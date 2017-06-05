@@ -5,7 +5,7 @@ var respecConfig = {
 //    previousMaturity:     "NOTE",
 //    previousPublishDate:  "2016-07-23",
 //    previousURI:          "https://www.w3.org/TR/2016/NOTE-poe-ucr-20160721/",
-    edDraftURI: "https://w3c.github.io/dxwg/ucr/",
+    edDraftURI: "https://w3c.github.io/dxwg/dcat/",
    editors: [
 {
 name: "Simon Cox",
