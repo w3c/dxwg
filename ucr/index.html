@@ -261,7 +261,7 @@
       </p>
     </section>
     <section id="ID3" class="usecase">
-      <h2>Combining multiple types of content sections in a single response [ID3]</h2>
+      <h2>Responses can conform to multiple, modular profiles [ID3]</h2>
       <p class="contributor">Ruben Verborgh</p>
       <p class="tags">
         <span class="tag class_profile">profile</span>
@@ -273,34 +273,50 @@
       <div class="expandOrCollapse" onclick="toggleVisibility(this)">&#x25B6; Full use case description (click to collapse):</div>
       <div class="visible">
         <p class="description">
-          <p>Servers should be able to send responses consisting of multiple sections of content to a client,
-analogously to how HTML documents also have different boxes (main text, sidebar, links, forms, etc.).
-Clients should be able to recognize the presence of these sections,
-and can ignore those they don't understand/need.</p>
-          <p>For example, a response could contain data and metadata,
-as well as different kinds of interaction widgets.</p>
-          <p>Currently, RDF responses are typically limited to contain only one such section,
-which limits what clients can do with responses.
-Those response that do contain multiple parts
-(such as the Triple Pattern Fragments interface and derivative interfaces)
-can currently not explain to a client that they do,
-and which parts they contain.</p>
+          <p>
+            A response of a server can conform to multiple content types.
+            For example, a JSON-LD response conforms to the following content types:
+            <code>application/octet-stream</code>, <code>application/json</code>, <code>application/ld+json</code>
+            (even though only one of them will typically be indicated).
+          </p>
+          <p>
+            Similarly, the response of a server can conform to multiple profiles.
+            For example, a profile X could demand that all persons are described with the FOAF vocabulary,
+            and a profile Y could demand that all books are described with the Schema.org vocabulary.
+            Then, a response which uses FOAF for people and Schema.org for books,
+            clearly conforms to both profiles.
+            And in contrast to content types,
+            it is informative to list both profiles,
+            as their conformance is independent.
+          </p>
+          <p>
+            Therefore, servers should be able to indicate, if they wish to do so,
+            that a response conforms to multiple profiles.
+            Clients should also be able to specify their preference
+            for one or multiple profiles.
+          </p>
+          <p>
+            This enables a <em>modular</em> design of profiles,
+            which can be combined when appropriate.
+            With content types, only hierarchical combinations are possible.
+            For example, a JSON-LD document is always a JSON document.
+            However, with profiles, this is not necessarily the case:
+            some of them might allow orthogonal combinations
+            (as is the case in the vocabulary example above).
+          </p>
         </p>
         <p class="existing_approaches">
           <ul>
-        <li> HTML pages</li>
-      </ul>
+            <li>conformance to multiple content types</li>
+          </ul>
         </p>
         <p class="links">
           <ul>
         <li>
+          <a rel="nofollow" class="external free" href="https://ruben.verborgh.org/articles/fine-grained-content-negotiation/">https://ruben.verborgh.org/articles/fine-grained-content-negotiation/</a>
+        </li>
+        <li>
           <a rel="nofollow" class="external free" href="https://ruben.verborgh.org/blog/2015/10/06/turtles-all-the-way-down/">https://ruben.verborgh.org/blog/2015/10/06/turtles-all-the-way-down/</a>
-        </li>
-        <li>
-          <a rel="nofollow" class="external free" href="https://www.hydra-cg.com/spec/latest/triple-pattern-fragments/">https://www.hydra-cg.com/spec/latest/triple-pattern-fragments/</a>
-        </li>
-        <li>
-          <a rel="nofollow" class="external free" href="https://arxiv.org/pdf/1609.07108v1.pdf">https://arxiv.org/pdf/1609.07108v1.pdf</a>
         </li>
       </ul>
         </p>
