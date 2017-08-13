@@ -14,7 +14,7 @@
     <section id="abstract">
       <p>
 		This document lists use cases iteratively compiled by the <a href="https://www.w3.org/2017/dxwg/wiki/Main_Page">Dataset Exchange Working Group</a>.
-		They identify current shortcommings and motivate the extension of the <a href="https://www.w3.org/TR/vocab-dcat/">Data Catalog Vocabulary (DCAT)</a>
+		They identify current shortcomings and motivate the extension of the <a href="https://www.w3.org/TR/vocab-dcat/">Data Catalog Vocabulary (DCAT)</a>
 		along with definition of guidance in application of this vocabulary and derived DCAT profiles. 
 	 </p>
     </section>
@@ -57,6 +57,7 @@
     <section id="Methodology">
       <h2>Methodology</h2>
       <p>
+
 		This Working Group was formed based on the Smart Descriptions & Smarter Vocabularies (SDSVoc) workshop held in Amsterdam November 30-December 1, 2016. The first  
 		Working Group meeting was held May 18, 2017.  At that meeting the Working Group Chairs called for Working Group members and other stakeholders to submit use cases 
 		on the <a href="https://www.w3.org/2017/dxwg/wiki/Use_Case_Working_Space">Working Group's wiki</a>. 
@@ -71,6 +72,7 @@
 		   <a href="https://www.w3.org/2017/Process-20170301/#Consensus">Section 3.3 of the W3C Process Document</a>. 
 		<p>The requirements were derived from the accepted use cases. One of the key tasks for the editors of this document was removing duplicate requirements, 
 		   editing those that remained and adding missing ones. The editors also ensured links from requirements to use cases were maintained.</p> 
+
     </section>
 
      <section id="Tags">
@@ -113,7 +115,7 @@
 		</td></tr>
 		<tr>
 		<td><span class="switch tag_meta">meta</span> </td>
-		<td> Meta-Usecase provides a point of entry to a topic to be handeld by subordinated, detailed usecases
+		<td> Meta-Usecase provides a point of entry to a topic to be handled by subordinated, detailed usecases
 		</td></tr>
 		<tr>
 		<td><span class="switch tag_packaging">packaging</span> </td>
@@ -208,7 +210,7 @@
         </section>
 
     <section id="ID2" class="usecase">
-      <h2>Specifying media type interpretation beyond the content type [ID2]</h2>
+      <h2>Detailing and requesting additional constraints (profiles) beyond content types [ID2]</h2>
       <p class="contributor">Ruben Verborgh</p>
       <p class="tags">
         <span class="tag class_profile">profile</span>
@@ -220,11 +222,39 @@
       <div class="expandOrCollapse" onclick="toggleVisibility(this)">&#x25B6; Full use case description (click to collapse):</div>
       <div class="visible">
         <p class="description">
-          <p>Servers should be able to detail additional structural and semantic constraints of their responses
-beyond what we can achieve with generic content types (such as <code>text/turtle</code> or <code>application/json</code>).
-Since such generic content types are often used, but almost always an underspecification,
-it is necessary that servers can add more detail.</p>
-          <p>Additionally, clients and servers should be able to negotiate such extra constraints.</p>
+          <p>
+            While a content type such as <code>application/json</code>
+            identifies the kind of parser a client needs for a given representation,
+            it does not cover all assumptions of the server.
+            In practice, the server will often follow a much more strict pattern than “everything that is valid JSON”,
+            restricting itself to one of more subsets of JSON.
+            For the purpose of this use case, we refer to such subsets generically as “profiles”.
+            A profile captures additional structural and/or semantic constraints
+            in addition to the media type.
+            Note that one profile might be used across different media types:
+            for instance, a profile could be applied to multiple RDF syntaxes.
+          </p>
+          <p>
+            In order to inform clients that a representation conforms to a certain profile,
+            servers should be able to explicitly indicate which profile(s) a response conforms to.
+            This then allows the client to make the additional structural and/or semantic interpretations
+            that are allowed within that profile.
+          </p>
+          <p>
+            Clients and servers should be able to indicate their compatibility
+            and/or preference for certain profiles.
+            This enables clients to request a resource in a specific profile,
+            in addition to the specific content type it requests.
+            A client should be able to determine
+            which profiles a server supports, and with which content types.
+            A client should be able to look up more information about a certain profile.
+          </p>
+          <p>
+            One example of such a profile is a specific DCAT Application Profile,
+            but many other profiles can be created.
+            For example, another profile could indicate
+            that the representation uses a certain vocabulary.
+          </p>
         </p>
         <p class="existing_approaches">
           <ul>
@@ -240,10 +270,10 @@ it is necessary that servers can add more detail.</p>
         </p>
       </div>
       <p class="relatedUseCases">
-		<a href="#ID3"></a>
-		<a href="#ID5"></a>
-		<a href="#ID30"></a>
-	  </p>
+        <a href="#ID3"></a>  <!-- #ID3 considers that resources can conform to multiple profiles. -->
+        <a href="#ID5"></a>  <!-- #ID5 requests two abilities also covered by the present use case: clients should be able to see all available profiles supported by a server, and to request metadata about a profile. -->
+        <a href="#ID30"></a> <!-- #ID30 presents highly similar requirements as the present use case from the perspective of harvesting. -->
+      </p>
       <p class="relatedRequirements">
         <a href="#RID1"></a>
         <a href="#RID2.2"></a>
@@ -251,7 +281,7 @@ it is necessary that servers can add more detail.</p>
       </p>
     </section>
     <section id="ID3" class="usecase">
-      <h2>Combining multiple types of content sections in a single response [ID3]</h2>
+      <h2>Responses can conform to multiple, modular profiles [ID3]</h2>
       <p class="contributor">Ruben Verborgh</p>
       <p class="tags">
         <span class="tag class_profile">profile</span>
@@ -263,34 +293,50 @@ it is necessary that servers can add more detail.</p>
       <div class="expandOrCollapse" onclick="toggleVisibility(this)">&#x25B6; Full use case description (click to collapse):</div>
       <div class="visible">
         <p class="description">
-          <p>Servers should be able to send responses consisting of multiple sections of content to a client,
-analogously to how HTML documents also have different boxes (main text, sidebar, links, forms, etc.).
-Clients should be able to recognize the presence of these sections,
-and can ignore those they don't understand/need.</p>
-          <p>For example, a response could contain data and metadata,
-as well as different kinds of interaction widgets.</p>
-          <p>Currently, RDF responses are typically limited to contain only one such section,
-which limits what clients can do with responses.
-Those response that do contain multiple parts
-(such as the Triple Pattern Fragments interface and derivative interfaces)
-can currently not explain to a client that they do,
-and which parts they contain.</p>
+          <p>
+            A response of a server can conform to multiple content types.
+            For example, a JSON-LD response conforms to the following content types:
+            <code>application/octet-stream</code>, <code>application/json</code>, <code>application/ld+json</code>
+            (even though only one of them will typically be indicated).
+          </p>
+          <p>
+            Similarly, the response of a server can conform to multiple profiles.
+            For example, a profile X could demand that all persons are described with the FOAF vocabulary,
+            and a profile Y could demand that all books are described with the Schema.org vocabulary.
+            Then, a response which uses FOAF for people and Schema.org for books,
+            clearly conforms to both profiles.
+            And in contrast to content types,
+            it is informative to list both profiles,
+            as their conformance is independent.
+          </p>
+          <p>
+            Therefore, servers should be able to indicate, if they wish to do so,
+            that a response conforms to multiple profiles.
+            Clients should also be able to specify their preference
+            for one or multiple profiles.
+          </p>
+          <p>
+            This enables a <em>modular</em> design of profiles,
+            which can be combined when appropriate.
+            With content types, only hierarchical combinations are possible.
+            For example, a JSON-LD document is always a JSON document.
+            However, with profiles, this is not necessarily the case:
+            some of them might allow orthogonal combinations
+            (as is the case in the vocabulary example above).
+          </p>
         </p>
         <p class="existing_approaches">
           <ul>
-        <li> HTML pages</li>
-      </ul>
+            <li>conformance to multiple content types</li>
+          </ul>
         </p>
         <p class="links">
           <ul>
         <li>
+          <a rel="nofollow" class="external free" href="https://ruben.verborgh.org/articles/fine-grained-content-negotiation/">https://ruben.verborgh.org/articles/fine-grained-content-negotiation/</a>
+        </li>
+        <li>
           <a rel="nofollow" class="external free" href="https://ruben.verborgh.org/blog/2015/10/06/turtles-all-the-way-down/">https://ruben.verborgh.org/blog/2015/10/06/turtles-all-the-way-down/</a>
-        </li>
-        <li>
-          <a rel="nofollow" class="external free" href="https://www.hydra-cg.com/spec/latest/triple-pattern-fragments/">https://www.hydra-cg.com/spec/latest/triple-pattern-fragments/</a>
-        </li>
-        <li>
-          <a rel="nofollow" class="external free" href="https://arxiv.org/pdf/1609.07108v1.pdf">https://arxiv.org/pdf/1609.07108v1.pdf</a>
         </li>
       </ul>
         </p>
@@ -389,7 +435,7 @@ and which parts they contain.</p>
         <p class="description">
           <p>There are multiple reasons to provide different information about the same concept, so if Linked Data is to exist based on URI object identifiers, and these are to relate to the real world entity, rather than specific implementations (i.e. information records), then it is inevitable that different sets of information will be required for different purposes.</p>
           <p>Consider a request for the boundary of a country, with a coastline. If the coastline is included as a property, this may be many megabytes of detail. Alternatively, a generalised simple coastline may be provided, or a single point, or may not be required at all. (In reality there may be many different versions of coastline based on different legal definitions, or practices, or approximation methods). </p>
-          <p>Furthermore, in any graph based response, the depth of traversal of the graph is always a choice. Consider a request to the GBIF taxonomy service to search for a biological species. A response typically includes not just the species, but potentially more information about the hierarchy of the taxomony (kingdom, phyla, family, genus etc) - also possible synonyms, also possibly a wide range of metadata about name sources, usages and history. There is a need for offering different choices of how deep such a traversal of relationships should be undertaken and returned.</p>
+          <p>Furthermore, in any graph based response, the depth of traversal of the graph is always a choice. Consider a request to the GBIF taxonomy service to search for a biological species. A response typically includes not just the species, but potentially more information about the hierarchy of the taxonomy (kingdom, phyla, family, genus etc) - also possible synonyms, also possibly a wide range of metadata about name sources, usages and history. There is a need for offering different choices of how deep such a traversal of relationships should be undertaken and returned.</p>
           <p>Different information models (response schema), and different choices of content within the same schema , constitute necessary options, and there may be a large number of these.</p>
           <p>Thus there is a need for discovering which profiles a service will offer for a given resource, and a canonical machine readable graph of metadata about what such offerings consist of and how they may be invoked. This may be as simple as providing a profile name, or content profile, schema choice, encoding and languages.</p>
           <p>Note that the Linked Data API implementation used by the UK Linked Data effort, includes the notion of _view parameters in URI requests - these are "named collections of properties" but it does not provide a means to attach metadata about what such views consist of. equivalent HTTP header based profile negotiation would still need to address this requirement in the same way as agent-driven negotiation (<a rel="nofollow" class="external free" href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec12.html">https://www.w3.org/Protocols/rfc2616/rfc2616-sec12.html</a>) - what is required is a minimal set of metadata and extension mechanisms for this.</p>
@@ -534,13 +580,8 @@ Users need a way to view the aggregated collection level metadata and the associ
       <div class="expandOrCollapse" onclick="toggleVisibility(this)">&#x25B6; Full use case description (click to collapse):</div>
       <div class="visible">
         <p class="description">
-          <p>What does 'dataset' mean? What kinds of resources may be described with DCAT? Can a text document be catalogued as a 'dataset'? How about source code? A controlled vocabulary? Ontology?</p>
-          <p>Need to provide guidance about the expected scope for DCAT, and a way for a DCAT description to indicate the 'type' of dataset involved (the semantic type, not the media-type).</p>
-        </p>
-        <p class="existing_approaches">
-          <p>[VOCAB-DCAT] does not provide guidance on how to model this information. [DCAT-AP] and [GeoDCAT-AP] partially support these requirements - namely, the specification of dataset authors (<code>dcterms:creator</code> [DCTerms]), data lineage (<code>dcterms:provenance</code> [DCTerms]), and input data (<code>dcterms:source</code> [DCTerms]). For the two remaining requirements, the JRC metadata schema makes use of <code>dcterms:isReferencedBy</code> [DCTerms] (publications) and <code>vann:usageNote</code> [VANN] (usage notes).</p>
-          <p>These solutions allow a simplified description of the dataset <i>context</i>, that can be used for multiple purposes - as assessing the quality and fitness for use of a dataset, or identifying the dataset most commonly used as input data. Additional details could be provided by representing more precisely these relationship with "qualified" forms by using vocabularies as [PROV-O], [VOCAB-DQV], or [VOCAB-DUV]: for instance, the relationship between a dataset and input data can be complemented with the model used for processing them, and possibly with additional information on the data generation workflow.</p>
-        </p>
+          <p>Some users of DCAT may want to apply it to resources that not everyone would consider a 'dataset'. Some examples are text documents, source code, controlled vocabularies, and ontologies. It's not clear what kinds of resources may be described with DCAT or how one would describe the types listed. Users need guidance about the expected scope for DCAT and on the use of whatever terms DCAT chooses to use or recommend for assigning types (e.g., dc:type). There also needs to be a way for a DCAT description to indicate the 'type' of dataset involved (the semantic type, not the media-type).</p>
+        <p class="existing_approaches"></p>
         <p class="links">
           <ul>
         <li> DCMI Type vocabulary - <a rel="nofollow" class="external free" href="http://dublincore.org/documents/dcmi-type-vocabulary/#H7">http://dublincore.org/documents/dcmi-type-vocabulary/#H7</a> </li>
@@ -548,6 +589,7 @@ Users need a way to view the aggregated collection level metadata and the associ
         <li> PARSE.Insight content-types recommended for Re3data - <a rel="nofollow" class="external free" href="http://www.re3data.org/schema">http://www.re3data.org/schema</a> <a rel="nofollow" class="external free" href="http://gfzpublic.gfz-potsdam.de/pubman/item/escidoc:1397899">http://gfzpublic.gfz-potsdam.de/pubman/item/escidoc:1397899</a> item 15 <b>contentType</b></li>
       </ul>
         </p>
+      </p>
       </div>
       <p class="relatedUseCases">
         <a href="#ID10"></a>
@@ -2677,14 +2719,14 @@ for the same resource (i.e. the same access/download target).</p>
 
     <section id="RID1">
     <h3>Definition of an application profile</h3>
-    <p>Create a sufficiently wide definition of an application profile to addressdeclaration of interoperability profiles data
-      		may conform to, and throught this mechanism provide the means for DCAT instances and collections to also declare the
+    <p>Create a sufficiently wide definition of an application profile to address declaration of interoperability profiles data
+      		may conform to, and through this mechanism provide the means for DCAT instances and collections to also declare the
 		 profiles of DCAT they conform to.</p>
 		 <p class="note">These Use case specific requirements apply to the required scope of this definition. Where 
 		      appropriate these are also captured as additional requirements.
 		      	<li>Machine-readable specifications of application profiles need to be easily publishable, and optimize re-use of existing specification.</li>
    <li>Each application profile needs to be documented, preferably by showing/reusing what is common across profiles</li>
-    <li>application profiles need a rich expression for the the validation of metadata</li>
+    <li>application profiles need a rich expression for the validation of metadata</li>
 		      <li>Profiles must have properties for at least two levels of documentation: 1) short definition 2) input and editing guidance</li>
    <li>Profiles must support declaration of vocabulary constraints</li>
 		      <li>Ability to describe the standards to which the dataset conforms.</li>
@@ -2718,9 +2760,15 @@ for the same resource (i.e. the same access/download target).</p>
   </section>
 
   <section id="RID5">
+
     <h3>Define version</h3>
     <p>Provide a definition of version, including how it relates to a dataset distribution.</p>
     <p>Provide support for different versioning scenarios (e.g., dataset evolution, conversions/translations, granularities/subsets).</p>
+
+    <h3>Define what is meant by "version" in this context and how it relates to dataset, distribution</h3>
+    <p>A definition of what is meant by version in this context and how it relates to dataset, distribution should be provided.</p>
+    <p>Different versioning scenarios should be supported (e.g., dataset evolution, conversions/translations, granularities/subsets).</p>
+
     <p class="note"> Requirements should be consistent with W3C DWBP guidelines on versioning: BP7. Provide a version indicator, BP8. Provide version history, BP11. Assign URIs to dataset versions and series</p>
       <p class="relatedUseCases">
       <a href="#ID4"></a>
@@ -2771,7 +2819,7 @@ for the same resource (i.e. the same access/download target).</p>
     <p>Provide recommendations and mechanisms for data providers to describe datasets with fine grained semantics (e.g. instrument/sensor used, spatial feature, 
        observable property, quantity kind) and data consumers and data cataloguers to filter datasets with the fine grained semantics.</p>
 		      <p class="note">Finer grained semantics will also allow dataset dimensions to be described, 
-		      and distributions descibed using these semantics - for example how a dataset is composed of muiltiple subsets, 
+		      and distributions described using these semantics - for example how a dataset is composed of multiple subsets, 
 		      such as a set of image bands or tiles, or parameterised filtering/subsetting services</p>
 		      <p class="note">This requirement applies to catalogues of DCAT records, and is thus related to the concept of profiles, 
 		      which are expected to define classification dimensions (use of controlled vocabularies in mandatory properties)</p>
@@ -2861,7 +2909,7 @@ for the same resource (i.e. the same access/download target).</p>
     <h3>Provide extensible model for agent roles</h3>
     <p>Provide communities with an extensible model different types of agent roles</p>
 		      <p class="note">dct:creator, dct:publisher etc are special cases, which require guidance, further roles may be defined in provenance or other richer models.
-		      The requirement is to extablish an extensible mechanism, and for profiles to specify canonical equivalents for the special case properties of dcat:Dataset</p>
+		      The requirement is to establish an extensible mechanism, and for profiles to specify canonical equivalents for the special case properties of dcat:Dataset</p>
     <p class="relatedUseCases">
       <a href="#ID13"></a>
     </p>
@@ -3061,7 +3109,7 @@ for the same resource (i.e. the same access/download target).</p>
   </section>
   <section id="RID33.1">
     <h3>To support the summarization/characterization of dataset through summary statistics and similar metrics, maybe providing a pattern for people to provide information about statistics about a datset</h3>
-    <p>To support the summarization/characterization of dataset through summary statistics and similar metrics, maybe providing a pattern for people to provide information about statistics about a datset</p>
+    <p>To support the summarization/characterization of dataset through summary statistics and similar metrics, maybe providing a pattern for people to provide information about statistics about a dataset</p>
     <p class="relatedUseCases">
       <a href="#ID33"></a>
     </p>
