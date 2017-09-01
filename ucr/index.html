@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="https://www.w3.org/StyleSheets/TR/2016/W3C-WG-NOTE"/>   
     <link rel="stylesheet" type="text/css" href="dxwg.css"/>    
   </head>
-  <body class="h-entry" role="document" id="respecDocument">	  
+  <body class="h-entry" role="document" id="respecDocument" onload="init()">	  
     <section id="abstract">
       <p>
 		This document lists use cases iteratively compiled by the <a href="https://www.w3.org/2017/dxwg/wiki/Main_Page">Dataset Exchange Working Group</a>.
@@ -91,107 +91,107 @@
 		to interactively reshape the document according to tag filter applied by users. 
       </p>
       <p>
-		<table cellpadding="3">
+      	<button id="view_update_button" onclick="applyFilter()">apply filter</button>
+		<table cellpadding="4">
 		<tbody>
 		<tr>
-		<td><input name=""></input></td>
-		<td><span class="switch tag_aggregate">aggregate</span> </td>
-		<td> The UC is an aggregate of individual UCs, and requires rework/splitting up
-		</td></tr>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="aggregate" hidden="true" onchange="toggle(this)"></input>aggregate</label></td>
+		<td> The UC is an aggregate of individual UCs, and requires rework/splitting up</td></tr>
 		<tr>
-		<td><span class="switch tag_catalog">catalog</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="catalog" hidden="true" onchange="toggle(this)"></input>catalog</label></td>
 		<td> Use case realted to the notion or handling of DCAT Catalogs.
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_content_negotiation deliverable_reference">content_negotiation</span> </td>
+		<td><label class="switch tag_content_negotiation deliverable_reference"><input type="checkbox" name="tag_filter" value="content_negotiation" hidden="true" onchange="toggle(this)"></input>content_negotiation</label></td>
 		<td> HTTP Content negotiation by media type and profile. Deliverable <em>Content Negotiation by Application Profile</em> reference tag.
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_coverage">coverage</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="coverage" hidden="true" onchange="toggle(this)"></input>coverage</label></td>
 		<td> Temporal, spatial etc. extension/coverage
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_dataset">dataset</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="dataset" hidden="true" onchange="toggle(this)"></input>dataset</label></td>
 		<td> Notion and usage of the Dataset concept
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_dcat deliverable_reference">dcat</span> </td>
+		<td><label class="switch deliverable_reference"><input type="checkbox" name="tag_filter" value="dcat" hidden="true" onchange="toggle(this)"></input>dcat</label></td>
 		<td> The UC refers to DCAT core and provides related requirements. Deliverable <em>DCAT 1.1</em> reference tag.
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_documentation">documentation</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="documentation" hidden="true" onchange="toggle(this)"></input>documentation</label></td>
 		<td> Documentation of informal hints for a prospective users, e.g. summary, example data, usage guide
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_lifecycle">lifecycle</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="lifecycle" hidden="true" onchange="toggle(this)"></input>lifecycle</label></td>
 		<td> Status, versioning etc.
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_meta">meta</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="meta" hidden="true" onchange="toggle(this)"></input>meta</label></td>
 		<td> Meta-Usecase provides a point of entry to a topic to be handled by subordinated, detailed usecases
 		</td></tr>
 		<tr>
 		<!-- ID24 and ID39 -->
-		<td><span class="switch tag_out_of_scope">out of scope</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="out_of_scope" hidden="true" onchange="toggle(this)"></input>out_of_scope</label></td>
 		<td> Usecase that is currently out of groups's scope 
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_packaging">packaging</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="packaging" hidden="true" onchange="toggle(this)"></input>packaging</label></td>
 		<td> Archiving (TAR), compression (GZ) etc.
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_profile deliverable_reference">profile</span> </td>
+		<td><label class="switch deliverable_reference"><input type="checkbox" name="tag_filter" value="profile" hidden="true" onchange="toggle(this)"></input>profile</label></td>
 		<td> Profile identifies the structural and/or semantic constraints of target resource (compared to its serialization, i.e. media type). Deliverable <em>Guidance on publishing application profiles of vocabularies</em> reference tag.
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_provenance">provenance</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="provenance" hidden="true" onchange="toggle(this)"></input>provenance</label></td>
 		<td> Data lineage, modification history etc.
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_publication">publication</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="publication" hidden="true" onchange="toggle(this)"></input>publication</label></td>
 		<td> (Re)publication and dissemination of Dataset information
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_quality">quality</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="quallity" hidden="true" onchange="toggle(this)"></input>quality</label></td>
 		<td> (Relative) quality of data stated or assessed by a testing suite
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_referencing">referencing</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="referencing" hidden="true" onchange="toggle(this)"></input>referencing</label></td>
 		<td> Means to reference entities in DCAT according to requirements of distinct communities
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_representation">representation</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="representation" hidden="true" onchange="toggle(this)"></input>representation</label></td>
 		<td> Media type, data type, encoding
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_resolution">resolution</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="resolution" hidden="true" onchange="toggle(this)"></input>resolution</label></td>
 		<td> (Quantifiable) spatio-temporal etc. resolution and precision
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_roles">roles</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="roles" hidden="true" onchange="toggle(this)"></input>roles</label></td>
 		<td> Agent roles involved in creation, modification etc. of the data
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_semantics">semantics</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="semantics" hidden="true" onchange="toggle(this)"></input>semantics</label></td>
 		<td> Content-related models (dimensions, conceptual classification) etc.
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_service">service</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="service" hidden="true" onchange="toggle(this)"></input>service</label></td>
 		<td> Dynamic, parametrized distribution approaches (PULL, PUSH)
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_space">space</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="space" hidden="true" onchange="toggle(this)"></input>space</label></td>
 		<td> Modeling of spatial aspects
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_time">time</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="time" hidden="true" onchange="toggle(this)"></input>time</label></td>
 		<td> Modeling of temporal aspects
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_usage_control">usage_control</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="usage_control" hidden="true" onchange="toggle(this)"></input>usage_control</label></td>
 		<td> Access control and usage permissions (extending access control)
 		</td></tr></tbody></table>
 	  </p>
+	  <button id="view_update_button" onclick="applyFilter()">apply filter</button>
     </section>
 
     <section id="UseCases">
@@ -1419,7 +1419,7 @@ Some of the DQV wishes might be included either as Use Cases or as group issues.
       <p class="tags">
         <span class="tag class_dcat">dcat</span>
         <span class="tag class_profile">profile</span>
-        <span class="tag class_out_of_scope">out of scope</span>
+        <span class="tag class_out_of_scope">out_of_scope</span>
       </p>
       <div class="expandOrCollapse" onclick="toggleVisibility(this)">&#x25B6; Full use case description (click to collapse):</div>
       <div class="visible">
@@ -2120,7 +2120,7 @@ These might be relative (today, P15M) or absolute, represent an instant or inter
         <span class="tag class_meta">meta</span>
         <span class="tag class_publication">publication</span>
         <span class="tag class_referencing">referencing</span>
-        <span class="tag class_out_of_scope">out of scope</span>
+        <span class="tag class_out_of_scope">out_of_scope</span>
       </p>
       <p class="stakeholders">
         <p>Data authors, data publishers, data consumers</p>
@@ -3050,7 +3050,7 @@ for the same resource (i.e. the same access/download target).</p>
       <a href="#RID25.1"></a>	
 	</p> 
   </section>
--->
+
   <section class="requirement" id="RID26.1">
     <h3>Missing aspects of dataset descriptions</h3>
     <p>Identify missing aspects of dataset descriptions.</p>
