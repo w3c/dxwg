@@ -102,7 +102,7 @@
 		<td> Use case realted to the notion or handling of DCAT Catalogs.
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_content_negotiation">content_negotiation</span> </td>
+		<td><span class="switch tag_content_negotiation deliverable_reference">content_negotiation</span> </td>
 		<td> HTTP Content negotiation by media type and profile. Deliverable <em>Content Negotiation by Application Profile</em> reference tag.
 		</td></tr>
 		<tr>
@@ -110,11 +110,11 @@
 		<td> Temporal, spatial etc. extension/coverage
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_dataset_concept">dataset_concept</span> </td>
-		<td> UCs challenging the notion of Dataset concept
+		<td><span class="switch tag_dataset">dataset</span> </td>
+		<td> Notion and usage of the Dataset concept
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_dcat">dcat</span> </td>
+		<td><span class="switch tag_dcat deliverable_reference">dcat</span> </td>
 		<td> The UC refers to DCAT core and provides related requirements. Deliverable <em>DCAT 1.1</em> reference tag.
 		</td></tr>
 		<tr>
@@ -139,7 +139,7 @@
 		<td> Archiving (TAR), compression (GZ) etc.
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_profile">profile</span> </td>
+		<td><span class="switch tag_profile deliverable_reference">profile</span> </td>
 		<td> Profile identifies the structural and/or semantic constraints of target resource (compared to its serialization, i.e. media type). Deliverable <em>Guidance on publishing application profiles of vocabularies</em> reference tag.
 		</td></tr>
 		<tr>
@@ -386,7 +386,7 @@
         <span class="tag class_dcat">dcat</span>
         <span class="tag class_lifecycle">lifecycle</span>
         <span class="tag class_provenance">provenance</span>
-        <span class="tag class_dataset_concept">dataset_concept</span>
+        <span class="tag class_dataset">dataset</span>
         <span class="tag class_aggregate">aggregate</span>
       </p>
       <p class="stakeholders">
@@ -579,7 +579,7 @@ Users need a way to view the aggregated collection level metadata and the associ
       <h2>Scope or type of dataset with a DCAT description [ID8]</h2>
       <p class="contributor">Simon Cox (CSIRO)</p>
       <p class="tags">
-        <span class="tag class_dataset_concept">dataset_concept</span>
+        <span class="tag class_dataset">dataset</span>
         <span class="tag class_dcat">dcat</span>
         <span class="tag class_representation">representation</span>
       </p>
@@ -1441,29 +1441,55 @@ Some of the DQV wishes might be included either as Use Cases or as group issues.
     </section>
 
     <section id="ID25" class="usecase">
-      <h2>Distribution and synchronization of catalog information [ID25]</h2>
+      <h2>Publication of catalog information [ID25]</h2>
       <p class="contributor">Jaroslav Pullmann, Christian Mader (Fraunhofer)</p>
       <p class="tags">
         <span class="tag class_dcat">dcat</span>
         <span class="tag class_catalog">catalog</span>
+        <span class="tag class_dataset">dataset</span>
         <span class="tag class_publication">publication</span>
         <span class="tag class_usage_control">usage control</span>
       </p>
       <p class="stakeholders">
-        <p>Data publisher, repository operator</p>
+        <p>Data publisher, data portal operator</p>
       </p>
       <div class="expandOrCollapse" onclick="toggleVisibility(this)">&#x25B6; Full use case description (click to collapse):</div>
       <div class="visible">
         <p class="description">
           <p>
-			  While the operation and co-existence of Catalog instances is out of scope here the information model
-			  should support scenarios where Datasets are copied among a number of (specialized) Catalogs.
-			  By leveraging dedicated standards (ODRL, PROV-O) or extensions to DCAT the policies should e.g. define
-			  the distribution target of the Dataset (copies to royalty-free catalogs only, no copy in case of exclusive
-			  hosting) and its subsequent handling (keep the copy synchronized, preserve and display provenance information).
+			  While the operation and co-existence of data portals hosting DCAT descriptions
+			  is out of group's scope the standard should support an explicit regulation of
+			  their (re)distribution and hosting. This use case refers to scenarios where
+			  individual Datasets or entire Catalogs are copied among data portals. 
+		  </p>
+		  <p>
+			  An explicit reference to the original resource should be maintained within any copy
+              even when both share the same URI (i.e. are local copies of an identical resource).		  
+			  The reference to the original resource should indicate resource's publication context
+			  (data portal) in a way that is accesible for search engine indexing and browser navigation.
+		  </p>
+		  <p>
+			  Usage policies might further regulate handling of the distributed entities, e.g.
+			  a duty to keep the copies updated, display the provenance information or prohibit
+			  a commercial exploitation.
           </p>
+        </p>
+        <p class="links">
+         <ul>
+			<li><a rel="nofollow" class="external free" href="https://www.w3.org/TR/prov-o/">PROV-O: The PROV Ontology</a>, provenance statements</li>
+			<li><a rel="nofollow" class="external free" href="https://www.w3.org/ns/odrl/2/">ODRL Version 2.1 Ontology</a>, policy definition</li>
+		 </ul>
         </p>        
-      </div>
+      </div>      
+       <p class="relatedUseCases">
+        <a href="#ID10"></a>
+        <a href="#ID11"></a>
+        <a href="#ID12"></a>
+        <a href="#ID32"></a>
+        <a href="#ID35"></a>
+        <a href="#ID40"></a>
+        <a href="#ID44"></a>
+      </p>
        <p class="relatedRequirements">
 	  <!--
         <a href="#RID25.1"></a>
@@ -2275,7 +2301,7 @@ Within Informatie Vlaanderen, a project is running of combining the two worlds i
       <h2>Identification of versioned datasets and subsets [ID44]</h2>
       <p class="contributor">Jaroslav Pullmann, Keith Jeffery</p>
       <p class="tags">
-        <span class="tag class_dataset_concept">dataset_concept</span>
+        <span class="tag class_dataset">dataset</span>
         <span class="tag class_lifecycle">lifecycle</span>
         <span class="tag class_publication">publication</span>
         <span class="tag class_referencing">referencing</span>
@@ -2988,15 +3014,33 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
 
- <section class="requirement" id="RID25.1">
-    <h3>Control of Dataset publication</h3>
-    <p>Define means to explicitly control the (re)publication of a Dataset description among Catalogs.
-       Obligations might apply e.g. to disclose the original source or keep the copy synchronized.</p>
+  <section class="requirement" id="RID25.1">
+    <h3>Publication control [RID25.1]</h3>
+    <p>Define means to explicitly control the re-publication of Dataset and Catalog descriptions
+       among data portals (policies). Obligations might apply e.g. to disclose the original source
+       or keep the copies synchronized.</p>
     <p class="relatedUseCases">
       <a href="#ID25"></a>
     </p>
+    <p class="relatedRequirements">
+      <a href="#RID25.2"></a>	
+	</p> 
   </section>
 
+  <section class="requirement" id="RID25.2">
+    <h3>Publication source [RID25.2]</h3>
+    <p>
+		Define a reference to the original release of a re-published DCAT resource in a way indexable by search engines
+		and processable by web clients.
+	</p>
+    <p class="relatedUseCases">
+      <a href="#ID25"></a>
+    </p>
+    <p class="relatedRequirements">
+      <a href="#RID25.1"></a>	
+	</p> 
+  </section>
+-->
   <section class="requirement" id="RID26.1">
     <h3>Missing aspects of dataset descriptions</h3>
     <p>Identify missing aspects of dataset descriptions.</p>
