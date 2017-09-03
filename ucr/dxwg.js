@@ -36,6 +36,20 @@ function init(){
 	}
 }
 
+function resetFilter(){
+	var chBoxes = document.getElementsByTagName('input');
+	for(var i = 0; i < chBoxes.length; i++) {
+		if(chBoxes[i].type == 'checkbox'){
+			chBoxes[i].checked = false;
+			chBoxes[i].parentElement.classList.remove('checked');
+		}
+	}
+	applyFilter();
+}
+
+// TODO: Improve by using indexes (create onload)
+// TODO: Optimize code reuse
+// TODO: Trigger respec to update the TOC
 function applyFilter(){
 	
 	var tagSelection = [];
