@@ -4,6 +4,7 @@
 	- ensure the document is well-formed (XHTML), test e.g. "xmllint index.html" 
 	- preserve document comments (hints, markers and excluded sections)
 	- expand empty tags (<a/>) otherwise the rendering breaks
+	- "relatedRequirements" sections of use cases are auto-populated by references within the "relatedUseCases" sections of requirements, ensure these are present and empty
 
 	Status:
 	- requirements processing started at line 3040
@@ -13,13 +14,10 @@
     <title>Dataset Exchange Use Cases and Requirements</title>
     <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
     <meta content="width=device-width,initial-scale=1" name="viewport"/>
-    <script class="remove" src="https://www.w3.org/Tools/respec/respec-w3c-common"> </script>
-    <script class="remove" src="config.js"> </script>
-    <script class="remove" src="dxwg.js"> </script> 
     <link rel="stylesheet" type="text/css" href="https://www.w3.org/StyleSheets/TR/2016/W3C-WG-NOTE"/>   
     <link rel="stylesheet" type="text/css" href="dxwg.css"/>    
   </head>
-  <body class="h-entry" role="document" id="respecDocument">
+  <body class="h-entry" role="document" id="respecDocument" onload="init()">	  
     <section id="abstract">
       <p>
 		This document lists use cases iteratively compiled by the <a href="https://www.w3.org/2017/dxwg/wiki/Main_Page">Dataset Exchange Working Group</a>.
@@ -89,111 +87,125 @@
       <h2>Tags</h2>
       <p>
 		TODO: extend:
-		A tag set has been defined to label the use cases and (in a next document version)
-		to interactively reshape the document according to tag filter applied by users. 
+		A tag set has been defined to label the use cases and to interactively rebuild 
+		the document according to tag filter selected. Please choose one or more tags 
+		and click "apply filter". "Reset filter" will clear the selection and recreate 
+		the original specification view .
       </p>
       <p>
-		<table cellpadding="3">
+      	<div class="filterControl">
+      		<button class="dxwgButton applyFilterButton" onclick="applyFilter()" aria-label="apply filter">apply filter</button>
+      		<button class="dxwgButton resetFilterButton" onclick="resetFilter()" aria-label="reset filter">reset filter</button>
+      	</div>
+		<table cellpadding="4">
 		<tbody>
 		<tr>
-		<td><span class="switch tag_aggregate">aggregate</span> </td>
-		<td> The UC is an aggregate of individual UCs, and requires rework/splitting up
-		</td></tr>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="aggregate" hidden="true" onchange="toggle(this)"></input>aggregate</label></td>
+		<td> The UC is an aggregate of individual UCs, and requires rework/splitting up</td></tr>
 		<tr>
-		<td><span class="switch tag_catalog">catalog</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="catalog" hidden="true" onchange="toggle(this)"></input>catalog</label></td>
 		<td> Use case realted to the notion or handling of DCAT Catalogs.
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_content_negotiation">content_negotiation</span> </td>
+		<td><label class="switch tag_content_negotiation deliverable_reference"><input type="checkbox" name="tag_filter" value="content_negotiation" hidden="true" onchange="toggle(this)"></input>content_negotiation</label></td>
 		<td> HTTP Content negotiation by media type and profile. Deliverable <em>Content Negotiation by Application Profile</em> reference tag.
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_coverage">coverage</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="coverage" hidden="true" onchange="toggle(this)"></input>coverage</label></td>
 		<td> Temporal, spatial etc. extension/coverage
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_dataset_concept">dataset_concept</span> </td>
-		<td> UCs challenging the notion of Dataset concept
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="dataset" hidden="true" onchange="toggle(this)"></input>dataset</label></td>
+		<td> Notion and usage of the Dataset concept
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_dcat">dcat</span> </td>
+		<td><label class="switch deliverable_reference"><input type="checkbox" name="tag_filter" value="dcat" hidden="true" onchange="toggle(this)"></input>dcat</label></td>
 		<td> The UC refers to DCAT core and provides related requirements. Deliverable <em>DCAT 1.1</em> reference tag.
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_documentation">documentation</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="documentation" hidden="true" onchange="toggle(this)"></input>documentation</label></td>
 		<td> Documentation of informal hints for a prospective users, e.g. summary, example data, usage guide
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_lifecycle">lifecycle</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="lifecycle" hidden="true" onchange="toggle(this)"></input>lifecycle</label></td>
 		<td> Status, versioning etc.
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_meta">meta</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="meta" hidden="true" onchange="toggle(this)"></input>meta</label></td>
 		<td> Meta-Usecase provides a point of entry to a topic to be handled by subordinated, detailed usecases
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_packaging">packaging</span> </td>
+		<!-- ID24 and ID39 -->
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="out_of_scope" hidden="true" onchange="toggle(this)"></input>out_of_scope</label></td>
+		<td> Usecase that is currently out of groups's scope 
+		</td></tr>
+		<tr>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="packaging" hidden="true" onchange="toggle(this)"></input>packaging</label></td>
 		<td> Archiving (TAR), compression (GZ) etc.
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_profile">profile</span> </td>
+		<td><label class="switch deliverable_reference"><input type="checkbox" name="tag_filter" value="profile" hidden="true" onchange="toggle(this)"></input>profile</label></td>
 		<td> Profile identifies the structural and/or semantic constraints of target resource (compared to its serialization, i.e. media type). Deliverable <em>Guidance on publishing application profiles of vocabularies</em> reference tag.
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_provenance">provenance</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="provenance" hidden="true" onchange="toggle(this)"></input>provenance</label></td>
 		<td> Data lineage, modification history etc.
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_publication">publication</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="publication" hidden="true" onchange="toggle(this)"></input>publication</label></td>
 		<td> (Re)publication and dissemination of Dataset information
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_quality">quality</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="quallity" hidden="true" onchange="toggle(this)"></input>quality</label></td>
 		<td> (Relative) quality of data stated or assessed by a testing suite
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_referencing">referencing</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="referencing" hidden="true" onchange="toggle(this)"></input>referencing</label></td>
 		<td> Means to reference entities in DCAT according to requirements of distinct communities
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_representation">representation</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="representation" hidden="true" onchange="toggle(this)"></input>representation</label></td>
 		<td> Media type, data type, encoding
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_resolution">resolution</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="resolution" hidden="true" onchange="toggle(this)"></input>resolution</label></td>
 		<td> (Quantifiable) spatio-temporal etc. resolution and precision
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_roles">roles</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="roles" hidden="true" onchange="toggle(this)"></input>roles</label></td>
 		<td> Agent roles involved in creation, modification etc. of the data
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_semantics">semantics</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="semantics" hidden="true" onchange="toggle(this)"></input>semantics</label></td>
 		<td> Content-related models (dimensions, conceptual classification) etc.
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_service">service</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="service" hidden="true" onchange="toggle(this)"></input>service</label></td>
 		<td> Dynamic, parametrized distribution approaches (PULL, PUSH)
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_space">space</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="space" hidden="true" onchange="toggle(this)"></input>space</label></td>
 		<td> Modeling of spatial aspects
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_time">time</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="time" hidden="true" onchange="toggle(this)"></input>time</label></td>
 		<td> Modeling of temporal aspects
 		</td></tr>
 		<tr>
-		<td><span class="switch tag_usage_control">usage_control</span> </td>
+		<td><label class="switch"><input type="checkbox" name="tag_filter" value="usage_control" hidden="true" onchange="toggle(this)"></input>usage_control</label></td>
 		<td> Access control and usage permissions (extending access control)
 		</td></tr></tbody></table>
 	  </p>
+	  <div class="filterControl">      		
+      		<button class="dxwgButton applyFilterButton" onclick="applyFilter()" aria-label="apply filter">apply filter</button>
+      		<button class="dxwgButton resetFilterButton" onclick="resetFilter()" aria-label="reset filter">reset filter</button>      	
+      </div>
     </section>
 
     <section id="UseCases">
       <h2>Use Cases</h2>
 
-	   <section id="ID1" class="Usecase">
+	   <section id="ID1" class="usecase">
           <h3>DCAT packaged distributions [ID1]</h3>
 		  <p class="contributor">Makx Dekkers</p>          
           <p class="tags"><span class="tag class_dcat">dcat</span> <span class="tag class_documentation">documentation</span> <span class="tag class_packaging">packaging</span> <span class="tag class_representation">representation</span></p>
@@ -220,7 +232,9 @@
 			  </ul>
             </p>
           </div>          
-          <p class="relatedRequirements"><a href="#RID1.1"> </a></p>
+          <p class="relatedRequirements">
+			  <!--<a href="#RID1.1"> </a>-->
+		  </p>
         </section>
 
     <section id="ID2" class="usecase">
@@ -289,9 +303,11 @@
         <a href="#ID30"></a> <!-- #ID30 presents highly similar requirements as the present use case from the perspective of harvesting. -->
       </p>
       <p class="relatedRequirements">
+		<!-- autolink, RID2.2 and RID2.3 are gone?!
         <a href="#RID1"></a>
         <a href="#RID2.2"></a>
         <a href="#RID2.3"></a>
+        -->
       </p>
     </section>
     <section id="ID3" class="usecase">
@@ -363,9 +379,11 @@
 		<a href="#ID2"></a>
 	  </p>
       <p class="relatedRequirements">
+		  <!--
         <a href="#RID1"></a>
         <a href="#RID3.2"></a>
         <a href="#RID3.3"></a>
+        -->
       </p>
     </section>
     <section id="ID4" class="usecase">
@@ -377,7 +395,7 @@
         <span class="tag class_dcat">dcat</span>
         <span class="tag class_lifecycle">lifecycle</span>
         <span class="tag class_provenance">provenance</span>
-        <span class="tag class_dataset_concept">dataset_concept</span>
+        <span class="tag class_dataset">dataset</span>
         <span class="tag class_aggregate">aggregate</span>
       </p>
       <p class="stakeholders">
@@ -415,6 +433,7 @@
         <a href="#ID32"></a>
       </p>
       <p class="relatedRequirements">
+		<!--
         <a href="#RID4.1"></a>
         <a href="#RID4.2"></a>
         <a href="#RID4.3"></a>
@@ -423,6 +442,7 @@
         <a href="#RID4.6"></a>
         <a href="#RID4.7"></a>
         <a href="#RID4.8"></a>
+        -->
       </p>
     </section>
     <section id="ID5" class="usecase">
@@ -480,8 +500,10 @@
         <a href="#ID30"></a>
       </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID5.1"></a>
         <a href="#RID5.2"></a>
+      -->
       </p>
     </section>
     <section id="ID6" class="usecase">
@@ -514,7 +536,9 @@
         </p>
       </div>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID6.1"></a>
+      -->
       </p>
     </section>
     <section id="ID7" class="usecase">
@@ -553,7 +577,6 @@ Users need a way to view the aggregated collection level metadata and the associ
       </ul>
         </p>
       </div>
-<<<<<<< HEAD
       <p class="relatedUseCases">
         <a href="#ID10"></a>
         <a href="#ID11"></a>
@@ -561,18 +584,18 @@ Users need a way to view the aggregated collection level metadata and the associ
         <a href="#ID13"></a>
         <a href="#ID31"></a>
       </p>
-=======
->>>>>>> dc838518906cb5ab595609fc5560a53e60653eab
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID7.1"></a>
         <a href="#RID7.2"></a>
+      -->
       </p>
     </section>
     <section id="ID8" class="usecase">
       <h2>Scope or type of dataset with a DCAT description [ID8]</h2>
       <p class="contributor">Simon Cox (CSIRO)</p>
       <p class="tags">
-        <span class="tag class_dataset_concept">dataset_concept</span>
+        <span class="tag class_dataset">dataset</span>
         <span class="tag class_dcat">dcat</span>
         <span class="tag class_representation">representation</span>
       </p>
@@ -594,8 +617,10 @@ Users need a way to view the aggregated collection level metadata and the associ
       </p>
       </div>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID8.1"></a>
         <a href="#RID8.2"></a>
+      -->
       </p>
     </section>
     <section id="ID9" class="usecase">
@@ -647,12 +672,14 @@ Users need a way to view the aggregated collection level metadata and the associ
         <a href="#ID31"></a>
       </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID9.1"></a>
         <a href="#RID9.2"></a>
         <a href="#RID9.3"></a>
         <a href="#RID9.4"></a>
         <a href="#RID9.5"></a>
         <a href="#RID9.6"></a>
+      -->
       </p>
     </section>
     <section id="ID10" class="usecase">
@@ -710,8 +737,10 @@ Users need a way to view the aggregated collection level metadata and the associ
         <a href="#ID32"></a>
       </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID10.1"></a>
         <a href="#RID10.2"></a>
+      -->
       </p>
     </section>
     <section id="ID11" class="usecase">
@@ -749,9 +778,11 @@ Users need a way to view the aggregated collection level metadata and the associ
         <a href="#ID9"></a>
       </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID11.1"></a>
         <a href="#RID11.2"></a>
         <a href="#RID11.3"></a>
+      -->
       </p>
     </section>
     <section id="ID12" class="usecase">
@@ -791,8 +822,10 @@ Users need a way to view the aggregated collection level metadata and the associ
         <a href="#ID31"></a>
       </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID12.1"></a>
         <a href="#RID12.2"></a>
+      -->
       </p>
     </section>
     <section id="ID13" class="usecase">
@@ -843,7 +876,9 @@ a:Dataset a dcat:Dataset;
         <a href="#ID31"></a>
       </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID13.1"></a>
+      -->
       </p>
     </section>
     <section id="ID14" class="usecase">
@@ -899,7 +934,9 @@ a:Dataset a dcat:Dataset;
         <a href="#ID43"></a>
       </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID14.1"></a>
+      -->
       </p>
     </section>
     <section id="ID15" class="usecase">
@@ -937,8 +974,10 @@ a:Dataset a dcat:Dataset;
         <a href="#ID14"></a>
       </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID15.1"></a>
         <a href="#RID15.2"></a>
+      -->
       </p>
     </section>
     <section id="ID16" class="usecase">
@@ -1028,8 +1067,10 @@ a:Dataset a dcat:Dataset&#xA0;;
         <a href="#ID14"></a>
       </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID16.1"></a>
         <a href="#RID16.2"></a>
+      -->
       </p>
     </section>
     <section id="ID17" class="usecase">
@@ -1095,8 +1136,10 @@ a:Dataset a dcat:Dataset&#xA0;;
         <a href="#ID33"></a>
       </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID17.1"></a>
         <a href="#RID17.2"></a>
+      -->
       </p>
     </section>
     <section id="ID18" class="usecase">
@@ -1157,8 +1200,10 @@ a:Dataset a dcat:Dataset;
         <a href="#ID21"></a>
       </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID18.1"></a>
         <a href="#RID18.2"></a>
+      -->
       </p>
     </section>
     <section id="ID19" class="usecase">
@@ -1202,8 +1247,10 @@ a:Dataset a dcat:Dataset;
         <a href="#ID32"></a>
       </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID19.1"></a>
         <a href="#RID19.2"></a>
+      -->
       </p>
     </section>
     <section id="ID20" class="usecase">
@@ -1255,8 +1302,10 @@ a:Dataset a dcat:Dataset;
         <a href="#ID8"></a>
       </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID20.1"></a>
         <a href="#RID20.2"></a>
+      -->
       </p>
     </section>
     <section id="ID21" class="usecase">
@@ -1293,7 +1342,9 @@ a:Dataset a dcat:Dataset;
 		  <a href="#ID22"></a>  
       </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID21.1"></a>
+      -->
       </p>
     </section>
     <section id="ID22" class="usecase">
@@ -1323,7 +1374,9 @@ a:Dataset a dcat:Dataset;
         <a href="#ID21"></a>        
       </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID22.1"></a>
+      -->
       </p>
     </section>
     <section id="ID23" class="usecase">
@@ -1362,17 +1415,19 @@ Some of the DQV wishes might be included either as Use Cases or as group issues.
         <a href="#ID21"></a>
       </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID23.1"></a>
+      -->
       </p>
     </section>
-    
-<!-- UC closed
+   
     <section id="ID24" class="usecase">
       <h2>Harmonising INSPIRE-obligations and DCAT-distribution [ID24]</h2>
       <p class="contributor">Thomas D'haenens, Informatie Vlaanderen</p>
       <p class="tags">
         <span class="tag class_dcat">dcat</span>
         <span class="tag class_profile">profile</span>
+        <span class="tag class_out_of_scope">out_of_scope</span>
       </p>
       <div class="expandOrCollapse" onclick="toggleVisibility(this)">&#x25B6; Full use case description (click to collapse):</div>
       <div class="visible">
@@ -1400,33 +1455,61 @@ Some of the DQV wishes might be included either as Use Cases or as group issues.
         </p>
       </div>   
     </section>
--->
+
     <section id="ID25" class="usecase">
-      <h2>Distribution and synchronization of catalog information [ID25]</h2>
+      <h2>Publication of catalog information [ID25]</h2>
       <p class="contributor">Jaroslav Pullmann, Christian Mader (Fraunhofer)</p>
       <p class="tags">
         <span class="tag class_dcat">dcat</span>
         <span class="tag class_catalog">catalog</span>
+        <span class="tag class_dataset">dataset</span>
         <span class="tag class_publication">publication</span>
         <span class="tag class_usage_control">usage control</span>
       </p>
       <p class="stakeholders">
-        <p>Data publisher, repository operator</p>
+        <p>Data publisher, data portal operator</p>
       </p>
       <div class="expandOrCollapse" onclick="toggleVisibility(this)">&#x25B6; Full use case description (click to collapse):</div>
       <div class="visible">
         <p class="description">
           <p>
-			  While the operation and co-existence of Catalog instances is out of scope here the information model
-			  should support scenarios where Datasets are copied among a number of (specialized) Catalogs.
-			  By leveraging dedicated standards (ODRL, PROV-O) or extensions to DCAT the policies should e.g. define
-			  the distribution target of the Dataset (copies to royalty-free catalogs only, no copy in case of exclusive
-			  hosting) and its subsequent handling (keep the copy synchronized, preserve and display provenance information).
+			  While the operation and co-existence of data portals hosting DCAT descriptions
+			  is out of group's scope the standard should support an explicit regulation of
+			  their (re)distribution and hosting. This use case refers to scenarios where
+			  individual Datasets or entire Catalogs are copied among data portals. 
+		  </p>
+		  <p>
+			  An explicit reference to the original resource should be maintained within any copy
+              even when both share the same URI (i.e. are local copies of an identical resource).		  
+			  The reference to the original resource should indicate resource's publication context
+			  (data portal) in a way that is accesible for search engine indexing and browser navigation.
+		  </p>
+		  <p>
+			  Usage policies might further regulate handling of the distributed entities, e.g.
+			  a duty to keep the copies updated, display the provenance information or prohibit
+			  a commercial exploitation.
           </p>
+        </p>
+        <p class="links">
+         <ul>
+			<li><a rel="nofollow" class="external free" href="https://www.w3.org/TR/prov-o/">PROV-O: The PROV Ontology</a>, provenance statements</li>
+			<li><a rel="nofollow" class="external free" href="https://www.w3.org/ns/odrl/2/">ODRL Version 2.1 Ontology</a>, policy definition</li>
+		 </ul>
         </p>        
-      </div>
+      </div>      
+       <p class="relatedUseCases">
+        <a href="#ID10"></a>
+        <a href="#ID11"></a>
+        <a href="#ID12"></a>
+        <a href="#ID32"></a>
+        <a href="#ID35"></a>
+        <a href="#ID40"></a>
+        <a href="#ID44"></a>
+      </p>
        <p class="relatedRequirements">
+	  <!--
         <a href="#RID25.1"></a>
+       -->
        </p>
     </section>
     <section id="ID26" class="usecase">
@@ -1461,8 +1544,10 @@ is based on evaluation of DXWG use cases and <a rel="nofollow" class="external t
       </p>
      </div>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID26.1"></a>
         <a href="#RID26.2"></a>
+      -->
       </p>
     </section>
     <section id="ID27" class="usecase">
@@ -1506,7 +1591,9 @@ is based on evaluation of DXWG use cases and <a rel="nofollow" class="external t
         <a href="#ID26"></a>
       </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID27.1"></a>
+      -->
       </p>
     </section>
     <section id="ID28" class="usecase">
@@ -1558,7 +1645,9 @@ ex:ExampleDataset
         <a href="#ID14"></a>
       </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID28.1"></a>
+      -->
       </p>
     </section>
     <section id="ID29" class="usecase">
@@ -1631,7 +1720,9 @@ ex:ExampleDataset
         <a href="#ID26"></a>
       </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID29.1"></a>
+      -->
       </p>
     </section>
     <section id="ID30" class="usecase">
@@ -1677,7 +1768,9 @@ ex:ExampleDataset
         <a href="#ID5"></a>
       </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID30.1"></a>
+	  -->
       </p>
     </section>
     <section id="ID31" class="usecase">
@@ -1710,7 +1803,9 @@ ex:ExampleDataset
         <a href="#ID49"></a>
       </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID31.1"></a>
+      -->
       </p>
     </section>
     <section id="ID32" class="usecase">
@@ -1766,7 +1861,9 @@ Specific cases of relationships that I have come across:</p>
         <a href="#ID4"></a>
       </p>
       <p class="relatedRequirements">
-        <a href="#RID20"></a>        
+	  <!--
+        <a href="#RID20"></a>
+      -->
       </p>
     </section>
     <section id="ID33" class="usecase">
@@ -1796,7 +1893,9 @@ For healthcare data, there is the Automated Characterization of Health Informati
       </div>
      
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID33.1"></a>
+      -->
       </p>
     </section>
     <section id="ID34" class="usecase">
@@ -1831,7 +1930,9 @@ For healthcare data, there is the Automated Characterization of Health Informati
         <a href="#ID32"></a>
 	  </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID34.1"></a>
+      -->
       </p>
     </section>
     <section id="ID35" class="usecase">
@@ -1858,7 +1959,9 @@ For healthcare data, there is the Automated Characterization of Health Informati
         </p>
        </div>
        <p class="relatedRequirements">
+	  <!--
         <a href="#RID35.1"></a>
+      -->
       </p>
     </section>
     <section id="ID36" class="usecase">
@@ -1939,6 +2042,7 @@ Currently, Europeana itself maintains data in two flavours of EDM is being defin
       </ul>
       </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID37.1"></a>
         <a href="#RID37.2"></a>
         <a href="#RID37.3"></a>
@@ -1946,6 +2050,7 @@ Currently, Europeana itself maintains data in two flavours of EDM is being defin
         <a href="#RID37.5"></a>
         <a href="#RID37.6"></a>
         <a href="#RID37.7"></a>
+      -->
       </p>
     </section>
     <section id="ID38" class="usecase">
@@ -2014,7 +2119,7 @@ These might be relative (today, P15M) or absolute, represent an instant or inter
       </p>
       
     </section>
-<!-- UC closed 
+ 
     <section id="ID39" class="usecase">
       <h2>DCAT Metadata profile integration [ID39]</h2>
       <p class="contributor"> Lieven Raes, Thomas D'haenens</p>
@@ -2023,6 +2128,7 @@ These might be relative (today, P15M) or absolute, represent an instant or inter
         <span class="tag class_meta">meta</span>
         <span class="tag class_publication">publication</span>
         <span class="tag class_referencing">referencing</span>
+        <span class="tag class_out_of_scope">out_of_scope</span>
       </p>
       <p class="stakeholders">
         <p>Data authors, data publishers, data consumers</p>
@@ -2048,10 +2154,12 @@ Within Informatie Vlaanderen, a project is running of combining the two worlds i
         <a href="#ID24"></a>
       </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID39.1"></a>
+      -->
       </p>
     </section>
--->
+
     <section id="ID40" class="usecase">
       <h2>Discoverability by mainstream search engines [ID40]</h2>
       <p class="contributor">Rob Atkinson</p>
@@ -2081,7 +2189,9 @@ Within Informatie Vlaanderen, a project is running of combining the two worlds i
         </p>
       </div>     
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID40.1"></a>
+      -->
       </p>
     </section>
     <section id="ID41" class="usecase">
@@ -2123,7 +2233,9 @@ Within Informatie Vlaanderen, a project is running of combining the two worlds i
         </p>
       </div>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID41.1"></a>
+      -->
       </p>
     </section>
     <section id="ID42" class="usecase">
@@ -2197,14 +2309,16 @@ Within Informatie Vlaanderen, a project is running of combining the two worlds i
 		  <a href="#ID41"></a>
 	  </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID1"></a>
+      -->
       </p>
     </section>
     <section id="ID44" class="usecase">
       <h2>Identification of versioned datasets and subsets [ID44]</h2>
       <p class="contributor">Jaroslav Pullmann, Keith Jeffery</p>
       <p class="tags">
-        <span class="tag class_dataset_concept">dataset_concept</span>
+        <span class="tag class_dataset">dataset</span>
         <span class="tag class_lifecycle">lifecycle</span>
         <span class="tag class_publication">publication</span>
         <span class="tag class_referencing">referencing</span>
@@ -2242,7 +2356,9 @@ for the same resource (i.e. the same access/download target).</p>
         <a href="#ID12"></a>
       </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID44.1"></a>
+      -->
       </p>
     </section>
     <section id="ID45" class="usecase">
@@ -2285,7 +2401,9 @@ for the same resource (i.e. the same access/download target).</p>
         <a href="#ID28"></a>
       </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID45.1"></a>
+      -->
       </p>
      </section>
 	 <section id="ID46" class="usecase">
@@ -2320,9 +2438,11 @@ for the same resource (i.e. the same access/download target).</p>
         <a href="#ID43"></a>        
       </p>
       <p class="relatedRequirements">
+	  <!--
         <a href="#RID46.1"></a>
         <a href="#RID46.2"></a>
         <a href="#RID46.3"></a>
+      -->
       </p>
      </section>
 	 <section id="ID47" class="usecase">
@@ -2351,7 +2471,9 @@ for the same resource (i.e. the same access/download target).</p>
 			</p>
 		  </div>		
 		  <p class="relatedRequirements">
+	      <!--
 			<a href="#RID47.1"></a>
+		  -->
 		  </p>
 		 </section>
 		<section id="ID48" class="usecase">
@@ -2397,7 +2519,9 @@ for the same resource (i.e. the same access/download target).</p>
 			<a href="#ID46"></a>
 		  </p>
 		  <p class="relatedRequirements">
+	      <!--
 			<a href="#RID48.1"></a>
+		  -->
 		  </p>
 		 </section>
 
@@ -2457,8 +2581,8 @@ for the same resource (i.e. the same access/download target).</p>
 			<a href="#ID31"></a>
 		  </p>
 		  <p class="relatedRequirements">
-			<a href="#RID49.1"></a>
-			<a href="#RID49.2"></a>
+			<!--<a href="#RID49.1"></a>
+			<a href="#RID49.2"></a>-->
 		  </p>
 		 </section>
 		 
@@ -2470,7 +2594,7 @@ for the same resource (i.e. the same access/download target).</p>
 		  </p>
 		  <p class="stakeholders">
 			<p>data producer, data publisher, validation program(s)</p>
-		  		  </p>
+		  </p>
 		  <div class="expandOrCollapse" onclick="toggleVisibility(this)">&#x25B6; Full use case description (click to collapse):</div>
 		  <div class="visible">
 			<p class="description">
@@ -2487,13 +2611,16 @@ for the same resource (i.e. the same access/download target).</p>
 				<li></li>
 			  </ul>
 			</p>
+			</p>
 		  </div>
 		  <p class="relatedUseCases">
 			<a href="#ID4">Dataset Versioning Information [ID4]</a>
 		  </p>
 		  <p class="relatedRequirements">
-			<a href="#RID5">Define Version</a>
-					  </p>
+		  <!--
+			<a href="#RID5"></a>
+		  -->
+		  </p>
 		</section>
     </section>
 
@@ -2524,7 +2651,7 @@ for the same resource (i.e. the same access/download target).</p>
       </p>
 		      
  
-    <section id="RID1">
+    <section class="requirement" id="RID1">
     <h3>Definition of an application profile</h3>
     <p>Create a sufficiently wide definition of an application profile to address declaration of interoperability profiles data
       		may conform to, and through this mechanism provide the means for DCAT instances and collections to also declare the
@@ -2559,7 +2686,7 @@ for the same resource (i.e. the same access/download target).</p>
    
   </section>
 
-  <section id="RID2">
+  <section class="requirement" id="RID2">
     <h3>Profile negotiation</h3>
     <p>Create a way to negotiate choice of information profile between clients and servers</p>
 
@@ -2571,7 +2698,7 @@ for the same resource (i.e. the same access/download target).</p>
 	  <a href="#ID30"></a>
     </p>
   </section>
-  <section id="RID3">
+  <section class="requirement" id="RID3">
     <h3>Create a way to list the profiles implemented by a dataset or a specific distribution</h3>
     <p>Create a way to list the profiles implemented by a dataset or a specific distribution</p>
 		      <p class="note">Some subset of profile metadata that can be included in a DCAT context should have a canonical set of properties recommended. Initial requirements are 1) short definition 2) input and editing guidance. Links should be consistent with <a href="#RID4"></a></p>
@@ -2586,7 +2713,7 @@ for the same resource (i.e. the same access/download target).</p>
 	  <a href="#ID46"></a>
     </p>
   </section>
-  <section id="RID4">
+  <section class="requirement" id="RID4">
     <h3>Create a way to retrieve more information about a profile.</h3>
     <p>Create a way to retrieve more information about a profile. This must be flexible enough to support human and machine readable resources, such as input and editing guidance, validation resources, usage notes etc.</p>
 
@@ -2600,7 +2727,7 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
 
-  <section id="RID5">
+  <section class="requirement" id="RID5">
 
     <h3>Define version</h3>
     <p>Provide a definition of version, including how it relates to a dataset distribution.</p>
@@ -2623,7 +2750,7 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
   
-  <section id="RID6">
+  <section class="requirement" id="RID6">
     <h3>Version identifiers</h3>
     <p>Provide a version identifier for a dataset</p>
  	<p class="relatedRequirements">
@@ -2637,7 +2764,7 @@ for the same resource (i.e. the same access/download target).</p>
       <a href="#ID4"></a>
     </p>
   </section>
-  <section id="RID7">
+  <section class="requirement" id="RID7">
     <h3>Version release dates</h3>
     <p>Provide metadata for when specific version of a dataset was created (released).</p>
 	<p class="relatedRequirements">
@@ -2649,7 +2776,7 @@ for the same resource (i.e. the same access/download target).</p>
       <a href="#ID4"></a>
     </p>
   </section>
-  <section id="RID8">
+  <section class="requirement" id="RID8">
     <h3>Version changes</h3>
     <p>Provide what was changed from one version of a dataset to the next.</p>
 	<p class="relatedRequirements">
@@ -2660,7 +2787,7 @@ for the same resource (i.e. the same access/download target).</p>
       <a href="#ID4"></a>
     </p>
   </section>
-  <section id="RID9">
+  <section class="requirement" id="RID9">
     <h3>Version discovery</h3>
     <p>Provide a means to search and discover versions of a given dataset. This should include both metadata elements referencing previous and next versions, lists of versions, and by implication the ability to search catalogs for related versions.</p>
 	<p class="relatedRequirements">
@@ -2674,7 +2801,7 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
 
- <section id="RID10">
+ <section class="requirement" id="RID10">
     <h3>Identify dataset types</h3>
     <p>Provide a mechanism to indicate the type of data being described and recommend vocabularies to use given the dataset type indicated. </p>
 		  <p class="note">Providing examples of scope will provide guidance, without being unnecessarily restrictive. 
@@ -2688,7 +2815,7 @@ for the same resource (i.e. the same access/download target).</p>
 	  </p>
   </section>
   
-  <section id="RID11">
+  <section class="requirement" id="RID11">
     <h3>Describe fine grained semantics and structure of datasets</h3>
     <p>Provide recommendations and mechanisms for data providers to describe datasets with fine grained semantics (e.g. instrument/sensor used, spatial feature, 
        observable property, quantity kind).</p>
@@ -2711,7 +2838,7 @@ for the same resource (i.e. the same access/download target).</p>
 	  </p>
   </section>
 
-   <section id="RID12">
+   <section class="requirement" id="RID12">
     <h3>Provide fine grained metadata for dcat:Distributions</h3>
     <p>Define a way to associate web services descriptions in dcat:Distribution instances associated to a dcat:Dataset</p>
       <p class="note">This may include rich information via extensions points, URI templates and parameters, dimensions and subsetting operations,
@@ -2727,7 +2854,7 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
   
-  <section id="RID13">
+  <section class="requirement" id="RID13">
     <h3>Provide service metadata for dcat:Distributions</h3>
     <p>Define a way to associate web services descriptions in dcat:Distribution instances associated to a dcat:Dataset</p>
       <p class="note">This may include rich information via extensions points, URI templates and parameters, dimensions and subsetting operations,
@@ -2745,7 +2872,7 @@ for the same resource (i.e. the same access/download target).</p>
 	</p>
   </section>
   
-  <section id="RID14">
+  <section class="requirement" id="RID14">
     <h3>Attach usage notes</h3>
     <p>Provide a recommended way to attach usage notes to data descriptions.</p>
 		      <p class="note">Should this also apply to specific distributions?</p>
@@ -2759,7 +2886,7 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
   
-  <section id="RID15">
+  <section class="requirement" id="RID15">
     <h3>Link datasets and publications</h3>
     <p>Provide a way to link publications about a dataset to the dataset.</p>
 	<p class="relatedRequirements">
@@ -2772,7 +2899,7 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
   
-  <section id="RID16">
+  <section class="requirement" id="RID16">
     <h3>Provide a way to link to provenance information</h3>
     <p>Provide a way to link to structured information about the provenance of a dataset including:
 	 <ul>
@@ -2794,7 +2921,7 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
 
-  <section id="RID17">
+  <section class="requirement" id="RID17">
     <h3>Cite datasets</h3>
     <p>Provide a way to specify information required for data citation (e.g., dataset authors, title, publication year, publisher, persistent identifier)</p>
 	<p class="relatedRequirements">
@@ -2805,7 +2932,7 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
     </section>
 	
-  <section id="RID18">
+  <section class="requirement" id="RID18">
     <h3>Modeling aspects of data quality</h3>
     <p>Identify common modeling patterns for different aspects of data quality based on frequently referenced data quality attributes found in existing standards and practices.</p>
 	<p scope="note">This includes potential use and revision of DQV</p>
@@ -2825,7 +2952,7 @@ for the same resource (i.e. the same access/download target).</p>
 	</p>
   </section>
  
-  <section id="RID19">
+  <section class="requirement" id="RID19">
     <h3>Describing access to datasets</h3>
     <p>Provide a way to specify access restrictions for both a dataset and a distribution.</p>
    <p>Provide a way to define the meaning of the access restrictions for a dataset or distribution and to specify what is required to access a dataset and distribution.</p>
@@ -2835,7 +2962,7 @@ for the same resource (i.e. the same access/download target).</p>
   </section>
 
  
-  <section id="RID20">
+  <section class="requirement" id="RID20">
     <h3>Ability to represent the different relationships between datasets, including: </h3>
     <p>Ability to represent the different relationships between datasets, including: versions of a dataset, collection of datasets, to describe their inclusion criteria and to define the 'hasPart'/'partOf' relationship, derivation, e.g. processed data that is derived from raw data  </p>
 	<p class="relatedRequirements">
@@ -2849,7 +2976,7 @@ for the same resource (i.e. the same access/download target).</p>
 
 <!-- Reviewed/edited by Jaro: --> 
 
-  <section id="RID1.1">
+  <section class="requirement" id="RID1.1">
 	<h3>Packaged Distribution</h3>
 	<p>Define way to specify content of packaged files in a Distribution.</p>
 	<p>For example, a set of files may be organised in an archive format and then compressed, 
@@ -2857,7 +2984,7 @@ for the same resource (i.e. the same access/download target).</p>
 	<p class="relatedUseCases"><a href="#ID1"></a></p>
  </section> 
 
-  <section id="RID11.1">
+  <section class="requirement" id="RID11.1">
     <h3>Dereferenceable identifiers</h3>
     <p>Encode identifiers as dereferenceable HTTP URIs</p>
     <p class="relatedUseCases">
@@ -2865,7 +2992,7 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
   
-  <section id="RID11.2">
+  <section class="requirement" id="RID11.2">
     <h3>Identifier type</h3>
     <p>Indicate type of identifier (e.g. <code>prism:doi, bibo:doi, ISBN</code> etc.).</p>
     <p class="relatedUseCases">
@@ -2873,7 +3000,7 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
   
-  <section id="RID11.3">
+  <section class="requirement" id="RID11.3">
     <h3>Primary and alternative identifier</h3>
     <p>Provide means to distinguish the primary and alternative (legacy) identifiers.</p>
     <p class="relatedUseCases">
@@ -2881,7 +3008,7 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
 
-  <section id="RID19.1">
+  <section class="requirement" id="RID19.1">
     <h3>Qualified forms</h3>
     <p>Define qualified forms to specify additional attributes of appropriate binary relations (e.g. temporal context).</p>
     <p class="relatedUseCases">
@@ -2889,7 +3016,7 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
   
-  <section id="RID19.2">
+  <section class="requirement" id="RID19.2">
     <h3>Mapping of qualified and non-qualified forms</h3>
     <p>Specify mapping of qualified to non-qualified forms (lowering mapping). The reverse requires information (qualification) that might not be present/evident.</p>
     <p class="relatedUseCases">
@@ -2897,7 +3024,7 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
 
-  <section id="RID22.1">
+  <section class="requirement" id="RID22.1">
     <h3>URI templates for Distribution links</h3>
     <p>Support use of URI templates for distribution links.</p>
     <p class="relatedUseCases">
@@ -2905,16 +3032,34 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
 
- <section id="RID25.1">
-    <h3>Control of Dataset publication</h3>
-    <p>Define means to explicitly control the (re)publication of a Dataset description among Catalogs.
-       Obligations might apply e.g. to disclose the original source or keep the copy synchronized.</p>
+  <section class="requirement" id="RID25.1">
+    <h3>Publication control [RID25.1]</h3>
+    <p>Define means to explicitly control the re-publication of Dataset and Catalog descriptions
+       among data portals (policies). Obligations might apply e.g. to disclose the original source
+       or keep the copies synchronized.</p>
     <p class="relatedUseCases">
       <a href="#ID25"></a>
     </p>
+    <p class="relatedRequirements">
+      <a href="#RID25.2"></a>	
+	</p> 
   </section>
 
-  <section id="RID26.1">
+  <section class="requirement" id="RID25.2">
+    <h3>Publication source [RID25.2]</h3>
+    <p>
+		Define a reference to the original release of a re-published DCAT resource in a way indexable by search engines
+		and processable by web clients.
+	</p>
+    <p class="relatedUseCases">
+      <a href="#ID25"></a>
+    </p>
+    <p class="relatedRequirements">
+      <a href="#RID25.1"></a>	
+	</p> 
+  </section>
+
+  <section class="requirement" id="RID26.1">
     <h3>Missing aspects of dataset descriptions</h3>
     <p>Identify missing aspects of dataset descriptions.</p>
     <p class="relatedUseCases">
@@ -2922,7 +3067,7 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
 
-  <section id="RID26.2">
+  <section class="requirement" id="RID26.2">
     <h3>Vocabulary extension points</h3>
     <p>Define extension points (e.g. properties) for integration of external, specialized vocabularies.</p>
     <p class="relatedUseCases">
@@ -2930,7 +3075,7 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
 
-  <section id="RID27.1">
+  <section class="requirement" id="RID27.1">
     <h3>Boundaries of temporal coverage</h3>
     <p>Allow for specification of the start and/or end date of temporal coverage.</p>
     <p class="relatedUseCases">
@@ -2938,7 +3083,7 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
 
-  <section id="RID28.1">
+  <section class="requirement" id="RID28.1">
     <h3>Reference system</h3>
     <p>Provide means to specify the reference system(s) used in a dataset.</p>
     <p class="relatedUseCases">
@@ -2946,7 +3091,7 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
 
-  <section id="RID29.1">
+  <section class="requirement" id="RID29.1">
     <h3>Spatial coverage</h3>
     <p>Provide means to specify spatial coverage with geometries.</p>
     <p class="relatedUseCases">
@@ -2954,7 +3099,7 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
 
-  <section id="RID31.1">
+  <section class="requirement" id="RID31.1">
     <h3>Funding source</h3>
     <p>Provide means to describe the funding (amount and source) of a Dataset (or entire Catalog).</p>
     <p class="relatedUseCases">
@@ -2962,7 +3107,7 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
 
-  <section id="RID33.1">
+  <section class="requirement" id="RID33.1">
     <h3>Summary statistics</h3>
     <p>Express summary statistics and descriptive metrics to characterize a Dataset.</p>
     <p class="relatedUseCases">
@@ -2971,7 +3116,7 @@ for the same resource (i.e. the same access/download target).</p>
   </section>
 
  
-  <section id="RID34.1">
+  <section class="requirement" id="RID34.1">
     <h3>Definition of Distribution</h3>
     <p>Revise definition of Distribution. Make clearer what a Distribution is and what it is not. Provide better guidance for data publishers.</p>
     <p class="relatedUseCases">
@@ -2979,7 +3124,7 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
   
-  <section id="RID35.1">
+  <section class="requirement" id="RID35.1">
     <h3>Relationship between Datasets and Catalogs</h3>
     <p>Clarify the relationships between Datasets and zero, one or multiple Catalogs,
     e.g. in scenarios of copying, harvesting and aggregation of Dataset descriptions
@@ -2989,14 +3134,14 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
   
-  <section id="RID36.1">
+  <section class="requirement" id="RID36.1">
     <h3>Comparision with related vocabularies</h3>
     <p>Analyse and compare similar concepts defined by vocabularies related to DCAT (e.g. VOID, Data Cube dataset).</p>
     <p class="relatedUseCases">
       <a href="#ID36"></a>
     </p>
   </section>
-  <section id="RID36.2">
+  <section class="requirement" id="RID36.2">
     <h3>Mapping to related vocabularies</h3>
     <p>Define guidelines how to create a DCAT description of a VOID or Data Cube dataset</p>
     <p class="relatedUseCases">
@@ -3004,7 +3149,7 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
  
-  <section id="RID40.1">
+  <section class="requirement" id="RID40.1">
     <h3>Entailment of schema.org</h3>
     <p>Define schema.org equivalents for DCAT properties to support entailment of schema.org compliant profiles of DCAT records.</p>
     <p class="relatedUseCases">
@@ -3012,7 +3157,7 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
  
-  <section id="RID42.1">
+  <section class="requirement" id="RID42.1">
     <h3>Metadata Guidance Rules</h3>
     <p>Indicate in profiled vocabulary set of guidance rules applied.</p>
     <p class="relatedUseCases">
@@ -3020,7 +3165,7 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
 
-  <section id="RID44.1">
+  <section class="requirement" id="RID44.1">
     <h3>Serialized Dataset identifier</h3>
     <p>Define a means to identify a serialized DCAT Data(sub)set (i.e. a particular Distribution of a Dataset or its subset).</p>
     <p class="relatedUseCases">
@@ -3028,7 +3173,7 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
   
-  <section id="RID45.1">
+  <section class="requirement" id="RID45.1">
     <h3>Quality-related information</h3>
     <p>Define a means to advertise any quality-related information; this might be text-based or more machine-processable.</p>
     <p class="relatedUseCases">
@@ -3037,7 +3182,7 @@ for the same resource (i.e. the same access/download target).</p>
   </section>
 
 
-  <section id="RID47.1">
+  <section class="requirement" id="RID47.1">
     <h3>Update method of Dataset</h3>
     <p>Indiacte the update method of a Dataset description, e.g. whether each new dataset entirely supercedes previous ones (is stand-alone), or whether there is a base dataset with files that effect updates to that base. </p>
     <p class="relatedUseCases">
@@ -3045,7 +3190,7 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
 
-  <section id="RID49.1">
+  <section class="requirement" id="RID49.1">
     <h3>Project definition</h3>
     <p>Provide a means (e.g. a class) to define a "project" as a research, funding or work organzation context of a Dataset. </p>
     <p class="relatedUseCases">
@@ -3056,7 +3201,7 @@ for the same resource (i.e. the same access/download target).</p>
 	</p>
   </section>
   
-  <section id="RID49.1">
+  <section class="requirement" id="RID49.1">
     <h3>Project relation</h3>
     <p>Provide a means (e.g. a property) to indicate the relation of Datasets to a project. </p>
     <p class="relatedUseCases">
@@ -3070,7 +3215,7 @@ for the same resource (i.e. the same access/download target).</p>
   
 <!-- Further consolidation required of requirements below this point  -->
 
-  <section id="RID21.1">
+  <section class="requirement" id="RID21.1">
     <h3>TODO:Machine actionable link</h3>
     <p>Metadata 'distribution' elements need a content model (see white paper referenced above) associated with links to communicate the protocol expected and the interchange formats (information model and encoding/serialization) available via the link. Content negotiation does not solve the problem very well because it requires the client to play a guessing game; it's better to explicitly identify the 'profile' for a link's behavior in the metadata so the client can pick the 'affordance' it needs.</p>
     <p class="relatedUseCases">
@@ -3079,5 +3224,8 @@ for the same resource (i.e. the same access/download target).</p>
   </section>
 
 </section>
+	<script class="remove" src="dxwg.js"> </script> 
+	<script class="remove" src="config.js"> </script>
+	<script class="remove" src="https://www.w3.org/Tools/respec/respec-w3c-common"> </script>
   </body>
 </html>
