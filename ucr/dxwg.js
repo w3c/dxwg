@@ -18,6 +18,7 @@ function toggleVisibility(elem) {	// expand or collapse the next div
 	}
 }
 
+
 function toggle(chBox){
 	if(chBox.checked) chBox.parentElement.classList.add('checked'); else chBox.parentElement.classList.remove('checked')
 }
@@ -47,16 +48,63 @@ function resetFilter(){
 	applyFilter();
 }
 
+//https://stackoverflow.com/a/45657360
+function swap(node1, node2) {
+    const afterNode2 = node2.nextElementSibling;
+    const parent = node2.parentNode;
+    node1.replaceWith(node2);
+    parent.insertBefore(node1, afterNode2);
+}
+
+function sortContent(){
+	var reqFirst = document.getElementById("req_first").checked;
+	var contentSections = document.getElementsByClassName("contentSection");
+	if(reqFirst && contentSections[0].id == "UseCases"){
+		swap(contentSections[0], contentSections[1]);
+	}
+	else if(!reqFirst && contentSections[0].id == "Requirements"){
+		var reqs = contentSections[0];
+		swap(contentSections[0], contentSections[1]);
+	}
+
+}
+
+function toggleUseCases(){
+
+	var collapsed = document.getElementById("uc_collapsed").checked;
+	var toggles = document.getElementsByClassName("expandOrCollapse");
+
+	for(var i = 0; i < toggles.length; i++) {
+		if(collapsed){
+			// expect at most 1
+			var visible = toggles[i].parentNode.querySelectorAll("div.visible");
+			if(visible.length > 0){
+				visible[0].className = 'hidden';
+				toggles[i].innerHTML = '&#9654; Full use case description (click to expand)';
+			}
+		}
+		else{
+			var hidden = toggles[i].parentNode.querySelectorAll("div.hidden");
+			if(hidden.length > 0){
+				hidden[0].className = 'visible';
+				toggles[i].innerHTML = '&#9650; Full use case description (click to collapse):';
+			}			
+		}
+	}
+}
 // TODO: Improve by using indexes (create onload)
 // TODO: Optimize code reuse
 // TODO: Trigger respec to update the TOC
 function applyFilter(){
-	
+
+	sortContent();
+	toggleUseCases();
+
 	var tagSelection = [];
 	// Collect selected tags
 	var chBoxes = document.getElementsByTagName('input');
 	for(var i = 0; i < chBoxes.length; i++) {
-		if(chBoxes[i].type == 'checkbox' && chBoxes[i].checked == true) tagSelection.push("'"+chBoxes[i].value+"'");
+		if(chBoxes[i].type == 'checkbox' && chBoxes[i].checked == true && chBoxes[i].name == 'tag_filter') tagSelection.push("'"+chBoxes[i].value+"'");
 	}
 	// Process use cases selected by tag
 	var ucSelection = [];
@@ -79,6 +127,9 @@ function applyFilter(){
 		}
 		else{
 			uc.style.display = 'block';
+			if(ucSelection.indexOf(uc.id) == -1){
+				ucSelection.push(uc.id);
+			}
 		}
 	}
 	// Process requirements

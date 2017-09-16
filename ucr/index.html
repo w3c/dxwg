@@ -82,7 +82,7 @@
 		   editing those that remained and adding missing ones. The editors also ensured links from requirements to use cases were maintained.</p> 
 
     </section>
-
+    
      <section id="Tags">
       <h2>Tags</h2>
       <p>
@@ -92,11 +92,54 @@
 		and click "apply filter". "Reset filter" will clear the selection and recreate 
 		the original specification view .
       </p>
+    
+
       <p>
+      	<!--
       	<div class="filterControl">
       		<button class="dxwgButton applyFilterButton" onclick="applyFilter()" aria-label="apply filter">apply filter</button>
       		<button class="dxwgButton resetFilterButton" onclick="resetFilter()" aria-label="reset filter">reset filter</button>
       	</div>
+		-->
+	
+		<div id="deliverableFilter" class="filterGroup">
+			Filter by deliverable&#160;
+			<div class="filter"><label class="switch deliverable_reference" title="HTTP Content negotiation by media type and profile. Deliverable 'Content Negotiation by Application Profile'"><input type="checkbox" name="tag_filter" value="content_negotiation" hidden="true" onchange="toggle(this)"></input>content_negotiation</label></div>
+			<div class="filter"><label class="switch deliverable_reference" title="DCAT core and deliverable 'DCAT 1.1'"><input type="checkbox" name="tag_filter" value="dcat" hidden="true" onchange="toggle(this)"></input>dcat</label></div>
+			<div class="filter"><label class="switch deliverable_reference" title="Structural and/or semantic constraints of target resource. Deliverable 'Guidance on publishing application profiles of vocabularies'"><input type="checkbox" name="tag_filter" value="profile" hidden="true" onchange="toggle(this)"></input>profile</label></div>			
+		</div>	
+		<div id="resourceFilter" class="filterGroup">
+			Filter by resource type&#160;
+			<div class="filter"><label class="switch" title="DCAT Catalog"><input type="checkbox" name="tag_filter" value="catalog" hidden="true" onchange="toggle(this)"></input>catalog</label></div>
+			<div class="filter"><label class="switch" title="DCAT Dataset"><input type="checkbox" name="tag_filter" value="dataset" hidden="true" onchange="toggle(this)"></input>dataset</label></div>
+		</div>
+		<div id="aspectFilter" class="filterGroup">
+			Filter by modeling aspect&#160;
+			<div class="filter"><label class="switch" title="Coverage with regard to spatial, temporal or social extension"><input type="checkbox" name="tag_filter" value="coverage" hidden="true" onchange="toggle(this)"></input>coverage</label></div>
+			<div class="filter"><label class="switch" title="Documentation of a DCAT resource, e.g. summary, example data, usage guide"><input type="checkbox" name="tag_filter" value="documentation" hidden="true" onchange="toggle(this)"></input>documentation</label></div>
+			<div class="filter"><label class="switch" title="Lifecycle status of a DCAT resource"><input type="checkbox" name="tag_filter" value="status" hidden="true" onchange="toggle(this)"></input>status</label></div>
+			<div class="filter"><label class="switch" title="Versioning aspects of a DCAT resource"><input type="checkbox" name="tag_filter" value="version" hidden="true" onchange="toggle(this)"></input>version</label></div>				
+			<div class="filter"><label class="switch" title="Archiving (TAR), compression (GZ) etc."><input type="checkbox" name="tag_filter" value="packaging" hidden="true" onchange="toggle(this)"></input>packaging</label></div>
+			<div class="filter"><label class="switch" title="Provenance history of a DCAT resource (data source, lineage, modifications etc.)"><input type="checkbox" name="tag_filter" value="provenance" hidden="true" onchange="toggle(this)"></input>provenance</label></div>
+			<div class="filter"><label class="switch" title="(Re)publication and dissemination of Dataset information"><input type="checkbox" name="tag_filter" value="publication" hidden="true" onchange="toggle(this)"></input>publication</label></div>
+			<div class="filter"><label class="switch" title="(Relative) quality of data stated or assessed by a testing suite"><input type="checkbox" name="tag_filter" value="quallity" hidden="true" onchange="toggle(this)"></input>quality</label></div>
+			<div class="filter"><label class="switch" title="References to DCAT resources according to requirements of distinct communities"><input type="checkbox" name="tag_filter" value="referencing" hidden="true" onchange="toggle(this)"></input>referencing</label></div>
+			<div class="filter"><label class="switch" title="Implementationdetails of DCAT Distribition (media type, data type, encoding etc.)"><input type="checkbox" name="tag_filter" value="representation" hidden="true" onchange="toggle(this)"></input>representation</label></div>
+			<div class="filter"><label class="switch" title="(Quantifiable) spatio-temporal etc. resolution and precision"><input type="checkbox" name="tag_filter" value="resolution" hidden="true" onchange="toggle(this)"></input>resolution</label></div>
+			<div class="filter"><label class="switch" title="Agent roles involved in creation, modification etc. of a DCAT resource" ><input type="checkbox" name="tag_filter" value="roles" hidden="true" onchange="toggle(this)"></input>roles</label></div>
+			<div class="filter"><label class="switch" title="Fine-grade content modelling (dimensions, conceptual classification) etc."><input type="checkbox" name="tag_filter" value="semantics" hidden="true" onchange="toggle(this)"></input>semantics</label></div>
+			<div class="filter"><label class="switch" title="Dynamic, parametrized, service-driven distribution approaches (PULL, PUSH)"><input type="checkbox" name="tag_filter" value="service" hidden="true" onchange="toggle(this)"></input>service</label></div>
+			<div class="filter"><label class="switch" title="Modeling of spatial aspects"><input type="checkbox" name="tag_filter" value="space" hidden="true" onchange="toggle(this)"></input>space</label></div>
+			<div class="filter"><label class="switch" title="Modeling of temporal aspects"><input type="checkbox" name="tag_filter" value="time" hidden="true" onchange="toggle(this)"></input>time</label></div>
+			<div class="filter"><label class="switch" title="Access control and usage permissions (extending access control)"><input type="checkbox" name="tag_filter" value="usage_control" hidden="true" onchange="toggle(this)"></input>usage_control</label></div>	
+		</div>
+		<div id="metaFilter" class="filterGroup">
+			Filter by meta-modeling aspect&#160;
+			<div class="filter"><label class="switch" title="Aggregate of individual use cases. Requires rework and splitting up."><input type="checkbox" name="tag_filter" value="aggregate" hidden="true" onchange="toggle(this)"></input>aggregate</label></div>
+			<div class="filter"><label class="switch" title="Meta use-case or requirement, details are handled by subordinated use-case or requirement"><input type="checkbox" name="tag_filter" value="meta" hidden="true" onchange="toggle(this)"></input>meta</label></div>
+			<div class="filter"><label class="switch" title="Usecase that is currently out of groups's scope"><input type="checkbox" name="tag_filter" value="out_of_scope" hidden="true" onchange="toggle(this)"></input>out_of_scope</label></div>
+		</div>			
+		<!--
 		<table cellpadding="4">
 		<tbody>
 		<tr>
@@ -135,7 +178,6 @@
 		<td> Meta-Usecase provides a point of entry to a topic to be handled by subordinated, detailed usecases
 		</td></tr>
 		<tr>
-		<!-- ID24 and ID39 -->
 		<td><label class="switch"><input type="checkbox" name="tag_filter" value="out_of_scope" hidden="true" onchange="toggle(this)"></input>out_of_scope</label></td>
 		<td> Usecase that is currently out of groups's scope 
 		</td></tr>
@@ -195,14 +237,18 @@
 		<td><label class="switch"><input type="checkbox" name="tag_filter" value="usage_control" hidden="true" onchange="toggle(this)"></input>usage_control</label></td>
 		<td> Access control and usage permissions (extending access control)
 		</td></tr></tbody></table>
+	-->
 	  </p>
+
 	  <div class="filterControl">      		
-      		<button class="dxwgButton applyFilterButton" onclick="applyFilter()" aria-label="apply filter">apply filter</button>
+	  		<span><input type="checkbox" name="render_option" value="req_first" id="req_first"></input><label>Requirements first</label></span>&#160;
+	  		<span><input type="checkbox" name="render_option" value="uc_collapsed" id="uc_collapsed"></input><label>UCs collapsed</label></span>&#160;
+      		<button class="dxwgButton applyFilterButton" onclick="applyFilter()" aria-label="apply filter">apply filter</button>&#160;
       		<button class="dxwgButton resetFilterButton" onclick="resetFilter()" aria-label="reset filter">reset filter</button>      	
       </div>
     </section>
 
-    <section id="UseCases">
+    <section class="contentSection" id="UseCases">
       <h2>Use Cases</h2>
 
 	   <section id="ID1" class="usecase">
@@ -393,7 +439,8 @@
       </p>
       <p class="tags">
         <span class="tag class_dcat">dcat</span>
-        <span class="tag class_lifecycle">lifecycle</span>
+        <span class="tag class_status">status</span>
+        <span class="tag class_version">version</span>
         <span class="tag class_provenance">provenance</span>
         <span class="tag class_dataset">dataset</span>
         <span class="tag class_aggregate">aggregate</span>
@@ -2065,7 +2112,8 @@ Currently, Europeana itself maintains data in two flavours of EDM is being defin
         <span class="tag class_coverage">coverage</span>
         <span class="tag class_quality">quality</span>
         <span class="tag class_resolution">resolution</span>
-        <span class="tag class_lifecycle">lifecycle</span>
+        <span class="tag class_status">status</span>
+        <span class="tag class_version">version</span>
         <span class="tag class_usage_control">usage_control</span>
       </p>
       <p class="stakeholders">
@@ -2322,7 +2370,8 @@ Within Informatie Vlaanderen, a project is running of combining the two worlds i
       <p class="contributor">Jaroslav Pullmann, Keith Jeffery</p>
       <p class="tags">
         <span class="tag class_dataset">dataset</span>
-        <span class="tag class_lifecycle">lifecycle</span>
+        <span class="tag class_status">status</span>
+        <span class="tag class_version">version</span>
         <span class="tag class_publication">publication</span>
         <span class="tag class_referencing">referencing</span>
       </p>
@@ -2534,7 +2583,8 @@ for the same resource (i.e. the same access/download target).</p>
 		  <p class="tags">
 			<span class="tag class_dcat">dcat</span>
 			<span class="tag class_documentation">documentation</span>
-			<span class="tag class_lifecycle">lifecycle</span>			
+			<span class="tag class_status">status</span>
+			<span class="tag class_version">version</span>			
 			<span class="tag class_profile">profile</span>
 			<span class="tag class_provenance">provenance</span>
 			<span class="tag class_roles">roles</span>
@@ -2636,7 +2686,7 @@ for the same resource (i.e. the same access/download target).</p>
 	phrases "Avoid coordinate transformations".
 -->
 	
-    <section id="Requirements">
+    <section class="contentSection" id="Requirements">
       <h2>Requirements</h2>
       <p>This chapter lists the requirements for the Working Group deliverables</p>
       <p class="note">In some requirements the expression 'recommended way' is used.
