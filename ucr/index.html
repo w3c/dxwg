@@ -454,7 +454,18 @@
       <div class="expandOrCollapse" onclick="toggleVisibility(this)">&#x25B6; Full use case description (click to collapse):</div>
       <div class="visible">
         <p class="description">
-          <p>Most datasets that are maintained long-term and evolve over time have distributions of multiple versions. However, the current DCAT model does not cover versioning with sufficient details. Being able to publish dataset version information in a standard way will help both producers publishing their data on data catalogues or archiving data and dataset consumers who want discover new versions of a give dataset, etc. We can also see some similarities with software versioning and dataset versioning, for instance, some data projects release daily dataset distributions, major/minor releases etc. Probably, we can use some of the lessons learned from software versioning. There are several existing dataset description models that extend DCAT to provide versioning information, for example, HCLS Community Profile.</p>
+         <p>
+          Most datasets that are maintained long-term and evolve over time have distributions of multiple versions. 
+          However, the current DCAT model does not cover versioning with sufficient details. Being able to publish 
+          dataset version information in a standard way will help both producers publishing their data on data catalogues 
+      	  or archiving data and dataset consumers who want discover new versions of a given dataset, etc. 
+      	 </p>
+      	 <p>
+      	  We can also see some similarities with software versioning and dataset versioning, for instance, some data projects 
+      	  release daily dataset distributions, major/minor releases etc. Probably, we can use some of the lessons learned from 
+      	  software versioning. There are several existing dataset description models that extend DCAT to provide versioning information,
+      	  for example, HCLS Community Profile.
+         </p>         
         </p>
         <p class="links">
           <ul>
@@ -2780,79 +2791,103 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
 
-  <section class="requirement" id="RID5">
-
-    <h3>Define version</h3>
-    <p>Provide a definition of version, including how it relates to a dataset distribution.</p>
-    <p>Provide support for different versioning scenarios (e.g., dataset evolution, conversions/translations, granularities/subsets).</p>
-
-    <h3>Define what is meant by "version" in this context and how it relates to dataset, distribution</h3>
-    <p>A definition of what is meant by version in this context and how it relates to dataset, distribution should be provided.</p>
-    <p>Different versioning scenarios should be supported (e.g., dataset evolution, conversions/translations, granularities/subsets).</p>
-
-    <p class="note"> Requirements should be consistent with W3C DWBP guidelines on versioning: BP7. Provide a version indicator, BP8. Provide version history, BP11. Assign URIs to dataset versions and series</p>
-
-	<p class="relatedRequirements">
+  <!-- Versioning requirements -->
+  <section class="requirement" id="RVer1">
+    <h3>Version subject [RVer1]</h3>
+    <p>Identify DCAT resources that are subject to versioning, i.e. Catalog, Dataset, Distribution.</p>
+    <p class="relatedRequirements">
       <a href="#RID6"></a>
 	  <a href="#RID7"></a>
 	  <a href="#RID8"></a>
-	  </p>
-	
+	</p>	
 	<p class="relatedUseCases">
       <a href="#ID4"></a>
     </p>
   </section>
- 
-  <section class="requirement" id="RID6">
-    <h3>Version identifiers</h3>
-    <p>Provide a version identifier for a dataset</p>
+
+  <section class="requirement" id="RVer2"><!-- RID5 -->
+    <h3>Version definition [RVer2]</h3>
+    <p>Provide a conceptual definition of what is considered a version with regard to modifications of the respective subject.
+	   The definition should provide a clear <em>guidance</em> on conditions, type and severity of a resource's update that 
+	   motivate the creation of a new version in scenarios like dataset evolution, conversion, translations etc. 	   
+	</p>
+    <p class="relatedRequirements">
+      <a href="#RVer1"></a>	  
+	</p>	
+	<p class="relatedUseCases">
+      <a href="#ID4"></a>
+    </p>
+  </section>
+  <section class="requirement" id="RVer3"><!--RID6-->
+    <h3>Version identifier [RVer3]</h3>
+    <p>Provide a means to identify a version (URI-segment, property etc.). 	   
+       Clarify relationship to identifier of the subject resource.
+    </p>
  	<p class="relatedRequirements">
-      <a href="#RID5"></a>
-	  <a href="#RID7"></a>
-	  <a href="#RID8"></a>
-	  <a href="#RID9"></a>
-	  <a href="#RID20"></a>
-	  </p>
+      <a href="#RVer2"></a> 
+      <a href="#RVer4"></a>
+      <a href="#RVer5"></a>
+	</p>
 	<p class="relatedUseCases">
       <a href="#ID4"></a>
     </p>
   </section>
-  <section class="requirement" id="RID7">
-    <h3>Version release dates</h3>
-    <p>Provide metadata for when specific version of a dataset was created (released).</p>
+   <section class="requirement" id="RVer4">
+    <h3>Version status [RVer4]</h3>
+    <p>
+    	Indicate the status of a version in terms stability, fidelity etc. (e.g. major, minor, stable).
+    	The version identifier might refer to the version status (semantic version). 
+    </p>
+ 	<p class="relatedRequirements">
+      <a href="#RVer2"></a> 
+      <a href="#RVer3"></a>
+	</p>
+	<p class="relatedUseCases">
+      <a href="#ID4"></a>
+    </p>
+  </section>
+  <section class="requirement" id="RVer5">
+    <h3>Version release date [RVer5]</h3>
+    <p>
+     Indicate the date when specific version was created (released).
+     The version identifier might refer to the release date. 
+    </p>
 	<p class="relatedRequirements">
-      <a href="#RID5"></a>
-	  <a href="#RID6"></a>
- 	  <a href="#RID9"></a>
+	  <a href="#RVer2"></a> 
+      <a href="#RVer3"></a>
     </p>	
     <p class="relatedUseCases">
       <a href="#ID4"></a>
     </p>
   </section>
-  <section class="requirement" id="RID8">
-    <h3>Version changes</h3>
-    <p>Provide what was changed from one version of a dataset to the next.</p>
+  <section class="requirement" id="RVer6">
+    <h3>Version delta [RVer6]</h3>
+    <p>
+      Indicate the change delta from one version to the next.
+    </p>
 	<p class="relatedRequirements">
-      <a href="#RID5"></a>
-	  <a href="#RID6"></a>
+      <a href="#RVer2"></a>
     </p>
     <p class="relatedUseCases">
       <a href="#ID4"></a>
     </p>
   </section>
-  <section class="requirement" id="RID9">
-    <h3>Version discovery</h3>
-    <p>Provide a means to search and discover versions of a given dataset. This should include both metadata elements referencing previous and next versions, lists of versions, and by implication the ability to search catalogs for related versions.</p>
+  <section class="requirement" id="RVer7">
+    <h3>Version discovery [RVer7]</h3>
+    <p>
+    	Provide a means to search and discover existing versions of a DCAT resource. 
+    	This should include both metadata elements referencing previous and next versions, 
+    	lists of versions, and by implication the ability to search catalogs for related versions.
+    </p>
 	<p class="relatedRequirements">
-      <a href="#RID5"></a>
-	  <a href="#RID6"></a>
- 	  <a href="#RID7"></a>
- 	  <a href="#RID20"></a>
-	  </p> 
+      <a href="#RVer2"></a>
+	</p> 
 	<p class="relatedUseCases">
       <a href="#ID4"></a>
     </p>
   </section>
+
+
 
  <section class="requirement" id="RID10">
     <h3>Identify dataset types</h3>
