@@ -82,7 +82,7 @@
 		   editing those that remained and adding missing ones. The editors also ensured links from requirements to use cases were maintained.</p> 
 
     </section>
-
+    
      <section id="Tags">
       <h2>Tags</h2>
       <p>
@@ -92,11 +92,54 @@
 		and click "apply filter". "Reset filter" will clear the selection and recreate 
 		the original specification view .
       </p>
+    
+
       <p>
+      	<!--
       	<div class="filterControl">
       		<button class="dxwgButton applyFilterButton" onclick="applyFilter()" aria-label="apply filter">apply filter</button>
       		<button class="dxwgButton resetFilterButton" onclick="resetFilter()" aria-label="reset filter">reset filter</button>
       	</div>
+		-->
+	
+		<div id="deliverableFilter" class="filterGroup">
+			Filter by deliverable&#160;
+			<div class="filter"><label class="switch deliverable_reference" title="HTTP Content negotiation by media type and profile. Deliverable 'Content Negotiation by Application Profile'"><input type="checkbox" name="tag_filter" value="content_negotiation" hidden="true" onchange="toggle(this)"></input>content_negotiation</label></div>
+			<div class="filter"><label class="switch deliverable_reference" title="DCAT core and deliverable 'DCAT 1.1'"><input type="checkbox" name="tag_filter" value="dcat" hidden="true" onchange="toggle(this)"></input>dcat</label></div>
+			<div class="filter"><label class="switch deliverable_reference" title="Structural and/or semantic constraints of target resource. Deliverable 'Guidance on publishing application profiles of vocabularies'"><input type="checkbox" name="tag_filter" value="profile" hidden="true" onchange="toggle(this)"></input>profile</label></div>			
+		</div>	
+		<div id="resourceFilter" class="filterGroup">
+			Filter by resource type&#160;
+			<div class="filter"><label class="switch" title="DCAT Catalog"><input type="checkbox" name="tag_filter" value="catalog" hidden="true" onchange="toggle(this)"></input>catalog</label></div>
+			<div class="filter"><label class="switch" title="DCAT Dataset"><input type="checkbox" name="tag_filter" value="dataset" hidden="true" onchange="toggle(this)"></input>dataset</label></div>
+		</div>
+		<div id="aspectFilter" class="filterGroup">
+			Filter by modeling aspect&#160;
+			<div class="filter"><label class="switch" title="Coverage with regard to spatial, temporal or social extension"><input type="checkbox" name="tag_filter" value="coverage" hidden="true" onchange="toggle(this)"></input>coverage</label></div>
+			<div class="filter"><label class="switch" title="Documentation of a DCAT resource, e.g. summary, example data, usage guide"><input type="checkbox" name="tag_filter" value="documentation" hidden="true" onchange="toggle(this)"></input>documentation</label></div>
+			<div class="filter"><label class="switch" title="Lifecycle status of a DCAT resource"><input type="checkbox" name="tag_filter" value="status" hidden="true" onchange="toggle(this)"></input>status</label></div>
+			<div class="filter"><label class="switch" title="Versioning aspects of a DCAT resource"><input type="checkbox" name="tag_filter" value="version" hidden="true" onchange="toggle(this)"></input>version</label></div>				
+			<div class="filter"><label class="switch" title="Archiving (TAR), compression (GZ) etc."><input type="checkbox" name="tag_filter" value="packaging" hidden="true" onchange="toggle(this)"></input>packaging</label></div>
+			<div class="filter"><label class="switch" title="Provenance history of a DCAT resource (data source, lineage, modifications etc.)"><input type="checkbox" name="tag_filter" value="provenance" hidden="true" onchange="toggle(this)"></input>provenance</label></div>
+			<div class="filter"><label class="switch" title="(Re)publication and dissemination of Dataset information"><input type="checkbox" name="tag_filter" value="publication" hidden="true" onchange="toggle(this)"></input>publication</label></div>
+			<div class="filter"><label class="switch" title="(Relative) quality of data stated or assessed by a testing suite"><input type="checkbox" name="tag_filter" value="quallity" hidden="true" onchange="toggle(this)"></input>quality</label></div>
+			<div class="filter"><label class="switch" title="References to DCAT resources according to requirements of distinct communities"><input type="checkbox" name="tag_filter" value="referencing" hidden="true" onchange="toggle(this)"></input>referencing</label></div>
+			<div class="filter"><label class="switch" title="Implementationdetails of DCAT Distribition (media type, data type, encoding etc.)"><input type="checkbox" name="tag_filter" value="representation" hidden="true" onchange="toggle(this)"></input>representation</label></div>
+			<div class="filter"><label class="switch" title="(Quantifiable) spatio-temporal etc. resolution and precision"><input type="checkbox" name="tag_filter" value="resolution" hidden="true" onchange="toggle(this)"></input>resolution</label></div>
+			<div class="filter"><label class="switch" title="Agent roles involved in creation, modification etc. of a DCAT resource" ><input type="checkbox" name="tag_filter" value="roles" hidden="true" onchange="toggle(this)"></input>roles</label></div>
+			<div class="filter"><label class="switch" title="Fine-grade content modelling (dimensions, conceptual classification) etc."><input type="checkbox" name="tag_filter" value="semantics" hidden="true" onchange="toggle(this)"></input>semantics</label></div>
+			<div class="filter"><label class="switch" title="Dynamic, parametrized, service-driven distribution approaches (PULL, PUSH)"><input type="checkbox" name="tag_filter" value="service" hidden="true" onchange="toggle(this)"></input>service</label></div>
+			<div class="filter"><label class="switch" title="Modeling of spatial aspects"><input type="checkbox" name="tag_filter" value="space" hidden="true" onchange="toggle(this)"></input>space</label></div>
+			<div class="filter"><label class="switch" title="Modeling of temporal aspects"><input type="checkbox" name="tag_filter" value="time" hidden="true" onchange="toggle(this)"></input>time</label></div>
+			<div class="filter"><label class="switch" title="Access control and usage permissions (extending access control)"><input type="checkbox" name="tag_filter" value="usage_control" hidden="true" onchange="toggle(this)"></input>usage_control</label></div>	
+		</div>
+		<div id="metaFilter" class="filterGroup">
+			Filter by meta-modeling aspect&#160;
+			<div class="filter"><label class="switch" title="Aggregate of individual use cases. Requires rework and splitting up."><input type="checkbox" name="tag_filter" value="aggregate" hidden="true" onchange="toggle(this)"></input>aggregate</label></div>
+			<div class="filter"><label class="switch" title="Meta use-case or requirement, details are handled by subordinated use-case or requirement"><input type="checkbox" name="tag_filter" value="meta" hidden="true" onchange="toggle(this)"></input>meta</label></div>
+			<div class="filter"><label class="switch" title="Usecase that is currently out of groups's scope"><input type="checkbox" name="tag_filter" value="out_of_scope" hidden="true" onchange="toggle(this)"></input>out_of_scope</label></div>
+		</div>			
+		<!--
 		<table cellpadding="4">
 		<tbody>
 		<tr>
@@ -135,7 +178,6 @@
 		<td> Meta-Usecase provides a point of entry to a topic to be handled by subordinated, detailed usecases
 		</td></tr>
 		<tr>
-		<!-- ID24 and ID39 -->
 		<td><label class="switch"><input type="checkbox" name="tag_filter" value="out_of_scope" hidden="true" onchange="toggle(this)"></input>out_of_scope</label></td>
 		<td> Usecase that is currently out of groups's scope 
 		</td></tr>
@@ -195,14 +237,18 @@
 		<td><label class="switch"><input type="checkbox" name="tag_filter" value="usage_control" hidden="true" onchange="toggle(this)"></input>usage_control</label></td>
 		<td> Access control and usage permissions (extending access control)
 		</td></tr></tbody></table>
+	-->
 	  </p>
+
 	  <div class="filterControl">      		
-      		<button class="dxwgButton applyFilterButton" onclick="applyFilter()" aria-label="apply filter">apply filter</button>
+	  		<span><input type="checkbox" name="render_option" value="req_first" id="req_first"></input><label>Requirements first</label></span>&#160;
+	  		<span><input type="checkbox" name="render_option" value="uc_collapsed" id="uc_collapsed"></input><label>UCs collapsed</label></span>&#160;
+      		<button class="dxwgButton applyFilterButton" onclick="applyFilter()" aria-label="apply filter">apply filter</button>&#160;
       		<button class="dxwgButton resetFilterButton" onclick="resetFilter()" aria-label="reset filter">reset filter</button>      	
       </div>
     </section>
 
-    <section id="UseCases">
+    <section class="contentSection" id="UseCases">
       <h2>Use Cases</h2>
 
 	   <section id="ID1" class="usecase">
@@ -393,7 +439,8 @@
       </p>
       <p class="tags">
         <span class="tag class_dcat">dcat</span>
-        <span class="tag class_lifecycle">lifecycle</span>
+        <span class="tag class_status">status</span>
+        <span class="tag class_version">version</span>
         <span class="tag class_provenance">provenance</span>
         <span class="tag class_dataset">dataset</span>
         <span class="tag class_aggregate">aggregate</span>
@@ -407,7 +454,18 @@
       <div class="expandOrCollapse" onclick="toggleVisibility(this)">&#x25B6; Full use case description (click to collapse):</div>
       <div class="visible">
         <p class="description">
-          <p>Most datasets that are maintained long-term and evolve over time have distributions of multiple versions. However, the current DCAT model does not cover versioning with sufficient details. Being able to publish dataset version information in a standard way will help both producers publishing their data on data catalogues or archiving data and dataset consumers who want discover new versions of a give dataset, etc. We can also see some similarities with software versioning and dataset versioning, for instance, some data projects release daily dataset distributions, major/minor releases etc. Probably, we can use some of the lessons learned from software versioning. There are several existing dataset description models that extend DCAT to provide versioning information, for example, HCLS Community Profile.</p>
+         <p>
+          Most datasets that are maintained long-term and evolve over time have distributions of multiple versions. 
+          However, the current DCAT model does not cover versioning with sufficient details. Being able to publish 
+          dataset version information in a standard way will help both producers publishing their data on data catalogues 
+      	  or archiving data and dataset consumers who want discover new versions of a given dataset, etc. 
+      	 </p>
+      	 <p>
+      	  We can also see some similarities with software versioning and dataset versioning, for instance, some data projects 
+      	  release daily dataset distributions, major/minor releases etc. Probably, we can use some of the lessons learned from 
+      	  software versioning. There are several existing dataset description models that extend DCAT to provide versioning information,
+      	  for example, HCLS Community Profile.
+         </p>         
         </p>
         <p class="links">
           <ul>
@@ -2065,7 +2123,8 @@ Currently, Europeana itself maintains data in two flavours of EDM is being defin
         <span class="tag class_coverage">coverage</span>
         <span class="tag class_quality">quality</span>
         <span class="tag class_resolution">resolution</span>
-        <span class="tag class_lifecycle">lifecycle</span>
+        <span class="tag class_status">status</span>
+        <span class="tag class_version">version</span>
         <span class="tag class_usage_control">usage_control</span>
       </p>
       <p class="stakeholders">
@@ -2322,7 +2381,8 @@ Within Informatie Vlaanderen, a project is running of combining the two worlds i
       <p class="contributor">Jaroslav Pullmann, Keith Jeffery</p>
       <p class="tags">
         <span class="tag class_dataset">dataset</span>
-        <span class="tag class_lifecycle">lifecycle</span>
+        <span class="tag class_status">status</span>
+        <span class="tag class_version">version</span>
         <span class="tag class_publication">publication</span>
         <span class="tag class_referencing">referencing</span>
       </p>
@@ -2534,7 +2594,8 @@ for the same resource (i.e. the same access/download target).</p>
 		  <p class="tags">
 			<span class="tag class_dcat">dcat</span>
 			<span class="tag class_documentation">documentation</span>
-			<span class="tag class_lifecycle">lifecycle</span>			
+			<span class="tag class_status">status</span>
+			<span class="tag class_version">version</span>			
 			<span class="tag class_profile">profile</span>
 			<span class="tag class_provenance">provenance</span>
 			<span class="tag class_roles">roles</span>
@@ -2636,7 +2697,7 @@ for the same resource (i.e. the same access/download target).</p>
 	phrases "Avoid coordinate transformations".
 -->
 	
-    <section id="Requirements">
+    <section class="contentSection" id="Requirements">
       <h2>Requirements</h2>
       <p>This chapter lists the requirements for the Working Group deliverables</p>
       <p class="note">In some requirements the expression 'recommended way' is used.
@@ -2730,79 +2791,103 @@ for the same resource (i.e. the same access/download target).</p>
     </p>
   </section>
 
-  <section class="requirement" id="RID5">
-
-    <h3>Define version</h3>
-    <p>Provide a definition of version, including how it relates to a dataset distribution.</p>
-    <p>Provide support for different versioning scenarios (e.g., dataset evolution, conversions/translations, granularities/subsets).</p>
-
-    <h3>Define what is meant by "version" in this context and how it relates to dataset, distribution</h3>
-    <p>A definition of what is meant by version in this context and how it relates to dataset, distribution should be provided.</p>
-    <p>Different versioning scenarios should be supported (e.g., dataset evolution, conversions/translations, granularities/subsets).</p>
-
-    <p class="note"> Requirements should be consistent with W3C DWBP guidelines on versioning: BP7. Provide a version indicator, BP8. Provide version history, BP11. Assign URIs to dataset versions and series</p>
-
-	<p class="relatedRequirements">
+  <!-- Versioning requirements -->
+  <section class="requirement" id="RVer1">
+    <h3>Version subject [RVer1]</h3>
+    <p>Identify DCAT resources that are subject to versioning, i.e. Catalog, Dataset, Distribution.</p>
+    <p class="relatedRequirements">
       <a href="#RID6"></a>
 	  <a href="#RID7"></a>
 	  <a href="#RID8"></a>
-	  </p>
-	
+	</p>	
 	<p class="relatedUseCases">
       <a href="#ID4"></a>
     </p>
   </section>
- 
-  <section class="requirement" id="RID6">
-    <h3>Version identifiers</h3>
-    <p>Provide a version identifier for a dataset</p>
+
+  <section class="requirement" id="RVer2"><!-- RID5 -->
+    <h3>Version definition [RVer2]</h3>
+    <p>Provide a conceptual definition of what is considered a version with regard to modifications of the respective subject.
+	   The definition should provide a clear <em>guidance</em> on conditions, type and severity of a resource's update that 
+	   motivate the creation of a new version in scenarios like dataset evolution, conversion, translations etc. 	   
+	</p>
+    <p class="relatedRequirements">
+      <a href="#RVer1"></a>	  
+	</p>	
+	<p class="relatedUseCases">
+      <a href="#ID4"></a>
+    </p>
+  </section>
+  <section class="requirement" id="RVer3"><!--RID6-->
+    <h3>Version identifier [RVer3]</h3>
+    <p>Provide a means to identify a version (URI-segment, property etc.). 	   
+       Clarify relationship to identifier of the subject resource.
+    </p>
  	<p class="relatedRequirements">
-      <a href="#RID5"></a>
-	  <a href="#RID7"></a>
-	  <a href="#RID8"></a>
-	  <a href="#RID9"></a>
-	  <a href="#RID20"></a>
-	  </p>
+      <a href="#RVer2"></a> 
+      <a href="#RVer4"></a>
+      <a href="#RVer5"></a>
+	</p>
 	<p class="relatedUseCases">
       <a href="#ID4"></a>
     </p>
   </section>
-  <section class="requirement" id="RID7">
-    <h3>Version release dates</h3>
-    <p>Provide metadata for when specific version of a dataset was created (released).</p>
+   <section class="requirement" id="RVer4">
+    <h3>Version status [RVer4]</h3>
+    <p>
+    	Indicate the status of a version in terms stability, fidelity etc. (e.g. major, minor, stable).
+    	The version identifier might refer to the version status (semantic version). 
+    </p>
+ 	<p class="relatedRequirements">
+      <a href="#RVer2"></a> 
+      <a href="#RVer3"></a>
+	</p>
+	<p class="relatedUseCases">
+      <a href="#ID4"></a>
+    </p>
+  </section>
+  <section class="requirement" id="RVer5">
+    <h3>Version release date [RVer5]</h3>
+    <p>
+     Indicate the date when specific version was created (released).
+     The version identifier might refer to the release date. 
+    </p>
 	<p class="relatedRequirements">
-      <a href="#RID5"></a>
-	  <a href="#RID6"></a>
- 	  <a href="#RID9"></a>
+	  <a href="#RVer2"></a> 
+      <a href="#RVer3"></a>
     </p>	
     <p class="relatedUseCases">
       <a href="#ID4"></a>
     </p>
   </section>
-  <section class="requirement" id="RID8">
-    <h3>Version changes</h3>
-    <p>Provide what was changed from one version of a dataset to the next.</p>
+  <section class="requirement" id="RVer6">
+    <h3>Version delta [RVer6]</h3>
+    <p>
+      Indicate the change delta from one version to the next.
+    </p>
 	<p class="relatedRequirements">
-      <a href="#RID5"></a>
-	  <a href="#RID6"></a>
+      <a href="#RVer2"></a>
     </p>
     <p class="relatedUseCases">
       <a href="#ID4"></a>
     </p>
   </section>
-  <section class="requirement" id="RID9">
-    <h3>Version discovery</h3>
-    <p>Provide a means to search and discover versions of a given dataset. This should include both metadata elements referencing previous and next versions, lists of versions, and by implication the ability to search catalogs for related versions.</p>
+  <section class="requirement" id="RVer7">
+    <h3>Version discovery [RVer7]</h3>
+    <p>
+    	Provide a means to search and discover existing versions of a DCAT resource. 
+    	This should include both metadata elements referencing previous and next versions, 
+    	lists of versions, and by implication the ability to search catalogs for related versions.
+    </p>
 	<p class="relatedRequirements">
-      <a href="#RID5"></a>
-	  <a href="#RID6"></a>
- 	  <a href="#RID7"></a>
- 	  <a href="#RID20"></a>
-	  </p> 
+      <a href="#RVer2"></a>
+	</p> 
 	<p class="relatedUseCases">
       <a href="#ID4"></a>
     </p>
   </section>
+
+
 
  <section class="requirement" id="RID10">
     <h3>Identify dataset types</h3>
