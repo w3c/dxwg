@@ -68,13 +68,6 @@ var respecConfig = {
         "href":"http://schema.org/",
         "title":"Schema.org"
        },
-      "DCAT-AP": {
-        "href":"https://joinup.ec.europa.eu/asset/dcat_application_profile/description",
-        "title":"DCAT application profile for data portals in Europe",
-        "publisher":"ISA² programme of the European Commission",
-        "authors":["Makx Dekkers"],
-        "date":"2017-03-14"
-      },
       "DATS": {
         "href":"http://wg3-metadataspecifications.readthedocs.io/",
         "title":"DAta Tag Suite",
