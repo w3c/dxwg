@@ -2848,7 +2848,8 @@ for the same resource (i.e. the same access/download target).</p>
       <a href="#ID4"></a>
     </p>
   </section>
-   <section class="requirement" id="RVer4">
+ <!-- rejected
+ <section class="requirement" id="RVer4">
     <h3>Version status [RVer4]</h3>
     <p>
     	Indicate the status of a version in terms stability, fidelity etc. (e.g. major, minor, stable).
@@ -2861,12 +2862,11 @@ for the same resource (i.e. the same access/download target).</p>
 	<p class="relatedUseCases">
       <a href="#ID4"></a>
     </p>
-  </section>
+  </section> -->
   <section class="requirement" id="RVer5">
     <h3>Version release date [RVer5]</h3>
     <p>
-     Indicate the date when specific version was created (released).
-     The version identifier might refer to the release date. 
+     It must be possible to assign a date to a version. The version indicator might refer to the release date. 
     </p>
 	<p class="relatedRequirements">
 	  <a href="#RVer2"></a> 
@@ -2879,7 +2879,7 @@ for the same resource (i.e. the same access/download target).</p>
   <section class="requirement" id="RVer6">
     <h3>Version delta [RVer6]</h3>
     <p>
-      Indicate the change delta from one version to the next.
+      Provide a way to indicate the change delta or other change information from the previous version.
     </p>
 	<p class="relatedRequirements">
       <a href="#RVer2"></a>
@@ -2888,7 +2888,8 @@ for the same resource (i.e. the same access/download target).</p>
       <a href="#ID4"></a>
     </p>
   </section>
-  <section class="requirement" id="RVer7">
+<!--  rejected
+ <section class="requirement" id="RVer7">
     <h3>Version discovery [RVer7]</h3>
     <p>
     	Provide a means to search and discover existing versions of a DCAT resource. 
@@ -2901,7 +2902,7 @@ for the same resource (i.e. the same access/download target).</p>
 	<p class="relatedUseCases">
       <a href="#ID4"></a>
     </p>
-  </section>
+  </section> -->
 </section>
 
  <section id="FormalDescriptionRequirements"> 
@@ -2924,13 +2925,13 @@ Requirements relating to machine readable descriptions of data and distributions
   </section>
   
   <section class="requirement" id="RID11">
-    <h3>Describe fine grained semantics and structure of datasets</h3>
-    <p>Provide recommendations and mechanisms for data providers to describe datasets with fine grained semantics (e.g. instrument/sensor used, spatial feature, 
-       observable property, quantity kind).</p>
-		      <p class="note">Finer grained semantics will also allow dataset dimensions to be described, 
+    <h3>Provide a mechanism to formally describe aspects of datasets.</h3>
+    <p>Provide recommendations and mechanisms for data providers to describe datasets with a formal description of aspects (e.g. instrument/sensor used, spatial feature, observable property, quantity kind).</p>
+
+	<p class="note">Finer grained semantics will also allow dataset dimensions to be described, 
 		      and distributions described using these semantics - for example how a dataset is composed of multiple subsets, 
 		      such as a set of image bands or tiles, or parameterised filtering/subsetting services</p>
-		      <p class="note">This requirement applies to catalogues of DCAT records, and is thus related to the concept of profiles, 
+	<p class="note">This requirement applies to catalogues of DCAT records, and is thus related to the concept of profiles, 
 		      which are expected to define classification dimensions (use of controlled vocabularies in mandatory properties)
 	</p>
 
@@ -2947,8 +2948,8 @@ Requirements relating to machine readable descriptions of data and distributions
   </section>
 
    <section class="requirement" id="RID12">
-    <h3>Provide fine grained metadata for dcat:Distributions</h3>
-    <p>Define a way to attach finer grained metadata for dcat:Distribution instances associated to a dcat:Dataset</p>
+    <h3>Provide for fine grained metadata for dcat:Distributions</h3>
+    <p>Define a way to include identification of the schema the described data conforms to</p>
       <p class="note">This may include rich information via extensions points, URI templates and parameters, dimensions and subsetting operations,
 		      dereferenceable identifiers of service behaviour profiles and canonical identifiers of well-known web service interfaces (e.g. OGC - WFS, WMS, OpenDAP, REST apis).</p>
       <p class="note">Such a description may be provided through identifier of a suitable profile that defines interoperability conditions the distribution conforms to.</p>
@@ -2966,7 +2967,7 @@ Requirements relating to machine readable descriptions of data and distributions
   
   <section class="requirement" id="RID13">
     <h3>Provide service metadata for dcat:Distributions</h3>
-    <p>Define a way to categorise web services descriptions in dcat:Distribution instances associated to a dcat:Dataset</p>
+    <p>Ability 1) to describe the type of distribution and 2) provide information about the type of service</p>
       <p class="note"></p>
 			 <p class="note">Such a description may be provided through a suitable profile identifier that defines a profile of the relevant service type.</p>
 	<p class="relatedRequirements">
@@ -2987,7 +2988,7 @@ Requirements relating to machine readable descriptions of data and distributions
  human readable information to evaluate/understand data and its context  
   <section class="requirement" id="RID14">
     <h3>Attach usage notes</h3>
-    <p>Provide a recommended way to attach usage notes to data descriptions.</p>
+    <p>Ability to provide information on how to use the data.</p>
 		      <p class="note">Should this also apply to specific distributions?</p>
 	<p class="relatedRequirements">
       <a href="#RID3"></a>
@@ -3182,9 +3183,7 @@ Alignment - how DCAT relates to other vocabularies
 
   <section class="requirement" id="RID25.1">
     <h3>Publication control [RID25.1]</h3>
-    <p>Define means to explicitly control the re-publication of Dataset and Catalog descriptions
-       among data portals (policies). Obligations might apply e.g. to disclose the original source
-       or keep the copies synchronized.</p>
+    <p>Provide means to express rights relating to reuse of DCAT metadata</p>
     <p class="relatedUseCases">
       <a href="#ID25"></a>
     </p>
@@ -3195,9 +3194,7 @@ Alignment - how DCAT relates to other vocabularies
 
   <section class="requirement" id="RID25.2">
     <h3>Publication source [RID25.2]</h3>
-    <p>
-		Define a reference to the original release of a re-published DCAT resource in a way indexable by search engines
-		and processable by web clients.
+    <p>Provide a way to cite the original metadata with a dereferenceable identifier.
 	</p>
     <p class="relatedUseCases">
       <a href="#ID25"></a>
@@ -3206,7 +3203,8 @@ Alignment - how DCAT relates to other vocabularies
       <a href="#RID25.1"></a>	
 	</p> 
   </section>
-
+  
+<!-- rejected 
   <section class="requirement" id="RID26.2">
     <h3>Vocabulary extension points</h3>
     <p>Define extension points (e.g. properties) for integration of external, specialized vocabularies.</p>
@@ -3214,6 +3212,7 @@ Alignment - how DCAT relates to other vocabularies
       <a href="#ID26"></a>
     </p>
   </section>
+-->
 
   <section class="requirement" id="RID27.1">
     <h3>Boundaries of temporal coverage</h3>
@@ -3277,12 +3276,12 @@ Alignment - how DCAT relates to other vocabularies
  
   <section class="requirement" id="RID42.1">
     <h3>Metadata Guidance Rules</h3>
-    <p>Indicate in profiled vocabulary set of guidance rules applied.</p>
+    <p>Ability to express "guidance rules" or "creation rules" in DCAT</p>
     <p class="relatedUseCases">
       <a href="#ID42"></a>
     </p>
   </section>
-
+<!-- rejected 
   <section class="requirement" id="RID44.1">
     <h3>Serialized Dataset identifier</h3>
     <p>Define a means to identify a serialized DCAT Data(sub)set (i.e. a particular Distribution of a Dataset or its subset).</p>
@@ -3290,7 +3289,7 @@ Alignment - how DCAT relates to other vocabularies
       <a href="#ID44"></a>
     </p>
   </section>
-  
+-->   
   <section class="requirement" id="RID45.1">
     <h3>Quality-related information</h3>
     <p>Define a way to associate quality-related information with Datasets.</p>
@@ -3311,7 +3310,7 @@ Alignment - how DCAT relates to other vocabularies
 
   <section class="requirement" id="RID49.1">
     <h3>Project definition</h3>
-    <p>Provide a means (e.g. a class) to define a "project" as a research, funding or work organzation context of a Dataset. </p>
+    <p>Provide a means to define a "project" as a research, funding or work organzation context of a dataset.</p>
     <p class="relatedUseCases">
       <a href="#ID49"></a>
     </p>
@@ -3322,7 +3321,7 @@ Alignment - how DCAT relates to other vocabularies
   
   <section class="requirement" id="RID49.1">
     <h3>Project relation</h3>
-    <p>Provide a means (e.g. a property) to indicate the relation of Datasets to a project. </p>
+    <p>Provide a means to indicate the relation of Datasets to a project.</p>
     <p class="relatedUseCases">
       <a href="#ID49"></a>
     </p>
@@ -3332,14 +3331,14 @@ Alignment - how DCAT relates to other vocabularies
   </section>
   
 
-
+<!-- rejected
   <section class="requirement" id="RID21.1">
     <h3>TODO:Machine actionable link</h3>
     <p>Metadata 'distribution' elements need a content model (see white paper referenced above) associated with links to communicate the protocol expected and the interchange formats (information model and encoding/serialization) available via the link. Content negotiation does not solve the problem very well because it requires the client to play a guessing game; it's better to explicitly identify the 'profile' for a link's behavior in the metadata so the client can pick the 'affordance' it needs.</p>
     <p class="relatedUseCases">
       <a href="#ID21"></a>
     </p>
-  </section>
+  </section> -->
 </section>
 
 </section>
