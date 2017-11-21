@@ -14,9 +14,9 @@ var respecConfig = {
       companyURL: "https://www.csiro.au/"
     },
     {
-      name: "Thomas D'Haenens",
-      company: "Informatie Vlaanderen",
-      companyURL: "https://overheid.vlaanderen.be/informatie-vlaanderen"
+      name: "Dave Browning",
+      company: "Thomson Reuters",
+      companyURL: "https://www.thomsonreuters.com"
     },
   {
     name:       "Alejandra Gonzalez Beltran",
@@ -31,12 +31,11 @@ var respecConfig = {
   ],
   authors: [
     {
-      name: "Phil Archer",
-      company: "W3C/ERCIM",
-      companyURL: "https://www.w3.org/People/#phila"
+      name: "Antoine Isaac",
+      company: "Vrije Universiteit",
     },
     {
-      name: "An Other Author",
+      name: "Makx Dekkers",
       company: "Affiliation",
       companyURL: "#"
     }
@@ -77,7 +76,7 @@ var respecConfig = {
       },
       "DATS": {
         "href":"http://wg3-metadataspecifications.readthedocs.io/",
-        "title":"DAta Tag Suite",
+        "title":"Data Tag Suite",
         "authors":["Philippe Rocca-Serra", "Alejandra Gonzalez-Beltran"],
         "publisher":"NIH Big Data 2 Knowledge bioCADDIE project.",
         "date":"2016"
