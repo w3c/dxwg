@@ -9,19 +9,19 @@ var respecConfig = {
     edDraftURI: "https://w3c.github.io/dxwg/dcat/",
     editors: [
     {
-      name: "Simon Cox",
-      company: "CSIRO",
-      companyURL: "https://www.csiro.au/"
-    },
-    {
-      name: "Dave Browning",
-      company: "Thomson Reuters",
-      companyURL: "https://www.thomsonreuters.com"
-    },
-  {
     name:       "Alejandra Gonzalez Beltran",
     company:    "University of Oxford eResearch Centre",
     companyURL: "http://www.oerc.ox.ac.uk/"
+  },
+  {
+    name: "Dave Browning",
+    company: "Thomson Reuters",
+    companyURL: "https://www.thomsonreuters.com"
+  },
+  {
+    name: "Simon Cox",
+    company: "CSIRO",
+    companyURL: "https://www.csiro.au/"
   },
   {
     name: "Peter Winstanley",
@@ -31,19 +31,19 @@ var respecConfig = {
   ],
   authors: [
     {
-      name: "Antoine Isaac",
-      company: "Vrije Universiteit",
-    },
-    {
       name: "Makx Dekkers",
       company: "Affiliation",
       companyURL: "#"
+    },
+    {
+      name: "Antoine Isaac",
+      company: "Vrije Universiteit",
     }
 
   ],
     otherLinks: [
       {
-        key: "Original authors",
+        key: "Authors of previous version",
         data: [
         {
           value: "Fadi Maali"
