@@ -34,6 +34,28 @@ companyURL: "http://www.opengeospatial.org/"
         "href":"http://schema.org/",
         "title":"Schema.org"
        },
+	"WMS":{
+        href:"http://www.opengeospatial.org/standards/wms",
+        publisher:"OGC",
+        authors:["Jeff de la Beaujardiere"],
+        date:"15 March 2006",
+        title:"Web Map Service Implementation Specification",
+        status:"OpenGIS Implementation Standard"
+      },
+      "GeoSPARQL":{
+        href:"http://www.opengeospatial.org/standards/geosparql",
+        publisher:"OGC",
+        title:"GeoSPARQL - A Geographic Query Language for RDF Data",
+        authors: ["Matthew Perry", "John Herring"],
+        date: "10 September 2012"
+      },
+      "CSW":{
+        href:"http://www.opengeospatial.org/standards/cat",
+        publisher:"OGC",
+        title:"Catalogue Services 3.0 - General Model",
+        authors:["Douglas Nebert", "Uwe Voges", "Lorenzo Bigagli"],
+        date: "10 June 2016"
+      },
     },
     issueBase: "https://github.com/w3c/dxwg/issues"
 };
