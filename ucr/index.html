@@ -2977,7 +2977,6 @@ Requirements relating to machine readable descriptions of data and distributions
   <section class="requirement" id="RID13">
     <h3>Provide service metadata for dcat:Distributions</h3>
     <p>Ability 1) to describe the type of distribution and 2) provide information about the type of service</p>
-      <p class="note"></p>
 			 <p class="note">Such a description may be provided through a suitable profile identifier that defines a profile of the relevant service type.</p>
 	<p class="relatedRequirements">
       <a href="#RID3"></a>
@@ -2990,6 +2989,35 @@ Requirements relating to machine readable descriptions of data and distributions
 	</p>
   </section>
 
+    <section class="requirement" id="RID18">
+    <h3>Link fine grained model of data quality</h3>
+    <p>Identify common modeling patterns for different aspects of data quality based on frequently referenced data quality attributes found in existing standards and practices.</p>
+	<p scope="note">This includes potential use and revision of DQV</p>
+	<p>Aspects include: 
+	<li>the degree of a dataset's precision (i.e. measure of resolution or variability).</li>
+	<li>the degree of a dataset's accuracy (i.e. measure of correctness).</li>
+	<li>the degree a dataset conforms to a stated quality standard.</li>
+	<li>details of data quality conformance test results.</li>
+	</p>
+    <p class="relatedUseCases">
+      <a href="#ID15"></a>
+      <a href="#ID14"></a>
+      <a href="#ID16"></a>
+      <a href="#ID21"></a>
+      <a href="#ID22"></a>
+      <a href="#ID23"></a>
+	</p>
+  </section>
+
+  <section class="requirement" id="RID1.1">
+	<h3>Packaged Distribution</h3>
+	<p>Define way to specify content of packaged files in a Distribution.</p>
+	<p>For example, a set of files may be organised in an archive format and then compressed, 
+		  but dct:hasFormat property only indicates the encoding type of the outer layer of packaging. </p>
+	<p class="relatedUseCases"><a href="#ID1"></a></p>
+  </section> 
+
+   
 </section>
 
 <section id="QualitativeInformationRequirements">
@@ -3043,6 +3071,33 @@ Requirements relating to machine readable descriptions of data and distributions
        <a href="#ID31"></a>
     </p>
   </section>
+ 
+ <section class="requirement" id="RID31.1">
+    <h3>Funding source</h3>
+    <p>Provide means to describe the funding (amount and source) of a Dataset (or entire Catalog).</p>
+    <p class="relatedUseCases">
+      <a href="#ID31"></a>
+    </p>
+  </section>
+
+    <section class="requirement" id="RID49.1">
+    <h3>Project definition</h3>
+    <p>Provide a means to define a "project" as a research, funding or work organzation context of a dataset.</p>
+    <p class="relatedUseCases">
+      <a href="#ID49"></a>
+    </p>
+    <p class="relatedRequirements">
+	   <a href="#ID49.2"></a>
+	</p>
+  </section>
+   <section class="requirement" id="RID45.1">
+    <h3>Quality-related information</h3>
+    <p>Define a way to associate quality-related information with Datasets.</p>
+   <!--Define a means to advertise any quality-related information; this might be text-based or more machine-processable.-->
+    <p class="relatedUseCases">
+      <a href="#ID45"></a>
+    </p>
+  </section>
 
 </section>
 
@@ -3082,10 +3137,65 @@ Aspects of identification and control over copies
       <a href="#ID10"></a>
     </p>
     </section>
+	
+  <section class="requirement" id="RID27.1">
+    <h3>Boundaries of temporal coverage</h3>
+    <p>Allow for specification of the start and/or end date of temporal coverage.</p>
+    <p class="relatedUseCases">
+      <a href="#ID27"></a>
+    </p>
+  </section>
+
+  <section class="requirement" id="RID28.1">
+    <h3>Reference system</h3>
+    <p>Provide means to specify the reference system(s) used in a dataset.</p>
+    <p class="relatedUseCases">
+      <a href="#ID28"></a>
+    </p>
+  </section>
+
+  <section class="requirement" id="RID29.1">
+    <h3>Spatial coverage</h3>
+    <p>Provide means to specify spatial coverage with geometries.</p>
+    <p class="relatedUseCases">
+      <a href="#ID29"></a>
+    </p>
+  </section>
+
+  <section class="requirement" id="RID33.1">
+    <h3>Summary statistics</h3>
+    <p>Express summary statistics and descriptive metrics to characterize a Dataset.</p>
+    <p class="relatedUseCases">
+
+    </p>
+  </section>
+
+
+
+  <section class="requirement" id="RID25.1">
+    <h3>Publication control [RID25.1]</h3>
+    <p>Provide means to express rights relating to reuse of DCAT metadata</p>
+    <p class="relatedUseCases">
+      <a href="#ID25"></a>
+    </p>
+    <p class="relatedRequirements">
+      <a href="#RID25.2"></a>	
+	</p> 
+  </section>
+
+  <section class="requirement" id="RID25.2">
+    <h3>Publication source [RID25.2]</h3>
+    <p>Provide a way to cite the original metadata with a dereferenceable identifier.
+	</p>
+    <p class="relatedUseCases">
+      <a href="#ID25"></a>
+    </p>
+    <p class="relatedRequirements">
+      <a href="#RID25.1"></a>	
+	</p> 
+  </section>
+
 </section>
-
-
-
 
 <section id="AlignmentRequirements">
 <h2>Alignment Requirements</h2>
@@ -3122,6 +3232,11 @@ Alignment - how DCAT relates to other vocabularies
   <section class="requirement" id="RID20">
     <h3>Link related datasets</h3>
     <p>Ability to represent the different relationships between datasets, including: versions of a dataset, collection of datasets, to describe their inclusion criteria and to define the 'hasPart'/'partOf' relationship, derivation, e.g. processed data that is derived from raw data  </p>
+    <p class="note">this requriement to be rolled in here: Update method of Dataset: 
+    Indicate the update method of a Dataset description, e.g. whether each new dataset entirely supercedes previous ones (is stand-alone), or whether there is a base dataset with files that effect updates to that base. 
+	</p>
+    <p class="relatedUseCases">
+      <a href="#ID47"></a><p>
 	<p class="relatedRequirements">
       <a href="#RID8"></a>
 	  <a href="#RID16"></a>
@@ -3130,139 +3245,18 @@ Alignment - how DCAT relates to other vocabularies
       <a href="#ID32"></a>
     </p>
   </section>
-
-</section>
-<section id="UnclassifiedRequirements">
-<h2>unclassified - to be reviewed and moved </h2>
-
-  <section class="requirement" id="RID18">
-    <h3>Link fine grained model of data quality</h3>
-    <p>Identify common modeling patterns for different aspects of data quality based on frequently referenced data quality attributes found in existing standards and practices.</p>
-	<p scope="note">This includes potential use and revision of DQV</p>
-	<p>Aspects include: 
-	<li>the degree of a dataset's precision (i.e. measure of resolution or variability).</li>
-	<li>the degree of a dataset's accuracy (i.e. measure of correctness).</li>
-	<li>the degree a dataset conforms to a stated quality standard.</li>
-	<li>details of data quality conformance test results.</li>
-	</p>
-    <p class="relatedUseCases">
-      <a href="#ID15"></a>
-      <a href="#ID14"></a>
-      <a href="#ID16"></a>
-      <a href="#ID21"></a>
-      <a href="#ID22"></a>
-      <a href="#ID23"></a>
-	</p>
-  </section>
  
-  <section class="requirement" id="RID19">
-    <h3>Describe access constraints to datasets</h3>
-    <p>Provide a way to specify access restrictions for both a dataset and a distribution.</p>
-   <p>Provide a way to define the meaning of the access restrictions for a dataset or distribution and to specify what is required to access a dataset and distribution.</p>
-   <p class="relatedUseCases">
-      <a href="#ID17"></a>
-    </p>
-  </section>
-
-  <section class="requirement" id="RID1.1">
-	<h3>Packaged Distribution</h3>
-	<p>Define way to specify content of packaged files in a Distribution.</p>
-	<p>For example, a set of files may be organised in an archive format and then compressed, 
-		  but dct:hasFormat property only indicates the encoding type of the outer layer of packaging. </p>
-	<p class="relatedUseCases"><a href="#ID1"></a></p>
- </section> 
-
- 
-
-  <section class="requirement" id="RID19.1">
-    <h3>Qualified forms</h3>
-    <p>Define qualified forms to specify additional attributes of appropriate binary relations (e.g. temporal context).</p>
+  <section class="requirement" id="RID49.1">
+    <h3>Project relation</h3>
+    <p>Provide a means to indicate the relation of Datasets to a project.</p>
     <p class="relatedUseCases">
-      <a href="#ID19"></a>
-    </p>
-  </section>
-  
-  <section class="requirement" id="RID19.2">
-    <h3>Mapping of qualified and non-qualified forms</h3>
-    <p>Specify mapping of qualified to non-qualified forms (lowering mapping). The reverse requires information (qualification) that might not be present/evident.</p>
-    <p class="relatedUseCases">
-      <a href="#ID19"></a>
-    </p>
-  </section>
-
-  <section class="requirement" id="RID25.1">
-    <h3>Publication control [RID25.1]</h3>
-    <p>Provide means to express rights relating to reuse of DCAT metadata</p>
-    <p class="relatedUseCases">
-      <a href="#ID25"></a>
+      <a href="#ID49"></a>
     </p>
     <p class="relatedRequirements">
-      <a href="#RID25.2"></a>	
-	</p> 
-  </section>
-
-  <section class="requirement" id="RID25.2">
-    <h3>Publication source [RID25.2]</h3>
-    <p>Provide a way to cite the original metadata with a dereferenceable identifier.
+	   <a href="#ID49.2"></a>
 	</p>
-    <p class="relatedUseCases">
-      <a href="#ID25"></a>
-    </p>
-    <p class="relatedRequirements">
-      <a href="#RID25.1"></a>	
-	</p> 
   </section>
   
-<!-- rejected 
-  <section class="requirement" id="RID26.2">
-    <h3>Vocabulary extension points</h3>
-    <p>Define extension points (e.g. properties) for integration of external, specialized vocabularies.</p>
-    <p class="relatedUseCases">
-      <a href="#ID26"></a>
-    </p>
-  </section>
--->
-
-  <section class="requirement" id="RID27.1">
-    <h3>Boundaries of temporal coverage</h3>
-    <p>Allow for specification of the start and/or end date of temporal coverage.</p>
-    <p class="relatedUseCases">
-      <a href="#ID27"></a>
-    </p>
-  </section>
-
-  <section class="requirement" id="RID28.1">
-    <h3>Reference system</h3>
-    <p>Provide means to specify the reference system(s) used in a dataset.</p>
-    <p class="relatedUseCases">
-      <a href="#ID28"></a>
-    </p>
-  </section>
-
-  <section class="requirement" id="RID29.1">
-    <h3>Spatial coverage</h3>
-    <p>Provide means to specify spatial coverage with geometries.</p>
-    <p class="relatedUseCases">
-      <a href="#ID29"></a>
-    </p>
-  </section>
-
-  <section class="requirement" id="RID31.1">
-    <h3>Funding source</h3>
-    <p>Provide means to describe the funding (amount and source) of a Dataset (or entire Catalog).</p>
-    <p class="relatedUseCases">
-      <a href="#ID31"></a>
-    </p>
-  </section>
-
-  <section class="requirement" id="RID33.1">
-    <h3>Summary statistics</h3>
-    <p>Express summary statistics and descriptive metrics to characterize a Dataset.</p>
-    <p class="relatedUseCases">
-
-    </p>
-  </section>
-
  
   <section class="requirement" id="RID34.1">
     <h3>Definition of Distribution</h3>
@@ -3283,6 +3277,53 @@ Alignment - how DCAT relates to other vocabularies
   </section>
  
  
+</section>
+<section id="UnclassifiedRequirements">
+<h2>unclassified - to be reviewed and moved </h2>
+
+
+ 
+  <section class="requirement" id="RID19">
+    <h3>Describe access constraints to datasets</h3>
+    <p>Provide a way to specify access restrictions for both a dataset and a distribution.</p>
+   <p>Provide a way to define the meaning of the access restrictions for a dataset or distribution and to specify what is required to access a dataset and distribution.</p>
+   <p class="relatedUseCases">
+      <a href="#ID17"></a>
+    </p>
+  </section>
+
+ 
+
+  <section class="requirement" id="RID19.1">
+    <h3>Qualified forms</h3>
+    <p>Define qualified forms to specify additional attributes of appropriate binary relations (e.g. temporal context).</p>
+    <p class="relatedUseCases">
+      <a href="#ID19"></a>
+    </p>
+  </section>
+  
+  <section class="requirement" id="RID19.2">
+    <h3>Mapping of qualified and non-qualified forms</h3>
+    <p>Specify mapping of qualified to non-qualified forms (lowering mapping). The reverse requires information (qualification) that might not be present/evident.</p>
+    <p class="relatedUseCases">
+      <a href="#ID19"></a>
+    </p>
+  </section>
+
+
+  
+<!-- rejected 
+  <section class="requirement" id="RID26.2">
+    <h3>Vocabulary extension points</h3>
+    <p>Define extension points (e.g. properties) for integration of external, specialized vocabularies.</p>
+    <p class="relatedUseCases">
+      <a href="#ID26"></a>
+    </p>
+  </section>
+-->
+
+ 
+
   <section class="requirement" id="RID42.1">
     <h3>Metadata Guidance Rules</h3>
     <p>Ability to express "guidance rules" or "creation rules" in DCAT</p>
@@ -3299,46 +3340,17 @@ Alignment - how DCAT relates to other vocabularies
     </p>
   </section>
 -->   
-  <section class="requirement" id="RID45.1">
-    <h3>Quality-related information</h3>
-    <p>Define a way to associate quality-related information with Datasets.</p>
-   <!--Define a means to advertise any quality-related information; this might be text-based or more machine-processable.-->
-    <p class="relatedUseCases">
-      <a href="#ID45"></a>
-    </p>
-  </section>
 
-
+<!-- now in - was Link Related Datasets 
   <section class="requirement" id="RID47.1">
     <h3>Update method of Dataset</h3>
-    <p>Indiacte the update method of a Dataset description, e.g. whether each new dataset entirely supercedes previous ones (is stand-alone), or whether there is a base dataset with files that effect updates to that base. </p>
+    <p>Indicate the update method of a Dataset description, e.g. whether each new dataset entirely supercedes previous ones (is stand-alone), or whether there is a base dataset with files that effect updates to that base. </p>
     <p class="relatedUseCases">
       <a href="#ID47"></a>
     </p>
   </section>
 
-  <section class="requirement" id="RID49.1">
-    <h3>Project definition</h3>
-    <p>Provide a means to define a "project" as a research, funding or work organzation context of a dataset.</p>
-    <p class="relatedUseCases">
-      <a href="#ID49"></a>
-    </p>
-    <p class="relatedRequirements">
-	   <a href="#ID49.2"></a>
-	</p>
-  </section>
-  
-  <section class="requirement" id="RID49.1">
-    <h3>Project relation</h3>
-    <p>Provide a means to indicate the relation of Datasets to a project.</p>
-    <p class="relatedUseCases">
-      <a href="#ID49"></a>
-    </p>
-    <p class="relatedRequirements">
-	   <a href="#ID49.2"></a>
-	</p>
-  </section>
-  
+-->
 
 <!-- rejected
   <section class="requirement" id="RID21.1">
