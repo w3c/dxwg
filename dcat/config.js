@@ -12,6 +12,7 @@ var respecConfig = {
     {
     name:       "Alejandra Gonzalez Beltran",
     company:    "University of Oxford eResearch Centre",
+    url: "https://www.oerc.ox.ac.uk/people/alejandra",
     companyURL: "http://www.oerc.ox.ac.uk/"
   },
   {
