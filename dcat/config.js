@@ -3,6 +3,7 @@ var respecConfig = {
     specStatus: "ED",
     shortName: "dcat-1-1",
     canonicalURI: "TR",
+    prevRecURI: "https://www.w3.org/TR/vocab-dcat/",
 //    previousMaturity:     "NOTE",
 //    previousPublishDate:  "2016-07-23",
 //    previousURI:          "https://www.w3.org/TR/2016/NOTE-poe-ucr-20160721/",
@@ -11,6 +12,7 @@ var respecConfig = {
     {
     name:       "Alejandra Gonzalez Beltran",
     company:    "University of Oxford eResearch Centre",
+    url: "https://www.oerc.ox.ac.uk/people/alejandra",
     companyURL: "http://www.oerc.ox.ac.uk/"
   },
   {
@@ -21,6 +23,7 @@ var respecConfig = {
   {
     name: "Simon Cox",
     company: "CSIRO",
+    url: "http://people.csiro.au/Simon-Cox",
     companyURL: "https://www.csiro.au/"
   },
   {
