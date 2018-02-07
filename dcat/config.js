@@ -78,5 +78,5 @@ var respecConfig = {
         "date":"2016"
       }
     },
-    issueBase: "https://github.com/w3c/dxwg/issues"
+    issueBase: "https://github.com/w3c/dxwg/issues/"
 };
