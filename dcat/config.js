@@ -35,12 +35,13 @@ var respecConfig = {
   authors: [
     {
       name: "Makx Dekkers",
-      company: "Affiliation",
-      companyURL: "#"
+      company: "Makx Dekkers",
+      companyURL: "http://www.makxdekkers.com"
     },
     {
       name: "Antoine Isaac",
-      company: "Vrije Universiteit",
+      company: "Europeana Foundation",
+      url: "https://pro.europeana.eu/person/antoine-isaac",
     }
 
   ],
@@ -78,5 +79,5 @@ var respecConfig = {
         "date":"2016"
       }
     },
-    issueBase: "https://github.com/w3c/dxwg/issues"
+    issueBase: "https://github.com/w3c/dxwg/issues/"
 };

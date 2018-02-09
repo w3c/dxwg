@@ -122,11 +122,6 @@ These are considered out of the scope of this version of the vocabulary. Neverth
 </p>
 <p>Another important class in DCAT is <code><a href="#Class:_Catalog_record">dcat:CatalogRecord</a></code> which describes a dataset entry in the catalog. Notice that while dcat:Dataset represents the dataset itself, dcat:CatalogRecord represents the record that describes a dataset in the catalog. The use of the CatalogRecord is considered optional. It is used to capture provenance information about dataset entries in a catalog. If this distinction is not necessary then CatalogRecord can be safely ignored.</p>
 
-<p class="issue">
-    In DCAT version 1.0 <a href="#class-dataset">dcat:Dataset</a> is a sub-class of <a href="http://purl.org/dc/dcmitype/Dataset">dctype:Dataset</a>, which is a member of the <a href="http://dublincore.org/documents/dcmi-terms/#section-7">DCMI Types vocabulary</a>.
-	This relationship may be removed in the revised DCAT vocabulary - see <a href="https://github.com/w3c/dxwg/issues/98">Issue #98</a>.
-</p>
-
 <figure><img alt="UML model of DCAT classes and properties" src="images/dcat-model.jpg">
 	<figcaption>
 		Overview of DCAT model
@@ -605,6 +600,21 @@ into a separate named graph. The name of that graph should be the IRI of the cat
 <a href="#Property:dataset_update_date">update date</a>,
 </p>
 
+<p class="issue" data-number="77">
+	A number of requirements identify the need to provide better support for Dataset provenance - see
+	<a href="https://github.com/w3c/dxwg/issues/77">Issue #77</a>,
+	<a href="https://github.com/w3c/dxwg/issues/76">Issue #76</a>,
+	<a href="https://github.com/w3c/dxwg/issues/71">Issue #71</a>,
+	<a href="https://github.com/w3c/dxwg/issues/66">Issue #66</a>,
+	<a href="https://github.com/w3c/dxwg/issues/57">Issue #57</a>,
+	.
+	It has been suggested that many of the requirements can be satisfied by using the [[prov-o]] ontology,
+	in particular by making dcat:Dataset a sub-class of <a href="http://www.w3.org/ns/prov#Entity">prov:Entity</a>.
+	However, the best way of introducing PROV-O capabilities into DCAT is not clear - see discussion at
+	<a href="https://github.com/w3c/dxwg/issues/77">Issue #77</a>,
+	<a href="https://github.com/w3c/dxwg/pull/94">Pull #94</a>,
+.
+</p>
 
 <table class="definition">
   <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a></th></tr></thead>
@@ -780,11 +790,6 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 
 <section id="Property:dataset_contactPoint">
 <h4>Property: contact point</h4>
-
-<p class="issue">
-    In <a href="https://www.w3.org/TR/vocab-dcat/">DCAT version 1.0</a> the range of dcat:contactPoint is vcard:Kind which is an RDF encoding of a commonly used contact data structure.
-	This may be removed in the revised DCAT vocabulary - see <a href="https://github.com/w3c/dxwg/issues/95">Issue #95</a>.
-</p>
 
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#contactPoint">dcat:contactPoint</a></th></tr></thead>
@@ -1053,6 +1058,10 @@ Examples of distributions include a downloadable CSV file, an API or an RSS feed
 </section>
 
 
+</section>
+
+<section class="appendix" id="issue-summary">
+  <!-- A list of issues will magically appear here -->
 </section>
 
 	</body>
