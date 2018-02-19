@@ -1,8 +1,10 @@
 # baseURI: http://www.w3.org/ns/dcat/prov
 # imports: http://www.w3.org/ns/dcat
 # imports: http://www.w3.org/ns/prov-o
+# prefix: dcat-prov
 
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcat-prov: <http://www.w3.org/ns/dcat/prov#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -12,6 +14,9 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+dct:publisher
+  rdfs:subPropertyOf prov:wasAttributedTo ;
+.
 dcat:CatalogRecord
   rdfs:subClassOf prov:Entity ;
   skos:editorialNote "2017-02-14 SJDC: Propose subClassOf prov:Entity, to enable the use of links to Activities and Agents, for example to satisfy the following requirements https://www.w3.org/TR/dcat-ucr/#RPCX https://www.w3.org/TR/dcat-ucr/#RFS https://www.w3.org/TR/dcat-ucr/#RPIF " ;
@@ -35,6 +40,10 @@ dcat:Dataset
   rdfs:seeAlso <https://github.com/w3c/dxwg/pull/94> ;
   owl:imports <http://www.w3.org/ns/dcat> ;
   owl:imports <http://www.w3.org/ns/prov-o> ;
+.
+prov:Agent
+  rdfs:comment "prov:Agent is modeled as a subclass of foaf:Agent since it is the subset of agents that are involved in prov:Activity individuals" ;
+  rdfs:subClassOf foaf:Agent ;
 .
 <https://www.w3.org/2017/dxwg/wiki/Main_Page>
   rdf:type foaf:Agent ;
