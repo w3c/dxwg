@@ -4,3 +4,4 @@
 - [Charter](https://www.w3.org/2017/dxwg/charter)
 - [Use cases and requirements working document](https://w3c.github.io/dxwg/ucr/)
 - [DCAT 1.1 working document](https://w3c.github.io/dxwg/dcat/)  
+- [Dataset Exchange Guidance for Application Profiles](https://w3c.github.io/dxwg/profiles/)
