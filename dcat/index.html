@@ -303,11 +303,20 @@ Vocabulary specification</h2>
 
 <p>The (revised) DCAT vocabulary is available in RDF <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/rdf/dcat.ttl">here</a>.</p>
 
-<p class="note">From DCAT 1.0</p>
+<p class="note">From DCAT 1.0 except where indicated.</p>
 
 <p>
 The definitions (including domain and range) of terms outside the dcat namespace are provided here only for convenience and must not be considered normative. The authoritative definitions of these terms are in the corresponding specifications: [[!dc11]], [[!foaf]], [[!rdf-schema]], [[!skos-reference]], [[!xmlschema11-2]] and [[!vcard-rdf]].
 </p>
+
+<p class="issue" data-number="110">
+	The axiomatization of DCAT v1 used global domain and range constraints for many of the properties defined in the DCAT namespace. This makes quite strong ontological commitments, some of which are now being reconsidered - see individual issues noted inline below.
+</p>
+
+<p class="issue" data-number="131">
+	Changes to the domain and range definitions of DCAT properties might be considered to be semantic changes to the vocabulary. The implications for such changes for backward compatibility must be considered, including the continued use of the same RDF namespace.
+</p>
+
 <section id="class-catalog">
 <h3>Class: Catalog</h3>
 <p>The following properties are recommended for use on this class:
@@ -325,6 +334,11 @@ The definitions (including domain and range) of terms outside the dcat namespace
 <a href="#Property:catalog_title">title</a>,
 <a href="#Property:catalog_update_date">update date</a>
 </p>
+
+<p class="issue" data-number="105">
+	The use of guarded constraints (existence, cardinality, range-type) to control the usage of the recommended properties in the context of a class is being considered as part of the revision of DCAT.
+</p>
+
 <table class="definition">
   <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Catalog">dcat:Catalog</a></th></tr></thead>
   <tbody>
@@ -441,6 +455,11 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 
 <section id="Property:catalog_themes">
 <h4>Property: themes</h4>
+
+<p class="issue" data-number="119">
+	The axiomatization of dcat:themeTaxonomy is being re-evaluated as part of the revision of DCAT.
+</p>
+
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#themeTaxonomy">dcat:themeTaxonomy</a></th></tr></thead>
   <tbody>
@@ -483,6 +502,11 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 
 <section id="Property:catalog_dataset">
 <h4>Property: dataset</h4>
+
+<p class="issue" data-number="117">
+	The axiomatization of dcat:dataset is being re-evaluated as part of the revision of DCAT.
+</p>
+
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#dataset">dcat:dataset</a></th></tr></thead>
   <tbody>
@@ -496,6 +520,11 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 
 <section id="Property:catalog_catalog_record">
 <h4>Property: catalog record</h4>
+
+<p class="issue" data-number="118">
+	The axiomatization of dcat:record is being re-evaluated as part of the revision of DCAT.
+</p>
+
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#record">dcat:record</a></th></tr></thead>
   <tbody>
@@ -515,6 +544,28 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 <a href="#Property:record_primary_topic">primary topic</a>,
 <a href="#Property:record_title">title</a>,
 <a href="#Property:record_update_date">update date</a>
+</p>
+
+<p class="issue" data-number="128">
+	A number of requirements identify the need to provide better support for Dataset and Record provenance - see
+	<a href="https://github.com/w3c/dxwg/issues/77">Issue #78</a>,
+	<a href="https://github.com/w3c/dxwg/issues/77">Issue #77</a>,
+	<a href="https://github.com/w3c/dxwg/issues/76">Issue #76</a>,
+	<a href="https://github.com/w3c/dxwg/issues/71">Issue #71</a>,
+	<a href="https://github.com/w3c/dxwg/issues/66">Issue #66</a>,
+	<a href="https://github.com/w3c/dxwg/issues/66">Issue #63</a>,
+	<a href="https://github.com/w3c/dxwg/issues/57">Issue #57</a>,
+	.
+	It has been suggested that many of the requirements can be satisfied by using the [[prov-o]] ontology,
+	in particular by making dcat:Dataset and/or dcat:CatalogRecord a sub-class of <a href="http://www.w3.org/ns/prov#Entity">prov:Entity</a>.
+	However, the best way of introducing PROV-O capabilities into DCAT is not clear - see discussion at
+	<a href="https://github.com/w3c/dxwg/issues/77">Issue #77</a>,
+	<a href="https://github.com/w3c/dxwg/pull/94">Pull #94</a>,
+.
+</p>
+
+<p class="issue" data-number="105">
+	The use of guarded constraints (existence, cardinality, range-type) to control the usage of the recommended properties in the context of a class is being considered as part of the revision of DCAT.
 </p>
 
 <table class="definition">
@@ -626,20 +677,30 @@ into a separate named graph. The name of that graph should be the IRI of the cat
 <a href="#Property:dataset_update_date">update date</a>,
 </p>
 
-<p class="issue" data-number="77">
-	A number of requirements identify the need to provide better support for Dataset provenance - see
+<p class="issue" data-number="128">
+	A number of requirements identify the need to provide better support for Dataset and Record provenance - see
+	<a href="https://github.com/w3c/dxwg/issues/77">Issue #78</a>,
 	<a href="https://github.com/w3c/dxwg/issues/77">Issue #77</a>,
 	<a href="https://github.com/w3c/dxwg/issues/76">Issue #76</a>,
 	<a href="https://github.com/w3c/dxwg/issues/71">Issue #71</a>,
 	<a href="https://github.com/w3c/dxwg/issues/66">Issue #66</a>,
+	<a href="https://github.com/w3c/dxwg/issues/66">Issue #63</a>,
 	<a href="https://github.com/w3c/dxwg/issues/57">Issue #57</a>,
 	.
 	It has been suggested that many of the requirements can be satisfied by using the [[prov-o]] ontology,
-	in particular by making dcat:Dataset a sub-class of <a href="http://www.w3.org/ns/prov#Entity">prov:Entity</a>.
+	in particular by making dcat:Dataset and/or dcat:CatalogRecord a sub-class of <a href="http://www.w3.org/ns/prov#Entity">prov:Entity</a>.
 	However, the best way of introducing PROV-O capabilities into DCAT is not clear - see discussion at
 	<a href="https://github.com/w3c/dxwg/issues/77">Issue #77</a>,
 	<a href="https://github.com/w3c/dxwg/pull/94">Pull #94</a>,
 .
+</p>
+
+<p class="issue" data-number="104">
+	The option of allowing license and rights information to be associated with a dcat:Dataset, as well as dcat:Distribution, is being considered as part of the revision of DCAT.
+</p>
+
+<p class="issue" data-number="105">
+	The use of guarded constraints (existence, cardinality, range-type) to control the usage of the recommended properties in the context of a class is being considered as part of the revision of DCAT.
 </p>
 
 <table class="definition">
@@ -757,6 +818,11 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 
 <section id="Property:dataset_identifier">
 <h4>Property: identifier</h4>
+
+<p class="issue" data-number="53">
+	The desirability of dereferenceable identifiers has been raised as an item for consideration in the revision of DCAT. dct:identifier has limited expressivity for this. It has been suggested that ADMS identifier, or a property from another ontology might be recruited to help DCAT in this area.
+</p>
+
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/identifier">dct:identifier</a></th></tr></thead>
   <tbody>
@@ -792,6 +858,10 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 
 <section id="Property:dataset_theme">
 <h4>Property: theme/category</h4>
+
+<p class="issue" data-number="123">
+	The axiomatization of dcat:theme is being re-evaluated as part of the revision of DCAT.
+</p>
 
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#theme">dcat:theme</a></th></tr></thead>
@@ -844,6 +914,10 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 <section id="Property:dataset_keyword">
 <h4>Property: keyword/tag</h4>
 
+<p class="issue" data-number="121">
+	The axiomatization of dcat:keyword is being re-evaluated as part of the revision of DCAT.
+</p>
+
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#keyword">dcat:keyword</a></th></tr></thead>
   <tbody>
@@ -863,6 +937,10 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
   see <a href="https://github.com/w3c/dxwg/issues/95">Issue #95</a>.
 </p>
 
+<p class="issue" data-number="109">
+	The axiomatization of dcat:contactPoint is being re-evaluated as part of the revision of DCAT.
+</p>
+
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#contactPoint">dcat:contactPoint</a></th></tr></thead>
   <tbody>
@@ -874,6 +952,11 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 
 <section id="Property:dataset_distribution">
 <h4>Property: dataset distribution</h4>
+
+<p class="issue" data-number="120">
+	The axiomatization of dcat:distribution is being re-evaluated as part of the revision of DCAT.
+</p>
+
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#distribution">dcat:distribution</a></th></tr></thead>
   <tbody>
@@ -886,6 +969,11 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 
 <section id="Property:dataset_landingpage">
 <h4>Property: landing page</h4>
+
+<p class="issue" data-number="122">
+	The axiomatization of dcat:landingPage is being re-evaluated as part of the revision of DCAT.
+</p>
+
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#landingPage">dcat:landingPage</a></th></tr></thead>
   <tbody>
@@ -916,6 +1004,10 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 <a href="#Property:distribution_rights">rights</a>,
 <a href="#Property:distribution_title">title</a>,
 <a href="#Property:distribution_update_date">update date</a>
+</p>
+
+<p class="issue" data-number="105">
+	The use of guarded constraints (existence, cardinality, range-type) to control the usage of the recommended properties in the context of a class is being considered as part of the revision of DCAT.
 </p>
 
 <table class="definition">
@@ -1012,6 +1104,11 @@ Examples of distributions include a downloadable CSV file, an API or an RSS feed
 
 <section id="Property:distribution_accessurl">
 <h4>Property: access URL</h4>
+
+<p class="issue" data-number="124">
+	The axiomatization of dcat:accessURL is being re-evaluated as part of the revision of DCAT.
+</p>
+
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#accessURL">dcat:accessURL</a></th></tr></thead>
   <tbody>
@@ -1037,6 +1134,11 @@ Examples of distributions include a downloadable CSV file, an API or an RSS feed
 
 <section id="Property:distribution_downloadurl">
 <h4>Property: download URL</h4>
+
+<p class="issue" data-number="126">
+	The axiomatization of dcat:downloadURL is being re-evaluated as part of the revision of DCAT.
+</p>
+
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#downloadURL">dcat:downloadURL</a></th></tr></thead>
   <tbody>
@@ -1053,6 +1155,11 @@ Examples of distributions include a downloadable CSV file, an API or an RSS feed
 
 <section id="Property:distribution_size">
 <h4>Property: byteSize</h4>
+
+<p class="issue" data-number="125">
+	The axiomatization of dcat:byteSize is being re-evaluated as part of the revision of DCAT.
+</p>
+
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#size">dcat:byteSize</a></th></tr></thead>
   <tbody>
@@ -1066,6 +1173,11 @@ Examples of distributions include a downloadable CSV file, an API or an RSS feed
 
 <section id="Property:distribution_media_type">
 <h4>Property: media type</h4>
+
+<p class="issue" data-number="127">
+	The axiomatization of dcat:mediaType is being re-evaluated as part of the revision of DCAT.
+</p>
+
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#mediaType">dcat:mediaType</a></th></tr></thead>
   <tbody>
