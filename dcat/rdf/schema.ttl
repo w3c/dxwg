@@ -1,0 +1,101 @@
+# baseURI: http://www.w3.org/ns/dcat/schema
+# imports: http://www.w3.org/ns/dcat
+# imports: https://raw.githubusercontent.com/schemaorg/schemaorg/master/data/releases/3.3/all-layers.ttl
+# imports: https://raw.githubusercontent.com/schemaorg/schemaorg/master/data/releases/3.3/ext-meta.ttl
+# prefix: dcat-schema
+
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcat-schema: <http://www.w3.org/ns/dcat/schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+schema:DataDownload
+  rdfs:subClassOf dcat:Distribution ;
+.
+schema:DataFeed
+  rdfs:subClassOf dcat:Distribution ;
+.
+dcat:Catalog
+  owl:equivalentClass schema:DataCatalog ;
+.
+dcat:Dataset
+  owl:equivalentClass schema:Dataset ;
+.
+dcat:accessURL
+  schema:domainIncludes dcat:Distribution ;
+  schema:rangeIncludes rdfs:Resource ;
+.
+dcat:byteSize
+  schema:domainIncludes dcat:Distribution ;
+  schema:rangeIncludes rdfs:Literal ;
+.
+dcat:bytes
+  schema:domainIncludes dcat:Distribution ;
+  schema:rangeIncludes xsd:integer ;
+.
+dcat:dataDictionary
+  schema:domainIncludes dcat:Dataset ;
+.
+dcat:dataQuality
+  schema:domainIncludes dcat:Dataset ;
+.
+dcat:dataset
+  schema:domainIncludes dcat:Catalog ;
+  schema:rangeIncludes dcat:Dataset ;
+.
+dcat:distribution
+  schema:domainIncludes dcat:Dataset ;
+  schema:rangeIncludes dcat:Distribution ;
+.
+dcat:downloadURL
+  schema:domainIncludes dcat:Distribution ;
+  schema:rangeIncludes rdfs:Resource ;
+.
+dcat:granularity
+  schema:domainIncludes dcat:Dataset ;
+.
+dcat:keyword
+  schema:domainIncludes dcat:Dataset ;
+  schema:rangeIncludes rdfs:Literal ;
+.
+dcat:landingPage
+  schema:domainIncludes dcat:Dataset ;
+  schema:rangeIncludes foaf:Document ;
+.
+dcat:mediaType
+  schema:domainIncludes dcat:Distribution ;
+  schema:rangeIncludes dcterms:MediaTypeOrExtent ;
+.
+dcat:record
+  schema:domainIncludes dcat:Catalog ;
+  schema:rangeIncludes dcat:CatalogRecord ;
+.
+dcat:size
+  schema:domainIncludes dcat:Distribution ;
+.
+dcat:theme
+  schema:domainIncludes dcat:Dataset ;
+  schema:rangeIncludes skos:Concept ;
+.
+dcat:themeTaxonomy
+  schema:domainIncludes dcat:Catalog ;
+  schema:rangeIncludes skos:ConceptScheme ;
+.
+<http://www.w3.org/ns/dcat/schema>
+  rdf:type owl:Ontology ;
+  dcterms:created "2018-02-19"^^xsd:date ;
+  dcterms:creator <http://registry.it.csiro.au/sandbox/csiro/person/Simon-Cox> ;
+  rdfs:comment "NOTE: this alignment is provisional and incomplete, and is added to the repository here to (a) support further development of the DCAT-SDO alignment (b) demonstrate the strategy of modularizing alignments and dependencies into separate RDF files." ;
+  rdfs:comment "RDF graph containing alignment axioms between DCAT and schema.org" ;
+  rdfs:label "DCAT-SDO alignment" ;
+  rdfs:seeAlso <https://github.com/w3c/dxwg/issues/110> ;
+  owl:imports <http://www.w3.org/ns/dcat> ;
+  owl:imports <https://raw.githubusercontent.com/schemaorg/schemaorg/master/data/releases/3.3/all-layers.ttl> ;
+  owl:imports <https://raw.githubusercontent.com/schemaorg/schemaorg/master/data/releases/3.3/ext-meta.ttl> ;
+.
