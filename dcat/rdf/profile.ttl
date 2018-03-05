@@ -71,6 +71,16 @@ prof:hasProfile
   owl:inverseOf prof:profileOf ;
 .
 
+prof:token
+  rdf:type owl:DatatypeProperty ;
+  rdfs:label "short name" ;
+  dc:description "A token identifying this profile for use in APIs"@en ;
+  rdfs:comment "Avoids need for a global registry - APIs may need to have some concept of a namespace for tokens to disambiguate - but should tokens be versioned? Should we just use skos:notation? "@en ;
+  rdfs:range prof:Profile ;
+  rdfs:domain xsd:token ;
+.
+
+
 prof:resource
   rdf:type owl:ObjectProperty ;
   rdfs:label "Implementing Resource"@en ;
@@ -85,8 +95,9 @@ prof:ImplResourceDesc
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:cardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onProperty prof:resourceType ;
+      owl:onProperty prof:resourceRole ;
     ] ;
+
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:cardinality "1"^^xsd:nonNegativeInteger ;
@@ -99,13 +110,49 @@ prof:ImplResourceDesc
     ] ;
 .
 
-prof:resourceType
-  rdfs:domain prof:ImplResourceDesc ;
-  rdfs:range skos:Concept ;
+prof:resourceRole a owl:ObjectProperty ;
+	rdfs:label "Functional role of implementation resource" ;
+	rdfs:comment "Not sure if this should be bound to a specific vocabulary - so a couple of examples provided here" ;
+	rdfs:domain prof:ImplResourceDesc ;
+  	rdfs:range skos:Concept ;
+.
+
+prof:resourceType a owl:ObjectProperty ;
+	rdfs:label "Type (model) of implementation resource" ;
+	rdfs:comment "e.g. SHACL" ;
+	rdfs:domain prof:ImplResourceDesc ;
+  	rdfs:range skos:Concept ;
 .
 
 prof:ImplResourceType a owl:Class ;
 	rdfs:subClassOf skos:Concept ;
+.
+
+
+prof:resourceRoles  a skos:ConceptScheme ;
+	skos:note "Suggested subset of possible roles a resource may play with regard to a profile"@en;
+.
+
+prof:fullConstraints a prof:ImplResourceType;
+	skos:prefLabel "Complete set of constraints for a profile"@en;
+	rdfs:comment "Note that this means a full set of constraints within the scope of the resource type - e.g. everything that can be tested by SHACL"@en ;
+	skos:topConceptOf prof:resourceRoles ;
+.
+
+prof:conformanceTest a prof:ImplResourceType;
+	skos:prefLabel "Constraints specifying a conformance Test "@en;
+	rdfs:comment "A normative conformance test - may also be a a fullConstraints or partConstraints resource."@en ;
+	skos:topConceptOf prof:resourceRoles ;
+.
+
+prof:partConstraints a prof:ImplResourceType;
+	skos:prefLabel "Partial set of constraints for a profile"@en;
+	skos:topConceptOf prof:resourceRoles ;
+.
+
+prof:guidance a prof:ImplResourceType;
+	skos:prefLabel "Guidance notes of profile"@en;
+	skos:topConceptOf prof:resourceRoles ;
 .
 
 prof:FullConstraintSet rdfs:subClassOf prof:ImplResourceType ;
