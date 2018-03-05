@@ -1,0 +1,116 @@
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix prof: <http://www.w3.org/ns/dcat/profile#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+
+
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+
+# axioms repeated/included here unchanged, for convenience
+dct:conformsTo
+	a rdf:Property ;
+	rdfs:comment "An established standard to which the described resource conforms."@en ;
+    rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
+    rdfs:label "Conforms To"@en ;
+    rdfs:range dct:Standard ;
+	rdfs:subPropertyOf <http://purl.org/dc/elements/1.1/relation>, dct:relation ;
+. 
+
+<http://www.w3.org/ns/dcat/profile>
+  rdf:type owl:Ontology ;
+  dc:creator "Rob Atkinson" ;
+  dc:description  "This is an RDF/OWL Ontology for describing relationships between Specifications, implementing profiles and supporting artefacts" ;
+  rdfs:comment "This model provides a canonical vocabulary for describing profiling relationships between http://dublincore.org/2012/06/14/dcterms#Standard entities and attachment of resources defining additional constraints"@en ;
+  dct:modified "2018-02-16" ;
+.
+
+prof:Profile
+  rdf:type owl:Class ;
+  rdf:subClassOf dct:Standard, skos:Concept ;
+  rdfs:label "Implementation Profile" ;
+  dc:description "A named set of constraints on one or more identified base specifications, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of those base specifications necessary to accomplish a particular function."@en;
+  dc:source <https://www.w3.org/2017/dxwg/wiki/ProfileContext> ;
+  rdfs:comment "Profile is modelled as a skos:Concept to explicitly support the notion of profiles organised as classification taxonomies. skos:broader/narrower and broaderTransitive properties may be used ";
+.
+
+prof:BaseSpecification
+  rdf:type owl:Class ;
+  rdfs:subClassOf prof:Profile ;
+  rdfs:label "Base Specification" ;
+  dc:description "A specification that defines all implementation constraints, without applying constraints on usage of another specification"@en;
+  rdfs:comment "This may not be a useful class, but documents that any specification can be regarded as a trivial profile, so applications only need to be concerned with Profile conformance"@en;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty prof:profileOf ;
+    ] ;
+.
+
+prof:profileOf
+  rdf:type owl:ObjectProperty ;
+  rdfs:label "profiles" ;
+  dc:description "a base specification a Profile conforms to"@en ;
+  rdfs:comment "The semantics of the rdfs:Range means that any resource treated as a base specification can be regarded as a Profile (i.e. may be any specification with an empty set of additional constraints)"@en ;
+  rdfs:range prof:Profile ;
+  rdfs:domain prof:Profile ;
+  owl:inverseOf prof:hasProfile ;
+.
+
+prof:hasProfile
+  rdf:type owl:ObjectProperty ;
+  rdfs:label "hasProfile" ;
+  dc:description "known profiles of a specification"@en ;
+  rdfs:range prof:Profile ;
+  owl:inverseOf prof:profileOf ;
+.
+
+prof:resource
+  rdf:type owl:ObjectProperty ;
+  rdfs:label "Implementing Resource"@en ;
+  dc:description "URI link to resource"@en ;
+  rdfs:range prof:ImplResourceDesc ;
+.
+
+prof:ImplResourceDesc
+  rdf:type owl:Class ;
+  rdfs:label "Implementation Resource Descriptor"@en ;
+  dc:description "A resource that defines implementing rules for a profile. Must indicate the purpose (dct:type) and the formalism (dct:format) used to allow machine mediation of such rules."@en ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty prof:resourceType ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty prof:resource ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dct:format ;
+    ] ;
+.
+
+prof:resourceType
+  rdfs:domain prof:ImplResourceDesc ;
+  rdfs:range skos:Concept ;
+.
+
+prof:ImplResourceType a owl:Class ;
+	rdfs:subClassOf skos:Concept ;
+.
+
+prof:FullConstraintSet rdfs:subClassOf prof:ImplResourceType ;
+	a skos:Concept ;
+.
