@@ -21,11 +21,20 @@
 dcterms:description
   owl:equivalentProperty schema:description ;
 .
+dcterms:format
+  owl:equivalentProperty schema:encodingFormat ;
+.
+dcterms:identifier
+  owl:equivalentProperty schema:identifier ;
+.
 dcterms:issued
   owl:equivalentProperty schema:datePublished ;
 .
 dcterms:language
   owl:equivalentProperty schema:inLanguage ;
+.
+dcterms:license
+  owl:equivalentProperty schema:license ;
 .
 dcterms:modified
   owl:equivalentProperty schema:dateModified ;
@@ -35,9 +44,12 @@ dcterms:publisher
 .
 dcterms:spatial
   owl:equivalentProperty schema:spatial ;
+  owl:equivalentProperty schema:spatialCoverage ;
 .
 dcterms:temporal
+  owl:equivalentProperty schema:datasetTimeInterval ;
   owl:equivalentProperty schema:temporal ;
+  owl:equivalentProperty schema:temporalCoverage ;
 .
 schema:DataDownload
   rdfs:subClassOf dcat:Distribution ;
@@ -51,17 +63,25 @@ dcat:Catalog
 dcat:Dataset
   owl:equivalentClass schema:Dataset ;
 .
+dcat:Distribution
+  rdfs:subClassOf schema:DataDownload ;
+.
 dcat:accessURL
   schema:domainIncludes dcat:Distribution ;
   schema:rangeIncludes rdfs:Resource ;
+  rdfs:subPropertyOf schema:contentUrl ;
 .
 dcat:byteSize
   schema:domainIncludes dcat:Distribution ;
   schema:rangeIncludes rdfs:Literal ;
+  rdfs:subPropertyOf schema:contentSize ;
 .
 dcat:bytes
   schema:domainIncludes dcat:Distribution ;
   schema:rangeIncludes xsd:integer ;
+.
+dcat:contactPoint
+  owl:equivalentProperty schema:contactPoint ;
 .
 dcat:dataDictionary
   schema:domainIncludes dcat:Dataset ;
@@ -72,15 +92,17 @@ dcat:dataQuality
 dcat:dataset
   schema:domainIncludes dcat:Catalog ;
   schema:rangeIncludes dcat:Dataset ;
+  owl:equivalentProperty schema:dataset ;
 .
 dcat:distribution
   schema:domainIncludes dcat:Dataset ;
   schema:rangeIncludes dcat:Distribution ;
+  owl:equivalentProperty schema:distribution ;
 .
 dcat:downloadURL
   schema:domainIncludes dcat:Distribution ;
   schema:rangeIncludes rdfs:Resource ;
-  owl:equivalentProperty schema:contentUrl ;
+  rdfs:subPropertyOf schema:contentUrl ;
 .
 dcat:granularity
   schema:domainIncludes dcat:Dataset ;
@@ -122,12 +144,23 @@ dcat:themeTaxonomy
   dcterms:created "2018-02-19"^^xsd:date ;
   dcterms:creator <http://registry.it.csiro.au/sandbox/csiro/person/Simon-Cox> ;
   rdfs:comment "<p>Based in part on Project Open Data mappings described in <a href=\"https://project-open-data.cio.gov/metadata-resources/\">https://project-open-data.cio.gov/metadata-resources/</a></p>"^^rdf:HTML ;
+  rdfs:comment "<p>Based in part on SDWWG ISO 19115 - DCAT - Schema.org mapping described in <a href=\"https://www.w3.org/2015/spatial/wiki/ISO_19115_-_DCAT_-_Schema.org_mapping\">https://www.w3.org/2015/spatial/wiki/ISO_19115_-_DCAT_-_Schema.org_mapping</a></p>"^^rdf:HTML ;
   rdfs:comment "NOTE: this alignment is provisional and incomplete, and is added to the repository here to (a) support further development of the DCAT-SDO alignment (b) demonstrate the strategy of modularizing alignments and dependencies into separate RDF files." ;
   rdfs:comment "RDF graph containing alignment axioms between DCAT and schema.org" ;
   rdfs:label "DCAT-SDO alignment" ;
   rdfs:seeAlso <https://github.com/w3c/dxwg/issues/110> ;
   rdfs:seeAlso <https://project-open-data.cio.gov/metadata-resources/> ;
+  rdfs:seeAlso <https://www.w3.org/2015/spatial/wiki/ISO_19115_-_DCAT_-_Schema.org_mapping> ;
   owl:imports <http://www.w3.org/ns/dcat> ;
   owl:imports <https://raw.githubusercontent.com/schemaorg/schemaorg/master/data/releases/3.3/all-layers.ttl> ;
   owl:imports <https://raw.githubusercontent.com/schemaorg/schemaorg/master/data/releases/3.3/ext-meta.ttl> ;
+.
+foaf:Organization
+  owl:equivalentClass schema:Organization ;
+.
+foaf:homepage
+  owl:equivalentProperty schema:url ;
+.
+foaf:mbox
+  owl:equivalentProperty schema:email ;
 .
