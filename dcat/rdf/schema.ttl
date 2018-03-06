@@ -15,6 +15,30 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+<http://purl.org/dc/elements/1.1/title>
+  owl:equivalentProperty schema:name ;
+.
+dcterms:description
+  owl:equivalentProperty schema:description ;
+.
+dcterms:issued
+  owl:equivalentProperty schema:datePublished ;
+.
+dcterms:language
+  owl:equivalentProperty schema:inLanguage ;
+.
+dcterms:modified
+  owl:equivalentProperty schema:dateModified ;
+.
+dcterms:publisher
+  owl:equivalentProperty schema:publisher ;
+.
+dcterms:spatial
+  owl:equivalentProperty schema:spatial ;
+.
+dcterms:temporal
+  owl:equivalentProperty schema:temporal ;
+.
 schema:DataDownload
   rdfs:subClassOf dcat:Distribution ;
 .
@@ -56,6 +80,7 @@ dcat:distribution
 dcat:downloadURL
   schema:domainIncludes dcat:Distribution ;
   schema:rangeIncludes rdfs:Resource ;
+  owl:equivalentProperty schema:contentUrl ;
 .
 dcat:granularity
   schema:domainIncludes dcat:Dataset ;
@@ -63,14 +88,18 @@ dcat:granularity
 dcat:keyword
   schema:domainIncludes dcat:Dataset ;
   schema:rangeIncludes rdfs:Literal ;
+  rdfs:comment "Mapped as a sub-property of schema:keywords - dcat:keyword is singular, schema:keywords is plural" ;
+  rdfs:subPropertyOf schema:keywords ;
 .
 dcat:landingPage
   schema:domainIncludes dcat:Dataset ;
   schema:rangeIncludes foaf:Document ;
+  rdfs:subPropertyOf schema:url ;
 .
 dcat:mediaType
   schema:domainIncludes dcat:Distribution ;
   schema:rangeIncludes dcterms:MediaTypeOrExtent ;
+  owl:equivalentProperty schema:encodingFormat ;
 .
 dcat:record
   schema:domainIncludes dcat:Catalog ;
@@ -82,6 +111,7 @@ dcat:size
 dcat:theme
   schema:domainIncludes dcat:Dataset ;
   schema:rangeIncludes skos:Concept ;
+  owl:equivalentProperty schema:about ;
 .
 dcat:themeTaxonomy
   schema:domainIncludes dcat:Catalog ;
@@ -91,10 +121,12 @@ dcat:themeTaxonomy
   rdf:type owl:Ontology ;
   dcterms:created "2018-02-19"^^xsd:date ;
   dcterms:creator <http://registry.it.csiro.au/sandbox/csiro/person/Simon-Cox> ;
+  rdfs:comment "<p>Based in part on Project Open Data mappings described in <a href=\"https://project-open-data.cio.gov/metadata-resources/\">https://project-open-data.cio.gov/metadata-resources/</a></p>"^^rdf:HTML ;
   rdfs:comment "NOTE: this alignment is provisional and incomplete, and is added to the repository here to (a) support further development of the DCAT-SDO alignment (b) demonstrate the strategy of modularizing alignments and dependencies into separate RDF files." ;
   rdfs:comment "RDF graph containing alignment axioms between DCAT and schema.org" ;
   rdfs:label "DCAT-SDO alignment" ;
   rdfs:seeAlso <https://github.com/w3c/dxwg/issues/110> ;
+  rdfs:seeAlso <https://project-open-data.cio.gov/metadata-resources/> ;
   owl:imports <http://www.w3.org/ns/dcat> ;
   owl:imports <https://raw.githubusercontent.com/schemaorg/schemaorg/master/data/releases/3.3/all-layers.ttl> ;
   owl:imports <https://raw.githubusercontent.com/schemaorg/schemaorg/master/data/releases/3.3/ext-meta.ttl> ;
