@@ -104,7 +104,7 @@ RDF syntaxes, access protocols, and access policies is not mandated by this spec
 
 <h2>Vocabulary Overview</h2>
 
-<p class="note">From DCAT 1.0</p>
+<p class="note">From DCAT 1.0 except as noted</p>
 
 <p>DCAT is an RDF vocabulary well-suited to representing government data catalogs such as <a href="http://Data.gov">Data.gov</a> and <a href="http://data.gov.uk">data.gov.uk</a>. DCAT defines three main classes:</p>
 <ul><li> <code><a href="#Class:_Catalog">dcat:Catalog</a></code> represents the catalog
@@ -124,7 +124,7 @@ These are considered out of the scope of this version of the vocabulary. Neverth
 
 
 <p class="note">
-    In  <a href="https://www.w3.org/TR/vocab-dcat/">DCAT version 1.0</a> <a href="#class-dataset">dcat:Dataset</a> was a sub-class of <a href="http://purl.org/dc/dcmitype/Dataset">dctype:Dataset</a>, which is a member of the <a href="http://dublincore.org/documents/dcmi-terms/#section-7">DCMI Types vocabulary</a>.
+    In <a href="https://www.w3.org/TR/vocab-dcat/">DCAT version 1.0</a> <a href="#class-dataset">dcat:Dataset</a> was a sub-class of <a href="http://purl.org/dc/dcmitype/Dataset">dctype:Dataset</a>, which is a member of the <a href="http://dublincore.org/documents/dcmi-terms/#section-7">DCMI Types vocabulary</a>.
 	This relationship has been removed in the revised DCAT vocabulary - see <a href="https://github.com/w3c/dxwg/issues/98">Issue #98</a>.
 </p>
 
@@ -301,12 +301,11 @@ does not have to be defined as a separate dcat:Distribution instance.
 <h2>
 Vocabulary specification</h2>
 
-<p>The (revised) DCAT vocabulary is available in RDF <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/rdf/dcat.ttl">here</a>.</p>
+<section id="RDF-representation">
+<h3>RDF representation</h3>
 
-<p class="note">From DCAT 1.0 except where indicated.</p>
-
-<p>
-The definitions (including domain and range) of terms outside the dcat namespace are provided here only for convenience and must not be considered normative. The authoritative definitions of these terms are in the corresponding specifications: [[!dc11]], [[!foaf]], [[!rdf-schema]], [[!skos-reference]], [[!xmlschema11-2]] and [[!vcard-rdf]].
+<p class="note">
+	The DCAT RDF representation is modularized into several files or graphs to facilitate users being able to access a version of DCAT with the alignments that they need. This mechanism may also be used to capture different levels of axiomatization, though the status of such proposals has not been finalized. See <a href="https://github.com/w3c/dxwg/issues/134">Issue #134</a>.
 </p>
 
 <div class="issue" data-number="65">
@@ -314,7 +313,7 @@ The definitions (including domain and range) of terms outside the dcat namespace
 		Guidance on the use DCAT in a weakly axiomatized environment, such as schema.org, has been identified as a requirement to be satisfied in the revision of DCAT.
 	</p>
 	<p>
-		An <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/schema.ttl">RDF graph containing an alignment of DCAT with schema.org</a> is available.
+		An <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/schema.ttl">RDF graph containing a proposed alignment of DCAT with schema.org</a> is available. Comments on this alignment are welcome.
 	</p>
 </div>
 
@@ -322,9 +321,32 @@ The definitions (including domain and range) of terms outside the dcat namespace
 	The axiomatization of DCAT v1 used global domain and range constraints for many of the properties defined in the DCAT namespace. This makes quite strong ontological commitments, some of which are now being reconsidered - see individual issues noted inline below.
 </p>
 
-<p class="note">
-	The DCAT RDF representation is modularized into several files or graphs to facilitate users being able to access a version of DCAT with the alignments that they need. This mechanism may also be used to capture different levels of axiomatization, though the status of such proposals has not been finalized. See <a href="https://github.com/w3c/dxwg/issues/134">Issue #134</a>.
+<p>The (revised) DCAT vocabulary is <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/rdf/">available in RDF</a>.
+The primary artefact <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/rdf/dcat.ttl">dcat.ttl</a> is a serialization of the core DCAT vocabulary.
+Alongside it are a set of other RDF files that provide additional information, including:</p>
+<ol>
+	<li>
+		alignments to other vocabularies
+	</li>
+	<li>
+		additional axiomatization, which may be useful in some contexts
+	</li>
+	<li>
+		some profiles of DCAT, including a DCAT v1 profile that corresponds to the 2014 version of DCAT
+	</li>
+</ol>
+
+</section>
+
+<section id="dependencies">
+<h3>Dependencies</h3>
+
+<p>
+The definitions (including domain and range) of terms outside the dcat namespace are provided here only for convenience and must not be considered normative. The authoritative definitions of these terms are in the corresponding specifications: [[!dc11]], [[!foaf]], [[!rdf-schema]], [[!skos-reference]], [[!xmlschema11-2]] and [[!vcard-rdf]].
 </p>
+
+<p class="note">Description of DCAT vocabulary elements from DCAT 1.0 except where indicated.</p>
+</section>
 
 <section id="class-catalog">
 <h3>Class: Catalog</h3>
@@ -1379,6 +1401,41 @@ Examples of distributions include a downloadable CSV file, an API or an RSS feed
 </table>
 </section>
 
+</section>
+
+<section id="alignments">
+
+	<h2>Alignment with other metadata vocabularies</h2>
+<p class="issue" data-number="65">
+	An alignment of DCAT with schema.org is being prepared. A <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/schema.ttl">provisional version</a> is available.
+</p>
+<p class="issue" data-number="128">
+	An alignment of DCAT with PROV-O [[prov-o]] is being prepared. A <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/prov.ttl">provisional version</a> is available.
+</p>
+<p class="issue" data-number="149">
+	An alignment of DCAT with DATS [[DATS]] is being considered.
+</p>
+<p class="issue" data-number="150">
+	An alignment of DCAT with HCLS [[HCLS-Dataset]] is being prepared.
+</p>
+<p class="issue" data-number="151">
+	An alignment of DCAT with ISO 19115 [[iso-19115-1]] is being prepared.
+</p>
+<p class="issue" data-number="152">
+	An alignment of DCAT with Datacite metadata schema [[datacite]] is being prepared.
+</p>
+
+</section>
+
+<section id="profiles">
+
+	<h2>DCAT Profiles</h2>
+<p class="issue" data-number="72">
+	DCAT provides a generic metadata vocabulary for cataloguing datasets.
+	Profiles of DCAT are required for spcific applications and disciplines.
+	Providing a model and formalization for DCAT profiles is planned to be an important part of this revision.
+	Also see <a href="https://github.com/w3c/dxwg/issues/73">Issue #73</a>, <a href="https://github.com/w3c/dxwg/issues/74">Issue #74</a>, <a href="https://github.com/w3c/dxwg/issues/75">Issue #75</a>.
+</p>
 
 </section>
 
