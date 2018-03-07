@@ -10,17 +10,18 @@
 	<body>
 <section  id="abstract">
 	<p>DCAT is an RDF vocabulary designed to facilitate interoperability between data catalogs published on the Web. This document defines the schema and provides examples for its use.</p>
-  <p>By using DCAT to describe datasets in data catalogs, publishers increase discoverability and enable applications easily to consume metadata from multiple catalogs. It further enables decentralized publishing of catalogs and facilitates federated dataset search across sites. Aggregated DCAT metadata can serve as a manifest file to facilitate digital preservation.</p>
+  <p>By using DCAT to describe datasets in data catalogs, publishers are using a standard model and vocabulary that facilitates the consumption and aggregation of metadata from multiple catalogs,
+		and in doing so can increase the discoverability of datasets. It also makes it possible to have a decentralized approach to publishing data catalogs and makes federated search for datasets across catalogs in multiple sites possible using the same query mechanism and structure. Aggregated DCAT metadata can serve as a manifest file as part of the digital preservation process.</p>
 	<p style="text-align: center;">The namespace for DCAT terms is <code>http://www.w3.org/ns/dcat#</code></p>
 	<p style="text-align: center;">The suggested prefix for the DCAT namespace is <code>dcat</code></p>
 	<p style="text-align: center;">The (revised) DCAT vocabulary is available <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/rdf/dcat.ttl">here</a>.</p>
 </section>
 <section id="sotd">
-	<p>The <a href="http://vocab.deri.ie/dcat">original DCAT vocabulary</a> was developed at DERI, refined by the <a href="http://www.w3.org/egov/">eGov Interest Group</a>, and then finally <a href="https://www.w3.org/TR/2014/REC-vocab-dcat-20140116/">standardized</a> by the <a href="http://www.w3.org/2011/gld/">Government Linked Data (GLD)</a> Working Group.</p>
+	<p>The <a href="http://vocab.deri.ie/dcat">original DCAT vocabulary</a> was developed at the Digital Enterprise Research Institute (DERI), refined by the <a href="http://www.w3.org/egov/">eGov Interest Group</a>, and then finally <a href="https://www.w3.org/TR/2014/REC-vocab-dcat-20140116/">standardized</a> by the <a href="http://www.w3.org/2011/gld/">Government Linked Data (GLD)</a> Working Group.</p>
 	<p>
-		This revised version of DCAT was developed by the <a href="https://www.w3.org/2017/dxwg/wiki/Main_Page">Dataset Exchange Working Group</a> in response to a new set of <a href="https://www.w3.org/TR/dcat-ucr/">Use Cases and Requirements</a> submitted on the basis of experience since the original version, and new applications not originally considered.
+		This revised version of DCAT was developed by the <a href="https://www.w3.org/2017/dxwg/wiki/Main_Page">Dataset Exchange Working Group</a> in response to a new set of <a href="https://www.w3.org/TR/dcat-ucr/">Use Cases and Requirements</a> submitted on the basis of experience with the DCAT vocabulary from the time of the original version, and new applications not originally considered.
 	</p>
-  <p>DCAT incorporates terms from pre-existing vocabularies, where stable terms with appropriate meanings could be found, such as foaf:homepage and dct:title.  Informal summary definitions of the externally defined terms are included here for convenience, while authoritative definitions are available in the normative references.  Changes to definitions in the references, if any, supersede the summaries given in this specification.  Note that conformance to DCAT (Section 4) concerns usage of only the terms in the DCAT namespace itself, so possible changes to the external definitions will not affect conformance of DCAT implementations.</p>
+  <p>DCAT incorporates terms from pre-existing vocabularies where stable terms with appropriate meanings could be found, such as foaf:homepage and dct:title.  Informal summary definitions of the externally-defined terms are included here for convenience, while authoritative definitions are available in the normative references.  Changes to definitions in the references, if any, supersede the summaries given in this specification.  Note that conformance to DCAT (Section 4) concerns usage of only the terms in the DCAT namespace itself, so possible changes to the external definitions will not affect the conformance of DCAT implementations.</p>
           <p>
             Please see the Working Group's  <a href="http://www.w3.org/2011/gld/wiki/DCAT_Implementations">implementation
             report</a>.
@@ -33,12 +34,12 @@
 
 <p class="note">From DCAT 1.0</p>
 
-<p>Data can come in many formats, ranging from spreadsheets over XML and RDF to various speciality formats. DCAT does not make any assumptions about the format of the datasets described in a catalog. Other, complementary vocabularies may be used together with DCAT to provide more detailed format-specific information. For example, properties from the VoID vocabulary [[void]] can be used to express various statistics about a DCAT-described dataset if that dataset is in RDF format.</p>
+<p>Data can come in many formats, ranging from spreadsheets, through XML and RDF, to various speciality formats. DCAT does not make any assumptions about the serialisation format of the datasets described in a catalog. Other, complementary vocabularies may be used together with DCAT to provide more detailed format-specific information. For example, properties from the VoID vocabulary [[void]] can be used to express various statistics about a DCAT-described dataset if that dataset is in RDF format.</p>
 <p>This document does not prescribe any particular method of deploying data expressed in DCAT. DCAT is applicable in many contexts including RDF accessible via SPARQL endpoints, embedded in HTML pages as RDFa, or serialized as e.g. RDF/XML or Turtle. The examples in this document use Turtle simply because of Turtle's readability.</p>
 </section>
 
 <section id="motivation" class="informative"><h2>Motivation for Change</h2>
-<p>The <a href="https://www.w3.org/TR/2014/REC-vocab-dcat-20140116/">original Recommendation</a>, published in January 2014, provided the basic framework for describing datasets. Importantly, it made the distinction between a dataset as an abstract idea and a distribution as a manifestation of it. Although DCAT has been widely adopted, it has became clear that the original lacked a number of essential features that were added either through application profiles, such as the European Commission's DCAT-AP [[DCAT-AP]], or the development of larger vocabularies that to a greater or lesser extent built upon the base standard, such as the Healthcare and Life Sciences Community Profile [[HCLS-Dataset]], the Data Tag Suite [[DATS]] and more. This version of DCAT has been developed to identify and address the specific shortcomings that have come to light through the experiences of different communities, the aim being, of course, to improve interoperability between them.</p>
+<p>The <a href="https://www.w3.org/TR/2014/REC-vocab-dcat-20140116/">original Recommendation</a>, published in January 2014, provided the basic framework for describing datasets. Importantly, it made the distinction between a dataset as an abstract idea and a distribution as a manifestation of the dataset. Although DCAT has been widely adopted, it has became clear that the original specification lacked a number of essential features that were added either through application profiles, such as the European Commission's DCAT-AP [[DCAT-AP]], or the development of larger vocabularies that, to a greater or lesser extent, built upon the base standard, such as the Healthcare and Life Sciences Community Profile [[HCLS-Dataset]], the Data Tag Suite [[DATS]] and more. This version of DCAT has been developed to address the specific shortcomings that have come to light through the experiences of different communities, the aim being, of course, to improve interoperability between the outputs of these larger vocabularies.</p>
 
 </section>
 
@@ -105,7 +106,7 @@ RDF syntaxes, access protocols, and access policies is not mandated by this spec
 
 <p class="note">From DCAT 1.0 except as noted</p>
 
-<p>DCAT is an RDF vocabulary well-suited to representing government data catalogs such as <a href="http://Data.gov">Data.gov</a> and <a href="http://data.gov.uk">data.gov.uk</a>. DCAT defines three main classes:</p>
+<p>DCAT is an RDF vocabulary well-suited to representing government data catalogs such as <a href="https://www.data.gov/">data.gov</a> and <a href="http://data.gov.uk">data.gov.uk</a>. DCAT defines three main classes:</p>
 <ul><li> <code><a href="#Class:_Catalog">dcat:Catalog</a></code> represents the catalog
 </li><li> <code><a href="#Class:_Dataset">dcat:Dataset</a></code> represents a dataset in a catalog.
 </li><li> <code><a href="#Class:_Distribution">dcat:Distribution</a></code> represents an accessible form of a dataset as for example a downloadable file, an RSS feed or a web service that provides the data.
@@ -115,7 +116,7 @@ Notice that a dataset in DCAT
 is defined as a "collection of data, published or curated by a single agent, and available for access or
 download in one or more formats". A dataset does not have to be available as a downloadable file.
 For example, a dataset that is available via an API can be defined as an instance of dcat:Dataset and the
-API can be defined as an instance of dcat:Distribution. DCAT itself does not define properties specific to APIs description.
+API can be defined as an instance of dcat:Distribution. DCAT itself does not define properties specific to the APIs description.
 These are considered out of the scope of this version of the vocabulary. Nevertheless, this can be defined as a profile of the DCAT vocabulary.
 
 </p>
@@ -156,7 +157,7 @@ These are considered out of the scope of this version of the vocabulary. Neverth
        rdfs:label "Transparency Office"&nbsp;;
        .
 </pre>
-<p>The catalog lists each of its datasets via dcat:dataset property. In the example above, an example dataset was mentioned with the relative URI&nbsp;:dataset-001. A possible description of it using DCAT is shown below:
+<p>The catalog lists each of its datasets via the dcat:dataset property. In the example above, an example dataset was mentioned with the relative URI&nbsp;:dataset-001. A possible description of it using DCAT is shown below:
 </p>
 <pre>  &nbsp;:dataset-001
        a dcat:Dataset&nbsp;;
@@ -174,8 +175,8 @@ These are considered out of the scope of this version of the vocabulary. Neverth
        .
 </pre>
 
-<p>In order to express frequency of update in the example above, we chose to use an instance from the <a href="http://www.w3.org/TR/vocab-data-cube/#dsd-cog">Content-Oriented Guidelines</a> developed as part
-of the <abbr title="World Wide Web Consortium">W3C</abbr> Data Cube Vocabulary efforts. Additionally, we chose to describe the spatial and temporal coverage of the example dataset using URIs from <a href="http://www.geonames.org/">Geonames</a> and <a href="http://reference.data.gov.uk/id/interval">the Interval dataset</a> from data.gov.uk, respectively. A contact point is also provided where comments and feedback about the dataset can be sent. Further details about the contact point, such as email address or telephone number, can be provided using VCard [[vcard-rdf]].</p>
+<p>In order to express the frequency of update in the example above, we chose to use an instance from the <a href="http://www.w3.org/TR/vocab-data-cube/#dsd-cog">Content-Oriented Guidelines</a> developed as part
+of the <abbr title="World Wide Web Consortium">W3C</abbr> Data Cube Vocabulary efforts. Additionally, we chose to describe the spatial and temporal coverage of the example dataset using URIs from <a href="http://www.geonames.org/">Geonames</a> and <a href="http://reference.data.gov.uk/id/interval">the Interval dataset</a> from data.gov.uk, respectively. A contact point is also provided where comments and feedback about the dataset can be sent. Further details about the contact point, such as email address or telephone number, can be provided using vCard [[vcard-rdf]].</p>
 
 <p>The dataset distribution :dataset-001-csv can be downloaded as a 5Kb CSV file. This information is
 represented via an RDF resource of type dcat:Distribution.
@@ -222,8 +223,8 @@ It is recommended to define the concept as part of the concepts scheme identifie
 <p class="issue" data-number="64">
 	The scope of DCAT Datasets is a lot more than tabular data, so a type/genre indication is required.
 	A number of controlled vocabularies are available for classification of datasets according to type.
-	In some cases, each individual classifier is denoted by a URI so can be linked directly.
-	However, in other cases there is only a text list, or a vocabulary is embedded in a document or code so the way to indicate an individual item is less direct.
+	In some cases, each individual classifier is denoted by a URI so it can be linked directly.
+	However, in other cases there is only a text list, or a vocabulary is embedded in a document or code, so the way to indicate an individual item is less direct.
 	Guidance about how to use items from various styles of controlled vocabulary are needed alongside the simple case.
 </p>
 
@@ -256,7 +257,7 @@ while &nbsp;:dataset-001 was issued on 2011-12-05, its description on Imaginary 
 <section id="a-dataset-available-only-behind-some-web-page">
 <h3>Dataset available only behind some Web page</h3>
 <p>:dataset-002 is available as a CSV file. However :dataset-002 can only be obtained through some Web page
-where the user needs to click some links, provide some information and check some boxes
+where the user needs to follow some links, provide some information and check some boxes
 before accessing the data</p>
 
 <pre>  &nbsp;:dataset-002
@@ -271,11 +272,11 @@ before accessing the data</p>
        .
 </pre>
 
-Notice the use of dcat:landingPage and the definition of the dcat:Distribution instance.
+Notice the use of a dcat:landingPage and the definition of the dcat:Distribution instance.
 </section>
 
 <section id="a-dataset-available-as-download-and-behind-some-web-page">
-<h3>A dataset available as download and behind some Web page</h3>
+<h3>A dataset available as a download and behind some Web page</h3>
 <p>On the other hand, :dataset-003 can be obtained through some landing page but also can be downloaded from a known URL.
 </p>
 <pre>  &nbsp;:dataset-003
@@ -289,7 +290,7 @@ Notice the use of dcat:landingPage and the definition of the dcat:Distribution i
        dcat:mediaType "text/csv" ;
        .
 </pre>
-Notice that we used dcat:downloadURL with the downloadable distribution and that the other distribution through the landing page
+Notice that we used dcat:downloadURL with the downloadable distribution and that the other distribution accessible through the landing page
 does not have to be defined as a separate dcat:Distribution instance.
 </section>
 
@@ -303,15 +304,15 @@ does not have to be defined as a separate dcat:Distribution instance.
 <h3>RDF representation</h3>
 
 <p class="note">
-	The DCAT 1.1 RDF representation is modularized into several files or graphs to facilitate users being able to access a version of DCAT with the alignments that they need. This mechanism may also be used to capture different levels of axiomatization, though the status of such proposals has not been finalized. See <a href="https://github.com/w3c/dxwg/issues/134">Issue #134</a> and the issues enumerated below.
+	The DCAT 1.1 RDF representation is modularized into several files or graphs to help users access a version of DCAT with just the alignments that they need. This mechanism may also be used to capture different levels of axiomatization, though the status of such proposals has not been finalized. See <a href="https://github.com/w3c/dxwg/issues/134">Issue #134</a> and the issues enumerated below.
 </p>
 
 <div class="issue" data-number="65">
 	<p>
-		Guidance on the use DCAT in a weakly axiomatized environment, such as schema.org, has been identified as a requirement to be satisfied in the revision of DCAT.
+		Guidance on the use DCAT in a weakly-axiomatized environment, such as schema.org, has been identified as a requirement to be satisfied in this revision of DCAT.
 	</p>
 	<p>
-		An <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/schema.ttl">RDF graph containing a proposed alignment of DCAT with schema.org</a> is available. Comments on this alignment are welcome.
+		An <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/schema.ttl">RDF graph containing a proposed alignment of DCAT with schema.org</a> is available. Comments on this alignment are invited.
 	</p>
 </div>
 
@@ -327,7 +328,7 @@ Alongside it are a set of other RDF files that provide additional information, i
 		alignments to other vocabularies
 	</li>
 	<li>
-		additional axiomatization, which may be useful in some contexts
+		additional axioms, which may be useful in some contexts
 	</li>
 	<li>
 		some profiles of DCAT, including a DCAT v1 profile that corresponds to the 2014 version of DCAT
@@ -371,7 +372,7 @@ The definitions (including domain and range) of terms outside the dcat namespace
 </p>
 
 <p class="issue" data-number="105">
-	The use of guarded constraints (existence, cardinality, range-type) to control the usage of the recommended properties in the context of a class is being considered as part of the revision of DCAT.
+	The use of guarded constraints (existence, cardinality, range-type) to control the use of the recommended properties in the context of a class is being considered as part of the revision of DCAT.
 </p>
 
 <p class="issue" data-number="116">
@@ -591,7 +592,7 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 </p>
 
 <p class="issue" data-number="70">
-	The need to be able to express rights relating re-use of DCAT metadata has been identified as a requirement to be satisfied in the revision of DCAT.
+	The need to be able to express rights relating to the re-use of DCAT metadata has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
 <p class="issue" data-number="78">
