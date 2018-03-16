@@ -1,0 +1,206 @@
+# baseURI: http://www.w3.org/ns/dcat-service
+# imports: http://purl.org/dc/terms/
+# imports: http://www.w3.org/2004/02/skos/core
+# imports: http://www.w3.org/ns/dcat
+# imports: http://www.w3.org/ns/dcat/prov
+# prefix: dcat-s
+
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcat-s: <http://www.w3.org/ns/dcat-service#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dctype: <http://purl.org/dc/dcmitype/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+dcat:Catalog
+  rdfs:subClassOf dcat-s:WebService ;
+.
+dcat:CatalogRecord
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty foaf:primaryTopic ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty foaf:primaryTopic ;
+      owl:someValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              dcat:Dataset
+              dcat-s:DataService
+            ) ;
+        ] ;
+    ] ;
+.
+dcat:Dataset
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:issued ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:modified ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:spatial ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:description ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:temporal ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:title ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:type ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcat:contactPoint ;
+    ] ;
+.
+<http://www.w3.org/ns/dcat-service>
+  rdf:type owl:Ontology ;
+  owl:imports dcterms: ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  owl:imports <http://www.w3.org/ns/dcat> ;
+  owl:imports <http://www.w3.org/ns/dcat/prov> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+dcat-s:DataService
+  rdf:type owl:Class ;
+  rdfs:comment "A site or end-point that provides access to datasets and distributions of datasets" ;
+  rdfs:label "Service" ;
+  rdfs:subClassOf dcat-s:WebService ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom <http://www.w3.org/ns/prov#Attribution> ;
+      owl:onProperty <http://www.w3.org/ns/prov#qualifiedAttribution> ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:modified ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:spatial ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:temporal ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcat-s:servesDataset ;
+    ] ;
+.
+dcat-s:WebService
+  rdf:type owl:Class ;
+  rdfs:label "Generic web service" ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom <http://www.w3.org/ns/prov#Attribution> ;
+      owl:onProperty <http://www.w3.org/ns/prov#qualifiedAttribution> ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:hasValue dctype:Service ;
+      owl:onProperty dcterms:type ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:description ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:issued ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:title ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:type ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcat:contactPoint ;
+    ] ;
+.
+dcat-s:accessService
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain dcat:Distribution ;
+  rdfs:label "link to DataService that serves this data Distribution" ;
+  rdfs:range dcat-s:DataService ;
+.
+dcat-s:dataService
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "link to description of a data service" ;
+  rdfs:domain dcat:Catalog ;
+  rdfs:label "has data service" ;
+  rdfs:range dcat-s:DataService ;
+.
+dcat-s:keyword
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "A keyword or tag describing the data service."@en ;
+  rdfs:domain dcat-s:DataService ;
+  rdfs:label "keyword"@en ;
+  rdfs:label "mot-clés "@fr ;
+  rdfs:label "palabra clave"@es ;
+  rdfs:label "λέξη-κλειδί"@el ;
+  rdfs:label "كلمة  مفتاحية "@ar ;
+  rdfs:label "キーワード/タグ"@ja ;
+  rdfs:range rdfs:Literal ;
+  rdfs:subPropertyOf dcterms:subject ;
+.
+dcat-s:servesDataset
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain dcat-s:DataService ;
+  rdfs:label "serves dataset" ;
+  rdfs:range dcat:Dataset ;
+.
+dcat-s:theme
+  rdf:type owl:ObjectProperty ;
+  <http://purl.org/vocab/vann/usageNote> """The set of skos:Concepts used to categorize the data services are organized in 
+          a skos:ConceptScheme describing all the categories and their relations in the catalog."""@en ;
+  rdfs:comment "The main category of the data service. A data service can have multiple themes."@en ;
+  rdfs:domain dcat-s:DataService ;
+  rdfs:label "tema"@es ;
+  rdfs:label "theme"@en ;
+  rdfs:label "thème"@fr ;
+  rdfs:label "Θέμα"@el ;
+  rdfs:label "التصنيف"@ar ;
+  rdfs:label "テーマ/カテゴリー"@ja ;
+  rdfs:range skos:Concept ;
+  rdfs:subPropertyOf dcterms:subject ;
+.
