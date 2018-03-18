@@ -121,6 +121,7 @@ dcat-s:DataService
 dcat-s:WebService
   rdf:type owl:Class ;
   rdfs:label "Generic web service" ;
+  rdfs:subClassOf dctype:Service ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:allValuesFrom <http://www.w3.org/ns/prov#Attribution> ;
@@ -128,23 +129,23 @@ dcat-s:WebService
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:hasValue dctype:Service ;
-      owl:onProperty dcterms:type ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:issued ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:title ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:conformsTo ;
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:minCardinality "1"^^xsd:nonNegativeInteger ;
       owl:onProperty dcterms:description ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onProperty dcterms:issued ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onProperty dcterms:title ;
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
