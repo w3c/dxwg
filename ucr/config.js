@@ -1,7 +1,7 @@
 var respecConfig = {
 //	preProcess: [dfn_index],
     specStatus: "ED",
-    shortName: "dxwg-ucr",
+    shortName: "dcat-ucr",
 //    previousMaturity:     "NOTE",
 //    previousPublishDate:  "2016-07-23",
 //    previousURI:          "https://www.w3.org/TR/2016/NOTE-poe-ucr-20160721/",
