@@ -10,7 +10,7 @@ var respecConfig = {
       },
       {
         name: "Lars G. Svensson",
-        company: "German National Library",
+        company: "Deutsche Nationalbibliothek",
         companyURL: "http://www.dnb.de/",
       },
       {
