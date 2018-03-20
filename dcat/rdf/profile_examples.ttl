@@ -23,14 +23,34 @@ eg:prof_examples
   dc:creator "Rob Atkinson";
   .
 
+#DCAT v1
+
+<http://www.w3.org/ns/dcat-v1> 
+	a prof:Profile ;
+	prof:token "dcat-v1" ;
+	rdfs:label "DCAT v1 implementation profile";
+	rdfs:comment "Provides a means to declare, and discover implementation resources to check, implementations of DCAT conforming to v1 specification"@en;
+	dc:publisher "W3.org" ;
+	prof:profileOf dcat: ;
+	prof:hasProfile <https://joinup.ec.europa.eu/release/dcat-ap-v10> ;
+	prof:resource eg:dcatv1-owl ;
+.
+
+eg:dcat-owl a prof:ImplResourceDesc;
+	rdfs:label "DCAT-AP-V1.0 SHACL constraints";
+	prof:resource <http://data.europa.eu/w21/016d88c3-a0b3-4506-ae4e-758e7401c096> ;
+	prof:resourceType  owl:Ontology;
+	.
+
+
 #DCAT-AP examples
 
 <https://joinup.ec.europa.eu/release/dcat-ap-v11> 
 	a prof:Profile ;
 	prof:token "dcat-ap" ;
-	rdfs:label "GeoDCAT-AP: A geospatial extension for the DCAT application profile for data portals in Europe";
+	rdfs:label "DCAT-AP: DCAT application profile for data portals in Europe";
 	dc:publisher "European Union" ;
-	prof:profileOf dcat: ;
+	prof:profileOf dcat: , <http://www.w3.org/ns/dcat-v1> ;
 	prof:hasProfile <https://joinup.ec.europa.eu/release/geodcat-ap-v10> ;
 	prof:resource eg:dcat-shacl ;
 .
