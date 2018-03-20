@@ -2724,6 +2724,47 @@ for the same resource (i.e. the same access/download target).</p>
 		  -->
 		  </p>		  		  
 		</section>
+			    <section id="ID51" class="usecase">
+		  <h2>Describing distribution subsetting and container mechanism separately from form of individual items.[ID51]</h2>
+		  <p class="contributor">Rob Atkinson</p>
+		  <p class="tags">
+			<span class="tag class_dcat">dcat</span>
+			<span class="tag class_profile">profile</span>
+			<span class="tag class_representation">representation</span>			
+			<span class="tag class_service">service</span>		
+		  </p>
+		  <p class="stakeholders">
+			<p>data user</p>
+		  </p>
+		  <div class="expandOrCollapse" onclick="toggleVisibility(this)">&#x25B6; Full use case description (click to collapse):</div>
+		  <div class="visible">
+			<p class="description">
+			  <p>
+				When considering Linked Data applications viewing datasets there are potentially multiple ways to access items. Large datasets in particular may support access to specific items, queries, subsets and optimally packaged downloads of data. Because the implications for user and agent interaction vary greatly between these modes of access there is a need to distinguish between distributions that package the entire dataset.
+
+				Furthermore, access methods delivering queries and subsets may introduce container elements, independently of the dataset itself.
+			  </p>
+			  <p>
+				So if we had a metadata catalog that supported a query service that returned a set of DCAT records (using say the BotDCAT-AP profile),
+				and also an api that delivered a specific record using this same profile we would need to be able to specify the query service support
+				the BotDCAT-AP profile and MyDCATCatalogSearchFunction profile (that specifies how the container structure is implemented?)
+			  </p>
+              			
+			</p>
+		  </div>
+		  <p class="relatedUseCases">
+		    <a href="#ID1">DCAT packaged distributions [ID1]</a>
+		    <a href="#ID2">Detailing and requesting additional constraints (profiles) beyond content types [ID2]</a>
+			<a href="#ID6">DCAT Distribution to describe web services [ID6]</a>
+			<a href="#ID18">Modeling service-based data access [ID18]</a>
+			<a href="#ID21">Machine actionable link for a mapping client [ID21]</a>
+		  </p>		  
+		  <p class="relatedRequirements">		  
+			<a href="#RDIQ">Distribution query type</a>
+		  </p>		  		  
+		</section>
+
+		
     </section>
 
 <!--
@@ -3086,7 +3127,6 @@ for the same resource (i.e. the same access/download target).</p>
     <a href="#ID6"></a>
     <a href="#ID33"></a>
    <a href="#ID17"></a>
-   <a href="#ID18"></a>
     <a href="#ID22"></a>
  </p>
 </section>
@@ -3103,6 +3143,21 @@ for the same resource (i.e. the same access/download target).</p>
     <a href="#ID6"></a>
     <a href="#ID18"></a>
     <a href="#ID21"></a>
+</p>
+</section>
+
+<section class="requirement" id="RDIC">
+  <h3>Distribution container [RDIC]</h3>
+  <p>Provide a means to specify the container structure of a distribution for access methods that return lists, independently of the specification of the profile the list items conform to.</p>
+<p class="note">Related to the distinction between dct:accessURL and dct:downloadURL. May be covered by service type, but specifically supports identification of lists vs items. (items have no container). lists may be wrapped in a structural element or not - so this also needs to be described.</p>
+<p class="relatedRequirements">
+    <a href="#RPIP"></a>
+    <a href="#RDIS"></a>
+  </p>
+  <p class="relatedUseCases">
+    <a href="#ID51"></a>
+    <a href="#ID18"></a>
+    <a href="#ID6"></a>
 </p>
 </section>
 
@@ -3197,6 +3252,7 @@ but dct:hasFormat property only indicates the encoding type of the outer layer o
 	<p class="relatedRequirements">
       <a href="#RPFL"></a>
       <a href="#RDSAT"></a>
+      <a href="#RDSP"></a>
     </p>
     <p class="relatedUseCases">
       <a href="#ID9"></a>
