@@ -28,13 +28,12 @@ dcat:CatalogRecord
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:onProperty foaf:primaryTopic ;
-      owl:someValuesFrom [
-          rdf:type owl:Class ;
-          owl:unionOf (
-              dcat:Dataset
-              dcat-s:DataService
-            ) ;
-        ] ;
+      owl:someValuesFrom dcat:Dataset ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty foaf:primaryTopic ;
+      owl:someValuesFrom dcat-s:DataService ;
     ] ;
 .
 dcat:Dataset
@@ -170,6 +169,7 @@ dcat-s:dataService
   rdfs:domain dcat:Catalog ;
   rdfs:label "has data service" ;
   rdfs:range dcat-s:DataService ;
+  rdfs:subPropertyOf dcterms:hasPart ;
 .
 dcat-s:keyword
   rdf:type owl:DatatypeProperty ;
