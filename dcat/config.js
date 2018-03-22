@@ -71,13 +71,18 @@ var respecConfig = {
         "href":"http://schema.org/",
         "title":"Schema.org"
        },
-      "DATS": {
-        "href":"http://wg3-metadataspecifications.readthedocs.io/",
-        "title":"Data Tag Suite",
-        "authors":["Philippe Rocca-Serra", "Alejandra Gonzalez-Beltran"],
-        "publisher":"NIH Big Data 2 Knowledge bioCADDIE project.",
-        "date":"2016"
-      }
+       "DATS": {
+         "href":"http://wg3-metadataspecifications.readthedocs.io/",
+         "title":"Data Tag Suite",
+         "authors":["Philippe Rocca-Serra", "Alejandra Gonzalez-Beltran"],
+         "publisher":"NIH Big Data 2 Knowledge bioCADDIE project.",
+         "date":"2016"
+       },
+       "DDI": {
+         "href":"http://www.ddialliance.org/explore-documentation",
+         "title":"Data Documentation Initiative",
+         "publisher":"DDI Alliance"
+       }
     },
     issueBase: "https://github.com/w3c/dxwg/issues/"
 };
