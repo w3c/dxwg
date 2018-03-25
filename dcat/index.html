@@ -120,6 +120,17 @@ API can be defined as an instance of dcat:Distribution. DCAT itself does not def
 These are considered out of the scope of this version of the vocabulary. Nevertheless, this can be defined as a profile of the DCAT vocabulary.
 
 </p>
+
+<section class="issue" data-number="172">
+	<p>
+	The scope of DCAT version 1 was limited to catalogs of datasets.
+	A number of use cases for the revision involve also having <b>data services</b> (aka distribution services) as members of a catalog - see <a href="https://www.w3.org/TR/dcat-ucr/#ID6">DCAT Distribution to describe web services - ID6</a> and
+<a href="https://www.w3.org/TR/dcat-ucr/#ID18">Modeling service-based data access - ID18</a>. </p>
+<p>
+	 <a href="https://github.com/w3c/dxwg/milestone/5">Milestone 5</a> collects a number of issues related to this requirement.
+</p>
+</section>
+
 <p>Another important class in DCAT is <code><a href="#Class:_Catalog_record">dcat:CatalogRecord</a></code> which describes a dataset entry in the catalog. Notice that while dcat:Dataset represents the dataset itself, dcat:CatalogRecord represents the record that describes a dataset in the catalog. The use of the CatalogRecord is considered optional. It is used to capture provenance information about dataset entries in a catalog. If this distinction is not necessary then CatalogRecord can be safely ignored.</p>
 
 
@@ -997,18 +1008,19 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 <section id="Property:dataset_theme">
 <h4>Property: theme/category</h4>
 
-<p class="issue" data-number="123">
-	The axiomatization of dcat:theme is being re-evaluated as part of the revision of DCAT.
+<p class="note">
+	In <a href="https://www.w3.org/TR/vocab-dcat/">DCAT version 1.0</a> the domain of dcat:theme was dcat:Dataset,
+  which limited use of this property in other contexts. The domain has been relaxed in this revision -
+  see <a href="https://github.com/w3c/dxwg/issues/123">Issue #123</a>.
 </p>
 
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#theme">dcat:theme</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>The main category of the dataset. A dataset can have multiple themes.</td></tr>
+    <tr><td class="prop">Definition:</td><td>The main category of the resource. A resource can have multiple themes.</td></tr>
     <tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/terms/subject">dct:subject</a></td></tr>
-    <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a></td></tr>
     <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2004/02/skos/core#Concept">skos:Concept</a></td></tr>
-    <tr><td class="prop">Usage note:</td><td>The set of <a href="http://www.w3.org/2004/02/skos/core#Concept">skos:Concept</a>s used to categorize the datasets are organized in a <a href="http://www.w3.org/2004/02/skos/core#ConceptScheme">skos:ConceptScheme</a> describing all the categories and their relations in the catalog.</td></tr>
+    <tr><td class="prop">Usage note:</td><td>The set of <a href="http://www.w3.org/2004/02/skos/core#Concept">skos:Concept</a>s used to categorize the resources are organized in a <a href="http://www.w3.org/2004/02/skos/core#ConceptScheme">skos:ConceptScheme</a> describing all the categories and their relations in the catalog.</td></tr>
     <tr><td>See also:</td><td><a href="#Property:catalog_themes">catalog themes taxonomy</a></td></tr>
   </tbody>
 </table>
@@ -1052,15 +1064,16 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 <section id="Property:dataset_keyword">
 <h4>Property: keyword/tag</h4>
 
-<p class="issue" data-number="121">
-	The axiomatization of dcat:keyword is being re-evaluated as part of the revision of DCAT.
+<p class="note">
+	In <a href="https://www.w3.org/TR/vocab-dcat/">DCAT version 1.0</a> the domain of dcat:keyword was dcat:Dataset,
+  which limited use of this property in other contexts. The domain has been relaxed in this revision -
+  see <a href="https://github.com/w3c/dxwg/issues/121">Issue #121</a>.
 </p>
 
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#keyword">dcat:keyword</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>A keyword or tag describing the dataset.</td></tr>
-    <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a></td></tr>
+    <tr><td class="prop">Definition:</td><td>A keyword or tag describing the resource.</td></tr>
     <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a></td></tr>
   </tbody>
 </table>
@@ -1108,8 +1121,10 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 <section id="Property:dataset_landingpage">
 <h4>Property: landing page</h4>
 
-<p class="issue" data-number="122">
-	The axiomatization of dcat:landingPage is being re-evaluated as part of the revision of DCAT.
+<p class="note">
+	In <a href="https://www.w3.org/TR/vocab-dcat/">DCAT version 1.0</a> the domain of dcat:landingPage was dcat:Dataset,
+  which limited use of this property in other contexts. The domain has been relaxed in this revision -
+  see <a href="https://github.com/w3c/dxwg/issues/122">Issue #122</a>.
 </p>
 
 <table class="definition">
@@ -1117,7 +1132,6 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
   <tbody>
     <tr><td class="prop">Definition:</td><td>A Web page that can be navigated to in a Web browser to gain access to the dataset, its distributions and/or additional information.</td></tr>
     <tr><td class="prop">Sub property of:</td><td><a href="http://xmlns.com/foaf/0.1/page">foaf:page</a></td></tr>
-    <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a></td></tr>
     <tr><td class="prop">Range:</td><td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
     <tr><td class="prop">Usage note:</td><td>
         If the distribution(s) are accessible only through a landing page
@@ -1413,6 +1427,63 @@ Examples of distributions include a downloadable CSV file, an API or an RSS feed
 
 </section>
 
+<section id="prov-patterns">
+
+	<h2>Provenance patterns</h2>
+	<p class="issue" data-number="128">
+		A number of requirements identify the need to provide better support for Dataset and Record provenance - see
+		<a href="https://github.com/w3c/dxwg/issues/77">Issue #78</a>,
+		<a href="https://github.com/w3c/dxwg/issues/77">Issue #77</a>,
+		<a href="https://github.com/w3c/dxwg/issues/76">Issue #76</a>,
+		<a href="https://github.com/w3c/dxwg/issues/71">Issue #71</a>,
+		<a href="https://github.com/w3c/dxwg/issues/66">Issue #66</a>,
+		<a href="https://github.com/w3c/dxwg/issues/66">Issue #63</a>,
+		<a href="https://github.com/w3c/dxwg/issues/57">Issue #57</a>,
+		.
+		It has been suggested that many of the requirements can be satisfied by using capabilities from the [[PROV-O]] ontology,
+		in particular by treating dcat:Dataset and/or dcat:CatalogRecord a sub-class of <a href="http://www.w3.org/ns/prov#Entity">prov:Entity</a>.
+		A preliminary <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/prov.ttl">alignment of DCAT with PROV-O is available</a>.
+	</p>
+
+	<p class="note">
+		In this chapter it is planned to describe patterns for the use of the [[PROV-O]] vocabulary to support the various provenance-related requirements.
+		See <a href="https://github.com/w3c/dxwg/milestone/2">Milestone 2</a> for more discussion.
+	</p>
+
+</section>
+
+<section id="license-rights">
+
+	<h2>License and rights statements</h2>
+
+	<p class="note">
+		DCAT version 1.0 handling of license and rights do not appear to satisfy all requirements.
+		The recently completed W3C ODRL vocabulary [[odrl-vocab]] provides a rich language for describing many kinds of rights and obligations.
+		In this chapter it is planned to describe some patterns for linking DCAT Datasets and/or Distributions to suitable rights expressions.
+		See <a href="https://github.com/w3c/dxwg/milestone/1">Milestone 1</a> for more discussion.
+	</p>
+
+</section>
+
+<section id="dataset-versions">
+
+	<h2>Dataset versions</h2>
+
+	<p class="issue" data-number="90">
+		The need to be able to describe version relationships of datasets has been identified as a requirement to be satisfied in the revision of DCAT. Also see detailed requirements in
+		<a href="https://github.com/w3c/dxwg/issues/89">Issue #89</a>,
+		<a href="https://github.com/w3c/dxwg/issues/91">Issue #91</a>,
+		<a href="https://github.com/w3c/dxwg/issues/92">Issue #92</a>,
+		<a href="https://github.com/w3c/dxwg/issues/93">Issue #93</a>,
+	</p>
+
+	<p class="note">
+		In this chapter it is planned to describe some patterns for describing Dataset and/or Distribution versions.
+		See <a href="https://github.com/w3c/dxwg/milestone/6">Milestone 6</a> for more discussion.
+	</p>
+
+</section>
+
 <section id="alignments">
 
 	<h2>Alignment with other metadata vocabularies</h2>
@@ -1434,6 +1505,14 @@ Examples of distributions include a downloadable CSV file, an API or an RSS feed
 <p class="issue" data-number="152">
 	An alignment of DCAT with Datacite metadata schema [[DataCite]] is being prepared.
 </p>
+<p class="issue" data-number="164">
+	An alignment of DCAT with DDI [[DDI]] is being prepared.
+</p>
+
+<p class="note">
+	See <a href="https://github.com/w3c/dxwg/milestone/4">Milestone 4</a> for more discussion.
+</p>
+
 
 </section>
 
@@ -1445,6 +1524,10 @@ Examples of distributions include a downloadable CSV file, an API or an RSS feed
 	Profiles of DCAT are required for spcific applications and disciplines.
 	Providing a model and formalization for DCAT profiles is planned to be an important part of this revision.
 	Also see <a href="https://github.com/w3c/dxwg/issues/73">Issue #73</a>, <a href="https://github.com/w3c/dxwg/issues/74">Issue #74</a>, <a href="https://github.com/w3c/dxwg/issues/75">Issue #75</a>.
+</p>
+
+<p class="note">
+	See <a href="https://github.com/w3c/dxwg/milestone/3">Milestone 3</a> for more discussion.
 </p>
 
 </section>
