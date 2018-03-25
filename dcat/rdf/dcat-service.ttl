@@ -17,7 +17,12 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 dcat:Catalog
-  rdfs:subClassOf dcat-s:WebService ;
+  rdfs:subClassOf dctype:Service ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:hasValue <https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/discovery> ;
+      owl:onProperty dcterms:type ;
+    ] ;
 .
 dcat:CatalogRecord
   rdfs:subClassOf [
@@ -90,37 +95,12 @@ dcat-s:DataService
   rdf:type owl:Class ;
   rdfs:comment "A site or end-point that provides access to datasets and distributions of datasets" ;
   rdfs:label "Service" ;
-  rdfs:subClassOf dcat-s:WebService ;
+  rdfs:subClassOf dctype:Service ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:allValuesFrom <http://www.w3.org/ns/prov#Attribution> ;
       owl:onProperty <http://www.w3.org/ns/prov#qualifiedAttribution> ;
     ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
-      owl:onProperty dcterms:modified ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
-      owl:onProperty dcterms:spatial ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onProperty dcterms:temporal ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onProperty dcat-s:servesDataset ;
-    ] ;
-.
-dcat-s:WebService
-  rdf:type owl:Class ;
-  rdfs:label "Generic web service" ;
-  rdfs:subClassOf dctype:Service ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:allValuesFrom <http://www.w3.org/ns/prov#Attribution> ;
@@ -143,8 +123,23 @@ dcat-s:WebService
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:modified ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:spatial ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
       owl:minCardinality "1"^^xsd:nonNegativeInteger ;
       owl:onProperty dcterms:description ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:temporal ;
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
@@ -155,6 +150,11 @@ dcat-s:WebService
       rdf:type owl:Restriction ;
       owl:minCardinality "1"^^xsd:nonNegativeInteger ;
       owl:onProperty dcat:contactPoint ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcat-s:servesDataset ;
     ] ;
 .
 dcat-s:accessService
@@ -171,37 +171,10 @@ dcat-s:dataService
   rdfs:range dcat-s:DataService ;
   rdfs:subPropertyOf dcterms:hasPart ;
 .
-dcat-s:keyword
-  rdf:type owl:DatatypeProperty ;
-  rdfs:comment "A keyword or tag describing the data service."@en ;
-  rdfs:domain dcat-s:DataService ;
-  rdfs:label "keyword"@en ;
-  rdfs:label "mot-clés "@fr ;
-  rdfs:label "palabra clave"@es ;
-  rdfs:label "λέξη-κλειδί"@el ;
-  rdfs:label "كلمة  مفتاحية "@ar ;
-  rdfs:label "キーワード/タグ"@ja ;
-  rdfs:range rdfs:Literal ;
-  rdfs:subPropertyOf dcterms:subject ;
-.
 dcat-s:servesDataset
   rdf:type owl:ObjectProperty ;
   rdfs:domain dcat-s:DataService ;
   rdfs:label "serves dataset" ;
   rdfs:range dcat:Dataset ;
-.
-dcat-s:theme
-  rdf:type owl:ObjectProperty ;
-  <http://purl.org/vocab/vann/usageNote> """The set of skos:Concepts used to categorize the data services are organized in 
-          a skos:ConceptScheme describing all the categories and their relations in the catalog."""@en ;
-  rdfs:comment "The main category of the data service. A data service can have multiple themes."@en ;
-  rdfs:domain dcat-s:DataService ;
-  rdfs:label "tema"@es ;
-  rdfs:label "theme"@en ;
-  rdfs:label "thème"@fr ;
-  rdfs:label "Θέμα"@el ;
-  rdfs:label "التصنيف"@ar ;
-  rdfs:label "テーマ/カテゴリー"@ja ;
-  rdfs:range skos:Concept ;
-  rdfs:subPropertyOf dcterms:subject ;
+  rdfs:subPropertyOf dcterms:hasPart ;
 .
