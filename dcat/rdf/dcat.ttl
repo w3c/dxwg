@@ -23,6 +23,10 @@
 <http://www.w3.org/ns/dcat>
   rdf:type voaf:Vocabulary ;
   rdf:type owl:Ontology ;
+  dct:contributor [
+        foaf:name "Alejandra Gonzalez-Beltran" ;
+        foaf:seeAlso <https://orcid.org/0000-0003-3499-8262>
+      ] ;
   dct:contributor <http://people.csiro.au/Simon-Cox> ;
   dct:contributor [
       rdf:type dct:Agent ;
@@ -84,9 +88,7 @@
   dct:modified "2013-11-28"^^xsd:date ;
   dct:modified "2017-12-19"^^xsd:date ;
   dct:modified "2018" ;
-  rdfs:comment """DCAT es un vocabulario RDF diseñado para facilitar la interoperabilidad entre catálogo de datos publicados en la Web.
-          Gracias a utilizar DCAT para describir conjuntos de datos en los catálogo de datos, los editores aumentan el descubrimiento y permiten
-          que las aplicaciones consuman fácilmente los metadatos de varios catálogos."""@es ;
+  rdfs:comment """DCAT es un vocabulario RDF diseñado para facilitar la interoperabilidad entre catálogos de datos publicados en la Web. Utilizando DCAT para describir datos disponibles en catálogos se aumenta la posibilidad de que sean descubiertos y se permite que las aplicaciones que las aplicaciones consuman fácilmente los metadatos de varios catálogos."""@es ;
   rdfs:comment """DCAT est un vocabulaire développé pour faciliter l'interopérabilité entre les jeux de données publiées sur le Web.
 				En utilisant DCAT pour décrire les jeux de données dans les catalogues de données, les fournisseurs de données augmentent leur découverte et permettent
 				que les applications facilement les métadonnées de plusieurs catalogues. Il permet en plus la publication décentralisée des catalogues et facilitent
@@ -110,7 +112,7 @@
   rdfs:label "El vocabulario de catálogo de datos"@es ;
   rdfs:label "Le vocabulaire des jeux de données "@fr ;
   rdfs:label "The data catalog vocabulary"@en ;
-    rdfs:label "Il vocabolario del catalogo dei dati"@it ;
+  rdfs:label "Il vocabolario del catalogo dei dati"@it ;
   rdfs:label "Το λεξιλόγιο των καταλόγων δεδομένων"@el ;
   rdfs:label "أنطولوجية فهارس قوائم البيانات"@ar ;
   rdfs:label "データ・カタログ語彙（DCAT）"@ja ;
@@ -119,7 +121,10 @@
   owl:imports <http://www.w3.org/2004/02/skos/core> ;
   owl:imports <http://xmlns.com/foaf/spec/index.rdf> ;
   owl:versionInfo """This is a copy of v1.0 of the DCAT vocabulary, taken from https://www.w3.org/ns/dcat.ttl
-Temporarily added imports for DCTerms, SKOS, FOAF to assist in development of v1.* or v2.0 by W3C Data Exchange Working Group """ ;
+Temporarily added imports for DCTerms, SKOS, FOAF to assist in development of v1.* or v2.0 by W3C Data Exchange Working Group"""@en ;
+owl:versionInfo """Esta es una copia del vocabulario DCAT v1.0 disponible en https://www.w3.org/ns/dcat.ttl
+con modificaciones en progreso para la nueva versión de DCAT que resultará del grupo 'W3C Data Exchange Working Group'"""@en ;
+
   foaf:maker [
       foaf:homepage <http://www.w3.org/2011/gld/> ;
       foaf:name "Government Linked Data WG" ;
@@ -128,14 +133,14 @@ Temporarily added imports for DCTerms, SKOS, FOAF to assist in development of v1
 dcat:Catalog
   rdf:type rdfs:Class ;
   rdf:type owl:Class ;
-  vann:usageNote "Normalmente, un catálogo de datos basado en web es representado como una sola instancia de esta clase."@es ;
+  vann:usageNote "Normalmente, un catálogo de datos disponible en la web se representa como una única instancia de esta clase."@es ;
   vann:usageNote "Typically, a web-based data catalog is represented as a single instance of this class."@en ;
-   vann:usageNote "Normalmente, un catalogo di dati nel web viene rappresentato come una singola istanza di questa classe."@it ;
+  vann:usageNote "Normalmente, un catalogo di dati nel web viene rappresentato come una singola istanza di questa classe."@it ;
   vann:usageNote "Συνήθως, ένας κατάλογος δεδομένων στον Παγκόσμιο Ιστό αναπαρίσταται ως ένα στιγμιότυπο αυτής της κλάσης."@el ;
   vann:usageNote "通常、ウェブ・ベースのデータ・カタログは、このクラスの1つのインスタンスとして表わされます。"@ja ;
   rdfs:comment "A curated collection of metadata about datasets"@en ;
-    rdfs:comment "Una raccolta curata di metadati sui dataset"@it ;
-  rdfs:comment "Una colección conservada de metadatos de conjuntos de datos"@es ;
+  rdfs:comment "Una raccolta curata di metadati sui dataset"@it ;
+  rdfs:comment "Una colección seleccionada de metadatos sobre los datos"@es ;
   rdfs:comment "Une collection élaborée de métadonnées sur les jeux de données"@fr ;
   rdfs:comment "Μια επιμελημένη συλλογή μεταδεδομένων περί συνόλων δεδομένων"@el ;
   rdfs:comment "مجموعة من توصيفات قوائم البيانات"@ar ;
@@ -156,7 +161,12 @@ dcat:CatalogRecord
 						ayant une distinction entre les métadonnées sur le jeu de données et les métadonnées sur une entrée du jeu de données dans le catalogue. """@fr ;
   vann:usageNote """Esta clase es opcional y no todos los catálogos la utilizarán. Esta clase existe para catálogos
 						que hacen una distinción entre los metadatos acerca de un conjunto de datos y los metadatos
-						acerca de una entrada en ese conjunto de datos en el catálogo. """@es ;
+						acerca de una entrada en ese conjunto de datos en el catálogo. Por ejemplo, la propiedad sobre la fecha de la publicación de los datos
+						 refleja la fecha en que la información fue originalmente publicada, mientras que la fecha de publicación del registro del catálogo
+						  es la fecha en que los datos se agregaron al mismo. En caso en que ambas fechas fueran diferentes, o en que sólo la
+						  fecha de publicación del registro del catálogo estuviera disponible, sólo debe especificarse en el registro del catálogo.
+						  Tengan en cuenta que la ontología PROV de W3C permite describir otra información sobre la proveniencia de los datos,
+						  como por ejemplo detalles del proceso y de los agentes involucrados en algún cambio específico a los datos."""@es ;
   vann:usageNote """This class is optional and not all catalogs will use it. It exists for 
             catalogs where a distinction is made between metadata about a dataset and 
             metadata about the dataset's entry in the catalog. For example, the publication 
@@ -183,7 +193,7 @@ dcat:CatalogRecord
   rdfs:comment "Μία καταγραφή ενός καταλόγου, η οποία περιγράφει ένα συγκεκριμένο σύνολο δεδομένων."@el ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "Catalog Record"@en ;
-   rdfs:label "Record di catalogo"@it ;
+  rdfs:label "Record di catalogo"@it ;
   rdfs:label "Registre du catalogue"@fr ;
   rdfs:label "Registro de catálogo"@es ;
   rdfs:label "Καταγραφή καταλόγου"@el ;
@@ -195,8 +205,8 @@ dcat:Dataset
   rdf:type owl:Class ;
   vann:usageNote """Cette classe représente le jeu de données publié par le fournisseur de données. Dans les cas où une distinction est nécessaire entre le jeu de donénes et son 
 					  entrée dans le catalogue, la classe registre de données peut être utilisée pour ce dernier. """@fr ;
-  vann:usageNote """Esta clase representa el conjunto de datos publicado por el editor del conjunto de datos. En los casos donde es necesaria una distinción entre el
-					conjunto de datos y su entrada en el catálogo de datos"""@es ;
+  vann:usageNote """Esta clase representa el conjunto de datos publicados. En los casos donde es necesario distinguir entre el
+					conjunto de datos y su entrada en el catálogo de datos, se debe utilizar la clase 'registro de catálogo'."""@es ;
   vann:usageNote """This class represents the actual dataset as published by the dataset publisher. In 
           cases where a distinction between the actual dataset and its entry in the catalog is 
           necessary (because metadata such as modification date and maintainer might differ), the 
@@ -208,15 +218,15 @@ dcat:Dataset
   vann:usageNote "このクラスは、データセットの公開者が公開する実際のデータセットを表わします。カタログ内の実際のデータセットとそのエントリーとの区別が必要な場合（修正日と維持者などのメタデータが異なるかもしれないので）は、後者にcatalog recordというクラスを使用できます。"@ja ;
   rdfs:comment "1つのエージェントによって公開またはキュレートされ、1つ以上の形式でアクセスまたはダウンロードできるデータの集合。"@ja ;
   rdfs:comment "A collection of data, published or curated by a single source, and available for access or download in one or more formats"@en ;
-    rdfs:comment "Raccolta di dati, pubblicati o curati da un'unica fonte, disponibili per l'accesso o il download in uno o più formati."@it ;
-  rdfs:comment "Una colección de datos, publicados o conservados por una única fuente, y disponibles para acceder o descagar en uno o más formatos"@es ;
+  rdfs:comment "Raccolta di dati, pubblicati o curati da un'unica fonte, disponibili per l'accesso o il download in uno o più formati."@it ;
+  rdfs:comment "Una colección de datos, publicados o conservados por una única fuente, y disponibles para ser accedidos o descagados en uno o más formatos"@es ;
   rdfs:comment "Une collection de données, publiée ou élaborée par une seule source, et disponible pour accès ou téléchargement dans un ou plusieurs formats"@fr ;
   rdfs:comment "Μία συλλογή από δεδομένα, δημοσιευμένη ή επιμελημένη από μία και μόνο πηγή, διαθέσιμη δε προς πρόσβαση ή μεταφόρτωση σε μία ή περισσότερες μορφές"@el ;
   rdfs:comment "قائمة بيانات منشورة أو مجموعة من قبل مصدر ما و متاح الوصول إليها أو تحميلها"@ar ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "Conjunto de datos"@es ;
   rdfs:label "Dataset"@en ;
-   rdfs:label "Dataset"@it ;
+  rdfs:label "Dataset"@it ;
   rdfs:label "Jeu de données"@fr ;
   rdfs:label "Σύνολο Δεδομένων"@el ;
   rdfs:label "قائمة بيانات"@ar ;
@@ -237,8 +247,8 @@ dcat:Distribution
   vann:usageNote """Αυτό αναπαριστά μία γενική διαθεσιμότητα ενός συνόλου δεδομένων και δεν υπονοεί τίποτα περί του πραγματικού τρόπου πρόσβασης στα δεδομένα, αν είναι άμεσα μεταφορτώσιμα,
 					  μέσω API ή μέσω μίας ιστοσελίδας. Η χρήση της ιδιότητας dcat:downloadURL δείχνει μόνο άμεσα μεταφορτώσιμες διανομές."""@el ;
   vann:usageNote "これは、データセットの一般的な利用可能性を表わし、データの実際のアクセス方式に関する情報（つまり、直接ダウンロードなのか、APIなのか、ウェブページを介したものなのか）を意味しません。dcat:downloadURLプロパティーの使用は、直接ダウンロード可能な配信を意味します。"@ja ;
-  rdfs:comment """Representa una forma disponible y específica a un conjunto de datos. Cada conjunto de datos puede estar disponible en
-          formas diferentes, estas formas pueden representar formatos diferentes del conjunto de datos o puntos de acceso diferentes."""@es ;
+  rdfs:comment """Representa una forma disponible y específica de los datos. Cada conjunto de datos puede estar disponible en
+          formas diferentes, las cuáles pueden representar formatos diferentes del conjunto de datos o diferentes puntos de acceso."""@es ;
   rdfs:comment """Represents a specific available form of a dataset. Each dataset might be available in 
           different forms, these forms might represent different formats of the dataset or different 
           endpoints. Examples of distributions include a downloadable CSV file, an API or an RSS feed"""@en ;
@@ -254,7 +264,7 @@ dcat:Distribution
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "Distribución"@es ;
   rdfs:label "Distribution"@en ;
-   rdfs:label "Distribuzione"@it ;
+  rdfs:label "Distribuzione"@it ;
   rdfs:label "Distribution"@fr ;
   rdfs:label "Διανομή"@el ;
   rdfs:label "التوزيع"@ar ;
@@ -263,16 +273,19 @@ dcat:Distribution
 dcat:Download
   rdf:type rdfs:Class ;
   rdf:type owl:Class ;
-  rdfs:comment "represents a downloadable distribution of a dataset. This term has been deprecated" ;
+  rdfs:comment "Represents a downloadable distribution of a dataset. This term has been deprecated."@en ;
+  rdfs:comment "Representación de una distribución descargable de los datos. Este término es obsoleto."@es ;
   rdfs:isDefinedBy dcat: ;
-  rdfs:label "Download (Deprecated)" ;
+  rdfs:label "Download (Deprecated)"@en ;
+  rdfs:label "Descarga (Obsoleto)"@es ;
   rdfs:subClassOf dcat:Distribution ;
   owl:deprecated "true"^^xsd:boolean ;
 .
 dcat:Feed
   rdf:type rdfs:Class ;
   rdf:type owl:Class ;
-  rdfs:comment "represents availability of a dataset as a feed. This term has been deprecated" ;
+  rdfs:comment "Represents availability of a dataset as a feed. This term has been deprecated"@en;
+  rdfs:comment "Representa la disponibilidad de datos como un 'feed'. Este término es obsoleto."@es;
   rdfs:isDefinedBy dcat: ;
   rdfs:label "Feed (Deprecated)" ;
   rdfs:subClassOf dcat:Distribution ;
@@ -281,7 +294,7 @@ dcat:Feed
 dcat:WebService
   rdf:type rdfs:Class ;
   rdf:type owl:Class ;
-  rdfs:comment "represents a web service that enables access to the data of a dataset. This term has been deprecated" ;
+  rdfs:comment "represents a web service that enables access to the data of a dataset. This term has been deprecated"@en ;
   rdfs:isDefinedBy dcat: ;
   rdfs:label "Web Service (Deprecated)" ;
   rdfs:subClassOf dcat:Distribution ;
@@ -290,16 +303,16 @@ dcat:WebService
 dcat:accessURL
   rdf:type rdf:Property ;
   rdf:type owl:ObjectProperty ;
-  vann:usageNote """El valor es una URL.
-          Si la distribución es accesible solamente través de una página de aterrizaje (i.e., no se conoce una URL de descarga directa),
-          entonces el enlance a la página de aterrizaje debe ser duplicado como accessURL sobre la distribución."""@es ;
+  vann:usageNote """El rango es una URL.
+          Si la distribución es accesible solamente través de una página de destino (es decir, si no se conoce una URL de descarga directa),
+          entonces el enlance a la página de destino debe ser duplicado como accessURL en la distribución."""@es ;
   vann:usageNote """La valeur est une URL.
 						Si la distribution est accessible seulement au travers d'une page d'atterrissage (c-à-dire on n'ignore une URL de téléchargement direct) ,
 						alors le lien à la page d'atterrissage doit être dupliqué comee accessURL sur la distribution."""@fr ;
   vann:usageNote """The value is a URL.
           If the distribution(s) are accessible only through a landing page (i.e. direct download URLs are 
           not known), then the landing page link should be duplicated as accessURL on a distribution."""@en ;
-   vann:usageNote """Il valore è un URL.  Se le distribuzioni sono accessibili solo attraverso una pagina web (ad esempio, gli URL per il download diretto non sono noti), il link della pagina web deve essere duplicato come accessURL sulla distribuzione."""@it ;
+  vann:usageNote """Il valore è un URL.  Se le distribuzioni sono accessibili solo attraverso una pagina web (ad esempio, gli URL per il download diretto non sono noti), il link della pagina web deve essere duplicato come accessURL sulla distribuzione."""@it ;
   vann:usageNote """Η τιμή είναι ένα URL.
 					Αν η/οι διανομή/ές είναι προσβάσιμη/ες μόνο μέσω μίας ιστοσελίδας αρχικής πρόσβασης (δηλαδή αν δεν υπάρχουν γνωστές διευθύνσεις άμεσης μεταφόρτωσης), τότε ο σύνδεσμος της ιστοσελίδας αρχικής πρόσβασης πρέπει να αναπαραχθεί ως accessURL σε μία διανομή."""@el ;
   vann:usageNote """確実にダウンロードでない場合や、ダウンロードかどうかが不明である場合は、downloadURLではなく、accessURLを用いてください。
@@ -310,8 +323,8 @@ dcat:accessURL
           download, feed URL, SPARQL endpoint. Use when your catalog does not have information on which it 
           is or when it is definitely not a download."""@en ;
   rdfs:comment """Potrebbe essere qualsiasi tipo di URL che dà accesso a una distribuzione del dataset. Ad esempio, la pagina di web, l'URL di download, URL del feed, un  SPARQL endpoint. Da utilizzare quando il catalogo non contiene informazioni su quale tipo sia o quando si sa che non è un download."""@it ;
-  rdfs:comment """Puede ser cualquier tipo de URL que de acceso a una distribución del conjunto de datos, e.g., página de aterrizaje, descarga,
-					URL feed, punto de acceso SPARQL. Utilizado cuando su catálogo de datos no tiene información sobre donde está o cuando no se puede descargar"""@es ;
+  rdfs:comment """Puede ser cualquier tipo de URL que de acceso a una distribución del conjunto de datos, e.g., página de destino, descarga,
+					URL feed, punto de acceso SPARQL. Esta propriedad se debe usar cuando su catálogo de datos no tiene información sobre donde está o cuando no se puede descargar."""@es ;
   rdfs:comment """Μπορεί να είναι οποιουδήποτε είδους URL που δίνει πρόσβαση στη διανομή ενός συνόλου δεδομένων. Π.χ. ιστοσελίδα αρχικής πρόσβασης, 
           μεταφόρτωση, feed URL, σημείο διάθεσης SPARQL. Να χρησιμοποιείται όταν ο κατάλογος δεν περιέχει πληροφορίες εαν πρόκειται ή όχι για μεταφορτώσιμο αρχείο."""@el ;
   rdfs:comment "أي رابط يتيح الوصول إلى البيانات. إذا كان الرابط هو ربط مباشر لملف يمكن تحميله استخدم الخاصية downloadURL"@ar ;
@@ -330,8 +343,8 @@ dcat:accessURL
 dcat:byteSize
   rdf:type rdf:Property ;
   rdf:type owl:DatatypeProperty ;
-  vann:usageNote """El tamaño en bytes puede ser aproximado cuando no es conocido el tamaño exacto.
-          El valor literal de dcat:byteSize debe ser tipado como xsd:decimal"""@es ;
+  vann:usageNote """El tamaño en bytes puede ser aproximado cuando se desconoce el tamaño exacto.
+          El valor literal de dcat:byteSize debe tener tipo 'xsd:decimal'"""@es ;
   vann:usageNote """La taille en octects peut être approximative lorsque l'on ignore la taille réelle.
 					La valeur littérale de dcat:byteSize doit être de type xsd:decimal"""@fr ;
   vann:usageNote """The size in bytes can be approximated when the precise size is not known. 
@@ -362,17 +375,19 @@ dcat:byteSize
 dcat:bytes
   rdf:type rdf:Property ;
   rdf:type owl:DatatypeProperty ;
-  rdfs:comment "describe size of resource in bytes. This term has been deprecated" ;
+  rdfs:comment "describe size of resource in bytes. This term has been deprecated"@en ;
+  rdfs:comment "Describe el tamaño de un recurso en bytes. Este término es obsoleto."@es ;
   rdfs:domain dcat:Distribution ;
   rdfs:isDefinedBy dcat: ;
-  rdfs:label "size in bytes (Deprecated)" ;
+  rdfs:label "size in bytes (Deprecated)"@en ;
+  rdfs:label "Tamaño en bytes (Obsoleto)"@es ;
   rdfs:range xsd:integer ;
   owl:deprecated "true"^^xsd:boolean ;
 .
 dcat:contactPoint
   rdf:type rdf:Property ;
   rdf:type owl:ObjectProperty ;
-  rdfs:comment "Enlaza un conjunto de datos a información de contacto relevante utilizando VCard"@es ;
+  rdfs:comment "Relaciona un conjunto de datos con la información de contacto relevante utilizando VCard."@es ;
   rdfs:comment "Links a dataset to relevant contact information which is provided using VCard."@en ;
   rdfs:comment "Collega un dataset alle informazioni del contatto pertinente utilizzando VCard."@it ;
   rdfs:comment "Relie un jeu de données à une information de contact utile en utilisant VCard."@fr ;
@@ -383,7 +398,7 @@ dcat:contactPoint
   rdfs:label "contact point"@en ;
   rdfs:label "punto di contatto"@it ;
   rdfs:label "point de contact"@fr ;
-  rdfs:label "punto de contacto"@es ;
+  rdfs:label "Punto de contacto"@es ;
   rdfs:label "σημείο επικοινωνίας"@el ;
   rdfs:label "عنوان اتصال"@ar ;
   rdfs:label "窓口"@ja ;
@@ -391,10 +406,12 @@ dcat:contactPoint
 .
 dcat:dataDictionary
   rdf:type rdf:Property ;
-  rdfs:comment "links a dataset to a dictionary that helps interpreting the data. This term has been deprecated" ;
+  rdfs:comment "links a dataset to a dictionary that helps interpreting the data. This term has been deprecated"@en;
+  rdfs:comment "Asocia los datos con un diccionario que ayuda a interpretarlos. Este término es obsoleto."@es;
   rdfs:domain dcat:Dataset ;
   rdfs:isDefinedBy dcat: ;
   rdfs:label "data dictionary (Deprecated)" ;
+  rdfs:label "Diccionario de datos (Obsoleto)" ;
   owl:deprecated "true"^^xsd:boolean ;
 .
 dcat:dataQuality
@@ -490,7 +507,7 @@ dcat:keyword
   rdf:type rdf:Property ;
   rdf:type owl:DatatypeProperty ;
   rdfs:comment "A keyword or tag describing a resource."@en ;
-rdfs:comment "Una parola chiave o un'etichetta per descrivere la risorsa."@it ;
+  rdfs:comment "Una parola chiave o un'etichetta per descrivere la risorsa."@it ;
   rdfs:comment "Un mot-clé ou étiquette décrivant une ressource."@fr ;
   rdfs:comment "Una palabra clave o etiqueta que describe un recurso."@es ;
   rdfs:comment "Μία λέξη-κλειδί ή μία ετικέτα που περιγράφει το σύνολο δεδομένων."@el ;
@@ -531,7 +548,7 @@ dcat:landingPage
   rdfs:label "landing page"@en ;
   rdfs:label "pagina di destinazione"@it ;
   rdfs:label "page d'atterrissage"@fr ;
-  rdfs:label "página de aterrizaje"@es ;
+  rdfs:label "página de destino"@es ;
   rdfs:label "ιστοσελίδα αρχικής πρόσβασης"@el ;
   rdfs:label "صفحة وصول"@ar ;
   rdfs:label "ランディング・ページ"@ja ;
@@ -543,7 +560,7 @@ dcat:mediaType
   rdf:type owl:ObjectProperty ;
   rdfs:comment """Cette propriété doit être utilisée quand c'est définit le type de média de la distribution
 					en IANA, sinon dct:format DOIT être utilisé avec différentes valeurs."""@fr ;
-  rdfs:comment """Esta propiedad debe ser usada cuando está definido el tipo de media de la distribución 
+  rdfs:comment """Esta propiedad debe ser usada cuando está definido el tipo de media de la distribución
 					en IANA, de otra manera dct:format puede ser utilizado con diferentes valores"""@es ;
   rdfs:comment """This property SHOULD be used when the media type of the distribution is defined 
           in IANA, otherwise dct:format MAY be used with different values."""@en ;
@@ -567,7 +584,7 @@ dcat:mediaType
 dcat:record
   rdf:type rdf:Property ;
   rdf:type owl:ObjectProperty ;
-  rdfs:comment "Enlaza un catálogo a sus registros."@es ;
+  rdfs:comment "Asocia un catálogo con sus registros."@es ;
   rdfs:comment "Links a catalog to its records."@en ;
    rdfs:comment "Collega un catalogo ai propri record."@it ;
   rdfs:comment "Relie un catalogue à ses registres"@fr ;
@@ -587,7 +604,7 @@ dcat:record
 .
 dcat:size
   rdf:type rdf:Property ;
-  rdfs:comment "the size of a distribution. This term has been deprecated" ;
+  rdfs:comment "the size of a distribution. This term has been deprecated"@en ;
   rdfs:domain dcat:Distribution ;
   rdfs:isDefinedBy dcat: ;
   rdfs:label "size (Deprecated)" ;
@@ -618,7 +635,7 @@ dcat:theme
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "tema"@es ;
   rdfs:label "theme"@en ;
-   rdfs:label "tema"@it ;
+  rdfs:label "tema"@it ;
   rdfs:label "thème"@fr ;
   rdfs:label "Θέμα"@el ;
   rdfs:label "التصنيف"@ar ;
