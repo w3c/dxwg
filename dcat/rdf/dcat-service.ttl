@@ -17,11 +17,10 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 dcat:Catalog
-  rdfs:subClassOf dctype:Service ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:hasValue <https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/discovery> ;
-      owl:onProperty dcterms:type ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:conformsTo ;
     ] ;
 .
 dcat:CatalogRecord
@@ -123,11 +122,6 @@ dcat-s:DataService
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onProperty dcterms:conformsTo ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
       owl:minCardinality "0"^^xsd:nonNegativeInteger ;
       owl:onProperty dcterms:modified ;
     ] ;
@@ -135,6 +129,11 @@ dcat-s:DataService
       rdf:type owl:Restriction ;
       owl:minCardinality "0"^^xsd:nonNegativeInteger ;
       owl:onProperty dcterms:spatial ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:conformsTo ;
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
@@ -167,6 +166,14 @@ dcat-s:accessService
   rdfs:domain dcat:Distribution ;
   rdfs:label "link to DataService that serves this data Distribution" ;
   rdfs:range dcat-s:DataService ;
+.
+dcat-s:catalog
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Link from a catalog to another catalog whose contents are of interest in the context of this catalog" ;
+  rdfs:domain dcat:Catalog ;
+  rdfs:label "Link to catalog" ;
+  rdfs:range dcat:Catalog ;
+  rdfs:subPropertyOf dcterms:hasPart ;
 .
 dcat-s:dataService
   rdf:type owl:ObjectProperty ;
