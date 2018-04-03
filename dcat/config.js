@@ -1,7 +1,7 @@
 var respecConfig = {
 //	preProcess: [dfn_index],
     specStatus: "ED",
-    shortName: "vocab-dcat-1-1",
+    shortName: "vocab-dcat-rev",
     canonicalURI: "TR",
     prevRecURI:           "https://www.w3.org/TR/vocab-dcat/",
     previousPublishDate:  "2014-01-16",
