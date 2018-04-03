@@ -1,71 +1,60 @@
 var respecConfig = {
 //	preProcess: [dfn_index],
     specStatus: "ED",
-    shortName: "dcat-1-1",
+    shortName: "vocab-dcat-rev",
     canonicalURI: "TR",
-    prevRecURI: "https://www.w3.org/TR/vocab-dcat/",
-//    previousMaturity:     "NOTE",
-//    previousPublishDate:  "2016-07-23",
-//    previousURI:          "https://www.w3.org/TR/2016/NOTE-poe-ucr-20160721/",
-    edDraftURI: "https://w3c.github.io/dxwg/dcat/",
-    editors: [
-    {
-    name:       "Alejandra Gonzalez Beltran",
-    company:    "University of Oxford eResearch Centre",
-    url: "https://www.oerc.ox.ac.uk/people/alejandra",
-    companyURL: "http://www.oerc.ox.ac.uk/"
-  },
-  {
-    name: "Dave Browning",
-    company: "Thomson Reuters",
-    companyURL: "https://www.thomsonreuters.com"
-  },
-  {
-    name: "Simon Cox",
-    company: "CSIRO",
-    url: "http://people.csiro.au/Simon-Cox",
-    companyURL: "https://www.csiro.au/"
-  },
-  {
-    name: "Peter Winstanley",
-    company: "Scottish Government",
-    companyURL: "http://www.gov.scot/"
-  }
-  ],
-  authors: [
-    {
-      name: "Makx Dekkers",
-      company: "Makx Dekkers",
-      companyURL: "http://www.makxdekkers.com"
-    },
-    {
-      name: "Antoine Isaac",
-      company: "Europeana Foundation",
-      url: "https://pro.europeana.eu/person/antoine-isaac",
-    }
-
-  ],
-    otherLinks: [
-      {
-        key: "Authors of previous version",
-        data: [
-        {
-          value: "Fadi Maali"
-        },
-        {
-          value: "John Erickson"
-        }
-      ]}
-    ],
-
-
+    prevRecURI:           "https://www.w3.org/TR/vocab-dcat/",
+    previousPublishDate:  "2014-01-16",
+    previousURI:          "https://www.w3.org/TR/2014/REC-vocab-dcat-20140116/",
+    edDraftURI:           "https://w3c.github.io/dxwg/dcat/",
+    issueBase:            "https://github.com/w3c/dxwg/issues/",
+    editors: [{
+      name:       "Alejandra Gonzalez Beltran",
+      company:    "University of Oxford eResearch Centre",
+      url: "https://www.oerc.ox.ac.uk/people/alejandra",
+      companyURL: "http://www.oerc.ox.ac.uk/"
+    },{
+      name: "Dave Browning",
+      company: "Thomson Reuters",
+      companyURL: "https://www.thomsonreuters.com"
+    },{
+      name: "Simon Cox",
+      company: "CSIRO",
+      url: "http://people.csiro.au/Simon-Cox",
+      companyURL: "https://www.csiro.au/"
+    },{
+      name: "Peter Winstanley",
+      company: "Scottish Government",
+      companyURL: "http://www.gov.scot/"
+    }],
+    otherLinks: [{
+//        key: "Contributors",
+//        data: [{
+//            value: "Makx Dekkers",
+//            href: "http://www.makxdekkers.com"
+//        },{
+//            value: "Antoine Isaac, Europeana Foundation",
+//            href: "https://pro.europeana.eu/person/antoine-isaac"
+//        },{
+//            value: "Andrea Perego, European Commission",
+//            href: "https://ec.europa.eu/jrc/en/research-topic/digital-earth"
+//        }]
+//      },{
+        key: "Editors of previous version",
+        data: [{
+            value: "Fadi Maali, DERI",
+            href: "http://www.deri.ie/"
+        },{
+            value: "John Erickson, Tetherless World Constellation (RPI)",
+            href: "http://tw.rpi.edu/"
+        }]
+      }],
     wg: "Dataset Exchange Working Group",
     wgURI: "https://www.w3.org/2017/dxwg/",
     wgPublicList: "public-dxwg-comments",
     wgPatentURI: "https://www.w3.org/2004/01/pp-impl/99375/status",
     inlineCSS: "true",
-	lint: "false",
-    noRecTrack: "true",
+	  lint: "false",
     localBiblio: {
       "SCHEMA-ORG":{
         "href":"http://schema.org/",
@@ -83,6 +72,5 @@ var respecConfig = {
          "title":"Data Documentation Initiative",
          "publisher":"DDI Alliance"
        }
-    },
-    issueBase: "https://github.com/w3c/dxwg/issues/"
-};
+    }
+  };
