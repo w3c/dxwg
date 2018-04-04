@@ -5,7 +5,7 @@ var respecConfig = {
     canonicalURI: "TR",
     prevRecURI:           "https://www.w3.org/TR/vocab-dcat/",
     previousPublishDate:  "2014-01-16",
-    previousMaturity: "REC",
+    previousMaturity:     "REC",
     previousURI:          "https://www.w3.org/TR/2014/REC-vocab-dcat-20140116/",
     edDraftURI:           "https://w3c.github.io/dxwg/dcat/",
     issueBase:            "https://github.com/w3c/dxwg/issues/",
