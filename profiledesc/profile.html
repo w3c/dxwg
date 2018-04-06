@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Profiles Ontology</title>
+        <link href="http://pid.data.gov.au/websrv/static/LODE/owl.css" rel="stylesheet" type="text/css" />
+        <link href="http://pid.data.gov.au/websrv/static/LODE/Primer.css" rel="stylesheet" type="text/css" />
+        <link href="http://pid.data.gov.au/websrv/static/LODE/rec.css" rel="stylesheet" type="text/css" />
+        <link href="http://pid.data.gov.au/websrv/static/LODE/extra.css" rel="stylesheet" type="text/css" />
+        <link rel="shortcut icon" href="http://pid.data.gov.au/websrv/static/LODE/favicon.ico" />
+        <script src="http://pid.data.gov.au/websrv/static/LODE/jquery.js"></script>
+        <script src="http://pid.data.gov.au/websrv/static/LODE/jquery.scrollTo.js"></script>
+        <script src="http://pid.data.gov.au/websrv/static/LODE/marked.min.js"></script>
+    </head>
+    <body>
+        <div class="head">
+            <h1>Profiles Ontology</h1>
+            <dl>
+                <dt>IRI:</dt>
+                <dd>
+                  <span style="text-decoration:line-through">http://www.opengis.net/def/ont/profile</span><br />
+                  http://promsns.org/def/prof (<em>for testing only</em>)
+                </dd>
+            </dl>
+            <dl>
+                <dt>Authors:</dt>
+                <dd>Rob Atkinson</dd>
+                <dt>Contributors:</dt>
+                <dd>Nicholas Car</dd>
+                <dd><a href="http://orcid.org/0000-0002-8742-7730">http://orcid.org/0000-0002-8742-7730</a></dd>
+            </dl>
+            <dl>
+                <dt>Ontology source:</dt>
+                <dd><a href="http://promsns.org/def/prof.ttl">RDF (turtle)</a></dd>
+            </dl>
+            <dl>
+      				<dt>Further documentation & examples:</dt>
+      				<dd><a href="https://github.com/w3c/dxwg/blob/profiledesc/profiledesc/">This ontology on GitHub</a></dd>
+            </dl>
+        </div>
+        <hr />
+        <h2>Abstract</h2>
+        <span class="markdown">This model provides a canonical vocabulary for describing profiling relationships between http://dublincore.org/2012/06/14/dcterms#Standard entities and attachment of resources defining additional constraints</span>
+        <div id="toc">
+            <h2>Table of Content</h2>
+            <ol>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#classes">Classes</a></li>
+                <li><a href="#objectproperties">Object Properties</a></li>
+                <li><a href="#namedindividuals">Named Individuals</a></li>
+                <li><a href="#annotationproperties">Annotation Properties</a></li>
+                <li><a href="#namespacedeclarations">Namespace Declarations</a></li>
+            </ol>
+        </div>
+        <h2 id="introduction">Introduction</h2>
+        <span class="markdown">This is an RDF/OWL Ontology for describing relationships between Specifications, implementing profiles and supporting artefacts.</span>
+        <div id="classes">
+            <h2>Classes</h2>
+            <ul class="hlist">
+                <li><a href="#BaseSpecification" title="http://promsns.org/def/prof#BaseSpecification">Base Specification</a></li>
+                <li><a href="#FullConstraintSet" title="http://promsns.org/def/prof#FullConstraintSet"><span>full constraint set</span></a></li>
+                <li><a href="#Profile" title="http://promsns.org/def/prof#Profile">Implementation Profile</a></li>
+                <li><a href="#ImplResourceDesc" title="http://promsns.org/def/prof#ImplResourceDesc">Implementation Resource Descriptor</a></li>
+                <li><a href="#ImplResourceType" title="http://promsns.org/def/prof#ImplResourceType">Implementation Resource Type</a></li>
+            </ul>
+            <div id="BaseSpecification" class="entity">
+                <a id="http://promsns.org/def/prof#BaseSpecification"></a>
+                <h3>Base Specification<sup title="class" class="type-c">c</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://promsns.org/def/prof#BaseSpecification</p>
+                <div class="comment"><span class="markdown">This may not be a useful class, but documents that any specification can be regarded as a trivial profile, so applications only need to be concerned with Profile conformance</span></div>
+                <dl class="description">
+                    <dt>has super-classes</dt>
+                    <dd><a href="#Profile" title="http://promsns.org/def/prof#Profile">Implementation Profile</a><sup title="class" class="type-c">c</sup></dd>
+                    <dd><a href="#profileOf" title="http://promsns.org/def/prof#profileOf">profiles</a><sup title="object property" class="type-op">op</sup> <span class="logic">max</span> 0</dd>
+                </dl>
+                <div class="info"><span class="markdown">A specification that defines all implementation constraints, without applying constraints on usage of another specification</span></div>
+            </div>
+            <div id="FullConstraintSet" class="entity">
+                <a id="http://promsns.org/def/prof#FullConstraintSet"></a>
+                <h3>full constraint set<sup title="class" class="type-c">c</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://promsns.org/def/prof#FullConstraintSet</p>
+                <dl class="description">
+                    <dt>has super-classes</dt>
+                    <dd><a href="#ImplResourceType" title="http://promsns.org/def/prof#ImplResourceType">Implementation Resource Type</a><sup title="class" class="type-c">c</sup></dd>
+                    <dt>is also defined as</dt>
+                    <dd><a href="#FullConstraintSet">named individual</a></dd>
+                </dl>
+            </div>
+            <div id="Profile" class="entity">
+                <a id="http://promsns.org/def/prof#Profile"></a>
+                <h3>Implementation Profile<sup title="class" class="type-c">c</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://promsns.org/def/prof#Profile</p>
+                <div class="comment"><span class="markdown">Profile is modelled as a skos:Concept to explicitly support the notion of profiles organised as classification taxonomies. skos:broader/narrower and broaderTransitive properties may be used </span></div>
+                <dl class="description">
+                    <dt>has sub-classes</dt>
+                    <dd><a href="#BaseSpecification" title="http://promsns.org/def/prof#BaseSpecification">Base Specification</a><sup title="class" class="type-c">c</sup></dd>
+                    <dt>is in domain of</dt>
+                    <dd><a href="#profileOf" title="http://promsns.org/def/prof#profileOf">profiles</a><sup title="object property" class="type-op">op</sup></dd>
+                    <dt>is in range of</dt>
+                    <dd><a href="#hasProfile" title="http://promsns.org/def/prof#hasProfile">has profile</a><sup title="object property" class="type-op">op</sup>, <a href="#profileOf" title="http://promsns.org/def/prof#profileOf">profiles</a><sup title="object property" class="type-op">op</sup></dd>
+                </dl>
+                <div class="info"><span class="markdown">A named set of constraints on one or more identified base specifications, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of those base specifications necessary to accomplish a particular function.</span></div>
+            </div>
+            <div id="ImplResourceDesc" class="entity">
+                <a id="http://promsns.org/def/prof#ImplResourceDesc"></a>
+                <h3>Implementation Resource Descriptor<sup title="class" class="type-c">c</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://promsns.org/def/prof#ImplResourceDesc</p>
+                <dl class="description">
+                    <dt>has super-classes</dt>
+                    <dd><span class="dotted" title="http://purl.org/dc/terms/format">format</span><sup title="object property" class="type-op">op</sup> <span class="logic">exactly</span> 1</dd>
+                    <dd><a href="#resource" title="http://promsns.org/def/prof#resource">implementing resource</a><sup title="object property" class="type-op">op</sup> <span class="logic">exactly</span> 1</dd>
+                    <dd><a href="#resourceType" title="http://promsns.org/def/prof#resourceType">resource type</a><sup title="object property" class="type-op">op</sup> <span class="logic">exactly</span> 1</dd>
+                    <dt>is in domain of</dt>
+                    <dd><a href="#resourceType" title="http://promsns.org/def/prof#resourceType">resource type</a><sup title="object property" class="type-op">op</sup></dd>
+                    <dt>is in range of</dt>
+                    <dd><a href="#resource" title="http://promsns.org/def/prof#resource">implementing resource</a><sup title="object property" class="type-op">op</sup></dd>
+                </dl>
+                <div class="info"><span class="markdown">A resource that defines implementing rules for a profile. Must indicate the purpose (dct:type) and the formalism (dct:format) used to allow machine mediation of such rules.</span></div>
+            </div>
+            <div id="ImplResourceType" class="entity">
+                <a id="http://promsns.org/def/prof#ImplResourceType"></a>
+                <h3>Implementation Resource Type<sup title="class" class="type-c">c</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://promsns.org/def/prof#ImplResourceType</p>
+                <dl class="description">
+                    <dt>has super-classes</dt>
+                    <dd><span class="dotted" title="http://www.w3.org/2004/02/skos/core#Concept">concept</span><sup title="class" class="type-c">c</sup></dd>
+                    <dt>has sub-classes</dt>
+                    <dd><a href="#FullConstraintSet" title="http://promsns.org/def/prof#FullConstraintSet">full constraint set</a><sup title="class" class="type-c">c</sup></dd>
+                </dl>
+            </div>
+        </div>
+        <div id="objectproperties">
+            <h2>Object Properties</h2>
+            <ul class="hlist">
+                <li><a href="#hasProfile" title="http://promsns.org/def/prof#hasProfile">has profile</a></li>
+                <li><a href="#resource" title="http://promsns.org/def/prof#resource">implementing resource</a></li>
+                <li><a href="#profileOf" title="http://promsns.org/def/prof#profileOf">profiles</a></li>
+                <li><a href="#resourceType" title="http://promsns.org/def/prof#resourceType">resource type</a></li>
+            </ul>
+            <div id="hasProfile" class="entity">
+                <a id="http://promsns.org/def/prof#hasProfile"></a>
+                <h3>has profile<sup title="object property" class="type-op">op</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://promsns.org/def/prof#hasProfile</p>
+                <div class="description">
+                    <dl>
+                        <dt>has range</dt>
+                        <dd><a href="#Profile" title="http://promsns.org/def/prof#Profile">Implementation Profile</a><sup title="class" class="type-c">c</sup></dd>
+                        <dt>is inverse of</dt>
+                        <dd><a href="#profileOf" title="http://promsns.org/def/prof#profileOf">profiles</a><sup title="object property" class="type-op">op</sup></dd>
+                    </dl>
+                </div>
+                <div class="info"><span class="markdown">known profiles of a specification</span></div>
+            </div>
+            <div id="resource" class="entity">
+                <a id="http://promsns.org/def/prof#resource"></a>
+                <h3>implementing resource<sup title="object property" class="type-op">op</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://promsns.org/def/prof#resource</p>
+                <div class="description">
+                    <dl>
+                        <dt>has range</dt>
+                        <dd><a href="#ImplResourceDesc" title="http://promsns.org/def/prof#ImplResourceDesc">Implementation Resource Descriptor</a><sup title="class" class="type-c">c</sup></dd>
+                    </dl>
+                </div>
+                <div class="info"><span class="markdown">URI link to resource</span></div>
+            </div>
+            <div id="profileOf" class="entity">
+                <a id="http://promsns.org/def/prof#profileOf"></a>
+                <h3>profiles<sup title="object property" class="type-op">op</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://promsns.org/def/prof#profileOf</p>
+                <div class="comment"><span class="markdown">The semantics of the rdfs:Range means that any resource treated as a base specification can be regarded as a Profile (i.e. may be any specification with an empty set of additional constraints)</span></div>
+                <div class="description">
+                    <dl>
+                        <dt>has domain</dt>
+                        <dd><a href="#Profile" title="http://promsns.org/def/prof#Profile">Implementation Profile</a><sup title="class" class="type-c">c</sup></dd>
+                        <dt>has range</dt>
+                        <dd><a href="#Profile" title="http://promsns.org/def/prof#Profile">Implementation Profile</a><sup title="class" class="type-c">c</sup></dd>
+                        <dt>is inverse of</dt>
+                        <dd><a href="#hasProfile" title="http://promsns.org/def/prof#hasProfile">has profile</a><sup title="object property" class="type-op">op</sup></dd>
+                    </dl>
+                </div>
+                <div class="info"><span class="markdown">a base specification a Profile conforms to</span></div>
+            </div>
+            <div id="resourceType" class="entity">
+                <a id="http://promsns.org/def/prof#resourceType"></a>
+                <h3>resource type<sup title="object property" class="type-op">op</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://promsns.org/def/prof#resourceType</p>
+                <div class="description">
+                    <dl>
+                        <dt>has domain</dt>
+                        <dd><a href="#ImplResourceDesc" title="http://promsns.org/def/prof#ImplResourceDesc">Implementation Resource Descriptor</a><sup title="class" class="type-c">c</sup></dd>
+                        <dt>has range</dt>
+                        <dd><span class="dotted" title="http://www.w3.org/2004/02/skos/core#Concept">concept</span><sup title="class" class="type-c">c</sup></dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div id="namedindividuals">
+            <h2>Named Individuals</h2>
+            <ul class="hlist">
+                <li><a href="#FullConstraintSet" title="http://promsns.org/def/prof#FullConstraintSet"><span>full constraint set</span></a></li>
+            </ul>
+            <div id="FullConstraintSet" class="entity">
+                <a id="http://promsns.org/def/prof#FullConstraintSet"></a>
+                <h3>full constraint set<sup title="named individual" class="type-ni">ni</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://promsns.org/def/prof#FullConstraintSet</p>
+                <dl class="description">
+                    <dt>belongs to</dt>
+                    <dd><span class="dotted" title="http://www.w3.org/2004/02/skos/core#Concept">concept</span><sup title="class" class="type-c">c</sup></dd>
+                    <dt>is also defined as</dt>
+                    <dd><a href="#FullConstraintSet">class</a></dd>
+                </dl>
+            </div>
+        </div>
+        <div id="annotationproperties">
+            <h2>Annotation Properties</h2>
+            <ul class="hlist">
+                <li><a href="#d4e60" title="http://purl.org/dc/terms/conformsTo"><span>conforms to</span></a></li>
+                <li><a href="#d4e34" title="http://purl.org/dc/elements/1.1/description"><span>description</span></a></li>
+                <li><a href="#d4e39" title="http://purl.org/dc/elements/1.1/format"><span>format</span></a></li>
+                <li><a href="#d4e72" title="http://purl.org/dc/terms/format"><span>format</span></a></li>
+                <li><a href="#d4e81" title="http://purl.org/dc/terms/hasFormat"><span>has format</span></a></li>
+                <li><a href="#d4e90" title="http://purl.org/dc/terms/hasPart"><span>has part</span></a></li>
+                <li><a href="#d4e100" title="http://purl.org/dc/terms/hasVersion"><span>has version</span></a></li>
+                <li><a href="#d4e43" title="http://purl.org/dc/elements/1.1/identifier"><span>identifier</span></a></li>
+                <li><a href="#d4e109" title="http://purl.org/dc/terms/identifier"><span>identifier</span></a></li>
+                <li><a href="#d4e116" title="http://purl.org/dc/terms/isFormatOf"><span>is format of</span></a></li>
+                <li><a href="#d4e126" title="http://purl.org/dc/terms/isPartOf"><span>is part of</span></a></li>
+                <li><a href="#d4e135" title="http://purl.org/dc/terms/issued"><span>issued</span></a></li>
+                <li><a href="#minCardinality" title="http://www.w3.org/2002/07/owl#minCardinality"><span>min cardinality</span></a></li>
+                <li><a href="#d4e139" title="http://purl.org/dc/terms/modified"><span>modified</span></a></li>
+                <li><a href="#d4e144" title="http://purl.org/dc/terms/references"><span>references</span></a></li>
+                <li><a href="#d4e47" title="http://purl.org/dc/elements/1.1/relation"><span>relation</span></a></li>
+                <li><a href="#d4e153" title="http://purl.org/dc/terms/relation"><span>relation</span></a></li>
+                <li><a href="#d4e160" title="http://purl.org/dc/terms/replaces"><span>replaces</span></a></li>
+                <li><a href="#d4e170" title="http://purl.org/dc/terms/requires"><span>requires</span></a></li>
+                <li><a href="#d4e52" title="http://purl.org/dc/elements/1.1/rights"><span>rights</span></a></li>
+                <li><a href="#d4e179" title="http://purl.org/dc/terms/rights"><span>rights</span></a></li>
+                <li><a href="#d4e56" title="http://purl.org/dc/elements/1.1/source"><span>source</span></a></li>
+                <li><a href="#d4e186" title="http://purl.org/dc/terms/source"><span>source</span></a></li>
+            </ul>
+            <div id="d4e60" class="entity">
+                <a id="http://purl.org/dc/terms/conformsTo"></a>
+                <h3>conforms to<sup title="annotation property" class="type-ap">ap</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://purl.org/dc/terms/conformsTo</p>
+                <div class="description">
+                    <dl>
+                        <dt>has super-properties</dt>
+                        <dd><span class="dotted" title="http://purl.org/dc/elements/1.1/relation">relation</span><sup title="annotation property" class="type-ap">ap</sup></dd>
+                        <dd><a href="#d4e153" title="http://purl.org/dc/terms/relation">relation</a><sup title="annotation property" class="type-ap">ap</sup></dd>
+                        <dt>has range</dt>
+                        <dd><span class="dotted" title="http://purl.org/dc/terms/Standard">standard</span></dd>
+                        <dt>is also defined as</dt>
+                        <dd>object property</dd>
+                    </dl>
+                </div>
+            </div>
+            <div id="d4e34" class="entity">
+                <a id="http://purl.org/dc/elements/1.1/description"></a>
+                <h3>description<sup title="annotation property" class="type-ap">ap</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://purl.org/dc/elements/1.1/description</p>
+            </div>
+            <div id="d4e39" class="entity">
+                <a id="http://purl.org/dc/elements/1.1/format"></a>
+                <h3>format<sup title="annotation property" class="type-ap">ap</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://purl.org/dc/elements/1.1/format</p>
+                <div class="description">
+                    <dl>
+                        <dt>has sub-properties</dt>
+                        <dd><a href="#d4e72" title="http://purl.org/dc/terms/format">format</a><sup title="annotation property" class="type-ap">ap</sup></dd>
+                    </dl>
+                </div>
+            </div>
+            <div id="d4e72" class="entity">
+                <a id="http://purl.org/dc/terms/format"></a>
+                <h3>format<sup title="annotation property" class="type-ap">ap</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://purl.org/dc/terms/format</p>
+                <div class="description">
+                    <dl>
+                        <dt>has super-properties</dt>
+                        <dd><span class="dotted" title="http://purl.org/dc/elements/1.1/format">format</span><sup title="annotation property" class="type-ap">ap</sup></dd>
+                        <dt>has range</dt>
+                        <dd><span class="dotted" title="http://purl.org/dc/terms/MediaTypeOrExtent">media type or extent</span></dd>
+                        <dt>is also defined as</dt>
+                        <dd>object property</dd>
+                    </dl>
+                </div>
+            </div>
+            <div id="d4e81" class="entity">
+                <a id="http://purl.org/dc/terms/hasFormat"></a>
+                <h3>has format<sup title="annotation property" class="type-ap">ap</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://purl.org/dc/terms/hasFormat</p>
+                <div class="description">
+                    <dl>
+                        <dt>has super-properties</dt>
+                        <dd><span class="dotted" title="http://purl.org/dc/elements/1.1/relation">relation</span><sup title="annotation property" class="type-ap">ap</sup></dd>
+                        <dd><a href="#d4e153" title="http://purl.org/dc/terms/relation">relation</a><sup title="annotation property" class="type-ap">ap</sup></dd>
+                    </dl>
+                </div>
+            </div>
+            <div id="d4e90" class="entity">
+                <a id="http://purl.org/dc/terms/hasPart"></a>
+                <h3>has part<sup title="annotation property" class="type-ap">ap</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://purl.org/dc/terms/hasPart</p>
+                <div class="description">
+                    <dl>
+                        <dt>has super-properties</dt>
+                        <dd><span class="dotted" title="http://purl.org/dc/elements/1.1/relation">relation</span><sup title="annotation property" class="type-ap">ap</sup></dd>
+                        <dd><a href="#d4e153" title="http://purl.org/dc/terms/relation">relation</a><sup title="annotation property" class="type-ap">ap</sup></dd>
+                    </dl>
+                </div>
+            </div>
+            <div id="d4e100" class="entity">
+                <a id="http://purl.org/dc/terms/hasVersion"></a>
+                <h3>has version<sup title="annotation property" class="type-ap">ap</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://purl.org/dc/terms/hasVersion</p>
+                <div class="description">
+                    <dl>
+                        <dt>has super-properties</dt>
+                        <dd><span class="dotted" title="http://purl.org/dc/elements/1.1/relation">relation</span><sup title="annotation property" class="type-ap">ap</sup></dd>
+                        <dd><a href="#d4e153" title="http://purl.org/dc/terms/relation">relation</a><sup title="annotation property" class="type-ap">ap</sup></dd>
+                    </dl>
+                </div>
+            </div>
+            <div id="d4e43" class="entity">
+                <a id="http://purl.org/dc/elements/1.1/identifier"></a>
+                <h3>identifier<sup title="annotation property" class="type-ap">ap</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://purl.org/dc/elements/1.1/identifier</p>
+                <div class="description">
+                    <dl>
+                        <dt>has sub-properties</dt>
+                        <dd><a href="#d4e109" title="http://purl.org/dc/terms/identifier">identifier</a><sup title="annotation property" class="type-ap">ap</sup></dd>
+                    </dl>
+                </div>
+            </div>
+            <div id="d4e109" class="entity">
+                <a id="http://purl.org/dc/terms/identifier"></a>
+                <h3>identifier<sup title="annotation property" class="type-ap">ap</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://purl.org/dc/terms/identifier</p>
+                <div class="description">
+                    <dl>
+                        <dt>has super-properties</dt>
+                        <dd><span class="dotted" title="http://purl.org/dc/elements/1.1/identifier">identifier</span><sup title="annotation property" class="type-ap">ap</sup></dd>
+                    </dl>
+                </div>
+            </div>
+            <div id="d4e116" class="entity">
+                <a id="http://purl.org/dc/terms/isFormatOf"></a>
+                <h3>is format of<sup title="annotation property" class="type-ap">ap</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://purl.org/dc/terms/isFormatOf</p>
+                <div class="description">
+                    <dl>
+                        <dt>has super-properties</dt>
+                        <dd><span class="dotted" title="http://purl.org/dc/elements/1.1/relation">relation</span><sup title="annotation property" class="type-ap">ap</sup></dd>
+                        <dd><a href="#d4e153" title="http://purl.org/dc/terms/relation">relation</a><sup title="annotation property" class="type-ap">ap</sup></dd>
+                    </dl>
+                </div>
+            </div>
+            <div id="d4e126" class="entity">
+                <a id="http://purl.org/dc/terms/isPartOf"></a>
+                <h3>is part of<sup title="annotation property" class="type-ap">ap</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://purl.org/dc/terms/isPartOf</p>
+                <div class="description">
+                    <dl>
+                        <dt>has super-properties</dt>
+                        <dd><span class="dotted" title="http://purl.org/dc/elements/1.1/relation">relation</span><sup title="annotation property" class="type-ap">ap</sup></dd>
+                        <dd><a href="#d4e153" title="http://purl.org/dc/terms/relation">relation</a><sup title="annotation property" class="type-ap">ap</sup></dd>
+                    </dl>
+                </div>
+            </div>
+            <div id="d4e135" class="entity">
+                <a id="http://purl.org/dc/terms/issued"></a>
+                <h3>issued<sup title="annotation property" class="type-ap">ap</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://purl.org/dc/terms/issued</p>
+            </div>
+            <div id="minCardinality" class="entity">
+                <a id="http://www.w3.org/2002/07/owl#minCardinality"></a>
+                <h3>min cardinality<sup title="annotation property" class="type-ap">ap</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://www.w3.org/2002/07/owl#minCardinality</p>
+            </div>
+            <div id="d4e139" class="entity">
+                <a id="http://purl.org/dc/terms/modified"></a>
+                <h3>modified<sup title="annotation property" class="type-ap">ap</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://purl.org/dc/terms/modified</p>
+            </div>
+            <div id="d4e144" class="entity">
+                <a id="http://purl.org/dc/terms/references"></a>
+                <h3>references<sup title="annotation property" class="type-ap">ap</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://purl.org/dc/terms/references</p>
+                <div class="description">
+                    <dl>
+                        <dt>has super-properties</dt>
+                        <dd><span class="dotted" title="http://purl.org/dc/elements/1.1/relation">relation</span><sup title="annotation property" class="type-ap">ap</sup></dd>
+                        <dd><a href="#d4e153" title="http://purl.org/dc/terms/relation">relation</a><sup title="annotation property" class="type-ap">ap</sup></dd>
+                    </dl>
+                </div>
+            </div>
+            <div id="d4e47" class="entity">
+                <a id="http://purl.org/dc/elements/1.1/relation"></a>
+                <h3>relation<sup title="annotation property" class="type-ap">ap</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://purl.org/dc/elements/1.1/relation</p>
+                <div class="description">
+                    <dl>
+                        <dt>has sub-properties</dt>
+                        <dd><a href="#d4e60" title="http://purl.org/dc/terms/conformsTo">conforms to</a><sup title="annotation property" class="type-ap">ap</sup>, <a href="#d4e81" title="http://purl.org/dc/terms/hasFormat">has format</a><sup title="annotation property" class="type-ap">ap</sup>, <a href="#d4e90" title="http://purl.org/dc/terms/hasPart">has part</a><sup title="annotation property" class="type-ap">ap</sup>, <a href="#d4e100" title="http://purl.org/dc/terms/hasVersion">has version</a><sup title="annotation property" class="type-ap">ap</sup>, <a href="#d4e116" title="http://purl.org/dc/terms/isFormatOf">is format of</a><sup title="annotation property" class="type-ap">ap</sup>, <a href="#d4e126" title="http://purl.org/dc/terms/isPartOf">is part of</a><sup title="annotation property" class="type-ap">ap</sup>, <a href="#d4e144" title="http://purl.org/dc/terms/references">references</a><sup title="annotation property" class="type-ap">ap</sup>, <a href="#d4e153" title="http://purl.org/dc/terms/relation">relation</a><sup title="annotation property" class="type-ap">ap</sup>, <a href="#d4e160" title="http://purl.org/dc/terms/replaces">replaces</a><sup title="annotation property" class="type-ap">ap</sup>, <a href="#d4e170" title="http://purl.org/dc/terms/requires">requires</a><sup title="annotation property" class="type-ap">ap</sup></dd>
+                    </dl>
+                </div>
+            </div>
+            <div id="d4e153" class="entity">
+                <a id="http://purl.org/dc/terms/relation"></a>
+                <h3>relation<sup title="annotation property" class="type-ap">ap</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://purl.org/dc/terms/relation</p>
+                <div class="description">
+                    <dl>
+                        <dt>has super-properties</dt>
+                        <dd><span class="dotted" title="http://purl.org/dc/elements/1.1/relation">relation</span><sup title="annotation property" class="type-ap">ap</sup></dd>
+                        <dt>has sub-properties</dt>
+                        <dd><a href="#d4e60" title="http://purl.org/dc/terms/conformsTo">conforms to</a><sup title="annotation property" class="type-ap">ap</sup>, <a href="#d4e81" title="http://purl.org/dc/terms/hasFormat">has format</a><sup title="annotation property" class="type-ap">ap</sup>, <a href="#d4e90" title="http://purl.org/dc/terms/hasPart">has part</a><sup title="annotation property" class="type-ap">ap</sup>, <a href="#d4e100" title="http://purl.org/dc/terms/hasVersion">has version</a><sup title="annotation property" class="type-ap">ap</sup>, <a href="#d4e116" title="http://purl.org/dc/terms/isFormatOf">is format of</a><sup title="annotation property" class="type-ap">ap</sup>, <a href="#d4e126" title="http://purl.org/dc/terms/isPartOf">is part of</a><sup title="annotation property" class="type-ap">ap</sup>, <a href="#d4e144" title="http://purl.org/dc/terms/references">references</a><sup title="annotation property" class="type-ap">ap</sup>, <a href="#d4e160" title="http://purl.org/dc/terms/replaces">replaces</a><sup title="annotation property" class="type-ap">ap</sup>, <a href="#d4e170" title="http://purl.org/dc/terms/requires">requires</a><sup title="annotation property" class="type-ap">ap</sup>, <a href="#d4e186" title="http://purl.org/dc/terms/source">source</a><sup title="annotation property" class="type-ap">ap</sup></dd>
+                    </dl>
+                </div>
+            </div>
+            <div id="d4e160" class="entity">
+                <a id="http://purl.org/dc/terms/replaces"></a>
+                <h3>replaces<sup title="annotation property" class="type-ap">ap</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://purl.org/dc/terms/replaces</p>
+                <div class="description">
+                    <dl>
+                        <dt>has super-properties</dt>
+                        <dd><span class="dotted" title="http://purl.org/dc/elements/1.1/relation">relation</span><sup title="annotation property" class="type-ap">ap</sup></dd>
+                        <dd><a href="#d4e153" title="http://purl.org/dc/terms/relation">relation</a><sup title="annotation property" class="type-ap">ap</sup></dd>
+                    </dl>
+                </div>
+            </div>
+            <div id="d4e170" class="entity">
+                <a id="http://purl.org/dc/terms/requires"></a>
+                <h3>requires<sup title="annotation property" class="type-ap">ap</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://purl.org/dc/terms/requires</p>
+                <div class="description">
+                    <dl>
+                        <dt>has super-properties</dt>
+                        <dd><span class="dotted" title="http://purl.org/dc/elements/1.1/relation">relation</span><sup title="annotation property" class="type-ap">ap</sup></dd>
+                        <dd><a href="#d4e153" title="http://purl.org/dc/terms/relation">relation</a><sup title="annotation property" class="type-ap">ap</sup></dd>
+                    </dl>
+                </div>
+            </div>
+            <div id="d4e52" class="entity">
+                <a id="http://purl.org/dc/elements/1.1/rights"></a>
+                <h3>rights<sup title="annotation property" class="type-ap">ap</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://purl.org/dc/elements/1.1/rights</p>
+                <div class="description">
+                    <dl>
+                        <dt>has sub-properties</dt>
+                        <dd><a href="#d4e179" title="http://purl.org/dc/terms/rights">rights</a><sup title="annotation property" class="type-ap">ap</sup></dd>
+                    </dl>
+                </div>
+            </div>
+            <div id="d4e179" class="entity">
+                <a id="http://purl.org/dc/terms/rights"></a>
+                <h3>rights<sup title="annotation property" class="type-ap">ap</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://purl.org/dc/terms/rights</p>
+                <div class="description">
+                    <dl>
+                        <dt>has super-properties</dt>
+                        <dd><span class="dotted" title="http://purl.org/dc/elements/1.1/rights">rights</span><sup title="annotation property" class="type-ap">ap</sup></dd>
+                    </dl>
+                </div>
+            </div>
+            <div id="d4e56" class="entity">
+                <a id="http://purl.org/dc/elements/1.1/source"></a>
+                <h3>source<sup title="annotation property" class="type-ap">ap</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://purl.org/dc/elements/1.1/source</p>
+                <div class="description">
+                    <dl>
+                        <dt>has sub-properties</dt>
+                        <dd><a href="#d4e186" title="http://purl.org/dc/terms/source">source</a><sup title="annotation property" class="type-ap">ap</sup></dd>
+                    </dl>
+                </div>
+            </div>
+            <div id="d4e186" class="entity">
+                <a id="http://purl.org/dc/terms/source"></a>
+                <h3>source<sup title="annotation property" class="type-ap">ap</sup><span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a></span></h3>
+                <p><strong>IRI:</strong> http://purl.org/dc/terms/source</p>
+                <div class="description">
+                    <dl>
+                        <dt>has super-properties</dt>
+                        <dd><span class="dotted" title="http://purl.org/dc/elements/1.1/source">source</span><sup title="annotation property" class="type-ap">ap</sup></dd>
+                        <dd><a href="#d4e153" title="http://purl.org/dc/terms/relation">relation</a><sup title="annotation property" class="type-ap">ap</sup></dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div id="namespacedeclarations">
+            <h2>Namespace Declarations <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+            <dl>
+                <dt><em>default namespace</em></dt>
+                <dd>http://www.opengis.net/def/ont/profile#</dd>
+                <dt>core</dt>
+                <dd>http://www.w3.org/2004/02/skos/core#</dd>
+                <dt>dc</dt>
+                <dd>http://purl.org/dc/elements/1.1/</dd>
+                <dt>ont</dt>
+                <dd>http://www.opengis.net/def/ont/</dd>
+                <dt>orcid-org</dt>
+                <dd>http://orcid.org/</dd>
+                <dt>owl</dt>
+                <dd>http://www.w3.org/2002/07/owl#</dd>
+                <dt>profile</dt>
+                <dd>http://promsns.org/def/prof#</dd>
+                <dt>rdf</dt>
+                <dd>http://www.w3.org/1999/02/22-rdf-syntax-ns#</dd>
+                <dt>rdfs</dt>
+                <dd>http://www.w3.org/2000/01/rdf-schema#</dd>
+                <dt>terms</dt>
+                <dd>http://purl.org/dc/terms/</dd>
+                <dt>wiki</dt>
+                <dd>https://www.w3.org/2017/dxwg/wiki/</dd>
+                <dt>xsd</dt>
+                <dd>http://www.w3.org/2001/XMLSchema#</dd>
+            </dl>
+        </div>
+        <p class="endnote">This HTML document was obtained by processing the OWL ontology source code through <a href="http://www.essepuntato.it/lode">LODE</a>, <em>Live OWL Documentation Environment</em>, developed by <a href="http://www.essepuntato.it">Silvio Peroni</a>.</p>
+    </body>
+</html>
