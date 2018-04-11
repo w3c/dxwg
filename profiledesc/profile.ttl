@@ -1,160 +1,127 @@
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix dct: <http://purl.org/dc/terms/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prof: <http://promsns.org/def/prof#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix prov: <http://www.w3.org/ns/prov#> .
 
+<http://promsns.org/def/prof> rdf:type owl:Ontology ;
+		rdfs:label "Profiles Ontology"@en ;
+    dc:contributor "Nicholas Car"^^xsd:string ;
+    dc:creator "Rob Atkinson"^^xsd:string ;
+    dc:description "This is an RDF/OWL Ontology for describing relationships between Specifications, implementing profiles and supporting artefacts."@en ;
+    dct:contributor <http://orcid.org/0000-0002-8742-7730> ;
+    dct:created "2018-02-16"^^xsd:date ;
+    dct:creator <file:///base/data/home/apps/s%7Erdf-translator/2.408516547054015808/rob@metalinkage.com.au> ;
+    dct:modified "2018-04-10"^^xsd:date ;
+    rdfs:comment "This model provides a canonical vocabulary for describing profiling relationships between http://dublincore.org/2012/06/14/dcterms#Standard entities and attachment of resources defining additional constraints"@en .
 
-@prefix dcat: <http://www.w3.org/ns/dcat#> .
-@prefix prof: <http://promsns.org/def/prof#> .
+prof:BaseSpecification a owl:Class ;
+    rdfs:label "Base Specification" ;
+    dc:description "A specification that defines all implementation constraints, without applying constraints on usage of another specification"@en ;
+    rdfs:comment "This may not be a useful class, but documents that any specification can be regarded as a trivial profile, so applications only need to be concerned with Profile conformance"@en ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "0"^^xsd:nonNegativeInteger ;
+            owl:onProperty prof:profileOf ],
+        prof:Profile .
 
+prof:FullConstraintSet a skos:Concept ;
+    rdfs:subClassOf prof:ImplResourceType .
 
-# axioms repeated/included here unchanged, for convenience
-dct:conformsTo
-	a rdf:Property ;
-	rdfs:comment "An established standard to which the described resource conforms."@en ;
-    rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
-    rdfs:label "Conforms To"@en ;
-    rdfs:range dct:Standard ;
-	rdfs:subPropertyOf <http://purl.org/dc/elements/1.1/relation>, dct:relation ;
-.
+prof:conformanceTest a prof:ImplResourceType ;
+    rdfs:comment "A normative conformance test - may also be a a fullConstraints or partConstraints resource."@en ;
+    skos:prefLabel "Constraints specifying a conformance Test"@en ;
+    skos:topConceptOf prof:resourceRoles .
 
-<http://promsns.org/def/prof>
-  rdf:type owl:Ontology ;
-  dc:creator "Rob Atkinson" ;
-  dc:description  "This is an RDF/OWL Ontology for describing relationships between Specifications, implementing profiles and supporting artefacts" ;
-  rdfs:comment "This model provides a canonical vocabulary for describing profiling relationships between http://dublincore.org/2012/06/14/dcterms#Standard entities and attachment of resources defining additional constraints"@en ;
-  dct:modified "2018-02-16" ;
-.
+prof:fullConstraints a prof:ImplResourceType ;
+    rdfs:comment "Note that this means a full set of constraints within the scope of the resource type - e.g. everything that can be tested by SHACL"@en ;
+    skos:prefLabel "Complete set of constraints for a profile"@en ;
+    skos:topConceptOf prof:resourceRoles .
 
-prof:Profile
-  rdf:type owl:Class ;
-  rdf:subClassOf dct:Standard, skos:Concept ;
-  rdfs:label "Implementation Profile" ;
-  dc:description "A named set of constraints on one or more identified base specifications, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of those base specifications necessary to accomplish a particular function."@en;
-  dc:source <https://www.w3.org/2017/dxwg/wiki/ProfileContext> ;
-  rdfs:comment "Profile is modelled as a skos:Concept to explicitly support the notion of profiles organised as classification taxonomies. skos:broader/narrower and broaderTransitive properties may be used ";
-.
+prof:guidance a prof:ImplResourceType ;
+    skos:prefLabel "Guidance notes of profile"@en ;
+    skos:topConceptOf prof:resourceRoles .
 
-prof:BaseSpecification
-  rdf:type owl:Class ;
-  rdfs:subClassOf prof:Profile ;
-  rdfs:label "Base Specification" ;
-  dc:description "A specification that defines all implementation constraints, without applying constraints on usage of another specification"@en;
-  rdfs:comment "This may not be a useful class, but documents that any specification can be regarded as a trivial profile, so applications only need to be concerned with Profile conformance"@en;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:maxCardinality "0"^^xsd:nonNegativeInteger ;
-      owl:onProperty prof:profileOf ;
-    ] ;
-.
-
-prof:profileOf
-  rdf:type owl:ObjectProperty ;
-  rdfs:label "profiles" ;
-  dc:description "a base specification a Profile conforms to"@en ;
-  rdfs:comment "The semantics of the rdfs:Range means that any resource treated as a base specification can be regarded as a Profile (i.e. may be any specification with an empty set of additional constraints)"@en ;
-  rdfs:range prof:Profile ;
-  rdfs:domain prof:Profile ;
-  owl:inverseOf prof:hasProfile ;
-.
-
-prof:hasProfile
-  rdf:type owl:ObjectProperty ;
-  rdfs:label "hasProfile" ;
-  dc:description "known profiles of a specification"@en ;
-  rdfs:range prof:Profile ;
-  owl:inverseOf prof:profileOf ;
-.
-
-prof:token
-  rdf:type owl:DatatypeProperty ;
-  rdfs:label "short name" ;
-  dc:description "A token identifying this profile for use in APIs"@en ;
-  rdfs:comment "Avoids need for a global registry - APIs may need to have some concept of a namespace for tokens to disambiguate - but should tokens be versioned? Should we just use skos:notation? "@en ;
-  rdfs:range prof:Profile ;
-  rdfs:domain xsd:token ;
-.
-
-
-prof:resource
-  rdf:type owl:ObjectProperty ;
-  rdfs:label "Implementing Resource"@en ;
-  dc:description "URI link to resource"@en ;
-  rdfs:range prof:ImplResourceDesc ;
-.
-
-prof:ImplResourceDesc
-  rdf:type owl:Class ;
-  rdfs:label "Implementation Resource Descriptor"@en ;
-  dc:description "A resource that defines implementing rules for a profile. Must indicate the purpose (dct:type) and the formalism (dct:format) used to allow machine mediation of such rules."@en ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:cardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onProperty prof:resourceRole ;
-    ] ;
-
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:cardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onProperty prof:resource ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onProperty dct:format ;
-    ] ;
-.
-
-prof:resourceRole a owl:ObjectProperty ;
-	rdfs:label "Functional role of implementation resource" ;
-	rdfs:comment "Not sure if this should be bound to a specific vocabulary - so a couple of examples provided here" ;
-	rdfs:domain prof:ImplResourceDesc ;
-  	rdfs:range skos:Concept ;
-.
+prof:partConstraints a prof:ImplResourceType ;
+    skos:prefLabel "Partial set of constraints for a profile"@en ;
+    skos:topConceptOf prof:resourceRoles .
 
 prof:resourceType a owl:ObjectProperty ;
-	rdfs:label "Type (model) of implementation resource" ;
-	rdfs:comment "e.g. SHACL" ;
-	rdfs:domain prof:ImplResourceDesc ;
-  	rdfs:range skos:Concept ;
-.
+    rdfs:label "Type (model) of implementation resource" ;
+    rdfs:comment "e.g. SHACL" ;
+    rdfs:domain prof:ImplResourceDesc ;
+    rdfs:range skos:Concept .
+
+prof:token a owl:DatatypeProperty ;
+    rdfs:label "short name" ;
+    dc:description "A token identifying this profile for use in APIs"@en ;
+    rdfs:comment "Avoids need for a global registry - APIs may need to have some concept of a namespace for tokens to disambiguate - but should tokens be versioned? Should we just use skos:notation? "@en ;
+    rdfs:domain xsd:token ;
+    rdfs:range prof:Profile .
+
+dct:conformsTo a rdf:Property ;
+    rdfs:label "Conforms To"@en ;
+    rdfs:comment "An established standard to which the described resource conforms."@en ;
+    rdfs:isDefinedBy dct: ;
+    rdfs:range dct:Standard ;
+    rdfs:subPropertyOf dc:relation,
+        dct:relation .
+
+prof:hasProfile a owl:ObjectProperty ;
+    rdfs:label "hasProfile" ;
+    dc:description "known profiles of a specification"@en ;
+    rdfs:range prof:Profile ;
+    owl:inverseOf prof:profileOf .
+
+prof:resource a owl:ObjectProperty ;
+    rdfs:label "Implementing Resource"@en ;
+    dc:description "URI link to resource"@en ;
+    rdfs:range prof:ImplResourceDesc .
+
+prof:resourceRole a owl:ObjectProperty ;
+    rdfs:label "Functional role of implementation resource" ;
+    rdfs:comment "Not sure if this should be bound to a specific vocabulary - so a couple of examples provided here" ;
+    rdfs:domain prof:ImplResourceDesc ;
+    rdfs:range skos:Concept .
+
+prof:profileOf a owl:ObjectProperty ;
+    rdfs:label "profiles" ;
+    dc:description "a base specification a Profile conforms to"@en ;
+    rdfs:comment "The semantics of the rdfs:Range means that any resource treated as a base specification can be regarded as a Profile (i.e. may be any specification with an empty set of additional constraints)"@en ;
+    rdfs:domain prof:Profile ;
+    rdfs:range prof:Profile ;
+    owl:inverseOf prof:hasProfile .
+
+prof:ImplResourceDesc a owl:Class ;
+    rdfs:label "Implementation Resource Descriptor"@en ;
+    dc:description "A resource that defines implementing rules for a profile. Must indicate the purpose (dct:type) and the formalism (dct:format) used to allow machine mediation of such rules."@en ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty prof:resource ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty dct:format ],
+        [ a owl:Restriction ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty prof:resourceRole ] .
+
+prof:resourceRoles a skos:ConceptScheme ;
+    skos:note "Suggested subset of possible roles a resource may play with regard to a profile"@en .
 
 prof:ImplResourceType a owl:Class ;
-	rdfs:subClassOf skos:Concept ;
-.
+    rdfs:subClassOf skos:Concept .
 
-
-prof:resourceRoles  a skos:ConceptScheme ;
-	skos:note "Suggested subset of possible roles a resource may play with regard to a profile"@en;
-.
-
-prof:fullConstraints a prof:ImplResourceType;
-	skos:prefLabel "Complete set of constraints for a profile"@en;
-	rdfs:comment "Note that this means a full set of constraints within the scope of the resource type - e.g. everything that can be tested by SHACL"@en ;
-	skos:topConceptOf prof:resourceRoles ;
-.
-
-prof:conformanceTest a prof:ImplResourceType;
-	skos:prefLabel "Constraints specifying a conformance Test "@en;
-	rdfs:comment "A normative conformance test - may also be a a fullConstraints or partConstraints resource."@en ;
-	skos:topConceptOf prof:resourceRoles ;
-.
-
-prof:partConstraints a prof:ImplResourceType;
-	skos:prefLabel "Partial set of constraints for a profile"@en;
-	skos:topConceptOf prof:resourceRoles ;
-.
-
-prof:guidance a prof:ImplResourceType;
-	skos:prefLabel "Guidance notes of profile"@en;
-	skos:topConceptOf prof:resourceRoles ;
-.
-
-prof:FullConstraintSet rdfs:subClassOf prof:ImplResourceType ;
-	a skos:Concept ;
-.
+prof:Profile a owl:Class ;
+    rdfs:label "Implementation Profile" ;
+    dc:description "A named set of constraints on one or more identified base specifications, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of those base specifications necessary to accomplish a particular function."@en ;
+    dc:source <https://www.w3.org/2017/dxwg/wiki/ProfileContext> ;
+    rdf:subClassOf dct:Standard,
+        skos:Concept ;
+    rdfs:comment "Profile is modelled as a skos:Concept to explicitly support the notion of profiles organised as classification taxonomies. skos:broader/narrower and broaderTransitive properties may be used " .
