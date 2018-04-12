@@ -10,7 +10,7 @@ The RDF for this example is in [profiledesc_example.ttl](profiledesc_example.ttl
 Figure 1: DCAT profiles
 
 ### DCAT-AP
-DCAT-AP is the widely used European *Application Profile* of DCAT. DCAT-AP's constraints are specified using SHACL.
+DCAT-AP is the widely used European *Application Profile* of DCAT. DCAT-AP's specification is avalable in document form (PDF & DOCX) which has the role of *Guidance* and *Conformance Test Constraints* are specified using SHACL.
 
 The RDF for this example is in [profiledesc_example.ttl](profiledesc_example.ttl).
 
