@@ -1,0 +1,114 @@
+# prefix: eg
+
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix def: <http://www.opengis.net/def/> .
+@prefix eg: <https://www.opengis.net/def/profiles_example/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix policy: <http://www.opengis.net/ogc-na#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix prof: <http://www.w3.org/ns/dcat/profile#> .
+
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+eg:prof_examples
+  rdf:type owl:Ontology ;
+  rdfs:label "Profile examples";
+  rdfs:comment "Examples of profiles and their relationships modelled with lightweight dcat profile identification model"@en;
+  dc:creator "Rob Atkinson";
+  .
+
+#DCAT v1
+
+<http://www.w3.org/ns/dcat-v1> 
+	a prof:Profile ;
+	prof:token "dcat-v1" ;
+	rdfs:label "DCAT v1 implementation profile";
+	rdfs:comment "Provides a means to declare, and discover implementation resources to check, implementations of DCAT conforming to v1 specification"@en;
+	dc:publisher "W3.org" ;
+	prof:profileOf dcat: ;
+	prof:hasProfile <https://joinup.ec.europa.eu/release/dcat-ap-v10> ;
+	prof:resource eg:dcatv1-owl ;
+.
+
+eg:dcat-owl a prof:ImplResourceDesc;
+	rdfs:label "DCAT-AP-V1.0 SHACL constraints";
+	prof:resource <http://data.europa.eu/w21/016d88c3-a0b3-4506-ae4e-758e7401c096> ;
+	prof:resourceType  owl:Ontology;
+	.
+
+
+#DCAT-AP examples
+
+<https://joinup.ec.europa.eu/release/dcat-ap-v11> 
+	a prof:Profile ;
+	prof:token "dcat-ap" ;
+	rdfs:label "DCAT-AP: DCAT application profile for data portals in Europe";
+	dc:publisher "European Union" ;
+	prof:profileOf dcat: , <http://www.w3.org/ns/dcat-v1> ;
+	prof:hasProfile <https://joinup.ec.europa.eu/release/geodcat-ap-v10> ;
+	prof:resource eg:dcat-shacl ;
+.
+
+eg:dcat-shacl a prof:ImplResourceDesc;
+	rdfs:label "DCAT-AP-V1.0 SHACL constraints";
+	prof:resource <http://data.europa.eu/w21/016d88c3-a0b3-4506-ae4e-758e7401c096> ;
+	prof:resourceType eg:shacl;
+	dct:format <http://www.w3.org/ns/shacl#>;
+	.
+	
+<https://joinup.ec.europa.eu/release/geodcat-ap-v10> a prof:Profile ;
+	prof:profileOf <https://joinup.ec.europa.eu/release/dcat-ap-v11> ;
+	rdfs:label "GeoDCAT-AP: A geospatial extension for the DCAT application profile for data portals in Europe";
+	prof:token "geodcat-ap" ;
+	.
+	
+	
+
+# OpenGeospatial Consortium Examples
+<http://www.opengis.net/def/serviceType/ogc/wms/1.3>
+  rdf:type dct:Standard, prof:Profile ;
+  prof:token "WMS13" ;
+  dct:publisher <http://www.opengis.net/def/auth/ogc> ;
+  prof:hasProfile eg:wms13_dgiwg;
+  
+.
+
+eg:wms13_dgiwg
+  rdf:type prof:Profile ;
+  prof:profiles <http://www.opengis.net/def/serviceType/ogc/wms/1.3> ;
+  rdfs:label "wms13 dgiwg" ;
+  skos:prefLabel "wms13 dgiwg" ;
+  prof:token "WMS-DGIWG" ;
+.
+eg:wmts
+  rdf:type dct:Standard ;
+  prof:token "WMTS" ;
+  prof:hasProfile eg:wmts_simple ;
+.
+eg:wmts-simple-sch
+  rdf:type prof:ImplResourceDesc ;
+  rdfs:label "WMTS simple Schematron constraints" ;
+  skos:prefLabel "WMS1.3 DGWIG profile schema" ;
+.
+eg:wmts-swagger-ui
+  rdf:type prof:ImplResourceDesc ;
+  dct:format <http://purl.org/NET/mediatypes/text/html> ;
+  dct:type prof:OAS ;
+  prof:resource <http://cite.opengeospatial.org/pub/cite/files/edu/wmts/text/target-api/index.html> ;
+  rdfs:label "WMTS OAS (Swagger) documentation UI" ;
+  skos:prefLabel "WMTS OAS (Swagger) documentation UI" ;
+.
+eg:wmts_simple
+  rdf:type prof:Profile ;
+  prof:profileOf eg:wmts ;
+  prof:resource eg:wmts-simple-sch ;
+  rdfs:label "WMTS Simple Profile" ;
+  skos:prefLabel "WMTS Simple Profile" ;
+  prof:token "WMTS-S" ;
+.
