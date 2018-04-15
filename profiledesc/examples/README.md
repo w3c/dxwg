@@ -4,23 +4,23 @@ Here are some examples of the Profile Descriptions Ontology modelling existing o
 ### DCAT
 The most fundamental profile for this group is the original DCAT (1.0) which will be termed a profile of the version of DCAT (1.1) currently under consideration.
 
-The RDF for this example is in [profiledesc_example.ttl](profiledesc_example.ttl).
+The RDF for this example is in [profiledesc_examples.ttl](profiledesc_examples.ttl).
 
-![](https://github.com/w3c/dxwg/raw/profiledesc/profiledesc/examples/eg_dcat.png)  
+![](eg_dcat.png)  
 Figure 1: DCAT profiles
 
 ### DCAT-AP
 DCAT-AP is the widely used European *Application Profile* of DCAT. DCAT-AP's specification is avalable in document form (PDF & DOCX) which has the role of *Guidance* and *Conformance Test Constraints* are specified using SHACL.
 
-The RDF for this example is in [profiledesc_example.ttl](profiledesc_example.ttl).
+The RDF for this example is in [profiledesc_examples.ttl](profiledesc_examples.ttl).
 
-![](https://github.com/w3c/dxwg/raw/profiledesc/profiledesc/examples/eg_dcat-ap.png)  
+![](eg_dcat-ap.png)  
 Figure 2: DCAT-AP profiles
 
 ### EUDM
 The Energy Use Data Model is an energy data platform project in Australia. It will profile an Australian government profile of DCAT (termed OzDCAT here).
 
-![](https://github.com/w3c/dxwg/raw/profiledesc/profiledesc/examples/eg_EUDM.png)  
+![](eg_EUDM.png)  
 Figure 3: EUDM profile
 
 ### Geoscience Australia
@@ -34,11 +34,11 @@ These profile descriptions are termed `Implementation Resource Descriptor` insta
 
 The RDF for this example is in [eg_ga.ttl](eg_ga.ttl).
 
-![](https://github.com/w3c/dxwg/raw/profiledesc/profiledesc/examples/eg_ga.png)  
+![](eg_ga.png)  
 Figure 4: Geoscience Australia profile
 
 ### Open Geospatial Consortium
 
-The RDF for this example is in [profiledesc_example.ttl](profiledesc_example.ttl).
+The RDF for this example is in [profiledesc_examples.ttl](profiledesc_examples.ttl).
 
 *Figure coming soon!*
