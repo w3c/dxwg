@@ -96,12 +96,6 @@ rdfs:comment "Some roles are offered in a Roles vocabulary with this ontology." 
                   rdfs:range skos:Concept .
 
 
-###  http://promsns.org/def/prof#resourceType
-prof:resourceType rdf:type owl:ObjectProperty ;
-rdfs:label "Type (model) of implementation resource" ;
-rdfs:comment "e.g. SHACL" ;
-                  rdfs:domain prof:ImplResourceDesc ;
-                  rdfs:range skos:Concept .
 
 
 ###  http://promsns.org/def/prof#token
@@ -151,7 +145,8 @@ prof:ImplResourceDesc rdf:type owl:Class ;
                                         owl:cardinality "1"^^xsd:nonNegativeInteger
                                       ] ,
                                       [ rdf:type owl:Restriction ;
-                                        owl:onProperty prof:resourceType ;
+									    rdfs:comment "Each implementing resource will also conform to some specification, which may in turn be a profile" ;
+                                        owl:onProperty dct:conformsTo ;
                                         owl:cardinality "1"^^xsd:nonNegativeInteger
                                       ] ;
                                         rdfs:label "Implementation Resource Descriptor"@en ;
@@ -169,7 +164,7 @@ prof:Profile
   rdfs:label "Implementation Profile" ;
   dc:description "A named set of constraints on one or more identified base specifications, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of those base specifications necessary to accomplish a particular function."@en;
   dc:source <https://www.w3.org/2017/dxwg/wiki/ProfileContext> ;
-  rdfs:comment "Profile is modelled as a skos:Concept to explicitly support the notion of profiles organised as classification taxonomies. skos:broader/narrower and broaderTransitive properties may be used ";
+  rdfs:comment "Profile is modelled as a skos:Concept to explicitly support the notion of profiles organised as classification taxonomies. SKOS semantic relations such as skos:broader/narrower and broaderTransitive properties may be used. ";
 .
 
 
