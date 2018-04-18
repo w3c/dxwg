@@ -1,0 +1,71 @@
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix def: <http://www.opengis.net/def/> .
+@prefix eg: <https://www.opengis.net/def/profiles_example/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix policy: <http://www.opengis.net/ogc-na#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix prof: <http://www.w3.org/ns/dcat/profile#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ga: <http://example.org/ga#> . # a fictional namespace for GA Profile Description Ontology resource instances
+@prefix eg: <http://example.org/types#> . # a fictional library of media types
+
+
+ga:prof_examples_ga
+  rdf:type owl:Ontology ;
+  rdfs:label "Profile examples - GA";
+  rdfs:comment "Example of Geoscience Australia's profile of the ISO19115-1:2014 Geographic metadata standard"@en;
+  dc:creator "Nicholas Car" ;
+  dct:creator <http://orcid.org/0000-0002-8742-7730> ;
+  dct:created "2018-04-10"^^xsd:date .
+
+<http://pid.geoscience.gov.au/def/schema/ga/ISO19115-1-2014>
+	a prof:Profile ;
+	prof:token "iso19115-ga" ;
+	rdfs:label "ISO19115-1:2014 GA Profile";
+	rdfs:comment "Provides a means to declare, and discover implementation resources to check, implementations of geographic metadata schema conforming to GA's profile."@en;
+	dct:publisher <http://pid.geoscience.gov.au/org/ga/geoscienceaustralia> ;
+	prof:profileOf ga:ISO19115-1-2014 ;
+	prof:resource <http://pid.geoscience.gov.au/def/schema/ga/schematron-rules-ga.sch> , <http://pid.geoscience.gov.au/def/schema/ga/ISO19115-1-2014> , <http://pid.geoscience.gov.au/def/schema/ga/ISO19115-3-2016>.
+
+ga:ISO19115-1-2014 a prof:BaseSpecification ;
+  rdfs:label "ISO ISO19115-1:2014" ;
+  rdfs:comment "The international standard ISO19115-1:2014 Geographic information - Metadata" ;
+  dc:publisher "International Organization for Standardization" ;
+  dct:source <https://www.iso.org/standard/53798.html> .
+
+<http://pid.geoscience.gov.au/def/schema/ga/schematron-rules-ga.sch> a prof:ImplResourceDesc;
+	rdfs:label "GA Profile Schematron";
+	prof:resource <http://pid.geoscience.gov.au/def/schema/ga/schematron-rules-ga.sch> ;
+	prof:resourceType eg:Schematron;
+  dct:format "text/xml"	.
+
+<http://pid.geoscience.gov.au/def/schema/ga/ISO19115-1-2014> a prof:ImplResourceDesc;
+	rdfs:label "GA Profile Document";
+	prof:resource <http://pid.geoscience.gov.au/def/schema/ga/schematron-rules-ga.sch> ;
+  prof:resourceType eg:WebPage ;
+  dct:format "text/html"	.
+
+<http://pid.geoscience.gov.au/def/schema/ga/ISO19115-3-2016> a prof:ImplResourceDesc;
+	rdfs:label "GA Profile XML Schema";
+	prof:resource <http://pid.geoscience.gov.au/def/schema/ga/ISO19115-3-2016/gapm.xsd> ;
+  prof:resourceType eg:XSDSchema ;
+  dct:format "text/xml"	.
+
+eg:Schematron a dct:MediaTypeOrExtent ;
+  rdfs:label "Schematron" ;
+  rdfs:comment "A language for making assertions about the presence or absence of patterns in XML documents." ;
+  dct:source <http://schematron.com> .
+
+eg:WebPage a dct:MediaTypeOrExtent ;
+  rdfs:label "Web Page" ;
+  rdfs:comment "A document written in HyperText Markup Language designed for human reading via a web browser." ;
+  dct:source <https://www.w3.org/html/> .
+
+eg:WebPage a dct:MediaTypeOrExtent ;
+  rdfs:label "Web Page" ;
+  rdfs:comment "A document written in HyperText Markup Language designed for human reading via a web browser." ;
+  dct:source <https://www.w3.org/html/> .

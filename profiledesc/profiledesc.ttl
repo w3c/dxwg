@@ -1,0 +1,198 @@
+@prefix : <http://promsns.org/def/prof#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix prof: <http://promsns.org/def/prof#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@base <http://promsns.org/def/prof> .
+
+<http://promsns.org/def/prof> rdf:type owl:Ontology ;
+                                          dct:contributor <http://orcid.org/0000-0002-8742-7730> ;
+                                          dc:description "This is an RDF/OWL Ontology for describing relationships between Specifications, implementing profiles and supporting artefacts."@en ;
+                                          dct:modified "2018-10-04"^^xsd:date ;
+                                          rdfs:label "Profile Descriptions Ontology"@en ;
+                                          rdfs:comment "This model provides a canonical vocabulary for describing profiling relationships between http://dublincore.org/2012/06/14/dcterms#Standard entities and attachment of resources defining additional constraints"@en ;
+                                          dc:contributor "Nicholas Car"^^xsd:string ;
+                                          dc:creator "Rob Atkinson"^^xsd:string ;
+                                          dct:created "2018-02-16"^^xsd:date .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+
+###  http://purl.org/dc/terms/format
+dcterms:format rdf:type owl:AnnotationProperty ;
+               rdfs:subPropertyOf dc:format .
+
+
+###  http://www.w3.org/2002/07/owl#minCardinality
+owl:minCardinality rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#prefLabel
+skos:prefLabel rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#topConceptOf
+skos:topConceptOf rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+dct:conformsTo
+	a rdf:Property ;
+	rdfs:comment "An established standard to which the described resource conforms."@en ;
+    rdfs:isDefinedBy <http://purl.org/dc/terms/> ;
+    rdfs:label "Conforms To"@en ;
+    rdfs:range dct:Standard ;
+	rdfs:subPropertyOf <http://purl.org/dc/elements/1.1/relation>, dct:relation ;
+.
+
+###  http://promsns.org/def/prof#hasProfile
+prof:hasProfile rdf:type owl:ObjectProperty ;
+                owl:inverseOf prof:profileOf ;
+                rdfs:label "has profile" ;
+                dc:description "A known profile of a specification"@en .
+
+
+###  http://promsns.org/def/prof#profileOf
+prof:profileOf rdf:type owl:ObjectProperty ;
+rdfs:label "profile of" ;
+dc:description "a base specification a Profile conforms to"@en ;
+rdfs:comment "The semantics of the rdfs:Range means that any resource treated as a base specification can be regarded as a Profile (i.e. may be any specification with an empty set of additional constraints)"@en ;
+rdfs:range prof:Profile ;
+rdfs:domain prof:Profile ;
+owl:inverseOf prof:hasProfile .
+
+
+###  http://promsns.org/def/prof#resource
+prof:resource rdf:type owl:ObjectProperty ;
+              rdfs:label "resource"@en ;
+              dc:description "link to an Implementing Resource Descriptor"@en ;
+              rdfs:range prof:ImplResourceDesc .
+
+
+###  http://promsns.org/def/prof#resourceRole
+prof:resourceRole rdf:type owl:ObjectProperty ;
+rdfs:label "Functional role of an Implementation Resource" ;
+rdfs:comment "Some roles are offered in a Roles vocabulary with this ontology." ;
+                  rdfs:domain prof:ImplResourceDesc ;
+                  rdfs:range skos:Concept .
+
+
+###  http://promsns.org/def/prof#resourceType
+prof:resourceType rdf:type owl:ObjectProperty ;
+rdfs:label "Type (model) of implementation resource" ;
+rdfs:comment "e.g. SHACL" ;
+                  rdfs:domain prof:ImplResourceDesc ;
+                  rdfs:range skos:Concept .
+
+
+###  http://promsns.org/def/prof#token
+prof:token rdf:type owl:ObjectProperty ;
+rdfs:label "token" ;
+rdfs:comment "A short name identifying this profile for use in APIs. Avoids need for a global registry - APIs may need to have some concept of a namespace for tokens to disambiguate."@en ;
+           rdfs:domain xsd:token ;
+           rdfs:range prof:Profile .
+
+
+###  http://purl.org/dc/terms/format
+dcterms:format rdf:type owl:ObjectProperty ;
+               rdfs:range dcterms:MediaTypeOrExtent .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://promsns.org/def/prof#token
+prof:token rdf:type owl:DatatypeProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://promsns.org/def/prof#BaseSpecification
+prof:BaseSpecification rdf:type owl:Class ;
+                       rdfs:subClassOf prof:Profile ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty prof:profileOf ;
+                                         owl:maxCardinality "0"^^xsd:nonNegativeInteger
+                                       ] ;
+                                       rdfs:label "Base Specification" ;
+                                       dc:description "A specification that defines all implementation constraints, without applying constraints on usage of another specification"@en ;
+                                       rdfs:comment "This may not be a useful class, but documents that any specification can be regarded as a trivial profile, so applications only need to be concerned with Profile conformance"@en .
+
+###  http://promsns.org/def/prof#ImplResourceDesc
+prof:ImplResourceDesc rdf:type owl:Class ;
+                      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                        owl:onProperty dcterms:format ;
+                                        owl:minCardinality "1"^^xsd:nonNegativeInteger
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty prof:resourceRole ;
+                                        owl:cardinality "1"^^xsd:nonNegativeInteger
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty prof:resourceType ;
+                                        owl:cardinality "1"^^xsd:nonNegativeInteger
+                                      ] ;
+                                        rdfs:label "Implementation Resource Descriptor"@en ;
+                                        dc:description "A resource that defines implementing rules for a profile. Must indicate the purpose (dct:type) and the formalism (dct:format) used to allow machine mediation of such rules."@en .
+
+###  http://promsns.org/def/prof#ImplResourceType
+prof:ImplResourceType rdf:type owl:Class ;
+                      rdfs:subClassOf skos:Concept .
+
+
+###  http://promsns.org/def/prof#Profile
+prof:Profile
+  rdf:type owl:Class ;
+  rdf:subClassOf dct:Standard, skos:Concept ;
+  rdfs:label "Implementation Profile" ;
+  dc:description "A named set of constraints on one or more identified base specifications, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of those base specifications necessary to accomplish a particular function."@en;
+  dc:source <https://www.w3.org/2017/dxwg/wiki/ProfileContext> ;
+  rdfs:comment "Profile is modelled as a skos:Concept to explicitly support the notion of profiles organised as classification taxonomies. skos:broader/narrower and broaderTransitive properties may be used ";
+.
+
+
+###  http://www.w3.org/2001/XMLSchema#token
+xsd:token rdf:type owl:Class .
+
+
+###  http://www.w3.org/2004/02/skos/core#Concept
+skos:Concept rdf:type owl:Class .
+
+
+###  http://www.w3.org/2004/02/skos/core#ConceptScheme
+skos:ConceptScheme rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+
+
+
+[ owl:minCardinality "1"^^xsd:nonNegativeInteger
+] .
+
+###  Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi
