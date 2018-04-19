@@ -39,6 +39,16 @@ dcat:CatalogRecord
       owl:onProperty foaf:primaryTopic ;
       owl:someValuesFrom dcat-s:DataService ;
     ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty foaf:primaryTopic ;
+      owl:someValuesFrom dcat-s:OtherService ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty foaf:primaryTopic ;
+      owl:someValuesFrom dcat-s:OtherThing ;
+    ] ;
 .
 <http://www.w3.org/ns/dcat-service>
   rdf:type owl:Ontology ;
@@ -51,13 +61,24 @@ dcat:CatalogRecord
 dcat-s:DataService
   rdf:type owl:Class ;
   rdfs:comment "A site or end-point that provides access to datasets and distributions of datasets" ;
-  rdfs:label "Service" ;
+  rdfs:label "Data distribution service" ;
   rdfs:subClassOf dctype:Service ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:hasValue <https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download> ;
       owl:onProperty dcterms:type ;
     ] ;
+.
+dcat-s:OtherService
+  rdf:type owl:Class ;
+  rdfs:comment "A site or end-point that provides another data-related service (e.g. transformation)" ;
+  rdfs:label "Other service" ;
+  rdfs:subClassOf dctype:Service ;
+.
+dcat-s:OtherThing
+  rdf:type owl:Class ;
+  rdfs:comment "Another type of catalogued thing" ;
+  rdfs:label "Other thing" ;
 .
 dcat-s:accessService
   rdf:type owl:ObjectProperty ;
@@ -79,6 +100,22 @@ dcat-s:dataService
   rdfs:domain dcat:Catalog ;
   rdfs:label "has data service" ;
   rdfs:range dcat-s:DataService ;
+  rdfs:subPropertyOf dcterms:hasPart ;
+.
+dcat-s:otherService
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "link to description of a data service" ;
+  rdfs:domain dcat:Catalog ;
+  rdfs:label "has service" ;
+  rdfs:range dcat-s:OtherService ;
+  rdfs:subPropertyOf dcterms:hasPart ;
+.
+dcat-s:otherThing
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "link to description of another thing" ;
+  rdfs:domain dcat:Catalog ;
+  rdfs:label "has other thing" ;
+  rdfs:range dcat-s:OtherThing ;
   rdfs:subPropertyOf dcterms:hasPart ;
 .
 dcat-s:servesDataset
