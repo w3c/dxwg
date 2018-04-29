@@ -19,6 +19,11 @@
 dcat:Catalog
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
+      owl:allValuesFrom dcat:CataloguedItem ;
+      owl:onProperty dcterms:hasPart ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
       owl:minCardinality "1"^^xsd:nonNegativeInteger ;
       owl:onProperty dcterms:conformsTo ;
     ] ;
@@ -26,29 +31,103 @@ dcat:Catalog
 dcat:CatalogRecord
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
+      owl:allValuesFrom dcat:CataloguedItem ;
+      owl:onProperty foaf:primaryTopic ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
       owl:cardinality "1"^^xsd:nonNegativeInteger ;
       owl:onProperty foaf:primaryTopic ;
     ] ;
+.
+dcat:CataloguedItem
+  rdf:type owl:Class ;
+  rdfs:label "Item in a DCAT Catalog" ;
+.
+dcat:DataDistributionService
+  rdf:type owl:Class ;
+  rdfs:comment "A site or end-point that provides access to datasets and distributions of datasets" ;
+  rdfs:label "Data distribution service" ;
+  rdfs:subClassOf dctype:Service ;
+  rdfs:subClassOf dcat:Service ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:onProperty foaf:primaryTopic ;
-      owl:someValuesFrom dcat:Dataset ;
+      owl:hasValue <https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download> ;
+      owl:onProperty dcterms:type ;
+    ] ;
+.
+dcat:DataTransformationService
+  rdf:type owl:Class ;
+  rdfs:comment "A site or end-point that provides a service to transform datasets in some way, e.g. spatial coordinates, schematic representation, interpolation, re-sampling" ;
+  rdfs:label "Other service" ;
+  rdfs:subClassOf dctype:Service ;
+  rdfs:subClassOf dcat:Service ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:hasValue <https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/transformation> ;
+      owl:onProperty dcterms:type ;
+    ] ;
+.
+dcat:DiscoveryService
+  rdf:type owl:Class ;
+  rdfs:label "Resource DIscovery Service" ;
+  rdfs:subClassOf dcat:Catalog ;
+  rdfs:subClassOf dcat:Service ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:hasValue <http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/discovery> ;
+      owl:onProperty dcterms:type ;
+    ] ;
+.
+dcat:Service
+  rdf:type owl:Class ;
+  rdfs:label "Service" ;
+  rdfs:subClassOf dcat:CataloguedItem ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:conformsTo ;
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:onProperty foaf:primaryTopic ;
-      owl:someValuesFrom dcat-s:DataService ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:type ;
     ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty foaf:primaryTopic ;
-      owl:someValuesFrom dcat-s:OtherService ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty foaf:primaryTopic ;
-      owl:someValuesFrom dcat-s:OtherThing ;
-    ] ;
+.
+dcat:accessService
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "link to DataDistributionService that can serves this data Distribution" ;
+  rdfs:domain dcat:Distribution ;
+  rdfs:label "data access services" ;
+  rdfs:range dcat:DataDistributionService ;
+.
+dcat:catalog
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Link from a catalog to another catalog whose contents are of interest in the context of this catalog" ;
+  rdfs:domain dcat:Catalog ;
+  rdfs:label "Link to catalog" ;
+  rdfs:range dcat:Catalog ;
+  rdfs:subPropertyOf dcterms:hasPart ;
+  rdfs:subPropertyOf rdfs:member ;
+.
+dcat:dataset
+  rdfs:subPropertyOf rdfs:member ;
+.
+dcat:servesDataset
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Link to description of a dataset that this DataDistributionService can distribute" ;
+  rdfs:domain dcat:DataDistributionService ;
+  rdfs:label "serves dataset" ;
+  rdfs:range dcat:Dataset ;
+.
+dcat:service
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "link to description of a service" ;
+  rdfs:domain dcat:Catalog ;
+  rdfs:label "has service" ;
+  rdfs:range dcat:Service ;
+  rdfs:subPropertyOf dcterms:hasPart ;
+  rdfs:subPropertyOf rdfs:member ;
 .
 <http://www.w3.org/ns/dcat-service>
   rdf:type owl:Ontology ;
@@ -57,71 +136,4 @@ dcat:CatalogRecord
   owl:imports <http://www.w3.org/ns/dcat> ;
   owl:imports <http://www.w3.org/ns/dcat/prov> ;
   owl:versionInfo "Created with TopBraid Composer" ;
-.
-dcat-s:DataService
-  rdf:type owl:Class ;
-  rdfs:comment "A site or end-point that provides access to datasets and distributions of datasets" ;
-  rdfs:label "Data distribution service" ;
-  rdfs:subClassOf dctype:Service ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:hasValue <https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download> ;
-      owl:onProperty dcterms:type ;
-    ] ;
-.
-dcat-s:OtherService
-  rdf:type owl:Class ;
-  rdfs:comment "A site or end-point that provides another data-related service (e.g. transformation)" ;
-  rdfs:label "Other service" ;
-  rdfs:subClassOf dctype:Service ;
-.
-dcat-s:OtherThing
-  rdf:type owl:Class ;
-  rdfs:comment "Another type of catalogued thing" ;
-  rdfs:label "Other thing" ;
-.
-dcat-s:accessService
-  rdf:type owl:ObjectProperty ;
-  rdfs:domain dcat:Distribution ;
-  rdfs:label "link to DataService that serves this data Distribution" ;
-  rdfs:range dcat-s:DataService ;
-.
-dcat-s:catalog
-  rdf:type owl:ObjectProperty ;
-  rdfs:comment "Link from a catalog to another catalog whose contents are of interest in the context of this catalog" ;
-  rdfs:domain dcat:Catalog ;
-  rdfs:label "Link to catalog" ;
-  rdfs:range dcat:Catalog ;
-  rdfs:subPropertyOf dcterms:hasPart ;
-.
-dcat-s:dataService
-  rdf:type owl:ObjectProperty ;
-  rdfs:comment "link to description of a data service" ;
-  rdfs:domain dcat:Catalog ;
-  rdfs:label "has data service" ;
-  rdfs:range dcat-s:DataService ;
-  rdfs:subPropertyOf dcterms:hasPart ;
-.
-dcat-s:otherService
-  rdf:type owl:ObjectProperty ;
-  rdfs:comment "link to description of a data service" ;
-  rdfs:domain dcat:Catalog ;
-  rdfs:label "has service" ;
-  rdfs:range dcat-s:OtherService ;
-  rdfs:subPropertyOf dcterms:hasPart ;
-.
-dcat-s:otherThing
-  rdf:type owl:ObjectProperty ;
-  rdfs:comment "link to description of another thing" ;
-  rdfs:domain dcat:Catalog ;
-  rdfs:label "has other thing" ;
-  rdfs:range dcat-s:OtherThing ;
-  rdfs:subPropertyOf dcterms:hasPart ;
-.
-dcat-s:servesDataset
-  rdf:type owl:ObjectProperty ;
-  rdfs:domain dcat-s:DataService ;
-  rdfs:label "serves dataset" ;
-  rdfs:range dcat:Dataset ;
-  rdfs:subPropertyOf dcterms:hasPart ;
 .
