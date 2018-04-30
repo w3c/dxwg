@@ -3,11 +3,9 @@
 # imports: http://www.w3.org/2004/02/skos/core
 # imports: http://www.w3.org/ns/dcat
 # imports: http://www.w3.org/ns/dcat/prov
-# prefix: dcat-s
 
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
-@prefix dcat-s: <http://www.w3.org/ns/dcat-service#> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dct: <http://purl.org/dc/terms/> .
 @prefix dctype: <http://purl.org/dc/dcmitype/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -20,7 +18,7 @@ dcat:Catalog
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:allValuesFrom dcat:CataloguedItem ;
-      owl:onProperty dcterms:hasPart ;
+      owl:onProperty dct:hasPart ;
     ] ;
 .
 dcat:CatalogRecord
@@ -47,7 +45,7 @@ dcat:DataDistributionService
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:hasValue <https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download> ;
-      owl:onProperty dcterms:type ;
+      owl:onProperty dct:type ;
     ] ;
 .
 dcat:DataTransformationService
@@ -58,7 +56,7 @@ dcat:DataTransformationService
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:hasValue <https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/transformation> ;
-      owl:onProperty dcterms:type ;
+      owl:onProperty dct:type ;
     ] ;
 .
 dcat:DiscoveryService
@@ -69,7 +67,7 @@ dcat:DiscoveryService
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:hasValue <http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/discovery> ;
-      owl:onProperty dcterms:type ;
+      owl:onProperty dct:type ;
     ] ;
 .
 dcat:Service
@@ -79,12 +77,12 @@ dcat:Service
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onProperty dcterms:conformsTo ;
+      owl:onProperty dct:conformsTo ;
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onProperty dcterms:type ;
+      owl:onProperty dct:type ;
     ] ;
 .
 dcat:accessService
@@ -100,7 +98,7 @@ dcat:catalog
   rdfs:domain dcat:Catalog ;
   rdfs:label "Link to catalog" ;
   rdfs:range dcat:Catalog ;
-  rdfs:subPropertyOf dcterms:hasPart ;
+  rdfs:subPropertyOf dct:hasPart ;
   rdfs:subPropertyOf rdfs:member ;
 .
 dcat:dataset
@@ -119,12 +117,12 @@ dcat:service
   rdfs:domain dcat:Catalog ;
   rdfs:label "has service" ;
   rdfs:range dcat:Service ;
-  rdfs:subPropertyOf dcterms:hasPart ;
+  rdfs:subPropertyOf dct:hasPart ;
   rdfs:subPropertyOf rdfs:member ;
 .
 <http://www.w3.org/ns/dcat-service>
   rdf:type owl:Ontology ;
-  owl:imports dcterms: ;
+  owl:imports dct: ;
   owl:imports <http://www.w3.org/2004/02/skos/core> ;
   owl:imports <http://www.w3.org/ns/dcat> ;
   owl:imports <http://www.w3.org/ns/dcat/prov> ;
