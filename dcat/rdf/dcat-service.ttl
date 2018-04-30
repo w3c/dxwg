@@ -36,6 +36,11 @@ dcat:CatalogRecord
 dcat:CataloguedItem
   rdf:type owl:Class ;
   rdfs:label "Item in a DCAT Catalog" ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dct:type ;
+    ] ;
 .
 dcat:DataDistributionService
   rdf:type owl:Class ;
@@ -78,11 +83,6 @@ dcat:Service
       rdf:type owl:Restriction ;
       owl:minCardinality "1"^^xsd:nonNegativeInteger ;
       owl:onProperty dct:conformsTo ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onProperty dct:type ;
     ] ;
 .
 dcat:accessService
