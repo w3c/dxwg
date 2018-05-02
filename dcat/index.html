@@ -101,7 +101,7 @@ RDF syntaxes, access protocols, and access policies is not mandated by this spec
 
 <p class="note">From DCAT 2014 [[!VOCAB-DCAT]] except as noted</p>
 
-<p>DCAT is an RDF vocabulary well-suited to representing data catalogs such as <a href="https://www.data.gov/">data.gov</a> and <a href="http://data.gov.uk">data.gov.uk</a>. DCAT defines six (or eight) main classes:</p>
+<p>DCAT is an RDF vocabulary well-suited to representing data catalogs such as <a href="https://www.data.gov/">data.gov</a> and <a href="http://data.gov.uk">data.gov.uk</a>. DCAT defines six main classes:</p>
 <ul>
 	<li> <code><a href="#Class:_Catalog">dcat:Catalog</a></code> represents the catalog</li>
 	<li> <code><a href="#Class:_CataloguedItem">dcat:CataloguedItem</a></code> represents an item in a catalog.</li>
@@ -109,8 +109,10 @@ RDF syntaxes, access protocols, and access policies is not mandated by this spec
 	<li> <code><a href="#Class:_Service">dcat:Service</a></code> represents a service in a catalog.</li>
 	<li> <code><a href="#Class:_DataDistributionService">dcat:DataDistributionService</a></code> represents a service that provides access to distributions of datasets and extracts of datasets.</li>
 	<li> <code><a href="#Class:_Distribution">dcat:Distribution</a></code> represents an accessible form of a dataset as for example a downloadable file, an RSS feed or a web service that provides the data.</li>
+	<!--
 	<li> (<code><a href="#Class:_DataTransformationService">dcat:DataTransformationService</a></code> represents a service that can transform a dataset, e.g. spatial coordinate transformation; interpolation or resampling of a dataset).</li>
 	<li> (<code><a href="#Class:_DiscoveryService">dcat:DiscoveryService</a></code> represents a service that supports discovery functions.)</li>
+-->
 </ul>
 <p>
 A <b>dataset</b> in DCAT is defined as a "collection of data, published or curated by a single agent, and available for access or download in one or more formats".
@@ -118,7 +120,7 @@ A dataset is a conceptual entity, and may be represented by one or more <b>distr
 Distributions of a dataset can be provided via <b>data distribution services</b>.
 Detailed properties for a data distribution service API are out of the scope of this version of DCAT. </p>
 
-<p>Datasets and data services, and potentially other types of thing, may be included in a <b>catalog</b>.
+<p>Datasets and <b>services</b>, and potentially other types of thing, may be included in a <b>catalog</b>.
 Types of service that might be found in a catalog include data distribution services, <b>discovery services</b> such as portals and catalog services, <b>data transformation services</b> such as coordinate transformation services, re-sampling and interpolation services, and various <b>data-processing services</b>.
 </p>
 
@@ -803,22 +805,6 @@ into a separate named graph. The name of that graph should be the IRI of the cat
 <a href="#Property:catalogueditem_update_date">update date</a>,
 </p>
 
-<p class="issue" data-number="57">
-	The need to provide hook for <b>quality</b> information concerning a dcat:Dataset has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
-<p class="issue" data-number="58">
-	The need to choose or define a data <b>quality model</b> has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
-<p class="issue" data-number="59">
-	The need to more formally encode access restrictions for both datasets and distributions has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
-<p class="issue" data-number="60">
-	The need to provide richer descriptions of dataset aspects (e.g. instrument/sensor used, spatial feature, observable property, quantity kind) has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
 <p class="issue" data-number="61">
 	The need to provide better guidance and vocabulary elements for dataset citation has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
@@ -852,24 +838,8 @@ into a separate named graph. The name of that graph should be the IRI of the cat
 	The need describe relationships between datasets has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
-<p class="issue" data-number="84">
-	The need to be able to provide summary statistics about a dataset has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
 <p class="issue" data-number="86">
 	The need to be able to provide usage notes for a dataset or distribution has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
-<p class="issue" data-number="90">
-	The need to be able to describe version relationships of datasets has been identified as a requirement to be satisfied in the revision of DCAT. Also see detailed requirements in
-	<a href="https://github.com/w3c/dxwg/issues/89">Issue #89</a>,
-	<a href="https://github.com/w3c/dxwg/issues/91">Issue #91</a>,
-	<a href="https://github.com/w3c/dxwg/issues/92">Issue #92</a>,
-	<a href="https://github.com/w3c/dxwg/issues/93">Issue #93</a>,
-</p>
-
-<p class="issue" data-number="104">
-	The option of allowing license and rights information to be associated with a dcat:Dataset, as well as dcat:Distribution, is being considered as part of the revision of DCAT.
 </p>
 
 <p class="issue" data-number="105">
@@ -1184,21 +1154,6 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 	The option of allowing license and rights information to be associated with a dcat:Dataset, as well as dcat:Distribution, is being considered as part of the revision of DCAT.
 </p>
 
-<p class="issue" data-number="128">
-	A number of requirements identify the need to provide better support for Dataset and Record provenance - see
-	<a href="https://github.com/w3c/dxwg/issues/77">Issue #78</a>,
-	<a href="https://github.com/w3c/dxwg/issues/77">Issue #77</a>,
-	<a href="https://github.com/w3c/dxwg/issues/76">Issue #76</a>,
-	<a href="https://github.com/w3c/dxwg/issues/71">Issue #71</a>,
-	<a href="https://github.com/w3c/dxwg/issues/66">Issue #66</a>,
-	<a href="https://github.com/w3c/dxwg/issues/66">Issue #63</a>,
-	<a href="https://github.com/w3c/dxwg/issues/57">Issue #57</a>,
-	.
-	It has been suggested that many of the requirements can be satisfied by using the [[PROV-O]] ontology,
-	in particular by making dcat:Dataset and/or dcat:CatalogRecord a sub-class of <a href="http://www.w3.org/ns/prov#Entity">prov:Entity</a>.
-	A preliminary <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/prov.ttl">alignment of DCAT with PROV-O is available</a>.
-</p>
-
 <table class="definition">
   <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a></th></tr></thead>
   <tbody>
@@ -1279,39 +1234,6 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 </section>
 
 </section> <!-- end class Dataset -->
-
-<section id="class-service">
-<h3>Class: Service</h3>
-<p>In addition to the properties inherited from the super-class CataloguedItem, the following properties are recommended for use on this class:
-<a href="#Property:service_conformsto">conformsTo</a>,
-</p>
-
-<table class="definition">
-  <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Service">dcat:Service</a></th></tr></thead>
-  <tbody>
-    <tr><td class="prop">Definition:</td><td>A service or API for discovery, access or processing data.</td></tr>
-    <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/dcat#CataloguedItem">dcat:CataloguedItem</a></td></tr>
-    <tr><td class="prop">Usage note:</td><td> </td></tr>
-    <tr><td class="prop">See also:</td><td> </td></tr>
-  </tbody>
-</table>
-
-<p class="note">
-  New class in this revision of DCAT.
-</p>
-
-<section id="Property:service_conformsto">
-<h4>Property: conforms to</h4>
-<table class="definition">
-  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/conformsTo">dct:conformsTo</a></th></tr></thead>
-  <tbody>
-    <tr><td class="prop">Definition:</td><td>An established standard to which the described resource conforms.</td></tr>
-    <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/Standard">dct:Standard</a> (A basis for comparison; a reference point against which other things can be evaluated.)</td></tr>
-  </tbody>
-</table>
-</section>
-
-</section> <!-- end class Service -->
 
 <section id="class-datadistributionservice">
 <h3>Class: Data distribution service</h3>
@@ -1615,6 +1537,39 @@ Examples of distributions include a downloadable CSV file, an API or an RSS feed
 </table>
 </section>
 </section> <!-- end class Distribution -->
+
+<section id="class-service">
+<h3>Class: Service</h3>
+<p>In addition to the properties inherited from the super-class CataloguedItem, the following properties are recommended for use on this class:
+<a href="#Property:service_conformsto">conformsTo</a>,
+</p>
+
+<table class="definition">
+  <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Service">dcat:Service</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>A service or API for discovery, access or processing data.</td></tr>
+    <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/dcat#CataloguedItem">dcat:CataloguedItem</a></td></tr>
+    <tr><td class="prop">Usage note:</td><td> </td></tr>
+    <tr><td class="prop">See also:</td><td> </td></tr>
+  </tbody>
+</table>
+
+<p class="note">
+  New class in this revision of DCAT.
+</p>
+
+<section id="Property:service_conformsto">
+<h4>Property: conforms to</h4>
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/conformsTo">dct:conformsTo</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>An established standard to which the described resource conforms.</td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/Standard">dct:Standard</a> (A basis for comparison; a reference point against which other things can be evaluated.)</td></tr>
+  </tbody>
+</table>
+</section>
+
+</section> <!-- end class Service -->
 
 <section id="class-concept-scheme">
 <h3>Class: Concept scheme</h3>
