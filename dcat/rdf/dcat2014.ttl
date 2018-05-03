@@ -1,0 +1,119 @@
+# baseURI: http://www.w3.org/ns/dcat10
+# imports: http://www.w3.org/ns/dcat
+# imports: http://www.w3.org/ns/dcat-service
+# prefix: dcat10
+
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcat10: <http://www.w3.org/ns/dcat10#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dctype: <http://purl.org/dc/dcmitype/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+dcat:Dataset
+  rdfs:subClassOf dctype:Dataset ;
+.
+dcat:Download
+  rdf:type rdfs:Class ;
+  rdf:type owl:Class ;
+  rdfs:comment "Represents a downloadable distribution of a dataset. This term has been deprecated."@en ;
+  rdfs:comment "Representación de una distribución descargable de los datos. Este término es obsoleto."@es ;
+  rdfs:isDefinedBy dcat: ;
+  rdfs:label "Download (Deprecated)"@en ;
+  rdfs:label "Descarga (Obsoleto)"@es ;
+  rdfs:subClassOf dcat:Distribution ;
+  owl:deprecated "true"^^xsd:boolean ;
+  skos:changeNote "Use dcat:DataDistributionService instead" ;
+.
+dcat:Feed
+  rdf:type rdfs:Class ;
+  rdf:type owl:Class ;
+  rdfs:comment "Represents availability of a dataset as a feed. This term has been deprecated"@en;
+  rdfs:comment "Representa la disponibilidad de datos como un 'feed'. Este término es obsoleto."@es;
+  rdfs:isDefinedBy dcat: ;
+  rdfs:label "Feed (Deprecated)" ;
+  rdfs:subClassOf dcat:Distribution ;
+  owl:deprecated "true"^^xsd:boolean ;
+  skos:changeNote "Use dcat:DataDistributionService instead" ;
+.
+dcat:WebService
+  rdf:type rdfs:Class ;
+  rdf:type owl:Class ;
+  rdfs:comment "represents a web service that enables access to the data of a dataset. This term has been deprecated"@en ;
+  rdfs:isDefinedBy dcat: ;
+  rdfs:label "Web Service (Deprecated)" ;
+  rdfs:subClassOf dcat:Distribution ;
+  owl:deprecated "true"^^xsd:boolean ;
+  skos:changeNote "Use dcat:Service instead" ;
+.
+dcat:accessService
+  rdfs:subPropertyOf dcat:accessURL ;
+.
+dcat:accessURL
+  rdf:type rdf:Property ;
+  rdf:type owl:ObjectProperty ;
+  <http://purl.org/vocab/vann/usageNote> """El rango es una URL.
+          Si la distribución es accesible solamente través de una página de destino (es decir, si no se conoce una URL de descarga directa),
+          entonces el enlance a la página de destino debe ser duplicado como accessURL en la distribución."""@es ;
+  <http://purl.org/vocab/vann/usageNote> "Il valore è un URL.  Se le distribuzioni sono accessibili solo attraverso una pagina web (ad esempio, gli URL per il download diretto non sono noti), il link della pagina web deve essere duplicato come accessURL sulla distribuzione."@it ;
+  <http://purl.org/vocab/vann/usageNote> """La valeur est une URL.
+						Si la distribution est accessible seulement au travers d'une page d'atterrissage (c-à-dire on n'ignore une URL de téléchargement direct) ,
+						alors le lien à la page d'atterrissage doit être dupliqué comee accessURL sur la distribution."""@fr ;
+  <http://purl.org/vocab/vann/usageNote> """The value is a URL.
+          If the distribution(s) are accessible only through a landing page (i.e. direct download URLs are
+          not known), then the landing page link should be duplicated as accessURL on a distribution."""@en ;
+  <http://purl.org/vocab/vann/usageNote> """Η τιμή είναι ένα URL.
+					Αν η/οι διανομή/ές είναι προσβάσιμη/ες μόνο μέσω μίας ιστοσελίδας αρχικής πρόσβασης (δηλαδή αν δεν υπάρχουν γνωστές διευθύνσεις άμεσης μεταφόρτωσης), τότε ο σύνδεσμος της ιστοσελίδας αρχικής πρόσβασης πρέπει να αναπαραχθεί ως accessURL σε μία διανομή."""@el ;
+  <http://purl.org/vocab/vann/usageNote> """確実にダウンロードでない場合や、ダウンロードかどうかが不明である場合は、downloadURLではなく、accessURLを用いてください。
+ランディング・ページを通じてしか配信にアクセスできない場合（つまり、直接的なダウンロードURLが不明）は、配信におけるaccessURLとしてランディング・ページのリンクをコピーすべきです（SHOULD）。"""@ja ;
+  rdfs:comment """Ceci peut être tout type d'URL qui donne accès à une distribution du jeu de données. Par exemple, un lien à une page HTML contenant un lien au jeu de données,
+					un Flux RSS, un point d'accès SPARQL. Utilisez le lorsque votre catalogue ne contient pas d'information sur quoi il est ou quand ce n'est pas téléchargeable."""@fr ;
+  rdfs:comment """Could be any kind of URL that gives access to a distribution of the dataset. E.g. landing page,
+          download, feed URL, SPARQL endpoint. Use when your catalog does not have information on which it
+          is or when it is definitely not a download."""@en ;
+  rdfs:comment "Potrebbe essere qualsiasi tipo di URL che dà accesso a una distribuzione del dataset. Ad esempio, la pagina di web, l'URL di download, URL del feed, un  SPARQL endpoint. Da utilizzare quando il catalogo non contiene informazioni su quale tipo sia o quando si sa che non è un download."@it ;
+  rdfs:comment """Puede ser cualquier tipo de URL que de acceso a una distribución del conjunto de datos, e.g., página de destino, descarga,
+					URL feed, punto de acceso SPARQL. Esta propriedad se debe usar cuando su catálogo de datos no tiene información sobre donde está o cuando no se puede descargar."""@es ;
+  rdfs:comment """Μπορεί να είναι οποιουδήποτε είδους URL που δίνει πρόσβαση στη διανομή ενός συνόλου δεδομένων. Π.χ. ιστοσελίδα αρχικής πρόσβασης,
+          μεταφόρτωση, feed URL, σημείο διάθεσης SPARQL. Να χρησιμοποιείται όταν ο κατάλογος δεν περιέχει πληροφορίες εαν πρόκειται ή όχι για μεταφορτώσιμο αρχείο."""@el ;
+  rdfs:comment "أي رابط يتيح الوصول إلى البيانات. إذا كان الرابط هو ربط مباشر لملف يمكن تحميله استخدم الخاصية downloadURL"@ar ;
+  rdfs:comment "データセットの配信にアクセス権を与えるランディング・ページ、フィード、SPARQLエンドポイント、その他の種類の資源。"@ja ;
+  rdfs:domain dcat:Distribution ;
+  rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
+  rdfs:label "URL d'accès"@fr ;
+  rdfs:label "URL de acceso"@es ;
+  rdfs:label "URL di accesso"@it ;
+  rdfs:label "URL πρόσβασης"@el ;
+  rdfs:label "access URL"@en ;
+  rdfs:label "رابط وصول"@ar ;
+  rdfs:label "アクセスURL"@ja ;
+  rdfs:range rdfs:Resource ;
+  owl:deprecated "true"^^xsd:boolean ;
+  skos:changeNote "Use dcat:accessService instead" ;
+.
+dcat:contactPoint
+  rdfs:domain dcat:Dataset ;
+.
+dcat:keyword
+  rdfs:domain dcat:Dataset ;
+.
+dcat:landingPage
+  rdfs:domain dcat:Dataset ;
+.
+dcat:theme
+  rdfs:domain dcat:Dataset ;
+.
+<http://www.w3.org/ns/dcat10>
+  rdf:type owl:Ontology ;
+  dct:contributor <http://orcid.org/0000-0002-3884-3420> ;
+  dct:created "2018-03-06" ;
+  dct:creator <https://www.w3.org/2017/dxwg> ;
+  rdfs:comment """This RDF graph defines a profile of DCAT corresponding to the 2014 version of DCAT - as described in https://www.w3.org/TR/2014/REC-vocab-dcat-20140116/
+It includes axioms removed from DCAT in the 2018-19 revision.""" ;
+  rdfs:label "DCAT 2014 profile of DCAT vocabulary" ;
+  owl:imports <http://www.w3.org/ns/dcat> ;
+  owl:imports <http://www.w3.org/ns/dcat-service> ;
+.

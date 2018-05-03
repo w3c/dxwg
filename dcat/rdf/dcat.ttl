@@ -27,10 +27,12 @@
         foaf:name "Alejandra Gonzalez-Beltran" ;
         foaf:seeAlso <https://orcid.org/0000-0003-3499-8262>
       ] ;
-  dct:contributor <http://people.csiro.au/Simon-Cox> ;
   dct:contributor [
-      rdf:type dct:Agent ;
-    ] ;
+        rdf:type foaf:Person ;
+        rdfs:seeAlso <https://orcid.org/0000-0002-3884-3420> ;
+        foaf:name "Simon J D Cox" ;
+        foaf:workInfoHomepage <http://people.csiro.au/Simon-Cox> ;
+      ] ;
   dct:contributor [
       schema:affiliation <http://www.w3.org/data#W3C> ;
       rdfs:seeAlso <http://philarcher.org/foaf.rdf#me> ;
@@ -153,6 +155,11 @@ dcat:Catalog
   rdfs:label "Κατάλογος"@el ;
   rdfs:label "فهرس قوائم البيانات"@ar ;
   rdfs:label "カタログ"@ja ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom dcat:CataloguedItem ;
+      owl:onProperty dct:hasPart ;
+    ] ;
 .
 dcat:CatalogRecord
   rdf:type rdfs:Class ;
@@ -199,6 +206,36 @@ dcat:CatalogRecord
   rdfs:label "Καταγραφή καταλόγου"@el ;
   rdfs:label "سجل"@ar ;
   rdfs:label "カタログ・レコード"@ja ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom dcat:CataloguedItem ;
+      owl:onProperty foaf:primaryTopic ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty foaf:primaryTopic ;
+    ] ;
+.
+dcat:CataloguedItem
+  rdf:type owl:Class ;
+  rdfs:label "Item in a DCAT Catalog" ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dct:type ;
+    ] ;
+.
+dcat:DataDistributionService
+  rdf:type owl:Class ;
+  rdfs:comment "A site or end-point that provides access to datasets and distributions of datasets" ;
+  rdfs:label "Data distribution service" ;
+  rdfs:subClassOf dcat:Service ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:hasValue <https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download> ;
+      owl:onProperty dct:type ;
+    ] ;
 .
 dcat:Dataset
   rdf:type rdfs:Class ;
@@ -232,6 +269,30 @@ dcat:Dataset
   rdfs:label "قائمة بيانات"@ar ;
   rdfs:label "データセット"@ja ;
   skos:changeNote "2018-02 - subclass of dctype:Dataset removed because scope of dcat:Dataset includes several other types from the dctype vocabulary. " ;
+.
+dcat:DataTransformationService
+  rdf:type owl:Class ;
+  rdfs:comment "A site or end-point that provides a service to transform datasets in some way, e.g. spatial coordinates, schematic representation, interpolation, re-sampling" ;
+  rdfs:label "Data transformation service" ;
+  rdfs:subClassOf dcat:Service ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:hasValue <https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/transformation> ;
+      owl:onProperty dct:type ;
+    ] ;
+  skos:editorialNote "Status: proposed - not yet confirmed by DCAT revision team" ;
+.
+dcat:DiscoveryService
+  rdf:type owl:Class ;
+  rdfs:label "Resource DIscovery Service" ;
+  rdfs:subClassOf dcat:Catalog ;
+  rdfs:subClassOf dcat:Service ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:hasValue <http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/discovery> ;
+      owl:onProperty dct:type ;
+    ] ;
+  skos:editorialNote "Status: proposed - not yet confirmed by DCAT revision team" ;
 .
 dcat:Distribution
   rdf:type rdfs:Class ;
@@ -270,75 +331,22 @@ dcat:Distribution
   rdfs:label "التوزيع"@ar ;
   rdfs:label "配信"@ja ;
 .
-dcat:Download
-  rdf:type rdfs:Class ;
+dcat:Service
   rdf:type owl:Class ;
-  rdfs:comment "Represents a downloadable distribution of a dataset. This term has been deprecated."@en ;
-  rdfs:comment "Representación de una distribución descargable de los datos. Este término es obsoleto."@es ;
-  rdfs:isDefinedBy dcat: ;
-  rdfs:label "Download (Deprecated)"@en ;
-  rdfs:label "Descarga (Obsoleto)"@es ;
-  rdfs:subClassOf dcat:Distribution ;
-  owl:deprecated "true"^^xsd:boolean ;
+  rdfs:label "Service" ;
+  rdfs:subClassOf dcat:CataloguedItem ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dct:conformsTo ;
+    ] ;
 .
-dcat:Feed
-  rdf:type rdfs:Class ;
-  rdf:type owl:Class ;
-  rdfs:comment "Represents availability of a dataset as a feed. This term has been deprecated"@en;
-  rdfs:comment "Representa la disponibilidad de datos como un 'feed'. Este término es obsoleto."@es;
-  rdfs:isDefinedBy dcat: ;
-  rdfs:label "Feed (Deprecated)" ;
-  rdfs:subClassOf dcat:Distribution ;
-  owl:deprecated "true"^^xsd:boolean ;
-.
-dcat:WebService
-  rdf:type rdfs:Class ;
-  rdf:type owl:Class ;
-  rdfs:comment "represents a web service that enables access to the data of a dataset. This term has been deprecated"@en ;
-  rdfs:isDefinedBy dcat: ;
-  rdfs:label "Web Service (Deprecated)" ;
-  rdfs:subClassOf dcat:Distribution ;
-  owl:deprecated "true"^^xsd:boolean ;
-.
-dcat:accessURL
-  rdf:type rdf:Property ;
+dcat:accessService
   rdf:type owl:ObjectProperty ;
-  vann:usageNote """El rango es una URL.
-          Si la distribución es accesible solamente través de una página de destino (es decir, si no se conoce una URL de descarga directa),
-          entonces el enlance a la página de destino debe ser duplicado como accessURL en la distribución."""@es ;
-  vann:usageNote """La valeur est une URL.
-						Si la distribution est accessible seulement au travers d'une page d'atterrissage (c-à-dire on n'ignore une URL de téléchargement direct) ,
-						alors le lien à la page d'atterrissage doit être dupliqué comee accessURL sur la distribution."""@fr ;
-  vann:usageNote """The value is a URL.
-          If the distribution(s) are accessible only through a landing page (i.e. direct download URLs are 
-          not known), then the landing page link should be duplicated as accessURL on a distribution."""@en ;
-  vann:usageNote """Il valore è un URL.  Se le distribuzioni sono accessibili solo attraverso una pagina web (ad esempio, gli URL per il download diretto non sono noti), il link della pagina web deve essere duplicato come accessURL sulla distribuzione."""@it ;
-  vann:usageNote """Η τιμή είναι ένα URL.
-					Αν η/οι διανομή/ές είναι προσβάσιμη/ες μόνο μέσω μίας ιστοσελίδας αρχικής πρόσβασης (δηλαδή αν δεν υπάρχουν γνωστές διευθύνσεις άμεσης μεταφόρτωσης), τότε ο σύνδεσμος της ιστοσελίδας αρχικής πρόσβασης πρέπει να αναπαραχθεί ως accessURL σε μία διανομή."""@el ;
-  vann:usageNote """確実にダウンロードでない場合や、ダウンロードかどうかが不明である場合は、downloadURLではなく、accessURLを用いてください。
-ランディング・ページを通じてしか配信にアクセスできない場合（つまり、直接的なダウンロードURLが不明）は、配信におけるaccessURLとしてランディング・ページのリンクをコピーすべきです（SHOULD）。"""@ja ;
-  rdfs:comment """Ceci peut être tout type d'URL qui donne accès à une distribution du jeu de données. Par exemple, un lien à une page HTML contenant un lien au jeu de données, 
-					un Flux RSS, un point d'accès SPARQL. Utilisez le lorsque votre catalogue ne contient pas d'information sur quoi il est ou quand ce n'est pas téléchargeable."""@fr ;
-  rdfs:comment """Could be any kind of URL that gives access to a distribution of the dataset. E.g. landing page, 
-          download, feed URL, SPARQL endpoint. Use when your catalog does not have information on which it 
-          is or when it is definitely not a download."""@en ;
-  rdfs:comment """Potrebbe essere qualsiasi tipo di URL che dà accesso a una distribuzione del dataset. Ad esempio, la pagina di web, l'URL di download, URL del feed, un  SPARQL endpoint. Da utilizzare quando il catalogo non contiene informazioni su quale tipo sia o quando si sa che non è un download."""@it ;
-  rdfs:comment """Puede ser cualquier tipo de URL que de acceso a una distribución del conjunto de datos, e.g., página de destino, descarga,
-					URL feed, punto de acceso SPARQL. Esta propriedad se debe usar cuando su catálogo de datos no tiene información sobre donde está o cuando no se puede descargar."""@es ;
-  rdfs:comment """Μπορεί να είναι οποιουδήποτε είδους URL που δίνει πρόσβαση στη διανομή ενός συνόλου δεδομένων. Π.χ. ιστοσελίδα αρχικής πρόσβασης, 
-          μεταφόρτωση, feed URL, σημείο διάθεσης SPARQL. Να χρησιμοποιείται όταν ο κατάλογος δεν περιέχει πληροφορίες εαν πρόκειται ή όχι για μεταφορτώσιμο αρχείο."""@el ;
-  rdfs:comment "أي رابط يتيح الوصول إلى البيانات. إذا كان الرابط هو ربط مباشر لملف يمكن تحميله استخدم الخاصية downloadURL"@ar ;
-  rdfs:comment "データセットの配信にアクセス権を与えるランディング・ページ、フィード、SPARQLエンドポイント、その他の種類の資源。"@ja ;
+  rdfs:comment "link to DataDistributionService that can serves this data Distribution" ;
   rdfs:domain dcat:Distribution ;
-  rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
-  rdfs:label "URL d'accès"@fr ;
-  rdfs:label "URL de acceso"@es ;
-  rdfs:label "URL πρόσβασης"@el ;
-  rdfs:label "access URL"@en ;
-  rdfs:label "URL di accesso"@it ;
-  rdfs:label "رابط وصول"@ar ;
-  rdfs:label "アクセスURL"@ja ;
-  rdfs:range rdfs:Resource ;
+  rdfs:label "data access services" ;
+  rdfs:range dcat:DataDistributionService ;
 .
 dcat:byteSize
   rdf:type rdf:Property ;
@@ -383,6 +391,15 @@ dcat:bytes
   rdfs:label "Tamaño en bytes (Obsoleto)"@es ;
   rdfs:range xsd:integer ;
   owl:deprecated "true"^^xsd:boolean ;
+.
+dcat:catalog
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Link from a catalog to another catalog whose contents are of interest in the context of this catalog" ;
+  rdfs:domain dcat:Catalog ;
+  rdfs:label "Link to catalog" ;
+  rdfs:range dcat:Catalog ;
+  rdfs:subPropertyOf dct:hasPart ;
+  rdfs:subPropertyOf rdfs:member ;
 .
 dcat:contactPoint
   rdf:type rdf:Property ;
@@ -443,6 +460,7 @@ dcat:dataset
   rdfs:label "データセット"@ja ;
   rdfs:range dcat:Dataset ;
   rdfs:subPropertyOf dct:hasPart ;
+  rdfs:subPropertyOf rdfs:member ;
 .
 dcat:distribution
   rdf:type rdf:Property ;
@@ -601,6 +619,22 @@ dcat:record
   rdfs:label "سجل"@ar ;
   rdfs:label "カタログ・レコード"@ja ;
   rdfs:range dcat:CatalogRecord ;
+.
+dcat:servesDataset
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Link to description of a dataset that this DataDistributionService can distribute" ;
+  rdfs:domain dcat:DataDistributionService ;
+  rdfs:label "serves dataset" ;
+  rdfs:range dcat:Dataset ;
+.
+dcat:service
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "link to description of a service" ;
+  rdfs:domain dcat:Catalog ;
+  rdfs:label "has service" ;
+  rdfs:range dcat:Service ;
+  rdfs:subPropertyOf dct:hasPart ;
+  rdfs:subPropertyOf rdfs:member ;
 .
 dcat:size
   rdf:type rdf:Property ;
