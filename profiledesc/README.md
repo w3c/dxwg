@@ -8,7 +8,7 @@ An ontology to describe objects relevant to profiling (original specifications p
 ![](profiledesc.png)  
 Figure 1: Profile description ontology
 
-See [examples here](examples). 
+See [ontology documentation](https://w3c.github.io/dxwg/profiledesc/profiledesc.html) and [examples here](examples). 
 
 ## Next Steps
 The DXWG has yet, as of the start of May 2018, not decided how it will address its original charter deliverable to provide **profile guidance**. Once a decision has been made (likely during the May, 2018, WG face-to-face meeting) work here will be folded into that initiative.
