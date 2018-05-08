@@ -1,7 +1,7 @@
 var respecConfig = {
 //	preProcess: [dfn_index],
     specStatus: "ED",
-    shortName: "vocab-dcat-rev",
+    shortName: "vocab-dcat-2",
     canonicalURI: "TR",
     prevRecURI:           "https://www.w3.org/TR/vocab-dcat/",
     previousPublishDate:  "2014-01-16",
@@ -44,7 +44,7 @@ var respecConfig = {
         key: "Editors of previous version",
         data: [{
             value: "Fadi Maali, DERI",
-            href: "http://www.deri.ie/"
+            href: "https://en.wikipedia.org/wiki/Digital_Enterprise_Research_Institute"
         },{
             value: "John Erickson, Tetherless World Constellation (RPI)",
             href: "http://tw.rpi.edu/"
