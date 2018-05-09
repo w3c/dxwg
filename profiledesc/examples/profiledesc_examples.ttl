@@ -62,15 +62,20 @@ eg:dcatv1-owl a prof:ImplResourceDesc;
 	dc:publisher "European Union" ;
 	prof:profileOf dcat: , <http://www.w3.org/ns/dcat-v1> ;
 	prof:hasProfile <https://joinup.ec.europa.eu/release/geodcat-ap-v10> ;
-	prof:resource eg:dcat-shacl ;
+	prof:resource eg:dcat-ap-shacl , eg:dcat-ap-doc ;
 .
 
-eg:dcat-shacl a prof:ImplResourceDesc;
+eg:dcat-ap-shacl a prof:ImplResourceDesc;
 	rdfs:label "DCAT-AP-V1.0 SHACL constraints";
 	prof:resource <http://data.europa.eu/w21/016d88c3-a0b3-4506-ae4e-758e7401c096> ;
 	dct:conformsTo eg:shacl;
 	dct:format <http://www.w3.org/ns/shacl#>;
+	prof:resourceRole eg:someRole 
 	.
+	
+eg:someRole a owl:Class, skos:Concept, prof:ResourceRole ;
+	rdfs:comment "Modelling resource roles is a task to complete:";
+.	
 	
 eg:geodcat a prof:Profile ;
 	prof:profileOf <https://joinup.ec.europa.eu/release/dcat-ap-v11> ;
@@ -80,7 +85,7 @@ eg:geodcat a prof:Profile ;
 
 eg:DCAT-AP-IT a prof:Profile ;
 	prof:profileOf <https://joinup.ec.europa.eu/release/dcat-ap-v11> ;
-	rdfs:label "DCAT-AP Italian profile"
+	rdfs:label "DCAT-AP Italian profile" ;
 	prof:token "DCAT-AP-IT" ;
 	.
 	
