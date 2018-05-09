@@ -67,30 +67,28 @@
 
 <section id="conformance">
 
-<p class="note">From DCAT 2014 [[VOCAB-DCAT-20140116]]</p>
+<p class="note">Modified from DCAT 2014 [[VOCAB-DCAT-20140116]]</p>
 
 <p>A data catalog conforms to DCAT if:</p>
 <ul>
-<li> Access to data is organized into datasets, distributions, and data-distribution-services. </li>
-
-<li> An RDF description of the catalog itself and its datasets distributions, and data-distribution-services is available (but the choice of
+	<li> Access to data is organized into datasets, distributions, and data-distribution-services. </li>
+	<li> Access to other resources is organized into suitable sub-classes of catalogued-item. </li>
+	<li> An RDF description of the catalog itself and its datasets, distributions, and data-distribution-services is available (but the choice of
 RDF syntaxes, access protocols, and access policies is not mandated by this specification).</li>
-
-<li> The contents of all metadata fields that are held in the catalog, and that contain data about the catalog itself and its dataset, distribution, and data-distribution-service, are included in this RDF description, expressed using the appropriate classes and properties from DCAT, except where no such class or property exists.</li>
-
-<li> All classes and properties defined in DCAT are used in a way consistent with the semantics declared in this specification.</li>
-
-<li>DCAT-compliant catalogs <em title="MAY" class="rfc2119">MAY</em> include additional non-DCAT metadata fields and additional RDF data in the catalog's RDF description.</li>
+	<li> The contents of all metadata fields that are held in the catalog, and that contain data about the catalog itself and its datasets, distributions, and data-distribution-services, are included in this RDF description, expressed using the appropriate classes and properties from DCAT, except where no such class or property exists.</li>
+	<li> All classes and properties defined in DCAT are used in a way consistent with the semantics declared in this specification.</li>
+	<li>DCAT-compliant catalogs <em title="MAY" class="rfc2119">MAY</em> include additional non-DCAT metadata fields and additional RDF data in the catalog's RDF description.</li>
 </ul>
 
 <p>
 	A <strong>DCAT profile</strong> is a specification for data catalogs that adds additional constraints to DCAT. A data catalog that conforms to the profile also conforms to DCAT. Additional constraints in a profile <em title="MAY" class="rfc2119">MAY</em> include:
 </p>
 <ul>
-<li> A minimum set of required metadata fields </li>
-<li> Classes and properties for additional metadata fields not covered in DCAT</li>
-<li> Controlled vocabularies or URI sets as acceptable values for properties</li>
-<li> Requirements for specific access mechanisms (RDF syntaxes, protocols) to the catalog's RDF description</li>
+	<li> Cardinality constraints, including a minimum set of required metadata fields </li>
+	<li> Sub-classes and sub-properties of the standard DCAT classes and properties</li>
+	<li> Classes and properties for additional metadata fields not covered in DCAT</li>
+	<li> Controlled vocabularies or URI sets as acceptable values for properties</li>
+	<li> Requirements for specific access mechanisms (RDF syntaxes, protocols) to the catalog's RDF description</li>
 </ul>
 
 </section>
@@ -101,7 +99,7 @@ RDF syntaxes, access protocols, and access policies is not mandated by this spec
 
 <p class="note">From DCAT 2014 [[VOCAB-DCAT-20140116]] except as noted</p>
 
-<p>DCAT is an RDF vocabulary well-suited to representing data catalogs such as <a href="https://www.data.gov/">data.gov</a> and <a href="http://data.gov.uk">data.gov.uk</a>. DCAT defines six main classes:</p>
+<p>DCAT is an RDF vocabulary well-suited to representing data catalogs such as <a href="https://www.data.gov/">data.gov</a> and <a href="http://data.gov.uk">data.gov.uk</a>. DCAT defines seven (nine) main classes:</p>
 <ul>
 	<li> <code><a href="#Class:_Catalog">dcat:Catalog</a></code> represents the catalog</li>
 	<li> <code><a href="#Class:_CataloguedItem">dcat:CataloguedItem</a></code> represents an item in a catalog.</li>
@@ -109,10 +107,9 @@ RDF syntaxes, access protocols, and access policies is not mandated by this spec
 	<li> <code><a href="#Class:_Service">dcat:Service</a></code> represents a service in a catalog.</li>
 	<li> <code><a href="#Class:_DataDistributionService">dcat:DataDistributionService</a></code> represents a service that provides access to distributions of datasets and extracts of datasets.</li>
 	<li> <code><a href="#Class:_Distribution">dcat:Distribution</a></code> represents an accessible form of a dataset as for example a downloadable file, an RSS feed or a web service that provides the data.</li>
-	<!--
 	<li> (<code><a href="#Class:_DataTransformationService">dcat:DataTransformationService</a></code> represents a service that can transform a dataset, e.g. spatial coordinate transformation; interpolation or resampling of a dataset).</li>
 	<li> (<code><a href="#Class:_DiscoveryService">dcat:DiscoveryService</a></code> represents a service that supports discovery functions.)</li>
--->
+	<li> <code><a href="#Class:_CatalogRecord">dcat:CatalogRecord</a></code> describes a dataset entry in the catalog, primarily concerning the registration information such as who added the item and when</li>
 </ul>
 <p>
 A <b>dataset</b> in DCAT is defined as a "collection of data, published or curated by a single agent, and available for access or download in one or more formats".
@@ -127,7 +124,7 @@ Types of service that might be found in a catalog include data distribution serv
 <div class="note">
 	<p>
 	The scope of DCAT 2014 [[VOCAB-DCAT-20140116]] was limited to catalogs of datasets.
-	A number of use cases for the revision involve also having <b>data services</b> (aka distribution services) as members of a catalog - see <a href="https://www.w3.org/TR/dcat-ucr/#ID6">DCAT Distribution to describe web services - ID6</a> and
+	A number of use cases for the revision involve also having <b>data distribution services</b> as members of a catalog - see <a href="https://www.w3.org/TR/dcat-ucr/#ID6">DCAT Distribution to describe web services - ID6</a> and
 <a href="https://www.w3.org/TR/dcat-ucr/#ID18">Modeling service-based data access - ID18</a>.
 It has been decided to add an explicit class for Data Distribution Services in this revision of DCAT, and to enable these to be part of a Catalog.
 Provision for other services to also be part of a Catalog will also be made, as well as for Catalogs to be composed of other Catalogs.
@@ -344,6 +341,10 @@ does not have to be defined as a separate dcat:Distribution instance.
 	</p>
 </div>
 
+<p class="issue" data-number="105">
+	The use of guarded constraints (existence, cardinality, range-type) to control the use of the recommended properties in the context of a class is being considered as part of the revision of DCAT.
+</p>
+
 <p class="issue" data-number="110">
 	The axiomatization of DCAT 2014 used global domain and range constraints for many of the properties defined in the DCAT namespace [[VOCAB-DCAT-20140116]]. This makes quite strong ontological commitments, some of which are now being reconsidered - see individual issues noted inline below.
 </p>
@@ -399,10 +400,6 @@ The definitions (including domain and range) of terms outside the dcat namespace
 <a href="#Property:catalog_themes">themes</a>,
 <a href="#Property:catalog_title">title</a>,
 <a href="#Property:catalog_update_date">update date</a>
-</p>
-
-<p class="issue" data-number="105">
-	The use of guarded constraints (existence, cardinality, range-type) to control the use of the recommended properties in the context of a class is being considered as part of the revision of DCAT.
 </p>
 
 <div class="note">
@@ -644,6 +641,24 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 </table>
 </section>
 
+<section id="Property:catalog_catalog">
+<h4>Property: catalog</h4>
+
+<p class="note">
+	Property added in this revision of DCAT.
+</p>
+
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#service">dcat:catalog</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>A catalog that is part of the catalog.</td></tr>
+    <tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/terms/hasPart">dct:hasPart</a></td></tr>
+    <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Catalog">dcat:Catalog</a></td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Catalog</a></td></tr>
+  </tbody>
+</table>
+</section>
+
 <section id="Property:catalog_catalog_record">
 <h4>Property: catalog record</h4>
 
@@ -678,25 +693,6 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 
 <p class="issue" data-number="78">
 	The need to be able to link a metadata record to its original source has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
-<p class="issue" data-number="105">
-	The use of guarded constraints (existence, cardinality, range-type) to control the usage of the recommended properties in the context of a class is being considered as part of the revision of DCAT.
-</p>
-
-<p class="issue" data-number="128">
-	A number of requirements identify the need to provide better support for Dataset and Record provenance - see
-	<a href="https://github.com/w3c/dxwg/issues/77">Issue #78</a>,
-	<a href="https://github.com/w3c/dxwg/issues/77">Issue #77</a>,
-	<a href="https://github.com/w3c/dxwg/issues/76">Issue #76</a>,
-	<a href="https://github.com/w3c/dxwg/issues/71">Issue #71</a>,
-	<a href="https://github.com/w3c/dxwg/issues/66">Issue #66</a>,
-	<a href="https://github.com/w3c/dxwg/issues/66">Issue #63</a>,
-	<a href="https://github.com/w3c/dxwg/issues/57">Issue #57</a>,
-	.
-	It has been suggested that many of the requirements can be satisfied by using the [[PROV-O]] ontology,
-	in particular by making dcat:Dataset and/or dcat:CatalogRecord a sub-class of <a href="http://www.w3.org/ns/prov#Entity">prov:Entity</a>.
-	A preliminary <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/prov.ttl">alignment of DCAT with PROV-O is available</a>.
 </p>
 
 <table class="definition">
@@ -805,60 +801,24 @@ into a separate named graph. The name of that graph should be the IRI of the cat
 <a href="#Property:catalogueditem_update_date">update date</a>,
 </p>
 
-<p class="issue" data-number="61">
-	The need to provide better guidance and vocabulary elements for dataset citation has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
 <p class="issue" data-number="62">
-	The possible association of datasets with zero or multiple catalogs has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
-<p class="issue" data-number="63">
-	The need to be able to link a dataset with publications arising from it has been identified as a requirement to be satisfied in the revision of DCAT.
+	The possible association of items with zero or multiple catalogs has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
 <p class="issue" data-number="66">
-	The need to be able to link a dataset with the source of funding that supported its production has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
-<p class="issue" data-number="71">
-	The need to be able to describe the business or project context related to dataset production has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
-<p class="issue" data-number="76">
-	The need provide a more comprehensive method for describing dataset provenance has been identified as a requirement to be satisfied in the revision of DCAT. A preliminary <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/prov.ttl">alignment of DCAT with PROV-O is available</a>.
-
+	The need to be able to link a catalogued item with the source of funding that supported its production has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
 <p class="issue" data-number="77">
-	The need to be able to link a dataset with the business or project context of its production has been identified as a requirement to be satisfied in the revision of DCAT.
+	The need to be able to link a catalogued item with the business or project context of its production has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
 <p class="issue" data-number="81">
-	The need describe relationships between datasets has been identified as a requirement to be satisfied in the revision of DCAT.
+	The need describe relationships between catalogued items has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
-<p class="issue" data-number="86">
-	The need to be able to provide usage notes for a dataset or distribution has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
-<p class="issue" data-number="105">
-	The use of guarded constraints (existence, cardinality, range-type) to control the usage of the recommended properties in the context of a class is being considered as part of the revision of DCAT.
-</p>
-
-<p class="issue" data-number="128">
-	A number of requirements identify the need to provide better support for Item provenance - see
-	<a href="https://github.com/w3c/dxwg/issues/77">Issue #78</a>,
-	<a href="https://github.com/w3c/dxwg/issues/77">Issue #77</a>,
-	<a href="https://github.com/w3c/dxwg/issues/76">Issue #76</a>,
-	<a href="https://github.com/w3c/dxwg/issues/71">Issue #71</a>,
-	<a href="https://github.com/w3c/dxwg/issues/66">Issue #66</a>,
-	<a href="https://github.com/w3c/dxwg/issues/66">Issue #63</a>,
-	<a href="https://github.com/w3c/dxwg/issues/57">Issue #57</a>,
-	.
-	It has been suggested that many of the requirements can be satisfied by using the [[PROV-O]] ontology,
-	in particular by making dcat:Dataset and/or dcat:CatalogRecord a sub-class of <a href="http://www.w3.org/ns/prov#Entity">prov:Entity</a>.
-	A preliminary <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/prov.ttl">alignment of DCAT with PROV-O is available</a>.
+<p class="issue" data-number="71">
+	The need to be able to describe the business or project context related to production of a catalogued item has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
 <table class="definition">
@@ -1129,16 +1089,28 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 	The need to choose or define a data <b>quality model</b> has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
-<p class="issue" data-number="59">
-	The need to more formally encode access restrictions for both datasets and distributions has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
 <p class="issue" data-number="60">
 	The need to provide richer descriptions of dataset aspects (e.g. instrument/sensor used, spatial feature, observable property, quantity kind) has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
+<p class="issue" data-number="61">
+	The need to provide better guidance and vocabulary elements for dataset citation has been identified as a requirement to be satisfied in the revision of DCAT.
+</p>
+
+<p class="issue" data-number="63">
+	The need to be able to link a dataset with publications arising from it has been identified as a requirement to be satisfied in the revision of DCAT.
+</p>
+
+<p class="issue" data-number="76">
+	The need provide a more comprehensive method for describing dataset provenance has been identified as a requirement to be satisfied in the revision of DCAT. A preliminary <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/prov.ttl">alignment of DCAT with PROV-O is available</a>.
+</p>
+
 <p class="issue" data-number="84">
 	The need to be able to provide summary statistics about a dataset has been identified as a requirement to be satisfied in the revision of DCAT.
+</p>
+
+<p class="issue" data-number="86">
+	The need to be able to provide usage notes for a dataset or distribution has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
 <p class="issue" data-number="90">
@@ -1304,16 +1276,8 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 	The need to more formally encode access restrictions for both datasets and distributions has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
-<p class="issue" data-number="86">
-	The need to be able to provide usage notes for a dataset or distribution has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
-<p class="issue" data-number="105">
-	The use of guarded constraints (existence, cardinality, range-type) to control the usage of the recommended properties in the context of a class is being considered as part of the revision of DCAT.
-</p>
-
 <p class="issue" data-number="106">
-	The possible need to provide guidance regarding the extension of the notion distribution is being considered for the revision of DCAT.
+	The possible need to provide guidance regarding the extension of the notion "Distribution" is being considered for the revision of DCAT.
 </p>
 
 <table class="definition">
