@@ -25,19 +25,29 @@ eg:prof_examples
 
 #DCAT v1
 
-<http://www.w3.org/ns/dcat-v1> 
+eg:dcat2014
 	a prof:Profile ;
-	prof:token "dcat-v1" ;
-	rdfs:label "DCAT v1 implementation profile";
+	prof:token "dcat2014" ;
+	rdfs:label "DCAT 2014";
 	rdfs:comment "Provides a means to declare, and discover implementation resources to check, implementations of DCAT conforming to v1 specification"@en;
 	dc:publisher "W3.org" ;
-	prof:profileOf dcat: ;
+	prof:profileOf eg:dcat2018 ;
 	prof:hasProfile <https://joinup.ec.europa.eu/release/dcat-ap-v10> ;
-	prof:resource eg:dcatv1-owl ;
+	prof:hasProfile eg:geodcat ;
+    prof:resource eg:dcatv1-owl ;
 .
 
-eg:dcat-owl a prof:ImplResourceDesc;
-	rdfs:label "DCAT-AP-V1.0 SHACL constraints";
+eg:dcat2018
+	a prof:Profile, prof:BaseSpecification  ;
+	prof:token "dcat2018" ;
+	rdfs:label "DCAT 2018";
+	rdfs:comment "Version of DCAT under development"@en;
+	dc:publisher "W3.org" ;
+	prof:hasProfile eg:dcat2014 ;
+.
+
+eg:dcatv1-owl a prof:ImplResourceDesc;
+	rdfs:label "DCAT constraints to meet original DCAT 2014 restrictions";
 	prof:resource <http://data.europa.eu/w21/016d88c3-a0b3-4506-ae4e-758e7401c096> ;
 	dct:conformsTo  owl:Ontology;
 	.
@@ -62,12 +72,23 @@ eg:dcat-shacl a prof:ImplResourceDesc;
 	dct:format <http://www.w3.org/ns/shacl#>;
 	.
 	
-<https://joinup.ec.europa.eu/release/geodcat-ap-v10> a prof:Profile ;
+eg:geodcat a prof:Profile ;
 	prof:profileOf <https://joinup.ec.europa.eu/release/dcat-ap-v11> ;
-	rdfs:label "GeoDCAT-AP: A geospatial extension for the DCAT application profile for data portals in Europe";
-	prof:token "geodcat-ap" ;
+	rdfs:label "GeoDCAT A geospatial extension for the DCAT";
+	prof:token "geodcat" ;
+	.
+
+eg:DCAT-AP-IT a prof:Profile ;
+	prof:profileOf <https://joinup.ec.europa.eu/release/dcat-ap-v11> ;
+	rdfs:label "DCAT-AP Italian profile"
+	prof:token "DCAT-AP-IT" ;
 	.
 	
+<https://joinup.ec.europa.eu/release/geodcat-ap-v10> a prof:Profile ;
+	prof:profileOf <https://joinup.ec.europa.eu/release/dcat-ap-v11> , eg:geodcat;
+	rdfs:label "GeoDCAT-AP: A geospatial extension for the DCAT application profile for data portals in Europe";
+	prof:token "geodcat-ap" ;
+	.	
 	
 
 # OpenGeospatial Consortium Examples
