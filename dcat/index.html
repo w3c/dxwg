@@ -104,9 +104,9 @@ RDF syntaxes, access protocols, and access policies is not mandated by this spec
 	<li> <code><a href="#Class:_Catalog">dcat:Catalog</a></code> represents the catalog</li>
 	<li> <code><a href="#Class:_CataloguedItem">dcat:CataloguedItem</a></code> represents an item in a catalog.</li>
 	<li> <code><a href="#Class:_Dataset">dcat:Dataset</a></code> represents a dataset in a catalog.</li>
+	<li> <code><a href="#Class:_Distribution">dcat:Distribution</a></code> represents an accessible form or representation of a dataset as for example a downloadable file.</li>
 	<li> <code><a href="#Class:_Service">dcat:Service</a></code> represents a service in a catalog.</li>
 	<li> <code><a href="#Class:_DataDistributionService">dcat:DataDistributionService</a></code> represents a service that provides access to distributions of datasets and extracts of datasets.</li>
-	<li> <code><a href="#Class:_Distribution">dcat:Distribution</a></code> represents an accessible form of a dataset as for example a downloadable file, an RSS feed or a web service that provides the data.</li>
 	<li> (<code><a href="#Class:_DataTransformationService">dcat:DataTransformationService</a></code> represents a service that can transform a dataset, e.g. spatial coordinate transformation; interpolation or resampling of a dataset).</li>
 	<li> (<code><a href="#Class:_DiscoveryService">dcat:DiscoveryService</a></code> represents a service that supports discovery functions.)</li>
 	<li> <code><a href="#Class:_CatalogRecord">dcat:CatalogRecord</a></code> describes a dataset entry in the catalog, primarily concerning the registration information such as who added the item and when</li>
@@ -389,6 +389,7 @@ The definitions (including domain and range) of terms outside the dcat namespace
 <a href="#Property:catalog_hasPart">hasPart</a>,
 <a href="#Property:catalog_dataset">dataset</a>,
 <a href="#Property:catalog_service">service</a>,
+<a href="#Property:catalog_catalog">catalog</a>,
 <a href="#Property:catalog_description">description</a>,
 <a href="#Property:catalog_homepage">homepage</a>,
 <a href="#Property:catalog_language">language</a>,
@@ -418,6 +419,7 @@ See <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>. </p>
 <table class="definition">
   <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Catalog">dcat:Catalog</a></th></tr></thead>
   <tbody>
+		<tr><td class="prop">Sub-class of:</td><td><a href="#Class:_Dataset">Dataset</a></td></tr>
     <tr><td class="prop">Definition:</td><td>A data catalog is a curated collection of metadata about datasets.</td></tr>
     <tr><td class="prop">Usage note:</td><td>Typically, a web-based data catalog is represented as a single instance of this class.</td></tr>
     <tr><td class="prop">See also:</td><td> <a href="#Class:_Catalog_record">Catalog record</a>, <a href="#Class:_Dataset">Dataset</a></td></tr>
@@ -649,10 +651,10 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 </p>
 
 <table class="definition">
-  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#service">dcat:catalog</a></th></tr></thead>
+  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#catalog">dcat:catalog</a></th></tr></thead>
   <tbody>
     <tr><td class="prop">Definition:</td><td>A catalog that is part of the catalog.</td></tr>
-    <tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/terms/hasPart">dct:hasPart</a></td></tr>
+    <tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/terms/hasPart">dct:dataset</a></td></tr>
     <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Catalog">dcat:Catalog</a></td></tr>
     <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Catalog</a></td></tr>
   </tbody>
@@ -1076,6 +1078,7 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 <h3>Class: Dataset</h3>
 <p>In addition to the properties inherited from the super-class CataloguedItem, the following properties are recommended for use on this class:
 <a href="#Property:dataset_distribution">distribution</a>,
+<a href="#Property:dataset_hasDatasetPart">hasDatasetPart</a>,
 <a href="#Property:dataset_frequency">frequency</a>,
 <a href="#Property:dataset_spatial">spatial coverage</a>,
 <a href="#Property:dataset_temporal">temporal coverage</a>,
@@ -1140,6 +1143,41 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 	This relationship has been removed in the revised DCAT vocabulary - see <a href="https://github.com/w3c/dxwg/issues/98">Issue #98</a>.
 </p>
 
+<section id="Property:dataset_distribution">
+<h4>Property: dataset distribution</h4>
+
+<p class="issue" data-number="120">
+	The axiomatization of dcat:distribution is being re-evaluated as part of the revision of DCAT.
+</p>
+
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#distribution">dcat:distribution</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>Connects a dataset to its available distributions.</td></tr>
+    <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a></td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#Distribution">dcat:Distribution</a></td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="Property:dataset_hasDatasetPart">
+<h4>Property: has dataset part</h4>
+
+<p class="note">
+	Property added in this revision of DCAT.
+</p>
+
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#hasDatasetPart">dcat:hasDatasetPart</a></th></tr></thead>
+  <tbody>
+		<tr><td class="prop">Definition:</td><td>Link to a dataset which is a part of this one</td></tr>
+		<tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/terms/hasPart">dct:hasPart</a></td></tr>
+    <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a></td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a></td></tr>
+  </tbody>
+</table>
+</section>
+
 <section id="Property:dataset_frequency">
 <h4>Property: frequency</h4>
 <table class="definition">
@@ -1183,23 +1221,6 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
   <tbody>
     <tr><td class="prop">Definition:</td><td>The temporal period that the dataset covers.</td></tr>
     <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/PeriodOfTime">dct:PeriodOfTime</a> (An interval of time that is named or defined by its start and end dates)</td></tr>
-  </tbody>
-</table>
-</section>
-
-<section id="Property:dataset_distribution">
-<h4>Property: dataset distribution</h4>
-
-<p class="issue" data-number="120">
-	The axiomatization of dcat:distribution is being re-evaluated as part of the revision of DCAT.
-</p>
-
-<table class="definition">
-  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#distribution">dcat:distribution</a></th></tr></thead>
-  <tbody>
-    <tr><td class="prop">Definition:</td><td>Connects a dataset to its available distributions.</td></tr>
-    <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a></td></tr>
-    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#Distribution">dcat:Distribution</a></td></tr>
   </tbody>
 </table>
 </section>
