@@ -105,7 +105,7 @@ RDF syntaxes, access protocols, and access policies is not mandated by this spec
 	<li> <code><a href="#Class:_CataloguedItem">dcat:CataloguedItem</a></code> represents an item in a catalog.</li>
 	<li> <code><a href="#Class:_Dataset">dcat:Dataset</a></code> represents a dataset in a catalog.</li>
 	<li> <code><a href="#Class:_Distribution">dcat:Distribution</a></code> represents an accessible form or representation of a dataset as for example a downloadable file.</li>
-	<li> <code><a href="#Class:_Service">dcat:Service</a></code> represents a service in a catalog.</li>
+	<li> <code><a href="#Class:_Service">dcat:DataService</a></code> represents a data service in a catalog.</li>
 	<li> <code><a href="#Class:_DataDistributionService">dcat:DataDistributionService</a></code> represents a service that provides access to distributions of datasets and extracts of datasets.</li>
 	<li> (<code><a href="#Class:_DataTransformationService">dcat:DataTransformationService</a></code> represents a service that can transform a dataset, e.g. spatial coordinate transformation; interpolation or resampling of a dataset).</li>
 	<li> (<code><a href="#Class:_DiscoveryService">dcat:DiscoveryService</a></code> represents a service that supports discovery functions.)</li>
@@ -117,8 +117,8 @@ A dataset is a conceptual entity, and may be represented by one or more <b>distr
 Distributions of a dataset can be provided via <b>data distribution services</b>.
 Detailed properties for a data distribution service API are out of the scope of this version of DCAT. </p>
 
-<p>Datasets and <b>services</b>, and potentially other types of thing, may be included in a <b>catalog</b>.
-Types of service that might be found in a catalog include data distribution services, <b>discovery services</b> such as portals and catalog services, <b>data transformation services</b> such as coordinate transformation services, re-sampling and interpolation services, and various <b>data-processing services</b>.
+<p>Datasets and <b>data services</b>, and potentially other types of thing, may be included in a <b>catalog</b>.
+Types of data service that might be found in a catalog include data distribution services, <b>discovery services</b> such as portals and catalog services, <b>data transformation services</b> such as coordinate transformation services, re-sampling and interpolation services, and various <b>data-processing services</b>.
 </p>
 
 <div class="note">
@@ -127,14 +127,14 @@ Types of service that might be found in a catalog include data distribution serv
 	A number of use cases for the revision involve also having <b>data distribution services</b> as members of a catalog - see <a href="https://www.w3.org/TR/dcat-ucr/#ID6">DCAT Distribution to describe web services - ID6</a> and
 <a href="https://www.w3.org/TR/dcat-ucr/#ID18">Modeling service-based data access - ID18</a>.
 It has been decided to add an explicit class for Data Distribution Services in this revision of DCAT, and to enable these to be part of a Catalog.
-Provision for other services to also be part of a Catalog will also be made, as well as for Catalogs to be composed of other Catalogs.
+Provision for other data services to also be part of a Catalog will also be made, as well as for Catalogs to be composed of other Catalogs.
 See <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>. </p>
 <p>
 	 <a href="https://github.com/w3c/dxwg/milestone/5">Milestone 5</a> collects a number of issues related to this requirement.
 </p>
 </div>
 
-<p>A <b>CatalogRecord</b> describes a dataset entry in the catalog. Notice that while <code>dcat:Dataset</code> represents the dataset itself, <code>dcat:CatalogRecord</code> is the record that describes the registration of a dataset in the catalog. The use of <code>dcat:CatalogRecord</code> is considered optional. It is used to capture provenance information about dataset entries in a catalog. If this distinction is not necessary then <code>dcat:CatalogRecord</code> can be safely ignored.</p>
+<p>A <b>CatalogRecord</b> describes an entry in the catalog. Notice that while <code>dcat:CataloguedItem</code> represents the dataset or service itself, <code>dcat:CatalogRecord</code> is the record that describes the registration of an item in the catalog. The use of <code>dcat:CatalogRecord</code> is considered optional. It is used to capture provenance information about entries in a catalog. If this distinction is not necessary then <code>dcat:CatalogRecord</code> can be safely ignored.</p>
 
 
 <p class="note">
@@ -315,7 +315,7 @@ does not have to be defined as a separate dcat:Distribution instance.
 		Need to add examples showing data distribution services and their relationship to datasets and distributions.
 	</p>
 	<p class="note">
-		Need to add examples showing other services.
+		Need to add examples showing other data services.
 	</p>
 </section>
 
@@ -406,7 +406,7 @@ The definitions (including domain and range) of terms outside the dcat namespace
 <div class="note">
 	<p>
 	The scope of DCAT 2014 was limited to catalogs of datasets [[VOCAB-DCAT-20140116]].
-	A number of use cases for the revision involve also having <b>data services</b> (aka distribution services) as members of a catalog - see <a href="https://www.w3.org/TR/dcat-ucr/#ID6">DCAT Distribution to describe web services - ID6</a> and
+	A number of use cases for the revision involve also having <b>data distribution services</b> as members of a catalog - see <a href="https://www.w3.org/TR/dcat-ucr/#ID6">DCAT Distribution to describe web services - ID6</a> and
 <a href="https://www.w3.org/TR/dcat-ucr/#ID18">Modeling service-based data access - ID18</a>.
 It has been decided to add an explicit class for Data Distribution Services in this revision of DCAT, and to enable these to be part of a Catalog.
 Provision for other services to also be part of a Catalog will also be made, as well as for Catalogs to be composed of other Catalogs.
@@ -638,7 +638,7 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
     <tr><td class="prop">Definition:</td><td>A service that is part of the catalog.</td></tr>
     <tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/terms/hasPart">dct:hasPart</a></td></tr>
     <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Catalog">dcat:Catalog</a></td></tr>
-    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Service</a></td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dcat:DataService</a></td></tr>
   </tbody>
 </table>
 </section>
@@ -828,7 +828,7 @@ into a separate named graph. The name of that graph should be the IRI of the cat
   <tbody>
     <tr><td class="prop">Definition:</td><td>An item, published or curated by a single agent.</td></tr>
     <tr><td class="prop">Sub class of:</td><td> </td></tr>
-    <tr><td class="prop">Usage note:</td><td>Superclass of <a href="#Dataset">dcat:Dataset</a>, <a href="#Service">dcat:Service</a>, <a href="#Catalog">dcat:Catalog</a> and any other member of a <a href="#Catalog">dcat:Catalog</a>. It is recommended to use one of the more specific sub-classe when available.</td></tr>
+    <tr><td class="prop">Usage note:</td><td>Superclass of <a href="#Dataset">dcat:Dataset</a>, <a href="#Service">dcat:DataService</a>, <a href="#Catalog">dcat:Catalog</a> and any other member of a <a href="#Catalog">dcat:Catalog</a>. It is strongly recommended to use a more specific sub-class when available.</td></tr>
     <tr><td class="prop">See also:</td><td> </td></tr>
   </tbody>
 </table>
@@ -1237,7 +1237,7 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
   <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#DataDistributionService">dcat:DataDistributionService</a></th></tr></thead>
   <tbody>
     <tr><td class="prop">Definition:</td><td>A site or end-point that provides access to datasets and distributions of datasets.</td></tr>
-    <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/dcat#Service">dcat:Service</a></td></tr>
+    <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/dcat#Service">dcat:DataService</a></td></tr>
     <tr><td class="prop">Usage note:</td><td> </td></tr>
     <tr><td class="prop">See also:</td><td> </td></tr>
   </tbody>
@@ -1520,14 +1520,14 @@ Examples of distributions include a downloadable CSV file, an API or an RSS feed
 </section>
 </section> <!-- end class Distribution -->
 
-<section id="class-service">
-<h3>Class: Service</h3>
+<section id="class-dataservice">
+<h3>Class: Data Service</h3>
 <p>In addition to the properties inherited from the super-class CataloguedItem, the following properties are recommended for use on this class:
-<a href="#Property:service_conformsto">conformsTo</a>,
+<a href="#Property:dataservice_conformsto">conformsTo</a>,
 </p>
 
 <table class="definition">
-  <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Service">dcat:Service</a></th></tr></thead>
+  <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Service">dcat:DataService</a></th></tr></thead>
   <tbody>
     <tr><td class="prop">Definition:</td><td>A service for discovery, access or processing data or related resources.</td></tr>
 		<tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/dcat#CataloguedItem">dcat:CataloguedItem</a></td></tr>
@@ -1541,7 +1541,7 @@ Examples of distributions include a downloadable CSV file, an API or an RSS feed
   New class in this revision of DCAT.
 </p>
 
-<section id="Property:service_conformsto">
+<section id="Property:dataservice_conformsto">
 <h4>Property: conforms to</h4>
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/conformsTo">dct:conformsTo</a></th></tr></thead>
@@ -1552,7 +1552,7 @@ Examples of distributions include a downloadable CSV file, an API or an RSS feed
 </table>
 </section>
 
-</section> <!-- end class Service -->
+</section> <!-- end class DataService -->
 
 <section id="class-concept-scheme">
 <h3>Class: Concept scheme</h3>

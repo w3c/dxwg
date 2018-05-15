@@ -140,7 +140,7 @@ dcat:Catalog
   vann:usageNote "Normalmente, un catalogo di dati nel web viene rappresentato come una singola istanza di questa classe."@it ;
   vann:usageNote "Συνήθως, ένας κατάλογος δεδομένων στον Παγκόσμιο Ιστό αναπαρίσταται ως ένα στιγμιότυπο αυτής της κλάσης."@el ;
   vann:usageNote "通常、ウェブ・ベースのデータ・カタログは、このクラスの1つのインスタンスとして表わされます。"@ja ;
-  rdfs:comment "A curated collection of metadata about datasets"@en ;
+  rdfs:comment "A curated collection of metadata about datasets and data services"@en ;
   rdfs:comment "Una raccolta curata di metadati sui dataset"@it ;
   rdfs:comment "Una colección seleccionada de metadatos sobre los datos"@es ;
   rdfs:comment "Une collection élaborée de métadonnées sur les jeux de données"@fr ;
@@ -155,11 +155,13 @@ dcat:Catalog
   rdfs:label "Κατάλογος"@el ;
   rdfs:label "فهرس قوائم البيانات"@ar ;
   rdfs:label "カタログ"@ja ;
+  rdfs:subClassOf dcat:Dataset ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:allValuesFrom dcat:CataloguedItem ;
       owl:onProperty dct:hasPart ;
     ] ;
+  skos:editorialNote "English definition updated in this revision. Multilingual text not yet updated." ;
 .
 dcat:CatalogRecord
   rdf:type rdfs:Class ;
@@ -193,7 +195,7 @@ dcat:CatalogRecord
 					  Να σημειωθεί πως η οντολογία W3C PROV επιτρέπει την περιγραφή επιπλέον πληροφοριών ιστορικού όπως λεπτομέρειες για τη διαδικασία και τον δράστη που εμπλέκονται σε μία συγκεκριμένη αλλαγή εντός του συνόλου δεδομένων."""@el ;
   vann:usageNote "このクラスはオプションで、すべてのカタログがそれを用いるとは限りません。これは、データセットに関するメタデータとカタログ内のデータセットのエントリーに関するメタデータとで区別が行われるカタログのために存在しています。例えば、データセットの公開日プロパティーは、公開機関が情報を最初に利用可能とした日付を示しますが、カタログ・レコードの公開日は、データセットがカタログに追加された日付です。両方の日付が異っていたり、後者だけが分かっている場合は、カタログ・レコードに対してのみ公開日を指定すべきです。W3CのPROVオントロジー[prov-o]を用いれば、データセットに対する特定の変更に関連するプロセスやエージェントの詳細などの、さらに詳しい来歴情報の記述が可能となることに注意してください。"@ja ;
   rdfs:comment "1つのデータセットを記述したデータ・カタログ内のレコード。"@ja ;
-  rdfs:comment "A record in a data catalog, describing a single dataset."@en ;
+  rdfs:comment "A record in a data catalog, describing a single dataset or data service."@en ;
   rdfs:comment "Un record in un catalogo di dati che descrive un singolo dataset."@it ;
   rdfs:comment "Un registre du catalogue ou une entrée du catalogue, décrivant un seul jeu de données"@fr ;
   rdfs:comment "Un registro en un catálogo de datos que describe un solo conjunto de datos."@es ;
@@ -216,26 +218,44 @@ dcat:CatalogRecord
       owl:cardinality "1"^^xsd:nonNegativeInteger ;
       owl:onProperty foaf:primaryTopic ;
     ] ;
+  skos:editorialNote "English definition updated in this revision. Multilingual text not yet updated." ;
 .
 dcat:CataloguedItem
   rdf:type owl:Class ;
-  rdfs:label "Item in a DCAT Catalog" ;
+  rdfs:comment "Item in a DCAT Catalog" ;
+  rdfs:label "Catalogued item" ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:minCardinality "1"^^xsd:nonNegativeInteger ;
       owl:onProperty dct:type ;
     ] ;
+  skos:changeNote "New class/property in this revision" ;
+  skos:scopeNote "The class of all catalogued resources. It is recommended to use a sub-class, such as Dataset or DataDistributionService whenever possible"
 .
 dcat:DataDistributionService
   rdf:type owl:Class ;
   rdfs:comment "A site or end-point that provides access to datasets and distributions of datasets" ;
   rdfs:label "Data distribution service" ;
-  rdfs:subClassOf dcat:Service ;
+  rdfs:subClassOf dcat:DataService ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:hasValue <https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download> ;
       owl:onProperty dct:type ;
     ] ;
+  skos:changeNote "New class/property in this revision" ;
+.
+dcat:DataService
+  rdf:type owl:Class ;
+  rdfs:comment "A service for discovery, access or processing data or related resources." ;
+  rdfs:label "Data service" ;
+  rdfs:subClassOf dcat:CataloguedItem ;
+  rdfs:subClassOf dctype:Service ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dct:conformsTo ;
+    ] ;
+  skos:changeNote "New class/property in this revision" ;
 .
 dcat:Dataset
   rdf:type rdfs:Class ;
@@ -268,13 +288,14 @@ dcat:Dataset
   rdfs:label "Σύνολο Δεδομένων"@el ;
   rdfs:label "قائمة بيانات"@ar ;
   rdfs:label "データセット"@ja ;
+  rdfs:subClassOf dcat:CataloguedItem ;
   skos:changeNote "2018-02 - subclass of dctype:Dataset removed because scope of dcat:Dataset includes several other types from the dctype vocabulary. " ;
 .
 dcat:DataTransformationService
   rdf:type owl:Class ;
   rdfs:comment "A site or end-point that provides a service to transform datasets in some way, e.g. spatial coordinates, schematic representation, interpolation, re-sampling" ;
   rdfs:label "Data transformation service" ;
-  rdfs:subClassOf dcat:Service ;
+  rdfs:subClassOf dcat:DataService ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:hasValue <https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/transformation> ;
@@ -286,7 +307,7 @@ dcat:DiscoveryService
   rdf:type owl:Class ;
   rdfs:label "Resource DIscovery Service" ;
   rdfs:subClassOf dcat:Catalog ;
-  rdfs:subClassOf dcat:Service ;
+  rdfs:subClassOf dcat:DataService ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:hasValue <http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/discovery> ;
@@ -331,22 +352,10 @@ dcat:Distribution
   rdfs:label "التوزيع"@ar ;
   rdfs:label "配信"@ja ;
 .
-dcat:Service
-  rdf:type owl:Class ;
-  rdfs:comment "A service for discovery, access or processing data or related resources." ;
-  rdfs:label "Service" ;
-  rdfs:subClassOf dcat:CataloguedItem ;
-  rdfs:subClassOf dctype:Service ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onProperty dct:conformsTo ;
-    ] ;
-.
 dcat:accessService
   rdf:type owl:ObjectProperty ;
   rdfs:comment "A service that gives access to the distribution of the dataset" ;
-  rdfs:label "data access services" ;
+  rdfs:label "data access service" ;
   rdfs:range dcat:DataDistributionService ;
   rdfs:subPropertyOf dcat:accessURL ;
 .
@@ -441,6 +450,7 @@ dcat:catalog
   rdfs:range dcat:Catalog ;
   rdfs:subPropertyOf dct:hasPart ;
   rdfs:subPropertyOf rdfs:member ;
+  skos:changeNote "New class/property in this revision" ;
 .
 dcat:contactPoint
   rdf:type rdf:Property ;
@@ -562,6 +572,17 @@ dcat:granularity
   rdfs:label "granularity (Deprecated)" ;
   owl:deprecated "true"^^xsd:boolean ;
 .
+dcat:hasDatasetPart
+  rdf:type rdf:Property ;
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Link to a dataset which is a part of this one" ;
+  rdfs:domain dcat:Dataset ;
+  rdfs:isDefinedBy dcat: ;
+  rdfs:label "has dataset part" ;
+  rdfs:range dcat:Dataset ;
+  rdfs:subPropertyOf dct:hasPart ;
+  skos:changeNote "New class/property in this revision" ;
+.
 dcat:keyword
   rdf:type rdf:Property ;
   rdf:type owl:DatatypeProperty ;
@@ -667,15 +688,17 @@ dcat:servesDataset
   rdfs:domain dcat:DataDistributionService ;
   rdfs:label "serves dataset" ;
   rdfs:range dcat:Dataset ;
+  skos:changeNote "New class/property in this revision" ;
 .
 dcat:service
   rdf:type owl:ObjectProperty ;
   rdfs:comment "link to description of a service" ;
   rdfs:domain dcat:Catalog ;
   rdfs:label "has service" ;
-  rdfs:range dcat:Service ;
+  rdfs:range dcat:DataService ;
   rdfs:subPropertyOf dct:hasPart ;
   rdfs:subPropertyOf rdfs:member ;
+  skos:changeNote "New class/property in this revision" ;
 .
 dcat:size
   rdf:type rdf:Property ;
