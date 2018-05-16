@@ -17,7 +17,7 @@
 <http://promsns.org/def/prof> rdf:type owl:Ontology ;
                                owl:versionIRI <http://promsns.org/def/prof/1.0> ;
                                dcterms:contributor <http://orcid.org/0000-0002-8742-7730> ;
-                               dc:description "This is an RDF/OWL Ontology for describing relationships between Specifications, implementing profiles and supporting artefacts."@en ;
+                               dcterms:description "This is an RDF/OWL Ontology for describing relationships between Specifications, implementing profiles and supporting artefacts."@en ;
                                dcterms:modified "2018-10-04"^^xsd:date ;
                                dc:contributor "Simon Cox"^^xsd:string ;
                                rdfs:comment "This model provides a canonical vocabulary for describing profiling relationships between http://dublincore.org/2012/06/14/dcterms#Standard entities and attachment of resources defining additional constraints"@en ;
@@ -33,7 +33,7 @@
 #################################################################
 
 ###  http://purl.org/dc/elements/1.1/description
-dc:description rdf:type owl:AnnotationProperty .
+dcterms:description rdf:type owl:AnnotationProperty .
 
 
 ###  http://purl.org/dc/elements/1.1/format
@@ -77,7 +77,7 @@ skos:topConceptOf rdf:type owl:AnnotationProperty .
 ###  http://promsns.org/def/prof#hasProfile
 prof:hasProfile rdf:type owl:ObjectProperty ;
                 owl:inverseOf prof:profileOf ;
-                rdfs:comment "A known profile of a specification"@en ;
+                rdfs:comment "The inverse of profileOf: if a Base Specification or Profile X hasProfile Y then Y is a profileOf X."@en ;
                 rdfs:label "has profile" .
 
 
@@ -85,7 +85,7 @@ prof:hasProfile rdf:type owl:ObjectProperty ;
 prof:profileOf rdf:type owl:ObjectProperty ;
                rdfs:domain prof:Profile ;
                rdfs:range prof:Profile ;
-               dc:description "The semantics of the rdfs:Range means that any resource treated as a base specification can be regarded as a Profile (i.e. may be any specification with an empty set of additional constraints)"@en ;
+               dcterms:description "The semantics of the rdfs:Range means that any resource treated as a base specification can be regarded as a Profile (i.e. may be any specification with an empty set of additional constraints)"@en ;
                rdfs:comment "A base specification a Profile conforms to"@en ;
                rdfs:label "profile of" .
 
@@ -101,7 +101,7 @@ prof:resource rdf:type owl:ObjectProperty ;
 prof:resourceRole rdf:type owl:ObjectProperty ;
                   rdfs:domain prof:ImplResourceDesc ;
                   rdfs:range skos:Concept ;
-                  dc:description "Some roles are published alongside this ontology in a separate vocabulary"@en ;
+                  dcterms:description "Some roles are published alongside this ontology in a separate vocabulary"@en ;
                   rdfs:comment "Functional role of an Implementation Resource"@en ;
                   rdfs:label "resource role"^^xsd:string .
 
@@ -142,7 +142,7 @@ prof:BaseSpecification rdf:type owl:Class ;
                                          owl:onProperty prof:profileOf ;
                                          owl:maxCardinality "0"^^xsd:nonNegativeInteger
                                        ] ;
-                       dc:description "This may not be a useful class, but documents that any specification can be regarded as a trivial profile, so applications only need to be concerned with Profile conformance."@en ;
+                       dcterms:description "This may not be a useful class, but documents that any specification can be regarded as a trivial profile, so applications only need to be concerned with Profile conformance."@en ;
                        rdfs:comment "A specification that defines all implementation constraints, without applying constraints on usage of another specification."@en ;
                        rdfs:label "Base Specification" .
 
@@ -175,7 +175,7 @@ prof:ImplResourceRole rdf:type owl:Class ;
 ###  http://promsns.org/def/prof#Profile
 prof:Profile rdf:type owl:Class ;
              rdfs:subClassOf skos:Concept ;
-             dc:description "Profile is modelled as a skos:Concept to explicitly support the notion of profiles organised as classification taxonomies. SKOS semantic relations such as skos:broader/narrower and broaderTransitive properties may be used."@en ;
+             dcterms:description "Profile is modelled as a skos:Concept to explicitly support the notion of profiles organised as classification taxonomies. SKOS semantic relations such as skos:broader/narrower and broaderTransitive properties may be used."@en ;
              dc:source <https://www.w3.org/2017/dxwg/wiki/ProfileContext> ;
              rdfs:comment "A named set of constraints on one or more identified base specifications, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of those base specifications necessary to accomplish a particular function."@en ;
              rdfs:label "Implementation Profile" .
