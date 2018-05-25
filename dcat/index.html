@@ -420,8 +420,8 @@ See <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>. </p>
   <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Catalog">dcat:Catalog</a></th></tr></thead>
   <tbody>
 		<tr><td class="prop">Sub-class of:</td><td><a href="#Class:_Dataset">Dataset</a></td></tr>
-    <tr><td class="prop">Definition:</td><td>A data catalog is a curated collection of metadata about datasets.</td></tr>
-    <tr><td class="prop">Usage note:</td><td>Typically, a web-based data catalog is represented as a single instance of this class.</td></tr>
+    <tr><td class="prop">Definition:</td><td>A curated collection of metadata about datasets and data services</td></tr>
+    <tr><td class="prop">Usage note:</td><td>A web-based data catalog is typically represented as a single instance of this class.</td></tr>
     <tr><td class="prop">See also:</td><td> <a href="#Class:_Catalog_record">Catalog record</a>, <a href="#Class:_Dataset">Dataset</a></td></tr>
   </tbody>
 </table>
@@ -653,7 +653,7 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#catalog">dcat:catalog</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>A catalog that is part of the catalog.</td></tr>
+    <tr><td class="prop">Definition:</td><td>Link from a catalog to another catalog whose contents are of interest in the context of this catalog</td></tr>
     <tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/terms/hasPart">dct:dataset</a></td></tr>
     <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Catalog">dcat:Catalog</a></td></tr>
     <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Catalog</a></td></tr>
@@ -700,7 +700,7 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 <table class="definition">
   <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#CatalogRecord">dcat:CatalogRecord</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>A record in a data catalog, describing a single dataset.</td></tr>
+    <tr><td class="prop">Definition:</td><td>A record in a data catalog, describing the registration of a single dataset or data service.</td></tr>
     <tr><td class="prop">Usage note</td><td>This class is optional and not all catalogs will use it. It exists for catalogs where a distinction is made between metadata about
     a <em>dataset</em> and metadata about the <em>dataset's entry in the catalog</em>. For example, the <i>publication date</i> property of the <i>dataset</i> reflects
     the date when the information was originally made available by the publishing agency, while the publication date of the <i>catalog record</i> is the date when the dataset was added to the catalog.
@@ -793,7 +793,7 @@ into a separate named graph. The name of that graph should be the IRI of the cat
 <table class="definition">
   <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#DataDistributionService">dcat:DataDistributionService</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>A site or end-point that provides access to datasets and distributions of datasets.</td></tr>
+    <tr><td class="prop">Definition:</td><td>A site or end-point that provides access to datasets through distributions of the datasets</td></tr>
     <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a></td></tr>
     <tr><td class="prop">Usage note:</td><td> </td></tr>
     <tr><td class="prop">See also:</td><td> </td></tr>
@@ -820,7 +820,8 @@ into a separate named graph. The name of that graph should be the IRI of the cat
 <section id="class-dataservice">
 <h3>Class: Data Service</h3>
 <p>In addition to the properties inherited from the super-class Resource, the following properties are recommended for use on this class:
-<a href="#Property:dataservice_conformsto">conformsTo</a>, <a href="#Property:dataservice_endpoint">endPoint</a>
+	<a href="#Property:dataservice_endpointdescription">endpointDescription</a>,
+	<a href="#Property:dataservice_endpointlocation">endpointLocation</a>
 </p>
 
 <table class="definition">
@@ -838,23 +839,24 @@ into a separate named graph. The name of that graph should be the IRI of the cat
   New class in this revision of DCAT.
 </p>
 
-<section id="Property:dataservice_conformsto">
-<h4>Property: conforms to</h4>
+<section id="Property:dataservice_endpointlocation">
+<h4>Property: endpoint location</h4>
 <table class="definition">
-  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/conformsTo">dct:conformsTo</a></th></tr></thead>
+  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/conformsTo">dct:endpointLocation</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>An established standard to which the described resource conforms.</td></tr>
-    <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/Standard">dct:Standard</a> (A basis for comparison; a reference point against which other things can be evaluated.)</td></tr>
+    <tr><td class="prop">Definition:</td><td>Link to service end-point.</td></tr>
+		<tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a> (A basis for comparison; a reference point against which other things can be evaluated.)</td></tr>
+		<tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Resource">rdfs:Resource</a> (A basis for comparison; a reference point against which other things can be evaluated.)</td></tr>
   </tbody>
 </table>
 </section>
 
-<section id="Property:dataservice_endpoint">
-<h4>Property: endpoint</h4>
+<section id="Property:dataservice_endpointdescription">
+<h4>Property: endpoint description</h4>
 <table class="definition">
-  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/conformsTo">dct:endPoint</a></th></tr></thead>
+  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/conformsTo">dct:endpointDescription</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>Link to service end-point.</td></tr>
+    <tr><td class="prop">Definition:</td><td>Link to a description of the service end-point, for example an OpenAPI (Swagger) description, an OGC getCapabilities response, a SD Service, an OpenSearch or WSDL document.  </td></tr>
 		<tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a> (A basis for comparison; a reference point against which other things can be evaluated.)</td></tr>
 		<tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Resource">rdfs:Resource</a> (A basis for comparison; a reference point against which other things can be evaluated.)</td></tr>
   </tbody>
@@ -1060,11 +1062,11 @@ into a separate named graph. The name of that graph should be the IRI of the cat
 <table class="definition">
   <thead><tr><th>RDF class:</th><th><a href="http://www.w3.org/ns/dcat#Distribution">dcat:Distribution</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>Represents a specific available form of a dataset. Each dataset might be available in different forms,
-these forms might represent different formats of the dataset or different endpoints.
-Examples of distributions include a downloadable CSV file, an API or an RSS feed</td></tr>
+    <tr><td class="prop">Definition:</td><td>A specific representation of a dataset. A dataset might be available in several different forms,
+	          and these forms might comprise both different serializations or different schematic arrangements of the same data.
+	          Examples of distributions include a CSV file, a netCDF file, or a data-cube</td></tr>
     <tr><td class="prop">Usage note:</td><td>This represents a general availability of a dataset it implies no information
-    about the actual access method of the data, i.e. whether it is a direct download, API, or some through Web page.
+    about the actual access method of the data, i.e. whether by direct download, API, or through a Web page.
     The use of <a href="#Property:distribution_downloadurl">dcat:downloadURL</a> property indicates directly downloadable distributions.</td></tr>
   </tbody>
 </table>
@@ -1291,6 +1293,7 @@ Examples of distributions include a downloadable CSV file, an API or an RSS feed
 <a href="#Property:resource_theme">theme</a>,
 <a href="#Property:resource_title">title</a>,
 <a href="#Property:resource_type">type</a>,
+<a href="#Property:resource_conformsto">conformsTo</a>,
 <a href="#Property:resource_update_date">update date</a>,
 </p>
 
@@ -1317,9 +1320,12 @@ Examples of distributions include a downloadable CSV file, an API or an RSS feed
 <table class="definition">
   <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>An item, published or curated by a single agent.</td></tr>
+    <tr><td class="prop">Definition:</td><td>Resource published or curated by a single agent.</td></tr>
     <tr><td class="prop">Sub class of:</td><td> </td></tr>
-    <tr><td class="prop">Usage note:</td><td>Superclass of <a href="#Dataset">dcat:Dataset</a>, <a href="#DataService">dcat:DataService</a>, <a href="#Catalog">dcat:Catalog</a> and any other member of a <a href="#Catalog">dcat:Catalog</a>.
+    <tr><td class="prop">Usage note:</td><td>The class of all catalogued resources, the Superclass of
+			<a href="#Dataset">dcat:Dataset</a>, <a href="#DataService">dcat:DataService</a>, <a href="#Catalog">dcat:Catalog</a> and any other member of a <a href="#Catalog">dcat:Catalog</a>.
+			This class carries properties common to all catalogued resources, including datasets and data services.
+
 			It is strongly recommended to use a more specific sub-class when available.</td></tr>
     <tr><td class="prop">See also:</td><td> </td></tr>
   </tbody>
@@ -1498,6 +1504,17 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 				<a href="http://id.loc.gov/vocabulary/marcgt.html">MARC intellectual resource types</a>
 			</li>
 		</ol> To describe the file format, physical medium, or dimensions of the resource, use the <a href="http://purl.org/dc/terms/format">dct:format element</a>.</td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="Property:resource_conformsto">
+<h4>Property: conforms to</h4>
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/conformsTo">dct:conformsTo</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>An established standard to which the described resource conforms.</td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/Standard">dct:Standard</a> (A basis for comparison; a reference point against which other things can be evaluated.)</td></tr>
   </tbody>
 </table>
 </section>

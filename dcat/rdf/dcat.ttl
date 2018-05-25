@@ -158,7 +158,7 @@ dcat:Catalog
   skos:editorialNote "English definition updated in this revision. Multilingual text not yet updated." ;
   skos:scopeNote "Normalmente, un catalogo di dati nel web viene rappresentato come una singola istanza di questa classe."@it ;
   skos:scopeNote "Normalmente, un catálogo de datos disponible en la web se representa como una única instancia de esta clase."@es ;
-  skos:scopeNote "Typically, a web-based data catalog is represented as a single instance of this class."@en ;
+  skos:scopeNote "A web-based data catalog is typically represented as a single instance of this class."@en ;
   skos:scopeNote "Συνήθως, ένας κατάλογος δεδομένων στον Παγκόσμιο Ιστό αναπαρίσταται ως ένα στιγμιότυπο αυτής της κλάσης."@el ;
   skos:scopeNote "通常、ウェブ・ベースのデータ・カタログは、このクラスの1つのインスタンスとして表わされます。"@ja ;
 .
@@ -166,7 +166,7 @@ dcat:CatalogRecord
   rdf:type rdfs:Class ;
   rdf:type owl:Class ;
   rdfs:comment "1つのデータセットを記述したデータ・カタログ内のレコード。"@ja ;
-  rdfs:comment "A record in a data catalog, describing a single dataset or data service."@en ;
+  rdfs:comment "A record in a data catalog, describing the registration of a single dataset or data service."@en ;
   rdfs:comment "Un record in un catalogo di dati che descrive un singolo dataset."@it ;
   rdfs:comment "Un registre du catalogue ou une entrée du catalogue, décrivant un seul jeu de données"@fr ;
   rdfs:comment "Un registro en un catálogo de datos que describe un solo conjunto de datos."@es ;
@@ -202,8 +202,8 @@ dcat:CatalogRecord
 						  como por ejemplo detalles del proceso y de los agentes involucrados en algún cambio específico a los datos."""@es ;
   skos:scopeNote "Questa classe è opzionale e non tutti i cataloghi la utilizzeranno. Esiste per cataloghi in cui si opera una distinzione tra i metadati relativi al dataset ed i metadati relativi alla gestione del dataset nel catalogo. Ad esempio, la  proprietà per indicare la data di pubblicazione del dataset rifletterà la data in cui l'informazione è stata originariamente messa a disposizione dalla casa editrice, mentre la data di pubblicazione per il record nel catalogo rifletterà la data in cui il dataset è stato aggiunto al catalogo. Nei casi dove solo quest'ultima sia nota, si utilizzerà esclusivamente la data di  pubblicazione relativa al record del catalogo. Si noti che l'Ontologia W3C PROV permette di descrivere ulteriori informazioni sulla provenienza, quali i dettagli del processo, la procedura e l'agente coinvolto in una particolare modifica di un dataset."@it ;
   skos:scopeNote """This class is optional and not all catalogs will use it. It exists for
-            catalogs where a distinction is made between metadata about a dataset and
-            metadata about the dataset's entry in the catalog. For example, the publication
+            catalogs where a distinction is made between metadata about a dataset or data service and
+            metadata about the entry for the dataset or data service in the catalog. For example, the publication
             date property of the dataset reflects the date when the information was originally
             made available by the publishing agency, while the publication date of the catalog
             record is the date when the dataset was added to the catalog. In cases where both
@@ -221,15 +221,11 @@ dcat:CatalogRecord
 .
 dcat:DataDistributionService
   rdf:type owl:Class ;
-  rdfs:comment "A site or end-point that provides access to datasets and distributions of datasets" ;
+  rdfs:comment "A site or end-point that provides access to datasets through distributions of the datasets" ;
   rdfs:label "Data distribution service" ;
   rdfs:subClassOf dcat:DataService ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:hasValue <https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download> ;
-      owl:onProperty dct:type ;
-    ] ;
-  skos:changeNote "New class/property in this revision" ;
+  skos:changeNote "New class in this revision of DCAT" ;
+  skos:editorialNote "Status: Class accepted by DCAT revision team, but details of definition and constraints not yet resolved." ;
 .
 dcat:DataService
   rdf:type owl:Class ;
@@ -239,10 +235,16 @@ dcat:DataService
   rdfs:subClassOf dcat:Resource ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onProperty dct:conformsTo ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcat:endpointLocation ;
     ] ;
-  skos:changeNote "New class/property in this revision" ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcat:endpointDescription ;
+    ] ;
+  skos:changeNote "New class in this revision of DCAT" ;
+  skos:editorialNote "Status: Class accepted by DCAT revision team, but details of definition and constraints not yet resolved." ;
 .
 #dcat:DataTransformationService
 #  rdf:type owl:Class ;
@@ -292,19 +294,16 @@ dcat:Dataset
 .
 dcat:DiscoveryService
   rdf:type owl:Class ;
+  rdfs:comment "A service used for the discovery of data resources, typically using one or more catalogs of datasets and data services." ;
   rdfs:label "Resource Discovery Service" ;
   rdfs:subClassOf dcat:DataDistributionService ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:hasValue <http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/discovery> ;
-      owl:onProperty dct:type ;
-    ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:onProperty dct:servesDataset ;
       owl:someValuesFrom dcat:Catalog ;
     ] ;
-  skos:editorialNote "Status: proposed - not yet confirmed by DCAT revision team" ;
+  skos:changeNote "New class in this revision of DCAT" ;
+  skos:editorialNote "Status: Class accepted by DCAT revision team, but details of definition and constraints not yet resolved." ;
 .
 dcat:Distribution
   rdf:type rdfs:Class ;
@@ -312,9 +311,9 @@ dcat:Distribution
   rdfs:comment "Rappresenta una forma disponibile e specifica del dataset. Ciascun dataset può essere disponibile in forme differenti, che possono rappresentare formati diversi o diversi punti di accesso per un dataset. Esempi di distribuzioni sono un file CSV scaricabile, una API o un RSS feed."@it ;
   rdfs:comment """Representa una forma disponible y específica de los datos. Cada conjunto de datos puede estar disponible en
           formas diferentes, las cuáles pueden representar formatos diferentes del conjunto de datos o diferentes puntos de acceso."""@es ;
-  rdfs:comment """Represents a specific available form of a dataset. Each dataset might be available in
-          different forms, these forms might represent different formats of the dataset or different
-          endpoints. Examples of distributions include a downloadable CSV file, an API or an RSS feed"""@en ;
+  rdfs:comment """A specific representation of a dataset. A dataset might be available in several different forms,
+          and these forms might comprise both different serializations or different schematic arrangements of the same data.
+          Examples of distributions include a CSV file, a netCDF file, or a data-cube"""@en ;
   rdfs:comment """Représente une forme spécifique d'un jeu de données. Caque jeu de données peut être disponible
 					sous différentes formes, celles-ci pouvant représenter différents formats du jeu de données ou différents endpoint. Des exemples de distribution
 					sont des fichirs CSV, des API ou des flux RSS."""@fr ;
@@ -337,24 +336,27 @@ dcat:Distribution
           del método de acceso real a los datos, i.e., si es un enlace de descarga directa o a través de una página Web."""@es ;
   skos:scopeNote "Questa classe rappresenta una disponibilità generale di un dataset e non implica alcuna informazione sul metodo di accesso effettivo ai dati, ad esempio se si tratta di un accesso a download diretto, API, o attraverso una pagina Web. L'utilizzo della proprietà dcat:downloadURL indica distribuzioni direttamente scaricabili."@it ;
   skos:scopeNote """This represents a general availability of a dataset it implies no information about the
-          actual access method of the data, i.e. whether it is a direct download, API, or some
-          through Web page. The use of dcat:downloadURL property indicates directly downloadable distributions."""@en ;
+          actual access method of the data, i.e. whether by direct download, API, or through a Web page.
+          The use of dcat:downloadURL property indicates directly downloadable distributions."""@en ;
   skos:scopeNote """Αυτό αναπαριστά μία γενική διαθεσιμότητα ενός συνόλου δεδομένων και δεν υπονοεί τίποτα περί του πραγματικού τρόπου πρόσβασης στα δεδομένα, αν είναι άμεσα μεταφορτώσιμα,
 					  μέσω API ή μέσω μίας ιστοσελίδας. Η χρήση της ιδιότητας dcat:downloadURL δείχνει μόνο άμεσα μεταφορτώσιμες διανομές."""@el ;
   skos:scopeNote "これは、データセットの一般的な利用可能性を表わし、データの実際のアクセス方式に関する情報（つまり、直接ダウンロードなのか、APIなのか、ウェブページを介したものなのか）を意味しません。dcat:downloadURLプロパティーの使用は、直接ダウンロード可能な配信を意味します。"@ja ;
 .
 dcat:Resource
   rdf:type owl:Class ;
-  rdfs:comment "Item in a DCAT Catalog" ;
-  rdfs:label "Catalogued item" ;
+  rdfs:comment "Resource published or curated by a single agent" ;
+  rdfs:label "Catalogued resource" ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:minCardinality "1"^^xsd:nonNegativeInteger ;
       owl:onProperty dct:type ;
     ] ;
-  skos:changeNote "New class/property in this revision" ;
-  skos:scopeNote """The class of all catalogued resources.
-  It is recommended to use a sub-class, such as Dataset or DataDistributionService whenever possible""" ;
+  skos:changeNote "New class in this revision" ;
+  skos:editorialNote "Status: Class accepted by DCAT revision team, but details of definition and constraints not yet resolved." ;
+  skos:scopeNote """The class of all catalogued resources, the Superclass of
+    dcat:Dataset, dcat:DataService, dcat:Catalog and any other member of a dcat:Catalog.
+    This class carries properties common to all catalogued resources, including datasets and data services.
+    It is strongly recommended to use a more specific sub-class when available.""" ;
 .
 dcat:accessService
   rdf:type owl:ObjectProperty ;
@@ -362,6 +364,8 @@ dcat:accessService
   rdfs:label "data access service" ;
   rdfs:range dcat:DataDistributionService ;
   rdfs:subPropertyOf dcat:accessURL ;
+  skos:changeNote "New property in this revision of DCAT" ;
+  skos:editorialNote "Status: Property accepted by DCAT revision team, but details of definition and constraints not yet resolved." ;
 .
 dcat:accessURL
   rdf:type rdf:Property ;
@@ -442,7 +446,8 @@ dcat:catalog
   rdfs:range dcat:Catalog ;
   rdfs:subPropertyOf dct:hasPart ;
   rdfs:subPropertyOf rdfs:member ;
-  skos:changeNote "New class/property in this revision" ;
+  skos:changeNote "New property in this revision of DCAT" ;
+  skos:editorialNote "Status: Property accepted by DCAT revision team, but details of definition and constraints not yet resolved." ;
 .
 dcat:contactPoint
   rdf:type rdf:Property ;
@@ -538,11 +543,21 @@ dcat:downloadURL
   skos:scopeNote "The value is a URL."@en ;
   skos:scopeNote "Η τιμή είναι ένα URL."@el ;
 .
-dcat:endPoint
+dcat:endpointDescription
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Link to a description of the service end-point, for example an OpenAPI (Swagger) description, an OGC getCapabilities response, a SD Service, an OpenSearch or WSDL document.  " ;
+  rdfs:domain dcat:DataService ;
+  rdfs:label "description of service end-point" ;
+  skos:changeNote "New property in this revision of DCAT" ;
+  skos:editorialNote "Status: Property accepted by DCAT revision team, but details of definition and constraints not yet resolved." ;
+.
+dcat:endpointLocation
   rdf:type owl:ObjectProperty ;
   rdfs:comment "Link to service end-point" ;
   rdfs:domain dcat:DataService ;
   rdfs:label "service end-point" ;
+  skos:changeNote "New property in this revision of DCAT" ;
+  skos:editorialNote "Status: Property accepted by DCAT revision team, but details of definition and constraints not yet resolved." ;
 .
 dcat:keyword
   rdf:type rdf:Property ;
@@ -649,7 +664,8 @@ dcat:servesDataset
   rdfs:domain dcat:DataDistributionService ;
   rdfs:label "serves dataset" ;
   rdfs:range dcat:Dataset ;
-  skos:changeNote "New class/property in this revision" ;
+  skos:changeNote "New property in this revision of DCAT" ;
+  skos:editorialNote "Status: Property accepted by DCAT revision team, but details of definition and constraints not yet resolved." ;
 .
 dcat:service
   rdf:type owl:ObjectProperty ;
@@ -659,7 +675,8 @@ dcat:service
   rdfs:range dcat:DataService ;
   rdfs:subPropertyOf dct:hasPart ;
   rdfs:subPropertyOf rdfs:member ;
-  skos:changeNote "New class/property in this revision" ;
+  skos:changeNote "New property in this revision of DCAT" ;
+  skos:editorialNote "Status: Property accepted by DCAT revision team, but details of definition and constraints not yet resolved." ;
 .
 dcat:theme
   rdf:type rdf:Property ;
