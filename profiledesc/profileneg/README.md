@@ -1,5 +1,7 @@
 # Profile negotiation - proposal
 
+*This proposal relates previous, unstandardised, work that partly deals with [Profile negotiation [RPFN] #74](https://github.com/w3c/dxwg/issues/74) and attempted to make human- and machine-readable lists of profiles available for resources and provides a simple mechanism to access them. This also addressed [Requirement, 6.8.4 Profiles listing [RPFL]](https://github.com/w3c/dxwg/issues/73) but was not widely implemented as a standard method.*
+
 There is a convention implemented by some Linked Data platforms to provide access to different model *views* of a resource by use of the query string argument `_view` and for MIME type selection by use of `_format` that may be in addition to regular HTTP Accept Header MIME format requests. This allows the following:
 
 URI | Description of dereferencing
@@ -81,7 +83,7 @@ _:v3 a ereg:View ;
 ![](alternates.png)
 **Figure 1**: Graphical representation of Listing 1
 
-# Proposal to use profiledesc
+## Proposal to use profiledesc
 We propose to model the contents of the Alternates View of objects using this Profiles Description Ontology. For the example in Listing 1 & Figure 1, the modelling could be as per Figure 2 below.
 
 ![](alternates_profiles.png)
@@ -89,3 +91,6 @@ We propose to model the contents of the Alternates View of objects using this Pr
 
 ### Benefits
 Currently, there is no formal model to inform a machine of the different model views and formats available for a resource. We believe it straightforward to use the Profiles Description Ontology as outlined in Figure 2 above. Basic human-readable descriptions of model view and formats are directly catered for using the properties already suggested for use in the Ontology and the descriptions of the specifications to which various views conform is handled better: whereas in the current alternates view, a *namespace* is indicated for a view, using ProfDesc, a view can be much better described using a `Profile` (or a `Base Specification`) and an `Implementation Resource Descriptor` and all the standard ProfDesc constructs.
+
+## Proposal to allow browser profile negotiation
+In addition, we propose to indicate how to negotiate profile information within the web browser, as requested in the proposed Use Case [web browser navigation of profile information](https://github.com/w3c/dxwg/issues/239) in some manner like the implementation described above. Details of this proposal are not given yet until further work with Lars & Ruben on harmonising approaches with the HTTP Accept-Profile and Profile headers is undertaken.
