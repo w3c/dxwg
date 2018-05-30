@@ -1,21 +1,19 @@
-# Profile Descriptions examples
-Here are some examples of the Profile Descriptions Ontology modelling existing or expected profile.
-
-
+# Profile Descriptions Ontology examples
+Here are some examples of the Profile Descriptions Ontology modelling existing or expected profiles.
 
 ### DCAT-AP
-DCAT-AP is the widely used European *Application Profile* of DCAT. DCAT-AP's specification is available in document form (PDF & DOCX) which has the role of *Guidance* and is also available in machine-readable form, using the SHACL RDF constraints language, which has the role *Conformance Test Constraints*.
+DCAT-AP is the widely used European *Application Profile* of DCAT. DCAT-AP's specification is available in document form (PDF & DOCX) which has the role of *Guidance* and is also available in machine-readable form, using the [SHACL](https://www.w3.org/TR/shacl/), the W3C's Shapes Constraints Language constraints language, which has the role *Conformance Test Constraints*.
 
 The current state of DCAT-AP usage already exhibits nested inheritance and multiple different types of implementation resources, of which a few examples are shown here.
 
-The degree to which categorisation of roles is explicity supported is a subject for discussion.
+The degree to which categorisation of roles is explicitly supported is a subject for discussion.
 
 The RDF for this example is in [profiledesc_examples.ttl](profiledesc_examples.ttl).
 
 ![](eg_dcat-ap.png)  
 Figure 1: DCAT-AP profile of DCAT
 
-Additionally, there are a range of national DCAT-AP profiles, such as DCAT-AP IT (Italy) which profile DCAT-AP and also other non-national profiles such as GeoDCAT-AP. Note that GeoDCAT-AP profiles both DCAT-AP *and* GeoDCAT.
+Additionally, there are a range of national DCAT-AP profiles, such as DCAT-AP IT (Italy) which profile DCAT-AP and also other non-national profiles such as GeoDCAT-AP. Note that GeoDCAT-AP profiles both DCAT-AP *and* GeoDCAT. The property `inheritedFrom` is used to show that at least some of the `Implementation Resource Descriptor` content for DCAT-AP-IT is inherited from DCAT & DCAT-AP from which DCAT-AP-IT derives.
 
 ![](eg_dcat-ap2.png)  
 Figure 2: Further DCAT-AP profiling
