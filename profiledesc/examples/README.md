@@ -6,7 +6,7 @@ Here are some examples of the Profile Descriptions Ontology modelling existing o
 ### DCAT-AP
 DCAT-AP is the widely used European *Application Profile* of DCAT. DCAT-AP's specification is available in document form (PDF & DOCX) which has the role of *Guidance* and is also available in machine-readable form, using the SHACL RDF constraints language, which has the role *Conformance Test Constraints*.
 
-The current state of DCAT-AP usage already exhibits nested inheritance and multiple different types of implementation resources, of which a few examples are shown here. 
+The current state of DCAT-AP usage already exhibits nested inheritance and multiple different types of implementation resources, of which a few examples are shown here.
 
 The degree to which categorisation of roles is explicity supported is a subject for discussion.
 
