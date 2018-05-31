@@ -48,6 +48,7 @@ Figure 5: Geoscience Australia profile
 
 ### Open Geospatial Consortium
 
-The RDF for this example is in [profiledesc_examples.ttl](profiledesc_examples.ttl).
+![](eg_ogc.png)  
+Figure 6: Modelling of current OGC WMS and WMTS profiling
 
-*Figure coming soon!*
+The RDF for this example is in [profiledesc_examples.ttl](profiledesc_examples.ttl).

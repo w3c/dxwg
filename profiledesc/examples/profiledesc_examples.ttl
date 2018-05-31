@@ -1,5 +1,3 @@
-# prefix: eg
-
 @prefix : <https://github.com/w3c/dxwg/blob/profiledesc-working/profiledesc/examples/profiledesc_examples.ttl#>
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dct: <http://purl.org/dc/terms/> .
@@ -51,7 +49,7 @@
 	rdfs:label "DCAT constraints to meet the DCAT 2018 restrictions"@en ;
 	prof:resource <http://data.europa.eu/w21/016d88c3-a0b3-4506-ae4e-758e7401c096> ;
 	dct:conformsTo  owl:Ontology ;
-  dct:format "application/rdf+xml" ;  # is this a Literal or a Class instance? - Nick
+  dct:format <https://www.iana.org/assignments/media-types/text/xml> ;
 .
 
 
@@ -76,89 +74,122 @@
 	dct:conformsTo <http://www.w3.org/ns/shacl#>;  # the namespace for SHACL
   dct:format "text/turtle" ;
 	prof:resourceRole roles:ConformanceTest ;
-	.
+.
 
 <https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f6f27f059_bf785_b4d7d_bb602_b6448aab73bd5>
   a prof:ImplResourceDesc;
 	rdfs:label "DCAT-AP Guidance Document (Word)" ;
-	dct:format "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+	dct:format <https://www.iana.org/assignments/media-types/application/vnd.openxmlformats-officedocument.wordprocessingml.document> ;
 	prof:resourceRole roles:Guidance ;
-	.
+.
 
 <https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f17e18570_b1d77_b4171_b9df5_bb53cb4f017d4>
   a prof:ImplResourceDesc;
 	rdfs:label "DCAT-AP Guidance Document (PDF)" ;
-	dct:format "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+	dct:format <https://www.iana.org/assignments/media-types/application/pdf> ;
 	prof:resourceRole roles:Guidance ;
-	.
+.
 
 <https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f1131a208_b92e9_b4427_ba40c_b6c47746cd422>
   a prof:ImplResourceDesc;
 	rdfs:label "DCAT-AP Image" ;
-	dct:format "image/png";
+	dct:format <https://www.iana.org/assignments/media-types/image/png> ;
 	prof:resourceRole roles:Guidance ;
-	.
+.
 
 # DCAT-AP example 2: DCAT-AP, GeoDCAT & DCAT-AP-IT
 
 :geodcat a prof:Profile ;
-	prof:profileOf <https://joinup.ec.europa.eu/release/dcat-ap-v11> ;
-	rdfs:label "GeoDCAT A geospatial extension for the DCAT" ;
+	prof:profileOf <http://www.w3.org/ns/dcat> ;
+	rdfs:label "GeoDCAT" ;
+  rdfs:comment "A geospatial extension for the DCAT"@en ;
 	prof:token "geodcat" ;
-	.
+.
 
 :DCAT-AP-IT a prof:Profile ;
 	prof:profileOf <https://joinup.ec.europa.eu/release/dcat-ap-v11> ;
-	rdfs:label "DCAT-AP Italian profile" ;
-	prof:token "DCAT-AP-IT" ;
-	.
+	rdfs:label "DCAT-AP-IT" ;
+  rdfs:comment "Italian profile of DCAT-AP"@en ;
+	prof:token "dcat-ap-it" ;
+  prof:resource <https://github.com/geosolutions-it/ckanext-dcatapit> ;
+.
 
 <https://joinup.ec.europa.eu/release/geodcat-ap-v10> a prof:Profile ;
-	prof:profileOf <https://joinup.ec.europa.eu/release/dcat-ap-v11> , :geodcat;
-	rdfs:label "GeoDCAT-AP: A geospatial extension for the DCAT application profile for data portals in Europe" ;
+	prof:profileOf <https://joinup.ec.europa.eu/release/dcat-ap-v11> , :geodcat ;
+	rdfs:label "GeoDCAT-AP" ;
+  rdfs:comment "A geospatial extension for the DCAT application profile for data portals in Europe"@en ;
 	prof:token "geodcat-ap" ;
-	.
+.
 
+<https://github.com/geosolutions-it/ckanext-dcatapit>  # this is a test, is it sensible to reference a code repo here?
+  a prof:ImplResourceDesc;
+	rdfs:label "DCAT-AP-IT Implementation Resource Descriptor" ;
+  rdfs:comment "This resource captures implementations of the DCAT-AP-IT profile"@en ;
+	dct:format "image/png";
+	prof:resourceRole roles:ASoFarUndefinedRole ;  # what role does a toolkit like this play?
+.
 
 # OpenGeospatial Consortium Examples
+
 <http://www.opengis.net/def/serviceType/ogc/wms/1.3>
-  rdf:type dct:Standard, prof:Profile ;
+  a dct:Standard, prof:Profile ;
+  rdfs:label "Web Map Service 1.3" ;
+  rdfs:comment "The OpenGIS Web Map Server Implementation Specification, v1.3"
   prof:token "WMS13" ;
   dct:publisher <http://www.opengis.net/def/auth/ogc> ;
-  prof:hasProfile :wms13_dgiwg;
-
+  prof:hasProfile :wms13_dgiwg ;
 .
 
 :wms13_dgiwg
-  rdf:type prof:Profile ;
-  prof:profiles <http://www.opengis.net/def/serviceType/ogc/wms/1.3> ;
-  rdfs:label "wms13 dgiwg" ;
-  skos:prefLabel "wms13 dgiwg" ;
+  a prof:Profile ;
+  rdfs:label "DGIWG – WMS 1.3 Profile" ;
   prof:token "WMS-DGIWG" ;
+  prof:profileOf <http://www.opengis.net/def/serviceType/ogc/wms/1.3> ;
+  prof:resource <https://portal.opengeospatial.org/files/?artifact_id=66915> ;
 .
-:wmts
-  rdf:type dct:Standard ;
+
+<https://portal.opengeospatial.org/files/?artifact_id=66915>
+  a prof:ImplResourceDesc;
+	rdfs:label "DGIWG Implementation Resource Descriptor" ;
+  rdfs:comment "This document defines specific DGIWG requirements, recommendations and guidelines for implementations of the ISO and OGC Web Map Service standards; ISO 19128:2005 Web Map Server Interface and the OpenGIS Web Map Server Implementation Specification 1.3.0"@en ;
+	dct:format <https://www.iana.org/assignments/media-types/application/pdf> ;
+	prof:resourceRole roles:FullConstraints ;  # this is the definitive doc for the profile
+.
+
+<http://www.opengeospatial.org/standards/wmts>
+  a dct:Standard ;
+  rdfs:label "OpenGIS Web Map Tile Service Implementation Standard" ;
   prof:token "WMTS" ;
   prof:hasProfile :wmts_simple ;
+  prof:resource <http://schemas.opengis.net/wmts/> ,
+                <http://cite.opengeospatial.org/pub/cite/files/edu/wmts/text/target-api/index.html> ;
 .
-:wmts-simple-sch
-  rdf:type prof:ImplResourceDesc ;
-  rdfs:label "WMTS simple Schematron constraints" ;
-  skos:prefLabel "WMS1.3 DGWIG profile schema" ;
+
+<http://schemas.opengis.net/wmts/>
+  a prof:ImplResourceDesc;
+  rdfs:label "WMTS XML Schema" ;
+  dct:format <https://www.iana.org/assignments/media-types/text/xml> ;
+  prof:resourceRole roles:ConformanceTest ;
 .
-:wmts-swagger-ui
-  rdf:type prof:ImplResourceDesc ;
-  dct:format <http://purl.org/NET/mediatypes/text/html> ;
-  dct:type prof:OAS ;
-  prof:resource <http://cite.opengeospatial.org/pub/cite/files/edu/wmts/text/target-api/index.html> ;
+
+<http://cite.opengeospatial.org/pub/cite/files/edu/wmts/text/target-api/index.html>
+  a prof:ImplResourceDesc ;
   rdfs:label "WMTS OAS (Swagger) documentation UI" ;
-  skos:prefLabel "WMTS OAS (Swagger) documentation UI" ;
+  dct:format <https://www.iana.org/assignments/media-types/text/html> ;
+  prof:resourceRole roles:Guidance , roles:PartConstraints ;
 .
+
 :wmts_simple
-  rdf:type prof:Profile ;
-  prof:profileOf :wmts ;
+  a prof:Profile ;
+  prof:profileOf <http://www.opengeospatial.org/standards/wmts> ;
   prof:resource :wmts-simple-sch ;
-  rdfs:label "WMTS Simple Profile" ;
-  skos:prefLabel "WMTS Simple Profile" ;
+  rdfs:label "OGC Web Map Tile Service (WMTS) Simple Profile" ;
   prof:token "WMTS-S" ;
+.
+
+<http://docs.opengeospatial.org/is/13-082r2/13-082r2.html>
+  a prof:ImplResourceDesc;
+  rdfs:label "WMTS Simple Document" ;
+  dct:format <https://www.iana.org/assignments/media-types/application/pdf>;
+  prof:resourceRole roles:FullConstraints ;  # this is the definitive doc for the profile
 .
