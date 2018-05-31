@@ -1,59 +1,59 @@
-@prefix : <http://promsns.org/def/prof#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
-@prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix prof: <http://promsns.org/def/prof#> .
+@prefix prof: <https://w3c.github.io/dxwg/profiledesc#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@base <http://promsns.org/def/prof> .
+@base <https://w3c.github.io/dxwg/profiledes> .
 
-<http://promsns.org/def/prof_dcat> rdf:type owl:Ontology ;
+<https://w3c.github.io/dxwg/profiledesc_dcat_alignment.ttl> rdf:type owl:Ontology ;
                                owl:versionIRI <http://promsns.org/def/prof/1.0> ;
                                dcterms:contributor <http://orcid.org/0000-0002-8742-7730> ;
                                dc:description "This ontology defines an alignment with DCAT through subclassing relevant DCAT types and properties, without limiting the scope of the main profileDesc ontology to DCAT."@en ;
-                             rdfs:label "Profile Description alignment to DCAT concepts"@en ;
+                               rdfs:label "Profile Description alignment to DCAT concepts"@en ;
                                owl:versionInfo "1.0"^^xsd:string ;
-                              dc:creator "Rob Atkinson"^^xsd:string ;
+                               dc:creator "Rob Atkinson"^^xsd:string ;
+                               dc:contributor "Nicholas Car"^^xsd:string ;
 .
 
 #################################################################
-###  http://promsns.org/def/prof#hasProfile
+###  https://w3c.github.io/dxwg/profiledesc#hasProfile
 prof:hasProfile rdf:type owl:ObjectProperty ;
                 rdfs:comment "May be aligned as a subproperty of a (possible new) property for relationships between DCAT resources"@en ;
 .
 
-###  http://promsns.org/def/prof#profileOf
+###  https://w3c.github.io/dxwg/profiledesc#profileOf
 prof:profileOf rdf:type owl:ObjectProperty ;
                rdfs:domain prof:Profile ;
-                 rdfs:comment "May be aligned as a subproperty of a (possible new) property for relationships between DCAT resources"@en ;
-				 .
+               rdfs:comment "May be aligned as a subproperty of a (possible new) property for relationships between DCAT resources"@en ;
+.
 
-###  http://promsns.org/def/prof#resource
+###  https://w3c.github.io/dxwg/profiledesc#resource
 prof:resource rdf:type owl:ObjectProperty ;
-              rdfs:subPropertyOf dcat:distribution .
+              rdfs:subPropertyOf dcat:distribution ;
+.
 
 
-###  http://promsns.org/def/prof#resourceRole
+###  https://w3c.github.io/dxwg/profiledesc#resourceRole
 prof:resourceRole rdf:type owl:ObjectProperty ;
-                  rdfs:comment "May be aligned as in future with DCAT distribution role qualification mechanisms"@en ; .
-				  
+                  rdfs:comment "May be aligned as in future with DCAT distribution role qualification mechanisms"@en ;
+.
+
 
 ###  http://purl.org/dc/terms/conformsTo
 dcterms:conformsTo rdf:type owl:ObjectProperty ;
-			rdfs:comment "Alignment presumes that DCAT will also use this property to qualify profile conformance for distributions."@en ; 
-                   rdfs:range dcterms:Standard .
+			             rdfs:comment "Alignment presumes that DCAT will also use this property to qualify profile conformance for distributions."@en ;
+                   rdfs:range dcterms:Standard ;
+.
 
 
 ###  http://purl.org/dc/terms/format
 dcterms:format rdf:type owl:ObjectProperty ;
-	rdfs:comment "Alignment presumes that DCAT will also use this property to qualify profile conformance for distributions."@en ;
+	             rdfs:comment "Alignment presumes that DCAT will also use this property to qualify profile conformance for distributions."@en ;
 .
 
 
@@ -62,21 +62,22 @@ dcterms:format rdf:type owl:ObjectProperty ;
 #################################################################
 
 
-###  http://promsns.org/def/prof#ImplResourceDesc
-prof:ImplResourceDesc rdf:type owl:Class ;                      
+###  https://w3c.github.io/dxwg/profiledesc#ImplResourceDesc
+prof:ImplResourceDesc rdf:type owl:Class ;
                       rdfs:comment "A resource that defines implementing rules for a profile. Must indicate the purpose (dct:type) and the formalism (dct:format) used to allow machine mediation of such rules."@en ;
-                      rdfs:label "Implementation Resource Descriptor"@en .
-
-
-###  http://promsns.org/def/prof#ImplResourceRole
-prof:ImplResourceRole rdf:type owl:Class ;
-                      rdfs:subClassOf dcat:Distribution ;
-                      rdfs:comment "Or a superclass od Distribution if Distribution domain remains dcat:Dataset"@en ;
+                      rdfs:label "Implementation Resource Descriptor"@en ;
 .
 
 
-###  http://promsns.org/def/prof#Profile
+###  https://w3c.github.io/dxwg/profiledesc#ImplResourceRole
+prof:ImplResourceRole rdf:type owl:Class ;
+                      rdfs:subClassOf dcat:Distribution ;
+                      rdfs:comment "Or a superclass of dcat:Distribution if dcat:Distribution domain remains dcat:Dataset"@en ;
+.
+
+
+###  https://w3c.github.io/dxwg/profiledesc#Profile
 prof:Profile rdf:type owl:Class ;
-             rdfs:subClassOf dcat:Resource .
-
-
+             rdfs:subClassOf dcat:Resource ;
+             rdfs:comment "This is a generic association"@en ;
+.
