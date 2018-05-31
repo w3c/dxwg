@@ -1,4 +1,4 @@
-@prefix : <http://promsns.org/def/prof#> .
+@prefix : <https://w3c.github.io/dxwg/profiledesc/profiledesc#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -7,18 +7,18 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix prof: <http://promsns.org/def/prof#> .
+@prefix prof: <https://w3c.github.io/dxwg/profiledesc/profiledesc#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@base <http://promsns.org/def/prof> .
+@base <https://w3c.github.io/dxwg/profiledesc/profiledesc> .
 
-<http://promsns.org/def/prof> rdf:type owl:Ontology ;
-                               owl:versionIRI <http://promsns.org/def/prof/1.0> ;
+<https://w3c.github.io/dxwg/profiledesc/profiledesc> rdf:type owl:Ontology ;
+                               owl:versionIRI <https://w3c.github.io/dxwg/profiledesc/profiledesc/1.0> ;
                                dcterms:contributor <http://orcid.org/0000-0002-8742-7730> ;
                                dc:description "This is an RDF/OWL Ontology for describing relationships between Specifications, implementing profiles and supporting artefacts."@en ;
-                               dcterms:modified "2018-10-04"^^xsd:date ;
+                               dcterms:modified "2018-05-30"^^xsd:date ;
                                dc:contributor "Simon Cox"^^xsd:string ;
                                rdfs:comment "This model provides a canonical vocabulary for describing profiling relationships between http://dublincore.org/2012/06/14/dcterms#Standard entities and attachment of resources defining additional constraints"@en ;
                                rdfs:label "Profile Descriptions Ontology"@en ;
@@ -80,30 +80,37 @@ skos:topConceptOf rdf:type owl:AnnotationProperty .
 #    Object Properties
 #################################################################
 
-###  http://promsns.org/def/prof#hasProfile
+###  https://w3c.github.io/dxwg/profiledesc/profiledesc#hasProfile
 prof:hasProfile rdf:type owl:ObjectProperty ;
                 owl:inverseOf prof:profileOf ;
                 rdfs:comment "A known profile of a specification"@en ;
                 rdfs:label "has profile" .
 
 
-###  http://promsns.org/def/prof#profileOf
+###  https://w3c.github.io/dxwg/profiledesc/profiledesc#profileOf
 prof:profileOf rdf:type owl:ObjectProperty ;
                rdfs:domain prof:Profile ;
                rdfs:range prof:Profile ;
                dc:description "The semantics of the rdfs:Range means that any resource treated as a base specification can be regarded as a Profile (i.e. may be any specification with an empty set of additional constraints)"@en ;
+               rdfs:comment "The immediate parent (base specification) a Profile describes conformance to"@en ;
+               rdfs:label "profile of" .
+
+###  https://w3c.github.io/dxwg/profiledesc/profiledesc#profileOfTransitive
+prof:profileOfTransitive rdf:type owl:ObjectProperty ;
+               rdfs:domain prof:Profile ;
+               rdfs:range prof:Profile ;
+               dc:description "A means to list all the transitive hierarchy of base specifications that this profile implies conformance to."@en ;
                rdfs:comment "A base specification a Profile conforms to"@en ;
                rdfs:label "profile of" .
 
-
-###  http://promsns.org/def/prof#resource
+###  https://w3c.github.io/dxwg/profiledesc/profiledesc#resource
 prof:resource rdf:type owl:ObjectProperty ;
               rdfs:range prof:ImplResourceDesc ;
               rdfs:comment "Link to an Implementing Resource Descriptor"@en ;
               rdfs:label "resource"@en .
 
 
-###  http://promsns.org/def/prof#resourceRole
+###  https://w3c.github.io/dxwg/profiledesc/profiledesc#resourceRole
 prof:resourceRole rdf:type owl:ObjectProperty ;
                   rdfs:domain prof:ImplResourceDesc ;
                   rdfs:range skos:Concept ;
@@ -111,11 +118,20 @@ prof:resourceRole rdf:type owl:ObjectProperty ;
                   rdfs:comment "Functional role of an Implementation Resource"@en ;
                   rdfs:label "resource role"^^xsd:string .
 
+###  https://w3c.github.io/dxwg/profiledesc/profiledesc#inheritedFrom
+prof:inheritedFrom rdf:type owl:ObjectProperty ;
+                  rdfs:domain prof:ImplResourceDesc ;
+                  rdfs:range prof:Profile ;
+                  dc:description "Provides a means to collate all inherited constraints from base specifications."@en ;
+                  rdfs:comment "Profile from inheritance hierarchy that defines these constraints. If absent, then the resource applies specifically to the profiles that refer to this resource."@en ;
+                  rdfs:label "Inherited From"^^xsd:string .
 
-###  http://promsns.org/def/prof#token
+
+###  https://w3c.github.io/dxwg/profiledesc/profiledesc#token
 prof:token rdf:type owl:ObjectProperty ;
-           rdfs:domain xsd:token ;
-           rdfs:range prof:Profile .
+		   rdfs:label "Short token for a profile.  For potential use in content negotiation. Will require a registry to disambiguate as do MIME type tokens"@en;
+           rdfs:domain prof:Profile ;
+           rdfs:range xsd:token .
 
 
 ###  http://purl.org/dc/terms/conformsTo
@@ -131,7 +147,7 @@ dcterms:format rdf:type owl:ObjectProperty .
 #    Data properties
 #################################################################
 
-###  http://promsns.org/def/prof#token
+###  https://w3c.github.io/dxwg/profiledesc/profiledesc#token
 prof:token rdf:type owl:DatatypeProperty .
 
 
@@ -139,7 +155,7 @@ prof:token rdf:type owl:DatatypeProperty .
 #    Classes
 #################################################################
 
-###  http://promsns.org/def/prof#BaseSpecification
+###  https://w3c.github.io/dxwg/profiledesc/profiledesc#BaseSpecification
 prof:BaseSpecification rdf:type owl:Class ;
                        rdfs:subClassOf prof:Profile ,
                                        [ rdf:type owl:Restriction ;
@@ -151,37 +167,25 @@ prof:BaseSpecification rdf:type owl:Class ;
                        rdfs:label "Base Specification" .
 
 
-###  http://promsns.org/def/prof#ImplResourceDesc
+###  https://w3c.github.io/dxwg/profiledesc/profiledesc#ImplResourceDesc
 prof:ImplResourceDesc rdf:type owl:Class ;
-                      rdfs:subClassOf [ rdf:type owl:Restriction ;
-                                        owl:onProperty dcterms:format ;
-                                        owl:minCardinality "1"^^xsd:nonNegativeInteger
-                                      ] ,
-                                      [ rdf:type owl:Restriction ;
-                                        owl:onProperty prof:resourceRole ;
-                                        owl:cardinality "1"^^xsd:nonNegativeInteger
-                                      ] ,
-                                      [ rdf:type owl:Restriction ;
-                                        owl:onProperty dcterms:conformsTo ;
-                                        owl:cardinality "1"^^xsd:nonNegativeInteger
-                                      ] ;
                       rdfs:comment "A resource that defines implementing rules for a profile. Must indicate the purpose (dct:type) and the formalism (dct:format) used to allow machine mediation of such rules."@en ;
                       rdfs:label "Implementation Resource Descriptor"@en .
 
 
-###  http://promsns.org/def/prof#ImplResourceRole
+###  https://w3c.github.io/dxwg/profiledesc/profiledesc#ImplResourceRole
 prof:ImplResourceRole rdf:type owl:Class ;
                       rdfs:subClassOf skos:Concept ;
                       rdfs:comment "The role that an Implementation Resource plays. Specific terms must come from a vocabulary."@en ;
                       rdfs:label "Implementation Resource Role" .
 
 
-###  http://promsns.org/def/prof#Profile
+###  https://w3c.github.io/dxwg/profiledesc/profiledesc#Profile
 prof:Profile rdf:type owl:Class ;
-             rdfs:subClassOf skos:Concept ;
+             rdfs:subClassOf skos:Concept , dcterms:Standard ;
              dc:description "Profile is modelled as a skos:Concept to explicitly support the notion of profiles organised as classification taxonomies. SKOS semantic relations such as skos:broader/narrower and broaderTransitive properties may be used."@en ;
              dc:source <https://www.w3.org/2017/dxwg/wiki/ProfileContext> ;
-             rdfs:comment "A named set of constraints on one or more identified base specifications, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of those base specifications necessary to accomplish a particular function."@en ;
+             skos:definition "A named set of constraints on one or more identified base specifications, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of those base specifications necessary to accomplish a particular function."@en ;
              rdfs:label "Implementation Profile" .
 
 
@@ -201,11 +205,6 @@ skos:Concept rdf:type owl:Class .
 skos:ConceptScheme rdf:type owl:Class .
 
 
-[ rdfs:comment "Each implementing resource will also conform to some specification, which may in turn be a profile"
-] .
-
-[ owl:minCardinality "1"^^xsd:nonNegativeInteger
- ] .
 
 #################################################################
 #    Annotations
