@@ -416,6 +416,12 @@ See <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>. </p>
 </p>
 </div>
 
+<p class="issue" data-number="116">
+	The need for resources other than dcat:Dataset to be included in a catalog is being considered as part of the revision of DCAT.
+	Also see <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>.
+</p>
+
+
 <table class="definition">
   <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Catalog">dcat:Catalog</a></th></tr></thead>
   <tbody>
@@ -605,11 +611,6 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 <section id="Property:catalog_dataset">
 <h4>Property: dataset</h4>
 
-<p class="issue" data-number="116">
-	The need for resources other than dcat:Dataset to be included in a catalog is being considered as part of the revision of DCAT.
-	Also see <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>.
-</p>
-
 <p class="issue" data-number="117">
 	The axiomatization of dcat:dataset is being re-evaluated as part of the revision of DCAT.
 </p>
@@ -790,6 +791,10 @@ into a separate named graph. The name of that graph should be the IRI of the cat
 <a href="#Property:datadistributionservice_servesdataset">servesDataset</a>,
 </p>
 
+<p class="issue" data-number="56">
+	The need to provide more information about the nature of data distribution services has been identified as a requirement to be satisfied in the revision of DCAT.
+</p>
+
 <table class="definition">
   <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#DataDistributionService">dcat:DataDistributionService</a></th></tr></thead>
   <tbody>
@@ -821,7 +826,9 @@ into a separate named graph. The name of that graph should be the IRI of the cat
 <h3>Class: Data Service</h3>
 <p>In addition to the properties inherited from the super-class <a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a>, the following properties are recommended for use on this class:
 	<a href="#Property:dataservice_endpointdescription">endpointDescription</a>,
-	<a href="#Property:dataservice_endpointlocation">endpointLocation</a>
+	<a href="#Property:dataservice_endpointurl">endpointURL</a>,
+	<a href="#Property:dataservice_license">license</a>,
+	<a href="#Property:dataservice_accessRights">accessRights</a>
 </p>
 
 <table class="definition">
@@ -839,14 +846,14 @@ into a separate named graph. The name of that graph should be the IRI of the cat
   New class in this revision of DCAT.
 </p>
 
-<section id="Property:dataservice_endpointlocation">
-<h4>Property: endpoint location</h4>
+<section id="Property:dataservice_endpointurl">
+<h4>Property: endpoint address</h4>
 <table class="definition">
-  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/conformsTo">dct:endpointLocation</a></th></tr></thead>
+  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#endpointURL">dct:endpointURL</a></th></tr></thead>
   <tbody>
     <tr><td class="prop">Definition:</td><td>Link to service end-point.</td></tr>
-		<tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a> (A basis for comparison; a reference point against which other things can be evaluated.)</td></tr>
-		<tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Resource">rdfs:Resource</a> (A basis for comparison; a reference point against which other things can be evaluated.)</td></tr>
+		<tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a> </td></tr>
+		<tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2001/XMLSchema#anyURI">xsd:anyURI</a> </td></tr>
   </tbody>
 </table>
 </section>
@@ -857,8 +864,32 @@ into a separate named graph. The name of that graph should be the IRI of the cat
   <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/conformsTo">dct:endpointDescription</a></th></tr></thead>
   <tbody>
     <tr><td class="prop">Definition:</td><td>Link to a description of the service end-point, for example an OpenAPI (Swagger) description, an OGC getCapabilities response, a SD Service, an OpenSearch or WSDL document.  </td></tr>
-		<tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a> (A basis for comparison; a reference point against which other things can be evaluated.)</td></tr>
-		<tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Resource">rdfs:Resource</a> (A basis for comparison; a reference point against which other things can be evaluated.)</td></tr>
+		<tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a> </td></tr>
+		<tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Resource">rdfs:Resource</a> </td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="Property:dataservice_license">
+<h4>Property: license</h4>
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/license">dct:license</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>This links to the license document under which the service is made available.</td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/LicenseDocument">dct:LicenseDocument</a></td></tr>
+    <tr><td class="prop">See also:</td><td><a href="#Property:distribution_rights" title=""> distribution rights</a>,
+    <a href="#Property:catalog_license" title="">catalog license</a></td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="Property:dataservice_accessrights">
+<h4>Property: access rights</h4>
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/accessRights">dct:accessRights</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>Access Rights may include information regarding access or restrictions based on privacy, security, or other policies. </td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/RightsStatement">dct:RightsStatement</a></td></tr>
   </tbody>
 </table>
 </section>
@@ -875,6 +906,10 @@ into a separate named graph. The name of that graph should be the IRI of the cat
 <a href="#Property:dataset_frequency">frequency</a>,
 <a href="#Property:dataset_spatial">spatial coverage</a>,
 <a href="#Property:dataset_temporal">temporal coverage</a>,
+</p>
+
+<p>
+	Information about licences and rights SHOULD be provided on the level of Distribution. Information about licences and rights MAY be provided for a Dataset in addition to but not in stead of the information provided for the Distributions of that Dataset. Providing licence or rights information for a Dataset that is different from information provided for a Distribution of that Dataset should be avoided as this may create legal conflicts.
 </p>
 
 <p class="issue" data-number="57">
@@ -915,10 +950,6 @@ into a separate named graph. The name of that graph should be the IRI of the cat
 	<a href="https://github.com/w3c/dxwg/issues/91">Issue #91</a>,
 	<a href="https://github.com/w3c/dxwg/issues/92">Issue #92</a>,
 	<a href="https://github.com/w3c/dxwg/issues/93">Issue #93</a>,
-</p>
-
-<p class="issue" data-number="104">
-	The option of allowing license and rights information to be associated with a dcat:Dataset, as well as dcat:Distribution, is being considered as part of the revision of DCAT.
 </p>
 
 <table class="definition">
@@ -1022,6 +1053,27 @@ into a separate named graph. The name of that graph should be the IRI of the cat
 
 </section> <!-- end class Dataset -->
 
+<section id="class-discoveryservice">
+<h3>Class: Discovery service</h3>
+<p>In addition to the properties inherited from the super-class <a href="http://www.w3.org/ns/dcat#DataService">dcat:DataDistributionService</a>, the following properties are recommended for use on this class: <i>none yet</i>
+</p>
+
+<table class="definition">
+  <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#DiscoveryService">dcat:DiscoveryService</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>A site or end-point that supports data discovery, usuing by providing access to catalogs</td></tr>
+    <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/dcat#DataDistributionService">dcat:DataDistributionService</a></td></tr>
+    <tr><td class="prop">Usage note:</td><td> </td></tr>
+    <tr><td class="prop">See also:</td><td> </td></tr>
+  </tbody>
+</table>
+
+<p class="note">
+    The class <a href="#DiscoveryService">dcat:DiscoveryService</a> has been added to the DCAT vocabulary in this revision.
+</p>
+
+</section> <!-- end class DiscoveryService -->
+
 <section id="class-distribution">
 <h3>Class: Distribution</h3>
 <p>The following properties are recommended for use on this class:
@@ -1040,7 +1092,7 @@ into a separate named graph. The name of that graph should be the IRI of the cat
 </p>
 
 <p class="issue" data-number="52">
-	The definition of dcat:Distribution is being re-evaluated as part of the revision of DCAT. In particular to clarify if distribution includes services as well as files.
+	The definition of dcat:Distribution is being re-evaluated as part of the revision of DCAT. In particular to clarify that distributions are primarily <i>representations</i> of datasets. Also see <a href="https://github.com/w3c/dxwg/issues/106">Issue #106</a>
 </p>
 
 <p class="issue" data-number="54">
@@ -1049,10 +1101,6 @@ into a separate named graph. The name of that graph should be the IRI of the cat
 
 <p class="issue" data-number="55">
 	The need to provide a way to indicate the structure or schema of data in a dcat:Distribution (in addition to the media-type or serialization) has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
-<p class="issue" data-number="56">
-	The need to provide more information about the nature of data service - a kind of dcat:Distribution - has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
 <p class="issue" data-number="59">
@@ -1147,7 +1195,8 @@ into a separate named graph. The name of that graph should be the IRI of the cat
     <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/RightsStatement">dct:RightsStatement</a></td></tr>
     <tr><td class="prop">Usage note:</td><td>dct:license, which is a sub-property of dct:rights, can be used to link
     a distribution to a license document. However, dct:rights allows linking to a rights statement that
-    can include licensing information as well as other information that supplements the licence such as attribution.</td></tr>
+    can include licensing information as well as other information that supplements the licence such as attribution.<br/>
+		Information about licences and rights SHOULD be provided on the level of Distribution. Information about licences and rights MAY be provided for a Dataset in addition to but not instead of the information provided for the Distributions of that Dataset. Providing licence or rights information for a Dataset that is different from information provided for a Distribution of that Dataset should be avoided as this may create legal conflicts.</td></tr>
     <tr><td class="prop">See also:</td><td><a href="#Property:distribution_license" title=""> distribution license</a>,
     <a href="#Property:catalog_rights" title="">catalog rights</a></td></tr>
   </tbody>
@@ -1156,7 +1205,7 @@ into a separate named graph. The name of that graph should be the IRI of the cat
 
 
 <section id="Property:distribution_accessurl">
-<h4>Property: access link</h4>
+<h4>Property: access address</h4>
 
 <p class="issue" data-number="124">
 	The axiomatization of dcat:accessURL is being re-evaluated as part of the revision of DCAT.
@@ -1309,16 +1358,16 @@ into a separate named graph. The name of that graph should be the IRI of the cat
 	The need to be able to link a catalogued item with the source of funding that supported its production has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
+<p class="issue" data-number="71">
+	The need to be able to describe the business or project context related to production of a catalogued item has been identified as a requirement to be satisfied in the revision of DCAT.
+</p>
+
 <p class="issue" data-number="77">
 	The need to be able to link a catalogued item with the business or project context of its production has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
 <p class="issue" data-number="81">
 	The need describe relationships between catalogued items has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
-<p class="issue" data-number="71">
-	The need to be able to describe the business or project context related to production of a catalogued item has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
 <table class="definition">
@@ -1752,6 +1801,21 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
         <p>The document has undergone the following changes since the W3C Recommendation of 16 January 2014 [[VOCAB-DCAT-20140116]]:</p>
 
         <ul>
+<li>
+	<a href="#class-resource">Class: Catalogued resource</a>: In DCAT 2014 [[VOCAB-DCAT-20140116]] the scope of a <a href="#class-catalog">dcat:Catalog</a> was limited to Datasets. This has been generalized, and properties common to all catalogued resources are now associated with a super-class dcat:Resource - see <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>.
+</li>
+
+<li>
+	<a href="#class-dataservice">Class: Data service</a>: In DCAT 2014 [[VOCAB-DCAT-20140116]] the scope of a <a href="#class-catalog">dcat:Catalog</a> was limited to Datasets. The new class dcat:DataService has been added to support cataloguing various kinds of data service - see <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>.
+</li>
+
+<li>
+	<a href="#class-datadistributionservice">Class: Data distribution service</a>: In DCAT 2014 [[VOCAB-DCAT-20140116]] the scope of a <a href="#class-catalog">dcat:Catalog</a> was limited to Datasets. The new class dcat:DataDistributionService has been added to support cataloguing data distribution services - see <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>.
+</li>
+
+<li>
+	<a href="#class-discoveryservice">Class: Discovery service</a>: In DCAT 2014 [[VOCAB-DCAT-20140116]] the scope of a <a href="#class-catalog">dcat:Catalog</a> was limited to Datasets. The new class dcat:DiscoveryService has been added to support cataloguing data discovery services - see <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>.
+</li>
 
 <li><a href="#class-dataset">Class: Dataset</a>:
 In DCAT 2014 [[VOCAB-DCAT-20140116]] <a href="#class-dataset">dcat:Dataset</a> was a sub-class of <a href="http://purl.org/dc/dcmitype/Dataset">dctype:Dataset</a>, which is a term of the <a href="http://dublincore.org/documents/dcmi-terms/#section-7">DCMI Types vocabulary</a> [[DCTERMS]]. This relationship has been removed in the revised DCAT vocabulary - see <a href="https://github.com/w3c/dxwg/issues/98">Issue #98</a>.
