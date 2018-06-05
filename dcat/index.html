@@ -1463,8 +1463,8 @@ Each type of quality information can pertain to one or more quality dimensions, 
 The following section shows how DCAT and DQV can be coupled to describe the quality of datasets and distributions. For a comprehensive introduction  and further examples of use, please refer to the Data Quality Vocabulary (DQV) group note [[vocab-dqv]].    
     
 <section id="quality-example1">
-    <h2>Example of quality information</h2>
-  Considering a dataset :busStopInGenoa, which provides an incomplete georeferenced list of bus stops in Genoa; the quality dimension ldqd:completeness, which refers to "the degree to which all required information is present in a particular dataset"; the following quality annotation :qualityNote provides information about the completeness of the dataset :busStopInGenoa. 
+    <h2>Example providing quality information</h2>
+    A data consumer (:consumer1)  describes the quality of the dataset :busStopInGenoa that includes a georeferenced list of bus stops in Genoa. He/she annotates the dataset with a DQV quality note (:qualityNote) about data completeness (ldqd:completeness) to warn that the dataset includes only 20500 out of the 30000 stops.
     
     <pre>:busStopInGenoa a dcat:Dataset ;
     dqv:hasQualityAnnotation :qualityNote .
@@ -1474,16 +1474,18 @@ The following section shows how DCAT and DQV can be coupled to describe the qual
     oa:hasTarget :busStopInGenoa ;
     oa:hasBody :textBody ;
     oa:motivatedBy dqv:qualityAssessment ;
+    prov:wasAttributedTo :consumer1 ;
+    prov:generatedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
     dqv:inDimension ldqd:completeness
     .
 
 :textBody a oa:TextualBody ;
-    rdf:value "This dataset is incomplete, it contains only 20500 out of 30000 existing bus stops" ;
+    rdf:value "Incomplete dataset: it contains only 20500 out of 30000 existing bus stops" ;
     dc:language "en" ; 
     dc:format "text/plain" 
     . 
     </pre>
-In the following  :myMeasurement quality measurement for the :completenessWRTExpectedNumberOfEntities metric provides the same quality information.
+The activity :myQualityChecking employs the service :myQualityChecker to check the quality of the :busStopInGenoa dataset. The metric :completenessWRTExpectedNumberOfEntities is applied to measure the dataset completeness (ldqd:completeness) and it results in the quality measurement :myMeasurement.
     <pre>:busStopInGenoa
     dqv:hasQualityMeasurement :myMeasurement .
 
@@ -1510,10 +1512,10 @@ In the following  :myMeasurement quality measurement for the :completenessWRTExp
     # Further details about quality service/software can be provided, for example,
     # deploying  vocabularies such as Dataset Usage Vocabulary (DUV), Dublin Core or ADMS.SW
 
-# :myQualityChecking is the activity that has generated :myMeasurement from :myDatasetDistribution
+# :myQualityChecking is the activity that has generated :myMeasurement from :busStopInGenoa
 :myQualityChecking
     a prov:Activity;
-    rdfs:label "The checking of myDatasetDistribution's quality"^^xsd:string;
+    rdfs:label "The checking of busStopInGenoa's quality"^^xsd:string;
     prov:wasAssociatedWith :myQualityChecker;
     prov:used              :busStopInGenoa;
     prov:generated         :myMeasurement;
