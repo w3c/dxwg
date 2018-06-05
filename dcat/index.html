@@ -1456,11 +1456,72 @@ It can relate  DCAT datasets and distributions with different types of quality i
 </ul>
 
 Each type of quality information can pertain to one or more quality dimensions, namely, quality characteristics relevant to the consumer. The practice to see the quality as a multi-dimensional space is consolidated in the field of quality management to split the quality management into addressable chunks. DQV does not define a normative list of quality dimensions. It offers the quality dimensions proposed in ISO/IEC 25012 [[ISOIEC25012]] and Zaveri et al. [[ZaveriEtAl]] as two possible starting points. It also provides an <a href="https://www.w3.org/2016/05/ldqd">RDF representation</a> for the quality dimensions and categories defined in the latter. Ultimately, implementers will need to choose themselves the collection of quality dimensions that best fits their needs.  
-
 <p class="issue" data-number="58">
 	The need to choose or define a data <b>quality model</b> has been identified as a requirement to be satisfied in the revision of DCAT.
 </p> 
     
+The following section shows how DCAT and DQV can be coupled to describe the quality of datasets and distributions. For a comprehensive introduction  and further examples of use, please refer to the Data Quality Vocabulary (DQV) group note [[vocab-dqv]].    
+    
+<section id="quality-example1">
+    <h2>Example of quality information</h2>
+  Considering a dataset :busStopInGenoa, which provides an incomplete georeferenced list of bus stops in Genoa; the quality dimension ldqd:completeness, which refers to "the degree to which all required information is present in a particular dataset"; the following quality annotation :qualityNote provides information about the completeness of the dataset :busStopInGenoa. 
+    
+    <pre>:busStopInGenoa a dcat:Dataset ;
+    dqv:hasQualityAnnotation :qualityNote .
+
+:qualityNote  
+    a dqv:UserQualityFeedback ;
+    oa:hasTarget :busStopInGenoa ;
+    oa:hasBody :textBody ;
+    oa:motivatedBy dqv:qualityAssessment ;
+    dqv:inDimension ldqd:completeness
+    .
+
+:textBody a oa:TextualBody ;
+    rdf:value "This dataset is incomplete, it contains only 20500 out of 30000 existing bus stops" ;
+    dc:language "en" ; 
+    dc:format "text/plain" 
+    . 
+    </pre>
+In the following  :myMeasurement quality measurement for the :completenessWRTExpectedNumberOfEntities metric provides the same quality information.
+    <pre>:busStopInGenoa
+    dqv:hasQualityMeasurement :myMeasurement .
+
+:myMeasurement
+    a dqv:QualityMeasurement ;
+    dqv:computedOn :busStopInGenoa ;
+    dqv:isMeasurementOf :completenessWRTExpectedNumberOfEntities ;
+    dqv:value "0.6833333"^^xsd:decimal  ;
+    prov:wasAttributedTo :myQualityChecker ;
+    prov:generatedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
+    prov:wasGeneratedBy :myQualityChecking   
+    .
+
+:completenessWRTExpectedNumberOfEntities 
+    a dqv:Metric ;
+    skos:definition "it returns the degree of completeness as ratio between the actual number of entities included in the dataset and the declared expected number of entities."@en ;
+    dqv:expectedDataType xsd:decimal ;
+    dqv:inDimension ldqd:completeness .
+
+# :myQualityChecker is a service computing some quality metrics 
+:myQualityChecker
+    a prov:SoftwareAgent ;   
+    rdfs:label "A quality assessment service"^^xsd:string .
+    # Further details about quality service/software can be provided, for example,
+    # deploying  vocabularies such as Dataset Usage Vocabulary (DUV), Dublin Core or ADMS.SW
+
+# :myQualityChecking is the activity that has generated :myMeasurement from :myDatasetDistribution
+:myQualityChecking
+    a prov:Activity;
+    rdfs:label "The checking of myDatasetDistribution's quality"^^xsd:string;
+    prov:wasAssociatedWith :myQualityChecker;
+    prov:used              :busStopInGenoa;
+    prov:generated         :myMeasurement;
+    prov:endedAtTime      "2018-05-27T02:52:02Z"^^xsd:dateTime;
+    prov:startedAtTime     "2018-05-27T00:52:02Z"^^xsd:dateTime .
+    </pre>
+    
+</section>
 </section>
 <section id="prov-patterns">
 
