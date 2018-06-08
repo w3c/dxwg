@@ -82,6 +82,11 @@
   dct:creator [
       foaf:name "John Erickson" ;
     ] ;
+  dct:contributor [
+      foaf:name "Jakub Klímek" ;
+	  rdfs:seeAlso <https://jakubklimek.com/#me> ;
+	  foaf:homepage <https://jakubklimek.com> ;
+    ] ;
   dct:modified "2012-04-24"^^xsd:date ;
   dct:modified "2013-09-20"^^xsd:date ;
   dct:modified "2013-11-28"^^xsd:date ;
@@ -108,6 +113,7 @@
           Επιπλέον, δίνει τη δυνατότητα για αποκεντρωμένη έκδοση και διάθεση καταλόγων και επιτρέπει δυνατότητες ενοποιημένης αναζήτησης μεταξύ διαφορετικών πηγών.
           Συγκεντρωτικά μεταδεδομένα που έχουν περιγραφεί με το DCAT μπορούν να χρησιμοποιηθούν σαν ένα δηλωτικό αρχείο (manifest file) ώστε να διευκολύνουν την ψηφιακή συντήρηση."""@el ;
   rdfs:comment "هي أنطولوجية تسهل تبادل البيانات بين مختلف الفهارس على الوب. استخدام هذه الأنطولوجية يساعد على اكتشاف قوائم  البيانات المنشورة على الوب و يمكن التطبيقات المختلفة من الاستفادة أتوماتيكيا من البيانات المتاحة من مختلف الفهارس."@ar ;
+  rdfs:comment """DCAT je RDF slovník navržený pro zprostředkování interoperability mezi datovými katalogy publikovanými na Webu. Poskytovatelé dat používáním slovníku DCAT pro popis datových sad v datových katalozích zvyšují jejich dohledatelnost a umožňují aplikacím konzumovat metadata z více katalogů. Dále je umožňena decentralizovaná publikace katalogů a federované dotazování na datové sady napříč katalogy. Agregovaná DCAT metadata mohou také sloužit jako průvodka umožňující digitální uchování informace. DCAT je definován na http://www.w3.org/TR/vocab-dcat/. Jakýkoliv nesoulad mezi odkazovaným dokumentem a tímto schématem je chybou v tomto schématu."""@cs ;
   rdfs:label "El vocabulario de catálogo de datos"@es ;
   rdfs:label "Il vocabolario del catalogo dei dati"@it ;
   rdfs:label "Le vocabulaire des jeux de données "@fr ;
@@ -115,6 +121,7 @@
   rdfs:label "Το λεξιλόγιο των καταλόγων δεδομένων"@el ;
   rdfs:label "أنطولوجية فهارس قوائم البيانات"@ar ;
   rdfs:label "データ・カタログ語彙（DCAT）"@ja ;
+  rdfs:label "Slovník pro datové katalogy"@cs ;
   owl:imports dctype: ;
   owl:imports dct: ;
   owl:imports <http://www.w3.org/2004/02/skos/core> ;
@@ -138,6 +145,7 @@ dcat:Catalog
   rdfs:comment "Μια επιμελημένη συλλογή μεταδεδομένων περί συνόλων δεδομένων"@el ;
   rdfs:comment "مجموعة من توصيفات قوائم البيانات"@ar ;
   rdfs:comment "データ・カタログは、データセットに関するキュレートされたメタデータの集合です。"@ja ;
+  rdfs:comment "Řízená kolekce metadat o datových sadách"@cs ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "Catalog"@en ;
   rdfs:label "Catalogo"@it ;
@@ -146,6 +154,7 @@ dcat:Catalog
   rdfs:label "Κατάλογος"@el ;
   rdfs:label "فهرس قوائم البيانات"@ar ;
   rdfs:label "カタログ"@ja ;
+  rdfs:label "Katalog"@cs ;
   rdfs:subClassOf dcat:Dataset ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
@@ -158,6 +167,7 @@ dcat:Catalog
   skos:scopeNote "A web-based data catalog is typically represented as a single instance of this class."@en ;
   skos:scopeNote "Συνήθως, ένας κατάλογος δεδομένων στον Παγκόσμιο Ιστό αναπαρίσταται ως ένα στιγμιότυπο αυτής της κλάσης."@el ;
   skos:scopeNote "通常、ウェブ・ベースのデータ・カタログは、このクラスの1つのインスタンスとして表わされます。"@ja ;
+  skos:scopeNote "Webový datový katalog je typicky reprezentován jako jedna instance této třídy."@cs ;
 .
 dcat:CatalogRecord
   rdf:type rdfs:Class ;
@@ -168,6 +178,7 @@ dcat:CatalogRecord
   rdfs:comment "Un registre du catalogue ou une entrée du catalogue, décrivant un seul jeu de données"@fr ;
   rdfs:comment "Un registro en un catálogo de datos que describe un solo conjunto de datos."@es ;
   rdfs:comment "Μία καταγραφή ενός καταλόγου, η οποία περιγράφει ένα συγκεκριμένο σύνολο δεδομένων."@el ;
+  rdfs:comment "Záznam v datovém katalogu popisující jednu datovou sadu."@cs ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "Catalog Record"@en ;
   rdfs:label "Record di catalogo"@it ;
@@ -176,6 +187,7 @@ dcat:CatalogRecord
   rdfs:label "Καταγραφή καταλόγου"@el ;
   rdfs:label "سجل"@ar ;
   rdfs:label "カタログ・レコード"@ja ;
+  rdfs:label "Záznam v katalogu"@cs ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:allValuesFrom dcat:Resource ;
@@ -215,6 +227,7 @@ dcat:CatalogRecord
 					  Σε περιπτώσεις που οι δύο ημερομηνίες διαφέρουν, ή που μόνο η τελευταία είναι γνωστή, η ημερομηνία δημοσίευσης θα πρέπει να δίνεται για την καταγραφή του καταλόγου.
 					  Να σημειωθεί πως η οντολογία W3C PROV επιτρέπει την περιγραφή επιπλέον πληροφοριών ιστορικού όπως λεπτομέρειες για τη διαδικασία και τον δράστη που εμπλέκονται σε μία συγκεκριμένη αλλαγή εντός του συνόλου δεδομένων."""@el ;
   skos:scopeNote "このクラスはオプションで、すべてのカタログがそれを用いるとは限りません。これは、データセットに関するメタデータとカタログ内のデータセットのエントリーに関するメタデータとで区別が行われるカタログのために存在しています。例えば、データセットの公開日プロパティーは、公開機関が情報を最初に利用可能とした日付を示しますが、カタログ・レコードの公開日は、データセットがカタログに追加された日付です。両方の日付が異っていたり、後者だけが分かっている場合は、カタログ・レコードに対してのみ公開日を指定すべきです。W3CのPROVオントロジー[prov-o]を用いれば、データセットに対する特定の変更に関連するプロセスやエージェントの詳細などの、さらに詳しい来歴情報の記述が可能となることに注意してください。"@ja ;
+  skos:scopeNote """Tato třída je volitelná a ne všechny katalogy ji využijí. Existuje pro katalogy, ve kterých se rozlišují metadata datové sady a metadata o záznamu o datové sadě v katalogu. Například datum publikace datové sady odráží datum, kdy byla datová sada původně zveřejněna poskytovatelem dat, zatímco datum publikace záznamu v katalogu je datum zanesení datové sady do katalogu. V případech kdy se obě data liší, nebo je známo jen to druhé, by mělo být specifikováno jen datum publikace záznamu v katalogu. Všimněte si, že ontologie W3C PROV umožňuje popsat další informace o původu jako například podrobnosti o procesu konkrétní změny datové sady a jeho účastnících."""@cs ;
 .
 dcat:DataDistributionService
   rdf:type owl:Class ;
@@ -260,6 +273,7 @@ dcat:Dataset
   rdfs:comment "Une collection de données, publiée ou élaborée par une seule source, et disponible pour accès ou téléchargement dans un ou plusieurs formats"@fr ;
   rdfs:comment "Μία συλλογή από δεδομένα, δημοσιευμένη ή επιμελημένη από μία και μόνο πηγή, διαθέσιμη δε προς πρόσβαση ή μεταφόρτωση σε μία ή περισσότερες μορφές"@el ;
   rdfs:comment "قائمة بيانات منشورة أو مجموعة من قبل مصدر ما و متاح الوصول إليها أو تحميلها"@ar ;
+  rdfs:comment "Kolekce dat poskytovaná či řízená jedním zdrojem, která je k dispozici pro přístup či stažení v jednom či více formátech"@cs ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "Conjunto de datos"@es ;
   rdfs:label "Dataset"@en ;
@@ -268,6 +282,7 @@ dcat:Dataset
   rdfs:label "Σύνολο Δεδομένων"@el ;
   rdfs:label "قائمة بيانات"@ar ;
   rdfs:label "データセット"@ja ;
+  rdfs:label "Datová sada"@cs ;
   rdfs:subClassOf dcat:Resource ;
   skos:changeNote "2018-02 - subclass of dctype:Dataset removed because scope of dcat:Dataset includes several other types from the dctype vocabulary. " ;
   skos:scopeNote """Cette classe représente le jeu de données publié par le fournisseur de données. Dans les cas où une distinction est nécessaire entre le jeu de donénes et son
@@ -283,6 +298,7 @@ dcat:Dataset
           Σε περιπτώσεις όπου είναι απαραίτητος ο διαχωρισμός μεταξύ του συνόλου δεδομένων και της καταγραφής αυτού στον κατάλογο (γιατί μεταδεδομένα όπως η ημερομηνία αλλαγής και ο συντηρητής μπορεί να διαφέρουν)
           η κλάση της καταγραφής καταλόγου μπορεί να χρησιμοποιηθεί για το τελευταίο."""@el ;
   skos:scopeNote "このクラスは、データセットの公開者が公開する実際のデータセットを表わします。カタログ内の実際のデータセットとそのエントリーとの区別が必要な場合（修正日と維持者などのメタデータが異なるかもしれないので）は、後者にcatalog recordというクラスを使用できます。"@ja ;
+  skos:scopeNote """Tato třída reprezentuje datovou sadu tak, jak je publikována poskytovatelem dat. V případě potřeby rozlišení datové sady a jejího záznamu v katalogu (jelikož metadata jako datum modifikace se mohou lišit) pro něj může být použita třída "záznam v katalogu"."""@cs ;
 .
 dcat:DiscoveryService
   rdf:type owl:Class ;
@@ -314,6 +330,7 @@ dcat:Distribution
 					Παραδείγματα διανομών συμπεριλαμβάνουν ένα μεταφορτώσιμο αρχείο μορφής CSV, ένα API ή ένα RSS feed."""@el ;
   rdfs:comment "شكل محدد لقائمة البيانات يمكن الوصول إليه. قائمة بيانات ما يمكن أن تكون متاحه باشكال و أنواع متعددة.  ملف يمكن تحميله أو واجهة برمجية يمكن من خلالها الوصول إلى البيانات هي أمثلة على ذلك."@ar ;
   rdfs:comment "データセットの特定の利用可能な形式を表わします。各データセットは、異なる形式で利用できることがあり、これらの形式は、データセットの異なる形式や、異なるエンドポイントを表わす可能性があります。配信の例には、ダウンロード可能なCSVファイル、API、RSSフィードが含まれます。"@ja ;
+  rdfs:comment """Reprezentuje konkrétní dostupnou formu datové sady. Každá datová sada může být dostupná v různých podobách, které mohou být reprezentovány různým formátem nebo různými přístupovými body. Příklady distribucí zahrnují CSV soubor ke stažení, API nebo RSS kanál"""@cs ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "Distribución"@es ;
   rdfs:label "Distribution"@en ;
@@ -322,6 +339,7 @@ dcat:Distribution
   rdfs:label "Διανομή"@el ;
   rdfs:label "التوزيع"@ar ;
   rdfs:label "配信"@ja ;
+  rdfs:label "Distribuce"@cs ;
   skos:scopeNote """Ceci représente une disponibilité générale du jeu de données, et implique qu'il n'existe pas d'information
 					sur la méthode d'accès réelle des données, par exple, si c'est un lien de téléchargement direct ou à travers une page Web. """@fr ;
   skos:scopeNote """Esto representa una disponibilidad general de un conjunto de datos, e implica que no existe información acerca
@@ -373,6 +391,7 @@ dcat:accessURL
           μεταφόρτωση, feed URL, σημείο διάθεσης SPARQL. Να χρησιμοποιείται όταν ο κατάλογος δεν περιέχει πληροφορίες εαν πρόκειται ή όχι για μεταφορτώσιμο αρχείο."""@el ;
   rdfs:comment "أي رابط يتيح الوصول إلى البيانات. إذا كان الرابط هو ربط مباشر لملف يمكن تحميله استخدم الخاصية downloadURL"@ar ;
   rdfs:comment "データセットの配信にアクセス権を与えるランディング・ページ、フィード、SPARQLエンドポイント、その他の種類の資源。"@ja ;
+  rdfs:comment """Toto může být libovolné URL, přes které je přístupná distribuce datové sady. Příkladem může být vstupní stránka, soubor ke stažení, URL RSS kanálu nebo SPARQL endpointu. Použijte, pokud katalogu není známo která z variant to je, nebo pokud to zcela jistě není URL souboru ke stažení."""@cs ;
   rdfs:domain dcat:Distribution ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "URL d'accès"@fr ;
@@ -382,6 +401,7 @@ dcat:accessURL
   rdfs:label "access link"@en ;
   rdfs:label "رابط وصول"@ar ;
   rdfs:label "アクセスURL"@ja ;
+  rdfs:label "přístupové URL"@cs ;
   rdfs:range rdfs:Resource ;
   owl:propertyChainAxiom (
       dcat:accessService
@@ -401,6 +421,7 @@ dcat:accessURL
 					Αν η/οι διανομή/ές είναι προσβάσιμη/ες μόνο μέσω μίας ιστοσελίδας αρχικής πρόσβασης (δηλαδή αν δεν υπάρχουν γνωστές διευθύνσεις άμεσης μεταφόρτωσης), τότε ο σύνδεσμος της ιστοσελίδας αρχικής πρόσβασης πρέπει να αναπαραχθεί ως accessURL σε μία διανομή."""@el ;
   skos:scopeNote """確実にダウンロードでない場合や、ダウンロードかどうかが不明である場合は、downloadURLではなく、accessURLを用いてください。
 ランディング・ページを通じてしか配信にアクセスできない場合（つまり、直接的なダウンロードURLが不明）は、配信におけるaccessURLとしてランディング・ページのリンクをコピーすべきです（SHOULD）。"""@ja ;
+  skos:scopeNote """Hodnotou je URL. Pokud je distribuce dostupná pouze přes vstupní stránku, t.j. přímý URL odkaz ke stažení není znám, URL přístupové stránky by mělo být duplikováno ve vlastnosti distribuce accessURL."""@cs ;
 .
 dcat:byteSize
   rdf:type rdf:Property ;
@@ -412,6 +433,7 @@ dcat:byteSize
   rdfs:comment "Το μέγεθος μιας διανομής σε bytes."@el ;
   rdfs:comment "الحجم بالبايتات "@ar ;
   rdfs:comment "バイトによる配信のサイズ。"@ja ;
+  rdfs:comment "Velikost distribuce v bajtech."@cs ;
   rdfs:domain dcat:Distribution ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "byte size"@en ;
@@ -421,6 +443,7 @@ dcat:byteSize
   rdfs:label "μέγεθος σε bytes"@el ;
   rdfs:label "الحجم بالبايت"@ar ;
   rdfs:label "バイト・サイズ"@ja ;
+  rdfs:label "velikost v bajtech"@cs ;
   rdfs:range rdfs:Literal ;
   skos:scopeNote """El tamaño en bytes puede ser aproximado cuando se desconoce el tamaño exacto.
           El valor literal de dcat:byteSize debe tener tipo 'xsd:decimal'"""@es ;
@@ -433,6 +456,7 @@ dcat:byteSize
           Η τιμή της dcat:byteSize θα πρέπει να δίνεται με τύπο δεδομένων xsd:decimal"""@el ;
   skos:scopeNote "الحجم يمكن أن يكون تقريبي إذا كان الحجم الدقيق غير معروف"@ar ;
   skos:scopeNote "正確なサイズが不明である場合、サイズは、バイトによる近似値を示すことができます。"@ja ;
+  skos:scopeNote """Velikost v bajtech může být přibližná, pokud její přesná hodnota není známa. Literál s hodnotou dcat:byteSize by měl mít datový typ xsd:decimal"""@cs ;
 .
 dcat:catalog
   rdf:type owl:ObjectProperty ;
@@ -455,6 +479,7 @@ dcat:contactPoint
   rdfs:comment "Συνδέει ένα σύνολο δεδομένων με ένα σχετικό σημείο επικοινωνίας, μέσω VCard."@el ;
   rdfs:comment "تربط قائمة البيانات بعنوان اتصال موصف  باستخدام VCard"@ar ;
   rdfs:comment "データセットを、VCardを用いて提供されている適切な連絡先情報にリンクします。"@ja ;
+  rdfs:comment "Propojuje datovou sadu a relevantní kontaktní informace poskytované jako VCard."@cs ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "Punto de contacto"@es ;
   rdfs:label "contact point"@en ;
@@ -463,6 +488,7 @@ dcat:contactPoint
   rdfs:label "σημείο επικοινωνίας"@el ;
   rdfs:label "عنوان اتصال"@ar ;
   rdfs:label "窓口"@ja ;
+  rdfs:label "kontaktní bod"@cs ;
   rdfs:range v:Kind ;
 .
 dcat:dataset
@@ -475,6 +501,7 @@ dcat:dataset
   rdfs:comment "Συνδέει έναν κατάλογο με ένα σύνολο δεδομένων το οποίο ανήκει στον εν λόγω κατάλογο."@el ;
   rdfs:comment "تربط الفهرس بقائمة بيانات ضمنه"@ar ;
   rdfs:comment "カタログの一部であるデータセット。"@ja ;
+  rdfs:comment "Propojuje katalog a datovou sadu, která je součástí tohoto katalogu."@cs ;
   rdfs:domain dcat:Catalog ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "conjunto de datos"@es ;
@@ -484,6 +511,7 @@ dcat:dataset
   rdfs:label "σύνολο δεδομένων"@el ;
   rdfs:label "قائمة بيانات"@ar ;
   rdfs:label "データセット"@ja ;
+  rdfs:label "datová sada"@cs ;
   rdfs:range dcat:Dataset ;
   rdfs:subPropertyOf dct:hasPart ;
   rdfs:subPropertyOf rdfs:member ;
@@ -498,6 +526,7 @@ dcat:distribution
   rdfs:comment "Συνδέει ένα σύνολο δεδομένων με μία από τις διαθέσιμες διανομές του."@el ;
   rdfs:comment "تربط قائمة البيانات بطريقة أو بشكل يسمح  الوصول الى البيانات"@ar ;
   rdfs:comment "データセットを、その利用可能な配信に接続します。"@ja ;
+  rdfs:comment "Propojuje datovou sadu a jednu z jejích dostupných distribucí."@cs ;
   rdfs:domain dcat:Dataset ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "distribución"@es ;
@@ -507,6 +536,7 @@ dcat:distribution
   rdfs:label "διανομή"@el ;
   rdfs:label "توزيع"@ar ;
   rdfs:label "データセット配信"@ja ;
+  rdfs:label "distribuce"@cs ;
   rdfs:range dcat:Distribution ;
 .
 dcat:downloadURL
@@ -523,6 +553,7 @@ dcat:downloadURL
   rdfs:comment """Είναι ένας σύνδεσμος άμεσης μεταφόρτωσης ενός αρχείου σε μια δεδομένη μορφή. Π.χ. ένα αρχείο CSV ή RDF.
 					Η μορφη αρχείου περιγράφεται από τις ιδιότητες dct:format ή/και dcat:mediaType της διανομής"""@el ;
   rdfs:comment "رابط مباشر لملف يمكن تحميله. نوع الملف يتم توصيفه باستخدام الخاصية dct:format dcat:mediaType "@ar ;
+  rdfs:comment """Toto je přímý odkaz na soubor ke stažení v daném formátu, například CSV nebo RDF soubor. Formát je popsán vlastností distribuce dct:format a/nebo dcat:mediaType."""@cs ;
   rdfs:domain dcat:Distribution ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "URL de descarga"@es ;
@@ -532,12 +563,14 @@ dcat:downloadURL
   rdfs:label "download URL"@en ;
   rdfs:label "رابط تحميل"@ar ;
   rdfs:label "ダウンロードURL"@ja ;
+  rdfs:label "URL souboru ke stažení"@cs ;
   rdfs:range rdfs:Resource ;
   skos:scopeNote "El valor es una URL."@es ;
   skos:scopeNote "Il valore é una URL."@it ;
   skos:scopeNote "La valeur est une URL."@fr ;
   skos:scopeNote "The value is a URL."@en ;
   skos:scopeNote "Η τιμή είναι ένα URL."@el ;
+  skos:scopeNote "Hodnotou je URL."@cs ;
 .
 dcat:endpointDescription
   rdf:type owl:ObjectProperty ;
@@ -565,6 +598,7 @@ dcat:keyword
   rdfs:comment "Μία λέξη-κλειδί ή μία ετικέτα που περιγράφει το σύνολο δεδομένων."@el ;
   rdfs:comment "كلمة  مفتاحيه توصف قائمة البيانات"@ar ;
   rdfs:comment "データセットを記述しているキーワードまたはタグ。"@ja ;
+  rdfs:comment "Klíčové slovo nebo značka popisující zdroj."@cs ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "keyword"@en ;
   rdfs:label "mot-clés "@fr ;
@@ -573,6 +607,7 @@ dcat:keyword
   rdfs:label "λέξη-κλειδί"@el ;
   rdfs:label "كلمة  مفتاحية "@ar ;
   rdfs:label "キーワード/タグ"@ja ;
+  rdfs:label "klíčové slovo"@cs ;
   rdfs:range rdfs:Literal ;
   rdfs:subPropertyOf dct:subject ;
 .
@@ -586,6 +621,7 @@ dcat:landingPage
   rdfs:comment "Μία ιστοσελίδα πλοηγίσιμη μέσω ενός φυλλομετρητή (Web browser) που δίνει πρόσβαση στο σύνολο δεδομένων, τις διανομές αυτού ή/και επιπρόσθετες πληροφορίες."@el ;
   rdfs:comment "صفحة وب يمكن من خلالها الوصول الى قائمة البيانات أو إلى معلومات إضافية متعلقة بها "@ar ;
   rdfs:comment "データセット、その配信および（または）追加情報にアクセスするためにウエブ・ブラウザでナビゲートできるウェブページ。"@ja ;
+  rdfs:comment "Webová stránka, na kterou lze pro získání přístupu ke katalogu, datové sadě, jejím distribucím a/nebo dalším informacím přistoupit webovým prohlížečem."@cs ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "landing page"@en ;
   rdfs:label "page d'atterrissage"@fr ;
@@ -594,6 +630,7 @@ dcat:landingPage
   rdfs:label "ιστοσελίδα αρχικής πρόσβασης"@el ;
   rdfs:label "صفحة وصول"@ar ;
   rdfs:label "ランディング・ページ"@ja ;
+  rdfs:label "vstupní stránka"@cs ;
   rdfs:range foaf:Document ;
   rdfs:subPropertyOf foaf:page ;
   skos:scopeNote """If the distribution(s) are accessible only through a landing page (i.e. direct download
@@ -606,6 +643,7 @@ dcat:landingPage
 						le lien de la page d'atterrissage doit être dupliqué comme accessURL sur la distribution."""@fr ;
   skos:scopeNote "Αν η/οι διανομή/ές είναι προσβάσιμη/ες μόνο μέσω μίας ιστοσελίδας αρχικής πρόσβασης (δηλαδή αν δεν υπάρχουν γνωστές διευθύνσεις άμεσης μεταφόρτωσης), τότε ο σύνδεσμος της ιστοσελίδας αρχικής πρόσβασης πρέπει να αναπαραχθεί ως accessURL σε μία διανομή."@el ;
   skos:scopeNote "ランディング・ページを通じてしか配信にアクセスできない場合（つまり、直接的なダウンロードURLが不明）には、配信におけるaccessURLとしてランディング・ページのリンクをコピーすべきです（SHOULD）。"@ja ;
+  skos:scopeNote """Pokud je distribuce dostupná pouze přes vstupní stránku, t.j. přímý URL odkaz ke stažení není znám, URL přístupové stránky by mělo být duplikováno ve vlastnosti distribuce accessURL."""@cs ;
 .
 dcat:mediaType
   rdf:type rdf:Property ;
@@ -621,6 +659,7 @@ dcat:mediaType
           η ιδιότητα dct:format ΔΥΝΑΤΑΙ να χρησιμοποιηθεί με διαφορετικές τιμές."""@el ;
   rdfs:comment "يجب استخدام هذه الخاصية إذا كان نوع الملف معرف ضمن IANA"@ar ;
   rdfs:comment "このプロパティーは、配信のメディア・タイプがIANAで定義されているときに使用すべきで（SHOULD）、そうでない場合には、dct:formatを様々な値と共に使用できます（MAY）。"@ja ;
+  rdfs:comment """Tato vlastnost by měla být použita, jestliže je typ média distribuce (MIME type) definovaný v IANA. V ostatních případech může být použita vlastnost dct:format s jinými hodnotami."""@cs ;
   rdfs:domain dcat:Distribution ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "media type"@en ;
@@ -630,6 +669,7 @@ dcat:mediaType
   rdfs:label "τύπος μέσου"@el ;
   rdfs:label "نوع الميديا"@ar ;
   rdfs:label "メディア・タイプ"@ja ;
+  rdfs:label "typ média"@cs ;
   rdfs:range dct:MediaTypeOrExtent ;
   rdfs:subPropertyOf dct:format ;
 .
@@ -643,6 +683,7 @@ dcat:record
   rdfs:comment "Συνδέει έναν κατάλογο με τις καταγραφές του."@el ;
   rdfs:comment "تربط الفهرس بسجل ضمنه"@ar ;
   rdfs:comment "カタログの一部であるカタログ・レコード。"@ja ;
+  rdfs:comment "Propojuje katalog a jeho záznamy."@cs ;
   rdfs:domain dcat:Catalog ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "record"@en ;
@@ -652,6 +693,7 @@ dcat:record
   rdfs:label "καταγραφή"@el ;
   rdfs:label "سجل"@ar ;
   rdfs:label "カタログ・レコード"@ja ;
+  rdfs:label "záznam"@cs ;
   rdfs:range dcat:CatalogRecord ;
 .
 dcat:servesDataset
@@ -684,6 +726,7 @@ dcat:theme
   rdfs:comment "Η κύρια κατηγορία του συνόλου δεδομένων. Ένα σύνολο δεδομένων δύναται να έχει πολλαπλά θέματα."@el ;
   rdfs:comment "التصنيف الرئيسي لقائمة البيانات. قائمة البيانات يمكن أن تملك أكثر من تصنيف رئيسي واحد."@ar ;
   rdfs:comment "データセットの主要カテゴリー。データセットは複数のテーマを持つことができます。"@ja ;
+  rdfs:comment "Hlavní kategorie zdroje. Zdroj může mít více kategorií."@cs ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "tema"@es ;
   rdfs:label "tema"@it ;
@@ -692,6 +735,7 @@ dcat:theme
   rdfs:label "Θέμα"@el ;
   rdfs:label "التصنيف"@ar ;
   rdfs:label "テーマ/カテゴリー"@ja ;
+  rdfs:label "téma"@cs ;
   rdfs:range skos:Concept ;
   rdfs:subPropertyOf dct:subject ;
   skos:scopeNote """El conjunto de skos:Concepts utilizados para categorizar los recursos están organizados en
@@ -704,6 +748,7 @@ dcat:theme
   skos:scopeNote """Το σετ των skos:Concepts που χρησιμοποιείται για να κατηγοριοποιήσει τα σύνολα δεδομένων είναι οργανωμένο εντός
           ενός skos:ConceptScheme που περιγράφει όλες τις κατηγορίες και τις σχέσεις αυτών στον κατάλογο."""@el ;
   skos:scopeNote "データセットを分類するために用いられるskos:Conceptの集合は、カタログのすべてのカテゴリーとそれらの関係を記述しているskos:ConceptSchemeで組織化されます。"@ja ;
+  skos:scopeNote """Sada konceptů, tj. instancí třídy skos:Concept, použitá pro kategorizaci zdrojů je organizována do schématu konceptů, tj. propojena na instanci třídy skos:ConceptScheme, které popisuje všechny kategorie v katalogu a jejich vztahy."""@cs ;
 .
 dcat:themeTaxonomy
   rdf:type rdf:Property ;
@@ -715,6 +760,7 @@ dcat:themeTaxonomy
   rdfs:comment "Το σύστημα οργάνωσης γνώσης που χρησιμοποιείται για την κατηγοριοποίηση των συνόλων δεδομένων του καταλόγου."@el ;
   rdfs:comment "لائحة التصنيفات المستخدمه لتصنيف قوائم البيانات ضمن الفهرس"@ar ;
   rdfs:comment "カタログのデータセットを分類するために用いられる知識組織化体系（KOS；knowledge organization system）。"@ja ;
+  rdfs:comment "Systém organizace znalostí použitý pro klasifikaci datových sad v katalogu."@cs ;
   rdfs:domain dcat:Catalog ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "tassonomia dei temi"@it ;
@@ -724,5 +770,6 @@ dcat:themeTaxonomy
   rdfs:label "Ταξινομία θεματικών κατηγοριών."@el ;
   rdfs:label "قائمة التصنيفات"@ar ;
   rdfs:label "テーマ"@ja ;
+  rdfs:label "taxonomie témat"@cs ;
   rdfs:range skos:ConceptScheme ;
 .
