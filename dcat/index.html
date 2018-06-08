@@ -101,7 +101,7 @@ RDF syntaxes, access protocols, and access policies is not mandated by this spec
 
 <p class="note">From DCAT 2014 [[VOCAB-DCAT-20140116]] except as noted</p>
 
-<p>DCAT is an RDF vocabulary well-suited to representing government data catalogs such as <a href="https://www.data.gov/">data.gov</a> and <a href="http://data.gov.uk">data.gov.uk</a>. DCAT defines three main classes:</p>
+<p>DCAT is an RDF vocabulary well-suited to representing data catalogs such as <a href="https://www.data.gov/">data.gov</a> and <a href="http://data.gov.uk">data.gov.uk</a>. DCAT defines three main classes:</p>
 <ul><li> <code><a href="#Class:_Catalog">dcat:Catalog</a></code> represents the catalog
 </li><li> <code><a href="#Class:_Dataset">dcat:Dataset</a></code> represents a dataset in a catalog.
 </li><li> <code><a href="#Class:_Distribution">dcat:Distribution</a></code> represents an accessible form of a dataset as for example a downloadable file, an RSS feed or a web service that provides the data.
@@ -1271,6 +1271,7 @@ Examples of distributions include a downloadable CSV file, an API or an RSS feed
   <tbody>
     <tr><td class="prop">Definition:</td><td>This links to the license document under which the distribution is made available.</td></tr>
     <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/LicenseDocument">dct:LicenseDocument</a></td></tr>
+	<tr><td class="prop">Usage note:</td><td>Information about licences and rights <em title="SHOULD" class="rfc2119">SHOULD</em> be provided on the level of Distribution. Information about licences and rights <em title="MAY" class="rfc2119">MAY</em> be provided for a Dataset in addition to but not in stead of the information provided for the Distributions of that Dataset. Providing licence or rights information for a Dataset that is different from information provided for a Distribution of that Dataset should be avoided as this may create legal conflicts.</td></tr>
     <tr><td class="prop">See also:</td><td><a href="#Property:distribution_rights" title=""> distribution rights</a>,
     <a href="#Property:catalog_license" title="">catalog license</a></td></tr>
   </tbody>
@@ -1286,7 +1287,7 @@ Examples of distributions include a downloadable CSV file, an API or an RSS feed
     <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/RightsStatement">dct:RightsStatement</a></td></tr>
     <tr><td class="prop">Usage note:</td><td>dct:license, which is a sub-property of dct:rights, can be used to link
     a distribution to a license document. However, dct:rights allows linking to a rights statement that
-    can include licensing information as well as other information that supplements the licence such as attribution.</td></tr>
+    can include licensing information as well as other information that supplements the licence such as attribution. Information about licences and rights <em title="SHOULD" class="rfc2119">SHOULD</em> be provided on the level of Distribution. Information about licences and rights <em title="MAY" class="rfc2119">MAY</em> be provided for a Dataset in addition to but not in stead of the information provided for the Distributions of that Dataset. Providing licence or rights information for a Dataset that is different from information provided for a Distribution of that Dataset should be avoided as this may create legal conflicts.</td></tr>
     <tr><td class="prop">See also:</td><td><a href="#Property:distribution_license" title=""> distribution license</a>,
     <a href="#Property:catalog_rights" title="">catalog rights</a></td></tr>
   </tbody>
@@ -1681,6 +1682,13 @@ In DCAT 2014 [[VOCAB-DCAT-20140116]] <a href="#class-dataset">dcat:Dataset</a> w
 	In DCAT 2014 [[VOCAB-DCAT-20140116]] the domain of dcat:landingPage was dcat:Dataset,
   which limited use of this property in other contexts. The domain has been relaxed in this revision -
   see <a href="https://github.com/w3c/dxwg/issues/122">Issue #122</a>.
+</li>
+
+<li><a href="#Property:vann:usageNote">Property: vann:usageNote</a>:
+    DCAT 2014 [[VOCAB-DCAT-20140116]] included documentation captured as text using <a href="http://vocab.org/vann/#usageNote">vann:usageNote</a> elements,
+    which is a sub-property of rdfs:seeAlso - an owl:ObjectProperty that cannot have a Literal value.
+    This revision of DCAT has fixed these issues and replaced the use of vann:usageNote with <a href="https://www.w3.org/TR/skos-primer/#secdocumentation">skos:scopeNote</a> -
+    see <a href="https://github.com/w3c/dxwg/issues/233">Issue #233</a>.
 </li>
 
         </ul>
