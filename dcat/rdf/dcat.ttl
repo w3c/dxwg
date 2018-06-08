@@ -16,12 +16,9 @@
 @prefix schema: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix v: <http://www.w3.org/2006/vcard/ns#> .
-@prefix vann: <http://purl.org/vocab/vann/> .
-@prefix voaf: <http://purl.org/vocommons/voaf#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <http://www.w3.org/ns/dcat>
-  rdf:type voaf:Vocabulary ;
   rdf:type owl:Ontology ;
   dct:contributor [
         foaf:name "Alejandra Gonzalez-Beltran" ;
@@ -386,6 +383,10 @@ dcat:accessURL
   rdfs:label "رابط وصول"@ar ;
   rdfs:label "アクセスURL"@ja ;
   rdfs:range rdfs:Resource ;
+  owl:propertyChainAxiom (
+      dcat:accessService
+      dcat:endpointURL
+    ) ;
   skos:editorialNote "rdfs:label, rdfs:comment and skos:scopeNote have been modified. Non-english versions must be updated." ;
   skos:scopeNote """El rango es una URL.
           Si la distribución es accesible solamente través de una página de destino (es decir, si no se conoce una URL de descarga directa),
@@ -547,11 +548,10 @@ dcat:endpointDescription
   skos:editorialNote "Status: Property accepted by DCAT revision team, but details of definition and constraints not yet resolved." ;
 .
 dcat:endpointURL
-  rdf:type owl:DatatypeProperty ;
+  rdf:type owl:ObjectProperty ;
   rdfs:comment "Address of service end-point" ;
   rdfs:domain dcat:DataService ;
   rdfs:label "service end-point" ;
-  rdfs:range xsd:anyURI ;
   skos:changeNote "New property in this revision of DCAT" ;
   skos:editorialNote "Status: Property accepted by DCAT revision team, but details of definition and constraints not yet resolved." ;
 .
@@ -726,4 +726,3 @@ dcat:themeTaxonomy
   rdfs:label "テーマ"@ja ;
   rdfs:range skos:ConceptScheme ;
 .
-
