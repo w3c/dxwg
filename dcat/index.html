@@ -67,30 +67,28 @@
 
 <section id="conformance">
 
-<p class="note">From DCAT 2014 [[VOCAB-DCAT-20140116]]</p>
+<p class="note">Modified from DCAT 2014 [[VOCAB-DCAT-20140116]]</p>
 
 <p>A data catalog conforms to DCAT if:</p>
 <ul>
-<li> It is organized into datasets and distributions.</li>
-
-<li> An RDF description of the catalog itself and its datasets and distributions is available (but the choice of
+	<li> Access to data is organized into datasets, distributions, and data-distribution-services. </li>
+	<li> Access to other resources is organized into suitable sub-classes of catalogued-item. </li>
+	<li> An RDF description of the catalog itself and its datasets, distributions, and data-distribution-services is available (but the choice of
 RDF syntaxes, access protocols, and access policies is not mandated by this specification).</li>
-
-<li> The contents of all metadata fields that are held in the catalog, and that contain data about the catalog itself and its dataset and distributions, are included in this RDF description, expressed using the appropriate classes and properties from DCAT, except where no such class or property exists.</li>
-
-<li> All classes and properties defined in DCAT are used in a way consistent with the semantics declared in this specification.</li>
-
-<li>DCAT-compliant catalogs <em title="MAY" class="rfc2119">MAY</em> include additional non-DCAT metadata fields and additional RDF data in the catalog's RDF description.</li>
+	<li> The contents of all metadata fields that are held in the catalog, and that contain data about the catalog itself and its datasets, distributions, and data-distribution-services, are included in this RDF description, expressed using the appropriate classes and properties from DCAT, except where no such class or property exists.</li>
+	<li> All classes and properties defined in DCAT are used in a way consistent with the semantics declared in this specification.</li>
+	<li>DCAT-compliant catalogs <em title="MAY" class="rfc2119">MAY</em> include additional non-DCAT metadata fields and additional RDF data in the catalog's RDF description.</li>
 </ul>
 
 <p>
 	A <strong>DCAT profile</strong> is a specification for data catalogs that adds additional constraints to DCAT. A data catalog that conforms to the profile also conforms to DCAT. Additional constraints in a profile <em title="MAY" class="rfc2119">MAY</em> include:
 </p>
 <ul>
-<li> A minimum set of required metadata fields </li>
-<li> Classes and properties for additional metadata fields not covered in DCAT</li>
-<li> Controlled vocabularies or URI sets as acceptable values for properties</li>
-<li> Requirements for specific access mechanisms (RDF syntaxes, protocols) to the catalog's RDF description</li>
+	<li> Cardinality constraints, including a minimum set of required metadata fields </li>
+	<li> Sub-classes and sub-properties of the standard DCAT classes and properties</li>
+	<li> Classes and properties for additional metadata fields not covered in DCAT</li>
+	<li> Controlled vocabularies or URI sets as acceptable values for properties</li>
+	<li> Requirements for specific access mechanisms (RDF syntaxes, protocols) to the catalog's RDF description</li>
 </ul>
 
 </section>
@@ -101,35 +99,42 @@ RDF syntaxes, access protocols, and access policies is not mandated by this spec
 
 <p class="note">From DCAT 2014 [[VOCAB-DCAT-20140116]] except as noted</p>
 
-<p>DCAT is an RDF vocabulary well-suited to representing data catalogs such as <a href="https://www.data.gov/">data.gov</a> and <a href="http://data.gov.uk">data.gov.uk</a>. DCAT defines three main classes:</p>
-<ul><li> <code><a href="#Class:_Catalog">dcat:Catalog</a></code> represents the catalog
-</li><li> <code><a href="#Class:_Dataset">dcat:Dataset</a></code> represents a dataset in a catalog.
-</li><li> <code><a href="#Class:_Distribution">dcat:Distribution</a></code> represents an accessible form of a dataset as for example a downloadable file, an RSS feed or a web service that provides the data.
-</li></ul>
+<p>DCAT is an RDF vocabulary well-suited to representing data catalogs such as <a href="https://www.data.gov/">data.gov</a> and <a href="http://data.gov.uk">data.gov.uk</a>. DCAT defines seven (nine) main classes:</p>
+<ul>
+	<li> <code><a href="#Class:_Catalog">dcat:Catalog</a></code> represents the catalog</li>
+	<li> <code><a href="#Class:_Resource">dcat:Resource</a></code> represents an item in a catalog.</li>
+	<li> <code><a href="#Class:_Dataset">dcat:Dataset</a></code> represents a dataset in a catalog.</li>
+	<li> <code><a href="#Class:_Distribution">dcat:Distribution</a></code> represents an accessible form or representation of a dataset as for example a downloadable file.</li>
+	<li> <code><a href="#Class:_Service">dcat:DataService</a></code> represents a data service in a catalog.</li>
+	<li> <code><a href="#Class:_DataDistributionService">dcat:DataDistributionService</a></code> represents a service that provides access to distributions of datasets and extracts of datasets.</li>
+	<li> (<code><a href="#Class:_DataTransformationService">dcat:DataTransformationService</a></code> represents a service that can transform a dataset, e.g. spatial coordinate transformation; interpolation or resampling of a dataset).</li>
+	<li> (<code><a href="#Class:_DiscoveryService">dcat:DiscoveryService</a></code> represents a service that supports discovery functions.)</li>
+	<li> <code><a href="#Class:_CatalogRecord">dcat:CatalogRecord</a></code> describes a dataset entry in the catalog, primarily concerning the registration information such as who added the item and when</li>
+</ul>
 <p>
-Notice that a dataset in DCAT
-is defined as a "collection of data, published or curated by a single agent, and available for access or
-download in one or more formats". A dataset does not have to be available as a downloadable file.
-For example, a dataset that is available via an API can be defined as an instance of dcat:Dataset and the
-API can be defined as an instance of dcat:Distribution. DCAT itself does not define properties specific to the APIs description.
-These are considered out of the scope of this version of the vocabulary. Nevertheless, this can be defined as a profile of the DCAT vocabulary.
+A <b>dataset</b> in DCAT is defined as a "collection of data, published or curated by a single agent, and available for access or download in one or more formats".
+A dataset is a conceptual entity, and may be represented by one or more <b>distributions</b> that serialize the dataset for transfer.
+Distributions of a dataset can be provided via <b>data distribution services</b>.
+Detailed properties for a data distribution service API are out of the scope of this version of DCAT. </p>
 
+<p>Datasets and <b>data services</b>, and potentially other types of thing, may be included in a <b>catalog</b>.
+Types of data service that might be found in a catalog include data distribution services, <b>discovery services</b> such as portals and catalog services, <b>data transformation services</b> such as coordinate transformation services, re-sampling and interpolation services, and various <b>data-processing services</b>.
 </p>
 
 <div class="note">
 	<p>
 	The scope of DCAT 2014 [[VOCAB-DCAT-20140116]] was limited to catalogs of datasets.
-	A number of use cases for the revision involve also having <b>data services</b> (aka distribution services) as members of a catalog - see <a href="https://www.w3.org/TR/dcat-ucr/#ID6">DCAT Distribution to describe web services - ID6</a> and
+	A number of use cases for the revision involve also having <b>data distribution services</b> as members of a catalog - see <a href="https://www.w3.org/TR/dcat-ucr/#ID6">DCAT Distribution to describe web services - ID6</a> and
 <a href="https://www.w3.org/TR/dcat-ucr/#ID18">Modeling service-based data access - ID18</a>.
 It has been decided to add an explicit class for Data Distribution Services in this revision of DCAT, and to enable these to be part of a Catalog.
-Provision for other services to also be part of a Catalog will also be made, as well as for Catalogs to be composed of other Catalogs.
+Provision for other data services to also be part of a Catalog will also be made, as well as for Catalogs to be composed of other Catalogs.
 See <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>. </p>
 <p>
 	 <a href="https://github.com/w3c/dxwg/milestone/5">Milestone 5</a> collects a number of issues related to this requirement.
 </p>
 </div>
 
-<p>Another important class in DCAT is <code><a href="#Class:_Catalog_record">dcat:CatalogRecord</a></code> which describes a dataset entry in the catalog. Notice that while dcat:Dataset represents the dataset itself, dcat:CatalogRecord represents the record that describes a dataset in the catalog. The use of dcat:CatalogRecord is considered optional. It is used to capture provenance information about dataset entries in a catalog. If this distinction is not necessary then dcat:CatalogRecord can be safely ignored.</p>
+<p>A <b>CatalogRecord</b> describes an entry in the catalog. Notice that while <code>dcat:Resource</code> represents the dataset or service itself, <code>dcat:CatalogRecord</code> is the record that describes the registration of an item in the catalog. The use of <code>dcat:CatalogRecord</code> is considered optional. It is used to capture provenance information about entries in a catalog. If this distinction is not necessary then <code>dcat:CatalogRecord</code> can be safely ignored.</p>
 
 
 <p class="note">
@@ -137,11 +142,12 @@ See <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>. </p>
 	This relationship has been removed in the revised DCAT vocabulary - see <a href="https://github.com/w3c/dxwg/issues/98">Issue #98</a>.
 </p>
 
-<figure><img alt="UML model of DCAT classes and properties" src="images/dcat-model-1.jpg">
+<figure><img alt="UML model of DCAT classes and properties" src="UML/DCAT-summary.png">
 	<figcaption>
-		Overview of DCAT model
+		Overview of DCAT model, showing the classes of resources that may be members of a Catalog and the relationships between them.
 	</figcaption>
 </figure>
+
 <p>All RDF examples in this document are written in Turtle syntax [[Turtle]].</p>
 <section id="basic-example">
 <h3>Basic Example</h3>
@@ -303,6 +309,16 @@ Notice that we used dcat:downloadURL with the downloadable distribution and that
 does not have to be defined as a separate dcat:Distribution instance.
 </section>
 
+<section id="more-examples-needed">
+	<h3>More examples needed</h3>
+	<p class="note">
+		Need to add examples showing data distribution services and their relationship to datasets and distributions.
+	</p>
+	<p class="note">
+		Need to add examples showing other data services.
+	</p>
+</section>
+
 </section>
 
 <section id="vocabulary-specification">
@@ -324,6 +340,10 @@ does not have to be defined as a separate dcat:Distribution instance.
 		An <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/schema.ttl">RDF graph containing a proposed alignment of DCAT with schema.org</a> is available. Comments on this alignment are invited.
 	</p>
 </div>
+
+<p class="issue" data-number="105">
+	The use of guarded constraints (existence, cardinality, range-type) to control the use of the recommended properties in the context of a class is being considered as part of the revision of DCAT.
+</p>
 
 <p class="issue" data-number="110">
 	The axiomatization of DCAT 2014 used global domain and range constraints for many of the properties defined in the DCAT namespace [[VOCAB-DCAT-20140116]]. This makes quite strong ontological commitments, some of which are now being reconsidered - see individual issues noted inline below.
@@ -366,7 +386,10 @@ The definitions (including domain and range) of terms outside the dcat namespace
 <h3>Class: Catalog</h3>
 <p>The following properties are recommended for use on this class:
 <a href="#Property:catalog_catalog_record">catalog record</a>,
+<a href="#Property:catalog_hasPart">hasPart</a>,
 <a href="#Property:catalog_dataset">dataset</a>,
+<a href="#Property:catalog_service">service</a>,
+<a href="#Property:catalog_catalog">catalog</a>,
 <a href="#Property:catalog_description">description</a>,
 <a href="#Property:catalog_homepage">homepage</a>,
 <a href="#Property:catalog_language">language</a>,
@@ -380,14 +403,10 @@ The definitions (including domain and range) of terms outside the dcat namespace
 <a href="#Property:catalog_update_date">update date</a>
 </p>
 
-<p class="issue" data-number="105">
-	The use of guarded constraints (existence, cardinality, range-type) to control the use of the recommended properties in the context of a class is being considered as part of the revision of DCAT.
-</p>
-
 <div class="note">
 	<p>
 	The scope of DCAT 2014 was limited to catalogs of datasets [[VOCAB-DCAT-20140116]].
-	A number of use cases for the revision involve also having <b>data services</b> (aka distribution services) as members of a catalog - see <a href="https://www.w3.org/TR/dcat-ucr/#ID6">DCAT Distribution to describe web services - ID6</a> and
+	A number of use cases for the revision involve also having <b>data distribution services</b> as members of a catalog - see <a href="https://www.w3.org/TR/dcat-ucr/#ID6">DCAT Distribution to describe web services - ID6</a> and
 <a href="https://www.w3.org/TR/dcat-ucr/#ID18">Modeling service-based data access - ID18</a>.
 It has been decided to add an explicit class for Data Distribution Services in this revision of DCAT, and to enable these to be part of a Catalog.
 Provision for other services to also be part of a Catalog will also be made, as well as for Catalogs to be composed of other Catalogs.
@@ -397,11 +416,18 @@ See <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>. </p>
 </p>
 </div>
 
+<p class="issue" data-number="116">
+	The need for resources other than dcat:Dataset to be included in a catalog is being considered as part of the revision of DCAT.
+	Also see <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>.
+</p>
+
+
 <table class="definition">
   <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Catalog">dcat:Catalog</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>A data catalog is a curated collection of metadata about datasets.</td></tr>
-    <tr><td class="prop">Usage note:</td><td>Typically, a web-based data catalog is represented as a single instance of this class.</td></tr>
+		<tr><td class="prop">Sub-class of:</td><td><a href="#Class:_Dataset">Dataset</a></td></tr>
+    <tr><td class="prop">Definition:</td><td>A curated collection of metadata about datasets and data services</td></tr>
+    <tr><td class="prop">Usage note:</td><td>A web-based data catalog is typically represented as a single instance of this class.</td></tr>
     <tr><td class="prop">See also:</td><td> <a href="#Class:_Catalog_record">Catalog record</a>, <a href="#Class:_Dataset">Dataset</a></td></tr>
   </tbody>
 </table>
@@ -563,13 +589,27 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 </table>
 </section>
 
+<section id="Property:catalog_hasPart">
+<h4>Property: hasPart</h4>
+
+<p class="note">
+	Explicit use of this property added in this revision of DCAT.
+</p>
+
+
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/hasPart">dct:hasPart</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>An item that is part of the catalog.</td></tr>
+    <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Catalog">dcat:Catalog</a></td></tr>
+		<tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a></td></tr>
+		<tr><td class="prop">Usage note:</td><td>This is the most general predicate for membership of a catalog. Use of a more specific sub-property is recommended when available. </td></tr>
+  </tbody>
+</table>
+</section>
+
 <section id="Property:catalog_dataset">
 <h4>Property: dataset</h4>
-
-<p class="issue" data-number="116">
-	The need for resources other than dcat:Dataset to be included in a catalog is being considered as part of the revision of DCAT.
-	Also see <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>.
-</p>
 
 <p class="issue" data-number="117">
 	The axiomatization of dcat:dataset is being re-evaluated as part of the revision of DCAT.
@@ -582,6 +622,42 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
     <tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/terms/hasPart">dct:hasPart</a></td></tr>
     <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Catalog">dcat:Catalog</a></td></tr>
     <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a></td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="Property:catalog_service">
+<h4>Property: service</h4>
+
+<p class="note">
+	Property added in this revision of DCAT.
+</p>
+
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#service">dcat:service</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>A service that is part of the catalog.</td></tr>
+    <tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/terms/hasPart">dct:hasPart</a></td></tr>
+    <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Catalog">dcat:Catalog</a></td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dcat:DataService</a></td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="Property:catalog_catalog">
+<h4>Property: catalog</h4>
+
+<p class="note">
+	Property added in this revision of DCAT.
+</p>
+
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#catalog">dcat:catalog</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>Link from a catalog to another catalog whose contents are of interest in the context of this catalog</td></tr>
+    <tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/terms/hasPart">dct:dataset</a></td></tr>
+    <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Catalog">dcat:Catalog</a></td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Catalog</a></td></tr>
   </tbody>
 </table>
 </section>
@@ -622,29 +698,10 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 	The need to be able to link a metadata record to its original source has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
-<p class="issue" data-number="105">
-	The use of guarded constraints (existence, cardinality, range-type) to control the usage of the recommended properties in the context of a class is being considered as part of the revision of DCAT.
-</p>
-
-<p class="issue" data-number="128">
-	A number of requirements identify the need to provide better support for Dataset and Record provenance - see
-	<a href="https://github.com/w3c/dxwg/issues/77">Issue #78</a>,
-	<a href="https://github.com/w3c/dxwg/issues/77">Issue #77</a>,
-	<a href="https://github.com/w3c/dxwg/issues/76">Issue #76</a>,
-	<a href="https://github.com/w3c/dxwg/issues/71">Issue #71</a>,
-	<a href="https://github.com/w3c/dxwg/issues/66">Issue #66</a>,
-	<a href="https://github.com/w3c/dxwg/issues/66">Issue #63</a>,
-	<a href="https://github.com/w3c/dxwg/issues/57">Issue #57</a>,
-	.
-	It has been suggested that many of the requirements can be satisfied by using the [[PROV-O]] ontology,
-	in particular by making dcat:Dataset and/or dcat:CatalogRecord a sub-class of <a href="http://www.w3.org/ns/prov#Entity">prov:Entity</a>.
-	A preliminary <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/prov.ttl">alignment of DCAT with PROV-O is available</a>.
-</p>
-
 <table class="definition">
   <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#CatalogRecord">dcat:CatalogRecord</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>A record in a data catalog, describing a single dataset.</td></tr>
+    <tr><td class="prop">Definition:</td><td>A record in a data catalog, describing the registration of a single dataset or data service.</td></tr>
     <tr><td class="prop">Usage note</td><td>This class is optional and not all catalogs will use it. It exists for catalogs where a distinction is made between metadata about
     a <em>dataset</em> and metadata about the <em>dataset's entry in the catalog</em>. For example, the <i>publication date</i> property of the <i>dataset</i> reflects
     the date when the information was originally made available by the publishing agency, while the publication date of the <i>catalog record</i> is the date when the dataset was added to the catalog.
@@ -694,11 +751,10 @@ into a separate named graph. The name of that graph should be the IRI of the cat
     encoded using the relevant ISO 8601 Date and Time compliant string [[!DATETIME]] and typed using the appropriate XML Schema datatype [[XMLSCHEMA11-2]]
      </td></tr>
     <tr><td class="prop">Usage note:</td><td>This indicates the date of listing the dataset in the catalog and not the publication date of the dataset itself.</td></tr>
-    <tr><td class="prop">See also:</td><td><a href="#Property:dataset_release_date" title=""> dataset release date</a></td></tr>
+    <tr><td class="prop">See also:</td><td><a href="#Property:resource_release_date" title=""> dataset release date</a></td></tr>
   </tbody>
 </table>
 </section>
-
 
 <section id="Property:record_update_date">
 <h4>Property: update/modification date</h4>
@@ -710,7 +766,7 @@ into a separate named graph. The name of that graph should be the IRI of the cat
     encoded using the relevant ISO 8601 Date and Time compliant string [[!DATETIME]] and typed using the appropriate XML Schema datatype [[XMLSCHEMA11-2]]
      </td></tr>
     <tr><td class="prop">Usage note:</td><td>This indicates the date of last change of a catalog entry, i.e. the catalog metadata description of the dataset, and not the date of the dataset itself.</td></tr>
-    <tr><td class="prop">See also:</td><td><a href="#Property:dataset_update_date" title=""> dataset modification date</a></td></tr>
+    <tr><td class="prop">See also:</td><td><a href="#Property:resource_update_date" title=""> dataset modification date</a></td></tr>
   </tbody>
 </table>
 </section>
@@ -729,25 +785,131 @@ into a separate named graph. The name of that graph should be the IRI of the cat
 </section>
 </section> <!-- end Class catalog record -->
 
+<section id="class-datadistributionservice">
+<h3>Class: Data distribution service</h3>
+<p>In addition to the properties inherited from the super-class <a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a>, the following properties are recommended for use on this class:
+<a href="#Property:datadistributionservice_servesdataset">servesDataset</a>,
+</p>
+
+<p class="issue" data-number="56">
+	The need to provide more information about the nature of data distribution services has been identified as a requirement to be satisfied in the revision of DCAT.
+</p>
+
+<table class="definition">
+  <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#DataDistributionService">dcat:DataDistributionService</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>A site or end-point that provides access to datasets through distributions of the datasets</td></tr>
+    <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a></td></tr>
+    <tr><td class="prop">Usage note:</td><td> </td></tr>
+    <tr><td class="prop">See also:</td><td> </td></tr>
+  </tbody>
+</table>
+
+<p class="note">
+    The class <a href="#DataDistributionService">dcat:DataDistributionService</a> has been added to the DCAT vocabulary in this revision.
+</p>
+
+<section id="Property:datadistributionservice_servesdataset">
+<h4>Property: serves dataset</h4>
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#servesdataset">dcat:servesDataset</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>Link to description of a dataset that this DataDistributionService can distribute</td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dact:Dataset</a></td></tr>
+  </tbody>
+</table>
+</section>
+
+</section> <!-- end class DataDistributionService -->
+
+<section id="class-dataservice">
+<h3>Class: Data Service</h3>
+<p>In addition to the properties inherited from the super-class <a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a>, the following properties are recommended for use on this class:
+	<a href="#Property:dataservice_endpointdescription">endpointDescription</a>,
+	<a href="#Property:dataservice_endpointurl">endpointURL</a>,
+	<a href="#Property:dataservice_license">license</a>,
+	<a href="#Property:dataservice_accessRights">accessRights</a>
+</p>
+
+<table class="definition">
+  <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>A service for discovery, access or processing data or related resources.</td></tr>
+		<tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a></td></tr>
+		<tr><td class="prop">Sub class of:</td><td><a href="http://purl.org/dc/dcmitype/Service">dctype:Service</a></td></tr>
+    <tr><td class="prop">Usage note:</td><td> </td></tr>
+    <tr><td class="prop">See also:</td><td> </td></tr>
+  </tbody>
+</table>
+
+<p class="note">
+  New class in this revision of DCAT.
+</p>
+
+<section id="Property:dataservice_endpointurl">
+<h4>Property: endpoint address</h4>
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#endpointURL">dct:endpointURL</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>Link to service end-point.</td></tr>
+		<tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a> </td></tr>
+		<tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2001/XMLSchema#anyURI">xsd:anyURI</a> </td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="Property:dataservice_endpointdescription">
+<h4>Property: endpoint description</h4>
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/conformsTo">dct:endpointDescription</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>Link to a description of the service end-point, for example an OpenAPI (Swagger) description, an OGC getCapabilities response, a SD Service, an OpenSearch or WSDL document.  </td></tr>
+		<tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a> </td></tr>
+		<tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Resource">rdfs:Resource</a> </td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="Property:dataservice_license">
+<h4>Property: license</h4>
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/license">dct:license</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>This links to the license document under which the service is made available.</td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/LicenseDocument">dct:LicenseDocument</a></td></tr>
+    <tr><td class="prop">See also:</td><td><a href="#Property:distribution_rights" title=""> distribution rights</a>,
+    <a href="#Property:catalog_license" title="">catalog license</a></td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="Property:dataservice_accessrights">
+<h4>Property: access rights</h4>
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/accessRights">dct:accessRights</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>Access Rights may include information regarding access or restrictions based on privacy, security, or other policies. </td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/RightsStatement">dct:RightsStatement</a></td></tr>
+  </tbody>
+</table>
+</section>
+
+</section> <!-- end class DataService -->
+
 <section id="class-dataset">
 <h3>Class: Dataset</h3>
-<p>The following properties are recommended for use on this class:
-<a href="#Property:dataset_contactPoint">contact point</a>,
-<a href="#Property:dataset_description">description</a>,
+<p>In addition to the properties inherited from the super-class <a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a>, the following properties are recommended for use on this class:
 <a href="#Property:dataset_distribution">distribution</a>,
+<!--
+<a href="#Property:dataset_hasDatasetPart">hasDatasetPart</a>,
+-->
 <a href="#Property:dataset_frequency">frequency</a>,
-<a href="#Property:dataset_identifier">identifier</a>,
-<a href="#Property:dataset_keyword">keyword</a>,
-<a href="#Property:dataset_landingpage">landing page</a>,
-<a href="#Property:dataset_language">language</a>,
-<a href="#Property:dataset_publisher">publisher</a>,
-<a href="#Property:dataset_release_date">release date</a>,
 <a href="#Property:dataset_spatial">spatial coverage</a>,
 <a href="#Property:dataset_temporal">temporal coverage</a>,
-<a href="#Property:dataset_theme">theme</a>,
-<a href="#Property:dataset_title">title</a>,
-<a href="#Property:dataset_type">type</a>,
-<a href="#Property:dataset_update_date">update date</a>,
+</p>
+
+<p>
+	Information about licences and rights SHOULD be provided on the level of Distribution. Information about licences and rights MAY be provided for a Dataset in addition to but not in stead of the information provided for the Distributions of that Dataset. Providing licence or rights information for a Dataset that is different from information provided for a Distribution of that Dataset should be avoided as this may create legal conflicts.
 </p>
 
 <p class="issue" data-number="57">
@@ -758,10 +920,6 @@ into a separate named graph. The name of that graph should be the IRI of the cat
 	The need to choose or define a data <b>quality model</b> has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
-<p class="issue" data-number="59">
-	The need to more formally encode access restrictions for both datasets and distributions has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
 <p class="issue" data-number="60">
 	The need to provide richer descriptions of dataset aspects (e.g. instrument/sensor used, spatial feature, observable property, quantity kind) has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
@@ -770,33 +928,12 @@ into a separate named graph. The name of that graph should be the IRI of the cat
 	The need to provide better guidance and vocabulary elements for dataset citation has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
-<p class="issue" data-number="62">
-	The possible association of datasets with zero or multiple catalogs has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
 <p class="issue" data-number="63">
 	The need to be able to link a dataset with publications arising from it has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
-<p class="issue" data-number="66">
-	The need to be able to link a dataset with the source of funding that supported its production has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
-<p class="issue" data-number="71">
-	The need to be able to describe the business or project context related to dataset production has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
 <p class="issue" data-number="76">
 	The need provide a more comprehensive method for describing dataset provenance has been identified as a requirement to be satisfied in the revision of DCAT. A preliminary <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/prov.ttl">alignment of DCAT with PROV-O is available</a>.
-
-</p>
-
-<p class="issue" data-number="77">
-	The need to be able to link a dataset with the business or project context of its production has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
-<p class="issue" data-number="81">
-	The need describe relationships between datasets has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
 <p class="issue" data-number="84">
@@ -807,143 +944,57 @@ into a separate named graph. The name of that graph should be the IRI of the cat
 	The need to be able to provide usage notes for a dataset or distribution has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
-<p class="issue" data-number="90">
-	The need to be able to describe version relationships of datasets has been identified as a requirement to be satisfied in the revision of DCAT. Also see detailed requirements in
-	<a href="https://github.com/w3c/dxwg/issues/89">Issue #89</a>,
-	<a href="https://github.com/w3c/dxwg/issues/91">Issue #91</a>,
-	<a href="https://github.com/w3c/dxwg/issues/92">Issue #92</a>,
-	<a href="https://github.com/w3c/dxwg/issues/93">Issue #93</a>,
-</p>
-
-<p class="issue" data-number="104">
-	The option of allowing license and rights information to be associated with a dcat:Dataset, as well as dcat:Distribution, is being considered as part of the revision of DCAT.
-</p>
-
-<p class="issue" data-number="105">
-	The use of guarded constraints (existence, cardinality, range-type) to control the usage of the recommended properties in the context of a class is being considered as part of the revision of DCAT.
-</p>
-
-<p class="issue" data-number="128">
-	A number of requirements identify the need to provide better support for Dataset and Record provenance - see
-	<a href="https://github.com/w3c/dxwg/issues/77">Issue #78</a>,
-	<a href="https://github.com/w3c/dxwg/issues/77">Issue #77</a>,
-	<a href="https://github.com/w3c/dxwg/issues/76">Issue #76</a>,
-	<a href="https://github.com/w3c/dxwg/issues/71">Issue #71</a>,
-	<a href="https://github.com/w3c/dxwg/issues/66">Issue #66</a>,
-	<a href="https://github.com/w3c/dxwg/issues/66">Issue #63</a>,
-	<a href="https://github.com/w3c/dxwg/issues/57">Issue #57</a>,
-	.
-	It has been suggested that many of the requirements can be satisfied by using the [[PROV-O]] ontology,
-	in particular by making dcat:Dataset and/or dcat:CatalogRecord a sub-class of <a href="http://www.w3.org/ns/prov#Entity">prov:Entity</a>.
-	A preliminary <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/prov.ttl">alignment of DCAT with PROV-O is available</a>.
-</p>
-
 <table class="definition">
   <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a></th></tr></thead>
   <tbody>
     <tr><td class="prop">Definition:</td><td>A collection of data, published or curated by a single agent, and available for access or download in one or more formats.</td></tr>
-    <tr><td class="prop">Sub class of:</td><td> </td></tr>
+    <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a></td></tr>
     <tr><td class="prop">Usage note:</td><td>This class represents the actual dataset as published by the dataset publisher. In cases where a distinction between the actual dataset and its entry in the catalog is necessary (because metadata such as modification date and maintainer might differ), the <i><a href="#Class:_Catalog_record">catalog record</a></i> class can be used for the latter.</td></tr>
     <tr><td class="prop">See also:</td><td><a href="#Class:_Catalog_record" title="">Catalog record</a></td></tr>
   </tbody>
 </table>
 
 <p class="note">
-    In DCAT 2014 [[VOCAB-DCAT-20140116]] <a href="#class-dataset">dcat:Dataset</a> was a sub-class of <a href="http://purl.org/dc/dcmitype/Dataset">dctype:Dataset</a>, which is a member of the <a href="http://dublincore.org/documents/dcmi-terms/#section-7">DCMI Types vocabulary</a> [[DCTERMS]].
+    In DCAT 2014 [[!VOCAB-DCAT]] <a href="#class-dataset">dcat:Dataset</a> was a sub-class of <a href="http://purl.org/dc/dcmitype/Dataset">dctype:Dataset</a>, which is a member of the <a href="http://dublincore.org/documents/dcmi-terms/#section-7">DCMI Types vocabulary</a> [[DCTERMS]].
 	This relationship has been removed in the revised DCAT vocabulary - see <a href="https://github.com/w3c/dxwg/issues/98">Issue #98</a>.
 </p>
 
-<section id="Property:dataset_title">
-<h4>Property: title</h4>
-<table class="definition">
-  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/title">dct:title</a></th></tr></thead>
-  <tbody>
-    <tr><td class="prop">Definition:</td><td>A name given to the dataset.</td></tr>
-    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a></td></tr>
-  </tbody>
-</table>
-</section>
+<section id="Property:dataset_distribution">
+<h4>Property: dataset distribution</h4>
 
-<section id="Property:dataset_description">
-<h4>Property: description</h4>
-<table class="definition">
-  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/description">dct:description</a></th></tr></thead>
-  <tbody>
-    <tr><td class="prop">Definition:</td><td>free-text account of the dataset.</td></tr>
-    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a></td></tr>
-  </tbody>
-</table>
-</section>
-
-<section id="Property:dataset_release_date">
-<h4>Property: release date</h4>
-<table class="definition">
-  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/issued">dct:issued</a></th></tr></thead>
-  <tbody>
-    <tr><td class="prop">Definition:</td><td>Date of formal issuance (e.g., publication) of the dataset.</td></tr>
-    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a>
-    encoded using the relevant ISO 8601 Date and Time compliant string [[!DATETIME]] and typed using the appropriate XML Schema datatype [[XMLSCHEMA11-2]]
-    </td></tr>
-    <tr><td class="prop">Usage note:</td><td>This property should be set using the first known date of issuance.</td></tr>
-  </tbody>
-</table>
-</section>
-
-<section id="Property:dataset_update_date">
-<h4>Property: update/modification date</h4>
-<table class="definition">
-  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/modified">dct:modified</a></th></tr></thead>
-  <tbody>
-    <tr><td class="prop">Definition:</td><td>Most recent date on which the dataset was changed, updated or modified.</td></tr>
-    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a>
-    encoded using the relevant ISO 8601 Date and Time compliant string [[!DATETIME]] and typed using the appropriate XML Schema datatype [[XMLSCHEMA11-2]]
-    </td></tr>
-    <tr><td class="prop">Usage note:</td><td>The value of this property indicates a change to the actual dataset, not a change to the catalog record. An absent value may indicate that the dataset has never changed after its initial publication, or that the date of last modification is not known, or that the dataset is continuously updated.</td></tr>
-    <tr><td class="prop">See also:</td><td><a href="#Property:dataset_frequency">frequency</a></td></tr>
-  </tbody>
-</table>
-</section>
-
-<section id="Property:dataset_language">
-<h4>Property: language</h4>
-<table class="definition">
-  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/language">dct:language</a></th></tr></thead>
-  <tbody>
-    <tr><td class="prop">Definition:</td><td>The language of the dataset.</td></tr>
-    <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/LinguisticSystem">dct:LinguisticSystem</a>
-    <br>
-    Resources defined by the Library of Congress (<a href="http://id.loc.gov/vocabulary/iso639-1.html">1</a>,
-     <a href="http://id.loc.gov/vocabulary/iso639-2.html">2</a>) <em title="SHOULD" class="rfc2119">SHOULD</em> be used.
-  <br>
-If a ISO 639-1 (two-letter) code is defined for language, then its corresponding IRI <em title="SHOULD" class="rfc2119">SHOULD</em> be used; if no ISO 639-1 code is defined, then IRI corresponding to the ISO 639-2 (three-letter) code <em title="SHOULD" class="rfc2119">SHOULD</em> be used.</td></tr>
-    <tr><td class="prop">Usage note:</td><td>
-    <ul>
-    <li>This overrides the value of the <a href="#Property:catalog_language">catalog language</a> in case of conflict.</li>
-    <li>
-    If the dataset is available in multiple languages, use multiple values for this property. If each language is available separately, define an instance of dcat:Distribution for each language and describe the specific language of each distribution using dct:language (i.e. the dataset will have multiple dct:language values and each distribution will have one of these languages as value of its dct:language property).
-    </li>
-    </ul></td></tr>
-  </tbody>
-</table>
-</section>
-
-<section id="Property:dataset_publisher">
-<h4>Property: publisher</h4>
-
-<p class="issue" data-number="80">
-	The desire to have qualified forms of properties (as done in [[PROV-O]]) has been raised. If dcat:Dataset is a prov:Entity (not decided yet) then `publisher` could be a qualified prov:Entity -> prov:Agent relationship.
+<p class="issue" data-number="120">
+	The axiomatization of dcat:distribution is being re-evaluated as part of the revision of DCAT.
 </p>
 
 <table class="definition">
-  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/publisher">dct:publisher</a></th></tr></thead>
+  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#distribution">dcat:distribution</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>An entity responsible for making the dataset available.</td></tr>
-    <tr><td class="prop">Usage note:</td><td>Resources of type <a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a>
-    are recommended as values for this property.</td></tr>
-    <tr><td class="prop">See also:</td><td><a href="#Class:_Organization.2FPerson">Class: Organization/Person</a></td></tr>
+    <tr><td class="prop">Definition:</td><td>Connects a dataset to its available distributions.</td></tr>
+    <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a></td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#Distribution">dcat:Distribution</a></td></tr>
   </tbody>
 </table>
 </section>
+
+<!--
+<section id="Property:dataset_hasDatasetPart">
+<h4>Property: has dataset part</h4>
+
+<p class="note">
+	Property added in this revision of DCAT.
+</p>
+
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#hasDatasetPart">dcat:hasDatasetPart</a></th></tr></thead>
+  <tbody>
+		<tr><td class="prop">Definition:</td><td>Link to a dataset which is a part of this one</td></tr>
+		<tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/terms/hasPart">dct:hasPart</a></td></tr>
+    <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a></td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a></td></tr>
+  </tbody>
+</table>
+</section>
+-->
 
 <section id="Property:dataset_frequency">
 <h4>Property: frequency</h4>
@@ -952,31 +1003,6 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
   <tbody>
     <tr><td class="prop">Definition:</td><td>The frequency at which dataset is published.</td></tr>
     <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/Frequency">dct:Frequency</a> (A rate at which something recurs)</td></tr>
-  </tbody>
-</table>
-</section>
-
-<section id="Property:dataset_identifier">
-<h4>Property: identifier</h4>
-
-<p class="issue" data-number="53">
-	The desirability of dereferenceable identifiers has been raised as an item for consideration in the revision of DCAT. dct:identifier has limited expressivity for this. It has been suggested that ADMS identifier, or a property from another ontology might be recruited to help DCAT in this area.
-</p>
-
-<p class="issue" data-number="67">
-	The need to clearly distinguish between primary and legacy identifiers for a dataset has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
-<p class="issue" data-number="68">
-	The need to indicate the scheme or authority for identifiers for a dataset has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
-<table class="definition">
-  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/identifier">dct:identifier</a></th></tr></thead>
-  <tbody>
-    <tr><td class="prop">Definition:</td><td>A unique identifier of the dataset.</td></tr>
-    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a></td></tr>
-    <tr><td class="prop">Usage note:</td><td>The identifier might be used as part of the URI of the dataset, but still having it represented explicitly is useful.</td></tr>
   </tbody>
 </table>
 </section>
@@ -1017,147 +1043,34 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 </table>
 </section>
 
-<section id="Property:dataset_theme">
-<h4>Property: theme/category</h4>
-
-<p class="note">
-	In DCAT 2014 [[VOCAB-DCAT-20140116]] the domain of dcat:theme was dcat:Dataset,
-  which limited use of this property in other contexts. The domain has been relaxed in this revision -
-  see <a href="https://github.com/w3c/dxwg/issues/123">Issue #123</a>.
-</p>
-
-<table class="definition">
-  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#theme">dcat:theme</a></th></tr></thead>
-  <tbody>
-    <tr><td class="prop">Definition:</td><td>The main category of the resource. A resource can have multiple themes.</td></tr>
-    <tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/terms/subject">dct:subject</a></td></tr>
-    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2004/02/skos/core#Concept">skos:Concept</a></td></tr>
-    <tr><td class="prop">Usage note:</td><td>The set of <a href="http://www.w3.org/2004/02/skos/core#Concept">skos:Concept</a>s used to categorize the resources are organized in a <a href="http://www.w3.org/2004/02/skos/core#ConceptScheme">skos:ConceptScheme</a> describing all the categories and their relations in the catalog.</td></tr>
-    <tr><td>See also:</td><td><a href="#Property:catalog_themes">catalog themes taxonomy</a></td></tr>
-  </tbody>
-</table>
-</section>
-
-<section id="Property:dataset_type">
-<h4>Property: type/genre</h4>
-
-<p class="note">
-	Added in DCAT revision - see <a href="https://github.com/w3c/dxwg/issues/64">Issue #64</a>.
-</p>
-
-<table class="definition">
-  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/type">dct:type</a></th></tr></thead>
-  <tbody>
-    <tr><td class="prop">Definition:</td><td>The nature or genre of the resource.</td></tr>
-    <tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/elements/1.1/type">dc:type</a></td></tr>
-    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Class">rdfs:Class</a></td></tr>
-    <tr><td class="prop">Usage note:</td><td>Recommended best practice is to use a value from a controlled vocabulary, such as:
-		<ol>
-			<li>
-				<a href="http://dublincore.org/documents/dcmi-terms/#section-7">DCMI Type vocabulary</a> [[DCTERMS]]
-			</li>
-			<li>
-				<a href="https://geo-ide.noaa.gov/wiki/index.php?title=ISO_19115_and_19115-2_CodeList_Dictionaries#MD_ScopeCode">ISO 19115 scope codes</a> [[ISO-19115-1]]
-			</li>
-			<li>
-				<a href="https://schema.datacite.org/meta/kernel-4.1/include/datacite-resourceType-v4.1.xsd">Datacite resource types</a> [[DataCite]]
-			</li>
-			<li>
-				PARSE.Insight content-types used by <a href="https://www.re3data.org/">re3data.org</a> [[RE3DATA-SCHEMA]] (see item 15 contentType)
-			</li>
-			<li>
-				<a href="http://id.loc.gov/vocabulary/marcgt.html">MARC intellectual resource types</a>
-			</li>
-		</ol> To describe the file format, physical medium, or dimensions of the resource, use the <a href="http://purl.org/dc/terms/format">dct:format element</a>.</td></tr>
-  </tbody>
-</table>
-</section>
-
-<section id="Property:dataset_keyword">
-<h4>Property: keyword/tag</h4>
-
-<p class="note">
-	In DCAT 2014 [[VOCAB-DCAT-20140116]] the domain of dcat:keyword was dcat:Dataset,
-  which limited use of this property in other contexts. The domain has been relaxed in this revision -
-  see <a href="https://github.com/w3c/dxwg/issues/121">Issue #121</a>.
-</p>
-
-<table class="definition">
-  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#keyword">dcat:keyword</a></th></tr></thead>
-  <tbody>
-    <tr><td class="prop">Definition:</td><td>A keyword or tag describing the resource.</td></tr>
-    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a></td></tr>
-  </tbody>
-</table>
-</section>
-
-<section id="Property:dataset_contactPoint">
-<h4>Property: contact point</h4>
-
-<p class="note">
-	In DCAT 2014 [[VOCAB-DCAT-20140116]] the domain of dcat:contactPoint was dcat:Dataset,
-  which limited use of this property in other contexts. The domain has been relaxed in this revision -
-  see <a href="https://github.com/w3c/dxwg/issues/95">Issue #95</a>.
-</p>
-
-<p class="issue" data-number="109">
-	The axiomatization of dcat:contactPoint is being re-evaluated as part of the revision of DCAT.
-</p>
-
-<table class="definition">
-  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#contactPoint">dcat:contactPoint</a></th></tr></thead>
-  <tbody>
-    <tr><td class="prop">Definition:</td><td>Link a dataset to relevant contact information which is provided using vCard [[VCARD-RDF]].</td></tr>
-    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2006/vcard/ns#Kind">vcard:Kind</a></td></tr>
-  </tbody>
-</table>
-</section>
-
-<section id="Property:dataset_distribution">
-<h4>Property: dataset distribution</h4>
-
-<p class="issue" data-number="120">
-	The axiomatization of dcat:distribution is being re-evaluated as part of the revision of DCAT.
-</p>
-
-<table class="definition">
-  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#distribution">dcat:distribution</a></th></tr></thead>
-  <tbody>
-    <tr><td class="prop">Definition:</td><td>Connects a dataset to its available distributions.</td></tr>
-    <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a></td></tr>
-    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#Distribution">dcat:Distribution</a></td></tr>
-  </tbody>
-</table>
-</section>
-
-<section id="Property:dataset_landingpage">
-<h4>Property: landing page</h4>
-
-<p class="note">
-	In DCAT 2014 [[VOCAB-DCAT-20140116]] the domain of dcat:landingPage was dcat:Dataset,
-  which limited use of this property in other contexts. The domain has been relaxed in this revision -
-  see <a href="https://github.com/w3c/dxwg/issues/122">Issue #122</a>.
-</p>
-
-<table class="definition">
-  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#landingPage">dcat:landingPage</a></th></tr></thead>
-  <tbody>
-    <tr><td class="prop">Definition:</td><td>A Web page that can be navigated to in a Web browser to gain access to the dataset, its distributions and/or additional information.</td></tr>
-    <tr><td class="prop">Sub property of:</td><td><a href="http://xmlns.com/foaf/0.1/page">foaf:page</a></td></tr>
-    <tr><td class="prop">Range:</td><td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
-    <tr><td class="prop">Usage note:</td><td>
-        If the distribution(s) are accessible only through a landing page
-    (i.e. direct download URLs are not known), then the landing page link <em title="SHOULD" class="rfc2119">SHOULD</em> be duplicated as dcat:accessURL on a distribution. (see <a href="#example-landing-page">example 4.4</a>)
-    </td></tr>
-  </tbody>
-</table>
-</section>
 </section> <!-- end class Dataset -->
+
+<section id="class-discoveryservice">
+<h3>Class: Discovery service</h3>
+<p>In addition to the properties inherited from the super-class <a href="http://www.w3.org/ns/dcat#DataService">dcat:DataDistributionService</a>, the following properties are recommended for use on this class: <i>none yet</i>
+</p>
+
+<table class="definition">
+  <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#DiscoveryService">dcat:DiscoveryService</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>A site or end-point that supports data discovery, usuing by providing access to catalogs</td></tr>
+    <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/dcat#DataDistributionService">dcat:DataDistributionService</a></td></tr>
+    <tr><td class="prop">Usage note:</td><td> </td></tr>
+    <tr><td class="prop">See also:</td><td> </td></tr>
+  </tbody>
+</table>
+
+<p class="note">
+    The class <a href="#DiscoveryService">dcat:DiscoveryService</a> has been added to the DCAT vocabulary in this revision.
+</p>
+
+</section> <!-- end class DiscoveryService -->
 
 <section id="class-distribution">
 <h3>Class: Distribution</h3>
 <p>The following properties are recommended for use on this class:
-<a href="#Property:distribution_accessurl">access URL</a>,
+	<a href="#Property:distribution_accessurl">access URL</a>,
+	<a href="#Property:distribution_accessservice">access service</a>,
 <a href="#Property:distribution_size">byte size</a>,
 <a href="#Property:distribution_description">description</a>,
 <a href="#Property:distribution_downloadurl">download URL</a>,
@@ -1171,7 +1084,7 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 </p>
 
 <p class="issue" data-number="52">
-	The definition of dcat:Distribution is being re-evaluated as part of the revision of DCAT. In particular to clarify if distribution includes services as well as files.
+	The definition of dcat:Distribution is being re-evaluated as part of the revision of DCAT. In particular to clarify that distributions are primarily <i>representations</i> of datasets. Also see <a href="https://github.com/w3c/dxwg/issues/106">Issue #106</a>
 </p>
 
 <p class="issue" data-number="54">
@@ -1182,34 +1095,22 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 	The need to provide a way to indicate the structure or schema of data in a dcat:Distribution (in addition to the media-type or serialization) has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
-<p class="issue" data-number="56">
-	The need to provide more information about the nature of data service - a kind of dcat:Distribution - has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
 <p class="issue" data-number="59">
 	The need to more formally encode access restrictions for both datasets and distributions has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
-<p class="issue" data-number="86">
-	The need to be able to provide usage notes for a dataset or distribution has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
-<p class="issue" data-number="105">
-	The use of guarded constraints (existence, cardinality, range-type) to control the usage of the recommended properties in the context of a class is being considered as part of the revision of DCAT.
-</p>
-
 <p class="issue" data-number="106">
-	The possible need to provide guidance regarding the extension of the notion distribution is being considered for the revision of DCAT.
+	The possible need to provide guidance regarding the extension of the notion "Distribution" is being considered for the revision of DCAT.
 </p>
 
 <table class="definition">
   <thead><tr><th>RDF class:</th><th><a href="http://www.w3.org/ns/dcat#Distribution">dcat:Distribution</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>Represents a specific available form of a dataset. Each dataset might be available in different forms,
-these forms might represent different formats of the dataset or different endpoints.
-Examples of distributions include a downloadable CSV file, an API or an RSS feed</td></tr>
+    <tr><td class="prop">Definition:</td><td>A specific representation of a dataset. A dataset might be available in several different forms,
+	          and these forms might comprise both different serializations or different schematic arrangements of the same data.
+	          Examples of distributions include a CSV file, a netCDF file, or a data-cube</td></tr>
     <tr><td class="prop">Usage note:</td><td>This represents a general availability of a dataset it implies no information
-    about the actual access method of the data, i.e. whether it is a direct download, API, or some through Web page.
+    about the actual access method of the data, i.e. whether by direct download, API, or through a Web page.
     The use of <a href="#Property:distribution_downloadurl">dcat:downloadURL</a> property indicates directly downloadable distributions.</td></tr>
   </tbody>
 </table>
@@ -1287,7 +1188,8 @@ Examples of distributions include a downloadable CSV file, an API or an RSS feed
     <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/RightsStatement">dct:RightsStatement</a></td></tr>
     <tr><td class="prop">Usage note:</td><td>dct:license, which is a sub-property of dct:rights, can be used to link
     a distribution to a license document. However, dct:rights allows linking to a rights statement that
-    can include licensing information as well as other information that supplements the licence such as attribution. Information about licences and rights <em title="SHOULD" class="rfc2119">SHOULD</em> be provided on the level of Distribution. Information about licences and rights <em title="MAY" class="rfc2119">MAY</em> be provided for a Dataset in addition to but not in stead of the information provided for the Distributions of that Dataset. Providing licence or rights information for a Dataset that is different from information provided for a Distribution of that Dataset should be avoided as this may create legal conflicts.</td></tr>
+    can include licensing information as well as other information that supplements the licence such as attribution.<br/>
+		Information about licences and rights SHOULD be provided on the level of Distribution. Information about licences and rights MAY be provided for a Dataset in addition to but not instead of the information provided for the Distributions of that Dataset. Providing licence or rights information for a Dataset that is different from information provided for a Distribution of that Dataset should be avoided as this may create legal conflicts.</td></tr>
     <tr><td class="prop">See also:</td><td><a href="#Property:distribution_license" title=""> distribution license</a>,
     <a href="#Property:catalog_rights" title="">catalog rights</a></td></tr>
   </tbody>
@@ -1296,7 +1198,7 @@ Examples of distributions include a downloadable CSV file, an API or an RSS feed
 
 
 <section id="Property:distribution_accessurl">
-<h4>Property: access URL</h4>
+<h4>Property: access address</h4>
 
 <p class="issue" data-number="124">
 	The axiomatization of dcat:accessURL is being re-evaluated as part of the revision of DCAT.
@@ -1310,22 +1212,41 @@ Examples of distributions include a downloadable CSV file, an API or an RSS feed
     <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#accessURL">dcat:accessURL</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>A landing page, feed, SPARQL endpoint or other type of resource that gives access to the distribution of the dataset</td></tr>
+    <tr><td class="prop">Definition:</td><td>Link to a resource that gives access to a distribution of the dataset. E.g. landing page, feed, SPARQL endpoint.</td></tr>
     <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Distribution">dcat:Distribution</a></td></tr>
     <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Resource">rdfs:Resource</a></td></tr>
     <tr><td class="prop">Usage note:</td><td>
     <ul>
+			<li>
+				Use for all cases except a simple download link, in which case downloadURL is preferred.
+			</li>
     <li>
-    Use dcat:accessURL, and not dcat:downloadURL, when it is definitely not a download or when you are not sure whether it is.
-    </li>
-    <li>
-    If the distribution(s) are accessible only through a landing page
-    (i.e. direct download URLs are not known), then the landing page link <em title="SHOULD" class="rfc2119">SHOULD</em> be duplicated as dcat:accessURL on a distribution. (see <a href="#example-landing-page">example 4.4</a>)
+			If the distribution(s) are accessible only through a landing page (i.e. direct download URLs are not known), then the landing page link <em title="SHOULD" class="rfc2119">SHOULD</em> be duplicated as accessURL on a distribution. (see <a href="#example-landing-page">example 4.4</a>)
     </li>
     </ul>
 
     </td></tr>
     <tr><td class="prop">See also</td><td><a href="#Property:distribution_downloadurl">distribution download URL</a></td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="Property:distribution_accessservice">
+<h4>Property: access service</h4>
+
+<p class="note">
+	New property in this revision of DCAT.
+</p>
+
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#accessService">dcat:accessService</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>A service that gives access to the distribution of the dataset</td></tr>
+		<tr><td class="prop">Sub-property of:</td><td><a href="http://www.w3.org/ns/dcat#accessURL">dcat:accessURL</a></td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#DataDistributionService">dcat:DataDistributionService</a></td></tr>
+		<tr><td class="prop">Usage note:</td><td></td></tr>
+		<tr><td class="prop">See also</td><td><a href="#Property:distribution_downloadurl">distribution download URL</a></td></tr>
+		<tr><td class="prop">See also</td><td><a href="#Property:distribution_accessurl">distribution access URL</a></td></tr>
   </tbody>
 </table>
 </section>
@@ -1402,6 +1323,313 @@ Examples of distributions include a downloadable CSV file, an API or an RSS feed
 </table>
 </section>
 </section> <!-- end class Distribution -->
+
+<section id="class-resource">
+<h3>Class: Catalogued resource</h3>
+<p>The following properties are recommended for use on this class:
+<a href="#Property:resource_conformsto">conformsTo</a>,
+<a href="#Property:resource_contactPoint">contact point</a>,
+<a href="#Property:resource_description">description</a>,
+<a href="#Property:resource_distribution">distribution</a>,
+<a href="#Property:resource_identifier">identifier</a>,
+<a href="#Property:resource_keyword">keyword</a>,
+<a href="#Property:resource_landingpage">landing page</a>,
+<a href="#Property:resource_language">language</a>,
+<a href="#Property:resource_publisher">publisher</a>,
+<a href="#Property:resource_release_date">release date</a>,
+<a href="#Property:resource_theme">theme</a>,
+<a href="#Property:resource_title">title</a>,
+<a href="#Property:resource_type">type</a>,
+<a href="#Property:resource_update_date">update date</a>,
+</p>
+
+<p class="issue" data-number="62">
+	The possible association of items with zero or multiple catalogs has been identified as a requirement to be satisfied in the revision of DCAT.
+</p>
+
+<p class="issue" data-number="66">
+	The need to be able to link a catalogued item with the source of funding that supported its production has been identified as a requirement to be satisfied in the revision of DCAT.
+</p>
+
+<p class="issue" data-number="71">
+	The need to be able to describe the business or project context related to production of a catalogued item has been identified as a requirement to be satisfied in the revision of DCAT.
+</p>
+
+<p class="issue" data-number="77">
+	The need to be able to link a catalogued item with the business or project context of its production has been identified as a requirement to be satisfied in the revision of DCAT.
+</p>
+
+<p class="issue" data-number="81">
+	The need describe relationships between catalogued items has been identified as a requirement to be satisfied in the revision of DCAT.
+</p>
+
+<table class="definition">
+  <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>Resource published or curated by a single agent.</td></tr>
+		<!--
+    <tr><td class="prop">Sub class of:</td><td> </td></tr>
+	-->
+    <tr><td class="prop">Usage note:</td><td>The class of all catalogued resources, the superclass of
+			<a href="#Dataset">dcat:Dataset</a>, <a href="#DataService">dcat:DataService</a>, <a href="#Catalog">dcat:Catalog</a> and any other member of a <a href="#Catalog">dcat:Catalog</a>.
+			This class carries properties common to all catalogued resources, including datasets and data services.
+
+			It is strongly recommended to use a more specific sub-class when available.</td></tr>
+    <tr><td class="prop">See also:</td><td> </td></tr>
+  </tbody>
+</table>
+
+<p class="note">
+    The class <a href="#Resource">dcat:Resource</a> has been added to the DCAT vocabulary in this revision.
+</p>
+
+<section id="Property:resource_title">
+<h4>Property: title</h4>
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/title">dct:title</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>A name given to the item.</td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a></td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="Property:resource_description">
+<h4>Property: description</h4>
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/description">dct:description</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>free-text account of the item.</td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a></td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="Property:resource_release_date">
+<h4>Property: release date</h4>
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/issued">dct:issued</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>Date of formal issuance (e.g., publication) of the item.</td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a>
+    encoded using the relevant ISO 8601 Date and Time compliant string [[!DATETIME]] and typed using the appropriate XML Schema datatype [[XMLSCHEMA11-2]]
+    </td></tr>
+    <tr><td class="prop">Usage note:</td><td>This property should be set using the first known date of issuance.</td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="Property:resource_update_date">
+<h4>Property: update/modification date</h4>
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/modified">dct:modified</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>Most recent date on which the item was changed, updated or modified.</td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a>
+    encoded using the relevant ISO 8601 Date and Time compliant string [[!DATETIME]] and typed using the appropriate XML Schema datatype [[XMLSCHEMA11-2]]
+    </td></tr>
+    <tr><td class="prop">Usage note:</td><td>The value of this property indicates a change to the actual item, not a change to the catalog record. An absent value may indicate that the item has never changed after its initial publication, or that the date of last modification is not known, or that the item is continuously updated.</td></tr>
+    <tr><td class="prop">See also:</td><td><a href="#Property:dataset_frequency">frequency</a></td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="Property:resource_language">
+<h4>Property: language</h4>
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/language">dct:language</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>The language of the item.</td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/LinguisticSystem">dct:LinguisticSystem</a>
+    <br>
+    Resources defined by the Library of Congress (<a href="http://id.loc.gov/vocabulary/iso639-1.html">1</a>,
+     <a href="http://id.loc.gov/vocabulary/iso639-2.html">2</a>) <em title="SHOULD" class="rfc2119">SHOULD</em> be used.
+  <br>
+If a ISO 639-1 (two-letter) code is defined for language, then its corresponding IRI <em title="SHOULD" class="rfc2119">SHOULD</em> be used; if no ISO 639-1 code is defined, then IRI corresponding to the ISO 639-2 (three-letter) code <em title="SHOULD" class="rfc2119">SHOULD</em> be used.</td></tr>
+    <tr><td class="prop">Usage note:</td><td>
+    <ul>
+    <li>This overrides the value of the <a href="#Property:catalog_language">catalog language</a> in case of conflict.</li>
+    <li>
+    If the item is available in multiple languages, use multiple values for this property. If each language is available separately for a dataset, define an instance of dcat:Distribution for each language and describe the specific language of each distribution using dct:language (i.e. the dataset will have multiple dct:language values and each distribution will have one of these languages as value of its dct:language property).
+    </li>
+    </ul></td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="Property:resource_publisher">
+<h4>Property: publisher</h4>
+
+<p class="issue" data-number="80">
+	The desire to have qualified forms of properties (as done in [[PROV-O]]) has been raised. If dcat:Dataset is a prov:Entity (not decided yet) then `publisher` could be a qualified prov:Entity -> prov:Agent relationship.
+</p>
+
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/publisher">dct:publisher</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>An entity responsible for making the item available.</td></tr>
+    <tr><td class="prop">Usage note:</td><td>Resources of type <a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a>
+    are recommended as values for this property.</td></tr>
+    <tr><td class="prop">See also:</td><td><a href="#Class:_Organization.2FPerson">Class: Organization/Person</a></td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="Property:resource_identifier">
+<h4>Property: identifier</h4>
+
+<p class="issue" data-number="53">
+	The desirability of dereferenceable identifiers has been raised as an item for consideration in the revision of DCAT. dct:identifier has limited expressivity for this. It has been suggested that ADMS identifier, or a property from another ontology might be recruited to help DCAT in this area.
+</p>
+
+<p class="issue" data-number="67">
+	The need to clearly distinguish between primary and legacy identifiers for a dataset has been identified as a requirement to be satisfied in the revision of DCAT.
+</p>
+
+<p class="issue" data-number="68">
+	The need to indicate the scheme or authority for identifiers for a dataset has been identified as a requirement to be satisfied in the revision of DCAT.
+</p>
+
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/identifier">dct:identifier</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>A unique identifier of the item.</td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a></td></tr>
+    <tr><td class="prop">Usage note:</td><td>The identifier might be used as part of the URI of the item, but still having it represented explicitly is useful.</td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="Property:resource_theme">
+<h4>Property: theme/category</h4>
+
+<p class="note">
+	In DCAT 2014 [[VOCAB-DCAT-20140116]] the domain of dcat:theme was dcat:Dataset,
+  which limited use of this property in other contexts. The domain has been relaxed in this revision -
+  see <a href="https://github.com/w3c/dxwg/issues/123">Issue #123</a>.
+</p>
+
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#theme">dcat:theme</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>The main category of the resource. A resource can have multiple themes.</td></tr>
+    <tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/terms/subject">dct:subject</a></td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2004/02/skos/core#Concept">skos:Concept</a></td></tr>
+    <tr><td class="prop">Usage note:</td><td>The set of <a href="http://www.w3.org/2004/02/skos/core#Concept">skos:Concept</a>s used to categorize the resources are organized in a <a href="http://www.w3.org/2004/02/skos/core#ConceptScheme">skos:ConceptScheme</a> describing all the categories and their relations in the catalog.</td></tr>
+    <tr><td>See also:</td><td><a href="#Property:catalog_themes">catalog themes taxonomy</a></td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="Property:resource_type">
+<h4>Property: type/genre</h4>
+
+<p class="note">
+	Added in DCAT revision - see <a href="https://github.com/w3c/dxwg/issues/64">Issue #64</a>.
+</p>
+
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/type">dct:type</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>The nature or genre of the resource.</td></tr>
+    <tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/elements/1.1/type">dc:type</a></td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Class">rdfs:Class</a></td></tr>
+    <tr><td class="prop">Usage note:</td><td>Recommended best practice is to use a value from a controlled vocabulary, such as:
+		<ol>
+			<li>
+				<a href="http://dublincore.org/documents/dcmi-terms/#section-7">DCMI Type vocabulary</a> [[DCTERMS]]
+			</li>
+			<li>
+				<a href="https://geo-ide.noaa.gov/wiki/index.php?title=ISO_19115_and_19115-2_CodeList_Dictionaries#MD_ScopeCode">ISO 19115 scope codes</a> [[ISO-19115-1]]
+			</li>
+			<li>
+				<a href="https://schema.datacite.org/meta/kernel-4.1/include/datacite-resourceType-v4.1.xsd">Datacite resource types</a> [[DataCite]]
+			</li>
+			<li>
+				PARSE.Insight content-types used by <a href="https://www.re3data.org/">re3data.org</a> [[RE3DATA-SCHEMA]] (see item 15 contentType)
+			</li>
+			<li>
+				<a href="http://id.loc.gov/vocabulary/marcgt.html">MARC intellectual resource types</a>
+			</li>
+		</ol> To describe the file format, physical medium, or dimensions of the resource, use the <a href="http://purl.org/dc/terms/format">dct:format element</a>.</td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="Property:resource_conformsto">
+<h4>Property: conforms to</h4>
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/conformsTo">dct:conformsTo</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>An established standard to which the described resource conforms.</td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/Standard">dct:Standard</a> (A basis for comparison; a reference point against which other things can be evaluated.)</td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="Property:resource_keyword">
+<h4>Property: keyword/tag</h4>
+
+<p class="note">
+	In DCAT 2014 [[VOCAB-DCAT-20140116]] the domain of dcat:keyword was dcat:Dataset,
+  which limited use of this property in other contexts. The domain has been relaxed in this revision -
+  see <a href="https://github.com/w3c/dxwg/issues/121">Issue #121</a>.
+</p>
+
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#keyword">dcat:keyword</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>A keyword or tag describing the resource.</td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a></td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="Property:resource_contactPoint">
+<h4>Property: contact point</h4>
+
+<p class="note">
+	In DCAT 2014 [[VOCAB-DCAT-20140116]] the domain of dcat:contactPoint was dcat:Dataset,
+  which limited use of this property in other contexts. The domain has been relaxed in this revision -
+  see <a href="https://github.com/w3c/dxwg/issues/95">Issue #95</a>.
+</p>
+
+<p class="issue" data-number="109">
+	The axiomatization of dcat:contactPoint is being re-evaluated as part of the revision of DCAT.
+</p>
+
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#contactPoint">dcat:contactPoint</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>Link a dataset to relevant contact information which is provided using vCard [[VCARD-RDF]].</td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2006/vcard/ns#Kind">vcard:Kind</a></td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="Property:resource_landingpage">
+<h4>Property: landing page</h4>
+
+<p class="note">
+	In DCAT 2014 [[!VOCAB-DCAT]] the domain of dcat:landingPage was dcat:Dataset,
+  which limited use of this property in other contexts. The domain has been relaxed in this revision -
+  see <a href="https://github.com/w3c/dxwg/issues/122">Issue #122</a>.
+</p>
+
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#landingPage">dcat:landingPage</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>A Web page that can be navigated to in a Web browser to gain access to the dataset, its distributions and/or additional information.</td></tr>
+    <tr><td class="prop">Sub property of:</td><td><a href="http://xmlns.com/foaf/0.1/page">foaf:page</a></td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
+    <tr><td class="prop">Usage note:</td><td>
+        If the distribution(s) are accessible only through a landing page
+    (i.e. direct download URLs are not known), then the landing page link <em title="SHOULD" class="rfc2119">SHOULD</em> be duplicated as dcat:accessURL on a distribution. (see <a href="#example-landing-page">example 4.4</a>)
+    </td></tr>
+  </tbody>
+</table>
+</section>
+</section> <!-- end class Resource -->
 
 <section id="class-concept-scheme">
 <h3>Class: Concept scheme</h3>
@@ -1500,9 +1728,6 @@ Examples of distributions include a downloadable CSV file, an API or an RSS feed
 <section id="alignments">
 
 	<h2>Alignment with other metadata vocabularies</h2>
-<p class="issue" data-number="65">
-	An alignment of DCAT with schema.org is being prepared. A <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/schema.ttl">provisional version</a> is available.
-</p>
 <p class="issue" data-number="128">
 	An alignment of DCAT with PROV-O [[PROV-O]] is being prepared. A <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/prov.ttl">provisional version</a> is available.
 </p>
@@ -1520,6 +1745,9 @@ Examples of distributions include a downloadable CSV file, an API or an RSS feed
 </p>
 <p class="issue" data-number="164">
 	An alignment of DCAT with DDI [[DDI]] is being prepared.
+</p>
+<p class="issue" data-number="251">
+	An alignment of DCAT with schema.org is being prepared. A <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/schema.ttl">provisional version</a> is available.
 </p>
 
 <p class="note">
@@ -1566,6 +1794,21 @@ Examples of distributions include a downloadable CSV file, an API or an RSS feed
         <p>The document has undergone the following changes since the W3C Recommendation of 16 January 2014 [[VOCAB-DCAT-20140116]]:</p>
 
         <ul>
+<li>
+	<a href="#class-resource">Class: Catalogued resource</a>: In DCAT 2014 [[VOCAB-DCAT-20140116]] the scope of a <a href="#class-catalog">dcat:Catalog</a> was limited to Datasets. This has been generalized, and properties common to all catalogued resources are now associated with a super-class dcat:Resource - see <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>.
+</li>
+
+<li>
+	<a href="#class-dataservice">Class: Data service</a>: In DCAT 2014 [[VOCAB-DCAT-20140116]] the scope of a <a href="#class-catalog">dcat:Catalog</a> was limited to Datasets. The new class dcat:DataService has been added to support cataloguing various kinds of data services - see <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>.
+</li>
+
+<li>
+	<a href="#class-datadistributionservice">Class: Data distribution service</a>: In DCAT 2014 [[VOCAB-DCAT-20140116]] the scope of a <a href="#class-catalog">dcat:Catalog</a> was limited to Datasets. The new class dcat:DataDistributionService has been added to support cataloguing data distribution services - see <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>.
+</li>
+
+<li>
+	<a href="#class-discoveryservice">Class: Discovery service</a>: In DCAT 2014 [[VOCAB-DCAT-20140116]] the scope of a <a href="#class-catalog">dcat:Catalog</a> was limited to Datasets. The new class dcat:DiscoveryService has been added to support cataloguing data discovery services - see <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>.
+</li>
 
 <li><a href="#class-dataset">Class: Dataset</a>:
 In DCAT 2014 [[VOCAB-DCAT-20140116]] <a href="#class-dataset">dcat:Dataset</a> was a sub-class of <a href="http://purl.org/dc/dcmitype/Dataset">dctype:Dataset</a>, which is a term of the <a href="http://dublincore.org/documents/dcmi-terms/#section-7">DCMI Types vocabulary</a> [[DCTERMS]]. This relationship has been removed in the revised DCAT vocabulary - see <a href="https://github.com/w3c/dxwg/issues/98">Issue #98</a>.
@@ -1587,7 +1830,7 @@ In DCAT 2014 [[VOCAB-DCAT-20140116]] <a href="#class-dataset">dcat:Dataset</a> w
   see <a href="https://github.com/w3c/dxwg/issues/121">Issue #121</a>.
 </li>
 
-<li><a href="#Property:dataset_contactPoint">Property: contact point</a>:
+<li><a href="#Property:dataset_contactPoint">Property: contact point</a>:
 	In DCAT 2014 [[VOCAB-DCAT-20140116]] the domain of dcat:contactPoint was dcat:Dataset,
   which limited use of this property in other contexts. The domain has been relaxed in this revision -
   see <a href="https://github.com/w3c/dxwg/issues/95">Issue #95</a>.
