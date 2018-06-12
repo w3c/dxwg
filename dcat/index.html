@@ -1698,14 +1698,14 @@ Besides, the examples and more in general the DQV  is neutral to the data portal
     <p class="issue" data-number="57">
 	The need to provide hook for <b>quality</b> information concerning a dcat:Dataset has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
-    A data consumer (:consumer1)  describes the quality of the dataset :busStopInGenoa that includes a georeferenced list of bus stops in Genoa. He/she annotates the dataset with a DQV quality note (:qualityNote) about data completeness (ldqd:completeness) to warn that the dataset includes only 20500 out of the 30000 stops.
+    A data consumer (:consumer1)  describes the quality of the dataset :genoaBusStopsDataset that includes a georeferenced list of bus stops in Genoa. He/she annotates the dataset with a DQV quality note (:qualityNote) about data completeness (ldqd:completeness) to warn that the dataset includes only 20500 out of the 30000 stops.
     
-    <pre>:busStopInGenoa a dcat:Dataset ;
+    <pre>:genoaBusStopsDataset a dcat:Dataset ;
     dqv:hasQualityAnnotation :qualityNote .
 
 :qualityNote  
     a dqv:UserQualityFeedback ;
-    oa:hasTarget :busStopInGenoa ;
+    oa:hasTarget :genoaBusStopsDataset ;
     oa:hasBody :textBody ;
     oa:motivatedBy dqv:qualityAssessment ;
     prov:wasAttributedTo :consumer1 ;
@@ -1719,13 +1719,13 @@ Besides, the examples and more in general the DQV  is neutral to the data portal
     dc:format "text/plain" 
     . 
     </pre>
-The activity :myQualityChecking employs the service :myQualityChecker to check the quality of the :busStopInGenoa dataset. The metric :completenessWRTExpectedNumberOfEntities is applied to measure the dataset completeness (ldqd:completeness) and it results in the quality measurement :myMeasurement.
-    <pre>:busStopInGenoa
+The activity :myQualityChecking employs the service :myQualityChecker to check the quality of the :genoaBusStopsDataset dataset. The metric :completenessWRTExpectedNumberOfEntities is applied to measure the dataset completeness (ldqd:completeness) and it results in the quality measurement :myMeasurement.
+    <pre>:genoaBusStopsDataset
     dqv:hasQualityMeasurement :myMeasurement .
 
 :myMeasurement
     a dqv:QualityMeasurement ;
-    dqv:computedOn :busStopInGenoa ;
+    dqv:computedOn :genoaBusStopsDataset ;
     dqv:isMeasurementOf :completenessWRTExpectedNumberOfEntities ;
     dqv:value "0.6833333"^^xsd:decimal  ;
     prov:wasAttributedTo :myQualityChecker ;
@@ -1746,12 +1746,12 @@ The activity :myQualityChecking employs the service :myQualityChecker to check t
     # Further details about quality service/software can be provided, for example,
     # deploying  vocabularies such as Dataset Usage Vocabulary (DUV), Dublin Core or ADMS.SW
 
-# :myQualityChecking is the activity that has generated :myMeasurement from :busStopInGenoa
+# :myQualityChecking is the activity that has generated :myMeasurement from :genoaBusStopsDataset
 :myQualityChecking
     a prov:Activity;
-    rdfs:label "The checking of busStopInGenoa's quality"^^xsd:string;
+    rdfs:label "The checking of genoaBusStopsDataset's quality"^^xsd:string;
     prov:wasAssociatedWith :myQualityChecker;
-    prov:used              :busStopInGenoa;
+    prov:used              :genoaBusStopsDataset;
     prov:generated         :myMeasurement;
     prov:endedAtTime      "2018-05-27T02:52:02Z"^^xsd:dateTime;
     prov:startedAtTime     "2018-05-27T00:52:02Z"^^xsd:dateTime .
