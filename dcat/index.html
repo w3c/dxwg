@@ -1719,11 +1719,11 @@ Besides, the examples and more in general the DQV  is neutral to the data portal
     dc:format "text/plain" 
     . 
     </pre>
-The activity :myQualityChecking employs the service :myQualityChecker to check the quality of the :genoaBusStopsDataset dataset. The metric :completenessWRTExpectedNumberOfEntities is applied to measure the dataset completeness (ldqd:completeness) and it results in the quality measurement :myMeasurement.
+The activity :myQualityChecking employs the service :myQualityChecker to check the quality of the :genoaBusStopsDataset dataset. The metric :completenessWRTExpectedNumberOfEntities is applied to measure the dataset completeness (ldqd:completeness) and it results in the quality measurement :genoaBusStopsDatasetCompletenessMeasurement.
     <pre>:genoaBusStopsDataset
-    dqv:hasQualityMeasurement :myMeasurement .
+    dqv:hasQualityMeasurement :genoaBusStopsDatasetCompletenessMeasurement .
 
-:myMeasurement
+:genoaBusStopsDatasetCompletenessMeasurement
     a dqv:QualityMeasurement ;
     dqv:computedOn :genoaBusStopsDataset ;
     dqv:isMeasurementOf :completenessWRTExpectedNumberOfEntities ;
@@ -1746,13 +1746,13 @@ The activity :myQualityChecking employs the service :myQualityChecker to check t
     # Further details about quality service/software can be provided, for example,
     # deploying  vocabularies such as Dataset Usage Vocabulary (DUV), Dublin Core or ADMS.SW
 
-# :myQualityChecking is the activity that has generated :myMeasurement from :genoaBusStopsDataset
+# :myQualityChecking is the activity that has generated :genoaBusStopsDatasetCompletenessMeasurement from :genoaBusStopsDataset
 :myQualityChecking
     a prov:Activity;
     rdfs:label "The checking of genoaBusStopsDataset's quality"^^xsd:string;
     prov:wasAssociatedWith :myQualityChecker;
     prov:used              :genoaBusStopsDataset;
-    prov:generated         :myMeasurement;
+    prov:generated         :genoaBusStopsDatasetCompletenessMeasurement;
     prov:endedAtTime      "2018-05-27T02:52:02Z"^^xsd:dateTime;
     prov:startedAtTime     "2018-05-27T00:52:02Z"^^xsd:dateTime .
     </pre>
