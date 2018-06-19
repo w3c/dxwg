@@ -53,6 +53,7 @@
     <tr><td>dcat</td><td>http://www.w3.org/ns/dcat#</td></tr>
     <tr><td>dct</td><td>http://purl.org/dc/terms/</td></tr>
     <tr><td>dctype</td><td>http://purl.org/dc/dcmitype/</td></tr>
+    <tr><td>dqv</td><td>http://www.w3.org/ns/dqv#</td></tr>
     <tr><td>foaf</td><td>http://xmlns.com/foaf/0.1/</td></tr>
 		<tr><td>owl</td><td>http://www.w3.org/2002/07/owl#</td></tr>
 		<tr><td>prov</td><td>http://www.w3.org/ns/prov#</td></tr>
@@ -912,12 +913,9 @@ into a separate named graph. The name of that graph should be the IRI of the cat
 	Information about licences and rights SHOULD be provided on the level of Distribution. Information about licences and rights MAY be provided for a Dataset in addition to but not in stead of the information provided for the Distributions of that Dataset. Providing licence or rights information for a Dataset that is different from information provided for a Distribution of that Dataset should be avoided as this may create legal conflicts.
 </p>
 
-<p class="issue" data-number="57">
-	The need to provide hook for <b>quality</b> information concerning a dcat:Dataset has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
 
-<p class="issue" data-number="58">
-	The need to choose or define a data <b>quality model</b> has been identified as a requirement to be satisfied in the revision of DCAT.
+<p class="issue" data-number="59">
+	The need to more formally encode access restrictions for both datasets and distributions has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
 <p class="issue" data-number="60">
@@ -1668,6 +1666,105 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 
 </section>
 
+<section id="quality-information" class="informative">
+    <h2>Quality information</h2
+
+    <div class="note">
+        <p>This section is not-normative as it provides guidance on how to document the quality of DCAT first class entities (e.g., datasets, distributions) and it does not define new DCAT terms. The guidance relies on the Data Quality Vocabulary(DQV)[[vocab-dqv]], which is a W3C Group Note.</p>
+    </div>
+    
+<p class="issue" data-number="58">
+	The need to choose or define a data <b>quality model</b> has been identified as a requirement to be satisfied in the revision of DCAT.
+</p> 
+The Data Quality Vocabulary (DQV) offers common modelling patterns for different aspects of Data Quality.
+
+It can relate  DCAT datasets and distributions with different types of quality information including
+<ul>
+    <li> <a href="https://www.w3.org/TR/vocab-dqv/#dqv:QualityAnnotation"> dqv:QualityAnnotation</a>, which represents feedback and quality certificates given about the dataset or its distribution. </li> 
+    <li> <a href="https://www.w3.org/TR/vocab-dqv/#dqv:QualityPolicy">dqv:QualityPolicy</a>, which represents a policy or agreement that is chiefly governed by data quality concerns.</li>
+    <li><a href="https://www.w3.org/TR/vocab-dqv/#dqv:QualityMeasurement">dqv:QualityMeasurement</a>, which represents a metric value providing quantitative or qualitative information about the dataset or distribution.</li>
+</ul>
+
+Each type of quality information can pertain to one or more quality dimensions, namely, quality characteristics relevant to the consumer. The practice to see the quality as a multi-dimensional space is consolidated in the field of quality management to split the quality management into addressable chunks. DQV does not define a normative list of quality dimensions. It offers the quality dimensions proposed in ISO/IEC 25012 [[ISOIEC25012]] and Zaveri et al. [[ZaveriEtAl]] as two possible starting points. It also provides an <a href="https://www.w3.org/2016/05/ldqd">RDF representation</a> for the quality dimensions and categories defined in the latter. Ultimately, implementers will need to choose themselves the collection of quality dimensions that best fits their needs.  
+
+The following section shows how DCAT and DQV can be coupled to describe the quality of datasets and distributions. 
+For a comprehensive introduction  and further examples of use, please refer to the Data Quality Vocabulary (DQV) group note [[vocab-dqv]].    
+<div class="note">
+<p>The following examples make no comments on where the quality information would reside and how it is managed. That is out of scope for the DCAT vocabulary.  The assumption made is that the quality individuals are available using the URIs indicated.
+Besides, the examples and more in general the DQV  is neutral to the data portal design choices on how to collect quality information. For example, data portals can collect DQV instances by implementing specific UI to annotate data or by taking inputs from 3rd-party services.
+</p>
+</div>
+
+  <p class="issue" data-number="252">
+	We might want to include examples of quality documentation related to services.
+</p>  
+    
+<section id="quality-example1">
+    <h2>Providing quality information</h2>
+    <p class="issue" data-number="57">
+	The need to provide hook for <b>quality</b> information concerning a dcat:Dataset has been identified as a requirement to be satisfied in the revision of DCAT.
+</p>
+    A data consumer (:consumer1)  describes the quality of the dataset :genoaBusStopsDataset that includes a georeferenced list of bus stops in Genoa. He/she annotates the dataset with a DQV quality note (:genoaBusStopsDatasetCompletenessNote) about data completeness (ldqd:completeness) to warn that the dataset includes only 20500 out of the 30000 stops.
+    
+    <pre>:genoaBusStopsDataset a dcat:Dataset ;
+    dqv:hasQualityAnnotation :genoaBusStopsDatasetCompletenessNote .
+
+:genoaBusStopsDatasetCompletenessNote  
+    a dqv:UserQualityFeedback ;
+    oa:hasTarget :genoaBusStopsDataset ;
+    oa:hasBody :textBody ;
+    oa:motivatedBy dqv:qualityAssessment ;
+    prov:wasAttributedTo :consumer1 ;
+    prov:generatedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
+    dqv:inDimension ldqd:completeness
+    .
+
+:textBody a oa:TextualBody ;
+    rdf:value "Incomplete dataset: it contains only 20500 out of 30000 existing bus stops" ;
+    dc:language "en" ; 
+    dc:format "text/plain" 
+    . 
+    </pre>
+The activity :myQualityChecking employs the service :myQualityChecker to check the quality of the :genoaBusStopsDataset dataset. The metric :completenessWRTExpectedNumberOfEntities is applied to measure the dataset completeness (ldqd:completeness) and it results in the quality measurement :genoaBusStopsDatasetCompletenessMeasurement.
+    <pre>:genoaBusStopsDataset
+    dqv:hasQualityMeasurement :genoaBusStopsDatasetCompletenessMeasurement .
+
+:genoaBusStopsDatasetCompletenessMeasurement
+    a dqv:QualityMeasurement ;
+    dqv:computedOn :genoaBusStopsDataset ;
+    dqv:isMeasurementOf :completenessWRTExpectedNumberOfEntities ;
+    dqv:value "0.6833333"^^xsd:decimal  ;
+    prov:wasAttributedTo :myQualityChecker ;
+    prov:generatedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
+    prov:wasGeneratedBy :myQualityChecking   
+    .
+
+:completenessWRTExpectedNumberOfEntities 
+    a dqv:Metric ;
+    skos:definition "it returns the degree of completeness as ratio between the actual number of entities included in the dataset and the declared expected number of entities."@en ;
+    dqv:expectedDataType xsd:decimal ;
+    dqv:inDimension ldqd:completeness .
+
+# :myQualityChecker is a service computing some quality metrics 
+:myQualityChecker
+    a prov:SoftwareAgent ;   
+    rdfs:label "A quality assessment service"^^xsd:string .
+    # Further details about quality service/software can be provided, for example,
+    # deploying  vocabularies such as Dataset Usage Vocabulary (DUV), Dublin Core or ADMS.SW
+
+# :myQualityChecking is the activity that has generated :genoaBusStopsDatasetCompletenessMeasurement from :genoaBusStopsDataset
+:myQualityChecking
+    a prov:Activity;
+    rdfs:label "The checking of genoaBusStopsDataset's quality"^^xsd:string;
+    prov:wasAssociatedWith :myQualityChecker;
+    prov:used              :genoaBusStopsDataset;
+    prov:generated         :genoaBusStopsDatasetCompletenessMeasurement;
+    prov:endedAtTime      "2018-05-27T02:52:02Z"^^xsd:dateTime;
+    prov:startedAtTime     "2018-05-27T00:52:02Z"^^xsd:dateTime .
+    </pre>
+    
+</section>
+</section>
 <section id="prov-patterns">
 
 	<h2>Provenance patterns</h2>
