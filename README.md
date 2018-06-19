@@ -6,5 +6,6 @@
 ### Working Documents
 
 - [Use cases and requirements](https://w3c.github.io/dxwg/ucr/)
-- [DCAT 1.1](https://w3c.github.io/dxwg/dcat/)  
+- [DCAT Revision](https://w3c.github.io/dxwg/dcat/)  
+  - [DCAT Revision First Public Working Draft (FPWD)](https://www.w3.org/TR/vocab-dcat-2/)
 - [Dataset Exchange Guidance for Application Profiles](https://w3c.github.io/dxwg/profiles/)
