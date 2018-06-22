@@ -1,0 +1,120 @@
+# baseURI: http://www.w3.org/ns/dcat10
+# imports: http://www.w3.org/ns/dcat
+# prefix: dcat10
+
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcat10: <http://www.w3.org/ns/dcat10#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dctype: <http://purl.org/dc/dcmitype/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+dcat:Dataset
+  rdfs:subClassOf dctype:Dataset ;
+.
+dcat:Download
+  rdf:type rdfs:Class ;
+  rdf:type owl:Class ;
+  rdfs:comment "Represents a downloadable distribution of a dataset. This term has been deprecated."@en ;
+  rdfs:comment "Representación de una distribución descargable de los datos. Este término es obsoleto."@es ;
+  rdfs:isDefinedBy dcat: ;
+  rdfs:label "Download (Deprecated)"@en ;
+  rdfs:label "Descarga (Obsoleto)"@es ;
+  rdfs:subClassOf dcat:Distribution ;
+  owl:deprecated "true"^^xsd:boolean ;
+  skos:changeNote "Use dcat:DataDistributionService instead" ;
+.
+dcat:Feed
+  rdf:type rdfs:Class ;
+  rdf:type owl:Class ;
+  rdfs:comment "Represents availability of a dataset as a feed. This term has been deprecated"@en;
+  rdfs:comment "Representa la disponibilidad de datos como un 'feed'. Este término es obsoleto."@es;
+  rdfs:isDefinedBy dcat: ;
+  rdfs:label "Feed (Deprecated)" ;
+  rdfs:subClassOf dcat:Distribution ;
+  owl:deprecated "true"^^xsd:boolean ;
+  skos:changeNote "Use dcat:DataDistributionService instead" ;
+.
+dcat:WebService
+  rdf:type rdfs:Class ;
+  rdf:type owl:Class ;
+  rdfs:comment "represents a web service that enables access to the data of a dataset. This term has been deprecated"@en ;
+  rdfs:isDefinedBy dcat: ;
+  rdfs:label "Web Service (Deprecated)" ;
+  rdfs:subClassOf dcat:Distribution ;
+  owl:deprecated "true"^^xsd:boolean ;
+  skos:changeNote "Use dcat:DataService instead" ;
+.
+dcat:bytes
+  rdf:type rdf:Property ;
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "Describe el tamaño de un recurso en bytes. Este término es obsoleto."@es ;
+  rdfs:comment "describe size of resource in bytes. This term has been deprecated"@en ;
+  rdfs:domain dcat:Distribution ;
+  rdfs:isDefinedBy dcat: ;
+  rdfs:label "Tamaño en bytes (Obsoleto)"@es ;
+  rdfs:label "size in bytes (Deprecated)"@en ;
+  rdfs:range xsd:integer ;
+  owl:deprecated "true"^^xsd:boolean ;
+.
+dcat:contactPoint
+  rdfs:domain dcat:Dataset ;
+.
+dcat:dataDictionary
+  rdf:type rdf:Property ;
+  rdfs:comment "Asocia los datos con un diccionario que ayuda a interpretarlos. Este término es obsoleto."@es ;
+  rdfs:comment "links a dataset to a dictionary that helps interpreting the data. This term has been deprecated"@en ;
+  rdfs:domain dcat:Dataset ;
+  rdfs:isDefinedBy dcat: ;
+  rdfs:label "Diccionario de datos (Obsoleto)" ;
+  rdfs:label "data dictionary (Deprecated)" ;
+  owl:deprecated "true"^^xsd:boolean ;
+.
+dcat:dataQuality
+  rdf:type rdf:Property ;
+  rdfs:comment "describes the quality of data e.g. precision. This should not be used to describe the data collection characteristics, other more specialized statistical properties can be used instead. This term has been deprecated" ;
+  rdfs:domain dcat:Dataset ;
+  rdfs:isDefinedBy dcat: ;
+  rdfs:label "data quality (Deprecated)" ;
+  owl:deprecated "true"^^xsd:boolean ;
+.
+dcat:granularity
+  rdf:type rdf:Property ;
+  rdfs:comment "describes the level of granularity of data in a dataset. The granularity can be in time, place etc. This term has been deprecated" ;
+  rdfs:domain dcat:Dataset ;
+  rdfs:isDefinedBy dcat: ;
+  rdfs:label "granularity (Deprecated)" ;
+  owl:deprecated "true"^^xsd:boolean ;
+.
+dcat:keyword
+  rdfs:domain dcat:Dataset ;
+  rdfs:subPropertyOf dct:subject ;
+.
+dcat:landingPage
+  rdfs:domain dcat:Dataset ;
+.
+dcat:size
+  rdf:type rdf:Property ;
+  rdfs:comment "the size of a distribution. This term has been deprecated"@en ;
+  rdfs:domain dcat:Distribution ;
+  rdfs:isDefinedBy dcat: ;
+  rdfs:label "size (Deprecated)" ;
+  rdfs:subPropertyOf dct:extent ;
+  owl:deprecated "true"^^xsd:boolean ;
+.
+dcat:theme
+  rdfs:domain dcat:Dataset ;
+.
+<http://www.w3.org/ns/dcat10>
+  rdf:type owl:Ontology ;
+  dct:contributor <http://orcid.org/0000-0002-3884-3420> ;
+  dct:created "2018-03-06" ;
+  dct:creator <https://www.w3.org/2017/dxwg> ;
+  rdfs:comment """This RDF graph defines a profile of DCAT corresponding to the 2014 version of DCAT - as described in https://www.w3.org/TR/2014/REC-vocab-dcat-20140116/
+It includes axioms removed from DCAT in the 2018-19 revision.""" ;
+  rdfs:label "DCAT 2014 profile of DCAT vocabulary" ;
+  owl:imports <http://www.w3.org/ns/dcat> ;
+.
