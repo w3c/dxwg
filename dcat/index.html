@@ -899,13 +899,14 @@ into a separate named graph. The name of that graph should be the IRI of the cat
 <section id="class-dataset">
 <h3>Class: Dataset</h3>
 <p>In addition to the properties inherited from the super-class <a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a>, the following properties are recommended for use on this class:
-<a href="#Property:dataset_distribution">distribution</a>,
-<!--
-<a href="#Property:dataset_hasDatasetPart">hasDatasetPart</a>,
--->
-<a href="#Property:dataset_frequency">frequency</a>,
-<a href="#Property:dataset_spatial">spatial coverage</a>,
-<a href="#Property:dataset_temporal">temporal coverage</a>,
+	<a href="#Property:dataset_distribution">distribution</a>,
+	<a href="#Property:dataset_frequency">frequency</a>,
+	<a href="#Property:dataset_hasPart">hasPart</a>,
+	<a href="#Property:dataset_relation">relation</a>,
+	<a href="#Property:dataset_references">references</a>,
+	<a href="#Property:dataset_requires">requires</a>,
+	<a href="#Property:dataset_spatial">spatial coverage</a>,
+	<a href="#Property:dataset_temporal">temporal coverage</a>
 </p>
 
 <p>
@@ -941,6 +942,10 @@ into a separate named graph. The name of that graph should be the IRI of the cat
 	The need to be able to provide usage notes for a dataset or distribution has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
+<p class="issue" data-number="253">
+	The need to recommend a method for linking from a dataset to various kinds of resources to complement <i>Distributions</i> has been proposed as a requirement to be satisfied in this revision of DCAT.
+</p>
+
 <table class="definition">
   <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a></th></tr></thead>
   <tbody>
@@ -956,6 +961,26 @@ into a separate named graph. The name of that graph should be the IRI of the cat
 	This relationship has been removed in the revised DCAT vocabulary - see <a href="https://github.com/w3c/dxwg/issues/98">Issue #98</a>.
 </p>
 
+<section id="Property:dataset_relation">
+<h4>Property: dataset relation</h4>
+
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/relation">dct:relation</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>Connects a dataset to resources related to it.</td></tr>
+    <tr><td class="prop">Usage note:</td><td><a href="http://purl.org/dc/terms/relation">dct:relation</a> may be used where the exact nature of the relationship between a dataset and related resources is not known. One of the more specific sub-properties should be used if the semantics of the link are known.</td></tr>
+		<tr><td class="prop">See also:</td><td><a href="http://purl.org/dc/terms/conformsTo">dct:conformsTo</a>, <a href="http://www.w3.org/ns/dcat#distribution">dcat:distribution</a>, <a href="http://purl.org/dc/terms/hasPart">dct:hasPart</a>, <a href="http://purl.org/dc/terms/references">dct:references</a>, <a href="http://purl.org/dc/terms/requires">dct:requires</a></td>
+		</tr>
+  </tbody>
+</table>
+
+<p class="note">
+	Many existing and legacy catalogues do not distinguish between dataset components, representations, documentation, schemata and other resources that are lumped together as part of a dataset.
+	Since <a href="http://purl.org/dc/terms/relation">dct:relation</a> is a super-property of <a href="http://purl.org/dc/terms/conformsTo">dct:conformsTo</a>, <a href="http://www.w3.org/ns/dcat#distribution">dcat:distribution</a>, <a href="http://purl.org/dc/terms/hasPart">dct:hasPart</a>, <a href="http://purl.org/dc/terms/references">dct:references</a> and <a href="http://purl.org/dc/terms/requires">dct:requires</a>,
+	it may be used to link a dataset to various component and supplementary resources, without being inconsistent with a subsequent reclassification to add more specific semantics.
+</p>
+</section>
+
 <section id="Property:dataset_distribution">
 <h4>Property: dataset distribution</h4>
 
@@ -967,31 +992,52 @@ into a separate named graph. The name of that graph should be the IRI of the cat
   <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#distribution">dcat:distribution</a></th></tr></thead>
   <tbody>
     <tr><td class="prop">Definition:</td><td>Connects a dataset to its available distributions.</td></tr>
+		<tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/terms/relation">dct:relation</a></td></tr>
     <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a></td></tr>
     <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#Distribution">dcat:Distribution</a></td></tr>
   </tbody>
 </table>
 </section>
 
-<!--
-<section id="Property:dataset_hasDatasetPart">
-<h4>Property: has dataset part</h4>
-
-<p class="note">
-	Property added in this revision of DCAT.
-</p>
+<section id="Property:dataset_part">
+<h4>Property: dataset part</h4>
 
 <table class="definition">
-  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#hasDatasetPart">dcat:hasDatasetPart</a></th></tr></thead>
+  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/hasPart">dct:hasPart</a></th></tr></thead>
   <tbody>
-		<tr><td class="prop">Definition:</td><td>Link to a dataset which is a part of this one</td></tr>
-		<tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/terms/hasPart">dct:hasPart</a></td></tr>
-    <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a></td></tr>
-    <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a></td></tr>
+    <tr><td class="prop">Definition:</td><td>A related resource that is a component of the described resource.</td></tr>
+		<tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/terms/relation">dct:relation</a></td></tr>
+    <tr><td class="prop">Usage note:</td><td><a href="http://purl.org/dc/terms/hasPart">dct:hasPart</a> may be used for general whole-to-part relationships to other resources. The component resource may be a <a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a> in its own right, or may just be a resource that is packaged as part of a dataset in a catalog. </td></tr>
   </tbody>
 </table>
+
 </section>
--->
+
+<section id="Property:dataset_references">
+<h4>Property: dataset reference</h4>
+
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/references">dct:references</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>A related resource that is referenced, cited, or otherwise pointed to by the described resource.</td></tr>
+		<tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/terms/relation">dct:relation</a></td></tr>
+  </tbody>
+</table>
+
+</section>
+
+<section id="Property:dataset_requires">
+<h4>Property: dataset requirement</h4>
+
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/requires">dct:requires</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>A related resource that is required by the described resource to support its function, delivery, or coherence.</td></tr>
+		<tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/terms/relation">dct:relation</a></td></tr>
+  </tbody>
+</table>
+
+</section>
 
 <section id="Property:dataset_frequency">
 <h4>Property: frequency</h4>
