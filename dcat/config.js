@@ -68,6 +68,17 @@ var respecConfig = {
          "publisher":"NIH Big Data 2 Knowledge bioCADDIE project.",
          "date":"2016"
        },
+        "ZaveriEtAl" : {
+                        title : "Quality assessment for Linked Data: A Survey",
+                        authors : [ "Amrapali Zaveri", "Anisa Rula", "Andrea Maurino",
+                                "Ricardo Pietrobon", "Jens  Lehmann", "Sören Auer" ],
+                        status : "Semantic Web, vol. 7, no. 1, pp. 63-93, 2015",
+                        href : "https://dx.doi.org/10.3233/SW-150175"
+                    },
+        "ISOIEC25012" : {
+                        title : "ISO/IEC 25012 - Data Quality model",
+                        href : "http://iso25000.com/index.php/en/iso-25000-standards/iso-25012"
+                    },
        "DDI": {
          "href":"http://www.ddialliance.org/explore-documentation",
          "title":"Data Documentation Initiative",
