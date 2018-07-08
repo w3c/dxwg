@@ -233,6 +233,11 @@ dcat:DataDistributionService
   rdf:type owl:Class ;
   rdfs:comment "A site or end-point that provides access to datasets through distributions of the datasets" ;
   rdfs:label "Data distribution service" ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:hasValue <https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download> ;
+      owl:onProperty dct:type ;
+    ] ;
   rdfs:subClassOf dcat:DataService ;
   skos:changeNote "New class in this revision of DCAT" ;
   skos:editorialNote "Status: Class accepted by DCAT revision team, but details of definition and constraints not yet resolved." ;
@@ -284,6 +289,11 @@ dcat:Dataset
   rdfs:label "データセット"@ja ;
   rdfs:label "Datová sada"@cs ;
   rdfs:subClassOf dcat:Resource ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom dcat:Dataset ;
+      owl:onProperty dcterms:hasPart ;
+    ] ;
   skos:changeNote "2018-02 - subclass of dctype:Dataset removed because scope of dcat:Dataset includes several other types from the dctype vocabulary. " ;
   skos:scopeNote """Cette classe représente le jeu de données publié par le fournisseur de données. Dans les cas où une distinction est nécessaire entre le jeu de donénes et son
 					  entrée dans le catalogue, la classe registre de données peut être utilisée pour ce dernier. """@fr ;
