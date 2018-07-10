@@ -947,7 +947,6 @@ into a separate named graph. The name of that graph should be the IRI of the cat
     <tr><td class="prop">Definition:</td><td>A collection of data, published or curated by a single agent, and available for access or download in one or more formats.</td></tr>
     <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a></td></tr>
     <tr><td class="prop">Usage note:</td><td>This class represents the actual dataset as published by the dataset publisher. In cases where a distinction between the actual dataset and its entry in the catalog is necessary (because metadata such as modification date and maintainer might differ), the <i><a href="#Class:_Catalog_record">catalog record</a></i> class can be used for the latter.</td></tr>
-    <tr><td class="prop">See also:</td><td><a href="#Class:_Catalog_record" title="">Catalog record</a></td></tr>
   </tbody>
 </table>
 
@@ -1109,8 +1108,24 @@ into a separate named graph. The name of that graph should be the IRI of the cat
     <tr><td class="prop">Usage note:</td><td>This represents a general availability of a dataset it implies no information
     about the actual access method of the data, i.e. whether by direct download, API, or through a Web page.
     The use of <a href="#Property:distribution_downloadurl">dcat:downloadURL</a> property indicates directly downloadable distributions.</td></tr>
+		<tr><td class="prop">See also:</td><td><a href="#class-datadistributionservice" title="">Data distribution service</a></td></tr>
   </tbody>
 </table>
+
+<div class="note">
+	<p>
+		The scope of dcat:Distribution is narrower than defined in DCAT-2014 [[VOCAB-DCAT-20140116]], where it also included APIs and feeds. Data catalogues designed using DCAT-2014 therefore used individuals of type dcat:Distribution to describe data distribution services.
+	</p>
+	<p>
+		Under the revised scope individuals of type dcat:Distribution <em title="SHOULD" class="rfc2119">SHOULD</em> be limited to representations of datasets which might be transported as files, and <em title="SHOULD" class="rfc2119">SHOULD NOT</em> be used for data services such as APIs or feeds. Data services including APIs and feeds <em title="SHOULD" class="rfc2119">SHOULD</em> be described using individuals of type <a href="#class-dataservice">dcat:DataService</a> or <a href="#class-datadistributionservice">dcat:DataDistributionService</a>.
+	</p>
+	<p>
+		<a href="#Property:distribution_accessservice">dcat:accessService</a> <em title="SHOULD" class="rfc2119">SHOULD</em> be used to link from a dcat:Distribution to a description of a <a href="#class-datadistributionservice">dcat:DataDistributionService</a> that can provide access to this distribution.
+	</p>
+	<p>
+		<a href="#Property:distribution_accessurl">dcat:accessURL</a> <em title="SHOULD" class="rfc2119">SHOULD</em> be used to link from a dcat:Distribution directly to a location that can provide access to this distribution.
+	</p>
+</div>
 
 <section id="Property:distribution_title">
 <h4>Property: title</h4>
