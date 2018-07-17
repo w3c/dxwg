@@ -1300,6 +1300,7 @@ a:Dataset a dcat:Dataset;
       -->
       </p>
     </section>
+
     <section id="ID19" class="usecase">
       <h2>Guidance on the use of qualified forms [ID19]</h2>
       <p class="contributor"><a href="/2017/dxwg/wiki/User:Aperego" title="User:Aperego">Andrea Perego</a> - <a rel="nofollow" class="external text" href="https://ec.europa.eu/jrc/">European Commission, Joint Research Centre (JRC)</a></p>
@@ -1319,8 +1320,35 @@ a:Dataset a dcat:Dataset;
       <div class="visible">
         <p class="description">
           <p>In most cases, the relationships between datasets and related resources (e.g., author, publisher, contact point, publications / documentation, input data, model(s) / software used to create the dataset) can be specified with simple, binary properties available from widely used vocabularies - as [[DCTerms]] and [[VOCAB-DCAT]].</p>
-          <p>However, there may be the need of providing additional information concerning, e.g., the temporal context of a relationship, which requires the use of a more sophisticated representation, similar to the "qualified" forms used in [[PROV-O]]. </p>
-          <p>Besides [[PROV-O]], vocabularies as [[VOCAB-DQV]] and [[VOCAB-DUV]] can be used for this purpose. However, there is the need of providing guidance on how to use them consistently, since the lack of modeling patterns results in the difficulty of aggregating this information across metadata records and catalogs.</p>
+          <p>As an example, <code>dcterms:source</code> can be used to specify a relationship between a dataset (<code>output:Dataset</code>), and the dataset it was derived from (<code>input:Dataset</code>):</p>
+          <pre>
+output:Dataset a dcat:Dataset ;
+  dcterms:source input:Dataset .
+  
+input:Dataset a dcat:Dataset .
+          </pre>
+          <p>However, there may be the need of providing additional information concerning, e.g., the temporal context of a relationship, which requires the use of a more sophisticated representation, similar to the "qualified" forms used in [[PROV-O]]. 
+          For instance, the previous example may be further detailed by saying that the output dataset is an anonymized version of the input dataset, and that the anonymization process started at time <var>t</var> and ended at time <var>t&prime;</var>. By using [[PROV-O]], this information can be expressed as follows:</p>
+          <pre>
+output:Dataset a dcat:Dataset ;
+  prov:qualifiedDerivation [
+    a prov:Derivation ;
+    prov:entity input:Dataset ; 
+    prov:hadActivity   :data_anonymization 
+] .
+
+input:Dataset a dcat:Dataset .
+
+# The process of anonymizing the data (load the data, process it, and generate the anonymized version)
+
+:data_anonymization
+  a prov:Activity ;
+# When the process started  
+  prov:startedAtTime  "2018-01-23T01:52:02Z"^^xsd:dateTime;
+# When the process ended  
+  prov:endedAtTime "2018-01-23T02:00:02Z"^^xsd:dateTime .
+          </pre>
+          <p>Besides [[PROV-O]], vocabularies as [[VOCAB-DQV]] and [[VOCAB-DUV]] can be used to specify relationships between datasets and related resources. However, there is the need of providing guidance on how to use them consistently, since the lack of modeling patterns results in the difficulty of aggregating this information across metadata records and catalogs.</p>
           <p>Moreover, it is important to define mappings between qualified and non-qualified forms (e.g., along the lines of what done in [[PROV-DC]]), not only to make it clear their semantic relationships (e.g., <code>dcterms:source</code> is the non-qualified form of <code>prov:qualifiedDerivation</code>), but also to enable metadata sharing and re-use across catalogs that may support only one of the two forms (qualified / non-qualified).</p>
         </p>
         <p class="existing_approaches">
@@ -1347,6 +1375,7 @@ a:Dataset a dcat:Dataset;
       -->
       </p>
     </section>
+
     <section id="ID20" class="usecase">
       <h2>Modelling resources different from datasets [ID20]</h2>
       <p class="contributor"><a href="/2017/dxwg/wiki/User:Aperego" title="User:Aperego">Andrea Perego</a> - <a rel="nofollow" class="external text" href="https://ec.europa.eu/jrc/">European Commission, Joint Research Centre (JRC)</a></p>
