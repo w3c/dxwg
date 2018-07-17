@@ -142,7 +142,7 @@ See <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>. </p>
 	This relationship has been removed in the revised DCAT vocabulary - see <a href="https://github.com/w3c/dxwg/issues/98">Issue #98</a>.
 </p>
 
-<figure><img alt="UML model of DCAT classes and properties" src="UML/DCAT-summary.png">
+<figure id="fig1"><img alt="UML model of DCAT classes and properties" src="UML/DCAT-summary.png">
 	<figcaption>
 		Overview of DCAT model, showing the classes of resources that can be members of a Catalog and the relationships between them.
 	</figcaption>
@@ -922,7 +922,6 @@ into a separate named graph. The name of that graph <em title="SHOULD" class="rf
     <tr><td class="prop">Definition:</td><td>A collection of data, published or curated by a single agent, and available for access or download in one or more formats.</td></tr>
     <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a></td></tr>
     <tr><td class="prop">Usage note:</td><td>This class represents the actual dataset as published by the dataset publisher. In cases where a distinction between the actual dataset and its entry in the catalog is necessary (because metadata such as modification date and maintainer might differ), the <i><a href="#Class:_Catalog_record">catalog record</a></i> class can be used for the latter.</td></tr>
-    <tr><td class="prop">See also:</td><td><a href="#Class:_Catalog_record" title="">Catalog record</a></td></tr>
   </tbody>
 </table>
 
@@ -1081,8 +1080,23 @@ into a separate named graph. The name of that graph <em title="SHOULD" class="rf
     <tr><td class="prop">Usage note:</td><td>This represents a general availability of a dataset it implies no information
     about the actual access method of the data, i.e. whether by direct download, API, or through a Web page.
     The use of <a href="#Property:distribution_downloadurl">dcat:downloadURL</a> property indicates directly downloadable distributions.</td></tr>
+		<tr><td class="prop">See also:</td><td><a href="#class-datadistributionservice" title="">Data distribution service</a></td></tr>
   </tbody>
 </table>
+
+<div class="note">
+	<p>
+		The scope of dcat:Distribution here is narrower than in DCAT-2014 [[VOCAB-DCAT-20140116]], where it also included APIs and feeds.
+		Data catalogues designed using DCAT-2014 therefore used individuals of type dcat:Distribution to describe data distribution services.
+		<b>Applications consuming DCAT should be aware that catalogues designed using DCAT-2014 might use dcat:Distribution to represent both services and representations.</b>
+	</p>
+	<p>
+		Under the revised scope, individuals of type dcat:Distribution <em title="SHOULD" class="rfc2119">SHOULD</em> be limited to <i>representations</i> of datasets which might be transported as files, and <em title="SHOULD NOT" class="rfc2119">SHOULD NOT</em> be used for data <i>services</i> such as APIs or feeds. Data services including APIs and feeds <em title="SHOULD" class="rfc2119">SHOULD</em> be described using individuals of type <a href="#class-dataservice">dcat:DataService</a> or <a href="#class-datadistributionservice">dcat:DataDistributionService</a>.
+	</p>
+	<p>
+		Links between a dcat:Distribution and services or web addresses where it can be accessed are expressed using <a href="#Property:distribution_accessurl">dcat:accessURL</a>, <a href="#Property:distribution_accessservice">dcat:accessService</a>, <a href="#Property:distribution_downloadurl">dcat:downloadURL</a>, as shown in <a href="#fig1">Figure 1</a> and described in the definitions below.
+	</p>
+</div>
 
 <section id="Property:distribution_title">
 <h4>Property: title</h4>
@@ -1173,27 +1187,23 @@ into a separate named graph. The name of that graph <em title="SHOULD" class="rf
     The granularity of dcat:accessURL is being re-considered to provide different usages for list and item endpoints as well as supporting the declaration of different profiles (for list results and data payload).
 </p>
 
-
     <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#accessURL">dcat:accessURL</a></th></tr></thead>
   <tbody>
     <tr><td class="prop">Definition:</td><td>Link to a resource that gives access to a distribution of the dataset. E.g. landing page, feed, SPARQL endpoint.</td></tr>
     <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Distribution">dcat:Distribution</a></td></tr>
     <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Resource">rdfs:Resource</a></td></tr>
-    <tr><td class="prop">Usage note:</td><td>
-    <ul>
-			<li>
-				downloadURL is preferred for direct links to downloadable resources.
-			</li>
-    <li>
-			If the distribution(s) are accessible only through a landing page (i.e. direct download URLs are not known), then the landing page link <em title="SHOULD" class="rfc2119">SHOULD</em> be duplicated as accessURL on a distribution. (see <a href="#example-landing-page">example 4.4</a>)
-    </li>
-    </ul>
-
+    <tr><td class="prop">Usage note:</td><td><a href="#Property:distribution_accessurl">dcat:accessURL</a> <em title="SHOULD" class="rfc2119">SHOULD</em> be used for the address of a service or location that can provide access to this distribution, typically through a web form, query or API call.
+		<br/><a href="#Property:distribution_downloadurl">dcat:downloadURL</a> is preferred for direct links to downloadable resources.
+		<br/>If the distribution(s) are accessible only through a landing page (i.e. direct download URLs are not known), then the landingPage address associated with the dcat:Dataset <em title="SHOULD" class="rfc2119">SHOULD</em> be duplicated as accessURL on a distribution. (see <a href="#example-landing-page">example 4.4</a>)
     </td></tr>
-    <tr><td class="prop">See also</td><td><a href="#Property:distribution_downloadurl">distribution download address</a>, <a href="#Property:distribution_accessservice">distribution access service</a></td></tr>
+    <tr><td class="prop">See also</td><td><a href="#Property:distribution_downloadurl">download address</a>, <a href="#Property:distribution_accessservice">access service</a></td></tr>
   </tbody>
 </table>
+
+<p>
+	dcat:accessURL generally matches the property-chain dcat:accessService/dcat:endpointURL. In the RDF representation of DCAT this is axiomatized as an OWL property-chain axiom.
+</p>
 </section>
 
 <section id="Property:distribution_accessservice">
@@ -1209,9 +1219,8 @@ into a separate named graph. The name of that graph <em title="SHOULD" class="rf
     <tr><td class="prop">Definition:</td><td>A service that gives access to the distribution of the dataset</td></tr>
 		<tr><td class="prop">Sub-property of:</td><td><a href="http://www.w3.org/ns/dcat#accessURL">dcat:accessURL</a></td></tr>
     <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#DataDistributionService">dcat:DataDistributionService</a></td></tr>
-		<tr><td class="prop">Usage note:</td><td></td></tr>
-		<tr><td class="prop">See also</td><td><a href="#Property:distribution_downloadurl">distribution download URL</a></td></tr>
-		<tr><td class="prop">See also</td><td><a href="#Property:distribution_accessurl">distribution access URL</a></td></tr>
+		<tr><td class="prop">Usage note:</td><td><a href="#Property:distribution_accessservice">dcat:accessService</a> <em title="SHOULD" class="rfc2119">SHOULD</em> be used to link to a description of a <a href="#class-datadistributionservice">dcat:DataDistributionService</a> that can provide access to this distribution.</td></tr>
+		<tr><td class="prop">See also</td><td><a href="#Property:distribution_downloadurl">download address</a>, <a href="#Property:distribution_accessurl">access address</a></td></tr>
   </tbody>
 </table>
 </section>
@@ -1225,10 +1234,8 @@ into a separate named graph. The name of that graph <em title="SHOULD" class="rf
     <tr><td class="prop">Definition:</td><td>Direct link to a downloadable file in a given format. E.g. CSV file or RDF file. The format is indicated by the distribution's dct:format and/or dcat:mediaType</td></tr>
     <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Distribution">dcat:Distribution</a></td></tr>
     <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Resource">rdfs:Resource</a></td></tr>
-     <tr><td class="prop">Usage note:</td><td>
-     dcat:downloadURL is a specific form of dcat:accessURL. Nevertheless, DCAT does not  define dcat:downloadURL as a subproperty of dcat:accessURL not to enforce this entailment as DCAT profiles can impose a stronger separation where they only use dcat:accessURL for non-download locations.
-     </td></tr>
-    <tr><td class="prop">See also</td><td><a href="#Property:distribution_accessurl">distribution access URL</a></td></tr>
+     <tr><td class="prop">Usage note:</td><td><a href="#Property:distribution_downloadurl">dcat:downloadURL</a> <em title="SHOULD" class="rfc2119">SHOULD</em> be used for the address at which this distribution is available directly, typically through a HTTP Get request.  </td></tr>
+    <tr><td class="prop">See also</td><td><a href="#Property:distribution_accessurl">access address</a>, <a href="#Property:distribution_accessservice">access service</a></td></tr>
   </tbody>
 </table>
 </section>
