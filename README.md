@@ -2,6 +2,7 @@
 
 - [DXWG's home page](https://www.w3.org/2017/dxwg/)
 - [Charter](https://www.w3.org/2017/dxwg/charter)
+- [Contribution Guidelines](CONTRIBUTING.md) cover the W3C legal aspects of contributing to this Github repository 
 
 ### Working Documents
 
