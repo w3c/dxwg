@@ -1038,16 +1038,17 @@ into a separate named graph. The name of that graph <em title="SHOULD" class="rf
 <p>The following properties are recommended for use on this class:
 	<a href="#Property:distribution_accessurl">access URL</a>,
 	<a href="#Property:distribution_accessservice">access service</a>,
-<a href="#Property:distribution_size">byte size</a>,
-<a href="#Property:distribution_description">description</a>,
-<a href="#Property:distribution_downloadurl">download URL</a>,
-<a href="#Property:distribution_format">format</a>,
-<a href="#Property:distribution_license">license</a>,
-<a href="#Property:distribution_media_type">media type</a>,
-<a href="#Property:distribution_release_date">release date</a>,
-<a href="#Property:distribution_rights">rights</a>,
-<a href="#Property:distribution_title">title</a>,
-<a href="#Property:distribution_update_date">update date</a>
+	<a href="#Property:distribution_size">byte size</a>,
+	<a href="#Property:distribution_conformsto">conforms to</a>,
+	<a href="#Property:distribution_description">description</a>,
+	<a href="#Property:distribution_downloadurl">download URL</a>,
+	<a href="#Property:distribution_format">format</a>,
+	<a href="#Property:distribution_license">license</a>,
+	<a href="#Property:distribution_media_type">media type</a>,
+	<a href="#Property:distribution_release_date">release date</a>,
+	<a href="#Property:distribution_rights">rights</a>,
+	<a href="#Property:distribution_title">title</a>,
+	<a href="#Property:distribution_update_date">update date</a>
 </p>
 
 <p class="issue" data-number="52">
@@ -1257,6 +1258,28 @@ into a separate named graph. The name of that graph <em title="SHOULD" class="rf
 </table>
 </section>
 
+<section id="Property:distribution_conformsto">
+<h4>Property: conforms to</h4>
+
+<p class="note">
+	New property in this context in this revision of DCAT.
+</p>
+
+<table class="definition">
+  <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/conformsTo">dct:conformsTo</a></th></tr></thead>
+  <tbody>
+    <tr><td class="prop">Definition:</td><td>An established standard to which the described resource conforms.</td></tr>
+    <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/Standard">dct:Standard</a> (A basis for comparison; a reference point against which other things can be evaluated.)</td></tr>
+		<tr><td class="prop">Usage note:</td><td>This property <em title="SHOULD" class="rfc2119">SHOULD</em> be used to indicate the model, schema, ontology, view or profile that this representation conforms to. This is (generally) a complementary concern to the media-type or format. </td></tr>
+		<tr><td class="prop">See also:</td><td><a href="#Property:distribution_format">format</a> , <a href="#Property:distribution_media_type">media type</a></td></tr>
+  </tbody>
+</table>
+
+<p class="note">
+	<a href="http://purl.org/dc/terms/Standard">dct:Standard</a> is defined as "A basis for comparison; a reference point against which other things can be evaluated." It is not restricted to formal standards issued by bodies like ISO and W3C. In this context it will usually be used for a schema, ontology, data model or profile which specifies the structure of a dataset. This is not necessarily tied to a single encoding or serialization.
+</p>
+</section>
+
 <section id="Property:distribution_media_type">
 <h4>Property: media type</h4>
 
@@ -1272,7 +1295,7 @@ into a separate named graph. The name of that graph <em title="SHOULD" class="rf
     <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Distribution">dcat:Distribution</a></td></tr>
     <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/MediaType">dct:MediaType</a></td></tr>
     <tr><td class="prop">Usage note:</td><td>This property <em title="SHOULD" class="rfc2119">SHOULD</em> be used when the media type of the distribution is defined in IANA [[!IANA-MEDIA-TYPES]], otherwise dct:format <em title="MAY" class="rfc2119">MAY</em> be used with different values.</td></tr>
-        <tr><td class="prop">See also:</td><td><a href="#Property:distribution_format"> format</a></td></tr>
+        <tr><td class="prop">See also:</td><td><a href="#Property:distribution_format">format</a> , <a href="#Property:distribution_conformsto">conforms to</a></td></tr>
   </tbody>
 </table>
 </section>
@@ -1286,6 +1309,7 @@ into a separate named graph. The name of that graph <em title="SHOULD" class="rf
     <tr><td class="prop">Definition:</td><td>The file format of the distribution.</td></tr>
     <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/MediaTypeOrExtent">dct:MediaTypeOrExtent</a></td></tr>
     <tr><td class="prop">Usage note:</td><td> <a href="#Property:distribution_media_type">dcat:mediaType</a> <em title="SHOULD" class="rfc2119">SHOULD</em> be used if the type of the distribution is defined by IANA [[!IANA-MEDIA-TYPES]].</td></tr>
+		<tr><td class="prop">See also:</td><td><a href="#Property:distribution_media_type">media type</a> , <a href="#Property:distribution_conformsto">conforms to</a></td></tr>
   </tbody>
 </table>
 </section>
@@ -2063,11 +2087,15 @@ Besides, the examples and more in general the DQV  is neutral to the data portal
 
         <ul>
 <li>
-		<a href="#Property:distribution_media_type"></a>: The range of dcat:mediaType has been tightened from dct:MediaTypeOrExtent to dct:MediaType - see <a href="https://github.com/w3c/dxwg/issues/127">Issue #127</a>.
+	<a href="#Property:distribution_media_type"></a>: The range of dcat:mediaType has been tightened from dct:MediaTypeOrExtent to dct:MediaType - see <a href="https://github.com/w3c/dxwg/issues/127">Issue #127</a>.
 </li>
 
 <li>
-	Errors in examples of <a href="#Property:distribution_media_type">dcat:mediaType</a> usage fixed - see <a href="https://github.com/w3c/dxwg/issues/170">Issue #170</a>.
+		<a href="#Property:distribution_conformsto">Property: conforms to</a>: The property dct:conformsTo is recommended for use in the context of a dcat:Distribution to allow the model or schema used for the representation to be indicated as well as the serialization (which is indicated using dct:format and dcat:mediaType) - see <a href="https://github.com/w3c/dxwg/issues/55">Issue #55</a>.
+</li>
+
+<li>
+		Errors in examples of <a href="#Property:distribution_media_type">dcat:mediaType</a> usage fixed - see <a href="https://github.com/w3c/dxwg/issues/170">Issue #170</a>.
 </li>
 
 <li>
@@ -2077,7 +2105,6 @@ Besides, the examples and more in general the DQV  is neutral to the data portal
 <li>
 	<a href="#class-resource">Class: Catalogued resource</a>: In DCAT 2014 [[VOCAB-DCAT-20140116]] the scope of a <a href="#class-catalog">dcat:Catalog</a> was limited to Datasets. This has been generalized, and properties common to all catalogued resources are now associated with a super-class dcat:Resource - see <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a> and <a href="https://github.com/w3c/dxwg/issues/116">Issue #116</a>. <a href="https://github.com/w3c/dxwg/milestone/5">Milestone 5</a> collects a number of issues related to this.
 	</p>
-
 </li>
 
 <li>
