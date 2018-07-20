@@ -1665,7 +1665,7 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 </section>
 
 <section id="quality-information" class="informative">
-    <h2>Quality information</h2
+    <h2>Quality information</h2>
 <div class="note"><p>This section is not-normative as it provides guidance on how to document the quality of DCAT first class entities (e.g., datasets, distributions) and it does not define new DCAT terms. The guidance relies on the Data Quality Vocabulary(DQV)[[vocab-dqv]], which is a W3C Group Note.</p></div>   
 <p class="issue" data-number="58">
 	The need to choose or define a data <b>quality model</b> has been identified as a requirement to be satisfied in the revision of DCAT.
@@ -1759,7 +1759,7 @@ The activity :myQualityChecking employs the service :myQualityChecker to check t
     
     </section>
 <section id="quality-conformance">
-<h2>Providing conformance</h2>
+<h2>Documenting conformance</h2>
 <p> This subsection discusses  examples representing the conformance degree to a stated quality standard  and the details about the conformance tests.
 </p>
     
@@ -1802,6 +1802,35 @@ a:ConformanceTest a prov:Plan ;
     # Here you can specify additional information on the test
     prov:wasDerivedFrom &lt;http://data.europa.eu/eli/reg/2014/1312/oj&gt; .
     </pre>
+<p>Also,  DQV [[vocab-dqv]] can be deployed to  measure the compliance to a specific standard. In the following, the :levelOfComplianceToINSPIRE is a quality metrics which measures the compliance of a dataset to INSPIRE in terms of the percentage of passed complieance tests. The example assumes iso as a namespace representing the quality dimensions and categories defined in the ISO/IEC 25012.</p>     
+        <pre>
+:levelOfComplianceToINSPIRE
+    a dqv:Metric ;
+    skos:definition "It returns the degree of compliance to INSPIRE defined as the percentage of passed compleance tests."@en
+    dqv:expectedDataType xsd:double ;
+    dqv:inDimension  iso:compliance .
+
+iso:compliance
+    a  dqv:Dimension ;
+    skos:prefLabel "Compliance"@en ;
+    skos:definition "The degree to which data has attributes that adhere to standards, conventions or regulations in force and similar rules relating to data quality in a specific context of use."@en ;
+    dqv:inCategory  iso:InherentandSystemDependentDataQuality
+    .
+iso:inherentandSystemDependentDataQuality
+    a  dqv:Category ;
+   skos:prefLabel "Inherent and System-Dependent Data Quality"@en.  
+        </pre>
+<p>The quality measurement :measurement_complianceToINSPIRE represents the level of compliance for a dataset a:Dataset, namely, measurement of the metric :levelOfComplianceToINSPIRE. If only a part of the compliance tests succeed (e.g. half of the compliance tests), the measurement would look like in the following:
+     <pre>
+:measurement_complianceToINSPIRE 
+   a         dqv:QualityMeasurement;
+   dqv:computedOn      a:Dataset;
+   dqv:value           "50"^^xsd:double ;
+   sdmx-attribute:unitMeasure &lt;http://www.wurvoc.org/vocabularies/om-1.8/Percentage&gt;
+   dcterms:date      "2018-01-10"^^xsd:date ;
+   dqv:isMeasurementOf    :levelOfComplianceToINSPIRE .
+    </pre>
+</p>    
 </section> 
 <section id="quality-confomance-test-results"> 
 <h3>Conformance test results</h3>
@@ -1842,7 +1871,7 @@ a:TestingActivity a prov:Activity;
     prov:generated a:TestAssertion, a:TestResult;
     prov:use a:Dataset ;
     prov:wasAssociatedWith   &lt;http://validator.example.org/&gt; .
-    </pre>
+    </pre>   
 <p> The following example shows how the description would have looked like if the subtest a:testq1 had failed. In particular, dcterms:description and earl:info provide additional warnings or error messages in a human-readable form.</p>
     <pre>
 a:assertion1 a earl:Assertion ;
@@ -1874,7 +1903,55 @@ a:assertion1 a earl:Assertion ;
     # we do not know if the test was manual, automatic, or what ..     
     earl:mode earl:automatic.   
     </pre>
-</section> 
+Depending on the details required about test, DQV can express the testing activity and errors as well. In the following, :error is a quality annotation that represents the previous error, and  a:testResult is defined as a DQV quality metadata to  collect the above annotations and the compliance measurements providing  provenance information. 
+ <pre>
+:error  
+    a dqv:QualityAnnotation ;
+    #this annotation is derived by the measurement
+    prov:wasGeneratedBy  a:TestingActivity;
+    oa:hasTarget a:Dataset ;
+    oa:hasBody [
+        #errors/failed test description 
+          a  oa:TextualBody;
+          rdf:value  """&lt;test-method duration-ms="47" finished-at="2015-09-29T11:50:00Z"  
+                name="validate" signature="validate()" started-at="2015-09-29T11:50:00Z"
+                status="FAIL"&gt; 
+                &lt;exception class="java.lang.AssertionError"&gt;
+                    &lt;message&gt;
+                     Total validation errors found: 2
+                     &lt;/message&gt;
+               &lt;/exception&gt;
+             &lt;/test-method&gt;"""^^rdf:XMLLiteral ;
+          #it can be in any format suppored by dc
+          dct:format  "text/xml"
+          ]
+    oa:motivatedBy dqv:qualityAssessment, oa:assessing ;
+    dqv:inDimension iso:compliance
+    .
+
+a:TestResult 
+    a dqv:QualityMetadata ;
+    #  change the the dcterms:type according to the resulted compliance 
+    dcterms:type &lt;http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant&gt; ;
+    prov:wasAttributedTo &lt;http://validator.example.org/&gt; ;
+    prov:generatedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
+    prov:wasGeneratedBy a:TestingActivity .
+
+# The graph contains the rest of the statements presented in the previous examples.
+a:testResult {
+    a:Dataset
+        dqv:hasQualityMeasurement :measurement_complianceToINSPIRE;
+        dqv:hasQualityAnnotation :errors .       
+}
+
+#the testing activity
+a:TestingActivity a prov:Activity;
+    prov:generated  a:TestResult;
+    prov:use a:Dataset ;
+    prov:wasAssociatedWith  &lt;http://validator.example.org/&gt;    
+     .
+</pre>
+ </section> 
 </section>          
 </section>  
 
