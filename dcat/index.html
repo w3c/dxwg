@@ -1776,6 +1776,33 @@ a:Dataset a dcat:Dataset;
     dct:issued "2010-11-23"^^xsd:date .
 </pre>
 </section> 
+<section id="quality-confomance-degree"> 
+<h3> Degree of Conformance</h3>
+     <p>Some legal context requires to specify the degree of conformance. For example,  INSPIRE metadata adopts a specific <a href="http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity">controlled vocabulary</a> to express  non-conformance and non-evaluation beside the full compliance. As suggested in [[geodcat-ap]], the following example specifies the degree of conformance (i.e.,  not conformant) by declaring the  <a href="http://dublincore.org/documents/dcmi-terms/#terms-type">dct:type</a> for the result of conformance test.  [[geodcat-ap]] suggests to use a PROV entity to model the  conformance test (e.g., a:TestResult),  a PROV activity to model the testing activity (e,g., a:TestingActivity), a PROV plan derived by the INSPIRE Directive to represent  conformance test (e.g., a:ConformanceTest). A qualified PROV association binds the testing activity to the conformance test.  
+    </p> 
+    <pre>
+a:Dataset a dcat:Dataset ; 
+    prov:wasUsedBy a:TestingActivity .
+
+a:TestingActivity a prov:Activity ;
+      prov:generated a:TestResult ;
+      prov:qualifiedAssociation [ 
+          a prov:Association ;
+        # http://validator.example.org/ is the agent who did the test.         
+        prov:agent  &lt;http://validator.example.org/&gt; 
+        #following the plan  a:ConformanceTest 
+        prov:hadPlan a:ConformanceTest 
+        ] .
+
+# Conformance test result
+a:TestResult a prov:Entity ;
+   dcterms:type &lt;http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/notConformant&gt; .
+
+a:ConformanceTest a prov:Plan ;
+    # Here you can specify additional information on the test
+    prov:wasDerivedFrom &lt;http://data.europa.eu/eli/reg/2014/1312/oj&gt; .
+    </pre>
+</section> 
 
 </section>          
 </section>  
