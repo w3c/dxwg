@@ -309,6 +309,68 @@ Notice that we used dcat:downloadURL with the downloadable distribution and that
 does not have to be defined as a separate dcat:Distribution instance.
 </section>
 
+<section id="bag-of-files">
+	<h3>Loosely structured catalog</h3>
+	<p>
+		In many legacy catalogues and repositories (e.g. CKAN), ‘datasets’ are ‘just a bag of files’. There is no distinction made between part/whole, distribution (representation), and other kinds of relationship (e.g. documentation, schema, supporting documents) from the dataset to each of the files.
+	</p>
+	<p>
+		If the nature of the relationships between a dataset and component resources in a catalogue, repository, or elsewhere are not known, <b>dct:relation</b> can be used:
+	</p>
+	<pre>
+	:d33937
+	  dct:description "A set of RDF graphs representing the International [Chrono]stratigraphic Chart, ..." ;
+  	dct:identifier "https://doi.org/10.25919/5b4d2b83cbf2d"^^xsd:anyURI ;
+		dct:relation <https://vocabs.ands.org.au/viewById/196> ;
+	  dct:relation :ChronostratChart2017-02.pdf  ;
+	  dct:relation :ChronostratChart2017-02.jpg ;
+		dct:relation :timescale.zip ;
+	  dct:relation :isc2017.jsonld ;
+	  dct:relation :isc2017.nt ;
+	  dct:relation :isc2017.rdf ;
+	  dct:relation :isc2017.ttl ;
+		.
+	</pre>
+	<p>
+		If it is clear that any of these related resources is a proper <i>representation</i> of the dataset, dcat:distribution should be used.
+	</p>
+	<pre>
+	:d33937
+		rdf:type dcat:Dataset ;
+	  dct:description "A set of RDF graphs representing the International [Chrono]stratigraphic Chart, ..." ;
+  	dct:identifier "https://doi.org/10.25919/5b4d2b83cbf2d"^^xsd:anyURI ;
+		dct:relation <https://vocabs.ands.org.au/viewById/196> ;
+	  dct:relation :ChronostratChart2017-02.pdf  ;
+	  dct:relation :ChronostratChart2017-02.jpg ;
+		dct:relation :timescale.zip ;
+		dcat:distribution [
+	      rdf:type dcat:Distribution ;
+	      dcat:downloadURL :isc2017.jsonld ;
+	      dcat:byteSize "698039"^^xsd:decimal ;
+	      dcat:mediaType <https://www.iana.org/assignments/media-types/application/ld+json> ;
+	    ] ;
+	  dcat:distribution [
+	      rdf:type dcat:Distribution ;
+	      dcat:downloadURL :isc2017.nt ;
+	      dcat:byteSize "2047874"^^xsd:decimal ;
+	      dcat:mediaType <https://www.iana.org/assignments/media-types/application/n-triples> ;
+	    ] ;
+	  dcat:distribution [
+	      rdf:type dcat:Distribution ;
+	      dcat:downloadURL :isc2017.rdf ;
+	      dcat:byteSize "1600569"^^xsd:decimal ;
+	      dcat:mediaType <https://www.iana.org/assignments/media-types/application/rdf+xml> ;
+	    ] ;
+	  dcat:distribution [
+	      rdf:type dcat:Distribution ;
+	      dcat:downloadURL :isc2017.ttl ;
+	      dcat:byteSize "531703"^^xsd:decimal ;
+	      dcat:mediaType <https://www.iana.org/assignments/media-types/text/turtle> ;
+	    ] ;
+		.
+	</pre>
+</section>
+
 <section id="more-examples-needed">
 	<h3>More examples needed</h3>
 	<p class="note">
@@ -946,6 +1008,12 @@ into a separate named graph. The name of that graph <em title="SHOULD" class="rf
 </table>
 </section>
 
+<p class="issue">
+	<a href="https://github.com/w3c/dxwg/issues/81">Issue #81</a> concerns the general need to describe relationships between datasets.
+	Guidance on the use of specializations of dct:relation is required in the context of dcat:Dataset.
+</p>
+
+<!--
 <section id="Property:dataset_part">
 <h4>Property: dataset part</h4>
 
@@ -964,6 +1032,7 @@ into a separate named graph. The name of that graph <em title="SHOULD" class="rf
 </p>
 
 </section>
+-->
 
 <section id="Property:dataset_frequency">
 <h4>Property: frequency</h4>
@@ -1352,10 +1421,6 @@ into a separate named graph. The name of that graph <em title="SHOULD" class="rf
 	The need to be able to link a catalogued resource with the business or project context of its production has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
-<p class="issue" data-number="81">
-	The need describe relationships between catalogued resources has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
 <table class="definition">
   <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a></th></tr></thead>
   <tbody>
@@ -1556,16 +1621,35 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
   <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/relation">dct:relation</a></th></tr></thead>
   <tbody>
     <tr><td class="prop">Definition:</td><td>Connects a catalogued item to other resources related to it.</td></tr>
-    <tr><td class="prop">Usage note:</td><td><a href="http://purl.org/dc/terms/relation">dct:relation</a> may be used where the exact nature of the relationship between a catalogued item and related resources is not known. A more specific sub-properties <em title="SHOULD" class="rfc2119">SHOULD</em> be used if the semantics of the link are known. In particular, the property <a href="http://www.w3.org/ns/dcat#distribution">dcat:distribution</a> <em title="SHOULD" class="rfc2119">SHOULD</em> be used to link from a <a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a> to a representation of the dataset, described as a <a href="http://www.w3.org/ns/dcat#Distribution">dcat:Distribution</a></td></tr>
-		<tr><td class="prop">See also:</td><td><a href="http://purl.org/dc/terms/conformsTo">dct:conformsTo</a>, <a href="http://www.w3.org/ns/dcat#distribution">dcat:distribution</a>, <a href="http://purl.org/dc/terms/hasPart">dct:hasPart</a>, <a href="http://purl.org/dc/terms/hasFormat">dct:hasFormat</a>, <a href="http://purl.org/dc/terms/isFormatOf">dct:isFormatOf</a>, <a href="http://purl.org/dc/terms/references">dct:references</a>, <a href="http://purl.org/dc/terms/requires">dct:requires</a></td>
+    <tr><td class="prop">Usage note:</td><td><a href="http://purl.org/dc/terms/relation">dct:relation</a> <em title="SHOULD" class="rfc2119">SHOULD</em> be used where the nature of the relationship between a catalogued item and related resources is not known. A more specific sub-property <em title="SHOULD" class="rfc2119">SHOULD</em> be used if the nature of the relationship of the link is known.
+		The property <a href="http://www.w3.org/ns/dcat#distribution">dcat:distribution</a> <em title="SHOULD" class="rfc2119">SHOULD</em> be used to link from a <a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a> to a representation of the dataset, described as a <a href="http://www.w3.org/ns/dcat#Distribution">dcat:Distribution</a></td></tr>
+		<tr><td class="prop">See also:</td><td>sub-properties of dct:relation in particular
+			<a href="http://www.w3.org/ns/dcat#distribution">dcat:distribution</a>,
+			<a href="http://purl.org/dc/terms/hasPart">dct:hasPart</a>,
+			<a href="http://purl.org/dc/terms/isPartOf">dct:isPartOf</a>,
+			<a href="http://purl.org/dc/terms/conformsTo">dct:conformsTo</a>,
+			<a href="http://purl.org/dc/terms/isFormatOf">dct:isFormatOf</a>,
+			<a href="http://purl.org/dc/terms/hasFormat">dct:hasFormat</a>,
+			<a href="http://purl.org/dc/terms/isVersionOf">dct:isVersionOf</a>,
+			<a href="http://purl.org/dc/terms/hasVersion">dct:hasVersion</a>,
+			<a href="http://purl.org/dc/terms/replaces">dct:replaces</a>,
+			<a href="http://purl.org/dc/terms/isReplacedBy">dct:isReplacedBy</a>,
+			<a href="http://purl.org/dc/terms/references">dct:references</a>,
+			<a href="http://purl.org/dc/terms/isReferencedBy">dct:isReferencedBy</a>,
+			<a href="http://purl.org/dc/terms/requires">dct:requires</a></td>,
+			<a href="http://purl.org/dc/terms/isRequiredBy">dct:isRequiredBy</a></td>
 		</tr>
   </tbody>
 </table>
 
-<p class="note">
+<p>
 	Many existing and legacy catalogues do not distinguish between dataset components, representations, documentation, schemata and other resources that are lumped together as part of a dataset.
-	Since <a href="http://purl.org/dc/terms/relation">dct:relation</a> is a super-property of <a href="http://purl.org/dc/terms/conformsTo">dct:conformsTo</a>, <a href="http://www.w3.org/ns/dcat#distribution">dcat:distribution</a>, <a href="http://purl.org/dc/terms/hasPart">dct:hasPart</a>, <a href="http://purl.org/dc/terms/hasFormat">dct:hasFormat</a>, <a href="http://purl.org/dc/terms/isFormatOf">dct:isFormatOf</a>, <a href="http://purl.org/dc/terms/references">dct:references</a>, <a href="http://purl.org/dc/terms/requires">dct:requires</a>, and a number of other Dublin Core properties.
-	It may be used to link a dataset to various component and supplementary resources, While not being inconsistent with a subsequent reclassification with more specific semantics.
+	<a href="http://purl.org/dc/terms/relation">dct:relation</a> is a super-property of a number of more specific properties which express more precise relationships, so use of dct:relation is not inconsistent with a subsequent reclassification with more specific semantics, though the more specialized sub-properties <em title="SHOULD" class="rfc2119">SHOULD</em> be used to link a dataset to component and supplementary resources if possible.
+</p>
+
+<p class="issue" data-number="81">
+	The general need to describe relationships between datasets has been identified as a requirement to be satisfied in the revision of DCAT.
+	Guidance on the use of more specific relationship predicates is required, particularly in the context of dcat:Dataset sub-class.
 </p>
 
 <p class="note">
@@ -2114,6 +2198,12 @@ Besides, the examples and more in general the DQV  is neutral to the data portal
         <p>The document has undergone the following changes since the W3C Recommendation of 16 January 2014 [[VOCAB-DCAT-20140116]]:</p>
 
         <ul>
+
+<li>
+	<a href="#Property:resource_relation">Property: resource relation</a>: The property dct:relation is recommended for use in the context of a catalogued resource to capture general relationships, including the case where the package of resources associated with a catalogued item includes a mixture of representations, parts, documentation and other elements which are not strictly 'distributions' of a dataset - see <a href="https://github.com/w3c/dxwg/issues/253">Issue #253</a>.
+</li>
+
+
 <li>
 	<a href="#Property:distribution_conformsto">Property: conforms to</a>: The property dct:conformsTo is recommended for use in the context of a dcat:Distribution to allow the model or schema used for the representation to be indicated as well as the serialization (which is indicated using dct:format and dcat:mediaType) - see <a href="https://github.com/w3c/dxwg/issues/55">Issue #55</a>.
 </li>
