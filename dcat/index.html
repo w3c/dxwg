@@ -235,19 +235,21 @@ It is recommended to define the concept as part of the concepts scheme identifie
 <section id="classifying-dataset-types">
 <h3>Classifying dataset types</h3>
 
-<p class="issue" data-number="64">
-	The scope of DCAT Datasets is a lot more than tabular data, so a type/genre indication is required.
-	A number of controlled vocabularies are available for classification of datasets according to type.
-	In some cases, each individual classifier is denoted by a URI so it can be linked directly.
-	However, in other cases there is only a text list, or a vocabulary is embedded in a document or code, so the way to indicate an individual item is less direct.
-	Guidance about how to use items from various styles of controlled vocabulary are needed alongside the simple case.
-</p>
-
 <p>
-	The type or genre of a dataset <em title="MAY" class="rfc2119">MAY</em> be indicated using the <a href="http://purl.org/dc/terms/type">dct:type</a> property:
+	The type or genre of a dataset <em title="MAY" class="rfc2119">MAY</em> be indicated using the <a href="http://purl.org/dc/terms/type">dct:type</a> property.
+	The value of the property <em title="SHOULD" class="rfc2119">SHOULD</em> be taken from a well governed and broadly recognised set of resource types, such as the <a href="http://dublincore.org/documents/dcmi-terms/#section-7">DCMI Type Vocabulary</a>, the <a href="https://id.loc.gov/vocabulary/marcgt.html">MARC Genre/Terms Scheme</a>, the <a href="https://schema.datacite.org/meta/kernel-4.1/include/datacite-resourceType-v4.1.xsd">DataCite resource types</a> or the PARSE.Insight content-types from Re3data [[re3data-schema]].
 </p>
-
-<pre>  :dataset-001 dct:type	dctype:Text . </pre>
+<pre>
+:dataset-001
+	rdf:type	dcat:Dataset ;
+	dct:type	&lt;http://purl.org/dc/dcmitype/Text&gt; ;
+	dct:type	&lt;http://id.loc.gov/vocabulary/marcgt/man&gt; ;
+	dct:type	[ rdfs:label "Text" ; dct:source "DataCite resource types" ; ] ;
+	dct:type	&lt;http://registry.it.csiro.au/def/datacite/resourceType/Text&gt; ;
+	dct:type	[ rdfs:label "Standard office documents" ; dct:source "Re3data content types" ; ] ;
+	dct:type	&lt;http://registry.it.csiro.au/def/re3data/contentType/doc&gt; ;
+.
+</pre>
 
 </section>
 
@@ -2126,7 +2128,7 @@ In DCAT 2014 [[VOCAB-DCAT-20140116]] <a href="#class-dataset">dcat:Dataset</a> w
 </li>
 
 <li><a href="#Property:dataset_type">Property: type/genre</a>:
-	Added in DCAT revision - see <a href="https://github.com/w3c/dxwg/issues/64">Issue #64</a>.
+	Added in DCAT revision - see <a href="https://github.com/w3c/dxwg/issues/64">Issue #64</a>, with examples of usage in overview section.
 </li>
 
 <li><a href="#Property:dataset_keyword">Property: keyword/tag</a>:
