@@ -1756,13 +1756,13 @@ Besides, the examples and more in general the DQV  is neutral to the data portal
     
     </section>
 <section id="quality-conformance">
-<h2>Documenting conformance</h2>
-<p> This subsection discusses  examples representing the conformance degree to a stated quality standard  and the details about the conformance tests.
+<h2>Documenting conformance to standards</h2>
+<p> This subsection  shows different modelling patterns combining DQV [[vocab-dqv]] with  PROV [[PROV-O]] and EARL [[EARL10-Schema]] to represent the conformance degree to a stated quality standard and the details about the conformance tests. 
 </p>
     
 <section id="quality-confomance-statement"> 
-<h3>Conformace to a standard</h3>
- <p>The use of <a href="http://dublincore.org/documents/dcmi-terms/#terms-conformsTo">dct:conformsTo</a> and <a href="http://dublincore.org/documents/dcmi-terms/#terms-conformsTo">dct:Standard</a> is a well-known pattern to represent the conformace to a standard. The following example declares a finctional a:Dataset conformat to the "Commission Regulation (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC".</p>
+<h3>Conformance to a standard</h3>
+ <p>The use of <a href="http://dublincore.org/documents/dcmi-terms/#terms-conformsTo">dct:conformsTo</a> and <a href="http://dublincore.org/documents/dcmi-terms/#terms-conformsTo">dct:Standard</a> is a well-known pattern to represent the conformance to a standard. The following example declares a fictional a:Dataset conformant to the "Commission Regulation (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC".</p>
 <pre>       
 a:Dataset a dcat:Dataset;
     dct:conformsTo &lt;http://data.europa.eu/eli/reg/2014/1312/oj&gt; .  
@@ -1799,7 +1799,7 @@ a:ConformanceTest a prov:Plan ;
     # Here you can specify additional information on the test
     prov:wasDerivedFrom &lt;http://data.europa.eu/eli/reg/2014/1312/oj&gt; .
     </pre>
-<p>Also,  DQV [[vocab-dqv]] can be deployed to  measure the compliance to a specific standard. In the following, the :levelOfComplianceToINSPIRE is a quality metrics which measures the compliance of a dataset to INSPIRE in terms of the percentage of passed complieance tests. The example assumes iso as a namespace representing the quality dimensions and categories defined in the ISO/IEC 25012.</p>     
+<p>Also,  DQV [[vocab-dqv]] can be deployed to  measure the compliance to a specific standard. In the following, the :levelOfComplianceToINSPIRE is a quality metrics which measures the compliance of a dataset to INSPIRE in terms of the percentage of passed compliance tests. The example assumes iso as a namespace representing the quality dimensions and categories defined in the ISO/IEC 25012.</p>     
         <pre>
 :levelOfComplianceToINSPIRE
     a dqv:Metric ;
@@ -1817,7 +1817,7 @@ iso:inherentandSystemDependentDataQuality
     a  dqv:Category ;
    skos:prefLabel "Inherent and System-Dependent Data Quality"@en.  
         </pre>
-<p>The quality measurement :measurement_complianceToINSPIRE represents the level of compliance for a dataset a:Dataset, namely, measurement of the metric :levelOfComplianceToINSPIRE. If only a part of the compliance tests succeed (e.g. half of the compliance tests), the measurement would look like in the following:
+<p>The quality measurement :measurement_complianceToINSPIRE represents the level of compliance for a dataset a:Dataset, namely, measurement of the metric :levelOfComplianceToINSPIRE. If only a part of the compliance tests succeeds (e.g. half of the compliance tests), the measurement would look like in the following:
      <pre>
 :measurement_complianceToINSPIRE 
    a         dqv:QualityMeasurement;
@@ -1831,8 +1831,8 @@ iso:inherentandSystemDependentDataQuality
 </section> 
 <section id="quality-confomance-test-results"> 
 <h3>Conformance test results</h3>
-    <p> Further information about the tests can be provided using EARL [[EARL10-Schema]]. EARL provides specific classes to describe the testing activity, which can be adopted in conjuction to PROV.
-The following example describes the Testing activity a:TestingActivity as an EARL Assertion instead of a qualified association on the PROV activity. The EARL Assertion states the dataset a:Dataset has been tested with the conformance test a:ConformanceTest, and it has passed the test as described in a:testResult.
+    <p> Further information about the tests can be provided using EARL [[EARL10-Schema]]. EARL provides specific classes to describe the testing activity, which can be adopted in conjunction with PROV. 
+The following example describes the Testing activity a:TestingActivity as an EARL Assertion instead of a qualified association on the PROV activity. The EARL Assertion states the dataset a:Dataset has been tested with the conformance test a:ConformanceTest, and it has passed the test as described in a:testResult.  
     </p> 
     <pre>
 a:assertion a earl:Assertion;
@@ -1900,7 +1900,7 @@ a:assertion1 a earl:Assertion ;
     # we do not know if the test was manual, automatic, or what ..     
     earl:mode earl:automatic.   
     </pre>
-Depending on the details required about test, DQV can express the testing activity and errors as well. In the following, :error is a quality annotation that represents the previous error, and  a:testResult is defined as a DQV quality metadata to  collect the above annotations and the compliance measurements providing  provenance information. 
+Depending on the details required about tests, DQV can express the testing activity and errors as well. In the following, :error is a quality annotation that represents the previous error, and  a:testResult is defined as a DQV quality metadata to  collect the above annotations and the compliance measurements providing  provenance information. 
  <pre>
 :error  
     a dqv:QualityAnnotation ;
@@ -1948,6 +1948,7 @@ a:TestingActivity a prov:Activity;
     prov:wasAssociatedWith  &lt;http://validator.example.org/&gt;    
      .
 </pre>
+    Of course,  the above modelling patterns can be exploited for representing any quality checks not only conformance to standards.
  </section> 
 </section>          
 </section>  
