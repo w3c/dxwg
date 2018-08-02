@@ -405,10 +405,10 @@ dap:P366
 		A terse description of the project is formalized as a <a href="http://www.w3.org/ns/prov#Activity">prov:Activity</a>.
 	</p>
 	<p>
-		Additional provenance information may be provided using the other basic PROV properties <a href="#Property:dataset_wasassociatedwith">prov:wasAssociatedWith</a> (to link to an agent associated with the dataset production) and <a href="#Property:dataset_wasderivedfrom">prov:wasDerivedFrom</a> (to link to a predecessor dataset). prov:wasAssociatedWith provides a general link to assocated agents, such as project sponsors, managers, dataset owners, etc which are not properly described using dct:creator, dct:contributor or dct:publisher. prov:wasDerivedFrom supports a general relationships to inputs and predecessor datasets compared with dct:source.
+		Additional provenance information may be provided using the other starting point PROV properties <a href="#Property:dataset_wasattributedto">prov:wasAttributedTo</a> (to link to an agent associated with the dataset production) and <a href="#Property:dataset_wasderivedfrom">prov:wasDerivedFrom</a> (to link to a predecessor dataset). prov:wasAttributedTo provides a general link to associated agents, such as project sponsors, managers, dataset owners, etc which are not correctly characterized using dct:creator, dct:contributor or dct:publisher. prov:wasDerivedFrom supports a more specific relationship to an input or predecessor dataset compared with dct:source, which is not necessarily a previous dataset.
 	</p>
 	<p>
-		For a more detailed discussion fo the use of PROV for dataset provenance, see the chapter on <a href="#prov-patterns">Provenance Patterns</a> below. 
+		For a more detailed discussion fo the use of PROV for dataset provenance, including recommendations on the use of qualified properties, see the chapter on <a href="#prov-patterns">Provenance Patterns</a> below.
 	</p>
 
 </section>
@@ -1108,7 +1108,7 @@ into a separate named graph. The name of that graph <em title="SHOULD" class="rf
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/prov#wasGeneratedBy">prov:wasGeneratedBy</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>Link to the activity that generated or provides the business context for the creation of the dataset.</td></tr>
+    <tr><td class="prop">Definition:</td><td>Link to the activity that generated, or provides the business context for, the creation of the dataset.</td></tr>
 		<tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/prov#Entity">prov:Entity</a></td></tr>
 		<tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/prov#Activity">prov:Activity</a> An activity is something that occurs over a period of time and acts upon or with entities; it may include consuming, processing, transforming, modifying, relocating, using, or generating entities.</td></tr>
 		<tr><td class="prop">Usage note:</td><td>The associated activity will typically be an initiative, project, mission, survey etc. Multiple prov:wasGeneratedBy properties can be used to indicate the dataset production context at various levels of granularity. </td></tr>
@@ -1880,7 +1880,7 @@ Besides, the examples and more in general the DQV  is neutral to the data portal
     dqv:computedOn :genoaBusStopsDataset ;
     dqv:isMeasurementOf :completenessWRTExpectedNumberOfEntities ;
     dqv:value "0.6833333"^^xsd:decimal  ;
-    prov:wasAttributedTo :myQualityChecker ;
+    prov:wasAssociatedWith :myQualityChecker ;
     prov:generatedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
     prov:wasGeneratedBy :myQualityChecking
     .
