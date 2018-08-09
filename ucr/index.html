@@ -800,7 +800,7 @@ Users need a way to view the aggregated collection level metadata and the associ
       </ul>
         </p>
         <p class="existing_approaches">
-          <p><a rel="nofollow" class="external text" href="https://webgate.ec.europa.eu/CITnet/stash/projects/ODCKAN/repos/datacite-to-dcat-ap/">A study</a> has been carried out at the <a rel="nofollow" class="external text" href="https://ec.europa.eu/jrc/">European Commission's Joint Research Centre (JRC)</a>, in order to create mappings between [[DataCite]] (the current <i>de facto</i> standard for data citation) and [[DCAT-AP]]. </p>
+          <p><a rel="nofollow" class="external text" href="https://github.com/ec-jrc/datacite-to-dcat-ap/">A study</a> has been carried out at the <a rel="nofollow" class="external text" href="https://ec.europa.eu/jrc/">European Commission's Joint Research Centre (JRC)</a>, in order to create mappings between [[DataCite]] (the current <i>de facto</i> standard for data citation) and [[DCAT-AP]]. </p>
           <p>The results show that [[DCAT-AP]] covers most of the required [[DataCite]] metadata elements, but some of them are missing. In particular:</p>
           <ul>
         <li> Mandatory elements:<ul><li> Dataset creator (but [[GeoDCAT-AP]] supports it)</li></ul></li>
@@ -813,7 +813,7 @@ Users need a way to view the aggregated collection level metadata and the associ
           <ul>
         <li><a rel="nofollow" class="external text" href="https://www.w3.org/2016/11/sdsvoc/SDSVoc16_paper_27#data-citation"><i>Using DCAT-AP for research data</i>.</a> Smart Descriptions &amp; Smarter Vocabularies (SDSVoc). Amsterdam, 30 Nov - 1 Dec 2016.</li>
         <li>
-          <a rel="nofollow" class="external text" href="https://webgate.ec.europa.eu/CITnet/stash/projects/ODCKAN/repos/datacite-to-dcat-ap/">
+          <a rel="nofollow" class="external text" href="https://github.com/ec-jrc/datacite-to-dcat-ap/">
             <i>DataCite to DCAT-AP Mapping</i>
           </a>
         </li>
@@ -1300,6 +1300,7 @@ a:Dataset a dcat:Dataset;
       -->
       </p>
     </section>
+
     <section id="ID19" class="usecase">
       <h2>Guidance on the use of qualified forms [ID19]</h2>
       <p class="contributor"><a href="/2017/dxwg/wiki/User:Aperego" title="User:Aperego">Andrea Perego</a> - <a rel="nofollow" class="external text" href="https://ec.europa.eu/jrc/">European Commission, Joint Research Centre (JRC)</a></p>
@@ -1319,8 +1320,35 @@ a:Dataset a dcat:Dataset;
       <div class="visible">
         <p class="description">
           <p>In most cases, the relationships between datasets and related resources (e.g., author, publisher, contact point, publications / documentation, input data, model(s) / software used to create the dataset) can be specified with simple, binary properties available from widely used vocabularies - as [[DCTerms]] and [[VOCAB-DCAT]].</p>
-          <p>However, there may be the need of providing additional information concerning, e.g., the temporal context of a relationship, which requires the use of a more sophisticated representation, similar to the "qualified" forms used in [[PROV-O]]. </p>
-          <p>Besides [[PROV-O]], vocabularies as [[VOCAB-DQV]] and [[VOCAB-DUV]] can be used for this purpose. However, there is the need of providing guidance on how to use them consistently, since the lack of modeling patterns results in the difficulty of aggregating this information across metadata records and catalogs.</p>
+          <p>As an example, <code>dcterms:source</code> can be used to specify a relationship between a dataset (<code>output:Dataset</code>), and the dataset it was derived from (<code>input:Dataset</code>):</p>
+          <pre>
+output:Dataset a dcat:Dataset ;
+  dcterms:source input:Dataset .
+  
+input:Dataset a dcat:Dataset .
+          </pre>
+          <p>However, there may be the need of providing additional information concerning, e.g., the temporal context of a relationship, which requires the use of a more sophisticated representation, similar to the "qualified" forms used in [[PROV-O]]. 
+          For instance, the previous example may be further detailed by saying that the output dataset is an anonymized version of the input dataset, and that the anonymization process started at time <var>t</var> and ended at time <var>t&prime;</var>. By using [[PROV-O]], this information can be expressed as follows:</p>
+          <pre>
+output:Dataset a dcat:Dataset ;
+  prov:qualifiedDerivation [
+    a prov:Derivation ;
+    prov:entity input:Dataset ; 
+    prov:hadActivity   :data_anonymization 
+] .
+
+input:Dataset a dcat:Dataset .
+
+# The process of anonymizing the data (load the data, process it, and generate the anonymized version)
+
+:data_anonymization
+  a prov:Activity ;
+# When the process started  
+  prov:startedAtTime  "2018-01-23T01:52:02Z"^^xsd:dateTime;
+# When the process ended  
+  prov:endedAtTime "2018-01-23T02:00:02Z"^^xsd:dateTime .
+          </pre>
+          <p>Besides [[PROV-O]], vocabularies as [[VOCAB-DQV]] and [[VOCAB-DUV]] can be used to specify relationships between datasets and related resources. However, there is the need of providing guidance on how to use them consistently, since the lack of modeling patterns results in the difficulty of aggregating this information across metadata records and catalogs.</p>
           <p>Moreover, it is important to define mappings between qualified and non-qualified forms (e.g., along the lines of what done in [[PROV-DC]]), not only to make it clear their semantic relationships (e.g., <code>dcterms:source</code> is the non-qualified form of <code>prov:qualifiedDerivation</code>), but also to enable metadata sharing and re-use across catalogs that may support only one of the two forms (qualified / non-qualified).</p>
         </p>
         <p class="existing_approaches">
@@ -1347,6 +1375,7 @@ a:Dataset a dcat:Dataset;
       -->
       </p>
     </section>
+
     <section id="ID20" class="usecase">
       <h2>Modelling resources different from datasets [ID20]</h2>
       <p class="contributor"><a href="/2017/dxwg/wiki/User:Aperego" title="User:Aperego">Andrea Perego</a> - <a rel="nofollow" class="external text" href="https://ec.europa.eu/jrc/">European Commission, Joint Research Centre (JRC)</a></p>
@@ -1378,14 +1407,14 @@ a:Dataset a dcat:Dataset;
         <li> Services are modeled as <code>dcat:Catalog</code>, in case of a catalog service, and with <code>dctype:Service</code> [[DCTerms]] in all the other cases.</li>
         <li> The type of service (discovery, download, view, etc.) is modeled by using <code>dcterms:type</code>.</li>
       </ul>
-          <p>A similar approach has been adopted in <a rel="nofollow" class="external text" href="https://webgate.ec.europa.eu/CITnet/stash/projects/ODCKAN/repos/datacite-to-dcat-ap/">the study</a> carried out by the <a rel="nofollow" class="external text" href="https://ec.europa.eu/jrc/">European Commission's Joint Research Centre (JRC)</a> to map [[DataCite]] to [[DCAT-AP]]. </p>
+          <p>A similar approach has been adopted in <a rel="nofollow" class="external text" href="https://github.com/ec-jrc/datacite-to-dcat-ap/">the study</a> carried out by the <a rel="nofollow" class="external text" href="https://ec.europa.eu/jrc/">European Commission's Joint Research Centre (JRC)</a> to map [[DataCite]] to [[DCAT-AP]]. </p>
           <p>The resource types supported in [[DataCite]] are 14. Most of them fall into the generic [[VOCAB-DCAT]] definition of "dataset", so they are modeled with <code>dcat:Dataset</code>. Moreover, the DCMI Type Vocabulary [[DCTerms]] is used to model both the dataset "type", and those resource types that cannot be modeled as datasets (events, physical objects, services).</p>
         </p>
         <p class="links">
           <ul>
         <li> [[GeoDCAT-AP]]</li>
         <li>
-          <a rel="nofollow" class="external text" href="https://webgate.ec.europa.eu/CITnet/stash/projects/ODCKAN/repos/datacite-to-dcat-ap/">
+          <a rel="nofollow" class="external text" href="https://github.com/ec-jrc/datacite-to-dcat-ap/">
             <i>DataCite to DCAT-AP Mapping</i>
           </a>
         </li>
@@ -1846,7 +1875,7 @@ ex:ExampleDataset
           <p>HTTP content negotiation may be the most viable solution, since HTTP is the protocol Web-based catalog services makes use of. However, although the HTTP protocol would allow metadata to be served in different formats, it does not support the ability to negotiate the metadata profile.</p>
         </p>
         <p class="existing_approaches">
-          <p>The <a rel="nofollow" class="external text" href="https://webgate.ec.europa.eu/CITnet/stash/projects/ODCKAN/repos/iso-19139-to-dcat-ap/browse/api">GeoDCAT-AP API</a> was designed to enable [[CSW]] endpoints to serve [[ISO-19115-1]] metadata based on the [[GeoDCAT-AP]] profile, by using the standard [[CSW]] interface - i.e., parameters <code>outputSchema</code> (for the metadata profile) and <code>outputFormat</code> (for the metadata format).</p>
+          <p>The <a rel="nofollow" class="external text" href="https://github.com/SEMICeu/iso-19139-to-dcat-ap/tree/master/api">GeoDCAT-AP API</a> was designed to enable [[CSW]] endpoints to serve [[ISO-19115-1]] metadata based on the [[GeoDCAT-AP]] profile, by using the standard [[CSW]] interface - i.e., parameters <code>outputSchema</code> (for the metadata profile) and <code>outputFormat</code> (for the metadata format).</p>
           <p>HTTP content negotiation is supported to determine the returned metadata format, without the need of using parameter <code>outputSchema</code>. The ability to negotiate also the profile would enable a client to query a [[CSW]] endpoint without the need of knowing the supported harvesting protocol.</p>
           <p>Besides the resulting RDF serialisation of the source [[ISO-19115-1]] records, the API returns a set of HTTP <code>Link</code> headers, using the following <a rel="nofollow" class="external text" href="https://www.iana.org/assignments/link-relations/">relationship types</a>:</p>
           <ul>
