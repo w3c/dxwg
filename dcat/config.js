@@ -57,32 +57,65 @@ var respecConfig = {
     inlineCSS: "true",
 	  lint: "false",
     localBiblio: {
-      "SCHEMA-ORG":{
-        "href":"http://schema.org/",
-        "title":"Schema.org"
+      "SCHEMA-ORG" : {
+        href : "http://schema.org/",
+        title : "Schema.org"
        },
        "DATS": {
-         "href":"http://wg3-metadataspecifications.readthedocs.io/",
-         "title":"Data Tag Suite",
-         "authors":["Philippe Rocca-Serra", "Alejandra Gonzalez-Beltran"],
-         "publisher":"NIH Big Data 2 Knowledge bioCADDIE project.",
-         "date":"2016"
+         href : "http://wg3-metadataspecifications.readthedocs.io/",
+         title : "Data Tag Suite",
+         authors : ["Philippe Rocca-Serra", "Alejandra Gonzalez-Beltran"],
+         publisher : "NIH Big Data 2 Knowledge bioCADDIE project.",
+         date : "2016"
        },
-        "ZaveriEtAl" : {
-                        title : "Quality assessment for Linked Data: A Survey",
-                        authors : [ "Amrapali Zaveri", "Anisa Rula", "Andrea Maurino",
-                                "Ricardo Pietrobon", "Jens  Lehmann", "Sören Auer" ],
-                        status : "Semantic Web, vol. 7, no. 1, pp. 63-93, 2015",
-                        href : "https://dx.doi.org/10.3233/SW-150175"
-                    },
-        "ISOIEC25012" : {
-                        title : "ISO/IEC 25012 - Data Quality model",
-                        href : "http://iso25000.com/index.php/en/iso-25000-standards/iso-25012"
-                    },
-       "DDI": {
-         "href":"http://www.ddialliance.org/explore-documentation",
-         "title":"Data Documentation Initiative",
-         "publisher":"DDI Alliance"
-       }
+      "ZaveriEtAl" : {
+          title : "Quality assessment for Linked Data: A Survey",
+          authors : [ "Amrapali Zaveri", "Anisa Rula", "Andrea Maurino",
+                      "Ricardo Pietrobon", "Jens  Lehmann", "Sören Auer" ],
+          status : "Semantic Web, vol. 7, no. 1, pp. 63-93, 2015",
+          href : "https://dx.doi.org/10.3233/SW-150175"
+      },
+      "ISOIEC25012" : {
+          title : "ISO/IEC 25012 - Data Quality model",
+          href : "http://iso25000.com/index.php/en/iso-25000-standards/iso-25012"
+      },
+      "DDI" : {
+         href : "http://www.ddialliance.org/explore-documentation",
+         title : "Data Documentation Initiative",
+         publisher : "DDI Alliance"
+      },
+      "schema-org" : {
+         href:"http://schema.org/",
+         title:"Schema.org"
+      },
+      "dbpedia-ont" : {
+         href:"http://dbpedia.org/ontology/",
+         title:"DBPedia ontology"
+      },
+      "doap" : {
+         href:"https://github.com/ewilderj/doap/wiki",
+         title:"Description of a Project",
+         authors: ["Edd Wilder-James"]
+      },
+      "frapo" : {
+         href:"http://www.sparontologies.net/ontologies/frapo",
+         title:"FRAPO, the Funding, Research Administration and Projects Ontology",
+         authors: ["David Shotton"],
+         date: "04 September 2017"
+      },
+      "obo" : {
+         href:"http://www.obofoundry.org/",
+         title:"The OBO Foundry"
+      },
+      "pdo" : {
+         href:"http://vocab.deri.ie/pdo",
+         title:"Project Documents Ontology",
+         authors: ["Pradeep Varma"],
+         date: "09 July 2010"
+      },
+      "vivo-isf" : {
+         href:"http://github.com/vivo-isf/vivo-isf",
+         title:"VIVO-ISF Data Standard"
+      }
     }
   };
