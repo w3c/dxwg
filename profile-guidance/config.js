@@ -18,6 +18,12 @@ var respecConfig = {
 		  company: "Europeana",
 		  companyURL: "https://www.europeana.eu/",
 	  },
+    {
+		  name: "Nicholas Car",
+      url: "http://people.csiro.au/C/N/Nicholas-Car",
+		  company: "CSIRO",
+      companyURL: "https://www.csiro.au/"
+	  },
     ],
     wg: "Dataset Exchange Working Group",
     wgURI: "https://www.w3.org/2017/dxwg/",
