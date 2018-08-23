@@ -239,16 +239,41 @@ It is recommended to define the concept as part of the concepts scheme identifie
 	The type or genre of a dataset <em title="MAY" class="rfc2119">MAY</em> be indicated using the <a href="http://purl.org/dc/terms/type">dct:type</a> property.
 	The value of the property <em title="SHOULD" class="rfc2119">SHOULD</em> be taken from a well governed and broadly recognised set of resource types, such as the <a href="http://dublincore.org/documents/dcmi-terms/#section-7">DCMI Type Vocabulary</a>, the <a href="https://id.loc.gov/vocabulary/marcgt.html">MARC Genre/Terms Scheme</a>, the <a href="https://schema.datacite.org/meta/kernel-4.1/include/datacite-resourceType-v4.1.xsd">DataCite resource types</a> or the PARSE.Insight content-types from Re3data [[re3data-schema]].
 </p>
+<p>
+	In the following examples a (notional) dataset is classified separately using a values from different vocabularies.
+</p>
+<pre>
+:dataset-001
+	rdf:type	dcat:Dataset ;
+	dct:type	&lt;http://purl.org/dc/dcmitype/Text&gt; ;
+	.
+
+:dataset-001
+	rdf:type	dcat:Dataset ;
+	dct:type	&lt;http://id.loc.gov/vocabulary/marcgt/man&gt; ;
+	.
+</pre>
+<p>
+	It is also possible for multiple classifications to be present in a single description.
+</p>
 <pre>
 :dataset-001
 	rdf:type	dcat:Dataset ;
 	dct:type	&lt;http://purl.org/dc/dcmitype/Text&gt; ;
 	dct:type	&lt;http://id.loc.gov/vocabulary/marcgt/man&gt; ;
-	dct:type	[ rdfs:label "Text" ; dct:source "DataCite resource types" ; ] ;
 	dct:type	&lt;http://registry.it.csiro.au/def/datacite/resourceType/Text&gt; ;
-	dct:type	[ rdfs:label "Standard office documents" ; dct:source "Re3data content types" ; ] ;
 	dct:type	&lt;http://registry.it.csiro.au/def/re3data/contentType/doc&gt; ;
 .
+
+&lt;http://registry.it.csiro.au/def/datacite/resourceType/Text&gt;
+	rdfs:label "Text" ;
+	dct:source "DataCite resource types" ;
+	.
+
+&lt;http://registry.it.csiro.au/def/re3data/contentType/doc&gt;
+	rdfs:label "Standard office documents" ;
+	dct:source "Re3data content types" ;
+	.
 </pre>
 
 </section>
