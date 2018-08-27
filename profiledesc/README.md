@@ -1,7 +1,7 @@
 # Profile Descriptions Ontology
-This ontology is for describing relationships between standards/specifications, profiles of them and supporting artefacts such as validating resources.
+This ontology is for describing relationships between standards/specifications, profiles of them, and supporting artefacts such as validating resources.
 
-This model starts with <http://dublincore.org/2012/06/14/dcterms#Standard> entities which can either be Base Specifications (a standard not profiling any other Standard) or Profiles (Standards which do profile others). Base Specifications or Profiles can have Implementation Resource Descriptors associated with them that defines implementing rules for the it. Implementation Resource Descriptors must indicate the role they play (to guide, to validate etc.) and the formalism they adhere to (dct:format) to allow for content negotiation. A vocabulary of Implementation Resource Roles are provided alongside this ontology but that list is extensible.
+This model starts with entities of type <http://dublincore.org/2012/06/14/dcterms#Standard>, which can either be a Base Specification (a Standard not profiling any other Standard) or Profiles (Standards which do profile others). Any Standard (i.e. a Base Specification or Profile) can have one or more associated Implementation Resource Descriptors, which define implementing rules for it. The role played by the Implementation Resource Descriptor must be indicated (guidance, validation etc.) and the formalism they adhere to (dct:format) to support content negotiation. A preliminary set of Implementation Resource Roles is provided as a 'vocabulary' alongside this ontology.
 
 Development of this ontology is part of the work of the [Data Exchange Working Group](https://www.w3.org/2017/dxwg/) (DXWG)'s [Profile Guidance](https://w3c.github.io/dxwg/profile-guidance/) work.
 
