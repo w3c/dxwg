@@ -10,8 +10,8 @@
   <section id="abstract">
     <h2>Abstract</h2>
     <p class="todo">
-      This document describes how Internet clients may request negotiate for content by <em>profile</em>. This is
-      distinct from negotiating for content by Media Type or Language.
+      This document describes how Internet clients may request negotiate for content provided by servers according to
+      <em>profiles</em>. This is distinct from negotiating by Media Type or Language.
     </p>
   </section>
 
@@ -22,12 +22,37 @@
   <section id="Introduction">
     <h1>Introduction</h1>
     <p>
-      The content delivered by dereferencing Internet identifiers can be altered by negotiating for different forms.
-      When using the HTTP protocol [[rfc7230]], a client may set an <code>Accept</code> header specifying preferred
-      Media Types which the server may or may not supply. So too resources in different languages may be requested by
-      setting an <code>Accept-Language</code> header.
+      Internet clients may wish to request that the content of a requested Internet resource adheres to a particular
+      standard, specification or <em>profile</em>. This is distinct from the content being formatted according to a
+      particular serialization or Media Type, such as HTML, one of the many forms of RDF or perhaps XML. Instead, this
+      sort of adherence relates to the parts of the content and their concepts adhering to information or conceptual
+      models. For example, information about a book may adhere to the Dublin Core Terms [[DCTERMS]] medatadata
+      specifications with each field of information, such as <em>title</em>, <em>description</em>, <em>author</em> etc.,
+      being defined according to various Dublin Core elements (<code>dct:title</code>, <code>dct:description</code>
+      &amp; <code>dct:creator</code>, respectively).
+    </p>
+    <p>
+      The content delivered by dereferencing Internet identifiers has long been able to be negotiated for in different
+      ways. When using the HTTP protocol [[rfc7230]], a client may set an <code>Accept</code> header specifying
+      preferred Media Types which the server may or may not supply. So too resources in different languages may be
+      requested by setting an HTTP <code>Accept-Language</code> header. Until now, clients have not had a defined way
+      to negotiate for content based on information model standard, specification or <em>profile</em> and this
+      document addresses that.
+    </p>
+    <p>
+      When selecting content negotiation mechanics, an Internet client may use the HTTP protocol but it also may not:
+      methods for providing instructions to a server such as Query String Arguments (QSAs) are long established as
+      useful for humans, machines and in situations where negotiation via HTTP is not best applicable. This document
+      provides guidance for non-HTTP methods of content negotiation to ensure that they align with HTTP method thus
+      ensuring their functional equivalency.
     </p>
     <h2>Definition</h2>
+    <p>
+      A <dfn>standard</dfn> is...
+    </p>
+    <p>
+      A <dfn>specification</dfn> is...
+    </p>
     <p>
       A <dfn>profile</dfn> is a named set of constraints on one or more identified base specifications,
       including the identification of any implementing subclasses of datatypes,
@@ -41,13 +66,21 @@
   <section id="Motivation">
     <h2>Motivation</h2>
     <p>
-      In many cases, there are several ways to describe a resource within the scope of the media type.
-      In the case of XML documents, for instance, the same content can be encoded using one of several
-      DTDs or XML Schemas, whereas in RDF there is a wide choice of RDF vocabularies (classes and properties)
-      available to describe resources of the same type. When a UA initiates a request, e.g., a GET request
-      to retrieve or a PUT request to create or replace a resource, neither the UA nor the server have any
-      possibility to exchange information on how the transmitted resource will be structured precisely.
-      This can be accomplished by implementing content negotiation based on profiles.
+      In many cases, there are several ways to describe a resource within the scope of a single Media Type.
+      For instance, XML documents, while conforming to the <code>text/xml</code> Media Type may adhere to one of several
+      DTDs or XML Schemas, whereas RDF documents (with a choice of Media Type serialisations such as
+      <code>text/turtle</code> and even XML, <code>application/rdf+xml</code>) have a very large number of vocabularies
+      (classes and properties) available use for their content's information model. When a client initiates a request
+      for an Internet resource, e.g., an HTTP GET to retrieve or a PUT to create or replace a resource, neither the
+      client nor the server have yet had any possibility to exchange information on how the transmitted resource will
+      be structured precisely according to DTDs, XML Schema or, vocabularies or other standards, specifications or
+      <em>profiles</em>. When using other methods such as QSAs, no universal or general standardised method for doing
+      this has been established although there are multiple specific ways this has been implemented previously, such as
+      the OAI-PMH protocol [[OAI-PMH]].
+    </p>
+    <p>
+      This document describes content negotiation based on profiles using HTTP protocol by introducing new headers and
+      non-HTTP methods, such as via QSAs by introducing a general QSA Aplication Programming Interface (API).
     </p>
   </section>
   <section id="RelatedWork">
