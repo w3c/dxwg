@@ -5,6 +5,7 @@
   <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
   <meta content="width=device-width,initial-scale=1" name="viewport"/>
   <link rel="stylesheet" type="text/css" href="https://www.w3.org/StyleSheets/TR/2016/W3C-WG-NOTE"/>
+  <link rel="stylesheet" type="text/css" href="dxwg-additions.css">
 </head>
 <body class="h-entry" id="respecDocument">
   <section id="abstract">
@@ -92,17 +93,86 @@
   <section id="guidance">
     <h2>Guidance for Profiles</h2>
     <p>
-      This section lists and then addresses individual requirements that the Dataset Exchange Working Group
-      considered important to define and work with profiles.
+      This section lists, and then addresses, individual requirements that the Dataset Exchange Working Group
+      considered important to address to define and work with profiles.
     </p>
-    <section>
+    <section id="description">
+      <h3>Profile Description</h3>
+      <p class="note">From F2F3 outline: What does profileDesc do?</p>
+      <div class="requirement">
+        <p class="reqTitle">Requirement</p>
+        <p class="req">
+          Profiles are "named collections of properties" or metadata terms (if not RDF) [ID41]
+          <a href="https://github.com/w3c/dxwg/issues/275">275</a>
+        </p>
+      </div>
+      <div class="req-response">
+        <p class="respTitle">Response For Req. 1</p>
+        <p>This requirement is addressed by this document's profile definition (see <a href="#introduction">Introduction</a>).</p>
+      </div>
+      <div class="requirement">
+        <p class="reqTitle">Requirement</p>
+        <p class="req">
+          There needs to be a property in the profile where the rules for the descriptive content can be provided.
+          This would apply to the entire profile. [ID42] (5.42) plenary-approved
+          <a href="https://github.com/w3c/dxwg/issues/255">255</a>
+        </p>
+      </div>
+      <div class="req-response">
+        <p class="respTitle">Response For Req. 2</p>
+        <p>
+          For such a property to exist, the <em>profile</em> and <em>rules</em> concepts need to be defined and
+          for this we can use an ontology. Since no W3C ontology exists for this purpose, the ProfileDesc ontology
+          provides such mechanisms.
+        </p>
+        <p>
+          Using ProfileDesc, we terms the <em>profile</em> a <code>Implementation Profile</code> class object
+          and the <em>rules</em> an <code>Implementation Resource Descriptor</code> class object. Then the property
+          that relates the two is a <code>resource</code>.
+        </p>
+        <p>
+          Note that defined in this way, the rules for descriptive content may be formulated in a formal
+          constraints language (such as [[SHACL]] or given in informal language, such as prose in a PDF document.
+        </p>
+      </div>
+    </section>
+    <section id="functions">
       <h3>Functions of Profiles</h3>
       <p class="note">From F2F3 outline: What profiles might include: (from requirements, each a section?) Express functionally: if you want to do x you will need y. Validation, formal and informal; SHACL,ShEx, XML schema, etc.</p>
       <p class="note">From F2F3 outline: Somewhere need to say this is not only for RDF profiles, and not only for machine-actionable profiles.</p>
-    </section>
-    <section>
-      <h3>Profile Description</h3>
-      <p class="note">From F2F3 outline: What does profileDesc do?</p>
+      <div class="requirement">
+        <p class="reqTitle">Requirement</p>
+        <p class="req">
+          Profiles may provide rules governing value validity [ID41] (5.41)
+          <a href="https://github.com/w3c/dxwg/issues/277">275</a>
+        </p>
+      </div>
+      <div class="req-response">
+        <p class="respTitle">Response For Req. 3</p>
+        <p>...</p>
+      </div>
+      <div class="requirement">
+        <p class="reqTitle">Requirement</p>
+        <p class="req">
+          Profiles may provide rules on cardinality of terms (including “recommended”) [ID41]
+          <a href="https://github.com/w3c/dxwg/issues/276">276</a>
+        </p>
+      </div>
+      <div class="req-response">
+        <p class="respTitle">Response For Req. 4</p>
+        <p>...</p>
+      </div>
+      <div class="requirement">
+        <p class="reqTitle">Requirement</p>
+        <p class="req">
+          Profiles may express dependencies between elements of the vocabulary (if A then not B, etc.) [ID41] (5.41)
+          <a href="https://github.com/w3c/dxwg/issues/276">276</a>
+        </p>
+      </div>
+      <div class="req-response">
+        <p class="respTitle">Response For Req. 5</p>
+        <p>...</p>
+      </div>
     </section>
   </section>
   <section id="examples">
