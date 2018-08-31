@@ -566,7 +566,7 @@ See <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a> and <a href=
     <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a>
     encoded using the relevant ISO 8601 Date and Time compliant string [[!DATETIME]] and typed using the appropriate XML Schema datatype [[XMLSCHEMA11-2]]
     </td></tr>
-    <tr><td class="prop">See also:</td><td><a href="#Property:dataset_release_date" title=""> dataset release date</a>, <a href="#Property:record_release_date" title=""> catalog record listing date</a> and <a href="#Property:distribution_release_date" title=""> distribution release date</a></td></tr>
+    <tr><td class="prop">See also:</td><td><a href="#Property:dataset_release_date" title=""> dataset release date</a>, <a href="#Property:record_listing_date" title=""> catalog record listing date</a> and <a href="#Property:distribution_release_date" title=""> distribution release date</a></td></tr>
   </tbody>
 </table>
 </section>
@@ -777,10 +777,10 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 <h3>Class: Catalog record</h3>
 <p>The following properties are recommended for use on this class:
 <a href="#Property:record_description">description</a>,
-<a href="#Property:record_release_date">listing date</a>,
+<a href="#Property:record_listing_date">listing date</a>,
 <a href="#Property:record_primary_topic">primary topic</a>,
 <a href="#Property:record_title">title</a>,
-<a href="#Property:record_update_date">update date</a>
+<a href="#Property:record_update_date">update/modification date</a>
 </p>
 
 <p class="issue" data-number="70">
@@ -794,12 +794,12 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 <table class="definition">
   <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#CatalogRecord">dcat:CatalogRecord</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>A record in a data catalog, describing the registration of a single dataset or data service.</td></tr>
+    <tr><td class="prop">Definition:</td><td>A record in a catalog, describing the registration of a single dataset or data service.</td></tr>
     <tr><td class="prop">Usage note</td><td>This class is optional and not all catalogs will use it. It exists for catalogs where a distinction is made between metadata about
     a <em>dataset or service</em> and metadata about the <em>entry in the catalog about the dataset or service</em>. For example, the <i>publication date</i> property of the <i>dataset</i> reflects
     the date when the information was originally made available by the publishing agency, while the publication date of the <i>catalog record</i> is the date when the dataset was added to the catalog.
     In cases where both dates differ, or where only the latter is known, the <em>publication date</em> <em title="SHOULD" class="rfc2119">SHOULD</em> only be specified for the catalog record.
-    Notice that the <abbr title="World Wide Web Consortium">W3C</abbr> PROV Ontology [[PROV-O]] allows describing further provenance information such as the details of the process and the agent involved in a particular change to a dataset.
+    Notice that the <abbr title="World Wide Web Consortium">W3C</abbr> PROV Ontology [[PROV-O]] allows describing further provenance information such as the details of the process and the agent involved in a particular change to a dataset or its registration.
     </td></tr>
     <tr><td class="prop">See also</td><td><a href="#Class:_Dataset">Dataset</a></td></tr>
   </tbody>
@@ -828,23 +828,23 @@ into a separate named graph. The name of that graph <em title="SHOULD" class="rf
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/description">dct:description</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>free-text account of the record.</td></tr>
+    <tr><td class="prop">Definition:</td><td>A free-text account of the record.</td></tr>
     <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a></td></tr>
   </tbody>
 </table>
 </section>
 
-<section id="Property:record_release_date">
+<section id="Property:record_listing_date">
 <h4>Property: listing date</h4>
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/issued">dct:issued</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>The date of listing the corresponding dataset or service in the catalog.</td></tr>
+    <tr><td class="prop">Definition:</td><td>The date of listing (i.e. formal recording) of the corresponding dataset or service in the catalog.</td></tr>
     <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a>
     encoded using the relevant ISO 8601 Date and Time compliant string [[!DATETIME]] and typed using the appropriate XML Schema datatype [[XMLSCHEMA11-2]]
      </td></tr>
     <tr><td class="prop">Usage note:</td><td>This indicates the date of listing the dataset in the catalog and not the publication date of the dataset itself.</td></tr>
-    <tr><td class="prop">See also:</td><td><a href="#Property:resource_release_date" title=""> dataset release date</a></td></tr>
+    <tr><td class="prop">See also:</td><td><a href="#Property:resource_release_date" title=""> resource release date</a></td></tr>
   </tbody>
 </table>
 </section>
@@ -859,7 +859,7 @@ into a separate named graph. The name of that graph <em title="SHOULD" class="rf
     encoded using the relevant ISO 8601 Date and Time compliant string [[!DATETIME]] and typed using the appropriate XML Schema datatype [[XMLSCHEMA11-2]]
      </td></tr>
     <tr><td class="prop">Usage note:</td><td>This indicates the date of last change of a catalog entry, i.e. the catalog metadata description of the dataset, and not the date of the dataset itself.</td></tr>
-    <tr><td class="prop">See also:</td><td><a href="#Property:resource_update_date" title=""> dataset modification date</a></td></tr>
+    <tr><td class="prop">See also:</td><td><a href="#Property:resource_update_date" title=""> resource modification date</a></td></tr>
   </tbody>
 </table>
 </section>
@@ -870,7 +870,7 @@ into a separate named graph. The name of that graph <em title="SHOULD" class="rf
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://xmlns.com/foaf/0.1/primaryTopic">foaf:primaryTopic</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>Links the catalog record to the <a href="http://www.w3.org/ns/dcat#dcat:Resource">dcat:Resource</a> (dataset or service) described in the record.</td></tr>
+    <tr><td class="prop">Definition:</td><td>The  <a href="http://www.w3.org/ns/dcat#dcat:Resource">dcat:Resource</a> (dataset or service) described in the record.</td></tr>
     <tr><td class="prop">Usage note:</td><td><a href="http://xmlns.com/foaf/0.1/primaryTopic">foaf:primaryTopic</a> property is functional:
     each catalog record can have at most one primary topic i.e. describes one dataset or service.</td></tr>
   </tbody>
@@ -880,6 +880,11 @@ into a separate named graph. The name of that graph <em title="SHOULD" class="rf
 
 <section id="class-datadistributionservice">
 <h3>Class: Data distribution service</h3>
+
+<p class="note">
+    The class <a href="#DataDistributionService">dcat:DataDistributionService</a> has been added to the DCAT vocabulary in this revision.
+</p>
+
 <p>In addition to the properties inherited from the super-class <a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a>, the following properties are recommended for use on this class:
 <a href="#Property:datadistributionservice_servesdataset">servesDataset</a>,
 </p>
@@ -889,21 +894,15 @@ into a separate named graph. The name of that graph <em title="SHOULD" class="rf
   <tbody>
     <tr><td class="prop">Definition:</td><td>A site or end-point that provides access to datasets through distributions of the datasets</td></tr>
     <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a></td></tr>
-    <tr><td class="prop">Usage note:</td><td> </td></tr>
-    <tr><td class="prop">See also:</td><td> </td></tr>
   </tbody>
 </table>
-
-<p class="note">
-    The class <a href="#DataDistributionService">dcat:DataDistributionService</a> has been added to the DCAT vocabulary in this revision.
-</p>
 
 <section id="Property:datadistributionservice_servesdataset">
 <h4>Property: serves dataset</h4>
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#servesdataset">dcat:servesDataset</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>Link to description of a dataset that this DataDistributionService can distribute</td></tr>
+    <tr><td class="prop">Definition:</td><td>A collection of data that this DataDistributionService can distribute</td></tr>
     <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a></td></tr>
   </tbody>
 </table>
@@ -913,6 +912,11 @@ into a separate named graph. The name of that graph <em title="SHOULD" class="rf
 
 <section id="class-dataservice">
 <h3>Class: Data Service</h3>
+
+<p class="note">
+    The class <a href="#DataService">dcat:DataService</a> has been added to the DCAT vocabulary in this revision.
+</p>
+
 <p>In addition to the properties inherited from the super-class <a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a>, the following properties are recommended for use on this class:
 	<a href="#Property:dataservice_endpointdescription">endpointDescription</a>,
 	<a href="#Property:dataservice_endpointurl">endpointURL</a>,
@@ -923,24 +927,20 @@ into a separate named graph. The name of that graph <em title="SHOULD" class="rf
 <table class="definition">
   <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>A service for discovery, access or processing data or related resources.</td></tr>
+    <tr><td class="prop">Definition:</td><td>A site or end-point for discovery, access or processing data or related resources.</td></tr>
 		<tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a></td></tr>
 		<tr><td class="prop">Sub class of:</td><td><a href="http://purl.org/dc/dcmitype/Service">dctype:Service</a></td></tr>
-    <tr><td class="prop">Usage note:</td><td> </td></tr>
-    <tr><td class="prop">See also:</td><td> </td></tr>
   </tbody>
 </table>
 
-<p class="note">
-  New class in this revision of DCAT.
-</p>
+
 
 <section id="Property:dataservice_endpointurl">
 <h4>Property: endpoint address</h4>
 <table class="definition">
-  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#endpointURL">dct:endpointURL</a></th></tr></thead>
+  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#endpointURL">dcat:endpointURL</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>Link to service end-point.</td></tr>
+    <tr><td class="prop">Definition:</td><td>The IRI of the service end-point.</td></tr>
 		<tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a> </td></tr>
 		<tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2001/XMLSchema#anyURI">xsd:anyURI</a> </td></tr>
   </tbody>
@@ -952,7 +952,7 @@ into a separate named graph. The name of that graph <em title="SHOULD" class="rf
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#endpointDescription">dcat:endpointDescription</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>Link to a description of the service end-point, for example an OpenAPI (Swagger) description, an OGC getCapabilities response, a SD Service, an OpenSearch or WSDL document.  </td></tr>
+    <tr><td class="prop">Definition:</td><td>A description of the service end-point, for example an OpenAPI (Swagger) description, an OGC getCapabilities response, a SD Service, an OpenSearch or WSDL document.  </td></tr>
 		<tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a> </td></tr>
 		<tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Resource">rdfs:Resource</a> </td></tr>
   </tbody>
@@ -964,7 +964,7 @@ into a separate named graph. The name of that graph <em title="SHOULD" class="rf
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/license">dct:license</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>This links to the license document under which the service is made available.</td></tr>
+    <tr><td class="prop">Definition:</td><td>A legal document under which the service is made available.</td></tr>
     <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/LicenseDocument">dct:LicenseDocument</a></td></tr>
     <tr><td class="prop">See also:</td><td><a href="#Property:distribution_rights" title=""> distribution rights</a>,
     <a href="#Property:catalog_license" title="">catalog license</a></td></tr>
