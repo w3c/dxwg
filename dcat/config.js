@@ -116,6 +116,12 @@ var respecConfig = {
       "vivo-isf" : {
          href:"http://github.com/vivo-isf/vivo-isf",
          title:"VIVO-ISF Data Standard"
+      },
+     "LinkedDataPatterns" : {
+          title : "Linked Data Patterns: A pattern catalogue for modelling, publishing, and consuming Linked Data",
+          authors : [ "Leigh Dodds", "Ian Davis" ],
+         date: "31 May 2012",
+          href : "http://patterns.dataincubator.org/book/"
       }
     }
   };
