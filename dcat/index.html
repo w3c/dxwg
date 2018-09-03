@@ -639,7 +639,7 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://xmlns.com/foaf/0.1/homepage">foaf:homepage</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>A homepage (a public web document usually available in HTML) of the catalog.</td></tr>
+    <tr><td class="prop">Definition:</td><td>A homepage of the catalog  (a public web document usually available in HTML).</td></tr>
     <tr><td class="prop">Range:</td><td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
     <tr><td class="prop">Usage note:</td><td><a href="http://xmlns.com/foaf/0.1/homepage">foaf:homepage</a> is an inverse functional property (IFP) which means that it <em title="SHOULD" class="rfc2119">SHOULD</em> be unique and precisely identify the catalog. This allows smushing various descriptions of the catalog when different URIs are used.</td></tr>
   </tbody>
@@ -711,7 +711,7 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
   <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/rights">dct:rights</a></th></tr></thead>
   <tbody>
     <tr><td class="prop">Definition:</td><td>Information about the rights under which the <strong>catalog</strong>
-     can be used/reused and <strong>not the datasets or services</strong>.</td></tr>
+     can be used/reused, but <strong>not the datasets or services</strong> listed.</td></tr>
     <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/RightsStatement">dct:RightsStatement</a></td></tr>
     <tr><td class="prop">Usage note:</td><td>If the rights associated with the catalog applies to all of its
      datasets and distributions, it <em title="SHOULD" class="rfc2119">SHOULD</em> also be replicated on each distribution.</td></tr>
@@ -796,7 +796,7 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#record">dcat:record</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>A record (describing the registration of a single dataset or dataservice) that is part of the catalog.</td></tr>
+    <tr><td class="prop">Definition:</td><td>A record describing the registration of a single dataset or dataservice that is part of the catalog.</td></tr>
     <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Catalog">dcat:Catalog</a></td></tr>
     <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#CatalogRecord">dcat:CatalogRecord</a></td></tr>
   </tbody>
@@ -836,17 +836,17 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 	The need to be able to describe the business or project context related to production of a catalogued resource has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
+<!-- 
+-- this issue already closed - prov:wasGeneratedBy added to dcat:Dataset (but not to dcat:Resource) --
 <p class="issue" data-number="77">
 	The need to be able to link a catalogued resource with the business or project context of its production has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
+-->
 
 <table class="definition">
 	<thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a></th></tr></thead>
 	<tbody>
 	<tr><td class="prop">Definition:</td><td>Resource published or curated by a single agent.</td></tr>
-	<!--
-        <tr><td class="prop">Sub class of:</td><td> </td></tr>
-        -->
 	<tr><td class="prop">Usage note:</td><td>The class of all catalogued resources, the superclass of
 		<a href="#Dataset">dcat:Dataset</a>, <a href="#DataService">dcat:DataService</a>, <a href="#Catalog">dcat:Catalog</a> and any other member of a <a href="#Catalog">dcat:Catalog</a>.
 		This class carries properties common to all catalogued resources, including datasets and data services.
@@ -1025,7 +1025,7 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 <table class="definition">
 	<thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/relation">dct:relation</a></th></tr></thead>
 	<tbody>
-	<tr><td class="prop">Definition:</td><td>A resource with an unspecified realtionship to the catalogued item.</td></tr>
+	<tr><td class="prop">Definition:</td><td>A resource with an unspecified relationship to the catalogued item.</td></tr>
 	<tr><td class="prop">Usage note:</td><td><a href="http://purl.org/dc/terms/relation">dct:relation</a> <em title="SHOULD" class="rfc2119">SHOULD</em> be used where the nature of the relationship between a catalogued item and related resources is not known. A more specific sub-property <em title="SHOULD" class="rfc2119">SHOULD</em> be used if the nature of the relationship of the link is known.
 		The property <a href="http://www.w3.org/ns/dcat#distribution">dcat:distribution</a> <em title="SHOULD" class="rfc2119">SHOULD</em> be used to link from a <a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a> to a representation of the dataset, described as a <a href="http://www.w3.org/ns/dcat#Distribution">dcat:Distribution</a></td></tr>
 	<tr><td class="prop">See also:</td><td>Sub-properties of dct:relation in particular
@@ -1054,7 +1054,7 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 
 <p class="issue" data-number="81">
 	The general need to describe relationships between datasets has been identified as a requirement to be satisfied in the revision of DCAT.
-	Guidance on the use of more specific relationship predicates is required, particularly in the context of dcat:Dataset sub-class.
+	Guidance on the use of more specific relationship predicates is required, particularly in the context of the dcat:Dataset sub-class.
 </p>
 
 <p class="note">
@@ -1449,7 +1449,7 @@ New property for Dataset in this revision of DCAT, added when considering the da
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#distribution">dcat:distribution</a></th></tr></thead>
   <tbody>
-    <tr><td class="prop">Definition:</td><td>An available diistribution of the dataset.</td></tr>
+    <tr><td class="prop">Definition:</td><td>An available distribution of the dataset.</td></tr>
 		<tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/terms/relation">dct:relation</a></td></tr>
     <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a></td></tr>
     <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#Distribution">dcat:Distribution</a></td></tr>
