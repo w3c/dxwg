@@ -20,10 +20,11 @@ var respecConfig = {
       }
     ],
     authors: [{
-        name:       "Nicholas Car",
+        name:       "Nicholas J. Car",
         url:        "https://people.csiro.au/Nicholas-Car",
         company:    "CSIRO",
-        companyURL: "https://www.csiro.au/"
+        companyURL: "https://www.csiro.au/",
+        w3cid:      70131
     }],
     wg: "Dataset Exchange Working Group",
     wgURI: "https://www.w3.org/2017/dxwg/",
@@ -32,5 +33,19 @@ var respecConfig = {
     inlineCSS: "true",
     lint: "false",
     noRecTrack: "true",
-    issueBase: "https://github.com/w3c/dxwg/issues"
+    issueBase: "https://github.com/w3c/dxwg/issues",
+    localBiblio: {
+        "PROF-GUIDE": {
+            "href": "https://www.w3.org/TR/profile-guidance/",
+            "title": "Profile Guidance",
+            "date": " 2018-12-31",
+            "status": "W3C Editor's Draft"
+        },
+        "PROF-CONNEG": {
+            "href": "https://www.w3.org/TR/conneg-by-ap/",
+            "title": "Content Negotiation by Profile",
+            "date": " 2018-12-31",
+            "status": "W3C Editor's Draft"
+        }
+    }
 };

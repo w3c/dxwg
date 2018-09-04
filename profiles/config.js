@@ -6,18 +6,18 @@ var respecConfig = {
       {
         name: "Rob Atkinson",
         company: "Metalinkage, Open Geospatial Consortium",
-        companyURL: "http://www.opengeospatial.org/",
+        companyURL: "http://www.opengeospatial.org/"
       },
 	  {
 		  name: "Karen Coyle",
 		  company: "Dublin Core Metadata Initiative",
-		  companyURL: "http://dublincore.org/",
+		  companyURL: "http://dublincore.org/"
 	  },
 	  {
 		  name: "Antoine Isaac",
 		  company: "Europeana",
-		  companyURL: "https://www.europeana.eu/",
-	  },
+		  companyURL: "https://www.europeana.eu/"
+	  }
     ],
     authors: [{
         name:       "Nicholas Car",
@@ -33,4 +33,58 @@ var respecConfig = {
     lint: "false",
     noRecTrack: "true",
     issueBase: "https://github.com/w3c/dxwg/issues",
+    localBiblio: {
+        "DCAP": {
+            "authors": [
+                "Karen Coyle",
+                "Thomas Baker"
+            ],
+            "href": "http://dublincore.org/documents/dcmi-terms/",
+            "title": "Guidelines for Dublin Core Application Profiles (Working Draft)",
+            "date": " 2009-05-18",
+            "status": "DCMI Recommended Resource"
+        },
+        "DCSF": {
+            "authors": [
+                "Mikael Nilsson",
+                "Thomas Baker",
+                "Pete Johnston"
+            ],
+            "href": "http://dublincore.org/documents/singapore-framework/",
+            "title": "The Singapore Framework for Dublin Core Application Profiles",
+            "date": " 2008-01-14",
+            "status": "DCMI Recommended Resource"
+        },
+        "DCDSP": {
+            "authors": [
+                "Nilsson, Mikael"
+            ],
+            "href": "http://dublincore.org/documents/dc-dsp/",
+            "title": "Description Set Profiles: A constraint language for Dublin Core Application Profiles",
+            "date": " 2008-03-31",
+            "status": "DCMI Working Draft"
+        },
+        "PROF-CONNEG": {
+            "href": "https://www.w3.org/TR/conneg-by-ap/",
+            "title": "Content Negotiation by Profile",
+            "date": " 2018-12-31",
+            "status": "W3C Editor's Draft"
+        },
+        "PROF-GUIDE": {
+            "href": "https://www.w3.org/TR/profile-guidance/",
+            "title": "Profile Guidance",
+            "date": " 2018-12-31",
+            "status": "W3C Editor's Draft"
+        },
+        "PROF-IETF": {
+            "authors": [
+                "L. Svensson",
+                "R. Verborgh"
+            ],
+            "href": "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema/",
+            "title": "Negotiating Profiles in HTTP",
+            "date": " 2017-10-24",
+            "status": "IETF Internet Draft"
+        }
+    }
 };
