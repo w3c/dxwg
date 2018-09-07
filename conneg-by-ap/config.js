@@ -36,26 +36,38 @@ var respecConfig = {
     issueBase: "https://github.com/w3c/dxwg/issues",
     localBiblio: {
         "PROF-CONNEG": {
-            "href": "https://www.w3.org/TR/conneg-by-ap/",
-            "title": "Content Negotiation by Profile",
-            "date": " 2018-12-31",
-            "status": "W3C Editor's Draft"
+            href: "https://www.w3.org/TR/conneg-by-ap/",
+            title: "Content Negotiation by Profile",
+            date: " 2018-12-31",
+            status: "W3C Editor's Draft"
         },
         "PROF-GUIDE": {
-            "href": "https://www.w3.org/TR/profile-guidance/",
-            "title": "Profile Guidance",
-            "date": " 2018-12-31",
-            "status": "W3C Editor's Draft"
+            href: "https://www.w3.org/TR/profile-guidance/",
+            title: "Profile Guidance",
+            date: " 2018-12-31",
+            status: "W3C Editor's Draft"
         },
         "PROF-IETF": {
-            "authors": [
+            authors: [
                 "L. Svensson",
                 "R. Verborgh"
             ],
-            "href": "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema/",
-            "title": "Negotiating Profiles in HTTP",
-            "date": " 2017-10-24",
-            "status": "IETF Internet Draft"
+            href: "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema/",
+            title: "Negotiating Profiles in HTTP",
+            date: "2017-10-24",
+            status: "IETF Internet Draft"
+        },
+        "vocab-dcat-2": {
+            editors: [
+                "Alejandra Gonzalez Beltran",
+                "Dave Browning",
+                "Simon Cox",
+                "Peter Winstanley"
+            ],
+            href: "https://www.w3.org/TR/vocab-dcat-2/",
+            title: "Data Catalog Vocabulary (DCAT) - revised edition",
+            date: "2018-09-07",
+            status: "W3C Editor's Draft"
         }
     }
 };
