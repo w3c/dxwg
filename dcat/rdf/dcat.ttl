@@ -2,6 +2,7 @@
 # imports: http://purl.org/dc/terms/
 # imports: http://www.w3.org/2004/02/skos/core
 # imports: http://www.w3.org/ns/prov-o
+# prefix: dcat
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
@@ -26,10 +27,10 @@
       foaf:workInfoHomepage <http://people.csiro.au/Simon-Cox> ;
     ] ;
 dct:contributor [
-	schema:affiliation [
-	foaf:homepage <http://www.thomsonreuters.com> ;
-	foaf:name "Thomson Reuters" ;
-        ] ;
+    schema:affiliation [
+        foaf:homepage <http://www.thomsonreuters.com> ;
+        foaf:name "Thomson Reuters" ;
+      ] ;
       foaf:name "David Browning" ;
     ] ;
   dct:contributor [
@@ -671,8 +672,7 @@ dcat:mediaType
   rdfs:label "メディア・タイプ"@ja ;
   rdfs:range dct:MediaType ;
   rdfs:subPropertyOf dct:format ;
-  skos:scopeNote """This property SHOULD be used when the media type of the distribution is defined
-          in the IANA media types registry https://www.iana.org/assignments/media-types/, otherwise dct:format MAY be used with different values.""";
+  skos:scopeNote "This property SHOULD be used when the media type of the distribution is defined in the IANA media types registry https://www.iana.org/assignments/media-types/, otherwise dct:format MAY be used with different values.";
   skos:editorialNote "The range of dcat:mediaType has been tightened as part of the revision of DCAT." ;
   skos:editorialNote "Status: English Definition text modified by DCAT revision team, translations pending. Note some inconsistency on def vs. usage" ;
 .
@@ -786,4 +786,6 @@ prov:wasDerivedFrom
 .
 prov:wasGeneratedBy
   rdfs:subPropertyOf dct:relation ;
+  skos:scopeNote "The activity associated with generation of a dataset will typically be an initiative, project, mission, survey, on-going activity ('business as usual') etc. Multiple prov:wasGeneratedBy properties can be used to indicate the dataset production context at various levels of granularity." ;
+  skos:scopeNote "Use prov:qualifiedGeneration to attach additional details about the relationship between the dataset and the activity, e.g. the exact time that the dataset was produced during the lifetime of a project" ;
 .
