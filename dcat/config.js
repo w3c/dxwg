@@ -122,6 +122,28 @@ var respecConfig = {
           authors : [ "Leigh Dodds", "Ian Davis" ],
          date: "31 May 2012",
           href : "http://patterns.dataincubator.org/book/"
+      },
+      "PROF-CONNEG": {
+            href: "https://www.w3.org/TR/conneg-by-ap/",
+            title: "Content Negotiation by Profile",
+            date: " 2018-12-31",
+            status: "W3C Editor's Draft"
+      },
+      "PROF-GUIDE": {
+            href: "https://www.w3.org/TR/profile-guidance/",
+            title: "Profile Guidance",
+            date: " 2018-12-31",
+            status: "W3C Editor's Draft"
+      },
+      "PROF-IETF": {
+            authors: [
+                "L. Svensson",
+                "R. Verborgh"
+            ],
+            href: "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema/",
+            title: "Negotiating Profiles in HTTP",
+            date: " 2017-10-24",
+            status: "IETF Internet Draft"
       }
     }
   };
