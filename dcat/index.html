@@ -461,17 +461,18 @@ dap:atnf-P366-2003SEPT
 
 dap:P366
   rdf:type prov:Activity ;
-  dcterms:type "Observation" ;
-  rdfs:comment "Parkes multibeam high-latitude pulsar survey" ;
-  rdfs:label "P366 - Parkes multibeam high-latitude pulsar survey" ;
+  dct:type "Observation" ;
+  prov:startedAtTime "2000-11-01"^^xsd:date ;
   prov:used dap:Parkes-radio-telescope ;
-  prov:wasAssociatedWith dap:Marta_Burgay ;
   prov:wasInformedBy dap:ATNF ;
+  rdfs:label "P366 - Parkes multibeam high-latitude pulsar survey" ;
+  rdfs:seeAlso &lt;https://doi.org/10.1111/j.1365-2966.2006.10100.x&gt; ;
 .
 	</pre>
 	<p>
 		Several properties capture provenance information, including within the citation and title, but the primary link to a formal description of the project is through <a href="#Property:dataset_wasgeneratedby">prov:wasGeneratedBy</a>.
 		A terse description of the project is shown as a <a href="http://www.w3.org/ns/prov#Activity">prov:Activity</a>, though this would not necessarily be part of the same catalog.
+		Note that as the project is ongoing, the activity has no end date.
 	</p>
 	<p>
 		Further provenance information might be provided using the other <i>starting point properties</i> from PROV, in particular <a href="http://www.w3.org/TR/prov-o/#wasAttributedTo">prov:wasAttributedTo</a> (to link to an agent associated with the dataset production) and <a href="http://www.w3.org/TR/prov-o/#Property:wasDerivedFrom">prov:wasDerivedFrom</a> (to link to a predecessor dataset). Both of these complement Dublin Core properties already used in DCAT, as follows:
@@ -1340,7 +1341,7 @@ into a separate named graph. The name of that graph <em title="SHOULD" class="rf
   <tbody>
     <tr><td class="prop">Definition:</td><td>The IRI of the service end-point.</td></tr>
 		<tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a> </td></tr>
-		<tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2001/XMLSchema#anyURI">xsd:anyURI</a> </td></tr>
+		<tr><td class="prop">Range:</td><td><a href="http://www.w3.org/TR/XMLSchema11-2/#anyURI">xsd:anyURI</a> </td></tr>
   </tbody>
 </table>
 </section>
@@ -1556,7 +1557,7 @@ New property for Dataset in this revision of DCAT, added when considering the da
     <tr><td class="prop">Definition:</td><td>An activity that generated, or provides the business context for, the creation of the dataset.</td></tr>
 		<tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/prov#Entity">prov:Entity</a></td></tr>
 		<tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/prov#Activity">prov:Activity</a> An activity is something that occurs over a period of time and acts upon or with entities; it may include consuming, processing, transforming, modifying, relocating, using, or generating entities.</td></tr>
-		<tr><td class="prop">Usage note:</td><td>The activity associated with generation of a dataset will typically be an initiative, project, mission, survey etc. Multiple prov:wasGeneratedBy properties can be used to indicate the dataset production context at various levels of granularity. </td></tr>
+		<tr><td class="prop">Usage note:</td><td>The activity associated with generation of a dataset will typically be an initiative, project, mission, survey, on-going activity ("business as usual") etc. Multiple prov:wasGeneratedBy properties can be used to indicate the dataset production context at various levels of granularity. </td></tr>
 		<tr><td class="prop">Usage note:</td><td>Use <a href="http://www.w3.org/ns/prov#qualifiedGeneration">prov:qualifiedGeneration</a> to attach additional details about the relationship between the dataset and the activity, e.g. the exact time that the dataset was produced during the lifetime of a project</td></tr>
   </tbody>
 </table>
@@ -1566,7 +1567,13 @@ New property for Dataset in this revision of DCAT, added when considering the da
 </p>
 
 <p>
-	Details about how to describe the activity that generated a dataset, such as a project, initiative, mission or survey, are out of scope for this document. <a href="http://www.w3.org/ns/prov#Activity">prov:Activity</a> provides for some basic properties such as begin and end time, associated agents etc. Further details may be provided through classes defined in applications. A number of ontologies for describing projects are available, for example VIVO for academic research projects [[vivo-isf]], DOAP (Description of a Project) for software projects [[doap]], and DBPedia for general projects [[dbpedia-ont]] which are expected to be suitable for different applications.
+	Details about how to describe the activity that generated a dataset, such as a project, initiative, on-going activity, mission or survey, are out of scope for this document.
+	<a href="http://www.w3.org/ns/prov#Activity">prov:Activity</a> provides for some basic properties such as begin and end time, associated agents etc.
+	Further details may be provided through classes defined in applications.
+	A number of ontologies for describing projects are available, for example
+	VIVO for academic research projects [[vivo-isf]],
+	DOAP (Description of a Project) for software projects [[doap]], and
+	DBPedia for general projects [[dbpedia-ont]] which are expected to be suitable for different applications.
 </p>
 </section>
 
@@ -2020,9 +2027,9 @@ Other examples of quality documentation are available in the W3C Group Note DQV 
 <p> This subsection  shows different modelling patterns combining DQV [[vocab-dqv]] with  PROV [[PROV-O]] and EARL [[EARL10-Schema]] to represent the conformance degree to a stated quality standard and the details about the conformance tests. 
 </p>
     
-<section id="quality-confomance-statement"> 
+<section id="quality-conformance-statement"> 
 <h3>Conformance to a standard</h3>
- <p>The use of <a href="http://dublincore.org/documents/dcmi-terms/#terms-conformsTo">dct:conformsTo</a> and <a href="http://dublincore.org/documents/dcmi-terms/#terms-conformsTo">dct:Standard</a> is a well-known pattern to represent the conformance to a standard. The following example declares a fictional a:Dataset conformant to the "Commission Regulation (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC".</p>
+ <p>The use of <a href="http://dublincore.org/documents/dcmi-terms/#terms-conformsTo">dct:conformsTo</a> and <a href="http://dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a> is a well-known pattern to represent the conformance to a standard. The following example declares a fictional a:Dataset conformant to the "Commission Regulation (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC".</p>
 <pre>       
 a:Dataset a dcat:Dataset;
     dct:conformsTo &lt;http://data.europa.eu/eli/reg/2014/1312/oj&gt; .  
@@ -2033,7 +2040,7 @@ a:Dataset a dcat:Dataset;
     dct:issued "2010-11-23"^^xsd:date .
 </pre>
 </section> 
-<section id="quality-confomance-degree"> 
+<section id="quality-conformance-degree"> 
 <h3> Degree of conformance</h3>
      <p>Some legal context requires to specify the degree of conformance. For example,  INSPIRE metadata adopts a specific <a href="http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity">controlled vocabulary</a> to express  non-conformance and non-evaluation beside the full compliance. As suggested in [[geodcat-ap]], the following example specifies the degree of conformance (i.e.,  not conformant) by declaring the  <a href="http://dublincore.org/documents/dcmi-terms/#terms-type">dct:type</a> for the result of conformance test.  [[geodcat-ap]] suggests to use a PROV entity to model the  conformance test (e.g., a:TestResult),  a PROV activity to model the testing activity (e,g., a:TestingActivity), a PROV plan derived by the INSPIRE Directive to represent  conformance test (e.g., a:ConformanceTest). A qualified PROV association binds the testing activity to the conformance test.  
     </p> 
@@ -2077,7 +2084,7 @@ iso:inherentandSystemDependentDataQuality
     a  dqv:Category ;
    skos:prefLabel "Inherent and System-Dependent Data Quality"@en.  
         </pre>
-<p>The quality measurement :measurement_complianceToINSPIRE represents the level of compliance for a dataset a:Dataset, namely, measurement of the metric :levelOfComplianceToINSPIRE. If only a part of the compliance tests succeeds (e.g. half of the compliance tests), the measurement would look like in the following:
+<p>The quality measurement :measurement_complianceToINSPIRE represents the level of compliance for a dataset a:Dataset, namely, measurement of the metric :levelOfComplianceToINSPIRE. If only a part of the compliance tests succeeds (e.g. half of the compliance tests), the measurement would look like in the following:</p>
      <pre>
 :measurement_complianceToINSPIRE 
    a         dqv:QualityMeasurement;
@@ -2087,9 +2094,9 @@ iso:inherentandSystemDependentDataQuality
    dcterms:date      "2018-01-10"^^xsd:date ;
    dqv:isMeasurementOf    :levelOfComplianceToINSPIRE .
     </pre>
-</p>    
+    
 </section> 
-<section id="quality-confomance-test-results"> 
+<section id="quality-conformance-test-results"> 
 <h3>Conformance test results</h3>
     <p> Further information about the tests can be provided using EARL [[EARL10-Schema]]. EARL provides specific classes to describe the testing activity, which can be adopted in conjunction with PROV. 
 The following example describes the Testing activity a:TestingActivity as an EARL Assertion instead of a qualified association on the PROV activity. The EARL Assertion states the dataset a:Dataset has been tested with the conformance test a:ConformanceTest, and it has passed the test as described in a:testResult.  
