@@ -486,13 +486,60 @@ dap:P366
 
 </section>
 
+<section id="data-service-examples">
+	<h3>Data services</h3>
+	<p>
+		Data services may be described using DCAT.
+		The values of the classifiers <b>dct:type</b>, <b>dct:conformsTo</b>, and <b>dcat:endpointDescription</b> provide progressively more detail about a service, whose actual endpoint is given by the <b>dcat:endpointURL</b>.
+	</p>
+	<pre>
+ga-wms:DEM_SRTM_1Second_Hydro_Enforced
+  rdf:type dcat:DataService ;
+  dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wms/1.3&gt; ;
+  dct:description "This Service represents the National Digital Elevation Model (DEM) 1 Second Hydrologically Enforced product, derived from the National DEM SRTM 1 Second and National Watercourses, lakes and Reservoirs." ;
+  dct:spatial [
+      rdf:type dct:Location ;
+      locn:geometry "&lt;gml:Envelope srsName=\"http://www.opengis.net/def/crs/OGC/1.3/CRS84\"&gt;&lt;gml:lowerCorner&gt;112.999861 -44.000139&lt;/gml:lowerCorner&gt;&lt;gml:upperCorner&gt;153.999861 -10.000139&lt;/gml:upperCorner&gt;&lt;/gml:Envelope&gt;"^^gsp:gmlLiteral ;
+    ] ;
+  dct:title "Digital Elevation Model (DEM) of Australia derived from STRM with 1 Second Grid - Hydrologically Enforced" ;
+  dct:type dctype:Service ;
+  dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view&gt; ;
+  dcat:endpointDescription &lt;http://services.ga.gov.au/gis/services/DEM_SRTM_1Second_Hydro_Enforced/MapServer/WMSServer?request=GetCapabilities&service=WMS&gt; ;
+  dcat:endpointURL &lt;http://services.ga.gov.au/gis/services/DEM_SRTM_1Second_Hydro_Enforced/MapServer/WMSServer&gt; ;
+  dcat:keyword "DEM" ;
+  dcat:keyword "ECOLOGY Landscape" ;
+  dcat:keyword "LAND Topography Models" ;
+.
+	</pre>
+	<pre>
+a:EEA-CSW-Endpoint
+  rdf:type dcat:DiscoveryService ;
+  dc:subject "infoCatalogueService"@en ;
+  dct:accessRights &lt;http://publications.europa.eu/resource/authority/access-right/PUBLIC&gt; ;
+  dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/csw&gt; ;
+  dct:description "The EEA public catalogue of spatial datasets references the spatial datasets used by the European Environment Agency as well as the spatial datasets produced by or for the EEA. In the latter case, when datasets are publicly available, a link to the location from where they can be downloaded is included in the dataset's metadata. The catalogue has been initially populated with the most important spatial datasets already available on the data&maps section of the EEA website and is currently updated with any newly published spatial dataset."@en ;
+  dct:identifier "eea-sdi-public-catalogue" ;
+  dct:issued "2012-01-01"^^xsd:date ;
+  dct:license &lt;https://creativecommons.org/licenses/by/2.5/dk/&gt; ;
+  dct:spatial [
+      rdf:type dct:Location ;
+      locn:geometry "&lt;gml:Envelope srsName=\"http://www.opengis.net/def/crs/OGC/1.3/CRS84\"&gt;&lt;gml:lowerCorner&gt;-180 -90&lt;/gml:lowerCorner&gt;&lt;gml:upperCorner&gt;180 90&lt;/gml:upperCorner&gt;&lt;/gml:Envelope&gt;"^^gsp:gmlLiteral ;
+      locn:geometry "POLYGON((-180 90,180 90,180 -90,-180 -90,-180 90))"^^gsp:wktLiteral ;
+    ] ;
+  dct:title "European Environment Agency's public catalogue of spatial datasets."@en ;
+  dct:type &lt;http://inspire.ec.europa.eu/metadata-codelist/ResourceType/service&gt; ;
+  dct:type &lt;http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/discovery&gt; ;
+  dcat:contactPoint a:EEA ;
+  dcat:endpointDescription &lt;https://sdi.eea.europa.eu/catalogue/srv/eng/csw?service=CSW&request=GetCapabilities&gt; ;
+  dcat:endpointURL &lt;http://sdi.eea.europa.eu/catalogue/srv/eng/csw&gt; ;
+.
+	</pre>
+</section>
+
 <section id="more-examples-needed">
 	<h3>More examples needed</h3>
 	<p class="note">
 		Need to add examples showing data distribution services and their relationship to datasets and distributions.
-	</p>
-	<p class="note">
-		Need to add examples showing other data services.
 	</p>
 </section>
 
