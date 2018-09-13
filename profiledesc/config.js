@@ -94,6 +94,27 @@ var respecConfig = {
             date: "2016-01",
             status: "ISO Standard"
         },
+        "modspec": {
+          editors: [
+            "OGC Policy SWG"
+          ],
+          href: "http://portal.opengeospatial.org/files/?artifact_id=59324" ,
+          title" "The Specification Model — A Standard for Modular specifications" ,
+          status: "OGC Policy Directive" ,
+          date: "2009-10-19"
+        },
+        "cfg-mgmt": {
+          authors: [
+            "Serena Coetzee",
+            "Simon Cox",
+            "John Herring"
+          ],
+          href: "https://doi.org/10.1109/SIIT.2011.6083604" ,
+          title" "Configuration management of a system of interdependent standards" ,
+          publisher: "IEEE" ,
+          status: "7th International Conference on Standardization and Innovation in Information Technology (SIIT), Berlin, 2011, pp. 1-12" ,
+          date: "2011-11-21"
+        },
         "vocab-dcat-2": {
             editors: [
                 "Alejandra Gonzalez Beltran",
