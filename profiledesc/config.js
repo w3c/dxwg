@@ -1,6 +1,6 @@
 var respecConfig = {
     specStatus: "ED",
-    shortName: "profiledesc",
+    shortName: "vocab-prof",
     edDraftURI: "https://w3c.github.io/dxwg/profiledesc/",
     editors: [
       {
