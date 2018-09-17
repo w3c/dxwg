@@ -71,18 +71,22 @@ dcat:Distribution
   owl:equivalentClass schema:DataDownload ;
 .
 dcat:accessURL
-  schema:domainIncludes dcat:Distribution ;
-  schema:rangeIncludes rdfs:Resource ;
+  schema:domainIncludes dcat:Distribution , schema:DataDownload ;
+  schema:rangeIncludes rdfs:Resource , schema:Thing ;
   rdfs:subPropertyOf schema:contentUrl ;
 .
 dcat:byteSize
-  schema:domainIncludes dcat:Distribution ;
-  schema:rangeIncludes rdfs:Literal ;
+  schema:domainIncludes dcat:Distribution , schema:DataDownload ;
+  schema:rangeIncludes rdfs:Literal , schema:Text;
   rdfs:subPropertyOf schema:contentSize ;
 .
 dcat:bytes
-  schema:domainIncludes dcat:Distribution ;
+  schema:domainIncludes dcat:Distribution , schema:DataDownload ;
   schema:rangeIncludes xsd:integer ;
+.
+dcat:catalog
+  schema:domainIncludes dcat:Catalog , schema:DataCatalog ;
+  schema:rangeIncludes dcat:Catalog , schema:DataCatalog ;
 .
 dcat:contactPoint
   owl:equivalentProperty schema:contactPoint ;
@@ -94,53 +98,57 @@ dcat:dataQuality
   schema:domainIncludes dcat:Dataset ;
 .
 dcat:dataset
-  schema:domainIncludes dcat:Catalog ;
-  schema:rangeIncludes dcat:Dataset ;
+  schema:domainIncludes dcat:Catalog , schema:DataCatalog ;
+  schema:rangeIncludes dcat:Dataset , schema:Dataset ;
   owl:equivalentProperty schema:dataset ;
 .
 dcat:distribution
-  schema:domainIncludes dcat:Dataset ;
-  schema:rangeIncludes dcat:Distribution ;
+  schema:domainIncludes dcat:Dataset , schema:Dataset ;
+  schema:rangeIncludes dcat:Distribution , schema:DataDownload ;
   owl:equivalentProperty schema:distribution ;
 .
 dcat:downloadURL
-  schema:domainIncludes dcat:Distribution ;
-  schema:rangeIncludes rdfs:Resource ;
+  schema:domainIncludes dcat:Distribution , schema:DataDownload ;
+  schema:rangeIncludes rdfs:Resource , schema:Thing ;
   rdfs:subPropertyOf schema:contentUrl ;
 .
 dcat:granularity
-  schema:domainIncludes dcat:Dataset ;
+  schema:domainIncludes dcat:Dataset , schema:Dataset ;
 .
 dcat:keyword
-  schema:domainIncludes dcat:Dataset ;
-  schema:rangeIncludes rdfs:Literal ;
+  schema:domainIncludes dcat:Dataset , schema:Dataset ;
+  schema:rangeIncludes rdfs:Literal , schema:Text ;
   rdfs:comment "Mapped as a sub-property of schema:keywords - dcat:keyword is singular, schema:keywords is plural" ;
   rdfs:subPropertyOf schema:keywords ;
 .
 dcat:landingPage
-  schema:domainIncludes dcat:Dataset ;
-  schema:rangeIncludes foaf:Document ;
+  schema:domainIncludes dcat:Dataset , schema:Dataset ;
+  schema:rangeIncludes foaf:Document , schema:WebPage ;
   rdfs:subPropertyOf schema:url ;
 .
 dcat:mediaType
-  schema:domainIncludes dcat:Distribution ;
+  schema:domainIncludes dcat:Distribution , schema:DataDownload ;
   schema:rangeIncludes dct:MediaTypeOrExtent ;
   owl:equivalentProperty schema:encodingFormat ;
 .
 dcat:record
-  schema:domainIncludes dcat:Catalog ;
+  schema:domainIncludes dcat:Catalog , schema:DataCatalog ;
   schema:rangeIncludes dcat:CatalogRecord ;
 .
+dcat:service
+  schema:domainIncludes dcat:Catalog , schema:DataCatalog ;
+  schema:rangeIncludes dcat:DataService ;
+.
 dcat:size
-  schema:domainIncludes dcat:Distribution ;
+  schema:domainIncludes dcat:Distribution , schema:DataDownload ;
 .
 dcat:theme
-  schema:domainIncludes dcat:Dataset ;
-  schema:rangeIncludes skos:Concept ;
+  schema:domainIncludes dcat:Dataset , schema:Dataset ;
+  schema:rangeIncludes skos:Concept , schema:Class ;
   owl:equivalentProperty schema:about ;
 .
 dcat:themeTaxonomy
-  schema:domainIncludes dcat:Catalog ;
+  schema:domainIncludes dcat:Catalog , schema:DataCatalog ;
   schema:rangeIncludes skos:ConceptScheme ;
 .
 <http://www.w3.org/ns/dcat/schema>
@@ -178,6 +186,15 @@ sosa:madeBySensor
 .
 sosa:observedProperty
   owl:equivalentProperty schema:variableMeasured ;
+.
+sosa:phenomenonTime
+  rdfs:subPropertyOf schema:temporalCoverage ;
+.
+sosa:resultTime
+  rdfs:subPropertyOf schema:endTime ;
+.
+sosa:usedProcedure
+  owl:equivalentProperty schema:measurementTechnique ;
 .
 foaf:Organization
   owl:equivalentClass schema:Organization ;
