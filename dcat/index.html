@@ -501,27 +501,12 @@ dap:P366
 		Data services may be described using DCAT.
 		The values of the classifiers <b>dct:type</b>, <b>dct:conformsTo</b>, and <b>dcat:endpointDescription</b> provide progressively more detail about a service, whose actual endpoint is given by the <b>dcat:endpointURL</b>.
 	</p>
-	<pre>
-ga-wms:DEM_SRTM_1Second_Hydro_Enforced
-  rdf:type dcat:DataService ;
-  dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wms/1.3&gt; ;
-  dct:description "This Service represents the National Digital Elevation Model (DEM) 1 Second Hydrologically Enforced product, derived from the National DEM SRTM 1 Second and National Watercourses, lakes and Reservoirs." ;
-  dct:spatial [
-      rdf:type dct:Location ;
-      locn:geometry "&lt;gml:Envelope srsName=\"http://www.opengis.net/def/crs/OGC/1.3/CRS84\"&gt;&lt;gml:lowerCorner&gt;112.999861 -44.000139&lt;/gml:lowerCorner&gt;&lt;gml:upperCorner&gt;153.999861 -10.000139&lt;/gml:upperCorner&gt;&lt;/gml:Envelope&gt;"^^gsp:gmlLiteral ;
-    ] ;
-  dct:title "Digital Elevation Model (DEM) of Australia derived from STRM with 1 Second Grid - Hydrologically Enforced" ;
-  dct:type dctype:Service ;
-  dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view&gt; ;
-  dcat:endpointDescription &lt;http://services.ga.gov.au/gis/services/DEM_SRTM_1Second_Hydro_Enforced/MapServer/WMSServer?request=GetCapabilities&service=WMS&gt; ;
-  dcat:endpointURL &lt;http://services.ga.gov.au/gis/services/DEM_SRTM_1Second_Hydro_Enforced/MapServer/WMSServer&gt; ;
-  dcat:keyword "DEM" ;
-  dcat:keyword "ECOLOGY Landscape" ;
-  dcat:keyword "LAND Topography Models" ;
-.
-	</pre>
 	<p>
-		This example is available from the <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/examples/ga-wms.ttl">DXWG code repository</a>
+		The first example describes a data catalog hosted by the European Environment Agency.
+		This is classified as a <a href="#Class:Discovery_Service">dcat:DiscoveryService</a> and also has the <code>dct:type</code> set to <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/discovery">discovery</a> from the <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/">INSPIRE classification of spatial data service types</a>.
+	</p>
+	<p>
+		This example is available from the <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/examples/eea-csw.ttl">DXWG code repository</a>
 	</p>
 	<pre>
 a:EEA-CSW-Endpoint
@@ -547,15 +532,70 @@ a:EEA-CSW-Endpoint
 .
 	</pre>
 	<p>
-		This example is available from the <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/examples/eea-csw.ttl">DXWG code repository</a>
+		The next example shows a dataset hosted by Geoscience Australia, which is available from three distinct services, as indicated by the value of the <a href="#Property:datadistributionservice_servesdataset">dcat:servesDataset</a> property of each of the service descriptions.
+		These are classified as a <a href="#Class:Data_Distribution_Service">dcat:DataDistributionService</a> and also have the <code>dct:type</code> set to <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download">download</a> and <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view">view</a> from the <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/">INSPIRE classification of spatial data service types</a>.
 	</p>
+	<p>
+		This example is available from the <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/examples/ga-courts.ttl">DXWG code repository</a>
+	</p>
+	<pre>
+ga-courts:jc
+  rdf:type dcat:Dataset ;
+  dct:description "The dataset contains spatial locations, in point format, of the Australian High Court, Australian Federal Courts and the Australian Magistrates Courts." ;
+  dct:spatial [
+      rdf:type dct:Location ;
+      locn:geometry "&lt;gml:Envelope srsName=\"http://www.opengis.net/def/crs/EPSG/0/4283\"&gt;&lt;gml:lowerCorner&gt;115.864566 -42.885989&lt;/gml:lowerCorner&gt;&lt;gml:upperCorner&gt;153.276835 -12.460578&lt;/gml:upperCorner&gt;&lt;/gml:Envelope&gt;"^^gsp:gmlLiteral ;
+    ] ;
+  dct:title "Judicial Courts" ;
+  dct:type &lt;http://purl.org/dc/dcmitype/Dataset&gt; ;
+  dcat:landingPage &lt;https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/cc365600-294a-597d-e044-00144fdd4fa6&gt; ;
+.
+ga-courts:jc-esri
+  rdf:type dcat:DataDistributionService ;
+  dct:conformsTo &lt;https://developers.arcgis.com/rest/&gt; ;
+  dct:description "This web service provides access to the National Judicial Courts dataset and presents the spatial locations of all the known Australian High Courts, Australian Federal Courts and the Australian Federal Circuit Courts located within Australia, all complemented with feature attribution." ;
+  dct:identifier "2b8540c8-4a43-144d-e053-12a3070a3ff7" ;
+  dct:title "National Judicial Courts MapServer" ;
+  dct:type &lt;http://purl.org/dc/dcmitype/Service&gt; ;
+  dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download&gt; ;
+  dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view&gt; ;
+  dcat:endpointURL &lt;http://services.ga.gov.au/gis/rest/services/Judicial_Courts/MapServer&gt; ;
+  dcat:landingPage &lt;https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/2b8540c8-4a43-144d-e053-12a3070a3ff7&gt; ;
+  dcat:servesDataset ga-courts:jc ;
+.
+ga-courts:jc-wfs
+  rdf:type dcat:DataDistributionService ;
+  dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wfs/2.0&gt; ;
+  dct:description "This web service provides access to the National Judicial Courts dataset and presents the spatial locations of all the known Australian High Courts, Australian Federal Courts and the Australian Federal Circuit Courts located within Australia, all complemented with feature attribution." ;
+  dct:identifier "2b8540c8-4a42-144d-e053-12a3070a3ff7" ;
+  dct:title "National Judicial Courts WFS" ;
+  dct:type &lt;http://purl.org/dc/dcmitype/Service&gt; ;
+  dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download&gt; ;
+  dcat:endpointDescription &lt;http://services.ga.gov.au/gis/services/Judicial_Courts/MapServer/WFSServer?request=GetCapabilities&service=WFS&gt; ;
+  dcat:endpointURL &lt;http://services.ga.gov.au/gis/services/Judicial_Courts/MapServer/WFSServer&gt; ;
+  dcat:landingPage &lt;https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/2b8540c8-4a42-144d-e053-12a3070a3ff7&gt; ;
+  dcat:servesDataset ga-courts:jc ;
+.
+ga-courts:jc-wms
+  rdf:type dcat:DataDistributionService ;
+  dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wms/1.3&gt; ;
+  dct:description "This web service provides access to the National Judicial Courts dataset and presents the spatial locations of all the known Australian High Courts, Australian Federal Courts and the Australian Federal Circuit Courts located within Australia, all complemented with feature attribution." ;
+  dct:identifier "2b8540c8-4a41-144d-e053-12a3070a3ff7" ;
+  dct:title "National Judicial Courts WMS" ;
+  dct:type &lt;http://purl.org/dc/dcmitype/Service&gt; ;
+  dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view&gt; ;
+  dcat:endpointDescription &lt;http://services.ga.gov.au/gis/services/Judicial_Courts/MapServer/WMSServer?request=GetCapabilities&service=WMS&gt; ;
+  dcat:endpointURL &lt;http://services.ga.gov.au/gis/services/Judicial_Courts/MapServer/WMSServer&gt; ;
+  dcat:landingPage &lt;https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/2b8540c8-4a41-144d-e053-12a3070a3ff7&gt; ;
+  dcat:servesDataset ga-courts:jc ;
+.
+	</pre>
+
 </section>
 
 <section id="more-examples-needed">
 	<h3>More examples needed</h3>
-	<p class="note">
-		Need to add examples showing data distribution services and their relationship to datasets and distributions.
-	</p>
+
 </section>
 
 </section>
