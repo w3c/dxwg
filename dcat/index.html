@@ -185,21 +185,9 @@ See <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>. </p>
 
 <p>A <b>CatalogRecord</b> describes an entry in the catalog. Notice that while <code>dcat:Resource</code> represents the dataset or service itself, <code>dcat:CatalogRecord</code> is the record that describes the registration of an item in the catalog. The use of <code>dcat:CatalogRecord</code> is considered optional. It is used to capture provenance information about entries in a catalog. If this distinction is not necessary then <code>dcat:CatalogRecord</code> can be safely ignored.</p>
 
-<p class="note">
-    In DCAT 2014 [[VOCAB-DCAT-20140116]] <a href="#Class:Dataset">dcat:Dataset</a> was a sub-class of 
-  <a href="http://purl.org/dc/dcmitype/Dataset">dctype:Dataset</a>, 
-  which is a term of the <a href="http://dublincore.org/documents/dcmi-terms/#section-7">DCMI Types vocabulary</a> [[DCTERMS]].
-	This relationship has been removed in the revised DCAT vocabulary - see <a href="https://github.com/w3c/dxwg/issues/98">Issue #98</a>.
-</p>
 
-<figure id="fig1"><img alt="UML model of DCAT classes and properties" src="UML/DCAT-summary.png">
-	<figcaption>
-		Overview of DCAT model, showing the classes of resources that can be members of a Catalog and the relationships between them.
-	</figcaption>
-</figure>
-
-<p id="blankNodes">RDF allows resources to have global identifiers (IRIs) or to be blank nodes.  Blank nodes can be used to denote resources without explicitly naming them with an IRI. They can appear in the subject and object position of a triple [[rdf11-primer]].<br>
-While blank nodes may offer flexibility for some use cases, in a Linked Data context, blank nodes limit our ability to collaboratively annotate data. A  blank node resource cannot be the target of a link and it can't be annotated with new information from new sources. As one of the biggest benefits of the Linked Data approach is that "anyone can say anything anywhere", use of blank nodes undermines some of the advantages we can gain from wide adoption of the RDF model. Even within the closed world of a single application dataset, use of blank nodes can quickly become limiting when integrating new data [[LinkedDataPatterns]]. <br>
+<p id="blankNodes">RDF allows resources to have global identifiers (IRIs) or to be blank nodes.  Blank nodes can be used to denote resources without explicitly naming them with an IRI. They can appear in the subject and object position of a triple [[rdf11-primer]].
+While blank nodes may offer flexibility for some use cases, in a Linked Data context, blank nodes limit our ability to collaboratively annotate data. A  blank node resource cannot be the target of a link and it can't be annotated with new information from new sources. As one of the biggest benefits of the Linked Data approach is that "anyone can say anything anywhere", use of blank nodes undermines some of the advantages we can gain from wide adoption of the RDF model. Even within the closed world of a single application dataset, use of blank nodes can quickly become limiting when integrating new data [[LinkedDataPatterns]]. 
 For these reasons, instances of the DCAT main classes <em title="SHOULD" class="rfc2119">SHOULD</em> have a global identifier, and use of blank nodes is generally discouraged when encoding DCAT in RDF.</p>
 
 <p class="note">All RDF examples in this document are written in Turtle syntax [[Turtle]] and are available from the DXWG <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">code repository</a>. </p>
@@ -2140,13 +2128,14 @@ Besides, the examples and more in general the DQV  is neutral to the data portal
     prov:endedAtTime      "2018-05-27T02:52:02Z"^^xsd:dateTime;
     prov:startedAtTime     "2018-05-27T00:52:02Z"^^xsd:dateTime .
     </pre>
-    <p class="issue" data-number="58">
-	The need to choose or define a data <b>quality model</b> has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
 Other examples of quality documentation are available in the W3C Group Note DQV [[vocab-dqv]], including examples about <a href="https://www.w3.org/TR/vocab-dqv/#ExpressDatasetAccuracyPrecision">how express dataset accuracy and precision</a>.
     </section>
 <section id="quality-conformance">
 <h2>Documenting conformance to standards</h2>
+    <p class="issue" data-number="58">
+	The issue suggests to represent "the degree a dataset conforms to a stated quality standard" and "the details of data quality conformance test results". This section is a starter to deal with the above requests by relying on the existing  W3C vocabularies.
+    Comments and suggestions about the following examples as well as the proposal of alternative patterns are more than welcome.
+    </p>
 <p> This subsection  shows different modelling patterns combining DQV [[vocab-dqv]] with  PROV [[PROV-O]] and EARL [[EARL10-Schema]] to represent the conformance degree to a stated quality standard and the details about the conformance tests. 
 </p>
     
@@ -2354,9 +2343,7 @@ a:TestingActivity a prov:Activity;
 		<a href="https://github.com/w3c/dxwg/issues/76">Issue #76</a>,
 		<a href="https://github.com/w3c/dxwg/issues/71">Issue #71</a>,
 		<a href="https://github.com/w3c/dxwg/issues/66">Issue #66</a>,
-		<a href="https://github.com/w3c/dxwg/issues/66">Issue #63</a>,
-		<a href="https://github.com/w3c/dxwg/issues/57">Issue #57</a>,
-		.
+		<a href="https://github.com/w3c/dxwg/issues/63">Issue #63</a>.
 		It has been suggested that many of the requirements can be satisfied by using capabilities from the [[PROV-O]] ontology,
 		in particular by treating dcat:Resource and/or dcat:CatalogRecord a sub-class of <a href="http://www.w3.org/ns/prov#Entity">prov:Entity</a>.
 		A preliminary <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/prov.ttl">alignment of DCAT with PROV-O is available</a>.
