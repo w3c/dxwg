@@ -32,6 +32,7 @@ var respecConfig = {
     inlineCSS: "true",
     lint: "false",
     noRecTrack: "true",
+    github: "https://github.com/w3c/dxwg/issues/",
     issueBase: "https://github.com/w3c/dxwg/issues/",
     localBiblio: {
         "DCAP": {
