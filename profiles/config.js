@@ -32,7 +32,7 @@ var respecConfig = {
     inlineCSS: "true",
     lint: "false",
     noRecTrack: "true",
-    issueBase: "https://github.com/w3c/dxwg/issues",
+    issueBase: "https://github.com/w3c/dxwg/issues/",
     localBiblio: {
         "DCAP": {
             "authors": [
