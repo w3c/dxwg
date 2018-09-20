@@ -18,7 +18,7 @@
 	<p style="text-align: center;">The suggested prefix for the DCAT namespace is <code>dcat</code></p>
 	<p style="text-align: center;">The (revised) DCAT vocabulary is available <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/rdf/dcat.ttl">here</a>.</p>
 </section>
-		
+
 <section id="sotd">
 
 	<h3>DCAT Family of Documents</h3>
@@ -50,7 +50,7 @@
 
 	<h3>DCAT history</h3>
 	<p>The original DCAT vocabulary (originally hosted at http://vocab.deri.ie/dcat) was developed at the Digital Enterprise Research Institute (DERI), refined by the <a href="http://www.w3.org/egov/">eGov Interest Group</a>, and then finally standardized in 2014 [[VOCAB-DCAT-20140116]] by the <a href="http://www.w3.org/2011/gld/">Government Linked Data (GLD)</a> Working Group.</p>
-	<p>This revised version of DCAT was developed by the <a href="https://www.w3.org/2017/dxwg/">Dataset Exchange Working Group</a> in response to a new set of Use Cases and Requirements [[DCAT-UCR]] submitted on the basis of experience with the DCAT vocabulary from the time of the original version, and new applications not originally considered.</p>
+	<p>This revised version of DCAT was developed by the <a href="https://www.w3.org/2017/dxwg/">Dataset Exchange Working Group</a> in response to a new set of Use Cases and Requirements [[DCAT-UCR]] submitted on the basis of experience with the DCAT vocabulary from the time of the original version, and new applications not originally considered. A summary of the changes from  [[VOCAB-DCAT-20140116]] can be found at <a href="#changes">Change History</a></p>
 
 	<h3>External terms</h3>
   <p>DCAT incorporates terms from pre-existing vocabularies where stable terms with appropriate meanings could be found, such as foaf:homepage and dct:title.  Informal summary definitions of the externally-defined terms are included here for convenience, while authoritative definitions are available in the normative references.  Changes to definitions in the references, if any, supersede the summaries given in this specification.  Note that conformance to DCAT (Section 4) concerns usage of only the terms in the DCAT namespace itself, so possible changes to the external definitions will not affect the conformance of DCAT implementations.</p>
@@ -69,8 +69,9 @@
 <p>This document does not prescribe any particular method of deploying data expressed in DCAT. DCAT is applicable in many contexts including RDF accessible via SPARQL endpoints, embedded in HTML pages as RDFa, or serialized as e.g. RDF/XML or Turtle. The examples in this document use Turtle simply because of Turtle's readability.</p>
 </section>
 
-<section id="motivation" class="informative"><h2>Motivation for Change</h2>
+<section id="motivation" class="informative"><h2>Motivation for change</h2>
 <p>The original Recommendation [[VOCAB-DCAT-20140116]], published in January 2014, provided the basic framework for describing datasets. Importantly, it made the distinction between a dataset as an abstract idea and a distribution as a manifestation of the dataset. Although DCAT has been widely adopted, it has became clear that the original specification lacked a number of essential features that were added either through application profiles, such as the European Commission's DCAT-AP [[DCAT-AP]], or the development of larger vocabularies that, to a greater or lesser extent, built upon the base standard, such as the Healthcare and Life Sciences Community Profile [[HCLS-Dataset]], the Data Tag Suite [[DATS]] and more. This version of DCAT has been developed to address the specific shortcomings that have come to light through the experiences of different communities, the aim being, of course, to improve interoperability between the outputs of these larger vocabularies.</p>
+<p>This draft includes re-writing of the specification throughout. Significant changes from the 2014 Recommendation are marked within the text using "Note" sections, as well as being described in the <a href="#changes">Change History</a>.</p>
 
 </section>
 
@@ -131,11 +132,11 @@ RDF syntaxes, access protocols, and access policies is not mandated by this spec
 
 <section id="vocabulary-overview" class="informative">
 
-<h2>Vocabulary Overview</h2>
+<h2>Vocabulary overview</h2>
 
-<p class="note">From DCAT 2014 [[VOCAB-DCAT-20140116]] except as noted</p>
+<p class="note">Significantly extended from DCAT 2014 [[VOCAB-DCAT-20140116]]</p>
 
-<p>DCAT is an RDF vocabulary well-suited to representing data catalogs such as <a href="https://www.data.gov/">data.gov</a> and <a href="http://data.gov.uk">data.gov.uk</a>. DCAT defines eight main classes:</p>
+<p>DCAT is an RDF vocabulary well-suited to representing data catalogs such as <a href="https://www.data.gov/">data.gov</a> and <a href="https://data.gov.uk">data.gov.uk</a>. DCAT defines eight main classes:</p>
 <ul>
 	<li> <code><a href="#Class:Catalog">dcat:Catalog</a></code> represents the catalog</li>
 	<li> <code><a href="#Class:Resource">dcat:Resource</a></code> represents an item in a catalog.</li>
@@ -147,6 +148,20 @@ RDF syntaxes, access protocols, and access policies is not mandated by this spec
 	<li> <code><a href="#Class:Discovery_Service">dcat:DiscoveryService</a></code> represents a service that supports discovery functions.</li>
 	<li> <code><a href="#Class:Catalog_Record">dcat:CatalogRecord</a></code> describes a dataset entry in the catalog, primarily concerning the registration information such as who added the item and when</li>
 </ul>
+
+<figure id="fig1"><img alt="UML model of DCAT classes and properties" src="UML/DCAT-summary-all-attributes.png">
+	<figcaption>
+		Overview of DCAT model, showing the classes of resources that can be members of a Catalog, and the relationships between them.
+	</figcaption>
+</figure>
+<p class="note">
+	Along with the rest of the <a href="#vocabulary-overview">Vocabulary overview</a>, this diagram is <b>non-normative</b>.
+	Furthermore, while the diagram uses UML-style class notation, it should be interpreted following the usual RDF open-world assumptions around the presence/absence of properties, relationships, and their cardinality.
+	The properties shown in each class reflect those recommended in the descriptions of classes in the <a href="#vocabulary-specification">Vocabulary specification</a>.
+	To assist in understanding the full scope of each class, properties are copied down from each '::super-class'.
+	Cardinalities are shown in a few places to reinforce expectations, but these are not axiomatized or enforced in any way by this recommendation.
+</p>
+
 <p>
 A <b>dataset</b> in DCAT is defined as a "collection of data, published or curated by a single agent, and available for access or download in one or more formats".
 A dataset is a conceptual entity, and can be represented by one or more <b>distributions</b> that serialize the dataset for transfer.
@@ -173,22 +188,13 @@ See <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>. </p>
 <p>A <b>CatalogRecord</b> describes an entry in the catalog. Notice that while <code>dcat:Resource</code> represents the dataset or service itself, <code>dcat:CatalogRecord</code> is the record that describes the registration of an item in the catalog. The use of <code>dcat:CatalogRecord</code> is considered optional. It is used to capture provenance information about entries in a catalog. If this distinction is not necessary then <code>dcat:CatalogRecord</code> can be safely ignored.</p>
 
 
-<p class="note">
-    In DCAT 2014 [[VOCAB-DCAT-20140116]] <a href="#Class:Dataset">dcat:Dataset</a> was a sub-class of <a href="http://purl.org/dc/dcmitype/Dataset">dctype:Dataset</a>, which is a term of the <a href="http://dublincore.org/documents/dcmi-terms/#section-7">DCMI Types vocabulary</a> [[DCTERMS]].
-	This relationship has been removed in the revised DCAT vocabulary - see <a href="https://github.com/w3c/dxwg/issues/98">Issue #98</a>.
-</p>
+<p id="blankNodes">RDF allows resources to have global identifiers (IRIs) or to be blank nodes.  Blank nodes can be used to denote resources without explicitly naming them with an IRI. They can appear in the subject and object position of a triple [[rdf11-primer]].
+While blank nodes may offer flexibility for some use cases, in a Linked Data context, blank nodes limit our ability to collaboratively annotate data. A  blank node resource cannot be the target of a link and it can't be annotated with new information from new sources. As one of the biggest benefits of the Linked Data approach is that "anyone can say anything anywhere", use of blank nodes undermines some of the advantages we can gain from wide adoption of the RDF model. Even within the closed world of a single application dataset, use of blank nodes can quickly become limiting when integrating new data [[LinkedDataPatterns]]. 
+For these reasons, instances of the DCAT main classes <em title="SHOULD" class="rfc2119">SHOULD</em> have a global identifier, and use of blank nodes is generally discouraged when encoding DCAT in RDF.</p>
 
-<figure id="fig1"><img alt="UML model of DCAT classes and properties" src="UML/DCAT-summary.png">
-	<figcaption>
-		Overview of DCAT model, showing the classes of resources that can be members of a Catalog and the relationships between them.
-	</figcaption>
-</figure>
+<p class="note">All RDF examples in this document are written in Turtle syntax [[Turtle]] and are available from the DXWG <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">code repository</a>. </p>
+<p class="note">Each RDF example in this document is intended to demonstrate specific capabilities of DCAT, and therefore only shows a subset of all the potential properties and links which might appear in a complete DCAT resource. </p>
 
-<p id="blankNodes">RDF allows resources to have global identifiers (IRIs) or to be blank nodes.  Blank nodes can be used to denote resources without explicitly naming them with an IRI. They can appear in the subject and object position of a triple [[rdf11-primer]].<br>
-While blank nodes may offer flexibility for some use cases, in a Linked Data context, blank nodes limit our ability to collaboratively annotate data. A  blank node resource cannot be the target of a link and it can't be annotated with new information from new sources. As one of the biggest benefits of the Linked Data approach is that "anyone can say anything anywhere", use of blank nodes undermines some of the advantages we can gain from wide adoption of the RDF model. Even within the closed world of a single application dataset, use of blank nodes can quickly become limiting when integrating new data [[LinkedDataPatterns]]. <br>
-For these reasons, instances of the DCAT main classes <em title="SHOULD" class="rfc2119">SHOULD</em> have a global identifier, and use of blank nodes is generally discouraged when encoding DCAT in RDF.</p> 
-
-    <p>All RDF examples in this document are written in Turtle syntax [[Turtle]].</p>
 <section id="basic-example">
 <h3>Basic Example</h3>
 <p>This example provides a quick overview of how DCAT might be used to represent a government catalog and its datasets. </p>
@@ -379,6 +385,11 @@ does not have to be defined as a separate dcat:Distribution instance.
 
 <section id="bag-of-files">
 	<h3>Loosely structured catalog</h3>
+
+<p class="note">
+	The background to this example is discussed in 	<a href="https://github.com/w3c/dxwg/issues/253">Best practice for a loosely-structured catalog</a>
+</p>
+
 	<p>
 		In many legacy catalogues and repositories (e.g. CKAN), ‘datasets’ are ‘just a bag of files’. There is no distinction made between part/whole, distribution (representation), and other kinds of relationship (e.g. documentation, schema, supporting documents) from the dataset to each of the files.
 	</p>
@@ -438,6 +449,9 @@ does not have to be defined as a separate dcat:Distribution instance.
 	dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/turtle&gt; ;
 	.
 	</pre>
+	<p>
+		These examples are available from the <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/examples/csiro-dap-examples.ttl">DXWG code repository</a>
+	</p>
 </section>
 
 <section id="examples-dataset-provenance">
@@ -468,12 +482,15 @@ dap:P366
 .
 	</pre>
 	<p>
+		These examples are available from the <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/examples/csiro-dap-examples.ttl">DXWG code repository</a>
+	</p>
+	<p>
 		Several properties capture provenance information, including within the citation and title, but the primary link to a formal description of the project is through <a href="#Property:dataset_wasgeneratedby">prov:wasGeneratedBy</a>.
 		A terse description of the project is shown as a <a href="http://www.w3.org/ns/prov#Activity">prov:Activity</a>, though this would not necessarily be part of the same catalog.
 		Note that as the project is ongoing, the activity has no end date.
 	</p>
 	<p>
-		Further provenance information might be provided using the other <i>starting point properties</i> from PROV, in particular <a href="http://www.w3.org/TR/prov-o/#wasAttributedTo">prov:wasAttributedTo</a> (to link to an agent associated with the dataset production) and <a href="http://www.w3.org/TR/prov-o/#Property:wasDerivedFrom">prov:wasDerivedFrom</a> (to link to a predecessor dataset). Both of these complement Dublin Core properties already used in DCAT, as follows:
+		Further provenance information might be provided using the other <i>starting point properties</i> from PROV, in particular <a href="http://www.w3.org/TR/prov-o/#wasAttributedTo">prov:wasAttributedTo</a> (to link to an agent associated with the dataset production) and <a href="http://www.w3.org/TR/prov-o/#wasDerivedFrom">prov:wasDerivedFrom</a> (to link to a predecessor dataset). Both of these complement Dublin Core properties already used in DCAT, as follows:
 	</p>
 	<ul>
 		<li>
@@ -489,14 +506,111 @@ dap:P366
 
 </section>
 
+<section id="data-service-examples">
+	<h3>Data services</h3>
+	<p>
+		Data services may be described using DCAT.
+		The values of the classifiers <b>dct:type</b>, <b>dct:conformsTo</b>, and <b>dcat:endpointDescription</b> provide progressively more detail about a service, whose actual endpoint is given by the <b>dcat:endpointURL</b>.
+	</p>
+	<p>
+		The first example describes a data catalog hosted by the European Environment Agency.
+		This is classified as a <a href="#Class:Discovery_Service">dcat:DiscoveryService</a> and also has the <code>dct:type</code> set to <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/discovery">discovery</a> from the <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/">INSPIRE classification of spatial data service types</a>.
+	</p>
+	<p>
+		This example is available from the <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/examples/eea-csw.ttl">DXWG code repository</a>
+	</p>
+	<pre>
+a:EEA-CSW-Endpoint
+  rdf:type dcat:DiscoveryService ;
+  dc:subject "infoCatalogueService"@en ;
+  dct:accessRights &lt;http://publications.europa.eu/resource/authority/access-right/PUBLIC&gt; ;
+  dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/csw&gt; ;
+  dct:description "The EEA public catalogue of spatial datasets references the spatial datasets used by the European Environment Agency as well as the spatial datasets produced by or for the EEA. In the latter case, when datasets are publicly available, a link to the location from where they can be downloaded is included in the dataset's metadata. The catalogue has been initially populated with the most important spatial datasets already available on the data&maps section of the EEA website and is currently updated with any newly published spatial dataset."@en ;
+  dct:identifier "eea-sdi-public-catalogue" ;
+  dct:issued "2012-01-01"^^xsd:date ;
+  dct:license &lt;https://creativecommons.org/licenses/by/2.5/dk/&gt; ;
+  dct:spatial [
+      rdf:type dct:Location ;
+      locn:geometry "&lt;gml:Envelope srsName=\"http://www.opengis.net/def/crs/OGC/1.3/CRS84\"&gt;&lt;gml:lowerCorner&gt;-180 -90&lt;/gml:lowerCorner&gt;&lt;gml:upperCorner&gt;180 90&lt;/gml:upperCorner&gt;&lt;/gml:Envelope&gt;"^^gsp:gmlLiteral ;
+      locn:geometry "POLYGON((-180 90,180 90,180 -90,-180 -90,-180 90))"^^gsp:wktLiteral ;
+    ] ;
+  dct:title "European Environment Agency's public catalogue of spatial datasets."@en ;
+  dct:type &lt;http://inspire.ec.europa.eu/metadata-codelist/ResourceType/service&gt; ;
+  dct:type &lt;http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/discovery&gt; ;
+  dcat:contactPoint a:EEA ;
+  dcat:endpointDescription &lt;https://sdi.eea.europa.eu/catalogue/srv/eng/csw?service=CSW&request=GetCapabilities&gt; ;
+  dcat:endpointURL &lt;http://sdi.eea.europa.eu/catalogue/srv/eng/csw&gt; ;
+.
+	</pre>
+	<p>
+		The next example shows a dataset hosted by Geoscience Australia, which is available from three distinct services, as indicated by the value of the <a href="#Property:datadistributionservice_servesdataset">dcat:servesDataset</a> property of each of the service descriptions.
+		These are classified as a <a href="#Class:Data_Distribution_Service">dcat:DataDistributionService</a> and also have the <code>dct:type</code> set to <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download">download</a> and <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view">view</a> from the <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/">INSPIRE classification of spatial data service types</a>.
+	</p>
+	<p>
+		This example is available from the <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/examples/ga-courts.ttl">DXWG code repository</a>
+	</p>
+	<pre>
+ga-courts:jc
+  rdf:type dcat:Dataset ;
+  dct:description "The dataset contains spatial locations, in point format, of the Australian High Court, Australian Federal Courts and the Australian Magistrates Courts." ;
+  dct:spatial [
+      rdf:type dct:Location ;
+      locn:geometry "&lt;gml:Envelope srsName=\"http://www.opengis.net/def/crs/EPSG/0/4283\"&gt;&lt;gml:lowerCorner&gt;115.864566 -42.885989&lt;/gml:lowerCorner&gt;&lt;gml:upperCorner&gt;153.276835 -12.460578&lt;/gml:upperCorner&gt;&lt;/gml:Envelope&gt;"^^gsp:gmlLiteral ;
+    ] ;
+  dct:title "Judicial Courts" ;
+  dct:type &lt;http://purl.org/dc/dcmitype/Dataset&gt; ;
+  dcat:landingPage &lt;https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/cc365600-294a-597d-e044-00144fdd4fa6&gt; ;
+.
+ga-courts:jc-esri
+  rdf:type dcat:DataDistributionService ;
+  dct:conformsTo &lt;https://developers.arcgis.com/rest/&gt; ;
+  dct:description "This web service provides access to the National Judicial Courts dataset and presents the spatial locations of all the known Australian High Courts, Australian Federal Courts and the Australian Federal Circuit Courts located within Australia, all complemented with feature attribution." ;
+  dct:identifier "2b8540c8-4a43-144d-e053-12a3070a3ff7" ;
+  dct:title "National Judicial Courts MapServer" ;
+  dct:type &lt;http://purl.org/dc/dcmitype/Service&gt; ;
+  dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download&gt; ;
+  dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view&gt; ;
+  dcat:endpointURL &lt;http://services.ga.gov.au/gis/rest/services/Judicial_Courts/MapServer&gt; ;
+  dcat:landingPage &lt;https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/2b8540c8-4a43-144d-e053-12a3070a3ff7&gt; ;
+  dcat:servesDataset ga-courts:jc ;
+.
+ga-courts:jc-wfs
+  rdf:type dcat:DataDistributionService ;
+  dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wfs/2.0&gt; ;
+  dct:description "This web service provides access to the National Judicial Courts dataset and presents the spatial locations of all the known Australian High Courts, Australian Federal Courts and the Australian Federal Circuit Courts located within Australia, all complemented with feature attribution." ;
+  dct:identifier "2b8540c8-4a42-144d-e053-12a3070a3ff7" ;
+  dct:title "National Judicial Courts WFS" ;
+  dct:type &lt;http://purl.org/dc/dcmitype/Service&gt; ;
+  dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download&gt; ;
+  dcat:endpointDescription &lt;http://services.ga.gov.au/gis/services/Judicial_Courts/MapServer/WFSServer?request=GetCapabilities&service=WFS&gt; ;
+  dcat:endpointURL &lt;http://services.ga.gov.au/gis/services/Judicial_Courts/MapServer/WFSServer&gt; ;
+  dcat:landingPage &lt;https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/2b8540c8-4a42-144d-e053-12a3070a3ff7&gt; ;
+  dcat:servesDataset ga-courts:jc ;
+.
+ga-courts:jc-wms
+  rdf:type dcat:DataDistributionService ;
+  dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wms/1.3&gt; ;
+  dct:description "This web service provides access to the National Judicial Courts dataset and presents the spatial locations of all the known Australian High Courts, Australian Federal Courts and the Australian Federal Circuit Courts located within Australia, all complemented with feature attribution." ;
+  dct:identifier "2b8540c8-4a41-144d-e053-12a3070a3ff7" ;
+  dct:title "National Judicial Courts WMS" ;
+  dct:type &lt;http://purl.org/dc/dcmitype/Service&gt; ;
+  dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view&gt; ;
+  dcat:endpointDescription &lt;http://services.ga.gov.au/gis/services/Judicial_Courts/MapServer/WMSServer?request=GetCapabilities&service=WMS&gt; ;
+  dcat:endpointURL &lt;http://services.ga.gov.au/gis/services/Judicial_Courts/MapServer/WMSServer&gt; ;
+  dcat:landingPage &lt;https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/2b8540c8-4a41-144d-e053-12a3070a3ff7&gt; ;
+  dcat:servesDataset ga-courts:jc ;
+.
+	</pre>
+
+</section>
+
 <section id="more-examples-needed">
 	<h3>More examples needed</h3>
+
 	<p class="note">
-		Need to add examples showing data distribution services and their relationship to datasets and distributions.
+		This section will contain more examples on the use of DCAT. 
 	</p>
-	<p class="note">
-		Need to add examples showing other data services.
-	</p>
+
 </section>
 
 </section>
@@ -558,10 +672,8 @@ Alongside it are a set of other RDF files that provide additional information, i
 <p>
 The definitions (including domain and range) of terms outside the DCAT namespace are provided here only for convenience and <em title="MUST NOT" class="rfc2119">MUST NOT</em> be considered normative. The authoritative definitions of these terms are in the corresponding specifications: [[!DC11]], [[!DCTERMS]], [[!FOAF]], [[!RDF-SCHEMA]], [[!SKOS-REFERENCE]], [[!XMLSCHEMA11-2]] and [[!VCARD-RDF]].
 </p>
-
-<p class="note">Description of DCAT vocabulary elements from DCAT 2014 [[VOCAB-DCAT-20140116]] except where indicated.</p>
 </section>
-
+	
 <section id="Class:Catalog">
 <h3>Class: Catalog</h3>
 <p>The following properties are recommended for use on this class:
@@ -725,7 +837,7 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 <h4>Property: license</h4>
 
 <p class="issue" data-number="114">
-	Models for the kind of license or rights representation indicated by the dct:license property are being considered as part of the revision of DCAT.
+	Models for the kind of license or rights representation indicated by the dct:license and dct:rights property are being considered as part of the revision of DCAT. See also <a href="#license-rights">License and rights statements</a>.
 </p>
 
 <table class="definition">
@@ -744,6 +856,11 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 
 <section id="Property:catalog_rights">
 <h4>Property: rights</h4>
+
+<p class="issue" data-number="114">
+	Models for the kind of license or rights representation indicated by the dct:license and dct:rights property are being considered as part of the revision of DCAT. See also <a href="#license-rights">License and rights statements</a>.
+</p>
+	
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/rights">dct:rights</a></th></tr></thead>
   <tbody>
@@ -1339,7 +1456,7 @@ into a separate named graph. The name of that graph <em title="SHOULD" class="rf
   <tbody>
     <tr><td class="prop">Definition:</td><td>The IRI of the service end-point.</td></tr>
 		<tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a> </td></tr>
-		<tr><td class="prop">Range:</td><td><a href="http://www.w3.org/TR/XMLSchema11-2/#anyURI">xsd:anyURI</a> </td></tr>
+		<tr><td class="prop">Range:</td><td><a href="http://www.w3.org/TR/xmlschema11-2/#anyURI">xsd:anyURI</a> </td></tr>
   </tbody>
 </table>
 </section>
@@ -1438,10 +1555,6 @@ into a separate named graph. The name of that graph <em title="SHOULD" class="rf
 
 <p class="issue" data-number="86">
 	The need to be able to provide usage notes for a dataset or distribution has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
-<p class="issue" data-number="253">
-	The need to recommend a method for linking from a dataset to various kinds of resources to complement <i>Distributions</i> has been proposed as a requirement to be satisfied in this revision of DCAT.
 </p>
 
 <table class="definition">
@@ -1621,24 +1734,12 @@ New property for Dataset in this revision of DCAT, added when considering the da
 	<a href="#Property:distribution_update_date">update/modification date</a>
 </p>
 
-<p class="issue" data-number="52">
-	The definition of dcat:Distribution is being re-evaluated as part of the revision of DCAT. In particular to clarify that distributions are primarily <i>representations</i> of datasets. Also see <a href="https://github.com/w3c/dxwg/issues/106">Issue #106</a>
-</p>
-
 <p class="issue" data-number="54">
 	The packaging of files in a dcat:Distribution is being considered as part of the revision of DCAT.
 </p>
 
-<p class="issue" data-number="55">
-	The need to provide a way to indicate the structure or schema of data in a dcat:Distribution (in addition to the media-type or serialization) has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
 <p class="issue" data-number="59">
 	The need to more formally encode access restrictions for both datasets and distributions has been identified as a requirement to be satisfied in the revision of DCAT.
-</p>
-
-<p class="issue" data-number="106">
-	The possible need to provide guidance regarding the extension of the notion "Distribution" is being considered for the revision of DCAT.
 </p>
 
 <table class="definition">
@@ -1668,6 +1769,10 @@ New property for Dataset in this revision of DCAT, added when considering the da
 	</p>
 </div>
 
+<p class="note">
+    The definition text of dcat:Distribution has been revised to clarify that distributions are primarily <i>representations</i> of datasets.  As such, all distributions of a given dataset should be informationally equivalent.
+</p>
+	
 <section id="Property:distribution_title">
 <h4>Property: title</h4>
 <table class="definition">
@@ -1722,9 +1827,9 @@ New property for Dataset in this revision of DCAT, added when considering the da
 <h4>Property: license</h4>
 
 <p class="issue" data-number="114">
-	Models for the kind of license or rights representation indicated by the dct:license property are being considered as part of the revision of DCAT.
+	Models for the kind of license or rights representation indicated by the dct:license and dct:rights property are being considered as part of the revision of DCAT. See also <a href="#license-rights">License and rights statements</a>.
 </p>
-
+	
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/license">dct:license</a></th></tr></thead>
   <tbody>
@@ -1739,6 +1844,11 @@ New property for Dataset in this revision of DCAT, added when considering the da
 
 <section id="Property:distribution_rights">
 <h4>Property: rights</h4>
+
+<p class="issue" data-number="114">
+	Models for the kind of license or rights representation indicated by the dct:license and dct:rights property are being considered as part of the revision of DCAT. See also <a href="#license-rights">License and rights statements</a>.
+</p>
+
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/rights">dct:rights</a></th></tr></thead>
   <tbody>
@@ -2937,11 +3047,11 @@ a:TestingActivity a prov:Activity;
         <h3>Changes since the W3C Recommendation of 16 January 2014</h3>
         <p>The document has undergone the following changes since the W3C Recommendation of 16 January 2014 [[VOCAB-DCAT-20140116]]:</p>
 
-        <ul>
+       <ul>
 
-					<li>
-						<a href="#Property:dataset_creator">Property: dataset creator</a>: The property dct:creator is recommended for use in the context of a dataset to allow the entity responsible for generating the dataset to be recorded - see <a href="https://github.com/w3c/dxwg/issues/61">Issue #61</a>
-					</li>
+<li>
+	<a href="#Property:dataset_creator">Property: dataset creator</a>: The property dct:creator is recommended for use in the context of a dataset to allow the entity responsible for generating the dataset to be recorded - see <a href="https://github.com/w3c/dxwg/issues/61">Issue #61</a>
+</li>
 
 
 <li>
@@ -2954,15 +3064,15 @@ a:TestingActivity a prov:Activity;
 
 
 <li>
-	<a href="#Property:distribution_media_type"></a>: The range of dcat:mediaType has been tightened from dct:MediaTypeOrExtent to dct:MediaType - see <a href="https://github.com/w3c/dxwg/issues/127">Issue #127</a>.
+	<a href="#Property:distribution_media_type">Property:media_type</a>: The range of dcat:mediaType has been tightened from dct:MediaTypeOrExtent to dct:MediaType - see <a href="https://github.com/w3c/dxwg/issues/127">Issue #127</a>.
 </li>
 
 <li>
-		<a href="#Property:distribution_conformsto">Property: conforms to</a>: The property dct:conformsTo is recommended for use in the context of a dcat:Distribution to allow the model or schema used for the representation to be indicated as well as the serialization (which is indicated using dct:format and dcat:mediaType) - see <a href="https://github.com/w3c/dxwg/issues/55">Issue #55</a>.
+	<a href="#Property:distribution_conformsto">Property: conforms to</a>: The property dct:conformsTo is recommended for use in the context of a dcat:Distribution to allow the model or schema used for the representation to be indicated as well as the serialization (which is indicated using dct:format and dcat:mediaType) - see <a href="https://github.com/w3c/dxwg/issues/55">Issue #55</a>.
 </li>
 
 <li>
-		Errors in examples of <a href="#Property:distribution_media_type">dcat:mediaType</a> usage fixed - see <a href="https://github.com/w3c/dxwg/issues/170">Issue #170</a>.
+	Errors in examples of <a href="#Property:distribution_media_type">dcat:mediaType</a> usage fixed - see <a href="https://github.com/w3c/dxwg/issues/170">Issue #170</a>.
 </li>
 
 <li>
@@ -2988,6 +3098,12 @@ a:TestingActivity a prov:Activity;
 <li><a href="#Class:Dataset">Class: Dataset</a>:
 In DCAT 2014 [[VOCAB-DCAT-20140116]] <a href="#Class:Dataset">dcat:Dataset</a> was a sub-class of <a href="http://purl.org/dc/dcmitype/Dataset">dctype:Dataset</a>, which is a term of the <a href="http://dublincore.org/documents/dcmi-terms/#section-7">DCMI Types vocabulary</a> [[DCTERMS]]. This relationship has been removed in the revised DCAT vocabulary - see <a href="https://github.com/w3c/dxwg/issues/98">Issue #98</a>.
 </li>
+
+<li>
+	<a href="#Class:Distribution">Class: Distribution</a>
+	: In DCAT 2014 [[VOCAB-DCAT-20140116]] the definition of a <a href="#Class:Distribution">dcat:Distribution</a> allowed a number of alternative interpretations. The definition has been rephrased to clarify that distributions are primarily <i>representations</i> of datasets. See <a href="https://github.com/w3c/dxwg/issues/172">Issue #52</a> and related use cases.
+</li>
+       
 
 <li><a href="#Property:resource_theme">Property: theme/category</a>:
 	In DCAT 2014 [[VOCAB-DCAT-20140116]] the domain of dcat:theme was dcat:Dataset,
