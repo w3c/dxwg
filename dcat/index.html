@@ -631,7 +631,7 @@ ga-courts:jc-wms
 		Guidance on the use DCAT in a weakly-axiomatized environment, such as schema.org, has been identified as a requirement to be satisfied in this revision of DCAT.
 	</p>
 	<p>
-		An <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/schema.ttl">RDF graph containing a proposed alignment of DCAT with schema.org</a> is available. Comments on this alignment are invited.
+		An <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/dcat-schema.ttl">RDF graph containing a proposed alignment of DCAT with schema.org</a> is available. Comments on this alignment are invited.
 	</p>
 </div>
 
@@ -2401,17 +2401,23 @@ a:TestingActivity a prov:Activity;
 <section id="dcat-sdo" class="informative">
 	<h3>Schema.org</h3>
 	<p>
-		<a href="https://schema.org/">Schema.org</a> includes a number of types and properties taken from (or at least inspired by) the original DCAT work, and the index for Google's <a href="https://g.co/datasetsearch">Dataset Search service</a> utilises both schema.org and DCAT.
-		However, most general purpose web search services that pay attention to metadata at all rely primarily on schema.org, so the detailed relationship of DCAT to schema.org is of interest for data providers who wish their datasets and services to be exposed through those indexes.
+		<a href="https://schema.org/">Schema.org</a> includes a number of types and properties based on the original DCAT work (see <a href="https://schema.org/Dataset">schema:Dataset</a> as a starting point),
+		and the index for Google's <a href="https://g.co/datasetsearch">Dataset Search service</a> relies on structured description in web pages about datasets based on both
+		<a href="https://developers.google.com/search/docs/data-types/dataset">schema.org and DCAT</a>.
 	</p>
 	<p>
-		A mapping between DCAT and schema.org can be inferred by comparing the examples in <a href="https://developers.google.com/search/docs/data-types/dataset">Google's documentation of dataset metadata</a>, but a systematic mapping is not currently available.
-		Partial mappings between DCAT 2014 [[VOCAB-DCAT-20140116]] and <a href="https://schema.org/docs/schemas.html">schema.org</a> were provided earlier by the <a href="https://ec-jrc.github.io/dcat-ap-to-schema-org/">European Commission</a> and the <a href="https://www.w3.org/2015/spatial/wiki/ISO_19115_-_DCAT_-_Schema.org_mapping">Spatial Data on the Web Working Group</a>.
+		Most general purpose web search services that pay attention to metadata at all rely primarily on schema.org, so the detailed relationship of DCAT to schema.org is of interest for data providers
+		who wish their datasets and services to be exposed through those indexes.
+	</p>
+	<p>
+		A <a href="https://www.w3.org/wiki/WebSchemas/Datasets">mapping between DCAT 2014 and schema.org</a> was discussed on the original proposal to extend schema.org for describing datasets and data catalogs.
+		Partial mappings between DCAT 2014 [[VOCAB-DCAT-20140116]] and <a href="https://schema.org/docs/schemas.html">schema.org</a> were provided earlier by the
+		<a href="https://ec-jrc.github.io/dcat-ap-to-schema-org/">European Commission</a> and the <a href="https://www.w3.org/2015/spatial/wiki/ISO_19115_-_DCAT_-_Schema.org_mapping">Spatial Data on the Web Working Group</a>.
 	</p>
 	<p>
 		A recommended mapping from the revised DCAT (this document) to schema.org is <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/dcat-schema.ttl">available in an RDF file</a>.
-		This mapping is axiomatized using the standard predicates <code>rdfs:subClassOf</code>, <code>rdfs:subPropertyOf</code>, <code>owl:equivalentClass</code>, <code>owl:equivalentProperty</code>, and also using the annotation properties <code>schema:domainIncludes</code> and <code>schema:rangeIncludes</code> to match schema.org semantics.
-		The mapping is summarized in the table below.
+		This mapping is axiomatized using the standard predicates <code>rdfs:subClassOf</code>, <code>rdfs:subPropertyOf</code>, <code>owl:equivalentClass</code>, <code>owl:equivalentProperty</code>, and also using the
+		annotation properties <code>schema:domainIncludes</code> and <code>schema:rangeIncludes</code> to match schema.org semantics. The mapping is summarized in the table below.
 	</p>
 	<p class="issue" data-number="251">
 		This alignment of DCAT with schema.org is provisional and non-normative. Feedback is invited in the <a href="https://github.com/w3c/dxwg/issues/251">issue tracker</a>.
@@ -2435,11 +2441,6 @@ a:TestingActivity a prov:Activity;
 <td align="right">dc:title</td>
 <td align="center"><code>owl:equivalentProperty</code></td>
 <td>schema:name</td>
-</tr>
-<tr>
-<td align="right">dct:description</td>
-<td align="center"><code>owl:equivalentProperty</code></td>
-<td>schema:description</td>
 </tr>
 <tr>
 <td align="right">dct:format</td>
