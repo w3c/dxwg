@@ -46,22 +46,22 @@ dct:publisher
   owl:equivalentProperty schema:publisher ;
 .
 dct:spatial
-  owl:equivalentProperty schema:spatial ;
   owl:equivalentProperty schema:spatialCoverage ;
 .
 dct:temporal
-  owl:equivalentProperty schema:datasetTimeInterval ;
-  owl:equivalentProperty schema:temporal ;
   owl:equivalentProperty schema:temporalCoverage ;
 .
 dct:title
   owl:equivalentProperty schema:name ;
 .
+dct:type
+  owl:equivalentProperty schema:additionalType ;
+.
 dcat:Catalog
   owl:equivalentClass schema:DataCatalog ;
 .
 dcat:DataService
-  rdfs:comment "Not quite sure if a DataFeed is a data service, or a data collection. From a REST viewpoint there is no difference. But other APIs support additional queries, slices, etc which make the characterization of a service more efficient than listing all the (potentially inifinite) resources available from it." ;
+  rdfs:comment "Unclear if a DataFeed is a data service, or a data collection. From a REST viewpoint there is no difference, but some commonly used APIs support additional queries, slices, etc which make the characterization of a service more efficient than listing the (potentially infinite) set of resources available from it." ;
   owl:equivalentClass schema:DataFeed ;
 .
 dcat:Dataset
@@ -70,77 +70,78 @@ dcat:Dataset
 dcat:Distribution
   owl:equivalentClass schema:DataDownload ;
 .
+dcat:Resource
+  rdfs:subClassOf schema:Thing ;
+.
 dcat:accessURL
-  schema:domainIncludes dcat:Distribution ;
-  schema:rangeIncludes rdfs:Resource ;
+  schema:domainIncludes dcat:Distribution , schema:DataDownload ;
+  schema:rangeIncludes rdfs:Resource , schema:url ;
   rdfs:subPropertyOf schema:contentUrl ;
 .
 dcat:byteSize
-  schema:domainIncludes dcat:Distribution ;
-  schema:rangeIncludes rdfs:Literal ;
+  schema:domainIncludes dcat:Distribution , schema:DataDownload ;
+  schema:rangeIncludes rdfs:Literal , schema:Text ;
   rdfs:subPropertyOf schema:contentSize ;
 .
-dcat:bytes
-  schema:domainIncludes dcat:Distribution ;
-  schema:rangeIncludes xsd:integer ;
+dcat:catalog
+  schema:domainIncludes dcat:Catalog , schema:DataCatalog ;
+  schema:rangeIncludes dcat:Catalog , schema:DataCatalog ;
 .
 dcat:contactPoint
+  schema:domainIncludes dcat:Resource , dcat:Dataset , dcat:DataService , schema:Dataset ;
   owl:equivalentProperty schema:contactPoint ;
 .
-dcat:dataDictionary
-  schema:domainIncludes dcat:Dataset ;
-.
-dcat:dataQuality
-  schema:domainIncludes dcat:Dataset ;
-.
 dcat:dataset
-  schema:domainIncludes dcat:Catalog ;
-  schema:rangeIncludes dcat:Dataset ;
+  schema:domainIncludes dcat:Catalog , schema:DataCatalog ;
+  schema:rangeIncludes dcat:Dataset , schema:Dataset ;
   owl:equivalentProperty schema:dataset ;
 .
 dcat:distribution
-  schema:domainIncludes dcat:Dataset ;
-  schema:rangeIncludes dcat:Distribution ;
+  schema:domainIncludes dcat:Dataset , schema:Dataset ;
+  schema:rangeIncludes dcat:Distribution , schema:DataDownload ;
   owl:equivalentProperty schema:distribution ;
 .
 dcat:downloadURL
-  schema:domainIncludes dcat:Distribution ;
-  schema:rangeIncludes rdfs:Resource ;
+  schema:domainIncludes dcat:Distribution , schema:DataDownload ;
+  schema:rangeIncludes rdfs:Resource , schema:url ;
   rdfs:subPropertyOf schema:contentUrl ;
 .
-dcat:granularity
-  schema:domainIncludes dcat:Dataset ;
+dcat:hasSubProperty
+  rdf:type owl:ObjectProperty ;
+  rdfs:label "has sub-property" ;
+  owl:inverseOf rdfs:subPropertyOf ;
 .
 dcat:keyword
-  schema:domainIncludes dcat:Dataset ;
-  schema:rangeIncludes rdfs:Literal ;
-  rdfs:comment "Mapped as a sub-property of schema:keywords - dcat:keyword is singular, schema:keywords is plural" ;
+  schema:domainIncludes dcat:Resource , dcat:Dataset , dcat:DataService , schema:Dataset ;
+  schema:rangeIncludes rdfs:Literal , schema:Text ;
+  rdfs:comment "dcat:keyword is singular, schema:keywords is plural" ;
   rdfs:subPropertyOf schema:keywords ;
 .
 dcat:landingPage
-  schema:domainIncludes dcat:Dataset ;
-  schema:rangeIncludes foaf:Document ;
+  schema:domainIncludes dcat:Resource , dcat:Dataset , dcat:DataService , schema:Dataset ;
+  schema:rangeIncludes foaf:Document , schema:WebPage ;
   rdfs:subPropertyOf schema:url ;
 .
 dcat:mediaType
-  schema:domainIncludes dcat:Distribution ;
-  schema:rangeIncludes dct:MediaTypeOrExtent ;
+  schema:domainIncludes dcat:Distribution , schema:DataDownload ;
+  schema:rangeIncludes dct:MediaTypeOrExtent , schema:Text , schema:url ;
   owl:equivalentProperty schema:encodingFormat ;
 .
 dcat:record
-  schema:domainIncludes dcat:Catalog ;
+  schema:domainIncludes dcat:Catalog , schema:DataCatalog ;
   schema:rangeIncludes dcat:CatalogRecord ;
 .
-dcat:size
-  schema:domainIncludes dcat:Distribution ;
+dcat:service
+  schema:domainIncludes dcat:Catalog , schema:DataCatalog ;
+  schema:rangeIncludes dcat:DataService ;
 .
 dcat:theme
-  schema:domainIncludes dcat:Dataset ;
-  schema:rangeIncludes skos:Concept ;
+  schema:domainIncludes dcat:Resource , dcat:Dataset , dcat:DataService , schema:Dataset ;
+  schema:rangeIncludes skos:Concept , schema:Class ;
   owl:equivalentProperty schema:about ;
 .
 dcat:themeTaxonomy
-  schema:domainIncludes dcat:Catalog ;
+  schema:domainIncludes dcat:Catalog , schema:DataCatalog ;
   schema:rangeIncludes skos:ConceptScheme ;
 .
 <http://www.w3.org/ns/dcat/schema>
@@ -148,7 +149,7 @@ dcat:themeTaxonomy
   dct:contributor <https://orcid.org/0000-0003-3499-8262> ;
   dct:created "2018-02-19"^^xsd:date ;
   dct:creator <http://registry.it.csiro.au/sandbox/csiro/person/Simon-Cox> ;
-  dct:modified "2018-09-14"^^xsd:date ;
+  dct:modified "2018-09-18"^^xsd:date ;
   rdfs:comment "<p>Based in part on Project Open Data mappings described in <a href=\"https://project-open-data.cio.gov/metadata-resources/\">https://project-open-data.cio.gov/metadata-resources/</a></p>"^^rdf:HTML ;
   rdfs:comment "<p>Based in part on SDWWG ISO 19115 - DCAT - Schema.org mapping described in <a href=\"https://www.w3.org/2015/spatial/wiki/ISO_19115_-_DCAT_-_Schema.org_mapping\">https://www.w3.org/2015/spatial/wiki/ISO_19115_-_DCAT_-_Schema.org_mapping</a></p>"^^rdf:HTML ;
   rdfs:comment "NOTE: this alignment is provisional and incomplete, and is added to the repository here to (a) support further development of the DCAT-SDO alignment (b) demonstrate the strategy of modularizing alignments and dependencies into separate RDF files." ;
@@ -160,6 +161,9 @@ dcat:themeTaxonomy
   owl:imports schema: ;
   owl:imports <http://www.w3.org/ns/dcat> ;
   owl:imports sosa: ;
+.
+schema:measurementTechnique
+  rdfs:subPropertyOf sosa:usedProcedure  ;
 .
 sosa:hasFeatureOfInterest
   rdfs:subPropertyOf schema:object ;
@@ -178,6 +182,15 @@ sosa:madeBySensor
 .
 sosa:observedProperty
   owl:equivalentProperty schema:variableMeasured ;
+.
+sosa:phenomenonTime
+  rdfs:subPropertyOf schema:temporalCoverage ;
+.
+sosa:resultTime
+  rdfs:subPropertyOf schema:endTime ;
+.
+sosa:usedProcedure
+  dcat:hasSubProperty schema:measurementTechnique ;
 .
 foaf:Organization
   owl:equivalentClass schema:Organization ;

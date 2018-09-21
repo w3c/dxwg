@@ -6,6 +6,8 @@
     <meta content="width=device-width,initial-scale=1" name="viewport" />
     <script class="remove" src="https://www.w3.org/Tools/respec/respec-w3c-common"></script>
     <script class="remove" src="config.js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="small.css" media="only all and (max-width: 649px)">
 	</head>
 	<body>
 <section  id="abstract">
@@ -629,7 +631,7 @@ ga-courts:jc-wms
 		Guidance on the use DCAT in a weakly-axiomatized environment, such as schema.org, has been identified as a requirement to be satisfied in this revision of DCAT.
 	</p>
 	<p>
-		An <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/schema.ttl">RDF graph containing a proposed alignment of DCAT with schema.org</a> is available. Comments on this alignment are invited.
+		An <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/dcat-schema.ttl">RDF graph containing a proposed alignment of DCAT with schema.org</a> is available. Comments on this alignment are invited.
 	</p>
 </div>
 
@@ -646,7 +648,7 @@ The primary artefact <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-page
 Alongside it are a set of other RDF files that provide additional information, including:</p>
 <ol>
 	<li>
-		alignments to other vocabularies
+		alignments to other vocabularies, some of which are normative, and others which are for guidance only
 	</li>
 	<li>
 		additional axioms, which can be useful in some contexts
@@ -2392,32 +2394,420 @@ a:TestingActivity a prov:Activity;
 <section id="alignments">
 
 	<h2>Alignment with other metadata vocabularies</h2>
+	<p class="note">
+		See the wiki page on <a href="https://github.com/w3c/dxwg/wiki/Alignments-and-crosswalks">Alignments and Crosswalks</a> for more discussion.
+	</p>
+
+<section id="dcat-sdo" class="informative">
+	<h3>Schema.org</h3>
+	<p>
+		<a href="https://schema.org/">Schema.org</a> includes a number of types and properties based on the original DCAT work (see <a href="https://schema.org/Dataset">schema:Dataset</a> as a starting point),
+		and the index for Google's <a href="https://g.co/datasetsearch">Dataset Search service</a> relies on structured description in web pages about datasets based on both
+		<a href="https://developers.google.com/search/docs/data-types/dataset">schema.org and DCAT</a>.
+	</p>
+	<p>
+		Most general purpose web search services that pay attention to metadata at all rely primarily on schema.org, so the detailed relationship of DCAT to schema.org is of interest for data providers
+		who wish their datasets and services to be exposed through those indexes.
+	</p>
+	<p>
+		A <a href="https://www.w3.org/wiki/WebSchemas/Datasets">mapping between DCAT 2014 and schema.org</a> was discussed on the original proposal to extend schema.org for describing datasets and data catalogs.
+		Partial mappings between DCAT 2014 [[VOCAB-DCAT-20140116]] and <a href="https://schema.org/docs/schemas.html">schema.org</a> were provided earlier by the
+		<a href="https://ec-jrc.github.io/dcat-ap-to-schema-org/">European Commission</a> and the <a href="https://www.w3.org/2015/spatial/wiki/ISO_19115_-_DCAT_-_Schema.org_mapping">Spatial Data on the Web Working Group</a>.
+	</p>
+	<p>
+		A recommended mapping from the revised DCAT (this document) to schema.org is <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/dcat-schema.ttl">available in an RDF file</a>.
+		This mapping is axiomatized using the standard predicates <code>rdfs:subClassOf</code>, <code>rdfs:subPropertyOf</code>, <code>owl:equivalentClass</code>, <code>owl:equivalentProperty</code>, and also using the
+		annotation properties <code>schema:domainIncludes</code> and <code>schema:rangeIncludes</code> to match schema.org semantics. The mapping is summarized in the table below, considering the prefix <code>schema</code> as <code>http://schema.org/</code>.
+	</p>
+	<p class="issue" data-number="251">
+		This alignment of DCAT with schema.org is provisional and non-normative. Feedback is invited in the <a href="https://github.com/w3c/dxwg/issues/251">issue tracker</a>.
+	</p>
+
+<table>
+<thead>
+<tr>
+<th align="right">DCAT element</th>
+<th align="center">mapping property</th>
+<th>target element from schema.org</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">dc:description</td>
+<td align="center"><code>owl:equivalentProperty</code></td>
+<td>schema:description</td>
+</tr>
+<tr>
+<td align="right">dc:title</td>
+<td align="center"><code>owl:equivalentProperty</code></td>
+<td>schema:name</td>
+</tr>
+<tr>
+<td align="right">dct:format</td>
+<td align="center"><code>owl:equivalentProperty</code></td>
+<td>schema:encodingFormat</td>
+</tr>
+<tr>
+<td align="right">dct:identifier</td>
+<td align="center"><code>owl:equivalentProperty</code></td>
+<td>schema:identifier</td>
+</tr>
+<tr>
+<td align="right">dct:issued</td>
+<td align="center"><code>owl:equivalentProperty</code></td>
+<td>schema:datePublished</td>
+</tr>
+<tr>
+<td align="right">dct:language</td>
+<td align="center"><code>owl:equivalentProperty</code></td>
+<td>schema:inLanguage</td>
+</tr>
+<tr>
+<td align="right">dct:license</td>
+<td align="center"><code>owl:equivalentProperty</code></td>
+<td>schema:license</td>
+</tr>
+<tr>
+<td align="right">dct:modified</td>
+<td align="center"><code>owl:equivalentProperty</code></td>
+<td>schema:dateModified</td>
+</tr>
+<tr>
+<td align="right">dct:publisher</td>
+<td align="center"><code>owl:equivalentProperty</code></td>
+<td>schema:publisher</td>
+</tr>
+<tr>
+<td align="right">dct:spatial</td>
+<td align="center"><code>owl:equivalentProperty</code></td>
+<td>schema:spatialCoverage</td>
+</tr>
+<tr>
+<td align="right">dct:temporal</td>
+<td align="center"><code>owl:equivalentProperty</code></td>
+<td>schema:temporalCoverage</td>
+</tr>
+<tr>
+<td align="right">dct:title</td>
+<td align="center"><code>owl:equivalentProperty</code></td>
+<td>schema:name</td>
+</tr>
+<tr>
+<td align="right">dct:type</td>
+<td align="center"><code>owl:equivalentProperty</code></td>
+<td>schema:additionalType</td>
+</tr>
+<tr>
+<td align="right">dcat:Catalog</td>
+<td align="center"><code>owl:equivalentClass</code></td>
+<td>schema:DataCatalog</td>
+</tr>
+<tr>
+<td align="right" rowspan="2">dcat:DataService</td>
+<td align="center"><code>owl:equivalentClass</code></td>
+<td>schema:DataFeed</td>
+</tr>
+<tr>
+<td align="center" colspan="2">Unclear if a <code>DataFeed</code> is a data <strong>service</strong>, or a data <strong>collection</strong>. From a REST viewpoint there is no difference, but some commonly used APIs support additional queries, slices, etc which make the characterization of a service more efficient than listing the (potentially infinite) set of resources available from it. </td>
+</tr>
+<tr>
+<td align="right">dcat:Dataset</td>
+<td align="center"><code>owl:equivalentClass</code></td>
+<td>schema:Dataset</td>
+</tr>
+<tr>
+<td align="right">dcat:Distribution</td>
+<td align="center"><code>owl:equivalentClass</code></td>
+<td>schema:DataDownload</td>
+</tr>
+<tr>
+<td align="right">dcat:Resource</td>
+<td align="center"><code>rdfs:subClassOf</code></td>
+<td>schema:Thing</td>
+</tr>
+<tr>
+<td align="right" rowspan="3">dcat:accessURL</td>
+<td align="center"><code>rdfs:subPropertyOf</code></td>
+<td>schema:contentUrl</td>
+</tr>
+<tr>
+<td align="center"><code>schema:domainIncludes</code></td>
+<td>dcat:Distribution , schema:DataDownload</td>
+</tr>
+<tr>
+<td align="center"><code>schema:rangeIncludes</code></td>
+<td>rdfs:Resource , schema:URL</td>
+</tr>
+<tr>
+<td align="right" rowspan="3">dcat:byteSize</td>
+<td align="center"><code>rdfs:subPropertyOf</code></td>
+<td>schema:contentSize</td>
+</tr>
+<tr>
+<td align="center"><code>schema:domainIncludes</code></td>
+<td>dcat:Distribution , schema:DataDownload</td>
+</tr>
+<tr>
+<td align="center"><code>schema:rangeIncludes</code></td>
+<td>rdfs:Literal , schema:Text</td>
+</tr>
+<tr>
+<td align="right" rowspan="2">dcat:catalog</td>
+<td align="center"><code>schema:domainIncludes</code></td>
+<td>dcat:Catalog , schema:DataCatalog</td>
+</tr>
+<tr>
+<td align="center"><code>schema:rangeIncludes</code></td>
+<td>dcat:Catalog , schema:DataCatalog</td>
+</tr>
+<tr>
+<td align="right" rowspan="2">dcat:contactPoint</td>
+<td align="center"><code>owl:equivalentProperty</code></td>
+<td>schema:contactPoint</td>
+</tr>
+<tr>
+<td align="center"><code>schema:domainIncludes</code></td>
+<td>dcat:Resource , dcat:Dataset , dcat:DataService , schema:Dataset</td>
+</tr>
+<tr>
+<td align="right" rowspan="3">dcat:dataset</td>
+<td align="center"><code>owl:equivalentProperty</code></td>
+<td>schema:dataset</td>
+</tr>
+<tr>
+<td align="center"><code>schema:domainIncludes</code></td>
+<td>dcat:Catalog , schema:DataCatalog</td>
+</tr>
+<tr>
+<td align="center"><code>schema:rangeIncludes</code></td>
+<td>dcat:Dataset , schema:Dataset</td>
+</tr>
+<tr>
+<td align="right" rowspan="3">dcat:distribution</td>
+<td align="center"><code>owl:equivalentProperty</code></td>
+<td>schema:distribution</td>
+</tr>
+<tr>
+<td align="center"><code>schema:domainIncludes</code></td>
+<td>dcat:Dataset , schema:Dataset</td>
+</tr>
+<tr>
+<td align="center"><code>schema:rangeIncludes</code></td>
+<td>dcat:Distribution , schema:DataDownload</td>
+</tr>
+<tr>
+<td align="right" rowspan="3">dcat:downloadURL</td>
+<td align="center"><code>rdfs:subPropertyOf</code></td>
+<td>schema:contentUrl</td>
+</tr>
+<tr>
+<td align="center"><code>schema:domainIncludes</code></td>
+<td>dcat:Distribution , schema:DataDownload</td>
+</tr>
+<tr>
+<td align="center"><code>schema:rangeIncludes</code></td>
+<td>rdfs:Resource , schema:Thing</td>
+</tr>
+<tr>
+<td align="right" rowspan="4">dcat:keyword</td>
+<td align="center"><code>rdfs:subPropertyOf</code></td>
+<td>schema:keywords</td>
+</tr>
+<tr>
+<td align="center" colspan="2"><em>dcat:keyword is singular, schema:keywords is plural</em></td>
+</tr>
+<tr>
+<td align="center"><code>schema:domainIncludes</code></td>
+<td>dcat:Resource , dcat:Dataset , dcat:DataService , schema:Dataset</td>
+</tr>
+<tr>
+<td align="center"><code>schema:rangeIncludes</code></td>
+<td>rdfs:Literal , schema:Text</td>
+</tr>
+<tr>
+<td align="right" rowspan="3">dcat:landingPage</td>
+<td align="center"><code>rdfs:subPropertyOf</code></td>
+<td>schema:url</td>
+</tr>
+<tr>
+<td align="center"><code>schema:domainIncludes</code></td>
+<td>dcat:Resource , dcat:Dataset , dcat:DataService , schema:Dataset</td>
+</tr>
+<tr>
+<td align="center"><code>schema:rangeIncludes</code></td>
+<td>foaf:Document , schema:WebPage</td>
+</tr>
+<tr>
+<td align="right" rowspan="3">dcat:mediaType</td>
+<td align="center"><code>owl:equivalentProperty</code></td>
+<td>schema:encodingFormat</td>
+</tr>
+<tr>
+<td align="center"><code>schema:domainIncludes</code></td>
+<td>dcat:Distribution , schema:DataDownload</td>
+</tr>
+<tr>
+<td align="center"><code>schema:rangeIncludes</code></td>
+<td>dct:MediaTypeOrExtent , schema:Text , schema:url </td>
+</tr>
+<tr>
+<td align="right" rowspan="2">dcat:record</td>
+<td align="center"><code>schema:domainIncludes</code></td>
+<td>dcat:Catalog , schema:DataCatalog</td>
+</tr>
+<tr>
+<td align="center"><code>schema:rangeIncludes</code></td>
+<td>dcat:CatalogRecord</td>
+</tr>
+<tr>
+<td align="right" rowspan="2">dcat:service</td>
+<td align="center"><code>schema:domainIncludes</code></td>
+<td>dcat:Catalog , schema:DataCatalog</td>
+</tr>
+<tr>
+<td align="center"><code>schema:rangeIncludes</code></td>
+<td>dcat:DataService</td>
+</tr>
+<tr>
+<td align="right" rowspan="3">dcat:theme</td>
+<td align="center"><code>owl:equivalentProperty</code></td>
+<td>schema:about</td>
+</tr>
+<tr>
+<td align="center"><code>schema:domainIncludes</code></td>
+<td>dcat:Resource , dcat:Dataset , dcat:DataService , schema:Dataset</td>
+</tr>
+<tr>
+<td align="center"><code>schema:rangeIncludes</code></td>
+<td>skos:Concept , schema:Class</td>
+</tr>
+<tr>
+<td align="right" rowspan="2">dcat:themeTaxonomy</td>
+<td align="center"><code>schema:domainIncludes</code></td>
+<td>dcat:Catalog , schema:DataCatalog</td>
+</tr>
+<tr>
+<td align="center"><code>schema:rangeIncludes</code></td>
+<td>skos:ConceptScheme</td>
+</tr>
+<tr>
+<td align="right">foaf:Organization</td>
+<td align="center"><code>owl:equivalentClass</code></td>
+<td>schema:Organization</td>
+</tr>
+<tr>
+<td align="right">foaf:homepage</td>
+<td align="center"><code>owl:equivalentProperty</code></td>
+<td>schema:url</td>
+</tr>
+<tr>
+<td align="right">foaf:mbox</td>
+<td align="center"><code>owl:equivalentProperty</code></td>
+<td>schema:email</td>
+</tr>
+<!--
+<tr>
+<td colspan="3"><em>... and potentially of interest to be mixed-in for descriptions of scientific data</em></td>
+</tr>
+<tr>
+<td align="right">sosa:hasFeatureOfInterest</td>
+<td align="center"><code>rdfs:subPropertyOf</code></td>
+<td>schema:object</td>
+</tr>
+<tr>
+<td align="right">sosa:hasResult</td>
+<td align="center"><code>rdfs:subPropertyOf</code></td>
+<td>schema:result</td>
+</tr>
+<tr>
+<td align="right">sosa:madeByActuator</td>
+<td align="center"><code>rdfs:subPropertyOf</code></td>
+<td>schema:instrument</td>
+</tr>
+<tr>
+<td align="right">sosa:madeBySampler</td>
+<td align="center"><code>rdfs:subPropertyOf</code></td>
+<td>schema:instrument</td>
+</tr>
+<tr>
+<td align="right">sosa:madeBySensor</td>
+<td align="center"><code>rdfs:subPropertyOf</code></td>
+<td>schema:instrument</td>
+</tr>
+<tr>
+<td align="right">sosa:observedProperty</td>
+<td align="center"><code>owl:equivalentProperty</code></td>
+<td>schema:variableMeasured</td>
+</tr>
+<tr>
+<td align="right">sosa:phenomenonTime</td>
+<td align="center"><code>rdfs:subPropertyOf</code></td>
+<td>schema:temporalCoverage</td>
+</tr>
+<tr>
+<td align="right">sosa:resultTime</td>
+<td align="center"><code>rdfs:subPropertyOf</code></td>
+<td>schema:endTime</td>
+</tr>
+<tr>
+<td align="right">sosa:usedProcedure</td>
+<td align="center"><code>dcat:hasSubProperty</code></td>
+<td>schema:measurementTechnique</td>
+</tr>
+-->
+</tbody>
+</table>
+
+</section>
+
+
+<section id="dcat-prov-o" class="informative">
+	<h3>PROV-O</h3>
 <p class="issue" data-number="128">
 	An alignment of DCAT with PROV-O [[PROV-O]] is being prepared. A <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/prov.ttl">provisional version</a> is available.
 </p>
+
+</section>
+
+<section id="dcat-dats" class="informative">
+	<h3>DATS</h3>
 <p class="issue" data-number="149">
 	An alignment of DCAT with DATS [[DATS]] is being considered.
 </p>
+
+</section>
+
+<section id="dcat-hcls" class="informative">
+	<h3>HCLS</h3>
 <p class="issue" data-number="150">
 	An alignment of DCAT with HCLS [[HCLS-Dataset]] is being prepared.
 </p>
+
+</section>
+
+<section id="dcat-iso-19115" class="informative">
+	<h3>ISO 19115</h3>
 <p class="issue" data-number="151">
 	An alignment of DCAT with ISO 19115 [[ISO-19115-1]] is being prepared.
 </p>
+
+</section>
+
+<section id="dcat-datacite" class="informative">
+	<h3>Datacite</h3>
 <p class="issue" data-number="152">
 	An alignment of DCAT with Datacite metadata schema [[DataCite]] is being prepared.
 </p>
+
+</section>
+
+<section id="dcat-ddi" class="informative">
+	<h3>DDI</h3>
 <p class="issue" data-number="164">
 	An alignment of DCAT with DDI [[DDI]] is being prepared.
 </p>
-<p class="issue" data-number="251">
-	An alignment of DCAT with schema.org is being prepared. A <a href="https://github.com/w3c/dxwg/blob/gh-pages/dcat/rdf/schema.ttl">provisional version</a> is available.
-</p>
 
-<p class="note">
-	See the wiki page on <a href="https://github.com/w3c/dxwg/wiki/Alignments-and-crosswalks">Alignments and Crosswalks</a> for more discussion.
-</p>
-
+</section>
 
 </section>
 
