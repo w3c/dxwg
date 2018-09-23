@@ -13,6 +13,7 @@
 @prefix schema: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix ssn: <http://www.w3.org/ns/ssn/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 dc:description
@@ -165,6 +166,30 @@ dcat:themeTaxonomy
 schema:measurementTechnique
   rdfs:subPropertyOf sosa:usedProcedure  ;
 .
+schema:usesDevice
+  rdfs:subPropertyOf ssn:implementedBy  ;
+.
+sosa:FeatureOfInterest
+  rdfs:subClassOf schema:Thing ;
+.
+sosa:ObservableProperty
+  rdfs:subClassOf schema:Property ;
+.
+sosa:Observation
+  rdfs:subClassOf schema:Action ;
+.
+sosa:Platform
+  rdfs:subClassOf schema:Thing ;
+.
+sosa:Procedure
+  rdfs:subClassOf schema:Intangible ;
+.
+sosa:Result
+  rdfs:subClassOf schema:Thing ;
+.
+sosa:Sensor
+  rdfs:subClassOf schema:Thing ;
+.
 sosa:hasFeatureOfInterest
   rdfs:subPropertyOf schema:object ;
 .
@@ -191,6 +216,9 @@ sosa:resultTime
 .
 sosa:usedProcedure
   dcat:hasSubProperty schema:measurementTechnique ;
+.
+ssn:implementedBy
+  dcat:hasSubProperty schema:usesDevice ;
 .
 foaf:Organization
   owl:equivalentClass schema:Organization ;
