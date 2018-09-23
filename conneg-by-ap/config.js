@@ -33,7 +33,8 @@ var respecConfig = {
     inlineCSS: "true",
     lint: "false",
     noRecTrack: "true",
-    issueBase: "https://github.com/w3c/dxwg/issues",
+    issueBase: "https://github.com/w3c/dxwg/issues/",
+    github: "https://github.com/w3c/dxwg/issues/",
     localBiblio: {
         "PROF-CONNEG": {
             href: "https://www.w3.org/TR/conneg-by-ap/",
