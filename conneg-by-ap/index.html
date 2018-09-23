@@ -41,6 +41,7 @@
         </p>
         <ul>
           <li>[[PROF-GUIDE]] (Recommendation), the top-level general profiling guidance document giving an overview of all other documents</li>
+          <li>[[PROF-DESC]] (WG Note), a formal ontology describing objects related to profiles</li>
           <li><strong>[PROF-CONNEG]</strong> (Recommendation), <strong>this document</strong>, Specific guidance on how to negotiate for Internet resource content using profiles</li>
           <li>[[PROF-IETF]] (<a href="http://www.ietf.org">IETF</a> <a href="http://www.ietf.org/standards/ids/">Internet-Draft</a>), HTTP Headers for HTTP content negotiation by profile</li>
         </ul>
@@ -230,8 +231,47 @@
       <div class="req-response">
         <p class="respTitle">RESPONSE FOR Req. 73</p>
         <p>
-
+          This requirement is addressed by suggesting how an Internet resource in general, rather than specifically a
+          <code>dcat:Dataset</code> or <code>dcat:Distribution</code> should list profiles it implements. A DCAT-
+          specific solution should not be any different from the general case.
         </p>
+        <div class="note" title="">Profile definition and constraints on properties are not addressed here. See
+          [[PROF-GUIDE]].</div>
+        <p>
+          This requirement is taken to mean "create a way to list the profiles implemented by a Internet resource for
+          <em>humans</em> and <em>machines</em> to use". For the former (humans), the options are:
+        </p>
+        <ul>
+          <li>
+            discovery via HTML representation
+            <ul>
+              <li>see [[PROF-GUIDE]]</li>
+              <li>the approach recommended is to provide an <em>alternate profiles</em> resource for the original
+                resource located at <code>RESOURCE_URI + ?_profile=alternates</code> which lists, at a minimum, the
+                <em>profiles</em>, <em>media types</em> &amp; <em>languages</em> available, as per the <em>alternate
+                  profiles</em> guidance.
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div class="issue" data-number="392"></div>
+        <p>For the latter (machines):</p>
+        <ul>
+          <li>
+            discovery via HTTP
+            <ul>
+              <li>see [[PROF-IETF]]</li>
+              <li>HTTP mechanics are described that allow clients to negotiate with servers for profile listings</li>
+            </ul>
+          </li>
+          <li>
+            discovery via RDF graph
+            <ul>
+              <li>see [[PROF-DESC]]</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="issue" data-number="393"></div>
       </div>
       <div class="issue" data-number="74"></div>
       <div class="req-response">
