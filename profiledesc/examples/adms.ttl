@@ -1,0 +1,114 @@
+# baseURI: http://example.org/profile/adms
+# imports: http://purl.org/dc/elements/1.1/
+# imports: https://w3c.github.io/dxwg/profiledesc
+
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix padms: <http://example.org/adms#> .
+@prefix pd: <https://w3c.github.io/dxwg/profiledesc#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+padms:ADMS
+  rdf:type pd:Profile ;
+  rdfs:label "ADMS" ;
+  pd:profileOf padms:DCAT2014 ;
+  pd:resource padms:ADMS-note ;
+.
+padms:ADMS-note
+  rdf:type pd:ImplResourceDesc ;
+  dct:conformsTo pd:W3Cnote ;
+  dct:format "text/html" ;
+  rdfs:label "ADMS specification document" ;
+  pd:artefact <https://www.w3.org/TR/vocab-adms/> ;
+  pd:resourceRole pd:Spec ;
+.
+padms:ADMS-rdf
+  rdf:type pd:ImplResourceDesc ;
+  dct:conformsTo <https://www.w3.org/TR/owl2-rdf-based-semantics/> ;
+  dct:conformsTo <https://www.w3.org/TR/rdf-schema/> ;
+  dct:format "text/turtle" ;
+  rdfs:label "ADMS RDF vocabulary" ;
+  pd:artefact <https://www.w3.org/ns/adms> ;
+  pd:resourceRole pd:Vocab ;
+.
+padms:DCAT2014
+  rdf:type pd:BaseSpecification ;
+  rdfs:label "DCAT 2014" ;
+  pd:resource padms:DCAT2014-rdf ;
+  pd:resource padms:DCAT2014-rec ;
+.
+padms:DCAT2014-rdf
+  rdf:type pd:ImplResourceDesc ;
+  dct:conformsTo <https://www.w3.org/TR/owl2-rdf-based-semantics/> ;
+  dct:conformsTo <https://www.w3.org/TR/rdf-schema/> ;
+  dct:format "text/turtle" ;
+  rdfs:label "DCAT 2014 RDF vocabulary" ;
+  pd:artefact <https://www.w3.org/ns/dcat.ttl> ;
+  pd:resourceRole pd:Vocab ;
+.
+padms:DCAT2014-rec
+  rdf:type pd:ImplResourceDesc ;
+  dct:conformsTo pd:W3Crec ;
+  dct:format "text/html" ;
+  rdfs:label "DCAT 2014 Recommendation document" ;
+  pd:artefact <https://www.w3.org/TR/2014/REC-vocab-dcat-20140116/> ;
+  pd:resourceRole pd:Spec ;
+.
+<http://example.org/profile/adms>
+  rdf:type owl:Ontology ;
+  dct:created "2018-09-18" ;
+  dct:creator <https://orcid.org/0000-0002-3884-3420> ;
+  rdfs:comment "A description of the ADMS profile of DCAT, formalised using the profdesc ontology" ;
+  rdfs:label "ADMS profile of DCAT" ;
+  owl:imports <http://purl.org/dc/elements/1.1/> ;
+  owl:imports <https://w3c.github.io/dxwg/profiledesc> ;
+  skos:scopeNote "Test of profdesc ontology" ;
+.
+pd:Guidance
+  rdf:type pd:ImplResourceRole ;
+  rdfs:comment "Document that provides guidance on the recommended use of the standard" ;
+  rdfs:label "Guidance document" ;
+.
+pd:ISOstandard
+  rdf:type dct:Standard ;
+  rdfs:label "ISO Standards Document" ;
+.
+pd:ISOtr
+  rdf:type dct:Standard ;
+  rdfs:label "ISO Technical Recommendation Document" ;
+.
+pd:OGCstandard
+  rdf:type dct:Standard ;
+  rdfs:label "OGC Standards Document" ;
+.
+pd:Spec
+  rdf:type pd:ImplResourceRole ;
+  rdfs:comment "Reference document which describes the standard" ;
+  rdfs:label "Specification document" ;
+.
+pd:Validation
+  rdf:type pd:ImplResourceRole ;
+  rdfs:comment "Artefact that is used directly in validation, such as XSD, Schematron, SHACL, ShEx" ;
+  rdfs:label "Validation" ;
+.
+pd:Vocab
+  rdf:type pd:ImplResourceRole ;
+  rdfs:comment """Machine readable definition of a vocabulary or schema
+Typically expressed in RDF, XSD, UML DDL, Table Schema or similar""" ;
+  rdfs:label "Vocabulary formalization" ;
+.
+pd:W3Cnote
+  rdf:type dct:Standard ;
+  rdfs:label "W3C Working Group Note Document" ;
+.
+pd:W3Crec
+  rdf:type dct:Standard ;
+  rdfs:label "W3C Recommendation Document" ;
+.
+pd:W3Cucr
+  rdf:type dct:Standard ;
+  rdfs:label "W3C Use Cases and Requirements Document" ;
+.
