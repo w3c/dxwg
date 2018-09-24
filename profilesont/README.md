@@ -8,25 +8,23 @@ Development of this ontology is part of the work of the [Data Exchange Working G
 ## Ontology components
 The main files of this ontology are:
 
-* [index.html](https://w3c.github.io/dxwg/profiledesc/) - ontology description as a web page (HTML)
-* [profiledesc.ttl](profiledesc.ttl) - ontology source (RDF, turtle)
-* [profiledesc.png](profiledesc.png) - ontology diagram (PNG)
+* [index.html](https://w3c.github.io/dxwg/profilesont/) - ontology description as a web page (HTML)
+* [profilesont.ttl](profilesont.ttl) - ontology source (RDF, turtle)
+* [profilesont.png](profilesont.png) - ontology diagram (PNG)
 
 Additional components:
 
 * **Examples**
   * [examples](examples/) - this folder contains a series of scenarios in which the Profiles Description Ontology is used to model existing and likely future profiling situations
 * **Roles vocabulary** - a small vocabulary of Implementation Resource Descriptor Roles
-  * [impl_res_roles.html](https://w3c.github.io/dxwg/profiledesc/impl_res_roles.html) - vocab as a web page (HTML)
-  * [impl_res_roles.ttl](impl_res_roles.ttl) - vocab source (RDF, turtle)
-  * [impl_res_roles.png](impl_res_roles.png) - vocab diagram (PNG)
+  * [resource_roles.html](https://w3c.github.io/dxwg/profilesont/resource_roles.html) - vocab as a web page (HTML)
+  * [resource_roles.ttl](resource_roles.ttl) - vocab source (RDF, turtle)
+  * [resource_roles.png](resource_roles.png) - vocab diagram (PNG)
 * **Alignments**
-  * alignment of ProfileDesc to DCAT 1.1 alignment
-    * note that this is alignment to the 2018 version of DCAT also being produced by the DXWG
-  * [profiledesc_dcat_alignment.html](https://w3c.github.io/dxwg/profiledesc/profiledesc_dcat_alignment.html) - alignment as a web page (HTML)
-  * [profiledesc_dcat_alignment.ttl](profiledesc_dcat_alignment.ttl) - alignment source (RDF, turtle)
-  * [profiledesc_dcat_alignment.png](profiledesc_dcat_alignment_classes.png) - alignment diagram for classes (PNG)
-  * [profiledesc_dcat_alignment.png](profiledesc_dcat_alignment_classes.png) - alignment diagram for properties (PNG)
+  * within the main ontology document, Section 'Alignments'
+  * [alignment_dcat.ttl](alignment_dcat.ttl) - alignment source (RDF, turtle)
+  * [alignment_dcat_classes.png](alignment_dcat_classes.png) - alignment diagram for classes (PNG)
+  * [alignment_dcat_properties.png](alignment_dcat_classes.png) - alignment diagram for properties (PNG)
 
 
 ## Status

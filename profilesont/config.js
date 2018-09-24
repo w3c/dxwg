@@ -1,7 +1,7 @@
 var respecConfig = {
     specStatus: "ED",
     shortName: "vocab-prof",
-    edDraftURI: "https://w3c.github.io/dxwg/profiledesc/",
+    edDraftURI: "https://w3c.github.io/dxwg/profilesont/",
     editors: [
       {
         name: "Rob Atkinson",
@@ -22,7 +22,8 @@ var respecConfig = {
     inlineCSS: "true",
     lint: "false",
     noRecTrack: "true",
-    issueBase: "https://github.com/w3c/dxwg/issues",
+    issueBase: "https://github.com/w3c/dxwg/issues/",
+    github:    "https://github.com/w3c/dxwg/issues/",
     localBiblio: {
         DCAP: {
             authors: [

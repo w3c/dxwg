@@ -83,7 +83,7 @@ _:v3 a ereg:View ;
 ![](alternates.png)
 **Figure 1**: Graphical representation of Listing 1
 
-## Proposal to use profiledesc
+## Proposal to use profilesont
 We propose to model the contents of the Alternates View of objects using this Profiles Description Ontology. For the example in Listing 1 & Figure 1, the modelling could be as per Figure 2 below.
 
 ![](alternates_profiles.png)
