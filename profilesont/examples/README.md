@@ -1,4 +1,4 @@
-# Profile Descriptions Ontology examples
+# Profiles Ontology examples
 Here are some examples of the Profile Descriptions Ontology modelling existing or expected profiles.
 
 ### DCAT-AP
@@ -8,7 +8,7 @@ The current state of DCAT-AP usage already exhibits nested inheritance and multi
 
 The degree to which categorisation of roles is explicitly supported is a subject for discussion.
 
-The RDF for this example is in [profiledesc_examples.ttl](profiledesc_examples.ttl).
+The RDF for this example is in [profilesont_examples.ttl](profilesont_examples.ttl).
 
 ![](eg_dcat-ap.png)  
 Figure 1: DCAT-AP profile of DCAT
@@ -21,7 +21,7 @@ Figure 2: Further DCAT-AP profiling
 ### DCAT
 Depending on backwards compatibility outcomes, it is possible that the original DCAT (2014) may be a strict profile of the newer version of DCAT (2018) currently under consideration. This is because the 2018 version will be broader (relaxed constraints and with more general classes available) than the original 2014 version and entirely backwards-compatible with it.
 
-The RDF for this example is in [profiledesc_examples.ttl](profiledesc_examples.ttl).
+The RDF for this example is in [profilesont_examples.ttl](profilesont_examples.ttl).
 
 ![](eg_dcat.png)  
 Figure 3: DCAT profiles
@@ -51,4 +51,4 @@ Figure 5: Geoscience Australia profile
 ![](eg_ogc.png)  
 Figure 6: Modelling of current OGC WMS and WMTS profiling
 
-The RDF for this example is in [profiledesc_examples.ttl](profiledesc_examples.ttl).
+The RDF for this example is in [profilesont_examples.ttl](profilesont_examples.ttl).
