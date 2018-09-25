@@ -1,0 +1,113 @@
+# baseURI: http://www.w3.org/ns/dcat/qualrel
+# imports: http://www.w3.org/ns/dcat/prov
+
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix qualrel: <http://www.w3.org/ns/dcat/qualrel/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+dcterms:contributor
+  owl:propertyChainAxiom (
+      [
+        rdf:type owl:ObjectProperty ;
+        rdfs:range [
+            rdf:type owl:Class ;
+            rdfs:subClassOf prov:Attribution ;
+            rdfs:subClassOf [
+                rdf:type owl:Restriction ;
+                owl:hasValue <http://registry.it.csiro.au/def/isotc211/CI_RoleCode/contributor> ;
+                owl:onProperty <http://www.w3.org/ns/dcat#hadRole> ;
+              ] ;
+          ] ;
+        rdfs:subPropertyOf prov:qualifiedAttribution ;
+      ]
+      prov:agent
+    ) ;
+.
+dcterms:creator
+  owl:propertyChainAxiom (
+      [
+        rdf:type owl:ObjectProperty ;
+        rdfs:range [
+            rdf:type owl:Class ;
+            rdfs:subClassOf prov:Attribution ;
+            rdfs:subClassOf [
+                rdf:type owl:Restriction ;
+                owl:hasValue <https://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/originator> ;
+                owl:onProperty <http://www.w3.org/ns/dcat#hadRole> ;
+              ] ;
+          ] ;
+        rdfs:subPropertyOf prov:qualifiedAttribution ;
+      ]
+      prov:agent
+    ) ;
+.
+dcterms:publisher
+  owl:propertyChainAxiom (
+      [
+        rdf:type owl:ObjectProperty ;
+        rdfs:range [
+            rdf:type owl:Class ;
+            rdfs:subClassOf prov:Attribution ;
+            rdfs:subClassOf [
+                rdf:type owl:Restriction ;
+                owl:hasValue <http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/publisher> ;
+                owl:onProperty <http://www.w3.org/ns/dcat#hadRole> ;
+              ] ;
+          ] ;
+        rdfs:subPropertyOf prov:qualifiedAttribution ;
+      ]
+      prov:agent
+    ) ;
+.
+<http://www.w3.org/ns/dcat#QualifiedRelationship>
+  rdf:type owl:Class ;
+  rdfs:comment "An instance of dcat:QualifiedRelationship provides additional descriptions about the binary dct:relation relation from some Entity to a related Entity."@en ;
+  rdfs:label "Qualified relation" ;
+  rdfs:subClassOf owl:Thing ;
+  prov:unqualifiedForm dcterms:relation ;
+.
+<http://www.w3.org/ns/dcat#Role>
+  rdf:type owl:Class ;
+  rdfs:label "Role" ;
+  rdfs:seeAlso prov:hadRole ;
+  rdfs:subClassOf owl:Thing ;
+  prov:category "qualified" ;
+  prov:definition "A role is the function of an entity or agent with respect to an entity."@en ;
+.
+<http://www.w3.org/ns/dcat#hadRole>
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "The _optional_ Role that an Agent or other Entity assumed in the context of an Entity."@en ;
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          prov:Attribution
+          <http://www.w3.org/ns/dcat#QualifiedRelationship>
+        ) ;
+    ] ;
+  rdfs:label "had role" ;
+  rdfs:range prov:Role ;
+  prov:category "qualified" ;
+.
+<http://www.w3.org/ns/dcat#qualifiedRelation>
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "If this Entity dct:relation Entity :e, then it can qualify how it was derived using dcat:qualifiedRelation [ a dcat:QualifiedRelationship ;  prov:entity :e; :foo :bar ]."@en ;
+  rdfs:domain prov:Entity ;
+  rdfs:range <http://www.w3.org/ns/dcat#QualifiedRelationship> ;
+  rdfs:subPropertyOf prov:qualifiedInfluence ;
+  prov:category "qualified" ;
+  prov:unqualifiedForm dcterms:relation ;
+.
+<http://www.w3.org/ns/dcat/qualrel>
+  rdf:type owl:Ontology ;
+  dcterms:created "2018-09-25"^^xsd:date ;
+  dcterms:creator <http://orcid.org/0000-0002-3884-3420> ;
+  dcterms:creator <https://www.w3.org/2017/dxwg/wiki/Main_Page> ;
+  rdfs:comment "RDF graph containing extensions to DCAT to support qualified relations" ;
+  rdfs:label "DCAT qualified relations" ;
+  rdfs:seeAlso <https://github.com/w3c/dxwg/wiki/Qualified-relations> ;
+  owl:imports <http://www.w3.org/ns/dcat/prov> ;
+.
