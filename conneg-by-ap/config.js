@@ -33,8 +33,19 @@ var respecConfig = {
     inlineCSS: "true",
     lint: "false",
     noRecTrack: "true",
-    issueBase: "https://github.com/w3c/dxwg/issues",
+    issueBase: "https://github.com/w3c/dxwg/issues/",
+    github: "https://github.com/w3c/dxwg/issues/",
     localBiblio: {
+        "PROF-DESC": {
+            editors: [
+                "Rob Atkinson",
+                "Nicholas J. Car"
+            ],
+            href: "https://www.w3.org/TR/vocab-prof/",
+            title: "Profile Descriptions ontology",
+            date: "2018-09-23",
+            status: "W3C Editor's Draft"
+        },
         "PROF-CONNEG": {
             href: "https://www.w3.org/TR/conneg-by-ap/",
             title: "Content Negotiation by Profile",
