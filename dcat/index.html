@@ -96,7 +96,8 @@
 		<tr><td>prov</td><td>http://www.w3.org/ns/prov#</td></tr>
 		<tr><td>rdf</td><td>http://www.w3.org/1999/02/22-rdf-syntax-ns#</td></tr>
     <tr><td>rdfs</td><td>http://www.w3.org/2000/01/rdf-schema#</td></tr>
-    <tr><td>skos</td><td>http://www.w3.org/2004/02/skos/core#</td></tr>
+		<tr><td>schema</td><td>https://schema.org/</td></tr>
+		<tr><td>skos</td><td>http://www.w3.org/2004/02/skos/core#</td></tr>
     <tr><td>vcard</td><td>http://www.w3.org/2006/vcard/ns#</td></tr>
     <tr><td>xsd</td><td>http://www.w3.org/2001/XMLSchema#</td></tr>
   </tbody>
@@ -189,7 +190,7 @@ See <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>. </p>
 
 
 <p id="blankNodes">RDF allows resources to have global identifiers (IRIs) or to be blank nodes.  Blank nodes can be used to denote resources without explicitly naming them with an IRI. They can appear in the subject and object position of a triple [[rdf11-primer]].
-While blank nodes may offer flexibility for some use cases, in a Linked Data context, blank nodes limit our ability to collaboratively annotate data. A  blank node resource cannot be the target of a link and it can't be annotated with new information from new sources. As one of the biggest benefits of the Linked Data approach is that "anyone can say anything anywhere", use of blank nodes undermines some of the advantages we can gain from wide adoption of the RDF model. Even within the closed world of a single application dataset, use of blank nodes can quickly become limiting when integrating new data [[LinkedDataPatterns]]. 
+While blank nodes may offer flexibility for some use cases, in a Linked Data context, blank nodes limit our ability to collaboratively annotate data. A  blank node resource cannot be the target of a link and it can't be annotated with new information from new sources. As one of the biggest benefits of the Linked Data approach is that "anyone can say anything anywhere", use of blank nodes undermines some of the advantages we can gain from wide adoption of the RDF model. Even within the closed world of a single application dataset, use of blank nodes can quickly become limiting when integrating new data [[LinkedDataPatterns]].
 For these reasons, instances of the DCAT main classes <em title="SHOULD" class="rfc2119">SHOULD</em> have a global identifier, and use of blank nodes is generally discouraged when encoding DCAT in RDF.</p>
 
 <p class="note">All RDF examples in this document are written in Turtle syntax [[Turtle]] and many are available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a>. </p>
@@ -201,41 +202,47 @@ For these reasons, instances of the DCAT main classes <em title="SHOULD" class="
 
 <p>First, the catalog description:
 </p>
-<pre>  &nbsp;:catalog
-       a dcat:Catalog&nbsp;;
-       dct:title "Imaginary Catalog"&nbsp;;
-       rdfs:label "Imaginary Catalog"&nbsp;;
-       foaf:homepage &lt;http://example.org/catalog&gt;&nbsp;;
-       dct:publisher&nbsp;:transparency-office&nbsp;;
-       dct:language &lt;http://id.loc.gov/vocabulary/iso639-1/en&gt; &nbsp;;
-       dcat:dataset&nbsp;:dataset-001&nbsp; , :dataset-002 , :dataset-003 ;
-       .
-</pre>
+<div class="example">
+  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+:catalog
+  a dcat:Catalog&nbsp;;
+  dct:title "Imaginary Catalog"&nbsp;;
+  rdfs:label "Imaginary Catalog"&nbsp;;
+  foaf:homepage &lt;http://example.org/catalog&gt;&nbsp;;
+  dct:publisher&nbsp;:transparency-office&nbsp;;
+  dct:language &lt;http://id.loc.gov/vocabulary/iso639-1/en&gt; &nbsp;;
+  dcat:dataset&nbsp;:dataset-001&nbsp; , :dataset-002 , :dataset-003 ;
+  .
+</pre></div>
 <p>The publisher of the catalog has the relative URI&nbsp;:transparency-office. Further description of the publisher can be provided as in the following example:
 </p>
-<pre>  &nbsp;:transparency-office
-       a foaf:Organization&nbsp;;
-       rdfs:label "Transparency Office"&nbsp;;
-       .
-</pre>
+<div class="example">
+  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+:transparency-office
+  a foaf:Organization&nbsp;;
+  rdfs:label "Transparency Office"&nbsp;;
+  .
+</pre></div>
 <p>The catalog lists each of its datasets via the dcat:dataset property. In the example above, an example dataset was mentioned with the relative URI&nbsp;:dataset-001. A possible description of it using DCAT is shown below:
 </p>
-<pre>  &nbsp;:dataset-001
-       a dcat:Dataset&nbsp;;
-       dct:title "Imaginary dataset"&nbsp;;
-       dcat:keyword "accountability","transparency" ,"payments"&nbsp;;
-	   dct:creator&nbsp;:finance-employee-001&nbsp;;
-       dct:issued "2011-12-05"^^xsd:date&nbsp;;
-       dct:modified "2011-12-05"^^xsd:date&nbsp;;
-       dcat:contactPoint &lt;http://example.org/transparency-office/contact&gt; ;
-       dct:temporal &lt;http://reference.data.gov.uk/id/quarter/2006-Q1&gt; ;
-       dct:spatial &lt;http://www.geonames.org/6695072&gt; ;
-       dct:publisher&nbsp;:finance-ministry&nbsp;;
-       dct:language &lt;http://id.loc.gov/vocabulary/iso639-1/en&gt; &nbsp;;
-       dct:accrualPeriodicity &lt;http://purl.org/linked-data/sdmx/2009/code#freq-W&gt; &nbsp;;
-       dcat:distribution&nbsp;:dataset-001-csv&nbsp;;
-       .
-</pre>
+<div class="example">
+  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+:dataset-001
+  a dcat:Dataset&nbsp;;
+  dct:title "Imaginary dataset"&nbsp;;
+  dcat:keyword "accountability","transparency" ,"payments"&nbsp;;
+  dct:creator&nbsp;:finance-employee-001&nbsp;;
+  dct:issued "2011-12-05"^^xsd:date&nbsp;;
+  dct:modified "2011-12-05"^^xsd:date&nbsp;;
+  dcat:contactPoint &lt;http://example.org/transparency-office/contact&gt; ;
+  dct:temporal &lt;http://reference.data.gov.uk/id/quarter/2006-Q1&gt; ;
+  dct:spatial &lt;http://www.geonames.org/6695072&gt; ;
+  dct:publisher&nbsp;:finance-ministry&nbsp;;
+  dct:language &lt;http://id.loc.gov/vocabulary/iso639-1/en&gt; &nbsp;;
+  dct:accrualPeriodicity &lt;http://purl.org/linked-data/sdmx/2009/code#freq-W&gt; &nbsp;;
+  dcat:distribution&nbsp;:dataset-001-csv&nbsp;;
+  .
+</pre></div>
 
 <p>In order to express the frequency of update in the example above, we chose to use an instance from the <a href="http://www.w3.org/TR/vocab-data-cube/#dsd-cog">Content-Oriented Guidelines</a> developed as part
 of the <abbr title="World Wide Web Consortium">W3C</abbr> Data Cube Vocabulary [[VOCAB-DATA-CUBE]] efforts. Additionally, we chose to describe the spatial and temporal coverage of the example dataset using URIs from <a href="http://www.geonames.org/">Geonames</a> and the Interval dataset (originally available from http://reference.data.gov.uk/id/interval) from data.gov.uk, respectively. A contact point is also provided where comments and feedback about the dataset can be sent. Further details about the contact point, such as email address or telephone number, can be provided using vCard [[VCARD-RDF]].</p>
@@ -243,40 +250,44 @@ of the <abbr title="World Wide Web Consortium">W3C</abbr> Data Cube Vocabulary [
 <p>The dataset distribution :dataset-001-csv can be downloaded as a 5Kb CSV file. This information is
 represented via an RDF resource of type dcat:Distribution.
 </p>
-<pre>  &nbsp;:dataset-001-csv
-       a dcat:Distribution&nbsp;;
-       dcat:downloadURL &lt;http://www.example.org/files/001.csv&gt; ;
-       dct:title "CSV distribution of imaginary dataset 001" ;
-       dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/csv&gt; ;
-       dcat:byteSize "5120"^^xsd:decimal ;
-       .
-</pre>
+<div class="example">
+  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+:dataset-001-csv
+  a dcat:Distribution&nbsp;;
+  dcat:downloadURL &lt;http://www.example.org/files/001.csv&gt; ;
+  dct:title "CSV distribution of imaginary dataset 001" ;
+  dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/csv&gt; ;
+  dcat:byteSize "5120"^^xsd:decimal ;
+  .
+</pre></div>
 </section>
 
 <section id="classifying-datasets">
 <h3>Classifying datasets thematically</h3>
 <p>The catalog classifies its datasets according to a set of domains represented by the relative URI&nbsp;:themes. SKOS can be used to describe the domains used:
 </p>
-<pre>  &nbsp;:catalog&nbsp;dcat:themeTaxonomy&nbsp;:themes&nbsp;.
-</pre>
+<div class="example">
+  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+:catalog&nbsp;dcat:themeTaxonomy&nbsp;:themes&nbsp;.
 
-<pre>  &nbsp;:themes
-       a skos:ConceptScheme&nbsp;;
-       skos:prefLabel "A set of domains to classify documents"&nbsp;;
-       .
-</pre>
+:themes
+  a skos:ConceptScheme&nbsp;;
+  skos:prefLabel "A set of domains to classify documents"&nbsp;;
+  .
 
-<pre>  &nbsp;:dataset-001 dcat:theme&nbsp;:accountability&nbsp; .
-</pre>
+:dataset-001 dcat:theme&nbsp;:accountability&nbsp; .
+</pre></div>
 <p>Notice that this dataset is classified under the domain represented by the relative URI&nbsp;:accountability.
 It is recommended to define the concept as part of the concepts scheme identified by the URI&nbsp;:themes that was used to describe the catalog domains. An example SKOS description:
 </p>
-<pre>  &nbsp;:accountability
-       a skos:Concept&nbsp;;
-       skos:inScheme&nbsp;:themes&nbsp;;
-       skos:prefLabel "Accountability"&nbsp;;
-       .
-</pre>
+<div class="example">
+  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+:accountability
+  a skos:Concept&nbsp;;
+  skos:inScheme&nbsp;:themes&nbsp;;
+  skos:prefLabel "Accountability"&nbsp;;
+  .
+</pre></div>
 </section>
 
 <section id="classifying-dataset-types">
@@ -289,39 +300,41 @@ It is recommended to define the concept as part of the concepts scheme identifie
 <p>
 	In the following examples a (notional) dataset is classified separately using a values from different vocabularies.
 </p>
-<pre>
+<div class="example">
+  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 :dataset-001
-	rdf:type	dcat:Dataset ;
-	dct:type	&lt;http://purl.org/dc/dcmitype/Text&gt; ;
-	.
+  rdf:type  dcat:Dataset ;
+  dct:type  &lt;http://purl.org/dc/dcmitype/Text&gt; ;
+  .
 
 :dataset-001
-	rdf:type	dcat:Dataset ;
-	dct:type	&lt;http://id.loc.gov/vocabulary/marcgt/man&gt; ;
-	.
-</pre>
+  rdf:type  dcat:Dataset ;
+  dct:type  &lt;http://id.loc.gov/vocabulary/marcgt/man&gt; ;
+  .
+</pre></div>
 <p>
 	It is also possible for multiple classifications to be present in a single description.
 </p>
-<pre>
+<div class="example">
+  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 :dataset-001
-	rdf:type	dcat:Dataset ;
-	dct:type	&lt;http://purl.org/dc/dcmitype/Text&gt; ;
-	dct:type	&lt;http://id.loc.gov/vocabulary/marcgt/man&gt; ;
-	dct:type	&lt;http://registry.it.csiro.au/def/datacite/resourceType/Text&gt; ;
-	dct:type	&lt;http://registry.it.csiro.au/def/re3data/contentType/doc&gt; ;
+  rdf:type  dcat:Dataset ;
+  dct:type  &lt;http://purl.org/dc/dcmitype/Text&gt; ;
+  dct:type  &lt;http://id.loc.gov/vocabulary/marcgt/man&gt; ;
+  dct:type  &lt;http://registry.it.csiro.au/def/datacite/resourceType/Text&gt; ;
+  dct:type  &lt;http://registry.it.csiro.au/def/re3data/contentType/doc&gt; ;
 .
 
 &lt;http://registry.it.csiro.au/def/datacite/resourceType/Text&gt;
-	rdfs:label "Text" ;
-	dct:source "DataCite resource types" ;
-	.
+  rdfs:label "Text" ;
+  dct:source "DataCite resource types" ;
+  .
 
 &lt;http://registry.it.csiro.au/def/re3data/contentType/doc&gt;
-	rdfs:label "Standard office documents" ;
-	dct:source "Re3data content types" ;
-	.
-</pre>
+  rdfs:label "Standard office documents" ;
+  dct:source "Re3data content types" ;
+  .
+</pre></div>
 
 </section>
 
@@ -332,15 +345,16 @@ describing its records (i.e. the records containing metadata
 describing the datasets), dcat:CatalogRecord can be used. For example,
 while &nbsp;:dataset-001 was issued on 2011-12-05, its description on Imaginary Catalog was added on 2011-12-11. This can be represented by DCAT as in the following:
 </p>
-<pre>  &nbsp;:catalog  dcat:record&nbsp;:record-001&nbsp; .
-</pre>
+<div class="example">
+  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+:catalog  dcat:record&nbsp;:record-001&nbsp; .
 
-<pre>  &nbsp;:record-001
-       a dcat:CatalogRecord&nbsp;;
-       foaf:primaryTopic&nbsp;:dataset-001&nbsp;;
-       dct:issued "2011-12-11"^^xsd:date&nbsp;;
-       .
-</pre>
+:record-001
+  a dcat:CatalogRecord&nbsp;;
+  foaf:primaryTopic&nbsp;:dataset-001&nbsp;;
+  dct:issued "2011-12-11"^^xsd:date&nbsp;;
+  .
+</pre></div>
 </section>
 
 <section id="example-landing-page">
@@ -349,17 +363,19 @@ while &nbsp;:dataset-001 was issued on 2011-12-05, its description on Imaginary 
 where the user needs to follow some links, provide some information and check some boxes
 before accessing the data</p>
 
-<pre>  &nbsp;:dataset-002
-       a dcat:Dataset ;
-       dcat:landingPage &lt;http://example.org/dataset-002.html&gt; ;
-       dcat:distribution :dataset-002-csv ;
-       .
-  &nbsp;:dataset-002-csv
-       a dcat:Distribution ;
-       dcat:accessURL &lt;http://example.org/dataset-002.html&gt; ;
-       dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/csv&gt; ;
-       .
-</pre>
+<div class="example">
+  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+:dataset-002
+  a dcat:Dataset ;
+  dcat:landingPage &lt;http://example.org/dataset-002.html&gt; ;
+  dcat:distribution :dataset-002-csv ;
+  .
+:dataset-002-csv
+  a dcat:Distribution ;
+  dcat:accessURL &lt;http://example.org/dataset-002.html&gt; ;
+  dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/csv&gt; ;
+  .
+</pre></div>
 
 Notice the use of a dcat:landingPage and the definition of the dcat:Distribution instance.
 </section>
@@ -368,17 +384,19 @@ Notice the use of a dcat:landingPage and the definition of the dcat:Distribution
 <h3>A dataset available as a download and behind some Web page</h3>
 <p>On the other hand, :dataset-003 can be obtained through some landing page but also can be downloaded from a known URL.
 </p>
-<pre>  &nbsp;:dataset-003
-       a dcat:Dataset ;
-       dcat:landingPage &lt;http://example.org/dataset-003.html&gt; ;
-       dcat:distribution :dataset-003-csv ;
-       .
-  &nbsp;:dataset-003-csv
-       a dcat:Distribution ;
-       dcat:downloadURL &lt;http://example.org/dataset-003.csv&gt; ;
-       dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/csv&gt; ;
-       .
-</pre>
+<div class="example">
+  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+:dataset-003
+  a dcat:Dataset ;
+  dcat:landingPage &lt;http://example.org/dataset-003.html&gt; ;
+  dcat:distribution :dataset-003-csv ;
+  .
+:dataset-003-csv
+  a dcat:Distribution ;
+  dcat:downloadURL &lt;http://example.org/dataset-003.csv&gt; ;
+  dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/csv&gt; ;
+  .
+</pre></div>
 Notice that we used dcat:downloadURL with the downloadable distribution and that the other distribution accessible through the landing page
 does not have to be defined as a separate dcat:Distribution instance.
 </section>
@@ -396,59 +414,61 @@ does not have to be defined as a separate dcat:Distribution instance.
 	<p>
 		If the nature of the relationships between a dataset and component resources in a catalogue, repository, or elsewhere are not known, <b>dct:relation</b> can be used:
 	</p>
-	<pre>
+	<div class="example">
+  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 :d33937
-	dct:description "A set of RDF graphs representing the International [Chrono]stratigraphic Chart, ..." ;
-	dct:identifier "https://doi.org/10.25919/5b4d2b83cbf2d"^^xsd:anyURI ;
-	dct:creator &lt;https://orcid.org/0000-0002-3884-3420&gt;;
-	dct:relation &lt;https://vocabs.ands.org.au/viewById/196&gt; ;
-	dct:relation :ChronostratChart2017-02.pdf  ;
-	dct:relation :ChronostratChart2017-02.jpg ;
-	dct:relation :timescale.zip ;
-	dct:relation :isc2017.jsonld ;
-	dct:relation :isc2017.nt ;
-	dct:relation :isc2017.rdf ;
-	dct:relation :isc2017.ttl ;
-	.
-	</pre>
+  dct:description "A set of RDF graphs representing the International [Chrono]stratigraphic Chart, ..." ;
+  dct:identifier "https://doi.org/10.25919/5b4d2b83cbf2d"^^xsd:anyURI ;
+  dct:creator &lt;https://orcid.org/0000-0002-3884-3420&gt;;
+  dct:relation &lt;https://vocabs.ands.org.au/viewById/196&gt; ;
+  dct:relation :ChronostratChart2017-02.pdf  ;
+  dct:relation :ChronostratChart2017-02.jpg ;
+  dct:relation :timescale.zip ;
+  dct:relation :isc2017.jsonld ;
+  dct:relation :isc2017.nt ;
+  dct:relation :isc2017.rdf ;
+  dct:relation :isc2017.ttl ;
+  .
+  </pre></div>
 	<p>
 		If it is clear that any of these related resources is a proper <i>representation</i> of the dataset, dcat:distribution should be used.
 	</p>
-	<pre>
+	<div class="example">
+  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 :d33937
-	rdf:type dcat:Dataset ;
-	dct:description "A set of RDF graphs representing the International [Chrono]stratigraphic Chart, ..." ;
-	dct:identifier "https://doi.org/10.25919/5b4d2b83cbf2d"^^xsd:anyURI ;
-	dct:relation &lt;https://vocabs.ands.org.au/viewById/196&gt; ;
-	dct:relation :ChronostratChart2017-02.pdf  ;
-	dct:relation :ChronostratChart2017-02.jpg ;
-	dct:relation :timescale.zip ;
-	dcat:distribution :d33937-jsonld ;
-	dcat:distribution :d33937-nt ;
-	dcat:distribution :d33937-rdf ;
-	dcat:distribution :d33937-ttl ;
-	.
-:d33937-jsonld	rdf:type dcat:Distribution ;
-	dcat:downloadURL :isc2017.jsonld ;
-	dcat:byteSize "698039"^^xsd:decimal ;
-	dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/ld+json&gt; ;
-	.
-:d33937-nt	rdf:type dcat:Distribution ;
-	dcat:downloadURL :isc2017.nt ;
-	dcat:byteSize "2047874"^^xsd:decimal ;
-	dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/n-triples&gt; ;
-	.
-:d33937-rdf	rdf:type dcat:Distribution ;
-	dcat:downloadURL :isc2017.rdf ;
-	dcat:byteSize "1600569"^^xsd:decimal ;
-	dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/rdf+xml&gt; ;
-	.
-:d33937-ttl	rdf:type dcat:Distribution ;
-	dcat:downloadURL :isc2017.ttl ;
-	dcat:byteSize "531703"^^xsd:decimal ;
-	dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/turtle&gt; ;
-	.
-	</pre>
+  rdf:type dcat:Dataset ;
+  dct:description "A set of RDF graphs representing the International [Chrono]stratigraphic Chart, ..." ;
+  dct:identifier "https://doi.org/10.25919/5b4d2b83cbf2d"^^xsd:anyURI ;
+  dct:relation &lt;https://vocabs.ands.org.au/viewById/196&gt; ;
+  dct:relation :ChronostratChart2017-02.pdf  ;
+  dct:relation :ChronostratChart2017-02.jpg ;
+  dct:relation :timescale.zip ;
+  dcat:distribution :d33937-jsonld ;
+  dcat:distribution :d33937-nt ;
+  dcat:distribution :d33937-rdf ;
+  dcat:distribution :d33937-ttl ;
+  .
+:d33937-jsonld  rdf:type dcat:Distribution ;
+  dcat:downloadURL :isc2017.jsonld ;
+  dcat:byteSize "698039"^^xsd:decimal ;
+  dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/ld+json&gt; ;
+  .
+:d33937-nt  rdf:type dcat:Distribution ;
+  dcat:downloadURL :isc2017.nt ;
+  dcat:byteSize "2047874"^^xsd:decimal ;
+  dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/n-triples&gt; ;
+  .
+:d33937-rdf  rdf:type dcat:Distribution ;
+  dcat:downloadURL :isc2017.rdf ;
+  dcat:byteSize "1600569"^^xsd:decimal ;
+  dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/rdf+xml&gt; ;
+  .
+:d33937-ttl  rdf:type dcat:Distribution ;
+  dcat:downloadURL :isc2017.ttl ;
+  dcat:byteSize "531703"^^xsd:decimal ;
+  dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/turtle&gt; ;
+  .
+	</pre></div>
 	<p>
 		This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/examples/csiro-dap-examples.ttl">csiro-dap-examples.ttl</a>
 	</p>
@@ -462,7 +482,8 @@ does not have to be defined as a separate dcat:Distribution instance.
 	<p>
 		For example, a simple link from a dataset description to the project that generated the dataset can be formalized as follows (other details elided for clarity):
 	</p>
-	<pre>
+	<div class="example">
+  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 dap:atnf-P366-2003SEPT
   rdf:type dcat:Dataset ;
   dct:bibliographicCitation "Burgay, M; McLaughlin, M; Kramer, M; Lyne, A; Joshi, B; Pearce, G; D'Amico, N; Possenti, A; Manchester, R; Camilo, F (2017): Parkes observations for project P366 semester 2003SEPT. v1. CSIRO. Data Collection. https://doi.org/10.4225/08/598dc08d07bb7" ;
@@ -480,7 +501,7 @@ dap:P366
   rdfs:label "P366 - Parkes multibeam high-latitude pulsar survey" ;
   rdfs:seeAlso &lt;https://doi.org/10.1111/j.1365-2966.2006.10100.x&gt; ;
 .
-	</pre>
+	</pre></div>
 	<p>
 		This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/examples/csiro-dap-examples.ttl">csiro-dap-examples.ttl</a>
 	</p>
@@ -519,7 +540,8 @@ dap:P366
 	<p>
 		This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/examples/eea-csw.ttl">eea-csw.ttl</a>
 	</p>
-	<pre>
+	<div class="example">
+  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 a:EEA-CSW-Endpoint
   rdf:type dcat:DiscoveryService ;
   dc:subject "infoCatalogueService"@en ;
@@ -541,7 +563,7 @@ a:EEA-CSW-Endpoint
   dcat:endpointDescription &lt;https://sdi.eea.europa.eu/catalogue/srv/eng/csw?service=CSW&request=GetCapabilities&gt; ;
   dcat:endpointURL &lt;http://sdi.eea.europa.eu/catalogue/srv/eng/csw&gt; ;
 .
-	</pre>
+	</pre></div>
 	<p>
 		The next example shows a dataset hosted by Geoscience Australia, which is available from three distinct services, as indicated by the value of the <a href="#Property:datadistributionservice_servesdataset">dcat:servesDataset</a> property of each of the service descriptions.
 		These are classified as a <a href="#Class:Data_Distribution_Service">dcat:DataDistributionService</a> and also have the <code>dct:type</code> set to <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download">download</a> and <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view">view</a> from the <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/">INSPIRE classification of spatial data service types</a>.
@@ -549,7 +571,8 @@ a:EEA-CSW-Endpoint
 	<p>
 		This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/examples/ga-courts.ttl">ga-courts.ttl</a>
 	</p>
-	<pre>
+	<div class="example">
+  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 ga-courts:jc
   rdf:type dcat:Dataset ;
   dct:description "The dataset contains spatial locations, in point format, of the Australian High Court, Australian Federal Courts and the Australian Magistrates Courts." ;
@@ -576,9 +599,9 @@ ga-courts:jc-esri
 .
 ga-courts:jc-wfs
   rdf:type dcat:DataDistributionService ;
-	dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wfs/2.0.0&gt; ;
-	dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wfs/1.1.0&gt; ;
-	dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wfs/1.0.0&gt; ;
+  dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wfs/2.0.0&gt; ;
+  dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wfs/1.1.0&gt; ;
+  dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wfs/1.0.0&gt; ;
   dct:description "This web service provides access to the National Judicial Courts dataset and presents the spatial locations of all the known Australian High Courts, Australian Federal Courts and the Australian Federal Circuit Courts located within Australia, all complemented with feature attribution." ;
   dct:identifier "2b8540c8-4a42-144d-e053-12a3070a3ff7" ;
   dct:title "National Judicial Courts WFS" ;
@@ -602,7 +625,7 @@ ga-courts:jc-wms
   dcat:landingPage &lt;https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/2b8540c8-4a41-144d-e053-12a3070a3ff7&gt; ;
   dcat:servesDataset ga-courts:jc ;
 .
-	</pre>
+	</pre></div>
 
 </section>
 
@@ -610,7 +633,7 @@ ga-courts:jc-wms
 	<h3>More examples needed</h3>
 
 	<p class="note">
-		This section will contain more examples on the use of DCAT. 
+		This section will contain more examples on the use of DCAT.
 	</p>
 
 </section>
@@ -675,7 +698,7 @@ Alongside it are a set of other RDF files that provide additional information, i
 The definitions (including domain and range) of terms outside the DCAT namespace are provided here only for convenience and <em title="MUST NOT" class="rfc2119">MUST NOT</em> be considered normative. The authoritative definitions of these terms are in the corresponding specifications: [[!DC11]], [[!DCTERMS]], [[!FOAF]], [[!RDF-SCHEMA]], [[!SKOS-REFERENCE]], [[!XMLSCHEMA11-2]] and [[!VCARD-RDF]].
 </p>
 </section>
-	
+
 <section id="Class:Catalog">
 <h3>Class: Catalog</h3>
 <p>The following properties are recommended for use on this class:
@@ -862,7 +885,7 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 <p class="issue" data-number="114">
 	Models for the kind of license or rights representation indicated by the dct:license and dct:rights property are being considered as part of the revision of DCAT. See also <a href="#license-rights">License and rights statements</a>.
 </p>
-	
+
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/rights">dct:rights</a></th></tr></thead>
   <tbody>
@@ -892,6 +915,7 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
     <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Catalog">dcat:Catalog</a></td></tr>
 		<tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a></td></tr>
 		<tr><td class="prop">Usage note:</td><td>This is the most general predicate for membership of a catalog. Use of a more specific sub-property is recommended when available. </td></tr>
+	        <tr><td class="prop">See also:</td><td>Sub-properties of dct:hasPart in particular <a href="http://www.w3.org/ns/dcat#/dataset">dcat:dataset</a>, <a href="http://www.w3.org/ns/dcat#catalog">dcat:catalog</a>, <a href="http://www.w3.org/ns/dcat#service">dcat:service</a>. </td></tr>
   </tbody>
 </table>
 </section>
@@ -992,7 +1016,7 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 	The need to be able to describe the business or project context related to production of a catalogued resource has been identified as a requirement to be satisfied in the revision of DCAT.
 </p>
 
-<!-- 
+<!--
 -- this issue already closed - prov:wasGeneratedBy added to dcat:Dataset (but not to dcat:Resource) --
 <p class="issue" data-number="77">
 	The need to be able to link a catalogued resource with the business or project context of its production has been identified as a requirement to be satisfied in the revision of DCAT.
@@ -1079,7 +1103,7 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 		<a href="http://id.loc.gov/vocabulary/iso639-2.html">2</a>) <em title="SHOULD" class="rfc2119">SHOULD</em> be used.
 		<br>
 		If a ISO 639-1 (two-letter) code is defined for language, then its corresponding IRI <em title="SHOULD" class="rfc2119">SHOULD</em> be used; if no ISO 639-1 code is defined, then IRI corresponding to the ISO 639-2 (three-letter) code <em title="SHOULD" class="rfc2119">SHOULD</em> be used.</td></tr>
-	<tr><td class="prop">Usage note:</td><td>This overrides the value of the <a href="#Property:catalog_language">catalog language</a> in case of conflict. 
+	<tr><td class="prop">Usage note:</td><td>This overrides the value of the <a href="#Property:catalog_language">catalog language</a> in case of conflict.
 		If the item is available in multiple languages, use multiple values for this property. If each language is available separately for a dataset, define an instance of dcat:Distribution for each language and describe the specific language of each distribution using dct:language (i.e. the dataset will have multiple dct:language values and each distribution will have one of these languages as value of its dct:language property).</td></tr>
 	</tbody>
 </table>
@@ -1169,7 +1193,7 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 		<li><a href="https://schema.datacite.org/meta/kernel-4.1/include/datacite-resourceType-v4.1.xsd">Datacite resource types</a> [[DataCite]]</li>
 		<li>PARSE.Insight content-types used by <a href="https://www.re3data.org/">re3data.org</a> [[RE3DATA-SCHEMA]] (see item 15 contentType)</li>
 		<li><a href="http://id.loc.gov/vocabulary/marcgt.html">MARC intellectual resource types</a></li>
-	</ol> 
+	</ol>
 	To describe the file format, physical medium, or dimensions of the resource, use the <a href="http://purl.org/dc/terms/format">dct:format element</a>.</td></tr>
 	</tbody>
 </table>
@@ -1187,6 +1211,11 @@ If a ISO 639-1 (two-letter) code is defined for language, then its corresponding
 	<tr><td class="prop">See also:</td><td>Sub-properties of dct:relation in particular
 			<a href="http://www.w3.org/ns/dcat#distribution">dcat:distribution</a>,
 			<a href="http://purl.org/dc/terms/hasPart">dct:hasPart</a>,
+			(and its sub-properties
+			<a href="http://www.w3.org/ns/dcat#catalog">dcat:catalog</a>,
+			<a href="http://www.w3.org/ns/dcat#dataset">dcat:dataset</a>,
+			<a href="http://www.w3.org/ns/dcat#service">dcat:service</a>
+			),
 			<a href="http://purl.org/dc/terms/isPartOf">dct:isPartOf</a>,
 			<a href="http://purl.org/dc/terms/conformsTo">dct:conformsTo</a>,
 			<a href="http://purl.org/dc/terms/isFormatOf">dct:isFormatOf</a>,
@@ -1697,7 +1726,7 @@ New property for Dataset in this revision of DCAT, added when considering the da
 
 </section> <!-- end class Dataset -->
 
-<section id="Class:Discovery_Service">	
+<section id="Class:Discovery_Service">
 <h3>Class: Discovery Service</h3>
 <p>In addition to the properties inherited from the super-class <a href="http://www.w3.org/ns/dcat#DataService">dcat:DataDistributionService</a>, the following properties are recommended for use on this class: <i>none yet</i>
 </p>
@@ -1774,7 +1803,7 @@ New property for Dataset in this revision of DCAT, added when considering the da
 <p class="note">
     The definition text of dcat:Distribution has been revised to clarify that distributions are primarily <i>representations</i> of datasets.  As such, all distributions of a given dataset should be informationally equivalent.
 </p>
-	
+
 <section id="Property:distribution_title">
 <h4>Property: title</h4>
 <table class="definition">
@@ -1831,7 +1860,7 @@ New property for Dataset in this revision of DCAT, added when considering the da
 <p class="issue" data-number="114">
 	Models for the kind of license or rights representation indicated by the dct:license and dct:rights property are being considered as part of the revision of DCAT. See also <a href="#license-rights">License and rights statements</a>.
 </p>
-	
+
 <table class="definition">
   <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/license">dct:license</a></th></tr></thead>
   <tbody>
@@ -2042,7 +2071,7 @@ New property for Dataset in this revision of DCAT, added when considering the da
 
 <section id="quality-information" class="informative">
     <h2>Quality information</h2>
-<div class="note"><p>This section is not-normative as it provides guidance on how to document the quality of DCAT first class entities (e.g., datasets, distributions) and it does not define new DCAT terms. The guidance relies on the Data Quality Vocabulary(DQV)[[vocab-dqv]], which is a W3C Group Note.</p></div>   
+<div class="note"><p>This section is not-normative as it provides guidance on how to document the quality of DCAT first class entities (e.g., datasets, distributions) and it does not define new DCAT terms. The guidance relies on the Data Quality Vocabulary(DQV)[[vocab-dqv]], which is a W3C Group Note.</p></div>
 
 The Data Quality Vocabulary (DQV) offers common modelling patterns for different aspects of Data Quality.
 
@@ -2074,7 +2103,9 @@ Besides, the examples and more in general the DQV  is neutral to the data portal
 	    A data consumer (:consumer1)  describes the quality of the dataset :genoaBusStopsDataset that includes a georeferenced list of bus stops in Genoa. He/she annotates the dataset with a DQV quality note (:genoaBusStopsDatasetCompletenessNote) about data completeness (ldqd:completeness) to warn that the dataset includes only 20500 out of the 30000 stops.
 </p>
 
-    <pre>:genoaBusStopsDataset a dcat:Dataset ;
+<div class="example">
+  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+:genoaBusStopsDataset a dcat:Dataset ;
     dqv:hasQualityAnnotation :genoaBusStopsDatasetCompletenessNote .
 
 :genoaBusStopsDatasetCompletenessNote
@@ -2092,11 +2123,13 @@ Besides, the examples and more in general the DQV  is neutral to the data portal
     dc:language "en" ;
     dc:format "text/plain"
     .
-    </pre>
+    </pre></div>
 <p>
 	The activity :myQualityChecking employs the service :myQualityChecker to check the quality of the :genoaBusStopsDataset dataset. The metric :completenessWRTExpectedNumberOfEntities is applied to measure the dataset completeness (ldqd:completeness) and it results in the quality measurement :genoaBusStopsDatasetCompletenessMeasurement.
 </p>
-    <pre>:genoaBusStopsDataset
+<div class="example">
+  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+:genoaBusStopsDataset
     dqv:hasQualityMeasurement :genoaBusStopsDatasetCompletenessMeasurement .
 
 :genoaBusStopsDatasetCompletenessMeasurement
@@ -2131,7 +2164,7 @@ Besides, the examples and more in general the DQV  is neutral to the data portal
     prov:generated         :genoaBusStopsDatasetCompletenessMeasurement;
     prov:endedAtTime      "2018-05-27T02:52:02Z"^^xsd:dateTime;
     prov:startedAtTime     "2018-05-27T00:52:02Z"^^xsd:dateTime .
-    </pre>
+    </pre></div>
 Other examples of quality documentation are available in the W3C Group Note DQV [[vocab-dqv]], including examples about <a href="https://www.w3.org/TR/vocab-dqv/#ExpressDatasetAccuracyPrecision">how express dataset accuracy and precision</a>.
     </section>
 <section id="quality-conformance">
@@ -2140,38 +2173,42 @@ Other examples of quality documentation are available in the W3C Group Note DQV 
 	The issue suggests to represent "the degree a dataset conforms to a stated quality standard" and "the details of data quality conformance test results". This section is a starter to deal with the above requests by relying on the existing  W3C vocabularies.
     Comments and suggestions about the following examples as well as the proposal of alternative patterns are more than welcome.
     </p>
-<p> This subsection  shows different modelling patterns combining DQV [[vocab-dqv]] with  PROV [[PROV-O]] and EARL [[EARL10-Schema]] to represent the conformance degree to a stated quality standard and the details about the conformance tests. 
+<p> This subsection  shows different modelling patterns combining DQV [[vocab-dqv]] with  PROV [[PROV-O]] and EARL [[EARL10-Schema]] to represent the conformance degree to a stated quality standard and the details about the conformance tests.
 </p>
-    
-<section id="quality-conformance-statement"> 
+
+<section id="quality-conformance-statement">
 <h3>Conformance to a standard</h3>
  <p>The use of <a href="http://dublincore.org/documents/dcmi-terms/#terms-conformsTo">dct:conformsTo</a> and <a href="http://dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a> is a well-known pattern to represent the conformance to a standard. The following example declares a fictional a:Dataset conformant to the "Commission Regulation (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC".</p>
-<pre>       
+<div class="example">
+  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+
 a:Dataset a dcat:Dataset;
-    dct:conformsTo &lt;http://data.europa.eu/eli/reg/2014/1312/oj&gt; .  
+    dct:conformsTo &lt;http://data.europa.eu/eli/reg/2014/1312/oj&gt; .
 
 # Reference standard / specification
 &lt;http://data.europa.eu/eli/reg/2014/1312/oj&gt; a dct:Standard ;
     dct:title "Commission Regulation (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards interoperability of spatial data sets and services"@en
     dct:issued "2010-11-23"^^xsd:date .
-</pre>
-</section> 
-<section id="quality-conformance-degree"> 
+</pre></div>
+</section>
+<section id="quality-conformance-degree">
 <h3> Degree of conformance</h3>
-     <p>Some legal context requires to specify the degree of conformance. For example,  INSPIRE metadata adopts a specific <a href="http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity">controlled vocabulary</a> to express  non-conformance and non-evaluation beside the full compliance. As suggested in [[geodcat-ap]], the following example specifies the degree of conformance (i.e.,  not conformant) by declaring the  <a href="http://dublincore.org/documents/dcmi-terms/#terms-type">dct:type</a> for the result of conformance test.  [[geodcat-ap]] suggests to use a PROV entity to model the  conformance test (e.g., a:TestResult),  a PROV activity to model the testing activity (e,g., a:TestingActivity), a PROV plan derived by the INSPIRE Directive to represent  conformance test (e.g., a:ConformanceTest). A qualified PROV association binds the testing activity to the conformance test.  
-    </p> 
-    <pre>
-a:Dataset a dcat:Dataset ; 
+     <p>Some legal context requires to specify the degree of conformance. For example,  INSPIRE metadata adopts a specific <a href="http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity">controlled vocabulary</a> to express  non-conformance and non-evaluation beside the full compliance. As suggested in [[geodcat-ap]], the following example specifies the degree of conformance (i.e.,  not conformant) by declaring the  <a href="http://dublincore.org/documents/dcmi-terms/#terms-type">dct:type</a> for the result of conformance test.  [[geodcat-ap]] suggests to use a PROV entity to model the  conformance test (e.g., a:TestResult),  a PROV activity to model the testing activity (e,g., a:TestingActivity), a PROV plan derived by the INSPIRE Directive to represent  conformance test (e.g., a:ConformanceTest). A qualified PROV association binds the testing activity to the conformance test.
+    </p>
+<div class="example">
+  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+
+a:Dataset a dcat:Dataset ;
     prov:wasUsedBy a:TestingActivity .
 
 a:TestingActivity a prov:Activity ;
       prov:generated a:TestResult ;
-      prov:qualifiedAssociation [ 
+      prov:qualifiedAssociation [
           a prov:Association ;
-        # http://validator.example.org/ is the agent who did the test.         
-        prov:agent  &lt;http://validator.example.org/&gt; 
-        #following the plan  a:ConformanceTest 
-        prov:hadPlan a:ConformanceTest 
+        # http://validator.example.org/ is the agent who did the test.
+        prov:agent  &lt;http://validator.example.org/&gt;
+        #following the plan  a:ConformanceTest
+        prov:hadPlan a:ConformanceTest
         ] .
 
 # Conformance test result
@@ -2181,9 +2218,11 @@ a:TestResult a prov:Entity ;
 a:ConformanceTest a prov:Plan ;
     # Here you can specify additional information on the test
     prov:wasDerivedFrom &lt;http://data.europa.eu/eli/reg/2014/1312/oj&gt; .
-    </pre>
-<p>Also,  DQV [[vocab-dqv]] can be deployed to  measure the compliance to a specific standard. In the following, the :levelOfComplianceToINSPIRE is a quality metrics which measures the compliance of a dataset to INSPIRE in terms of the percentage of passed compliance tests. The example assumes iso as a namespace representing the quality dimensions and categories defined in the ISO/IEC 25012.</p>     
-        <pre>
+    </pre></div>
+<p>Also,  DQV [[vocab-dqv]] can be deployed to  measure the compliance to a specific standard. In the following, the :levelOfComplianceToINSPIRE is a quality metrics which measures the compliance of a dataset to INSPIRE in terms of the percentage of passed compliance tests. The example assumes iso as a namespace representing the quality dimensions and categories defined in the ISO/IEC 25012.</p>
+<div class="example">
+  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+
 :levelOfComplianceToINSPIRE
     a dqv:Metric ;
     skos:definition "It returns the degree of compliance to INSPIRE defined as the percentage of passed compleance tests."@en
@@ -2198,46 +2237,50 @@ iso:compliance
     .
 iso:inherentandSystemDependentDataQuality
     a  dqv:Category ;
-   skos:prefLabel "Inherent and System-Dependent Data Quality"@en.  
-        </pre>
+   skos:prefLabel "Inherent and System-Dependent Data Quality"@en.
+        </pre></div>
 <p>The quality measurement :measurement_complianceToINSPIRE represents the level of compliance for a dataset a:Dataset, namely, measurement of the metric :levelOfComplianceToINSPIRE. If only a part of the compliance tests succeeds (e.g. half of the compliance tests), the measurement would look like in the following:</p>
-     <pre>
-:measurement_complianceToINSPIRE 
+<div class="example">
+  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+
+:measurement_complianceToINSPIRE
    a         dqv:QualityMeasurement;
    dqv:computedOn      a:Dataset;
    dqv:value           "50"^^xsd:double ;
    sdmx-attribute:unitMeasure &lt;http://www.wurvoc.org/vocabularies/om-1.8/Percentage&gt;
    dcterms:date      "2018-01-10"^^xsd:date ;
    dqv:isMeasurementOf    :levelOfComplianceToINSPIRE .
-    </pre>
-    
-</section> 
-<section id="quality-conformance-test-results"> 
+    </pre></div>
+
+</section>
+<section id="quality-conformance-test-results">
 <h3>Conformance test results</h3>
-    <p> Further information about the tests can be provided using EARL [[EARL10-Schema]]. EARL provides specific classes to describe the testing activity, which can be adopted in conjunction with PROV. 
-The following example describes the Testing activity a:TestingActivity as an EARL Assertion instead of a qualified association on the PROV activity. The EARL Assertion states the dataset a:Dataset has been tested with the conformance test a:ConformanceTest, and it has passed the test as described in a:testResult.  
-    </p> 
-    <pre>
+    <p> Further information about the tests can be provided using EARL [[EARL10-Schema]]. EARL provides specific classes to describe the testing activity, which can be adopted in conjunction with PROV.
+The following example describes the Testing activity a:TestingActivity as an EARL Assertion instead of a qualified association on the PROV activity. The EARL Assertion states the dataset a:Dataset has been tested with the conformance test a:ConformanceTest, and it has passed the test as described in a:testResult.
+    </p>
+<div class="example">
+  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+
 a:assertion a earl:Assertion;
     earl:subject a:Dataset;
     earl:test a:ConformanceTest;
     earl:result a:testResult ;
-    # let's indicate if the test was manual, automatic, or what ..     
+    # let's indicate if the test was manual, automatic, or what ..
     earl:mode earl:automatic ;
     earl:assertedBy &lt;http://validator.example.org/&gt; ;
-    prov:wasAttributedTo  &lt;http://validator.example.org/&gt;.   
+    prov:wasAttributedTo  &lt;http://validator.example.org/&gt;.
 
 a:ConformanceTest a earl:TestRequirement, prov:Plan;
          dct:title "Set of conformance test derived by the Commission Regulation (EU) No 1089/2010 of 23 November 2010 implementing  Directive 2007/2/EC of the European Parliament and of the Council as regards interoperability of spatial data sets and services"@en";
          # it includes different subtests
          dct:hasPart a:test1, a:test2, ...,  a:testn.
          #It is derived  by the reference standard
-         prov:wasDerivedFrom  &lt;http://data.europa.eu/eli/reg/2014/1312/oj&gt;.  
+         prov:wasDerivedFrom  &lt;http://data.europa.eu/eli/reg/2014/1312/oj&gt;.
 
 a:testResult a earl:TestResult;
         #  results in conformancy.
         dcterms:type  &lt;http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant&gt;;
-        #the overall set of tests have been passed 
+        #the overall set of tests have been passed
         earl:outcome earl:passed .
         ];
 
@@ -2251,27 +2294,29 @@ a:TestingActivity a prov:Activity;
     prov:generated a:TestAssertion, a:TestResult;
     prov:use a:Dataset ;
     prov:wasAssociatedWith   &lt;http://validator.example.org/&gt; .
-    </pre>   
+    </pre></div>
 <p> The following example shows how the description would have looked like if the subtest a:testq1 had failed. In particular, dcterms:description and earl:info provide additional warnings or error messages in a human-readable form.</p>
-    <pre>
+<div class="example">
+  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+
 a:assertion1 a earl:Assertion ;
     earl:subject a:Dataset ;
     earl:test a:testq1 ;
-    earl:result [ 
+    earl:result [
         a earl:TestResult;
-        #  results in no conformancy. 
+        #  results in no conformancy.
         dcterms:type  &lt;http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/notConformant&gt;
-        #the overall set of tests have not been passed (!?) 
+        #the overall set of tests have not been passed (!?)
         dcterms:date "2015-09-29T11:50:00+00:00"^^xsd:dateTime ;
         # Some XML encoding of the error
             dcterms:description """
                  &lt;ul xmlns="http://www.w3.org/1999/xhtml"&gt;
                  &lt;li&gt; test 1 has failed. Some description of the errors found&lt;/li&gt;
                  &lt;/ul&gt;"^^rdf:XMLLiteral;
-            earl:info """" 
-                &lt;test-method duration-ms="47" finished-at="2015-09-29T11:50:00Z"  
+            earl:info """"
+                &lt;test-method duration-ms="47" finished-at="2015-09-29T11:50:00Z"
                 name="validate" signature="validate()" started-at="2015-09-29T11:50:00Z"
-                status="FAIL"&gt; 
+                status="FAIL"&gt;
                 &lt;exception class="java.lang.AssertionError"&gt;
                     &lt;message&gt;
                      Total validation errors found: 2
@@ -2280,22 +2325,24 @@ a:assertion1 a earl:Assertion ;
              &lt;/test-method&gt;"""^^rdf:XMLLiteral;
        earl:outcome earl:fail .
         ];
-    # we do not know if the test was manual, automatic, or what ..     
-    earl:mode earl:automatic.   
-    </pre>
-Depending on the details required about tests, DQV can express the testing activity and errors as well. In the following, :error is a quality annotation that represents the previous error, and  a:testResult is defined as a DQV quality metadata to  collect the above annotations and the compliance measurements providing  provenance information. 
- <pre>
-:error  
+    # we do not know if the test was manual, automatic, or what ..
+    earl:mode earl:automatic.
+    </pre></div>
+Depending on the details required about tests, DQV can express the testing activity and errors as well. In the following, :error is a quality annotation that represents the previous error, and  a:testResult is defined as a DQV quality metadata to  collect the above annotations and the compliance measurements providing  provenance information.
+<div class="example">
+  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+
+:error
     a dqv:QualityAnnotation ;
     #this annotation is derived by the measurement
     prov:wasGeneratedBy  a:TestingActivity;
     oa:hasTarget a:Dataset ;
     oa:hasBody [
-        #errors/failed test description 
+        #errors/failed test description
           a  oa:TextualBody;
-          rdf:value  """&lt;test-method duration-ms="47" finished-at="2015-09-29T11:50:00Z"  
+          rdf:value  """&lt;test-method duration-ms="47" finished-at="2015-09-29T11:50:00Z"
                 name="validate" signature="validate()" started-at="2015-09-29T11:50:00Z"
-                status="FAIL"&gt; 
+                status="FAIL"&gt;
                 &lt;exception class="java.lang.AssertionError"&gt;
                     &lt;message&gt;
                      Total validation errors found: 2
@@ -2309,9 +2356,9 @@ Depending on the details required about tests, DQV can express the testing activ
     dqv:inDimension iso:compliance
     .
 
-a:TestResult 
+a:TestResult
     a dqv:QualityMetadata ;
-    #  change the the dcterms:type according to the resulted compliance 
+    #  change the the dcterms:type according to the resulted compliance
     dcterms:type &lt;http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant&gt; ;
     prov:wasAttributedTo &lt;http://validator.example.org/&gt; ;
     prov:generatedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
@@ -2321,20 +2368,20 @@ a:TestResult
 a:testResult {
     a:Dataset
         dqv:hasQualityMeasurement :measurement_complianceToINSPIRE;
-        dqv:hasQualityAnnotation :errors .       
+        dqv:hasQualityAnnotation :errors .
 }
 
 #the testing activity
 a:TestingActivity a prov:Activity;
     prov:generated  a:TestResult;
     prov:use a:Dataset ;
-    prov:wasAssociatedWith  &lt;http://validator.example.org/&gt;    
+    prov:wasAssociatedWith  &lt;http://validator.example.org/&gt;
      .
-</pre>
+</pre></div>
     Of course,  the above modelling patterns can represent any quality tests not only conformance to standards.
- </section> 
-</section>          
-</section>  
+ </section>
+</section>
+</section>
 
 
 <section id="prov-patterns">
@@ -2427,283 +2474,283 @@ a:TestingActivity a prov:Activity;
 <table>
 <thead>
 <tr>
-<th align="right">DCAT element</th>
-<th align="center">mapping property</th>
+<th style="text-align: right">DCAT element</th>
+<th style="text-align: center">mapping property</th>
 <th>target element from schema.org</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="right">dc:description</td>
-<td align="center"><code>owl:equivalentProperty</code></td>
+<td style="text-align: right">dct:description</td>
+<td style="text-align: center"><code>owl:equivalentProperty</code></td>
 <td>schema:description</td>
 </tr>
 <tr>
-<td align="right">dc:title</td>
-<td align="center"><code>owl:equivalentProperty</code></td>
-<td>schema:name</td>
-</tr>
-<tr>
-<td align="right">dct:format</td>
-<td align="center"><code>owl:equivalentProperty</code></td>
+<td style="text-align: right">dct:format</td>
+<td style="text-align: center"><code>owl:equivalentProperty</code></td>
 <td>schema:encodingFormat</td>
 </tr>
 <tr>
-<td align="right">dct:identifier</td>
-<td align="center"><code>owl:equivalentProperty</code></td>
+<td style="text-align: right">dct:identifier</td>
+<td style="text-align: center"><code>owl:equivalentProperty</code></td>
 <td>schema:identifier</td>
 </tr>
 <tr>
-<td align="right">dct:issued</td>
-<td align="center"><code>owl:equivalentProperty</code></td>
+<td style="text-align: right">dct:issued</td>
+<td style="text-align: center"><code>owl:equivalentProperty</code></td>
 <td>schema:datePublished</td>
 </tr>
 <tr>
-<td align="right">dct:language</td>
-<td align="center"><code>owl:equivalentProperty</code></td>
+<td style="text-align: right">dct:language</td>
+<td style="text-align: center"><code>owl:equivalentProperty</code></td>
 <td>schema:inLanguage</td>
 </tr>
 <tr>
-<td align="right">dct:license</td>
-<td align="center"><code>owl:equivalentProperty</code></td>
+<td style="text-align: right">dct:license</td>
+<td style="text-align: center"><code>owl:equivalentProperty</code></td>
 <td>schema:license</td>
 </tr>
 <tr>
-<td align="right">dct:modified</td>
-<td align="center"><code>owl:equivalentProperty</code></td>
+<td style="text-align: right">dct:modified</td>
+<td style="text-align: center"><code>owl:equivalentProperty</code></td>
 <td>schema:dateModified</td>
 </tr>
 <tr>
-<td align="right">dct:publisher</td>
-<td align="center"><code>owl:equivalentProperty</code></td>
+<td style="text-align: right">dct:publisher</td>
+<td style="text-align: center"><code>owl:equivalentProperty</code></td>
 <td>schema:publisher</td>
 </tr>
 <tr>
-<td align="right">dct:spatial</td>
-<td align="center"><code>owl:equivalentProperty</code></td>
+<td style="text-align: right">dct:spatial</td>
+<td style="text-align: center"><code>owl:equivalentProperty</code></td>
 <td>schema:spatialCoverage</td>
 </tr>
 <tr>
-<td align="right">dct:temporal</td>
-<td align="center"><code>owl:equivalentProperty</code></td>
+<td style="text-align: right">dct:temporal</td>
+<td style="text-align: center"><code>owl:equivalentProperty</code></td>
 <td>schema:temporalCoverage</td>
 </tr>
 <tr>
-<td align="right">dct:title</td>
-<td align="center"><code>owl:equivalentProperty</code></td>
+<td style="text-align: right">dct:title</td>
+<td style="text-align: center"><code>owl:equivalentProperty</code></td>
 <td>schema:name</td>
 </tr>
 <tr>
-<td align="right">dct:type</td>
-<td align="center"><code>owl:equivalentProperty</code></td>
+<td style="text-align: right">dct:type</td>
+<td style="text-align: center"><code>owl:equivalentProperty</code></td>
 <td>schema:additionalType</td>
 </tr>
 <tr>
-<td align="right">dcat:Catalog</td>
-<td align="center"><code>owl:equivalentClass</code></td>
+<td style="text-align: right">dcat:Catalog</td>
+<td style="text-align: center"><code>owl:equivalentClass</code></td>
 <td>schema:DataCatalog</td>
 </tr>
 <tr>
-<td align="right" rowspan="2">dcat:DataService</td>
-<td align="center"><code>owl:equivalentClass</code></td>
+<td style="text-align: right" rowspan="2">dcat:DataService</td>
+<td style="text-align: center"><code>owl:equivalentClass</code></td>
 <td>schema:DataFeed</td>
 </tr>
 <tr>
-<td align="center" colspan="2">Unclear if a <code>DataFeed</code> is a data <strong>service</strong>, or a data <strong>collection</strong>. From a REST viewpoint there is no difference, but some commonly used APIs support additional queries, slices, etc which make the characterization of a service more efficient than listing the (potentially infinite) set of resources available from it. </td>
+<td style="text-align: center" colspan="2">Unclear if a <code>DataFeed</code> is a data <strong>service</strong>, or a data <strong>collection</strong>. From a REST viewpoint there is no difference, but some commonly used APIs support additional queries, slices, etc which make the characterization of a service more efficient than listing the (potentially infinite) set of resources available from it. </td>
 </tr>
 <tr>
-<td align="right">dcat:Dataset</td>
-<td align="center"><code>owl:equivalentClass</code></td>
+<td style="text-align: right">dcat:Dataset</td>
+<td style="text-align: center"><code>owl:equivalentClass</code></td>
 <td>schema:Dataset</td>
 </tr>
 <tr>
-<td align="right">dcat:Distribution</td>
-<td align="center"><code>owl:equivalentClass</code></td>
+<td style="text-align: right">dcat:Distribution</td>
+<td style="text-align: center"><code>owl:equivalentClass</code></td>
 <td>schema:DataDownload</td>
 </tr>
 <tr>
-<td align="right">dcat:Resource</td>
-<td align="center"><code>rdfs:subClassOf</code></td>
+<td style="text-align: right">dcat:Resource</td>
+<td style="text-align: center"><code>rdfs:subClassOf</code></td>
 <td>schema:Thing</td>
 </tr>
 <tr>
-<td align="right" rowspan="3">dcat:accessURL</td>
-<td align="center"><code>rdfs:subPropertyOf</code></td>
+<td style="text-align: right" rowspan="3">dcat:accessURL</td>
+<td style="text-align: center"><code>rdfs:subPropertyOf</code></td>
 <td>schema:contentUrl</td>
 </tr>
 <tr>
-<td align="center"><code>schema:domainIncludes</code></td>
+<td style="text-align: center"><code>schema:domainIncludes</code></td>
 <td>dcat:Distribution , schema:DataDownload</td>
 </tr>
 <tr>
-<td align="center"><code>schema:rangeIncludes</code></td>
+<td style="text-align: center"><code>schema:rangeIncludes</code></td>
 <td>rdfs:Resource , schema:URL</td>
 </tr>
 <tr>
-<td align="right" rowspan="3">dcat:byteSize</td>
-<td align="center"><code>rdfs:subPropertyOf</code></td>
+<td style="text-align: right" rowspan="3">dcat:byteSize</td>
+<td style="text-align: center"><code>rdfs:subPropertyOf</code></td>
 <td>schema:contentSize</td>
 </tr>
 <tr>
-<td align="center"><code>schema:domainIncludes</code></td>
+<td style="text-align: center"><code>schema:domainIncludes</code></td>
 <td>dcat:Distribution , schema:DataDownload</td>
 </tr>
 <tr>
-<td align="center"><code>schema:rangeIncludes</code></td>
+<td style="text-align: center"><code>schema:rangeIncludes</code></td>
 <td>rdfs:Literal , schema:Text</td>
 </tr>
 <tr>
-<td align="right" rowspan="2">dcat:catalog</td>
-<td align="center"><code>schema:domainIncludes</code></td>
+<td style="text-align: right" rowspan="2">dcat:catalog</td>
+<td style="text-align: center"><code>schema:domainIncludes</code></td>
 <td>dcat:Catalog , schema:DataCatalog</td>
 </tr>
 <tr>
-<td align="center"><code>schema:rangeIncludes</code></td>
+<td style="text-align: center"><code>schema:rangeIncludes</code></td>
 <td>dcat:Catalog , schema:DataCatalog</td>
 </tr>
 <tr>
-<td align="right" rowspan="2">dcat:contactPoint</td>
-<td align="center"><code>owl:equivalentProperty</code></td>
+<td style="text-align: right" rowspan="2">dcat:contactPoint</td>
+<td style="text-align: center"><code>owl:equivalentProperty</code></td>
 <td>schema:contactPoint</td>
 </tr>
 <tr>
-<td align="center"><code>schema:domainIncludes</code></td>
+<td style="text-align: center"><code>schema:domainIncludes</code></td>
 <td>dcat:Resource , dcat:Dataset , dcat:DataService , schema:Dataset</td>
 </tr>
 <tr>
-<td align="right" rowspan="3">dcat:dataset</td>
-<td align="center"><code>owl:equivalentProperty</code></td>
+<td style="text-align: right" rowspan="3">dcat:dataset</td>
+<td style="text-align: center"><code>owl:equivalentProperty</code></td>
 <td>schema:dataset</td>
 </tr>
 <tr>
-<td align="center"><code>schema:domainIncludes</code></td>
+<td style="text-align: center"><code>schema:domainIncludes</code></td>
 <td>dcat:Catalog , schema:DataCatalog</td>
 </tr>
 <tr>
-<td align="center"><code>schema:rangeIncludes</code></td>
+<td style="text-align: center"><code>schema:rangeIncludes</code></td>
 <td>dcat:Dataset , schema:Dataset</td>
 </tr>
 <tr>
-<td align="right" rowspan="3">dcat:distribution</td>
-<td align="center"><code>owl:equivalentProperty</code></td>
+<td style="text-align: right" rowspan="3">dcat:distribution</td>
+<td style="text-align: center"><code>owl:equivalentProperty</code></td>
 <td>schema:distribution</td>
 </tr>
 <tr>
-<td align="center"><code>schema:domainIncludes</code></td>
+<td style="text-align: center"><code>schema:domainIncludes</code></td>
 <td>dcat:Dataset , schema:Dataset</td>
 </tr>
 <tr>
-<td align="center"><code>schema:rangeIncludes</code></td>
+<td style="text-align: center"><code>schema:rangeIncludes</code></td>
 <td>dcat:Distribution , schema:DataDownload</td>
 </tr>
 <tr>
-<td align="right" rowspan="3">dcat:downloadURL</td>
-<td align="center"><code>rdfs:subPropertyOf</code></td>
+<td style="text-align: right" rowspan="3">dcat:downloadURL</td>
+<td style="text-align: center"><code>rdfs:subPropertyOf</code></td>
 <td>schema:contentUrl</td>
 </tr>
 <tr>
-<td align="center"><code>schema:domainIncludes</code></td>
+<td style="text-align: center"><code>schema:domainIncludes</code></td>
 <td>dcat:Distribution , schema:DataDownload</td>
 </tr>
 <tr>
-<td align="center"><code>schema:rangeIncludes</code></td>
+<td style="text-align: center"><code>schema:rangeIncludes</code></td>
 <td>rdfs:Resource , schema:Thing</td>
 </tr>
 <tr>
-<td align="right" rowspan="4">dcat:keyword</td>
-<td align="center"><code>rdfs:subPropertyOf</code></td>
+<td style="text-align: right" rowspan="4">dcat:keyword</td>
+<td style="text-align: center"><code>rdfs:subPropertyOf</code></td>
 <td>schema:keywords</td>
 </tr>
 <tr>
-<td align="center" colspan="2"><em>dcat:keyword is singular, schema:keywords is plural</em></td>
+<td style="text-align: center" colspan="2"><em>dcat:keyword is singular, schema:keywords is plural</em></td>
 </tr>
 <tr>
-<td align="center"><code>schema:domainIncludes</code></td>
+<td style="text-align: center"><code>schema:domainIncludes</code></td>
 <td>dcat:Resource , dcat:Dataset , dcat:DataService , schema:Dataset</td>
 </tr>
 <tr>
-<td align="center"><code>schema:rangeIncludes</code></td>
+<td style="text-align: center"><code>schema:rangeIncludes</code></td>
 <td>rdfs:Literal , schema:Text</td>
 </tr>
 <tr>
-<td align="right" rowspan="3">dcat:landingPage</td>
-<td align="center"><code>rdfs:subPropertyOf</code></td>
+<td style="text-align: right" rowspan="3">dcat:landingPage</td>
+<td style="text-align: center"><code>rdfs:subPropertyOf</code></td>
 <td>schema:url</td>
 </tr>
 <tr>
-<td align="center"><code>schema:domainIncludes</code></td>
+<td style="text-align: center"><code>schema:domainIncludes</code></td>
 <td>dcat:Resource , dcat:Dataset , dcat:DataService , schema:Dataset</td>
 </tr>
 <tr>
-<td align="center"><code>schema:rangeIncludes</code></td>
+<td style="text-align: center"><code>schema:rangeIncludes</code></td>
 <td>foaf:Document , schema:WebPage</td>
 </tr>
 <tr>
-<td align="right" rowspan="3">dcat:mediaType</td>
-<td align="center"><code>owl:equivalentProperty</code></td>
+<td style="text-align: right" rowspan="3">dcat:mediaType</td>
+<td style="text-align: center"><code>owl:equivalentProperty</code></td>
 <td>schema:encodingFormat</td>
 </tr>
 <tr>
-<td align="center"><code>schema:domainIncludes</code></td>
+<td style="text-align: center"><code>schema:domainIncludes</code></td>
 <td>dcat:Distribution , schema:DataDownload</td>
 </tr>
 <tr>
-<td align="center"><code>schema:rangeIncludes</code></td>
+<td style="text-align: center"><code>schema:rangeIncludes</code></td>
 <td>dct:MediaTypeOrExtent , schema:Text , schema:url </td>
 </tr>
 <tr>
-<td align="right" rowspan="2">dcat:record</td>
-<td align="center"><code>schema:domainIncludes</code></td>
+<td style="text-align: right" rowspan="2">dcat:record</td>
+<td style="text-align: center"><code>schema:domainIncludes</code></td>
 <td>dcat:Catalog , schema:DataCatalog</td>
 </tr>
 <tr>
-<td align="center"><code>schema:rangeIncludes</code></td>
+<td style="text-align: center"><code>schema:rangeIncludes</code></td>
 <td>dcat:CatalogRecord</td>
 </tr>
 <tr>
-<td align="right" rowspan="2">dcat:service</td>
-<td align="center"><code>schema:domainIncludes</code></td>
+<td style="text-align: right" rowspan="2">dcat:service</td>
+<td style="text-align: center"><code>schema:domainIncludes</code></td>
 <td>dcat:Catalog , schema:DataCatalog</td>
 </tr>
 <tr>
-<td align="center"><code>schema:rangeIncludes</code></td>
+<td style="text-align: center"><code>schema:rangeIncludes</code></td>
 <td>dcat:DataService</td>
 </tr>
 <tr>
-<td align="right" rowspan="3">dcat:theme</td>
-<td align="center"><code>owl:equivalentProperty</code></td>
+<td style="text-align: right" rowspan="3">dcat:theme</td>
+<td style="text-align: center"><code>owl:equivalentProperty</code></td>
 <td>schema:about</td>
 </tr>
 <tr>
-<td align="center"><code>schema:domainIncludes</code></td>
+<td style="text-align: center"><code>schema:domainIncludes</code></td>
 <td>dcat:Resource , dcat:Dataset , dcat:DataService , schema:Dataset</td>
 </tr>
 <tr>
-<td align="center"><code>schema:rangeIncludes</code></td>
+<td style="text-align: center"><code>schema:rangeIncludes</code></td>
 <td>skos:Concept , schema:Class</td>
 </tr>
 <tr>
-<td align="right" rowspan="2">dcat:themeTaxonomy</td>
-<td align="center"><code>schema:domainIncludes</code></td>
+<td style="text-align: right" rowspan="2">dcat:themeTaxonomy</td>
+<td style="text-align: center"><code>schema:domainIncludes</code></td>
 <td>dcat:Catalog , schema:DataCatalog</td>
 </tr>
 <tr>
-<td align="center"><code>schema:rangeIncludes</code></td>
+<td style="text-align: center"><code>schema:rangeIncludes</code></td>
 <td>skos:ConceptScheme</td>
 </tr>
 <tr>
-<td align="right">foaf:Organization</td>
-<td align="center"><code>owl:equivalentClass</code></td>
+<td style="text-align: right">foaf:Organization</td>
+<td style="text-align: center"><code>owl:equivalentClass</code></td>
 <td>schema:Organization</td>
 </tr>
 <tr>
-<td align="right">foaf:homepage</td>
-<td align="center"><code>owl:equivalentProperty</code></td>
+    <td style="text-align: right">foaf:Person</td>
+    <td style="text-align: center"><code>owl:equivalentClass</code></td>
+    <td>schema:Person</td>
+</tr>
+<tr>
+<td style="text-align: right">foaf:homepage</td>
+<td style="text-align: center"><code>owl:equivalentProperty</code></td>
 <td>schema:url</td>
 </tr>
 <tr>
-<td align="right">foaf:mbox</td>
-<td align="center"><code>owl:equivalentProperty</code></td>
+<td style="text-align: right">foaf:mbox</td>
+<td style="text-align: center"><code>owl:equivalentProperty</code></td>
 <td>schema:email</td>
 </tr>
 <!--
@@ -2711,48 +2758,48 @@ a:TestingActivity a prov:Activity;
 <td colspan="3"><em>... and potentially of interest to be mixed-in for descriptions of scientific data</em></td>
 </tr>
 <tr>
-<td align="right">sosa:hasFeatureOfInterest</td>
-<td align="center"><code>rdfs:subPropertyOf</code></td>
+<td style="text-align: right">sosa:hasFeatureOfInterest</td>
+<td style="text-align: center"><code>rdfs:subPropertyOf</code></td>
 <td>schema:object</td>
 </tr>
 <tr>
-<td align="right">sosa:hasResult</td>
-<td align="center"><code>rdfs:subPropertyOf</code></td>
+<td style="text-align: right">sosa:hasResult</td>
+<td style="text-align: center"><code>rdfs:subPropertyOf</code></td>
 <td>schema:result</td>
 </tr>
 <tr>
-<td align="right">sosa:madeByActuator</td>
-<td align="center"><code>rdfs:subPropertyOf</code></td>
+<td style="text-align: right">sosa:madeByActuator</td>
+<td style="text-align: center"><code>rdfs:subPropertyOf</code></td>
 <td>schema:instrument</td>
 </tr>
 <tr>
-<td align="right">sosa:madeBySampler</td>
-<td align="center"><code>rdfs:subPropertyOf</code></td>
+<td style="text-align: right">sosa:madeBySampler</td>
+<td style="text-align: center"><code>rdfs:subPropertyOf</code></td>
 <td>schema:instrument</td>
 </tr>
 <tr>
-<td align="right">sosa:madeBySensor</td>
-<td align="center"><code>rdfs:subPropertyOf</code></td>
+<td style="text-align: right">sosa:madeBySensor</td>
+<td style="text-align: center"><code>rdfs:subPropertyOf</code></td>
 <td>schema:instrument</td>
 </tr>
 <tr>
-<td align="right">sosa:observedProperty</td>
-<td align="center"><code>owl:equivalentProperty</code></td>
+<td style="text-align: right">sosa:observedProperty</td>
+<td style="text-align: center"><code>owl:equivalentProperty</code></td>
 <td>schema:variableMeasured</td>
 </tr>
 <tr>
-<td align="right">sosa:phenomenonTime</td>
-<td align="center"><code>rdfs:subPropertyOf</code></td>
+<td style="text-align: right">sosa:phenomenonTime</td>
+<td style="text-align: center"><code>rdfs:subPropertyOf</code></td>
 <td>schema:temporalCoverage</td>
 </tr>
 <tr>
-<td align="right">sosa:resultTime</td>
-<td align="center"><code>rdfs:subPropertyOf</code></td>
+<td style="text-align: right">sosa:resultTime</td>
+<td style="text-align: center"><code>rdfs:subPropertyOf</code></td>
 <td>schema:endTime</td>
 </tr>
 <tr>
-<td align="right">sosa:usedProcedure</td>
-<td align="center"><code>dcat:hasSubProperty</code></td>
+<td style="text-align: right">sosa:usedProcedure</td>
+<td style="text-align: center"><code>dcat:hasSubProperty</code></td>
 <td>schema:measurementTechnique</td>
 </tr>
 -->
@@ -3105,7 +3152,7 @@ In DCAT 2014 [[VOCAB-DCAT-20140116]] <a href="#Class:Dataset">dcat:Dataset</a> w
 	<a href="#Class:Distribution">Class: Distribution</a>
 	: In DCAT 2014 [[VOCAB-DCAT-20140116]] the definition of a <a href="#Class:Distribution">dcat:Distribution</a> allowed a number of alternative interpretations. The definition has been rephrased to clarify that distributions are primarily <i>representations</i> of datasets. See <a href="https://github.com/w3c/dxwg/issues/172">Issue #52</a> and related use cases.
 </li>
-       
+
 
 <li><a href="#Property:resource_theme">Property: theme/category</a>:
 	In DCAT 2014 [[VOCAB-DCAT-20140116]] the domain of dcat:theme was dcat:Dataset,
