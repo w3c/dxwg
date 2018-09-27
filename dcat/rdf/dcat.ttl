@@ -2,7 +2,6 @@
 # imports: http://purl.org/dc/terms/
 # imports: http://www.w3.org/2004/02/skos/core
 # imports: http://www.w3.org/ns/prov-o
-# imports: http://xmlns.com/foaf/0.1/
 # prefix: dcat
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
@@ -26,6 +25,13 @@
       rdfs:seeAlso <https://orcid.org/0000-0002-3884-3420> ;
       foaf:name "Simon J D Cox" ;
       foaf:workInfoHomepage <http://people.csiro.au/Simon-Cox> ;
+    ] ;
+dct:contributor [
+    schema:affiliation [
+        foaf:homepage <http://www.thomsonreuters.com> ;
+        foaf:name "Thomson Reuters" ;
+      ] ;
+      foaf:name "David Browning" ;
     ] ;
   dct:contributor [
       schema:affiliation <http://www.w3.org/data#W3C> ;
@@ -126,7 +132,6 @@
   owl:imports dct: ;
   owl:imports <http://www.w3.org/2004/02/skos/core> ;
   owl:imports <http://www.w3.org/ns/prov-o> ;
-  owl:imports foaf: ;
   owl:versionInfo """Esta es una copia del vocabulario DCAT v1.0 disponible en https://www.w3.org/ns/dcat.ttl
 con modificaciones en progreso para la nueva versión de DCAT que resultará del grupo 'W3C Data Exchange Working Group'"""@en ;
   owl:versionInfo """This is a copy of v1.0 of the DCAT vocabulary, taken from https://www.w3.org/ns/dcat.ttl
@@ -240,7 +245,7 @@ dcat:DataDistributionService
 .
 dcat:DataService
   rdf:type owl:Class ;
-  rdfs:comment "A service for discovery, access or processing data or related resources." ;
+  rdfs:comment "A site or end-point for discovery, access or processing data or related resources." ;
   rdfs:label "Data service" ;
   rdfs:subClassOf dctype:Service ;
   rdfs:subClassOf dcat:Resource ;
@@ -291,8 +296,8 @@ dcat:Dataset
 .
 dcat:DiscoveryService
   rdf:type owl:Class ;
-  rdfs:comment "A service used for the discovery of data resources, typically using one or more catalogs of datasets and data services." ;
-  rdfs:label "Resource Discovery Service" ;
+  rdfs:comment "A site or end-point that supports data discovery, usually by providing access to catalogs of datasets and data services." ;
+  rdfs:label "Discovery Service" ;
   rdfs:subClassOf dcat:DataDistributionService ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
@@ -359,7 +364,7 @@ dcat:Resource
 .
 dcat:accessService
   rdf:type owl:ObjectProperty ;
-  rdfs:comment "A service that gives access to the distribution of the dataset" ;
+  rdfs:comment "A site or end-point that gives access to the distribution of the dataset" ;
   rdfs:label "data access service" ;
   rdfs:range dcat:DataDistributionService ;
   rdfs:subPropertyOf dcat:accessURL ;
@@ -371,7 +376,7 @@ dcat:accessURL
   rdf:type owl:ObjectProperty ;
   rdfs:comment """Ceci peut être tout type d'URL qui donne accès à une distribution du jeu de données. Par exemple, un lien à une page HTML contenant un lien au jeu de données,
 					un Flux RSS, un point d'accès SPARQL. Utilisez le lorsque votre catalogue ne contient pas d'information sur quoi il est ou quand ce n'est pas téléchargeable."""@fr ;
-  rdfs:comment """Link to a resource that gives access to a distribution of the dataset. E.g. landing page, feed, SPARQL endpoint.
+  rdfs:comment """A URL of a resource that gives access to a distribution of the dataset. E.g. landing page, feed, SPARQL endpoint.
           Use for all cases except a simple download link, in which case downloadURL is preferred."""@en ;
   rdfs:comment "Potrebbe essere qualsiasi tipo di URL che dà accesso a una distribuzione del dataset. Ad esempio, la pagina di web, l'URL di download, URL del feed, un  SPARQL endpoint. Da utilizzare quando il catalogo non contiene informazioni su quale tipo sia o quando si sa che non è un download."@it ;
   rdfs:comment """Puede ser cualquier tipo de URL que de acceso a una distribución del conjunto de datos, e.g., página de destino, descarga,
@@ -387,7 +392,7 @@ dcat:accessURL
   rdfs:label "URL de acceso"@es ;
   rdfs:label "URL di accesso"@it ;
   rdfs:label "URL πρόσβασης"@el ;
-  rdfs:label "access link"@en ;
+  rdfs:label "access address"@en ;
   rdfs:label "přístupové URL"@cs ;
   rdfs:label "رابط وصول"@ar ;
   rdfs:label "アクセスURL"@ja ;
@@ -411,6 +416,7 @@ dcat:accessURL
 					Αν η/οι διανομή/ές είναι προσβάσιμη/ες μόνο μέσω μίας ιστοσελίδας αρχικής πρόσβασης (δηλαδή αν δεν υπάρχουν γνωστές διευθύνσεις άμεσης μεταφόρτωσης), τότε ο σύνδεσμος της ιστοσελίδας αρχικής πρόσβασης πρέπει να αναπαραχθεί ως accessURL σε μία διανομή."""@el ;
   skos:scopeNote """確実にダウンロードでない場合や、ダウンロードかどうかが不明である場合は、downloadURLではなく、accessURLを用いてください。
 ランディング・ページを通じてしか配信にアクセスできない場合（つまり、直接的なダウンロードURLが不明）は、配信におけるaccessURLとしてランディング・ページのリンクをコピーすべきです（SHOULD）。"""@ja ;
+ skos:editorialNote "Status: English Definition text modified by DCAT revision team, translations pending." ;
 .
 dcat:byteSize
   rdf:type rdf:Property ;
@@ -449,9 +455,9 @@ dcat:byteSize
 .
 dcat:catalog
   rdf:type owl:ObjectProperty ;
-  rdfs:comment "Link from a catalog to another catalog whose contents are of interest in the context of this catalog" ;
+  rdfs:comment "A catalog whose contents are of interest in the context of this catalog" ;
   rdfs:domain dcat:Catalog ;
-  rdfs:label "Link to catalog" ;
+  rdfs:label "catalog" ;
   rdfs:range dcat:Catalog ;
   rdfs:subPropertyOf dct:hasPart ;
   rdfs:subPropertyOf rdfs:member ;
@@ -462,7 +468,7 @@ dcat:contactPoint
   rdf:type rdf:Property ;
   rdf:type owl:ObjectProperty ;
   rdfs:comment "Collega un dataset alle informazioni del contatto pertinente utilizzando VCard."@it ;
-  rdfs:comment "Links a dataset to relevant contact information which is provided using VCard."@en ;
+  rdfs:comment "Relevant contact information (provided using vCard) for the catalogued resource."@en ;
   rdfs:comment "Propojuje datovou sadu a relevantní kontaktní informace poskytované jako VCard."@cs ;
   rdfs:comment "Relaciona un conjunto de datos con la información de contacto relevante utilizando VCard."@es ;
   rdfs:comment "Relie un jeu de données à une information de contact utile en utilisant VCard."@fr ;
@@ -479,13 +485,14 @@ dcat:contactPoint
   rdfs:label "عنوان اتصال"@ar ;
   rdfs:label "窓口"@ja ;
   rdfs:range v:Kind ;
+  skos:editorialNote "Status: English Definition text modified by DCAT revision team, translations pending." ;
 .
 dcat:dataset
   rdf:type rdf:Property ;
   rdf:type owl:ObjectProperty ;
   rdfs:comment "Collega un catalogo ad un dataset che è parte del catalogo."@it ;
   rdfs:comment "Enlaza un catálogo a un conjunto de datos que es parte de ese catálogo"@es ;
-  rdfs:comment "Links a catalog to a dataset that is part of the catalog."@en ;
+  rdfs:comment "A collection of data that is listed in the catalog."@en ;
   rdfs:comment "Propojuje katalog a datovou sadu, která je součástí tohoto katalogu."@cs ;
   rdfs:comment "Relie un catalogue à un jeu de données faisant partie de ce catalogue"@fr ;
   rdfs:comment "Συνδέει έναν κατάλογο με ένα σύνολο δεδομένων το οποίο ανήκει στον εν λόγω κατάλογο."@el ;
@@ -504,6 +511,7 @@ dcat:dataset
   rdfs:range dcat:Dataset ;
   rdfs:subPropertyOf dct:hasPart ;
   rdfs:subPropertyOf rdfs:member ;
+  skos:editorialNote "Status: English Definition text modified by DCAT revision team, translations pending." ;
 .
 dcat:distribution
   rdf:type rdf:Property ;
@@ -511,7 +519,7 @@ dcat:distribution
   rdfs:comment "Collega un dataset ad una delle sue distribuzioni disponibili."@it ;
   rdfs:comment "Conecta un conjunto de datos a una de sus distribuciones disponibles"@es ;
   rdfs:comment "Connecte un jeu de données à des distributions disponibles."@fr ;
-  rdfs:comment "Connects a dataset to one of its available distributions."@en ;
+  rdfs:comment "An available distribution of the dataset."@en ;
   rdfs:comment "Propojuje datovou sadu a jednu z jejích dostupných distribucí."@cs ;
   rdfs:comment "Συνδέει ένα σύνολο δεδομένων με μία από τις διαθέσιμες διανομές του."@el ;
   rdfs:comment "تربط قائمة البيانات بطريقة أو بشكل يسمح  الوصول الى البيانات"@ar ;
@@ -528,6 +536,7 @@ dcat:distribution
   rdfs:label "データセット配信"@ja ;
   rdfs:range dcat:Distribution ;
   rdfs:subPropertyOf dct:relation ;
+  skos:editorialNote "Status: English Definition text modified by DCAT revision team, translations pending." ;
 .
 dcat:downloadURL
   rdf:type rdf:Property ;
@@ -537,7 +546,7 @@ dcat:downloadURL
   rdfs:comment """Este es un enlace directo a un fichero descargable en un formato dado, e.g., fichero CSV o RDF. El
           formato es descrito por las propiedades de la distribución dct:format y/o dcat:mediaType"""@es ;
   rdfs:comment "Questo è un link diretto al file scaricabile in un dato formato. E.g. un file CSV o un file RDF. Il formato è descritto dal dct:format e/o dal dcat:mediaType della distribuzione."@it ;
-  rdfs:comment """This is a direct link to a downloadable file in a given format. E.g. CSV file or RDF file. The
+  rdfs:comment """The URL of the downloadable file in a given format. E.g. CSV file or RDF file. The
           format is indicated by the distribution's dct:format and/or dcat:mediaType"""@en ;
   rdfs:comment "Toto je přímý odkaz na soubor ke stažení v daném formátu, například CSV nebo RDF soubor. Formát je popsán vlastností distribuce dct:format a/nebo dcat:mediaType."@cs ;
   rdfs:comment "dcat:downloadURLはdcat:accessURLの特定の形式です。しかし、DCATプロファイルが非ダウンロード・ロケーションに対してのみaccessURLを用いる場合には、より強い分離を課すことを望む可能性があるため、この含意を強化しないように、DCATは、dcat:downloadURLをdcat:accessURLのサブプロパティーであると定義しません。"@ja ;
@@ -562,10 +571,11 @@ dcat:downloadURL
   skos:scopeNote "La valeur est une URL."@fr ;
   skos:scopeNote "The value is a URL."@en ;
   skos:scopeNote "Η τιμή είναι ένα URL."@el ;
+  skos:editorialNote "Status: English Definition text modified by DCAT revision team, translations pending." ;
 .
 dcat:endpointDescription
   rdf:type owl:ObjectProperty ;
-  rdfs:comment "Link to a description of the service end-point, for example an OpenAPI (Swagger) description, an OGC getCapabilities response, a SD Service, an OpenSearch or WSDL document.  " ;
+  rdfs:comment "A description of the service end-point, for example an OpenAPI (Swagger) description, an OGC getCapabilities response, a SD Service, an OpenSearch or WSDL document.  " ;
   rdfs:domain dcat:DataService ;
   rdfs:label "description of service end-point" ;
   skos:changeNote "New property in this revision of DCAT" ;
@@ -573,7 +583,7 @@ dcat:endpointDescription
 .
 dcat:endpointURL
   rdf:type owl:ObjectProperty ;
-  rdfs:comment "Address of service end-point" ;
+  rdfs:comment "The URI of the service end-point" ;
   rdfs:domain dcat:DataService ;
   rdfs:label "service end-point" ;
   skos:changeNote "New property in this revision of DCAT" ;
@@ -645,8 +655,7 @@ dcat:mediaType
 					en IANA, de otra manera dct:format puede ser utilizado con diferentes valores"""@es ;
   rdfs:comment "Questa proprietà DOVREBBE essere utilizzata quando il tipo di media usato per la distribuzione è definito dal IANA, altrimenti dct:format può essere impiegato con altri valori."@it ;
   rdfs:comment "Tato vlastnost by měla být použita, jestliže je typ média distribuce (MIME type) definovaný v IANA. V ostatních případech může být použita vlastnost dct:format s jinými hodnotami."@cs ;
-  rdfs:comment """This property SHOULD be used when the media type of the distribution is defined
-          in the IANA media types registry https://www.iana.org/assignments/media-types/, otherwise dct:format MAY be used with different values."""@en ;
+  rdfs:comment "The media type of the distribution as defined by IANA"@en ;
   rdfs:comment """Η ιδιότητα αυτή ΘΑ ΠΡΕΠΕΙ να χρησιμοποιείται όταν ο τύπος μέσου μίας διανομής είναι ορισμένος στο IANA, αλλιώς
           η ιδιότητα dct:format ΔΥΝΑΤΑΙ να χρησιμοποιηθεί με διαφορετικές τιμές."""@el ;
   rdfs:comment "يجب استخدام هذه الخاصية إذا كان نوع الملف معرف ضمن IANA"@ar ;
@@ -663,13 +672,16 @@ dcat:mediaType
   rdfs:label "メディア・タイプ"@ja ;
   rdfs:range dct:MediaType ;
   rdfs:subPropertyOf dct:format ;
+  skos:scopeNote "This property SHOULD be used when the media type of the distribution is defined in the IANA media types registry https://www.iana.org/assignments/media-types/, otherwise dct:format MAY be used with different values.";
+  skos:editorialNote "The range of dcat:mediaType has been tightened as part of the revision of DCAT." ;
+  skos:editorialNote "Status: English Definition text modified by DCAT revision team, translations pending. Note some inconsistency on def vs. usage" ;
 .
 dcat:record
   rdf:type rdf:Property ;
   rdf:type owl:ObjectProperty ;
   rdfs:comment "Asocia un catálogo con sus registros."@es ;
   rdfs:comment "Collega un catalogo ai propri record."@it ;
-  rdfs:comment "Links a catalog to its records."@en ;
+  rdfs:comment "A record describing the registration of a single dataset or dataservice that is part of the catalog."@en ;
   rdfs:comment "Propojuje katalog a jeho záznamy."@cs ;
   rdfs:comment "Relie un catalogue à ses registres"@fr ;
   rdfs:comment "Συνδέει έναν κατάλογο με τις καταγραφές του."@el ;
@@ -686,10 +698,11 @@ dcat:record
   rdfs:label "سجل"@ar ;
   rdfs:label "カタログ・レコード"@ja ;
   rdfs:range dcat:CatalogRecord ;
+  skos:editorialNote "Status: English Definition text modified by DCAT revision team, translations pending." ;
 .
 dcat:servesDataset
   rdf:type owl:ObjectProperty ;
-  rdfs:comment "Link to description of a dataset that this DataDistributionService can distribute" ;
+  rdfs:comment "A collection of data that this DataDistributionService can distribute" ;
   rdfs:domain dcat:DataDistributionService ;
   rdfs:label "serves dataset" ;
   rdfs:range dcat:Dataset ;
@@ -698,9 +711,9 @@ dcat:servesDataset
 .
 dcat:service
   rdf:type owl:ObjectProperty ;
-  rdfs:comment "link to description of a service" ;
+  rdfs:comment "A site or endpoint that is listed in the catalog" ;
   rdfs:domain dcat:Catalog ;
-  rdfs:label "has service" ;
+  rdfs:label "service" ;
   rdfs:range dcat:DataService ;
   rdfs:subPropertyOf dct:hasPart ;
   rdfs:subPropertyOf rdfs:member ;
@@ -714,7 +727,7 @@ dcat:theme
   rdfs:comment "La categoria principale della risorsa. Una risorsa può avere più temi."@it ;
   rdfs:comment "La categoría principal del recurso. Un recurso puede tener varios temas."@es ;
   rdfs:comment "La catégorie principale de la ressource. Une ressource peut avoir plusieurs thèmes."@fr ;
-  rdfs:comment "The main category of the resource. A resource can have multiple themes."@en ;
+  rdfs:comment "A main category of the resource. A resource can have multiple themes."@en ;
   rdfs:comment "Η κύρια κατηγορία του συνόλου δεδομένων. Ένα σύνολο δεδομένων δύναται να έχει πολλαπλά θέματα."@el ;
   rdfs:comment "التصنيف الرئيسي لقائمة البيانات. قائمة البيانات يمكن أن تملك أكثر من تصنيف رئيسي واحد."@ar ;
   rdfs:comment "データセットの主要カテゴリー。データセットは複数のテーマを持つことができます。"@ja ;
@@ -740,6 +753,7 @@ dcat:theme
   skos:scopeNote """Το σετ των skos:Concepts που χρησιμοποιείται για να κατηγοριοποιήσει τα σύνολα δεδομένων είναι οργανωμένο εντός
           ενός skos:ConceptScheme που περιγράφει όλες τις κατηγορίες και τις σχέσεις αυτών στον κατάλογο."""@el ;
   skos:scopeNote "データセットを分類するために用いられるskos:Conceptの集合は、カタログのすべてのカテゴリーとそれらの関係を記述しているskos:ConceptSchemeで組織化されます。"@ja ;
+  skos:editorialNote "Status: English Definition text modified by DCAT revision team, translations pending." ;
 .
 dcat:themeTaxonomy
   rdf:type rdf:Property ;
@@ -772,4 +786,14 @@ prov:wasDerivedFrom
 .
 prov:wasGeneratedBy
   rdfs:subPropertyOf dct:relation ;
+  skos:scopeNote "The activity associated with generation of a dataset will typically be an initiative, project, mission, survey, on-going activity ('business as usual') etc. Multiple prov:wasGeneratedBy properties can be used to indicate the dataset production context at various levels of granularity." ;
+  skos:scopeNote "Use prov:qualifiedGeneration to attach additional details about the relationship between the dataset and the activity, e.g. the exact time that the dataset was produced during the lifetime of a project" ;
+.
+dct:hasPart
+  skos:scopeNote "See also: Sub-properties of dct:hasPart in particular dcat:dataset, dcat:catalog, dcat:service." ;
+  skos:scopeNote "This is the most general predicate for membership of a catalog. Use of a more specific sub-property is recommended when available. " ;
+.
+dct:relation
+  skos:scopeNote "See also: Sub-properties of dct:relation in particular dcat:distribution, dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy" ;
+  skos:scopeNote "dct:relation SHOULD be used where the nature of the relationship between a catalogued item and related resources is not known. A more specific sub-property SHOULD be used if the nature of the relationship of the link is known. The property dcat:distribution SHOULD be used to link from a dcat:Dataset to a representation of the dataset, described as a dcat:Distribution" ;
 .

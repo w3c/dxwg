@@ -6,7 +6,7 @@ var respecConfig = {
     prevRecURI:           "https://www.w3.org/TR/vocab-dcat/",
     previousPublishDate:  "2014-01-16",
     previousMaturity:     "REC",
-    previousURI:          "https://www.w3.org/TR/2014/REC-vocab-dcat-20140116/",
+//    previousURI:          "https://www.w3.org/TR/2014/REC-vocab-dcat-20140116/",
     edDraftURI:           "https://w3c.github.io/dxwg/dcat/",
     issueBase:            "https://github.com/w3c/dxwg/issues/",
     editors: [{
@@ -116,6 +116,34 @@ var respecConfig = {
       "vivo-isf" : {
          href:"http://github.com/vivo-isf/vivo-isf",
          title:"VIVO-ISF Data Standard"
+      },
+     "LinkedDataPatterns" : {
+          title : "Linked Data Patterns: A pattern catalogue for modelling, publishing, and consuming Linked Data",
+          authors : [ "Leigh Dodds", "Ian Davis" ],
+         date: "31 May 2012",
+          href : "http://patterns.dataincubator.org/book/"
+      },
+      "PROF-CONNEG": {
+            href: "https://www.w3.org/TR/conneg-by-ap/",
+            title: "Content Negotiation by Profile",
+            date: " 2018-12-31",
+            status: "W3C Editor's Draft"
+      },
+      "PROF-GUIDE": {
+            href: "https://www.w3.org/TR/profile-guidance/",
+            title: "Profile Guidance",
+            date: " 2018-12-31",
+            status: "W3C Editor's Draft"
+      },
+      "PROF-IETF": {
+            authors: [
+                "L. Svensson",
+                "R. Verborgh"
+            ],
+            href: "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema/",
+            title: "Negotiating Profiles in HTTP",
+            date: " 2017-10-24",
+            status: "IETF Internet Draft"
       }
     }
   };
