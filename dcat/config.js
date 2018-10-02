@@ -88,6 +88,13 @@ var respecConfig = {
          href:"http://schema.org/",
          title:"Schema.org"
       },
+      "DATS": {
+          "href": "https://github.com/datatagsuite/",
+          "title": "Data Tag Suite",
+          "authors": ["Alejandra Gonzalez-Beltran", "Philippe Rocca-Serra"],
+          "publisher": "NIH Big Data 2 Knowledge bioCADDIE and NIH Data Commons projects",
+          "date": "2016"
+      },
       "dbpedia-ont" : {
          href:"http://dbpedia.org/ontology/",
          title:"DBPedia ontology"
