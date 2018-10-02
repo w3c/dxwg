@@ -75,10 +75,10 @@ var respecConfig = {
         "date":"2017-03-14"
       },
       "DATS": {
-        "href":"http://wg3-metadataspecifications.readthedocs.io/",
+        "href":"https://github.com/datatagsuite/",
         "title":"Data Tag Suite",
-        "authors":["Philippe Rocca-Serra", "Alejandra Gonzalez-Beltran"],
-        "publisher":"NIH Big Data 2 Knowledge bioCADDIE project.",
+        "authors":["Alejandra Gonzalez-Beltran", "Philippe Rocca-Serra"],
+        "publisher":"NIH Big Data 2 Knowledge bioCADDIE and NIH Data Commons projects",
         "date":"2016"
       }
     },
