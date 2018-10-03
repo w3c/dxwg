@@ -15,7 +15,7 @@ var respecConfig = {
 	  },
 	  {
 		  name: "Antoine Isaac",
-		  company: "Europeana",
+		  company: "VU Amsterdam and Europeana",
 		  companyURL: "https://www.europeana.eu/"
 	  }
     ],
