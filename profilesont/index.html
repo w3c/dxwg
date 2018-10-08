@@ -78,12 +78,11 @@
   <section id="NotationalConventions">
     <h3>Notational Conventions</h3>
     <p>
-      The key words <dfn>may</dfn>, <dfn>must</dfn>, <dfn>must no</dfn>, <dfn>optional</dfn>, <dfn>shall</dfn>,
+      The key words <dfn>may</dfn>, <dfn>must</dfn>, <dfn>must not</dfn>, <dfn>optional</dfn>, <dfn>shall</dfn>,
       <dfn>shall not</dfn>, <dfn>should</dfn>, <dfn>should not</dfn>, <dfn>recommended</dfn>, <dfn>required</dfn>,
       in this document are to be interpreted as described in [[RFC2119]].
     </p>
   </section>
-  <div class="issue" data-number="399"></div>
 </section>
 <section id="namespaces-1">
   <h2>Namespaces</h2>
@@ -133,7 +132,7 @@
   </p>
   <ul>
     <li>its dependence on standards or other profiles</li>
-    <li>inheritance of profile information from the things being profiled</li>, or
+    <li>inheritance of profile information from the things being profiled, or</li>
     <li>related profile resources
       <ul>
         <li>guidance documents in addition to formal constraints</li>
@@ -351,6 +350,7 @@
           <tr><td class="prop">Usage note:</td><td>This property is to be used to indicate a token that identifies this Profile which should be used when the Profile's URI cannot be used. For potential use in content negotiation. Will require a registry to disambiguate as do Media Type type tokens</td></tr>
         </tbody>
       </table>
+      <div class="issue" data-number="453"></div>
     </section>
   </section>
   <section id="Class:ResourceDescriptor" class="property">
@@ -579,21 +579,23 @@
     <div class="req-response">
       <p class="respTitle">RESPONSE FOR 205</p>
       <p>
-
+        This is handled by having URIs for profiles resolve to HTML landing pages and RDF descriptions of the profile
+        created according to this ontology which then lenk to Resource Descriptors and other Profiles.
       </p>
     </div>
     <div class="issue" data-number="207"></div>
     <div class="req-response">
       <p class="respTitle">RESPONSE FOR 207</p>
       <p>
-
+        This is addressed by a Profile using this ontology to link to other Profiles from which it derives.
       </p>
     </div>
     <div class="issue" data-number="208"></div>
     <div class="req-response">
       <p class="respTitle">RESPONSE FOR 208</p>
       <p>
-
+        This is addressed by Profiles using Resource Descriptors from this ontology which then implement constraint
+        languages with various Roles such as "Full Constraints".
       </p>
     </div>
     <div class="issue" data-number="209"></div>
@@ -607,7 +609,8 @@
     <div class="req-response">
       <p class="respTitle">RESPONSE FOR 210</p>
       <p>
-
+        This is addressed by a Profile implementing a constraint language via a Resource Descriptor and selecting an
+        appropriate Resource Role for it.
       </p>
     </div>
     <div class="issue" data-number="211"></div>
@@ -642,7 +645,7 @@
     <div class="req-response">
       <p class="respTitle">RESPONSE FOR 215</p>
       <p>
-
+        Profiles described using this ontology may indicate that they are a <em>profileOf</em> another Profile.
       </p>
     </div>
     <div class="issue" data-number="216"></div>
@@ -698,7 +701,9 @@
     <div class="req-response">
       <p class="respTitle">RESPONSE FOR 279</p>
       <p>
-
+        Using this ontology, a <em>Profile</em> may indicate a <em>Resource Descriptor</em> instance by way of the
+        <em>resource</em> property. That <em>Resource Descriptor</em> may be a schema that <em>conformsTo</em> a
+        constraints language, such as SHACL etc.
       </p>
     </div>
     <div class="issue" data-number="280"></div>
@@ -712,14 +717,18 @@
     <div class="req-response">
       <p class="respTitle">RESPONSE FOR 284</p>
       <p>
-
+        Using this ontology, all <em>Profile</em> instances are RDF <em>Resources</em> with their own URIs.
+        Additionally, the <em>token</em> property is given for use with a <em>Profile</em> to be used to identify it
+        where use of a full URI is not possible, such as within HTTP Query String Arguments.
       </p>
     </div>
     <div class="issue" data-number="286"></div>
     <div class="req-response">
       <p class="respTitle">RESPONSE FOR 286</p>
       <p>
-
+        Following relationships from a profile defined using this ontology, a person or machine may discover either
+        <em>Resource Descriptor</em> resources describing any sort of document relevant to the profile or other
+        <em>Profile</em>s.
       </p>
     </div>
     <div class="issue" data-number="287"></div>
@@ -733,8 +742,13 @@
     <div class="req-response">
       <p class="respTitle">RESPONSE FOR 288</p>
       <p>
-
+        Graph navigation of profiles' information described using this ontology is supported by its RDF mechanics.
       </p>
+      <p>
+        An instance of a resource claiming adherence to an instance of a <em>Profile</em> might indicate its adherence
+        by using the <em>dct:conformsTo</em> property.
+      </p>
+      <div class="issue" data-number="455"></div>
     </div>
   </section>
   <section class="appendix" id="extra-issues">
