@@ -36,7 +36,7 @@ var respecConfig = {
     issueBase: "https://github.com/w3c/dxwg/issues/",
     github: "https://github.com/w3c/dxwg/issues/",
     localBiblio: {
-        "PROF-DESC": {
+        "PROF-ONT": {
             editors: [
                 "Rob Atkinson",
                 "Nicholas J. Car"

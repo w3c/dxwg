@@ -52,29 +52,31 @@
   <section id="introduction">
     <h1>Introduction</h1>
     <p>
-      Internet clients may wish to request that the content of a requested Internet resource adheres to a particular
-      standard, specification or <em>profile</em>. This is distinct from the content being formatted according to a
-      particular serialization or Media Type, such as HTML, one of the many forms of RDF or perhaps XML. Instead, this
-      sort of adherence relates to the parts of the content and their concepts adhering to information or conceptual
-      models. For example, information about a book may adhere to the Dublin Core Terms [[DCTERMS]] medatadata
-      specifications with each field of information, such as <em>title</em>, <em>description</em>, <em>author</em> etc.,
-      being defined according to various Dublin Core elements (<code>dct:title</code>, <code>dct:description</code>
-      &amp; <code>dct:creator</code>, respectively).
-    </p>
-    <p>
-      The content delivered by dereferencing Internet identifiers has long been able to be negotiated for in different
+      Content delivered by dereferencing Internet identifiers has long been able to be negotiated for in different
       ways. When using the HTTP protocol [[rfc7230]], a client may set an <code>Accept</code> header specifying
-      preferred Media Types which the server may or may not supply. So too resources in different languages may be
-      requested by setting an HTTP <code>Accept-Language</code> header. Until now, clients have not had a defined way
-      to negotiate for content based on information model standard, specification or <em>profile</em> and this
-      document addresses that.
+      preferred Media Types which the server may or may not supply. So too resources available in different languages
+      may be requested by setting an HTTP <code>Accept-Language</code> header. Until now, clients have not had a
+      defined way to negotiate for content based on its adherence to an information model - standard, specification or
+      <em>profile</em> - and this document addresses that.
     </p>
     <p>
-      When selecting content negotiation mechanics, an Internet client may use the HTTP protocol but it also may not:
-      methods for providing instructions to a server such as Query String Arguments (QSAs) are long established as
-      useful for humans, machines and in situations where negotiation via HTTP is not best applicable. This document
-      provides guidance for non-HTTP methods of content negotiation to ensure that they align with HTTP method thus
-      ensuring their functional equivalency.
+      When information online about a resource adheres to one or more profiles, methods described here allow
+      clients to list those models adhered to and request content according to one or more of them in preference order.
+      For example, information about a book online might adhere to the as the Dublin Core Terms [[DCTERMS]] medatadata
+      specifications with each field of information, such as <em>title</em>, <em>description</em>, <em>author</em> etc.,
+      being defined and formatted according to various Dublin Core elements (<code>dct:title</code>,
+      <code>dct:description</code> &amp; <code>dct:creator</code>, respectively). A request then for this book may ask for
+      the list of profiles the book is available according to or it may ask specifically for a response adhering to the
+      Dublin Core Terms profile. When a requested for a non-existent or unsupported profile is requested, a server
+      returns default content.
+    </p>
+    <p>
+      When selecting content negotiation mechanics, an Internet client may use the HTTP protocol but it may also use
+      other methods for providing instructions to a server, such as URI Query String Arguments (QSAs). QSAs are long
+      established as useful for humans and machines and in situations where negotiation via HTTP is not practical, such
+      as when manually entering requests into web browsers. This document also provides guidance for non-HTTP methods
+      of content negotiation and ensures they and the HTTP methods all adhere to a single functional specification
+      which thus ensures their functional equivalency.
     </p>
   </section>
   <section id="definitions">
@@ -426,7 +428,6 @@
         <li><a href="https://github.com/w3c/dxwg/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Aprofile-negotiation+sort%3Acreated-asc+">GitHub Issues tracker for profile-negotiation</a></li>
       </ul>
     </section>
-  </section>
   </section>
   <div class="issue" data-number="390"></div>
   <script class="remove" src="config.js"></script>
