@@ -63,7 +63,7 @@
 
     <h2>Introduction</h2>
 
-    <p class="note">From DCAT 2014 [[!VOCAB-DCAT-20140116]]</p>
+    <p class="note">From DCAT 2014 [[VOCAB-DCAT-20140116]]</p>
 
     <p>Data can come in many formats, ranging from spreadsheets, through XML and RDF, to various specialty formats. DCAT does not make any assumptions about the serialization format of the datasets described in a catalog. Other, complementary vocabularies <em title="MAY" class="rfc2119">MAY</em> be used together with DCAT to provide more detailed format-specific information. For example, properties from the VoID vocabulary [[VOID]] can be used to express various statistics about a DCAT-described dataset if that dataset is in RDF format.</p>
     <p>This document does not prescribe any particular method of deploying data expressed in DCAT. DCAT is applicable in many contexts including RDF accessible via SPARQL endpoints, embedded in HTML pages as RDFa, or serialized as e.g. RDF/XML or Turtle. The examples in this document use Turtle simply because of Turtle's readability.</p>
@@ -172,7 +172,7 @@
         Distributions of a dataset can be provided via <b>data distribution services</b>.
         Detailed properties for a data distribution service API are out of the scope of this version of DCAT. </p>
 
-    <p>Datasets and <b>data services</b>, and potentially other types of thing, <em title="MAY" class="rfc2119">MAY</em> be included in a <b>catalog</b>.
+    <p>Datasets and <b>data services</b>, and potentially other types of thing, can be included in a <b>catalog</b>.
         Types of data service that might be found in a catalog include data distribution services, <b>discovery services</b> such as portals and catalog services, <b>data transformation services</b> such as coordinate transformation services, re-sampling and interpolation services, and various <b>data processing services</b>.
     </p>
 
@@ -182,21 +182,18 @@
             A number of use cases for the revision involve also having <b>data distribution services</b> as members of a catalog - see <a href="https://www.w3.org/TR/dcat-ucr/#ID6">DCAT Distribution to describe web services - ID6</a> and
             <a href="https://www.w3.org/TR/dcat-ucr/#ID18">Modeling service-based data access - ID18</a>.
             It has been decided to add an explicit class for Data Distribution Services in this revision of DCAT, and to enable these to be part of a Catalog.
-            Provision for other data services to also be part of a Catalog will also be made, as well as for Catalogs to be composed of other Catalogs.
+            Provision for other data services to also be part of a Catalog is also made, as well as for Catalogs to be composed of other Catalogs.
             See <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>. </p>
-        <p>
-            The wiki page on <a href="https://github.com/w3c/dxwg/wiki/Cataloguing-data-services">Cataloguing data services</a> describes some proposals related to this requirement.
-        </p>
     </div>
 
     <p>A <b>CatalogRecord</b> describes an entry in the catalog. Notice that while <code>dcat:Resource</code> represents the dataset or service itself, <code>dcat:CatalogRecord</code> is the record that describes the registration of an item in the catalog. The use of <code>dcat:CatalogRecord</code> is considered optional. It is used to capture provenance information about entries in a catalog. If this distinction is not necessary then <code>dcat:CatalogRecord</code> can be safely ignored.</p>
 
     <p class="issue" data-number="431">
-        There is ongoing discussion about whether a resource represents a dataset or a distribution.
+        There is ongoing discussion about whether a DCAT Resource represents only a dataset or also a distribution.
     </p>
     <p id="blankNodes">RDF allows resources to have global identifiers (IRIs) or to be blank nodes.  Blank nodes can be used to denote resources without explicitly naming them with an IRI. They can appear in the subject and object position of a triple [[RDF11-PRIMER]].
         While blank nodes may offer flexibility for some use cases, in a Linked Data context, blank nodes limit our ability to collaboratively annotate data. A  blank node resource cannot be the target of a link and it can't be annotated with new information from new sources. As one of the biggest benefits of the Linked Data approach is that "anyone can say anything anywhere", use of blank nodes undermines some of the advantages we can gain from wide adoption of the RDF model. Even within the closed world of a single application dataset, use of blank nodes can quickly become limiting when integrating new data [[LinkedDataPatterns]].
-        For these reasons, instances of the DCAT main classes <em title="SHOULD" class="rfc2119">SHOULD</em> have a global identifier, and use of blank nodes is generally discouraged when encoding DCAT in RDF.</p>
+        For these reasons, it is recommended that instances of the DCAT main classes have a global identifier, and use of blank nodes is generally discouraged when encoding DCAT in RDF.</p>
 
     <p class="note">All RDF examples in this document are written in Turtle syntax [[Turtle]] and many are available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a>. </p>
     <p class="note">Each RDF example in this document is intended to demonstrate specific capabilities of DCAT, and therefore only shows a subset of all the potential properties and links which might appear in a complete DCAT resource. </p>
@@ -299,8 +296,13 @@
         <h3>Classifying dataset types</h3>
 
         <p>
-            The type or genre of a dataset <em title="MAY" class="rfc2119">MAY</em> be indicated using the <a href="http://purl.org/dc/terms/type">dct:type</a> property.
-            The value of the property <em title="SHOULD" class="rfc2119">SHOULD</em> be taken from a well governed and broadly recognised set of resource types, such as the <a href="http://dublincore.org/documents/dcmi-terms/#section-7">DCMI Type Vocabulary</a>, the <a href="https://id.loc.gov/vocabulary/marcgt.html">MARC Genre/Terms Scheme</a>, the <a href="https://schema.datacite.org/meta/kernel-4.1/include/datacite-resourceType-v4.1.xsd">DataCite resource types</a> or the PARSE.Insight content-types from Re3data [[RE3DATA-SCHEMA]].
+            The type or genre of a dataset can be indicated using the <a href="http://purl.org/dc/terms/type">dct:type</a> property.
+            It is recommended that the value of the property is be taken from a well governed and broadly recognised set of resource types,
+            such as the <a href="http://dublincore.org/documents/dcmi-terms/#section-7">DCMI Type Vocabulary</a>,
+            the <a href="https://id.loc.gov/vocabulary/marcgt.html">MARC Genre/Terms Scheme</a>,
+            the <a href="https://geo-ide.noaa.gov/wiki/index.php?title=ISO_19115_and_19115-2_CodeList_Dictionaries#MD_ScopeCode">ISO 19115 MD_Scope codes</a>,
+            the <a href="https://schema.datacite.org/meta/kernel-4.1/include/datacite-resourceType-v4.1.xsd">DataCite resource types</a>,
+            or the PARSE.Insight content-types from Re3data [[RE3DATA-SCHEMA]].
         </p>
         <p>
             In the following examples, a (notional) dataset is classified separately using values from different vocabularies.
@@ -482,7 +484,7 @@
     <section id="examples-dataset-provenance">
         <h3>Dataset provenance</h3>
         <p>
-            The provenance or business context of a dataset can be described using elements from the W3C Provenance Ontology [[!PROV-O]].
+            The provenance or business context of a dataset can be described using elements from the W3C Provenance Ontology [[PROV-O]].
         </p>
         <p>
             For example, a simple link from a dataset description to the project that generated the dataset can be formalized as follows (other details elided for clarity):
@@ -1191,7 +1193,7 @@ ga-courts:jc-wms
                 <tr><td class="prop">Definition:</td><td>The nature or genre of the resource.</td></tr>
                 <tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/elements/1.1/type">dc:type</a></td></tr>
                 <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Class">rdfs:Class</a></td></tr>
-                <tr><td class="prop">Usage note:</td><td>Recommended best practice is to use a value from a controlled vocabulary, such as:
+                <tr><td class="prop">Usage note:</td><td>The value <em title="SHOULD" class="rfc2119">SHOULD</em> be taken from a well governed and broadly recognised controlled vocabulary, such as:
                     <ol>
                         <li><a href="http://dublincore.org/documents/dcmi-terms/#section-7">DCMI Type vocabulary</a> [[DCTERMS]]</li>
                         <li><a href="https://geo-ide.noaa.gov/wiki/index.php?title=ISO_19115_and_19115-2_CodeList_Dictionaries#MD_ScopeCode">ISO 19115 scope codes</a> [[ISO-19115-1]]</li>
@@ -1304,7 +1306,7 @@ ga-courts:jc-wms
             <h4>Property: landing page</h4>
 
             <p class="note">
-                In DCAT 2014 [[!VOCAB-DCAT-20140116]] the domain of dcat:landingPage was dcat:Dataset, which limited use of this property in other contexts. The domain has been relaxed in this revision - see <a href="https://github.com/w3c/dxwg/issues/122">Issue #122</a>.
+                In DCAT 2014 [[VOCAB-DCAT-20140116]] the domain of dcat:landingPage was dcat:Dataset, which limited use of this property in other contexts. The domain has been relaxed in this revision - see <a href="https://github.com/w3c/dxwg/issues/122">Issue #122</a>.
             </p>
 
             <table class="definition">
@@ -1607,8 +1609,8 @@ ga-courts:jc-wms
 
         <div class="note">
             <p>
-                In DCAT 2014 [[!VOCAB-DCAT-20140116]] <a href="#Class:Dataset">dcat:Dataset</a> was a sub-class of <a href="http://purl.org/dc/dcmitype/Dataset">dctype:Dataset</a>, which is a member of the <a href="http://dublincore.org/documents/dcmi-terms/#section-7">DCMI Types vocabulary</a> [[DCTERMS]].
-                The scope of <a href="#Class:Dataset">dcat:Dataset</a> also includes other members of the <a href="http://dublincore.org/documents/dcmi-terms/#section-7">DCMI Types vocabulary</a>, so the implicitly limited sub-class relationship from DCAT 2014 [[!VOCAB-DCAT-20140116]] has been removed in this revised DCAT vocabulary - see <a href="https://github.com/w3c/dxwg/issues/98">Issue #98</a>.
+                In DCAT 2014 [[VOCAB-DCAT-20140116]] <a href="#Class:Dataset">dcat:Dataset</a> was a sub-class of <a href="http://purl.org/dc/dcmitype/Dataset">dctype:Dataset</a>, which is a member of the <a href="http://dublincore.org/documents/dcmi-terms/#section-7">DCMI Types vocabulary</a> [[DCTERMS]].
+                The scope of <a href="#Class:Dataset">dcat:Dataset</a> also includes other members of the <a href="http://dublincore.org/documents/dcmi-terms/#section-7">DCMI Types vocabulary</a>, so the implicitly limited sub-class relationship from DCAT 2014 [[VOCAB-DCAT-20140116]] has been removed in this revised DCAT vocabulary - see <a href="https://github.com/w3c/dxwg/issues/98">Issue #98</a>.
             </p>
             <p>
                 Note that members of the <a href="http://dublincore.org/documents/dcmi-terms/#section-7">DCMI Types vocabulary</a> may appear as the value of the <a href="#Property:resource_type">dct:type</a> property, as shown in <a href="#classifying-dataset-types">Classifying dataset types</a>.
