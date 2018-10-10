@@ -24,9 +24,15 @@ var respecConfig = {
     authors: [{
         name:       "Nicholas J. Car",
         url:        "https://people.csiro.au/Nicholas-Car",
+        mailto:     "nicholas.car@csiro.au",
         company:    "CSIRO",
-        companyURL: "https://www.csiro.au/",
-        w3cid:      70131
+        companyURL: "https://www.csiro.au",
+        w3cid:      70131,
+        extras:     [{
+            name:  "<img src='orcid_logo.png' alt='orcid logo' />",
+            href:  "https://orcid.org/0000-0002-8742-7730",
+            class: "orcid"
+        }],
     }],
     wg: "Dataset Exchange Working Group",
     wgURI: "https://www.w3.org/2017/dxwg/",
