@@ -2,6 +2,7 @@ var respecConfig = {
     specStatus: "ED",
     shortName: "vocab-prof",
     edDraftURI: "https://w3c.github.io/dxwg/profilesont/",
+    implementationReportURI: "https://github.com/CSIRO-enviro-informatics/prof-ont-implementation-results",
     editors: [
       {
         name: "Rob Atkinson",
@@ -13,7 +14,21 @@ var respecConfig = {
         url:        "https://people.csiro.au/Nicholas-Car",
         company:    "CSIRO",
         companyURL: "https://www.csiro.au/",
-        w3cid:      70131
+        w3cid:      70131,
+        extras:     [{
+          name:  "<img src='orcid_logo.png' alt='orcid logo' />",
+          href:  "https://orcid.org/0000-0002-8742-7730",
+          class: "orcid"
+        }]
+    }],
+    otherLinks: [{
+      key: "Contributors",
+      data: [
+        {
+          value: "Simon Cox",
+          href: "http://people.csiro.au/Simon-Cox"
+        }
+      ]
     }],
     wg: "Dataset Exchange Working Group",
     wgURI: "https://www.w3.org/2017/dxwg/",

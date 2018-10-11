@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <title>The Profiles Ontology</title>
-  <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Language" content="en">
   <meta content="width=device-width,initial-scale=1" name="viewport"/>
   <link rel="stylesheet" type="text/css" href="style.css">
   <link rel="stylesheet" type="text/css" href="https://www.w3.org/StyleSheets/TR/2016/W3C-WG-NOTE"/>
@@ -54,7 +55,7 @@
   </section>
 </section>
 <section id="tof"></section>
-<section id="introduction">
+<section id="introduction" class="informative">
   <h1>Introduction</h1>
   <p>
     This model starts with <a href="http://dublincore.org/2012/06/14/dcterms#Standard">dcterms:Standard</a> entities
@@ -114,9 +115,8 @@
     </tbody>
   </table>
 </section>
-<section id="motivation">
+<section id="motivation" class="informative">
   <h2>Motivation</h2>
-  <p><em>This section is non-normative.</em></p>
   <p>
     Until this ontology, there was no formal W3C method for describing the objects (Internet resources) related to
     <em>profiles</em>.
@@ -179,9 +179,8 @@
     are explained in detail in the related [[PROF-CONNEG]] document.
   </div>
 </section>
-<section id="relatedwork">
+<section id="relatedwork" class="informative">
   <h2>Related Work</h2>
-  <p><em>This section is non-normative.</em></p>
   <p>
 
   </p>
@@ -364,6 +363,20 @@
       <tr><td class="prop">Definition:</td><td>A resource that defines implementing rules for a profile. Must indicate the purpose (dct:type) and the formalism (dct:format) used to allow machine mediation of such rules</td></tr>
       </tbody>
     </table>
+    <section id="Property:artifact" class="property">
+      <h4>artifact</h4>
+      <table class="definition">
+        <thead>
+        <tr><th>RDF Property:</th><th><a href="#Property:artifact">prof:artifact</a></th></tr>
+        </thead>
+        <tbody>
+        <tr><td class="prop">Label:</td><td>artifact (resource)</td></tr>
+        <tr><td class="prop">Definition:</td><td>The artifact (resource) linked to a profile through an Resource Descriptor</td></tr>
+        <tr><td class="prop">Domain:</td><td><a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a></td></tr>
+        <tr><td class="prop">Editorial Note:</td><td>A property to link from a :ResourceDescriptor to the actual implementation resource</td></tr>
+        </tbody>
+      </table>
+    </section>
     <section id="Property:conformsTo" class="property">
       <h4>conformsTo</h4>
       <p><em>This property's details are from the [[DCTERMS]] specification.</em></p>
@@ -440,64 +453,25 @@
     <div class="issue" data-number="452"></div>
   </section>
 </section>
-<section id="testsuite">
-  <h2>Test Suite</h2>
+<section id="implementations" class="informative">
+  <h2>Test Suite & Implementations</h2>
   <p>
-    This section describes the software test suite used to assess adherence of implementations of this ontology to it.
-  </p>
-  <p>
-    This test suite is implemented as a constraints language validating ruleset coded using the Shapes Constraint
-    Language (SHACL) [[shacl]] used for validating RDF graphs against a set of conditions. A normative SHACL "shapes
-    graphs" file, in RDF, is presented here.
+    A test suite and implementation conformance reports for this ontology are given in:
   </p>
   <ul>
-    <li>This ontology's SHACL shapes graph file: <a href="validation.ttl">profilesont-validation.ttl</a></li>
+    <li>
+      <a href="https://github.com/CSIRO-enviro-informatics/prof-ont-implementation-results">
+        https://github.com/CSIRO-enviro-informatics/prof-ont-implementation-results
+      </a>
+    </li>
   </ul>
-  <p>
-    The shapes graph file can be used with a validation execution tool such as <a href="https://github.com/RDFLib/pySHACL">pySHACL</a>
-    to test the adherence of instances of this ontology for conformance to it.
-  </p>
-  <p>
-    Known implementations of this ontology are listed in the next section with their conformance results generated from
-    using this shapes graph file.
-  </p>
-  <section id="shapesgraph">
-    <div class="issue" data-number="407"></div>
-  </section>
-</section>
-<section id="implementations">
-  <h2>Implementations</h2>
-  <p><em>This section is non-normative.</em></p>
-  <p>
-    This section describes exemplar implementations of the guidance outlined in this document.
-  </p>
-  <section class="implementation" id="impl-csiro">
-    <h3><a href="https://www.csiro.au">CSIRO</a></h3>
-    <p>
-
-    </p>
-    <h4>Implementation Test Suite results</h4>
-    <p>
-      <em>Here will be given each of the implementation instance's results according to the Test Suite</em>
-    </p>
-    <div class="issue" data-number="408"></div>
-  </section>
-  <section class="implementation" id="impl-ogc">
-    <h3><a href="http://www.opengeospatial.org/">Open Geospatial Consortium</a></h3>
-    <p>
-
-    </p>
-    <h4>Implementation Test Suite results</h4>
-    <p>
-      <em>Here will be given each of the implementation instance's results according to the Test Suite</em>
-    </p>
-  </section>
+  <div class="issue" data-number="467"></div>
+  <div class="issue" data-number="407"></div>
   <div class="issue" data-number="409"></div>
   <p></p>
 </section>
-<section id="alignments">
+<section id="alignments" class="informative">
   <h2>Alignments</h2>
-  <p><em>This section is non-normative.</em></p>
   <p>This section will list alignments from PROF to other W3C ontologies.</p>
   <section id="alignment-dcat">
     <h3>Alignment with DCAT</h3>
@@ -530,7 +504,18 @@
     <h3>Alignment with ADMS</h3>
     <p></p>
   </section>
+  <section id="alignment-modspec">
+    <h3>Alignment with OGC/ISO Modular specification model</h3>
+    <p></p>
+  </section>
   <div class="issue" data-number="405"></div>
+</section>
+<section id="privacyConsiderations" class="informative">
+  <h2>Privacy Considerations</h2>
+  <p>
+
+  </p>
+  <div class="issue" data-number="461"></div>
 </section>
 <section class="appendix" id="appendices">
   <h2>Appendices</h2>
@@ -539,7 +524,6 @@
   </section>
   <section class="appendix" id="requirements">
     <h3>Requirements</h3>
-    <p><em>This section is non-normative.</em></p>
     <p>
       This section lists, and then addresses, individual requirements that the Dataset Exchange Working Group
       considered important for content negotiation by profile.
