@@ -2,6 +2,7 @@ var respecConfig = {
     specStatus: "ED",
     shortName: "vocab-prof",
     edDraftURI: "https://w3c.github.io/dxwg/profilesont/",
+    implementationReportURI: "https://github.com/CSIRO-enviro-informatics/prof-ont-implementation-results",
     editors: [
       {
         name: "Rob Atkinson",
