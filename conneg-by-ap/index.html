@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+  <meta http-equiv="Content-Language" content="en">
+  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+  <meta content="ED" name="w3c-status">
   <title>Content Negotiation by Profile</title>
-  <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
-  <meta content="width=device-width,initial-scale=1" name="viewport"/>
-  <link rel="stylesheet" type="text/css" href="https://www.w3.org/StyleSheets/TR/2016/W3C-WG-NOTE"/>
-  <link rel="stylesheet" type="text/css" href="dxwg-additions.css">
+  <link rel="stylesheet" type="text/css" href="https://www.w3.org/StyleSheets/TR/2016/W3C-WD"/>
 </head>
 <body class="h-entry" role="document" id="respecDocument">
   <section id="abstract">
@@ -41,40 +42,42 @@
         </p>
         <ul>
           <li>[[PROF-GUIDE]] (Recommendation), the top-level general profiling guidance document giving an overview of all other documents</li>
-          <li>[[PROF-DESC]] (WG Note), a formal ontology describing objects related to profiles</li>
-          <li><strong>[PROF-CONNEG]</strong> (Recommendation), <strong>this document</strong>, Specific guidance on how to negotiate for Internet resource content using profiles</li>
+          <li>[[PROF-ONT]] (WG Note), a formal ontology describing objects related to profiles</li>
+          <li><strong>[PROF-CONNEG] (Recommendation), this document, specific guidance on how to negotiate for Internet resource content using profiles</strong></li>
           <li>[[PROF-IETF]] (<a href="http://www.ietf.org">IETF</a> <a href="http://www.ietf.org/standards/ids/">Internet-Draft</a>), HTTP Headers for HTTP content negotiation by profile</li>
         </ul>
       </section>
     </section>
   </section>
   <section id="tof"></section>
-  <section id="introduction">
+  <section id="introduction" class="informative">
     <h1>Introduction</h1>
     <p>
-      Internet clients may wish to request that the content of a requested Internet resource adheres to a particular
-      standard, specification or <em>profile</em>. This is distinct from the content being formatted according to a
-      particular serialization or Media Type, such as HTML, one of the many forms of RDF or perhaps XML. Instead, this
-      sort of adherence relates to the parts of the content and their concepts adhering to information or conceptual
-      models. For example, information about a book may adhere to the Dublin Core Terms [[DCTERMS]] medatadata
-      specifications with each field of information, such as <em>title</em>, <em>description</em>, <em>author</em> etc.,
-      being defined according to various Dublin Core elements (<code>dct:title</code>, <code>dct:description</code>
-      &amp; <code>dct:creator</code>, respectively).
-    </p>
-    <p>
-      The content delivered by dereferencing Internet identifiers has long been able to be negotiated for in different
+      Content delivered by dereferencing Internet identifiers has long been able to be negotiated for in different
       ways. When using the HTTP protocol [[rfc7230]], a client may set an <code>Accept</code> header specifying
-      preferred Media Types which the server may or may not supply. So too resources in different languages may be
-      requested by setting an HTTP <code>Accept-Language</code> header. Until now, clients have not had a defined way
-      to negotiate for content based on information model standard, specification or <em>profile</em> and this
-      document addresses that.
+      preferred Media Types which the server may or may not supply. So too resources available in different languages
+      may be requested by setting an HTTP <code>Accept-Language</code> header. Until now, clients have not had a
+      defined way to negotiate for content based on its adherence to an information model - standard, specification or
+      <em>profile</em> - and this document addresses that.
     </p>
     <p>
-      When selecting content negotiation mechanics, an Internet client may use the HTTP protocol but it also may not:
-      methods for providing instructions to a server such as Query String Arguments (QSAs) are long established as
-      useful for humans, machines and in situations where negotiation via HTTP is not best applicable. This document
-      provides guidance for non-HTTP methods of content negotiation to ensure that they align with HTTP method thus
-      ensuring their functional equivalency.
+      When information online about a resource adheres to one or more profiles, methods described here allow
+      clients to list those models adhered to and request content according to one or more of them in preference order.
+      For example, information about a book online might adhere to the as the Dublin Core Terms [[DCTERMS]] medatadata
+      specifications with each field of information, such as <em>title</em>, <em>description</em>, <em>author</em> etc.,
+      being defined and formatted according to various Dublin Core elements (<code>dct:title</code>,
+      <code>dct:description</code> &amp; <code>dct:creator</code>, respectively). A request then for this book may ask for
+      the list of profiles the book is available according to or it may ask specifically for a response adhering to the
+      Dublin Core Terms profile. When a requested for a non-existent or unsupported profile is requested, a server
+      returns default content.
+    </p>
+    <p>
+      When selecting content negotiation mechanics, an Internet client may use the HTTP protocol but it may also use
+      other methods for providing instructions to a server, such as URI Query String Arguments (QSAs). QSAs are long
+      established as useful for humans and machines and in situations where negotiation via HTTP is not practical, such
+      as when manually entering requests into web browsers. This document also provides guidance for non-HTTP methods
+      of content negotiation and ensures they and the HTTP methods all adhere to a single functional specification
+      which thus ensures their functional equivalency.
     </p>
   </section>
   <section id="definitions">
@@ -118,43 +121,79 @@
     </dl>
     <div class="issue" data-number="378"></div>
   </section>
-  <section id="motivation">
+  <section id="motivation" class="informative">
     <h2>Motivation</h2>
     <p>
       In many cases, there are several ways to describe a resource within the scope of a single Media Type.
-      For instance, XML documents, while conforming to the <code>text/xml</code> Media Type may adhere to one of several
-      DTDs or XML Schemas, whereas RDF documents (with a choice of Media Type serialisations such as
-      <code>text/turtle</code> and even XML, <code>application/rdf+xml</code>) have a very large number of vocabularies
+      For instance, XML documents, while conforming to the <code>text/xml</code> Media Type, may adhere to one of several
+      DTDs or XML Schemas. RDF documents, with a choice of Media Type serialisations such as
+      <code>text/turtle</code>, <code>application/rdf+xml</code> and others, have a very large number of vocabularies
       (classes and properties) available use for their content's information model. When a client initiates a request
       for an Internet resource, e.g., an HTTP GET to retrieve or a PUT to create or replace a resource, neither the
-      client nor the server have yet had any possibility to exchange information on how the transmitted resource will
-      be structured precisely according to DTDs, XML Schema or, vocabularies or other standards, specifications or
-      <em>profiles</em>. When using other methods such as QSAs, no universal or general standardised method for doing
+      client nor the server have yet had any standardised way to exchange information on how the transmitted resource will
+      be structured precisely according to DTDs, XML Schema, vocabularies or other standards, specifications or
+      <em>profiles</em>. When using non-HTTP content negotiation other methods, such as URIs with Query String Arguments, no universal or standardised method for doing
       this has been established although there are multiple specific ways this has been implemented previously, such as
       the OAI-PMH protocol [[OAI-PMH]].
     </p>
     <p>
       This document describes content negotiation based on profiles using HTTP protocol by introducing new headers and
-      non-HTTP methods, such as via QSAs by introducing a general QSA Aplication Programming Interface (API).
+      non-HTTP methods, such as via QSAs by introducing a general QSA Application Programming Interface (API).
     </p>
     <div class="issue" data-number="379"></div>
   </section>
-  <section id="relatedwork">
+  <section id="relatedwork" class="informative">
     <h2>Related Work</h2>
     <p>
-      The necessary standardisation of the content-negotiation headers is done within the IETF. A first proposal
+      What a <em>profile</em> is and how to create one is detailed in the [[PROFILE_GUIDANCE]] document created
+      alongside this document, also by the Dataset Exchange Working Group (DXWG).
+    </p>
+    <p>
+      The necessary standardisation of the content-negotiation HTTP headers is done within the IETF. A first proposal
       for an <a href="https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema">Internet Draft
-      for Negotiating Profiles in HTTP</a> is available but has not yet been submitted to the IETF. The current
+      for Negotiating Profiles in HTTP</a> [[PROFILE-IETF]] is available but has not yet been submitted to the IETF. The current
       version of the draft (-00) is expected to be completely re-written in course of the process and should not
       be seen as anything but work-in-progress.
+    </p>
+    <p>
+      Describing the parts of profiles and their relation to other profiles is done within the Profiles Ontology
+      [[PROFILE-ONT]], also produced by the DXWG.
     </p>
     <div class="issue" data-number="380"></div>
     <div class="issue" data-number="382"></div>
     <div class="issue" data-number="383"></div>
     <div class="issue" data-number="384"></div>
   </section>
-  <section id="fpwd">
+  <section id="fpwd" class="informative">
     <h2>Recommendations for First Public Working Draft</h2>
+  </section>
+  <section id="abstractmodel">
+    <h2>Abstract Model</h2>
+    <p>
+      This section describes an abstract conceptual model for profile negotiation, independent of specific
+      implementation.
+    </p>
+    <div class="issue" data-number="462"></div>
+  </section>
+  <section id="realisations">
+    <h2>Realisations</h2>
+    <p>
+      This section describes the realisation of the abstract model in multiple implementation domains.
+    </p>
+    <section id="http">
+      <h2>Hypertext Transfer Protocol</h2>
+      <p>
+        The Hypertext Transfer Protocol implementation of the abstract model is described in the IETF submission
+        [[PROFILE-IETF]].
+      </p>
+    </section>
+    <section id="qsa">
+      <h2>Query String Arguments</h2>
+      <p>
+
+      </p>
+      <div class="issue" data-number="463"></div>
+    </section>
   </section>
   <section id="testsuite">
     <h2>Test Suite</h2>
@@ -204,6 +243,13 @@
       <div class="issue" data-number="388"></div>
     </section>
     <p></p>
+  </section>
+  <section id="privacyConsiderations" class="informative">
+    <h2>Privacy Considerations</h2>
+    <p>
+
+    </p>
+    <div class="issue" data-number="461"></div>
   </section>
   <section id="appendices" class="appendix">
     <h2>Appendices</h2>
@@ -277,7 +323,7 @@
           <li>
             discovery via RDF graph
             <ul>
-              <li>see [[PROF-DESC]]</li>
+              <li>see [[PROF-ONT]]</li>
             </ul>
           </li>
         </ul>
@@ -395,14 +441,14 @@
       <div class="req-response">
         <p class="respTitle">RESPONSE FOR Req. 288</p>
         <p>
-          This requirement is met by [PROF-DESC].
+          This requirement is met by [[PROF-ONT]].
         </p>
       </div>
       <div class="issue" data-number="289"></div>
       <div class="req-response">
         <p class="respTitle">RESPONSE FOR Req. 289</p>
         <p>
-          This requirement is met by [PROF-IETF].
+          This requirement is met by [[PROF-IETF]].
         </p>
       </div>
       <div class="issue" data-number="290"></div>
@@ -414,6 +460,17 @@
       </div>
       <h4>Issues from CNEG meetings</h4>
       <div class="issue" data-number="391"></div>
+    </section>
+    <section id="issue-summary" class="appendix">
+      <!-- A list of issues will magically appear here -->
+    </section>
+    <section id="extra-issues" class="appendix">
+      <h2>Additional Issues</h2>
+      <p><em>This section will be removed in a later version of this document.</em></p>
+      <p>Additional Issues related to this document and not yet placed within it are listed at the:</p>
+      <ul>
+        <li><a href="https://github.com/w3c/dxwg/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Aprofile-negotiation+sort%3Acreated-asc+">GitHub Issues tracker for profile-negotiation</a></li>
+      </ul>
     </section>
   </section>
   <div class="issue" data-number="390"></div>
