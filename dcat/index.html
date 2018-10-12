@@ -2445,12 +2445,32 @@ a:TestingActivity a prov:Activity;
 
     <h2>License and rights statements</h2>
 
-    <p class="note">
-        DCAT 2014 handling of license and rights do not appear to satisfy all requirements [[VOCAB-DCAT-20140116]].
-        The recently completed W3C ODRL vocabulary [[ODRL-VOCAB]] provides a rich language for describing many kinds of rights and obligations.
-        In this chapter it is planned to describe some patterns for linking DCAT Datasets and/or Distributions to suitable rights expressions.
-        See the wiki page on <a href="https://github.com/w3c/dxwg/wiki/License-and-rights">License and rights</a> for more discussion.
-    </p>
+	<p class="note">
+		DCAT 2014 handling of license and rights do not appear to satisfy all requirements [[VOCAB-DCAT-20140116]].
+		The recently completed W3C ODRL vocabulary [[ODRL-VOCAB]] provides a rich language for describing many kinds of rights and obligations.
+		In this chapter it is planned to describe some patterns for linking DCAT Datasets and/or Distributions to suitable rights expressions.
+		See the wiki page on <a href="https://github.com/w3c/dxwg/wiki/License-and-rights">License and rights</a> for more discussion.
+	</p>
+	<p>
+		Selecting the right way to express conditions for access to and re-use of resources can be complex.
+		Implementers should always seek legal advice before deciding which conditions apply to the resource being described.
+	</p>
+	<p>
+		This specification distinguishes three main situations: one where a statement is associated with the resource that is explicitly declared as a 'licence';
+		a second where the statement is not explicitly declared as a 'licence'; and a third where the conditions are explicitly expressed as an ODRL Policy.
+	</p>
+	<p>
+		The following approach is recommended:
+		<ol>
+			<li>use <a href="http://dublincore.org/documents/dcmi-terms/#terms-license">dct:license</a> to refer to well-known licences such as <a href="https://creativecommons.org/share-your-work/licensing-types-examples/">those defined by Creative Commons</a></br>
+			The object of dct:license, a <a href="http://dublincore.org/documents/dcmi-terms/#terms-LicenseDocument">dct:LicenseDocument</a>, is "A legal document giving official permission to do something with a Resource."</li>
+			<li>use <a href="http://dublincore.org/documents/dcmi-terms/#terms-rights">dct:rights</a> to refer to rights statements that are not licences, such as copyright statements</br>
+			The object of dct:rights, a <a href="http://dublincore.org/documents/dcmi-terms/#terms-RightsStatement">dct:RightsStatement</a>, is "A statement about the intellectual property rights (IPR) held in or over a Resource, a legal document giving official permission to do something with a resource, or a statement about access rights." 
+			This is more general than a <a href="http://dublincore.org/documents/dcmi-terms/#terms-LicenseDocument">dct:LicenseDocument</a> and therefore should be used if it the statement contains more general information about rights.</li>
+			<li>use <a href="https://www.w3.org/TR/odrl-vocab/#term-hasPolicy">odrl:hasPolicy</a> for linking to <a href="https://www.w3.org/TR/odrl-vocab/#term-Policy">ODRL policies</a></br>
+			The Open Digital Rights Language (ODRL) is a policy expression language that provides a flexible and interoperable information model, vocabulary, and encoding mechanisms for representing statements about usage (i.e. permissions, prohibitions, and obligations) of content and services.</li>
+		</ol>
+	</p>
 
 </section>
 
