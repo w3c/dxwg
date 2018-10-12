@@ -430,7 +430,50 @@
 
     <section id="a-dataset-available-from a service">
         <h3>A dataset available through a service</h3>
-        <p>TBC        </p>
+        <p>:dataset-004 is distributed in different representations from different services.
+          The <code>accessURL</code> for each <code>Distribution</code> corresponds with the <code>endpointURL</code> of the service.
+          Each service is characterized by its general type using <code>dct:type</code> (here using values from the INSPIRE spatial data service type vocabulary),
+          its specific API definition using <code>dct:conformsTo</code>,
+          with the detailed description of the individual endpoint parameters and options linked using <code>dcat:endpointDescription</code>.
+        </p>
+<div class="example">
+  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+:dataset-004
+  rdf:type dcat:Dataset ;
+  dcat:distribution :dataset-004-csv ;
+  dcat:distribution :dataset-004-png ;
+.
+:dataset-004-csv
+  rdf:type dcat:Distribution ;
+  dcat:accessService :table-service-005 ;
+  dcat:accessURL &lt;http://example.org/api/table-005&gt; ;
+  dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/csv&gt; ;
+.
+:dataset-004-png
+  rdf:type dcat:Distribution ;
+  dcat:accessService :figure-service-006 ;
+  dcat:accessURL &lt;http://example.org/api/figure-006&gt; ;
+  dcat:mediaType &lt;https://www.iana.org/assignments/media-types/image/png&gt; ;
+.
+:figure-service-006
+  rdf:type dcat:DataDistributionService ;
+  dct:conformsTo &lt;http://example.org/apidef/figure/v1.0&gt; ;
+  dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view&gt; ;
+  dcat:endpointDescription &lt;http://example.org/api/figure-006/params&gt; ;
+  dcat:endpointURL &lt;http://example.org/api/figure-006&gt; ;
+  dcat:servesDataset :dataset-004 ;
+.
+:table-service-005
+  rdf:type dcat:DataDistributionService ;
+  dct:conformsTo &lt;http://example.org/apidef/table/v2.2&gt; ;
+  dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download&gt; ;
+  dcat:endpointDescription &lt;http://example.org/api/table-005/capability&gt; ;
+  dcat:endpointURL &lt;http://example.org/api/table-005&gt; ;
+  dcat:servesDataset :dataset-003, :dataset-004 ;
+.  </pre>
+</div>
+
+
 
     </section>
 
