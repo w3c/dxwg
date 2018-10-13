@@ -3,19 +3,17 @@
 <head>
   <title>The Profiles Ontology</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Language" content="en">
-  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" type="text/css" href="style.css">
-  <link rel="stylesheet" type="text/css" href="https://www.w3.org/StyleSheets/TR/2016/W3C-WG-NOTE"/>
 </head>
-<body class="h-entry" role="document" id="respecDocument">
+<body class="h-entry" id="respecDocument">
 <section id="abstract">
   <h2>Abstract</h2>
   <p>
     An ontology for listing the set of resources required for a standard or a profile of one or more standards, such as schemas, ontologies, and rules, and for specifying the relationships between them and supporting artefacts, such as controlled vocabularies, validation tools, and guidelines.
   </p>
   <p style="text-align: center;">
-    The namespace for PROF terms is <code>https://w3c.github.io/dxwg/profilesont/</code>.<br />
+    The namespace for PROF terms is <code>http://www.w3.org/ns/prof/</code>.<br />
     The PROF ontology, defined in OWL and encoded in RDF Turtle, is available at <a href="profilesont.ttl">profilesont.ttl</a>.
   </p>
   <div class="issue" data-number="398"></div>
@@ -46,30 +44,37 @@
       </p>
       <ul>
         <li>[[PROF-GUIDE]] (Recommendation), the top-level general profiling guidance document giving an overview of all other documents</li>
-        <li><strong>[PROF-ONT]</strong> (WG Note), <strong>this document</strong>, a formal ontology describing objects related to profiles</li>
+        <li><strong>[PROF-ONT] (WG Note), this document, a formal ontology describing objects related to profiles</strong></li>
         <li>[[PROF-CONNEG]] (Recommendation), Specific guidance on how to negotiate for Internet resource content using profiles</li>
         <li>[[PROF-IETF]] (<a href="http://www.ietf.org">IETF</a> <a href="http://www.ietf.org/standards/ids/">Internet-Draft</a>), HTTP Headers for HTTP content negotiation by profile</li>
       </ul>
     </section>
   </section>
 </section>
-<section id="tof"></section>
 <section id="introduction" class="informative">
-  <h1>Introduction</h1>
+  <h2>Introduction</h2>
   <p>
-    The profiles ontology is designed to provide a structure to describe profiles of information standards.
-    Its development was triggered by the appearance of multiple profiles of the Dataset Catalog Vocabulary [[!vocab-dcat-20140116]], and also influenced by work on profiles of the Dublin Core metadata vocabulary.
-    These profiles aim to increase interoperability within a specified community of users by introducing certain limitations on the use of the general vocabulary, such as restrictions on the cardinality of certain properties, or a requirement to select values of a property from a specified controlled vocabulary.
-    The profiles have generally been specified through textually-oriented documents.
-    This ontology provides a more formally structured, machine readable alternative formalization for these profiles, which can be used generally for profiles of standard.
+    The profiles ontology is designed to provide a structure to describe profiles of information standards. Its
+    development was triggered by the appearance of multiple profiles of the Dataset Catalog Vocabulary (DCAT)
+    [[vocab-dcat-20140116]], and also influenced by work on profiles of the Dublin Core metadata vocabulary [[DCAP]].
   </p>
   <p>
-    The model starts with <a href="http://dublincore.org/2012/06/14/dcterms#Standard">dcterms:Standard</a> entities
-    which can either be Base Specifications (a standard not profiling any other Standard) or Profiles (Standards which
-    do profile others). Base Specifications or Profiles can have Implementation Resource Descriptors associated with
-    them that defines implementing rules for the it. Implementation Resource Descriptors must indicate the role they
-    play (to guide, to validate etc.) and the formalism they adhere to (dct:format) to allow for content negotiation.
-    A vocabulary of Implementation Resource Roles are provided alongside this ontology but that list is extensible.
+    Profiles of DCAT &amp; DCAP aim to increase interoperability within a specified community of users by introducing
+    certain limitations on the use of the general vocabulary, such as restrictions on the cardinality of certain
+    properties, or a requirement to select values of a property from a specified controlled vocabulary. The profiles
+    have generally been specified through textually-oriented documents.
+  </p>
+  <p>
+    This ontology provides a more formally structured, machine readable alternative formalization, for these profiles,
+    and can also be used generally for any profiles of any standards.
+  </p>
+  <p>
+    This model starts with <code><a href="http://dublincore.org/2012/06/14/dcterms#Standard">dcterms:Standard</a></code> entities
+    which can either be <code>Base Specifications</code> (a Standard not profiling any other Standard) or <code>Profiles</code> (Standards which
+    do profile others). <code>Base Specifications</code> or <code>Profiles</code> can have <code>Resource Descriptors</code> associated with
+    them that define rules for implementing it. <code>Resource Descriptors</code> must indicate the role they
+    play (to guide, to validate etc.) and the formalism they adhere to (<code><a href="http://dublincore.org/2012/06/14/dcterms#format">dct:format</a></code>) to allow for content negotiation.
+    A vocabulary of <code>Resource Roles</code> are provided alongside this ontology and that list is extensible.
   </p>
   <section id="Compliance">
     <h3>Compliance with this Document</h3>
@@ -94,9 +99,9 @@
 <section id="namespaces-1">
   <h2>Namespaces</h2>
   <p>
-    The namespace for PROF is <code>http://www.w3.org/ns/prof#</code>.
-    However, it can be noted that PROF makes use of terms from other vocabularies, in particular Dublin Core [[!DCTERMS]].
-    PROF itself defines a minimal set of classes and properties of its own.
+    The namespace for PROF is <code>http://www.w3.org/ns/prof/</code>.
+    However, it should be noted that PROF makes use of terms from other vocabularies, in particular Dublin Core [[!DCTERMS]].
+    PROF itself only defines a minimal set of classes and properties of its own.
   </p>
   <p>
     A full set of namespaces and prefixes used in this document is shown in the table below.
@@ -109,8 +114,8 @@
       <tr><td>dcat</td><td>http://www.w3.org/ns/dcat#</td></tr>
       <tr><td>dct</td><td>http://purl.org/dc/terms/</td></tr>
       <tr><td>owl</td><td>http://www.w3.org/2002/07/owl#</td></tr>
-      <tr><td>prof</td><td>http://www.w3.org/ns/prof#</td></tr>
-      <tr><td>profc</td><td>http://www.w3.org/ns/prof-constraints#</td></tr>
+      <tr><td>prof</td><td>http://www.w3.org/ns/prof/</td></tr>
+      <tr><td>profc</td><td>http://www.w3.org/ns/prof/constraints/</td></tr>
       <tr><td>prov</td><td>http://www.w3.org/ns/prov#</td></tr>
       <tr><td>rdf</td><td>http://www.w3.org/1999/02/22-rdf-syntax-ns#</td></tr>
       <tr><td>rdfs</td><td>http://www.w3.org/2000/01/rdf-schema#</td></tr>
@@ -243,12 +248,12 @@
     <h4>Class: BaseSpecification</h4>
     <table class="definition">
       <thead>
-      <tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/prof#BaseSpecification">prof:BaseSpecification</a></th></tr>
+      <tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/prof/BaseSpecification">prof:BaseSpecification</a></th></tr>
       </thead>
       <tbody>
       <tr><td class="prop">Label:</td><td>Base Specification</td></tr>
       <tr><td class="prop">Definition:</td><td>A specification that defines all implementation constraints, without applying constraints on usage of another specification</td></tr>
-      <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/prof#Profile">prof:Profile</a></td></tr>
+      <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/prof/Profile">prof:Profile</a></td></tr>
       <tr><td class="prop">Usage note:</td><td>This may not be a useful class: documents of any specification can be regarded as a trivial profile, so applications only need to be concerned with Profile conformance</td></tr>
       </tbody>
     </table>
@@ -257,7 +262,7 @@
     <h4>Class: Profile</h4>
     <table class="definition">
       <thead>
-      <tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/prof#ResourceRole">prof:ResourceRole</a></th></tr>
+      <tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/prof/ResourceRole">prof:ResourceRole</a></th></tr>
       </thead>
       <tbody>
       <tr><td class="prop">Label:</td><td>Profile</td></tr>
@@ -362,7 +367,7 @@
     <h4>Class: ResourceDescriptor</h4>
     <table class="definition">
       <thead>
-      <tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/prof#ResourceDescriptor">prof:ResourceDescriptor</a></th></tr>
+      <tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/prof/ResourceDescriptor">prof:ResourceDescriptor</a></th></tr>
       </thead>
       <tbody>
       <tr><td class="prop">Label:</td><td>Resource Descriptor</td></tr>
@@ -448,7 +453,7 @@
     <h4>Class: ResourceRole</h4>
     <table class="definition">
       <thead>
-      <tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/prof#ResourceRole">prof:ResourceRole</a></th></tr>
+      <tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/prof/ResourceRole">prof:ResourceRole</a></th></tr>
       </thead>
       <tbody>
         <tr><td class="prop">Label:</td><td>Resource Role</td></tr>
@@ -502,7 +507,6 @@
       <tr><td>dcterms:format</td><td style="text-align: center;">-</td><td>-</td><td>Used similarly</td>
       <tr><td>prof:ResourceRole</td><td style="text-align: center;"><code>rdfs:subClassOf</code></td><td>dcat:Distribution</td><td></td></tr>
       <tr><td>prof:Profile</td><td style="text-align: center;"><code>rdfs:subClassOf</code></td><td>dcat:Resource</td><td>Generic association</td></tr>
-      </tr>
       </tbody>
     </table>
   </section>
@@ -738,8 +742,8 @@
         An instance of a resource claiming adherence to an instance of a <em>Profile</em> might indicate its adherence
         by using the <em>dct:conformsTo</em> property.
       </p>
-      <div class="issue" data-number="455"></div>
     </div>
+    <div class="issue" data-number="455"></div>
   </section>
   <section class="appendix" id="extra-issues">
     <h3>Additional Issues</h3>

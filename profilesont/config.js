@@ -1,7 +1,8 @@
 var respecConfig = {
-    specStatus: "ED",
+    specStatus: "FPWD-NOTE",
     shortName: "vocab-prof",
     edDraftURI: "https://w3c.github.io/dxwg/profilesont/",
+    canonicalURI: "TR",
     implementationReportURI: "https://github.com/CSIRO-enviro-informatics/prof-ont-implementation-results",
     editors: [
       {
@@ -14,12 +15,7 @@ var respecConfig = {
         url:        "https://people.csiro.au/Nicholas-Car",
         company:    "CSIRO",
         companyURL: "https://www.csiro.au/",
-        w3cid:      70131,
-        extras:     [{
-          name:  "<img src='orcid_logo.png' alt='orcid logo' />",
-          href:  "https://orcid.org/0000-0002-8742-7730",
-          class: "orcid"
-        }]
+        w3cid:      70131
     }],
     otherLinks: [{
       key: "Contributors",
@@ -145,3 +141,12 @@ var respecConfig = {
         }
     }
 };
+
+/*
+,
+        extras:     [{
+          name:  "<img src='orcid_logo.png' alt='orcid logo' />",
+          href:  "https://orcid.org/0000-0002-8742-7730",
+          class: "orcid"
+        }]
+ */
