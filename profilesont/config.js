@@ -1,5 +1,5 @@
 var respecConfig = {
-    specStatus: "FPWG-NOTE",
+    specStatus: "FPWD-NOTE",
     shortName: "vocab-prof",
     edDraftURI: "https://w3c.github.io/dxwg/profilesont/",
     canonicalURI: "TR",
