@@ -69,25 +69,25 @@
     and can also be used generally for any profiles of any standards.
   </p>
   <p>
-    This model starts with <code><a href="http://dublincore.org/2012/06/14/dcterms#Standard">dcterms:Standard</a></code> entities
+    This model starts with <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dcterms:Standard</a></code> entities
     which can either be <code>Base Specifications</code> (a Standard not profiling any other Standard) or <code>Profiles</code> (Standards which
     do profile others). <code>Base Specifications</code> or <code>Profiles</code> can have <code>Resource Descriptors</code> associated with
     them that define rules for implementing it. <code>Resource Descriptors</code> must indicate the role they
     play (to guide, to validate etc.) and the formalism they adhere to (<code><a href="http://dublincore.org/2012/06/14/dcterms#format">dct:format</a></code>) to allow for content negotiation.
     A vocabulary of <code>Resource Roles</code> are provided alongside this ontology and that list is extensible.
   </p>
-  <section id="Compliance">
+  <section id="compliance">
     <h3>Compliance with this Document</h3>
     <p>
       For the purpose of compliance, the normative sections of this document are
-      <a href="#Compliance">Section 1.1</a>,
-      <a href="#Definitions">Section 1.2</a>,
-      <a href="#ConceptualModel">Section 6</a>,
-      <a href="#CrossReference">Section 7</a>,
-      <a href="#TestSuite">Section 8</a>,
+      <a href="#compliance">Section 1.1</a>,
+      <a href="#notationalconventions">Section 1.2</a>,
+      <a href="#conceptualmodel">Section 5</a>,
+      <a href="#specification">Section 6</a> &amp;
+      <a href="#implementations">Section 7</a>
     </p>
   </section>
-  <section id="NotationalConventions">
+  <section id="notationalconventions">
     <h3>Notational Conventions</h3>
     <p>
       The key words <dfn>may</dfn>, <dfn>must</dfn>, <dfn>must not</dfn>, <dfn>optional</dfn>, <dfn>shall</dfn>,
@@ -289,7 +289,7 @@
           <tr><th>RDF Property:</th><th><a href="#Property:hasProfile">prof:hasProfile</a></th></tr>
         </thead>
         <tbody>
-          <tr><td class="prop">OWL type:</td><td><a href="http://www.w3.org/2002/07/owl#ObjectProperty">owl:ObjectProperty</a></td></tr>
+          <tr><td class="prop">OWL type:</td><td><a href="https://www.w3.org/TR/owl2-rdf-based-semantics/#table-axiomatic-properties">owl:ObjectProperty</a></td></tr>
           <tr><td class="prop">Label:</td><td>has profile</td></tr>
           <tr><td class="prop">Definition:</td><td>A known profile of a specification</td></tr>
           <tr><td class="prop">Domain:</td><td><a href="#Class:Profile">prof:Profile</a></td></tr>
@@ -305,7 +305,7 @@
         <tr><th>RDF Property:</th><th><a href="#Property:hasResource">prof:hasResource</a></th></tr>
         </thead>
         <tbody>
-          <tr><td class="prop">OWL type:</td><td><a href="http://www.w3.org/2002/07/owl#ObjectProperty">owl:ObjectProperty</a></td></tr>
+          <tr><td class="prop">OWL type:</td><td><a href="https://www.w3.org/TR/owl2-rdf-based-semantics/#table-axiomatic-properties">owl:ObjectProperty</a></td></tr>
           <tr><td class="prop">Label:</td><td>has resource</td></tr>
           <tr><td class="prop">Definition:</td><td>Property for indicating a Resource Descriptor of this profile</td></tr>
           <tr><td class="prop">Range:</td><td><a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a></td></tr>
@@ -319,7 +319,7 @@
         <tr><th>RDF Property:</th><th><a href="#Property:profileOf">profileOf</a></th></tr>
         </thead>
         <tbody>
-          <tr><td class="prop">OWL type:</td><td><a href="http://www.w3.org/2002/07/owl#ObjectProperty">owl:ObjectProperty</a></td></tr>
+          <tr><td class="prop">OWL type:</td><td><a href="https://www.w3.org/TR/owl2-rdf-based-semantics/#table-axiomatic-properties">owl:ObjectProperty</a></td></tr>
           <tr><td class="prop">Label:</td><td>profile of</td></tr>
           <tr><td class="prop">Definition:</td><td>The immediate parent (base specification) an Profile describes conformance to</td></tr>
           <tr><td class="prop">Domain:</td><td><a href="#Class:Profile">prof:Profile</a></td></tr>
@@ -333,10 +333,10 @@
       <h4>profileOfTransitive</h4>
       <table class="definition">
         <thead>
-        <tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#dataset">dcat:dataset</a></th></tr>
+        <tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/prof#profileOfTransitive">prof:profileOfTransitive</a></th></tr>
         </thead>
         <tbody>
-          <tr><td class="prop">OWL type:</td><td><a href="http://www.w3.org/2002/07/owl#ObjectProperty">owl:ObjectProperty</a></td></tr>
+          <tr><td class="prop">OWL type:</td><td><a href="https://www.w3.org/TR/owl2-rdf-based-semantics/#table-axiomatic-properties">owl:ObjectProperty</a></td></tr>
           <tr><td class="prop">Label:</td><td>profile of transitive</td></tr>
           <tr><td class="prop">Definition:</td><td>A base specification an Profile conforms to</td></tr>
           <tr><td class="prop">Domain:</td><td><a href="#Class:Profile">prof:Profile</a></td></tr>
@@ -352,11 +352,11 @@
           <tr><th>RDF Property:</th><th><a href="#Property:token">prof:token</a></th></tr>
         </thead>
         <tbody>
-          <tr><td class="prop">OWL type:</td><td><a href="http://www.w3.org/2002/07/owl#DatatypeProperty">owl:DatatypeProperty</a></td></tr>
+          <tr><td class="prop">OWL type:</td><td><a href="https://www.w3.org/TR/owl2-rdf-based-semantics/#table-axiomatic-datatypes">owl:DatatypeProperty</a></td></tr>
           <tr><td class="prop">Label:</td><td>token</td></tr>
           <tr><td class="prop">Definition:</td><td>A property for indicating a short name identifying this profile for use in APIs</td></tr>
           <tr><td class="prop">Domain:</td><td><a href="#Class:Profile">prof:Profile</a></td></tr>
-          <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2001/XMLSchema#token">xsd:token</a></td></tr>
+          <tr><td class="prop">Range:</td><td><a href="https://www.w3.org/TR/xmlschema-2/#token">xsd:token</a></td></tr>
           <tr><td class="prop">Usage note:</td><td>This property is to be used to indicate a token that identifies this Profile which should be used when the Profile's URI cannot be used. For potential use in content negotiation. Will require a registry to disambiguate as do Media Type type tokens</td></tr>
         </tbody>
       </table>
@@ -393,7 +393,7 @@
       <p><em>This property's details are from the [[DCTERMS]] specification.</em></p>
       <table class="definition">
         <thead>
-        <tr><th>RDF Property:</th><th><a href="http://www.w3.org/2004/02/skos/core#conformsTo">skos:conformsTo</a></th></tr>
+        <tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/#conformsTo">dct:conformsTo</a></th></tr>
         </thead>
         <tbody>
           <tr><td class="prop">Label:</td><td>Conforms To</td></tr>
@@ -520,7 +520,7 @@
   </section>
   <div class="issue" data-number="405"></div>
 </section>
-<section id="privacyConsiderations" class="informative">
+<section id="privacyconsiderations" class="informative">
   <h2>Privacy Considerations</h2>
   <p>
 
