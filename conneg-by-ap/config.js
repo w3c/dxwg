@@ -1,5 +1,5 @@
 var respecConfig = {
-    specStatus: "ED",
+    specStatus: "FPWD",
     shortName: "conneg-by-ap",
     edDraftURI: "https://w3c.github.io/dxwg/conneg-by-ap/",
     previousURI: "https://w3c.github.io/dxwg/conneg-by-ap/",
