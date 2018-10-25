@@ -1,4 +1,4 @@
-@prefix : <https://w3c.github.io/dxwg/profilesont#> .
+@prefix : <http://www.w3.org/ns/prof/> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -10,14 +10,14 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@base <https://w3c.github.io/dxwg/profilesont> .
+@base <http://www.w3.org/ns/prof> .
 
-<https://w3c.github.io/dxwg/profilesont> rdf:type owl:Ontology ;
-                                          owl:versionIRI <https://w3c.github.io/dxwg/profilesont/1.0> ;
+<http://www.w3.org/ns/prof> rdf:type owl:Ontology ;
+                                          owl:versionIRI <http://www.w3.org/ns/prof/1.0> ;
                                           rdfs:label "Profile Descriptions Ontology" ;
                                           dct:contributor <http://orcid.org/0000-0002-8742-7730> ;
                                           dc:creator "Rob Atkinson" ;
-                                          rdfs:comment """This ontology is for describing relationships between standards/specifications, profiles of them and supporting artefacts such as validating resources.
+                                          rdfs:comment """This ontology is for describing relationships between standards/specifications, profiles of them and supporting artifacts such as validating resources.
 
 This model starts with [http://dublincore.org/2012/06/14/dcterms#Standard](dct:Standard) entities which can either be Base Specifications (a standard not profiling any other Standard) or Profiles (Standards which do profile others). Base Specifications or Profiles can have Resource Descriptors associated with them that defines implementing rules for the it. Resource Descriptors must indicate the role they play (to guide, to validate etc.) and the formalism they adhere to (dct:format) to allow for content negotiation. A vocabulary of Resource Roles are provided alongside this ontology but that list is extensible."""@en ;
                                           owl:versionInfo "1.0" ;
@@ -48,14 +48,23 @@ dct:format rdf:type owl:AnnotationProperty ;
 #    Object Properties
 #################################################################
 
-###  https://w3c.github.io/dxwg/profilesont#hasProfile
+###  http://www.w3.org/ns/prof/artifact
+:artifact
+  rdf:type owl:ObjectProperty ;
+  skos:definition "The artifact, a resource, linked to a profile through an Resource Descriptor."@en ;
+  rdfs:domain :ResourceDescriptor ;
+  rdfs:label "artifact" ;
+  skos:editorialNote "A property to link from a :ResourceDescriptor to the actual implementation resource."@en .
+
+
+###  http://www.w3.org/ns/prof/hasProfile
 :hasProfile rdf:type owl:ObjectProperty ;
             owl:inverseOf :profileOf ;
             skos:definition "A known profile of a specification."@en ;
             rdfs:label "has profile" .
 
 
-###  https://w3c.github.io/dxwg/profilesont#inheritedFrom
+###  http://www.w3.org/ns/prof/inheritedFrom
 :inheritedFrom rdf:type owl:ObjectProperty ;
                rdfs:domain :ResourceDescriptor ;
                rdfs:range :Profile ;
@@ -64,7 +73,7 @@ dct:format rdf:type owl:AnnotationProperty ;
                rdfs:label "inherited from" .
 
 
-###  https://w3c.github.io/dxwg/profilesont#profileOf
+###  http://www.w3.org/ns/prof/profileOf
 :profileOf rdf:type owl:ObjectProperty ;
            rdfs:domain :Profile ;
            rdfs:range :Profile ;
@@ -73,7 +82,7 @@ dct:format rdf:type owl:AnnotationProperty ;
            rdfs:label "profile of" .
 
 
-###  https://w3c.github.io/dxwg/profilesont#profileOfTransitive
+###  http://www.w3.org/ns/prof/profileOfTransitive
 :profileOfTransitive rdf:type owl:ObjectProperty ;
                      rdfs:domain :Profile ;
                      rdfs:range :Profile ;
@@ -82,14 +91,14 @@ dct:format rdf:type owl:AnnotationProperty ;
                      rdfs:label "transitive profile of" .
 
 
-###  https://w3c.github.io/dxwg/profilesont#resource
+###  http://www.w3.org/ns/prof/resource
 :resource rdf:type owl:ObjectProperty ;
           rdfs:range :ResourceDescriptor ;
           skos:definition "Property for indicating a Resource Descriptor of this profile."@en ;
           rdfs:label "resource"@en .
 
 
-###  https://w3c.github.io/dxwg/profilesont#resourceRole
+###  http://www.w3.org/ns/prof/resourceRole
 :resourceRole rdf:type owl:ObjectProperty ;
               rdfs:domain :ResourceDescriptor ;
               rdfs:range skos:Concept ;
@@ -102,7 +111,7 @@ dct:format rdf:type owl:AnnotationProperty ;
 #    Data properties
 #################################################################
 
-###  https://w3c.github.io/dxwg/profilesont#token
+###  http://www.w3.org/ns/prof/token
 :token rdf:type owl:DatatypeProperty ;
        rdfs:domain :Profile ;
        rdfs:range xsd:token ;
@@ -115,7 +124,7 @@ dct:format rdf:type owl:AnnotationProperty ;
 #    Classes
 #################################################################
 
-###  https://w3c.github.io/dxwg/profilesont#BaseSpecification
+###  http://www.w3.org/ns/prof/BaseSpecification
 :BaseSpecification rdf:type owl:Class ;
                    rdfs:subClassOf :Profile ,
                                    [ rdf:type owl:Restriction ;
@@ -127,20 +136,20 @@ dct:format rdf:type owl:AnnotationProperty ;
                    skos:scopeNote "This may not be a useful class: documents of any specification can be regarded as a trivial profile, so applications only need to be concerned with Profile conformance."@en .
 
 
-###  https://w3c.github.io/dxwg/profilesont#ResourceDescriptor
+###  http://www.w3.org/ns/prof/ResourceDescriptor
 :ResourceDescriptor rdf:type owl:Class ;
                   skos:definition "A resource that defines implementing rules for a profile. Must indicate the purpose (dct:type) and the formalism (dct:format) used to allow machine mediation of such rules."@en ;
                   rdfs:label "Resource Descriptor"@en .
 
 
-###  https://w3c.github.io/dxwg/profilesont#ResourceRole
+###  http://www.w3.org/ns/prof/ResourceRole
 :ResourceRole rdf:type owl:Class ;
                   rdfs:subClassOf skos:Concept ;
                   skos:definition "The role that an Resource plays. Specific terms must come from a vocabulary."@en ;
                   rdfs:label "Resource Role" .
 
 
-###  https://w3c.github.io/dxwg/profilesont#Profile
+###  http://www.w3.org/ns/prof/Profile
 :Profile rdf:type owl:Class ;
          rdfs:subClassOf dct:Standard ;
          dc:source <https://www.w3.org/2017/dxwg/wiki/ProfileContext> ;

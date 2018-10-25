@@ -11,7 +11,7 @@ var respecConfig = {
     issueBase:            "https://github.com/w3c/dxwg/issues/",
     editors: [{
       name:       "Alejandra Gonzalez Beltran",
-      company:    "University of Oxford eResearch Centre",
+      company:    "Oxford eResearch Centre, Engineering Science, University of Oxford",
       url: "https://www.oerc.ox.ac.uk/people/alejandra",
       companyURL: "http://www.oerc.ox.ac.uk/"
     },{

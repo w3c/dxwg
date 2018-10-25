@@ -1,7 +1,9 @@
 var respecConfig = {
-    specStatus: "ED",
+    specStatus: "FPWD",
     shortName: "conneg-by-ap",
     edDraftURI: "https://w3c.github.io/dxwg/conneg-by-ap/",
+    previousURI: "https://w3c.github.io/dxwg/conneg-by-ap/",
+    canonicalURI: "TR",
     editors: [{
         name:       "Ruben Verborgh",
         url:        "https://ruben.verborgh.org/",
@@ -22,8 +24,9 @@ var respecConfig = {
     authors: [{
         name:       "Nicholas J. Car",
         url:        "https://people.csiro.au/Nicholas-Car",
+        mailto:     "nicholas.car@csiro.au",
         company:    "CSIRO",
-        companyURL: "https://www.csiro.au/",
+        companyURL: "https://www.csiro.au",
         w3cid:      70131
     }],
     wg: "Dataset Exchange Working Group",
@@ -32,11 +35,10 @@ var respecConfig = {
     wgPatentURI: "https://www.w3.org/2004/01/pp-impl/99375/status",
     inlineCSS: "true",
     lint: "false",
-    noRecTrack: "true",
     issueBase: "https://github.com/w3c/dxwg/issues/",
-    github: "https://github.com/w3c/dxwg/issues/",
+    github: "https://github.com/w3c/dxwg/",
     localBiblio: {
-        "PROF-DESC": {
+        "PROF-ONT": {
             editors: [
                 "Rob Atkinson",
                 "Nicholas J. Car"

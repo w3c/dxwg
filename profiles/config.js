@@ -1,5 +1,5 @@
 var respecConfig = {
-    specStatus: "ED",
+    specStatus: "FPWD",
     shortName: "profile-guidance",
     edDraftURI: "https://w3c.github.io/dxwg/profiles/",
     editors: [
@@ -86,6 +86,16 @@ var respecConfig = {
             "title": "Negotiating Profiles in HTTP",
             "date": " 2017-10-24",
             "status": "IETF Internet Draft"
+        },
+        "PROF-ONT": {
+            editors: [
+                "Rob Atkinson",
+                "Nicholas J. Car"
+            ],
+            href: "https://www.w3.org/TR/vocab-prof/",
+            title: "Profile Descriptions ontology",
+            date: "2018-09-15",
+            status: "W3C Working Group Note"
         },
         "vocab-dcat-2": {
             editors: [
