@@ -1,6 +1,6 @@
 var respecConfig = {
     specStatus: "FPWD-NOTE",
-    shortName: "vocab-prof",
+    shortName: "prof",
     edDraftURI: "https://w3c.github.io/dxwg/profilesont/",
     canonicalURI: "TR",
     implementationReportURI: "https://github.com/CSIRO-enviro-informatics/prof-ont-implementation-results",
