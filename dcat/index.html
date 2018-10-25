@@ -442,6 +442,7 @@
   rdf:type dcat:Dataset ;
   dcat:distribution :dataset-004-csv ;
   dcat:distribution :dataset-004-png ;
+  dcat:distribution :dataset-004-rdf ;
 .
 :dataset-004-csv
   rdf:type dcat:Distribution ;
@@ -455,6 +456,14 @@
   dcat:accessURL &lt;http://example.org/api/figure-006&gt; ;
   dcat:mediaType &lt;https://www.iana.org/assignments/media-types/image/png&gt; ;
 .
+:dataset-004-rdf
+  rdf:type dcat:Distribution ;
+  dcat:accessService :sparql-service-007 ;
+  dcat:accessURL &lt;http://example.org/api/sparql-007&gt; ;
+  dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/rdf+xml&gt; ;
+  dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/ld+json&gt;; ;
+  dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/turtle&gt; ;
+.
 :figure-service-006
   rdf:type dcat:DataDistributionService ;
   dct:conformsTo &lt;http://example.org/apidef/figure/v1.0&gt; ;
@@ -462,6 +471,14 @@
   dcat:endpointDescription &lt;http://example.org/api/figure-006/params&gt; ;
   dcat:endpointURL &lt;http://example.org/api/figure-006&gt; ;
   dcat:servesDataset :dataset-004 ;
+.
+:sparql-service-007
+  rdf:type dcat:DataDistributionService ;
+  dct:conformsTo &lt;https://www.w3.org/TR/sparql11-protocol/&gt; ;
+  dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download&gt; ;
+  dcat:endpointDescription &lt;http://example.org/api/sparql-007?query=SELECT%20DISTINCT%20?c%20WHERE%20{%20?S%20a%20?c%20.%20}&gt; ;
+  dcat:endpointURL &lt;http://example.org/api/sparql-007&gt; ;
+  dcat:servesDataset :dataset-004 , :graph-009 , :graph-010 ;
 .
 :table-service-005
   rdf:type dcat:DataDistributionService ;
