@@ -54,7 +54,7 @@
       preferred Media Types which the server may or may not supply. So too resources available in different languages
       may be requested by setting an HTTP <code>Accept-Language</code> header. Until now, clients have not had a
       defined way to negotiate for content based on its adherence to an information model - standard, specification or
-      <em>profile</em> - and this document addresses that.
+      <a>profile</a> - and this document addresses that.
     </p>
     <p>
       When information online about a resource adheres to one or more profiles, methods described here allow
@@ -138,16 +138,16 @@
     <h2>Motivation</h2>
     <p>
       In many cases, there are several ways to describe a resource within the scope of a single Media Type.
-      For instance, XML documents, while conforming to the <code>text/xml</code> Media Type, may adhere to one of several
-      DTDs or XML Schemas. RDF documents, with a choice of Media Type serialisations such as
+      For instance, XML documents, while conforming to the <code>text/xml</code> Media Type, may adhere to one of
+      several DTDs or XML Schemas. RDF documents, with a choice of Media Type serialisations such as
       <code>text/turtle</code>, <code>application/rdf+xml</code> and others, have a very large number of vocabularies
       (classes and properties) available use for their content's information model. When a client initiates a request
       for an Internet resource, e.g., an HTTP GET to retrieve or a PUT to create or replace a resource, neither the
-      client nor the server have yet had any standardised way to exchange information on how the transmitted resource will
-      be structured precisely according to DTDs, XML Schema, vocabularies or other standards, specifications or
-      <em>profiles</em>. When using non-HTTP content negotiation other methods, such as URIs with Query String Arguments, no universal or standardised method for doing
-      this has been established although there are multiple specific ways this has been implemented previously, such as
-      the OAI-PMH protocol [[OAI-PMH]].
+      client nor the server have yet had any standardised way to exchange information on how the transmitted resource
+      will be structured precisely according to DTDs, XML Schema, vocabularies or other standards, specifications or
+      <em>profiles</em>. When using non-HTTP content negotiation other methods, such as URIs with Query String
+      Arguments, no universal or standardised method for doing this has been established although there are multiple
+      specific ways this has been implemented previously, such as the OAI-PMH protocol [[OAI-PMH]].
     </p>
     <p>
       This document describes content negotiation based on profiles using HTTP protocol by introducing new headers and
@@ -158,15 +158,15 @@
   <section id="relatedwork" class="informative">
     <h2>Related Work</h2>
     <p>
-      What a <em>profile</em> is and how to create one is detailed in the [[PROF-GUIDE]] document created
+      What a <a>profile</a> is and how to create one is detailed in the [[PROF-GUIDE]] document created
       alongside this document, also by the Dataset Exchange Working Group (DXWG).
     </p>
     <p>
       The necessary standardisation of the content-negotiation HTTP headers is done within the IETF. A first proposal
       for an <a href="https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema">Internet Draft
-      for Negotiating Profiles in HTTP</a> [[PROF-IETF]] is available but has not yet been submitted to the IETF. The current
-      version of the draft (-00) is expected to be completely re-written in course of the process and should not
-      be seen as anything but work-in-progress.
+      for Negotiating Profiles in HTTP</a> [[PROF-IETF]] is available but has not yet been submitted to the IETF. The
+      current version of the draft (-00) is expected to be completely re-written in course of the process and should
+      not be seen as anything but work-in-progress.
     </p>
     <p>
       Describing the parts of profiles and their relation to other profiles is done within the Profiles Ontology
@@ -181,23 +181,31 @@
     <h2>Abstract Model</h2>
     <p>
       This section describes an abstract conceptual model for content negotiation by profile, independent of any
-      specific implementation.
+      specific implementation - here termed realisations.
     </p>
     <section id="abstractmodelcontext">
-    <h3>Context and terms</h3>
+      <h3>Context and terms</h3>
       <p>
         All content negotiation takes place between a <em>client</em> and a <em>server</em> over the Internet with the
-        former requesting a <em>resource</em> or <em>resource</em> <em>metadata</em> through a <em>request</em> and
-        receiving it via a <em>response</em>. In some cases, a <em>server</em> may have to make a <em>request</em> of a
-        <em>client</em> and receive a <em>response</em>.
+        former requesting a representation of a <em>resource</em> or <em>resource</em>'s <em>metadata</em> through a 
+        <em>request</em> and receiving it via a <em>response</em>. In some cases, a <em>server</em> may have to make a 
+        <em>request</em> of a <em>client</em> and receive a <em>response</em>.
       </p>
       <p>
-        A <em>client</em> <em>request</em>ing the representation of a <em>resource</em> conforming to a <em>profile</em>
-        <a>must</a> identify the <em>resource</em> by a Uniform Resource Identifier (URI) [[rfc3986]] and <a>must</a>
-        identify a <em>profile</em> either by a URI or a <em>token</em> that unambiguously identifies the
-        <em>profile</em> for the <em>server</em> within that <em>request</em>/<em>response</em> session.
+        An Internet <em>resource</em> may have many aspects over which a <em>client</em>/<em>server</em> pair of
+        agents might negotiate for content. These aspects are to be treated independently so content negotiation for a 
+        resource involving negotiation by profile and potentially multiple other aspects of a resource will not affect
+        each other. For this reason, other than a directive to maintain independence, no further discussion of 
+        negotiation by profile and this relations to other forms of negotiation are given. Specific realisations might 
+        require special handling of profile and other forms of negotiation.
       </p>
-      <p>Short definitions for the terms used above and below are:</p>
+      <p>
+        A <em>client</em> <em>request</em>ing the representation of a <em>resource</em> conforming to a <a>profile</a>
+        <a>must</a> identify the <em>resource</em> by a Uniform Resource Identifier (URI) [[rfc3986]] and <a>must</a>
+        identify a <a>profile</a> either by a URI or a <em>token</em> that unambiguously identifies the
+        <a>profile</a> for the <em>server</em> within that <em>request</em>/<em>response</em> session.
+      </p>
+      <p>Definitions for the terms used above and below are:</p>
       <dl>
         <dt>client</dt>
         <dd>an agent making a <em>request</em></dd>
@@ -227,7 +235,7 @@
       </dl>
       <dl>
         <dt>token</dt>
-        <dd>a short name identifying something, in this situation a <em>profile</em></dd>
+        <dd>a short name identifying something, in this situation a <a>profile</a></dd>
       </dl>
       <p>
         In this abstract model, we don't assume any specifics about <em>client</em>, <em>server</em>, <em>resource</em>,
@@ -238,18 +246,18 @@
       <h3>Requests and Responses</h3>
       <p>
         There are two main types of <em>request</em> that a <em>client</em> might make of a <em>server</em> regarding
-        content negotiation by profile. A <em>client wising to negotiate for content via profile adhering to this
-        specification <a>must</a> be able to implement these two request types.</em></p>
+        content negotiation by profile. A <em>client</em> wishing to negotiate for content via profile adhering to this
+        specification <a>must</a> be able to implement these two request types.</p>
       <ol>
         <li>
           <strong>list profiles</strong><br />
-          a <em>client</em> requests the list of URIs for <em>profile</em>s a <em>server</em> is able to deliver
+          a <em>client</em> requests the list of URIs for <a>profile</a>s a <em>server</em> is able to deliver
           <em>resource</em> representations conforming to
         </li>
         <li>
           <strong>get resource by profile</strong>
           <br />a <em>client</em> requests a representation of the requested <em>resource</em> represented conforming
-          to a particular <em>profile</em>
+          to a particular <a>profile</a>
         </li>
       </ol>
       <p>
@@ -258,33 +266,88 @@
       </p>
       <ol start="3">
         <li>
-          <strong>list profile tokens</strong><br />
-          a <em>client</em> requests the list of <em>token</em>s the <em>server</em> uses for <em>profiles</em>s a
+          <strong>list profiles tokens</strong><br />
+          a <em>client</em> requests the list of <em>token</em>s the <em>server</em> uses for <a>profiles</a>s a
           <em>server</em> is able to deliver <em>resource</em> representations conforming to and their mapping to
-          <em>profile</em> URIs
+          <a>profile</a> URIs
         </li>
       </ol>
       <p>
         A <em>server</em> adhering to this specification <a>must</a> respond to each request with the following
-        <em>response</em>s. The first two types are required, the third depends on the realisation environment.
+        <em>response</em>s. The first two types are required, handling the third depends on the realisation environment.
       </p>
       <ol>
         <li>
           <strong>list profiles</strong><br />
-          a <em>server</em> responds with the list of <em>profile</em> URIs for a <em>profile</em>s it is able to
+          a <em>server</em> responds with the list of <a>profile</a> URIs for a <a>profile</a>s it is able to
           deliver <em>resource</em> representations conforming to, to a <em>client</em>
         </li>
         <li>
           <strong>get resource by profile</strong><br />
-          a <em>server</em> responds with either a specific <em>profile</em> for a <em>resource</em> conforming to a
-          requested <em>profile</em> identified by the <em>client</em> or a default <em>profile</em>
+          a <em>server</em> responds with either a specific <a>profile</a> for a <em>resource</em> conforming to a
+          requested <a>profile</a> identified by the <em>client</em> or a default <a>profile</a>
         </li>
         <li>
-          <strong>list profile tokens</strong><br />
+          <strong>list profiles tokens</strong><br />
           a <em>server</em> responds the list of <em>profile </em> <em>token</em>s it is able to deliver
-          <em>resource</em> representations conforming to and their mapping to <em>profile</em> URIs.
+          <em>resource</em> representations conforming to and their mapping to <a>profile</a> URIs.
         </li>
       </ol>
+      <p>More detailed descriptions of these requests and their responses is given next.</p>
+      <section id="listprofiles">
+        <h4>list profiles</h4>
+        <p>
+          A <em>client</em> wishes to know what <a>profile</a>s a <em>server</em> is able to deliver conformant 
+          representations of a <em>resource</em> for. This may need to be known either before a <em>request</em> for a 
+          particular <em>resource</em> representation is made or perhaps after an initial <em>request</em> for a
+          <em>resource</em> representation is made.
+        </p>
+        <p>
+          The <strong>list profiles</strong> <em>request</em> <a>may</a> be an independent request or part of another 
+          realisation's request. 
+        </p>
+        <p>
+          The <strong>list profiles</strong> <em>request</em> <a>may</a> result in a <em>response</em> in one of a
+          number of structures or formats provided the <a>profile</a>s representations of a <em>resource</em>
+          conforming to are unambiguously identified either by URI or a <em>token</em> mappable to a URI.
+        </p>
+        <p>
+          A <em>server</em> <a>must not</a> list <a>profile</a>s which <em>resource</em> representations conform to if
+          it is unable to deliver those representations when presented with a <strong>get resource by profile</strong>
+          <em>request</em>.
+        </p>
+      </section>
+      <section id="getresourcebyprofile">
+        <h4>get resource by profile</h4>
+        <p>
+          The most basic <em>request</em> of content negotiation by profile is for a <em>client</em> to <em>request</em>
+          a representation of a <em>resource</em> that is claimed to conform to a <a>profile</a>.
+        </p>
+        <p>
+          A <em>client</em> executing a <strong>get resource by profile</strong> <em>request</em> <a>must</a>
+          identify the <a>profile</a> with either a URI or a token mappable to a URI.
+        </p>
+        <p>
+          A <em>client</em> executing a <strong>get resource by profile</strong> <a>may</a> <em>request</em> a
+          <em>resource</em> representation conforming to one of any number of <a>profiles</a>s with its preference
+          expressed in a some form of list ordering.
+        </p>
+      </section>
+      <section id="listprofilestokens">
+        <h4>list profiles tokens</h4>
+        <p>
+          A <em>client</em>/<em>server</em> pair of agents <a>may</a> refere to <a>profile</a>s by identifiers other
+          than URIs, <em>token</em>, as long as both the <em>client</em> and <em>server</em> are able to
+          deterministically map that token to a <a>profile</a>'s URI. This is due to the known requirement for
+          <a>profile</a>s to be able to be referred to within other URIs, such as those of <em>resources</em> and other
+          situations where referring to the <a>profile</a> itself by a URI is not possible.
+        </p>
+        <p>
+          A <em>server</em> responding to a <strong>list profiles tokens</strong> <em>request</em> <a>must</a> provide
+          tokens that can be used for <strong>get resource by profile</strong> <em>requests</em> within the same
+          realisation.
+        </p>
+      </section>
     </section>
     <div class="issue" data-number="462"></div>
   </section>
