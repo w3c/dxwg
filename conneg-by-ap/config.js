@@ -27,12 +27,7 @@ var respecConfig = {
         mailto:     "nicholas.car@csiro.au",
         company:    "CSIRO",
         companyURL: "https://www.csiro.au",
-        w3cid:      70131,
-        extras:     [{
-            name:  "<img src='orcid_logo.png' alt='orcid logo' />",
-            href:  "https://orcid.org/0000-0002-8742-7730",
-            class: "orcid"
-        }],
+        w3cid:      70131
     }],
     wg: "Dataset Exchange Working Group",
     wgURI: "https://www.w3.org/2017/dxwg/",
@@ -41,7 +36,7 @@ var respecConfig = {
     inlineCSS: "true",
     lint: "false",
     issueBase: "https://github.com/w3c/dxwg/issues/",
-    github: "https://github.com/w3c/dxwg/issues/",
+    github: "https://github.com/w3c/dxwg/",
     localBiblio: {
         "PROF-ONT": {
             editors: [
