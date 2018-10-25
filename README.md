@@ -10,4 +10,5 @@
 - [DCAT Revision](https://w3c.github.io/dxwg/dcat/)  
   - [DCAT Revision First Public Working Draft (FPWD)](https://www.w3.org/TR/vocab-dcat-2/)
 - [Dataset Exchange Guidance for Application Profiles](https://w3c.github.io/dxwg/profiles/)
+- [The Profiles Ontology](https://w3c.github.io/dxwg/profilesont/)
 - [Content Negotiation by Profile](https://w3c.github.io/dxwg/conneg-by-ap/)
