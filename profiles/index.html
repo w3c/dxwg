@@ -142,29 +142,20 @@
       <div class="issue" data-number="418"></div>
     </section>
     
-    <section id="whatisaprofile">
-      <h3>What is a profile?</h3>
-      <p>This section builds on the formal definitions for <a>profile</a> and other terms given above.</p>
-      <div class="issue" data-number="435"></div>
-      <div class="note">(Antoine:) From https://github.com/w3c/dxwg/issues/242#issuecomment-408916364:
-        <ul>
-          <li>A profile SHOULD have a textual description intended for humans</li>
-          <li>A profile SHOULD describe metadata elements/properties</li>
-          <li>A profile SHOULD describe valid value types for elements</li>
-          <li>A profile SHOULD provide relevant cardinality rules</li>
-          <li>(etc. here until we finalize requirements - these are just examples)</li>
-        </ul>
-      </div>
-      <div class="note">
-        (Antoine:) Though it should likely be formatted differently, I see this section as reprising the <a href="https://github.com/w3c/dxwg/blob/a7403b8c3ceb2630a1a1eb87da7b9babc6fd2d7e/profiles/index.html">previous structure</a>'s <em>description</em> & <em>functions</em> sections (see id="description" &amp; id="functions" in the HTML) i.e. list some of the DXWG requirements on profile and explain how they translate in recommendations, when needed.
-      </div>
-      <div class="note">
-        (Antoine:) At this stage I have doubts on whether all requirements should be reflected in this section. Perhaps we should have only two clusters for the requirements about administrative and descriptive metadata in this section and detail them later, in the section about that metadata.
-      </div>
-      <div class="issue" data-number="416"></div>
-    </section>
     <section id="relatedwork">
-      <h3>Related work</h3>
+      <h3>Types and profiles and related work</h3>
+        <div class="note"><p>
+      (Antoine:) The idea is that this section will contain text the define the types of profiles and their motivation in general terms, 
+          as well as pointing to examples, as done at <a href="https://github.com/w3c/dxwg/issues/435#issuecomment-426928897">in this draft</a>. As Karen said:</p>
+          <p>(Karen:) I had thought of this as showing examples of TYPES of profiles. There are profiles like DCAT that take place 
+            within a community, make primary use of a base metadata schema, but add or remove based on local need. There are profiles 
+            like ODRL that have a very formal meaning (legal license) and are in essence cumulative, with the base standard elements 
+            assumed and specific rules for over-riding. There are profiles that use only the namespace of the base profile, but are 
+            defined subsets (BIBFRA.ME, but any other example of this would be fine - that's the one I know). And then we could perhaps 
+            find a profile that has no strong base profile (ADMS perhaps?) but combines elements as needed from a variety of sources and 
+            is independent of any existing vocabulary. The idea would be to show a range of profile motivations, designs, and community 
+            involvement.</p>
+  </div>
       <p>
         <em>Profiling</em> is an activity that has been undertaken by many communities with a range of formalisms. This
         section lists work that has been influential in the development of this document.
@@ -193,14 +184,92 @@
           <div class="issue" data-number="242">See comment <a href="https://github.com/w3c/dxwg/issues/242#issuecomment-408916364">408916364</a></div>
         </dd>
       </dl>
-      <div class="note">
-        (Karen:) I had thought of this as showing examples of TYPES of profiles. There are profiles like DCAT that take place within a community, make primary use of a base metadata schema, but add or remove based on local need. There are profiles like ODRL that have a very formal meaning (legal license) and are in essence cumulative, with the base standard elements assumed and specific rules for over-riding. There are profiles that use only the namespace of the base profile, but are defined subsets (BIBFRA.ME, but any other example of this would be fine - that's the one I know). And then we could perhaps find a profile that has no strong base profile (ADMS perhaps?) but combines elements as needed from a variety of sources and is independent of any existing vocabulary. The idea would be to show a range of profile motivations, designs, and community involvement.
-      </div>
     </section>
   </section>
+  
+  <div class="issue" data-number="416"></div>
+  
+  <section id="whatisaprofile">
+      <h2>What is a profile?</h2>
+      <p>This section builds on the formal definition for <a>profile</a> and the requirements DXWG has identified, and lays down a conceptual model for profiles, their components 
+        and their functions.</p>
+      <p>A Profile is based on an existing Specification, which can have the status of a Standard and which can be itself 
+        a Profile of another Specification. A profile can have various Components/Manifestations in various expression languages for profiles.
+        These Components/Manifestations play specific Functions (roles) for the implementation of the services that motivate the creation of the Profile. 
+        These Components are serialized and published as Distributions in various formats, which are the concrete input for performing these services.
+        </p>
+         <div class="note"><p>
+      (Antoine:) Obviously at this stage some names in this model have to be finalized. 
+           We will also provide with a diagram that shows our 'big picture' on profiles and their possible (or recommended) components. 
+		 Something at the level of the diagram at https://docs.google.com/drawings/d/1dHkpwKwUwMgS1RqSCTPO3uOoRiY_qNk0z5bhXJlYi4Y/, 
+		 which should work as an abstracted version of the prof-o model https://w3c.github.io/dxwg/profilesont/ 
+		 (i.e. one without classes and properties that come from a specific namespace/vocabulary.<p>
+	<p>(Lars:) Probably we should not just use the DCAT view (distributions) but we should rather use more generic 
+		Web architecture terms as resources and representations.</p>
+        <p>(Riccardo:) We should talk about 'distribution of a manifestation' not 'distribution' alone.</p>
+    </div>
+  </div>  
+     <p>The W3C DXWG has identified general requirements about profiles, which we list here and are going to expand upon (in more detailed requirements and recommendations) in the following section:</p>
+     <div class="note"><p>
+      (Antoine:) Once the structure is stabilized this section should list the other sections it 'introduces'. 
+              Maybe these sections will be moved as sub-sections of this one.</p>
+  </div>  
+    <div class="note">(Antoine:) From https://github.com/w3c/dxwg/issues/435#issue-366191828:
+        <ul>
+          <li>A profile MUST be published to the relevant metadata-using community</li>
+          <li>A profile MAY be based on one or more known community standards, for interoperability within that community 
+            (&quot;profile of X&quot;), and, when it is, it must indicate that basis</li>
+          <li>A profile MAY combine vocabularies that cross community boundaries without having any strongly identifiable base 
+            profile or profiles</li>
+          <li>A profile MAY be expressed in more than one physical file</li>
+	  <li>(etc. here until we finalize requirements - these are just examples)</li>
+        </ul>
+      </div>
+      <div class="note">(Antoine:) From the 24 Oct discussion in Lyon, but it looks redundant with one of the above:
+        <ul>
+          <li>A profile MAY be based more than one model or vocabulary.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="functions">
+      <h2>The Functions of Profile Components/Manifestations</h2>
+      <p>A Component/Manifestion of a Profile can play a number of Functions (Roles) for the performing of a service.
+      (NB: the input for such a service is not necessary the Component/Manifestation per se, in most cases it will be a Distribution of it,
+      serialized in a specific format)</p>
+      <p>The W3C DXWG has identified the following Functions as being particularly relevant:
+        </p>
+    <div class="note">(Antoine:) From https://github.com/w3c/dxwg/issues/435#issue-366191828 and https://github.com/w3c/dxwg/issues/242#issuecomment-408916364 or from the 24 Oct discussion in Lyon:
+        <ul>
+          <li>A profile MUST define vocabulary terms that are used in the metadata being profiled.</li>
+          <li>A profile SHOULD describe metadata elements/properties</li>
+          <li>A profile SHOULD (MUST?) define what values are valid for vocabulary terms.</li>
+	  <li>A profile SHOULD describe valid value types for elements</li>
+	  <li>Human-readable labels and definitions MUST be included for vocabulary terms</li>
+          <li>Vocabulary terms SHOULD be defined as mandatory, optional, repeatable, not repeatable (alt.: cardinality rules for vocabulary terms SHOULD be defined in the profile)</li>
+	  <li>The profile MAY include input instructions for metadata creators (and to aid users in understanding the deeper meaning of terms)</li>
+          <li>A Profile MAY drive user forms</li>
+          <li>(etc. here until we finalize requirements - these are just examples)</li>
+        </ul>
+      </div>
+    </section>
 
   <section id="publication">
     <h2>Profile publication</h2>
+    <p>Profiles are published in the form of Components/Manifestations that are serialized in Distributions.<p>
+    <p>The W3C DXWG has identified the following requirement for such publication:</p>
+       <div class="note">(Antoine:) From https://github.com/w3c/dxwg/issues/435#issue-366191828 and https://github.com/w3c/dxwg/issues/242#issuecomment-408916364 or from the 24 Oct discussion in Lyon:
+        <ul>
+          <li>A profile can be expressed and published in more than one Distribution</li>
+          <li>A profile MAY be published as operational code</li>
+	  <li>A profile MAY include operational validation code (NB: this ventures a bit into 'functions'...)</li>
+	  <li>A profile SHOULD have a textual description intended for humans</li>
+	  <li>A profile MAY be published as a human-readable document</li>
+          <li>A profile Distribution can be expressed in more than one module</li>
+	  <li>[here a placeholder for the URI requirements derived from content negotiation needs]</li>
+          <li>(etc. here until we finalize requirements - these are just examples)</li>
+        </ul>
+      </div>
     <div class="note">(Antoine:) From https://github.com/w3c/dxwg/issues/242#issuecomment-408916364:
     <ul>
       <li>(here the various options for publication - PDF, XML, RDF...)</li>
@@ -208,9 +277,6 @@
     </ul>
     </div>
     <div class="issue" data-number="365"></div>
-    <div class="note">
-      (Antoine:) To make this section work, I think it will be good if the reader can see our 'big picture' on profiles and their possible (or recommended) components. I'm thinking of something at the level of the diagram at https://docs.google.com/drawings/d/1dHkpwKwUwMgS1RqSCTPO3uOoRiY_qNk0z5bhXJlYi4Y/, which should work as an abstracted version of the prof-o model https://w3c.github.io/dxwg/profilesont/ (i.e. one without classes and properties that come from a specific namespace/vocabulary. NB: at this stage I'm not sure if this diagram would fit better in this section or in the one above ('What is a profile?').
-    </div>
   </section>
 
   <section id="metadata">
@@ -221,7 +287,6 @@
       <li>creator/maintainer (+ contact info)</li>
       <li>date/version</li>
       <li>etc</li>
-      <li></li>
     </ul>
     </div>
    <div class="note">(Antoine:) I've kept it here, but I do agree with the comment at  https://github.com/w3c/dxwg/issues/242#issuecomment-408916364 (and above) that URI should be in a specific section on publication of profiles.</div>
@@ -236,12 +301,17 @@
           <li>Model and elements</li>
         </ul>
       </li>
-      <li>Relationship to vocabs or other profilesn</li>
+      <li>Relationship to vocabs or other profiles</li>
       <li>Link to validation schemas implementing the profile</li>
     </ul>
     </div>
+     <div class="note">(Antoine:) From the 24 Oct discussion in Lyon reminding some approved requirements, which could fit here:
+        <ul>
+          <li>Specify external standards (e.g., guidelines on how to create strings to be used in some elements)</li>
+          <li>Descriptive rules</li>
+        </ul>
+      </div>
     <div class="issue" data-number="369"></div>
-    <div class="note">(Antoine:) In this section we could list all the requirements on metadata, which we have not listed in the 'What is a profile?' section.</div>
   </section>
 
   <section id="prof-o">
