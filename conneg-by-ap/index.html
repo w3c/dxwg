@@ -75,6 +75,23 @@
       of content negotiation and ensures they and the HTTP methods all adhere to a single functional specification
       which thus ensures their functional equivalency.
     </p>
+    <section id="compliance">
+      <h3>Compliance with this Document</h3>
+      <p>
+        For the purpose of compliance, the normative sections of this document are
+        <a href="#abstractmodel">Section 5</a>,
+        <a href="#realisations">Section 6</a>,
+        <a href="#testsuites">Section 7</a>,
+      </p>
+    </section>
+    <section id="notationalconventions">
+      <h3>Notational Conventions</h3>
+      <p>
+        The key words <dfn>may</dfn>, <dfn>MUST</dfn>, <dfn>MUST NOT</dfn>, <dfn>OPTIONAL</dfn>, <dfn>SHALL</dfn>,
+        <dfn>SHALL NOT</dfn>, <dfn>SHOULD</dfn>, <dfn>SHOULD NOT</dfn>, <dfn>RECOMMENDED</dfn>, <dfn>REQUIRED</dfn>,
+        in this document are to be interpreted as described in [[RFC2119]].
+      </p>
+    </section>
   </section>
   <section id="definitions">
     <h2>Definitions</h2>
@@ -163,9 +180,112 @@
   <section id="abstractmodel">
     <h2>Abstract Model</h2>
     <p>
-      This section describes an abstract conceptual model for profile negotiation, independent of specific
-      implementation.
+      This section describes an abstract conceptual model for content negotiation by profile, independent of any
+      specific implementation.
     </p>
+    <section id="abstractmodelcontext">
+    <h3>Context and terms</h3>
+      <p>
+        All content negotiation takes place between a <em>client</em> and a <em>server</em> over the Internet with the
+        former requesting a <em>resource</em> or <em>resource</em> <em>metadata</em> through a <em>request</em> and
+        receiving it via a <em>response</em>. In some cases, a <em>server</em> may have to make a <em>request</em> of a
+        <em>client</em> and receive a <em>response</em>.
+      </p>
+      <p>
+        A <em>client</em> <em>request</em>ing the representation of a <em>resource</em> conforming to a <em>profile</em>
+        <a>MUST</a> identify the <em>resource</em> by a Uniform Resource Identifier (URI) [[rfc3986]] and <a>MUST</a>
+        identify a <em>profile</em> either by a URI or a <em>token</em> that unambiguously identifies the
+        <em>profile</em> for the <em>server</em> within that <em>request</em>/<em>response</em> session.
+      </p>
+      <p>Short definitions for the terms used above and below are:</p>
+      <dl>
+        <dt>client</dt>
+        <dd>an agent making a <em>request</em></dd>
+      </dl>
+      <dl>
+        <dt>server</dt>
+        <dd>an agent responding to a <em>request</em> with a <em>response</em></dd>
+      </dl>
+      <dl>
+        <dt>resource</dt>
+        <dd>
+          whatever might be identified by a URI. Familiar examples include an electronic
+          document, an image, a source of information with a consistent purpose [[rfc3986]]
+        </dd>
+      </dl>
+      <dl>
+        <dt>metadata</dt>
+        <dd>additional information be supplied about a resource [[rfc3986]]</dd>
+      </dl>
+      <dl>
+        <dt>request</dt>
+        <dd>a message, from one agent to another over the Internet, for a <em>resource</em></dd>
+      </dl>
+      <dl>
+        <dt>response</dt>
+        <dd>a message, from one agent to another over the Internet, delivering a requested <em>resource</em></dd>
+      </dl>
+      <dl>
+        <dt>token</dt>
+        <dd>a short name identifying something, in this situation a <em>profile</em></dd>
+      </dl>
+      <p>
+        In this abstract model, we don't assume any specifics about <em>client</em>, <em>server</em>, <em>resource</em>,
+        <em>metadata</em>, <em>request</em> or <em>response</em>.
+      </p>
+    </section>
+    <section id="requestsandresonses">
+      <h3>Requests and Responses</h3>
+      <p>
+        There are two main types of <em>request</em> that a <em>client</em> might make of a <em>server</em> regarding
+        content negotiation by profile. A <em>client wising to negotiate for content via profile adhering to this
+        specification <a>must</a> be able to implement these two request types.</em></p>
+      <ol>
+        <li>
+          <strong>list profiles</strong><br />
+          a <em>client</em> requests the list of URIs for <em>profile</em>s a <em>server</em> is able to deliver
+          <em>resource</em> representations conforming to
+        </li>
+        <li>
+          <strong>get resource by profile</strong>
+          <br />a <em>client</em> requests a representation of the requested <em>resource</em> represented conforming
+          to a particular <em>profile</em>
+        </li>
+      </ol>
+      <p>
+        A third <em>request</em> type is given that is expected not to apply to all realisations of this abstract model
+        and not all clients adhering to this specification need implement it.
+      </p>
+      <ol start="3">
+        <li>
+          <strong>list profile tokens</strong><br />
+          a <em>client</em> requests the list of <em>token</em>s the <em>server</em> uses for <em>profiles</em>s a
+          <em>server</em> is able to deliver <em>resource</em> representations conforming to and their mapping to
+          <em>profile</em> URIs
+        </li>
+      </ol>
+      <p>
+        A <em>server</em> adhering to this specification <a>MUST</a> respond to each request with the following
+        <em>response</em>s. The first two types are <a>REQUIRED</a>, the third depends on the realisation environment.
+      </p>
+      <ol>
+        <li>
+          <strong>list profiles</strong><br />
+          a <em>server</em> responds with the list of <em>profile</em> URIs for <em>profile</em>s it is able to
+          deliver <em>resource</em> representations conforming to, to a <em>client</em>
+        </li>
+        <li>
+          <strong>get resource by profile</strong><br />
+          a <em>server</em> responds with either a specific <em>profile</em> for a <em>resource</em> conforming to a
+          requested <em>profile</em> identified by the <em>client</em> or a default <em>profile</em>
+        </li>
+        <li>
+          <strong>list profile tokens</strong><br />
+          a <em>server</em> responds the list of <em>profile </em> <em>token</em>s it is able to deliver
+          <em>resource</em> representations conforming to and their mapping to <em>profile</em> URIs.
+        </li>
+      </ol>
+    </section>
     <div class="issue" data-number="462"></div>
   </section>
   <section id="realisations">
@@ -222,8 +342,8 @@
     </ul>
     <div class="issue" data-number="467"></div>
   </section>
-  <section id="privacyConsiderations" class="informative">
-    <h2>Privacy Considerations</h2>
+  <section id="security_and_privacy" class="informative">
+    <h2>Security and Privacy</h2>
     <p>
 
     </p>
@@ -343,12 +463,12 @@
       <div class="req-response">
         <p class="respTitle">RESPONSE FOR Req. 263</p>
         <p>
-          The IETF submission in the DXWG Family of Documents [[PROF-IETF]] does not address profile negotiation by
-          query param patterns: it is limited to HTTP specification-based negotiation only.
+          The IETF submission in the DXWG Family of Documents [[PROF-IETF]] does not address content negotiaiton by
+          profile query param patterns: it is limited to HTTP specification-based negotiation only.
         </p>
         <p>
-          Recommendations for profile negotiation via query param patterns (Query String Arguments) are given in the
-          Profile Guidance [[PROF-GUIDE]] document where an API for this is defined.
+          Recommendations for content negotiation by profile via query param patterns (Query String Arguments) are
+          given in the Profile Guidance [[PROF-GUIDE]] document where an API for this is defined.
         </p>
       </div>
       <div class="issue" data-number="264"></div>
