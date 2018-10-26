@@ -365,8 +365,9 @@
       </p>
       <p>
         Content Negotiation by profile adds a further dimension to the already existing http content
-        negotiation dimensions media type (Accept/Content-Type), encoding (Accept-Encoding/Content-Encoding)
-        and language (Accept-Language/Content-Language).
+        negotiation dimensions media type <code>Accept</code>/<code>Content-Type</code>), encoding
+        (<code>Accept-Encoding</code>/<code>Content-Encoding</code>) and language
+        (<code>Accept-Language</code>/<code>Content-Language</code>).
       </p>
       <div class="issue">
         <p>
@@ -380,16 +381,16 @@
             Listing profiles for a resource using http can be done in two ways.
         </p>
         <p>
-          The first one is to issue an OPTIONS request against the resource. In this case a server implementing
-          content negotiation by profile <a>SHOULD</a> return a Content-Profile header listing all profiles the requested
-          resource conforms to.
+          The first one is to issue an <code>OPTIONS</code> request against the resource. In this case a server implementing
+          content negotiation by profile <a>SHOULD</a> return a <code>Content-Profile</code> header listing all profiles
+          the requested resource conforms to.
         </p>
         <div class="example">
           <p>
             Request:
           </p>
           <pre class="nohighlight" aria-busy="false" aria-live="polite">
-            OPTIONS /some/resource HTTP/1.1
+OPTIONS /some/resource HTTP/1.1
           </pre>
           <p>
             Response:
@@ -401,20 +402,22 @@ Content-Profile: urn:example:profile:1;q=0.8,http://example.org/profiles/2;q=0.5
           </pre>
         </div>
         <p>
-          The second way is to issue an GET or HEAD against the resource. In this case a server implementing
-          content negotiation by profile SHOULD return a http Link header containing information about the
+          The second way is to issue an <code>GET</code> or <code>HEAD</code> against the resource. In this 
+          case a server implementing
+          content negotiation by profile <a>SHOULD</a> return a http <code>Link</code> header containing information about the
           default representation of that resource (i. e. the representation that will be returned after any
           content negotiation has been performed) and information about any alternate representations of that
-          resource. The returned representation will be identified by rel=“self“, other representations by
-          rel=”alternate”.
+          resource. The returned representation will be identified by <code>rel="self"</code>, other representations by
+          <code>rel="alternate"</code>.
         </p>
-        <p>As an example, consider the resource “http://example.org/a/resource”. This resource is available
-          in the media types application/xml, text/html and text/turtle. The text/html representation has
-          no profile, whereas the application/xml and text/turtle representations are both available in the
-          profiles urn:example:profile:1 and urn:example:profile:2.
+        <p>As an example, consider the resource <code>http://example.org/a/resource</code>. This resource is available
+          in the media types <code>application/xml</code>, <code>text/html</code> and <code>text/turtle</code>.
+          The <code>text/html</code> representation has
+          no profile, whereas the <code>application/xml</code> and <code>text/turtle</code> representations are
+          both available in the profiles <code>urn:example:profile:1</code> and <code>urn:example:profile:2</code>.
         </p>
         <p>
-          All representations of /a/resource have own content-location URLs which leaves us with the following matrix:
+          All representations of <code>/a/resource</code> have own content-location URLs which leaves us with the following matrix:
         </p>
         <table>
           <tr><th>Media type / profile</th><th>urn:example:profile:1</th><th>urn:example:profile:2</th></tr>
@@ -423,12 +426,13 @@ Content-Profile: urn:example:profile:1;q=0.8,http://example.org/profiles/2;q=0.5
           <tr><th>application/xml</th><td>http://example.org/a/resource/prof1.xml</td><td>http://example.org/a/resource/prof2.xml</td></tr>
         </table
         <p>
-          Assuming that a request without an Accept-Profile header per default delivers content conforming to
-          urn:example:profile:1 a request/response pair would look as follows:
+          Assuming that a request without an <code>Accept-Profile</code> header per default delivers content conforming to
+          <code>urn:example:profile:1</code> a request/response pair would look as follows:
         </p>
         <div class="example">
+          <p>EXAMPLE</p>
           <p>
-            Request
+            Request:
           </p>
           <pre class="nohighlight" aria-busy="false" aria-live="polite">
 HEAD /a/resource HTTP/1.1
@@ -442,16 +446,16 @@ Accept: text/turtle
 HTTP/1.1 200 OK
 Content-Type: text/turtle
 Content-Profile: urn:example:profile:1
-Link: <http://example.org/a/resource.prof1.ttl>; rel="self"; type="text/turtle"; profile="urn:example:profile:1",
-  <http://example.org/a/resource.prof2.ttl>; rel="alternate"; type="text/turtle"; profile="urn:example:profile:2",
-  <http://example.org/a/resource.prof1.xml>; rel="alternate"; type="application/xml"; profile="urn:example:profile:1",
-  <http://example.org/a/resource.prof2.xml>; rel="alternate"; type="application/xml"; profile="urn:example:profile:2",
-  <http://example.org/a/resource.html>; rel="alternate"; type="text/html"
+Link: &lt;http://example.org/a/resource.prof1.ttl&gt;; rel="self"; type="text/turtle"; profile="urn:example:profile:1",
+  &lt;http://example.org/a/resource.prof2.ttl&gt;; rel="alternate"; type="text/turtle"; profile="urn:example:profile:2",
+  &lt;http://example.org/a/resource.prof1.xml&gt;; rel="alternate"; type="application/xml"; profile="urn:example:profile:1",
+  &lt;http://example.org/a/resource.prof2.xml&gt;; rel="alternate"; type="application/xml"; profile="urn:example:profile:2",
+  &lt;http://example.org/a/resource.html&gt;; rel="alternate"; type="text/html"
 [more response headers]
             </pre>
           </div>
           <div class="issue">
-            ISSUE: This pattern uses the Link attribute “profile” that is not yet defined and registered.
+            This pattern uses the Link attribute “profile” that is not yet defined and registered.
           </div>
        </section>
        <section id="getresourcebyprofilehttp">
