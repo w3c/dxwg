@@ -380,22 +380,15 @@
           content negotiation by profile <a>SHOULD</a> return a <code>Content-Profile</code> header listing all profiles
           the requested resource conforms to.
         </p>
-        <div class="example" title="Using http OPTIONS to list available profiles">
-          <p>
-            Request:
-          </p>
-          <pre class="nohighlight" aria-busy="false" aria-live="polite">
+        <pre class="example nohighlight" title="Using http OPTIONS to list available profiles" aria-busy="false" aria-live="polite">
 OPTIONS /some/resource HTTP/1.1
-          </pre>
-          <p>
-            Response:
-          </p>
-          <pre class="nohighlight" aria-busy="false" aria-live="polite">
+
+---
+
 HTTP/1.1 200 OK
 Content-Profile: urn:example:profile:1;q=0.8,http://example.org/profiles/2;q=0.5
 [More headers for this resource]
-          </pre>
-        </div>
+        </pre>
         <p>
           The second way is to issue an <code>GET</code> or <code>HEAD</code> against the resource. In this 
           case a server implementing
@@ -424,19 +417,17 @@ Content-Profile: urn:example:profile:1;q=0.8,http://example.org/profiles/2;q=0.5
           Assuming that a request without an <code>Accept-Profile</code> header per default delivers content conforming to
           <code>urn:example:profile:1</code> a request/response pair would look as follows:
         </p>
-        <div class="example" title="Using a Link-header to point list available profiles">
+        <div class="example" >
           <p>
             Request:
           </p>
-          <pre class="nohighlight" aria-busy="false" aria-live="polite">
+          <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Using a Link-header to point list available profiles">
 HEAD /a/resource HTTP/1.1
 Accept: text/turtle
 [more request headers]
-          </pre>
-          <p>
-            Response:
-          </p>
-          <pre class="nohighlight" aria-busy="false" aria-live="polite">
+
+---
+
 HTTP/1.1 200 OK
 Content-Type: text/turtle
 Content-Profile: urn:example:profile:1
@@ -446,8 +437,7 @@ Link: &lt;http://example.org/a/resource.prof1.ttl&gt;; rel="self"; type="text/tu
   &lt;http://example.org/a/resource.prof2.xml&gt;; rel="alternate"; type="application/xml"; profile="urn:example:profile:2",
   &lt;http://example.org/a/resource.html&gt;; rel="alternate"; type="text/html"
 [more response headers]
-            </pre>
-          </div>
+          </pre>
           <div class="issue" data-number="501"></div>
        </section>
        <section id="getresourcebyprofilehttp">
@@ -458,24 +448,19 @@ Link: &lt;http://example.org/a/resource.prof1.ttl&gt;; rel="self"; type="text/tu
           It is possible to specify a range of acceptable profile URIs and also to indicate preferences by using
           quality indicators (q-values).
         </p>
-        <div class="example" title="Requesting a representation conforming to a specific profile using http headers">
-          <p>Request</p>
-          <pre class="nohighlight" aria-busy="false" aria-live="polite">
+        <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Requesting a representation conforming to a specific profile using http headers">
 GET /a/resource HTTP/1.1
 Accept: text/turtle;q=0.8, application/xml;q=0.5
 Accept-Profile: urn:example:profile:1;q=1.0,urn:example:profile:2;q=0.6
 [more request headers]
-          </pre>
-          <p>
-            Response:
-          </p>
-          <pre class="nohighlight" aria-busy="false" aria-live="polite">
+
+---
+
 HTTP/1.1 200 OK
 Content-Type: text/turtle
 Content-Profile: urn:example:profile:1
 [more response headers]
-          </pre>
-        </div>
+        </pre>
         <p>
           Having performed content negotiation and returning a resource representation, it is <a>RECOMMENDED</a>
           that the server also includes a Link header indicating the availability of alternate resources
