@@ -359,9 +359,138 @@
     <section id="http">
       <h2>Hypertext Transfer Protocol</h2>
       <p>
-        The Hypertext Transfer Protocol implementation of the abstract model is described in the IETF submission
-        [[PROF-IETF]].
+        A realisation of the Abstract Model using the Hypertext Transfer Protocol (http) is presented here.
+        This implementation is based on http content negotiation and uses two new http headers, „Accept-Profile“
+        and „Content-Profile“ that are to be defined in an upcoming Internet-Draft [[PROF-IETF]].
       </p>
+      <p>
+        Content Negotiation by profile adds a further dimension to the already existing http content
+        negotiation dimensions media type (Accept/Content-Type), encoding (Accept-Encoding/Content-Encoding)
+        and language (Accept-Language/Content-Language).
+      </p>
+      <div class="issue">
+        <p>
+          Do we need to specify the order in which negotation headers are processed? Memento specifies that 
+          time-based negotiation <a>MUST</a> take place before any other negotiation.
+        </p>
+      </div>
+      <section id="listprofileshttp">
+        <h3>list profiles</h3>
+          <p>
+            Listing profiles for a resource using http can be done in two ways.
+        </p>
+        <p>
+          The first one is to issue an OPTIONS request against the resource. In this case a server implementing
+          content negotiation by profile <a>SHOULD</a> return a Content-Profile header listing all profiles the requested
+          resource conforms to.
+        </p>
+        <div class="example">
+          <p>
+            Request:
+          </p>
+          <pre class="nohighlight" aria-busy="false" aria-live="polite">
+            OPTIONS /some/resource HTTP/1.1
+          </pre>
+          <p>
+            Response:
+          </p>
+          <pre class="nohighlight" aria-busy="false" aria-live="polite">
+HTTP/1.1 200 OK
+Content-Profile: urn:example:profile:1;q=0.8,http://example.org/profiles/2;q=0.5
+[More headers for this resource]
+          </pre>
+        </div>
+        <p>
+          The second way is to issue an GET or HEAD against the resource. In this case a server implementing
+          content negotiation by profile SHOULD return a http Link header containing information about the
+          default representation of that resource (i. e. the representation that will be returned after any
+          content negotiation has been performed) and information about any alternate representations of that
+          resource. The returned representation will be identified by rel=“self“, other representations by
+          rel=”alternate”.
+        </p>
+        <p>As an example, consider the resource “http://example.org/a/resource”. This resource is available
+          in the media types application/xml, text/html and text/turtle. The text/html representation has
+          no profile, whereas the application/xml and text/turtle representations are both available in the
+          profiles urn:example:profile:1 and urn:example:profile:2.
+        </p>
+        <p>
+          All representations of /a/resource have own content-location URLs which leaves us with the following matrix:
+        </p>
+        <table>
+          <tr><th>Media type / profile</th><th>urn:example:profile:1</th><th>urn:example:profile:2</th></tr>
+          <tr><th>text/html</th><td>http://example.org/a/resource.html</td><td>http://example.org/a/resource.html</td></tr>
+          <tr><th>text/turtle</th><td>http://example.org/a/resource.prof1.ttl</td><td>http://example.org/a/resource.prof2.ttl</td></tr>
+          <tr><th>application/xml</th><td>http://example.org/a/resource/prof1.xml</td><td>http://example.org/a/resource/prof2.xml</td></tr>
+        </table
+        <p>
+          Assuming that a request without an Accept-Profile header per default delivers content conforming to
+          urn:example:profile:1 a request/response pair would look as follows:
+        </p>
+        <div class="example">
+          <p>
+            Request
+          </p>
+          <pre class="nohighlight" aria-busy="false" aria-live="polite">
+HEAD /a/resource HTTP/1.1
+Accept: text/turtle
+[more request headers]
+          </pre>
+          <p>
+            Response:
+          </p>
+          <pre class="nohighlight" aria-busy="false" aria-live="polite">
+HTTP/1.1 200 OK
+Content-Type: text/turtle
+Content-Profile: urn:example:profile:1
+Link: <http://example.org/a/resource.prof1.ttl>; rel="self"; type="text/turtle"; profile="urn:example:profile:1",
+  <http://example.org/a/resource.prof2.ttl>; rel="alternate"; type="text/turtle"; profile="urn:example:profile:2",
+  <http://example.org/a/resource.prof1.xml>; rel="alternate"; type="application/xml"; profile="urn:example:profile:1",
+  <http://example.org/a/resource.prof2.xml>; rel="alternate"; type="application/xml"; profile="urn:example:profile:2",
+  <http://example.org/a/resource.html>; rel="alternate"; type="text/html"
+[more response headers]
+            </pre>
+          </div>
+          <div class="issue">
+            ISSUE: This pattern uses the Link attribute “profile” that is not yet defined and registered.
+          </div>
+       </section>
+       <section id="getresourcebyprofilehttp">
+        <h3>get resource by profile</h3>
+        <p>
+          Getting a resource representation conforming to a specific profile is done by issuing an http GET
+          request against the resource and specifying the desired profile URI in an "Accept-Profile" header.
+          It is possible to specify a range of acceptable profile URIs and also to indicate preferences by using
+          quality indicators (q-values).
+        </p>
+        <div class="example">
+          <p>Request</p>
+          <pre class="nohighlight" aria-busy="false" aria-live="polite">
+GET /a/resource HTTP/1.1
+Accept: text/turtle;q=0.8, application/xml;q=0.5
+Accept-Profile: urn:example:profile:1;q=1.0,urn:example:profile:2;q=0.6
+[more request headers]
+          </pre>
+          <p>
+            Response:
+          </p>
+          <pre class="nohighlight" aria-busy="false" aria-live="polite">
+HTTP/1.1 200 OK
+Content-Type: text/turtle
+Content-Profile: urn:example:profile:1
+[more response headers]
+          </pre>
+        </div>
+        <p>
+          Having performed content negotiation and returning a resource representation, it is <a>RECOMMENDED</a>
+          that the server also includes a Link header indicating the availability of alternate resources
+          encoded in other media types and conforming to other profiles, as described above.
+        </p>
+      </section>
+      <section id="listprofilestokenshttp">
+        <h3>list profiles tokens</h3>
+        <p>
+          Currently, there is no proposed way to implement this function using http
+        </p>
     </section>
     <section id="qsa">
       <h2>Query String Arguments</h2>
