@@ -13,3 +13,4 @@
 - [Dataset Exchange Guidance for Application Profiles](https://w3c.github.io/dxwg/profiles/)
 - [The Profiles Ontology](https://w3c.github.io/dxwg/profilesont/)
 - [Content Negotiation by Profile](https://w3c.github.io/dxwg/conneg-by-ap/)
+- [The Profiles Ontology](https://w3c.github.io/dxwg/profilesont/)
