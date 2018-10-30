@@ -1173,6 +1173,7 @@
     <section id="Class:Catalog_Record">
         <h3>Class: Catalog Record</h3>
         <p>The following properties are recommended for use on this class:
+            <a href="#Property:record_conformsto">conforms to</a>,
             <a href="#Property:record_description">description</a>,
             <a href="#Property:record_listing_date">listing date</a>,
             <a href="#Property:record_primary_topic">primary topic</a>,
@@ -1273,6 +1274,30 @@
                 </tbody>
             </table>
         </section>
+
+        <section id="Property:record_conformsto">
+            <h4>Property: conforms to</h4>
+
+            <p class="note">
+                New property in this context in this revision of DCAT.
+            </p>
+
+            <table class="definition">
+                <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/conformsTo">dct:conformsTo</a></th></tr></thead>
+                <tbody>
+                <tr><td class="prop">Definition:</td><td>An established standard to which the described resource conforms.</td></tr>
+                <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/Standard">dct:Standard</a> (A basis for comparison; a reference point against which other things can be evaluated.)</td></tr>
+                <tr><td class="prop">Usage note:</td><td>This property <em title="SHOULD" class="rfc2119">SHOULD</em> be used to indicate the model, schema, ontology, view or profile that the catalog record metadata conforms to. </td></tr>
+                </tbody>
+            </table>
+
+            <!-- this note is repeated from above, should we remove here or repeat for clarification in this context? -->
+            <p class="note">
+                <a href="http://purl.org/dc/terms/Standard">dct:Standard</a> is defined as "A basis for comparison; a reference point against which other things can be evaluated." It is not restricted to formal standards issued by bodies like ISO and W3C. In this context it will usually be used for a schema, ontology, data model or profile which specifies the structure of a dataset. This is not necessarily tied to a single encoding or serialization.
+            </p>
+        </section>
+
+
     </section> <!-- end Class catalog record -->
 
     <section id="Class:Dataset">
@@ -3381,6 +3406,11 @@ dcat:servesDataset ga-courts:jc ;
                 which is a sub-property of rdfs:seeAlso - an owl:ObjectProperty that cannot have a Literal value.
                 This revision of DCAT has fixed these issues and replaced the use of vann:usageNote with <a href="https://www.w3.org/TR/skos-primer/#secdocumentation">skos:scopeNote</a> -
                 see <a href="https://github.com/w3c/dxwg/issues/233">Issue #233</a>.
+            </li>
+
+            <li><a href="#Property:record_conformsto">Property: conforms to </a>:
+                DCAT 2014 [[VOCAB-DCAT-20140116]] had no way of representing the conformance of a record metadata with a metadata standard. This revision has added the property dct:conformsTo for dcat:CatalogRecord to cover this requirement.
+                - see <a href="https://github.com/w3c/dxwg/issues/502">Issue #502</a>.
             </li>
 
         </ul>
