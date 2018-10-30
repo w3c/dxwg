@@ -467,6 +467,7 @@ Content-Profile: urn:example:profile:1
         web browsers by humans and in other <em>client</em>/<em>server</em> situations to deliver extra information to a
         <em>server</em>.
       </p>
+      <h5>Key naming</h5>
       <p>
         When content negotiation by profile is to take place using QSAs, the <em>request</em>s and <em>response</em>s
         of the <a href="#abstractmodel">Abstract Model</a> <a>MUST</a> be implemented however there is some flexibility
@@ -488,14 +489,25 @@ Content-Profile: urn:example:profile:1
         <p>
           For this reason, the QSA realisation allows either URIs or tokens for profiles to be used and it is expected,
           though not mandated here, that QSA realisations will also allow URIs or tokens for Media Types and other
-          content negotiation dimentions, such as language. There are already several initiatives that have created URIs
+          content negotiation dimensions, such as language. There are already several initiatives that have created URIs
           for Media Types based on the IANA register's tokens.
         </p>
       </div>
-
-        <em>requests</em> and other parameters <a>MUST</a> be appended to the URI of the <em>resource</em> for which the
-        content negotiation is taking place.
+      <h5>Resource URI</h5>
+      <p>
+        Resource URIs for which QSA-based profile negotiation is taking place <a>MUST NOT</a>, themselves be QSA values
+        of other resource URIs in any QSA-based realisation. Such mechanics may be used but must be transparent to the
+        realisation's <em>client</em> applications.
       </p>
+      <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Resource URIs must not, themselves, be parameters of other URIs">
+For the representation of Resource X, according to Profile Y, in Media Type Z:
+
+NOT ALLOWED:
+GET /single/endpoint?resource=http://example.org/resource/X&_profile=Y&_mediatype=Z
+
+ALLOWED:
+GET /resource/X?_profile=Y&_mediatype=Z
+      </pre>
       <section id="listprofilesqsa">
         <h4>list profiles</h4>
         <p>
