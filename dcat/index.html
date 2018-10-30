@@ -40,34 +40,6 @@
         and the list of all the changes since the previous version of DCAT in the <a href="#changes">Change History</a> section.
     </p>
 
-
-    <h3 id="dxwg_family_of_documents">DXWG Family of Documents</h3>
-
-    <p>
-        This document is part of the output of the Dataset Exchange Working Group (DXWG).
-        All documents from the group are listed here.
-    </p>
-
-    <h4 id="dcat_documents">DCAT documents</h4>
-    <p>
-        The DCAT documents are about the revised Data Catalog Vocabulary.
-    </p>
-    <ul>
-        <li>[VOCAB-DCAT] (Recommendation) - this document, description of the DCAT RDF vocabulary</li>
-    </ul>
-
-    <h4 id="profiling_documents">Profiling documents</h4>
-    <p>
-        These documents give guidance on profiling. Some of the documents are general while some are technology-specific.
-        Please consult the Profile Guidance [[PROF-GUIDE]] document for an overview of all profiling documents. It is the
-        recommended starting point.
-    </p>
-    <ul>
-        <li>[[PROF-GUIDE]] (Recommendation) - the top-level general profiling guidance document giving an overview of all other documents</li>
-        <li>[[PROF-CONNEG]] (Recommendation) - Specific guidance on how to negotiate for Internet resource content using profiles</li>
-        <li>[[PROF-IETF]] (<a href="http://www.ietf.org">IETF</a> <a href="http://www.ietf.org/standards/ids/">Internet-Draft</a>) - HTTP Headers for HTTP content negotiation by profile</li>
-    </ul>
-
     <h3 id="dcat_history">DCAT history</h3>
     <p>The original DCAT vocabulary (originally hosted at http://vocab.deri.ie/dcat) was developed at the Digital Enterprise Research Institute (DERI), refined by the <a href="http://www.w3.org/egov/">eGov Interest Group</a>, and then finally standardized in 2014 [[VOCAB-DCAT-20140116]] by the <a href="http://www.w3.org/2011/gld/">Government Linked Data (GLD)</a> Working Group.</p>
     <p>This revised version of DCAT was developed by the <a href="https://www.w3.org/2017/dxwg/">Dataset Exchange Working Group</a> in response to a new set of Use Cases and Requirements [[DCAT-UCR]] submitted on the basis of experience with the DCAT vocabulary from the time of the original version, and new applications not originally considered. A summary of the changes from  [[VOCAB-DCAT-20140116]] can be found at <a href="#changes">Change History</a></p>
@@ -552,7 +524,6 @@
             <a href="#Property:catalog_themes">themes</a>
         </p>
         <p>The following properties are inherited from the super-class <a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a>:
-            <a href="#Property:dataset_creator">creator</a>,
             <a href="#Property:dataset_distribution">distribution</a>,
             <a href="#Property:dataset_frequency">frequency</a>,
             <a href="#Property:catalog_spatial">spatial/geographic coverage</a>,
@@ -562,6 +533,7 @@
         <p>The following properties are inherited from the super-class <a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a>:
             <a href="#Property:resource_conformsto">conformsTo</a>,
             <a href="#Property:resource_contact_point">contact point</a>,
+            <a href="#Property:resource_creator">creator</a>,
             <a href="#Property:catalog_description">description</a>,
             <a href="#Property:resource_identifier">identifier</a>,
             <a href="#Property:resource_keyword">keyword/tag</a>,
@@ -847,6 +819,7 @@
         <p>The following properties are recommended for use on this class:
             <a href="#Property:resource_conformsto">conformsTo</a>,
             <a href="#Property:resource_contact_point">contact point</a>,
+            <a href="#Property:resource_creator">creator</a>,
             <a href="#Property:resource_description">description</a>,
             <a href="#Property:resource_identifier">identifier</a>,
             <a href="#Property:resource_keyword">keyword/tag</a>,
@@ -917,6 +890,28 @@
                 <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a></td></tr>
                 </tbody>
             </table>
+        </section>
+
+        <section id="Property:resource_creator">
+            <h4>Property: resource creator</h4>
+
+            <p class="note">
+                New property added in this revision of DCAT, specifically added when considering the data citation requirement and
+                added to the dcat:Resource class, as the Dataset superclass.
+            </p>
+
+
+            <table class="definition">
+                <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/creator">dct:creator</a></th></tr></thead>
+                <tbody>
+                <tr><td class="prop">Definition:</td><td>The entity responsible for producing the resource.</td></tr>
+                <tr><td class="prop">Range:</td><td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+                <tr><td class="prop">Usage note:</td><td>Resources of type <a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a>
+                    are recommended as values for this property.</td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Class:Organization_Person">Class: Organization/Person</a></td></tr>
+                </tbody>
+            </table>
+
         </section>
 
         <section id="Property:resource_release_date">
@@ -1283,7 +1278,6 @@
     <section id="Class:Dataset">
         <h3>Class: Dataset</h3>
         <p>The following properties are recommended for use on this class:
-            <a href="#Property:dataset_creator">creator</a>,
             <a href="#Property:dataset_distribution">distribution</a>,
             <a href="#Property:dataset_frequency">frequency</a>,
             <a href="#Property:dataset_spatial">spatial/geographic coverage</a>,
@@ -1293,6 +1287,7 @@
         <p>The following properties are are inherited from the super-class <a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a>:
             <a href="#Property:resource_conformsto">conformsTo</a>,
             <a href="#Property:resource_contact_point">contact point</a>,
+            <a href="#Property:resource_creator">creator</a>,
             <a href="#Property:resource_description">description</a>,
             <a href="#Property:resource_identifier">identifier</a>,
             <a href="#Property:resource_keyword">keyword/tag</a>,
@@ -1376,27 +1371,6 @@
             </p>
         </div>
 
-
-        <section id="Property:dataset_creator">
-            <h4>Property: dataset creator</h4>
-
-            <p class="note">
-                New property for Dataset in this revision of DCAT, added when considering the data citation requirement.
-            </p>
-
-
-            <table class="definition">
-                <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/creator">dct:creator</a></th></tr></thead>
-                <tbody>
-                <tr><td class="prop">Definition:</td><td>The entity responsible for producing the dataset.</td></tr>
-                <tr><td class="prop">Range:</td><td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
-                <tr><td class="prop">Usage note:</td><td>Resources of type <a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a>
-                    are recommended as values for this property.</td></tr>
-                <tr><td class="prop">See also:</td><td><a href="#Class:Organization_Person">Class: Organization/Person</a></td></tr>
-                </tbody>
-            </table>
-
-        </section>
 
         <section id="Property:dataset_distribution">
             <h4>Property: dataset distribution</h4>
@@ -1799,6 +1773,7 @@
         <p>The following properties are are inherited from the super-class <a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a>:
             <a href="#Property:resource_conformsto">conformsTo</a>,
             <a href="#Property:resource_contact_point">contact point</a>,
+            <a href="#Property:resource_creator">creator</a>,
             <a href="#Property:resource_description">description</a>,
             <a href="#Property:resource_identifier">identifier</a>,
             <a href="#Property:resource_keyword">keyword/tag</a>,
@@ -1894,6 +1869,7 @@
         <p>The following properties are are inherited from the super-class <a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a>:
             <a href="#Property:resource_conformsto">conformsTo</a>,
             <a href="#Property:resource_contact_point">contact point</a>,
+            <a href="#Property:resource_creator">creator</a>,
             <a href="#Property:resource_description">description</a>,
             <a href="#Property:resource_identifier">identifier</a>,
             <a href="#Property:resource_keyword">keyword/tag</a>,
@@ -1942,6 +1918,7 @@
         <p>The following properties are are inherited from the super-class <a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a>:
             <a href="#Property:resource_conformsto">conformsTo</a>,
             <a href="#Property:resource_contact_point">contact point</a>,
+            <a href="#Property:resource_creator">creator</a>,
             <a href="#Property:resource_description">description</a>,
             <a href="#Property:resource_identifier">identifier</a>,
             <a href="#Property:resource_keyword">keyword/tag</a>,
