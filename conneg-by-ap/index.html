@@ -4,6 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <title>Content Negotiation by Profile</title>
+  <link rel="stylesheet" type="text/css" href="extra.css">
 </head>
 <body class="h-entry" id="respecDocument">
   <section id="abstract">
@@ -343,12 +344,12 @@
     <section id="http">
       <h2>Hypertext Transfer Protocol</h2>
       <p>
-        A realisation of the Abstract Model using the Hypertext Transfer Protocol (http) is presented here.
-        This implementation is based on http content negotiation and uses two new http headers, „Accept-Profile“
+        A realisation of the Abstract Model using the Hypertext Transfer Protocol (HTTP) is presented here.
+        This implementation is based on HTTP content negotiation and uses two new HTTP headers, „Accept-Profile“
         and „Content-Profile“ that are to be defined in an upcoming Internet-Draft [[PROF-IETF]].
       </p>
       <p>
-        Content Negotiation by profile adds a further dimension to the already existing http content
+        Content Negotiation by profile adds a further dimension to the already existing HTTP content
         negotiation dimensions media type <code>Accept</code>/<code>Content-Type</code>), encoding
         (<code>Accept-Encoding</code>/<code>Content-Encoding</code>) and language
         (<code>Accept-Language</code>/<code>Content-Language</code>).
@@ -357,14 +358,14 @@
       <section id="listprofileshttp">
         <h3>list profiles</h3>
           <p>
-            Listing profiles for a resource using http can be done in two ways.
+            Listing profiles for a resource using HTTP can be done in two ways.
         </p>
         <p>
           The first one is to issue an <code>OPTIONS</code> request against the resource. In this case a server implementing
           content negotiation by profile <a>SHOULD</a> return a <code>Content-Profile</code> header listing all profiles
           the requested resource conforms to.
         </p>
-        <pre class="example nohighlight" title="Using http OPTIONS to list available profiles" aria-busy="false" aria-live="polite">
+        <pre class="example nohighlight" title="Using HTTP OPTIONS to list available profiles" aria-busy="false" aria-live="polite">
 OPTIONS /some/resource HTTP/1.1
 
 ---
@@ -376,7 +377,7 @@ Content-Profile: urn:example:profile:1;q=0.8,http://example.org/profiles/2;q=0.5
         <p>
           The second way is to issue an <code>GET</code> or <code>HEAD</code> against the resource. In this 
           case a server implementing
-          content negotiation by profile <a>SHOULD</a> return a http <code>Link</code> header containing information about the
+          content negotiation by profile <a>SHOULD</a> return a HTTP <code>Link</code> header containing information about the
           default representation of that resource (i. e. the representation that will be returned after any
           content negotiation has been performed) and information about any alternate representations of that
           resource. The returned representation will be identified by <code>rel="self"</code>, other representations by
@@ -396,7 +397,7 @@ Content-Profile: urn:example:profile:1;q=0.8,http://example.org/profiles/2;q=0.5
           <tr><th>text/html</th><td>http://example.org/a/resource.html</td><td>http://example.org/a/resource.html</td></tr>
           <tr><th>text/turtle</th><td>http://example.org/a/resource.prof1.ttl</td><td>http://example.org/a/resource.prof2.ttl</td></tr>
           <tr><th>application/xml</th><td>http://example.org/a/resource/prof1.xml</td><td>http://example.org/a/resource/prof2.xml</td></tr>
-        </table
+        </table>
         <p>
           Assuming that a request without an <code>Accept-Profile</code> header per default delivers content conforming to
           <code>urn:example:profile:1</code> a request/response pair would look as follows:
@@ -420,15 +421,15 @@ Link: &lt;http://example.org/a/resource.prof1.ttl&gt;; rel="self"; type="text/tu
           </pre>
           <div class="issue" data-number="501"></div>
        </section>
-       <section id="getresourcebyprofilehttp">
+      <section id="getresourcebyprofilehttp">
         <h3>get resource by profile</h3>
         <p>
-          Getting a resource representation conforming to a specific profile is done by issuing an http GET
+          Getting a resource representation conforming to a specific profile is done by issuing an HTTP GET
           request against the resource and specifying the desired profile URI in an "Accept-Profile" header.
           It is possible to specify a range of acceptable profile URIs and also to indicate preferences by using
           quality indicators (q-values).
         </p>
-        <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Requesting a representation conforming to a specific profile using http headers">
+        <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Requesting a representation conforming to a specific profile using HTTP headers">
 GET /a/resource HTTP/1.1
 Accept: text/turtle;q=0.8, application/xml;q=0.5
 Accept-Profile: urn:example:profile:1;q=1.0,urn:example:profile:2;q=0.6
@@ -450,7 +451,7 @@ Content-Profile: urn:example:profile:1
       <section id="listprofilestokenshttp">
         <h3>list profiles tokens</h3>
         <p>
-          Currently, there is no proposed way to implement this function using http
+          Currently, there is no proposed way to implement this function using HTTP.
         </p>
       </section>
     </section>
@@ -475,22 +476,68 @@ Content-Profile: urn:example:profile:1
       <section id="listprofilesqsa">
         <h4>list profiles</h4>
         <p>
-          The QSA indicating a <strong>list profiles</strong> <em>request</em> is <code>_profile=list</code> so that a
-          complete request for the <a>profile</a>s to which a <em>resource</em>'s representations conform can be
+          A QSA with a fixed value <a>MUST</a> be supported by a <em>server</em> to allow a <em>client</em> to
+          make a <strong>list profiles</strong> <em>request</em>.
+        </p>
+        <p>
+          The QSA key/value pair <code>_profile=list</code> <a>SHOULD</a> be used however the <em>server</em> <a>MAY</a>
+          make available an equivalent pair as long as this is discoverable. This is to cater for APIs that alreadly
+          implement a similar function using QSA key/value pairs such as <code>_view=alternates</code>.
+        </p>
+        <p>
+          The complete request for the <a>profile</a>s to which a <em>resource</em>'s representations conform can be
           communicated in a single URI like thus:
         </p>
+        <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Requesting a list of profiles for a resource by QSA">
+GET /a/resource?_profile=list
+        </pre>
+        <!--
         <p><code>RESOURCE_URI?_profile=list</code></p>
         <p>where</p>
-        <p><code>RESOURCE_URI</code> is the URI of the resource</p>
+        -->
         <p>
-          A <em>client</em> making this <em>request</em> may negotiate for particular formats of the response by using
-          the QSA <code>_mediatype</code> to indicate a Media Type, for example, for an HTML listing, a full URI would
-          look like:
+          where <code>/a/resource</code> is the URI of the resource for which the list of available profiles is
+          requested
         </p>
-        <p><code>RESOURCE_URI?_profile=list&_mediatype=text/html</code></p>
+        <p>
+          A <em>client</em> making this <em>request</em> <a>MAY</a> negotiate for particular formats of the response by
+          using a QSA equivalent to the HTTP <code>Accept</code> header to indicate a Media Type. A <em>server</em>
+          <a>SHOULD</a> implement a <code>_mediatype</code> QSA for this but <a>MAY</a> implement an alternative, such
+          as <code>_format</code> as long as this is dicoverable,
+        </p>
+        <p>An example <em>profile</em> listing for a <em>resource</em> in HTML would look like:
+        </p>
+        <!--<p><code>RESOURCE_URI?_profile=list&_mediatype=text/html</code></p>-->
+        <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Requesting a list of profiles for a resource by QSA in HTML">
+GET /a/resource?_profile=list&_mediatype=text/html
+        </pre>
       </section>
       <section id="getresourcebyprofileqsa">
         <h4>get resource by profile</h4>
+
+        <h5>Expressing profile preference</h5>
+        <p>
+          A <em>server</em> implementing <em>profile</em> listing for <em>resource</em>s <a>SHOULD</a> allow the
+          requester to indicate preferences. This <a>SHOULD</a> be done by allowing the QSA indicating the desired
+          profile, usually <code>_profile</code>, to have a comma-separated list as its value so, for a
+          <em>client</em> desiring representations of <code>/a/resource</code> according to profiles with tokens
+          <code>aaa</code>, <code>bbb</code> &amp; <code>ccc</code> we have:
+        </p>
+        <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Requesting a list of profiles for a resource by QSA in HTML">
+  GET /a/resource?_profile=aaa,bbb,ccc
+        </pre>
+        <p>
+          It <a>MAY</a> be possible to use any any combination of profile URIs or tokens for this (e.g. <code>aaa</code>,
+          <code>http://example.org/profile-x</code>,<code>bbb</code> however, in this situation, profile URIs containing
+          commas must escape them.
+        </p>
+        <p>
+          Similarly, a <em>server</em> implementing multiple Media Type return formats for <em>profile</em> listing <a>SHOULD</a>
+          allow a client to specify a preference order for Media Types and also for other dimensions of content
+          negotiation, such as language. When using a QSA-only API, Media Type preferences (and language and others in a
+          similar fashion) <a>MAY</a> be specified in a comma-separated list form, most preferred to least such that
+          a client requesting profil
+        </p>
       </section>
       <section id="listprofilestokensqsa">
         <h4>list profiles tokens</h4>
@@ -535,7 +582,7 @@ Content-Profile: urn:example:profile:1
   <section id="security_and_privacy" class="informative">
     <h2>Security and Privacy</h2>
     <p>
-      The use of http to negotiate and transport implies that all privacy and security issues
+      The use of HTTP to negotiate and transport implies that all privacy and security issues
       that are relevant for that protocol are also relevant for profile negotiation. E. g.,
       information such as user agent, accept-headers, IP address etc. can potentially be used as
       identifying information, and particularly, the IP address adds information about geolocation
