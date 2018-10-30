@@ -342,7 +342,7 @@
       This section describes the realisation of the abstract model in multiple implementation domains.
     </p>
     <section id="http">
-      <h2>Hypertext Transfer Protocol</h2>
+      <h3>Hypertext Transfer Protocol</h3>
       <p>
         A realisation of the Abstract Model using the Hypertext Transfer Protocol (HTTP) is presented here.
         This implementation is based on HTTP content negotiation and uses two new HTTP headers, „Accept-Profile“
@@ -456,20 +456,43 @@ Content-Profile: urn:example:profile:1
       </section>
     </section>
     <section id="qsa">
-      <h2>Query String Arguments</h2>
+      <h3>Query String Arguments</h3>
       <p>
         A Query String Argument (QSA) realisation of the Abstract Model is presented here. Unlike the HTTP realisation
         which is the subject of an independent document [[PROF-IETF]], this realisation is fully specified here and this
         document is considered normative for this realisation.
       </p>
       <p>
-        A query string ia a part of a URI which assigns values to specified parameters. QSAs are commonly used within
-        web browsers by humans and in other <em>client</em>/<em>server</em> situations to deliver extra information to
-        server.
+        A query string is a part of a URI which assigns values to specified parameters. QSAs are commonly used within
+        web browsers by humans and in other <em>client</em>/<em>server</em> situations to deliver extra information to a
+        <em>server</em>.
       </p>
       <p>
-        When content negotiation by profile is to take place using QSAs to realise the required <em>request</em>s listed
-        in the <a href="#abstractmodel">Abstract Model</a> section above, the QSAs used to indicate those particular
+        When content negotiation by profile is to take place using QSAs, the <em>request</em>s and <em>response</em>s
+        of the <a href="#abstractmodel">Abstract Model</a> <a>MUST</a> be implemented however there is some flexibility
+        in how this may be done: QSA key/value pairs must be implemented but the specific key terms may be changed. In
+        this realisation, <code>_profile</code> and <code>_mediatype</code> are used to indicate a single or a list of
+        preference-ordered profiles or Media types respectively with profiles or Media Types indicated by either URI or
+        token.
+      </p>
+      <div class="note" title="Current use of Media type tokens">
+        <p>
+          Currently, the convention in HTTP content negotiation by media type uses tokens for Media Types, such as
+          <code>text/html</code> or <code>application/ld+json</code> with the tokens registered at
+          <a href="http://www.iana.org/assignments/media-types">IANA's Media Types list</a>.
+        </p>
+        <p>
+          There is no proposal yet to create a central register of profiles as this is thought by the authors to be
+          un-sustainable in the long-term, given the likely numbers of profiles to be established.
+        </p>
+        <p>
+          For this reason, the QSA realisation allows either URIs or tokens for profiles to be used and it is expected,
+          though not mandated here, that QSA realisations will also allow URIs or tokens for Media Types and other
+          content negotiation dimentions, such as language. There are already several initiatives that have created URIs
+          for Media Types based on the IANA register's tokens.
+        </p>
+      </div>
+
         <em>requests</em> and other parameters <a>MUST</a> be appended to the URI of the <em>resource</em> for which the
         content negotiation is taking place.
       </p>
@@ -543,6 +566,9 @@ GET /a/resource?_profile=list&_mediatype=text/html
         <h4>list profiles tokens</h4>
       </section>
       <div class="issue" data-number="463"></div>
+    </section>
+    <section id="rest">
+      <h3>REST</h3>
     </section>
   </section>
   <section id="testsuites" class="informative">
