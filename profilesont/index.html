@@ -338,13 +338,50 @@
         <tbody>
           <tr><td class="prop">OWL type:</td><td><a href="https://www.w3.org/TR/owl2-rdf-based-semantics/#table-axiomatic-properties">owl:ObjectProperty</a></td></tr>
           <tr><td class="prop">Label:</td><td>transitive profile of</td></tr>
-          <tr><td class="prop">Definition:</td><td>A base specification that a Profile conforms to transitivly (through an intermediary)</td></tr>
+          <tr><td class="prop">Definition:</td><td>A base specification that a Profile conforms to transitively (through an intermediary)</td></tr>
           <tr><td class="prop">Domain:</td><td><a href="#Class:Profile">prof:Profile</a></td></tr>
           <tr><td class="prop">Range:</td><td><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></td></tr>
-          <tr><td class="prop">Usage note:</td><td>A means to list all the transitive hierarchy of base specifications that this Profile implies conformance to</td></tr>
+          <tr><td class="prop">Usage note:</td><td>A means to list all the Profiles/Standards within a transitive hierarchy that this Profile implies conformance to</td></tr>
         </tbody>
       </table>
     </section>
+    <div class="issue" data-number="520"></div>
+    <div class="note" title="Explanation of profiling transitivity">
+      <p>
+        The property <a href="#Property:transitiveProfileOf">prof:transitiveProfileOf</a> defined here performs a role
+        similar to that of the property <a href="https://www.w3.org/TR/skos-reference/#semantic-relations">skos:broaderTransitive</a>
+        defined in [[skos-reference]]. That property "...allows communities of practice to exploit transitive
+        interpretations of hierarchical networks..." while freeing the simpler hierarchy property of
+        <a href="https://www.w3.org/TR/skos-reference/#semantic-relations">skos:broader</a> from having to enforce
+        transitivity which would prevent broader but non-transitive relationships.
+      </p>
+      <p>
+        Figure 4.5.2 from [[skos-primer]], reproduced below, illustrates the general principle of use of
+        <code>skos:broaderTransitive</code>.
+      </p>
+      <figure id="fig-skos-4.5.2">
+        <img src="broaderTransitive.jpg" title="Figure 4.5.1 from the SKOS Primer WG Note" style="width:90%;" />
+        <figcaption>
+          Inferring a transitive hierarchy from asserted skos:broader statements. Dotted arrows represent statements
+          inferred from the SKOS data model. Solid arrows represent asserted statements. Reproduction of Figure 4.5.2
+          in [[skos-primer]]
+        </figcaption>
+      </figure>
+      <p>
+        This ontology defines <a href="#Property:transitiveProfileOf">prof:transitiveProfileOf</a> to allow for the
+        transitive interpretations of hierarchies of Profiles (of other Profiles and Standards) while freeing the
+        simpler property, <a href="#Property:pofileOf">prof:profileOf</a> from having to enforce transitivity.
+      </p>
+      <p>
+        While this ontology provides this <code>prof:profileOf</code> &amp; <code>prof:transitiveProfileOf</code>
+        pair of properties, it does not specify how a particular implementation of a Profile that is related to another
+        Profile or Standard by <code>prof:transitiveProfileOf</code> should implement specific inferences.
+      </p>
+      <p>
+        Inference based on <code>prof:transitiveProfileOf</code> will be more complex than inference based on
+        <code>skos:broaderTransitive</code> due to Profiles being complex objects relative to SKOS Concepts.
+      </p>
+    </div>
     <section id="Property:token" class="property">
       <h4>token</h4>
       <table class="definition">
