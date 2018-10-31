@@ -110,7 +110,7 @@ var respecConfig = {
           editors: [
             "OGC Policy SWG"
           ],
-          href: "http://portal.opengeospatial.org/files/?artifact_id=59324" ,
+          href: "http://www.opengeospatial.org/standards/modularspec" ,
           title: "The Specification Model — A Standard for Modular specifications" ,
           status: "OGC Policy Directive" ,
           date: "2009-10-19"
