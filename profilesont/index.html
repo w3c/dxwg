@@ -248,7 +248,7 @@
     <h4>Class: BaseSpecification</h4>
     <table class="definition">
       <thead>
-      <tr><th>RDF Class:</th><th><a href="#Class:BaseSpecification">prof:BaseSpecification</a></th></tr>
+      <tr><th><a href="https://www.w3.org/TR/owl-syntax/#Classes">OWL Class</a>:</th><th><a href="#Class:BaseSpecification">prof:BaseSpecification</a></th></tr>
       </thead>
       <tbody>
       <tr><td class="prop">Label:</td><td>Base Specification</td></tr>
@@ -260,10 +260,9 @@
   </section>
   <section id="Class:Profile" class="property">
     <h4>Class: Profile</h4>
-    <div class=issue" data-number="521"></div>
     <table class="definition">
       <thead>
-      <tr><th>RDF Class:</th><th><a href="#Class:Profile">prof:Profile</a></th></tr>
+      <tr><th><a href="https://www.w3.org/TR/owl-syntax/#Classes">OWL Class</a>:</th><th><a href="#Class:Profile">prof:Profile</a></th></tr>
       </thead>
       <tbody>
       <tr><td class="prop">Label:</td><td>Profile</td></tr>
@@ -283,6 +282,7 @@
       <tr><td class="prop">Sub class of:</td><td><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></td></tr>
       </tbody>
     </table>
+    <div class=issue" data-number="521"></div>
     <section id="Property:hasProfile" class="property">
       <h4>hasProfile</h4>
       <table class="definition">
@@ -300,7 +300,7 @@
       </table>
     </section>
     <section id="Property:hasResource" class="property">
-      <h4>resource</h4>
+      <h4>hasResource</h4>
       <table class="definition">
         <thead>
         <tr><th>RDF Property:</th><th><a href="#Property:hasResource">prof:resource</a></th></tr>
@@ -405,7 +405,7 @@
     <h4>Class: ResourceDescriptor</h4>
     <table class="definition">
       <thead>
-      <tr><th>RDF Class:</th><th><a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a></th></tr>
+      <tr><th><a href="https://www.w3.org/TR/owl-syntax/#Classes">OWL Class</a>:</th><th><a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a></th></tr>
       </thead>
       <tbody>
       <tr><td class="prop">Label:</td><td>Resource Descriptor</td></tr>
@@ -422,7 +422,7 @@
         <tr><td class="prop">Label:</td><td>artifact (resource)</td></tr>
         <tr><td class="prop">Definition:</td><td>The artifact (resource) linked to a profile through an Resource Descriptor</td></tr>
         <tr><td class="prop">Domain:</td><td><a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a></td></tr>
-        <tr><td class="prop">Editorial Note:</td><td>A property to link from a :ResourceDescriptor to the actual implementation resource</td></tr>
+        <tr><td class="prop">Editorial Note:</td><td>A property to link from a :ResourceDescriptor to an implementing resource object</td></tr>
         </tbody>
       </table>
     </section>
@@ -489,7 +489,7 @@
     <h4>Class: ResourceRole</h4>
     <table class="definition">
       <thead>
-      <tr><th>RDF Class:</th><th><a href="#Class:ResourceRole">prof:ResourceRole</a></th></tr>
+      <tr><th><a href="https://www.w3.org/TR/owl-syntax/#Classes">OWL Class</a>:</th><th><a href="#Class:ResourceRole">prof:ResourceRole</a></th></tr>
       </thead>
       <tbody>
         <tr><td class="prop">Label:</td><td>Resource Role</td></tr>
@@ -498,6 +498,131 @@
       </tbody>
     </table>
     <div class="issue" data-number="452"></div>
+  </section>
+</section>
+<section id="examples" class="informative">
+  <h2>Examples</h2>
+  <p>
+    This section contains a few modelled examples of existing profiles to demonstrate aspects of this ontology. While
+    efforts have been made to ensure they are accurate at the time of this document's publication, they are not to be
+    considered authoritative; their purpose is only to illustrate this ontology's use.
+  </p>
+  <section id="eg-dcat-ap">
+    <h3>DCAT-AP</h3>
+    <p>
+      DCAT-AP is the widely used European <em>Application Profile</em> of DCAT. DCAT-AP is described in document form
+      (PDF & DOCX) and a constraints document for instance validation is available, formulated using the W3C's Shapes
+      Constraints Language constraints language [[SHACL]].
+    </p>
+    <p>
+      The figure below described DCA-AP graphically, using elements from this ontology.
+    </p>
+    <figure id="fig-eg-dcat">
+      <img src="examples/eg_dcat-ap.png" title="DCAT-AP described using this ontology" style="width:90%;" />
+      <figcaption>DCAT-AP described using this ontology</figcaption>
+    </figure>
+    <p>
+      In words this ontology's descriptions of DCAT-AP is:
+    </p>
+    <ul>
+      <li>
+        a <a href="#Class:Profile">prof:Profile</a>
+        <ul>
+          <li>
+            with a <a href="#Property:profileOf">prof:profileOf</a> value of
+            <a href="https://www.w3.org/ns/dcat#">https://www.w3.org/ns/dcat#</a> - the namespace for the DCAT
+            <a href="#Class:BaseSpecification">prof:BaseSpecification</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        three <a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a> objects - linked to the <em>prof:Profile</em>
+        object by a <a href="#Property:hasResource">prof:hasResource</a> property
+        <ul>
+          <li>
+            a document, with a <a href="#Property:format">dct:format</a> value of
+            <a href="https://w3id.org/mediatype/application/pdf">application/pdf</a> and a
+            <a href="#Property:hasRole">prof:hasRole</a> value of
+            <a href="https://www.w3.org/TR/prof/code/Guidance">prole:Guidance</a>
+          </li>
+          <li>
+            a document, with a <a href="#Property:format">dct:format</a> value of
+            <a href="https://w3id.org/mediatype/application/msword">application/msword</a> and a
+            <a href="#Property:hasRole">prof:hasRole</a> value of
+            <a href="https://www.w3.org/TR/prof/code/Guidance">prole:Guidance</a>
+          </li>
+          <li>
+            a document, with a <a href="#Property:format">dct:format</a> value of
+            <a href="https://w3id.org/mediatype/text/turtle">text/turtle</a> and a
+            <a href="#Property:hasRole">prof:hasRole</a> value of
+            <a href="https://www.w3.org/TR/prof/code/ConformanceTestConstraints">prole:ConformanceTestConstraints</a>
+          </li>
+        </ul>
+        each with a <a href="#Property:artifact">prof:artifact</a> value of an implementing resource object in the
+        European Commission's <a href="https://joinup.ec.europa.eu">'joinup' data catalogue</a>
+        <ul>
+          <li><a href="https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f6f27f059_bf785_b4d7d_bb602_b6448aab73bd5">b6448aab73bd5</a></li>
+          <li><a href="https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f17e18570_b1d77_b4171_b9df5_bb53cb4f017d4">bb53cb4f017d4</a></li>
+          <li><a href="https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f1131a208_b92e9_b4427_ba40c_b6c47746cd422">b6c47746cd422</a></li>
+        </ul>
+      </li>
+    </ul>
+    <p>
+      In RDF (turtle format), DCAT-AP is describe using the Profiles Ontology, with many properties not listed in the
+      summary descriptions above as:
+    </p>
+    <div class="example">
+      <pre class="nohighlight turtle" aria-busy="false" aria-live="polite" title="DCAT-AP described using Profile Ontology in RDF (turtle)">
+&lt;https://joinup.ec.europa.eu/release/dcat-ap-v11&gt;
+  a prof:Profile ;
+  prof:token "dcat-ap" ;
+  rdfs:label "DCAT-AP" ;
+  rdfs:comment "DCAT Application Profile for data portals in Europe" ;
+  dc:publisher "European Union" ;
+  prof:profileOf &lt;http://www.w3.org/ns/dcat&gt; ;
+  prof:hasProfile &lt;https://joinup.ec.europa.eu/release/geodcat-ap-v10&gt; ;
+  #  SHACL constraints for the profile, guidance doc in Word & PDF & an image of the profile components
+  prof:hasResource &lt;https://joinup.ec.europa.eu/collection/semantic-interoperability-community-semic/dcat-ap&gt; ,
+        # profile doc in Word (DOCX)
+        &lt;https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f6f27f059_bf785_b4d7d_bb602_b6448aab73bd5&gt; ,
+        # profile doc in PDF
+        &lt;https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f17e18570_b1d77_b4171_b9df5_bb53cb4f017d4&gt; ,
+        # profile image (PNG)
+        &lt;https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f1131a208_b92e9_b4427_ba40c_b6c47746cd422&gt; ;
+.
+
+&lt;http://data.europa.eu/w21/016d88c3-a0b3-4506-ae4e-758e7401c096&gt;
+  a prof:ResourceDescriptor;
+	rdfs:label "DCAT-AP constraints" ;
+  # the namespace for SHACL
+	dct:conformsTo &lt;http://www.w3.org/ns/shacl#&gt;;
+  dct:format "text/turtle" ;
+	prof:resourceRole roles:ConformanceTest ;
+.
+
+&lt;https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f6f27f059_bf785_b4d7d_bb602_b6448aab73bd5&gt;
+  a prof:ResourceDescriptor;
+	rdfs:label "DCAT-AP Guidance Document (Word)" ;
+	dct:format &lt;https://w3id.org/mediatype/application/msword&gt; ;
+	prof:resourceRole roles:Guidance ;
+.
+
+&lt;https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f17e18570_b1d77_b4171_b9df5_bb53cb4f017d4&gt;
+  a prof:ResourceDescriptor;
+	rdfs:label "DCAT-AP Guidance Document (PDF)" ;
+	dct:format &lt;https://w3id.org/mediatype/application/pdf&gt; ;
+	prof:resourceRole roles:Guidance ;
+.
+
+&lt;https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f1131a208_b92e9_b4427_ba40c_b6c47746cd422&gt;
+  a prof:ResourceDescriptor;
+	rdfs:label "DCAT-AP Image" ;
+	dct:format &lt;https://w3id.org/mediatype/image/png&gt; ;
+	prof:resourceRole roles:Guidance ;
+.
+      </pre>
+    </div>
+    <div class="issue" title="Harmonising of this example's representation (image, text, RDF) not aligned or complete"></div>
   </section>
 </section>
 <section id="implementations" class="informative">
