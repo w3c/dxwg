@@ -3314,104 +3314,11 @@ but dct:hasFormat property only indicates the encoding type of the outer layer o
 
 </section>
 
-<section id="ProfilesRequirements">
-<h2>Profile</h2>
-    <section class="requirement" id="RPFDF">
-    <h3>Profile definition [RPFDF]</h3>
-    <div class="note">This composite requirement is subject to deduplication and deletion</div>    
-    <p>Create a sufficiently wide definition of an application profile to address declaration of interoperability profiles data
-      		may conform to, and through this mechanism provide the means for DCAT instances and collections to also declare the
-		 profiles of DCAT they conform to.</p>         
-		 <p class="note">These Use case specific requirements apply to the required scope of this definition. Where
-		      appropriate these are also captured as additional requirements.
-			<ol>
-				<li>Clarify any relationship between profiles and validation languages</li>
-				<li>Profiles have URI identifiers that resolve to more detailed descriptions</li>		
-				<li>Each application profile needs to be documented, preferably by showing/reusing what is common across profiles</li>
-				<li>Profiles <b>should provide both</b> machine and human readable views.</li>
-				<li>Profiles may inherit clauses from one or more parent profiles <!--(see <a href="#extensibility">below</a>)--></li>
-				<li><b>Profiles must support a view that includes all inherited constraints clearly identifying the parent profile the constraint is defined in.</b></li>
-				<li>Profiles may be used to describe the metadata standard a description conforms to, the standards to which the resource described (e.g. dataset) and the standards each distribution conforms to.</li>
-				<li><!--<a name="extensibility"></a>-->Conceptually, profiles can extend other vocabularies or profiles, or can be refinements of other vocabularies or profiles <a href="#ID37"></a></li>
-				<li>Responses can conform to multiple, modular profiles <a href="#ID3"></a></li>
-			</ol>
-		   </p>
-    <p class="relatedRequirements">
-	  <a href="#RPFRP"></a>
-      <a href="#RPFN"></a>
-      <a href="#RPFL"></a>
-    </p>
-	<p class="relatedUseCases">
-      <a href="#ID2"></a>
-	  <a href="#ID3"></a>
-	  <a href="#ID5"></a>
-	  <a href="#ID43"></a>
-	  <a href="#ID48"></a>
-    </p>
-  </section>
+<section id="ProfileDefinitionRequirements">
+<h2>Profile definition</h2>
 
-  
-  <section class="requirement" id="RPFRP">
-    <h3>Profile representation [RPFRP]</h3>
-    <div class="note">This composite requirement is subject to deduplication and deletion</div>    
-    <p>Create a way to retrieve more information about a profile.
-     This must be flexible enough to support human and machine readable resources,
-     such as input and editing guidance, validation resources, usage notes etc.</p>
-    <p class="note">Following additional requirements consider the representation of a profile (document),
-     expressing concrete constraints, compared to the definition of the concept in <a href="#RPFDF"></a></p>
-    <ol>
-		<li>Machine-readable specifications of application profiles need to be easily publishable, and optimize re-use of existing specifications.</li>
-		<li>Application profiles need a rich expression for the validation of metadata</li>
-		<li>Profiles must have properties for at least two levels of documentation: 1) short definition 2) input and editing guidance</li>
-		<li>Profiles must support declaration of vocabulary constraints</li>
-		<li><b>A mechanism must be available to identify conformance to each inherited profile given conformance to a profile that specialises it.</b></li>
-		<li>Profiles list valid vocabulary terms for a metadata usage environment</li>
-		<li>Profile vocabulary lists may be defined as <b>closed (no other terms are allowed) or open (other terms are allowed)</b> <a href="#ID37"></a></li>
-		<li>Profiles should reuse vocabulary terms defined elsewhere (Dublin Core profiles; no use case)</li>
-		<li>Profiles must be able to support information that can drive data creation functions, including brief and detailed documentation <a href="#ID46"></a></li>
-		<li>Profiles must support discoverability via search engines <a href="#ID40"></a></li>
-		<li>Profiles must have identifiers that can be used to <b>link the DCAT description to the relevant profile</b></li>
-	</ol>
-	 <p class="relatedRequirements">
-      <a href="#RPFDF"></a>
-	  <a href="#RPFL"></a>
-    </p>
-    <p class="relatedUseCases">
-      <a href="#ID2"></a>
-	  <a href="#ID41"></a>
-	  <a href="#ID46"></a>
-    </p>
-  </section>
-
-  <section class="requirement" id="RPFN">
-    <h3>Profile negotiation [RPFN]</h3>
-    <div class="note">This legacy requirement is subject to deletion</div>
-    <p>Create a way to negotiate choice of profile between clients and servers</p>
-    <p class="relatedRequirements">
-      <a href="#RPFDF"></a>
-    </p>
-	<p class="relatedUseCases">
-      <a href="#ID2"></a>
-	  <a href="#ID30"></a>
-    </p>
-  </section>
-  
-  <section class="requirement" id="RPFL">
-    <h3>Profiles listing [RPFL]</h3>
-    <div class="note">This legacy requirement is subject to deletion</div>
-    <p>Create a way to list the profiles implemented by a dataset or a specific distribution</p>
-		      <p class="note">Some subset of profile metadata that can be included in a DCAT context should have a canonical set of properties recommended. Initial requirements are 1) short definition 2) input and editing guidance. Links should be consistent with <a href="#RPFRP"></a></p>
-
-   <p class="relatedRequirements">
-      <a href="#RPFDF"></a>
-	  <a href="#RPFN"></a>
-	  <a href="#RPFRP"></a>
-    </p>
-	<p class="relatedUseCases">
-      <!--<a href="#ID1"></a> wrong reference-->
-	  <a href="#ID46"></a>
-    </p>
-  </section>
+    Requirements covering aspects of profile definition, i.e. what profiles are in general,
+    how to identify, describe and compose profiles etc.
 
 <!--
     - jpullmann, 2018/10/16
@@ -3429,58 +3336,6 @@ but dct:hasFormat property only indicates the encoding type of the outer layer o
     <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/284">github:issue/284</a></span>
   </section>
 
-  <section class="requirement" id="RPFSUP">
-    <h3>Server-side profile support [RPFSUP]</h3>
-    <p>A client should be able to determine which profiles are supported by a server, and with which content types or other properties, in order to receive the one most appropriate for their use.</p>
-    <p class="relatedUseCases">
-      <a href="#ID2"></a>	  
-    </p>
-    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/285">github:issue/285</a></span>
-  </section>
-
-  <section class="requirement" id="RPFLUP">
-    <h3>Lookup of profile details [RPFLUP]</h3>
-    <p>There should be a way to look up additional information about a profile - this may be machine readable for run-time mediation or used to develop or configure a client.</p>
-    <p class="relatedUseCases">
-      <a href="#ID2"></a>	  
-    </p>
-    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/286">github:issue/286</a></span>
-  </section>
-
-  <section class="requirement" id="RPFRCONF">
-    <h3>Response conformance to multiple profiles [RPFRCONF]</h3>
-    <p>Some data may conform to one or more profiles at once. A server can indicate that a response conforms to multiple profiles.</p>
-    <p class="relatedUseCases">
-      <a href="#ID3"></a>	  
-    </p>
-    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/287">github:issue/287</a></span>
-  </section>
-
-  <section class="requirement" id="RPFMD">
-    <h3>Profile metadata [RPFMD]</h3>
-    <p>Profiles must be discoverable through a machine-readable metadata that describes what is offered and how to invoke the offered profiles.</p>
-    <p class="relatedRequirements">
-      <a href="#RPFMDUSE"></a>	 
-    </p>
-    <p class="relatedUseCases">
-      <a href="#ID5"></a>	  
-    </p>
-    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/288">github:issue/288</a></span>
-  </section>
-
-  <section class="requirement" id="RPFSREQ">
-    <h3>Profile selection on request [RPFSREQ]</h3>
-    <p class="issue">
-       When requesting a representation, a client must be able to specify which profile it prefers the representation to adhere to.
-       This information about the requested profile is not a replacement for content type (e. g. application/xml), language (e. g. zh-Hant)
-       nor any other negotiated dimension of the representation.
-    </p>
-    <p class="relatedUseCases">
-      <a href="#ID5"></a>	  
-    </p>
-    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/289">github:issue/289</a></span>
-  </section>
-
   <section class="requirement" id="RPFALIAS">
     <h3>Profile alias [RPFALIAS]</h3>
     <p class="issue">A short token to specify a profile may be used as long as there is a discoverable mapping from it to the profile's identifying URI.</p>
@@ -3490,45 +3345,88 @@ but dct:hasFormat property only indicates the encoding type of the outer layer o
     <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/290">github:issue/290</a></span>
   </section>
 
-  <section class="requirement" id="RPFMDUSE">
-    <h3>Profile metadata use [RPFMDUSE]</h3>
-    <p class="issue">Metadata about server profile support can be used for discovery and mediated traversal via content negotiation.</p>
+  <section class="requirement" id="RPFMD">
+    <h3>Profile metadata [RPFMD]</h3>
+    <p class="issue">Profiles must be discoverable through a machine-readable metadata that describes what is offered and how to invoke the offered profiles.</p>
     <p class="relatedRequirements">
-      <a href="#RPFMD"></a>	 
+      <a href="#RPFMDUSE"></a>	 
     </p>
     <p class="relatedUseCases">
       <a href="#ID5"></a>	  
     </p>
-    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/264">github:issue/264</a></span>
+    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/288">github:issue/288</a></span>
   </section>
 
-  <section class="requirement" id="RPFNEG">
-    <h3>Profile negotiatation [RPFNEG]</h3>
-    <p class="issue">Enable the ability to negotiate the metadata profile via http, similar to the negotiation of metadata formats today.</p>
-    <p class="relatedUseCases">
-      <a href="#ID30"></a>	  
-    </p>
-    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/265">github:issue/265</a></span>
-  </section>
-
-  <section class="requirement" id="RPFLREL">
-    <h3>Profile link relations [RPFLREL]</h3>
-    <p class="issue">There needs to be a way to encode the necessary relations using an http link header.</p>
-    <p class="relatedUseCases">
-      <a href="#ID30"></a>	  
-    </p>
-    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/266">github:issue/266</a></span>
-  </section>
-    
   <section class="requirement" id="RPFDIST">
     <h3>Distribution profile [RPFDIST]</h3>
+    <!-- unclear weather this means "profile" in CONNEG sense -->
     <p class="issue">Provide a means to distinguish between distributions that package the entire dataset and those that support access to specific items, queries, and packaged downloads of data.</p>
     <p class="relatedUseCases">
       <a href="#ID51"></a>	  
     </p>
     <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/267">github:issue/267</a></span>
   </section>
+
   
+  <section class="requirement" id="RPFHRDEF">
+    <h3>Human-readable profile definition [RPFHRDEF]</h3>    
+    <p>Profiles can have human-readable definitions of terms and input instructions.</p>
+    <p class="relatedUseCases">
+      <a href="#ID46"></a>	  
+    </p>
+    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/283">github:issue/283</a></span>
+  </section>
+
+  <section class="requirement" id="RPFDOCU">
+    <h3>Profile documentation [RPFDOCU]</h3>
+    <p>
+        A profile should have human-readable documentation that expresses for humans the main components
+        of a profile, which can also be available as machine-readable resources (ontology or schema files,
+        SHACL files, etc). This includes listing of elements in the profile, instructions and recommendations
+        on how to use them, constraints that determine what data is valid according to the profile, etc.
+    </p>
+    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/272">github:issue/272</a></span>
+  </section>
+
+  <section class="requirement" id="RPFRPROP">
+    <h3>Profile rule property [RPFRPROP]</h3>    
+    <p>There needs to be a property in the profile where the rules for the descriptive content can be provided. This would apply to the entire profile.</p>
+    <p class="relatedUseCases">
+      <a href="#ID42"></a>	  
+    </p>
+    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/255">github:issue/255</a></span>
+  </section>
+
+  <section class="requirement" id="RPFIMPL">
+    <h3>Profile implementation [RPFIMPL]</h3>
+    <p>A profile may be (partially) "implemented" by "schemas" (in OWL, SHACL, XML Schema...) that allow different levels of data validation</p>
+    <p class="relatedUseCases">
+      <a href="#ID37"></a>	  
+    </p>
+    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/273">github:issue/273</a></span>
+  </section>
+
+  <section class="requirement" id="RPFIMPL2">
+    <h3>Profile implementation (2) [RPFIMPL2]</h3>    
+    <p>Profiles may be written in or may link to a document or schema in a validation language (ShEx, SHACL, XMLschema).</p>
+    <p class="relatedRequirements">
+      <a href="#RPFIMPL"></a>	 
+    </p>
+    <p class="relatedUseCases">
+      <a href="#ID41"></a>	  
+    </p>
+    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/279">github:issue/279</a></span>
+  </section>
+
+  <section class="requirement" id="RPFEXTSPEC">
+    <h3>Profile reference to external specifications [RPFEXTSPEC]</h3>
+    <p>Profiles should be able to indicate what external standards specifications are expected to be applied/have been applied to the data provided.</p>
+    <p class="relatedUseCases">
+      <a href="#ID43"></a>	  
+    </p>
+    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/280">github:issue/280</a></span>
+  </section>
+
   <section class="requirement" id="RPFBSPEC">
     <h3>Multiple profile base specifications [RPFBSPEC]</h3>
     <p>A profile can be based on several data models or vocabularies at the same time.</p>
@@ -3539,6 +3437,19 @@ but dct:hasFormat property only indicates the encoding type of the outer layer o
       <a href="#ID37"></a>	  
     </p>
     <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/268">github:issue/268</a></span>
+  </section>
+
+  <section class="requirement" id="RPFINHER">
+    <h3>Profile inheritance [RPFINHER]</h3>    
+    <p>Profiles may add to or specialise clauses from one or more base specifications. Such profiles inherit all the constraints from base specifications.</p>
+    <p class="relatedRequirements">
+      <a href="#RPFBSPEC"></a>	 
+    </p>
+    <p class="relatedUseCases">
+      <a href="#ID37"></a>
+      <a href="#ID39"></a>	  
+    </p>
+    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/238">github:issue/238</a></span>
   </section>
 
   <section class="requirement" id="RPFPF">
@@ -3564,35 +3475,6 @@ but dct:hasFormat property only indicates the encoding type of the outer layer o
     <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/271">github:issue/271</a></span>
   </section>
 
-  <section class="requirement" id="RPFDOCU">
-    <h3>Profile documentation [RPFDOCU]</h3>
-    <p>
-        A profile should have human-readable documentation that expresses for humans the main components
-        of a profile, which can also be available as machine-readable resources (ontology or schema files,
-        SHACL files, etc). This includes listing of elements in the profile, instructions and recommendations
-        on how to use them, constraints that determine what data is valid according to the profile, etc.
-    </p>
-    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/272">github:issue/272</a></span>
-  </section>
-
-  <section class="requirement" id="RPFIMPL">
-    <h3>Profile implementation [RPFIMPL]</h3>
-    <p>A profile may be (partially) "implemented" by "schemas" (in OWL, SHACL, XML Schema...) that allow different levels of data validation</p>
-    <p class="relatedUseCases">
-      <a href="#ID37"></a>	  
-    </p>
-    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/273">github:issue/273</a></span>
-  </section>
-
-  <section class="requirement" id="RPFDPUB">
-    <h3>Profile-aware data publication [RPFDPUB]</h3>
-    <p>Data publishers may publish data according to different profiles, either simultaneously (e.g. in one same data "distribution") or in parallel (e.g. via content negotiation).</p>
-    <p class="relatedUseCases">
-      <a href="#ID37"></a>	  
-    </p>
-    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/274">github:issue/274</a></span>
-  </section>
-
   <section class="requirement" id="RPF_">
     <h3>Profile _ [RPF_]</h3>
     <span class="issue">What is required here? Consider moving into a definition clause.</span>
@@ -3602,6 +3484,15 @@ but dct:hasFormat property only indicates the encoding type of the outer layer o
     </p>
     <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/275">github:issue/275</a></span>
   </section>
+
+</section>
+
+<section id="ProfileFunctionalityRequirements"><!-- roles / functions -->
+<h2>Profile functionality</h2>
+
+    Requirements covering aspects of how profiles are being used,
+    i.e. what functionality may leverage the profiles construct,
+    for example instantiation, validation, or retrieval of data. 
 
   <section class="requirement" id="RPFCARDR">
     <h3>Profile cardinality rules [RPFCARDR]</h3>    
@@ -3630,36 +3521,6 @@ but dct:hasFormat property only indicates the encoding type of the outer layer o
     <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/278">github:issue/278</a></span>
   </section>
 
-  <section class="requirement" id="RPFIMPL2">
-    <h3>Profile implementation (2) [RPFIMPL2]</h3>    
-    <p>Profiles may be written in or may link to a document or schema in a validation language (ShEx, SHACL, XMLschema).</p>
-    <p class="relatedRequirements">
-      <a href="#RPFIMPL"></a>	 
-    </p>
-    <p class="relatedUseCases">
-      <a href="#ID41"></a>	  
-    </p>
-    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/279">github:issue/279</a></span>
-  </section>
-
-  <section class="requirement" id="RPFRPROP">
-    <h3>Profile rule property [RPFRPROP]</h3>    
-    <p>There needs to be a property in the profile where the rules for the descriptive content can be provided. This would apply to the entire profile.</p>
-    <p class="relatedUseCases">
-      <a href="#ID42"></a>	  
-    </p>
-    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/255">github:issue/255</a></span>
-  </section>
-
-  <section class="requirement" id="RPFEXTSPEC">
-    <h3>Profile reference to external specifications [RPFEXTSPEC]</h3>
-    <p>Profiles should be able to indicate what external standards specifications are expected to be applied/have been applied to the data provided.</p>
-    <p class="relatedUseCases">
-      <a href="#ID43"></a>	  
-    </p>
-    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/280">github:issue/280</a></span>
-  </section>
-
   <section class="requirement" id="RPFUI">
     <h3>Profile user interface support [RPFUI]</h3>    
     <p>Profiles can have what is needed to drive forms for data input or for user display.</p>
@@ -3678,13 +3539,33 @@ but dct:hasFormat property only indicates the encoding type of the outer layer o
     <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/282">github:issue/282</a></span>
   </section>
 
-  <section class="requirement" id="RPFHRDEF">
-    <h3>Human-readable profile definition [RPFHRDEF]</h3>    
-    <p>Profiles can have human-readable definitions of terms and input instructions.</p>
+
+
+</section>
+
+<section id="ProfileNegotiationRequirements"><!-- distribution -->
+<h2>Profile and content negotiation</h2>
+
+    Requirements covering the provision, look-up and negotiation of
+    profiles and compliant contents.
+
+
+  <section class="requirement" id="RPFNEG">
+    <h3>Profile negotiatation [RPFNEG]</h3>
+    <p class="issue">Enable the ability to negotiate the metadata profile via http, similar to the negotiation of metadata formats today.</p>
     <p class="relatedUseCases">
-      <a href="#ID46"></a>	  
+      <a href="#ID30"></a>	  
     </p>
-    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/283">github:issue/283</a></span>
+    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/265">github:issue/265</a></span>
+  </section>
+
+  <section class="requirement" id="RPFLREL">
+    <h3>Profile link relations [RPFLREL]</h3>
+    <p class="issue">There needs to be a way to encode the necessary relations using an http link header.</p>
+    <p class="relatedUseCases">
+      <a href="#ID30"></a>	  
+    </p>
+    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/266">github:issue/266</a></span>
   </section>
 
   <section class="requirement" id="RPFDISCO">
@@ -3696,21 +3577,71 @@ but dct:hasFormat property only indicates the encoding type of the outer layer o
     <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/222">github:issue/222</a></span>
   </section>
 
-  <section class="requirement" id="RPFINHER">
-    <h3>Profile inheritance [RPFINHER]</h3>    
-    <p>Profiles may add to or specialise clauses from one or more base specifications. Such profiles inherit all the constraints from base specifications.</p>
+  <section class="requirement" id="RPFSUP">
+    <h3>Server-side profile support [RPFSUP]</h3>
+    <p>A client should be able to determine which profiles are supported by a server, and with which content types or other properties, in order to receive the one most appropriate for their use.</p>
+    <p class="relatedUseCases">
+      <a href="#ID2"></a>	  
+    </p>
+    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/285">github:issue/285</a></span>
+  </section>
+
+  <section class="requirement" id="RPFLUP">
+    <h3>Lookup of profile details [RPFLUP]</h3>
+    <p>There should be a way to look up additional information about a profile - this may be machine readable for run-time mediation or used to develop or configure a client.</p>
+    <p class="relatedUseCases">
+      <a href="#ID2"></a>	  
+    </p>
+    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/286">github:issue/286</a></span>
+  </section>
+
+  <section class="requirement" id="RPFMDUSE">
+    <h3>Profile metadata use [RPFMDUSE]</h3>
+    <p class="issue">Metadata about server profile support can be used for discovery and mediated traversal via content negotiation.</p>
     <p class="relatedRequirements">
-      <a href="#RPFBSPEC"></a>	 
+      <a href="#RPFMD"></a>	 
     </p>
     <p class="relatedUseCases">
-      <a href="#ID37"></a>
-      <a href="#ID39"></a>	  
+      <a href="#ID5"></a>	  
     </p>
-    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/238">github:issue/238</a></span>
+    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/264">github:issue/264</a></span>
+  </section>
+
+  <section class="requirement" id="RPFSREQ">
+    <h3>Profile selection on request [RPFSREQ]</h3>
+    <p class="issue">
+       When requesting a representation, a client must be able to specify which profile it prefers the representation to adhere to.
+       This information about the requested profile is not a replacement for content type (e. g. application/xml), language (e. g. zh-Hant)
+       nor any other negotiated dimension of the representation.
+    </p>
+    <p class="relatedUseCases">
+      <a href="#ID5"></a>	  
+    </p>
+    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/289">github:issue/289</a></span>
+  </section>
+
+  <section class="requirement" id="RPFRCONF">
+    <h3>Response conformance to multiple profiles [RPFRCONF]</h3>
+    <p>Some data may conform to one or more profiles at once. A server can indicate that a response conforms to multiple profiles.</p>
+    <p class="relatedUseCases">
+      <a href="#ID3"></a>	  
+    </p>
+    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/287">github:issue/287</a></span>
+  </section>
+
+  <section class="requirement" id="RPFDPUB">
+    <h3>Profile-aware data publication [RPFDPUB]</h3>
+    <p>Data publishers may publish data according to different profiles, either simultaneously (e.g. in one same data "distribution") or in parallel (e.g. via content negotiation).</p>
+    <p class="relatedUseCases">
+      <a href="#ID37"></a>	  
+    </p>
+    <span class="source"><a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/274">github:issue/274</a></span>
   </section>
 
 
 </section>
+
+
 
 
 <section id="AlignmentRequirements">
