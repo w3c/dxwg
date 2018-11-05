@@ -9,7 +9,7 @@ var respecConfig = {
         company: "Deutsche Nationalbibliothek",
         companyURL: "http://www.dnb.de/",
         extras: [{
-		    name:  "<img src='orcid_logo.png' alt='orcid logo'/>",
+		    name:  "<img src='https://w3c.github.io/dxwg/conneg-by-ap/orcid_logo.png' alt='orcid logo'/>",
 		    href:  "https://orcid.org/0000-0002-8714-9718",
 		    class: "orcid"
 	}],
@@ -29,10 +29,8 @@ var respecConfig = {
         w3cid:      70131
     }],
     contributors: [{
-        name:       "Ruben Verborgh",
-        url:        "https://ruben.verborgh.org/",
-        company:    "Ghent University – imec",
-        companyURL: "http://idlab.ugent.be/"
+        value:       "Ruben Verborgh",
+        href:        "https://ruben.verborgh.org/"
       }],
     wg: "Dataset Exchange Working Group",
     wgURI: "https://www.w3.org/2017/dxwg/",
