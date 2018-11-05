@@ -8,11 +8,7 @@ var respecConfig = {
         name: "Lars G. Svensson",
         company: "Deutsche Nationalbibliothek",
         companyURL: "http://www.dnb.de/",
-        extras: [{
-		    name:  "<img src='https://w3c.github.io/dxwg/conneg-by-ap/orcid_logo.png' alt='orcid logo'/>",
-		    href:  "https://orcid.org/0000-0002-8714-9718",
-		    class: "orcid"
-	}],
+	orcid: "https://orcid.org/0000-0002-8714-9718",
         w3cid:  "44603"
       },
       {
@@ -28,10 +24,13 @@ var respecConfig = {
         companyURL: "https://www.csiro.au",
         w3cid:      70131
     }],
-    contributors: [{
-        value:       "Ruben Verborgh",
-        href:        "https://ruben.verborgh.org/"
-      }],
+    otherLinks: [{
+    	key: "Contributors",
+	    data: [{
+		value:       "Ruben Verborgh",
+		href:        "https://ruben.verborgh.org/"
+	      }]
+    }],
     wg: "Dataset Exchange Working Group",
     wgURI: "https://www.w3.org/2017/dxwg/",
     wgPublicList: "public-dxwg-comments",
