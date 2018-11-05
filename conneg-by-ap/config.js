@@ -8,7 +8,7 @@ var respecConfig = {
         name: "Lars G. Svensson",
         company: "Deutsche Nationalbibliothek",
         companyURL: "http://www.dnb.de/",
-	orcid: "https://orcid.org/0000-0002-8714-9718",
+	orcid: "0000-0002-8714-9718",
         w3cid:  "44603"
       },
       {
