@@ -45,29 +45,39 @@ var respecConfig = {
                 "Rob Atkinson",
                 "Nicholas J. Car"
             ],
-            href: "https://www.w3.org/TR/vocab-prof/",
+            href: "https://w3c.github.io/dxwg/profilesont/",
             title: "Profile Descriptions ontology",
             date: "2018-09-23",
             status: "W3C Editor's Draft"
         },
         "PROF-CONNEG": {
-            href: "https://www.w3.org/TR/conneg-by-ap/",
+	    editors: [
+   	      "Lars G. Svensson",
+	      "Rob Atkinson",
+	      "Nicholas J. Car"
+	    ],
+            href: "https://w3c.github.io/dxwg/conneg-by-ap/",
             title: "Content Negotiation by Profile",
-            date: " 2018-12-31",
+            date: "2018-12-31",
             status: "W3C Editor's Draft"
         },
         "PROF-GUIDE": {
-            href: "https://www.w3.org/TR/profile-guidance/",
+  	    editors: [
+	      "Rob Atkinson",
+    	      "Karen Coyle", 
+    	      "Antoine Isaac"
+	    ],
+            href: "https://w3c.github.io/dxwg/profiles/",
             title: "Profile Guidance",
-            date: " 2018-12-31",
+            date: "2018-12-31",
             status: "W3C Editor's Draft"
         },
         "PROF-IETF": {
             authors: [
-                "L. Svensson",
-                "R. Verborgh"
+                "Lars G. Svensson",
+                "Ruben Verborgh"
             ],
-            href: "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema/",
+            href: "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema",
             title: "Negotiating Profiles in HTTP",
             date: "2017-10-24",
             status: "IETF Internet Draft"
@@ -81,8 +91,8 @@ var respecConfig = {
             ],
             href: "https://www.w3.org/TR/vocab-dcat-2/",
             title: "Data Catalog Vocabulary (DCAT) - revised edition",
-            date: "2018-09-07",
-            status: "W3C Editor's Draft"
+            date: "2018-10-16",
+            status: "W3C Working Draft"
         }
     }
 };
