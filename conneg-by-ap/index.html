@@ -35,7 +35,7 @@
         <li>[[PROF-GUIDE]] the top-level general profiling guidance document giving an overview of all other documents</li>
         <li>[[PROF-ONT]] a document describing a formal ontology for describing objects related to profiles</li>
         <li><strong>[PROF-CONNEG] this document, including specific guidance on how to negotiate for Internet resource content using profiles</strong></li>
-        <li>[[PROF-IETF]] a (<a href="http://www.ietf.org">IETF</a> <a href="http://www.ietf.org/standards/ids/">Internet-Draft</a>) defining two HTTP Headers for HTTP content negotiation by profile</li>
+        <li>[[PROF-IETF]] an (<a href="http://www.ietf.org">Internet Engineering Task Force (IETF)</a> <a href="http://www.ietf.org/standards/ids/">Internet-Draft</a>) defining two Hypertext Transfer Protocol (HTTP) Headers for HTTP content negotiation by profile</li>
       </ul>
     </section>
   </section>
@@ -135,7 +135,7 @@
       <dt><dfn>response</dfn></dt>
       <dd>a message sent over the Internet, from a <em>server</em> to a <em>client</em> answering a <em>request</em> for information about a <em>resource</em> [[RFC7230]]</dd>
       <dt><dfn>token</dfn></dt>
-      <dd>a short name identifying something, in this situation a <a>profile</a></dd>
+      <dd>a short name identifying something, in the context of this document a <a>profile</a></dd>
     </dl>
     <div class="issue" data-number="378"></div>
     <div class="issue" data-number="513"></div>
@@ -169,7 +169,7 @@
       alongside this document, also by the Dataset Exchange Working Group (DXWG).
     </p>
     <p>
-      The necessary standardisation of the content-negotiation HTTP headers is done within the IETF. A first proposal
+      The necessary standardization of the content-negotiation HTTP headers is done within the IETF. A first proposal
       for an <a href="https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema">Internet Draft
       for Negotiating Profiles in HTTP</a> [[PROF-IETF]] is available but has not yet been submitted to the IETF. The
       current version of the draft (-00) is expected to be completely re-written in course of the process and should
@@ -200,7 +200,7 @@
     <h2>Abstract Model</h2>
     <p>
       This section describes an abstract conceptual model for content negotiation by profile, independent of any
-      specific implementation - here termed realisations.
+      specific implementation - here termed realizations.
     </p>
     <section id="abstractmodelcontext">
       <h3>Context</h3>
@@ -215,12 +215,12 @@
         agents might negotiate for content. These aspects are to be treated independently so content negotiation for a 
         resource involving negotiation by profile and potentially multiple other aspects of a resource will not affect
         each other. For this reason, other than a directive to maintain independence, no further discussion of 
-        negotiation by profile and this relations to other forms of negotiation are given. Specific realisations might 
+        negotiation by profile and this relations to other forms of negotiation are given. Specific realizations might
         require special handling of profile and other forms of negotiation.
       </p>
       <p>
         A <em>client</em> <em>request</em>ing the representation of a <em>resource</em> conforming to a <em>profile</em>
-        MUST identify the <em>resource</em> by a Uniform Resource Identifier (URI) [[rfc3986]] and MUST
+        MUST identify the <em>resource</em> by a Uniform Resource Identifier (URI) [[RFC3986]] and MUST
         identify a <em>profile</em> either by a URI or a <em>token</em> that unambiguously identifies the
         <em>profile</em> for the <em>server</em> within that <em>request</em>/<em>response</em> session.
       </p>
@@ -263,13 +263,13 @@
       </ol>
       <p>
         A <em>server</em> adhering to this specification MUST respond to each request with the following
-        <em>response</em>s. The first two types are required, handling the third depends on the realisation environment.
+        <em>response</em>s. The first two types are required, handling the third depends on the realization environment.
       </p>
       <ol>
         <li>
           <strong>list profiles</strong><br />
-          a <em>server</em> responds with the list of <em>profile</em> URIs for a <em>profile</em>s it is able to
-          deliver <em>resource</em> representations conforming to, to a <em>client</em>
+          a <em>server</em> responds to a <em>client</em> with the list of <em>profile</em> URIs for the <em>profile</em>s it is able to
+          deliver <em>resource</em> representations conforming to
         </li>
         <li>
           <strong>get resource by profile</strong><br />
@@ -282,7 +282,7 @@
           <em>resource</em> representations conforming to and their mapping to <em>profile</em> URIs.
         </li>
       </ol>
-      <p>More detailed descriptions of these requests and their responses is given next.</p>
+      <p>More detailed descriptions of these requests and their responses are given next.</p>
       <section id="listprofiles">
         <h4>list profiles</h4>
         <p>
@@ -293,7 +293,7 @@
         </p>
         <p>
           The <strong>list profiles</strong> <em>request</em> MAY be an independent request or part of another 
-          realisation's request. 
+          realization's request.
         </p>
         <p>
           The <strong>list profiles</strong> <em>request</em> MAY result in a <em>response</em> in one of a
@@ -341,21 +341,21 @@
     <div class="issue" data-number="462"></div>
   </section>
   <section id="realisations">
-    <h2>Realisations</h2>
+    <h2>Realizations</h2>
     <p>
-      This section describes <em>realisation</em>s of the abstract model in multiple implementation domains.
+      This section describes <em>realization</em>s of the abstract model in multiple implementation domains.
     </p>
     <section id="http">
       <h3>Hypertext Transfer Protocol</h3>
       <p>
-        A realisation of the Abstract Model using the Hypertext Transfer Protocol (HTTP) is presented here.
+        A realization of the Abstract Model using the Hypertext Transfer Protocol (HTTP) is presented here.
         This implementation is based on HTTP content negotiation and uses two new HTTP headers,
 	      <code>Accept-Profile</code> and <code>Content-Profile</code>
 	      that are to be defined in an upcoming Internet-Draft [[PROF-IETF]].
       </p>
       <p>
-        Content Negotiation by profile adds a further dimension to the already existing HTTP content
-        negotiation dimensions media type <code>Accept</code>/<code>Content-Type</code>), encoding
+        Content negotiation by profile adds a further dimension to the already existing HTTP content
+        negotiation dimensions, namely media type (<code>Accept</code>/<code>Content-Type</code>), encoding
         (<code>Accept-Encoding</code>/<code>Content-Encoding</code>) and language
         (<code>Accept-Language</code>/<code>Content-Language</code>).
       </p>
@@ -397,7 +397,7 @@ Content-Profile: urn:example:profile:1;q=0.8,http://example.org/profiles/2;q=0.5
           resource. The returned representation will be identified by <code>rel="self"</code>, other representations by
           <code>rel="alternate"</code>.
         </p>
-        <p>As an example, consider the resource <code>http://example.org/a/resource</code>. This resource is available
+        <p>As an example, consider the resource <code>http://example.org/a/resource</code>  available
           in the media types <code>application/xml</code>, <code>text/html</code> and <code>text/turtle</code>.
           The <code>text/html</code> representation has
           no profile, whereas the <code>application/xml</code> and <code>text/turtle</code> representations are
@@ -477,12 +477,12 @@ Content-Profile: urn:example:profile:1
 	    <div class="issue" data-number="511"></div>
       <div class="issue" data-number="538"></div>
       <p>
-	      A Query String Argument (QSA) realisation of the <a href="#abstractmodel">Abstract Model</a>
-	      is presented here. Unlike the HTTP realisation
+	      A Query String Argument (QSA) realization of the <a href="#abstractmodel">Abstract Model</a>
+	      is presented here. Unlike the HTTP realization,
  		which is the subject of an independent document [[PROF-IETF]],
-	      this realisation is fully specified here
-	      and this document is considered normative for this realisation.
-	      This realisation does not preclude other QSA specifications for profile and content negotiation.
+	      this realization is fully specified here
+	      and this document is considered normative for the QSA realization.
+	      This realization does not preclude other QSA specifications for profile and content negotiation.
       </p>
       <p>
         A query string is a part of a URI which assigns values to specified parameters. QSAs are commonly used within
@@ -495,7 +495,7 @@ Content-Profile: urn:example:profile:1
         of the <a href="#abstractmodel">Abstract Model</a> MUST be implemented.
 	      However there is some flexibility in how this may be done:
 	      QSA key/value pairs must be implemented but the specific key terms may be changed.
-	      In this realisation, <code>_profile</code> and <code>_mediatype</code> are used
+	      In this realization, <code>_profile</code> and <code>_mediatype</code> are used
 	      to indicate a single or a list of
         preference-ordered profiles or Media types respectively with profiles or Media Types indicated by either URI or
         token.
@@ -608,7 +608,7 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
   <section id="testsuites">
     <h2>Test Suites</h2>
     <p>
-      Here are links to software tools to be used for testing the adherence of implementations to the realisations
+      This section includes links to software tools to be used for testing the adherence of implementations to the realisations
       given in this document.
     </p>
     <dl>
@@ -627,7 +627,7 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
   <section id="implementations" class="informative">
     <h2>Implementations</h2>
     <p>
-      Here are implementations of the realisations given in this document and their conformance test results. The tools
+      This section includes implementations of the realizations given in this document and their conformance test results. The tools
       used for conformance testing are listed in the section above.
     </p>
     <ul>
