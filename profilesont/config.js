@@ -4,6 +4,7 @@ var respecConfig = {
     edDraftURI: "https://w3c.github.io/dxwg/profilesont/",
     canonicalURI: "TR",
     implementationReportURI: "https://github.com/CSIRO-enviro-informatics/prof-ont-implementation-results",
+    testSuiteURI: "https://github.com/CSIRO-enviro-informatics/prof-ont-implementation-results",
     editors: [
       {
         name: "Rob Atkinson",
