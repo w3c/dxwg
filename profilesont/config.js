@@ -1,5 +1,5 @@
 var respecConfig = {
-    specStatus: "FPWD",
+    specStatus: "ED",
     shortName: "prof",
     edDraftURI: "https://w3c.github.io/dxwg/profilesont/",
     canonicalURI: "TR",
@@ -73,7 +73,7 @@ var respecConfig = {
             date: "2008-07",
             status: "ISO Standard"
         },
-        shex: {
+        SHEX: {
             href: "https://shexspec.github.io/spec/",
             title: "Shape Expressions Language 2.next",
             date: "2018-09-06",
@@ -107,7 +107,7 @@ var respecConfig = {
             date: "2016-01",
             status: "ISO Standard"
         },
-        "modspec": {
+        "MODSPEC": {
           editors: [
             "OGC Policy SWG"
           ],
@@ -116,7 +116,7 @@ var respecConfig = {
           status: "OGC Policy Directive" ,
           date: "2009-10-19"
         },
-        "cfg-mgmt": {
+        "CFG-MGMT": {
           authors: [
             "Serena Coetzee",
             "Simon Cox",
@@ -127,18 +127,6 @@ var respecConfig = {
           publisher: "IEEE" ,
           status: "7th International Conference on Standardization and Innovation in Information Technology (SIIT), Berlin, 2011, pp. 1-12" ,
           date: "2011-11-21"
-        },
-        "vocab-dcat-2": {
-            editors: [
-                "Alejandra Gonzalez Beltran",
-                "Dave Browning",
-                "Simon Cox",
-                "Peter Winstanley"
-            ],
-            href: "https://www.w3.org/TR/vocab-dcat-2/",
-            title: "Data Catalog Vocabulary (DCAT) - revised edition",
-            date: "2018-09-07",
-            status: "W3C Editor's Draft"
         }
     }
 };
