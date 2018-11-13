@@ -40,34 +40,6 @@
         and the list of all the changes since the previous version of DCAT in the <a href="#changes">Change History</a> section.
     </p>
 
-
-    <h3 id="dxwg_family_of_documents">DXWG Family of Documents</h3>
-
-    <p>
-        This document is part of the output of the Dataset Exchange Working Group (DXWG).
-        All documents from the group are listed here.
-    </p>
-
-    <h4 id="dcat_documents">DCAT documents</h4>
-    <p>
-        The DCAT documents are about the revised Data Catalog Vocabulary.
-    </p>
-    <ul>
-        <li>[VOCAB-DCAT] (Recommendation) - this document, description of the DCAT RDF vocabulary</li>
-    </ul>
-
-    <h4 id="profiling_documents">Profiling documents</h4>
-    <p>
-        These documents give guidance on profiling. Some of the documents are general while some are technology-specific.
-        Please consult the Profile Guidance [[PROF-GUIDE]] document for an overview of all profiling documents. It is the
-        recommended starting point.
-    </p>
-    <ul>
-        <li>[[PROF-GUIDE]] (Recommendation) - the top-level general profiling guidance document giving an overview of all other documents</li>
-        <li>[[PROF-CONNEG]] (Recommendation) - Specific guidance on how to negotiate for Internet resource content using profiles</li>
-        <li>[[PROF-IETF]] (<a href="http://www.ietf.org">IETF</a> <a href="http://www.ietf.org/standards/ids/">Internet-Draft</a>) - HTTP Headers for HTTP content negotiation by profile</li>
-    </ul>
-
     <h3 id="dcat_history">DCAT history</h3>
     <p>The original DCAT vocabulary (originally hosted at http://vocab.deri.ie/dcat) was developed at the Digital Enterprise Research Institute (DERI), refined by the <a href="http://www.w3.org/egov/">eGov Interest Group</a>, and then finally standardized in 2014 [[VOCAB-DCAT-20140116]] by the <a href="http://www.w3.org/2011/gld/">Government Linked Data (GLD)</a> Working Group.</p>
     <p>This revised version of DCAT was developed by the <a href="https://www.w3.org/2017/dxwg/">Dataset Exchange Working Group</a> in response to a new set of Use Cases and Requirements [[DCAT-UCR]] submitted on the basis of experience with the DCAT vocabulary from the time of the original version, and new applications not originally considered. A summary of the changes from  [[VOCAB-DCAT-20140116]] can be found at <a href="#changes">Change History</a></p>
@@ -428,240 +400,52 @@
         does not have to be defined as a separate dcat:Distribution instance.
     </section>
 
-    <section id="bag-of-files">
-        <h3>Loosely structured catalog</h3>
-
-        <p class="note">
-            The background to this example is discussed in 	<a href="https://github.com/w3c/dxwg/issues/253">Best practice for a loosely-structured catalog</a>
+    <section id="a-dataset-available-from a service">
+        <h3>A dataset available through a service</h3>
+        <p>:dataset-004 is distributed in different representations from different services.
+          The <code>accessURL</code> for each <code>Distribution</code> corresponds with the <code>endpointURL</code> of the service.
+          Each service is characterized by its general type using <code>dct:type</code> (here using values from the INSPIRE spatial data service type vocabulary),
+          its specific API definition using <code>dct:conformsTo</code>,
+          with the detailed description of the individual endpoint parameters and options linked using <code>dcat:endpointDescription</code>.
         </p>
-
-        <p>
-            In many legacy catalogues and repositories (e.g. CKAN), ‘datasets’ are ‘just a bag of files’. There is no distinction made between part/whole, distribution (representation), and other kinds of relationship (e.g. documentation, schema, supporting documents) from the dataset to each of the files.
-        </p>
-        <p>
-            If the nature of the relationships between a dataset and component resources in a catalogue, repository, or elsewhere are not known, <b>dct:relation</b> can be used:
-        </p>
-        <div class="example">
+<div class="example">
   <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
-:d33937
-  dct:description "A set of RDF graphs representing the International [Chrono]stratigraphic Chart, ..." ;
-  dct:identifier "https://doi.org/10.25919/5b4d2b83cbf2d"^^xsd:anyURI ;
-  dct:creator &lt;https://orcid.org/0000-0002-3884-3420&gt;;
-  dct:relation &lt;https://vocabs.ands.org.au/viewById/196&gt; ;
-  dct:relation :ChronostratChart2017-02.pdf  ;
-  dct:relation :ChronostratChart2017-02.jpg ;
-  dct:relation :timescale.zip ;
-  dct:relation :isc2017.jsonld ;
-  dct:relation :isc2017.nt ;
-  dct:relation :isc2017.rdf ;
-  dct:relation :isc2017.ttl ;
-  .
-  </pre></div>
-        <p>
-            If it is clear that any of these related resources is a proper <i>representation</i> of the dataset, dcat:distribution should be used.
-        </p>
-        <div class="example">
-  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
-:d33937
+:dataset-004
   rdf:type dcat:Dataset ;
-  dct:description "A set of RDF graphs representing the International [Chrono]stratigraphic Chart, ..." ;
-  dct:identifier "https://doi.org/10.25919/5b4d2b83cbf2d"^^xsd:anyURI ;
-  dct:relation &lt;https://vocabs.ands.org.au/viewById/196&gt; ;
-  dct:relation :ChronostratChart2017-02.pdf  ;
-  dct:relation :ChronostratChart2017-02.jpg ;
-  dct:relation :timescale.zip ;
-  dcat:distribution :d33937-jsonld ;
-  dcat:distribution :d33937-nt ;
-  dcat:distribution :d33937-rdf ;
-  dcat:distribution :d33937-ttl ;
-  .
-:d33937-jsonld  rdf:type dcat:Distribution ;
-  dcat:downloadURL :isc2017.jsonld ;
-  dcat:byteSize "698039"^^xsd:decimal ;
-  dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/ld+json&gt; ;
-  .
-:d33937-nt  rdf:type dcat:Distribution ;
-  dcat:downloadURL :isc2017.nt ;
-  dcat:byteSize "2047874"^^xsd:decimal ;
-  dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/n-triples&gt; ;
-  .
-:d33937-rdf  rdf:type dcat:Distribution ;
-  dcat:downloadURL :isc2017.rdf ;
-  dcat:byteSize "1600569"^^xsd:decimal ;
-  dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/rdf+xml&gt; ;
-  .
-:d33937-ttl  rdf:type dcat:Distribution ;
-  dcat:downloadURL :isc2017.ttl ;
-  dcat:byteSize "531703"^^xsd:decimal ;
-  dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/turtle&gt; ;
-  .
-	</pre></div>
-        <p>
-            This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/examples/csiro-dap-examples.ttl">csiro-dap-examples.ttl</a>
-        </p>
-    </section>
-
-    <section id="examples-dataset-provenance">
-        <h3>Dataset provenance</h3>
-        <p>
-            The provenance or business context of a dataset can be described using elements from the W3C Provenance Ontology [[PROV-O]].
-        </p>
-        <p>
-            For example, a simple link from a dataset description to the project that generated the dataset can be formalized as follows (other details elided for clarity):
-        </p>
-        <div class="example">
-  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
-dap:atnf-P366-2003SEPT
-  rdf:type dcat:Dataset ;
-  dct:bibliographicCitation "Burgay, M; McLaughlin, M; Kramer, M; Lyne, A; Joshi, B; Pearce, G; D'Amico, N; Possenti, A; Manchester, R; Camilo, F (2017): Parkes observations for project P366 semester 2003SEPT. v1. CSIRO. Data Collection. https://doi.org/10.4225/08/598dc08d07bb7" ;
-  dct:title "Parkes observations for project P366 semester 2003SEPT" ;
-  dcat:landingPage &lt;https://data.csiro.au/dap/landingpage?pid=csiro:P366-2003SEPT&gt; ;
-  prov:wasGeneratedBy dap:P366 ;
+  dcat:distribution :dataset-004-csv ;
+  dcat:distribution :dataset-004-png ;
 .
-
-dap:P366
-  rdf:type prov:Activity ;
-  dct:type "Observation" ;
-  prov:startedAtTime "2000-11-01"^^xsd:date ;
-  prov:used dap:Parkes-radio-telescope ;
-  prov:wasInformedBy dap:ATNF ;
-  rdfs:label "P366 - Parkes multibeam high-latitude pulsar survey" ;
-  rdfs:seeAlso &lt;https://doi.org/10.1111/j.1365-2966.2006.10100.x&gt; ;
+:dataset-004-csv
+  rdf:type dcat:Distribution ;
+  dcat:accessService :table-service-005 ;
+  dcat:accessURL &lt;http://example.org/api/table-005&gt; ;
+  dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/csv&gt; ;
 .
-	</pre></div>
-        <p>
-            This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/examples/csiro-dap-examples.ttl">csiro-dap-examples.ttl</a>
-        </p>
-        <p>
-            Several properties capture provenance information, including within the citation and title, but the primary link to a formal description of the project is through <a href="#Property:dataset_wasgeneratedby">prov:wasGeneratedBy</a>.
-            A terse description of the project is shown as a <a href="http://www.w3.org/ns/prov#Activity">prov:Activity</a>, though this would not necessarily be part of the same catalog.
-            Note that as the project is ongoing, the activity has no end date.
-        </p>
-        <p>
-            Further provenance information might be provided using the other <i>starting point properties</i> from PROV, in particular <a href="http://www.w3.org/TR/prov-o/#wasAttributedTo">prov:wasAttributedTo</a> (to link to an agent associated with the dataset production) and <a href="http://www.w3.org/TR/prov-o/#wasDerivedFrom">prov:wasDerivedFrom</a> (to link to a predecessor dataset). Both of these complement Dublin Core properties already used in DCAT, as follows:
-        </p>
-        <ul>
-            <li>
-                <b>prov:wasAttributedTo</b> provides a general link to all kinds of associated agents, such as project sponsors, managers, dataset owners, etc which are not correctly characterized using <b>dct:creator</b>, <b>dct:contributor</b> or <b>dct:publisher</b>.
-            </li>
-            <li>
-                <b>prov:wasDerivedFrom</b> supports a more specific relationship to an input or predecessor dataset compared with <b>dct:source</b>, which is not necessarily a previous dataset.
-            </li>
-        </ul>
-        <p>
-            For a more detailed discussion of the use of PROV for dataset provenance, including recommendations on the use of <i>qualified properties</i>, see the chapter on <a href="#prov-patterns">Provenance Patterns</a> below.
-        </p>
-
-    </section>
-
-    <section id="data-service-examples">
-        <h3>Data services</h3>
-        <p>
-            Data services may be described using DCAT.
-            The values of the classifiers <b>dct:type</b>, <b>dct:conformsTo</b>, and <b>dcat:endpointDescription</b> provide progressively more detail about a service, whose actual endpoint is given by the <b>dcat:endpointURL</b>.
-        </p>
-        <p>
-            The first example describes a data catalog hosted by the European Environment Agency.
-            This is classified as a <a href="#Class:Discovery_Service">dcat:DiscoveryService</a> and also has the <code>dct:type</code> set to <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/discovery">discovery</a> from the <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/">INSPIRE classification of spatial data service types</a>.
-        </p>
-        <p>
-            This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/examples/eea-csw.ttl">eea-csw.ttl</a>
-        </p>
-        <div class="example">
-  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
-a:EEA-CSW-Endpoint
-  rdf:type dcat:DiscoveryService ;
-  dc:subject "infoCatalogueService"@en ;
-  dct:accessRights &lt;http://publications.europa.eu/resource/authority/access-right/PUBLIC&gt; ;
-  dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/csw&gt; ;
-  dct:description "The EEA public catalogue of spatial datasets references the spatial datasets used by the European Environment Agency as well as the spatial datasets produced by or for the EEA. In the latter case, when datasets are publicly available, a link to the location from where they can be downloaded is included in the dataset's metadata. The catalogue has been initially populated with the most important spatial datasets already available on the data&maps section of the EEA website and is currently updated with any newly published spatial dataset."@en ;
-  dct:identifier "eea-sdi-public-catalogue" ;
-  dct:issued "2012-01-01"^^xsd:date ;
-  dct:license &lt;https://creativecommons.org/licenses/by/2.5/dk/&gt; ;
-  dct:spatial [
-      rdf:type dct:Location ;
-      locn:geometry "&lt;gml:Envelope srsName=\"http://www.opengis.net/def/crs/OGC/1.3/CRS84\"&gt;&lt;gml:lowerCorner&gt;-180 -90&lt;/gml:lowerCorner&gt;&lt;gml:upperCorner&gt;180 90&lt;/gml:upperCorner&gt;&lt;/gml:Envelope&gt;"^^gsp:gmlLiteral ;
-      locn:geometry "POLYGON((-180 90,180 90,180 -90,-180 -90,-180 90))"^^gsp:wktLiteral ;
-    ] ;
-  dct:title "European Environment Agency's public catalogue of spatial datasets."@en ;
-  dct:type &lt;http://inspire.ec.europa.eu/metadata-codelist/ResourceType/service&gt; ;
-  dct:type &lt;http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/discovery&gt; ;
-  dcat:contactPoint a:EEA ;
-  dcat:endpointDescription &lt;https://sdi.eea.europa.eu/catalogue/srv/eng/csw?service=CSW&request=GetCapabilities&gt; ;
-  dcat:endpointURL &lt;http://sdi.eea.europa.eu/catalogue/srv/eng/csw&gt; ;
+:dataset-004-png
+  rdf:type dcat:Distribution ;
+  dcat:accessService :figure-service-006 ;
+  dcat:accessURL &lt;http://example.org/api/figure-006&gt; ;
+  dcat:mediaType &lt;https://www.iana.org/assignments/media-types/image/png&gt; ;
 .
-	</pre></div>
-        <p>
-            The next example shows a dataset hosted by Geoscience Australia, which is available from three distinct services, as indicated by the value of the <a href="#Property:datadistributionservice_servesdataset">dcat:servesDataset</a> property of each of the service descriptions.
-            These are classified as a <a href="#Class:Data_Distribution_Service">dcat:DataDistributionService</a> and also have the <code>dct:type</code> set to <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download">download</a> and <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view">view</a> from the <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/">INSPIRE classification of spatial data service types</a>.
-        </p>
-        <p>
-            This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/examples/ga-courts.ttl">ga-courts.ttl</a>
-        </p>
-        <div class="example">
-  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
-ga-courts:jc
-  rdf:type dcat:Dataset ;
-  dct:description "The dataset contains spatial locations, in point format, of the Australian High Court, Australian Federal Courts and the Australian Magistrates Courts." ;
-  dct:spatial [
-      rdf:type dct:Location ;
-      locn:geometry "&lt;gml:Envelope srsName=\"http://www.opengis.net/def/crs/EPSG/0/4283\"&gt;&lt;gml:lowerCorner&gt;115.864566 -42.885989&lt;/gml:lowerCorner&gt;&lt;gml:upperCorner&gt;153.276835 -12.460578&lt;/gml:upperCorner&gt;&lt;/gml:Envelope&gt;"^^gsp:gmlLiteral ;
-    ] ;
-  dct:title "Judicial Courts" ;
-  dct:type &lt;http://purl.org/dc/dcmitype/Dataset&gt; ;
-  dcat:landingPage &lt;https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/cc365600-294a-597d-e044-00144fdd4fa6&gt; ;
-.
-ga-courts:jc-esri
+:figure-service-006
   rdf:type dcat:DataDistributionService ;
-  dct:conformsTo &lt;https://developers.arcgis.com/rest/&gt; ;
-  dct:description "This web service provides access to the National Judicial Courts dataset and presents the spatial locations of all the known Australian High Courts, Australian Federal Courts and the Australian Federal Circuit Courts located within Australia, all complemented with feature attribution." ;
-  dct:identifier "2b8540c8-4a43-144d-e053-12a3070a3ff7" ;
-  dct:title "National Judicial Courts MapServer" ;
-  dct:type &lt;http://purl.org/dc/dcmitype/Service&gt; ;
-  dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download&gt; ;
+  dct:conformsTo &lt;http://example.org/apidef/figure/v1.0&gt; ;
   dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view&gt; ;
-  dcat:endpointURL &lt;http://services.ga.gov.au/gis/rest/services/Judicial_Courts/MapServer&gt; ;
-  dcat:landingPage &lt;https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/2b8540c8-4a43-144d-e053-12a3070a3ff7&gt; ;
-  dcat:servesDataset ga-courts:jc ;
+  dcat:endpointDescription &lt;http://example.org/api/figure-006/params&gt; ;
+  dcat:endpointURL &lt;http://example.org/api/figure-006&gt; ;
+  dcat:servesDataset :dataset-004 ;
 .
-ga-courts:jc-wfs
+:table-service-005
   rdf:type dcat:DataDistributionService ;
-  dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wfs/2.0.0&gt; ;
-  dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wfs/1.1.0&gt; ;
-  dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wfs/1.0.0&gt; ;
-  dct:description "This web service provides access to the National Judicial Courts dataset and presents the spatial locations of all the known Australian High Courts, Australian Federal Courts and the Australian Federal Circuit Courts located within Australia, all complemented with feature attribution." ;
-  dct:identifier "2b8540c8-4a42-144d-e053-12a3070a3ff7" ;
-  dct:title "National Judicial Courts WFS" ;
-  dct:type &lt;http://purl.org/dc/dcmitype/Service&gt; ;
+  dct:conformsTo &lt;http://example.org/apidef/table/v2.2&gt; ;
   dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download&gt; ;
-  dcat:endpointDescription &lt;http://services.ga.gov.au/gis/services/Judicial_Courts/MapServer/WFSServer?request=GetCapabilities&service=WFS&gt; ;
-  dcat:endpointURL &lt;http://services.ga.gov.au/gis/services/Judicial_Courts/MapServer/WFSServer&gt; ;
-  dcat:landingPage &lt;https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/2b8540c8-4a42-144d-e053-12a3070a3ff7&gt; ;
-  dcat:servesDataset ga-courts:jc ;
-.
-ga-courts:jc-wms
-  rdf:type dcat:DataDistributionService ;
-  dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wms/1.3&gt; ;
-  dct:description "This web service provides access to the National Judicial Courts dataset and presents the spatial locations of all the known Australian High Courts, Australian Federal Courts and the Australian Federal Circuit Courts located within Australia, all complemented with feature attribution." ;
-  dct:identifier "2b8540c8-4a41-144d-e053-12a3070a3ff7" ;
-  dct:title "National Judicial Courts WMS" ;
-  dct:type &lt;http://purl.org/dc/dcmitype/Service&gt; ;
-  dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view&gt; ;
-  dcat:endpointDescription &lt;http://services.ga.gov.au/gis/services/Judicial_Courts/MapServer/WMSServer?request=GetCapabilities&service=WMS&gt; ;
-  dcat:endpointURL &lt;http://services.ga.gov.au/gis/services/Judicial_Courts/MapServer/WMSServer&gt; ;
-  dcat:landingPage &lt;https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/2b8540c8-4a41-144d-e053-12a3070a3ff7&gt; ;
-  dcat:servesDataset ga-courts:jc ;
-.
-	</pre></div>
+  dcat:endpointDescription &lt;http://example.org/api/table-005/capability&gt; ;
+  dcat:endpointURL &lt;http://example.org/api/table-005&gt; ;
+  dcat:servesDataset :dataset-003, :dataset-004 ;
+.  </pre>
+</div>
 
-    </section>
 
-    <section id="more-examples-needed">
-        <h3>More examples needed</h3>
-
-        <p class="note">
-            This section will contain more examples on the use of DCAT.
-        </p>
 
     </section>
 
@@ -734,18 +518,36 @@ ga-courts:jc-wms
             <a href="#Property:catalog_dataset">dataset</a>,
             <a href="#Property:catalog_service">service</a>,
             <a href="#Property:catalog_catalog">catalog</a>,
-            <a href="#Property:catalog_description">description</a>,
             <a href="#Property:catalog_homepage">homepage</a>,
-            <a href="#Property:catalog_language">language</a>,
             <a href="#Property:catalog_license">license</a>,
+            <a href="#Property:catalog_rights">rights</a>,
+            <a href="#Property:catalog_themes">themes</a>
+        </p>
+        <p>The following properties are inherited from the super-class <a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a>:
+            <a href="#Property:dataset_distribution">distribution</a>,
+            <a href="#Property:dataset_frequency">frequency</a>,
+            <a href="#Property:catalog_spatial">spatial/geographic coverage</a>,
+            <a href="#Property:dataset_temporal">temporal coverage</a>,
+            <a href="#Property:dataset_wasgeneratedby">was generated by</a>
+        </p>
+        <p>The following properties are inherited from the super-class <a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a>:
+            <a href="#Property:resource_conformsto">conformsTo</a>,
+            <a href="#Property:resource_contact_point">contact point</a>,
+            <a href="#Property:resource_creator">creator</a>,
+            <a href="#Property:catalog_description">description</a>,
+            <a href="#Property:resource_identifier">identifier</a>,
+            <a href="#Property:resource_keyword">keyword/tag</a>,
+            <a href="#Property:resource_landing_page">landing page</a>,
+            <a href="#Property:catalog_language">resource language</a>,
+            <a href="#Property:resource_relation">relation</a>,
             <a href="#Property:catalog_publisher">publisher</a>,
             <a href="#Property:catalog_release_date">release date</a>,
-            <a href="#Property:catalog_rights">rights</a>,
-            <a href="#Property:catalog_spatial">spatial/geographical</a>,
-            <a href="#Property:catalog_themes">themes</a>,
+            <a href="#Property:resource_theme">theme/category</a>,
             <a href="#Property:catalog_title">title</a>,
-            <a href="#Property:catalog_update_date">update/modification date</a>
+            <a href="#Property:resource_type">type/genre</a>,
+            <a href="#Property:catalog_update_date">update/modification date</a>,
         </p>
+
 
         <div class="note">
             <p>
@@ -1017,6 +819,7 @@ ga-courts:jc-wms
         <p>The following properties are recommended for use on this class:
             <a href="#Property:resource_conformsto">conformsTo</a>,
             <a href="#Property:resource_contact_point">contact point</a>,
+            <a href="#Property:resource_creator">creator</a>,
             <a href="#Property:resource_description">description</a>,
             <a href="#Property:resource_identifier">identifier</a>,
             <a href="#Property:resource_keyword">keyword/tag</a>,
@@ -1087,6 +890,28 @@ ga-courts:jc-wms
                 <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a></td></tr>
                 </tbody>
             </table>
+        </section>
+
+        <section id="Property:resource_creator">
+            <h4>Property: resource creator</h4>
+
+            <p class="note">
+                New property added in this revision of DCAT, specifically added when considering the data citation requirement and
+                added to the dcat:Resource class, as the Dataset superclass.
+            </p>
+
+
+            <table class="definition">
+                <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/creator">dct:creator</a></th></tr></thead>
+                <tbody>
+                <tr><td class="prop">Definition:</td><td>The entity responsible for producing the resource.</td></tr>
+                <tr><td class="prop">Range:</td><td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+                <tr><td class="prop">Usage note:</td><td>Resources of type <a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a>
+                    are recommended as values for this property.</td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Class:Organization_Person">Class: Organization/Person</a></td></tr>
+                </tbody>
+            </table>
+
         </section>
 
         <section id="Property:resource_release_date">
@@ -1348,6 +1173,7 @@ ga-courts:jc-wms
     <section id="Class:Catalog_Record">
         <h3>Class: Catalog Record</h3>
         <p>The following properties are recommended for use on this class:
+            <a href="#Property:record_conformsto">conforms to</a>,
             <a href="#Property:record_description">description</a>,
             <a href="#Property:record_listing_date">listing date</a>,
             <a href="#Property:record_primary_topic">primary topic</a>,
@@ -1366,7 +1192,7 @@ ga-courts:jc-wms
         <table class="definition">
             <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#CatalogRecord">dcat:CatalogRecord</a></th></tr></thead>
             <tbody>
-            <tr><td class="prop">Definition:</td><td>A record in a catalog, describing the registration of a single dataset or data service.</td></tr>
+            <tr><td class="prop">Definition:</td><td>A record in a catalog, describing the registration of a single <a href="http://www.w3.org/ns/dcat#dcat:Resource">dcat:Resource</a>.</td></tr>
             <tr><td class="prop">Usage note</td><td>This class is optional and not all catalogs will use it. It exists for catalogs where a distinction is made between metadata about
                 a <em>dataset or service</em> and metadata about the <em>entry in the catalog about the dataset or service</em>. For example, the <i>publication date</i> property of the <i>dataset</i> reflects
                 the date when the information was originally made available by the publishing agency, while the publication date of the <i>catalog record</i> is the date when the dataset was added to the catalog.
@@ -1448,124 +1274,57 @@ ga-courts:jc-wms
                 </tbody>
             </table>
         </section>
+
+        <section id="Property:record_conformsto">
+            <h4>Property: conforms to</h4>
+
+            <p class="note">
+                New property in this context in this revision of DCAT.
+            </p>
+
+            <table class="definition">
+                <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/conformsTo">dct:conformsTo</a></th></tr></thead>
+                <tbody>
+                <tr><td class="prop">Definition:</td><td>An established standard to which the described resource conforms.</td></tr>
+                <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/Standard">dct:Standard</a> (A basis for comparison; a reference point against which other things can be evaluated.)</td></tr>
+                <tr><td class="prop">Usage note:</td><td>This property <em title="SHOULD" class="rfc2119">SHOULD</em> be used to indicate the model, schema, ontology, view or profile that the catalog record metadata conforms to. </td></tr>
+                </tbody>
+            </table>
+
+            <!-- this note is repeated from above, should we remove here or repeat for clarification in this context? -->
+            <p class="note">
+                <a href="http://purl.org/dc/terms/Standard">dct:Standard</a> is defined as "A basis for comparison; a reference point against which other things can be evaluated." It is not restricted to formal standards issued by bodies like ISO and W3C. In this context it will usually be used for a schema, ontology, data model or profile which specifies the structure of a dataset. This is not necessarily tied to a single encoding or serialization.
+            </p>
+        </section>
+
+
     </section> <!-- end Class catalog record -->
-
-    <section id="Class:Data_Distribution_Service">
-        <h3>Class: Data Distribution Service</h3>
-
-        <p class="note">
-            The class <a href="#Class:Data_Distribution_Service">dcat:DataDistributionService</a> has been added to the DCAT vocabulary in this revision.
-        </p>
-
-        <p>In addition to the properties inherited from the super-class <a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a>, the following properties are recommended for use on this class:
-            <a href="#Property:datadistributionservice_servesdataset">servesDataset</a>,
-        </p>
-
-        <table class="definition">
-            <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#DataDistributionService">dcat:DataDistributionService</a></th></tr></thead>
-            <tbody>
-            <tr><td class="prop">Definition:</td><td>A site or end-point that provides access to datasets through distributions of the datasets</td></tr>
-            <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a></td></tr>
-            </tbody>
-        </table>
-
-        <section id="Property:datadistributionservice_servesdataset">
-            <h4>Property: serves dataset</h4>
-            <table class="definition">
-                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#servesdataset">dcat:servesDataset</a></th></tr></thead>
-                <tbody>
-                <tr><td class="prop">Definition:</td><td>A collection of data that this DataDistributionService can distribute</td></tr>
-                <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a></td></tr>
-                </tbody>
-            </table>
-        </section>
-
-    </section> <!-- end class DataDistributionService -->
-
-    <section id="Class:Data_Service">
-        <h3>Class: Data Service</h3>
-
-        <p class="note">
-            The class <a href="#Class:Data_Service">dcat:DataService</a> has been added to the DCAT vocabulary in this revision.
-        </p>
-
-        <p>In addition to the properties inherited from the super-class <a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a>, the following properties are recommended for use on this class:
-            <a href="#Property:dataservice_endpointdescription">endpointDescription</a>,
-            <a href="#Property:dataservice_endpointurl">endpointURL</a>,
-            <a href="#Property:dataservice_license">license</a>,
-            <a href="#Property:dataservice_access_rights">accessRights</a>
-        </p>
-
-        <table class="definition">
-            <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a></th></tr></thead>
-            <tbody>
-            <tr><td class="prop">Definition:</td><td>A site or end-point for discovery, access or processing data or related resources.</td></tr>
-            <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a></td></tr>
-            <tr><td class="prop">Sub class of:</td><td><a href="http://purl.org/dc/dcmitype/Service">dctype:Service</a></td></tr>
-            </tbody>
-        </table>
-
-
-
-        <section id="Property:dataservice_endpointurl">
-            <h4>Property: endpoint address</h4>
-            <table class="definition">
-                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#endpointURL">dcat:endpointURL</a></th></tr></thead>
-                <tbody>
-                <tr><td class="prop">Definition:</td><td>The IRI of the service end-point.</td></tr>
-                <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a> </td></tr>
-                <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/TR/xmlschema11-2/#anyURI">xsd:anyURI</a> </td></tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section id="Property:dataservice_endpointdescription">
-            <h4>Property: endpoint description</h4>
-            <table class="definition">
-                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#endpointDescription">dcat:endpointDescription</a></th></tr></thead>
-                <tbody>
-                <tr><td class="prop">Definition:</td><td>A description of the service end-point, for example an OpenAPI (Swagger) description, an OGC getCapabilities response, a SD Service, an OpenSearch or WSDL document.  </td></tr>
-                <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a> </td></tr>
-                <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Resource">rdfs:Resource</a> </td></tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section id="Property:dataservice_license">
-            <h4>Property: license</h4>
-            <table class="definition">
-                <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/license">dct:license</a></th></tr></thead>
-                <tbody>
-                <tr><td class="prop">Definition:</td><td>A legal document under which the service is made available.</td></tr>
-                <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/LicenseDocument">dct:LicenseDocument</a></td></tr>
-                <tr><td class="prop">See also:</td><td><a href="#Property:distribution_rights" title=""> distribution rights</a>,
-                    <a href="#Property:catalog_license" title="">catalog license</a></td></tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section id="Property:dataservice_access_rights">
-            <h4>Property: access rights</h4>
-            <table class="definition">
-                <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/accessRights">dct:accessRights</a></th></tr></thead>
-                <tbody>
-                <tr><td class="prop">Definition:</td><td>Access Rights <em title="MAY" class="rfc2119">MAY</em> include information regarding access or restrictions based on privacy, security, or other policies. </td></tr>
-                <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/RightsStatement">dct:RightsStatement</a></td></tr>
-                </tbody>
-            </table>
-        </section>
-
-    </section> <!-- end class DataService -->
 
     <section id="Class:Dataset">
         <h3>Class: Dataset</h3>
-        <p>In addition to the properties inherited from the super-class <a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a>, the following properties are recommended for use on this class:
-            <a href="#Property:dataset_creator">creator</a>,
+        <p>The following properties are recommended for use on this class:
             <a href="#Property:dataset_distribution">distribution</a>,
             <a href="#Property:dataset_frequency">frequency</a>,
             <a href="#Property:dataset_spatial">spatial/geographic coverage</a>,
             <a href="#Property:dataset_temporal">temporal coverage</a>,
             <a href="#Property:dataset_wasgeneratedby">was generated by</a>
+        </p>
+        <p>The following properties are are inherited from the super-class <a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a>:
+            <a href="#Property:resource_conformsto">conformsTo</a>,
+            <a href="#Property:resource_contact_point">contact point</a>,
+            <a href="#Property:resource_creator">creator</a>,
+            <a href="#Property:resource_description">description</a>,
+            <a href="#Property:resource_identifier">identifier</a>,
+            <a href="#Property:resource_keyword">keyword/tag</a>,
+            <a href="#Property:resource_landing_page">landing page</a>,
+            <a href="#Property:resource_language">resource language</a>,
+            <a href="#Property:resource_relation">relation</a>,
+            <a href="#Property:resource_publisher">publisher</a>,
+            <a href="#Property:resource_release_date">release date</a>,
+            <a href="#Property:resource_theme">theme/category</a>,
+            <a href="#Property:resource_title">title</a>,
+            <a href="#Property:resource_type">type/genre</a>,
+            <a href="#Property:resource_update_date">update/modification date</a>,
         </p>
 
         <p>
@@ -1637,27 +1396,6 @@ ga-courts:jc-wms
             </p>
         </div>
 
-
-        <section id="Property:dataset_creator">
-            <h4>Property: dataset creator</h4>
-
-            <p class="note">
-                New property for Dataset in this revision of DCAT, added when considering the data citation requirement.
-            </p>
-
-
-            <table class="definition">
-                <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/creator">dct:creator</a></th></tr></thead>
-                <tbody>
-                <tr><td class="prop">Definition:</td><td>The entity responsible for producing the dataset.</td></tr>
-                <tr><td class="prop">Range:</td><td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
-                <tr><td class="prop">Usage note:</td><td>Resources of type <a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a>
-                    are recommended as values for this property.</td></tr>
-                <tr><td class="prop">See also:</td><td><a href="#Class:Organization_Person">Class: Organization/Person</a></td></tr>
-                </tbody>
-            </table>
-
-        </section>
 
         <section id="Property:dataset_distribution">
             <h4>Property: dataset distribution</h4>
@@ -1755,27 +1493,6 @@ ga-courts:jc-wms
         </section>
 
     </section> <!-- end class Dataset -->
-
-    <section id="Class:Discovery_Service">
-        <h3>Class: Discovery Service</h3>
-        <p>In addition to the properties inherited from the super-class <a href="http://www.w3.org/ns/dcat#DataService">dcat:DataDistributionService</a>, the following properties are recommended for use on this class: <i>none yet</i>
-        </p>
-
-        <table class="definition">
-            <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#DiscoveryService">dcat:DiscoveryService</a></th></tr></thead>
-            <tbody>
-            <tr><td class="prop">Definition:</td><td>A site or end-point that supports data discovery, usually by providing access to catalogs</td></tr>
-            <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/dcat#DataDistributionService">dcat:DataDistributionService</a></td></tr>
-            <tr><td class="prop">Usage note:</td><td> </td></tr>
-            <tr><td class="prop">See also:</td><td> </td></tr>
-            </tbody>
-        </table>
-
-        <p class="note">
-            The class <a href="#Class:Discovery_Service">dcat:DiscoveryService</a> has been added to the DCAT vocabulary in this revision.
-        </p>
-
-    </section> <!-- end class DiscoveryService -->
 
     <section id="Class:Distribution">
         <h3>Class: Distribution</h3>
@@ -2064,6 +1781,200 @@ ga-courts:jc-wms
             </table>
         </section>
     </section> <!-- end class Distribution -->
+
+    <section id="Class:Data_Service">
+        <h3>Class: Data Service</h3>
+
+        <p class="note">
+            The class <a href="#Class:Data_Service">dcat:DataService</a> has been added to the DCAT vocabulary in this revision.
+        </p>
+
+        <p>The following properties are recommended for use on this class:
+            <a href="#Property:dataservice_endpointdescription">endpointDescription</a>,
+            <a href="#Property:dataservice_endpointurl">endpointURL</a>,
+            <a href="#Property:dataservice_license">license</a>,
+            <a href="#Property:dataservice_access_rights">accessRights</a>
+        </p>
+        <p>The following properties are are inherited from the super-class <a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a>:
+            <a href="#Property:resource_conformsto">conformsTo</a>,
+            <a href="#Property:resource_contact_point">contact point</a>,
+            <a href="#Property:resource_creator">creator</a>,
+            <a href="#Property:resource_description">description</a>,
+            <a href="#Property:resource_identifier">identifier</a>,
+            <a href="#Property:resource_keyword">keyword/tag</a>,
+            <a href="#Property:resource_landing_page">landing page</a>,
+            <a href="#Property:resource_language">resource language</a>,
+            <a href="#Property:resource_relation">relation</a>,
+            <a href="#Property:resource_publisher">publisher</a>,
+            <a href="#Property:resource_release_date">release date</a>,
+            <a href="#Property:resource_theme">theme/category</a>,
+            <a href="#Property:resource_title">title</a>,
+            <a href="#Property:resource_type">type/genre</a>,
+            <a href="#Property:resource_update_date">update/modification date</a>,
+        </p>
+
+
+        <table class="definition">
+            <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a></th></tr></thead>
+            <tbody>
+            <tr><td class="prop">Definition:</td><td>A site or end-point for discovery, access or processing data or related resources.</td></tr>
+            <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a></td></tr>
+            <tr><td class="prop">Sub class of:</td><td><a href="http://purl.org/dc/dcmitype/Service">dctype:Service</a></td></tr>
+            </tbody>
+        </table>
+
+
+
+        <section id="Property:dataservice_endpointurl">
+            <h4>Property: endpoint address</h4>
+            <table class="definition">
+                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#endpointURL">dcat:endpointURL</a></th></tr></thead>
+                <tbody>
+                <tr><td class="prop">Definition:</td><td>The IRI of the service end-point.</td></tr>
+                <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a> </td></tr>
+                <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/TR/xmlschema11-2/#anyURI">xsd:anyURI</a> </td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="Property:dataservice_endpointdescription">
+            <h4>Property: endpoint description</h4>
+            <table class="definition">
+                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#endpointDescription">dcat:endpointDescription</a></th></tr></thead>
+                <tbody>
+                <tr><td class="prop">Definition:</td><td>A description of the service end-point, for example an OpenAPI (Swagger) description, an OGC getCapabilities response, a SD Service, an OpenSearch or WSDL document.  </td></tr>
+                <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a> </td></tr>
+                <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Resource">rdfs:Resource</a> </td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="Property:dataservice_license">
+            <h4>Property: license</h4>
+            <table class="definition">
+                <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/license">dct:license</a></th></tr></thead>
+                <tbody>
+                <tr><td class="prop">Definition:</td><td>A legal document under which the service is made available.</td></tr>
+                <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/LicenseDocument">dct:LicenseDocument</a></td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Property:distribution_rights" title=""> distribution rights</a>,
+                    <a href="#Property:catalog_license" title="">catalog license</a></td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="Property:dataservice_access_rights">
+            <h4>Property: access rights</h4>
+            <table class="definition">
+                <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/accessRights">dct:accessRights</a></th></tr></thead>
+                <tbody>
+                <tr><td class="prop">Definition:</td><td>Access Rights <em title="MAY" class="rfc2119">MAY</em> include information regarding access or restrictions based on privacy, security, or other policies. </td></tr>
+                <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/RightsStatement">dct:RightsStatement</a></td></tr>
+                </tbody>
+            </table>
+        </section>
+
+    </section> <!-- end class DataService -->
+
+    <section id="Class:Data_Distribution_Service">
+        <h3>Class: Data Distribution Service</h3>
+
+        <p class="note">
+            The class <a href="#Class:Data_Distribution_Service">dcat:DataDistributionService</a> has been added to the DCAT vocabulary in this revision.
+        </p>
+
+        <p>The following properties are recommended for use on this class:
+            <a href="#Property:datadistributionservice_servesdataset">servesDataset</a>,
+        </p>
+        <p>The following properties are inherited from the super-class <a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a>:
+            <a href="#Property:dataservice_endpointdescription">endpointDescription</a>,
+            <a href="#Property:dataservice_endpointurl">endpointURL</a>,
+            <a href="#Property:dataservice_license">license</a>,
+            <a href="#Property:dataservice_access_rights">accessRights</a>
+        </p>
+        <p>The following properties are are inherited from the super-class <a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a>:
+            <a href="#Property:resource_conformsto">conformsTo</a>,
+            <a href="#Property:resource_contact_point">contact point</a>,
+            <a href="#Property:resource_creator">creator</a>,
+            <a href="#Property:resource_description">description</a>,
+            <a href="#Property:resource_identifier">identifier</a>,
+            <a href="#Property:resource_keyword">keyword/tag</a>,
+            <a href="#Property:resource_landing_page">landing page</a>,
+            <a href="#Property:resource_language">resource language</a>,
+            <a href="#Property:resource_relation">relation</a>,
+            <a href="#Property:resource_publisher">publisher</a>,
+            <a href="#Property:resource_release_date">release date</a>,
+            <a href="#Property:resource_theme">theme/category</a>,
+            <a href="#Property:resource_title">title</a>,
+            <a href="#Property:resource_type">type/genre</a>,
+            <a href="#Property:resource_update_date">update/modification date</a>,
+        </p>
+
+
+        <table class="definition">
+            <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#DataDistributionService">dcat:DataDistributionService</a></th></tr></thead>
+            <tbody>
+            <tr><td class="prop">Definition:</td><td>A site or end-point that provides access to datasets through distributions of the datasets</td></tr>
+            <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a></td></tr>
+            </tbody>
+        </table>
+
+        <section id="Property:datadistributionservice_servesdataset">
+            <h4>Property: serves dataset</h4>
+            <table class="definition">
+                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#servesdataset">dcat:servesDataset</a></th></tr></thead>
+                <tbody>
+                <tr><td class="prop">Definition:</td><td>A collection of data that this DataDistributionService can distribute</td></tr>
+                <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a></td></tr>
+                </tbody>
+            </table>
+        </section>
+
+    </section> <!-- end class DataDistributionService -->
+
+
+    <section id="Class:Discovery_Service">
+        <h3>Class: Discovery Service</h3>
+        <p>The following properties are inherited from the super-class <a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a>:
+            <a href="#Property:dataservice_endpointdescription">endpointDescription</a>,
+            <a href="#Property:dataservice_endpointurl">endpointURL</a>,
+            <a href="#Property:dataservice_license">license</a>,
+            <a href="#Property:dataservice_access_rights">accessRights</a>
+        </p>
+        <p>The following properties are are inherited from the super-class <a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a>:
+            <a href="#Property:resource_conformsto">conformsTo</a>,
+            <a href="#Property:resource_contact_point">contact point</a>,
+            <a href="#Property:resource_creator">creator</a>,
+            <a href="#Property:resource_description">description</a>,
+            <a href="#Property:resource_identifier">identifier</a>,
+            <a href="#Property:resource_keyword">keyword/tag</a>,
+            <a href="#Property:resource_landing_page">landing page</a>,
+            <a href="#Property:resource_language">resource language</a>,
+            <a href="#Property:resource_relation">relation</a>,
+            <a href="#Property:resource_publisher">publisher</a>,
+            <a href="#Property:resource_release_date">release date</a>,
+            <a href="#Property:resource_theme">theme/category</a>,
+            <a href="#Property:resource_title">title</a>,
+            <a href="#Property:resource_type">type/genre</a>,
+            <a href="#Property:resource_update_date">update/modification date</a>,
+        </p>
+
+
+        <table class="definition">
+            <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#DiscoveryService">dcat:DiscoveryService</a></th></tr></thead>
+            <tbody>
+            <tr><td class="prop">Definition:</td><td>A site or end-point that supports data discovery, usually by providing access to catalogs</td></tr>
+            <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/dcat#DataDistributionService">dcat:DataDistributionService</a></td></tr>
+            <tr><td class="prop">Usage note:</td><td> </td></tr>
+            <tr><td class="prop">See also:</td><td> </td></tr>
+            </tbody>
+        </table>
+
+        <p class="note">
+            The class <a href="#Class:Discovery_Service">dcat:DiscoveryService</a> has been added to the DCAT vocabulary in this revision.
+        </p>
+
+    </section> <!-- end class DiscoveryService -->
+
 
 
     <section id="Class:Concept_Scheme">
@@ -2445,12 +2356,32 @@ a:TestingActivity a prov:Activity;
 
     <h2>License and rights statements</h2>
 
-    <p class="note">
-        DCAT 2014 handling of license and rights do not appear to satisfy all requirements [[VOCAB-DCAT-20140116]].
-        The recently completed W3C ODRL vocabulary [[ODRL-VOCAB]] provides a rich language for describing many kinds of rights and obligations.
-        In this chapter it is planned to describe some patterns for linking DCAT Datasets and/or Distributions to suitable rights expressions.
-        See the wiki page on <a href="https://github.com/w3c/dxwg/wiki/License-and-rights">License and rights</a> for more discussion.
-    </p>
+	<p class="note">
+		DCAT 2014 handling of license and rights do not appear to satisfy all requirements [[VOCAB-DCAT-20140116]].
+		The recently completed W3C ODRL vocabulary [[ODRL-VOCAB]] provides a rich language for describing many kinds of rights and obligations.
+		In this chapter it is planned to describe some patterns for linking DCAT Datasets and/or Distributions to suitable rights expressions.
+		See the wiki page on <a href="https://github.com/w3c/dxwg/wiki/License-and-rights">License and rights</a> for more discussion.
+	</p>
+	<p>
+		Selecting the right way to express conditions for access to and re-use of resources can be complex.
+		Implementers should always seek legal advice before deciding which conditions apply to the resource being described.
+	</p>
+	<p>
+		This specification distinguishes three main situations: one where a statement is associated with the resource that is explicitly declared as a 'licence';
+		a second where the statement is not explicitly declared as a 'licence'; and a third where the conditions are explicitly expressed as an ODRL Policy.
+	</p>
+	<p>
+		The following approach is recommended:
+		<ol>
+			<li>use <a href="http://dublincore.org/documents/dcmi-terms/#terms-license">dct:license</a> to refer to well-known licences such as <a href="https://creativecommons.org/share-your-work/licensing-types-examples/">those defined by Creative Commons</a></br>
+			The object of dct:license, a <a href="http://dublincore.org/documents/dcmi-terms/#terms-LicenseDocument">dct:LicenseDocument</a>, is "A legal document giving official permission to do something with a Resource."</li>
+			<li>use <a href="http://dublincore.org/documents/dcmi-terms/#terms-rights">dct:rights</a> to refer to rights statements that are not licences, such as copyright statements</br>
+			The object of dct:rights, a <a href="http://dublincore.org/documents/dcmi-terms/#terms-RightsStatement">dct:RightsStatement</a>, is "A statement about the intellectual property rights (IPR) held in or over a Resource, a legal document giving official permission to do something with a resource, or a statement about access rights." 
+			This is more general than a <a href="http://dublincore.org/documents/dcmi-terms/#terms-LicenseDocument">dct:LicenseDocument</a> and therefore should be used if it the statement contains more general information about rights.</li>
+			<li>use <a href="https://www.w3.org/TR/odrl-vocab/#term-hasPolicy">odrl:hasPolicy</a> for linking to <a href="https://www.w3.org/TR/odrl-vocab/#term-Policy">ODRL policies</a></br>
+			The Open Digital Rights Language (ODRL) is a policy expression language that provides a flexible and interoperable information model, vocabulary, and encoding mechanisms for representing statements about usage (i.e. permissions, prohibitions, and obligations) of content and services.</li>
+		</ol>
+	</p>
 
 </section>
 
@@ -3134,6 +3065,249 @@ a:TestingActivity a prov:Activity;
     <p>The editors also gratefully acknowledge the chairs of this Working Group: Karen Coyle, Caroline Burle and Peter Winstanley &mdash; and staff contacts Phil Archer and Dave Raggett.</p>
 </section>
 
+<section class="appendix" id="collection-of-examples">
+  <h2>Examples</h2>
+  <section id="bag-of-files">
+      <h3>Loosely structured catalog</h3>
+
+      <p class="note">
+          The background to this example is discussed in 	<a href="https://github.com/w3c/dxwg/issues/253">Best practice for a loosely-structured catalog</a>
+      </p>
+
+      <p>
+          In many legacy catalogues and repositories (e.g. CKAN), ‘datasets’ are ‘just a bag of files’. There is no distinction made between part/whole, distribution (representation), and other kinds of relationship (e.g. documentation, schema, supporting documents) from the dataset to each of the files.
+      </p>
+      <p>
+          If the nature of the relationships between a dataset and component resources in a catalogue, repository, or elsewhere are not known, <b>dct:relation</b> can be used:
+      </p>
+      <div class="example">
+<pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+:d33937
+dct:description "A set of RDF graphs representing the International [Chrono]stratigraphic Chart, ..." ;
+dct:identifier "https://doi.org/10.25919/5b4d2b83cbf2d"^^xsd:anyURI ;
+dct:creator &lt;https://orcid.org/0000-0002-3884-3420&gt;;
+dct:relation &lt;https://vocabs.ands.org.au/viewById/196&gt; ;
+dct:relation :ChronostratChart2017-02.pdf  ;
+dct:relation :ChronostratChart2017-02.jpg ;
+dct:relation :timescale.zip ;
+dct:relation :isc2017.jsonld ;
+dct:relation :isc2017.nt ;
+dct:relation :isc2017.rdf ;
+dct:relation :isc2017.ttl ;
+.
+</pre></div>
+      <p>
+          If it is clear that any of these related resources is a proper <i>representation</i> of the dataset, dcat:distribution should be used.
+      </p>
+      <div class="example">
+<pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+:d33937
+rdf:type dcat:Dataset ;
+dct:description "A set of RDF graphs representing the International [Chrono]stratigraphic Chart, ..." ;
+dct:identifier "https://doi.org/10.25919/5b4d2b83cbf2d"^^xsd:anyURI ;
+dct:relation &lt;https://vocabs.ands.org.au/viewById/196&gt; ;
+dct:relation :ChronostratChart2017-02.pdf  ;
+dct:relation :ChronostratChart2017-02.jpg ;
+dct:relation :timescale.zip ;
+dcat:distribution :d33937-jsonld ;
+dcat:distribution :d33937-nt ;
+dcat:distribution :d33937-rdf ;
+dcat:distribution :d33937-ttl ;
+.
+:d33937-jsonld  rdf:type dcat:Distribution ;
+dcat:downloadURL :isc2017.jsonld ;
+dcat:byteSize "698039"^^xsd:decimal ;
+dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/ld+json&gt; ;
+.
+:d33937-nt  rdf:type dcat:Distribution ;
+dcat:downloadURL :isc2017.nt ;
+dcat:byteSize "2047874"^^xsd:decimal ;
+dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/n-triples&gt; ;
+.
+:d33937-rdf  rdf:type dcat:Distribution ;
+dcat:downloadURL :isc2017.rdf ;
+dcat:byteSize "1600569"^^xsd:decimal ;
+dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/rdf+xml&gt; ;
+.
+:d33937-ttl  rdf:type dcat:Distribution ;
+dcat:downloadURL :isc2017.ttl ;
+dcat:byteSize "531703"^^xsd:decimal ;
+dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/turtle&gt; ;
+.
+</pre></div>
+      <p>
+          This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/examples/csiro-dap-examples.ttl">csiro-dap-examples.ttl</a>
+      </p>
+  </section>
+
+  <section id="examples-dataset-provenance">
+      <h3>Dataset provenance</h3>
+      <p>
+          The provenance or business context of a dataset can be described using elements from the W3C Provenance Ontology [[PROV-O]].
+      </p>
+      <p>
+          For example, a simple link from a dataset description to the project that generated the dataset can be formalized as follows (other details elided for clarity):
+      </p>
+      <div class="example">
+<pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+dap:atnf-P366-2003SEPT
+rdf:type dcat:Dataset ;
+dct:bibliographicCitation "Burgay, M; McLaughlin, M; Kramer, M; Lyne, A; Joshi, B; Pearce, G; D'Amico, N; Possenti, A; Manchester, R; Camilo, F (2017): Parkes observations for project P366 semester 2003SEPT. v1. CSIRO. Data Collection. https://doi.org/10.4225/08/598dc08d07bb7" ;
+dct:title "Parkes observations for project P366 semester 2003SEPT" ;
+dcat:landingPage &lt;https://data.csiro.au/dap/landingpage?pid=csiro:P366-2003SEPT&gt; ;
+prov:wasGeneratedBy dap:P366 ;
+.
+
+dap:P366
+rdf:type prov:Activity ;
+dct:type "Observation" ;
+prov:startedAtTime "2000-11-01"^^xsd:date ;
+prov:used dap:Parkes-radio-telescope ;
+prov:wasInformedBy dap:ATNF ;
+rdfs:label "P366 - Parkes multibeam high-latitude pulsar survey" ;
+rdfs:seeAlso &lt;https://doi.org/10.1111/j.1365-2966.2006.10100.x&gt; ;
+.
+</pre></div>
+      <p>
+          This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/examples/csiro-dap-examples.ttl">csiro-dap-examples.ttl</a>
+      </p>
+      <p>
+          Several properties capture provenance information, including within the citation and title, but the primary link to a formal description of the project is through <a href="#Property:dataset_wasgeneratedby">prov:wasGeneratedBy</a>.
+          A terse description of the project is shown as a <a href="http://www.w3.org/ns/prov#Activity">prov:Activity</a>, though this would not necessarily be part of the same catalog.
+          Note that as the project is ongoing, the activity has no end date.
+      </p>
+      <p>
+          Further provenance information might be provided using the other <i>starting point properties</i> from PROV, in particular <a href="http://www.w3.org/TR/prov-o/#wasAttributedTo">prov:wasAttributedTo</a> (to link to an agent associated with the dataset production) and <a href="http://www.w3.org/TR/prov-o/#wasDerivedFrom">prov:wasDerivedFrom</a> (to link to a predecessor dataset). Both of these complement Dublin Core properties already used in DCAT, as follows:
+      </p>
+      <ul>
+          <li>
+              <b>prov:wasAttributedTo</b> provides a general link to all kinds of associated agents, such as project sponsors, managers, dataset owners, etc which are not correctly characterized using <b>dct:creator</b>, <b>dct:contributor</b> or <b>dct:publisher</b>.
+          </li>
+          <li>
+              <b>prov:wasDerivedFrom</b> supports a more specific relationship to an input or predecessor dataset compared with <b>dct:source</b>, which is not necessarily a previous dataset.
+          </li>
+      </ul>
+      <p>
+          For a more detailed discussion of the use of PROV for dataset provenance, including recommendations on the use of <i>qualified properties</i>, see the chapter on <a href="#prov-patterns">Provenance Patterns</a> below.
+      </p>
+
+  </section>
+
+  <section id="data-service-examples">
+      <h3>Data services</h3>
+      <p>
+          Data services may be described using DCAT.
+          The values of the classifiers <b>dct:type</b>, <b>dct:conformsTo</b>, and <b>dcat:endpointDescription</b> provide progressively more detail about a service, whose actual endpoint is given by the <b>dcat:endpointURL</b>.
+      </p>
+      <p>
+          The first example describes a data catalog hosted by the European Environment Agency.
+          This is classified as a <a href="#Class:Discovery_Service">dcat:DiscoveryService</a> and also has the <code>dct:type</code> set to <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/discovery">discovery</a> from the <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/">INSPIRE classification of spatial data service types</a>.
+      </p>
+      <p>
+          This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/examples/eea-csw.ttl">eea-csw.ttl</a>
+      </p>
+      <div class="example">
+<pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+a:EEA-CSW-Endpoint
+rdf:type dcat:DiscoveryService ;
+dc:subject "infoCatalogueService"@en ;
+dct:accessRights &lt;http://publications.europa.eu/resource/authority/access-right/PUBLIC&gt; ;
+dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/csw&gt; ;
+dct:description "The EEA public catalogue of spatial datasets references the spatial datasets used by the European Environment Agency as well as the spatial datasets produced by or for the EEA. In the latter case, when datasets are publicly available, a link to the location from where they can be downloaded is included in the dataset's metadata. The catalogue has been initially populated with the most important spatial datasets already available on the data&maps section of the EEA website and is currently updated with any newly published spatial dataset."@en ;
+dct:identifier "eea-sdi-public-catalogue" ;
+dct:issued "2012-01-01"^^xsd:date ;
+dct:license &lt;https://creativecommons.org/licenses/by/2.5/dk/&gt; ;
+dct:spatial [
+    rdf:type dct:Location ;
+    locn:geometry "&lt;gml:Envelope srsName=\"http://www.opengis.net/def/crs/OGC/1.3/CRS84\"&gt;&lt;gml:lowerCorner&gt;-180 -90&lt;/gml:lowerCorner&gt;&lt;gml:upperCorner&gt;180 90&lt;/gml:upperCorner&gt;&lt;/gml:Envelope&gt;"^^gsp:gmlLiteral ;
+    locn:geometry "POLYGON((-180 90,180 90,180 -90,-180 -90,-180 90))"^^gsp:wktLiteral ;
+  ] ;
+dct:title "European Environment Agency's public catalogue of spatial datasets."@en ;
+dct:type &lt;http://inspire.ec.europa.eu/metadata-codelist/ResourceType/service&gt; ;
+dct:type &lt;http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/discovery&gt; ;
+dcat:contactPoint a:EEA ;
+dcat:endpointDescription &lt;https://sdi.eea.europa.eu/catalogue/srv/eng/csw?service=CSW&request=GetCapabilities&gt; ;
+dcat:endpointURL &lt;http://sdi.eea.europa.eu/catalogue/srv/eng/csw&gt; ;
+.
+</pre></div>
+      <p>
+          The next example shows a dataset hosted by Geoscience Australia, which is available from three distinct services, as indicated by the value of the <a href="#Property:datadistributionservice_servesdataset">dcat:servesDataset</a> property of each of the service descriptions.
+          These are classified as a <a href="#Class:Data_Distribution_Service">dcat:DataDistributionService</a> and also have the <code>dct:type</code> set to <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download">download</a> and <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view">view</a> from the <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/">INSPIRE classification of spatial data service types</a>.
+      </p>
+      <p>
+          This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/examples/ga-courts.ttl">ga-courts.ttl</a>
+      </p>
+      <div class="example">
+<pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+ga-courts:jc
+rdf:type dcat:Dataset ;
+dct:description "The dataset contains spatial locations, in point format, of the Australian High Court, Australian Federal Courts and the Australian Magistrates Courts." ;
+dct:spatial [
+    rdf:type dct:Location ;
+    locn:geometry "&lt;gml:Envelope srsName=\"http://www.opengis.net/def/crs/EPSG/0/4283\"&gt;&lt;gml:lowerCorner&gt;115.864566 -42.885989&lt;/gml:lowerCorner&gt;&lt;gml:upperCorner&gt;153.276835 -12.460578&lt;/gml:upperCorner&gt;&lt;/gml:Envelope&gt;"^^gsp:gmlLiteral ;
+  ] ;
+dct:title "Judicial Courts" ;
+dct:type &lt;http://purl.org/dc/dcmitype/Dataset&gt; ;
+dcat:landingPage &lt;https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/cc365600-294a-597d-e044-00144fdd4fa6&gt; ;
+.
+ga-courts:jc-esri
+rdf:type dcat:DataDistributionService ;
+dct:conformsTo &lt;https://developers.arcgis.com/rest/&gt; ;
+dct:description "This web service provides access to the National Judicial Courts dataset and presents the spatial locations of all the known Australian High Courts, Australian Federal Courts and the Australian Federal Circuit Courts located within Australia, all complemented with feature attribution." ;
+dct:identifier "2b8540c8-4a43-144d-e053-12a3070a3ff7" ;
+dct:title "National Judicial Courts MapServer" ;
+dct:type &lt;http://purl.org/dc/dcmitype/Service&gt; ;
+dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download&gt; ;
+dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view&gt; ;
+dcat:endpointURL &lt;http://services.ga.gov.au/gis/rest/services/Judicial_Courts/MapServer&gt; ;
+dcat:landingPage &lt;https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/2b8540c8-4a43-144d-e053-12a3070a3ff7&gt; ;
+dcat:servesDataset ga-courts:jc ;
+.
+ga-courts:jc-wfs
+rdf:type dcat:DataDistributionService ;
+dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wfs/2.0.0&gt; ;
+dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wfs/1.1.0&gt; ;
+dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wfs/1.0.0&gt; ;
+dct:description "This web service provides access to the National Judicial Courts dataset and presents the spatial locations of all the known Australian High Courts, Australian Federal Courts and the Australian Federal Circuit Courts located within Australia, all complemented with feature attribution." ;
+dct:identifier "2b8540c8-4a42-144d-e053-12a3070a3ff7" ;
+dct:title "National Judicial Courts WFS" ;
+dct:type &lt;http://purl.org/dc/dcmitype/Service&gt; ;
+dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download&gt; ;
+dcat:endpointDescription &lt;http://services.ga.gov.au/gis/services/Judicial_Courts/MapServer/WFSServer?request=GetCapabilities&service=WFS&gt; ;
+dcat:endpointURL &lt;http://services.ga.gov.au/gis/services/Judicial_Courts/MapServer/WFSServer&gt; ;
+dcat:landingPage &lt;https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/2b8540c8-4a42-144d-e053-12a3070a3ff7&gt; ;
+dcat:servesDataset ga-courts:jc ;
+.
+ga-courts:jc-wms
+rdf:type dcat:DataDistributionService ;
+dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wms/1.3&gt; ;
+dct:description "This web service provides access to the National Judicial Courts dataset and presents the spatial locations of all the known Australian High Courts, Australian Federal Courts and the Australian Federal Circuit Courts located within Australia, all complemented with feature attribution." ;
+dct:identifier "2b8540c8-4a41-144d-e053-12a3070a3ff7" ;
+dct:title "National Judicial Courts WMS" ;
+dct:type &lt;http://purl.org/dc/dcmitype/Service&gt; ;
+dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view&gt; ;
+dcat:endpointDescription &lt;http://services.ga.gov.au/gis/services/Judicial_Courts/MapServer/WMSServer?request=GetCapabilities&service=WMS&gt; ;
+dcat:endpointURL &lt;http://services.ga.gov.au/gis/services/Judicial_Courts/MapServer/WMSServer&gt; ;
+dcat:landingPage &lt;https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/2b8540c8-4a41-144d-e053-12a3070a3ff7&gt; ;
+dcat:servesDataset ga-courts:jc ;
+.
+</pre></div>
+
+  </section>
+
+  <section id="more-examples-needed">
+      <h3>More examples needed</h3>
+
+      <p class="note">
+          This section will contain more examples on the use of DCAT.
+      </p>
+
+  </section>
+
+</section>
+
+
+
 <section class="appendix" id="changes">
     <h2>Change history</h2>
     <p>A full change-log is available on <a href="https://github.com/w3c/dxwg/commits/gh-pages/dcat">GitHub</a></p>
@@ -3232,6 +3406,11 @@ a:TestingActivity a prov:Activity;
                 which is a sub-property of rdfs:seeAlso - an owl:ObjectProperty that cannot have a Literal value.
                 This revision of DCAT has fixed these issues and replaced the use of vann:usageNote with <a href="https://www.w3.org/TR/skos-primer/#secdocumentation">skos:scopeNote</a> -
                 see <a href="https://github.com/w3c/dxwg/issues/233">Issue #233</a>.
+            </li>
+
+            <li><a href="#Property:record_conformsto">Property: conforms to </a>:
+                DCAT 2014 [[VOCAB-DCAT-20140116]] had no way of representing the conformance of a record metadata with a metadata standard. This revision has added the property dct:conformsTo for dcat:CatalogRecord to cover this requirement.
+                - see <a href="https://github.com/w3c/dxwg/issues/502">Issue #502</a>.
             </li>
 
         </ul>

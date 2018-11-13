@@ -1,10 +1,8 @@
 var respecConfig = {
-    specStatus: "FPWD",
-    shortName: "prof",
-    edDraftURI: "https://w3c.github.io/dxwg/profilesont/",
+    specStatus: "WD",
+    shortName: "prof-roles",
+    edDraftURI: "https://w3c.github.io/dxwg/profilesont/resource_roles.html",
     canonicalURI: "TR",
-    implementationReportURI: "https://github.com/CSIRO-enviro-informatics/prof-ont-implementation-results",
-    testSuiteURI: "https://github.com/CSIRO-enviro-informatics/prof-ont-implementation-results",
     editors: [
       {
         name: "Rob Atkinson",
@@ -17,15 +15,6 @@ var respecConfig = {
         company:    "CSIRO",
         companyURL: "https://www.csiro.au/",
         w3cid:      70131
-    }],
-    otherLinks: [{
-      key: "Contributors",
-      data: [
-        {
-          value: "Simon Cox",
-          href: "http://people.csiro.au/Simon-Cox"
-        }
-      ]
     }],
     wg: "Dataset Exchange Working Group",
     wgURI: "https://www.w3.org/2017/dxwg/",
@@ -100,6 +89,16 @@ var respecConfig = {
             title: "Negotiating Profiles in HTTP",
             date: "2017-10-24",
             status: "IETF Internet Draft"
+        },
+        "PROF-ONT": {
+            editors: [
+                "Rob Atkinson",
+                "Nicholas J. Car"
+            ],
+            href: "https://www.w3.org/TR/prof/",
+            title: "Profile Descriptions ontology",
+            date: "2018-09-23",
+            status: "W3C Editor's Draft"
         },
         SCHEMATRON: {
             href: "https://www.iso.org/standard/55982.html",
