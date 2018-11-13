@@ -1,5 +1,5 @@
 var respecConfig = {
-    specStatus: "FPWD",
+    specStatus: "ED",
     shortName: "conneg-by-ap",
     edDraftURI: "https://w3c.github.io/dxwg/conneg-by-ap/",
     previousURI: "https://w3c.github.io/dxwg/conneg-by-ap/",
@@ -81,18 +81,6 @@ var respecConfig = {
             title: "Negotiating Profiles in HTTP",
             date: "2017-10-24",
             status: "IETF Internet Draft"
-        },
-        "vocab-dcat-2": {
-            editors: [
-                "Alejandra Gonzalez Beltran",
-                "Dave Browning",
-                "Simon Cox",
-                "Peter Winstanley"
-            ],
-            href: "https://www.w3.org/TR/vocab-dcat-2/",
-            title: "Data Catalog Vocabulary (DCAT) - revised edition",
-            date: "2018-10-16",
-            status: "W3C Working Draft"
         }
     }
 };
