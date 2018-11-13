@@ -1,6 +1,6 @@
 var respecConfig = {
     specStatus: "ED",
-    shortName: "conneg-by-ap",
+    shortName: "prof-conneg",
     edDraftURI: "https://w3c.github.io/dxwg/conneg-by-ap/",
     previousURI: "https://w3c.github.io/dxwg/conneg-by-ap/",
     testSuiteURI: "https://github.com/CSIRO-enviro-informatics/prof-conneg-jmeter-test-suite",
