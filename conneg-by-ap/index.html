@@ -28,8 +28,8 @@
     <section id="FamilyOfDocs">
       <h3>Overview of DXWG documents on profiles</h3>
       <p>
-        This document is part of a set of documents on profiles, edited by the W3C Dataset Exchange Working Group (DXWG). 
-	      Some of the documents are general while some are technology-specific:
+        This document is one of a set of documents on profiles, edited by the W3C Dataset Exchange Working Group (DXWG). 
+	      Some of the documents are general whereas others are technology-specific:
       </p>
       <ul>
         <li>[[PROF-GUIDE]] the top-level general profiling guidance document giving an overview of all other documents</li>
@@ -44,27 +44,27 @@
     <p>
       Content delivered by dereferencing Internet identifiers has long been able to be negotiated for in different
       ways. When using the HTTP protocol [[RFC7230]], a client may set an <code>Accept</code> header specifying
-      preferred Media Types which the server may or may not supply. Thus, resources available in different languages
-      may be requested by setting an HTTP <code>Accept-Language</code> header. Until now, clients have not had a
+      preferred Media Types which the server may or may not supply. For example, resources available in different languages
+      may be requested by setting an HTTP <code>Accept-Language</code> header. Until now clients have not had a
       defined way to negotiate for content based on its adherence to an information model - a standard, a specification or
-      a <a>profile</a> - and this document addresses this functionality.
+      a <a>profile</a> - and this document describes how this functionality can be delivered.
     </p>
     <p>
       When online information about a resource adheres to one or more profiles, methods described here allow
       clients to list those profiles and request content according to one or more of them in order of preference.
       For example, information about an online book might adhere to the Dublin Core Terms [[DCTERMS]] metadata
-      specification with each field of information, such as <em>title</em>, <em>description</em>, <em>author</em> etc.,
+      specification with each field, such as <em>title</em>, <em>description</em>, <em>author</em> etc.,
       being defined and formatted according to various Dublin Core elements (<code>dct:title</code>,
-      <code>dct:description</code> &amp; <code>dct:creator</code>, respectively). Then, a request for the informatoin about this
-      book may ask for the list of profiles according to which the metadata is available, or it may ask specifically for a response adhering to the
-      Dublin Core Terms profile. When a non-existent or unsupported profile is requested, a server returns default content.
+      <code>dct:description</code> &amp; <code>dct:creator</code>, respectively). A request for the information about this
+      book may ask for the list of profiles according to which the metadata are available, or it may ask specifically for a response adhering to the
+      Dublin Core Terms profile. When a non-existent or unsupported profile is requested default content would be returned.
     </p>
     <p>
-      When selecting a content negotiation mechanism, an Internet client may use the HTTP protocol but it may also use
-      other methods for providing instructions to a server, such as URI Query String Arguments (QSAs). QSAs are long
+      When selecting a content negotiation mechanism an Internet client may use the HTTP protocol, but it may also use
+      other methods for providing instructions to a server such as URL Query String Arguments (QSAs). QSAs are long
       established as useful for humans and machines for situations where negotiation via HTTP is not practical, such
-      as when manually entering requests into web browsers. This document also provides guidance for both HTTP and non-HTTP methods
-      of content negotiation and ensures they all adhere to a single functional specification, and thus their functional equivalency.
+      as when manually entering requests into web browsers. This document provides guidance for both HTTP and non-HTTP methods
+      of content negotiation, ensuring they adhere to a single functional specification and are, therefore, functionally equivalent.
     </p>
     <section id="compliance">
       <h3>Compliance with this Document</h3>
@@ -148,10 +148,10 @@
       several DTDs or XML Schemas. RDF documents, with a choice of Media Type serializations such as
       <code>text/turtle</code>, <code>application/rdf+xml</code> and others, have a very large number of vocabularies
       (classes and properties) available to use for their content's information model. When a client initiates a request
-      for an Internet resource, e.g., an HTTP GET to retrieve a resource or an HTTP PUT to create or replace a resource, neither the
-      client nor the server have yet had any standardized way to exchange information on how the transmitted resource
+      for an Internet resource, e.g. an HTTP GET to retrieve a resource, or an HTTP PUT to create or replace a resource, neither the
+      client nor the server have yet had any standardized way to exchange information on how the returned resource
       will be structured precisely according to DTDs, XML Schema, vocabularies or other standards, specifications or
-      <em>profiles</em>. When using non-HTTP content negotiation, other methods, such as URIs with Query String
+      <em>profiles</em>. When using non-HTTP content negotiation, other methods, such as URLs with Query String
       Arguments, no universal or standardized method for doing this has been established although there are multiple
       specific ways this has been implemented previously, such as the OAI-PMH protocol [[OAI-PMH]].
     </p>
@@ -212,8 +212,8 @@
         An Internet <em>resource</em> may have many aspects over which a <em>client</em>/<em>server</em> pair of
         agents might negotiate for content. These aspects are to be treated independently so content negotiation for a 
         resource involving negotiation by profile and potentially multiple other aspects of a resource will not affect
-        each other. For this reason, other than a directive to maintain independence, no further discussion of 
-        negotiation by profile and this relations to other forms of negotiation are given. Specific realizations might
+        each other. For this reason, apart from a directive to maintain independence, no further discussion of 
+        negotiation by profile and its relations to other forms of negotiation are given. Specific realizations might
         require special handling of profile and other forms of negotiation.
       </p>
       <p>
@@ -223,7 +223,7 @@
         <em>profile</em> for the <em>server</em> within that <em>request</em>/<em>response</em> session.
       </p>
       <p>
-        In this abstract model, we don't assume any specifics about <em>client</em>, <em>server</em>, <em>resource</em>,
+        In this abstract model, we don't assume any specific details about <em>client</em>, <em>server</em>, <em>resource</em>,
         <em>metadata</em>, <em>request</em> or <em>response</em>.
       </p>
       <div class="issue" data-number="391"></div>
@@ -283,9 +283,9 @@
       <section id="listprofiles">
         <h4>list profiles</h4>
         <p>
-          A <em>client</em> wishes to know what <em>profile</em>s a <em>server</em> is able to deliver conformant
-          representations of a <em>resource</em> for. This may need to be known either before a <em>request</em> for a 
-          particular <em>resource</em> representation is made or perhaps after an initial <em>request</em> for a
+          A <em>client</em> wishes to know for which <em>profile</em>s a <em>server</em> is able to deliver conformant
+          representations of a <em>resource</em>. This may need to be known either before a <em>request</em> for a 
+          particular <em>resource</em> representation is made, or perhaps after the initial <em>request</em> for a
           <em>resource</em> representation is made.
         </p>
         <p>
@@ -322,7 +322,7 @@
       <section id="listprofilestokens">
         <h4>list profiles tokens</h4>
         <p>
-          A <em>client</em>/<em>server</em> pair of agents MAY refere to <em>profile</em>s by identifiers other
+          A <em>client</em>/<em>server</em> pair of agents MAY refer to <em>profile</em>s by identifiers other
           than URIs, <em>token</em>, as long as both the <em>client</em> and <em>server</em> are able to
           deterministically map that token to a <em>profile</em>'s URI. This is due to the known requirement for
           <em>profile</em>s to be able to be referred to within other URIs, such as those of <em>resources</em> and other
@@ -482,7 +482,7 @@ Content-Profile: urn:example:profile:1
 	      This realization does not preclude other QSA specifications for profile and content negotiation.
       </p>
       <p>
-        A query string is a part of a URI which assigns values to specified parameters. QSAs are commonly used within
+        A query string is a part of a URL which assigns values to specified parameters. QSAs are commonly used within
         web browsers by humans and in other <em>client</em>/<em>server</em> situations to deliver extra information to a
         <em>server</em>.
       </p>
@@ -508,19 +508,19 @@ Content-Profile: urn:example:profile:1
           un-sustainable in the long-term, given the likely numbers of profiles to be established.
         </p>
         <p>
-          For this reason, the QSA realisation allows either URIs or tokens for profiles to be used and it is expected,
-          though not mandated here, that QSA realisations will also allow URIs or tokens for Media Types and other
+          For this reason, the QSA realisation allows either URLs or tokens for profiles to be used and it is expected,
+          though not mandated here, that QSA realisations will also allow URLs or tokens for Media Types and other
           content negotiation dimensions, such as language. There are already several initiatives that have created URIs
           for Media Types based on the IANA register's tokens.
         </p>
       </div>
-      <p><strong><em>Resource URI</em></strong></p>
+      <p><strong><em>Resource URL</em></strong></p>
       <p>
-        Resource URIs for which QSA-based profile negotiation is taking place MUST NOT themselves be QSA values
-        of other resource URIs in any QSA-based realisation. Such mechanics may be used but must be transparent to the
+        Resource URLs for which QSA-based profile negotiation is taking place MUST NOT themselves be QSA values
+        of other resource URLs in any QSA-based realisation. Such mechanics may be used but must be transparent to the
         realisation's <em>client</em> applications.
       </p>
-      <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Resource URIs must not, themselves, be parameters of other URIs">
+      <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Resource URLs must not, themselves, be parameters of other URLs">
 For the representation of Resource X, according to Profile Y, in Media Type Z:
 
 NOT ALLOWED:
@@ -542,17 +542,17 @@ GET /resource/X?_profile=Y&_mediatype=Z HTTP/1.1
         </p>
         <p>
           The complete request for the <em>profile</em>s to which a <em>resource</em>'s representations conform can be
-          communicated in a single URI like thus:
+          communicated in a single URL like thus:
         </p>
         <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Requesting a list of profiles for a resource by QSA">
 GET /a/resource?_profile=list HTTP/1.1
         </pre>
         <!--
-        <p><code>RESOURCE_URI?_profile=list</code></p>
+        <p><code>RESOURCE_URL?_profile=list</code></p>
         <p>where</p>
         -->
         <p>
-          where <code>/a/resource</code> is the URI of the resource for which the list of available profiles is
+          where <code>/a/resource</code> is the URL of the resource for which the list of available profiles is
           requested
         </p>
         <p>
@@ -563,7 +563,7 @@ GET /a/resource?_profile=list HTTP/1.1
         </p>
         <p>An example <em>profile</em> listing for a <em>resource</em> in HTML would look like:
         </p>
-        <!--<p><code>RESOURCE_URI?_profile=list&_mediatype=text/html</code></p>-->
+        <!--<p><code>RESOURCE_URL?_profile=list&_mediatype=text/html</code></p>-->
         <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Requesting a list of profiles for a resource by QSA in HTML">
 GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
         </pre>
@@ -696,7 +696,7 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
             <ul>
               <li>see [[PROF-GUIDE]]</li>
               <li>an approach suggested is to provide an <em>alternate view</em> resource for the original
-                resource located at <code>RESOURCE_URI + ?_view=alternates</code> which lists, at a minimum, the
+                resource located at <code>RESOURCE_URL + ?_view=alternates</code> which lists, at a minimum, the
                 <em>profiles</em>, <em>media types</em> (formats) &amp; <em>languages</em> available, as per the
                 <em>alternate views</em> guidance.
               </li>
