@@ -35,7 +35,11 @@
         <li>[[PROF-GUIDE]] the top-level general profiling guidance document giving an overview of all other documents</li>
         <li>[[PROF-ONT]] a document describing a formal ontology for describing objects related to profiles</li>
         <li><strong>[PROF-CONNEG] this document, including specific guidance on how to negotiate for Internet resource content using profiles</strong></li>
-        <li>[[PROF-IETF]] an (<a href="http://www.ietf.org">Internet Engineering Task Force (IETF)</a> <a href="http://www.ietf.org/standards/ids/">Internet-Draft</a>) defining two Hypertext Transfer Protocol (HTTP) Headers for HTTP content negotiation by profile</li>
+        <li>[[PROF-IETF]] an 
+		<a href="http://www.ietf.org">Internet Engineering Task Force (<abbr title="Internet Engineering Task Force">IETF</abbr>)</a>
+		<a href="http://www.ietf.org/standards/ids/">Internet-Draft</a>
+		defining two Hypertext Transfer Protocol (HTTP) Headers
+		for HTTP content negotiation by profile</li>
       </ul>
     </section>
   </section>
@@ -55,16 +59,18 @@
       For example, information about an online book might adhere to the Dublin Core Terms [[DCTERMS]] metadata
       specification with each field, such as <em>title</em>, <em>description</em>, <em>author</em> etc.,
       being defined and formatted according to various Dublin Core elements (<code>dct:title</code>,
-      <code>dct:description</code> &amp; <code>dct:creator</code>, respectively). A request for the information about this
-      book may ask for the list of profiles according to which the metadata are available, or it may ask specifically for a response adhering to the
-      Dublin Core Terms profile. When a non-existent or unsupported profile is requested default content would be returned.
+      <code>dct:description</code> &amp; <code>dct:creator</code>, respectively). Then, a request for the information about this
+      book may ask for the list of profiles according to which the metadata is available, or it may ask specifically for a response adhering to the
+      Dublin Core Terms. When a non-existent or unsupported profile is requested, a server returns default content.
     </p>
     <p>
-      When selecting a content negotiation mechanism an Internet client may use the HTTP protocol, but it may also use
-      other methods for providing instructions to a server such as URL Query String Arguments (QSAs). QSAs are long
+      When selecting a content negotiation mechanism, an Internet client may use the HTTP protocol but it may also use
+      other methods for providing instructions to a server,
+      such as URI Query String Arguments (<abbr title="Query String Arguments">QSAs</abbr>).
+      QSAs are
       established as useful for humans and machines for situations where negotiation via HTTP is not practical, such
-      as when manually entering requests into web browsers. This document provides guidance for both HTTP and non-HTTP methods
-      of content negotiation, ensuring they adhere to a single functional specification and are, therefore, functionally equivalent.
+      as when manually entering requests into web browsers. This document also provides guidance for both HTTP and non-HTTP methods
+      of content negotiation and ensures they all adhere to a single functional specification, ensuring their functional equivalency.
     </p>
     <section id="compliance">
       <h3>Compliance with this Document</h3>
@@ -72,7 +78,7 @@
         For the purpose of compliance, the normative sections of this document are
         <a href="#definitions">Section 2</a>,
         <a href="#abstractmodel">Section 5</a>,
-        <a href="#realisations">Section 6</a>, and
+        <a href="#realizations">Section 6</a>, and
         <a href="#testsuites">Section 7</a>.
       </p>
     </section>
@@ -116,26 +122,26 @@
       </dd>
       <dt><dfn>client</dfn></dt>
       <dd>
-        a program that establishes a connection to a server for the purpose of sending one or more HTTP requests
+        A program that establishes a connection to a server for the purpose of sending one or more HTTP requests
         [[RFC7230]]
       </dd>
       <dt><dfn>server</dfn></dt>
       <dd>
-        a program that accepts connections in order to service HTTP requests by sending HTTP responses [[RFC7230]]
+        A program that accepts connections in order to service HTTP requests by sending HTTP responses. [[RFC7230]]
       </dd>
       <dt><dfn>resource</dfn></dt>
       <dd>
-        whatever might be identified by a URI. Familiar examples include an electronic
-        document, an image, a source of information with a consistent purpose [[rfc3986]]
+        The entity that is identified by a URI. Familiar examples include an electronic
+        document, an image, a source of information with a consistent purpose. [[RFC3986]]
       </dd>
       <dt><dfn>metadata</dfn></dt>
-      <dd>additional information be supplied about a resource [[rfc3986]]</dd>
+      <dd>Information that is supplied about a resource. [[RFC3986]]</dd>
       <dt><dfn>request</dfn></dt>
-      <dd>a message sent over the Internet, from a <em>client</em> to a <em>server</em>, for a information about a <em>resource</em> [[RFC7230]]</dd>
+      <dd>A message sent over the Internet, from a <em>client</em> to a <em>server</em>, for a information about a <em>resource</em>. [[RFC7230]]</dd>
       <dt><dfn>response</dfn></dt>
-      <dd>a message sent over the Internet, from a <em>server</em> to a <em>client</em> answering a <em>request</em> for information about a <em>resource</em> [[RFC7230]]</dd>
-      <dt><dfn>token</dfn></dt>
-      <dd>a short name identifying something, in the context of this document a <a>profile</a></dd>
+      <dd>A message sent over the Internet, from a <em>server</em> to a <em>client</em> answering a <em>request</em> for information about a <em>resource</em> [[RFC7230]]</dd>
+      <dt><dfn>token</dfn></dt>.
+      <dd>A short name identifying something, in the context of this document a <a>profile</a></dd>.
     </dl>
     <div class="issue" data-number="378"></div>
     <div class="issue" data-number="537"></div>
@@ -146,18 +152,21 @@
       In many cases, there are several ways to describe a resource within the scope of a single Media Type.
       For instance, XML documents, while conforming to the <code>text/xml</code> Media Type, may adhere to one of
       several DTDs or XML Schemas. RDF documents, with a choice of Media Type serializations such as
-      <code>text/turtle</code>, <code>application/rdf+xml</code> and others, have a very large number of vocabularies
+      <code>text/turtle</code>, <code>application/rdf+xml</code> and others, have a large number of vocabularies
       (classes and properties) available to use for their content's information model. When a client initiates a request
-      for an Internet resource, e.g. an HTTP GET to retrieve a resource, or an HTTP PUT to create or replace a resource, neither the
-      client nor the server have yet had any standardized way to exchange information on how the returned resource
-      will be structured precisely according to DTDs, XML Schema, vocabularies or other standards, specifications or
-      <em>profiles</em>. When using non-HTTP content negotiation, other methods, such as URLs with Query String
-      Arguments, no universal or standardized method for doing this has been established although there are multiple
-      specific ways this has been implemented previously, such as the OAI-PMH protocol [[OAI-PMH]].
+      for an Internet resource, such as an HTTP GET to retrieve a resource or an HTTP PUT to create or replace a resource, the client and server must have a standardized way to exchange information on how the transmitted resource
+      will be structured according to DTDs, XML Schema, vocabularies or other standards, specifications or
+      <em>profiles</em>. When using non-HTTP content negotiation, various methods such as URIs with Query String
+      Arguments have been implemented previously,
+      such as the
+      <abbr title="Open Archives Initiative - Protocol for Metadata Harvesting">OAI-PMH</abbr> [[OAI-PMH]] and
+      <abbr title="Open Geospatial Consortium">OGC</abbr>'s
+      <abbr title="Catalogue Service for the Web">CSW</abbr> [[CSW]] protocols.
     </p>
     <p>
-      This document describes content negotiation based on profiles using HTTP protocol by introducing new headers and
-      non-HTTP methods, such as via QSAs, by introducing a general QSA Application Programming Interface (API).
+      This document describes content negotiation based on profiles using HTTP protocol. It introduces HTTP headers and
+      non-HTTP methods, such as via QSAs, and defines a general QSA Application Programming Interface
+      (<abbr title="Application Programming Interface">API</abbr>).
     </p>
   </section>
   <section id="relatedwork" class="informative">
@@ -212,8 +221,8 @@
         An Internet <em>resource</em> may have many aspects over which a <em>client</em>/<em>server</em> pair of
         agents might negotiate for content. These aspects are to be treated independently so content negotiation for a 
         resource involving negotiation by profile and potentially multiple other aspects of a resource will not affect
-        each other. For this reason, apart from a directive to maintain independence, no further discussion of 
-        negotiation by profile and its relations to other forms of negotiation are given. Specific realizations might
+        each other. For this reason, other than a directive to maintain independence, no further discussion of 
+        negotiation by profile and the relations to other forms of negotiation are given. Specific realizations might
         require special handling of profile and other forms of negotiation.
       </p>
       <p>
@@ -247,7 +256,7 @@
         </li>
       </ol>
       <p>
-        A third <em>request</em> type is given that is expected not to apply to all realisations of this abstract model
+        A third <em>request</em> type is given that is expected not to apply to all realizations of this abstract model
         and not all clients adhering to this specification need implement it.
       </p>
       <ol start="3">
@@ -331,12 +340,12 @@
         <p>
           A <em>server</em> responding to a <strong>list profiles tokens</strong> <em>request</em> MUST provide
           token/URI mappings that list tokens and URIs, either of which can be used for <strong>get resource by
-          profile</strong> <em>requests</em> within the same realisation.
+          profile</strong> <em>requests</em> within the same realization.
         </p>
       </section>
     </section>
   </section>
-  <section id="realisations">
+  <section id="realizations">
     <h2>Realizations</h2>
     <p>
       This section describes <em>realization</em>s of the abstract model in multiple implementation domains.
@@ -458,7 +467,7 @@ Content-Profile: urn:example:profile:1
         </pre>
         <p>
           Having performed content negotiation and returning a resource representation, it is RECOMMENDED
-          that the server also includes a Link header indicating the availability of alternate resources
+          that the server also include a Link header indicating the availability of alternate resources
           encoded in other media types and conforming to other profiles, as described above.
         </p>
       </section>
@@ -508,17 +517,17 @@ Content-Profile: urn:example:profile:1
           un-sustainable in the long-term, given the likely numbers of profiles to be established.
         </p>
         <p>
-          For this reason, the QSA realisation allows either URLs or tokens for profiles to be used and it is expected,
-          though not mandated here, that QSA realisations will also allow URLs or tokens for Media Types and other
+          For this reason, the QSA realization allows either URIs or tokens for profiles to be used and it is expected,
+          though not mandated here, that QSA realizations will also allow URIs or tokens for Media Types and other
           content negotiation dimensions, such as language. There are already several initiatives that have created URIs
           for Media Types based on the IANA register's tokens.
         </p>
       </div>
       <p><strong><em>Resource URL</em></strong></p>
       <p>
-        Resource URLs for which QSA-based profile negotiation is taking place MUST NOT themselves be QSA values
-        of other resource URLs in any QSA-based realisation. Such mechanics may be used but must be transparent to the
-        realisation's <em>client</em> applications.
+        Resource URIs for which QSA-based profile negotiation is taking place MUST NOT themselves be QSA values
+        of other resource URIs in any QSA-based realization. Such mechanics may be used but must be transparent to the
+        realization's <em>client</em> applications.
       </p>
       <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Resource URLs must not, themselves, be parameters of other URLs">
 For the representation of Resource X, according to Profile Y, in Media Type Z:
@@ -605,7 +614,7 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
   <section id="testsuites">
     <h2>Test Suites</h2>
     <p>
-      This section includes links to software tools to be used for testing the adherence of implementations to the realisations
+      This section includes links to software tools to be used for testing the adherence of implementations to the realizations
       given in this document.
     </p>
     <dl>
