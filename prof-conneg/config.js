@@ -1,8 +1,8 @@
 var respecConfig = {
     specStatus: "ED",
     shortName: "prof-conneg",
-    edDraftURI: "https://w3c.github.io/dxwg/conneg-by-ap/",
-    previousURI: "https://w3c.github.io/dxwg/conneg-by-ap/",
+    edDraftURI: "https://w3c.github.io/dxwg/prof-conneg/",
+    previousURI: "https://w3c.github.io/dxwg/prof-conneg/",
     testSuiteURI: "https://github.com/CSIRO-enviro-informatics/prof-conneg-jmeter-test-suite",
     implementationReportURI: "https://github.com/CSIRO-enviro-informatics/prof-conneg-conf-test-results",
     canonicalURI: "TR",
@@ -47,7 +47,7 @@ var respecConfig = {
                 "Rob Atkinson",
                 "Nicholas J. Car"
             ],
-            href: "https://w3c.github.io/dxwg/profilesont/",
+            href: "https://w3c.github.io/dxwg/prof/",
             title: "Profile Descriptions ontology",
             date: "2018-09-23",
             status: "W3C Editor's Draft"
@@ -58,7 +58,7 @@ var respecConfig = {
 	      "Rob Atkinson",
 	      "Nicholas J. Car"
 	    ],
-            href: "https://w3c.github.io/dxwg/conneg-by-ap/",
+            href: "https://w3c.github.io/dxwg/prof-conneg/",
             title: "Content Negotiation by Profile",
             date: "2018-12-31",
             status: "W3C Editor's Draft"
@@ -69,7 +69,7 @@ var respecConfig = {
     	      "Karen Coyle", 
     	      "Antoine Isaac"
 	    ],
-            href: "https://w3c.github.io/dxwg/profiles/",
+            href: "https://w3c.github.io/dxwg/prof-guidance/",
             title: "Profile Guidance",
             date: "2018-12-31",
             status: "W3C Editor's Draft"

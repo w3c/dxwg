@@ -1,7 +1,7 @@
 var respecConfig = {
     specStatus: "WD",
     shortName: "prof-roles",
-    edDraftURI: "https://w3c.github.io/dxwg/profilesont/resource_roles.html",
+    edDraftURI: "https://w3c.github.io/dxwg/prof/resource_roles.html",
     canonicalURI: "TR",
     editors: [
       {
@@ -69,7 +69,7 @@ var respecConfig = {
             status: "W3C Community Group Draft Report"
         },
         "PROF-CONNEG": {
-            href: "https://www.w3.org/TR/conneg-by-ap/",
+            href: "https://www.w3.org/TR/prof-conneg/",
             title: "Content Negotiation by Profile",
             date: "2018-12-31",
             status: "W3C Editor's Draft"

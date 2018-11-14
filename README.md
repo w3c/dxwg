@@ -10,7 +10,7 @@
 - [DCAT Revision](https://w3c.github.io/dxwg/dcat/)  
   - [DCAT Revision Second Public Working Draft (SPWD)](https://www.w3.org/TR/vocab-dcat-2/)
   - [DCAT Revision First Public Working Draft (FPWD)](https://www.w3.org/TR/2018/WD-vocab-dcat-2-20180508/)
-- [Dataset Exchange Guidance for Application Profiles](https://w3c.github.io/dxwg/profiles/)
-- [The Profiles Ontology](https://w3c.github.io/dxwg/profilesont/)
-- [Content Negotiation by Profile](https://w3c.github.io/dxwg/conneg-by-ap/)
+- [Dataset Exchange Guidance for Application Profiles](https://w3c.github.io/dxwg/prof-guidance/)
+- [The Profiles Ontology](https://w3c.github.io/dxwg/prof/)
+- [Content Negotiation by Profile](https://w3c.github.io/dxwg/prof-conneg/)
 

@@ -127,13 +127,13 @@ var respecConfig = {
           href : "http://patterns.dataincubator.org/book/"
       },
       "PROF-CONNEG": {
-            href: "https://w3c.github.io/dxwg/conneg-by-ap/",
+            href: "https://w3c.github.io/dxwg/prof-conneg/",
             title: "Content Negotiation by Profile",
             date: " 2018-10-03",
             status: "W3C Editor's Draft"
       },
       "PROF-GUIDE": {
-            href: "https://w3c.github.io/dxwg/profiles/",
+            href: "https://w3c.github.io/dxwg/prof-guidance/",
             title: "Profile Guidance",
             date: " 2018-10-03",
             status: "W3C Editor's Draft"

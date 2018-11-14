@@ -1,7 +1,7 @@
 var respecConfig = {
     specStatus: "FPWD",
     shortName: "profile-guidance",
-    edDraftURI: "https://w3c.github.io/dxwg/profiles/",
+    edDraftURI: "https://w3c.github.io/dxwg/prof-guidance/",
     editors: [
       {
         name: "Rob Atkinson",
@@ -66,7 +66,7 @@ var respecConfig = {
             "status": "DCMI Working Draft"
         },
         "PROF-CONNEG": {
-            "href": "https://www.w3.org/TR/conneg-by-ap/",
+            "href": "https://www.w3.org/TR/prof-conneg/",
             "title": "Content Negotiation by Profile",
             "date": " 2018-12-31",
             "status": "W3C Editor's Draft"

@@ -1,7 +1,7 @@
 var respecConfig = {
     specStatus: "ED",
     shortName: "prof",
-    edDraftURI: "https://w3c.github.io/dxwg/profilesont/",
+    edDraftURI: "https://w3c.github.io/dxwg/prof/",
     canonicalURI: "TR",
     implementationReportURI: "https://github.com/CSIRO-enviro-informatics/prof-ont-implementation-results",
     testSuiteURI: "https://github.com/CSIRO-enviro-informatics/prof-ont-implementation-results",
@@ -80,7 +80,7 @@ var respecConfig = {
             status: "W3C Community Group Draft Report"
         },
         "PROF-CONNEG": {
-            href: "https://www.w3.org/TR/conneg-by-ap/",
+            href: "https://www.w3.org/TR/prof-conneg/",
             title: "Content Negotiation by Profile",
             date: "2018-12-31",
             status: "W3C Editor's Draft"
