@@ -1,10 +1,8 @@
 var respecConfig = {
-    specStatus: "ED",
-    shortName: "prof",
-    edDraftURI: "https://w3c.github.io/dxwg/profilesont/",
+    specStatus: "WD",
+    shortName: "prof-roles",
+    edDraftURI: "https://w3c.github.io/dxwg/profilesont/resource_roles.html",
     canonicalURI: "TR",
-    implementationReportURI: "https://github.com/CSIRO-enviro-informatics/prof-ont-implementation-results",
-    testSuiteURI: "https://github.com/CSIRO-enviro-informatics/prof-ont-implementation-results",
     editors: [
       {
         name: "Rob Atkinson",
@@ -17,15 +15,6 @@ var respecConfig = {
         company:    "CSIRO",
         companyURL: "https://www.csiro.au/",
         w3cid:      70131
-    }],
-    otherLinks: [{
-      key: "Contributors",
-      data: [
-        {
-          value: "Simon Cox",
-          href: "http://people.csiro.au/Simon-Cox"
-        }
-      ]
     }],
     wg: "Dataset Exchange Working Group",
     wgURI: "https://www.w3.org/2017/dxwg/",
@@ -73,7 +62,7 @@ var respecConfig = {
             date: "2008-07",
             status: "ISO Standard"
         },
-        SHEX: {
+        shex: {
             href: "https://shexspec.github.io/spec/",
             title: "Shape Expressions Language 2.next",
             date: "2018-09-06",
@@ -101,13 +90,23 @@ var respecConfig = {
             date: "2017-10-24",
             status: "IETF Internet Draft"
         },
+        "PROF-ONT": {
+            editors: [
+                "Rob Atkinson",
+                "Nicholas J. Car"
+            ],
+            href: "https://www.w3.org/TR/prof/",
+            title: "Profile Descriptions ontology",
+            date: "2018-09-23",
+            status: "W3C Editor's Draft"
+        },
         SCHEMATRON: {
             href: "https://www.iso.org/standard/55982.html",
             title: "ISO/IEC 19757-3:2016 Information technology -- Document Schema Definition Languages (DSDL) -- Part 3: Rule-based validation -- Schematron",
             date: "2016-01",
             status: "ISO Standard"
         },
-        "MODSPEC": {
+        "modspec": {
           editors: [
             "OGC Policy SWG"
           ],
@@ -116,7 +115,7 @@ var respecConfig = {
           status: "OGC Policy Directive" ,
           date: "2009-10-19"
         },
-        "CFG-MGMT": {
+        "cfg-mgmt": {
           authors: [
             "Serena Coetzee",
             "Simon Cox",
@@ -127,6 +126,18 @@ var respecConfig = {
           publisher: "IEEE" ,
           status: "7th International Conference on Standardization and Innovation in Information Technology (SIIT), Berlin, 2011, pp. 1-12" ,
           date: "2011-11-21"
+        },
+        "vocab-dcat-2": {
+            editors: [
+                "Alejandra Gonzalez Beltran",
+                "Dave Browning",
+                "Simon Cox",
+                "Peter Winstanley"
+            ],
+            href: "https://www.w3.org/TR/vocab-dcat-2/",
+            title: "Data Catalog Vocabulary (DCAT) - revised edition",
+            date: "2018-09-07",
+            status: "W3C Editor's Draft"
         }
     }
 };
