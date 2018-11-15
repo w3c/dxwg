@@ -58,11 +58,14 @@
   </p>
   <p>
     This model starts with <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></code> entities
-    which can either be <code>Base Specifications</code> (a Standard not profiling any other Standard) or <code>Profiles</code> (Standards which
-    do profile others). <code>Base Specifications</code> or <code>Profiles</code> can have <code>Resource Descriptors</code> associated with
-    them that define rules for implementing it. <code>Resource Descriptors</code> must indicate the role they
-    play (to guide, to validate etc.) and the formalism they adhere to (<code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-format">dct:format</a></code>) to allow for content negotiation.
-    A vocabulary of <code>Resource Roles</code> are provided alongside this ontology and that list is extensible.
+    which can either be a <code>Base Specification</code> (a Standard that does not profile anything) or a <code>Profile</code> (a Standard which
+    does). <code>Base Specification</code>s or <code>Profile</code>s can have <code>Resource Descriptor</code>s associated with
+    them that define rules for implementing it, provide guidance on how tom implement it or take on a series of other roles. <code>Resource Descriptor</code>s must indicate the role they
+    play (to guide, to validate etc.), the formalism they adhere to (<code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-format">dct:format</a></code>) to allow for content negotiation
+    and any <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></code> that they themselves conform to (<code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-conformsTo">dct:conformsTo</a></code>).
+  </p>
+  <p>
+    A vocabulary of <code>Resource Role</code>s is provided alongside this ontology and that list is extensible.
   </p>
 </section>
 <section id="conformance">
@@ -197,15 +200,15 @@
   </figure>
   <div class="issue" data-number="404"></div>
   <p>
-    This model starts with <code>dct:Standard</code> entities which can either be <code>Base Specifications</code>
-    (a <code>dct:Standard</code> not profiling any other <code>dct:Standard</code>) or <code>Profiles</code>
-    (<code>dct:Standard</code>s which do profile others). <code>Base Specifications</code> or <code>Profiles</code> can
-    have <code>Resource Descriptors</code> associated with them that defines implementing rules for the it.
-    <code>Resource Descriptors</code> must indicate the role (<code>Resource Roles</code>) they play (to guide, to
-    validate etc.) and the formats they adhere to (<code>dct:format</code>) to allow for content negotiation, as well
-    as any standards they themselves conform to, such as [[SHACL]] or [[DCDSP]] for validating rules, to allow for
-    interpretation. A vocabulary of <code>Resource Roles</code> is provided alongside this ontology and that list is
-    extensible.
+    This model starts with <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></code> entities
+    which can either be a <code>Base Specification</code> (a Standard that does not profile anything) or a <code>Profile</code> (a Standard which
+    does). <code>Base Specification</code>s or <code>Profile</code>s can have <code>Resource Descriptor</code>s associated with
+    them that define rules for implementing it, provide guidance on how tom implement it or take on a series of other roles. <code>Resource Descriptor</code>s must indicate the role they
+    play (to guide, to validate etc.), the formalism they adhere to (<code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-format">dct:format</a></code>) to allow for content negotiation
+    and any <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></code> that they themselves conform to (<code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-conformsTo">dct:conformsTo</a></code>).
+  </p>
+  <p>
+    A vocabulary of <code>Resource Role</code>s is provided alongside this ontology and that list is extensible.
   </p>
 </section>
 <section id="specification">
@@ -245,7 +248,7 @@
       <tr><td class="prop">Label:</td><td>Base Specification</td></tr>
       <tr><td class="prop">Definition:</td><td>A specification that defines all implementation constraints, without applying constraints on usage of another specification</td></tr>
       <tr><td class="prop">Sub class of:</td><td><a href="#Class:Profile">prof:Profile</a></td></tr>
-      <tr><td class="prop">Usage note:</td><td>This may not be a useful class: documents of any specification can be regarded as a trivial profile, so applications only need to be concerned with Profile conformance</td></tr>
+      <tr><td class="prop">Usage note:</td><td>This may not be a useful class: documents of any specification can be regarded as a trivial profile, so applications only need to be concerned with Profile conformance. If used, a Base Specification may not have the property <a href="#Property:isProfileOf">prof:isProfileOf</a>.</td></tr>
       </tbody>
     </table>
   </section>
