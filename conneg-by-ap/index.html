@@ -61,7 +61,8 @@
       being defined and formatted according to various Dublin Core elements (<code>dct:title</code>,
       <code>dct:description</code> &amp; <code>dct:creator</code>, respectively). Then, a request for the information about this
       book may ask for the list of profiles according to which the metadata is available, or it may ask specifically for a response adhering to the
-      Dublin Core Terms. When a non-existent or unsupported profile is requested, a server returns default content.
+      Dublin Core Terms. When no profile or an unsupported profile is requested, a server returns default content, that
+      is, content conforming to the default profile supported by the server.
     </p>
     <p>
       When selecting a content negotiation mechanism, an Internet client may use the HTTP protocol but it may also use
@@ -277,6 +278,8 @@
 		conformant <em>resource</em> representations and the mapping of the tokens to <em>profile</em> URIs.
         </li>
       </ol>
+
+      <div class="issue" data-number="587"></div>
       <p>More detailed descriptions of these requests and their responses are given next.</p>
       <section id="listprofiles">
         <h4>list profiles</h4>
@@ -316,6 +319,7 @@
           <em>resource</em> representation conforming to one of any number of <em>profile</em>s with its preference
           expressed in a some form of list ordering.
         </p>
+        <div class="issue" data-number="588"></div>
       </section>
       <section id="listprofilestokens">
         <h4>list profiles tokens</h4>
@@ -533,6 +537,7 @@ GET /resource/X?_profile=Y&_mediatype=Z HTTP/1.1
           A QSA with a fixed value MUST be supported by a <em>server</em> to allow a <em>client</em> to
           make a <strong>list profiles</strong> <em>request</em>.
         </p>
+        <div class="issue" data-number="589"></div>
         <p>
           The QSA key/value pair <code>_profile=list</code> SHOULD be used however the <em>server</em> MAY
           make available an equivalent pair as long as this is discoverable. This is to cater for APIs that alreadly
