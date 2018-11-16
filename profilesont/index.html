@@ -38,9 +38,13 @@
 <section id="introduction" class="informative">
   <h2>Introduction</h2>
   <p>
-    The profiles ontology provides a structure to describe profiles of information standards. Its
+    This Profiles Ontology provides a structure to describe profiles of information standards. Its
     development was triggered by the appearance of multiple profiles of the Dataset Catalog Vocabulary (DCAT)
     [[VOCAB-DCAT-20140116]], and also influenced by work on profiles of the Dublin Core Application Profiles guidelines [[DCAP]].
+  </p>
+  <p>
+    A "profile" here is defined by the <a href="#Class:Profile">Profile class definition</a> in the
+    <a href="#specification">Vocabulary Specification</a>.
   </p>
   <p>
     Profiles of DCAT &amp; DCAP aim to increase interoperability within a specified community of users by introducing
@@ -54,11 +58,14 @@
   </p>
   <p>
     This model starts with <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></code> entities
-    which can either be <code>Base Specifications</code> (a Standard not profiling any other Standard) or <code>Profiles</code> (Standards which
-    do profile others). <code>Base Specifications</code> or <code>Profiles</code> can have <code>Resource Descriptors</code> associated with
-    them that define rules for implementing it. <code>Resource Descriptors</code> must indicate the role they
-    play (to guide, to validate etc.) and the formalism they adhere to (<code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-format">dct:format</a></code>) to allow for content negotiation.
-    A vocabulary of <code>Resource Roles</code> are provided alongside this ontology and that list is extensible.
+    which can either be a <code>Base Specification</code> (a Standard that does not profile anything) or a <code>Profile</code> (a Standard which
+    does). <code>Base Specification</code>s or <code>Profile</code>s can have <code>Resource Descriptor</code>s associated with
+    them that define rules for implementing it, provide guidance on how tom implement it or take on a series of other roles. <code>Resource Descriptor</code>s must indicate the role they
+    play (to guide, to validate etc.), the formalism they adhere to (<code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-format">dct:format</a></code>) to allow for content negotiation
+    and any <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></code> that they themselves conform to (<code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-conformsTo">dct:conformsTo</a></code>).
+  </p>
+  <p>
+    A vocabulary of <code>Resource Role</code>s is provided alongside this ontology and that list is extensible.
   </p>
 </section>
 <section id="conformance">
@@ -97,7 +104,6 @@
       <tr><td>dct</td><td>http://purl.org/dc/terms/</td></tr>
       <tr><td>owl</td><td>http://www.w3.org/2002/07/owl#</td></tr>
       <tr><td>prof</td><td>http://www.w3.org/ns/prof/</td></tr>
-      <tr><td>profc</td><td>http://www.w3.org/ns/prof/constraints/</td></tr>
       <tr><td>prov</td><td>http://www.w3.org/ns/prov#</td></tr>
       <tr><td>rdf</td><td>http://www.w3.org/1999/02/22-rdf-syntax-ns#</td></tr>
       <tr><td>rdfs</td><td>http://www.w3.org/2000/01/rdf-schema#</td></tr>
@@ -193,15 +199,15 @@
   </figure>
   <div class="issue" data-number="404"></div>
   <p>
-    This model starts with <code>dct:Standard</code> entities which can either be <code>Base Specifications</code>
-    (a <code>dct:Standard</code> not profiling any other <code>dct:Standard</code>) or <code>Profiles</code>
-    (<code>dct:Standard</code>s which do profile others). <code>Base Specifications</code> or <code>Profiles</code> can
-    have <code>Resource Descriptors</code> associated with them that defines implementing rules for the it.
-    <code>Resource Descriptors</code> must indicate the role (<code>Resource Roles</code>) they play (to guide, to
-    validate etc.) and the formats they adhere to (<code>dct:format</code>) to allow for content negotiation, as well
-    as any standards they themselves conform to, such as [[SHACL]] or [[DCDSP]] for validating rules, to allow for
-    interpretation. A vocabulary of <code>Resource Roles</code> is provided alongside this ontology and that list is
-    extensible.
+    This model starts with <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></code> entities
+    which can either be a <code>Base Specification</code> (a Standard that does not profile anything) or a <code>Profile</code> (a Standard which
+    does). <code>Base Specification</code>s or <code>Profile</code>s can have <code>Resource Descriptor</code>s associated with
+    them that define rules for implementing it, provide guidance on how tom implement it or take on a series of other roles. <code>Resource Descriptor</code>s must indicate the role they
+    play (to guide, to validate etc.), the formalism they adhere to (<code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-format">dct:format</a></code>) to allow for content negotiation
+    and any <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></code> that they themselves conform to (<code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-conformsTo">dct:conformsTo</a></code>).
+  </p>
+  <p>
+    A vocabulary of <code>Resource Role</code>s is provided alongside this ontology and that list is extensible.
   </p>
 </section>
 <section id="specification">
@@ -241,7 +247,7 @@
       <tr><td class="prop">Label:</td><td>Base Specification</td></tr>
       <tr><td class="prop">Definition:</td><td>A specification that defines all implementation constraints, without applying constraints on usage of another specification</td></tr>
       <tr><td class="prop">Sub class of:</td><td><a href="#Class:Profile">prof:Profile</a></td></tr>
-      <tr><td class="prop">Usage note:</td><td>This may not be a useful class: documents of any specification can be regarded as a trivial profile, so applications only need to be concerned with Profile conformance</td></tr>
+      <tr><td class="prop">Usage note:</td><td>This may not be a useful class: documents of any specification can be regarded as a trivial profile, so applications only need to be concerned with Profile conformance. If used, a Base Specification may not have the property <a href="#Property:isProfileOf">prof:isProfileOf</a>.</td></tr>
       </tbody>
     </table>
   </section>
@@ -261,8 +267,9 @@
             identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options
             and parameters of those base specifications necessary to accomplish a particular function.
           </p>
-          <p>This definition includes what are often called "application profiles", "metadata application profiles",
-            or "metadata profiles"
+          <p>
+            This definition includes what are often called "application profiles", "metadata application profiles", or
+            "metadata profiles".
           </p>
         </td>
       </tr>
@@ -398,8 +405,8 @@
       </thead>
       <tbody>
       <tr><td class="prop">Label:</td><td>Resource Descriptor</td></tr>
-      <tr><td class="prop">Definition:</td><td>A resource that defines an aspect of a Profile</td></tr>
-      <tr><td class="prop">Usage note:</td><td>Must indicate the formalism (dct:format) used and any adherence to a dct:Standard (dct:conformsTo) to allow for machine mediation. For human understanding, must indicate purpose via relation to a ResourceRole (hasRole)</td></tr>
+      <tr><td class="prop">Definition:</td><td>A resource that defines an aspect - a particular part or feature - of a Profile</td></tr>
+      <tr><td class="prop">Usage note:</td><td>Can be use to indicate the formalism (via dct:format) and any adherence to a dct:Standard (via dct:conformsTo) to allow for machine mediation as well as its purpose via relation to a ResourceRole (via hasRole)</td></tr>
       </tbody>
     </table>
     <section id="Property:hasArtifact" class="property">
@@ -410,9 +417,9 @@
         </thead>
         <tbody>
         <tr><td class="prop">Label:</td><td>has artifact (resource)</td></tr>
-        <tr><td class="prop">Definition:</td><td>The artifact (resource) linked to a profile through an Resource Descriptor</td></tr>
+        <tr><td class="prop">Definition:</td><td>An rdfs:Resource that implements the Resource Descriptor</td></tr>
         <tr><td class="prop">Domain:</td><td><a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a></td></tr>
-        <tr><td class="prop">Usage Note:</td><td>A property to link from a :ResourceDescriptor to an implementing resource object</td></tr>
+        <tr><td class="prop">Usage Note:</td><td>A property to link from a :ResourceDescriptor to an actual resource (rdfs:Resource and an individual) that implements it</td></tr>
         </tbody>
       </table>
     </section>
@@ -479,7 +486,7 @@
     <h4>Class: ResourceRole</h4>
     <table class="definition">
       <thead>
-      <tr><th><a href="https://www.w3.org/TR/owl-syntax/#Classes">OWL Class</a>:</th><th><a href="#Class:ResourceRole">prof:hasResourceRole</a></th></tr>
+      <tr><th><a href="https://www.w3.org/TR/owl-syntax/#Classes">OWL Class</a>:</th><th><a href="#Class:ResourceRole">prof:ResourceRole</a></th></tr>
       </thead>
       <tbody>
         <tr><td class="prop">Label:</td><td>Resource Role</td></tr>
@@ -600,21 +607,21 @@
   a prof:ResourceDescriptor;
 	rdfs:label "DCAT-AP Guidance Document (Word)" ;
 	dct:format &lt;https://w3id.org/mediatype/application/msword&gt; ;
-	prof:hasResourceRole roles:Guidance ;
+	prof:hasRole roles:Guidance ;
 .
 
 &lt;https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f17e18570_b1d77_b4171_b9df5_bb53cb4f017d4&gt;
   a prof:ResourceDescriptor;
 	rdfs:label "DCAT-AP Guidance Document (PDF)" ;
 	dct:format &lt;https://w3id.org/mediatype/application/pdf&gt; ;
-	prof:hasResourceRole roles:Guidance ;
+	prof:hasRole roles:Guidance ;
 .
 
 &lt;https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f1131a208_b92e9_b4427_ba40c_b6c47746cd422&gt;
   a prof:ResourceDescriptor;
 	rdfs:label "DCAT-AP Image" ;
 	dct:format &lt;https://w3id.org/mediatype/image/png&gt; ;
-	prof:hasResourceRole roles:Guidance ;
+	prof:hasRole roles:Guidance ;
 .
       
 &lt;https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f016d88c3_ba0b3_b4506_bae4e_b758e7401c096&gt;
@@ -622,7 +629,7 @@
 	rdfs:label "DCAT-AP Constraints" ;
 	dct:conformsTo &lt;http://www.w3.org/ns/shacl&gt;; # the namespace for SHACL
 	dct:format "text/turtle" ;
-	prof:hasResourceRole roles:ConformanceTest ;
+	prof:hasRole roles:ConformanceTest ;
 .
     </pre>
   </section>
@@ -641,9 +648,9 @@
       <a href="https://joinup.ec.europa.eu/release/geodcat-ap-v10">GeoDCAT-AP</a> - for describing geospatial datasets,
       dataset series and services - and <a href="https://joinup.ec.europa.eu/solution/statdcat-application-profile-data-portals-europe">StatDCAT-AP</a>
       for enhancing interoperability between descriptions of statistical datasets. further to this, there is even an
-      Italian profile of GeoDCAt, <a href="https://joinup.ec.europa.eu/news/geodcat-apit">DCAT-AP-IT</a>.
+      Italian profile of GeoDCAT, <a href="https://joinup.ec.europa.eu/news/geodcat-apit">DCAT-AP-IT</a>.
     </p>
-    <p>This profile hierarchy is represented graphically in the figure above and in RDf (turtle) below.</p>
+    <p>This profile hierarchy is represented graphically in the figure above and in RDF (turtle) below.</p>
     <pre class="example nohighlight turtle" aria-busy="false" aria-live="polite" title="The GeoDCAT profile hierarchy described using Profile Ontology in RDF (turtle)">
 &lt;http://www.w3.org/ns/dcat&gt;
   a prof:BaseSpecification ;
@@ -676,7 +683,7 @@
     <p>
       Since there are no restrictions on either the property <code>prof:isProfileOf</code> or the class definition of
       <code>prof:Profile</code> that prevent them from being used to represent polyhierarchies, Belgium could release a
-      Belgium StatDTAC-AP that is both a profile of DCAT-BE and DCAT-BE. This imagined profile, '?' in the figure above,
+      Belgium StatDCAT-AP-BE that is both a profile of DCAT-AP-BE and StatDCAT-AP. This imagined profile, '?' in the figure above,
       would not be a profile of GeoDCAT-AP.
     </p>
   </section>
@@ -727,7 +734,7 @@
       <tr><td>prof:hasResource</td><td style="text-align: center;"><code>rdfs:subPropertyOf</code></td><td>dcat:distribution</td><td></td>
       <tr><td>dct:conformsTo</td><td style="text-align: center;">-</td><td>-</td><td>Used similarly</td>
       <tr><td>dct:format</td><td style="text-align: center;">-</td><td>-</td><td>Used similarly</td>
-      <tr><td>prof:hasResourceRole</td><td style="text-align: center;"><code>rdfs:subClassOf</code></td><td>dcat:Distribution</td><td></td></tr>
+      <tr><td>prof:hasRole</td><td style="text-align: center;"><code>rdfs:subClassOf</code></td><td>dcat:Distribution</td><td></td></tr>
       <tr><td>prof:Profile</td><td style="text-align: center;"><code>rdfs:subClassOf</code></td><td>dcat:Resource</td><td>Generic association</td></tr>
       </tbody>
     </table>

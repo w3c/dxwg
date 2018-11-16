@@ -63,7 +63,7 @@ var respecConfig = {
             date: "2018-12-31",
             status: "W3C Editor's Draft"
         },
-        "PROF-GUIDE": {
+        "PROF-GUIDANCE": {
   	    editors: [
 	      "Rob Atkinson",
     	      "Karen Coyle", 
