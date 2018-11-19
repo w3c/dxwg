@@ -10,7 +10,7 @@
 <section id="abstract">
   <h2>Abstract</h2>
   <p>
-    An ontology for listing the set of resources required for a standard or a profile of one or more standards, such as schemas, ontologies, and rules, and for specifying the relationships between them and supporting artefacts, such as controlled vocabularies, validation tools, and guidelines.
+    The Profiles Ontology is an RDF vocabulary to describe profiles of (one or more) standards for information resources. A standard is a specification used as a reference point by a community, and profiles themselves are examples of such standards.  The Profiles Ontology enables profile descriptions to specify the role of related resources such as schemas, ontologies, rules about use of controlled vocabularies, validation tools, and guidelines.
   </p>
   <p style="text-align: center;">
     The namespace for PROF terms is <code>http://www.w3.org/ns/prof/</code>.<br />
@@ -40,38 +40,25 @@
   <p>
     This Profiles Ontology provides a structure to describe profiles of information standards. Its
     development was triggered by the appearance of multiple profiles of the Dataset Catalog Vocabulary (DCAT)
-    [[VOCAB-DCAT-20140116]], and also influenced by work on profiles of the Dublin Core Application Profiles guidelines [[DCAP]].
+    [[VOCAB-DCAT-20140116]] and examples of profiles including the Dublin Core Application Profiles guidelines [[DCAP]] and various profiles of OpenGeospatial Consortium specifications.
   </p>
   <p>
-    A "profile" here is defined by the <a href="#Class:Profile">Profile class definition</a> in the
-    <a href="#specification">Vocabulary Specification</a>.
+    A "profile" here is represented by the <a href="#Class:Profile">Profile class definition</a> in the
+    <a href="#specification">Vocabulary Specification</a> with the following definition: "A named set of constraints on one or more identified base specifications or other profiles, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of those base specifications necessary to accomplish a particular function."
   </p>
   <p>
-    Profiles of DCAT &amp; DCAP aim to increase interoperability within a specified community of users by introducing
-    certain limitations on the use of the general vocabulary, such as restrictions on the cardinality of certain
-    properties, or a requirement to select values of a property from a specified controlled vocabulary. The profiles
-    have generally been specified through textually-oriented documents.
+    Profiles aim to increase interoperability within a community of users by introducing
+    certain constraints on the use of a more general standard such as a published vocabulary. Such constraints include restrictions on the cardinality of certain
+    properties, or a requirement to select values of a property from a specified controlled vocabulary. Profiles
+    have generally been specified through textually-oriented documents, and/or platform specific constraint languages.
   </p>
   <p>
-    This ontology provides a more formally structured, machine readable alternative formalization, for these profiles,
-    and can also be used generally for any profiles of any standards.
-  </p>
-  <p>
-    This model starts with <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">
-    dct:Standard</a></code> entities which can either be a <code>Base Specification</code> (a Standard that does not
-    profile anything) or a <code>Profile</code> (a Standard which does). <code>Base Specification</code>s or
-    <code>Profile</code>s can have <code>Resource Descriptor</code>s associated with them used to describe aspects -
-    particular parts or features - of the profile, such as guidance on how to implement them, validating constraints etc.
-    To do this, <code>Resource Descriptor</code>s must indicate the role they play (to guide, to validate etc.), the
-    formalism they adhere to (<code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-format">dct:format</a></code>)
-    to allow for content negotiation and any <code>
-    <a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></code> that
-    they, themselves, conform to (<code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-conformsTo">
-    dct:conformsTo</a></code>).
+    This ontology provides a standardized, machine readable formalism for describing profiles. The basis of the ontology is a specialization of <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></code>, allowing the use of the <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-conformsTo">dct:conformsTo</a></code> predicate to specify conformance to a profile.
   </p>
   <p>
     A vocabulary of <code>Resource Role</code>s is provided alongside this ontology and that list is extensible.
   </p>
+    <div class="issue" data-number="536"></div>
 </section>
 <section id="conformance">
   <!-- boilerplate will be added here -->
@@ -126,10 +113,13 @@
     <em>profiles</em>.
   </p>
   <p>
-    There are a multitude of ways to describe the components <em>within</em> or defining a profile,
-    such as documents (PDF documents [[PDF]]; any human-readable resources) to offer guidance, constraint languages
-    from the abstract (Dublin Core's Description Set Profiles [[DCDSP]]) to the concrete (SHACL [[SHACL]] &amp; ShEx
-    [[SHEX]])) to offer mechanisms for validation of profile instances.
+    There are a multitude of ways to describe the components needed to define a profile and support validation of instances, such as:
+    <ul><li>human-readable  documents stating requirements ( e.g. [[PDF]]) </li>
+    <li>usage and guidance notes</li>
+    <li>machine readable constraint languages  
+    (e.g. the abstract (Dublin Core's Description Set Profiles [[DCDSP]]) ot the more concrete (SHACL [[SHACL]] &amp; ShEx
+    [[SHEX]]).</li>
+    </ul>
   <p>
     Describing only the components within a profile via documents or constraint languages does not indicate many things
     either important or interesting to know about a profile such as:
@@ -156,16 +146,15 @@
       assist with the reuse of existing profiles
       <ul>
         <li>
-          one can profile another profile, rather than profiling a base standard and thus inherit that profile's work
+          one can profile another profile, adding a small set of additional constraints and declaring compatibility with all profiled standards.
         </li>
         <li>
-          this will assist with alignment of multiple specialised resources, such as constraints language files, within
-          profile, and perhaps with reducing the total effort and information necessary to specify a profile
+          reducing the total effort and information necessary to specify a profile
         </li>
       </ul>
     </li>
     <li>
-      eventually allow for machine interpretation of profiles and automated profile negotiation with fallback options
+      allow for machine interpretation of profiles and automated profile negotiation with fallback options
       <ul>
         <li>
           if a client requests a profile which a server cannot deliver, a server may be able to instead deliver a
@@ -180,7 +169,7 @@
   </ul>
   <div class="issue" data-number="551"></div>
   <div class="note" title="See the Content Negotiation by Profile document">
-    The details of profile negotiation using this ontology, as suggested immediately above, and also other methods,
+    The details of profile negotiation using this ontology, as suggested immediately above, and other methods,
     are explained in detail in the related [[PROF-CONNEG]] document.
   </div>
 </section>
@@ -202,13 +191,11 @@
     </a>
     <figcaption>OWL [[OWL2-OVERVIEW]] overview diagram of this ontology</figcaption>
   </figure>
-  <div class="issue" data-number="404"></div>
-  <p>
-    This model starts with <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></code> entities
-    which can either be a <code>Base Specification</code> (a Standard that does not profile anything) or a <code>Profile</code> (a Standard which
+    <p>
+    The model takes the <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></code> Class as a starting point and defines two specializations, a <code>Base Specification</code> (a Standard that does not profile anything) or a <code>Profile</code> (a Standard which
     does). <code>Base Specification</code>s or <code>Profile</code>s can have <code>Resource Descriptor</code>s associated with
-    them that define rules for implementing it, provide guidance on how tom implement it or take on a series of other roles. <code>Resource Descriptor</code>s must indicate the role they
-    play (to guide, to validate etc.), the formalism they adhere to (<code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-format">dct:format</a></code>) to allow for content negotiation
+    them that define rules for implementation, provide guidance on how to implement, or some other role. <code>Resource Descriptor</code>s must indicate the role they
+    play (to guide, to validate etc.), the formalism they adhere to (<code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-format">dct:format</a></code>)
     and any <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></code> that they themselves conform to (<code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-conformsTo">dct:conformsTo</a></code>).
   </p>
   <p>

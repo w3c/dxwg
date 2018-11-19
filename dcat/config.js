@@ -123,19 +123,19 @@ var respecConfig = {
      "LinkedDataPatterns" : {
           title : "Linked Data Patterns: A pattern catalogue for modelling, publishing, and consuming Linked Data",
           authors : [ "Leigh Dodds", "Ian Davis" ],
-         date: "31 May 2012",
+          date: "31 May 2012",
           href : "http://patterns.dataincubator.org/book/"
       },
       "PROF-CONNEG": {
             href: "https://w3c.github.io/dxwg/conneg-by-ap/",
             title: "Content Negotiation by Profile",
-            date: " 2018-10-03",
+            date: "03 October 2018",
             status: "W3C Editor's Draft"
       },
       "PROF-GUIDE": {
             href: "https://w3c.github.io/dxwg/profiles/",
             title: "Profile Guidance",
-            date: " 2018-10-03",
+            date: "03 October 2018",
             status: "W3C Editor's Draft"
       },
       "PROF-IETF": {
@@ -145,8 +145,33 @@ var respecConfig = {
             ],
             href: "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema",
             title: "Negotiating Profiles in HTTP",
-            date: " 2017-10-24",
+            date: "24 October 2017",
             status: "IETF Internet Draft"
+      },
+      "OpenAPI": {
+            href: "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md",
+            title: "OpenAPI Specification. Version 3.0.2",
+            date: "08 October 2018",
+            publisher: "OAI"
+      },
+      "OpenSearch": {
+            authors: [
+                "DeWitt Clinton"
+            ],
+            href:"https://github.com/dewitt/opensearch/blob/master/opensearch-1-1-draft-6.md",
+            title:"OpenSearch 1.1 Draft 6",
+            date:"17 April 2018",
+            publisher:"OpenSearch"
+      },
+      "HYDRA": {
+            authors: [
+                "Markus Lanthaler"
+            ],
+            href:"https://www.hydra-cg.com/spec/latest/core/",
+            title:"Hydra Core Vocabulary",
+            date:"15 March 2018",
+            publisher:"Hydra W3C Community Group",
+            status:"Unofficial Draft"
       }
     }
   };
