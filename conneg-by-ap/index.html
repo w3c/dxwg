@@ -408,6 +408,18 @@ Accept: text/turtle
 
 ---
 
+HTTP/1.1 303 See Other
+Location: /a/resource.prof1.ttl
+[more response headers]
+
+===
+
+HEAD /a/resource.prof1.ttl
+Accept: text/turtle
+[more request headers]
+
+---
+
 HTTP/1.1 200 OK
 Content-Type: text/turtle
 Content-Location: http://example.org/a/resource.prof1.ttl
@@ -433,6 +445,19 @@ Link: &lt;http://example.org/a/resource.prof1.ttl&gt;; rel="self"; type="text/tu
         </p>
         <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Requesting a representation conforming to a specific profile using HTTP headers">
 GET /a/resource HTTP/1.1
+Accept: text/turtle;q=0.8, application/xml;q=0.5
+Accept-Profile: urn:example:profile:1;q=1.0,urn:example:profile:2;q=0.6
+[more request headers]
+
+---
+
+HTTP/1.1 303 See Other
+Location: /a/resource.prof1.ttl
+[more response headers]
+
+===
+
+GET /a/resource.prof1.ttl
 Accept: text/turtle;q=0.8, application/xml;q=0.5
 Accept-Profile: urn:example:profile:1;q=1.0,urn:example:profile:2;q=0.6
 [more request headers]
