@@ -12,7 +12,7 @@
     <p>
       This document describes how Internet clients may negotiate for content provided by servers according to
       <em>profiles</em>. This is distinct from negotiating by Media Type or Language: the <em>profile</em> is expected
-      to specify the content of information returned, which may be a subset of what the responding server contains.
+      to specify the content of information returned, which may be a subset of the information the responding server has about the requested resource. Such profiles may be structured in a specific way to meet interoperability requirements of a community of practice.
     </p>
   </section>
   <section id="sotd">
@@ -39,12 +39,13 @@
     <h1>Introduction</h1>
     <p>
       Content delivered by dereferencing Internet identifiers can be negotiated for in different
-      ways. When using the HTTP protocol [[RFC7230]], a client may set an <code>Accept</code> header specifying
-      preferred Media Types which the server may or may not supply or it may set an <code>Accept-Encoding</code>.
-      header to request that a specific content encoding system be used. Resources available in different languages
-      may be also requested by setting an HTTP <code>Accept-Language</code> header. However, clients have not had a
-      defined way to negotiate for content based on its adherence to an information model - a standard, a specification or
-      a <a>profile</a> - and this document addresses this functionality.
+      ways. When using the HTTP protocol [[RFC7230]], a client may set one or more headers:
+      <ul><li>an <code>Accept</code> header specifying preferred Media Types which the server may or may not supply</li>
+      <li>an <code>Accept-Encoding</code> header to request that a specific content encoding system be used</li>
+      <li>an <code>Accept-Language</code> header to indicate a preferred language</li>
+      </ul>
+      However, clients have not had a
+      defined way to negotiate for content based on its adherence to an information model - a specification such as a standard or a <a>profile</a> of one or more standards.  This document defines the functionality required to address this need.
     </p>
     <p>
       When online information about a resource adheres to one or more profiles, methods described here allow
@@ -58,13 +59,10 @@
       is, content conforming to the default profile supported by the server.
     </p>
     <p>
-      When selecting a content negotiation mechanism, an Internet client may use the HTTP protocol but it may also use
-      other methods for providing instructions to a server,
-      such as URI Query String Arguments (<abbr title="Query String Arguments">QSAs</abbr>).
-      QSAs are
-      established as useful for humans and machines for situations where negotiation via HTTP is not practical, such
-      as when manually entering requests into web browsers. This document also provides guidance for both HTTP and non-HTTP methods
-      of content negotiation and ensures they all adhere to a single functional specification, ensuring their functional equivalency.
+      When selecting a content negotiation mechanism, an Internet client may use either the HTTP protocol or 
+      other methods for providing instructions to a server. The use of URI Query String Arguments (<abbr title="Query String Arguments">QSAs</abbr>) is appropriate for humans and machines for situations where negotiation via HTTP is not practical, such
+      as when manually entering requests into web browsers. This document provides guidance for both HTTP and non-HTTP methods
+      of content negotiation and ensures they all adhere to a single conceptual model, ensuring functional equivalency.
     </p>
     <p>
       Guidance for the creation of <a>profile</a>s is provided in the [[PROF-GUIDANCE]] document created
@@ -128,7 +126,7 @@
       <dt><dfn>metadata</dfn></dt>
       <dd>Information that is supplied about a resource. [[RFC3986]]</dd>
       <dt><dfn>request</dfn></dt>
-      <dd>A message sent over the Internet, from a <em>client</em> to a <em>server</em>, for a information about a <em>resource</em>. [[RFC7230]]</dd>
+      <dd>A message sent over the Internet, from a <em>client</em> to a <em>server</em>, for information about a <em>resource</em>. [[RFC7230]]</dd>
       <dt><dfn>response</dfn></dt>
       <dd>A message sent over the Internet, from a <em>server</em> to a <em>client</em> answering a <em>request</em> for information about a <em>resource</em> [[RFC7230]]</dd>
       <dt><dfn>token</dfn></dt>.
@@ -145,7 +143,7 @@
       several DTDs or XML Schemas. RDF documents, with a choice of Media Type serializations such as
       <code>text/turtle</code>, <code>application/rdf+xml</code> and others, have a large number of vocabularies
       (classes and properties) available to use for their content's information model. When a client initiates a request
-      for an Internet resource, such as an HTTP GET to retrieve a resource or an HTTP PUT to create or replace a resource, the client and server must have a standardized way to exchange information on how the transmitted resource
+      for an Internet resource, such as an HTTP GET to retrieve a resource, or an HTTP PUT to create or replace a resource, the client and server must have a standardized way to exchange information on how the transmitted resource
       will be structured according to DTDs, XML Schema, vocabularies or other standards, specifications or
       <em>profiles</em>. When using non-HTTP content negotiation, various methods such as URIs with Query String
       Arguments have been implemented previously,
@@ -238,6 +236,7 @@
           to a particular <em>profile</em>
         </li>
       </ol>
+      <div class="issue" data-number="602"></div>
       <p>
         A third <em>request</em> type is given that is expected not to apply to all realizations of this abstract model
         and not all clients adhering to this specification need implement it.
@@ -245,14 +244,14 @@
       <ol start="3">
         <li>
           <strong>list profiles tokens</strong><br />
-          a <em>client</em> requests the list of <em>token</em>s that the <em>server</em> uses for <em>profile</em>s and for which the
-          <em>server</em> is able to deliver <em>resource</em> representations that conform to the profile. The server also provides a mapping from tokens to
-          <em>profile</em> URIs
+          a <em>client</em> requests the list of <em>token</em>s that the <em>server</em> uses for <em>profile</em>s for which the
+          <em>server</em> is able to deliver <em>resource</em> representations that conform to the profile. This provides a mapping from tokens to canonical
+          <em>profile</em> URIs.
         </li>
       </ol>
       <p>
-        A <em>server</em> adhering to this specification MUST respond to each request with the following
-        <em>response</em>s. The first two types are required, handling the third depends on the realization environment.
+        A <em>server</em> adhering to this specification MUST respond to each supported request with the appropriate
+        <em>response</em>s:
       </p>
       <ol>
         <li>
@@ -272,13 +271,13 @@
         </li>
       </ol>
       <div class="issue" data-number="587"></div>
-      <p>More detailed descriptions of these requests and their responses are given next.</p>
+      <p>More detailed descriptions of these requests and their responses follow.</p>
       <section id="listprofiles">
         <h4>list profiles</h4>
         <p>
           A <em>client</em> wishes to know for which <em>profile</em>s a <em>server</em> is able to deliver conformant
           representations of a <em>resource</em>. The content of the list can be known either before a <em>request</em> for a 
-          particular <em>resource</em> representation is made or it is known after an initial <em>request</em> for a
+          particular <em>resource</em> representation is made or it is provided by the server in a response and known after an initial <em>request</em> for a
           <em>resource</em> representation is made.
         </p>
         <p>
@@ -295,6 +294,7 @@
           it is unable to deliver those representations when presented with a <strong>get resource by profile</strong>
           <em>request</em>.
         </p>
+        <div class="issue" data-number="603"></div>
       </section>
       <section id="getresourcebyprofile">
         <h4>get resource by profile</h4>
@@ -309,7 +309,7 @@
         <p>
           A <em>client</em> executing a <strong>get resource by profile</strong> MAY <em>request</em> a
           <em>resource</em> representation conforming to one of any number of <em>profile</em>s with its preference
-          expressed in a some form of list ordering.
+          expressed in some form of list ordering.
         </p>
         <div class="issue" data-number="588"></div>
       </section>
@@ -317,7 +317,7 @@
         <h4>list profiles tokens</h4>
         <p>
           A <em>client</em>/<em>server</em> pair of agents MAY refer to <em>profile</em>s by identifiers other
-          than URIs, <em>token</em>, as long as both the <em>client</em> and <em>server</em> are able to
+          than URIs, <em>token</em>, if both the <em>client</em> and <em>server</em> are able to
           deterministically map that token to a <em>profile</em>'s URI. This is due to the known requirement for
           <em>profile</em>s to be able to be referred to within other URIs, such as those of <em>resources</em> and other
           situations where referring to the <em>profile</em> itself by a URI is not possible.
@@ -364,7 +364,7 @@
 	    <pre class="example nohighlight" title="Using HTTP OPTIONS to list available profiles" aria-busy="false" aria-live="polite">
 OPTIONS /some/resource HTTP/1.1
 
----
+--- (Any HTTP 3xx redirections) ---
 
 HTTP/1.1 200 OK
 Content-Profile: urn:example:profile:1;q=0.8,http://example.org/profiles/2;q=0.5
@@ -406,7 +406,7 @@ HEAD /a/resource HTTP/1.1
 Accept: text/turtle
 [more request headers]
 
----
+--- (Any HTTP 3xx redirections) ---
 
 HTTP/1.1 200 OK
 Content-Type: text/turtle
@@ -437,7 +437,7 @@ Accept: text/turtle;q=0.8, application/xml;q=0.5
 Accept-Profile: urn:example:profile:1;q=1.0,urn:example:profile:2;q=0.6
 [more request headers]
 
----
+--- (Any HTTP 3xx redirections) ---
 
 HTTP/1.1 200 OK
 Content-Type: text/turtle
@@ -819,13 +819,6 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
       <div class="issue" data-number="286"></div>
       <div class="req-response">
         <p class="respTitle">RESPONSE FOR Req. 286</p>
-        <p>
-
-        </p>
-      </div>
-      <div class="issue" data-number="287"></div>
-      <div class="req-response">
-        <p class="respTitle">RESPONSE FOR Req. 287</p>
         <p>
 
         </p>
