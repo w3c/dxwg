@@ -2362,10 +2362,14 @@ a:TestingActivity a prov:Activity;
 		In this chapter it is planned to describe some patterns for linking DCAT Datasets and/or Distributions to suitable rights expressions.
 		See the wiki page on <a href="https://github.com/w3c/dxwg/wiki/License-and-rights">License and rights</a> for more discussion.
 	</p>
+	
 	<p>
 		Selecting the right way to express conditions for access to and re-use of resources can be complex.
 		Implementers should always seek legal advice before deciding which conditions apply to the resource being described.
 	</p>
+<!--	
+	<div class="ednote" title="Original text">
+	
 	<p>
 		This specification distinguishes three main situations: one where a statement is associated with the resource that is explicitly declared as a 'licence';
 		a second where the statement is not explicitly declared as a 'licence'; and a third where the conditions are explicitly expressed as an ODRL Policy.
@@ -2382,6 +2386,49 @@ a:TestingActivity a prov:Activity;
 			The Open Digital Rights Language (ODRL) is a policy expression language that provides a flexible and interoperable information model, vocabulary, and encoding mechanisms for representing statements about usage (i.e. permissions, prohibitions, and obligations) of content and services.</li>
 		</ol>
 	</p>
+	
+	</div>
+-->
+	<p>
+    This specification distinguishes three main situations: 
+    one where a statement is associated with the resource that is explicitly declared as a 'license', i.e., when the rights statement is only about use conditions; 
+    a second, where the statement is associated with a resource denoting only access rights; 
+    a third, covering all the other cases - i.e., statements not concerning use conditions and access rights (e.g., copyright statements) and/or mixing use conditions and access rights.	
+	</p>
+	
+	<p class="note">
+	  It is worth noting that the provision of use conditions and access rights complies with the [[DWBP]]'s Best Practices 4 ("<a data-cite="DWBP#licenses">Provide data license information</a>") and 22 ("<a data-cite="DWBP#DataUnavailabilityReference">Provide an explanation for data that is not available</a>"), respectively.
+	</p>
+	
+	<p>
+		The following approach is recommended:
+		<ol>
+			<li>
+			  <p>use <a href="http://dublincore.org/documents/dcmi-terms/#terms-license">dct:license</a> to refer to rights statements concerning only use conditions, and specified, preferably, by using well-known licenses such as <a href="https://creativecommons.org/share-your-work/licensing-types-examples/">those defined by Creative Commons</a></p>
+			<p>The object of dct:license, a <a href="http://dublincore.org/documents/dcmi-terms/#terms-LicenseDocument">dct:LicenseDocument</a>, is "A legal document giving official permission to do something with a Resource."</p>
+			</li>
+			<li>
+			  <p>use <a href="http://dublincore.org/documents/dcmi-terms/#terms-accessRights">dct:accessRights</a>  to refer to statements concerning only access rights (e.g., whether data can be accessed by anyone or just by authorized parties).</p>
+        <p>The object of dct:accessRights is a dct:RightsStatement providing "Information about who can access the resource or an indication of its security status."</p>
+        <p class="note">
+          Access rights can also be expressed as code lists / taxonomies. Examples include the access rights code list  [[MDR-AR]] used in [[DCAT-AP]] and the <a href="http://purl.org/eprint/accessRights/">Eprints Access Rights Vocabulary Encoding Scheme</a>.
+        </p>
+      </li>
+			<li>
+			  <p>use <a href="http://dublincore.org/documents/dcmi-terms/#terms-rights">dct:rights</a> for all the other types of rights statements - those which are not covered by dct:license and dct:accessRights, such as copyright statements, and/or mixing use conditions and access rights.</p>
+			  <p>The object of dct:rights, a <a href="http://dublincore.org/documents/dcmi-terms/#terms-RightsStatement">dct:RightsStatement</a>, is "A statement about the intellectual property rights (IPR) held in or over a Resource, a legal document giving official permission to do something with a resource, or a statement about access rights." 
+			This is more general than a <a href="http://dublincore.org/documents/dcmi-terms/#terms-LicenseDocument">dct:LicenseDocument</a> and therefore should be used if it the statement contains more general information about rights.</p>
+			  <p class="note">
+			    A more sophisticated approach to express rights, based on and extending [[DCTERMS]], is provided by the Open Data Rights Statement Vocabulary (ODRS) [[ODRS]], which defines properties for specifying, among others, copyright statements and copyright notices.
+			  </p>
+			</li>
+		</ol>
+	</p>
+
+	<p>Finally, in the particular case when rights are expressed via <a href="https://www.w3.org/TR/odrl-vocab/#term-Policy">ODRL policies</a>, the recommendation is to use use <a href="https://www.w3.org/TR/odrl-vocab/#term-hasPolicy">odrl:hasPolicy</a>.</p>
+  <p>The Open Digital Rights Language (ODRL) [[ODRL-VOCAB]] is a policy expression language that provides a flexible and interoperable information model, vocabulary, and encoding mechanisms for representing statements about usage (i.e. permissions, prohibitions, and obligations) of content and services.</p>
+
+  <p>Recommendations on the use of these properties on the different types of resources defined in DCAT are provided in the relevant class descriptions.</p>
 
 </section>
 
