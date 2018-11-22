@@ -12,7 +12,7 @@
     <p>
       This document describes how Internet clients may negotiate for content provided by servers according to
       <em>profiles</em>. This is distinct from negotiating by Media Type or Language: the <em>profile</em> is expected
-      to specify the content of information returned, which may be a subset of what the responding server contains.
+      to specify the content of information returned, which may be a subset of the information the responding server has about the requested resource, and may be structured in a specific way to meet interoperability requirements of a community of practice.
     </p>
   </section>
   <section id="sotd">
@@ -39,10 +39,12 @@
     <h1>Introduction</h1>
     <p>
       Content delivered by dereferencing Internet identifiers can be negotiated for in different
-      ways. When using the HTTP protocol [[RFC7230]], a client may set an <code>Accept</code> header specifying
-      preferred Media Types which the server may or may not supply or it may set an <code>Accept-Encoding</code>
-      header to request that a specific content encoding system be used. Resources available in different languages
-      may be also requested by setting an HTTP <code>Accept-Language</code> header. However, clients have not had a
+      ways. When using the HTTP protocol [[RFC7230]], a client may set one or more headers:
+      <ul><li>an <code>Accept</code> header specifying preferred Media Types which the server may or may not supply</li>
+      <li>an <code>Accept-Encoding</code> header to request that a specific content encoding system be used</li>
+      <li>an <code>Accept-Language</code> header to indicate a preferred language</li>
+      </ul>
+      However, clients have not had a
       defined way to negotiate for content based on its adherence to an information model - a standard, a specification or
       a <a>profile</a> - and this document addresses this functionality.
     </p>
@@ -408,18 +410,6 @@ Accept: text/turtle
 
 ---
 
-HTTP/1.1 303 See Other
-Location: /a/resource.prof1.ttl
-[more response headers]
-
-===
-
-HEAD /a/resource.prof1.ttl
-Accept: text/turtle
-[more request headers]
-
----
-
 HTTP/1.1 200 OK
 Content-Type: text/turtle
 Content-Location: http://example.org/a/resource.prof1.ttl
@@ -445,19 +435,6 @@ Link: &lt;http://example.org/a/resource.prof1.ttl&gt;; rel="self"; type="text/tu
         </p>
         <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Requesting a representation conforming to a specific profile using HTTP headers">
 GET /a/resource HTTP/1.1
-Accept: text/turtle;q=0.8, application/xml;q=0.5
-Accept-Profile: urn:example:profile:1;q=1.0,urn:example:profile:2;q=0.6
-[more request headers]
-
----
-
-HTTP/1.1 303 See Other
-Location: /a/resource.prof1.ttl
-[more response headers]
-
-===
-
-GET /a/resource.prof1.ttl
 Accept: text/turtle;q=0.8, application/xml;q=0.5
 Accept-Profile: urn:example:profile:1;q=1.0,urn:example:profile:2;q=0.6
 [more request headers]
@@ -844,13 +821,6 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
       <div class="issue" data-number="286"></div>
       <div class="req-response">
         <p class="respTitle">RESPONSE FOR Req. 286</p>
-        <p>
-
-        </p>
-      </div>
-      <div class="issue" data-number="287"></div>
-      <div class="req-response">
-        <p class="respTitle">RESPONSE FOR Req. 287</p>
         <p>
 
         </p>
