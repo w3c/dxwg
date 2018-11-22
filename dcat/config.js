@@ -172,6 +172,20 @@ var respecConfig = {
             date:"15 March 2018",
             publisher:"Hydra W3C Community Group",
             status:"Unofficial Draft"
-      }
+      },
+      "ODRS": {
+            authors: [
+                "Leigh Dodds"
+            ],
+            href:"http://schema.theodi.org/odrs",
+            title:"Open Data Rights Statement Vocabulary",
+            date:"29 July 2013",
+            publisher:"ODI"
+      },
+      "MDR-AR":{
+        "href":"http://publications.europa.eu/mdr/authority/access-right/",
+        "title":"Named Authority List: Access rights",
+        "publisher":"Publications Office of the European Union"
+       }
     }
   };
