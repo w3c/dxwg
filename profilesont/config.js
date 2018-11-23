@@ -1,5 +1,5 @@
 var respecConfig = {
-    specStatus: "ED",
+    specStatus: "FPWD",
     shortName: "dx-prof",
     edDraftURI: "https://w3c.github.io/dxwg/profilesont/",
     canonicalURI: "TR",
@@ -33,7 +33,6 @@ var respecConfig = {
     wgPatentURI: "https://www.w3.org/2004/01/pp-impl/99375/status",
     inlineCSS: "true",
     lint: "false",
-    noRecTrack: "true",
     issueBase: "https://github.com/w3c/dxwg/issues/",
     github:    "https://github.com/w3c/dxwg/issues/",
     localBiblio: {
