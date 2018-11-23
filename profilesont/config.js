@@ -80,13 +80,13 @@ var respecConfig = {
             status: "W3C Community Group Draft Report"
         },
         "PROF-CONNEG": {
-            href: "https://www.w3.org/TR/conneg-by-ap/",
+            href: "https://www.w3.org/TR/dx-prof-conneg",
             title: "Content Negotiation by Profile",
             date: "2018-12-31",
             status: "W3C Editor's Draft"
         },
         "PROF-GUIDANCE": {
-            href: "https://www.w3.org/TR/profile-guidance/",
+            href: "https://www.w3.org/TR/dxe-prof-guidance",
             title: "Profile Guidance",
             date: " 2018-12-31",
             status: "W3C Editor's Draft"
@@ -96,7 +96,7 @@ var respecConfig = {
                 "L. Svensson",
                 "R. Verborgh"
             ],
-            href: "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema/",
+            href: "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema",
             title: "Negotiating Profiles in HTTP",
             date: "2017-10-24",
             status: "IETF Internet Draft"
