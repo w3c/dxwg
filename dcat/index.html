@@ -2012,6 +2012,25 @@
         </table>
     </section>
 
+    <section id="Property:hadRole">
+        <h3>Property: had role</h3>
+        <table class="definition">
+          <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#hadRole">dcat:hadRole</a></th></tr></thead>
+          <tbody>
+          <tr><td class="prop">Definition:</td><td>A role is the function of an entity or agent with respect to an entity or resource.</td></tr>
+          <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/prov#Attribution">prov:Attribution</a></td></tr>
+          <tr><td class="prop">Usage note:</td><td>Used in a qualified-attribution to specify the role of an Agent with respect to an Entity.
+            It is recommended that the value be taken from a controlled vocabulary of agent roles, such as http://registry.it.csiro.au/def/isotc211/CI_RoleCode.</td></tr>
+          </tbody>
+        </table>
+
+        <p>
+          This DCAT property complements <a href="http://www.w3.org/ns/prov#hadRole">prov:hadRole</a> which provides the function of an entity or agent with respect to an activity.
+        </p>
+    </section>
+
+</section>
+
 </section>
 
 <section id="quality-information" class="informative">
@@ -2328,6 +2347,36 @@ a:TestingActivity a prov:Activity;
     </section>
 </section>
 
+<section id="qualified-attribution">
+  <h2>Attribution roles</h2>
+  <p>
+    The standard Dublin Core properties <a href="http://purl.org/dc/terms/contributor">dct:contributor</a>, <a href="http://purl.org/dc/terms/creator">dct:creator</a> and <a href="http://purl.org/dc/terms/publisher">dct:publisher</a>, support basic associations of responsible agents with a catalogued resource.
+    However, there are many other roles of importance in relation to datasets and services, such as those enumerated in the CI_RoleCode values from [[ISO-19115-1]] (available as <a href="http://registry.it.csiro.au/def/isotc211/CI_RoleCode">linked-data</a>), in the [[DataCite]] metadata schema, and included within the <a href="https://id.loc.gov/vocabulary/relators">MARC relators</a>.
+    A generic method for assigning an agent to a resource with a specified relationship is provided by using the qualified form <a href="https://www.w3.org/TR/prov-o/#qualifiedAttribution">prov:qualifiedAttribution</a> from [[PROV-O]], as shown in the following example:
+  </p>
+<div class="example">
+<pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+ex:DS987
+  a dcat:Dataset ;
+  prov:qualifiedAttribution [
+    a prov:Attribution ;
+    prov:agent <https://www.ala.org.au/> ;
+    dcat:hadRole <https://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/distributor>
+  ] ;
+  prov:qualifiedAttribution [
+    a prov:Attribution ;
+    prov:agent <https://www.education.gov.au/> ;
+    dcat:hadRole <http://registry.it.csiro.au/def/isotc211/CI_RoleCode/funder>
+  ] ;
+.
+</pre>
+</div>
+
+<p class="note">
+  Note: The domain of <a href="http://www.w3.org/ns/prov#hadRole">prov:hadRole</a> property is <a href="http://www.w3.org/ns/prov#Association">prov:Association</a> [[PROV-O]] i.e. PROV-O roles relate to activities, not entities.
+  Therefore, a new property <a href="http://www.w3.org/ns/dcat#hadRole">dcat:hadRole</a> is used to attach a specific role to the association-class <a href="http://www.w3.org/ns/prov#Attribution">prov:Attribution</a>.
+</p>
+</section>
 
 <section id="prov-patterns">
 
