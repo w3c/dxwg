@@ -2024,6 +2024,10 @@
           </tbody>
         </table>
 
+        <p class="note">
+            Property added in this revision of DCAT.
+        </p>
+
         <p>
           This DCAT property complements <a href="http://www.w3.org/ns/prov#hadRole">prov:hadRole</a> which provides the function of an entity or agent with respect to an activity.
         </p>
@@ -2351,8 +2355,12 @@ a:TestingActivity a prov:Activity;
   <h2>Attribution roles</h2>
   <p>
     The standard Dublin Core properties <a href="http://purl.org/dc/terms/contributor">dct:contributor</a>, <a href="http://purl.org/dc/terms/creator">dct:creator</a> and <a href="http://purl.org/dc/terms/publisher">dct:publisher</a>, support basic associations of responsible agents with a catalogued resource.
-    However, there are many other roles of importance in relation to datasets and services, such as those enumerated in the CI_RoleCode values from [[ISO-19115-1]] (available as <a href="http://registry.it.csiro.au/def/isotc211/CI_RoleCode">linked-data</a>), in the [[DataCite]] metadata schema, and included within the <a href="https://id.loc.gov/vocabulary/relators">MARC relators</a>.
-    A generic method for assigning an agent to a resource with a specified relationship is provided by using the qualified form <a href="https://www.w3.org/TR/prov-o/#qualifiedAttribution">prov:qualifiedAttribution</a> from [[PROV-O]], as shown in the following example:
+    However, there are many other roles of importance in relation to datasets and services - e.g. funder, distributor, custodian, editor.
+    Some of these roles are enumerated in the CI_RoleCode values from [[ISO-19115-1]], in the [[DataCite]] metadata schema, and included within the <a href="https://id.loc.gov/vocabulary/relators">MARC relators</a>.
+  <p>
+  </p>
+    A general method for assigning an agent to a resource with a specified relationship is provided by using the qualified form <a href="https://www.w3.org/TR/prov-o/#qualifiedAttribution">prov:qualifiedAttribution</a> from [[PROV-O]].
+    The following provides an illustration:
   </p>
 <div class="example">
 <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
@@ -2371,6 +2379,10 @@ ex:DS987
 .
 </pre>
 </div>
+
+<p>
+  In this example the roles are taken from [[ISO-19115-1]] which are available as linked data in a <a href="http://registry.it.csiro.au/def/isotc211/CI_RoleCode">discrete list</a>. 
+</p>
 
 <p class="note">
   Note: The domain of <a href="http://www.w3.org/ns/prov#hadRole">prov:hadRole</a> property is <a href="http://www.w3.org/ns/prov#Association">prov:Association</a> [[PROV-O]] i.e. PROV-O roles relate to activities, not entities.
@@ -2425,7 +2437,7 @@ ex:DS987
 			<li>use <a href="http://dublincore.org/documents/dcmi-terms/#terms-license">dct:license</a> to refer to well-known licences such as <a href="https://creativecommons.org/share-your-work/licensing-types-examples/">those defined by Creative Commons</a></br>
 			The object of dct:license, a <a href="http://dublincore.org/documents/dcmi-terms/#terms-LicenseDocument">dct:LicenseDocument</a>, is "A legal document giving official permission to do something with a Resource."</li>
 			<li>use <a href="http://dublincore.org/documents/dcmi-terms/#terms-rights">dct:rights</a> to refer to rights statements that are not licences, such as copyright statements</br>
-			The object of dct:rights, a <a href="http://dublincore.org/documents/dcmi-terms/#terms-RightsStatement">dct:RightsStatement</a>, is "A statement about the intellectual property rights (IPR) held in or over a Resource, a legal document giving official permission to do something with a resource, or a statement about access rights." 
+			The object of dct:rights, a <a href="http://dublincore.org/documents/dcmi-terms/#terms-RightsStatement">dct:RightsStatement</a>, is "A statement about the intellectual property rights (IPR) held in or over a Resource, a legal document giving official permission to do something with a resource, or a statement about access rights."
 			This is more general than a <a href="http://dublincore.org/documents/dcmi-terms/#terms-LicenseDocument">dct:LicenseDocument</a> and therefore should be used if it the statement contains more general information about rights.</li>
 			<li>use <a href="https://www.w3.org/TR/odrl-vocab/#term-hasPolicy">odrl:hasPolicy</a> for linking to <a href="https://www.w3.org/TR/odrl-vocab/#term-Policy">ODRL policies</a></br>
 			The Open Digital Rights Language (ODRL) is a policy expression language that provides a flexible and interoperable information model, vocabulary, and encoding mechanisms for representing statements about usage (i.e. permissions, prohibitions, and obligations) of content and services.</li>
