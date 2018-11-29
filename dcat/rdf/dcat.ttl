@@ -18,6 +18,14 @@
 @prefix v: <http://www.w3.org/2006/vcard/ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+dct:hasPart
+  skos:scopeNote "See also: Sub-properties of dct:hasPart in particular dcat:dataset, dcat:catalog, dcat:service." ;
+  skos:scopeNote "This is the most general predicate for membership of a catalog. Use of a more specific sub-property is recommended when available. " ;
+.
+dct:relation
+  skos:scopeNote "See also: Sub-properties of dct:relation in particular dcat:distribution, dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy" ;
+  skos:scopeNote "dct:relation SHOULD be used where the nature of the relationship between a catalogued item and related resources is not known. A more specific sub-property SHOULD be used if the nature of the relationship of the link is known. The property dcat:distribution SHOULD be used to link from a dcat:Dataset to a representation of the dataset, described as a dcat:Distribution" ;
+.
 <http://www.w3.org/ns/dcat>
   rdf:type owl:Ontology ;
   dct:contributor [
@@ -346,6 +354,19 @@ dcat:Distribution
 					  μέσω API ή μέσω μίας ιστοσελίδας. Η χρήση της ιδιότητας dcat:downloadURL δείχνει μόνο άμεσα μεταφορτώσιμες διανομές."""@el ;
   skos:scopeNote "これは、データセットの一般的な利用可能性を表わし、データの実際のアクセス方式に関する情報（つまり、直接ダウンロードなのか、APIなのか、ウェブページを介したものなのか）を意味しません。dcat:downloadURLプロパティーの使用は、直接ダウンロード可能な配信を意味します。"@ja ;
 .
+dcat:Relationship
+  rdf:type owl:Class ;
+  rdfs:comment "An association class for attaching additional information to a relationship between DCAT Resources" ;
+  rdfs:label "Relationship" ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dct:relation ;
+    ] ;
+  skos:changeNote "New class in this revision" ;
+  skos:editorialNote "Status: Class accepted by DCAT revision team, but details of definition and constraints not yet resolved." ;
+  skos:scopeNote "  " ;
+.
 dcat:Resource
   rdf:type owl:Class ;
   rdfs:comment "Resource published or curated by a single agent" ;
@@ -592,12 +613,18 @@ dcat:endpointURL
 dcat:hadRole
   rdf:type owl:ObjectProperty ;
   rdfs:comment "The function of an entity or agent with respect to another entity or resource."@en ;
-  rdfs:domain prov:Attribution ;
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          prov:Attribution
+          dcat:Relationship
+        ) ;
+    ] ;
   rdfs:label "hadRole" ;
   rdfs:range prov:Role ;
   skos:changeNote "New property in this revision of DCAT" ;
   skos:editorialNote "Introduced into DCAT to complement prov:hadRole, whose use is limited to roles in the context of an activity, with the domain of prov:Association" ;
-  skos:scopeNote "Used in a qualified-attribution to specify the role of an Agent with respect to an Entity. It is recommended that the value be taken from a controlled vocabulary of agent roles, such as http://registry.it.csiro.au/def/isotc211/CI_RoleCode " ;
+  skos:scopeNote "Used in a qualified-attribution to specify the role of an Agent or Entity with respect to an Entity. It is recommended that the value be taken from a controlled vocabulary of agent roles, such as http://registry.it.csiro.au/def/isotc211/CI_RoleCode, or relation-types, such as https://www.iana.org/assignments/link-relations " ;
 .
 dcat:keyword
   rdf:type rdf:Property ;
@@ -682,9 +709,20 @@ dcat:mediaType
   rdfs:label "メディア・タイプ"@ja ;
   rdfs:range dct:MediaType ;
   rdfs:subPropertyOf dct:format ;
-  skos:scopeNote "This property SHOULD be used when the media type of the distribution is defined in the IANA media types registry https://www.iana.org/assignments/media-types/, otherwise dct:format MAY be used with different values.";
-  skos:editorialNote "The range of dcat:mediaType has been tightened as part of the revision of DCAT." ;
   skos:editorialNote "Status: English Definition text modified by DCAT revision team, translations pending. Note some inconsistency on def vs. usage" ;
+  skos:editorialNote "The range of dcat:mediaType has been tightened as part of the revision of DCAT." ;
+  skos:scopeNote "This property SHOULD be used when the media type of the distribution is defined in the IANA media types registry https://www.iana.org/assignments/media-types/, otherwise dct:format MAY be used with different values." ;
+.
+dcat:qualifiedRelation
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Link to a description of a relationship with another resource."@en ;
+  rdfs:domain dcat:Resource ;
+  rdfs:label "hadRole" ;
+  rdfs:range dcat:Relationship ;
+  rdfs:subPropertyOf prov:qualifiedInfluence ;
+  skos:changeNote "New property in this revision of DCAT" ;
+  skos:editorialNote "Introduced into DCAT to complement the other PROV qualified relations" ;
+  skos:scopeNote "Used in a qualified-relation to specify a relationship of an Entity to another Entity. It is recommended that the value be taken from a controlled vocabulary of agent roles, such as https://www.iana.org/assignments/link-relations" ;
 .
 dcat:record
   rdf:type rdf:Property ;
@@ -798,12 +836,4 @@ prov:wasGeneratedBy
   rdfs:subPropertyOf dct:relation ;
   skos:scopeNote "The activity associated with generation of a dataset will typically be an initiative, project, mission, survey, on-going activity ('business as usual') etc. Multiple prov:wasGeneratedBy properties can be used to indicate the dataset production context at various levels of granularity." ;
   skos:scopeNote "Use prov:qualifiedGeneration to attach additional details about the relationship between the dataset and the activity, e.g. the exact time that the dataset was produced during the lifetime of a project" ;
-.
-dct:hasPart
-  skos:scopeNote "See also: Sub-properties of dct:hasPart in particular dcat:dataset, dcat:catalog, dcat:service." ;
-  skos:scopeNote "This is the most general predicate for membership of a catalog. Use of a more specific sub-property is recommended when available. " ;
-.
-dct:relation
-  skos:scopeNote "See also: Sub-properties of dct:relation in particular dcat:distribution, dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy" ;
-  skos:scopeNote "dct:relation SHOULD be used where the nature of the relationship between a catalogued item and related resources is not known. A more specific sub-property SHOULD be used if the nature of the relationship of the link is known. The property dcat:distribution SHOULD be used to link from a dcat:Dataset to a representation of the dataset, described as a dcat:Distribution" ;
 .
