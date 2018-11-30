@@ -2420,9 +2420,15 @@ a:TestingActivity a prov:Activity;
             Schema.org [[SCHEMA-ORG]] includes a number of types and properties based on the original DCAT work (see <a href="https://schema.org/Dataset">schema:Dataset</a> as a starting point),
             and the index for Google's <a href="https://g.co/datasetsearch">Dataset Search service</a> relies on structured description in web pages about datasets based on both
             <a href="https://developers.google.com/search/docs/data-types/dataset">schema.org and DCAT</a>.
+            A comparison of the DCAT backbone, showed in <a href="#vocabulary-overview">Figure 1. above</a> with related classes from schema.org shows the similarity:
         </p>
+        <figure id="fig2"><img alt="UML model of schema.org classes and properties related to dataset catalogs" src="UML/schema.org-dataset.png">
+            <figcaption>
+                schema.org support for dataset catalogs, showing a selection of schema.org properties that have the classes shown within their domain and range
+            </figcaption>
+        </figure>
         <p>
-            Most general purpose web search services that pay attention to metadata at all rely primarily on schema.org, so the detailed relationship of DCAT to schema.org is of interest for data providers
+            General purpose web search services that use metadata at all rely primarily on schema.org, so the relationship of DCAT to schema.org is of interest for data providers
             who wish their datasets and services to be exposed through those indexes.
         </p>
         <p>
@@ -2432,8 +2438,8 @@ a:TestingActivity a prov:Activity;
         </p>
         <p>
             A recommended mapping from the revised DCAT (this document) to schema.org is <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/rdf/dcat-schema.ttl">available in an RDF file</a>.
-            This mapping is axiomatized using the standard predicates <code>rdfs:subClassOf</code>, <code>rdfs:subPropertyOf</code>, <code>owl:equivalentClass</code>, <code>owl:equivalentProperty</code>, and also using the
-            annotation properties <code>schema:domainIncludes</code> and <code>schema:rangeIncludes</code> to match schema.org semantics. The mapping is summarized in the table below, considering the prefix <code>schema</code> as <code>http://schema.org/</code>.
+            This mapping is axiomatized using the predicates <code>rdfs:subClassOf</code>, <code>rdfs:subPropertyOf</code>, <code>owl:equivalentClass</code>, <code>owl:equivalentProperty</code>, <code>skos:closeMatch</code>,
+            and also using the annotation properties <code>schema:domainIncludes</code> and <code>schema:rangeIncludes</code> to match schema.org semantics. The mapping is summarized in the table below, considering the prefix <code>schema</code> as <code>http://schema.org/</code>.
         </p>
         <p class="issue" data-number="251">
             This alignment of DCAT with schema.org is provisional and non-normative. Feedback is invited in the <a href="https://github.com/w3c/dxwg/issues/251">issue tracker</a>.
@@ -2455,7 +2461,7 @@ a:TestingActivity a prov:Activity;
             </tr>
             <tr>
                 <td style="text-align: right">dct:format</td>
-                <td style="text-align: center"><code>owl:equivalentProperty</code></td>
+                <td style="text-align: center"><code>[ owl:inverseOf rdfs:subPropertyOf ]</code></td>
                 <td>schema:encodingFormat</td>
             </tr>
             <tr>
@@ -2465,7 +2471,7 @@ a:TestingActivity a prov:Activity;
             </tr>
             <tr>
                 <td style="text-align: right">dct:issued</td>
-                <td style="text-align: center"><code>owl:equivalentProperty</code></td>
+                <td style="text-align: center"><code>skos:closeMatch</code></td>
                 <td>schema:datePublished</td>
             </tr>
             <tr>
@@ -2505,7 +2511,7 @@ a:TestingActivity a prov:Activity;
             </tr>
             <tr>
                 <td style="text-align: right">dct:type</td>
-                <td style="text-align: center"><code>owl:equivalentProperty</code></td>
+                <td style="text-align: center"><code>skos:closeMatch</code></td>
                 <td>schema:additionalType</td>
             </tr>
             <tr>
@@ -2515,11 +2521,11 @@ a:TestingActivity a prov:Activity;
             </tr>
             <tr>
                 <td style="text-align: right" rowspan="2">dcat:DataService</td>
-                <td style="text-align: center"><code>owl:equivalentClass</code></td>
+                <td style="text-align: center"><code>skos:closeMatch</code></td>
                 <td>schema:DataFeed</td>
             </tr>
             <tr>
-                <td style="text-align: center" colspan="2">Unclear if a <code>DataFeed</code> is a data <strong>service</strong>, or a data <strong>collection</strong>. From a REST viewpoint there is no difference, but some commonly used APIs support additional queries, slices, etc which make the characterization of a service more efficient than listing the (potentially infinite) set of resources available from it. </td>
+                <td style="text-align: center" colspan="2">Unclear if a <code>schema:DataFeed</code> is a data <strong>service</strong>, or a data <strong>collection</strong>.</td>
             </tr>
             <tr>
                 <td style="text-align: right">dcat:Dataset</td>
