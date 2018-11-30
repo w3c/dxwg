@@ -135,7 +135,7 @@
     <p>DCAT is an RDF vocabulary well-suited to representing data catalogs such as <a href="https://www.data.gov/">data.gov</a> and <a href="https://data.gov.uk">data.gov.uk</a>. DCAT defines eight main classes:</p>
     <ul>
         <li> <code><a href="#Class:Catalog">dcat:Catalog</a></code> represents the catalog</li>
-        <li> <code><a href="#Class:Resource">dcat:Resource</a></code> represents an item described by an entry in a catalog.</li>
+        <li> <code><a href="#Class:Resource">dcat:Resource</a></code> represents an item described by an entry in a catalog, and carries the properties common to any resource that can be catalogued. This class is the parent class of <code><a href="#Class:Dataset">dcat:Dataset</a></code>, <code><a href="#Class:Data_Service">dcat:DataService</a></code> and <code><a href="#Class:Catalog">dcat:Catalog</a></code>. A specific sub-class should be used when available.</li>
         <li> <code><a href="#Class:Dataset">dcat:Dataset</a></code> represents a dataset in a catalog.</li>
         <li> <code><a href="#Class:Distribution">dcat:Distribution</a></code> represents an accessible form or representation of a dataset as for example a downloadable file.</li>
         <li> <code><a href="#Class:Data_Service">dcat:DataService</a></code> represents a data service in a catalog. Example data services include data distribution services and data discovery services.</li>
@@ -459,7 +459,9 @@
         <h3>RDF representation</h3>
 
         <p class="note">
-            The DCAT RDF representation is modularized into several files or graphs to help users access a version of DCAT with just the alignments that they need. This mechanism can also be used to capture different levels of axiomatization, though the status of such proposals has not been finalized. See <a href="https://github.com/w3c/dxwg/issues/134">Issue #134</a> and the issues enumerated below.
+            The DCAT RDF representation is modularized into several files or graphs to help users access a version of DCAT with only the alignments that they need.
+            This mechanism can also be used to capture different levels of axiomatization, though the status of such proposals has not been finalized.
+            See <a href="https://github.com/w3c/dxwg/issues/134">Issue #134</a> and the issues enumerated below.
         </p>
 
         <div class="issue" data-number="65">
@@ -1363,7 +1365,8 @@
         </p>
 
         <p class="issue" data-number="76">
-            The need provide a more comprehensive method for describing dataset provenance has been identified as a requirement to be satisfied in the revision of DCAT. A preliminary <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/rdf/dcat-prov.ttl">alignment of DCAT with PROV-O is available</a>.
+            The need provide a more comprehensive method for describing dataset provenance has been identified as a requirement to be satisfied in the revision of DCAT.
+            A preliminary <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/rdf/dcat-prov.ttl">alignment of DCAT with PROV-O is available</a>.
         </p>
 
         <p class="issue" data-number="84">
@@ -2590,7 +2593,7 @@ ex:Test543L
 
 <section id="alignments">
 
-    <h2>Alignment with other metadata vocabularies</h2>
+    <h2>Alignment with other general purpose metadata vocabularies</h2>
     <p class="note">
         See the wiki page on <a href="https://github.com/w3c/dxwg/wiki/Alignments-and-crosswalks">Alignments and Crosswalks</a> for more discussion.
     </p>
@@ -2966,46 +2969,6 @@ ex:Test543L
 
     </section>
 
-    <section id="dcat-dats" class="informative">
-        <h3>DATS</h3>
-        <p class="issue" data-number="149">
-            An alignment of DCAT with DATS [[DATS]] is being considered.
-        </p>
-
-    </section>
-
-    <section id="dcat-hcls" class="informative">
-        <h3>HCLS</h3>
-        <p class="issue" data-number="150">
-            An alignment of DCAT with HCLS [[HCLS-Dataset]] is being prepared.
-        </p>
-
-    </section>
-
-    <section id="dcat-iso-19115" class="informative">
-        <h3>ISO 19115</h3>
-        <p class="issue" data-number="151">
-            An alignment of DCAT with ISO 19115 [[ISO-19115-1]] is being prepared.
-        </p>
-
-    </section>
-
-    <section id="dcat-datacite" class="informative">
-        <h3>Datacite</h3>
-        <p class="issue" data-number="152">
-            An alignment of DCAT with Datacite metadata schema [[DataCite]] is being prepared.
-        </p>
-
-    </section>
-
-    <section id="dcat-ddi" class="informative">
-        <h3>DDI</h3>
-        <p class="issue" data-number="164">
-            An alignment of DCAT with DDI [[DDI]] is being prepared.
-        </p>
-
-    </section>
-
 </section>
 
 <section id="profiles">
@@ -3229,6 +3192,55 @@ ex:Test543L
 &lt;/datasets/001/inbox/&gt; ldp:contains &lt;/datasets/001/inbox/001&gt; .</pre>
         </div>
     </section>
+
+</section>
+
+<section class="appendix" id="alignments-domains">
+  <h2>Alignment with external metadata vocabularies</h2>
+
+<p>
+  This annex lists some (planned) alignments between DCAT and some metadata vocabularies that are oriented towards particular applications and domains.
+</p>
+
+  <section id="dcat-dats" class="informative">
+      <h3>DATS</h3>
+      <p class="issue" data-number="149">
+          An alignment of DCAT with DATS [[DATS]] is being considered.
+      </p>
+
+  </section>
+
+  <section id="dcat-hcls" class="informative">
+      <h3>HCLS</h3>
+      <p class="issue" data-number="150">
+          An alignment of DCAT with HCLS [[HCLS-Dataset]] is being prepared.
+      </p>
+
+  </section>
+
+  <section id="dcat-iso-19115" class="informative">
+      <h3>ISO 19115</h3>
+      <p class="issue" data-number="151">
+          An alignment of DCAT with ISO 19115 [[ISO-19115-1]] is being prepared.
+      </p>
+
+  </section>
+
+  <section id="dcat-datacite" class="informative">
+      <h3>Datacite</h3>
+      <p class="issue" data-number="152">
+          An alignment of DCAT with Datacite metadata schema [[DataCite]] is being prepared.
+      </p>
+
+  </section>
+
+  <section id="dcat-ddi" class="informative">
+      <h3>DDI</h3>
+      <p class="issue" data-number="164">
+          An alignment of DCAT with DDI [[DDI]] is being prepared.
+      </p>
+
+  </section>
 
 </section>
 
