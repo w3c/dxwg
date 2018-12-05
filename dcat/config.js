@@ -16,8 +16,8 @@ var respecConfig = {
       companyURL: "http://www.oerc.ox.ac.uk/"
     },{
       name: "Dave Browning",
-      company: "Thomson Reuters",
-      companyURL: "https://www.thomsonreuters.com"
+      company: "Refinitiv",
+      companyURL: "https://www.refinitiv.com"
     },{
       name: "Simon Cox",
       company: "CSIRO",
