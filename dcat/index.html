@@ -2016,7 +2016,52 @@
     </section>
 
 </section>
+<section id="Dereferenceable-identifiers" class="informative">
+    <h2>Dereferenceable identifiers</h2>
+    
+    <p>DCAT should rely on peristent HTTP URIs, which are an effective way of making identifiers actionable.</p>
 
+    <p>The property <a href="#Property:resource_identifier">dct:identifier</a> can be used to explicitly indicate HTTP URIs as well as legacy identifiers. In the following examples,  <a href="#Property:resource_identifier">dct:identifier</a>  identifies a dataset, but it can similarly be used with any kind of resources.</p>
+    <div class="example">
+    <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+&lt;https://example.org/id&gt; a dcat:Dataset;      
+	dct:identifier "https://example.org/id"^^xsd:anyURI 
+  . </pre></div>
+    <p> Proxy dereferenceable URIs can be used  when resources haven't  HTTP dereferenceable IDs. For example, in the following,  &lt;https://example.org/proxyid&gt;  is a proxy for "id".</p>
+<div class="example">
+    <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+&lt;https://example.org/proxyid&gt; a dcat:Dataset;
+	dct:identifier  "id"^^xsd:string 
+    .</pre></div>   
+    <p> The property <a href="https://www.w3.org/TR/vocab-adms/#adms-identifier">adms:identifier</a> can express other locally minted identifiers or external identifiers, like Datacite, DOI, ELI etc., as long as they are globally unique and stable.</p>
+    <div class="example">
+    <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+&lt;https://example.org/id&gt; a dcat:Dataset;
+    adms:identifier  &lt;https://example.org/iddoi&gt; .
+	.
+    
+&lt;https://example.org/iddoi&gt; rdf:type adms:Identifier ; 
+   skos:notation "https://doi.org/10.1109/5.771073"^^xsd:anyURI; 
+   # reading https://www.w3.org/TR/skos-reference/#notations more than one skos:notation can be set 
+   skos:notation "info:doi/10.1109/5.771073"^^xsd:anyURI  ;
+   # the authority/agency defining the identifier scheme, used if the agency has no URI
+   adms:schemeAgency "International DOI Foundation" ;
+   # the authority/agency defining the identifier scheme, used if the agency has URI
+   dct:creator  ex:InternationalDOIFundation.
+
+ex:InternationalDOIFundation a dct:Agent;
+    rdfs:label "International DOI Foundation";
+    foaf:homepage &lt;https://www.doi.org/&gt; .
+</pre>
+   </div>
+    <p>DCAT uses adms:schemeAgency and dct:creator to represent the authority that defines the identifier scheme (e.g., DOI foundation in the example), adms:schemeAgency is used when the authority has no URI associated. DCAT does not represent the authority responsible for assigning and maintaining identifiers using that scheme (e.g., IEEE ) as naming the registrant goes against the philosophy of DOI where the sub-spaces are abstracted from the organisation that registers them, with the advantage that DOIs don't change when the organisation changes or the responsibility for that sub-space is handed over to someone else.</p>
+    <p>Identifies for dataset should follow the <a href="https://www.w3.org/TR/dwbp/#DataIdentifiers">DWBP Data Identifier Best Practices</a>.</p>
+    
+
+
+Assign a stable identifier to the dataset in the catalogue where the dataset is first published. This should be the primary identifier of the dataset. Include this identifier as the value of <a href="http://dublincore.org/documents/dcmi-terms/#terms-identifier" >dct:identifier</a>
+
+</section>    
 <section id="quality-information" class="informative">
     <h2>Quality information</h2>
     <div class="note"><p>This section is not-normative as it provides guidance on how to document the quality of DCAT first class entities (e.g., datasets, distributions) and it does not define new DCAT terms. The guidance relies on the Data Quality Vocabulary(DQV) [[VOCAB-DQV]], which is a W3C Group Note.</p></div>
