@@ -6,20 +6,26 @@ var respecConfig = {
 //    previousPublishDate:  "2016-07-23",
 //    previousURI:          "https://www.w3.org/TR/2016/NOTE-poe-ucr-20160721/",
     edDraftURI: "https://w3c.github.io/dxwg/ucr/",
-   editors: [{
-  name:       "Ixchel Faniel",
-  company:    "OCLC (Online Computer Library Center, Inc.)",
-  companyURL: "https://www.oclc.org/"
+   editors: [
+{
+    name: "Jaroslav Pullmann",
+    company: "Fraunhofer Gesellschaft",
+    companyURL: "https://www.fraunhofer.de/"
 },
 {
-name: "Jaroslav Pullmann",
-company: "Fraunhofer Gesellschaft",
-companyURL: "https://www.fraunhofer.de/"
+    name: "Rob Atkinson",
+    company: "Metalinkage, Open Geospatial Consortium",
+    companyURL: "http://www.opengeospatial.org/"
 },
 {
-name: "Rob Atkinson",
-company: "Metalinkage, Open Geospatial Consortium",
-companyURL: "http://www.opengeospatial.org/"
+    name:       "Antoine Isaac",
+    company:    "Europeana, Vrije Universiteit Amsterdam",
+    companyURL: "https://pro.europeana.eu/person/antoine-isaac"
+},
+{
+    name:       "Ixchel Faniel",
+    company:    "OCLC (Online Computer Library Center, Inc.)",
+    companyURL: "https://www.oclc.org/"
 }
          	],
     wg: "Dataset Exchange Working Group",
