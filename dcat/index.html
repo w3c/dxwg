@@ -2018,10 +2018,10 @@
           <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#hadRole">dcat:hadRole</a></th></tr></thead>
           <tbody>
           <tr><td class="prop">Definition:</td><td>The function of an entity or agent with respect to another entity or resource.</td></tr>
-          <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/prov#Attribution">prov:Attribution</a></td></tr>
+          <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/prov#Influence">prov:Influence</a></td></tr>
           <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/prov#Role">prov:Role</a></td></tr>
-          <tr><td class="prop">Usage note:</td><td>Used in a qualified-attribution to specify the role of an Agent with respect to an Entity.
-            It is recommended that the value be taken from a controlled vocabulary of agent roles, such as <a href="http://registry.it.csiro.au/def/isotc211/CI_RoleCode">ISO 19115 CI_RoleCode</a>.</td></tr>
+          <tr><td class="prop">Usage note:</td><td>"May be used in a qualified-attribution to specify the role of an Agent with respect to an Entity. It is recommended that the value be taken from a controlled vocabulary of agent roles, such as <a href="http://registry.it.csiro.au/def/isotc211/CI_RoleCode">ISO 19115 CI_RoleCode</a>.</td></tr>
+          <tr><td class="prop">Usage note:</td><td>May be used in a qualified-relation to specify the role of an Entity with respect to another Entity. It is recommended that the value be taken from a controlled vocabulary of entity roles.</td></tr>
           </tbody>
         </table>
 
@@ -2355,7 +2355,7 @@ a:TestingActivity a prov:Activity;
 <section id="qualified-attribution">
   <h2>Attribution roles</h2>
   <p>
-    The standard Dublin Core properties <a href="http://purl.org/dc/terms/contributor">dct:contributor</a>, <a href="http://purl.org/dc/terms/creator">dct:creator</a> and <a href="http://purl.org/dc/terms/publisher">dct:publisher</a>, support basic associations of responsible agents with a catalogued resource.
+    The standard Dublin Core properties <a href="http://purl.org/dc/terms/contributor">dct:contributor</a>, <a href="http://purl.org/dc/terms/creator">dct:creator</a> and <a href="http://purl.org/dc/terms/publisher">dct:publisher</a>, and the generic <a href="https://www.w3.org/TR/prov-o/#wasAttributedTo">prov:wasAttributedTo</a> from [[PROV-O]], support basic associations of responsible agents with a catalogued resource.
     However, there are many other roles of importance in relation to datasets and services - e.g. funder, distributor, custodian, editor.
     Some of these roles are enumerated in the CI_RoleCode values from [[ISO-19115-1]], in the [[DataCite]] metadata schema, and included within the <a href="https://id.loc.gov/vocabulary/relators">MARC relators</a>.
   <p>
@@ -3378,6 +3378,10 @@ dcat:servesDataset ga-courts:jc ;
         <p>The document has undergone the following changes since the W3C Recommendation of 16 January 2014 [[VOCAB-DCAT-20140116]]:</p>
 
         <ul>
+
+            <li>
+                <a href="#Property:hadRole">Property: had role</a>: The property dcat:hadRole is added to support the use of prov:qualifiedAttribution to associate an agent with a DCAT resource, where the role of the agent with relation to the resource is specified, and is something other than the standard Dublin Core roles: creator, publisher or contributor - see <a href="https://github.com/w3c/dxwg/issues/79">Issue #79</a>
+            </li>
 
             <li>
                 <a href="#Property:dataset_creator">Property: dataset creator</a>: The property dct:creator is recommended for use in the context of a dataset to allow the entity responsible for generating the dataset to be recorded - see <a href="https://github.com/w3c/dxwg/issues/61">Issue #61</a>
