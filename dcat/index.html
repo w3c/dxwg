@@ -2362,13 +2362,16 @@ a:TestingActivity a prov:Activity;
 	<p class="note">
 		DCAT 2014 handling of license and rights do not appear to satisfy all requirements [[VOCAB-DCAT-20140116]].
 		The recently completed W3C ODRL vocabulary [[ODRL-VOCAB]] provides a rich language for describing many kinds of rights and obligations.
-		In this chapter it is planned to describe some patterns for linking DCAT Datasets and/or Distributions to suitable rights expressions.
-		See the wiki page on <a href="https://github.com/w3c/dxwg/wiki/License-and-rights">License and rights</a> for more discussion.
+		In this chapter, we describe some patterns for linking DCAT Datasets and/or Distributions to suitable license and rights expressions.
 	</p>
+	
 	<p>
 		Selecting the right way to express conditions for access to and re-use of resources can be complex.
 		Implementers should always seek legal advice before deciding which conditions apply to the resource being described.
 	</p>
+<!--	
+	<div class="ednote" title="Original text">
+	
 	<p>
 		This specification distinguishes three main situations: one where a statement is associated with the resource that is explicitly declared as a 'licence';
 		a second where the statement is not explicitly declared as a 'licence'; and a third where the conditions are explicitly expressed as an ODRL Policy.
@@ -2385,6 +2388,58 @@ a:TestingActivity a prov:Activity;
 			The Open Digital Rights Language (ODRL) is a policy expression language that provides a flexible and interoperable information model, vocabulary, and encoding mechanisms for representing statements about usage (i.e. permissions, prohibitions, and obligations) of content and services.</li>
 		</ol>
 	</p>
+	
+	</div>
+-->
+	<p>
+    This specification distinguishes three main situations: 
+    one where a statement is associated with a resource that is explicitly declared as a 'license'; 
+    a second, where the statement is associated with a resource denoting only access rights; 
+    a third, covering all the other cases - i.e., statements not concerning licensing conditions and/or access rights (e.g., copyright statements).	
+	</p>
+	
+	<p class="note">
+	  It is worth noting that the provision of licensing conditions and access rights complies with the [[DWBP]]'s Best Practices 4 ("<a data-cite="DWBP#licenses">Provide data license information</a>") and 22 ("<a data-cite="DWBP#DataUnavailabilityReference">Provide an explanation for data that is not available</a>"), respectively.
+	</p>
+	
+	<p>
+		To address these scenarios, the recommendation is to use property dct:rights, and its sub-properties dct:license and dct:accessRights. More precisely:
+  </p>
+		<ol>
+			<li>
+			  <p>use <a href="http://dublincore.org/documents/dcmi-terms/#terms-license">dct:license</a> to refer to licenses;</p>
+<!--			  
+			<p>The object of dct:license, a <a href="http://dublincore.org/documents/dcmi-terms/#terms-LicenseDocument">dct:LicenseDocument</a>, is "A legal document giving official permission to do something with a Resource."</p>
+-->			
+        <p class="note">
+          For interoperability, it is recommended to use canonical URIs of well-known licenses such as <a href="https://creativecommons.org/share-your-work/licensing-types-examples/">those defined by Creative Commons</a>.
+        </p>
+			</li>
+			<li>
+			  <p>use <a href="http://dublincore.org/documents/dcmi-terms/#terms-accessRights">dct:accessRights</a>  to express statements concerning only access rights (e.g., whether data can be accessed by anyone or just by authorized parties);</p>
+<!--			  
+        <p>The object of dct:accessRights is a dct:RightsStatement providing "Information about who can access the resource or an indication of its security status."</p>
+-->        
+        <p class="note">
+          Access rights can also be expressed as code lists / taxonomies. Examples include the access rights code list  [[MDR-AR]] used in [[DCAT-AP]] and the <a href="http://purl.org/eprint/accessRights/">Eprints Access Rights Vocabulary Encoding Scheme</a>.
+        </p>
+      </li>
+			<li>
+			  <p>use <a href="http://dublincore.org/documents/dcmi-terms/#terms-rights">dct:rights</a> for all the other types of rights statements - those which are not covered by dct:license and dct:accessRights, such as copyright statementss.</p>
+<!--			  
+			  <p>The object of dct:rights, a <a href="http://dublincore.org/documents/dcmi-terms/#terms-RightsStatement">dct:RightsStatement</a>, is "A statement about the intellectual property rights (IPR) held in or over a Resource, a legal document giving official permission to do something with a resource, or a statement about access rights." 
+			This is more general than a <a href="http://dublincore.org/documents/dcmi-terms/#terms-LicenseDocument">dct:LicenseDocument</a> and therefore should be used if it the statement contains more general information about rights.</p>
+-->			
+			  <p class="note">
+			    A more sophisticated approach to express rights, based on and extending [[DCTERMS]], is provided by the Open Data Rights Statement Vocabulary (ODRS) [[ODRS]], which defines properties for specifying, among others, copyright statements and copyright notices.
+			  </p>
+			</li>
+		</ol>
+
+	<p>Finally, in the particular case when rights are expressed via <a href="https://www.w3.org/TR/odrl-vocab/#term-Policy">ODRL policies</a>, it is recommended to use use the <a href="https://www.w3.org/TR/odrl-vocab/#term-hasPolicy">odrl:hasPolicy</a> property as the link from the description of the catalogued resource or distribution to the ODRL policy, in addition to the relevant <code>dct</code> property.</p>
+  <p class="note">The Open Digital Rights Language (ODRL) [[ODRL-VOCAB]] is a policy expression language that provides a flexible and interoperable information model, vocabulary, and encoding mechanisms for representing statements about usage (i.e. permissions, prohibitions, and obligations) of content and services.</p>
+
+  <p>Recommendations on the use of these properties on the different types of resources defined in DCAT are provided in the relevant class descriptions.</p>
 
 </section>
 
@@ -3336,6 +3391,10 @@ dcat:servesDataset ga-courts:jc ;
         <ul>
 
             <li>
+               The section <a href="#license-rights">License and rights statements</a> was added to describe patterns for linking dcat:Datasets and dcat:Distributions to the relevant license and rights expressions.
+            </li>
+
+            <li>
                 <a href="#Property:dataset_creator">Property: dataset creator</a>: The property dct:creator is recommended for use in the context of a dataset to allow the entity responsible for generating the dataset to be recorded - see <a href="https://github.com/w3c/dxwg/issues/61">Issue #61</a>
             </li>
 
@@ -3437,4 +3496,4 @@ dcat:servesDataset ga-courts:jc ;
 </section>
 
 </body>
-</html>
+</html> 
