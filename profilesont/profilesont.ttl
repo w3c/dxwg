@@ -1,4 +1,4 @@
-@prefix : <http://www.w3.org/ns/prof/> .
+@prefix : <http://www.w3.org/ns/dx/prof/> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -10,10 +10,10 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@base <http://www.w3.org/ns/prof> .
+@base <http://www.w3.org/ns/dx/prof> .
 
-<http://www.w3.org/ns/prof> rdf:type owl:Ontology ;
-                                          owl:versionIRI <http://www.w3.org/ns/prof/1.0> ;
+<http://www.w3.org/ns/dx/prof> rdf:type owl:Ontology ;
+                                          owl:versionIRI <http://www.w3.org/ns/dx/prof/1.0> ;
                                           rdfs:label "Profile Descriptions Ontology" ;
                                           dct:contributor <http://orcid.org/0000-0002-8742-7730> ;
                                           dc:creator "Rob Atkinson" ;
@@ -49,7 +49,7 @@ dct:format rdf:type owl:AnnotationProperty ;
 #    Object Properties
 #################################################################
 
-###  http://www.w3.org/ns/prof/hasArtifact
+###  http://www.w3.org/ns/dx/prof/hasArtifact
 :hasArtifact
   rdf:type owl:ObjectProperty ;
   skos:definition "An rdfs:Resource that implements the Resource Descriptor"@en ;
@@ -58,14 +58,14 @@ dct:format rdf:type owl:AnnotationProperty ;
   skos:usageNote "A property to link from a Resource Descriptor to an implementing resource object"@en .
 
 
-###  http://www.w3.org/ns/prof/hasProfile
+###  http://www.w3.org/ns/dx/prof/hasProfile
 :hasProfile rdf:type owl:ObjectProperty ;
             owl:inverseOf :isProfileOf ;
             skos:definition "A dct:Standard (or a Profile or Base Specification) has a Profile"@en ;
             rdfs:label "has profile" .
 
 
-###  http://www.w3.org/ns/prof/isInheritedFrom
+###  http://www.w3.org/ns/dx/prof/isInheritedFrom
 :isInheritedFrom rdf:type owl:ObjectProperty ;
                rdfs:domain :ResourceDescriptor ;
                rdfs:range :Profile ;
@@ -74,7 +74,7 @@ dct:format rdf:type owl:AnnotationProperty ;
                rdfs:label "is inherited from" .
 
 
-###  http://www.w3.org/ns/prof/isProfileOf
+###  http://www.w3.org/ns/dx/prof/isProfileOf
 :isProfileOf rdf:type owl:ObjectProperty ;
            rdfs:domain :Profile ;
            rdfs:range dct:Standard ;
@@ -83,7 +83,7 @@ dct:format rdf:type owl:AnnotationProperty ;
            rdfs:label "is profile of" .
 
 
-###  http://www.w3.org/ns/prof/isTransitiveProfileOf
+###  http://www.w3.org/ns/dx/prof/isTransitiveProfileOf
 :isTransitiveProfileOf rdf:type owl:ObjectProperty ;
                      rdfs:domain :Profile ;
                      rdfs:range dct:Standard ;
@@ -92,14 +92,14 @@ dct:format rdf:type owl:AnnotationProperty ;
                      rdfs:label "is transitive profile of" .
 
 
-###  http://www.w3.org/ns/prof/hasResource
+###  http://www.w3.org/ns/dx/prof/hasResource
 :hasResource rdf:type owl:ObjectProperty ;
           rdfs:range :ResourceDescriptor ;
           skos:definition "Property for indicating a Resource Descriptor of this profile"@en ;
           rdfs:label "has resource"@en .
 
 
-###  http://www.w3.org/ns/prof/hasRole
+###  http://www.w3.org/ns/dx/prof/hasRole
 :hasRole rdf:type owl:ObjectProperty ;
               rdfs:domain :ResourceDescriptor ;
               rdfs:range skos:Concept ;
@@ -112,7 +112,7 @@ dct:format rdf:type owl:AnnotationProperty ;
 #    Data properties
 #################################################################
 
-###  http://www.w3.org/ns/prof/hasToken
+###  http://www.w3.org/ns/dx/prof/hasToken
 :hasToken rdf:type owl:DatatypeProperty ;
        rdfs:domain :Profile ;
        rdfs:range xsd:token ;
@@ -125,7 +125,7 @@ dct:format rdf:type owl:AnnotationProperty ;
 #    Classes
 #################################################################
 
-###  http://www.w3.org/ns/prof/BaseSpecification
+###  http://www.w3.org/ns/dx/prof/BaseSpecification
 :BaseSpecification rdf:type owl:Class ;
                    rdfs:subClassOf :Profile ,
                                    [ rdf:type owl:Restriction ;
@@ -137,14 +137,14 @@ dct:format rdf:type owl:AnnotationProperty ;
                    skos:usageNote "This may not be a useful class: documents of any specification can be regarded as a trivial profile, so applications only need to be concerned with Profile conformance"@en .
 
 
-###  http://www.w3.org/ns/prof/ResourceDescriptor
+###  http://www.w3.org/ns/dx/prof/ResourceDescriptor
 :ResourceDescriptor rdf:type owl:Class ;
                   rdfs:label "Resource Descriptor"@en ;
                   skos:definition "A resource that defines an aspect - a particular part or feature - of a Profile"@en ;
                   skos:usageNote "Can be use to indicate the formalism (via dct:format) and any adherence to a dct:Standard (via dct:conformsTo) to allow for machine mediation as well as its purpose via relation to a ResourceRole (via hasRole)"@en .
 
 
-###  http://www.w3.org/ns/prof/ResourceRole
+###  http://www.w3.org/ns/dx/prof/ResourceRole
 :ResourceRole rdf:type owl:Class ;
                   rdfs:label "Resource Role" ;
                   skos:definition "The role that an Resource plays"@en ;
@@ -152,7 +152,7 @@ dct:format rdf:type owl:AnnotationProperty ;
                   skos:usageNote "Specific terms must come from a vocabulary"@en .
 
 
-###  http://www.w3.org/ns/prof/Profile
+###  http://www.w3.org/ns/dx/prof/Profile
 :Profile rdf:type owl:Class ;
          rdfs:subClassOf dct:Standard ;
          dct:source <https://www.w3.org/2017/dxwg/wiki/ProfileContext> ;

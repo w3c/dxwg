@@ -85,7 +85,7 @@ var respecConfig = {
             status: "W3C Editor's Draft"
         },
         "PROF-GUIDANCE": {
-            href: "https://www.w3.org/TR/dx-prof-guidance",
+            href: "https://w3c.github.io/dxwg/profiles/",
             title: "Profile Guidance",
             date: " 2018-12-31",
             status: "W3C Editor's Draft"
