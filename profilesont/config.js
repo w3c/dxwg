@@ -79,10 +79,10 @@ var respecConfig = {
             status: "W3C Community Group Draft Report"
         },
         "PROF-CONNEG": {
-            href: "https://www.w3.org/TR/dx-prof-conneg",
+            href: "https://www.w3.org/TR/2018/WD-dx-prof-conneg-20181211/",
             title: "Content Negotiation by Profile",
-            date: "2018-12-31",
-            status: "W3C Editor's Draft"
+            date: "2018-12-11",
+            status: "First Public Editor's Draft"
         },
         "PROF-GUIDANCE": {
             href: "https://w3c.github.io/dxwg/profiles/",

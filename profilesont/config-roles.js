@@ -69,13 +69,13 @@ var respecConfig = {
             status: "W3C Community Group Draft Report"
         },
         "PROF-CONNEG": {
-            href: "https://www.w3.org/TR/conneg-by-ap/",
+            href: "https://www.w3.org/TR/2018/WD-dx-prof-conneg-20181211/",
             title: "Content Negotiation by Profile",
-            date: "2018-12-31",
-            status: "W3C Editor's Draft"
+            date: "2018-12-11",
+            status: "First Public Editor's Draft"
         },
-        "PROF-GUIDE": {
-            href: "https://www.w3.org/TR/profile-guidance/",
+        "PROF-GUIDANCE": {
+            href: "https://w3c.github.io/dxwg/profiles/",
             title: "Profile Guidance",
             date: " 2018-12-31",
             status: "W3C Editor's Draft"
@@ -85,20 +85,20 @@ var respecConfig = {
                 "L. Svensson",
                 "R. Verborgh"
             ],
-            href: "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema/",
+            href: "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema",
             title: "Negotiating Profiles in HTTP",
             date: "2017-10-24",
             status: "IETF Internet Draft"
         },
-        "PROF-ONT": {
+        "PROF": {
             editors: [
                 "Rob Atkinson",
                 "Nicholas J. Car"
             ],
-            href: "https://www.w3.org/TR/prof/",
+            href: "https://www.w3.org/TR/2018/WD-dx-prof-20181211/",
             title: "Profile Descriptions ontology",
-            date: "2018-09-23",
-            status: "W3C Editor's Draft"
+            date: "2018-12-11",
+            status: "First Public Working Draft"
         },
         SCHEMATRON: {
             href: "https://www.iso.org/standard/55982.html",
