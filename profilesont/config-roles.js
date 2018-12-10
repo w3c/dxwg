@@ -1,5 +1,5 @@
 var respecConfig = {
-    specStatus: "WD",
+    specStatus: "ED",
     shortName: "prof-roles",
     edDraftURI: "https://w3c.github.io/dxwg/profilesont/resource_roles.html",
     canonicalURI: "TR",
