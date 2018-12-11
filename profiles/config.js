@@ -1,5 +1,5 @@
 var respecConfig = {
-    specStatus: "FPWD",
+    specStatus: "ED",
     shortName: "profile-guidance",
     edDraftURI: "https://w3c.github.io/dxwg/profiles/",
     editors: [
