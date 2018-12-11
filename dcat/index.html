@@ -2052,9 +2052,9 @@
 	.
     
 &lt;https://example.org/iddoi&gt; rdf:type adms:Identifier ; 
-   skos:notation "https://doi.org/10.1109/5.771073"^^xsd:anyURI; 
+   skos:notation "https://doi.org/10.5281/zenodo.1486279"^^xsd:anyURI; 
    # reading https://www.w3.org/TR/skos-reference/#notations more than one skos:notation can be set 
-   skos:notation "info:doi/10.1109/5.771073"^^xsd:anyURI  ;
+   skos:notation "info:10.5281/zenodo.1486279"^^xsd:anyURI  ;
    # the authority/agency defining the identifier scheme, used if the agency has no URI
    adms:schemaAgency "International DOI Foundation" ;
    # the authority/agency defining the identifier scheme, used if the agency has URI
@@ -2066,17 +2066,18 @@ ex:InternationalDOIFundation a dct:Agent;
     </pre>
     </div>
     
-    <p> The example does not represent the authority responsible for assigning and maintaining identifiers using that scheme (e.g., IEEE) as naming the registrant goes against the philosophy of DOI where the sub-spaces are abstracted from the organisation that registers them, with the advantage that DOIs don't change when the organisation changes or the responsibility for that sub-space is handed over to someone else.</p>
+    <p> The example does not represent the authority responsible for assigning and maintaining identifiers using that scheme (e.g., zenodo) as naming the registrant goes against the philosophy of DOI where the sub-spaces are abstracted from the organisation that registers them, with the advantage that DOIs don't change when the organisation changes or the responsibility for that sub-space is handed over to someone else.</p>
     
-    <p>When the HTTP dereferenceable ID returns RDF/OWL, the use owl:sameAs might be consider</p>
-    
+    <p>When the HTTP dereferenceable ID returns RDF/OWL description for the identifier, the use owl:sameAs might be consider. For example, </p>     
     <div class="example">
     <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
-&lt;https://example.org/id&gt; a dcat:Dataset;
+&lt;https://example.org/iddoi&gt; 
 	...
-	owl:sameAs &lt;https://doi.org/10.1109/5.771073&gt; .
+	owl:sameAs &lt;https://doi.org/10.5281/zenodo.1486279&gt; .
     </pre>
     </div>
+    <p>when dereferenced with media type "text/turtle",  https://doi.org/10.5281/zenodo.1486279 returns a schema.org description for the identifier, which might dinamically enrich the description provided by https://example.org/iddoi. </p>
+
     
     <p>Identifiers for datasets should follow the <a href="https://www.w3.org/TR/dwbp/#DataIdentifiers">DWBP Data Identifier Best Practices</a>. Depending on the application context, specific guidelines such as <a href="https://joinup.ec.europa.eu/release/dcat-ap-how-manage-duplicates">"DCAT-AP: How to manage duplicates?"</a> can be adopted for distinguishing authoritative datasets from dataset harvested by third parties catalogs.</p>
     
