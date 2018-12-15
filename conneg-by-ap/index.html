@@ -24,14 +24,11 @@
 	      Some of the documents are general while some are technology-specific:
       </p>
       <ul>
-        <li>[[PROF-GUIDANCE]] the top-level general profiling guidance document giving an overview of all other documents</li>
-        <li>[[PROF-ONT]] a document describing a formal ontology for describing objects related to profiles</li>
-        <li><strong>[PROF-CONNEG] this document, including specific guidance on how to negotiate for Internet resource content using profiles</strong></li>
-        <li>[[PROF-IETF]] an 
-		<a href="http://www.ietf.org">Internet Engineering Task Force (<abbr title="Internet Engineering Task Force">IETF</abbr>)</a>
-		<a href="http://www.ietf.org/standards/ids/">Internet-Draft</a>
-		defining two Hypertext Transfer Protocol (HTTP) Headers
-		for HTTP content negotiation by profile</li>
+        <li>[[DX-PROF-GUIDANCE]] the top-level general recommendations and guidance on profiling.
+          It gives an overview of all DXWG documents on profiles and is the recommended starting point</li>
+        <li>[[DX-PROF]] an RDF vocabulary that describes profiles and related resources</li>
+        <li><strong>[DX-PROF-CONNEG] this document, specific guidance on how to negotiate for Internet resource content using profiles</strong></li>
+        <li>[[DX-PROF-IETF]] an <a href="http://www.ietf.org">IETF</a> <a href="http://www.ietf.org/standards/ids/">Internet-Draft</a> defining HTTP Headers for HTTP content negotiation by profile</li>
       </ul>
     </section>
   </section>
@@ -69,12 +66,12 @@
       of content negotiation and ensures they all adhere to a single functional specification, ensuring their functional equivalency.
     </p>
     <p>
-      Guidance for the creation of <a>profile</a>s is provided in the [[PROF-GUIDANCE]] document created
+      Guidance for the creation of <a>profile</a>s is provided in the [[DX-PROF-GUIDANCE]] document created
       by the Dataset Exchange Working Group (DXWG).
     </p>
     <p>
       Describing the parts of profiles and their relation to other profiles is the function of the Profiles Ontology
-      [[PROF-ONT]], also produced by the DXWG.
+      [[DX-PROF]], also produced by the DXWG.
     </p>
   </section>
   <section id="conformance">
@@ -167,7 +164,7 @@
     <p>
       The standardization of the content-negotiation HTTP headers is the purview of the IETF. A first proposal
       for an <a href="https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema">Internet Draft
-      for Negotiating Profiles in HTTP</a> [[PROF-IETF]] is available but has not yet been submitted to the IETF. The
+      for Negotiating Profiles in HTTP</a> [[DX-PROF-IETF]] is available but has not yet been submitted to the IETF. The
       current version of the IETF draft (-00) is expected to be completely re-written in parallel work with this document and should
       not be seen as anything but work-in-progress.
     </p>
@@ -343,7 +340,7 @@
         A realization of the Abstract Model using Hypertext Transfer Protocol (HTTP) headers is presented here.
         This implementation is based on HTTP content negotiation and uses two new HTTP headers,
 	      <code>Accept-Profile</code> and <code>Content-Profile</code>
-	      that are to be defined in an upcoming Internet-Draft [[PROF-IETF]].
+	      that are to be defined in an upcoming Internet-Draft [[DX-PROF-IETF]].
       </p>
       <div class="issue" data-number="500"></div>
       <section id="listprofileshttp">
@@ -477,7 +474,7 @@ Content-Profile: urn:example:profile:1
       <p>
 	      A Query String Argument (QSA) realization of the <a href="#abstractmodel">Abstract Model</a>
 	      is presented here. Unlike the HTTP realization,
- 		which is the subject of an independent document [[PROF-IETF]],
+ 		which is the subject of an independent document [[DX-PROF-IETF]],
 	      this realization is fully specified here
 	      and this document is considered normative for the QSA realization.
 	      This realization does not preclude other QSA specifications for profile and content negotiation.
@@ -687,7 +684,7 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
           specific solution should not be any different from the general case.
         </p>
         <div class="note" title="">Profile definition and constraints on properties are not addressed here. See
-          [[PROF-GUIDANCE]].</div>
+          [[DX-PROF-GUIDANCE]].</div>
         <p>
           This requirement is taken to mean "create a way to list the profiles implemented by a Internet resource for
           <em>humans</em> and <em>machines</em> to use". For the former (humans), the options are:
@@ -696,7 +693,7 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
           <li>
             discovery via HTML representation
             <ul>
-              <li>see [[PROF-GUIDANCE]]</li>
+              <li>see [[DX-PROF-GUIDANCE]]</li>
               <li>an approach suggested is to provide an <em>alternate view</em> resource for the original
                 resource located at <code>RESOURCE_URI + ?_view=alternates</code> which lists, at a minimum, the
                 <em>profiles</em>, <em>media types</em> (formats) &amp; <em>languages</em> available, as per the
@@ -711,14 +708,14 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
           <li>
             discovery via HTTP
             <ul>
-              <li>see [[PROF-IETF]]</li>
+              <li>see [[DX-PROF-IETF]]</li>
               <li>HTTP mechanics are described that allow clients to negotiate with servers for profile listings</li>
             </ul>
           </li>
           <li>
             discovery via RDF graph
             <ul>
-              <li>see [[PROF-ONT]]</li>
+              <li>see [[DX-PROF]]</li>
             </ul>
           </li>
         </ul>
@@ -728,7 +725,7 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
       <div class="req-response">
         <p class="respTitle">RESPONSE FOR Req. 74</p>
         <p>
-          This requirement is the focus of the IETF RFC in the DXWG Family of Documents [[PROF-IETF]].
+          This requirement is the focus of the IETF RFC in the DXWG Family of Documents [[DX-PROF-IETF]].
         </p>
         <p>
           In summary, a series of new HTTP headers are added to the HTTP specification allowing for HTTP negotiation
@@ -760,12 +757,12 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
       <div class="req-response">
         <p class="respTitle">RESPONSE FOR Req. 263</p>
         <p>
-          The IETF submission in the DXWG Family of Documents [[PROF-IETF]] does not address content negotiaiton by
+          The IETF submission in the DXWG Family of Documents [[DX-PROF-IETF]] does not address content negotiaiton by
           profile query param patterns: it is limited to HTTP specification-based negotiation only.
         </p>
         <p>
           Recommendations for content negotiation by profile via query param patterns (Query String Arguments) are
-          given in the Profile Guidance [[PROF-GUIDANCE]] document where an API for this is defined.
+          given in the Profile Guidance [[DX-PROF-GUIDANCE]] document where an API for this is defined.
         </p>
       </div>
       <div class="issue" data-number="264"></div>
@@ -779,7 +776,7 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
       <div class="req-response">
         <p class="respTitle">RESPONSE FOR Req. 265</p>
         <p>
-          This requirement is met by [[PROF-IETF]].
+          This requirement is met by [[DX-PROF-IETF]].
         </p>
       </div>
       <div class="issue" data-number="266"></div>
@@ -829,14 +826,14 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
       <div class="req-response">
         <p class="respTitle">RESPONSE FOR Req. 288</p>
         <p>
-          This requirement is met by [[PROF-ONT]].
+          This requirement is met by [[DX-PROF]].
         </p>
       </div>
       <div class="issue" data-number="289"></div>
       <div class="req-response">
         <p class="respTitle">RESPONSE FOR Req. 289</p>
         <p>
-          This requirement is met by [[PROF-IETF]].
+          This requirement is met by [[DX-PROF-IETF]].
         </p>
       </div>
       <div class="issue" data-number="290"></div>
