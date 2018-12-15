@@ -78,27 +78,48 @@ var respecConfig = {
             date: "2018-09-06",
             status: "W3C Community Group Draft Report"
         },
-        "PROF-CONNEG": {
-            href: "https://www.w3.org/TR/2018/WD-dx-prof-conneg-20181211/",
+        "DX-PROF-CONNEG": {
+            editors: [
+                "Lars G. Svensson",
+                "Rob Atkinson",
+                "Nicholas J. Car"
+            ],
+            href: "https://www.w3.org/TR/2018/WD-dx-prof-conneg-20181218/",
             title: "Content Negotiation by Profile",
-            date: "2018-12-11",
-            status: "First Public Editor's Draft"
+            date: " 2018-12-18",
+            status: "W3C First Public Working Draft"
         },
-        "PROF-GUIDANCE": {
-            href: "https://w3c.github.io/dxwg/profiles/",
+        "DX-PROF-GUIDANCE": {
+            editors: [
+                "Rob Atkinson",
+                "Karen Coyle",
+                "Antoine Isaac",
+                "Nicholas J. Car"
+            ],
+            href: "https://www.w3.org/TR/profile-guidance/",
             title: "Profile Guidance",
             date: " 2018-12-31",
             status: "W3C Editor's Draft"
         },
-        "PROF-IETF": {
+        "DX-PROF-IETF": {
             authors: [
                 "L. Svensson",
                 "R. Verborgh"
             ],
-            href: "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema",
+            href: "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema/",
             title: "Negotiating Profiles in HTTP",
-            date: "2017-10-24",
+            date: " 2017-10-24",
             status: "IETF Internet Draft"
+        },
+        "DX-PROF": {
+            editors: [
+                "Rob Atkinson",
+                "Nicholas J. Car"
+            ],
+            href: "https://www.w3.org/TR/2018/WD-dx-prof-20181218/",
+            title: "Profile Descriptions ontology",
+            date: "2018-12-18",
+            status: "W3C First Public Working Draft"
         },
         SCHEMATRON: {
             href: "https://www.iso.org/standard/55982.html",
