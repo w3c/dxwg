@@ -3,25 +3,23 @@ var respecConfig = {
     shortName: "profile-guidance",
     edDraftURI: "https://w3c.github.io/dxwg/profiles/",
     editors: [
-      {
-        name: "Rob Atkinson",
-        company: "Metalinkage, Open Geospatial Consortium",
-        companyURL: "http://www.opengeospatial.org/"
-      },
-	  {
-		  name: "Karen Coyle",
-		  company: "Dublin Core Metadata Initiative",
-		  companyURL: "http://dublincore.org/"
-	  },
-	  {
-		  name: "Antoine Isaac",
-		  company: "VU Amsterdam and Europeana",
-		  companyURL: "https://www.europeana.eu/"
-	  }
-    ],
-    authors: [
         {
-            name:       "Nicholas Car",
+            name: "Rob Atkinson",
+            company: "Metalinkage, Open Geospatial Consortium",
+            companyURL: "http://www.opengeospatial.org/"
+        },
+        {
+            name: "Karen Coyle",
+            company: "Dublin Core Metadata Initiative",
+            companyURL: "http://dublincore.org/"
+        },
+        {
+            name: "Antoine Isaac",
+            company: "VU Amsterdam and Europeana",
+            companyURL: "https://www.europeana.eu/"
+        },
+        {
+            name:       "Nicholas J. Car",
             url:        "https://people.csiro.au/Nicholas-Car",
             company:    "CSIRO",
             companyURL: "https://www.csiro.au/"
