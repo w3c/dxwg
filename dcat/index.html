@@ -135,15 +135,15 @@
 
     <p>DCAT is an RDF vocabulary well-suited to representing data catalogs such as <a href="https://www.data.gov/">data.gov</a> and <a href="https://data.gov.uk">data.gov.uk</a>. DCAT defines eight main classes:</p>
     <ul>
-        <li> <code><a href="#Class:Catalog">dcat:Catalog</a></code> represents the catalog</li>
-        <li> <code><a href="#Class:Resource">dcat:Resource</a></code> represents an item described by an entry in a catalog, and carries the properties common to any resource that can be catalogued. This class is the parent class of <code><a href="#Class:Dataset">dcat:Dataset</a></code>, <code><a href="#Class:Data_Service">dcat:DataService</a></code> and <code><a href="#Class:Catalog">dcat:Catalog</a></code>. A specific sub-class should be used when available.</li>
-        <li> <code><a href="#Class:Dataset">dcat:Dataset</a></code> represents a dataset in a catalog.</li>
-        <li> <code><a href="#Class:Distribution">dcat:Distribution</a></code> represents an accessible form or representation of a dataset as for example a downloadable file.</li>
-        <li> <code><a href="#Class:Data_Service">dcat:DataService</a></code> represents a data service in a catalog. Example data services include data distribution services and data discovery services.</li>
-        <li> <code><a href="#Class:Data_Distribution_Service">dcat:DataDistributionService</a></code> represents a data service that provides access to distributions of datasets and extracts of datasets, such as an API.</li>
+        <li> <code><a href="#Class:Catalog">dcat:Catalog</a></code> represents a catalog, which is a dataset in which each individual item is a metadata record describing some resource; the scope of dcat:catalog is collections of metadata about datasets or data services.</li>
+        <li> <code><a href="#Class:Resource">dcat:Resource</a></code> represents an individual item description in a catalog; each description carries the properties defined in this model. The resources described in a single catalog are published or curated by a single agent. This class is the parent class of <code><a href="#Class:Dataset">dcat:Dataset</a></code>, <code><a href="#Class:Data_Service">dcat:DataService</a></code> and <code><a href="#Class:Catalog">dcat:Catalog</a></code>. A specific sub-class should be used when available.</li>
+        <li> <code><a href="#Class:Dataset">dcat:Dataset</a></code> represents a description of a dataset in a catalog. A dataset is a collection of data, published or curated by a single agent.</li>
+        <li> <code><a href="#Class:Distribution">dcat:Distribution</a></code> represents an accessible form or representation of a dataset, for example a downloadable file.</li>
+        <li> <code><a href="#Class:Data_Service">dcat:DataService</a></code> represents a description of a data service in a catalog. A data service is a collection of operations, accessible through an interface (API) that provide access to one or more datasets or data processing functions. Example data services include data distribution services, data discovery services, coordinate transformation services, image manipulation services.</li>
+        <li> <code><a href="#Class:Data_Distribution_Service">dcat:DataDistributionService</a></code> represents a description of a data service that provides access to one or more datasets or extracts of datasets.</li>
         <!--	<li> (<code><a href="#Class:DataTransformationService">dcat:DataTransformationService</a></code> represents a service that can transform a dataset, e.g. spatial coordinate transformation; interpolation or resampling of a dataset).</li> -->
-        <li> <code><a href="#Class:Discovery_Service">dcat:DiscoveryService</a></code> represents a data service that supports discovery functions.</li>
-        <li> <code><a href="#Class:Catalog_Record">dcat:CatalogRecord</a></code> describes a dataset entry in the catalog, primarily concerning the registration information such as who added the item and when</li>
+        <li> <code><a href="#Class:Discovery_Service">dcat:DiscoveryService</a></code> represents a description of a data service that provides access to one or more catalogs to support discovery functions.</li>
+        <li> <code><a href="#Class:Catalog_Record">dcat:CatalogRecord</a></code> represents a metadata item in the catalog, primarily concerning the registration information, such as who added the item and when.</li>
     </ul>
 
     <figure id="fig1"><img alt="UML model of DCAT classes and properties" src="UML/DCAT-summary-all-attributes.png">
@@ -819,7 +819,7 @@
     <section id="Class:Resource">
         <h3>Class: Catalogued Resource</h3>
 
-        <p>The following properties are recommended for use on this class:
+        <p>The following properties are recommended for use on this class (<code>dcat:Resource</code>):
             <a href="#Property:resource_conformsto">conformsTo</a>,
             <a href="#Property:resource_contact_point">contact point</a>,
             <a href="#Property:resource_creator">creator</a>,
@@ -1097,11 +1097,18 @@
             <table class="definition">
                 <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/conformsTo">dct:conformsTo</a></th></tr></thead>
                 <tbody>
-                <tr><td class="prop">Definition:</td><td>An established standard to which the described resource conforms.</td></tr>
+                <tr><td class="prop">Definition:</td><td>An established standard to which the described catalogued resource conforms.</td></tr>
                 <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/Standard">dct:Standard</a> (A basis for comparison; a reference point against which other things can be evaluated.)</td></tr>
+                <tr><td class="prop">Usage note:</td><td>This property <em title="SHOULD" class="rfc2119">SHOULD</em> be used to indicate the model, schema, ontology, view or profile that the catalogued resource content conforms to. </td></tr>
                 </tbody>
             </table>
         </section>
+
+        <p class="note">
+            <a href="http://purl.org/dc/terms/Standard">dct:Standard</a> is defined as "A basis for comparison; a reference point against which other things can be evaluated." The target resource is not restricted to formal standards issued by bodies like ISO and W3C. In this context, it is any resource that specifies one or more aspects of the catalogued resource content, for example schema, semantics, syntax, usage guidelines, file format, or specific serialization. The meaning of conformance is determined by provisions in the target standard.
+        </p>
+
+
 
         <section id="Property:resource_keyword">
             <h4>Property: keyword/tag</h4>
@@ -1164,7 +1171,7 @@
 
     <section id="Class:Catalog_Record">
         <h3>Class: Catalog Record</h3>
-        <p>The following properties are recommended for use on this class:
+        <p>The following properties are recommended for use on this class (<code>dcat:CatalogRecord</code>):
             <a href="#Property:record_conformsto">conforms to</a>,
             <a href="#Property:record_description">description</a>,
             <a href="#Property:record_listing_date">listing date</a>,
@@ -1285,7 +1292,7 @@
 
             <!-- this note is repeated from above, should we remove here or repeat for clarification in this context? -->
             <p class="note">
-                <a href="http://purl.org/dc/terms/Standard">dct:Standard</a> is defined as "A basis for comparison; a reference point against which other things can be evaluated." It is not restricted to formal standards issued by bodies like ISO and W3C. In this context it will usually be used for a schema, ontology, data model or profile which specifies the structure of a dataset. This is not necessarily tied to a single encoding or serialization.
+                <a href="http://purl.org/dc/terms/Standard">dct:Standard</a> is defined as "A basis for comparison; a reference point against which other things can be evaluated." The target resource is not restricted to formal standards issued by bodies like ISO and W3C. In this context, it is any resource that specifies one or more aspects of the catalog record content, for example schema, semantics, syntax, usage guidelines, file format, or specific serialization. The meaning of conformance is determined by provisions in the target standard.
             </p>
         </section>
 
@@ -2005,6 +2012,30 @@
         </table>
     </section>
 
+    <section id="Property:hadRole">
+        <h3>Property: had role</h3>
+        <table class="definition">
+          <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#hadRole">dcat:hadRole</a></th></tr></thead>
+          <tbody>
+          <tr><td class="prop">Definition:</td><td>The function of an entity or agent with respect to another entity or resource.</td></tr>
+          <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/prov#Influence">prov:Influence</a></td></tr>
+          <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/prov#Role">prov:Role</a></td></tr>
+          <tr><td class="prop">Usage note:</td><td>"May be used in a qualified-attribution to specify the role of an Agent with respect to an Entity. It is recommended that the value be taken from a controlled vocabulary of agent roles, such as <a href="http://registry.it.csiro.au/def/isotc211/CI_RoleCode">ISO 19115 CI_RoleCode</a>.</td></tr>
+          <tr><td class="prop">Usage note:</td><td>May be used in a qualified-relation to specify the role of an Entity with respect to another Entity. It is recommended that the value be taken from a controlled vocabulary of entity roles.</td></tr>
+          </tbody>
+        </table>
+
+        <p>
+          This DCAT property complements <a href="http://www.w3.org/ns/prov#hadRole">prov:hadRole</a> which provides the function of an entity or agent with respect to an activity.
+        </p>
+
+        <p class="note">
+          Property added in this revision of DCAT.
+        </p>
+    </section>
+
+</section>
+
 </section>
 <section id="Dereferenceable-identifiers" class="informative">
     <h2>Dereferenceable identifiers</h2>
@@ -2430,6 +2461,44 @@ a:TestingActivity a prov:Activity;
     </section>
 </section>
 
+<section id="qualified-attribution">
+  <h2>Attribution roles</h2>
+  <p>
+    The standard Dublin Core properties <a href="http://purl.org/dc/terms/contributor">dct:contributor</a>, <a href="http://purl.org/dc/terms/creator">dct:creator</a> and <a href="http://purl.org/dc/terms/publisher">dct:publisher</a>, and the generic <a href="https://www.w3.org/TR/prov-o/#wasAttributedTo">prov:wasAttributedTo</a> from [[PROV-O]], support basic associations of responsible agents with a catalogued resource.
+    However, there are many other roles of importance in relation to datasets and services - e.g. funder, distributor, custodian, editor.
+    Some of these roles are enumerated in the CI_RoleCode values from [[ISO-19115-1]], in the [[DataCite]] metadata schema, and included within the <a href="https://id.loc.gov/vocabulary/relators">MARC relators</a>.
+  <p>
+  </p>
+    A general method for assigning an agent to a resource with a specified relationship is provided by using the qualified form <a href="https://www.w3.org/TR/prov-o/#qualifiedAttribution">prov:qualifiedAttribution</a> from [[PROV-O]].
+    The following provides an illustration:
+  </p>
+<div class="example">
+<pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+ex:DS987
+  a dcat:Dataset ;
+  prov:qualifiedAttribution [
+    a prov:Attribution ;
+    prov:agent &lt;https://www.ala.org.au/&gt; ;
+    dcat:hadRole &lt;http://registry.it.csiro.au/def/isotc211/CI_RoleCode/distributor&gt;
+  ] ;
+  prov:qualifiedAttribution [
+    a prov:Attribution ;
+    prov:agent &lt;https://www.education.gov.au/&gt; ;
+    dcat:hadRole &lt;http://registry.it.csiro.au/def/isotc211/CI_RoleCode/funder&gt;
+  ] ;
+.
+</pre>
+</div>
+
+<p>
+  In this example the roles are taken from [[ISO-19115-1]] which are available as linked data in a <a href="http://registry.it.csiro.au/def/isotc211/CI_RoleCode">discrete list</a>.
+</p>
+
+<p class="note">
+  Note: The domain of <a href="http://www.w3.org/ns/prov#hadRole">prov:hadRole</a> property is <a href="http://www.w3.org/ns/prov#Association">prov:Association</a> [[PROV-O]] i.e. PROV-O roles relate to activities, not entities.
+  Therefore, a new property <a href="http://www.w3.org/ns/dcat#hadRole">dcat:hadRole</a> is used to attach a specific role to the association-class <a href="http://www.w3.org/ns/prov#Attribution">prov:Attribution</a>.
+</p>
+</section>
 
 <section id="prov-patterns">
 
@@ -2461,13 +2530,16 @@ a:TestingActivity a prov:Activity;
 	<p class="note">
 		DCAT 2014 handling of license and rights do not appear to satisfy all requirements [[VOCAB-DCAT-20140116]].
 		The recently completed W3C ODRL vocabulary [[ODRL-VOCAB]] provides a rich language for describing many kinds of rights and obligations.
-		In this chapter it is planned to describe some patterns for linking DCAT Datasets and/or Distributions to suitable rights expressions.
-		See the wiki page on <a href="https://github.com/w3c/dxwg/wiki/License-and-rights">License and rights</a> for more discussion.
+		In this chapter, we describe some patterns for linking DCAT Datasets and/or Distributions to suitable license and rights expressions.
 	</p>
+
 	<p>
 		Selecting the right way to express conditions for access to and re-use of resources can be complex.
 		Implementers should always seek legal advice before deciding which conditions apply to the resource being described.
 	</p>
+<!--
+	<div class="ednote" title="Original text">
+
 	<p>
 		This specification distinguishes three main situations: one where a statement is associated with the resource that is explicitly declared as a 'licence';
 		a second where the statement is not explicitly declared as a 'licence'; and a third where the conditions are explicitly expressed as an ODRL Policy.
@@ -2484,6 +2556,58 @@ a:TestingActivity a prov:Activity;
 			The Open Digital Rights Language (ODRL) is a policy expression language that provides a flexible and interoperable information model, vocabulary, and encoding mechanisms for representing statements about usage (i.e. permissions, prohibitions, and obligations) of content and services.</li>
 		</ol>
 	</p>
+
+	</div>
+-->
+	<p>
+    This specification distinguishes three main situations:
+    one where a statement is associated with a resource that is explicitly declared as a 'license';
+    a second, where the statement is associated with a resource denoting only access rights;
+    a third, covering all the other cases - i.e., statements not concerning licensing conditions and/or access rights (e.g., copyright statements).
+	</p>
+
+	<p class="note">
+	  It is worth noting that the provision of licensing conditions and access rights complies with the [[DWBP]]'s Best Practices 4 ("<a data-cite="DWBP#licenses">Provide data license information</a>") and 22 ("<a data-cite="DWBP#DataUnavailabilityReference">Provide an explanation for data that is not available</a>"), respectively.
+	</p>
+
+	<p>
+		To address these scenarios, the recommendation is to use property dct:rights, and its sub-properties dct:license and dct:accessRights. More precisely:
+  </p>
+		<ol>
+			<li>
+			  <p>use <a href="http://dublincore.org/documents/dcmi-terms/#terms-license">dct:license</a> to refer to licenses;</p>
+<!--
+			<p>The object of dct:license, a <a href="http://dublincore.org/documents/dcmi-terms/#terms-LicenseDocument">dct:LicenseDocument</a>, is "A legal document giving official permission to do something with a Resource."</p>
+-->
+        <p class="note">
+          For interoperability, it is recommended to use canonical URIs of well-known licenses such as <a href="https://creativecommons.org/share-your-work/licensing-types-examples/">those defined by Creative Commons</a>.
+        </p>
+			</li>
+			<li>
+			  <p>use <a href="http://dublincore.org/documents/dcmi-terms/#terms-accessRights">dct:accessRights</a>  to express statements concerning only access rights (e.g., whether data can be accessed by anyone or just by authorized parties);</p>
+<!--
+        <p>The object of dct:accessRights is a dct:RightsStatement providing "Information about who can access the resource or an indication of its security status."</p>
+-->
+        <p class="note">
+          Access rights can also be expressed as code lists / taxonomies. Examples include the access rights code list  [[MDR-AR]] used in [[DCAT-AP]] and the <a href="http://purl.org/eprint/accessRights/">Eprints Access Rights Vocabulary Encoding Scheme</a>.
+        </p>
+      </li>
+			<li>
+			  <p>use <a href="http://dublincore.org/documents/dcmi-terms/#terms-rights">dct:rights</a> for all the other types of rights statements - those which are not covered by dct:license and dct:accessRights, such as copyright statementss.</p>
+<!--
+			  <p>The object of dct:rights, a <a href="http://dublincore.org/documents/dcmi-terms/#terms-RightsStatement">dct:RightsStatement</a>, is "A statement about the intellectual property rights (IPR) held in or over a Resource, a legal document giving official permission to do something with a resource, or a statement about access rights."
+			This is more general than a <a href="http://dublincore.org/documents/dcmi-terms/#terms-LicenseDocument">dct:LicenseDocument</a> and therefore should be used if it the statement contains more general information about rights.</p>
+-->
+			  <p class="note">
+			    A more sophisticated approach to express rights, based on and extending [[DCTERMS]], is provided by the Open Data Rights Statement Vocabulary (ODRS) [[ODRS]], which defines properties for specifying, among others, copyright statements and copyright notices.
+			  </p>
+			</li>
+		</ol>
+
+	<p>Finally, in the particular case when rights are expressed via <a href="https://www.w3.org/TR/odrl-vocab/#term-Policy">ODRL policies</a>, it is recommended to use use the <a href="https://www.w3.org/TR/odrl-vocab/#term-hasPolicy">odrl:hasPolicy</a> property as the link from the description of the catalogued resource or distribution to the ODRL policy, in addition to the relevant <code>dct</code> property.</p>
+  <p class="note">The Open Digital Rights Language (ODRL) [[ODRL-VOCAB]] is a policy expression language that provides a flexible and interoperable information model, vocabulary, and encoding mechanisms for representing statements about usage (i.e. permissions, prohibitions, and obligations) of content and services.</p>
+
+  <p>Recommendations on the use of these properties on the different types of resources defined in DCAT are provided in the relevant class descriptions.</p>
 
 </section>
 
@@ -2519,7 +2643,7 @@ a:TestingActivity a prov:Activity;
             Schema.org [[SCHEMA-ORG]] includes a number of types and properties based on the original DCAT work (see <a href="https://schema.org/Dataset">schema:Dataset</a> as a starting point),
             and the index for Google's <a href="https://g.co/datasetsearch">Dataset Search service</a> relies on structured description in web pages about datasets based on both
             <a href="https://developers.google.com/search/docs/data-types/dataset">schema.org and DCAT</a>.
-            A comparison of the DCAT backbone, showed in <a href="#vocabulary-overview">Figure 1. above</a> with related classes from schema.org shows the similarity:
+            A comparison of the DCAT backbone, showed in <a href="#vocabulary-overview">Figure 1. above</a> with related classes from [[SCHEMA-ORG]] shows the similarity:
         </p>
         <figure id="fig2"><img alt="UML model of schema.org classes and properties related to dataset catalogs" src="UML/schema.org-dataset.png">
             <figcaption>
@@ -2527,18 +2651,18 @@ a:TestingActivity a prov:Activity;
             </figcaption>
         </figure>
         <p>
-            General purpose web search services that use metadata at all rely primarily on schema.org, so the relationship of DCAT to schema.org is of interest for data providers
+            General purpose web search services that use metadata at all rely primarily on [[SCHEMA-ORG]], so the relationship of DCAT to [[SCHEMA-ORG]] is of interest for data providers
             who wish their datasets and services to be exposed through those indexes.
         </p>
         <p>
-            A <a href="https://www.w3.org/wiki/WebSchemas/Datasets">mapping between DCAT 2014 and schema.org</a> was discussed on the original proposal to extend schema.org for describing datasets and data catalogs.
-            Partial mappings between DCAT 2014 [[VOCAB-DCAT-20140116]] and schema.org were provided earlier by the
-            <a href="https://ec-jrc.github.io/dcat-ap-to-schema-org/">European Commission</a> and the <a href="https://www.w3.org/2015/spatial/wiki/ISO_19115_-_DCAT_-_Schema.org_mapping">Spatial Data on the Web Working Group</a>.
+            A <a href="https://www.w3.org/wiki/WebSchemas/Datasets">mapping between DCAT 2014 and schema.org</a> was discussed on the original proposal to extend [[SCHEMA-ORG]] for describing datasets and data catalogs.
+            Partial mappings between DCAT 2014 [[VOCAB-DCAT-20140116]] and [[SCHEMA-ORG]] were provided earlier by the
+            <a href="https://www.w3.org/2015/spatial/wiki/ISO_19115_-_DCAT_-_Schema.org_mapping">Spatial Data on the Web Working Group</a>, building upon previous work.
         </p>
         <p>
-            A recommended mapping from the revised DCAT (this document) to schema.org is <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/rdf/dcat-schema.ttl">available in an RDF file</a>.
+            A recommended mapping from the revised DCAT (this document) to [[SCHEMA-ORG]] is <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/rdf/dcat-schema.ttl">available in an RDF file</a>.
             This mapping is axiomatized using the predicates <code>rdfs:subClassOf</code>, <code>rdfs:subPropertyOf</code>, <code>owl:equivalentClass</code>, <code>owl:equivalentProperty</code>, <code>skos:closeMatch</code>,
-            and also using the annotation properties <code>schema:domainIncludes</code> and <code>schema:rangeIncludes</code> to match schema.org semantics. The mapping is summarized in the table below, considering the prefix <code>schema</code> as <code>http://schema.org/</code>.
+            and also using the annotation properties <code>schema:domainIncludes</code> and <code>schema:rangeIncludes</code> to match [[SCHEMA-ORG]] semantics. The mapping is summarized in the table below, considering the prefix <code>schema</code> as <code>http://schema.org/</code>.
         </p>
         <p class="issue" data-number="251">
             This alignment of DCAT with schema.org is provisional and non-normative. Feedback is invited in the <a href="https://github.com/w3c/dxwg/issues/251">issue tracker</a>.
@@ -3433,6 +3557,17 @@ dcat:servesDataset ga-courts:jc ;
         <p>The document has undergone the following changes since the W3C Recommendation of 16 January 2014 [[VOCAB-DCAT-20140116]]:</p>
 
         <ul>
+            <li>
+                A new section on <a href="#qualified-attribution">Attribution roles</a> was added to recommend a pattern for assigning an agent to a catalogued resource with a qualified relationship.
+            </li>
+
+            <li>
+                <a href="#Property:hadRole">Property: had role</a>: The property dcat:hadRole is added to support the use of prov:qualifiedAttribution to associate an agent with a DCAT resource, where the role of the agent with relation to the resource is specified, and is something other than the standard Dublin Core roles: creator, publisher or contributor - see <a href="https://github.com/w3c/dxwg/issues/79">Issue #79</a>
+            </li>
+
+            <li>
+               The section <a href="#license-rights">License and rights statements</a> was added to describe patterns for linking dcat:Datasets and dcat:Distributions to the relevant license and rights expressions.
+            </li>
 
             <li>
                 <a href="#Property:dataset_creator">Property: dataset creator</a>: The property dct:creator is recommended for use in the context of a dataset to allow the entity responsible for generating the dataset to be recorded - see <a href="https://github.com/w3c/dxwg/issues/61">Issue #61</a>
