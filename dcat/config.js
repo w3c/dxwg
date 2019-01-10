@@ -73,7 +73,7 @@ var respecConfig = {
           authors : [ "Amrapali Zaveri", "Anisa Rula", "Andrea Maurino",
                       "Ricardo Pietrobon", "Jens  Lehmann", "Sören Auer" ],
           status : "Semantic Web, vol. 7, no. 1, pp. 63-93",
-	  publisher : "ISO Press",
+	  publisher : "IOS Press",
           href : "https://doi.org/10.3233/SW-150175",
 	  date : "2015"
       },
