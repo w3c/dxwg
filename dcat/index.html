@@ -2248,7 +2248,7 @@ ex:InternationalDOIFundation a dct:Agent;
             The issue suggests to represent "the degree a dataset conforms to a stated quality standard" and "the details of data quality conformance test results". This section is a starter to deal with the above requests by relying on the existing  W3C vocabularies.
             Comments and suggestions about the following examples as well as the proposal of alternative patterns are more than welcome.
         </p>
-        <p> This subsection  shows different modelling patterns combining DQV [[VOCAB-DQV]] with  PROV [[PROV-O]] and EARL [[EARL10-Schema]] to represent the conformance degree to a stated quality standard and the details about the conformance tests.
+        <p> This subsection  shows different modelling patterns combining [[VOCAB-DQV]] with [[PROV-O]] and EARL [[EARL10-Schema]] to represent the conformance degree to a stated quality standard and the details about the conformance tests.
         </p>
 
         <section id="quality-conformance-statement">
@@ -2276,14 +2276,13 @@ a:Dataset a dcat:Dataset;
 	    specific <a href="http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity">controlled vocabulary</a> 
 	    to express non-conformance and non-evaluation beside the full compliance. Similar controlled vocabularies can 
 	    be defined in other contexts.</p>
-	    <p>The following example (derived from the Data on the Web Best Practices [[DWBP]]) specifies some newly minted concepts representing the degree 
-	    of conformance (i.e., conformant, not conformant) and  declares the  
+	    <p>The following example (derived from the Data on the Web Best Practices [[DWBP]]) specifies some newly minted concepts representing the degree of conformance (i.e., conformant, not conformant) and  declares the  
 	    <a href="http://dublincore.org/documents/dcmi-terms/#terms-type"><code>dct:type</code></a> for indicating 
 	    the result of conformance test. The example uses a <code>prov:Entity</code> to model the  conformance test (e.g., 
 	    <code>a:TestResult</code>), a <code>prov:Activity</code> to model the testing activity (e,g., 
 	    <code>a:TestingActivity</code>), a <code>prov:Plan</code>. A qualified PROV association binds the testing activity to the conformance test.</p>
 	    <aside class="note">
-	    <p>Depending of the kind of dataset, other sets  of best practices and standards, such as FAIR [[FAIR]] or Spatial Data on the Web Best Practices [[SDW-BP]], can be considered as a replacement or used in combination with [[DWBP]].</p>
+	    <p>Depending of the kind of dataset, other sets  of best practices and standards, such as the FAIR Principles [[FAIR]] or the Spatial Data on the Web Best Practices [[SDW-BP]], can be considered as a replacement or used in combination with [[DWBP]].</p>
        </aside>
        <aside class="example" id="ex-conformance-degree">
 <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
@@ -2310,7 +2309,7 @@ a:ConformanceTest a prov:Plan ;
     # Here you can specify additional information on the test, which in the example is derived by the W3C Data on the Web Best. Practices
     prov:wasDerivedFrom &lt;https://www.w3.org/TR/dwbp/&gt; .
     </pre></aside>
-            <p>Also, [[VOCAB-DQV]] can be deployed to  measure the compliance to a specific standard. In the following, the <code>:levelOfComplianceToDWBP</code> is a quality metrics which measures the compliance of a dataset to [[DWBP]] in terms of the percentage of passed compliance tests. The example assumes <code>iso</code> as a namespace representing the quality dimensions and categories defined in the ISO/IEC 25012.</p>
+            <p>Also, [[VOCAB-DQV]] can be deployed to  measure the compliance to a specific standard. In the following example, the <code>:levelOfComplianceToDWBP</code> is a quality metrics which measures the compliance of a dataset to [[DWBP]] in terms of the percentage of passed compliance tests. The example assumes <code>iso</code> as a namespace prefix representing the quality dimensions and categories defined in the ISO/IEC 25012 [[ISOIEC25012]].</p>
             <aside class="example" id="ex-conformance-degree-percentage">
   <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 :levelOfComplianceToDWBP
@@ -2328,18 +2327,17 @@ iso:compliance
 iso:inherentandSystemDependentDataQuality
     a  dqv:Category ;
    skos:prefLabel "Inherent and System-Dependent Data Quality"@en.
-        </pre></div>
-            <p>The quality measurement :measurement_complianceToDWBP represents the level of compliance for a dataset a:Dataset, namely, measurement of the metric :levelOfComplianceToDWBP. If only a part of the compliance tests succeeds (e.g. half of the compliance tests), the measurement would look like in the following:</p>
-            <div class="example">
-  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
-
+        </pre></aside>
+            <p>The quality measurement <code>:measurement_complianceToDWBP</code> represents the level of compliance for dataset <code>a:Dataset</code>, namely, measurement of the metric <code>:levelOfComplianceToDWBP</code>. If only a part of the compliance tests succeeds (e.g. half of the compliance tests), the measurement would look like in the following:</p>
+  <aside class="example" id="ex-conformance-test-partial-success">
+<pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 :measurement_complianceToDWBP
    a         dqv:QualityMeasurement;
    dqv:computedOn      a:Dataset;
    dqv:value           "50"^^xsd:double ;
    sdmx-attribute:unitMeasure &lt;http://www.wurvoc.org/vocabularies/om-1.8/Percentage&gt;
-   dcterms:date      "2018-01-10"^^xsd:date ;
-   dqv:isMeasurementOf    :levelOfComplianceToDWBP .
+   dcterms:date        "2018-01-10"^^xsd:date ;
+   dqv:isMeasurementOf :levelOfComplianceToDWBP .
     </pre></aside>
 
         </section>
@@ -2470,7 +2468,7 @@ a:TestingActivity a prov:Activity;
     prov:wasAssociatedWith  &lt;http://validator.example.org/&gt;
      .
 </pre></aside>
-            <p>Of course,  the above modelling patterns can represent any quality tests not only conformance to standards.</p>
+          <p>Of course,  the above modelling patterns can represent any quality tests not only conformance to standards.</p>
         </section>
     </section>
 </section>
