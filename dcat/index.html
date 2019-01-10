@@ -11,9 +11,12 @@
 </head>
 <body>
 <section  id="abstract">
-    <p>DCAT is an RDF vocabulary designed to facilitate interoperability between data catalogs published on the Web. This document defines the schema and provides examples for its use.</p>
-    <p>By using DCAT to describe datasets in data catalogs, publishers are using a standard model and vocabulary that facilitates the consumption and aggregation of metadata from multiple catalogs,
-        and in doing so can increase the discoverability of datasets. It also makes it possible to have a decentralized approach to publishing data catalogs and makes federated search for datasets across catalogs in multiple sites possible using the same query mechanism and structure. Aggregated DCAT metadata can serve as a manifest file as part of the digital preservation process.</p>
+    <p>DCAT is an RDF vocabulary designed to facilitate interoperability between data catalogs published on the Web.
+      This document defines the schema and provides examples for its use.</p>
+    <p>DCAT enables a publisher to describe datasets and data services in a catalog using a standard model and vocabulary that facilitates the consumption and aggregation of metadata from multiple catalogs.
+        This can increase the discoverability of datasets and data services.
+        It also makes it possible to have a decentralized approach to publishing data catalogs and makes federated search for datasets across catalogs in multiple sites possible using the same query mechanism and structure.
+        Aggregated DCAT metadata can serve as a manifest file as part of the digital preservation process.</p>
     <p style="text-align: center;">The namespace for DCAT terms is <code>http://www.w3.org/ns/dcat#</code></p>
     <p style="text-align: center;">The suggested prefix for the DCAT namespace is <code>dcat</code></p>
     <p style="text-align: center;">The (revised) DCAT vocabulary is available <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/rdf/dcat.ttl">here</a>.</p>
@@ -41,13 +44,14 @@
     </p>
 
     <h3 id="dcat_history">DCAT history</h3>
-    <p>The original DCAT vocabulary (originally hosted at <a href="http://vocab.deri.ie/dcat">http://vocab.deri.ie/dcat</a>) was developed at the Digital Enterprise Research Institute (DERI), refined by the <a href="http://www.w3.org/egov/">eGov Interest Group</a>, and then finally standardized in 2014 [[VOCAB-DCAT-20140116]] by the <a href="http://www.w3.org/2011/gld/">Government Linked Data (GLD)</a> Working Group.</p>
+    <p>The original DCAT vocabulary (hosted at http://vocab.deri.ie/dcat) was developed at the Digital Enterprise Research Institute (DERI), then refined by the <a href="http://www.w3.org/egov/">eGov Interest Group</a>, and finally standardized in 2014 [[VOCAB-DCAT-20140116]] by the <a href="http://www.w3.org/2011/gld/">Government Linked Data (GLD)</a> Working Group.</p>
     <p>This revised version of DCAT was developed by the <a href="https://www.w3.org/2017/dxwg/">Dataset Exchange Working Group</a> in response to a new set of Use Cases and Requirements [[DCAT-UCR]] submitted on the basis of experience with the DCAT vocabulary from the time of the original version, and new applications not originally considered. A summary of the changes from  [[VOCAB-DCAT-20140116]] can be found at <a href="#changes">Change History</a></p>
 
-    <p>Given its origin, the original vocabulary mainly considered use cases around government data catalogs. This revision has extended the scope, and considered broader resource catalogs, including research data and data services.</p>
-
     <h3 id="external_terms">External terms</h3>
-    <p>DCAT incorporates terms from pre-existing vocabularies where stable terms with appropriate meanings could be found, such as <a href="http://xmlns.com/foaf/0.1/homepage">foaf:homepage</a> and <a href="http://purl.org/dc/terms/title">dct:title</a>.  Informal summary definitions of the externally-defined terms are included here for convenience, while authoritative definitions are available in the normative references.  Changes to definitions in the references, if any, supersede the summaries given in this specification.  Note that conformance to DCAT (Section 4) concerns usage of only the terms in the DCAT namespace itself, so possible changes to the external definitions will not affect the conformance of DCAT implementations.</p>
+    <p>DCAT incorporates terms from pre-existing vocabularies where stable terms with appropriate meanings could be found, such as <a href="http://xmlns.com/foaf/0.1/homepage">foaf:homepage</a> and <a href="http://purl.org/dc/terms/title">dct:title</a>.
+      Informal summary definitions of the externally-defined terms are included here for convenience, while authoritative definitions are available in the normative references.
+      Changes to definitions in the references, if any, supersede the summaries given in this specification.
+      Note that conformance to DCAT (Section 4) concerns usage of only the terms in the DCAT namespace itself, so possible changes to the external definitions will not affect the conformance of DCAT implementations.</p>
 
     <h3 id="please_send_comments">Please send comments</h3>
 
@@ -57,10 +61,33 @@
 
     <h2>Introduction</h2>
 
-    <p class="note">From DCAT 2014 [[VOCAB-DCAT-20140116]]</p>
+    <p>
+      DCAT is a vocabulary for data catalogs published on the Web.
+      DCAT provides RDF classes and properties to allow datasets and data services to be described and included in a catalog.
+      Use of a standard model and vocabulary will facilitate the consumption and aggregation of metadata from multiple catalogs, which can:
+    </p>
+    <ol>
+      <li>
+        increase the discoverability of datasets and data services
+      </li>
+      <li>
+        allow federated search for datasets across catalogs in multiple sites
+      </li>
+    </ol>
 
-    <p>Data can come in many formats, ranging from spreadsheets, through XML and RDF, to various specialty formats. DCAT does not make any assumptions about the serialization format of the datasets described in a catalog. Other, complementary vocabularies <em title="MAY" class="rfc2119">MAY</em> be used together with DCAT to provide more detailed format-specific information. For example, properties from the VoID vocabulary [[VOID]] can be used to express various statistics about a DCAT-described dataset if that dataset is in RDF format.</p>
-    <p>This document does not prescribe any particular method of deploying data expressed in DCAT. DCAT is applicable in many contexts including RDF accessible via SPARQL endpoints, embedded in HTML pages as RDFa, or serialized as e.g. RDF/XML or Turtle. The examples in this document use Turtle simply because of Turtle's readability.</p>
+    <p>Data can come in many formats, ranging from spreadsheets, through XML and RDF, to various specialty formats.
+      DCAT does not make any assumptions about the serialization format of the datasets described in a catalog.
+      </p>
+      <p>
+        Data is often provided through a service, accessed through a form or API which supports selection of an extract, sub-set, or combination of data.
+        DCAT allows the description of a data access service to be included in a catalog.
+      </p>
+      <p>
+        Other, complementary vocabularies <em title="MAY" class="rfc2119">MAY</em> be used together with DCAT to provide more detailed format-specific information.
+      For example, properties from the VoID vocabulary [[VOID]] can be used to express various statistics about a DCAT-described dataset if that dataset is in RDF format.</p>
+    <p>This document does not prescribe any particular method of deploying data expressed in DCAT.
+      DCAT is applicable in many contexts including RDF accessible via SPARQL endpoints, embedded in HTML pages as RDFa, or serialized as e.g. RDF/XML, N3, Turtle, or JSON-LD.
+      Within this document the examples use Turtle because of its readability.</p>
 </section>
 
 <section id="motivation" class="informative"><h2>Motivation for change</h2>
@@ -2025,36 +2052,36 @@
 </section>
 <section id="Dereferenceable-identifiers" class="informative">
     <h2>Dereferenceable identifiers</h2>
-    
+
     <p>DCAT should rely on persistent HTTP URIs, which are an effective way of making identifiers actionable.</p>
     <p>The property <a href="#Property:resource_identifier">dct:identifier</a>  explicitly indicates HTTP URIs as well as legacy identifiers. In the following examples,  <a href="#Property:resource_identifier">dct:identifier</a>  identifies a dataset, but it can similarly be used with any kind of resources.</p>
-    
+
     <div class="example">
     <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
-&lt;https://example.org/id&gt; a dcat:Dataset;      
-	dct:identifier "https://example.org/id"^^xsd:anyURI 
+&lt;https://example.org/id&gt; a dcat:Dataset;
+	dct:identifier "https://example.org/id"^^xsd:anyURI
   . </pre></div>
-    
+
     <p> Proxy dereferenceable URIs can be used  when resources haven't  HTTP dereferenceable IDs. For example, in the following, https://example.org/proxyid is a proxy for "id".</p>
-    
+
     <div class="example">
     <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 &lt;https://example.org/proxyid&gt; a dcat:Dataset;
-	dct:identifier  "id"^^xsd:string 
-    .</pre></div> 
+	dct:identifier  "id"^^xsd:string
+    .</pre></div>
     <p> The property <a href="https://www.w3.org/TR/vocab-adms/#adms-identifier">adms:identifier</a> can express other locally minted identifiers or external identifiers, like Datacite, DOI, ELI etc., as long as they are globally unique and stable.</p>
     <p>The following example uses <a href="https://www.w3.org/ns/adms#schemaAgency">adms:schemaAgency</a> and <a href="http://dublincore.org/2012/06/14/dcterms#creator">dct:creator</a> to represent the authority that defines the identifier scheme (e.g., DOI foundation in the example), adms:schemaAgency is used when the authority has no URI associated.
     </p>
-    
+
     <div class="example">
     <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 &lt;https://example.org/id&gt; a dcat:Dataset;
     adms:identifier  &lt;https://example.org/iddoi&gt; .
 	.
-    
-&lt;https://example.org/iddoi&gt; rdf:type adms:Identifier ; 
-   skos:notation "https://doi.org/10.5281/zenodo.1486279"^^xsd:anyURI; 
-   # reading https://www.w3.org/TR/skos-reference/#notations more than one skos:notation can be set 
+
+&lt;https://example.org/iddoi&gt; rdf:type adms:Identifier ;
+   skos:notation "https://doi.org/10.5281/zenodo.1486279"^^xsd:anyURI;
+   # reading https://www.w3.org/TR/skos-reference/#notations more than one skos:notation can be set
    skos:notation "info:doi/10.5281/zenodo.1486279"^^xsd:anyURI  ;
    # the authority/agency defining the identifier scheme, used if the agency has no URI
    adms:schemaAgency "International DOI Foundation" ;
@@ -2066,10 +2093,10 @@ ex:InternationalDOIFundation a dct:Agent;
     foaf:homepage &lt;https://www.doi.org/&gt; .
     </pre>
     </div>
-    
+
     <p> The example does not represent the authority responsible for assigning and maintaining identifiers using that scheme (e.g., zenodo) as naming the registrant goes against the philosophy of DOI where the sub-spaces are abstracted from the organisation that registers them, with the advantage that DOIs don't change when the organisation changes or the responsibility for that sub-space is handed over to someone else.</p>
-    
-    <p>When the HTTP dereferenceable ID returns RDF/OWL description for the dataset, the use owl:sameAs might be consider. For example, </p>     
+
+    <p>When the HTTP dereferenceable ID returns RDF/OWL description for the dataset, the use owl:sameAs might be consider. For example, </p>
     <div class="example">
     <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 &lt;https://example.org/id&gt; a dcat:Dataset;
@@ -2079,49 +2106,49 @@ ex:InternationalDOIFundation a dct:Agent;
     </div>
     <p>when dereferenced with media type "text/turtle",  https://doi.org/10.5281/zenodo.1486279 returns a schema.org description for the dataset, which might dinamically enrich the description provided by https://example.org/id. </p>
 
-    
-    <p>Identifiers for datasets should follow the <a href="https://www.w3.org/TR/dwbp/#DataIdentifiers">DWBP Data Identifier Best Practices</a>.</p> 
-    
+
+    <p>Identifiers for datasets should follow the <a href="https://www.w3.org/TR/dwbp/#DataIdentifiers">DWBP Data Identifier Best Practices</a>.</p>
+
      <p class="issue" data-number="67">
                 The need to distinguish between primary and alternative (legacy) identifiers for a dataset has been posed as a requirement. However, it is very much application-specific and should be better addressed in application profiles rather than being mandate a general approach.
             </p>
-    
+
     <p>Depending on the application context, specific guidelines such as <a href="https://joinup.ec.europa.eu/release/dcat-ap-how-manage-duplicates">"DCAT-AP: How to manage duplicates?"</a> can be adopted for distinguishing authoritative datasets from dataset harvested by third parties catalogs.</p>
-    
+
     <section id="identifiers-type">
     <h2>Indicating common identifier types</h2>
-    
+
         <p> If identifiers are not HTTP dereferenceable, common identifier types can be served as <a href="https://www.w3.org/TR/rdf11-concepts/#dfn-recognized-datatype-iris">RDF datatypes</a> or custom <a href="https://www.w3.org/TR/owl2-syntax/#Datatype_Definitions">OWL datatypes</a> for the sake of interoperability, see 'ex:type' in the following</p>
-    
+
         <div class="example">
             <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 &lt;https://example.org/id&gt; a dcat:Dataset;
 	...
 	adms:identifier &lt;https://example.org/sid&gt; .
 
- &lt;https://example.org/sid&gt; rdf:type adms:Identifier ; 
+ &lt;https://example.org/sid&gt; rdf:type adms:Identifier ;
  # the actual id
 	 skos:notation "PA 1-060-815"^^ex:type ;
- # Human readable schema agency 
-	 adms:schemaAgency "US Copyright Office" ; 
-	 dcterms:issued "2001-09-12"^^xsd:date . 
+ # Human readable schema agency
+	 adms:schemaAgency "US Copyright Office" ;
+	 dcterms:issued "2001-09-12"^^xsd:date .
             </pre>
-        </div> 
-    
+        </div>
+
         <p>If a registered URI type is used (<a href="https://tools.ietf.org/html/rfc3986#section-3.1">following RFC-3986</a>), the identifier scheme is part of the URI; thus indicating a separate identifier scheme in 'type' is redundant. For example, DOI is registered as a namespace in the <a href="https://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml">'info' URI scheme</a> (see <a href="https://www.doi.org/faq.html">faq #11</a>), so according to RFC-3986 URI it should be encoded as in the following</p>
-    
+
         <div class="example">
-            <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">&lt;https://example.org/sid&gt; rdf:type adms:Identifier ; 
+            <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">&lt;https://example.org/sid&gt; rdf:type adms:Identifier ;
  # the actual id
-	 skos:notation "info:doi/10.1109/5.771073"^^xsd:anyURI 
+	 skos:notation "info:doi/10.1109/5.771073"^^xsd:anyURI
  .
             </pre>
         </div>
 
         <p>Otherwise, examples of common types for identifier scheme (arXiv, etc) are defined in <a href="https://schema.datacite.org/meta/kernel-4.1/include/datacite-relatedIdentifierType-v4.xsd">DataCite schema</a> and <a href="https://fairsharing.org/standards/?q=&selected_facets=type_exact:identifier%20schema">FAIRsharing Registry</a>.</p>
     </section>
-</section>    
-    
+</section>
+
 <section id="quality-information" class="informative">
     <h2>Quality information</h2>
     <div class="note"><p>This section is not-normative as it provides guidance on how to document the quality of DCAT first class entities (e.g., datasets, distributions) and it does not define new DCAT terms. The guidance relies on the Data Quality Vocabulary(DQV) [[VOCAB-DQV]], which is a W3C Group Note.</p></div>
