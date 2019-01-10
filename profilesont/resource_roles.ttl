@@ -1,48 +1,75 @@
-@prefix : <https://w3c.github.io/dxwg/profilesont/impl_res_roles.ttl#> .
+@prefix : <http://www.w3.org/ns/prof/roles/> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix dct: <http://purl.org/dc/terms/> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix prof: <http://promsns.org/def/prof#> .
+@prefix prof: <http://www.w3.org/ns/prof/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@base <https://w3c.github.io/dxwg/profilesont/impl_res_roles.ttl> .
 
-:ConformanceTest a prof:ResourceRole,
-        owl:NamedIndividual ;
-    skos:prefLabel "Conformance Test Constraints" ;
-    skos:definition "Constraints specifying a conformance Test"@en ;
-    skos:topConceptOf prof:resourceRoles .
+:ConformanceTest a owl:NamedIndividual,
+        skos:Concept,
+        prof:ResourceRole ;
+    skos:definition "Constraints specifying a conformance test"@en ;
+    skos:prefLabel "Conformance Test Constraints"@en ;
+    skos:topConceptOf : .
 
-:FullConstraints a prof:ResourceRole,
-        owl:NamedIndividual ;
-skos:prefLabel "Full Constraints" ;
-skos:definition "Complete set of constraints for a profile"@en ;
-    skos:topConceptOf prof:resourceRoles .
+:FullConstraints a owl:NamedIndividual,
+        skos:Concept,
+        prof:ResourceRole ;
+    skos:broader :Validation ;
+    skos:definition "Complete set of constraints for a profile"@en ;
+    skos:prefLabel "Full Constraints"@en .
 
-:Guidance a prof:ResourceRole,
-        owl:NamedIndividual ;
-skos:prefLabel "Guidance" ;
-skos:definition "Guidance notes of profile"@en ;
-    skos:topConceptOf prof:resourceRoles .
+:Guidance a owl:NamedIndividual,
+        skos:Concept,
+        prof:ResourceRole ;
+    skos:definition "Guidance notes of profile"@en ;
+    skos:prefLabel "Guidance"@en ;
+    skos:topConceptOf : .
 
-:PartConstraints a prof:ResourceRole,
-        owl:NamedIndividual ;
-skos:prefLabel "Part Constraints" ;
-skos:definition "Partial set of constraints for a profile"@en ;
-    skos:topConceptOf prof:resourceRoles .
+:PartConstraints a owl:NamedIndividual,
+        skos:Concept,
+        prof:ResourceRole ;
+    skos:broader :Validation ;
+    skos:definition "Partial set of constraints for a profile"@en ;
+    skos:prefLabel "Part Constraints"@en .
+
+:Specification a owl:NamedIndividual,
+        skos:Concept,
+        prof:ResourceRole ;
+    skos:definition "Reference document which describes the standard"@en ;
+    skos:prefLabel "Specification document"@en ;
+    skos:topConceptOf : .
+
+:Vocabulary a owl:NamedIndividual,
+        skos:Concept,
+        prof:ResourceRole ;
+    skos:definition "Machine readable definition of a vocabulary or schema. Typically expressed in RDF, XSD, UML DDL, Table Schema or similar"@en ;
+    skos:prefLabel "Vocabulary"@en ;
+    skos:topConceptOf : .
+
+:Validation a owl:NamedIndividual,
+        skos:Concept,
+        prof:ResourceRole ;
+    skos:definition "Artifact that is used directly in validation, such as XSD, Schematron, SHACL, ShEx"@en ;
+    skos:prefLabel "Validation"@en ;
+    skos:topConceptOf : .
 
 : a skos:ConceptScheme ;
     rdfs:label "Resource Roles vocabulary"@en ;
-    dc:contributor "Nicholas Car" ;
+    dc:contributor "Nicholas Car",
+        "Simon Cox" ;
     dc:creator "Rob Atkinson" ;
-    dcterms:contributor <http://orcid.org/0000-0002-8742-7730> ;
-    dcterms:created "2018-02-16"^^xsd:date ;
-    dcterms:modified "2018-05-30"^^xsd:date ;
-    rdfs:comment "A vocabulary of Resource' roles."@en .
+    dct:contributor <http://orcid.org/0000-0002-3884-3420>,
+        <http://orcid.org/0000-0002-8742-7730> ;
+    dct:created "2018-02-16"^^xsd:date ;
+    dct:modified "2018-11-15"^^xsd:date ;
+    rdfs:comment """A vocabulary of ResourceRole instances.
+
+This vocabulary is both a SKOS vocabulary and also a list of instances of the Profile Ontology's ResourceRole class."""@en .

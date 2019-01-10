@@ -11,13 +11,13 @@ var respecConfig = {
     issueBase:            "https://github.com/w3c/dxwg/issues/",
     editors: [{
       name:       "Alejandra Gonzalez Beltran",
-      company:    "University of Oxford eResearch Centre",
+      company:    "Oxford eResearch Centre, Engineering Science, University of Oxford",
       url: "https://www.oerc.ox.ac.uk/people/alejandra",
       companyURL: "http://www.oerc.ox.ac.uk/"
     },{
       name: "Dave Browning",
-      company: "Thomson Reuters",
-      companyURL: "https://www.thomsonreuters.com"
+      company: "Refinitiv",
+      companyURL: "https://www.refinitiv.com"
     },{
       name: "Simon Cox",
       company: "CSIRO",
@@ -38,7 +38,7 @@ var respecConfig = {
 //            href: "https://pro.europeana.eu/person/antoine-isaac"
 //        },{
 //            value: "Andrea Perego, European Commission",
-//            href: "https://ec.europa.eu/jrc/en/research-topic/digital-earth"
+//            href: "https://ec.europa.eu/jrc/"
 //        }]
 //      },{
         key: "Editors of previous version",
@@ -69,7 +69,7 @@ var respecConfig = {
          date : "2016"
        },
       "ZaveriEtAl" : {
-          title : "Quality assessment for Linked Data: A Survey",
+          title : "Quality assessment for Linked Data: A Survey",
           authors : [ "Amrapali Zaveri", "Anisa Rula", "Andrea Maurino",
                       "Ricardo Pietrobon", "Jens  Lehmann", "Sören Auer" ],
           status : "Semantic Web, vol. 7, no. 1, pp. 63-93, 2015",
@@ -84,55 +84,58 @@ var respecConfig = {
          title : "Data Documentation Initiative",
          publisher : "DDI Alliance"
       },
-      "schema-org" : {
-         href:"http://schema.org/",
-         title:"Schema.org"
+      "DATS": {
+          "href": "https://github.com/datatagsuite/",
+          "title": "Data Tag Suite",
+          "authors": ["Alejandra Gonzalez-Beltran", "Philippe Rocca-Serra"],
+          "publisher": "NIH Big Data 2 Knowledge bioCADDIE and NIH Data Commons projects",
+          "date": "2016"
       },
-      "dbpedia-ont" : {
+      "DBPEDIA-ONT" : {
          href:"http://dbpedia.org/ontology/",
          title:"DBPedia ontology"
       },
-      "doap" : {
+      "DOAP" : {
          href:"https://github.com/ewilderj/doap/wiki",
          title:"Description of a Project",
          authors: ["Edd Wilder-James"]
       },
-      "frapo" : {
+      "FRAPO" : {
          href:"http://www.sparontologies.net/ontologies/frapo",
          title:"FRAPO, the Funding, Research Administration and Projects Ontology",
          authors: ["David Shotton"],
          date: "04 September 2017"
       },
-      "obo" : {
+      "OBO" : {
          href:"http://www.obofoundry.org/",
          title:"The OBO Foundry"
       },
-      "pdo" : {
+      "PDO" : {
          href:"http://vocab.deri.ie/pdo",
          title:"Project Documents Ontology",
          authors: ["Pradeep Varma"],
          date: "09 July 2010"
       },
-      "vivo-isf" : {
+      "VIVO-ISF" : {
          href:"http://github.com/vivo-isf/vivo-isf",
          title:"VIVO-ISF Data Standard"
       },
      "LinkedDataPatterns" : {
           title : "Linked Data Patterns: A pattern catalogue for modelling, publishing, and consuming Linked Data",
           authors : [ "Leigh Dodds", "Ian Davis" ],
-         date: "31 May 2012",
+          date: "31 May 2012",
           href : "http://patterns.dataincubator.org/book/"
       },
       "PROF-CONNEG": {
-            href: "https://www.w3.org/TR/conneg-by-ap/",
+            href: "https://w3c.github.io/dxwg/conneg-by-ap/",
             title: "Content Negotiation by Profile",
-            date: " 2018-12-31",
+            date: "03 October 2018",
             status: "W3C Editor's Draft"
       },
       "PROF-GUIDE": {
-            href: "https://www.w3.org/TR/profile-guidance/",
+            href: "https://w3c.github.io/dxwg/profiles/",
             title: "Profile Guidance",
-            date: " 2018-12-31",
+            date: "03 October 2018",
             status: "W3C Editor's Draft"
       },
       "PROF-IETF": {
@@ -140,10 +143,49 @@ var respecConfig = {
                 "L. Svensson",
                 "R. Verborgh"
             ],
-            href: "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema/",
+            href: "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema",
             title: "Negotiating Profiles in HTTP",
-            date: " 2017-10-24",
+            date: "24 October 2017",
             status: "IETF Internet Draft"
-      }
+      },
+      "OpenAPI": {
+            href: "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md",
+            title: "OpenAPI Specification. Version 3.0.2",
+            date: "08 October 2018",
+            publisher: "OAI"
+      },
+      "OpenSearch": {
+            authors: [
+                "DeWitt Clinton"
+            ],
+            href:"https://github.com/dewitt/opensearch/blob/master/opensearch-1-1-draft-6.md",
+            title:"OpenSearch 1.1 Draft 6",
+            date:"17 April 2018",
+            publisher:"OpenSearch"
+      },
+      "HYDRA": {
+            authors: [
+                "Markus Lanthaler"
+            ],
+            href:"https://www.hydra-cg.com/spec/latest/core/",
+            title:"Hydra Core Vocabulary",
+            date:"15 March 2018",
+            publisher:"Hydra W3C Community Group",
+            status:"Unofficial Draft"
+      },
+      "ODRS": {
+            authors: [
+                "Leigh Dodds"
+            ],
+            href:"http://schema.theodi.org/odrs",
+            title:"Open Data Rights Statement Vocabulary",
+            date:"29 July 2013",
+            publisher:"ODI"
+      },
+      "MDR-AR":{
+        "href":"http://publications.europa.eu/mdr/authority/access-right/",
+        "title":"Named Authority List: Access rights",
+        "publisher":"Publications Office of the European Union"
+       }
     }
   };

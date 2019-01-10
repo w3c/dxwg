@@ -1,10 +1,8 @@
 var respecConfig = {
-    specStatus: "FPWD",
-    shortName: "dx-prof",
-    edDraftURI: "https://w3c.github.io/dxwg/profilesont/",
+    specStatus: "WD",
+    shortName: "prof-roles",
+    edDraftURI: "https://w3c.github.io/dxwg/profilesont/resource_roles.html",
     canonicalURI: "TR",
-    implementationReportURI: "https://github.com/CSIRO-enviro-informatics/prof-ont-implementation-results",
-    testSuiteURI: "https://github.com/CSIRO-enviro-informatics/prof-ont-implementation-results",
     editors: [
       {
         name: "Rob Atkinson",
@@ -18,21 +16,13 @@ var respecConfig = {
         companyURL: "https://www.csiro.au/",
         w3cid:      70131
     }],
-    otherLinks: [{
-      key: "Contributors",
-      data: [
-        {
-          value: "Simon Cox",
-          href: "http://people.csiro.au/Simon-Cox"
-        }
-      ]
-    }],
     wg: "Dataset Exchange Working Group",
     wgURI: "https://www.w3.org/2017/dxwg/",
     wgPublicList: "public-dxwg-comments",
     wgPatentURI: "https://www.w3.org/2004/01/pp-impl/99375/status",
     inlineCSS: "true",
     lint: "false",
+    noRecTrack: "true",
     issueBase: "https://github.com/w3c/dxwg/issues/",
     github:    "https://github.com/w3c/dxwg/issues/",
     localBiblio: {
@@ -72,20 +62,20 @@ var respecConfig = {
             date: "2008-07",
             status: "ISO Standard"
         },
-        SHEX: {
+        shex: {
             href: "https://shexspec.github.io/spec/",
             title: "Shape Expressions Language 2.next",
             date: "2018-09-06",
             status: "W3C Community Group Draft Report"
         },
         "PROF-CONNEG": {
-            href: "https://www.w3.org/TR/dx-prof-conneg",
+            href: "https://www.w3.org/TR/conneg-by-ap/",
             title: "Content Negotiation by Profile",
             date: "2018-12-31",
             status: "W3C Editor's Draft"
         },
-        "PROF-GUIDANCE": {
-            href: "https://www.w3.org/TR/dx-prof-guidance",
+        "PROF-GUIDE": {
+            href: "https://www.w3.org/TR/profile-guidance/",
             title: "Profile Guidance",
             date: " 2018-12-31",
             status: "W3C Editor's Draft"
@@ -95,10 +85,20 @@ var respecConfig = {
                 "L. Svensson",
                 "R. Verborgh"
             ],
-            href: "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema",
+            href: "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema/",
             title: "Negotiating Profiles in HTTP",
             date: "2017-10-24",
             status: "IETF Internet Draft"
+        },
+        "PROF-ONT": {
+            editors: [
+                "Rob Atkinson",
+                "Nicholas J. Car"
+            ],
+            href: "https://www.w3.org/TR/prof/",
+            title: "Profile Descriptions ontology",
+            date: "2018-09-23",
+            status: "W3C Editor's Draft"
         },
         SCHEMATRON: {
             href: "https://www.iso.org/standard/55982.html",
@@ -106,7 +106,7 @@ var respecConfig = {
             date: "2016-01",
             status: "ISO Standard"
         },
-        "MODSPEC": {
+        "modspec": {
           editors: [
             "OGC Policy SWG"
           ],
@@ -115,7 +115,7 @@ var respecConfig = {
           status: "OGC Policy Directive" ,
           date: "2009-10-19"
         },
-        "CFG-MGMT": {
+        "cfg-mgmt": {
           authors: [
             "Serena Coetzee",
             "Simon Cox",
@@ -126,6 +126,18 @@ var respecConfig = {
           publisher: "IEEE" ,
           status: "7th International Conference on Standardization and Innovation in Information Technology (SIIT), Berlin, 2011, pp. 1-12" ,
           date: "2011-11-21"
+        },
+        "vocab-dcat-2": {
+            editors: [
+                "Alejandra Gonzalez Beltran",
+                "Dave Browning",
+                "Simon Cox",
+                "Peter Winstanley"
+            ],
+            href: "https://www.w3.org/TR/vocab-dcat-2/",
+            title: "Data Catalog Vocabulary (DCAT) - revised edition",
+            date: "2018-09-07",
+            status: "W3C Editor's Draft"
         }
     }
 };
