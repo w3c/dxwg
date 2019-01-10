@@ -350,7 +350,7 @@ dcat:Relationship
   rdf:type owl:Class ;
   rdfs:comment "An association class for attaching additional information to a relationship between DCAT Resources" ;
   rdfs:label "Relationship" ;
-  rdfs:subClassOf prov:Influence ;
+  rdfs:subClassOf prov:EntityInfluence ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:minCardinality "1"^^xsd:nonNegativeInteger ;
@@ -358,7 +358,7 @@ dcat:Relationship
     ] ;
   skos:changeNote "New class in this revision" ;
   skos:editorialNote "Status: Class accepted by DCAT revision team, but details of definition and constraints not yet resolved." ;
-  skos:scopeNote "  " ;
+  skos:scopeNote "Use to characterize a relationship between datasets, and potentially other resources, where the nature of the relationship is known but is not adequately characterized by the standard Dublin Core properties (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy) or PROV-O properties (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)" ;
 .
 dcat:Resource
   rdf:type owl:Class ;
@@ -618,7 +618,12 @@ dcat:hadRole
   skos:changeNote "New property in this revision of DCAT" ;
   skos:editorialNote "Introduced into DCAT to complement prov:hadRole, whose use is limited to roles in the context of an activity, with the domain of prov:Association" ;
   skos:scopeNote "May be used in a qualified-attribution to specify the role of an Agent with respect to an Entity. It is recommended that the value be taken from a controlled vocabulary of agent roles, such as http://registry.it.csiro.au/def/isotc211/CI_RoleCode " ;
-  skos:scopeNote "May be used in a qualified-relation to specify the role of an Entity with respect to another Entity. It is recommended that the value be taken from a controlled vocabulary of entity roles " ;
+  skos:scopeNote """May be used in a qualified-relation to specify the role of an Entity with respect to another Entity.
+  It is recommended that the value be taken from a controlled vocabulary of entity roles such as
+  - ISO 19115 DS_AssociationTypeCode http://registry.it.csiro.au/def/isotc211/DS_AssociationTypeCode
+  - IANA Registry of Link Relations https://www.iana.org/assignments/link-relation
+  - DataCite metadata schema
+  - MARC relators https://id.loc.gov/vocabulary/relators""" ;
 .
 dcat:keyword
   rdf:type rdf:Property ;
@@ -711,12 +716,12 @@ dcat:qualifiedRelation
   rdf:type owl:ObjectProperty ;
   rdfs:comment "Link to a description of a relationship with another resource."@en ;
   rdfs:domain dcat:Resource ;
-  rdfs:label "hadRole" ;
+  rdfs:label "qualified relation" ;
   rdfs:range dcat:Relationship ;
   rdfs:subPropertyOf prov:qualifiedInfluence ;
   skos:changeNote "New property in this revision of DCAT" ;
   skos:editorialNote "Introduced into DCAT to complement the other PROV qualified relations" ;
-  skos:scopeNote "Used in a qualified-relation to specify a relationship of an Entity to another Entity. It is recommended that the value be taken from a controlled vocabulary of agent roles, such as https://www.iana.org/assignments/link-relations" ;
+  skos:scopeNote "Used to link to another resource where the nature of the relationship is known but does not match one of the standard Dublin Core properties (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy) or PROV-O properties (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)." ;
 .
 dcat:record
   rdf:type rdf:Property ;
@@ -827,6 +832,13 @@ dct:hasPart
 dct:relation
   skos:scopeNote "See also: Sub-properties of dct:relation in particular dcat:distribution, dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy" ;
   skos:scopeNote "dct:relation SHOULD be used where the nature of the relationship between a catalogued item and related resources is not known. A more specific sub-property SHOULD be used if the nature of the relationship of the link is known. The property dcat:distribution SHOULD be used to link from a dcat:Dataset to a representation of the dataset, described as a dcat:Distribution" ;
+  skos:scopeNote "In the context of a dcat:Relationship this is expected to point to another dcat:Dataset or other catalogued resource" ;
+.
+prov:qualifiedAttribution
+  skos:definition "Link to an Agent having some form of responsibility for the resource" ;
+  skos:scopeNote """Used to link to an Agent where the nature of the relationship is known but does not match one of the standard Dublin Core properties (dct:creator, dct:publisher).
+  Use dcat:hadRole on the prov:Attribution to capture the responsibility of the Agent with respect to the Resource.
+  See https://w3c.github.io/dxwg/dcat/#qualified-attribution for usage examples. """ ;
 .
 prov:wasAttributedTo
   rdfs:subPropertyOf dct:relation ;
