@@ -2245,7 +2245,7 @@ a:Dataset a dcat:Dataset;
         </section>
         <section id="quality-conformance-degree">
             <h3> Degree of conformance</h3>
-            <p>Some legal context requires to specify the degree of conformance. For example,  INSPIRE metadata adopts a specific <a href="http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity">controlled vocabulary</a> to express  non-conformance and non-evaluation beside the full compliance. As suggested in [[GeoDCAT-AP]], the following example specifies the degree of conformance (i.e.,  not conformant) by declaring the  <a href="http://dublincore.org/documents/dcmi-terms/#terms-type">dct:type</a> for the result of conformance test.  [[GeoDCAT-AP]] suggests to use a PROV entity to model the  conformance test (e.g., a:TestResult),  a PROV activity to model the testing activity (e,g., a:TestingActivity), a PROV plan derived by the INSPIRE Directive to represent  conformance test (e.g., a:ConformanceTest). A qualified PROV association binds the testing activity to the conformance test.
+            <p>Some legal context requires to specify the degree of conformance. For example,  INSPIRE metadata adopts a specific <a href="http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity">controlled vocabulary</a> to express  non-conformance and non-evaluation beside the full compliance. Similar controlled vocabularies can be defined in other contexts, the following example specifies some newly minted concepts representing the degree of conformance (i.e., conformat, not conformat) and  declares the  <a href="http://dublincore.org/documents/dcmi-terms/#terms-type">dct:type</a> for indicating the result of conformance test. The example uses a PROV entity to model the  conformance test (e.g., a:TestResult),  a PROV activity to model the testing activity (e,g., a:TestingActivity), a PROV plan derived by the Data on the Web Best Practices [[dwbp]]. A qualified PROV association binds the testing activity to the conformance test. <!--As suggested in [[GeoDCAT-AP]], the following example specifies the degree of conformance (i.e.,  not conformant) by declaring the  <a href="http://dublincore.org/documents/dcmi-terms/#terms-type">dct:type</a> for the result of conformance test.  [[GeoDCAT-AP]] suggests to use a PROV entity to model the  conformance test (e.g., a:TestResult),  a PROV activity to model the testing activity (e,g., a:TestingActivity), a PROV plan derived by the INSPIRE Directive to represent  conformance test (e.g., a:ConformanceTest). A qualified PROV association binds the testing activity to the conformance test.-->
             </p>
             <div class="example">
   <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
@@ -2265,19 +2265,21 @@ a:TestingActivity a prov:Activity ;
 
 # Conformance test result
 a:TestResult a prov:Entity ;
-   dcterms:type &lt;http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/notConformant&gt; .
+   # a:notConformat belongs to a SKOS concept scheme about conformance 
+   dcterms:type a:notConformant .
+   
 
 a:ConformanceTest a prov:Plan ;
-    # Here you can specify additional information on the test
-    prov:wasDerivedFrom &lt;http://data.europa.eu/eli/reg/2014/1312/oj&gt; .
+    # Here you can specify additional information on the test, which in the example is derived by the W3C Data on the Web Best. Practices
+    prov:wasDerivedFrom &lt;https://www.w3.org/TR/dwbp/&gt; .
     </pre></div>
-            <p>Also,  DQV [[VOCAB-DQV]] can be deployed to  measure the compliance to a specific standard. In the following, the :levelOfComplianceToINSPIRE is a quality metrics which measures the compliance of a dataset to INSPIRE in terms of the percentage of passed compliance tests. The example assumes iso as a namespace representing the quality dimensions and categories defined in the ISO/IEC 25012.</p>
+            <p>Also,  DQV [[VOCAB-DQV]] can be deployed to  measure the compliance to a specific standard. In the following, the :levelOfComplianceToDWBP is a quality metrics which measures the compliance of a dataset to DWBP in terms of the percentage of passed compliance tests. The example assumes iso as a namespace representing the quality dimensions and categories defined in the ISO/IEC 25012.</p>
             <div class="example">
   <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 
-:levelOfComplianceToINSPIRE
+:levelOfComplianceToDWBP
     a dqv:Metric ;
-    skos:definition "It returns the degree of compliance to INSPIRE defined as the percentage of passed compleance tests."@en
+    skos:definition "It returns the degree of compliance to DWBP defined as the percentage of passed compleance tests."@en
     dqv:expectedDataType xsd:double ;
     dqv:inDimension  iso:compliance .
 
@@ -2291,17 +2293,17 @@ iso:inherentandSystemDependentDataQuality
     a  dqv:Category ;
    skos:prefLabel "Inherent and System-Dependent Data Quality"@en.
         </pre></div>
-            <p>The quality measurement :measurement_complianceToINSPIRE represents the level of compliance for a dataset a:Dataset, namely, measurement of the metric :levelOfComplianceToINSPIRE. If only a part of the compliance tests succeeds (e.g. half of the compliance tests), the measurement would look like in the following:</p>
+            <p>The quality measurement :measurement_complianceToDWBP represents the level of compliance for a dataset a:Dataset, namely, measurement of the metric :levelOfComplianceToDWBP. If only a part of the compliance tests succeeds (e.g. half of the compliance tests), the measurement would look like in the following:</p>
             <div class="example">
   <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 
-:measurement_complianceToINSPIRE
+:measurement_complianceToDWBP
    a         dqv:QualityMeasurement;
    dqv:computedOn      a:Dataset;
    dqv:value           "50"^^xsd:double ;
    sdmx-attribute:unitMeasure &lt;http://www.wurvoc.org/vocabularies/om-1.8/Percentage&gt;
    dcterms:date      "2018-01-10"^^xsd:date ;
-   dqv:isMeasurementOf    :levelOfComplianceToINSPIRE .
+   dqv:isMeasurementOf    :levelOfComplianceToDWBP .
     </pre></div>
 
         </section>
@@ -2327,11 +2329,11 @@ a:ConformanceTest a earl:TestRequirement, prov:Plan;
          # it includes different subtests
          dct:hasPart a:test1, a:test2, ...,  a:testn.
          #It is derived  by the reference standard
-         prov:wasDerivedFrom  &lt;http://data.europa.eu/eli/reg/2014/1312/oj&gt;.
+         prov:wasDerivedFrom  &lt;https://www.w3.org/TR/dwbp/&gt;.
 
 a:testResult a earl:TestResult;
         #  results in conformancy.
-        dcterms:type  &lt;http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant&gt;;
+        dcterms:type  a:conformat;
         #the overall set of tests have been passed
         earl:outcome earl:passed .
         ];
@@ -2357,7 +2359,7 @@ a:assertion1 a earl:Assertion ;
     earl:result [
         a earl:TestResult;
         #  results in no conformancy.
-        dcterms:type  &lt;http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/notConformant&gt;
+        dcterms:type  a:nonConformat ;
         #the overall set of tests have not been passed (!?)
         dcterms:date "2015-09-29T11:50:00+00:00"^^xsd:dateTime ;
         # Some XML encoding of the error
@@ -2419,7 +2421,7 @@ a:TestResult
 # The graph contains the rest of the statements presented in the previous examples.
 a:testResult {
     a:Dataset
-        dqv:hasQualityMeasurement :measurement_complianceToINSPIRE;
+        dqv:hasQualityMeasurement :measurement_complianceToDWBP;
         dqv:hasQualityAnnotation :errors .
 }
 
