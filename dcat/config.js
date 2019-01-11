@@ -72,8 +72,10 @@ var respecConfig = {
           title : "Quality assessment for Linked Data: A Survey",
           authors : [ "Amrapali Zaveri", "Anisa Rula", "Andrea Maurino",
                       "Ricardo Pietrobon", "Jens  Lehmann", "Sören Auer" ],
-          status : "Semantic Web, vol. 7, no. 1, pp. 63-93, 2015",
-          href : "https://dx.doi.org/10.3233/SW-150175"
+          status : "Semantic Web, vol. 7, no. 1, pp. 63-93",
+	  publisher : "IOS Press",
+          href : "https://doi.org/10.3233/SW-150175",
+	  date : "2015"
       },
       "ISOIEC25012" : {
           title : "ISO/IEC 25012 - Data Quality model",
@@ -183,9 +185,17 @@ var respecConfig = {
             publisher:"ODI"
       },
       "MDR-AR":{
-        "href":"http://publications.europa.eu/mdr/authority/access-right/",
+        "href":"http://publications.europa.eu/resource/authority/access-right",
         "title":"Named Authority List: Access rights",
         "publisher":"Publications Office of the European Union"
-       }
+       },
+      "FAIR" : {
+          title : "The FAIR Guiding Principles for scientific data management and stewardship",
+          authors : [ "Mark D. Wilkinson" ],
+	  etAl : true,
+          status : "Scientific Data, vol. 3, Article nr. 160018",
+	  publisher : "Nature",
+          href : "https://doi.org/10.1038/sdata.2016.18"
+      },
     }
   };

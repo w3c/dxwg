@@ -2123,26 +2123,41 @@ ex:InternationalDOIFundation a dct:Agent;
     
 <section id="quality-information" class="informative">
     <h2>Quality information</h2>
-    <div class="note"><p>This section is not-normative as it provides guidance on how to document the quality of DCAT first class entities (e.g., datasets, distributions) and it does not define new DCAT terms. The guidance relies on the Data Quality Vocabulary(DQV) [[VOCAB-DQV]], which is a W3C Group Note.</p></div>
+    <aside class="note">
+      <p>This section is not-normative as it provides guidance on how to document the quality of DCAT 
+      first class entities (e.g., datasets, distributions) and it does not define new DCAT terms. The guidance relies on the 
+      Data Quality Vocabulary (DQV) [[VOCAB-DQV]], which is a W3C Group Note.</p>
+    </aside>
 
-    The Data Quality Vocabulary (DQV) offers common modelling patterns for different aspects of Data Quality.
-
-    It can relate  DCAT datasets and distributions with different types of quality information including
+    <p>The Data Quality Vocabulary (DQV) [[VOCAB-DQV]] offers common modelling patterns for different aspects of Data 
+    Quality.
+    It can relate  DCAT datasets and distributions with different types of quality information including:</p>
+	
     <ul>
-        <li> <a href="https://www.w3.org/TR/vocab-dqv/#dqv:QualityAnnotation"> dqv:QualityAnnotation</a>, which represents feedback and quality certificates given about the dataset or its distribution. </li>
-        <li> <a href="https://www.w3.org/TR/vocab-dqv/#dqv:QualityPolicy">dqv:QualityPolicy</a>, which represents a policy or agreement that is chiefly governed by data quality concerns.</li>
-        <li><a href="https://www.w3.org/TR/vocab-dqv/#dqv:QualityMeasurement">dqv:QualityMeasurement</a>, which represents a metric value providing quantitative or qualitative information about the dataset or distribution.</li>
+        <li><a href="https://www.w3.org/TR/vocab-dqv/#dqv:QualityAnnotation"><code>dqv:QualityAnnotation</code></a>, which represents feedback and quality certificates given about the dataset or its distribution.</li>
+        <li><a href="https://www.w3.org/TR/vocab-dqv/#dqv:QualityPolicy"><code>dqv:QualityPolicy</code></a>, which represents a policy or agreement that is chiefly governed by data quality concerns.</li>
+        <li><a href="https://www.w3.org/TR/vocab-dqv/#dqv:QualityMeasurement"><code>dqv:QualityMeasurement</code></a>, which represents a metric value providing quantitative or qualitative information about the dataset or distribution.</li>
     </ul>
 
-    Each type of quality information can pertain to one or more quality dimensions, namely, quality characteristics relevant to the consumer. The practice to see the quality as a multi-dimensional space is consolidated in the field of quality management to split the quality management into addressable chunks. DQV does not define a normative list of quality dimensions. It offers the quality dimensions proposed in ISO/IEC 25012 [[ISOIEC25012]] and Zaveri et al. [[ZaveriEtAl]] as two possible starting points. It also provides an <a href="https://www.w3.org/2016/05/ldqd">RDF representation</a> for the quality dimensions and categories defined in the latter. Ultimately, implementers will need to choose themselves the collection of quality dimensions that best fits their needs.
-
+    <p>Each type of quality information can pertain to one or more quality dimensions, namely, quality characteristics relevant 
+    to the consumer. The practice to see the quality as a multi-dimensional space is consolidated in the field of quality 
+    management to split the quality management into addressable chunks. DQV does not define a normative list of quality 
+    dimensions. It offers the quality dimensions proposed in ISO/IEC 25012 [[ISOIEC25012]] and Zaveri et al. [[ZaveriEtAl]] 
+    as two possible starting points. It also provides an <a href="https://www.w3.org/2016/05/ldqd">RDF representation</a> 
+    for the quality dimensions and categories defined in the latter. Ultimately, implementers will need to choose themselves 
+    the collection of quality dimensions that best fits their needs.
     The following section shows how DCAT and DQV can be coupled to describe the quality of datasets and distributions.
-    For a comprehensive introduction  and further examples of use, please refer to the Data Quality Vocabulary (DQV) group note [[VOCAB-DQV]].
-    <div class="note">
-        <p>The following examples make no comments on where the quality information would reside and how it is managed. That is out of scope for the DCAT vocabulary.  The assumption made is that the quality individuals are available using the URIs indicated.
-            Besides, the examples and more in general the DQV  is neutral to the data portal design choices on how to collect quality information. For example, data portals can collect DQV instances by implementing specific UI to annotate data or by taking inputs from 3rd-party services.
+    For a comprehensive introduction  and further examples of use, please refer to [[VOCAB-DQV]].</p>
+
+    <aside class="note">
+        <p>The following examples make no comments on where the quality information would reside and how it is managed. That 
+	is out of scope for the DCAT vocabulary.  The assumption made is that the quality individuals are available using 
+	the URIs indicated.
+        Besides, the examples and more in general the DQV  is neutral to the data portal design choices on how to collect 
+	quality information. For example, data portals can collect DQV instances by implementing specific UI to annotate 
+	data or by taking inputs from 3rd-party services.
         </p>
-    </div>
+    </aside>
 
     <p class="issue" data-number="252">
         We might want to include examples of quality documentation related to services.
@@ -2152,16 +2167,18 @@ ex:InternationalDOIFundation a dct:Agent;
         <h2>Providing quality information</h2>
 
         <p>
-            A data consumer (:consumer1)  describes the quality of the dataset :genoaBusStopsDataset that includes a georeferenced list of bus stops in Genoa. He/she annotates the dataset with a DQV quality note (:genoaBusStopsDatasetCompletenessNote) about data completeness (ldqd:completeness) to warn that the dataset includes only 20500 out of the 30000 stops.
+        A data consumer (<code>:consumer1</code>)  describes the quality of the dataset <code>:genoaBusStopsDataset</code> 
+	that includes a georeferenced list of bus stops in Genoa. He/she annotates the dataset with a DQV quality note 
+	(<code>:genoaBusStopsDatasetCompletenessNote</code>) about data completeness (<code>ldqd:completeness</code>) to 
+	warn that the dataset includes only 20500 out of the 30000 stops.
         </p>
 
-        <div class="example">
+        <aside class="example" id="ex-genoa-bus-stops-dataset-completeness-note">
   <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 :genoaBusStopsDataset a dcat:Dataset ;
     dqv:hasQualityAnnotation :genoaBusStopsDatasetCompletenessNote .
 
-:genoaBusStopsDatasetCompletenessNote
-    a dqv:UserQualityFeedback ;
+:genoaBusStopsDatasetCompletenessNote a dqv:UserQualityFeedback ;
     oa:hasTarget :genoaBusStopsDataset ;
     oa:hasBody :textBody ;
     oa:motivatedBy dqv:qualityAssessment ;
@@ -2175,17 +2192,19 @@ ex:InternationalDOIFundation a dct:Agent;
     dc:language "en" ;
     dc:format "text/plain"
     .
-    </pre></div>
-        <p>
-            The activity :myQualityChecking employs the service :myQualityChecker to check the quality of the :genoaBusStopsDataset dataset. The metric :completenessWRTExpectedNumberOfEntities is applied to measure the dataset completeness (ldqd:completeness) and it results in the quality measurement :genoaBusStopsDatasetCompletenessMeasurement.
-        </p>
-        <div class="example">
+    </pre></aside>
+	<p>
+	The activity <code>:myQualityChecking</code> employs the service <code>:myQualityChecker</code> to check the 
+	quality of the <code>:genoaBusStopsDataset</code> dataset. The metric <code>:completenessWRTExpectedNumberOfEntities</code> 
+	is applied to measure the dataset completeness (<code>ldqd:completeness</code>) and it results in the quality measurement 
+	<code>:genoaBusStopsDatasetCompletenessMeasurement</code>.
+	</p>
+        <aside class="example" id="ex-genoa-bus-stops-dataset-completeness-measure">
   <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 :genoaBusStopsDataset
     dqv:hasQualityMeasurement :genoaBusStopsDatasetCompletenessMeasurement .
 
-:genoaBusStopsDatasetCompletenessMeasurement
-    a dqv:QualityMeasurement ;
+:genoaBusStopsDatasetCompletenessMeasurement a dqv:QualityMeasurement ;
     dqv:computedOn :genoaBusStopsDataset ;
     dqv:isMeasurementOf :completenessWRTExpectedNumberOfEntities ;
     dqv:value "0.6833333"^^xsd:decimal  ;
@@ -2194,30 +2213,29 @@ ex:InternationalDOIFundation a dct:Agent;
     prov:wasGeneratedBy :myQualityChecking
     .
 
-:completenessWRTExpectedNumberOfEntities
-    a dqv:Metric ;
-    skos:definition "it returns the degree of completeness as ratio between the actual number of entities included in the dataset and the declared expected number of entities."@en ;
+:completenessWRTExpectedNumberOfEntities a dqv:Metric ;
+    skos:definition "The degree of completeness as ratio between the actual number of entities included in the dataset and the declared expected number of entities."@en ;
     dqv:expectedDataType xsd:decimal ;
     dqv:inDimension ldqd:completeness .
 
 # :myQualityChecker is a service computing some quality metrics
-:myQualityChecker
-    a prov:SoftwareAgent ;
+:myQualityChecker a prov:SoftwareAgent ;
     rdfs:label "A quality assessment service"^^xsd:string .
     # Further details about quality service/software can be provided, for example,
     # deploying  vocabularies such as Dataset Usage Vocabulary (DUV), Dublin Core or ADMS.SW
 
 # :myQualityChecking is the activity that has generated :genoaBusStopsDatasetCompletenessMeasurement from :genoaBusStopsDataset
-:myQualityChecking
-    a prov:Activity;
+:myQualityChecking a prov:Activity;
     rdfs:label "The checking of genoaBusStopsDataset's quality"^^xsd:string;
     prov:wasAssociatedWith :myQualityChecker;
-    prov:used              :genoaBusStopsDataset;
-    prov:generated         :genoaBusStopsDatasetCompletenessMeasurement;
-    prov:endedAtTime      "2018-05-27T02:52:02Z"^^xsd:dateTime;
-    prov:startedAtTime     "2018-05-27T00:52:02Z"^^xsd:dateTime .
-    </pre></div>
-        Other examples of quality documentation are available in the W3C Group Note DQV [[VOCAB-DQV]], including examples about <a href="https://www.w3.org/TR/vocab-dqv/#ExpressDatasetAccuracyPrecision">how express dataset accuracy and precision</a>.
+    prov:used :genoaBusStopsDataset;
+    prov:generated :genoaBusStopsDatasetCompletenessMeasurement;
+    prov:endedAtTime 2018-05-27T02:52:02Z"^^xsd:dateTime;
+    prov:startedAtTime "2018-05-27T00:52:02Z"^^xsd:dateTime .
+    </pre></aside>
+    <p>
+      Other examples of quality documentation are available in [[VOCAB-DQV]], including examples about 
+      <a data-cite="VOCAB-DQV#ExpressDatasetAccuracyPrecision">how to express dataset accuracy and precision</a>.
     </section>
     <section id="quality-conformance">
         <h2>Documenting conformance to standards</h2>
@@ -2225,15 +2243,19 @@ ex:InternationalDOIFundation a dct:Agent;
             The issue suggests to represent "the degree a dataset conforms to a stated quality standard" and "the details of data quality conformance test results". This section is a starter to deal with the above requests by relying on the existing  W3C vocabularies.
             Comments and suggestions about the following examples as well as the proposal of alternative patterns are more than welcome.
         </p>
-        <p> This subsection  shows different modelling patterns combining DQV [[VOCAB-DQV]] with  PROV [[PROV-O]] and EARL [[EARL10-Schema]] to represent the conformance degree to a stated quality standard and the details about the conformance tests.
+        <p> This subsection  shows different modelling patterns combining [[VOCAB-DQV]] with [[PROV-O]] and EARL [[EARL10-Schema]] to represent the conformance degree to a stated quality standard and the details about the conformance tests.
         </p>
 
         <section id="quality-conformance-statement">
             <h3>Conformance to a standard</h3>
-            <p>The use of <a href="http://dublincore.org/documents/dcmi-terms/#terms-conformsTo">dct:conformsTo</a> and <a href="http://dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a> is a well-known pattern to represent the conformance to a standard. The following example declares a fictional a:Dataset conformant to the "Commission Regulation (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC".</p>
-            <div class="example">
+            <p>The use of <a href="http://dublincore.org/documents/dcmi-terms/#terms-conformsTo"><code>dct:conformsTo</code></a> and 
+	    <a href="http://dublincore.org/documents/dcmi-terms/#terms-Standard"><code>dct:Standard</code></a> is a well-known pattern 
+            to represent the conformance to a standard. The following example, directly mutuated from [[SDW-BP]] (<a data-cite="SDW-BP#ex-geodcat-ap-dataset-conformance-with-specification">Example 51</a>), declares a fictional <code>a:Dataset</code> 
+	    conformant to the EU INSPIRE Regulation on interoperability of spatial data sets and services (<a href="http://data.europa.eu/eli/reg/2014/1312/oj">"Commission Regulation (EU) No 1089/2010 
+	    of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards 
+	    interoperability of spatial data sets and services"</a>).</p>
+            <aside class="example" id="ex-inspire-conformant-dataset">
   <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
-
 a:Dataset a dcat:Dataset;
     dct:conformsTo &lt;http://data.europa.eu/eli/reg/2014/1312/oj&gt; .
 
@@ -2241,80 +2263,86 @@ a:Dataset a dcat:Dataset;
 &lt;http://data.europa.eu/eli/reg/2014/1312/oj&gt; a dct:Standard ;
     dct:title "Commission Regulation (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards interoperability of spatial data sets and services"@en
     dct:issued "2010-11-23"^^xsd:date .
-</pre></div>
+</pre></aside>
         </section>
         <section id="quality-conformance-degree">
-            <h3> Degree of conformance</h3>
-            <p>Some legal context requires to specify the degree of conformance. For example,  INSPIRE metadata adopts a specific <a href="http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity">controlled vocabulary</a> to express  non-conformance and non-evaluation beside the full compliance. Similar controlled vocabularies can be defined in other contexts, the following example specifies some newly minted concepts representing the degree of conformance (i.e., conformat, not conformat) and  declares the  <a href="http://dublincore.org/documents/dcmi-terms/#terms-type">dct:type</a> for indicating the result of conformance test. The example uses a PROV entity to model the  conformance test (e.g., a:TestResult),  a PROV activity to model the testing activity (e,g., a:TestingActivity), a PROV plan derived by the Data on the Web Best Practices [[dwbp]]. A qualified PROV association binds the testing activity to the conformance test. Depending of the kind of dataset, other sets  of Best practices and standards such as FAIR or Spatial Data on the Web Best Practices [[sdw-bp]]  can be considered as replacement or in combination to the Data on the Web Best Practices.  
-            </p>
-            <div class="example">
-  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
-
+            <h3>Degree of conformance</h3>
+            <p>Some legal context requires to specify the degree of conformance. For example, INSPIRE metadata adopts a 
+	    specific <a href="http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity">controlled vocabulary</a> 
+	    to express non-conformance and non-evaluation beside the full compliance. Similar controlled vocabularies can 
+	    be defined in other contexts.</p>
+	    <p>The following example specifies some newly minted concepts representing the degree of conformance (i.e., conformant, not conformant) and  declares the  
+	    <a href="http://dublincore.org/documents/dcmi-terms/#terms-type"><code>dct:type</code></a> for indicating 
+	    the result of conformance test. Following a pattern used in [[GeoDCAT-AP]], the example uses a <code>prov:Entity</code> to model the  conformance test (e.g., 
+	    <code>a:TestResult</code>), a <code>prov:Activity</code> to model the testing activity (e,g., 
+	    <code>a:TestingActivity</code>), a <code>prov:Plan</code> derived from the Data on the Web Best Practices [[DWBP]]. A qualified PROV association binds the testing activity to the conformance test.</p>
+	    <aside class="note">
+	    <p>Depending of the kind of dataset, other best practices and standards, such as the FAIR Principles [[FAIR]] or the Spatial Data on the Web Best Practices [[SDW-BP]], can be considered as a replacement or used in combination with [[DWBP]].</p>
+       </aside>
+       <aside class="example" id="ex-conformance-degree">
+<pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 a:Dataset a dcat:Dataset ;
     prov:wasUsedBy a:TestingActivity .
 
 a:TestingActivity a prov:Activity ;
       prov:generated a:TestResult ;
       prov:qualifiedAssociation [
-          a prov:Association ;
-        # http://validator.example.org/ is the agent who did the test.
+        a prov:Association ;
+        # http://validator.example.org/ is the agent who ran the test.
         prov:agent  &lt;http://validator.example.org/&gt;
-        #following the plan  a:ConformanceTest
+        # following the plan a:ConformanceTest
         prov:hadPlan a:ConformanceTest
         ] .
 
 # Conformance test result
 a:TestResult a prov:Entity ;
-   # a:notConformat belongs to a SKOS concept scheme about conformance 
+   # a:notConformant belongs to a SKOS concept scheme about conformance 
    dcterms:type a:notConformant .
-   
 
 a:ConformanceTest a prov:Plan ;
-    # Here you can specify additional information on the test, which in the example is derived by the W3C Data on the Web Best. Practices
+    # Here one can specify additional information on the test, which in the example is derived by the W3C Data on the Web Best Practices
     prov:wasDerivedFrom &lt;https://www.w3.org/TR/dwbp/&gt; .
-    </pre></div>
-            <p>Also,  DQV [[VOCAB-DQV]] can be deployed to  measure the compliance to a specific standard. In the following, the :levelOfComplianceToDWBP is a quality metrics which measures the compliance of a dataset to DWBP in terms of the percentage of passed compliance tests. The example assumes iso as a namespace representing the quality dimensions and categories defined in the ISO/IEC 25012.</p>
-            <div class="example">
+    </pre></aside>
+            <p>Also, [[VOCAB-DQV]] can be deployed to  measure the compliance to a specific standard. In the following example, the <code>:levelOfComplianceToDWBP</code> is a quality metrics which measures the compliance of a dataset to [[DWBP]] in terms of the percentage of passed compliance tests. The example assumes <code>iso</code> as a namespace prefix representing the quality dimensions and categories defined in the ISO/IEC 25012 [[ISOIEC25012]].</p>
+            <aside class="example" id="ex-conformance-degree-percentage">
   <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
-
-:levelOfComplianceToDWBP
-    a dqv:Metric ;
-    skos:definition "It returns the degree of compliance to DWBP defined as the percentage of passed compliance tests."@en
+:levelOfComplianceToDWBP a dqv:Metric ;
+    skos:definition "The degree of compliance to DWBP defined as the percentage of passed compliance tests."@en
     dqv:expectedDataType xsd:double ;
     dqv:inDimension  iso:compliance .
 
-iso:compliance
-    a  dqv:Dimension ;
+iso:compliance a dqv:Dimension ;
     skos:prefLabel "Compliance"@en ;
     skos:definition "The degree to which data has attributes that adhere to standards, conventions or regulations in force and similar rules relating to data quality in a specific context of use."@en ;
-    dqv:inCategory  iso:InherentandSystemDependentDataQuality
+    dqv:inCategory iso:InherentandSystemDependentDataQuality
     .
-iso:inherentandSystemDependentDataQuality
-    a  dqv:Category ;
+iso:inherentandSystemDependentDataQuality a dqv:Category ;
    skos:prefLabel "Inherent and System-Dependent Data Quality"@en.
-        </pre></div>
-            <p>The quality measurement :measurement_complianceToDWBP represents the level of compliance for a dataset a:Dataset, namely, measurement of the metric :levelOfComplianceToDWBP. If only a part of the compliance tests succeeds (e.g. half of the compliance tests), the measurement would look like in the following:</p>
-            <div class="example">
-  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
-
+        </pre></aside>
+            <p>The quality measurement <code>:measurement_complianceToDWBP</code> represents the level of compliance for dataset <code>a:Dataset</code>, namely, measurement of the metric <code>:levelOfComplianceToDWBP</code>. If only a part of the compliance tests succeeds (e.g. half of the compliance tests), the measurement would look like in the following:</p>
+  <aside class="example" id="ex-conformance-test-partial-success">
+<pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 :measurement_complianceToDWBP
    a         dqv:QualityMeasurement;
    dqv:computedOn      a:Dataset;
    dqv:value           "50"^^xsd:double ;
    sdmx-attribute:unitMeasure &lt;http://www.wurvoc.org/vocabularies/om-1.8/Percentage&gt;
-   dcterms:date      "2018-01-10"^^xsd:date ;
-   dqv:isMeasurementOf    :levelOfComplianceToDWBP .
-    </pre></div>
+   dcterms:date        "2018-01-10"^^xsd:date ;
+   dqv:isMeasurementOf :levelOfComplianceToDWBP .
+    </pre></aside>
 
         </section>
         <section id="quality-conformance-test-results">
             <h3>Conformance test results</h3>
-            <p> Further information about the tests can be provided using EARL [[EARL10-Schema]]. EARL provides specific classes to describe the testing activity, which can be adopted in conjunction with PROV.
-                The following example describes the Testing activity a:TestingActivity as an EARL Assertion instead of a qualified association on the PROV activity. The EARL Assertion states the dataset a:Dataset has been tested with the conformance test a:ConformanceTest, and it has passed the test as described in a:testResult.
+            <p> Further information about the tests can be provided using EARL [[EARL10-Schema]]. EARL provides specific 
+	    classes to describe the testing activity, which can be adopted in conjunction with [[PROV-O]].
+	    The following example describes the Testing activity <code>a:TestingActivity</code> as an <code>earl:Assertion</code> 
+	    instead of a qualified association on the <code>prov:Activity</code>. The <code>earl:Assertion</code> states 
+	    that dataset <code>a:Dataset</code> has been tested with the conformance test <code>a:ConformanceTest</code>, and it 
+		    has passed the test as described in <code>a:testResult</code>.
             </p>
-            <div class="example">
+            <aside class="example" id="ex-conformance-test-results-earl">
   <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
-
 a:assertion a earl:Assertion;
     earl:subject a:Dataset;
     earl:test a:ConformanceTest;
@@ -2348,9 +2376,9 @@ a:TestingActivity a prov:Activity;
     prov:generated a:TestAssertion, a:TestResult;
     prov:use a:Dataset ;
     prov:wasAssociatedWith   &lt;http://validator.example.org/&gt; .
-    </pre></div>
-            <p> The following example shows how the description would have looked like if the subtest a:testq1 had failed. In particular, dcterms:description and earl:info provide additional warnings or error messages in a human-readable form.</p>
-            <div class="example">
+    </pre></aside>
+            <p>The following example shows how the description would have looked like if the subtest <code>a:testq1</code> had failed. In particular, <code>dcterms:description</code> and <code>earl:info</code> provide additional warnings or error messages in a human-readable form.</p>
+            <aside class="example" id="ex-conformance-test-earl-fail">
   <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 
 a:assertion1 a earl:Assertion ;
@@ -2381,11 +2409,10 @@ a:assertion1 a earl:Assertion ;
         ];
     # we do not know if the test was manual, automatic, or what ..
     earl:mode earl:automatic.
-    </pre></div>
-            Depending on the details required about tests, DQV can express the testing activity and errors as well. In the following, :error is a quality annotation that represents the previous error, and  a:testResult is defined as a DQV quality metadata to  collect the above annotations and the compliance measurements providing  provenance information.
-            <div class="example">
+    </pre></aside>
+            <p>Depending on the details required about tests, [[VOCAB-DQV]] can express the testing activity and errors as well. In the following, <code>:error</code> is a quality annotation that represents the previous error, and  <code>a:testResult</code> is defined as a <code>dqv:QualityMetadata</code> to  collect the above annotations and the compliance measurements providing  provenance information.
+            <aside class="example" id="ex-conformance-test-error">
   <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
-
 :error
     a dqv:QualityAnnotation ;
     #this annotation is derived by the measurement
@@ -2431,8 +2458,8 @@ a:TestingActivity a prov:Activity;
     prov:use a:Dataset ;
     prov:wasAssociatedWith  &lt;http://validator.example.org/&gt;
      .
-</pre></div>
-            Of course,  the above modelling patterns can represent any quality tests not only conformance to standards.
+</pre></aside>
+          <p>Of course,  the above modelling patterns can represent any quality tests not only conformance to standards.</p>
         </section>
     </section>
 </section>
