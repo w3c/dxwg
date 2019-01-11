@@ -147,8 +147,8 @@
         <li>
           <code><a href="#Class:Resource">dcat:Resource</a></code> represents an individual item description in a catalog.
           This class is not intended to be used directly, but is the parent class of <code><a href="#Class:Dataset">dcat:Dataset</a></code>, <code><a href="#Class:Data_Service">dcat:DataService</a></code> and <code><a href="#Class:Catalog">dcat:Catalog</a></code>.
-          Member items in a catalog should be members of one of the sub-classes, or of a sub-class of these, or of a sub-class of dcat:Resource defined in a DCAT application profile or other DCAT application.
-          dcat:Resource is effectively an extension point for defining a catalog of any kind of resource.
+          Member items in a catalog should be members of one of the sub-classes, or of a sub-class of these, or of a sub-class of <code><a href="#Class:Resource">dcat:Resource</a></code> defined in a DCAT application profile or other DCAT application.
+          <code><a href="#Class:Resource">dcat:Resource</a></code> is effectively an extension point for defining a catalog of any kind of resource.
         </li>
         <li>
           <code><a href="#Class:Dataset">dcat:Dataset</a></code> represents a description of a dataset in a catalog.
@@ -210,7 +210,7 @@
       Datasets and data services can be included in a <b>catalog</b>.
       A catalog is a kind of dataset whose member items are themselves the descriptions of datasets.
       Other types of thing might also be catalogued, but the scope of DCAT is currently limited to datasets and data services.
-      To extend the scope of a catalog beyond datasets and adata services it is recommended to define additional sub-classes of dcat:Resource in a DCAT application profile or other DCAT application.
+      To extend the scope of a catalog beyond datasets and data services it is recommended to define additional sub-classes of <code><a href="#Class:Resource">dcat:Resource</a></code> in a DCAT application profile or other DCAT application.
     </p>
 
     <div class="note">
@@ -224,11 +224,11 @@
       </p>
       <p>
         Catalogs of other kinds of things might be designed following the DCAT pattern, e.g. dealing with facilities, instruments, samples and specimens, other physical artefacts, events or activities.
-        These are currently out of scope for DCAT, but might be defined through further sub-classes of dcat:Resource, which could be specified in a DCAT application profile or other DCAT application.
+        These are currently out of scope for DCAT, but might be defined through further sub-classes of <code><a href="#Class:Resource">dcat:Resource</a></code>, which could be specified in a DCAT application profile or other DCAT application.
       </p>
     </div>
 
-    <p>A <b>CatalogRecord</b> describes an entry in the catalog. Notice that while <code>dcat:Resource</code> represents the dataset or service itself, <code>dcat:CatalogRecord</code> is the record that describes the registration of an item in the catalog. The use of explicit <code>dcat:CatalogRecords</code> is considered optional. It is used to capture provenance information about entries in a catalog explicitly. If this is not necessary then <code>dcat:CatalogRecord</code> can be safely ignored.</p>
+    <p>A <b>CatalogRecord</b> describes an entry in the catalog. Notice that while <code><a href="#Class:Resource">dcat:Resource</a></code> represents the dataset or service itself, <code><a href="#Class:Catalog_Record">dcat:CatalogRecord</a></code> is the record that describes the registration of an item in the catalog. The use of explicit <code><a href="#Class:Catalog_Record">dcat:CatalogRecord</a></code> is considered optional. It is used to capture provenance information about entries in a catalog explicitly. If this is not necessary then <code><a href="#Class:Catalog_Record">dcat:CatalogRecord</a></code> can be safely ignored.</p>
   </section>
   <section id="dcat-rdf">
     <h3>RDF considerations</h3>
@@ -880,7 +880,7 @@
     <section id="Class:Resource">
         <h3>Class: Catalogued Resource</h3>
 
-        <p>The following properties are recommended for use on this class (<code>dcat:Resource</code>):
+        <p>The following properties are recommended for use on this class:
             <a href="#Property:resource_conformsto">conformsTo</a>,
             <a href="#Property:resource_contact_point">contact point</a>,
             <a href="#Property:resource_creator">creator</a>,
@@ -926,7 +926,7 @@
             This class carries properties common to all catalogued resources, including datasets and data services.
 
             It is strongly recommended to use a more specific sub-class when available.</td></tr>
-            <tr><td class="prop">Usage note:</td><td>dcat:Resource is an extension point that enables the definition of any kind of catalog. Additional subclasses may be defined in a DCAT application profile or other DCAT application for catalogs of other kinds of resources</td></tr>
+            <tr><td class="prop">Usage note:</td><td><code><a href="#Class:Resource">dcat:Resource</a></code> is an extension point that enables the definition of any kind of catalog. Additional subclasses may be defined in a DCAT application profile or other DCAT application for catalogs of other kinds of resources</td></tr>
             <tr><td class="prop">See also:</td><td><a href="#Class:Catalog_Record" title="">Catalog record</a></td></tr>
             </tbody>
         </table>
@@ -962,7 +962,7 @@
 
             <p class="note">
                 New property added in this revision of DCAT, specifically added when considering the data citation requirement and
-                added to the dcat:Resource class, as the Dataset superclass.
+                added to the <code><a href="#Class:Resource">dcat:Resource</a></code> class, as the Dataset superclass.
             </p>
 
 
@@ -2557,7 +2557,7 @@ ex:DS987
         <a href="https://github.com/w3c/dxwg/issues/66">Issue #66</a>,
         <a href="https://github.com/w3c/dxwg/issues/63">Issue #63</a>.
         It has been suggested that many of the requirements can be satisfied by using capabilities from the [[PROV-O]] ontology,
-        in particular by treating dcat:Resource and/or dcat:CatalogRecord a sub-class of <a href="http://www.w3.org/ns/prov#Entity">prov:Entity</a>.
+        in particular by treating <code><a href="#Class:Resource">dcat:Resource</a></code> and/or <code><a href="#Class:Catalog_Record">dcat:CatalogRecord</a></code> a sub-class of <a href="http://www.w3.org/ns/prov#Entity">prov:Entity</a>.
         A preliminary <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/rdf/dcat-prov.ttl">alignment of DCAT with PROV-O is available</a>.
     </p>
 
@@ -3648,7 +3648,7 @@ dcat:servesDataset ga-courts:jc ;
             </li>
 
             <li>
-                <a href="#Class:Resource">Class: Catalogued resource</a>: In DCAT 2014 [[VOCAB-DCAT-20140116]] the scope of a <a href="#Class:Catalog">dcat:Catalog</a> was limited to Datasets. This has been generalized, and properties common to all catalogued resources are now associated with a super-class dcat:Resource - see <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a> and <a href="https://github.com/w3c/dxwg/issues/116">Issue #116</a>. The wiki page on <a href="https://github.com/w3c/dxwg/wiki/Cataloguing-data-services">Cataloguing data services</a> describes some proposals related to this requirement.
+                <a href="#Class:Resource">Class: Catalogued resource</a>: In DCAT 2014 [[VOCAB-DCAT-20140116]] the scope of a <a href="#Class:Catalog">dcat:Catalog</a> was limited to Datasets. This has been generalized, and properties common to all catalogued resources are now associated with a super-class <code><a href="#Class:Resource">dcat:Resource</a></code> - see <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a> and <a href="https://github.com/w3c/dxwg/issues/116">Issue #116</a>. The wiki page on <a href="https://github.com/w3c/dxwg/wiki/Cataloguing-data-services">Cataloguing data services</a> describes some proposals related to this requirement.
             </li>
 
             <li>
