@@ -1,7 +1,6 @@
 # baseURI: http://www.w3.org/ns/dcat
 # imports: http://purl.org/dc/terms/
 # imports: http://www.w3.org/2004/02/skos/core
-# imports: http://www.w3.org/ns/prov-o
 # prefix: dcat
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
@@ -131,7 +130,6 @@
   rdfs:label "データ・カタログ語彙（DCAT）"@ja ;
   owl:imports dct: ;
   owl:imports <http://www.w3.org/2004/02/skos/core> ;
-  owl:imports <http://www.w3.org/ns/prov-o> ;
   owl:versionInfo """Esta es una copia del vocabulario DCAT v1.0 disponible en https://www.w3.org/ns/dcat.ttl
 con modificaciones en progreso para la nueva versión de DCAT que resultará del grupo 'W3C Data Exchange Working Group'"""@en ;
   owl:versionInfo """This is a copy of v1.0 of the DCAT vocabulary, taken from https://www.w3.org/ns/dcat.ttl
@@ -350,7 +348,6 @@ dcat:Relationship
   rdf:type owl:Class ;
   rdfs:comment "An association class for attaching additional information to a relationship between DCAT Resources" ;
   rdfs:label "Relationship" ;
-  rdfs:subClassOf prov:EntityInfluence ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:minCardinality "1"^^xsd:nonNegativeInteger ;
@@ -718,7 +715,6 @@ dcat:qualifiedRelation
   rdfs:domain dcat:Resource ;
   rdfs:label "qualified relation" ;
   rdfs:range dcat:Relationship ;
-  rdfs:subPropertyOf prov:qualifiedInfluence ;
   skos:changeNote "New property in this revision of DCAT" ;
   skos:editorialNote "Introduced into DCAT to complement the other PROV qualified relations" ;
   skos:scopeNote "Used to link to another resource where the nature of the relationship is known but does not match one of the standard Dublin Core properties (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy) or PROV-O properties (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)." ;
@@ -825,63 +821,9 @@ dcat:themeTaxonomy
   rdfs:label "テーマ"@ja ;
   rdfs:range skos:ConceptScheme ;
 .
-dct:contributor
-  owl:propertyChainAxiom (
-      [
-        rdf:type owl:ObjectProperty ;
-        rdfs:range [
-            rdf:type owl:Class ;
-            rdfs:subClassOf prov:Attribution ;
-            rdfs:subClassOf [
-                rdf:type owl:Restriction ;
-                owl:hasValue <http://registry.it.csiro.au/def/isotc211/CI_RoleCode/contributor> ;
-                owl:onProperty dcat:hadRole ;
-              ] ;
-          ] ;
-        rdfs:subPropertyOf prov:qualifiedAttribution ;
-      ]
-      prov:agent
-    ) ;
-.
-dct:creator
-  owl:propertyChainAxiom (
-      [
-        rdf:type owl:ObjectProperty ;
-        rdfs:range [
-            rdf:type owl:Class ;
-            rdfs:subClassOf prov:Attribution ;
-            rdfs:subClassOf [
-                rdf:type owl:Restriction ;
-                owl:hasValue <https://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/originator> ;
-                owl:onProperty dcat:hadRole ;
-              ] ;
-          ] ;
-        rdfs:subPropertyOf prov:qualifiedAttribution ;
-      ]
-      prov:agent
-    ) ;
-.
 dct:hasPart
   skos:scopeNote "See also: Sub-properties of dct:hasPart in particular dcat:dataset, dcat:catalog, dcat:service." ;
   skos:scopeNote "This is the most general predicate for membership of a catalog. Use of a more specific sub-property is recommended when available. " ;
-.
-dct:publisher
-  owl:propertyChainAxiom (
-      [
-        rdf:type owl:ObjectProperty ;
-        rdfs:range [
-            rdf:type owl:Class ;
-            rdfs:subClassOf prov:Attribution ;
-            rdfs:subClassOf [
-                rdf:type owl:Restriction ;
-                owl:hasValue <http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/publisher> ;
-                owl:onProperty dcat:hadRole ;
-              ] ;
-          ] ;
-        rdfs:subPropertyOf prov:qualifiedAttribution ;
-      ]
-      prov:agent
-    ) ;
 .
 dct:relation
   skos:scopeNote "See also: Sub-properties of dct:relation in particular dcat:distribution, dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy" ;
