@@ -2178,8 +2178,7 @@ ex:InternationalDOIFundation a dct:Agent;
 :genoaBusStopsDataset a dcat:Dataset ;
     dqv:hasQualityAnnotation :genoaBusStopsDatasetCompletenessNote .
 
-:genoaBusStopsDatasetCompletenessNote
-    a dqv:UserQualityFeedback ;
+:genoaBusStopsDatasetCompletenessNote a dqv:UserQualityFeedback ;
     oa:hasTarget :genoaBusStopsDataset ;
     oa:hasBody :textBody ;
     oa:motivatedBy dqv:qualityAssessment ;
@@ -2205,8 +2204,7 @@ ex:InternationalDOIFundation a dct:Agent;
 :genoaBusStopsDataset
     dqv:hasQualityMeasurement :genoaBusStopsDatasetCompletenessMeasurement .
 
-:genoaBusStopsDatasetCompletenessMeasurement
-    a dqv:QualityMeasurement ;
+:genoaBusStopsDatasetCompletenessMeasurement a dqv:QualityMeasurement ;
     dqv:computedOn :genoaBusStopsDataset ;
     dqv:isMeasurementOf :completenessWRTExpectedNumberOfEntities ;
     dqv:value "0.6833333"^^xsd:decimal  ;
@@ -2215,32 +2213,29 @@ ex:InternationalDOIFundation a dct:Agent;
     prov:wasGeneratedBy :myQualityChecking
     .
 
-:completenessWRTExpectedNumberOfEntities
-    a dqv:Metric ;
-    skos:definition "it returns the degree of completeness as ratio between the actual number of entities included in the dataset and the declared expected number of entities."@en ;
+:completenessWRTExpectedNumberOfEntities a dqv:Metric ;
+    skos:definition "The degree of completeness as ratio between the actual number of entities included in the dataset and the declared expected number of entities."@en ;
     dqv:expectedDataType xsd:decimal ;
     dqv:inDimension ldqd:completeness .
 
 # :myQualityChecker is a service computing some quality metrics
-:myQualityChecker
-    a prov:SoftwareAgent ;
+:myQualityChecker a prov:SoftwareAgent ;
     rdfs:label "A quality assessment service"^^xsd:string .
     # Further details about quality service/software can be provided, for example,
     # deploying  vocabularies such as Dataset Usage Vocabulary (DUV), Dublin Core or ADMS.SW
 
 # :myQualityChecking is the activity that has generated :genoaBusStopsDatasetCompletenessMeasurement from :genoaBusStopsDataset
-:myQualityChecking
-    a prov:Activity;
+:myQualityChecking a prov:Activity;
     rdfs:label "The checking of genoaBusStopsDataset's quality"^^xsd:string;
     prov:wasAssociatedWith :myQualityChecker;
-    prov:used              :genoaBusStopsDataset;
-    prov:generated         :genoaBusStopsDatasetCompletenessMeasurement;
-    prov:endedAtTime       "2018-05-27T02:52:02Z"^^xsd:dateTime;
-    prov:startedAtTime     "2018-05-27T00:52:02Z"^^xsd:dateTime .
+    prov:used :genoaBusStopsDataset;
+    prov:generated :genoaBusStopsDatasetCompletenessMeasurement;
+    prov:endedAtTime 2018-05-27T02:52:02Z"^^xsd:dateTime;
+    prov:startedAtTime "2018-05-27T00:52:02Z"^^xsd:dateTime .
     </pre></aside>
     <p>
       Other examples of quality documentation are available in [[VOCAB-DQV]], including examples about 
-      <a data-cite="VOCAB-DQV#ExpressDatasetAccuracyPrecision">how express dataset accuracy and precision</a>.
+      <a data-cite="VOCAB-DQV#ExpressDatasetAccuracyPrecision">how to express dataset accuracy and precision</a>.
     </section>
     <section id="quality-conformance">
         <h2>Documenting conformance to standards</h2>
@@ -2282,7 +2277,7 @@ a:Dataset a dcat:Dataset;
 	    <code>a:TestResult</code>), a <code>prov:Activity</code> to model the testing activity (e,g., 
 	    <code>a:TestingActivity</code>), a <code>prov:Plan</code>. A qualified PROV association binds the testing activity to the conformance test.</p>
 	    <aside class="note">
-	    <p>Depending of the kind of dataset, other sets  of best practices and standards, such as the FAIR Principles [[FAIR]] or the Spatial Data on the Web Best Practices [[SDW-BP]], can be considered as a replacement or used in combination with [[DWBP]].</p>
+	    <p>Depending of the kind of dataset, other best practices and standards, such as the FAIR Principles [[FAIR]] or the Spatial Data on the Web Best Practices [[SDW-BP]], can be considered as a replacement or used in combination with [[DWBP]].</p>
        </aside>
        <aside class="example" id="ex-conformance-degree">
 <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
@@ -2292,40 +2287,36 @@ a:Dataset a dcat:Dataset ;
 a:TestingActivity a prov:Activity ;
       prov:generated a:TestResult ;
       prov:qualifiedAssociation [
-          a prov:Association ;
-        # http://validator.example.org/ is the agent who did the test.
+        a prov:Association ;
+        # http://validator.example.org/ is the agent who ran the test.
         prov:agent  &lt;http://validator.example.org/&gt;
-        #following the plan  a:ConformanceTest
+        # following the plan a:ConformanceTest
         prov:hadPlan a:ConformanceTest
         ] .
 
 # Conformance test result
 a:TestResult a prov:Entity ;
-   # a:notConformat belongs to a SKOS concept scheme about conformance 
+   # a:notConformant belongs to a SKOS concept scheme about conformance 
    dcterms:type a:notConformant .
-   
 
 a:ConformanceTest a prov:Plan ;
-    # Here you can specify additional information on the test, which in the example is derived by the W3C Data on the Web Best. Practices
+    # Here one can specify additional information on the test, which in the example is derived by the W3C Data on the Web Best Practices
     prov:wasDerivedFrom &lt;https://www.w3.org/TR/dwbp/&gt; .
     </pre></aside>
             <p>Also, [[VOCAB-DQV]] can be deployed to  measure the compliance to a specific standard. In the following example, the <code>:levelOfComplianceToDWBP</code> is a quality metrics which measures the compliance of a dataset to [[DWBP]] in terms of the percentage of passed compliance tests. The example assumes <code>iso</code> as a namespace prefix representing the quality dimensions and categories defined in the ISO/IEC 25012 [[ISOIEC25012]].</p>
             <aside class="example" id="ex-conformance-degree-percentage">
   <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
-:levelOfComplianceToDWBP
-    a dqv:Metric ;
-    skos:definition "It returns the degree of compliance to DWBP defined as the percentage of passed compliance tests."@en
+:levelOfComplianceToDWBP a dqv:Metric ;
+    skos:definition "The degree of compliance to DWBP defined as the percentage of passed compliance tests."@en
     dqv:expectedDataType xsd:double ;
     dqv:inDimension  iso:compliance .
 
-iso:compliance
-    a  dqv:Dimension ;
+iso:compliance a dqv:Dimension ;
     skos:prefLabel "Compliance"@en ;
     skos:definition "The degree to which data has attributes that adhere to standards, conventions or regulations in force and similar rules relating to data quality in a specific context of use."@en ;
-    dqv:inCategory  iso:InherentandSystemDependentDataQuality
+    dqv:inCategory iso:InherentandSystemDependentDataQuality
     .
-iso:inherentandSystemDependentDataQuality
-    a  dqv:Category ;
+iso:inherentandSystemDependentDataQuality a dqv:Category ;
    skos:prefLabel "Inherent and System-Dependent Data Quality"@en.
         </pre></aside>
             <p>The quality measurement <code>:measurement_complianceToDWBP</code> represents the level of compliance for dataset <code>a:Dataset</code>, namely, measurement of the metric <code>:levelOfComplianceToDWBP</code>. If only a part of the compliance tests succeeds (e.g. half of the compliance tests), the measurement would look like in the following:</p>
