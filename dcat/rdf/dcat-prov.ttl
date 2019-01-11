@@ -14,6 +14,54 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+### DCAT classes ###
+
+dcat:Catalog
+  rdfs:subClassOf prov:Collection ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom dcat:Resource ;
+      owl:onProperty prov:hadMember ;
+    ] ;
+.
+dcat:CatalogRecord
+  rdfs:subClassOf prov:Entity ;
+  skos:editorialNote """2018-02-28 AGB: Links to requirements mentioned above in the github tracker to follow the discussions
+https://github.com/w3c/dxwg/issues/71
+https://github.com/w3c/dxwg/issues/66
+https://github.com/w3c/dxwg/issues/76""" ;
+.
+dcat:Distribution
+  rdfs:subClassOf prov:Entity ;
+.
+dcat:Relationship
+  rdfs:subClassOf prov:EntityInfluence ;
+.
+dcat:Resource
+  rdfs:subClassOf prov:Entity ;
+  skos:editorialNote """2018-02-28 AGB: Links to requirements mentioned above in the github tracker to follow the discussions
+https://github.com/w3c/dxwg/issues/71
+https://github.com/w3c/dxwg/issues/66
+https://github.com/w3c/dxwg/issues/76""" ;
+.
+
+### DCAT properties ###
+
+dcat:catalog
+  rdfs:subPropertyOf prov:hadMember ;
+.
+dcat:dataset
+  rdfs:subPropertyOf prov:hadMember ;
+.
+dcat:qualifiedRelation
+  rdfs:subPropertyOf prov:qualifiedInfluence ;
+.
+dcat:service
+  rdfs:subPropertyOf prov:hadMember ;
+.
+
+### Dublin Core properties ###
+
 dct:contributor
   rdfs:subPropertyOf prov:wasAttributedTo ;
   owl:propertyChainAxiom (
@@ -83,46 +131,22 @@ dct:isVersionOf
 dct:source
   rdfs:subPropertyOf prov:wasDerivedFrom ;
 .
-dcat:Catalog
-  rdfs:subClassOf prov:Collection ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom dcat:Resource ;
-      owl:onProperty prov:hadMember ;
-    ] ;
+
+### PROV classes ###
+
+prov:Agent
+  rdfs:comment "prov:Agent is modeled as a subclass of foaf:Agent since it is the subset of agents that are involved in prov:Activity individuals" ;
+  rdfs:subClassOf foaf:Agent ;
 .
-dcat:CatalogRecord
-  rdfs:subClassOf prov:Entity ;
-  skos:editorialNote """2018-02-28 AGB: Links to requirements mentioned above in the github tracker to follow the discussions
-https://github.com/w3c/dxwg/issues/71
-https://github.com/w3c/dxwg/issues/66
-https://github.com/w3c/dxwg/issues/76""" ;
+
+### PROV properties ###
+
+prov:hadMember
+  rdfs:subPropertyOf dct:hasPart ;
 .
-dcat:Distribution
-  rdfs:subClassOf prov:Entity ;
-.
-dcat:Relationship
-  rdfs:subClassOf prov:EntityInfluence ;
-.
-dcat:Resource
-  rdfs:subClassOf prov:Entity ;
-  skos:editorialNote """2018-02-28 AGB: Links to requirements mentioned above in the github tracker to follow the discussions
-https://github.com/w3c/dxwg/issues/71
-https://github.com/w3c/dxwg/issues/66
-https://github.com/w3c/dxwg/issues/76""" ;
-.
-dcat:catalog
-  rdfs:subPropertyOf prov:hadMember ;
-.
-dcat:dataset
-  rdfs:subPropertyOf prov:hadMember ;
-.
-dcat:qualifiedRelation
-  rdfs:subPropertyOf prov:qualifiedInfluence ;
-.
-dcat:service
-  rdfs:subPropertyOf prov:hadMember ;
-.
+
+### metadata about this graph ###
+
 <http://www.w3.org/ns/dcat/prov>
   rdf:type owl:Ontology ;
   dct:created "2018-02-19"^^xsd:date ;
@@ -144,15 +168,4 @@ dcat:service
   owl:imports <http://www.w3.org/ns/prov-o> ;
   skos:editorialNote "NOTE: Currently includes the apparatus required for Qualified Relations, since some of these build on elements from PROV-O" ;
   skos:editorialNote "NOTE: Includes some alignments from Dublin Core to PROV Mapping https://www.w3.org/TR/prov-dc/" ;
-.
-prov:Agent
-  rdfs:comment "prov:Agent is modeled as a subclass of foaf:Agent since it is the subset of agents that are involved in prov:Activity individuals" ;
-  rdfs:subClassOf foaf:Agent ;
-.
-prov:hadMember
-  rdfs:subPropertyOf dct:hasPart ;
-.
-<https://www.w3.org/2017/dxwg/wiki/Main_Page>
-  rdf:type foaf:Agent ;
-  rdfs:label "W3C Data Exchange Working Group" ;
 .
