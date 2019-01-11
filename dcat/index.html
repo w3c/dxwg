@@ -2250,13 +2250,13 @@ ex:InternationalDOIFundation a dct:Agent;
             <h3>Conformance to a standard</h3>
             <p>The use of <a href="http://dublincore.org/documents/dcmi-terms/#terms-conformsTo"><code>dct:conformsTo</code></a> and 
 	    <a href="http://dublincore.org/documents/dcmi-terms/#terms-Standard"><code>dct:Standard</code></a> is a well-known pattern 
-            to represent the conformance to a standard. The following example, directly borrowed from [[SDW-BP]] (<a data-cite="SDW-BP#ex-geodcat-ap-dataset-conformance-with-specification">Example 51</a>), declares a fictional <code>a:Dataset</code> 
+            to represent the conformance to a standard. The following example, directly borrowed from [[SDW-BP]] (<a data-cite="SDW-BP#ex-geodcat-ap-dataset-conformance-with-specification">Example 51</a>), declares a fictional <code>a:dataset</code> 
 	    conformant to the EU INSPIRE Regulation on interoperability of spatial data sets and services (<a href="http://data.europa.eu/eli/reg/2014/1312/oj">"Commission Regulation (EU) No 1089/2010 
 	    of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards 
 	    interoperability of spatial data sets and services"</a>).</p>
             <aside class="example" id="ex-inspire-conformant-dataset">
   <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
-a:Dataset a dcat:Dataset;
+a:dataset a dcat:Dataset;
     dct:conformsTo &lt;http://data.europa.eu/eli/reg/2014/1312/oj&gt; .
 
 # Reference standard / specification
@@ -2274,32 +2274,32 @@ a:Dataset a dcat:Dataset;
 	    <p>The following example specifies some newly minted concepts representing the degree of conformance (i.e., conformant, not conformant) and  declares the  
 	    <a href="http://dublincore.org/documents/dcmi-terms/#terms-type"><code>dct:type</code></a> for indicating 
 	    the result of conformance test. Following a pattern used in [[GeoDCAT-AP]], the example uses a <code>prov:Entity</code> to model the  conformance test (e.g., 
-	    <code>a:TestResult</code>), a <code>prov:Activity</code> to model the testing activity (e,g., 
-	    <code>a:TestingActivity</code>), a <code>prov:Plan</code> derived from the Data on the Web Best Practices [[DWBP]]. A qualified PROV association binds the testing activity to the conformance test.</p>
+	    <code>a:testResult</code>), a <code>prov:Activity</code> to model the testing activity (e,g., 
+	    <code>a:testingActivity</code>), a <code>prov:Plan</code> derived from the Data on the Web Best Practices [[DWBP]]. A qualified PROV association binds the testing activity to the conformance test.</p>
 	    <aside class="note">
 	    <p>Depending of the kind of dataset, other best practices and standards, such as the FAIR Principles [[FAIR]] or the Spatial Data on the Web Best Practices [[SDW-BP]], can be considered as a replacement or used in combination with [[DWBP]].</p>
        </aside>
        <aside class="example" id="ex-conformance-degree">
 <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
-a:Dataset a dcat:Dataset ;
-    prov:wasUsedBy a:TestingActivity .
+a:dataset a dcat:Dataset ;
+    prov:wasUsedBy a:testingActivity .
 
-a:TestingActivity a prov:Activity ;
-      prov:generated a:TestResult ;
+a:testingActivity a prov:Activity ;
+      prov:generated a:testResult ;
       prov:qualifiedAssociation [
         a prov:Association ;
         # http://validator.example.org/ is the agent who ran the test.
         prov:agent  &lt;http://validator.example.org/&gt;
-        # following the plan a:ConformanceTest
-        prov:hadPlan a:ConformanceTest
+        # following the plan a:conformanceTest
+        prov:hadPlan a:conformanceTest
         ] .
 
 # Conformance test result
-a:TestResult a prov:Entity ;
+a:testResult a prov:Entity ;
    # a:notConformant belongs to a SKOS concept scheme about conformance 
    dcterms:type a:notConformant .
 
-a:ConformanceTest a prov:Plan ;
+a:conformanceTest a prov:Plan ;
     # Here one can specify additional information on the test, which in the example is derived by the W3C Data on the Web Best Practices
     prov:wasDerivedFrom &lt;https://www.w3.org/TR/dwbp/&gt; .
     </pre></aside>
@@ -2314,17 +2314,17 @@ a:ConformanceTest a prov:Plan ;
 iso:compliance a dqv:Dimension ;
     skos:prefLabel "Compliance"@en ;
     skos:definition "The degree to which data has attributes that adhere to standards, conventions or regulations in force and similar rules relating to data quality in a specific context of use."@en ;
-    dqv:inCategory iso:InherentandSystemDependentDataQuality
+    dqv:inCategory iso:inherentandSystemDependentDataQuality
     .
 iso:inherentandSystemDependentDataQuality a dqv:Category ;
    skos:prefLabel "Inherent and System-Dependent Data Quality"@en.
         </pre></aside>
-            <p>The quality measurement <code>:measurement_complianceToDWBP</code> represents the level of compliance for dataset <code>a:Dataset</code>, namely, measurement of the metric <code>:levelOfComplianceToDWBP</code>. If only a part of the compliance tests succeeds (e.g. half of the compliance tests), the measurement would look like in the following:</p>
+            <p>The quality measurement <code>:measurement_complianceToDWBP</code> represents the level of compliance for dataset <code>a:dataset</code>, namely, measurement of the metric <code>:levelOfComplianceToDWBP</code>. If only a part of the compliance tests succeeds (e.g. half of the compliance tests), the measurement would look like in the following:</p>
   <aside class="example" id="ex-conformance-test-partial-success">
 <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 :measurement_complianceToDWBP
    a         dqv:QualityMeasurement;
-   dqv:computedOn      a:Dataset;
+   dqv:computedOn      a:dataset;
    dqv:value           "50"^^xsd:double ;
    sdmx-attribute:unitMeasure &lt;http://www.wurvoc.org/vocabularies/om-1.8/Percentage&gt;
    dcterms:date        "2018-01-10"^^xsd:date ;
@@ -2336,23 +2336,23 @@ iso:inherentandSystemDependentDataQuality a dqv:Category ;
             <h3>Conformance test results</h3>
             <p> Further information about the tests can be provided using EARL [[EARL10-Schema]]. EARL provides specific 
 	    classes to describe the testing activity, which can be adopted in conjunction with [[PROV-O]].
-	    The following example describes the Testing activity <code>a:TestingActivity</code> as an <code>earl:Assertion</code> 
+	    The following example describes the Testing activity <code>a:testingActivity</code> as an <code>earl:Assertion</code> 
 	    instead of a qualified association on the <code>prov:Activity</code>. The <code>earl:Assertion</code> states 
-	    that dataset <code>a:Dataset</code> has been tested with the conformance test <code>a:ConformanceTest</code>, and it 
+	    that dataset <code>a:dataset</code> has been tested with the conformance test <code>a:conformanceTest</code>, and it 
 		    has passed the test as described in <code>a:testResult</code>.
             </p>
             <aside class="example" id="ex-conformance-test-results-earl">
   <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 a:assertion a earl:Assertion;
-    earl:subject a:Dataset;
-    earl:test a:ConformanceTest;
+    earl:subject a:dataset;
+    earl:test a:conformanceTest;
     earl:result a:testResult ;
     # let's indicate if the test was manual, automatic, or what ..
     earl:mode earl:automatic ;
     earl:assertedBy &lt;http://validator.example.org/&gt; ;
     prov:wasAttributedTo  &lt;http://validator.example.org/&gt;.
 
-a:ConformanceTest a earl:TestRequirement, prov:Plan;
+a:conformanceTest a earl:TestRequirement, prov:Plan;
          dct:title "Set of conformance test derived by the Commission Regulation (EU) No 1089/2010 of 23 November 2010 implementing  Directive 2007/2/EC of the European Parliament and of the Council as regards interoperability of spatial data sets and services"@en";
          # it includes different subtests
          dct:hasPart a:test1, a:test2, ...,  a:testn.
@@ -2372,9 +2372,9 @@ a:testResult a earl:TestResult;
       dcterms:title "Validator"@en .
 
 #the testing activity
-a:TestingActivity a prov:Activity;
-    prov:generated a:TestAssertion, a:TestResult;
-    prov:use a:Dataset ;
+a:testingActivity a prov:Activity;
+    prov:generated a:TestAssertion, a:testResult;
+    prov:use a:dataset ;
     prov:wasAssociatedWith   &lt;http://validator.example.org/&gt; .
     </pre></aside>
             <p>The following example shows how the description would have looked like if the subtest <code>a:testq1</code> had failed. In particular, <code>dcterms:description</code> and <code>earl:info</code> provide additional warnings or error messages in a human-readable form.</p>
@@ -2382,7 +2382,7 @@ a:TestingActivity a prov:Activity;
   <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 
 a:assertion1 a earl:Assertion ;
-    earl:subject a:Dataset ;
+    earl:subject a:dataset ;
     earl:test a:testq1 ;
     earl:result [
         a earl:TestResult;
@@ -2416,8 +2416,8 @@ a:assertion1 a earl:Assertion ;
 :error
     a dqv:QualityAnnotation ;
     #this annotation is derived by the measurement
-    prov:wasGeneratedBy  a:TestingActivity;
-    oa:hasTarget a:Dataset ;
+    prov:wasGeneratedBy  a:testingActivity;
+    oa:hasTarget a:dataset ;
     oa:hasBody [
         #errors/failed test description
           a  oa:TextualBody;
@@ -2437,25 +2437,25 @@ a:assertion1 a earl:Assertion ;
     dqv:inDimension iso:compliance
     .
 
-a:TestResult
+a:testResult
     a dqv:QualityMetadata ;
     #  change the the dcterms:type according to the resulted compliance
     dcterms:type &lt;http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant&gt; ;
     prov:wasAttributedTo &lt;http://validator.example.org/&gt; ;
     prov:generatedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
-    prov:wasGeneratedBy a:TestingActivity .
+    prov:wasGeneratedBy a:testingActivity .
 
 # The graph contains the rest of the statements presented in the previous examples.
 a:testResult {
-    a:Dataset
+    a:dataset
         dqv:hasQualityMeasurement :measurement_complianceToDWBP;
         dqv:hasQualityAnnotation :errors .
 }
 
 #the testing activity
-a:TestingActivity a prov:Activity;
-    prov:generated  a:TestResult;
-    prov:use a:Dataset ;
+a:testingActivity a prov:Activity;
+    prov:generated  a:testResult;
+    prov:use a:dataset ;
     prov:wasAssociatedWith  &lt;http://validator.example.org/&gt;
      .
 </pre></aside>
