@@ -131,19 +131,50 @@
 
     <h2>Vocabulary overview</h2>
 
+<!--
     <p class="note">Significantly extended from DCAT 2014 [[VOCAB-DCAT-20140116]]</p>
+-->
+<section id="dcat-scope">
+    <h3>DCAT scope</h3>
 
-    <p>DCAT is an RDF vocabulary well-suited to representing data catalogs such as <a href="https://www.data.gov/">data.gov</a> and <a href="https://data.gov.uk">data.gov.uk</a>. DCAT defines eight main classes:</p>
+    <p>DCAT is an RDF vocabulary for representing data catalogs.
+      DCAT is based around eight main classes:</p>
     <ul>
-        <li> <code><a href="#Class:Catalog">dcat:Catalog</a></code> represents a catalog, which is a dataset in which each individual item is a metadata record describing some resource; the scope of dcat:catalog is collections of metadata about datasets or data services.</li>
-        <li> <code><a href="#Class:Resource">dcat:Resource</a></code> represents an individual item description in a catalog; each description carries the properties defined in this model. The resources described in a single catalog are published or curated by a single agent. This class is the parent class of <code><a href="#Class:Dataset">dcat:Dataset</a></code>, <code><a href="#Class:Data_Service">dcat:DataService</a></code> and <code><a href="#Class:Catalog">dcat:Catalog</a></code>. A specific sub-class should be used when available.</li>
-        <li> <code><a href="#Class:Dataset">dcat:Dataset</a></code> represents a description of a dataset in a catalog. A dataset is a collection of data, published or curated by a single agent.</li>
-        <li> <code><a href="#Class:Distribution">dcat:Distribution</a></code> represents an accessible form or representation of a dataset, for example a downloadable file.</li>
-        <li> <code><a href="#Class:Data_Service">dcat:DataService</a></code> represents a description of a data service in a catalog. A data service is a collection of operations, accessible through an interface (API) that provide access to one or more datasets or data processing functions. Example data services include data distribution services, data discovery services, coordinate transformation services, image manipulation services.</li>
-        <li> <code><a href="#Class:Data_Distribution_Service">dcat:DataDistributionService</a></code> represents a description of a data service that provides access to one or more datasets or extracts of datasets.</li>
-        <!--	<li> (<code><a href="#Class:DataTransformationService">dcat:DataTransformationService</a></code> represents a service that can transform a dataset, e.g. spatial coordinate transformation; interpolation or resampling of a dataset).</li> -->
-        <li> <code><a href="#Class:Discovery_Service">dcat:DiscoveryService</a></code> represents a description of a data service that provides access to one or more catalogs to support discovery functions.</li>
-        <li> <code><a href="#Class:Catalog_Record">dcat:CatalogRecord</a></code> represents a metadata item in the catalog, primarily concerning the registration information, such as who added the item and when.</li>
+        <li>
+          <code><a href="#Class:Catalog">dcat:Catalog</a></code> represents a catalog, which is a dataset in which each individual item is a metadata record describing some resource; the scope of dcat:catalog is collections of metadata about <b>datasets</b> or <b>data services</b>.
+        </li>
+        <li>
+          <code><a href="#Class:Resource">dcat:Resource</a></code> represents an individual item description in a catalog.
+          This class is not intended to be used directly, but is the parent class of <code><a href="#Class:Dataset">dcat:Dataset</a></code>, <code><a href="#Class:Data_Service">dcat:DataService</a></code> and <code><a href="#Class:Catalog">dcat:Catalog</a></code>.
+          Member items in a catalog should be members of one of the sub-classes, or of a sub-class of these, or of a sub-class of <code><a href="#Class:Resource">dcat:Resource</a></code> defined in a DCAT application profile or other DCAT application.
+          <code><a href="#Class:Resource">dcat:Resource</a></code> is effectively an extension point for defining a catalog of any kind of resource.
+        </li>
+        <li>
+          <code><a href="#Class:Dataset">dcat:Dataset</a></code> represents a description of a dataset in a catalog.
+          A dataset is a collection of data, published or curated by a single agent.
+          Data comes in many forms, including numbers, words, pixels, imagery, sound and other multi-media, and potentially other types, any of which may be collected into a dataset.
+        </li>
+        <li>
+          <code><a href="#Class:Distribution">dcat:Distribution</a></code> represents an accessible form or representation of a dataset, for example a downloadable file.
+        </li>
+        <li>
+          <code><a href="#Class:Data_Service">dcat:DataService</a></code> represents a description of a data service in a catalog.
+          A data service is a collection of operations, accessible through an interface (API) that provide access to one or more datasets or data processing functions.
+        </li>
+        <li>
+          <code><a href="#Class:Data_Distribution_Service">dcat:DataDistributionService</a></code> represents a description of a data service that provides access to distributions of one or more datasets or extracts of datasets.
+        </li>
+        <!--
+          <li>
+            <code><a href="#Class:DataTransformationService">dcat:DataTransformationService</a></code> represents a service that can transform a dataset, e.g. spatial coordinate transformation; interpolation or resampling of a dataset.
+          </li>
+        -->
+        <li>
+          <code><a href="#Class:Discovery_Service">dcat:DiscoveryService</a></code> represents a description of a data service that provides access to one or more catalogs to support discovery functions.
+        </li>
+        <li>
+          <code><a href="#Class:Catalog_Record">dcat:CatalogRecord</a></code> represents a metadata item in the catalog, primarily concerning the registration information, such as who added the item and when.
+        </li>
     </ul>
 
     <figure id="fig1"><img alt="UML model of DCAT classes and properties" src="UML/DCAT-summary-all-attributes.png">
@@ -160,33 +191,71 @@
     </p>
 
     <p>
-        A <b>dataset</b> in DCAT is defined as a "collection of data, published or curated by a single agent, and available for access or download in one or more formats".
+        A <b>dataset</b> in DCAT is defined as a "collection of data, published or curated by a single agent, and available for access or download in one or more serializations or formats".
         A dataset is a conceptual entity, and can be represented by one or more <b>distributions</b> that serialize the dataset for transfer.
         Distributions of a dataset can be provided via <b>data distribution services</b>.
-        Detailed properties for a data distribution service API are out of the scope of this version of DCAT. </p>
+        Detailed properties for a data distribution service API are out of the scope of this version of DCAT.
+    </p>
 
-    <p>Datasets and <b>data services</b>, and potentially other types of thing, can be included in a <b>catalog</b>.
-        Types of data service that might be found in a catalog include data distribution services, <b>discovery services</b> such as portals and catalog services, <b>data transformation services</b> such as coordinate transformation services, re-sampling and interpolation services, and various <b>data processing services</b>.
+    <p>
+      A <b>data service</b> in DCAT is a collection of operations or API which provides access to data.
+      A data service usually provides selection, extraction, combination, processing or transformation operations over datasets that might be hosted locally or remote to the service.
+      The result of a request to a data service is a representation of a dataset. A <b>data distribution service</b> is a kind of service that provides the means to select and download a distribution of a dataset or subset.
+      A <b>data discovery service</b> is a kind of service that provides the means to find the description of a suitable dataset, often through a portal or catalog service.
+      Other kinds of data service might include <b>data transformation services</b> such as coordinate transformation services, re-sampling and interpolation services, and various <b>data processing services</b>.
+      A data service might be tied to specific datasets, or its source data might be configured at request- or run-time.
+    </p>
+    <p>
+      Datasets and data services can be included in a <b>catalog</b>.
+      A catalog is a kind of dataset whose member items are themselves the descriptions of datasets.
+      Other types of thing might also be catalogued, but the scope of DCAT is currently limited to datasets and data services.
+      To extend the scope of a catalog beyond datasets and data services it is recommended to define additional sub-classes of <code><a href="#Class:Resource">dcat:Resource</a></code> in a DCAT application profile or other DCAT application.
     </p>
 
     <div class="note">
-        <p>
-            The scope of DCAT 2014 [[VOCAB-DCAT-20140116]] was limited to catalogs of datasets.
-            A number of use cases for the revision involve also having <b>data distribution services</b> as members of a catalog - see <a href="https://www.w3.org/TR/dcat-ucr/#ID6">DCAT Distribution to describe web services - ID6</a> and
-            <a href="https://www.w3.org/TR/dcat-ucr/#ID18">Modeling service-based data access - ID18</a>.
-            It has been decided to add an explicit class for Data Distribution Services in this revision of DCAT, and to enable these to be part of a Catalog.
-            Provision for other data services to also be part of a Catalog is also made, as well as for Catalogs to be composed of other Catalogs.
-            See <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>. </p>
+      <p>
+        The scope of DCAT 2014 [[VOCAB-DCAT-20140116]] was limited to catalogs of datasets.
+        A number of use cases for the revision involve <b>data distribution services</b> as members of a catalog - see <a href="https://www.w3.org/TR/dcat-ucr/#ID6">DCAT Distribution to describe web services - ID6</a> and
+        <a href="https://www.w3.org/TR/dcat-ucr/#ID18">Modeling service-based data access - ID18</a>.
+        Hence, the scope of this revision of DCAT includes both datasets and data services, with an explicit class for Data Distribution Services, to enable these to be part of a DCAT conformant catalog.
+        Provision for other data services to also be part of a Catalog is also made, as well as for Catalogs to be composed of other Catalogs.
+        See <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>.
+      </p>
+      <p>
+        Catalogs of other kinds of things might be designed following the DCAT pattern, e.g. dealing with facilities, instruments, samples and specimens, other physical artefacts, events or activities.
+        These are currently out of scope for DCAT, but might be defined through further sub-classes of <code><a href="#Class:Resource">dcat:Resource</a></code>, which could be specified in a DCAT application profile or other DCAT application.
+      </p>
     </div>
 
-    <p>A <b>CatalogRecord</b> describes an entry in the catalog. Notice that while <code>dcat:Resource</code> represents the dataset or service itself, <code>dcat:CatalogRecord</code> is the record that describes the registration of an item in the catalog. The use of <code>dcat:CatalogRecord</code> is considered optional. It is used to capture provenance information about entries in a catalog. If this distinction is not necessary then <code>dcat:CatalogRecord</code> can be safely ignored.</p>
-    <p id="blankNodes">RDF allows resources to have global identifiers (IRIs) or to be blank nodes.  Blank nodes can be used to denote resources without explicitly naming them with an IRI. They can appear in the subject and object position of a triple [[RDF11-PRIMER]].
-        While blank nodes may offer flexibility for some use cases, in a Linked Data context, blank nodes limit our ability to collaboratively annotate data. A  blank node resource cannot be the target of a link and it can't be annotated with new information from new sources. As one of the biggest benefits of the Linked Data approach is that "anyone can say anything anywhere", use of blank nodes undermines some of the advantages we can gain from wide adoption of the RDF model. Even within the closed world of a single application dataset, use of blank nodes can quickly become limiting when integrating new data [[LinkedDataPatterns]].
-        For these reasons, it is recommended that instances of the DCAT main classes have a global identifier, and use of blank nodes is generally discouraged when encoding DCAT in RDF.</p>
+    <p>A <b>CatalogRecord</b> describes an entry in the catalog. Notice that while <code><a href="#Class:Resource">dcat:Resource</a></code> represents the dataset or service itself, <code><a href="#Class:Catalog_Record">dcat:CatalogRecord</a></code> is the record that describes the registration of an item in the catalog. The use of explicit <code><a href="#Class:Catalog_Record">dcat:CatalogRecord</a></code> is considered optional. It is used to capture provenance information about entries in a catalog explicitly. If this is not necessary then <code><a href="#Class:Catalog_Record">dcat:CatalogRecord</a></code> can be safely ignored.</p>
+  </section>
+  <section id="dcat-rdf">
+    <h3>RDF considerations</h3>
+      <p id="owl2">
+        The DCAT vocabulary is an OWL2 ontology [[OWL2-OVERVIEW]] formalized using [[RDF-SCHEMA]].
+        Each class and property in DCAT is denoted by an [[IRI]].
+        Locally defined elements are in the namespace <a href="http://www.w3.org/ns/dcat#">http://www.w3.org/ns/dcat#</a>.
+        Elements are also adopted from several external vocabularies, in particular [[FOAF]], [[DCTERMS]] and [[PROV-O]]
+      </p>
+      <p id="blankNodes">
+        RDF allows resources to have global identifiers (IRIs) or to be blank nodes.
+        Blank nodes can be used to denote resources without explicitly naming them with an IRI.
+        They can appear in the subject and object position of a triple [[RDF11-PRIMER]].
+        For example, in many actual DCAT catalogs, distributions are represented as blank nodes nested inside the related dataset description.
+        While blank nodes may offer flexibility for some use cases, in a Linked Data context, blank nodes limit our ability to collaboratively annotate data.
+        A  blank node resource cannot be the target of a link and it can't be annotated with new information from new sources.
+        As one of the biggest benefits of the Linked Data approach is that "anyone can say anything anywhere", use of blank nodes undermines some of the advantages we can gain from wide adoption of the RDF model.
+        Even within the closed world of a single application dataset, use of blank nodes can quickly become limiting when integrating new data [[LinkedDataPatterns]].
+        For these reasons, it is recommended that instances of the DCAT main classes have a global identifier, and use of blank nodes is generally discouraged when encoding DCAT in RDF.
+      </p>
 
-    <p class="note">All RDF examples in this document are written in Turtle syntax [[Turtle]] and many are available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a>. </p>
-    <p class="note">Each RDF example in this document is intended to demonstrate specific capabilities of DCAT, and therefore only shows a subset of all the potential properties and links which might appear in a complete DCAT resource. </p>
-
+      <p id="rdf-syntax">
+        All RDF examples in this document are written in Turtle syntax [[Turtle]] and many are available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a>.
+      </p>
+      <p class="note">
+        Each RDF example in this document is intended to demonstrate specific capabilities of DCAT, and therefore only shows a subset of all the potential properties and links which might appear in a complete DCAT resource.
+      </p>
+    </section>
     <section id="basic-example">
         <h3>Basic Example</h3>
         <p>This example provides a quick overview of how DCAT might be used to represent a government catalog and its datasets. </p>
@@ -810,7 +879,7 @@
     <section id="Class:Resource">
         <h3>Class: Catalogued Resource</h3>
 
-        <p>The following properties are recommended for use on this class (<code>dcat:Resource</code>):
+        <p>The following properties are recommended for use on this class:
             <a href="#Property:resource_conformsto">conformsTo</a>,
             <a href="#Property:resource_contact_point">contact point</a>,
             <a href="#Property:resource_creator">creator</a>,
@@ -852,10 +921,11 @@
             <tbody>
             <tr><td class="prop">Definition:</td><td>Resource published or curated by a single agent.</td></tr>
             <tr><td class="prop">Usage note:</td><td>The class of all catalogued resources, the superclass of
-                <a href="#Class:Dataset">dcat:Dataset</a>, <a href="#Class:Data_Service">dcat:DataService</a>, <a href="#Class:Catalog">dcat:Catalog</a> and any other member of a <a href="#Class:Catalog">dcat:Catalog</a>.
-                This class carries properties common to all catalogued resources, including datasets and data services.
+            <a href="#Class:Dataset">dcat:Dataset</a>, <a href="#Class:Data_Service">dcat:DataService</a>, <a href="#Class:Catalog">dcat:Catalog</a> and any other member of a <a href="#Class:Catalog">dcat:Catalog</a>.
+            This class carries properties common to all catalogued resources, including datasets and data services.
 
-                It is strongly recommended to use a more specific sub-class when available.</td></tr>
+            It is strongly recommended to use a more specific sub-class when available.</td></tr>
+            <tr><td class="prop">Usage note:</td><td><code><a href="#Class:Resource">dcat:Resource</a></code> is an extension point that enables the definition of any kind of catalog. Additional subclasses may be defined in a DCAT application profile or other DCAT application for catalogs of other kinds of resources</td></tr>
             <tr><td class="prop">See also:</td><td><a href="#Class:Catalog_Record" title="">Catalog record</a></td></tr>
             </tbody>
         </table>
@@ -891,7 +961,7 @@
 
             <p class="note">
                 New property added in this revision of DCAT, specifically added when considering the data citation requirement and
-                added to the dcat:Resource class, as the Dataset superclass.
+                added to the <code><a href="#Class:Resource">dcat:Resource</a></code> class, as the Dataset superclass.
             </p>
 
 
@@ -1016,8 +1086,8 @@
             </p>
 
             <table class="definition">
-                <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/type">dct:type</a></th></tr></thead>
-                <tbody>
+              <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/type">dct:type</a></th></tr></thead>
+              <tbody>
                 <tr><td class="prop">Definition:</td><td>The nature or genre of the resource.</td></tr>
                 <tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/elements/1.1/type">dc:type</a></td></tr>
                 <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Class">rdfs:Class</a></td></tr>
@@ -1028,9 +1098,10 @@
                         <li><a href="https://schema.datacite.org/meta/kernel-4.1/include/datacite-resourceType-v4.1.xsd">Datacite resource types</a> [[DataCite]]</li>
                         <li>PARSE.Insight content-types used by <a href="https://www.re3data.org/">re3data.org</a> [[RE3DATA-SCHEMA]] (see item 15 contentType)</li>
                         <li><a href="http://id.loc.gov/vocabulary/marcgt.html">MARC intellectual resource types</a></li>
-                    </ol>
-                    To describe the file format, physical medium, or dimensions of the resource, use the <a href="http://purl.org/dc/terms/format">dct:format element</a>.</td></tr>
-                </tbody>
+                  </ol>
+                Some members of these controlled vocabularies are not strictly suitable for datasets or data services (e.g. DCMI Type <i>Event</i>, <i>PhysicalObject</i>; ISO 19115 <i>CollectionHardware</i>, <i>CollectionSession</i>, <i>Initiative</i>, <i>Sample</i>, <i>Repository</i>), but might be used in the context of other kinds of catalogs defined in DCAT profiles or applications. </td></tr>
+                <tr><td class="prop">Usage note:</td><td>To describe the file format, physical medium, or dimensions of the resource, use the <a href="http://purl.org/dc/terms/format">dct:format element</a>.</td></tr>
+              </tbody>
             </table>
         </section>
 
@@ -2023,36 +2094,36 @@
 </section>
 <section id="Dereferenceable-identifiers" class="informative">
     <h2>Dereferenceable identifiers</h2>
-    
+
     <p>DCAT should rely on persistent HTTP URIs, which are an effective way of making identifiers actionable.</p>
     <p>The property <a href="#Property:resource_identifier">dct:identifier</a>  explicitly indicates HTTP URIs as well as legacy identifiers. In the following examples,  <a href="#Property:resource_identifier">dct:identifier</a>  identifies a dataset, but it can similarly be used with any kind of resources.</p>
-    
+
     <div class="example">
     <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
-&lt;https://example.org/id&gt; a dcat:Dataset;      
-	dct:identifier "https://example.org/id"^^xsd:anyURI 
+&lt;https://example.org/id&gt; a dcat:Dataset;
+	dct:identifier "https://example.org/id"^^xsd:anyURI
   . </pre></div>
-    
+
     <p> Proxy dereferenceable URIs can be used  when resources haven't  HTTP dereferenceable IDs. For example, in the following, https://example.org/proxyid is a proxy for "id".</p>
-    
+
     <div class="example">
     <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 &lt;https://example.org/proxyid&gt; a dcat:Dataset;
-	dct:identifier  "id"^^xsd:string 
-    .</pre></div> 
+	dct:identifier  "id"^^xsd:string
+    .</pre></div>
     <p> The property <a href="https://www.w3.org/TR/vocab-adms/#adms-identifier">adms:identifier</a> can express other locally minted identifiers or external identifiers, like Datacite, DOI, ELI etc., as long as they are globally unique and stable.</p>
     <p>The following example uses <a href="https://www.w3.org/ns/adms#schemaAgency">adms:schemaAgency</a> and <a href="http://dublincore.org/2012/06/14/dcterms#creator">dct:creator</a> to represent the authority that defines the identifier scheme (e.g., DOI foundation in the example), adms:schemaAgency is used when the authority has no URI associated.
     </p>
-    
+
     <div class="example">
     <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 &lt;https://example.org/id&gt; a dcat:Dataset;
     adms:identifier  &lt;https://example.org/iddoi&gt; .
 	.
-    
-&lt;https://example.org/iddoi&gt; rdf:type adms:Identifier ; 
-   skos:notation "https://doi.org/10.5281/zenodo.1486279"^^xsd:anyURI; 
-   # reading https://www.w3.org/TR/skos-reference/#notations more than one skos:notation can be set 
+
+&lt;https://example.org/iddoi&gt; rdf:type adms:Identifier ;
+   skos:notation "https://doi.org/10.5281/zenodo.1486279"^^xsd:anyURI;
+   # reading https://www.w3.org/TR/skos-reference/#notations more than one skos:notation can be set
    skos:notation "info:doi/10.5281/zenodo.1486279"^^xsd:anyURI  ;
    # the authority/agency defining the identifier scheme, used if the agency has no URI
    adms:schemaAgency "International DOI Foundation" ;
@@ -2064,10 +2135,10 @@ ex:InternationalDOIFundation a dct:Agent;
     foaf:homepage &lt;https://www.doi.org/&gt; .
     </pre>
     </div>
-    
+
     <p> The example does not represent the authority responsible for assigning and maintaining identifiers using that scheme (e.g., zenodo) as naming the registrant goes against the philosophy of DOI where the sub-spaces are abstracted from the organisation that registers them, with the advantage that DOIs don't change when the organisation changes or the responsibility for that sub-space is handed over to someone else.</p>
-    
-    <p>When the HTTP dereferenceable ID returns RDF/OWL description for the dataset, the use owl:sameAs might be consider. For example, </p>     
+
+    <p>When the HTTP dereferenceable ID returns RDF/OWL description for the dataset, the use owl:sameAs might be consider. For example, </p>
     <div class="example">
     <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 &lt;https://example.org/id&gt; a dcat:Dataset;
@@ -2077,49 +2148,49 @@ ex:InternationalDOIFundation a dct:Agent;
     </div>
     <p>when dereferenced with media type "text/turtle",  https://doi.org/10.5281/zenodo.1486279 returns a schema.org description for the dataset, which might dinamically enrich the description provided by https://example.org/id. </p>
 
-    
-    <p>Identifiers for datasets should follow the <a href="https://www.w3.org/TR/dwbp/#DataIdentifiers">DWBP Data Identifier Best Practices</a>.</p> 
-    
+
+    <p>Identifiers for datasets should follow the <a href="https://www.w3.org/TR/dwbp/#DataIdentifiers">DWBP Data Identifier Best Practices</a>.</p>
+
      <p class="issue" data-number="67">
                 The need to distinguish between primary and alternative (legacy) identifiers for a dataset has been posed as a requirement. However, it is very much application-specific and should be better addressed in application profiles rather than being mandate a general approach.
             </p>
-    
+
     <p>Depending on the application context, specific guidelines such as <a href="https://joinup.ec.europa.eu/release/dcat-ap-how-manage-duplicates">"DCAT-AP: How to manage duplicates?"</a> can be adopted for distinguishing authoritative datasets from dataset harvested by third parties catalogs.</p>
-    
+
     <section id="identifiers-type">
     <h2>Indicating common identifier types</h2>
-    
+
         <p> If identifiers are not HTTP dereferenceable, common identifier types can be served as <a href="https://www.w3.org/TR/rdf11-concepts/#dfn-recognized-datatype-iris">RDF datatypes</a> or custom <a href="https://www.w3.org/TR/owl2-syntax/#Datatype_Definitions">OWL datatypes</a> for the sake of interoperability, see 'ex:type' in the following</p>
-    
+
         <div class="example">
             <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 &lt;https://example.org/id&gt; a dcat:Dataset;
 	...
 	adms:identifier &lt;https://example.org/sid&gt; .
 
- &lt;https://example.org/sid&gt; rdf:type adms:Identifier ; 
+ &lt;https://example.org/sid&gt; rdf:type adms:Identifier ;
  # the actual id
 	 skos:notation "PA 1-060-815"^^ex:type ;
- # Human readable schema agency 
-	 adms:schemaAgency "US Copyright Office" ; 
-	 dcterms:issued "2001-09-12"^^xsd:date . 
+ # Human readable schema agency
+	 adms:schemaAgency "US Copyright Office" ;
+	 dcterms:issued "2001-09-12"^^xsd:date .
             </pre>
-        </div> 
-    
+        </div>
+
         <p>If a registered URI type is used (<a href="https://tools.ietf.org/html/rfc3986#section-3.1">following RFC-3986</a>), the identifier scheme is part of the URI; thus indicating a separate identifier scheme in 'type' is redundant. For example, DOI is registered as a namespace in the <a href="https://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml">'info' URI scheme</a> (see <a href="https://www.doi.org/faq.html">faq #11</a>), so according to RFC-3986 URI it should be encoded as in the following</p>
-    
+
         <div class="example">
-            <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">&lt;https://example.org/sid&gt; rdf:type adms:Identifier ; 
+            <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">&lt;https://example.org/sid&gt; rdf:type adms:Identifier ;
  # the actual id
-	 skos:notation "info:doi/10.1109/5.771073"^^xsd:anyURI 
+	 skos:notation "info:doi/10.1109/5.771073"^^xsd:anyURI
  .
             </pre>
         </div>
 
         <p>Otherwise, examples of common types for identifier scheme (arXiv, etc) are defined in <a href="https://schema.datacite.org/meta/kernel-4.1/include/datacite-relatedIdentifierType-v4.xsd">DataCite schema</a> and <a href="https://fairsharing.org/standards/?q=&selected_facets=type_exact:identifier%20schema">FAIRsharing Registry</a>.</p>
     </section>
-</section>    
-    
+</section>
+
 <section id="quality-information" class="informative">
     <h2>Quality information</h2>
     <div class="note"><p>This section is not-normative as it provides guidance on how to document the quality of DCAT first class entities (e.g., datasets, distributions) and it does not define new DCAT terms. The guidance relies on the Data Quality Vocabulary(DQV) [[VOCAB-DQV]], which is a W3C Group Note.</p></div>
@@ -2485,7 +2556,7 @@ ex:DS987
         <a href="https://github.com/w3c/dxwg/issues/66">Issue #66</a>,
         <a href="https://github.com/w3c/dxwg/issues/63">Issue #63</a>.
         It has been suggested that many of the requirements can be satisfied by using capabilities from the [[PROV-O]] ontology,
-        in particular by treating dcat:Resource and/or dcat:CatalogRecord a sub-class of <a href="http://www.w3.org/ns/prov#Entity">prov:Entity</a>.
+        in particular by treating <code><a href="#Class:Resource">dcat:Resource</a></code> and/or <code><a href="#Class:Catalog_Record">dcat:CatalogRecord</a></code> a sub-class of <a href="http://www.w3.org/ns/prov#Entity">prov:Entity</a>.
         A preliminary <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/rdf/dcat-prov.ttl">alignment of DCAT with PROV-O is available</a>.
     </p>
 
@@ -3576,7 +3647,7 @@ dcat:servesDataset ga-courts:jc ;
             </li>
 
             <li>
-                <a href="#Class:Resource">Class: Catalogued resource</a>: In DCAT 2014 [[VOCAB-DCAT-20140116]] the scope of a <a href="#Class:Catalog">dcat:Catalog</a> was limited to Datasets. This has been generalized, and properties common to all catalogued resources are now associated with a super-class dcat:Resource - see <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a> and <a href="https://github.com/w3c/dxwg/issues/116">Issue #116</a>. The wiki page on <a href="https://github.com/w3c/dxwg/wiki/Cataloguing-data-services">Cataloguing data services</a> describes some proposals related to this requirement.
+                <a href="#Class:Resource">Class: Catalogued resource</a>: In DCAT 2014 [[VOCAB-DCAT-20140116]] the scope of a <a href="#Class:Catalog">dcat:Catalog</a> was limited to Datasets. This has been generalized, and properties common to all catalogued resources are now associated with a super-class <code><a href="#Class:Resource">dcat:Resource</a></code> - see <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a> and <a href="https://github.com/w3c/dxwg/issues/116">Issue #116</a>. The wiki page on <a href="https://github.com/w3c/dxwg/wiki/Cataloguing-data-services">Cataloguing data services</a> describes some proposals related to this requirement.
             </li>
 
             <li>
