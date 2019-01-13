@@ -372,6 +372,7 @@ dcat:Resource
     dcat:Dataset, dcat:DataService, dcat:Catalog and any other member of a dcat:Catalog.
     This class carries properties common to all catalogued resources, including datasets and data services.
     It is strongly recommended to use a more specific sub-class when available.""" ;
+  skos:scopeNote "dcat:Resource is an extension point that enables the definition of any kind of catalog. Additional subclasses may be defined in a DCAT profile or application for catalogs of other kinds of resources" ;
 .
 dcat:accessService
   rdf:type owl:ObjectProperty ;
@@ -829,6 +830,16 @@ dct:relation
   skos:scopeNote "See also: Sub-properties of dct:relation in particular dcat:distribution, dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy" ;
   skos:scopeNote "dct:relation SHOULD be used where the nature of the relationship between a catalogued item and related resources is not known. A more specific sub-property SHOULD be used if the nature of the relationship of the link is known. The property dcat:distribution SHOULD be used to link from a dcat:Dataset to a representation of the dataset, described as a dcat:Distribution" ;
   skos:scopeNote "In the context of a dcat:Relationship this is expected to point to another dcat:Dataset or other catalogued resource" ;
+.
+dct:type
+  skos:scopeNote """The value SHOULD be taken from a well governed and broadly recognised controlled vocabulary, such as:
+1. DCMI Type vocabulary [DCTERMS]
+2. ISO 19115 scope codes [ISO-19115-1]
+3. Datacite resource types [DataCite]
+4. PARSE.Insight content-types used by re3data.org [RE3DATA-SCHEMA] (see item 15 contentType)
+5. MARC intellectual resource types
+Some members of these controlled vocabularies are not strictly suitable for datasets or data services (e.g. DCMI Type Event, PhysicalObject; ISO 19115 CollectionHardware, CollectionSession, Initiative, Sample, Repository), but might be used in the context of other kinds of catalogs defined in DCAT profiles or applications.""" ;
+  skos:scopeNote "To describe the file format, physical medium, or dimensions of the resource, use the dct:format element." ;
 .
 prov:qualifiedAttribution
   skos:definition "Link to an Agent having some form of responsibility for the resource" ;
