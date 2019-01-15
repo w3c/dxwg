@@ -183,7 +183,7 @@ var respecConfig = {
             publisher:"ODI"
       },
       "MDR-AR":{
-        "href":"http://publications.europa.eu/mdr/authority/access-right/",
+        "href":"https://publications.europa.eu/en/web/eu-vocabularies/at-dataset/-/resource/dataset/access-right",
         "title":"Named Authority List: Access rights",
         "publisher":"Publications Office of the European Union"
        }
