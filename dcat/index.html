@@ -2225,12 +2225,12 @@ ex:InternationalDOIFundation a dct:Agent;
     # deploying  vocabularies such as Dataset Usage Vocabulary (DUV), Dublin Core or ADMS.SW
 
 # :myQualityChecking is the activity that has generated :genoaBusStopsDatasetCompletenessMeasurement from :genoaBusStopsDataset
-:myQualityChecking a prov:Activity;
-    rdfs:label "The checking of genoaBusStopsDataset's quality"^^xsd:string;
-    prov:wasAssociatedWith :myQualityChecker;
-    prov:used :genoaBusStopsDataset;
-    prov:generated :genoaBusStopsDatasetCompletenessMeasurement;
-    prov:endedAtTime 2018-05-27T02:52:02Z"^^xsd:dateTime;
+:myQualityChecking a prov:Activity ;
+    rdfs:label "The checking of genoaBusStopsDataset's quality"^^xsd:string ;
+    prov:wasAssociatedWith :myQualityChecker ;
+    prov:used :genoaBusStopsDataset ;
+    prov:generated :genoaBusStopsDatasetCompletenessMeasurement ;
+    prov:endedAtTime 2018-05-27T02:52:02Z"^^xsd:dateTime ;
     prov:startedAtTime "2018-05-27T00:52:02Z"^^xsd:dateTime .
     </pre></aside>
     <p>
@@ -2261,7 +2261,7 @@ a:dataset a dcat:Dataset;
 
 # Reference standard / specification
 &lt;http://data.europa.eu/eli/reg/2014/1312/oj&gt; a dct:Standard ;
-    dct:title "Commission Regulation (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards interoperability of spatial data sets and services"@en
+    dct:title "Commission Regulation (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards interoperability of spatial data sets and services"@en ;
     dct:issued "2010-11-23"^^xsd:date .
 </pre></aside>
         </section>
@@ -2274,8 +2274,8 @@ a:dataset a dcat:Dataset;
 	    <p>The following example specifies some newly minted concepts representing the degree of conformance (i.e., conformant, not conformant) and  declares the  
 	    <a href="http://dublincore.org/documents/dcmi-terms/#terms-type"><code>dct:type</code></a> for indicating 
 	    the result of conformance test. Following a pattern used in [[GeoDCAT-AP]], the example uses a <code>prov:Entity</code> to model the  conformance test (e.g., 
-	    <code>a:testResult</code>), a <code>prov:Activity</code> to model the testing activity (e,g., 
-	    <code>a:testingActivity</code>), a <code>prov:Plan</code> derived from the Data on the Web Best Practices [[DWBP]]. A qualified PROV association binds the testing activity to the conformance test.</p>
+	    <code>a:testResult</code>), a <code>prov:Activity</code> to model the testing activity (e.g., 
+	    <code>a:testingActivity</code>), a <code>prov:Plan</code> derived from the Data on the Web Best Practices [[DWBP]] (e.g., <code>a:conformanceTest</code>) to check for the whole set of best practices. A qualified PROV association binds the testing activity to the conformance test.</p>
 	    <aside class="note">
 	    <p>Depending of the kind of dataset, other best practices and standards, such as the FAIR Principles [[FAIR]] or the Spatial Data on the Web Best Practices [[SDW-BP]], can be considered as a replacement or used in combination with [[DWBP]].</p>
        </aside>
@@ -2307,7 +2307,7 @@ a:conformanceTest a prov:Plan ;
             <aside class="example" id="ex-conformance-degree-percentage">
   <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 :levelOfComplianceToDWBP a dqv:Metric ;
-    skos:definition "The degree of compliance to DWBP defined as the percentage of passed compliance tests."@en
+    skos:definition "The degree of compliance to DWBP defined as the percentage of passed compliance tests."@en ;
     dqv:expectedDataType xsd:double ;
     dqv:inDimension  iso:compliance .
 
@@ -2317,17 +2317,16 @@ iso:compliance a dqv:Dimension ;
     dqv:inCategory iso:inherentandSystemDependentDataQuality
     .
 iso:inherentandSystemDependentDataQuality a dqv:Category ;
-   skos:prefLabel "Inherent and System-Dependent Data Quality"@en.
+   skos:prefLabel "Inherent and System-Dependent Data Quality"@en .
         </pre></aside>
             <p>The quality measurement <code>:measurement_complianceToDWBP</code> represents the level of compliance for dataset <code>a:dataset</code>, namely, measurement of the metric <code>:levelOfComplianceToDWBP</code>. If only a part of the compliance tests succeeds (e.g. half of the compliance tests), the measurement would look like in the following:</p>
   <aside class="example" id="ex-conformance-test-partial-success">
 <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
-:measurement_complianceToDWBP
-   a         dqv:QualityMeasurement;
-   dqv:computedOn      a:dataset;
-   dqv:value           "50"^^xsd:double ;
-   sdmx-attribute:unitMeasure &lt;http://www.wurvoc.org/vocabularies/om-1.8/Percentage&gt;
-   dcterms:date        "2018-01-10"^^xsd:date ;
+:measurement_complianceToDWBP a dqv:QualityMeasurement ;
+   dqv:computedOn a:dataset ;
+   dqv:value "50"^^xsd:double ;
+   sdmx-attribute:unitMeasure &lt;http://www.wurvoc.org/vocabularies/om-1.8/Percentage&gt; ;
+   dcterms:date "2018-01-10"^^xsd:date ;
    dqv:isMeasurementOf :levelOfComplianceToDWBP .
     </pre></aside>
 
@@ -2343,28 +2342,27 @@ iso:inherentandSystemDependentDataQuality a dqv:Category ;
             </p>
             <aside class="example" id="ex-conformance-test-results-earl">
   <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
-a:assertion a earl:Assertion;
-    earl:subject a:dataset;
-    earl:test a:conformanceTest;
+a:assertion a earl:Assertion ;
+    earl:subject a:dataset ;
+    earl:test a:conformanceTest ;
     earl:result a:testResult ;
     # let's indicate if the test was manual, automatic, or what ..
     earl:mode earl:automatic ;
     earl:assertedBy &lt;http://validator.example.org/&gt; ;
-    prov:wasAttributedTo  &lt;http://validator.example.org/&gt;.
+    prov:wasAttributedTo  &lt;http://validator.example.org/&gt; .
 
-a:conformanceTest a earl:TestRequirement, prov:Plan;
-         dct:title "Set of conformance test derived by the Commission Regulation (EU) No 1089/2010 of 23 November 2010 implementing  Directive 2007/2/EC of the European Parliament and of the Council as regards interoperability of spatial data sets and services"@en";
+a:conformanceTest a earl:TestRequirement, prov:Plan ;
+         dct:title "Set of conformance test derived from the W3C Data on the Web Best Practices"@en" ;
          # it includes different subtests
-         dct:hasPart a:test1, a:test2, ...,  a:testn.
+         dct:hasPart a:testBP1, a:testBP2, ...,  a:testBP35 ;
          #It is derived  by the reference standard
-         prov:wasDerivedFrom  &lt;https://www.w3.org/TR/dwbp/&gt;.
+         prov:wasDerivedFrom  &lt;https://www.w3.org/TR/dwbp/&gt; .
 
-a:testResult a earl:TestResult;
-        #  results in conformancy.
-        dcterms:type  a:conformat;
+a:testResult a earl:TestResult ;
+        #  results in conformancy .
+        dcterms:type  a:conformant ;
         #the overall set of tests have been passed
         earl:outcome earl:passed .
-        ];
 
 # the description of the validator
  &lt;http://validator.example.org/&gt; a earl:Assertor, prov:Agent ;
@@ -2372,10 +2370,10 @@ a:testResult a earl:TestResult;
       dcterms:title "Validator"@en .
 
 #the testing activity
-a:testingActivity a prov:Activity;
-    prov:generated a:TestAssertion, a:testResult;
+a:testingActivity a prov:Activity ;
+    prov:generated a:TestAssertion, a:testResult ;
     prov:use a:dataset ;
-    prov:wasAssociatedWith   &lt;http://validator.example.org/&gt; .
+    prov:wasAssociatedWith &lt;http://validator.example.org/&gt; .
     </pre></aside>
             <p>The following example shows how the description would have looked like if the subtest <code>a:testq1</code> had failed. In particular, <code>dcterms:description</code> and <code>earl:info</code> provide additional warnings or error messages in a human-readable form.</p>
             <aside class="example" id="ex-conformance-test-earl-fail">
@@ -2385,16 +2383,16 @@ a:assertion1 a earl:Assertion ;
     earl:subject a:dataset ;
     earl:test a:testq1 ;
     earl:result [
-        a earl:TestResult;
-        #  results in no conformancy.
-        dcterms:type  a:nonConformat ;
+        a earl:TestResult ;
+        #  results in no conformancy
+        dcterms:type a:nonConformant ;
         #the overall set of tests have not been passed (!?)
         dcterms:date "2015-09-29T11:50:00+00:00"^^xsd:dateTime ;
         # Some XML encoding of the error
             dcterms:description """
                  &lt;ul xmlns="http://www.w3.org/1999/xhtml"&gt;
                  &lt;li&gt; test 1 has failed. Some description of the errors found&lt;/li&gt;
-                 &lt;/ul&gt;"^^rdf:XMLLiteral;
+                 &lt;/ul&gt;"^^rdf:XMLLiteral; 
             earl:info """"
                 &lt;test-method duration-ms="47" finished-at="2015-09-29T11:50:00Z"
                 name="validate" signature="validate()" started-at="2015-09-29T11:50:00Z"
@@ -2404,7 +2402,7 @@ a:assertion1 a earl:Assertion ;
                      Total validation errors found: 2
                      &lt;/message&gt;
                &lt;/exception&gt;
-             &lt;/test-method&gt;"""^^rdf:XMLLiteral;
+             &lt;/test-method&gt;"""^^rdf:XMLLiteral ;
        earl:outcome earl:fail .
         ];
     # we do not know if the test was manual, automatic, or what ..
