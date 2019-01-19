@@ -262,8 +262,7 @@
 
         <p>First, the catalog description:
         </p>
-        <div class="example">
-  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+<pre id="ex-catalog" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 :catalog
   a dcat:Catalog&nbsp;;
   dct:title "Imaginary Catalog"&nbsp;;
@@ -273,20 +272,18 @@
   dct:language &lt;http://id.loc.gov/vocabulary/iso639-1/en&gt; &nbsp;;
   dcat:dataset&nbsp;:dataset-001&nbsp; , :dataset-002 , :dataset-003 ;
   .
-</pre></div>
+</pre>
         <p>The publisher of the catalog has the relative URI&nbsp;:transparency-office. Further description of the publisher can be provided as in the following example:
         </p>
-        <div class="example">
-  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+<pre id="ex-publisher" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 :transparency-office
   a foaf:Organization&nbsp;;
   rdfs:label "Transparency Office"&nbsp;;
   .
-</pre></div>
+</pre>
         <p>The catalog lists each of its datasets via the <code>dcat:dataset</code> property. In the example above, an example dataset was mentioned with the relative URI&nbsp;:dataset-001. A possible description of it using DCAT is shown below:
         </p>
-        <div class="example">
-  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+<pre id="ex-dataset" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 :dataset-001
   a dcat:Dataset&nbsp;;
   dct:title "Imaginary dataset"&nbsp;;
@@ -302,7 +299,7 @@
   dct:accrualPeriodicity &lt;http://purl.org/linked-data/sdmx/2009/code#freq-W&gt; &nbsp;;
   dcat:distribution&nbsp;:dataset-001-csv&nbsp;;
   .
-</pre></div>
+</pre>
 
         <p>In order to express the frequency of update in the example above, we chose to use an instance from the <a href="http://www.w3.org/TR/vocab-data-cube/#dsd-cog">Content-Oriented Guidelines</a> developed as part
             of the <abbr title="World Wide Web Consortium">W3C</abbr> Data Cube Vocabulary [[VOCAB-DATA-CUBE]] efforts. Additionally, we chose to describe the spatial and temporal coverage of the example dataset using URIs from <a href="http://www.geonames.org/">Geonames</a> and the Interval dataset (originally available from http://reference.data.gov.uk/id/interval) from data.gov.uk, respectively. A contact point is also provided where comments and feedback about the dataset can be sent. Further details about the contact point, such as email address or telephone number, can be provided using vCard [[VCARD-RDF]].</p>
@@ -310,8 +307,7 @@
         <p>The dataset distribution :dataset-001-csv can be downloaded as a 5Kb CSV file. This information is
             represented via an RDF resource of type <code>dcat:Distribution</code>.
         </p>
-        <div class="example">
-  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+<pre id="ex-distribution" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 :dataset-001-csv
   a dcat:Distribution&nbsp;;
   dcat:downloadURL &lt;http://www.example.org/files/001.csv&gt; ;
@@ -319,15 +315,14 @@
   dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/csv&gt; ;
   dcat:byteSize "5120"^^xsd:decimal ;
   .
-</pre></div>
+</pre>
     </section>
 
     <section id="classifying-datasets">
         <h3>Classifying datasets thematically</h3>
         <p>The catalog classifies its datasets according to a set of domains represented by the relative URI&nbsp;:themes. SKOS can be used to describe the domains used:
         </p>
-        <div class="example">
-  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+<pre id="ex-thematic-classification" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 :catalog&nbsp;dcat:themeTaxonomy&nbsp;:themes&nbsp;.
 
 :themes
@@ -336,18 +331,17 @@
   .
 
 :dataset-001 dcat:theme&nbsp;:accountability&nbsp; .
-</pre></div>
+</pre>
         <p>Notice that this dataset is classified under the domain represented by the relative URI&nbsp;:accountability.
             It is recommended to define the concept as part of the concepts scheme identified by the URI&nbsp;:themes that was used to describe the catalog domains. An example SKOS description:
         </p>
-        <div class="example">
-  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+<pre id="ex-theme-accountability" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 :accountability
   a skos:Concept&nbsp;;
   skos:inScheme&nbsp;:themes&nbsp;;
   skos:prefLabel "Accountability"&nbsp;;
   .
-</pre></div>
+</pre>
     </section>
 
     <section id="classifying-dataset-types">
@@ -365,8 +359,7 @@
         <p>
             In the following examples, a (notional) dataset is classified separately using values from different vocabularies.
         </p>
-        <div class="example">
-  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+<pre id="ex-dataset-type" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 :dataset-001
   rdf:type  dcat:Dataset ;
   dct:type  &lt;http://purl.org/dc/dcmitype/Text&gt; ;
@@ -376,12 +369,12 @@
   rdf:type  dcat:Dataset ;
   dct:type  &lt;http://id.loc.gov/vocabulary/marcgt/man&gt; ;
   .
-</pre></div>
+</pre>
         <p>
             It is also possible for multiple classifications to be present in a single description.
         </p>
         <div class="example">
-  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+<pre id="ex-dataset-multiple-types" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 :dataset-001
   rdf:type  dcat:Dataset ;
   dct:type  &lt;http://purl.org/dc/dcmitype/Text&gt; ;
@@ -399,7 +392,7 @@
   rdfs:label "Standard office documents" ;
   dct:source "Re3data content types" ;
   .
-</pre></div>
+</pre>
 
     </section>
 
@@ -410,8 +403,7 @@
             describing the datasets), <code>dcat:CatalogRecord</code> can be used. For example,
             while &nbsp;:dataset-001 was issued on 2011-12-05, its description on Imaginary Catalog was added on 2011-12-11. This can be represented by DCAT as in the following:
         </p>
-        <div class="example">
-  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+<pre id="ex-catalog-record" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 :catalog  dcat:record&nbsp;:record-001&nbsp; .
 
 :record-001
@@ -419,7 +411,7 @@
   foaf:primaryTopic&nbsp;:dataset-001&nbsp;;
   dct:issued "2011-12-11"^^xsd:date&nbsp;;
   .
-</pre></div>
+</pre>
     </section>
 
     <section id="example-landing-page">
@@ -428,8 +420,7 @@
             where the user needs to follow some links, provide some information and check some boxes
             before accessing the data</p>
 
-        <div class="example">
-  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+<pre id="ex-landing-page" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 :dataset-002
   a dcat:Dataset ;
   dcat:landingPage &lt;http://example.org/dataset-002.html&gt; ;
@@ -440,7 +431,7 @@
   dcat:accessURL &lt;http://example.org/dataset-002.html&gt; ;
   dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/csv&gt; ;
   .
-</pre></div>
+</pre>
 
         Notice the use of a <code>dcat:landingPage</code> and the definition of the <code>dcat:Distribution</code> instance.
     </section>
@@ -449,8 +440,7 @@
         <h3>A dataset available as a download and behind some Web page</h3>
         <p>On the other hand, :dataset-003 can be obtained through some landing page but also can be downloaded from a known URL.
         </p>
-        <div class="example">
-  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+<pre id="ex-access-and-download-url" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 :dataset-003
   a dcat:Dataset ;
   dcat:landingPage &lt;http://example.org/dataset-003.html&gt; ;
@@ -461,9 +451,9 @@
   dcat:downloadURL &lt;http://example.org/dataset-003.csv&gt; ;
   dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/csv&gt; ;
   .
-</pre></div>
-        Notice that we used <code>dcat:downloadURL</code> with the downloadable distribution and that the other distribution accessible through the landing page
-        does not have to be defined as a separate <code>dcat:Distribution</code> instance.
+</pre>
+        <p>Notice that we used <code>dcat:downloadURL</code> with the downloadable distribution and that the other distribution accessible through the landing page
+        does not have to be defined as a separate <code>dcat:Distribution</code> instance.</p>
     </section>
 
     <section id="a-dataset-available-from a service">
@@ -474,8 +464,7 @@
           its specific API definition using <code>dct:conformsTo</code>,
           with the detailed description of the individual endpoint parameters and options linked using <code>dcat:endpointDescription</code>.
         </p>
-<div class="example">
-  <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+<pre id="ex-access-service" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 :dataset-004
   rdf:type dcat:Dataset ;
   dcat:distribution :dataset-004-csv ;
@@ -2098,25 +2087,22 @@
     <p>DCAT should rely on persistent HTTP URIs, which are an effective way of making identifiers actionable.</p>
     <p>The property <a href="#Property:resource_identifier"><code>dct:identifier</code></a>  explicitly indicates HTTP URIs as well as legacy identifiers. In the following examples,  <a href="#Property:resource_identifier"><code>dct:identifier</code></a>  identifies a dataset, but it can similarly be used with any kind of resources.</p>
 
-    <div class="example">
-    <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+<pre id="ex-identifier" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 &lt;https://example.org/id&gt; a dcat:Dataset;
 	dct:identifier "https://example.org/id"^^xsd:anyURI
-  . </pre></div>
+  .</pre>
 
-    <p> Proxy dereferenceable URIs can be used  when resources haven't  HTTP dereferenceable IDs. For example, in the following, https://example.org/proxyid is a proxy for "id".</p>
+    <p> Proxy dereferenceable URIs can be used  when resources have not  HTTP dereferenceable IDs. For example, in the following, https://example.org/proxyid is a proxy for "id".</p>
 
-    <div class="example">
-    <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+<pre id="ex-proxy-id" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 &lt;https://example.org/proxyid&gt; a dcat:Dataset;
 	dct:identifier  "id"^^xsd:string
-    .</pre></div>
-    <p> The property <a href="https://www.w3.org/TR/vocab-adms/#adms-identifier"><code>adms:identifier</code></a> can express other locally minted identifiers or external identifiers, like Datacite, DOI, ELI etc., as long as they are globally unique and stable.</p>
+    .</pre>
+    <p>The property <a href="https://www.w3.org/TR/vocab-adms/#adms-identifier"><code>adms:identifier</code></a> can express other locally minted identifiers or external identifiers, like Datacite, DOI, ELI etc., as long as they are globally unique and stable.</p>
     <p>The following example uses <a href="https://www.w3.org/ns/adms#schemaAgency"><code>adms:schemaAgency</code></a> and <a href="http://dublincore.org/2012/06/14/dcterms#creator"><code>dct:creator</code></a> to represent the authority that defines the identifier scheme (e.g., DOI foundation in the example), <code>adms:schemaAgency</code> is used when the authority has no URI associated.
     </p>
 
-    <div class="example">
-    <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+<pre id="ex-adms-identifier" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 &lt;https://example.org/id&gt; a dcat:Dataset;
     adms:identifier  &lt;https://example.org/iddoi&gt; .
 	.
@@ -2133,20 +2119,18 @@
 ex:InternationalDOIFundation a dct:Agent;
     rdfs:label "International DOI Foundation";
     foaf:homepage &lt;https://www.doi.org/&gt; .
-    </pre>
-    </div>
+</pre>
 
     <p> The example does not represent the authority responsible for assigning and maintaining identifiers using that scheme (e.g., zenodo) as naming the registrant goes against the philosophy of DOI where the sub-spaces are abstracted from the organisation that registers them, with the advantage that DOIs don't change when the organisation changes or the responsibility for that sub-space is handed over to someone else.</p>
 
     <p>When the HTTP dereferenceable ID returns RDF/OWL description for the dataset, the use <code>owl:sameAs</code> might be consider. For example, </p>
-    <div class="example">
-    <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+
+<pre id="ex-owl-sameas" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 &lt;https://example.org/id&gt; a dcat:Dataset;
 	...
 	owl:sameAs &lt;https://doi.org/10.5281/zenodo.1486279&gt; .
-    </pre>
-    </div>
-    <p>when dereferenced with media type "text/turtle",  https://doi.org/10.5281/zenodo.1486279 returns a schema.org description for the dataset, which might dinamically enrich the description provided by https://example.org/id. </p>
+</pre>
+    <p>when dereferenced with media type <code>text/turtle</code>,  <code>https://doi.org/10.5281/zenodo.1486279</code> returns a schema.org description for the dataset, which might dinamically enrich the description provided by <code>https://example.org/id</code>. </p>
 
 
     <p>Identifiers for datasets should follow the <a href="https://www.w3.org/TR/dwbp/#DataIdentifiers">DWBP Data Identifier Best Practices</a>.</p>
@@ -2160,10 +2144,9 @@ ex:InternationalDOIFundation a dct:Agent;
     <section id="identifiers-type">
     <h2>Indicating common identifier types</h2>
 
-        <p> If identifiers are not HTTP dereferenceable, common identifier types can be served as <a href="https://www.w3.org/TR/rdf11-concepts/#dfn-recognized-datatype-iris">RDF datatypes</a> or custom <a href="https://www.w3.org/TR/owl2-syntax/#Datatype_Definitions">OWL datatypes</a> for the sake of interoperability, see 'ex:type' in the following</p>
+        <p> If identifiers are not HTTP dereferenceable, common identifier types can be served as <a href="https://www.w3.org/TR/rdf11-concepts/#dfn-recognized-datatype-iris">RDF datatypes</a> or custom <a href="https://www.w3.org/TR/owl2-syntax/#Datatype_Definitions">OWL datatypes</a> for the sake of interoperability, see <code>ex:type</code> in the following example.</p>
 
-        <div class="example">
-            <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+<pre id="ex-identifier-type" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 &lt;https://example.org/id&gt; a dcat:Dataset;
 	...
 	adms:identifier &lt;https://example.org/sid&gt; .
@@ -2174,18 +2157,15 @@ ex:InternationalDOIFundation a dct:Agent;
  # Human readable schema agency
 	 adms:schemaAgency "US Copyright Office" ;
 	 dcterms:issued "2001-09-12"^^xsd:date .
-            </pre>
-        </div>
+</pre>
 
-        <p>If a registered URI type is used (<a href="https://tools.ietf.org/html/rfc3986#section-3.1">following RFC-3986</a>), the identifier scheme is part of the URI; thus indicating a separate identifier scheme in 'type' is redundant. For example, DOI is registered as a namespace in the <a href="https://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml">'info' URI scheme</a> (see <a href="https://www.doi.org/faq.html">faq #11</a>), so according to RFC-3986 URI it should be encoded as in the following</p>
+        <p>If a registered URI type is used (following [[RFC3986]], <a href="https://tools.ietf.org/html/rfc3986#section-3.1">Section 3.1</a>), the identifier scheme is part of the URI; thus indicating a separate identifier scheme in 'type' is redundant. For example, DOI is registered as a namespace in the <a href="https://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml"><code>info</code> URI scheme</a> (see <a href="https://www.doi.org/faq.html">DOI FAQ #11</a>), so according to [[RFC3986]] URI it should be encoded as in the following</p>
 
-        <div class="example">
-            <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">&lt;https://example.org/sid&gt; rdf:type adms:Identifier ;
+<pre id="ex-identifier-type-in-uri" class="example nohighlight turtle" aria-busy="false" aria-live="polite">&lt;https://example.org/sid&gt; rdf:type adms:Identifier ;
  # the actual id
 	 skos:notation "info:doi/10.1109/5.771073"^^xsd:anyURI
  .
-            </pre>
-        </div>
+</pre>
 
         <p>Otherwise, examples of common types for identifier scheme (arXiv, etc) are defined in <a href="https://schema.datacite.org/meta/kernel-4.1/include/datacite-relatedIdentifierType-v4.xsd">DataCite schema</a> and <a href="https://fairsharing.org/standards/?q=&selected_facets=type_exact:identifier%20schema">FAIRsharing Registry</a>.</p>
     </section>
@@ -2516,8 +2496,7 @@ a:TestingActivity a prov:Activity;
     A general method for assigning an agent to a resource with a specified relationship is provided by using the qualified form <a href="https://www.w3.org/TR/prov-o/#qualifiedAttribution"><code>prov:qualifiedAttribution</code></a> from [[PROV-O]].
     The following provides an illustration:
   </p>
-<div class="example">
-<pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+<pre id="ex-qualified-attribution" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 ex:DS987
   a dcat:Dataset ;
   prov:qualifiedAttribution [
@@ -2532,7 +2511,6 @@ ex:DS987
   ] ;
 .
 </pre>
-</div>
 
 <p>
   In this example the roles are taken from [[ISO-19115-1]] which are available as linked data in a <a href="http://registry.it.csiro.au/def/isotc211/CI_RoleCode">discrete list</a>.
@@ -3107,11 +3085,7 @@ ex:DS987
             The dataset is contained in the <code>&lt;/datasets/&gt;</code> LDP Direct Container.
             To ensure the LDPC discovery, we connect it to the Catalog using the <code>dcat:datasets</code> predicate.
         </p>
-        <div class="example">
-            <div class="example-title marker">
-                <span>Example 1</span>
-            </div>
-            <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+<pre id="ex-ldpc-dataset" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 @prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt; .
 @prefix ldp:  &lt;http://www.w3.org/ns/ldp#&gt; .
 
@@ -3127,16 +3101,10 @@ ex:DS987
 	ldp:contains &lt;/datasets/001&gt; .
 
 &lt;/datasets/001&gt; a dcat:Dataset .</pre>
-        </div>
 
-        <p>
-            In the second example, we add LDPCs <code>&lt;/records/&gt;</code> for Catalog Records and <code>&lt;/services/&gt;</code> for Data Services, discoverable using <code>dcat:records</code> and <code>dcat:services</code> predicates from the Catalog:
+        <p>In the second example, we add LDPCs <code>&lt;/records/&gt;</code> for Catalog Records and <code>&lt;/services/&gt;</code> for Data Services, discoverable using <code>dcat:records</code> and <code>dcat:services</code> predicates from the Catalog:
         </p>
-        <div class="example">
-            <div class="example-title marker">
-                <span>Example 2</span>
-            </div>
-            <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+<pre id="ex-ldpc-record" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 @prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt; .
 @prefix ldp:  &lt;http://www.w3.org/ns/ldp#&gt; .
 
@@ -3169,16 +3137,10 @@ ex:DS987
 &lt;/datasets/001&gt; a dcat:Dataset ;
 
 &lt;/services/001&gt; a dcat:DataService .</pre>
-        </div>
-        <p>
-            Each dataset has its own LDPC for its distributions.
-            In the third example, we show the LDPC <code>&lt;/datasets/001/distributions/&gt;</code> for distributions of a single dataset, <code>&lt;/datasets/001&gt;</code>, discoverable through the <code>dcat:distributions</code> predicate.
-        </p>
-        <div class="example">
-            <div class="example-title marker">
-                <span>Example 3</span>
-            </div>
-            <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+
+        <p>Each dataset has its own LDPC for its distributions.
+            In the third example, we show the LDPC <code>&lt;/datasets/001/distributions/&gt;</code> for distributions of a single dataset, <code>&lt;/datasets/001&gt;</code>, discoverable through the <code>dcat:distributions</code> predicate.</p>
+<pre id="ex-ldpc-distribution" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 @prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt; .
 @prefix ldp:  &lt;http://www.w3.org/ns/ldp#&gt; .
 
@@ -3194,7 +3156,6 @@ ex:DS987
 	ldp:contains &lt;/datasets/001/distributions/001&gt; .
 
 &lt;/datasets/001/distributions/001&gt; a dcat:Distribution .</pre>
-        </div>
 
         <p class="note">For catalogs with many datasets, catalog records, data services or distributions,
             the Linked Data Platform Paging mechanism [[LDP-Paging]] <em title="SHOULD" class="rfc2119">SHOULD</em> be used to provide access to them.</p>
@@ -3265,11 +3226,7 @@ ex:DS987
             Any resource can have an LDN Inbox.
             In the following example we show a dataset <code>&lt;/datasets/001&gt;</code> as an LDN Target with an LDN Inbox.
         </p>
-        <div class="example">
-            <div class="example-title marker">
-                <span>Example 4</span>
-            </div>
-            <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+<pre id="ex-ldn-dataset" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 @prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt; .
 @prefix ldp:  &lt;http://www.w3.org/ns/ldp#&gt; .
 
@@ -3279,7 +3236,7 @@ ex:DS987
 	ldp:inbox &lt;/datasets/001/inbox/&gt; .
 
 &lt;/datasets/001/inbox/&gt; ldp:contains &lt;/datasets/001/inbox/001&gt; .</pre>
-        </div>
+
     </section>
 
 </section>
@@ -3365,8 +3322,7 @@ ex:DS987
       <p>
           If the nature of the relationships between a dataset and component resources in a catalogue, repository, or elsewhere are not known, <code>dct:relation</code> can be used:
       </p>
-      <div class="example">
-<pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+<pre id="ex-dataset-as-bag-of-files" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 :d33937
 dct:description "A set of RDF graphs representing the International [Chrono]stratigraphic Chart, ..." ;
 dct:identifier "https://doi.org/10.25919/5b4d2b83cbf2d"^^xsd:anyURI ;
@@ -3380,12 +3336,13 @@ dct:relation :isc2017.nt ;
 dct:relation :isc2017.rdf ;
 dct:relation :isc2017.ttl ;
 .
-</pre></div>
+</pre>
+
       <p>
           If it is clear that any of these related resources is a proper <i>representation</i> of the dataset, <code>dcat:distribution</code> should be used.
       </p>
-      <div class="example">
-<pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+
+<pre id="ex-when-using-distribution" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 :d33937
 rdf:type dcat:Dataset ;
 dct:description "A set of RDF graphs representing the International [Chrono]stratigraphic Chart, ..." ;
@@ -3419,7 +3376,8 @@ dcat:downloadURL :isc2017.ttl ;
 dcat:byteSize "531703"^^xsd:decimal ;
 dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/turtle&gt; ;
 .
-</pre></div>
+</pre>
+
       <p>
           This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/examples/csiro-dap-examples.ttl">csiro-dap-examples.ttl</a>
       </p>
@@ -3433,8 +3391,7 @@ dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/turtle&gt; 
       <p>
           For example, a simple link from a dataset description to the project that generated the dataset can be formalized as follows (other details elided for clarity):
       </p>
-      <div class="example">
-<pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+<pre id="ex-dataset-project" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 dap:atnf-P366-2003SEPT
 rdf:type dcat:Dataset ;
 dct:bibliographicCitation "Burgay, M; McLaughlin, M; Kramer, M; Lyne, A; Joshi, B; Pearce, G; D'Amico, N; Possenti, A; Manchester, R; Camilo, F (2017): Parkes observations for project P366 semester 2003SEPT. v1. CSIRO. Data Collection. https://doi.org/10.4225/08/598dc08d07bb7" ;
@@ -3452,7 +3409,7 @@ prov:wasInformedBy dap:ATNF ;
 rdfs:label "P366 - Parkes multibeam high-latitude pulsar survey" ;
 rdfs:seeAlso &lt;https://doi.org/10.1111/j.1365-2966.2006.10100.x&gt; ;
 .
-</pre></div>
+</pre>
       <p>
           This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/examples/csiro-dap-examples.ttl">csiro-dap-examples.ttl</a>
       </p>
@@ -3485,14 +3442,13 @@ rdfs:seeAlso &lt;https://doi.org/10.1111/j.1365-2966.2006.10100.x&gt; ;
           The values of the classifiers <code>dct:type</code>, <code>dct:conformsTo</code>, and <code>dcat:endpointDescription</code> provide progressively more detail about a service, whose actual endpoint is given by the <code>dcat:endpointURL</code>.
       </p>
       <p>
-          The first example describes a data catalog hosted by the European Environment Agency.
+          The first example describes a data catalog hosted by the European Environment Agency (EEA).
           This is classified as a <a href="#Class:Discovery_Service"><code>dcat:DiscoveryService</code></a> and also has the <code>dct:type</code> set to <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/discovery">discovery</a> from the <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/">INSPIRE classification of spatial data service types</a>.
       </p>
       <p>
           This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/examples/eea-csw.ttl">eea-csw.ttl</a>
       </p>
-      <div class="example">
-<pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+<pre id="ex-service-eea" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 a:EEA-CSW-Endpoint
 rdf:type dcat:DiscoveryService ;
 dc:subject "infoCatalogueService"@en ;
@@ -3514,7 +3470,7 @@ dcat:contactPoint a:EEA ;
 dcat:endpointDescription &lt;https://sdi.eea.europa.eu/catalogue/srv/eng/csw?service=CSW&request=GetCapabilities&gt; ;
 dcat:endpointURL &lt;http://sdi.eea.europa.eu/catalogue/srv/eng/csw&gt; ;
 .
-</pre></div>
+</pre>
       <p>
           The next example shows a dataset hosted by Geoscience Australia, which is available from three distinct services, as indicated by the value of the <a href="#Property:datadistributionservice_servesdataset"><code>dcat:servesDataset</code></a> property of each of the service descriptions.
           These are classified as a <a href="#Class:Data_Distribution_Service"><code>dcat:DataDistributionService</code></a> and also have the <code>dct:type</code> set to <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download">download</a> and <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view">view</a> from the <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/">INSPIRE classification of spatial data service types</a>.
@@ -3522,8 +3478,8 @@ dcat:endpointURL &lt;http://sdi.eea.europa.eu/catalogue/srv/eng/csw&gt; ;
       <p>
           This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/examples/ga-courts.ttl">ga-courts.ttl</a>
       </p>
-      <div class="example">
-<pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+
+<pre id="ex-service-gsa" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 ga-courts:jc
 rdf:type dcat:Dataset ;
 dct:description "The dataset contains spatial locations, in point format, of the Australian High Court, Australian Federal Courts and the Australian Magistrates Courts." ;
@@ -3576,7 +3532,7 @@ dcat:endpointURL &lt;http://services.ga.gov.au/gis/services/Judicial_Courts/MapS
 dcat:landingPage &lt;https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/2b8540c8-4a41-144d-e053-12a3070a3ff7&gt; ;
 dcat:servesDataset ga-courts:jc ;
 .
-</pre></div>
+</pre>
 
   </section>
 
