@@ -46,7 +46,7 @@
 	prof:hasProfile <http://www.w3.org/ns/dcat> ;
 .
 
-:dcat-constraints a prof:hasResourceDescriptor;
+:dcat-constraints a prof:ResourceDescriptor;
 	rdfs:label "DCAT constraints to meet the DCAT 2018 restrictions"@en ;
 	prof:hasResource <http://data.europa.eu/w21/016d88c3-a0b3-4506-ae4e-758e7401c096> ;
 	dct:conformsTo  owl:Ontology ;
@@ -70,44 +70,51 @@
                 <https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f1131a208_b92e9_b4427_ba40c_b6c47746cd422> ;  # profile image (PNG)
 .
 
-<http://data.europa.eu/w21/016d88c3-a0b3-4506-ae4e-758e7401c096> a prof:hasResourceDescriptor;
+:dcat-ap-constraints
+  a prof:ResourceDescriptor;
 	rdfs:label "DCAT-AP constraints" ;
 	dct:conformsTo <http://www.w3.org/ns/shacl#>;  # the namespace for SHACL
   dct:format "text/turtle" ;
+  prof:hasArtifact <http://data.europa.eu/w21/016d88c3-a0b3-4506-ae4e-758e7401c096> ;
 	prof:hasRole roles:ConformanceTest ;
 .
 
-<https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f6f27f059_bf785_b4d7d_bb602_b6448aab73bd5>
-  a prof:hasResourceDescriptor;
+:dcat-ap-guidance-msw
+  a prof:ResourceDescriptor;
 	rdfs:label "DCAT-AP Guidance Document (Word)" ;
 	dct:format <https://www.iana.org/assignments/media-types/application/vnd.openxmlformats-officedocument.wordprocessingml.document> ;
+  prof:hasArtifact <https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f6f27f059_bf785_b4d7d_bb602_b6448aab73bd5> ;
 	prof:hasRole roles:Guidance ;
 .
 
-<https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f17e18570_b1d77_b4171_b9df5_bb53cb4f017d4>
-  a prof:hasResourceDescriptor;
+:dcat-ap-guidance-pdf
+  a prof:ResourceDescriptor;
 	rdfs:label "DCAT-AP Guidance Document (PDF)" ;
 	dct:format <https://www.iana.org/assignments/media-types/application/pdf> ;
+  prof:hasArtifact <https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f17e18570_b1d77_b4171_b9df5_bb53cb4f017d4> ;
 	prof:hasRole roles:Guidance ;
 .
 
-<https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f1131a208_b92e9_b4427_ba40c_b6c47746cd422>
-  a prof:hasResourceDescriptor;
+:dcat-ap-guidance-png
+  a prof:ResourceDescriptor;
 	rdfs:label "DCAT-AP Image" ;
 	dct:format <https://www.iana.org/assignments/media-types/image/png> ;
+  prof:hasArtifact <https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f1131a208_b92e9_b4427_ba40c_b6c47746cd422> ;
 	prof:hasRole roles:Guidance ;
 .
 
 # DCAT-AP example 2: DCAT-AP, GeoDCAT & DCAT-AP-IT
 
-:geodcat a prof:Profile ;
+:geodcat
+  a prof:Profile ;
 	prof:isProfileOf <http://www.w3.org/ns/dcat> ;
 	rdfs:label "GeoDCAT" ;
   rdfs:comment "A geospatial extension for the DCAT"@en ;
 	prof:hasToken "geodcat" ;
 .
 
-:DCAT-AP-IT a prof:Profile ;
+:DCAT-AP-IT
+  a prof:Profile ;
 	prof:isProfileOf <https://joinup.ec.europa.eu/release/dcat-ap-v11> ;
 	rdfs:label "DCAT-AP-IT" ;
   rdfs:comment "Italian profile of DCAT-AP"@en ;
@@ -115,18 +122,20 @@
   prof:hasResource <https://github.com/geosolutions-it/ckanext-dcatapit> ;
 .
 
-<https://joinup.ec.europa.eu/release/geodcat-ap-v10> a prof:Profile ;
+<https://joinup.ec.europa.eu/release/geodcat-ap-v10>
+  a prof:Profile ;
 	prof:isProfileOf <https://joinup.ec.europa.eu/release/dcat-ap-v11> , :geodcat ;
 	rdfs:label "GeoDCAT-AP" ;
   rdfs:comment "A geospatial extension for the DCAT application profile for data portals in Europe"@en ;
 	prof:hasToken "geodcat-ap" ;
 .
 
-<https://github.com/geosolutions-it/ckanext-dcatapit>  # this is a test, is it sensible to reference a code repo here?
-  a prof:hasResourceDescriptor;
+:DCAT-AP-IT-IMPL  # this is a test, is it sensible to reference a code repo here?
+  a prof:ResourceDescriptor;
 	rdfs:label "DCAT-AP-IT Implementation Resource Descriptor" ;
   rdfs:comment "This resource captures implementations of the DCAT-AP-IT profile"@en ;
 	dct:format "image/png";
+  prof:hasArtifact <https://github.com/geosolutions-it/ckanext-dcatapit> ;
 	prof:hasRole roles:ASoFarUndefinedRole ;  # what role does a toolkit like this play?
 .
 
@@ -149,11 +158,12 @@
   prof:hasResource <https://portal.opengeospatial.org/files/?artifact_id=66915> ;
 .
 
-<https://portal.opengeospatial.org/files/?artifact_id=66915>
-  a prof:hasResourceDescriptor;
+:DGIWG-IRD
+  a prof:ResourceDescriptor;
 	rdfs:label "DGIWG Implementation Resource Descriptor" ;
   rdfs:comment "This document defines specific DGIWG requirements, recommendations and guidelines for implementations of the ISO and OGC Web Map Service standards; ISO 19128:2005 Web Map Server Interface and the OpenGIS Web Map Server Implementation Specification 1.3.0"@en ;
 	dct:format <https://www.iana.org/assignments/media-types/application/pdf> ;
+  prof:hasArtifact <https://portal.opengeospatial.org/files/?artifact_id=66915> ;
 	prof:hasRole roles:FullConstraints ;  # this is the definitive doc for the profile
 .
 
@@ -166,17 +176,19 @@
                 <http://cite.opengeospatial.org/pub/cite/files/edu/wmts/text/target-api/index.html> ;
 .
 
-<http://schemas.opengis.net/wmts/>
-  a prof:hasResourceDescriptor;
+:wmts-xsd
+  a prof:ResourceDescriptor;
   rdfs:label "WMTS XML Schema" ;
   dct:format <https://www.iana.org/assignments/media-types/text/xml> ;
+  prof:hasArtifact <http://schemas.opengis.net/wmts/> ;
   prof:hasRole roles:ConformanceTest ;
 .
 
-<http://cite.opengeospatial.org/pub/cite/files/edu/wmts/text/target-api/index.html>
-  a prof:hasResourceDescriptor ;
+:wmts-OpenAPI
+  a prof:ResourceDescriptor ;
   rdfs:label "WMTS OAS (Swagger) documentation UI" ;
   dct:format <https://www.iana.org/assignments/media-types/text/html> ;
+  prof:hasArtifact <http://cite.opengeospatial.org/pub/cite/files/edu/wmts/text/target-api/index.html> ;
   prof:hasRole roles:Guidance , roles:PartConstraints ;
 .
 
@@ -188,10 +200,11 @@
   prof:hasToken "WMTS-S" ;
 .
 
-<http://docs.opengeospatial.org/is/13-082r2/13-082r2.html>
-  a prof:hasResourceDescriptor;
+:wmts-pdf
+  a prof:ResourceDescriptor;
   rdfs:label "WMTS Simple Document" ;
   dct:format <https://www.iana.org/assignments/media-types/application/pdf>;
+  prof:hasArtifact <http://docs.opengeospatial.org/is/13-082r2/13-082r2.html> ;
   prof:hasRole roles:FullConstraints ;  # this is the definitive doc for the profile
 .
 
@@ -200,38 +213,50 @@
 <http://purl.org/pav/>
   rdf:type prof:Profile ;
   rdfs:label "PAV - Provenance, Authoring and Versioning" ;
-  prof:hasResource <http://eelst.cs.unibo.it/apps/LODE/source?url=http://purl.org/pav/2.3> ;
-  prof:hasResource <https://github.com/pav-ontology/pav/> ;
-  prof:hasResource <http://pav-ontology.github.io/pav/> ;
-  prof:hasResource <https://jbiomedsem.biomedcentral.com/articles/10.1186/2041-1480-4-37> ;
-  prof:hasResource <https://practicalprovenance.wordpress.com/2016/05/07/tracking-versions-with-pav/> ;
+  prof:hasResource :pav-rdf ;
+  prof:hasResource :pav-gh ;
+  prof:hasResource :pav-lode ;
+  prof:hasResource :pav-paper ;
+  prof:hasResource :pav-blogpost ;
   prof:isProfileOf <https://www.w3.org/TR/prov-o/> ;
 .
-<http://eelst.cs.unibo.it/apps/LODE/source?url=http://purl.org/pav/2.3>
+:pav-rdf
   rdf:type prof:ResourceDescriptor ;
   dct:format <https://www.iana.org/assignments/media-types/application/rdf+xml> ;
   dct:conformsTo owl:Ontology ;
-  prof:hasRole roles:FullConstraints ;
+  prof:hasRole roles:fullConstraints ;
+  prof:hasArtifact <http://eelst.cs.unibo.it/apps/LODE/source?url=http://purl.org/pav/2.3> ;
+  dct:modified "2015-03-17" ;
 .
-<https://github.com/pav-ontology/pav/>
+:pav-gh
   rdf:type prof:ResourceDescriptor ;
   dct:format <https://www.iana.org/assignments/media-types/text/html> ;
-  prof:hasRole roles:CodeRepository ;
+  prof:hasRole roles:codeRepository ;
+  prof:hasArtifact <https://github.com/pav-ontology/pav/> ;
+  dct:modified "2015-07-29" ;
 .
-<http://pav-ontology.github.io/pav/>
+:pav-lode
   rdf:type prof:ResourceDescriptor ;
   dct:format <https://www.iana.org/assignments/media-types/text/html> ;
-  prof:hasRole roles:Guidance ;
+  prof:hasRole roles:specification ;
+  prof:hasArtifact <http://pav-ontology.github.io/pav/> ;
+  dct:modified "2015-03-16T22:21:00Z" ;
 .
-<https://practicalprovenance.wordpress.com/2016/05/07/tracking-versions-with-pav/>
+:pav-blogpost
   rdf:type prof:ResourceDescriptor ;
   dct:format <https://www.iana.org/assignments/media-types/text/html> ;
-  prof:hasRole roles:Guidance ;
+  prof:hasRole roles:guidance ;
+  prof:hasArtifact <https://practicalprovenance.wordpress.com/2016/05/07/tracking-versions-with-pav/> ;
+  dct:created "2016-05-07" ;
 .
-<https://jbiomedsem.biomedcentral.com/articles/10.1186/2041-1480-4-37>
+:pav-paper
   rdf:type prof:ResourceDescriptor ;
   dct:format <https://www.iana.org/assignments/media-types/text/html>;
-  prof:hasRole roles:Guidance ;  # this is the official citation for PAV
+  prof:hasRole roles:specification ;  # this is the official citation for PAV
+  prof:hasArtifact <https://jbiomedsem.biomedcentral.com/articles/10.1186/2041-1480-4-37> ;
+  dct:created "2013-04-26" ;
+  dct:modified "2013-10-07" ;
+  dct:issued "2013-11-22" ;
 .
 <https://www.w3.org/TR/prov-o/>
   rdf:type prof:BaseSpecification ;
