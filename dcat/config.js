@@ -81,6 +81,14 @@ var respecConfig = {
           title : "ISO/IEC 25012 - Data Quality model",
           href : "http://iso25000.com/index.php/en/iso-25000-standards/iso-25012"
       },
+      "ISO-26324" : {
+	 "authors":["ISO/TC 46/SC 9"],
+	 "href":"https://www.iso.org/standard/43506.html",
+	 "title":"Information and documentation -- Digital object identifier system",
+	 "publisher":"ISO",
+	 "status":"International Standard",
+	 "date":"2012"
+      },	    
       "DDI" : {
          href : "http://www.ddialliance.org/explore-documentation",
          title : "Data Documentation Initiative",
