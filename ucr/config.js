@@ -36,9 +36,47 @@ var respecConfig = {
 	lint: "false",
     noRecTrack: "true",
     localBiblio: {
+      "CERIF":{
+        "href":"http://schema.org/",
+        "title":"Common European Research Information Format (CERIF)",
+        "publisher" : "euroCRIS"
+       },
+      "DATS-2017": {
+          "href": "https://doi.org/10.1038/sdata.2017.59",
+          "title": "DATS, the data tag suite to enable discoverability of datasets",
+          "authors": ["Susanna-Assunta Sansone"],
+          "etAl" : true,
+          "publisher": "Nature",
+          "status" : "Scientific Data, vol. 4, Article nr. 170059",
+          "date": "2017"
+      },
+      "DATS": {
+          "href": "https://github.com/datatagsuite/",
+          "title": "Data Tag Suite",
+          "authors": ["Alejandra Gonzalez-Beltran", "Philippe Rocca-Serra"],
+          "publisher": "NIH Big Data 2 Knowledge bioCADDIE and NIH Data Commons projects",
+          "date": "2016"
+      },
+      "DDI" : {
+         href : "http://www.ddialliance.org/explore-documentation",
+         title : "Data Documentation Initiative",
+         publisher : "DDI Alliance"
+      },
+      "RAMLET": {
+          "href": "https://doi.org/10.1045/march2016-verbert",
+          "title": "RAMLET - Resource Aggregation for Learning, Education, and Training",
+          "authors": ["Katrien Verbert", "Nancy J. Hoebelheinrich", "Kerry Blinco", "Scott Lewis", "Wilbert Kraan"],
+          "publisher": "D-Lib Magazine",
+          "status" : "Vol. 22, Number 3/4",
+          "date": "2016"
+      },
       "SCHEMA-ORG":{
         "href":"http://schema.org/",
         "title":"Schema.org"
+       },
+      "SDMX":{
+        "href":"https://sdmx.org/",
+        "title":"Statistical Data and Metadata eXchange (SDMX)"
        },
     },
     issueBase: "https://github.com/w3c/dxwg/issues"
