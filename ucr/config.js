@@ -41,6 +41,15 @@ var respecConfig = {
         "title":"Common European Research Information Format (CERIF)",
         "publisher" : "euroCRIS"
        },
+      "DATAHUB-2015": {
+          "href": "https://arxiv.org/abs/1409.0798",
+          "title": "DataHub: Collaborative Data Science & Dataset Version Management at Scale",
+          "authors": ["Anant Bhardwaj"],
+          "etAl" : true,
+          "publisher": "arXiv.org",
+          "status" : "7th Biennial Conference on Innovative Data Systems Research (CIDR’15)",
+          "date": "2015"
+      },
       "DATS-2017": {
           "href": "https://doi.org/10.1038/sdata.2017.59",
           "title": "DATS, the data tag suite to enable discoverability of datasets",
