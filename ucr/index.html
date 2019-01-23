@@ -852,7 +852,7 @@ Users need a way to view the aggregated collection level metadata and the associ
         <p class="existing_approaches">
           <p>[[DCTerms]] defines a limited number of agent roles as properties. [[VOCAB-DCAT]] re-uses some of them (in particular, <code>dcterms:publisher</code>), plus it defines a new one, namely, <code>dcat:contactPoint</code>. [[DCAT-AP]] and [[GeoDCAT-AP]] provide guidance on the use of other [[DCTerms]] roles - in particular, <code>dcterms:creator</code>, <code>dcterms:rightsHolder</code>. Anyway, the role properties defined in [[DCTerms]] and [[VOCAB-DCAT]] model just a subset of the agent roles defined in other standards. Moreover, they cannot be used to associate a role with other information concerning its temporal / organizational context.</p>
           <p>[[PROV-O]] could be used for this purpose by using a &#x201C;qualified attribution&#x201D;. This is, for instance, the approach used in [[GeoDCAT-AP]] to model agent roles defined in [[ISO-19115-1]] but not supported in [[DCTerms]] and [[VOCAB-DCAT]]:</p>
-          <pre>
+          <pre id="ex-attribution-using-prov" class="example">
 a:Dataset a dcat:Dataset; 
   prov:qualifiedAttribution [ a prov:Attribution&#xA0;;
 # The agent role, as per ISO 19115
@@ -861,7 +861,7 @@ a:Dataset a dcat:Dataset;
     prov:agent [ a foaf:Organization&#xA0;;
       foaf:name "European Union"@en ] ] .</pre>
           <p>However, to address the different use cases, such &#x201C;qualified roles&#x201D; should be compatible with the corresponding non-qualified forms, and both should be mutually inferable. For instance, the example above in [[GeoDCAT-AP]] is considered as equivalent to:</p>
-          <pre>
+          <pre id="ex-attribution-using-dc" class="example">
 a:Dataset a dcat:Dataset;
   dcterms:rightsHolder [ a foaf:Organization&#xA0;;
     foaf:name "European Union"@en ] .</pre>
@@ -1027,7 +1027,7 @@ a:Dataset a dcat:Dataset;
           <p>[[VOCAB-DQV]] allows to specify data conformance with a reference quality standard / benchmark. However, this can model only one of the possible scenarios - i.e., when data are <i>conformant</i>. </p>
           <p>[[GeoDCAT-AP]] provides an alternative and extended way of expressing "conformance" by using [[PROV-O]], allowing the specification of additional information about conformance tests (when this has been carried out, by whom, etc.), but also different conformance test results (namely, <i>conformant</i>, <i>not conformant</i>, <i>not evaluated</i>).</p>
           <p>An example of the [[GeoDCAT-AP]] [[PROV-O]]-based representation of conformance is provided by the following code snippet:</p>
-          <pre>
+          <pre id="ex-conformance-using-prov" class="example">
 a:Dataset a dcat:Dataset&#xA0;;
   prov:wasUsedBy a:TestingActivity .
 a:TestingActivity a prov:Activity&#xA0;;
@@ -1048,7 +1048,7 @@ a:ConformanceTest a prov:Plan&#xA0;;
                  interoperability of spatial data sets and services"@en
   dcterms:issued "2010-11-23"^^xsd:date .</pre>
           <p>The example states that the reference dataset is conformant with the <i>Commission Regulation (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards interoperability of spatial data sets and services</i>. Since this case corresponds to the scenario supported in [[VOCAB-DQV]], the [[PROV-O]]-based representation above is equivalent to:</p>
-          <pre>
+          <pre id="ex-conformance-using-dc" class="example">
 a:Dataset a dcat:Dataset&#xA0;;
   dcterms:conformsTo &lt;http://data.europa.eu/eli/reg/2014/1312/oj&gt; .
 # Reference standard / specification
@@ -1176,7 +1176,7 @@ a:Dataset a dcat:Dataset&#xA0;;
         <li> In the latter case, we include the specification the service/API conforms to (<code>dcterms:conformsTo</code>).</li>
       </ul>
           <p>An example is provided by the following code snippet. Here, the distribution's access URL points to service, implemented by using the [[WMS]] standard of the Open Geospatial Consortium (OGC):</p>
-          <pre>
+          <pre id="ex-access-url-point-to-service" class="example">
 a:Dataset a dcat:Dataset; 
   dcat:distribution [ a dcat:Distribution&#xA0;;
     dct:title "GMIS - WMS (9km)"@en&#xA0;;
@@ -1229,7 +1229,7 @@ a:Dataset a dcat:Dataset;
         <p class="description">
           <p>In most cases, the relationships between datasets and related resources (e.g., author, publisher, contact point, publications / documentation, input data, model(s) / software used to create the dataset) can be specified with simple, binary properties available from widely used vocabularies - as [[DCTerms]] and [[VOCAB-DCAT]].</p>
           <p>As an example, <code>dcterms:source</code> can be used to specify a relationship between a dataset (<code>output:Dataset</code>), and the dataset it was derived from (<code>input:Dataset</code>):</p>
-          <pre>
+          <pre id="ex-source-dataset-using-dc" class="example">
 output:Dataset a dcat:Dataset ;
   dcterms:source input:Dataset .
   
@@ -1237,7 +1237,7 @@ input:Dataset a dcat:Dataset .
           </pre>
           <p>However, there may be the need of providing additional information concerning, e.g., the temporal context of a relationship, which requires the use of a more sophisticated representation, similar to the "qualified" forms used in [[PROV-O]]. 
           For instance, the previous example may be further detailed by saying that the output dataset is an anonymized version of the input dataset, and that the anonymization process started at time <var>t</var> and ended at time <var>t&#8242;</var>. By using [[PROV-O]], this information can be expressed as follows:</p>
-          <pre>
+          <pre id="ex-source-dataset-using-prov" class="example">
 output:Dataset a dcat:Dataset ;
   prov:qualifiedDerivation [
     a prov:Derivation ;
@@ -1656,7 +1656,7 @@ is based on evaluation of DXWG use cases and <a rel="nofollow" class="external t
         <p class="existing_approaches">
           <p>[[SDW-BP]] addresses this issue in <a rel="nofollow" class="external text" href="https://www.w3.org/TR/sdw-bp/#bp-crs">Best Practice 8</a>, and illustrates a number of options that can be followed.</p>
           <p>[[GeoDCAT-AP]] models this information by specifying data conformance with a given standard, as done in [[VOCAB-DQV]], which, in this case, is a spatial or temporal reference system. As far as spatial reference systems are concerned, they are denoted by the HTTP URIs operated by the OGC CRS register (see [[SDW-BP]], <a rel="nofollow" class="external text" href="https://www.w3.org/TR/sdw-bp/#ex-crs-dataset-metadata">Example 22</a>):</p>
-          <pre>
+          <pre id="ex-dataset-reference-system" class="example">
 @prefix ex:      &lt;http://data.example.org/datasets/&gt; .
 @prefix dcat:    &lt;http://www.w3.org/ns/dcat#&gt; .
 @prefix dcterms: &lt;http://purl.org/dc/terms/&gt; .
@@ -1716,7 +1716,7 @@ ex:ExampleDataset
         <p class="existing_approaches">
           <p>[[SDW-BP]] provides a comprehensive guidance on how to specify geometries in the Best Practices under <a rel="nofollow" class="external text" href="http://w3c.github.io/sdw/bp/#geometry-and-crs">Section 12.2.2 <i>Geometries and coordinate reference systems</i></a>.</p>
           <p>As far as metadata are concerned, one of the documented approaches concerns the solution adopted in [[GeoDCAT-AP]], which models spatial coverage by using property <code>locn:geometry</code> [[LOCN]], and recommending encoding the geometry by using [[GML]] and/or [WKT] - see [[SDW-BP]], <a rel="nofollow" class="external text" href="https://www.w3.org/TR/sdw-bp/#ex-geodcat-ap-bag-addresses">Example 15</a>:</p>
-          <pre>
+          <pre id="ex-spatial-coverage" class="example">
 @prefix dcat:      &lt;http://www.w3.org/ns/dcat#&gt; .
 @prefix dcterms:   &lt;http://purl.org/dc/terms/&gt; .
 @prefix geosparql: &lt;http://www.opengis.net/ont/geosparql##&gt; .
