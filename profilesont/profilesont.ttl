@@ -19,8 +19,8 @@
                                           dc:creator "Rob Atkinson" ;
                                           rdfs:comment """This ontology is for describing relationships between standards/specifications, profiles of them and supporting artifacts such as validating resources.
 
-The model takes the `[dct:Standard](<a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">`) Class as a starting point and defines a specialization, a `Profile`, which is a `dct:Standard` that <em>profiles</em> a `dct:Standard` or another `Profile`. `Standards`s or `Profile`s can have `Resource Descriptor`s associated with
-    them that define rules for implementation, provide guidance on how to implement, or play some other role. `Resource Descriptor`s must indicate the role they
+This model takes the `[dct:Standard](<http://www.dublincore.org/documents/dcmi-terms/#terms-Standard)` Class as a starting point and defines a specialization, a `Profile`, that *profiles* a `dct:Standard` or another `Profile`. `Standards`s or `Profile`s can have `ResourceDescriptor`s associated with
+    them that define rules for implementation, provide guidance on how to implement, or play some other role. `ResourceDescriptor`s must indicate the role they
     play (to guide, to validate etc.), the formalism they adhere to (`[dct:format](http://www.dublincore.org/documents/dcmi-terms/#terms-format)`)
     and any `dct:Standard` that they themselves conform to (`[dct:conformsTo](http://www.dublincore.org/documents/dcmi-terms/#terms-conformsTo)`)."""@en ;
                                           owl:versionInfo "1.0" ;
@@ -73,7 +73,7 @@ dct:format rdf:type owl:AnnotationProperty ;
 :isInheritedFrom rdf:type owl:ObjectProperty ;
                rdfs:domain :ResourceDescriptor ;
                rdfs:range :Profile ;
-               skos:definition "A Profile's Resource Descriptor has been inherited from a Standard"@en ;
+               skos:definition "A Profile's Resource Descriptor has been inherited from a base specification"@en ;
                skos:usageNote "Profiles within inheritance hierarchies may use this property. If absent, then the Resource Descriptor applies specifically to this Profiles only"@en ;
                rdfs:label "is inherited from" .
 
@@ -82,7 +82,7 @@ dct:format rdf:type owl:AnnotationProperty ;
 :isProfileOf rdf:type owl:ObjectProperty ;
            rdfs:domain :Profile ;
            rdfs:range dct:Standard ;
-           skos:definition "A Profile is a profile of a dct:Standard or another Profile"@en ;
+           skos:definition "A Profile is a profile of a dct:Standard (or another Profile)"@en ;
            rdfs:label "is profile of" .
 
 
@@ -91,7 +91,7 @@ dct:format rdf:type owl:AnnotationProperty ;
                      rdfs:domain :Profile ;
                      rdfs:range dct:Standard ;
                      skos:scopeNote "A means to list all the transitive hierarchy of Standards/Profiles that this Profile implies conformance to"@en ;
-                     skos:definition "A Standard a Profile conforms to"@en ;
+                     skos:definition "A base specification a Profile conforms to"@en ;
                      rdfs:label "is transitive profile of" .
 
 
@@ -148,7 +148,7 @@ dct:format rdf:type owl:AnnotationProperty ;
          rdfs:subClassOf dct:Standard ;
          dct:source <https://www.w3.org/2017/dxwg/wiki/ProfileContext> ;
          rdfs:label "Profile" ;
-         skos:definition """A named set of constraints on one or more identified Standards or other Profiles, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of those Standards/Profiles necessary to accomplish a particular function.
+         skos:definition """A named set of constraints on one or more identified Standards or other Profiles, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of them necessary to accomplish a particular function.
 
 This definition includes what are often called \"application profiles\", \"metadata application profiles\", or \"metadata profiles\"."""@en .
 

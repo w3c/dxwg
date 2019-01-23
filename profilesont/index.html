@@ -42,12 +42,12 @@
     development was triggered by the appearance of multiple profiles of the Dataset Catalog Vocabulary (DCAT)
     [[VOCAB-DCAT-20140116]] and examples of profiles including the Dublin Core Application Profiles guidelines [[DCAP]] and various profiles of OpenGeospatial Consortium specifications.
   </p>
-  <p>The Profiles Ontology is an RDF vocabulary to describe the resources that define and implement a profile. A profile is defined as "A named set of constraints on one or more identified standards or other profiles, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of those standards necessary to accomplish a particular function." These resources may be human-readable documents (PDFs, textual documents), vocabularies or ontologies (XSD, RDF),  resources specific to validation tools (SHACL, ShEx, Schematron), or any other files or resources that support the profile. Each resource is defined as having a role that defines its function within the profile.
+  <p>The Profiles Ontology is an RDF vocabulary to describe the resources that define and implement a profile. A profile is defined as "A named set of constraints on one or more identified base specifications or other profiles, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of those base specifications necessary to accomplish a particular function." These resources may be human-readable documents (PDFs, textual documents), vocabularies or ontologies (XSD, RDF),  resources specific to validation tools (SHACL, ShEx, Schematron), or any other files or resources that support the profile. Each resource is defined as having a role that defines its function within the profile.
 	</p>
 This ontology also provides for the description of relationships between such profiles and the standards to which they conform. A standard in this case can be a vocabulary or it can be another profile from which the described profile is a derivation, expansion, or selection. This ontology provides a standardized, machine readable formalism for describing the context of profiles. The basis of the ontology is a specialization of <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></code>, allowing the use of the <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-conformsTo">dct:conformsTo</a></code> predicate to specify conformance to a profile.
 	</p><p>
     A "profile" here is represented by the <a href="#Class:Profile">Profile class definition</a> in the
-    <a href="#specification">Vocabulary Specification</a> with the following definition: "A named set of constraints on one or more identified standards or other profiles, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of those standards necessary to accomplish a particular function."
+    <a href="#specification">Vocabulary Specification</a> with the following definition: "A named set of constraints on one or more identified base specifications or other profiles, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of those base specifications necessary to accomplish a particular function."
   </p>
   <p>
     Profiles aim to increase interoperability within a community of users by introducing
@@ -250,9 +250,9 @@ This ontology also provides for the description of relationships between such pr
         <td class="prop">Definition:</td>
         <td>
           <p>
-            A named set of constraints on one or more identified standards or other profiles, including the
+            A named set of constraints on one or more identified base specifications or other profiles, including the
             identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options
-            and parameters of those standards necessary to accomplish a particular function.
+            and parameters of those base specifications necessary to accomplish a particular function.
           </p>
           <p>
             This definition includes what are often called "application profiles", "metadata application profiles", or
@@ -304,11 +304,11 @@ This ontology also provides for the description of relationships between such pr
         <tbody>
           <tr><td class="prop">OWL type:</td><td><a href="https://www.w3.org/TR/owl2-rdf-based-semantics/#table-axiomatic-properties">owl:ObjectProperty</a></td></tr>
           <tr><td class="prop">Label:</td><td>is profile of</td></tr>
-          <tr><td class="prop">Definition:</td><td>A Profile is a profile of a dct:Standard (or of another Profile)</td></tr>
+          <tr><td class="prop">Definition:</td><td>A Profile is a profile of a dct:Standard (or another Profile)</td></tr>
           <tr><td class="prop">Domain:</td><td><a href="#Class:Profile">prof:Profile</a></td></tr>
           <tr><td class="prop">Range:</td><td><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></td></tr>
           <tr><td class="prop">Inverse of:</td><td><a href="#Property:hasProfile">prof:hasProfile</a></td></tr>
-          <tr><td class="prop">Usage note:</td><td>The semantics of the rdfs:Range means that any resource treated as a dct:Standard can be regarded as a Profile (i.e. may be any specification with an empty set of additional constraints)</td></tr>
+          <tr><td class="prop">Usage note:</td><td>The semantics of the rdfs:Range means that any resource treated as a base specification can be regarded as a Profile (i.e. may be any specification with an empty set of additional constraints)</td></tr>
         </tbody>
       </table>
     </section>
@@ -461,7 +461,7 @@ This ontology also provides for the description of relationships between such pr
         </thead>
         <tbody>
           <tr><td class="prop">Label:</td><td>is inherited from</td></tr>
-          <tr><td class="prop">Definition:</td><td>A Profile's Resource Descriptor has been inherited from a parent Standard</td></tr>
+          <tr><td class="prop">Definition:</td><td>A Profile's Resource Descriptor has been inherited from a base specification</td></tr>
           <tr><td class="prop">Domain:</td><td><a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a></td></tr>
           <tr><td class="prop">Range:</td><td><a href="#Class:Profile">prof:Profile</a></td></tr>
           <tr><td class="prop">Usage note:</td><td>Profiles within inheritance hierarchies may use this property. If absent, then the Resource Descriptor applies specifically to this Profiles only</td></tr>
