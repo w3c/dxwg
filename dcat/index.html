@@ -878,12 +878,14 @@
             <a href="#Property:resource_landing_page">landing page</a>,
             <a href="#Property:resource_language">resource language</a>,
             <a href="#Property:resource_relation">relation</a>,
+            <a href="#Property:resource_qualifiedRelation">qualified relation</a>,
             <a href="#Property:resource_publisher">publisher</a>,
             <a href="#Property:resource_release_date">release date</a>,
             <a href="#Property:resource_theme">theme/category</a>,
             <a href="#Property:resource_title">title</a>,
             <a href="#Property:resource_type">type/genre</a>,
             <a href="#Property:resource_update_date">update/modification date</a>,
+            <a href="#Property:resource_qualifiedAttribution">qualified attribution</a>
         </p>
 
         <p class="issue" data-number="62">
@@ -953,6 +955,10 @@
                 added to the <code><a href="#Class:Resource"><code>dcat:Resource</code></a></code> class, as the Dataset superclass.
             </p>
 
+            <p class="issue" data-number="80">
+                The use of the [[PROV-O]] qualified-attribution pattern is <a href="#qualified-attribution">described below</a>.
+                `dct:creator` corresponds with a general attribution with the role 'creator'.
+            </p>
 
             <table class="definition">
                 <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/creator">dct:creator</a></th></tr></thead>
@@ -1018,7 +1024,8 @@
             <h4>Property: publisher</h4>
 
             <p class="issue" data-number="80">
-                The desire to have qualified forms of properties (as done in [[PROV-O]]) has been raised. If dcat:Dataset is a prov:Entity (not decided yet) then `publisher` could be a qualified prov:Entity &rarr; prov:Agent relationship.
+                The use of the [[PROV-O]] qualified-attribution pattern is <a href="#qualified-attribution">described below</a>.
+                `dct:publisher` corresponds with a general attribution with the role 'publisher'.
             </p>
 
             <table class="definition">
@@ -1143,6 +1150,29 @@
 
         </section>
 
+        <section id="Property:resource_qualifiedRelation">
+            <h4>Property: qualified relation</h4>
+
+            <table class="definition">
+              <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#qualifiedRelation">dcat:qualifiedRelation</a></th></tr></thead>
+              <tbody>
+              <tr><td class="prop">Definition:</td><td>Link to a description of a relationship with another resource</td></tr>
+              <tr><td class="prop">Sub-property of:</td><td><a href="http://www.w3.org/ns/prov#qualifiedInfluence">prov:qualifiedInfluence</a></td></tr>
+              <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a></td></tr>
+              <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#Relationship">dcat:Relationship</a></td></tr>
+              <tr><td class="prop">Usage note:</td><td>Used to link to another resource where the nature of the relationship is known but does not match one of the standard Dublin Core properties (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy) or PROV-O properties (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf).</td></tr>
+              </tbody>
+            </table>
+
+            <p>
+              This DCAT property follows the pattern of <a href="https://www.w3.org/TR/prov-o/#description-qualified-terms">Qualification Properties</a> defined in [[PROV-O]].
+            </p>
+
+            <p class="note">
+              Property added in this revision of DCAT.
+            </p>
+        </section>
+
         <section id="Property:resource_conformsto">
             <h4>Property: conforms to</h4>
             <table class="definition">
@@ -1217,6 +1247,32 @@
                 </tbody>
             </table>
         </section>
+
+        <section id="Property:resource_qualifiedAttribution">
+            <h4>Property: qualified attribution</h4>
+
+            <table class="definition">
+              <thead><tr><th>RDF Property:</th><th><a href="https://www.w3.org/ns/prov#qualifiedAttribution">prov:qualifiedAttribution</a></th></tr></thead>
+              <tbody>
+              <tr><td class="prop">Definition:</td><td>Link to an Agent having some form of responsibility for the resource</td></tr>
+              <tr><td class="prop">Sub-property of:</td><td><a href="http://www.w3.org/ns/prov#qualifiedInfluence">prov:qualifiedInfluence</a></td></tr>
+              <tr><td class="prop">Domain:</td><td><a href="https://www.w3.org/TR/prov-o/#Entity">prov:Entity</a></td></tr>
+              <tr><td class="prop">Range:</td><td><a href="https://www.w3.org/TR/prov-o/#Attribution">prov:Attribution</a></td></tr>
+              <tr><td class="prop">Usage note:</td><td>Used to link to an Agent where the nature of the relationship is known but does not match one of the standard Dublin Core properties (dct:creator, dct:publisher).
+              Use dcat:hadRole on the prov:Attribution to capture the responsibility of the Agent with respect to the Resource.
+              See https://w3c.github.io/dxwg/dcat/#qualified-attribution for usage examples.</td></tr>
+              </tbody>
+            </table>
+
+            <p>
+              This DCAT property follows the pattern of <a href="https://www.w3.org/TR/prov-o/#description-qualified-terms">Qualification Properties</a> defined in [[PROV-O]].
+            </p>
+
+            <p class="note">
+              Property added in this revision of DCAT.
+            </p>
+        </section>
+
 
     </section> <!-- end class Resource -->
 
@@ -1369,12 +1425,14 @@
             <a href="#Property:resource_landing_page">landing page</a>,
             <a href="#Property:resource_language">resource language</a>,
             <a href="#Property:resource_relation">relation</a>,
+            <a href="#Property:resource_qualifiedRelation">qualified relation</a>,
             <a href="#Property:resource_publisher">publisher</a>,
             <a href="#Property:resource_release_date">release date</a>,
             <a href="#Property:resource_theme">theme/category</a>,
             <a href="#Property:resource_title">title</a>,
             <a href="#Property:resource_type">type/genre</a>,
             <a href="#Property:resource_update_date">update/modification date</a>,
+            <a href="#Property:resource_qualifiedAttribution">qualified attribution</a>
         </p>
 
         <p>
@@ -1849,12 +1907,14 @@
             <a href="#Property:resource_landing_page">landing page</a>,
             <a href="#Property:resource_language">resource language</a>,
             <a href="#Property:resource_relation">relation</a>,
+            <a href="#Property:resource_qualifiedRelation">qualified relation</a>,
             <a href="#Property:resource_publisher">publisher</a>,
             <a href="#Property:resource_release_date">release date</a>,
             <a href="#Property:resource_theme">theme/category</a>,
             <a href="#Property:resource_title">title</a>,
             <a href="#Property:resource_type">type/genre</a>,
             <a href="#Property:resource_update_date">update/modification date</a>,
+            <a href="#Property:resource_qualifiedAttribution">qualified attribution</a>
         </p>
 
 
@@ -1945,12 +2005,14 @@
             <a href="#Property:resource_landing_page">landing page</a>,
             <a href="#Property:resource_language">resource language</a>,
             <a href="#Property:resource_relation">relation</a>,
+            <a href="#Property:resource_qualifiedRelation">qualified relation</a>,
             <a href="#Property:resource_publisher">publisher</a>,
             <a href="#Property:resource_release_date">release date</a>,
             <a href="#Property:resource_theme">theme/category</a>,
             <a href="#Property:resource_title">title</a>,
             <a href="#Property:resource_type">type/genre</a>,
             <a href="#Property:resource_update_date">update/modification date</a>,
+            <a href="#Property:resource_qualifiedAttribution">qualified attribution</a>
         </p>
 
 
@@ -1994,12 +2056,14 @@
             <a href="#Property:resource_landing_page">landing page</a>,
             <a href="#Property:resource_language">resource language</a>,
             <a href="#Property:resource_relation">relation</a>,
+            <a href="#Property:resource_qualifiedRelation">qualified relation</a>,
             <a href="#Property:resource_publisher">publisher</a>,
             <a href="#Property:resource_release_date">release date</a>,
             <a href="#Property:resource_theme">theme/category</a>,
             <a href="#Property:resource_title">title</a>,
             <a href="#Property:resource_type">type/genre</a>,
             <a href="#Property:resource_update_date">update/modification date</a>,
+            <a href="#Property:resource_qualifiedAttribution">qualified attribution</a>
         </p>
 
 
@@ -2055,6 +2119,56 @@
             </tbody>
         </table>
     </section>
+
+    <section id="Class:Relationship">
+        <h3>Class: Relationship</h3>
+
+        <p class="note">
+            The class <a href="#Class:Relationship">dcat:Relationship</a> has been added to the DCAT vocabulary in this revision.
+        </p>
+
+        <p>The following properties are recommended for use on this class:
+          <a href="#Property:relationship_relation">relation</a>,
+          <a href="#Property:relationship_hadRole">hadRole</a>,
+        </p>
+
+        <table class="definition">
+            <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Relationship">dcat:Relationship</a></th></tr></thead>
+            <tbody>
+            <tr><td class="prop">Definition:</td><td>An association class for attaching additional information to a relationship between DCAT Resources</td></tr>
+            <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/prov#EntityInfluence">prov:EntityInfluence</a></td></tr>
+            <tr><td class="prop">Usage note:</td><td>Use to characterize a relationship between datasets, and potentially other resources, where the nature of the relationship is known but is not adequately characterized by the standard Dublin Core properties (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy) or PROV-O properties (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)</td></tr>
+            </tbody>
+        </table>
+
+        <section id="Property:relationship_relation">
+            <h4>Property: relation</h4>
+            <table class="definition">
+                <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/relation">dct:relation</a></th></tr></thead>
+                <tbody>
+                <tr><td class="prop">Definition:</td><td>The resource related to the source resource</td></tr>
+                <tr><td class="prop">Usage note:</td><td>In the context of a dcat:Relationship this is expected to point to another dcat:Dataset or other catalogued resource</td></tr>
+                </tbody>
+            </table>
+
+        <section id="Property:relationship_hadRole">
+            <h4>Property: hadRole</h4>
+            <table class="definition">
+                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#hadRole">dcat:hadRole</a></th></tr></thead>
+                <tbody>
+                <tr><td class="prop">Definition:</td><td>The function of an entity or agent with respect to another entity or resource.</td></tr>
+                <tr><td class="prop">Usage note:</td><td>Used in a qualified-relationship to specify the role of an Entity with respect to another Entity.
+                  It is recommended that the value be taken from a controlled vocabulary of relation types,
+                  such as <a href="http://registry.it.csiro.au/def/isotc211/DS_AssociationTypeCode">ISO 19115 DS_AssociationTypeCode</a>,
+                   or those included in the <a href="https://www.iana.org/assignments/link-relations">IANA Registry of Link Relations</a>,
+                   the [[DataCite]] metadata schema, or the <a href="https://id.loc.gov/vocabulary/relators">MARC relators</a>.
+                </td></tr>
+                </tbody>
+            </table>
+
+        </section>
+
+    </section> <!-- end class Relationship -->
 
     <section id="Property:hadRole">
         <h3>Property: had role</h3>
@@ -2547,6 +2661,52 @@ ex:DS987
 <p>The domain of <a href="http://www.w3.org/ns/prov#hadRole"><code>prov:hadRole</code></a> property is <a href="http://www.w3.org/ns/prov#Association"><code>prov:Association</code></a> [[PROV-O]] i.e. PROV-O roles relate to activities, not entities.
   Therefore, a new property <a href="http://www.w3.org/ns/dcat#hadRole"><code>dcat:hadRole</code></a> is used to attach a specific role to the association-class <a href="http://www.w3.org/ns/prov#Attribution"><code>prov:Attribution</code></a>.</p>
 </aside>
+</section>
+
+<section id="qualified-relationship">
+  <h2>Relationships between datasets and other catalogued resources</h2>
+  <p>
+    The standard Dublin Core properties <a href="http://purl.org/dc/terms/relation">dct:relation</a> and sub-properties such as
+    <a href="http://purl.org/dc/terms/hasPart">dct:hasPart</a>/<a href="http://purl.org/dc/terms/isPartOf">dct:isPartOf</a>,
+    <a href="http://purl.org/dc/terms/hasVersion">dct:hasVersion</a>/<a href="http://purl.org/dc/terms/isVersionOf">dct:isVersionOf</a>,
+    <a href="http://purl.org/dc/terms/replaces">dct:replaces</a>/<a href="http://purl.org/dc/terms/isReplacedBy">dct:isReplacedBy</a>,
+    <a href="http://purl.org/dc/terms/requires">dct:requires</a>/<a href="http://purl.org/dc/terms/isRequiredBy">dct:isRequiredBy</a>,
+    <a href="http://www.w3.org/ns/prov#wasDerivedFrom">prov:wasDerivedFrom</a>,
+    <a href="http://www.w3.org/ns/prov#wasQuotedFrom">prov:wasQuotedFrom</a>,
+    support the description of relationships between datasets and other catalogued resources.
+    However, there are many other relationships of importance - e.g. alternate, canonical, original, preview, stereo-mate, working-copy-of.
+    Some of these roles are enumerated in the DS_AssociationTypeCode values from [[ISO-19115-1]], the <a href="https://www.iana.org/assignments/link-relations">IANA Registry of Link Relations</a>, in the [[DataCite]] metadata schema, and included within the <a href="https://id.loc.gov/vocabulary/relators">MARC relators</a>.
+  <p>
+  </p>
+    A general method for relating a resource to another resource with a specified relationship is provided by using the qualified form <a href="http://www.w3.org/ns/dcat#Property:resource_qualifiedRelation">dcat:qualifiedRelation</a>.
+    The following provides illustrations:
+  </p>
+<div class="example">
+<pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
+ex:Test987
+  a dcat:Dataset ;
+  dcat:qualifiedRelation [
+    a dcat:Relationship ;
+    dct:relation &lt;http://example.org/Original987&gt; ;
+    dcat:hadRole &lt;http://www.iana.org/assignments/relation/original&gt;
+  ] ;
+.
+
+ex:Test543L
+  a dcat:Dataset ;
+  dcat:qualifiedRelation [
+    a dcat:Relationship ;
+    dct:relation &lt;http://example.org/Test543R&gt; ;
+    dcat:hadRole &lt;http://registry.it.csiro.au/def/isotc211/DS_AssociationTypeCode/stereoMate&gt;
+  ] ;
+.
+</pre>
+</div>
+
+<p class="note">
+  Note: The property <a href="http://www.w3.org/ns/dcat#qualifiedRelation">dcat:qualifiedRelation</a> and association-class <a href="http://www.w3.org/ns/dcat#Relationship">dcat:Relationship</a> follow the pattern established in W3C [[PROV-O]] and described in the section <a href="https://www.w3.org/TR/prov-o/#description-qualified-terms">Qualified Terms</a>.
+  However, PROV-O is activity-centric, and does not support Entity-Entity relations except for the single case of 'was derived from', thus necessitating the new elements shown here to support the general case.
+</p>
 </section>
 
 <section id="prov-patterns">
@@ -3580,9 +3740,14 @@ dcat:servesDataset ga-courts:jc ;
         <p>The document has undergone the following changes since the W3C Recommendation of 16 January 2014 [[VOCAB-DCAT-20140116]]:</p>
 
         <ul>
+          <li>
+              A new section <a href="#qualified-relationship">Relationships between datasets and other catalogued resources</a> and new property <a href="#resource_qualifiedRelation">dcat:qualifiedRelation</a> and class <a href="#Class:Relationship">dcat:Relationship</a> added to support relationships between datasets or other resources
+          </li>
+
             <li>
                 A new  section, <a href="#Dereferenceable-identifiers">Dereferenceable identifiers</a>, is added to describe how to indicate different types of identifiers by using [[DCTERMS]] and [[vocab-adms]] - see <a href="https://github.com/w3c/dxwg/issues/53">Issue #53</a> and <a href="https://github.com/w3c/dxwg/issues/68">Issue #68</a>.
             </li>
+
             <li>
                 A new section on <a href="#qualified-attribution">Attribution roles</a> was added to recommend a pattern for assigning an agent to a catalogued resource with a qualified relationship.
             </li>
