@@ -235,15 +235,17 @@ dcat:CatalogRecord
 .
 dcat:DataDistributionService
   rdf:type owl:Class ;
-  rdfs:comment "A site or end-point that provides access to datasets through distributions of the datasets" ;
+  rdfs:comment "A site or end-point that provides access to distributions of existing datasets or subsets of datasets" ;
   rdfs:label "Data distribution service" ;
   rdfs:subClassOf dcat:DataService ;
   skos:changeNote "New class in this revision of DCAT" ;
   skos:editorialNote "Status: Class accepted by DCAT revision team, but details of definition and constraints not yet resolved." ;
+  skos:scopeNote "A DataDistributionService is usually bound to one or more specified Datasets, as indicated by the dcat:servesDataset property" ;
+  skos:scopeNote "A data discovery service supports discovery of data, usually by providing access to a Catalog. In that context the data discovery service can be understood as a DataDistributionService in which least one dcat:Catalog appears as the object of its dcat:servesDataset property" ;
 .
 dcat:DataService
   rdf:type owl:Class ;
-  rdfs:comment "A site or end-point for discovery, access or processing data or related resources." ;
+  rdfs:comment "A site or end-point providing operations related to the discovery of, access to, or processing functions on, data or related resources" ;
   rdfs:label "Data service" ;
   rdfs:subClassOf dctype:Service ;
   rdfs:subClassOf dcat:Resource ;
@@ -254,12 +256,14 @@ dcat:DataService
     ] ;
   skos:changeNote "New class in this revision of DCAT" ;
   skos:editorialNote "Status: Class accepted by DCAT revision team, but details of definition and constraints not yet resolved." ;
+  skos:scopeNote "The class dcat:DataService is an extension point for the description of any kind of data service. Currently only one subclass is defined - DataDistributionService - but additional subclasses may be defined in a DCAT application profile or other DCAT application for catalogs of other kinds of services" ;
+  skos:scopeNote "The kind of service can be indicated using the dct:type property. Its value may be taken from a controlled vocabulary such as the INSPIRE spatial data service type vocabulary" ;
 .
 dcat:Dataset
   rdf:type rdfs:Class ;
   rdf:type owl:Class ;
   rdfs:comment "1つのエージェントによって公開またはキュレートされ、1つ以上の形式でアクセスまたはダウンロードできるデータの集合。"@ja ;
-  rdfs:comment "A collection of data, published or curated by a single source, and available for access or download in one or more formats"@en ;
+  rdfs:comment "A collection of data, published or curated by a single source, and available for access or download in one or more represenations"@en ;
   rdfs:comment "Kolekce dat poskytovaná či řízená jedním zdrojem, která je k dispozici pro přístup či stažení v jednom či více formátech"@cs ;
   rdfs:comment "Raccolta di dati, pubblicati o curati da un'unica fonte, disponibili per l'accesso o il download in uno o più formati."@it ;
   rdfs:comment "Una colección de datos, publicados o conservados por una única fuente, y disponibles para ser accedidos o descargados en uno o más formatos"@es ;
@@ -277,13 +281,14 @@ dcat:Dataset
   rdfs:label "データセット"@ja ;
   rdfs:subClassOf dcat:Resource ;
   skos:changeNote "2018-02 - subclass of dctype:Dataset removed because scope of dcat:Dataset includes several other types from the dctype vocabulary. " ;
+  skos:scopeNote "This class describes the conceptual dataset. One or more representations might be available, with differing schematic layouts and formats or serializations." ;
   skos:scopeNote """Cette classe représente le jeu de données publié par le fournisseur de données. Dans les cas où une distinction est nécessaire entre le jeu de donénes et son
 					  entrée dans le catalogue, la classe registre de données peut être utilisée pour ce dernier. """@fr ;
   skos:scopeNote """Esta clase representa el conjunto de datos publicados. En los casos donde es necesario distinguir entre el
 					conjunto de datos y su entrada en el catálogo de datos, se debe utilizar la clase 'registro de catálogo'."""@es ;
   skos:scopeNote "Questa classe rappresenta il dataset come pubblicato dall’editore. Nel caso in cui sia necessario operare  una distinzione fra i metadati originali del dataset e il record dei metadati ad esso associato nel catalogo (ad esempio, per distinguere la data di modifica del dataset da quella del dataset nel catalogo) si può impiegare la classe catalog record."@it ;
   skos:scopeNote "Tato třída reprezentuje datovou sadu tak, jak je publikována poskytovatelem dat. V případě potřeby rozlišení datové sady a jejího záznamu v katalogu (jelikož metadata jako datum modifikace se mohou lišit) pro něj může být použita třída \"záznam v katalogu\"."@cs ;
-  skos:scopeNote """This class represents the actual dataset as published by the dataset publisher. In
+  skos:scopeNote """This class represents the actual dataset as published by the dataset provider. In
           cases where a distinction between the actual dataset and its entry in the catalog is
           necessary (because metadata such as modification date and maintainer might differ), the
           catalog record class can be used for the latter."""@en ;
@@ -292,25 +297,12 @@ dcat:Dataset
           η κλάση της καταγραφής καταλόγου μπορεί να χρησιμοποιηθεί για το τελευταίο."""@el ;
   skos:scopeNote "このクラスは、データセットの公開者が公開する実際のデータセットを表わします。カタログ内の実際のデータセットとそのエントリーとの区別が必要な場合（修正日と維持者などのメタデータが異なるかもしれないので）は、後者にcatalog recordというクラスを使用できます。"@ja ;
 .
-dcat:DiscoveryService
-  rdf:type owl:Class ;
-  rdfs:comment "A site or end-point that supports data discovery, usually by providing access to catalogs of datasets and data services." ;
-  rdfs:label "Discovery Service" ;
-  rdfs:subClassOf dcat:DataDistributionService ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty dcat:servesDataset ;
-      owl:someValuesFrom dcat:Catalog ;
-    ] ;
-  skos:changeNote "New class in this revision of DCAT" ;
-  skos:editorialNote "Status: Class accepted by DCAT revision team, but details of definition and constraints not yet resolved." ;
-.
 dcat:Distribution
   rdf:type rdfs:Class ;
   rdf:type owl:Class ;
   rdfs:comment """A specific representation of a dataset. A dataset might be available in several different forms,
           and these forms might comprise both different serializations or different schematic arrangements of the same data.
-          Examples of distributions include a CSV file, a netCDF file, or a data-cube"""@en ;
+          Examples of distributions include a CSV file, a netCDF file, a JSON document, or a data-cube"""@en ;
   rdfs:comment "Rappresenta una forma disponibile e specifica del dataset. Ciascun dataset può essere disponibile in forme differenti, che possono rappresentare formati diversi o diversi punti di accesso per un dataset. Esempi di distribuzioni sono un file CSV scaricabile, una API o un RSS feed."@it ;
   rdfs:comment """Representa una forma disponible y específica de los datos. Cada conjunto de datos puede estar disponible en
           formas diferentes, las cuáles pueden representar formatos diferentes del conjunto de datos o diferentes puntos de acceso."""@es ;
@@ -587,11 +579,13 @@ dcat:downloadURL
 .
 dcat:endpointDescription
   rdf:type owl:ObjectProperty ;
-  rdfs:comment "A description of the service end-point, for example an OpenAPI (Swagger) description, an OGC getCapabilities response, a SD Service, an OpenSearch or WSDL document.  " ;
+  rdfs:comment "A description of the service end-point, including its operations, parameters etc." ;
   rdfs:domain dcat:DataService ;
   rdfs:label "description of service end-point" ;
   skos:changeNote "New property in this revision of DCAT" ;
   skos:editorialNote "Status: Property accepted by DCAT revision team, but details of definition and constraints not yet resolved." ;
+  skos:scopeNote "The endpoint decription gives specific details of the actual endpoint instance, while <a href="#Property:resource_conformsto">dct:conformsTo</a> is used to indicate the general standard or specification that the endpoint implements." ;
+  skos:scopeNote "An endpoint description may be expressed in a machine-readable form, such as an OpenAPI (Swagger) description, an OGC getCapabilities response, a SPARQL Service Description, an OpenSearch or WSDL document, a Hydra API description, else in text or some other informal mode if a formal representation is not possible." ;
 .
 dcat:endpointURL
   rdf:type owl:ObjectProperty ;
