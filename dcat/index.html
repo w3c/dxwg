@@ -11,9 +11,12 @@
 </head>
 <body>
 <section  id="abstract">
-    <p>DCAT is an RDF vocabulary designed to facilitate interoperability between data catalogs published on the Web. This document defines the schema and provides examples for its use.</p>
-    <p>By using DCAT to describe datasets in data catalogs, publishers are using a standard model and vocabulary that facilitates the consumption and aggregation of metadata from multiple catalogs,
-        and in doing so can increase the discoverability of datasets. It also makes it possible to have a decentralized approach to publishing data catalogs and makes federated search for datasets across catalogs in multiple sites possible using the same query mechanism and structure. Aggregated DCAT metadata can serve as a manifest file as part of the digital preservation process.</p>
+    <p>DCAT is an RDF vocabulary designed to facilitate interoperability between data catalogs published on the Web.
+      This document defines the schema and provides examples for its use.</p>
+    <p>DCAT enables a publisher to describe datasets and data services in a catalog using a standard model and vocabulary that facilitates the consumption and aggregation of metadata from multiple catalogs.
+        This can increase the discoverability of datasets and data services.
+        It also makes it possible to have a decentralized approach to publishing data catalogs and makes federated search for datasets across catalogs in multiple sites possible using the same query mechanism and structure.
+        Aggregated DCAT metadata can serve as a manifest file as part of the digital preservation process.</p>
     <p style="text-align: center;">The namespace for DCAT terms is <code>http://www.w3.org/ns/dcat#</code></p>
     <p style="text-align: center;">The suggested prefix for the DCAT namespace is <code>dcat</code></p>
     <p style="text-align: center;">The (revised) DCAT vocabulary is available <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/rdf/dcat.ttl">here</a>.</p>
@@ -41,11 +44,14 @@
     </p>
 
     <h3 id="dcat_history">DCAT history</h3>
-    <p>The original DCAT vocabulary (originally hosted at http://vocab.deri.ie/dcat) was developed at the Digital Enterprise Research Institute (DERI), refined by the <a href="http://www.w3.org/egov/">eGov Interest Group</a>, and then finally standardized in 2014 [[VOCAB-DCAT-20140116]] by the <a href="http://www.w3.org/2011/gld/">Government Linked Data (GLD)</a> Working Group.</p>
+    <p>The original DCAT vocabulary was developed and <a href="http://vocab.deri.ie/dcat">hosted</a> at the Digital Enterprise Research Institute (DERI), then refined by the <a href="http://www.w3.org/egov/">eGov Interest Group</a>, and finally standardized in 2014 [[VOCAB-DCAT-20140116]] by the <a href="http://www.w3.org/2011/gld/">Government Linked Data (GLD)</a> Working Group.</p>
     <p>This revised version of DCAT was developed by the <a href="https://www.w3.org/2017/dxwg/">Dataset Exchange Working Group</a> in response to a new set of Use Cases and Requirements [[DCAT-UCR]] submitted on the basis of experience with the DCAT vocabulary from the time of the original version, and new applications not originally considered. A summary of the changes from  [[VOCAB-DCAT-20140116]] can be found at <a href="#changes">Change History</a></p>
 
     <h3 id="external_terms">External terms</h3>
-    <p>DCAT incorporates terms from pre-existing vocabularies where stable terms with appropriate meanings could be found, such as <code>foaf:homepage</code> and <code>dct:title</code>.  Informal summary definitions of the externally-defined terms are included here for convenience, while authoritative definitions are available in the normative references.  Changes to definitions in the references, if any, supersede the summaries given in this specification.  Note that conformance to DCAT (Section 4) concerns usage of only the terms in the DCAT namespace itself, so possible changes to the external definitions will not affect the conformance of DCAT implementations.</p>
+    <p>DCAT incorporates terms from pre-existing vocabularies where stable terms with appropriate meanings could be found, such as <a href="http://xmlns.com/foaf/0.1/homepage">foaf:homepage</a> and <a href="http://purl.org/dc/terms/title">dct:title</a>.
+      Informal summary definitions of the externally-defined terms are included here for convenience, while authoritative definitions are available in the normative references.
+      Changes to definitions in the references, if any, supersede the summaries given in this specification.
+      Note that conformance to DCAT (Section 4) concerns usage of only the terms in the DCAT namespace itself, so possible changes to the external definitions will not affect the conformance of DCAT implementations.</p>
 
     <h3 id="please_send_comments">Please send comments</h3>
 
@@ -55,10 +61,55 @@
 
     <h2>Introduction</h2>
 
-    <p class="note">From DCAT 2014 [[VOCAB-DCAT-20140116]]</p>
+    <p>Sharing data resources among different organizations, researchers, governments and citizens requires the provision of metadata.
+        This is irrespective of the data being open or not.
+        DCAT is a vocabulary for publishing data catalogs on the Web, which was originally developed in the context of government data catalogs
+        such as <a href="https://www.data.gov/">data.gov</a> and <a href="https://data.gov.uk">data.gov.uk</a>, but it has also been used in other contexts.
+    <p>
 
-    <p>Data can come in many formats, ranging from spreadsheets, through XML and RDF, to various specialty formats. DCAT does not make any assumptions about the serialization format of the datasets described in a catalog. Other, complementary vocabularies <em title="MAY" class="rfc2119">MAY</em> be used together with DCAT to provide more detailed format-specific information. For example, properties from the VoID vocabulary [[VOID]] can be used to express various statistics about a DCAT-described dataset if that dataset is in RDF format.</p>
-    <p>This document does not prescribe any particular method of deploying data expressed in DCAT. DCAT is applicable in many contexts including RDF accessible via SPARQL endpoints, embedded in HTML pages as RDFa, or serialized as e.g. RDF/XML or Turtle. The examples in this document use Turtle simply because of Turtle's readability.</p>
+    <p>
+        This revision of DCAT has extended the previous version to support further use cases and requirements [[DCAT-UCR]].
+        These include the possibility of cataloguing other data resources in addition to
+        datasets, such as data services. The revision also supports describing relationships between datasets as well as between
+        datasets and other catalogued resources, guidance on how to document licenses and right statements associated with the catalogued items.
+   </p>
+
+   <p>
+    DCAT provides RDF classes and properties to allow datasets and data services to be described and included in a catalog.
+    The use of a standard model and vocabulary facilitates the consumption and aggregation of metadata from multiple catalogs, which can:
+
+
+    <ol>
+      <li>
+        increase the discoverability of datasets and data services
+      </li>
+      <li>
+        allow federated search for datasets across catalogs in multiple sites
+      </li>
+    </ol>
+    </p>
+
+    <p>
+        Data can come in many formats, ranging from spreadsheets, through XML and RDF, to various specialty formats.
+        DCAT does not make any assumptions about the serialization format of the datasets described in a catalog, but it does
+        distinguish between the abstract dataset and its different manifestations or distributions.
+    </p>
+
+    <p>
+        Data is often provided through a service, accessed through a form or API which supports selection of an extract, sub-set, or combination of data.
+        DCAT allows the description of a data access service to be included in a catalog.
+    </p>
+
+    <p>
+        Other, complementary vocabularies <em title="MAY" class="rfc2119">MAY</em> be used together with DCAT to provide more detailed format-specific information.
+      For example, properties from the VoID vocabulary [[VOID]] can be used to express various statistics about a DCAT-described dataset if that dataset is in RDF format.
+    </p>
+
+    <p>
+      This document does not prescribe any particular method of deploying data expressed in DCAT.
+      DCAT is applicable in many contexts including RDF accessible via SPARQL endpoints, embedded in HTML pages as RDFa, or serialized as e.g. RDF/XML, N3, Turtle, or JSON-LD.
+      Within this document the examples use Turtle because of its readability.
+    </p>
 </section>
 
 <section id="motivation" class="informative"><h2>Motivation for change</h2>
