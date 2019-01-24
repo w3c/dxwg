@@ -1,6 +1,7 @@
 # baseURI: http://www.w3.org/ns/dcat
 # imports: http://purl.org/dc/terms/
 # imports: http://www.w3.org/2004/02/skos/core
+# imports: http://www.w3.org/ns/prov-o#
 # prefix: dcat
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
@@ -17,6 +18,25 @@
 @prefix v: <http://www.w3.org/2006/vcard/ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+dct:hasPart
+  skos:scopeNote "See also: Sub-properties of dct:hasPart in particular dcat:dataset, dcat:catalog, dcat:service." ;
+  skos:scopeNote "This is the most general predicate for membership of a catalog. Use of a more specific sub-property is recommended when available. " ;
+.
+dct:relation
+  skos:scopeNote "In the context of a dcat:Relationship this is expected to point to another dcat:Dataset or other catalogued resource" ;
+  skos:scopeNote "See also: Sub-properties of dct:relation in particular dcat:distribution, dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy" ;
+  skos:scopeNote "dct:relation SHOULD be used where the nature of the relationship between a catalogued item and related resources is not known. A more specific sub-property SHOULD be used if the nature of the relationship of the link is known. The property dcat:distribution SHOULD be used to link from a dcat:Dataset to a representation of the dataset, described as a dcat:Distribution" ;
+.
+dct:type
+  skos:scopeNote """The value SHOULD be taken from a well governed and broadly recognised controlled vocabulary, such as:
+1. DCMI Type vocabulary [DCTERMS]
+2. ISO 19115 scope codes [ISO-19115-1]
+3. Datacite resource types [DataCite]
+4. PARSE.Insight content-types used by re3data.org [RE3DATA-SCHEMA] (see item 15 contentType)
+5. MARC intellectual resource types
+Some members of these controlled vocabularies are not strictly suitable for datasets or data services (e.g. DCMI Type Event, PhysicalObject; ISO 19115 CollectionHardware, CollectionSession, Initiative, Sample, Repository), but might be used in the context of other kinds of catalogs defined in DCAT profiles or applications.""" ;
+  skos:scopeNote "To describe the file format, physical medium, or dimensions of the resource, use the dct:format element." ;
+.
 <http://www.w3.org/ns/dcat>
   rdf:type owl:Ontology ;
   dct:contributor [
@@ -24,13 +44,6 @@
       rdfs:seeAlso <https://orcid.org/0000-0002-3884-3420> ;
       foaf:name "Simon J D Cox" ;
       foaf:workInfoHomepage <http://people.csiro.au/Simon-Cox> ;
-    ] ;
-  dct:contributor [
-      schema:affiliation [
-        foaf:homepage <http://www.refinitiv.com> ;
-        foaf:name "Refinitiv" ;
-      ] ;
-      foaf:name "David Browning" ;
     ] ;
   dct:contributor [
       schema:affiliation <http://www.w3.org/data#W3C> ;
@@ -53,6 +66,13 @@
       foaf:name "Rufus Pollock" ;
     ] ;
   dct:contributor [
+      schema:affiliation [
+          foaf:homepage <http://www.refinitiv.com> ;
+          foaf:name "Refinitiv" ;
+        ] ;
+      foaf:name "David Browning" ;
+    ] ;
+  dct:contributor [
       rdfs:seeAlso <http://makxdekkers.com/makxdekkers.rdf#me> ;
       foaf:homepage <http://makxdekkers.com/> ;
       foaf:name "Makx Dekkers" ;
@@ -60,6 +80,11 @@
   dct:contributor [
       rdfs:seeAlso <http://www.eurecom.fr/~atemezin/gatemezing-foaf.rdf> ;
       foaf:name "Ghislain Auguste Atemezing" ;
+    ] ;
+  dct:contributor [
+      rdfs:seeAlso <https://jakubklimek.com/#me> ;
+      foaf:homepage <https://jakubklimek.com> ;
+      foaf:name "Jakub Klímek" ;
     ] ;
   dct:contributor [
       foaf:homepage <http://www.asahi-net.or.jp/~ax2s-kmtn/> ;
@@ -87,11 +112,6 @@
     ] ;
   dct:creator [
       foaf:name "John Erickson" ;
-    ] ;
-  dct:contributor [
-      foaf:name "Jakub Klímek" ;
-	  rdfs:seeAlso <https://jakubklimek.com/#me> ;
-	  foaf:homepage <https://jakubklimek.com> ;
     ] ;
   dct:modified "2012-04-24"^^xsd:date ;
   dct:modified "2013-09-20"^^xsd:date ;
@@ -130,6 +150,7 @@
   rdfs:label "データ・カタログ語彙（DCAT）"@ja ;
   owl:imports dct: ;
   owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  owl:imports <http://www.w3.org/ns/prov-o#> ;
   owl:versionInfo """Esta es una copia del vocabulario DCAT v1.0 disponible en https://www.w3.org/ns/dcat.ttl
 con modificaciones en progreso para la nueva versión de DCAT que resultará del grupo 'W3C Data Exchange Working Group'"""@en ;
   owl:versionInfo """This is a copy of v1.0 of the DCAT vocabulary, taken from https://www.w3.org/ns/dcat.ttl
@@ -281,13 +302,13 @@ dcat:Dataset
   rdfs:label "データセット"@ja ;
   rdfs:subClassOf dcat:Resource ;
   skos:changeNote "2018-02 - subclass of dctype:Dataset removed because scope of dcat:Dataset includes several other types from the dctype vocabulary. " ;
-  skos:scopeNote "This class describes the conceptual dataset. One or more representations might be available, with differing schematic layouts and formats or serializations." ;
   skos:scopeNote """Cette classe représente le jeu de données publié par le fournisseur de données. Dans les cas où une distinction est nécessaire entre le jeu de donénes et son
 					  entrée dans le catalogue, la classe registre de données peut être utilisée pour ce dernier. """@fr ;
   skos:scopeNote """Esta clase representa el conjunto de datos publicados. En los casos donde es necesario distinguir entre el
 					conjunto de datos y su entrada en el catálogo de datos, se debe utilizar la clase 'registro de catálogo'."""@es ;
   skos:scopeNote "Questa classe rappresenta il dataset come pubblicato dall’editore. Nel caso in cui sia necessario operare  una distinzione fra i metadati originali del dataset e il record dei metadati ad esso associato nel catalogo (ad esempio, per distinguere la data di modifica del dataset da quella del dataset nel catalogo) si può impiegare la classe catalog record."@it ;
   skos:scopeNote "Tato třída reprezentuje datovou sadu tak, jak je publikována poskytovatelem dat. V případě potřeby rozlišení datové sady a jejího záznamu v katalogu (jelikož metadata jako datum modifikace se mohou lišit) pro něj může být použita třída \"záznam v katalogu\"."@cs ;
+  skos:scopeNote "This class describes the conceptual dataset. One or more representations might be available, with differing schematic layouts and formats or serializations." ;
   skos:scopeNote """This class represents the actual dataset as published by the dataset provider. In
           cases where a distinction between the actual dataset and its entry in the catalog is
           necessary (because metadata such as modification date and maintainer might differ), the
@@ -366,6 +387,21 @@ dcat:Resource
     It is strongly recommended to use a more specific sub-class when available.""" ;
   skos:scopeNote "dcat:Resource is an extension point that enables the definition of any kind of catalog. Additional subclasses may be defined in a DCAT profile or application for catalogs of other kinds of resources" ;
 .
+dcat:Role
+  rdf:type owl:Class ;
+  rdfs:label "Role" ;
+  rdfs:seeAlso dcat:hadRole ;
+  rdfs:subClassOf skos:Concept ;
+  skos:editorialNote "Introduced into DCAT to complement prov:Role (whose use is limited to roles in the context of an activity, as the range of prov:hadRole)" ;
+  skos:scopeNote "Used in a qualified-attribution to specify the role of an Agent with respect to an Entity. It is recommended that the values be managed as a controlled vocabulary of agent roles, such as http://registry.it.csiro.au/def/isotc211/CI_RoleCode " ;
+  skos:scopeNote """Used in a qualified-relation to specify the role of an Entity with respect to another Entity.
+  It is recommended that the values be managed as a controlled vocabulary of entity roles such as
+  - ISO 19115 DS_AssociationTypeCode http://registry.it.csiro.au/def/isotc211/DS_AssociationTypeCode
+  - IANA Registry of Link Relations https://www.iana.org/assignments/link-relation
+  - DataCite metadata schema
+  - MARC relators https://id.loc.gov/vocabulary/relators""" ;
+  rdfs:comment "A role is the function of a resource or agent with respect to another resource, in the context of resource attribution or resource relationships."@en ;
+.
 dcat:accessService
   rdf:type owl:ObjectProperty ;
   rdfs:comment "A site or end-point that gives access to the distribution of the dataset" ;
@@ -378,10 +414,10 @@ dcat:accessService
 dcat:accessURL
   rdf:type rdf:Property ;
   rdf:type owl:ObjectProperty ;
-  rdfs:comment """Ceci peut être tout type d'URL qui donne accès à une distribution du jeu de données. Par exemple, un lien à une page HTML contenant un lien au jeu de données,
-					un Flux RSS, un point d'accès SPARQL. Utilisez le lorsque votre catalogue ne contient pas d'information sur quoi il est ou quand ce n'est pas téléchargeable."""@fr ;
   rdfs:comment """A URL of a resource that gives access to a distribution of the dataset. E.g. landing page, feed, SPARQL endpoint.
           Use for all cases except a simple download link, in which case downloadURL is preferred."""@en ;
+  rdfs:comment """Ceci peut être tout type d'URL qui donne accès à une distribution du jeu de données. Par exemple, un lien à une page HTML contenant un lien au jeu de données,
+					un Flux RSS, un point d'accès SPARQL. Utilisez le lorsque votre catalogue ne contient pas d'information sur quoi il est ou quand ce n'est pas téléchargeable."""@fr ;
   rdfs:comment "Potrebbe essere qualsiasi tipo di URL che dà accesso a una distribuzione del dataset. Ad esempio, la pagina di web, l'URL di download, URL del feed, un  SPARQL endpoint. Da utilizzare quando il catalogo non contiene informazioni su quale tipo sia o quando si sa che non è un download."@it ;
   rdfs:comment """Puede ser cualquier tipo de URL que de acceso a una distribución del conjunto de datos, e.g., página de destino, descarga,
 					URL feed, punto de acceso SPARQL. Esta propriedad se debe usar cuando su catálogo de datos no tiene información sobre donde está o cuando no se puede descargar."""@es ;
@@ -405,6 +441,7 @@ dcat:accessURL
       dcat:accessService
       dcat:endpointURL
     ) ;
+  skos:editorialNote "Status: English Definition text modified by DCAT revision team, translations pending." ;
   skos:editorialNote "rdfs:label, rdfs:comment and skos:scopeNote have been modified. Non-english versions must be updated." ;
   skos:scopeNote """El rango es una URL.
           Si la distribución es accesible solamente través de una página de destino (es decir, si no se conoce una URL de descarga directa),
@@ -420,7 +457,6 @@ dcat:accessURL
 					Αν η/οι διανομή/ές είναι προσβάσιμη/ες μόνο μέσω μίας ιστοσελίδας αρχικής πρόσβασης (δηλαδή αν δεν υπάρχουν γνωστές διευθύνσεις άμεσης μεταφόρτωσης), τότε ο σύνδεσμος της ιστοσελίδας αρχικής πρόσβασης πρέπει να αναπαραχθεί ως accessURL σε μία διανομή."""@el ;
   skos:scopeNote """確実にダウンロードでない場合や、ダウンロードかどうかが不明である場合は、downloadURLではなく、accessURLを用いてください。
 ランディング・ページを通じてしか配信にアクセスできない場合（つまり、直接的なダウンロードURLが不明）は、配信におけるaccessURLとしてランディング・ページのリンクをコピーすべきです（SHOULD）。"""@ja ;
- skos:editorialNote "Status: English Definition text modified by DCAT revision team, translations pending." ;
 .
 dcat:byteSize
   rdf:type rdf:Property ;
@@ -472,9 +508,9 @@ dcat:contactPoint
   rdf:type rdf:Property ;
   rdf:type owl:ObjectProperty ;
   rdfs:comment "Collega un dataset alle informazioni del contatto pertinente utilizzando VCard."@it ;
-  rdfs:comment "Relevant contact information (provided using vCard) for the catalogued resource."@en ;
   rdfs:comment "Propojuje datovou sadu a relevantní kontaktní informace poskytované jako VCard."@cs ;
   rdfs:comment "Relaciona un conjunto de datos con la información de contacto relevante utilizando VCard."@es ;
+  rdfs:comment "Relevant contact information (provided using vCard) for the catalogued resource."@en ;
   rdfs:comment "Relie un jeu de données à une information de contact utile en utilisant VCard."@fr ;
   rdfs:comment "Συνδέει ένα σύνολο δεδομένων με ένα σχετικό σημείο επικοινωνίας, μέσω VCard."@el ;
   rdfs:comment "تربط قائمة البيانات بعنوان اتصال موصف  باستخدام VCard"@ar ;
@@ -494,9 +530,9 @@ dcat:contactPoint
 dcat:dataset
   rdf:type rdf:Property ;
   rdf:type owl:ObjectProperty ;
+  rdfs:comment "A collection of data that is listed in the catalog."@en ;
   rdfs:comment "Collega un catalogo ad un dataset che è parte del catalogo."@it ;
   rdfs:comment "Enlaza un catálogo a un conjunto de datos que es parte de ese catálogo"@es ;
-  rdfs:comment "A collection of data that is listed in the catalog."@en ;
   rdfs:comment "Propojuje katalog a datovou sadu, která je součástí tohoto katalogu."@cs ;
   rdfs:comment "Relie un catalogue à un jeu de données faisant partie de ce catalogue"@fr ;
   rdfs:comment "Συνδέει έναν κατάλογο με ένα σύνολο δεδομένων το οποίο ανήκει στον εν λόγω κατάλογο."@el ;
@@ -520,10 +556,10 @@ dcat:dataset
 dcat:distribution
   rdf:type rdf:Property ;
   rdf:type owl:ObjectProperty ;
+  rdfs:comment "An available distribution of the dataset."@en ;
   rdfs:comment "Collega un dataset ad una delle sue distribuzioni disponibili."@it ;
   rdfs:comment "Conecta un conjunto de datos a una de sus distribuciones disponibles"@es ;
   rdfs:comment "Connecte un jeu de données à des distributions disponibles."@fr ;
-  rdfs:comment "An available distribution of the dataset."@en ;
   rdfs:comment "Propojuje datovou sadu a jednu z jejích dostupných distribucí."@cs ;
   rdfs:comment "Συνδέει ένα σύνολο δεδομένων με μία από τις διαθέσιμες διανομές του."@el ;
   rdfs:comment "تربط قائمة البيانات بطريقة أو بشكل يسمح  الوصول الى البيانات"@ar ;
@@ -568,6 +604,7 @@ dcat:downloadURL
   rdfs:label "رابط تحميل"@ar ;
   rdfs:label "ダウンロードURL"@ja ;
   rdfs:range rdfs:Resource ;
+  skos:editorialNote "Status: English Definition text modified by DCAT revision team, translations pending." ;
   skos:editorialNote "rdfs:label, rdfs:comment and/or skos:scopeNote have been modified. Non-english versions must be updated." ;
   skos:scopeNote "El valor es una URL."@es ;
   skos:scopeNote "Hodnotou je URL."@cs ;
@@ -575,7 +612,6 @@ dcat:downloadURL
   skos:scopeNote "La valeur est une URL."@fr ;
   skos:scopeNote "The value is a URL."@en ;
   skos:scopeNote "Η τιμή είναι ένα URL."@el ;
-  skos:editorialNote "Status: English Definition text modified by DCAT revision team, translations pending." ;
 .
 dcat:endpointDescription
   rdf:type owl:ObjectProperty ;
@@ -584,8 +620,8 @@ dcat:endpointDescription
   rdfs:label "description of service end-point" ;
   skos:changeNote "New property in this revision of DCAT" ;
   skos:editorialNote "Status: Property accepted by DCAT revision team, but details of definition and constraints not yet resolved." ;
-  skos:scopeNote "The endpoint decription gives specific details of the actual endpoint instance, while <a href="#Property:resource_conformsto">dct:conformsTo</a> is used to indicate the general standard or specification that the endpoint implements." ;
   skos:scopeNote "An endpoint description may be expressed in a machine-readable form, such as an OpenAPI (Swagger) description, an OGC getCapabilities response, a SPARQL Service Description, an OpenSearch or WSDL document, a Hydra API description, else in text or some other informal mode if a formal representation is not possible." ;
+  skos:scopeNote "The endpoint decription gives specific details of the actual endpoint instance, while dct:conformsTo is used to indicate the general standard or specification that the endpoint implements." ;
 .
 dcat:endpointURL
   rdf:type owl:ObjectProperty ;
@@ -606,9 +642,9 @@ dcat:hadRole
         ) ;
     ] ;
   rdfs:label "hadRole" ;
-  rdfs:range prov:Role ;
+  rdfs:range dcat:Role ;
   skos:changeNote "New property in this revision of DCAT" ;
-  skos:editorialNote "Introduced into DCAT to complement prov:hadRole, whose use is limited to roles in the context of an activity, with the domain of prov:Association" ;
+  skos:editorialNote "Introduced into DCAT to complement prov:hadRole (whose use is limited to roles in the context of an activity, with the domain of prov:Association)" ;
   skos:scopeNote "May be used in a qualified-attribution to specify the role of an Agent with respect to an Entity. It is recommended that the value be taken from a controlled vocabulary of agent roles, such as http://registry.it.csiro.au/def/isotc211/CI_RoleCode " ;
   skos:scopeNote """May be used in a qualified-relation to specify the role of an Entity with respect to another Entity.
   It is recommended that the value be taken from a controlled vocabulary of entity roles such as
@@ -717,9 +753,9 @@ dcat:qualifiedRelation
 dcat:record
   rdf:type rdf:Property ;
   rdf:type owl:ObjectProperty ;
+  rdfs:comment "A record describing the registration of a single dataset or dataservice that is part of the catalog."@en ;
   rdfs:comment "Asocia un catálogo con sus registros."@es ;
   rdfs:comment "Collega un catalogo ai propri record."@it ;
-  rdfs:comment "A record describing the registration of a single dataset or dataservice that is part of the catalog."@en ;
   rdfs:comment "Propojuje katalog a jeho záznamy."@cs ;
   rdfs:comment "Relie un catalogue à ses registres"@fr ;
   rdfs:comment "Συνδέει έναν κατάλογο με τις καταγραφές του."@el ;
@@ -761,11 +797,11 @@ dcat:service
 dcat:theme
   rdf:type rdf:Property ;
   rdf:type owl:ObjectProperty ;
+  rdfs:comment "A main category of the resource. A resource can have multiple themes."@en ;
   rdfs:comment "Hlavní kategorie zdroje. Zdroj může mít více kategorií."@cs ;
   rdfs:comment "La categoria principale della risorsa. Una risorsa può avere più temi."@it ;
   rdfs:comment "La categoría principal del recurso. Un recurso puede tener varios temas."@es ;
   rdfs:comment "La catégorie principale de la ressource. Une ressource peut avoir plusieurs thèmes."@fr ;
-  rdfs:comment "A main category of the resource. A resource can have multiple themes."@en ;
   rdfs:comment "Η κύρια κατηγορία του συνόλου δεδομένων. Ένα σύνολο δεδομένων δύναται να έχει πολλαπλά θέματα."@el ;
   rdfs:comment "التصنيف الرئيسي لقائمة البيانات. قائمة البيانات يمكن أن تملك أكثر من تصنيف رئيسي واحد."@ar ;
   rdfs:comment "データセットの主要カテゴリー。データセットは複数のテーマを持つことができます。"@ja ;
@@ -780,6 +816,7 @@ dcat:theme
   rdfs:label "テーマ/カテゴリー"@ja ;
   rdfs:range skos:Concept ;
   rdfs:subPropertyOf dct:subject ;
+  skos:editorialNote "Status: English Definition text modified by DCAT revision team, translations pending." ;
   skos:scopeNote """El conjunto de skos:Concepts utilizados para categorizar los recursos están organizados en
           un skos:ConceptScheme que describe todas las categorías y sus relaciones en el catálogo"""@es ;
   skos:scopeNote "L'insieme dei skos:Concept impiegati per categorizzare le risorse. I concetti sono organizzati in un skos:ConceptScheme il quale descrive tutte le categorie e le loro relazioni nel catalogo."@it ;
@@ -791,7 +828,6 @@ dcat:theme
   skos:scopeNote """Το σετ των skos:Concepts που χρησιμοποιείται για να κατηγοριοποιήσει τα σύνολα δεδομένων είναι οργανωμένο εντός
           ενός skos:ConceptScheme που περιγράφει όλες τις κατηγορίες και τις σχέσεις αυτών στον κατάλογο."""@el ;
   skos:scopeNote "データセットを分類するために用いられるskos:Conceptの集合は、カタログのすべてのカテゴリーとそれらの関係を記述しているskos:ConceptSchemeで組織化されます。"@ja ;
-  skos:editorialNote "Status: English Definition text modified by DCAT revision team, translations pending." ;
 .
 dcat:themeTaxonomy
   rdf:type rdf:Property ;
@@ -816,28 +852,6 @@ dcat:themeTaxonomy
   rdfs:label "テーマ"@ja ;
   rdfs:range skos:ConceptScheme ;
 .
-dct:hasPart
-  skos:scopeNote "See also: Sub-properties of dct:hasPart in particular dcat:dataset, dcat:catalog, dcat:service." ;
-  skos:scopeNote "This is the most general predicate for membership of a catalog. Use of a more specific sub-property is recommended when available. " ;
-.
-dct:relation
-  skos:scopeNote "See also: Sub-properties of dct:relation in particular dcat:distribution, dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy" ;
-  skos:scopeNote "dct:relation SHOULD be used where the nature of the relationship between a catalogued item and related resources is not known. A more specific sub-property SHOULD be used if the nature of the relationship of the link is known. The property dcat:distribution SHOULD be used to link from a dcat:Dataset to a representation of the dataset, described as a dcat:Distribution" ;
-  skos:scopeNote "In the context of a dcat:Relationship this is expected to point to another dcat:Dataset or other catalogued resource" ;
-.
-dct:type
-  skos:scopeNote """The value SHOULD be taken from a well governed and broadly recognised controlled vocabulary, such as:
-1. DCMI Type vocabulary [DCTERMS]
-2. ISO 19115 scope codes [ISO-19115-1]
-3. Datacite resource types [DataCite]
-4. PARSE.Insight content-types used by re3data.org [RE3DATA-SCHEMA] (see item 15 contentType)
-5. MARC intellectual resource types
-Some members of these controlled vocabularies are not strictly suitable for datasets or data services (e.g. DCMI Type Event, PhysicalObject; ISO 19115 CollectionHardware, CollectionSession, Initiative, Sample, Repository), but might be used in the context of other kinds of catalogs defined in DCAT profiles or applications.""" ;
-  skos:scopeNote "To describe the file format, physical medium, or dimensions of the resource, use the dct:format element." ;
-.
-foaf:homepage
-  skos:scopeNote "foaf:homepage is an inverse functional property (IFP) which means that it MUST be unique and precisely identify the web-page for the resource. This property indicates the canonical web-page, which might be helpful in cases where there is more than one web-page about the resource." ;
-.
 prov:qualifiedAttribution
   skos:definition "Link to an Agent having some form of responsibility for the resource" ;
   skos:scopeNote """Used to link to an Agent where the nature of the relationship is known but does not match one of the standard Dublin Core properties (dct:creator, dct:publisher).
@@ -854,4 +868,7 @@ prov:wasGeneratedBy
   rdfs:subPropertyOf dct:relation ;
   skos:scopeNote "The activity associated with generation of a dataset will typically be an initiative, project, mission, survey, on-going activity ('business as usual') etc. Multiple prov:wasGeneratedBy properties can be used to indicate the dataset production context at various levels of granularity." ;
   skos:scopeNote "Use prov:qualifiedGeneration to attach additional details about the relationship between the dataset and the activity, e.g. the exact time that the dataset was produced during the lifetime of a project" ;
+.
+foaf:homepage
+  skos:scopeNote "foaf:homepage is an inverse functional property (IFP) which means that it MUST be unique and precisely identify the web-page for the resource. This property indicates the canonical web-page, which might be helpful in cases where there is more than one web-page about the resource." ;
 .
