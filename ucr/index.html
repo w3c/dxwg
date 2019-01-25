@@ -556,7 +556,7 @@
       <div class="expandOrCollapse" onclick="toggleVisibility(this)">&#x25B6; Full use case description (click to collapse):</div>
       <div class="visible">
         <p class="description">
-          <p>We want to be able to describe a dataset record using properties appropriate to the dataset type. This is especially the case in a dataset in the geoscience domain, e.g. an observation of a "feature" in the real world captured using a sensor about some property. There are emerging practices on how to represent these semantics for the data, however, DCAT currently only supports association of a <code>dcat:Dataset</code> with <code>dcat:theme</code> to a <code>skos:Concept</code>. Data providers could extend/specialise dcat:theme to provide specific semantics about the association between dcat:Dataset and the &#x2018;theme&#x2019; but is this enough? Furthermore, there are broad/aggregated semantics at the dataset level (e.g. observations in the Great Barrier Reef) and then fine grained semantics for elements within a dataset (e.g. sea surface temperature observations in the Great Barrier Reef). 
+          <p>We want to be able to describe a dataset record using properties appropriate to the dataset type. This is especially the case in a dataset in the geoscience domain, e.g. an observation of a "feature" in the real world captured using a sensor about some property. There are emerging practices on how to represent these semantics for the data, however, DCAT currently only supports association of a <code>dcat:Dataset</code> with <code>dcat:theme</code> to a <code>skos:Concept</code>. Data providers could extend/specialise <code>dcat:theme</code> to provide specific semantics about the association between <code>dcat:Dataset</code> and the &#x2018;theme&#x2019; but is this enough? Furthermore, there are broad/aggregated semantics at the dataset level (e.g. observations in the Great Barrier Reef) and then fine grained semantics for elements within a dataset (e.g. sea surface temperature observations in the Great Barrier Reef). 
 Users need a way to view the aggregated collection level metadata and the associated semantics and then they need a way to view record level metadata to obtain/filter on specific information, e.g. instrument/sensor used, spatial feature, observable property, quantity kind, etc. </p>
           <p>Properties from the W3C Semantic Sensor Network SOSA ontology [[VOCAB-SSN]] and <cite>Quantities, Units, Dimensions And Data Types Ontologies</cite> (QUDT) [[QUDT]] may be useful in this context.  </p>
         </p>
@@ -605,7 +605,7 @@ Users need a way to view the aggregated collection level metadata and the associ
       <div class="expandOrCollapse" onclick="toggleVisibility(this)">&#x25B6; Full use case description (click to collapse):</div>
       <div class="visible">
         <p class="description">
-          <p>Some users of DCAT may want to apply it to resources that not everyone would consider a 'dataset'. Some examples are text documents, source code, controlled vocabularies, and ontologies. It's not clear what kinds of resources may be described with DCAT or how one would describe the types listed. Users need guidance about the expected scope for DCAT and on the use of whatever terms DCAT chooses to use or recommend for assigning types (e.g., dc:type). There also needs to be a way for a DCAT description to indicate the 'type' of dataset involved (the semantic type, not the media-type).</p>
+          <p>Some users of DCAT may want to apply it to resources that not everyone would consider a 'dataset'. Some examples are text documents, source code, controlled vocabularies, and ontologies. It's not clear what kinds of resources may be described with DCAT or how one would describe the types listed. Users need guidance about the expected scope for DCAT and on the use of whatever terms DCAT chooses to use or recommend for assigning types (e.g., <code>dct:type</code>). There also needs to be a way for a DCAT description to indicate the 'type' of dataset involved (the semantic type, not the media-type).</p>
         
         <p class="links">
           <ul>
@@ -767,8 +767,10 @@ Users need a way to view the aggregated collection level metadata and the associ
           <p>To model identifiers as literals, [[VOCAB-DCAT]] uses <code>dct:identifier</code>, but it makes no distinction between primary / alternative identifiers, or the identifier type. For alternative identifiers, [[DCAT-AP]] recommends class <code>adms:Identifier</code> [[VOCAB-ADMS]], which can be used to specify the identifier type, plus additional information - namely, the identifier scheme agency and the identifier issue date. It is worth noting that the <code>adms:Identifier</code> has the primary purpose of describing the identifier itself, which makes it less suitable for linking purposes.</p>
           <p>Finally, a number of vocabularies have defined specific properties for modeling identifier types, as <code>prism:doi</code> [[PRISM]] and <code>bibo:doi</code> [[BIBO]] for DOIs. Moreover, starting from <a href="http://schema.org/version/3.2/">version 3.2</a>, [[SCHEMA-ORG]] has defined a super-property <a href="http://schema.org/identifier"><code>schema:identifier</code></a> for all the identifier-specific properties already used in [[SCHEMA-ORG]].</p>
           <p>An alternative approach is to denote the identifier type with an RDF datatype. In such a case, the same property can be used to specify the identifier - e.g., <code>dct:identifier</code>. This solution has the advantage of being able to easily identify all literals used as identifiers (you just have to lookup / search for the same property), whereas the datatype can be used to filter specific identifier types.</p>
-          <p>KC: Note that the libraries/archives community has identifiers that are not (yet) actionable, like ISBNs, ISSNs. These can be coded as dct:identifier strings but the string itself is not unique. Not sure how these fit into the overall picture but perhaps we can task someone to bring a specific proposal.</p>
+          <aside class="ednote">
+          <p>KC: Note that the libraries/archives community has identifiers that are not (yet) actionable, like ISBNs, ISSNs. These can be coded as <code>dct:identifier</code> strings but the string itself is not unique. Not sure how these fit into the overall picture but perhaps we can task someone to bring a specific proposal.</p>
         </p>
+        </aside>
         <p class="links">
           <ul>
         <li><a href="https://www.w3.org/2016/11/sdsvoc/SDSVoc16_paper_27#data-citation-identifiers"><i>Using DCAT-AP for research data</i>.</a> Smart Descriptions &amp; Smarter Vocabularies (SDSVoc). Amsterdam, 30 Nov - 1 Dec 2016.</li>
@@ -1162,7 +1164,7 @@ a:Dataset a dcat:Dataset&#xA0;;
           <p>Although this is a domain-independent issue, it is a key one in the geospatial domain, where data are typically made accessible via services (e.g., a view or download service), that, to be used, require specific clients. In metadata, the link to such services is usually pointing to an XML document describing the service's "capabilities". This of course puzzles non-expert users, who expect instead to get the actual "data".</p>
           <p>Some catalogue platforms (as <a href="http://geonetwork-opensource.org/">GeoNetwork</a> and, to some extent, <a href="http://ckan.org/">CKAN</a>) are able to make this transparent for some services (typically, view services), but not for all. It would therefore be desirable to agree on a cross-domain and cross-platform approach to deal with this issue.</p>
           <p>In [[VOCAB-DCAT]], the option of accessing data via a service / API is explicitly mentioned, recommending the use of <a data-cite="VOCAB-DCAT#Property:distribution_accessurl">dcat:accessURL</a> to point to it. However, this property is meant to be used, generically, for <i>indirect</i> data download, so it is not enough to know that the URL points to a service endpoint rather than to a download page.</p>
-          <p>Actually, for some time, [[VOCAB-DCAT]] included a class <code><a data-cite="VOCAB-DCAT-20120405#Class:_WebService">dcat:WebService</a></code> (subclass of <code>dcat:Distribution</code>) to specify that data is available via a service / API. Other subclasses of <code>dcat:Distribution</code> were also defined to specify direct data access (<code><a data-cite="VOCAB-DCAT-20120405#Class:_Download">dcat:Download</a></code>), and data access via an RSS/Atom feed (<code><a data-cite="VOCAB-DCAT-20120405/#Class:_Feed">dcat:Feed</a></code>). All these subclasses were dropped in the final version of the vocabulary (see GLD's <a href="https://www.w3.org/2011/gld/track/issues/8">ISSUE-8</a> / <a href="https://www.w3.org/2011/gld/track/issues/9">ISSUE-9</a>, and related discussion).</p>
+          <p>Actually, for some time, [[VOCAB-DCAT]] included a class <a data-cite="VOCAB-DCAT-20120405#Class:_WebService"><code>dcat:WebService</code></a> (subclass of <code>dcat:Distribution</code>) to specify that data is available via a service / API. Other subclasses of <code>dcat:Distribution</code> were also defined to specify direct data access (<code><a data-cite="VOCAB-DCAT-20120405#Class:_Download">dcat:Download</a></code>), and data access via an RSS/Atom feed (<code><a data-cite="VOCAB-DCAT-20120405/#Class:_Feed">dcat:Feed</a></code>). All these subclasses were dropped in the final version of the vocabulary (see GLD's <a href="https://www.w3.org/2011/gld/track/issues/8">ISSUE-8</a> / <a href="https://www.w3.org/2011/gld/track/issues/9">ISSUE-9</a>, and related discussion).</p>
         </p>
         <p class="existing_approaches">
           <p>A proposal to address this issue has been elaborated in the framework of <a href="https://www.w3.org/2016/11/sdsvoc/SDSVoc16_paper_25#ref-DCAT-AP-IG">the <i>DCAT-AP implementation guidelines</i></a> (see issue <a href="https://joinup.ec.europa.eu/asset/dcat_application_profile/issue/dt2-service-based-data-access"><i>DT2: Service-based data access</i></a>), where two main requirements have been identified:</p>
@@ -1560,18 +1562,18 @@ Some of the DQV wishes might be included either as Use Cases or as group issues.
           <p>Considering DCAT a high-level model for data exchange agree on significant aspects
 missing so far and define extension points (typically properties) for re-use and 
 integration of existing standards, application profiles etc. The reference listing of aspects deemed relevant
-is based on evaluation of DXWG use cases and <a href="https://www.iso.org/standard/53798.html">ISO 19115:2014</a>:</p>
+is based on evaluation of DXWG use cases and [[ISO-19115-1]]:</p>
 		<p>
 		  <ul>
-			<li> Identification of Data(sub)sets (e.g. for purposes of citation)</li>
-			<li> Lineage, provenance and versioning (sources and processes applied)</li>
-			<li> Content description (internal data structure and semantics)</li>
-			<li> Context (spatial, temporal, socio-economic)</li>
-			<li> Reference system (spatial, temporal, socio-economic)</li>
-			<li> Quality, ratings and recommendations (?)</li>
-			<li> Distribution options (dynamic distribution, coverage of representation-, packaging- and compression formats)</li>
-			<li> Usage control, licensing (usage constraints and obligations, e.g. pricing) </li>
-			<li> Maintenance (scope and frequency of maintenance)</li>
+			<li>Identification of Data(sub)sets (e.g. for purposes of citation)</li>
+			<li>Lineage, provenance and versioning (sources and processes applied)</li>
+			<li>Content description (internal data structure and semantics)</li>
+			<li>Context (spatial, temporal, socio-economic)</li>
+			<li>Reference system (spatial, temporal, socio-economic)</li>
+			<li>Quality, ratings and recommendations (?)</li>
+			<li>Distribution options (dynamic distribution, coverage of representation-, packaging- and compression formats)</li>
+			<li>Usage control, licensing (usage constraints and obligations, e.g. pricing) </li>
+			<li>Maintenance (scope and frequency of maintenance)</li>
 		  </ul>
         </p>
       </p>
@@ -1619,22 +1621,22 @@ is based on evaluation of DXWG use cases and <a href="https://www.iso.org/standa
         <li> [[DCAT-AP]]</li>
         <li>[[OWL-Time]] (2017 revision) includes the following general-purpose predicates 
           <ul>
-            <li><a data-cite="OWL-TIME#time:hasTime">time:hasTime</a> to associate a time:TemporalEntity with anything</li>
-            <li><a data-cite="OWL-TIME#time:hasBeginning">time:hasBeginning</a> to associate a time:Instant with anything, though with the entailment that the subject is itself a time:TemporalEntity (or a member of a subclass, which is general not hard)</li>
-            <li><a data-cite="OWL-TIME#time:hasEnd">time:hasEnd</a> to associate a time:Instant with anything, though with the entailment that the subject is itself a time:TemporalEntity (or a member of a subclass, which is general not hard)</li>
+            <li><a data-cite="OWL-TIME#time:hasTime"><code>time:hasTime</code></a> to associate a <code>time:TemporalEntity</code> with anything</li>
+            <li><a data-cite="OWL-TIME#time:hasBeginning"><code>time:hasBeginning</code></a> to associate a <code>time:Instant</code> with anything, though with the entailment that the subject is itself a <code>time:TemporalEntity</code> (or a member of a subclass, which is general not hard)</li>
+            <li><a data-cite="OWL-TIME#time:hasEnd"><code>time:hasEnd</code></a> to associate a <code>time:Instant</code> with anything, though with the entailment that the subject is itself a <code>time:TemporalEntity</code> (or a member of a subclass, which is general not hard)</li>
           </ul>
         </li>
-        <li>SOSA/SSN Ontology [[VOCAB-SSN]] defines <b>sosa:phenomenonTime</b> and <b>sosa:resultTime</b>, adapted from ISO 19156 (Observations and measurements)
+        <li>SOSA/SSN Ontology [[VOCAB-SSN]] defines <code>sosa:phenomenonTime</code> and <code>sosa:resultTime</code>, adapted from [[ISO-19156]] (Observations and measurements)
           <ul>
-            <li><a data-cite="VOCAB-SSN#SOSAphenomenonTime">sosa:phenomenonTime</a> refers to world time</li>
-            <li><a data-cite="VOCAB-SSN#SOSAresultTime">sosa:resultTime</a> refers to data aquisition time 
+            <li><a data-cite="VOCAB-SSN#SOSAphenomenonTime"><code>sosa:phenomenonTime</code></a> refers to world time</li>
+            <li><a data-cite="VOCAB-SSN#SOSAresultTime"><code>sosa:resultTime</code></a> refers to data aquisition time 
               <ul>
                 <li> also briefly discussed was <b>stimulusTime</b> - being the time the act of data aquisition started (complementing resultTIme which is when it finished) </li>
               </ul>
             </li>
           </ul>
         </li>
-        <li>[[ISO-19156]] also has <b>om:validTime</b> - being the time interval during which use of the result is recommended (important for forecasting applications) </li>
+        <li>[[ISO-19156]] also has <code>om:validTime</code> - being the time interval during which use of the result is recommended (important for forecasting applications) </li>
         <li><a href="https://portal.opengeospatial.org/files/?artifact_id=42926">OGC Met Ocean working group / UK MetOffice</a> recognize the following temporal properties of ensemble forecast data<ul><li> simulation event time</li><li> analysis time (aka run time or reference time)</li><li> assimilation window</li><li> datum time</li><li> forecast computation time</li><li> validity time</li><li> partial forecast time</li><li> re-analysis event time</li><li> forecast model run collection time</li></ul></li>
       </ul>
         </p>
@@ -2047,7 +2049,7 @@ For healthcare data, there is the Automated Characterization of Health Informati
       <div class="expandOrCollapse" onclick="toggleVisibility(this)">&#x25B6; Full use case description (click to collapse):</div>
       <div class="visible">
         <p class="description">
-          <p>In the context of W3C working and interest groups (e.g. <a href="https://www.w3.org/2017/sdwig/charter.html"><abbr title="Spatial Data on the Web">SDW</abbr></a>, <a href="https://www.w3.org/2011/gld/charter"><abbr title="Government Linked Data">GLD</abbr></a>, <a href="https://www.w3.org/2013/05/odbp-charter"><abbr title="Data on the Web Best Practices">DWBP</abbr></a>) several overlapping vocabularies have been developed for the description of datasets: DCAT, VoID [[VOID]] and Data Cube [VOCAB-DATA-CUBE]. These vocabularies define similar concepts, but it is not entirely clear how these concepts are related. For example, all three vocabularies define a notion of &#x2018;dataset&#x2019; &#x2013; dcat:Dataset, void:Dataset and qb:DataSet. These notions are similar but not entirely equivalent.For example, it has been argued that void:Dataset and qb:DataSet are more like a dcat:Distribution than a dcat:Dataset.</p>
+          <p>In the context of W3C working and interest groups (e.g. <a href="https://www.w3.org/2017/sdwig/charter.html"><abbr title="Spatial Data on the Web">SDW</abbr></a>, <a href="https://www.w3.org/2011/gld/charter"><abbr title="Government Linked Data">GLD</abbr></a>, <a href="https://www.w3.org/2013/05/odbp-charter"><abbr title="Data on the Web Best Practices">DWBP</abbr></a>) several overlapping vocabularies have been developed for the description of datasets: DCAT, VoID [[VOID]] and Data Cube [VOCAB-DATA-CUBE]. These vocabularies define similar concepts, but it is not entirely clear how these concepts are related. For example, all three vocabularies define a notion of &#x2018;dataset&#x2019; &#x2013; <code>dcat:Dataset</code>, <code>void:Dataset</code> and <code>qb:DataSet</code>. These notions are similar but not entirely equivalent.For example, it has been argued that <code>void:Dataset</code> and <code>qb:DataSet</code> are more like a <code>dcat:Distribution</code> than a <code>dcat:Dataset</code>.</p>
         </p>
       </div>           
       <p class="relatedRequirements">
@@ -2160,13 +2162,13 @@ These might be relative (today, P15M) or absolute, represent an instant or inter
 			</li>
 			<li> Temporal resolution of a time series (sampling/observation rate), implied by <a href="#ID15">ID15</a>
 			</li>
-			<li> Profile recommendation on a standardized annotation of phenomenon time for single values (e.g. sosa:phenomenonTime) etc.
+			<li> Profile recommendation on a standardized annotation of phenomenon time for single values (e.g. <code>sosa:phenomenonTime</code>) etc.
 			</li>			
 			</ul>
 		</p>
 		<p>Possible use cases at life-cycle and publishing level (b)
 			<ul>
-			<li> Creation, modification time already covered by dct:issued, dct:modified
+			<li> Creation, modification time already covered by <code>dct:issued</code>, <code>dct:modified</code>
 			</li>
 			<li> Data Retention (related to usage control): The copy of Dataset should be removed after this date
 			</li>
@@ -2447,7 +2449,7 @@ for the same resource (i.e. the same access/download target).</p>
           <p>Data producers may have human-readable, textual information or more precise machine-readable information either as part of their publication process or as external resources that they can attach to the description of the dataset.</p>
         </p>
         <p class="existing_approaches">
-          <p>The European StatDCAT application profile for data portals in Europe specifies the optional use of the property dqv:hasQualityAnnotation with a range of a subclass of oa:Annotation from the Web Annotation Vocabulary [[ANNOTATION-VOCAB]], which allows annotations to be either embedded text or an external resource identified by a URI.</p>
+          <p>The European StatDCAT application profile for data portals in Europe specifies the optional use of the property <code>dqv:hasQualityAnnotation</code> with a range of a subclass of <code>oa:Annotation</code> from the Web Annotation Vocabulary [[ANNOTATION-VOCAB]], which allows annotations to be either embedded text or an external resource identified by a URI.</p>
         </p>
         <p class="links">
           <ul>			  
@@ -2772,7 +2774,7 @@ for the same resource (i.e. the same access/download target).</p>
 
   <section class="requirement" id="RIDT">
     <h3>Identifier type [RIDT]</h3>
-    <p>Indicate type of identifier (e.g. <code>prism:doi, bibo:doi, ISBN</code> etc.).</p>
+    <p>Indicate type of identifier (e.g. DOI, ISBN etc.).</p>
     <p class="relatedUseCases">
       <a href="#ID11"></a>
     </p>
@@ -2932,8 +2934,8 @@ for the same resource (i.e. the same access/download target).</p>
 
 	 </ul>
 	 </p>
-  <p class="note">dct:creator, dct:publisher etc are special cases, which require guidance, further roles may be defined in provenance or other richer models.
-		      The requirement is to establish an extensible mechanism, and for profiles to specify canonical equivalents for the special case properties of dcat:Dataset</p>
+  <p class="note"><code>dct:creator</code>, <code>dct:publisher</code> etc are special cases, which require guidance, further roles may be defined in provenance or other richer models.
+		      The requirement is to establish an extensible mechanism, and for profiles to specify canonical equivalents for the special case properties of <code>dcat:Dataset</code></p>
 
     <p class="relatedUseCases">
       <a href="#ID9"></a>
@@ -3117,7 +3119,7 @@ for the same resource (i.e. the same access/download target).</p>
 <section class="requirement" id="RDIC">
   <h3>Distribution container [RDIC]</h3>
   <p>Provide a means to specify the container structure of a distribution for access methods that return lists, independently of the specification of the profile the list items conform to.</p>
-<p class="note">Related to the distinction between dcat:accessURL and dcat:downloadURL. May be covered by service type, but specifically supports identification of lists vs items (items have no container). lists may be wrapped in a structural element or not - so this also needs to be described.</p>
+<p class="note">Related to the distinction between <code>dcat:accessURL</code> and <code>dcat:downloadURL</code>. May be covered by service type, but specifically supports identification of lists vs items (items have no container). lists may be wrapped in a structural element or not - so this also needs to be described.</p>
 <p class="relatedRequirements">
     <a href="#RDIP"></a>
     <a href="#RDIS"></a>
@@ -3133,7 +3135,7 @@ for the same resource (i.e. the same access/download target).</p>
 <h3>Distribution package [RDIP]</h3>
 <p>Define way to specify content of packaged files in a Distribution.
 For example, a set of files may be organised in an archive format and then compressed,
-but dct:hasFormat property only indicates the encoding type of the outer layer of packaging. </p>
+but <code>dct:hasFormat</code> property only indicates the encoding type of the outer layer of packaging. </p>
 <p class="relatedUseCases"><a href="#ID1"></a></p>
 </section>
 
