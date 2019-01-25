@@ -66,39 +66,6 @@ var respecConfig = {
           "publisher": "NIH Big Data 2 Knowledge bioCADDIE and NIH Data Commons projects",
           "date": "2016"
       },
-      "DCAP": {
-          authors: [
-              "Karen Coyle",
-              "Thomas Baker"
-          ],
-          href: "http://dublincore.org/documents/profile-guidelines/",
-          title: "Guidelines for Dublin Core Application Profiles",
-          date: "18 May 2009",
-          publisher: "DCMI",
-          status: "DCMI Recommended Resource"
-      },
-      "DCSF": {
-          authors: [
-              "Mikael Nilsson",
-              "Thomas Baker",
-              "Pete Johnston"
-          ],
-          href: "http://dublincore.org/documents/singapore-framework/",
-          title: "The Singapore Framework for Dublin Core Application Profiles",
-          date: "14 January 2008",
-          publisher: "DCMI",
-          status: "DCMI Recommended Resource"
-      },
-      "DCDSP": {
-          authors: [
-              "Mikael Nilsson"
-          ],
-          href: "http://dublincore.org/documents/dc-dsp/",
-          title: "Description Set Profiles: A constraint language for Dublin Core Application Profiles",
-          date: "31 March 2008",
-          publisher: "DCMI",
-          status: "DCMI Working Draft"
-      },
       "DDI" : {
          href : "http://www.ddialliance.org/explore-documentation",
          title : "Data Documentation Initiative",
