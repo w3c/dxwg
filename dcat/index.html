@@ -946,10 +946,6 @@
             The possible association of items with zero or multiple catalogs has been identified as a requirement to be satisfied in the revision of DCAT.
         </p>
 
-        <p class="issue" data-number="66">
-            The need to be able to link a catalogued resource with the source of funding that supported its production has been identified as a requirement to be satisfied in the revision of DCAT.
-        </p>
-
         <p class="issue" data-number="71">
             The need to be able to describe the business or project context related to production of a catalogued resource has been identified as a requirement to be satisfied in the revision of DCAT.
         </p>
@@ -1268,10 +1264,6 @@
                 In DCAT 2014 [[VOCAB-DCAT-20140116]] the domain of <code>dcat:contactPoint</code> was <code>dcat:Dataset</code>, which limited use of this property in other contexts. The domain has been relaxed in this revision - see <a href="https://github.com/w3c/dxwg/issues/95">Issue #95</a>.
             </p>
 
-            <p class="issue" data-number="109">
-                The axiomatization of <code>dcat:contactPoint</code> is being re-evaluated as part of the revision of DCAT.
-            </p>
-
             <table class="definition">
                 <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#contactPoint">dcat:contactPoint</a></th></tr></thead>
                 <tbody>
@@ -1500,10 +1492,6 @@
 
         <p class="issue" data-number="60">
             The need to provide richer descriptions of dataset aspects (e.g. instrument/sensor used, spatial feature, observable property, quantity kind) has been identified as a requirement to be satisfied in the revision of DCAT.
-        </p>
-
-        <p class="issue" data-number="61">
-            The need to provide better guidance and vocabulary elements for dataset citation has been identified as a requirement to be satisfied in the revision of DCAT.
         </p>
 
         <p class="note">
@@ -2293,9 +2281,7 @@ ex:InternationalDOIFundation a dct:Agent;
 
     <p>Identifiers for datasets should follow the <a href="https://www.w3.org/TR/dwbp/#DataIdentifiers">DWBP Data Identifier Best Practices</a>.</p>
 
-     <p class="issue" data-number="67">
-                The need to distinguish between primary and alternative (or legacy) identifiers for a dataset has been posed as a requirement. However, it is very much application-specific and should be better addressed in application profiles rather than being mandate a general approach.
-            </p>
+    <p>The need to provide support to distinguish between primary and alternative (or legacy) identifiers for a dataset within DCAT has been posed as a requirement. However, as it is very much application-specific and would be better addressed in application profiles rather than mandating a general approach.</p>
 
     <p>Depending on the application context, specific guidelines such as <a href="https://joinup.ec.europa.eu/release/dcat-ap-how-manage-duplicates">"DCAT-AP: How to manage duplicates?"</a> can be adopted for distinguishing authoritative datasets from dataset harvested by third parties catalogs.</p>
 
@@ -2447,11 +2433,8 @@ ex:InternationalDOIFundation a dct:Agent;
     </section>
     <section id="quality-conformance">
         <h2>Documenting conformance to standards</h2>
-        <p class="issue" data-number="58">
-            The issue suggests to represent "the degree a dataset conforms to a stated quality standard" and "the details of data quality conformance test results". This section is a starter to deal with the above requests by relying on the existing  W3C vocabularies.
-            Comments and suggestions about the following examples as well as the proposal of alternative patterns are more than welcome.
-        </p>
-        <p> This subsection  shows different modelling patterns combining [[VOCAB-DQV]] with [[PROV-O]] and EARL [[EARL10-Schema]] to represent the conformance degree to a stated quality standard and the details about the conformance tests.
+
+	<p> This subsection  shows different modelling patterns combining [[VOCAB-DQV]] with [[PROV-O]] and EARL [[EARL10-Schema]] to represent the conformance degree to a stated quality standard and the details about the conformance tests.
         </p>
 
         <section id="quality-conformance-statement">
@@ -2756,22 +2739,23 @@ ex:Test543L
 <section id="prov-patterns">
 
     <h2>Provenance patterns</h2>
-    <p class="issue" data-number="128">
-        A number of requirements identify the need to provide better support for Dataset and Record provenance - see
+    <p class="note">
+        In this chapter it is planned to describe patterns for the use of the [[PROV-O]] vocabulary to support the various provenance-related requirements. 
+	A number of requirements identify the need to provide better support for Dataset and Record provenance - see
         <a href="https://github.com/w3c/dxwg/issues/77">Issue #78</a>,
+        <a href="https://github.com/w3c/dxwg/issues/128">Issue #128</a>,
         <a href="https://github.com/w3c/dxwg/issues/77">Issue #77</a>,
         <a href="https://github.com/w3c/dxwg/issues/76">Issue #76</a>,
         <a href="https://github.com/w3c/dxwg/issues/71">Issue #71</a>,
         <a href="https://github.com/w3c/dxwg/issues/66">Issue #66</a>,
         <a href="https://github.com/w3c/dxwg/issues/63">Issue #63</a>.
-        It has been suggested that many of the requirements can be satisfied by using capabilities from the [[PROV-O]] ontology,
+	    
+        <p>It has been suggested that many of the requirements can be satisfied by using capabilities from the [[PROV-O]] ontology,
         in particular by treating <code><a href="#Class:Resource">dcat:Resource</a></code> and/or <code><a href="#Class:Catalog_Record">dcat:CatalogRecord</a></code> a sub-class of <a href="http://www.w3.org/ns/prov#Entity"><code>prov:Entity</code></a>.
-        A preliminary <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/rdf/dcat-prov.ttl">alignment of DCAT with PROV-O is available</a>.
-    </p>
-
-    <p class="note">
-        In this chapter it is planned to describe patterns for the use of the [[PROV-O]] vocabulary to support the various provenance-related requirements.
+        See <a href="https://github.com/w3c/dxwg/issues/128">Issue #128</a> for the relevant discussion.
+	A preliminary <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/rdf/dcat-prov.ttl">alignment of DCAT with PROV-O is available</a>.
         See the wiki page on <a href="https://github.com/w3c/dxwg/wiki/Provenance-patterns">Provenance Patterns</a> for more discussion.
+	</p>
     </p>
 
 </section>
@@ -3257,9 +3241,8 @@ ex:Test543L
 
     <section id="dcat-prov-o" class="informative">
         <h3>PROV-O</h3>
-        <p class="issue" data-number="128">
-            An alignment of DCAT with PROV-O [[PROV-O]] is being prepared. A <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/rdf/dcat-prov.ttl">provisional version</a> is available.
-        </p>
+            An alignment of DCAT with PROV-O [[PROV-O]] is being prepared, and has been discussed in <a href="https://github.com/w3c/dxwg/issues/128">Issue #128</a>.
+	    A <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/rdf/dcat-prov.ttl">provisional version</a> is available.
 
     </section>
 
