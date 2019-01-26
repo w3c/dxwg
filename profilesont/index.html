@@ -205,12 +205,79 @@ This ontology also provides for the description of relationships between such pr
     play (to guide, to validate etc.), the formalism they adhere to (<code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-format">dct:format</a></code>)
     and any <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></code> that they themselves conform to (<code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-conformsTo">dct:conformsTo</a></code>).
   </p>
-  <p>
-    A vocabulary of <code>Resource Role</code>s is provided alongside this ontology and that list is extensible.
-  </p>
-  <ul>
-    <li><a href="https://w3c.github.io/dxwg/profilesont/resource_roles.html">Resource Roles Vocabulary</a></li>
-  </ul>
+  <section id="initial-example">
+    <h3>Initial Example</h3>
+    <div class="issue" data-number="695"></div>
+    <p>
+      The example below illustrates the use of most parts of PROF and indicates how non-PROF profile metadata is stored alongside PROF metadata.
+    </p>
+    <figure id="fig-initial-example">
+      <img src="examples/initial.svg" title="An example profile of Dublin Core Terms" style="width:90%;" />
+      <figcaption>
+        A full example profile described using common metadata and the Profiles Ontology
+      </figcaption>
+    </figure>
+    <pre class="example nohighlight turtle" aria-busy="false" aria-live="polite" title="A full example described using the Profiles Ontology in RDF (turtle)">
+@prefix dct: &lt;http://purl.org/dc/terms/&gt; .
+@prefix prof: &lt;http://www.w3.org/ns/dx/prof/&gt; .
+@prefix role: &lt;http://www.w3.org/ns/dx/prof/role/&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+
+&lt;http://example.org/profile/x&gt;  # a Profile; it's identifying URI
+  a prof:Profile ;
+
+  # common metadata for the Profile
+
+  # the Profile's label
+  rdfs:label "Profile X" ;
+
+  # regular metadata, a basic description of the Profile
+  rdfs:comment """This is a Profile of Dublin Core Terms used to describe items in
+CSIRO's publications catalogue."""@en ;
+
+  # regular metadata, URI of publisher
+  dct:publisher &lt;http://catalogue.linked.data.gov.au/org/O-000886&gt; ;
+
+  # PROF metadata
+
+  # this is a profile of Dublin Core Terms, referenced by its namespace
+  prof:isProfileOf &lt;http://purl.org/dc/terms/&gt; ;
+
+  # this profile has a SHACL resource that constrains it's use of Dublin Core
+  prof:hasResource [
+    a prof:ResourceDescriptor ;
+
+    # it's in Turtle format
+    dct:format &lt;https://w3id.org/mediatype/text/turtle&gt; ;
+
+    # it conforms to SHACL, here refered to by its namespace URI as a Profile
+    dct:conformsTo &lt;http://www.w3.org/ns/shacl#&gt; ;
+
+    # this resource plays the role of "Validation"
+    # described in this ontology's accompanying Roles vocabulary
+    prof:hasRole role:Validation ;
+
+    # this resource's actual file
+    prof:hasArtifact &lt;http://example.org/profile/x/resource/validator.ttl&gt;
+  ] ;
+
+  # other resources this profile contains
+  prof:hasResource ... ;
+
+  # a short code to refer to the Profile with when a URI can't be used
+  prof:hasToken "profx"
+.
+    </pre>
+  </section>
+  <section id="roles-vocab">
+    <h3>Roles Vocabulary</h3>
+    <p>
+      A vocabulary of <code>Resource Role</code>s is provided alongside this ontology and that list is extensible.
+    </p>
+    <ul>
+      <li><a href="https://w3c.github.io/dxwg/profilesont/resource_roles.html">Resource Roles Vocabulary</a></li>
+    </ul>
+  </section>
 </section>
 <section id="specification">
   <h2>Vocabulary Specification</h2>
