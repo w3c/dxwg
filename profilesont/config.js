@@ -36,36 +36,6 @@ var respecConfig = {
     issueBase: "https://github.com/w3c/dxwg/issues/",
     github:    "https://github.com/w3c/dxwg/issues/",
     localBiblio: {
-        DCAP: {
-            authors: [
-                "Karen Coyle",
-                "Thomas Baker"
-            ],
-            href: "http://dublincore.org/documents/dcmi-terms/",
-            title: "Guidelines for Dublin Core Application Profiles (Working Draft)",
-            date: " 2009-05-18",
-            status: "DCMI Recommended Resource"
-        },
-        DCSF: {
-            authors: [
-                "Mikael Nilsson",
-                "Thomas Baker",
-                "Pete Johnston"
-            ],
-            href: "http://dublincore.org/documents/singapore-framework/",
-            title: "The Singapore Framework for Dublin Core Application Profiles",
-            date: " 2008-01-14",
-            status: "DCMI Recommended Resource"
-        },
-        DCDSP: {
-            authors: [
-                "Nilsson, Mikael"
-            ],
-            href: "http://dublincore.org/documents/dc-dsp/",
-            title: "Description Set Profiles: A constraint language for Dublin Core Application Profiles",
-            date: " 2008-03-31",
-            status: "DCMI Working Draft"
-        },
         PDF: {
             href: "https://www.iso.org/standard/51502.html",
             title: "Document management -- Portable document format -- Part 1: PDF 1.7",
