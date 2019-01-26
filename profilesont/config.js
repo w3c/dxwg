@@ -48,7 +48,7 @@ var respecConfig = {
             date: "2018-09-06",
             status: "W3C Community Group Draft Report"
         },
-        "DX-PROF-CONNEG": {
+        "PROF-CONNEG": {
             editors: [
                 "Lars G. Svensson",
                 "Rob Atkinson",
@@ -71,7 +71,7 @@ var respecConfig = {
             date: " 2018-12-31",
             status: "W3C Editor's Draft"
         },
-        "DX-PROF-IETF": {
+        "PROF-IETF": {
             authors: [
                 "L. Svensson",
                 "R. Verborgh"
@@ -81,7 +81,7 @@ var respecConfig = {
             date: " 2017-10-24",
             status: "IETF Internet Draft"
         },
-        "DX-PROF": {
+        "PROF": {
             editors: [
                 "Rob Atkinson",
                 "Nicholas J. Car"
