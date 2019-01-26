@@ -83,6 +83,22 @@ var respecConfig = {
         "href":"http://schema.org/",
         "title":"Schema.org"
        },
+      "SCHEMATRON":{
+        "href":"http://schematron.com/",
+        "title":"Schematron"
+       },
+      "ISO-19757-3" : {
+	 "authors":["ISO/IEC JTC 1/SC 34"],
+	 "href":"https://www.iso.org/standard/55982.html",
+	 "title":"Information technology -- Document Schema Definition Languages (DSDL) -- Part 3: Rule-based validation -- Schematron",
+	 "publisher":"ISO",
+	 "status":"International Standard",
+	 "date":"2016"
+      },	    
+      "ShEx":{
+        "href":"http://shex.io/",
+        "title":"ShEx - Shape Expressions"
+       },
       "SDMX":{
         "href":"https://sdmx.org/",
         "title":"Statistical Data and Metadata eXchange (SDMX)"
