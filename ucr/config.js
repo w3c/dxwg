@@ -37,7 +37,7 @@ var respecConfig = {
     noRecTrack: "true",
     localBiblio: {
       "CERIF":{
-        "href":"http://schema.org/",
+        "href":"https://www.eurocris.org/cerif/main-features-cerif",
         "title":"Common European Research Information Format (CERIF)",
         "publisher" : "euroCRIS"
        },
