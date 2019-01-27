@@ -71,6 +71,15 @@ var respecConfig = {
          title : "Data Documentation Initiative",
          publisher : "DDI Alliance"
       },
+      "OpenSearch": {
+            authors: [
+                "DeWitt Clinton"
+            ],
+            href:"https://github.com/dewitt/opensearch/blob/master/opensearch-1-1-draft-6.md",
+            title:"OpenSearch 1.1 Draft 6",
+            date:"17 April 2018",
+            publisher:"OpenSearch"
+      },
       "RAMLET": {
         "href": "https://doi.org/10.1045/march2016-verbert",
         "title": "RAMLET - Resource Aggregation for Learning, Education, and Training",
