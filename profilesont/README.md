@@ -3,7 +3,7 @@ This ontology is for describing relationships between standards/specifications, 
 
 This model starts with entities of type <http://dublincore.org/2012/06/14/dcterms#Standard>. A Standard can be either a Base Specification (a Standard not profiling any other Standard) or a Profile (a Standard which does profile others). Any Standard can have one or more associated Implementation Resource Descriptors, each of which defines implementing rules for it. The role played by each Implementation Resource Descriptor must be indicated (guidance, validation etc.), and the formalism they adhere to (dct:format) in order to support content negotiation. A preliminary set of Implementation Resource Roles is provided as a 'vocabulary' alongside this ontology.
 
-Development of this ontology is part of the work of the [Data Exchange Working Group](https://www.w3.org/2017/dxwg/) (DXWG)'s [Profile Guidance](https://w3c.github.io/dxwg/profile-guidance/) work.
+Development of this ontology is part of the work of the [Data Exchange Working Group](https://www.w3.org/2017/dxwg/) (DXWG)'s [Profile Guidance](https://w3c.github.io/dxwg/profiles/) work.
 
 ## Ontology components
 The main files of this ontology are:
