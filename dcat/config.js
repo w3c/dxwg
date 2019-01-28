@@ -88,7 +88,7 @@ var respecConfig = {
 	 "publisher":"ISO",
 	 "status":"International Standard",
 	 "date":"2012"
-      },	    
+      },
       "DDI" : {
          href : "http://www.ddialliance.org/explore-documentation",
          title : "Data Documentation Initiative",
@@ -182,6 +182,15 @@ var respecConfig = {
             date:"15 March 2018",
             publisher:"Hydra W3C Community Group",
             status:"Unofficial Draft"
+      },
+      "LDP": {
+            authors: [
+                "Leigh Dodds",
+                "Ian Davis"
+            ],
+            href:"http://patterns.dataincubator.org/book/",
+            title:"Linked Data Patterns",
+            date:"31 May 2012"
       },
       "ODRS": {
             authors: [
