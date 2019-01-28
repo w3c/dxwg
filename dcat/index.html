@@ -6,6 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script class="remove" src="https://www.w3.org/Tools/respec/respec-w3c-common"></script>
     <script class="remove" src="config.js"></script>
+	
+    <script>
+// @andrea-perego
+function popCrossRefs() {
+  $('a[href^="#"]').each( function () {
+    var href = $(this).attr('href');
+    var id = href.trim().replace('#','');
+    var text = $(this).text();
+    if (text.trim().length == 0 && id.length > 0 && ( $(href).hasClass('example') || $(href).hasClass('practicelab') )) {
+      var label = $('.example:has(#' + id + ') > .example-title, *[id="' + id + '"].example > .example-title, *[id="' + id + '"].illegal-example > .example-title, *[id="' + id + '"].practicelab').text();
+      if (label.trim().length > 0) {
+        $(this).text(label);
+      }
+    }
+  } );
+}
+$(document).ready( function() {
+  popCrossRefs();
+});
+// @andrea-perego
+    </script>	
+	
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="small.css" media="only all and (max-width: 649px)">
 </head>
@@ -228,7 +250,7 @@
         </li>
     </ul>
 
-    <figure id="fig1"><img alt="UML model of DCAT classes and properties" src="UML/DCAT-summary-all-attributes.png">
+    <figure id="UML_DCAT_All_Attr"><img alt="UML model of DCAT classes and properties" src="UML/DCAT-summary-all-attributes.png">
         <figcaption>
             Overview of DCAT model, showing the classes of resources that can be members of a Catalog, and the relationships between them.
         </figcaption>
@@ -1707,7 +1729,7 @@
                 Under the revised scope, instances of type <code>dcat:Distribution</code> <em title="SHOULD" class="rfc2119">SHOULD</em> be limited to <i>representations</i> of datasets which might be transported as files, and <em title="SHOULD NOT" class="rfc2119">SHOULD NOT</em> be used for data <i>services</i> such as APIs or feeds. Data services including APIs and feeds <em title="SHOULD" class="rfc2119">SHOULD</em> be described using instances of type <a href="#Class:Data_Service"><code>dcat:DataService</code></a> whose sub-class <a href="#Class:Data_Distribution_Service"><code>dcat:DataDistributionService</code></a> <em title="MAY" class="rfc2119">MAY</em> serve <a href="#Class:Distribution"><code>dcat:Distributions</code></a>.
             </p>
             <p>
-                Links between a <code>dcat:Distribution</code> and services or web addresses where it can be accessed are expressed using <a href="#Property:distribution_accessurl"><code>dcat:accessURL</code></a>, <a href="#Property:distribution_accessservice"><code>dcat:accessService</code></a>, <a href="#Property:distribution_downloadurl"><code>dcat:downloadURL</code></a>, as shown in <a href="#fig1">Figure 1</a> and described in the definitions below.
+                Links between a <code>dcat:Distribution</code> and services or web addresses where it can be accessed are expressed using <a href="#Property:distribution_accessurl"><code>dcat:accessURL</code></a>, <a href="#Property:distribution_accessservice"><code>dcat:accessService</code></a>, <a href="#Property:distribution_downloadurl"><code>dcat:downloadURL</code></a>, as shown in <a href="#UML_DCAT_All_Attr"></a> and described in the definitions below.
             </p>
         </div>
 
@@ -2282,8 +2304,8 @@ end class DiscoveryService -->
 &lt;https://example.org/proxyid&gt; a dcat:Dataset;
 	dct:identifier  "id"^^xsd:string
     .</pre>
-    <p>The property <a href="https://www.w3.org/TR/vocab-adms/#adms-identifier"><code>adms:identifier</code></a> can express other locally minted identifiers or external identifiers, like <abbr title="Digital Object Identifier">DOI</abbr> [[ISO-26324]], <a href="https://eur-lex.europa.eu/eli-register/about.html"><abbr title="European Legislation Identifier">ELI</abbr></a> etc., as long as they are globally unique and stable.</p>
-    <p>The following example uses <a href="https://www.w3.org/ns/adms#schemaAgency"><code>adms:schemaAgency</code></a> and <a href="http://dublincore.org/2012/06/14/dcterms#creator"><code>dct:creator</code></a> to represent the authority that defines the identifier scheme (e.g., the <a href="https://www.doi.org/">DOI foundation</a> in the example), <code>adms:schemaAgency</code> is used when the authority has no URI associated.
+    <p>The property <a data-cite="VOCAB-ADMS#adms-identifier"><code>adms:identifier</code></a> [[VOCAB-ADMS]] can express other locally minted identifiers or external identifiers, like <abbr title="Digital Object Identifier">DOI</abbr> [[ISO-26324]], <a href="https://eur-lex.europa.eu/eli-register/about.html"><abbr title="European Legislation Identifier">ELI</abbr></a> etc., as long as they are globally unique and stable.</p>
+    <p>The following example uses <a data-cite="VOCAB-ADMS#schemaAgency"><code>adms:schemaAgency</code></a> and <a data-cite="DCTerms#creator"><code>dct:creator</code></a> to represent the authority that defines the identifier scheme (e.g., the <a href="https://www.doi.org/">DOI foundation</a> in the example), <code>adms:schemaAgency</code> is used when the authority has no URI associated.
     </p>
 
 <pre id="ex-adms-identifier" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
@@ -2945,9 +2967,9 @@ ex:Test543L
             Schema.org [[SCHEMA-ORG]] includes a number of types and properties based on the original DCAT work (see <a href="https://schema.org/Dataset">schema:Dataset</a> as a starting point),
             and the index for Google's <a href="https://g.co/datasetsearch">Dataset Search service</a> relies on structured description in web pages about datasets based on both
             <a href="https://developers.google.com/search/docs/data-types/dataset">schema.org and DCAT</a>.
-            A comparison of the <a href="#fig1">DCAT backbone</a> with related classes from [[SCHEMA-ORG]] in <a href="#fig3">the following figure</a> shows the similarity:
+            A comparison of the DCAT backbone, shown in <a href="#UML_DCAT_All_Attr"></a> above with the related classes from [[SCHEMA-ORG]] in <a href="#UML_SchemaOrg_Data_Cat"></a> shows the similarity:
         </p>
-        <figure id="fig3"><img alt="UML model of schema.org classes and properties related to dataset catalogs" src="UML/schema.org-dataset.png">
+        <figure id="UML_SchemaOrg_Data_Cat"><img alt="UML model of schema.org classes and properties related to dataset catalogs" src="UML/schema.org-dataset.png">
             <figcaption>
                 schema.org support for dataset catalogs, showing a selection of schema.org properties that have the classes shown within their domain and range
             </figcaption>
@@ -3842,7 +3864,7 @@ dcat:servesDataset ga-courts:jc ;
           </li>
 
             <li>
-                A new  section, <a href="#Dereferenceable-identifiers">Dereferenceable identifiers</a>, is added to describe how to indicate different types of identifiers by using [[DCTERMS]] and [[vocab-adms]] - see <a href="https://github.com/w3c/dxwg/issues/53">Issue #53</a> and <a href="https://github.com/w3c/dxwg/issues/68">Issue #68</a>.
+                A new  section, <a href="#Dereferenceable-identifiers">Dereferenceable identifiers</a>, is added to describe how to indicate different types of identifiers by using [[DCTERMS]] and [[VOCAB-ADMS]] - see <a href="https://github.com/w3c/dxwg/issues/53">Issue #53</a> and <a href="https://github.com/w3c/dxwg/issues/68">Issue #68</a>.
             </li>
 
             <li>
