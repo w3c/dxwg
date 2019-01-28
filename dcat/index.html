@@ -96,8 +96,7 @@
     </p>
 
     <p>
-        Data is often provided through a service, accessed through a form or API which supports selection of an extract, sub-set, or combination of data.
-        DCAT allows the description of a data access service to be included in a catalog.
+        Data is often provided through a service, accessed through a graphical interface or an API, which often supports selection of extracts, subsets, or combinations of data. DCAT allows the description of a data access service to be included in a catalog. DCAT also supports the description of related data applications that may be included in a data catalog, such as data transformation or analysis services.
     </p>
 
     <p>
@@ -210,12 +209,18 @@
         </li>
         <li>
           <code><a href="#Class:Data_Service">dcat:DataService</a></code> represents a data service in a catalog.
-          A data service is a collection of operations, accessible through an interface (API) that provide access to one or more datasets or data processing functions.
+          A data service is a collection of operations, accessible through a graphical interface or an application programming interface (API), that provide access to one or more datasets and/or data processing functions.
         </li>
+        <li>
+          <code><a href="#Class:Data_API">dcat:DataAPI</a></code> represents a kind of data service that can be interacted with via an application programming interface. It may provide access to distributions of one or more datasets or extracts of datasets, and it may provide related data services.
+        </li>
+        <li>
+          <code><a href="#Class:Data_Application">dcat:DataApplication</a></code> represents a kind of data service that can be interacted with via a graphical interface, such as a single web form or a more complex interactive application. It may provide access to distributions of one or more datasets or extracts of datasets, and it may provide related data services.
+        </li>
+        <!--
         <li>
           <code><a href="#Class:Data_Distribution_Service">dcat:DataDistributionService</a></code> represents a kind of data service that provides access to distributions of one or more datasets or extracts of datasets.
         </li>
-        <!--
           <li>
             <code><a href="#Class:DataTransformationService">dcat:DataTransformationService</a></code> represents a service that can transform a dataset, e.g. spatial coordinate transformation; interpolation or resampling of a dataset.
           </li>
@@ -228,7 +233,7 @@
         </li>
     </ul>
 
-    <figure id="fig1"><img alt="UML model of DCAT classes and properties" src="UML/DCAT-summary-all-attributes.png">
+    <figure id="fig1"><img alt="UML model of DCAT classes and properties" src="UML/DCAT2.png">
         <figcaption>
             Overview of DCAT model, showing the classes of resources that can be members of a Catalog, and the relationships between them.
         </figcaption>
@@ -249,21 +254,26 @@
     </p>
 
     <p>
-      A <b>data service</b> in DCAT is a collection of operations or API which provides access to data.
-      An interactive interface such as a web form is often provided to access to the API operations.
+      A <b>data service</b> in DCAT is a collection of operations that provides access to data or to services for working with data. We distinguish between services made available to programmers for manipulation with a programming language (data APIs) and those made available via an interactive user agent (data applications), since they have distinct audiences and purposes. One can think of a catalog record for a data API as access to the back end of a web application, and a record for a data application as access to the front end. Attributes such as access methods and rights will differ between the back end and the front end. In many cases, only one of the two will be available to users.
       A data service typically provides selection, extraction, combination, processing or transformation operations over datasets that might be hosted locally or remote to the service.
       A data service might be tied to specific datasets, or its source data might be configured at request- or run-time.
-      The result of a request to a data service is a representation of a part or all of a dataset or catalog.
-      A <b>data distribution service</b> is a kind of data service that provides the means to select and download a distribution of a dataset or subset.
-      A data discovery service is a kind of data service that provides the means to find the description of a suitable dataset, often through a portal or catalog service.
-      Other kinds of data service might include data transformation services such as coordinate transformation services, re-sampling and interpolation services, and various data processing services, but these are outside the scope of the current DCAT vocabulary.
+      The result of a request to a data service is a representation of a part or all of a dataset or catalog. (A catalog is itself a dataset.) The representation may take many forms, from a JSON-formatted file to a table or visualization. Whether and which datasets are served by a given API are indicated through the use of the servesData property.
+    </p>
+    <p>
+      A <b>data API</b> is a kind of data service that provides the means to select and download one or more dataset distributions or subsets thereof, or to utilize data processing services, through an application programming interface. The specific functions offered by an API can be documented at a location referenced by the endpointDescription property.
+    </p>
+    <p>
+      A <b>data application</b> is a kind of data service that enables a user to download one or more dataset distributions or subsets thereof, or to utilize data processing services, through an interactive user agent. Typical services include data discovery, transformation, visualization, and download. The specific features available to users may be described at a location provided via the appDescription property.
+    </p>
+    <p>
+      Both APIs and data applications can offer any combination of functions, from file downloads to data discovery. (A data discovery service is a kind of data service that provides the means to find the description of a suitable dataset, often through a portal or catalog service.) Other functions include data transformation services such as coordinate transformation services, re-sampling and interpolation services, and various data processing services, but describing these precisely is outside the scope of the current DCAT vocabulary.
     </p>
     <p>
       Descriptions of datasets and data services can be included in a <b>catalog</b>.
       A catalog is a kind of dataset whose member items are descriptions of datasets and data services.
       Other types of thing might also be catalogued, but the scope of DCAT is currently limited to datasets and data services.
       To extend the scope of a catalog beyond datasets and data services it is recommended to define additional sub-classes of <code><a href="#Class:Resource">dcat:Resource</a></code> in a DCAT application profile or other DCAT application.
-      To extend the scope of service descriptions beyond data distribution services it is recommended to define additional sub-classes of <code><a href="#Class:DataService">dcat:DataService</a></code> in a DCAT application profile or other DCAT application.
+      To extend the scope of service descriptions beyond data APIs and data applications, it is recommended to define additional properties of a <code><a href="#Class:DataService">dcat:DataService</a></code> in a DCAT application profile or other DCAT application.
     </p>
 
     <div class="note">
