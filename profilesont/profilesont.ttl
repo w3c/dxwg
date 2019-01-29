@@ -19,15 +19,11 @@
                                           dc:creator "Rob Atkinson" ;
                                           rdfs:comment """This ontology is for describing relationships between standards/specifications, profiles of them and supporting artifacts such as validating resources.
 
-This model takes the `[dct:Standard](<http://www.dublincore.org/documents/dcmi-terms/#terms-Standard)` Class as a starting point and defines a specialization, a `Profile`, that *profiles* a `dct:Standard` or another `Profile`. `Standards`s or `Profile`s can have `ResourceDescriptor`s associated with
-    them that define rules for implementation, provide guidance on how to implement, or play some other role. `ResourceDescriptor`s must indicate the role they
-    play (to guide, to validate etc.), the formalism they adhere to (`[dct:format](http://www.dublincore.org/documents/dcmi-terms/#terms-format)`)
-    and any `dct:Standard` that they themselves conform to (`[dct:conformsTo](http://www.dublincore.org/documents/dcmi-terms/#terms-conformsTo)`)."""@en ;
+This model starts with [http://dublincore.org/2012/06/14/dcterms#Standard](dct:Standard) entities which can either be Base Specifications (a standard not profiling any other Standard) or Profiles (Standards which do profile others). Base Specifications or Profiles can have Resource Descriptors associated with them that defines implementing rules for the it. Resource Descriptors must indicate the role they play (to guide, to validate etc.) and the formalism they adhere to (dct:format) to allow for content negotiation. A vocabulary of Resource Roles are provided alongside this ontology but that list is extensible."""@en ;
                                           owl:versionInfo "1.0" ;
                                           dc:contributor "Nicholas Car" ,
                                                          "Simon Cox" ,
-                                                         "Alejandra Gonzalez-Beltran" ,
-                                                         "Antoine Issac" ;
+                                                         "Alejandra Gonzalez-Beltran";
                                           dct:modified "2018-11-15"^^xsd:date ;
                                           dct:contributor <http://orcid.org/0000-0002-3884-3420> ;
                                           dct:created "2018-02-16"^^xsd:date .
@@ -62,18 +58,11 @@ dct:format rdf:type owl:AnnotationProperty ;
   skos:usageNote "A property to link from a Resource Descriptor to an implementing resource object"@en .
 
 
-###  http://www.w3.org/ns/dx/prof/hasProfile
-:hasProfile rdf:type owl:ObjectProperty ;
-            owl:inverseOf :isProfileOf ;
-            skos:definition "A dct:Standard (or a Profile) has a Profile"@en ;
-            rdfs:label "has profile" .
-
-
 ###  http://www.w3.org/ns/dx/prof/isInheritedFrom
 :isInheritedFrom rdf:type owl:ObjectProperty ;
                rdfs:domain :ResourceDescriptor ;
                rdfs:range :Profile ;
-               skos:definition "A Profile's Resource Descriptor has been inherited from a base specification"@en ;
+               skos:definition "A Profile's Resource Descriptor has been inherited from a Base Specification"@en ;
                skos:usageNote "Profiles within inheritance hierarchies may use this property. If absent, then the Resource Descriptor applies specifically to this Profiles only"@en ;
                rdfs:label "is inherited from" .
 
@@ -82,19 +71,18 @@ dct:format rdf:type owl:AnnotationProperty ;
 :isProfileOf rdf:type owl:ObjectProperty ;
            rdfs:domain :Profile ;
            rdfs:range dct:Standard ;
-           skos:definition "The subject of 'is profile of' defines constraints on the object which playes the role of a base specification"@en ;
-           rdfs:label "is profile of" ;
-           skos:usageNote "The semantics of the rdfs:Range means that any resource treated as a base specification can be regarded as a Profile (i.e. may be any specification with an empty set of additional constraints)" .
+           skos:usageNote "The semantics of the rdfs:Range means that any resource treated as a base specification can be regarded as a Profile (i.e. may be any specification with an empty set of additional constraints)"@en ;
+           skos:definition "A Profile is a profile of a dct:Standard (or a Base Specification or another Profile)"@en ;
+           rdfs:label "is profile of" .
 
 
 ###  http://www.w3.org/ns/dx/prof/isTransitiveProfileOf
 :isTransitiveProfileOf rdf:type owl:ObjectProperty ;
                      rdfs:domain :Profile ;
                      rdfs:range dct:Standard ;
-                     skos:scopeNote "The subject 'is profile of' the object which may be through a chain of 'is profile of' relationships"@en ;
-                     skos:definition "A base specification a Profile conforms to"@en ;
-                     rdfs:label "is transitive profile of" ;
-                     skos:usageNote "A convenience predicate that may be used to avoid forcing clients to traverse an entire profile hierarchy to find all Profiles/Standards that the subject declares conformance to" .
+                     skos:scopeNote "A means to list all the transitive hierarchy of base specifications that this Profile implies conformance to"@en ;
+                     skos:definition "A base specification an Profile conforms to"@en ;
+                     rdfs:label "is transitive profile of" .
 
 
 ###  http://www.w3.org/ns/dx/prof/hasResource
@@ -130,6 +118,18 @@ dct:format rdf:type owl:AnnotationProperty ;
 #    Classes
 #################################################################
 
+###  http://www.w3.org/ns/dx/prof/BaseSpecification
+:BaseSpecification rdf:type owl:Class ;
+                   rdfs:subClassOf :Profile ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :isProfileOf ;
+                                     owl:maxCardinality "0"^^xsd:nonNegativeInteger
+                                   ] ;
+                   rdfs:label "Base Specification" ;
+                   skos:definition "A specification that defines all implementation constraints, without applying constraints on usage of another specification"@en ;
+                   skos:usageNote "This may not be a useful class: documents of any specification can be regarded as a trivial profile, so applications only need to be concerned with Profile conformance"@en .
+
+
 ###  http://www.w3.org/ns/dx/prof/ResourceDescriptor
 :ResourceDescriptor rdf:type owl:Class ;
                   rdfs:label "Resource Descriptor"@en ;
@@ -150,7 +150,7 @@ dct:format rdf:type owl:AnnotationProperty ;
          rdfs:subClassOf dct:Standard ;
          dct:source <https://www.w3.org/2017/dxwg/wiki/ProfileContext> ;
          rdfs:label "Profile" ;
-         skos:definition """A named set of constraints on one or more identified Standards or other Profiles, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of them necessary to accomplish a particular function.
+         skos:definition """A named set of constraints on one or more identified base specifications or other profiles, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of those base specifications necessary to accomplish a particular function.
 
 This definition includes what are often called \"application profiles\", \"metadata application profiles\", or \"metadata profiles\"."""@en .
 
