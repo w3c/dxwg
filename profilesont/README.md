@@ -22,7 +22,7 @@ Additional components:
 * **Roles vocabulary** - a small vocabulary of Implementation Resource Descriptor Roles
   * [resource_roles.html](https://w3c.github.io/dxwg/profilesont/resource_roles.html) - vocab as a web page (HTML)
   * [resource_roles.ttl](resource_roles.ttl) - vocab source (RDF, turtle)
-  * [resource_roles.png](resource_roles.png) - vocab diagram (PNG)
+  * [resource_roles.svg](resource_roles.svg) - vocab diagram (PNG)
 * **Alignments**
   * within the main ontology document, Section 'Alignments'
   * [alignment_dcat.ttl](alignment_dcat.ttl) - alignment source (RDF, turtle)

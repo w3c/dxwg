@@ -26,23 +26,26 @@
     <p>
       This document is part of a set of documents on profiles, edited by the W3C Dataset Exchange Working Group (DXWG).
       Some of the documents are general while some are technology-specific:
+    </p>
     <ul>
       <li>[[PROF-GUIDANCE]], the top-level general recommendations and guidance on profiling.
         It gives an overview of all DXWG documents on profiles and is the recommended starting point</li>
       <li>[[PROF]], an RDF vocabulary that describes profiles and related resources</li>
       <li>[[PROF-CONNEG]], the specific guidance on how to negotiate for Internet resource content using profiles</li>
       <li>[[PROF-IETF]], an <a href="http://www.ietf.org">IETF</a> <a href="http://www.ietf.org/standards/ids/">Internet-Draft</a> defining HTTP Headers for HTTP content negotiation by profile</li>
-    <li><strong>[PROF-ROLES] (this document), a vocabulary of Profile Ontology Resource Role instances</strong></li>
+    <li><strong>[PROF-ROLES] (this document), a vocabulary of Profile Ontology <code>Resource Role</code> instances</strong></li>
     </ul>
-    </p>
   </section>
 </section>
 <section id="introduction">
     <h2>Introduction</h2>
     <p>
-      This vocabulary contains a controlled list of <a href="https://www.w3.org/TR/2018/WD-dx-prof-20181211/#Class:ResourceRole">prof:ResourceRole</a>
+      This vocabulary contains a controlled list of <a href="https://www.w3.org/TR/dx-prof/#Class:ResourceRole">prof:ResourceRole</a>
       instances, which are also <a href="https://www.w3.org/TR/skos-reference/#Concept">skos:Concept</a>s, for use with
       the Profiles Ontology [[PROF]].
+    </p>
+    <p>
+      It is suggested, and expected, that this vocabulary be extended by users to suite their own needs.
     </p>
 </section>
 <section id="namespaces-1">
@@ -60,8 +63,8 @@
         </thead>
         <tbody>
         <tr><td>dct</td><td>http://purl.org/dc/terms/</td></tr>
-        <tr><td>prof</td><td>http://www.w3.org/ns/dx/prof/</td></tr>
-        <tr><td>role</td><td>http://www.w3.org/ns/dx/prof/role/</td></tr>
+        <tr><td>prof</td><td><a href="http://www.w3.org/ns/dx/prof/">http://www.w3.org/ns/dx/prof/</a></td></tr>
+        <tr><td>role</td><td><a href="http://www.w3.org/ns/dx/prof/role/">http://www.w3.org/ns/dx/prof/role/</a></td></tr>
         <tr><td>skos</td><td>http://www.w3.org/2004/02/skos/core#</td></tr>
         </tbody>
     </table>
@@ -80,29 +83,54 @@
 <section id="vocabulary">
   <h2>Vocabulary</h2>
   <figure id="fig-voc">
-    <img src="resource_roles.png" title="Figure of the Resource Roles vocabulary" style="width:90%;" />
+    <img src="resource_roles.svg" title="Figure of the Resource Roles vocabulary" alt="Resource Roles diagram" style="width:90%;" />
     <figcaption>
       A diagram of the Concepts in this vocabulary
     </figcaption>
   </figure>
-  <p>
-
-  </p>
-  <section id="Role:conformanceTest" class="property">
-    <h4>Role: ConformanceTest</h4>
+  <section id="Role:aggregatedConstraints" class="property">
+    <h4>Role: Aggregated Constraints</h4>
     <table class="definition">
       <thead>
-      <tr><th><a href="https://www.w3.org/TR/skos-reference/#Concept">SKOS Concept</a>:</th><th><a href="#Role:conformanceTest">role:conformanceTest</a></th></tr>
+        <tr><th><a href="https://www.w3.org/TR/skos-reference/#Concept">SKOS Concept</a>:</th><th><a href="#Role:aggregatedConstraints">role:aggregatedConstraints</a></th></tr>
       </thead>
       <tbody>
-      <tr><td class="prop">Pref Label:</td><td>Conformance Test</td></tr>
-      <tr><td class="prop">Definition:</td><td>Constraints specifying a conformance test</td></tr>
-      <tr><td class="prop">Top Concept Of:</td><td><a href="http://www.w3.org/ns/dx/prof/role/">role:</a></td></tr>
+        <tr><td class="prop">Pref Label:</td><td>Aggregated Constraints</td></tr>
+        <tr><td class="prop">Definition:</td><td>Full Constraints not only for this Profile but also for all dependencies (Profiles or dct:Standards)</td></tr>
+        <tr><td class="prop">Usage Note:</td><td>Use this Role when you want to provide a resource that validates data according to this profile and also its dependents. You must include the Full Constraints of all dependencies within this resource</td></tr>
+        <tr><td class="prop">Broader:</td><td><a href="http://www.w3.org/ns/dx/prof/role/fullConstraints">role:fullConstraints</a></td></tr>
+      </tbody>
+    </table>
+  </section>
+  <section id="Role:codeRepository" class="property">
+    <h4>Role: Code Repository</h4>
+    <table class="definition">
+      <thead>
+        <tr><th><a href="https://www.w3.org/TR/skos-reference/#Concept">SKOS Concept</a>:</th><th><a href="#Role:codeRepository">role:codeRepository</a></th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="prop">Pref Label:</td><td>Code Repository</td></tr>
+        <tr><td class="prop">Definition:</td><td>Repository for source code and profile artifacts</td></tr>
+        <tr><td class="prop">Top Concept Of:</td><td><a href="http://www.w3.org/ns/dx/prof/role/">role:</a></td></tr>
+      </tbody>
+    </table>
+  </section>
+  <section id="Role:extensionConstraints" class="property">
+    <h4>Role: Extension Constraints</h4>
+    <table class="definition">
+      <thead>
+      <tr><th><a href="https://www.w3.org/TR/skos-reference/#Concept">SKOS Concept</a>:</th><th><a href="#Role:extensionConstraints">role:extensionConstraints</a></th></tr>
+      </thead>
+      <tbody>
+      <tr><td class="prop">Pref Label:</td><td>Extension Constraints</td></tr>
+      <tr><td class="prop">Definition:</td><td>Constraints implemented by this Profile building on dependencies but not including them</td></tr>
+      <tr><td class="prop">Usage Note:</td><td>Use this Role when you want to provide a resource that validates data according to this profile but only in so far as it is a constraint on its dependents. Therefore, this resource must not also include any dependents' constraints</td></tr>
+      <tr><td class="prop">Broader:</td><td><a href="http://www.w3.org/ns/dx/prof/role/partConstraints">role:partConstraints</a></td></tr>
       </tbody>
     </table>
   </section>
   <section id="Role:fullConstraints" class="property">
-    <h4>Role: FullConstraints</h4>
+    <h4>Role: Full Constraints</h4>
     <table class="definition">
       <thead>
       <tr><th><a href="https://www.w3.org/TR/skos-reference/#Concept">SKOS Concept</a>:</th><th><a href="#Role:fullConstraints">role:fullConstraints</a></th></tr>
@@ -128,7 +156,7 @@
     </table>
   </section>
   <section id="Role:partConstraints" class="property">
-    <h4>Role: PartConstraints</h4>
+    <h4>Role: Part Constraints</h4>
     <table class="definition">
       <thead>
       <tr><th><a href="https://www.w3.org/TR/skos-reference/#Concept">SKOS Concept</a>:</th><th><a href="#Role:partConstraints">role:partConstraints</a></th></tr>
@@ -162,19 +190,6 @@
       <tbody>
       <tr><td class="prop">Pref Label:</td><td>Vocabulary</td></tr>
       <tr><td class="prop">Definition:</td><td>Machine readable definition of a vocabulary or schema. Typically expressed in RDF, XSD, UML DDL, Table Schema or similar</td></tr>
-      <tr><td class="prop">Top Concept Of:</td><td><a href="http://www.w3.org/ns/dx/prof/role/">role:</a></td></tr>
-      </tbody>
-    </table>
-  </section>
-  <section id="Role:validation" class="property">
-    <h4>Role: Validation</h4>
-    <table class="definition">
-      <thead>
-      <tr><th><a href="https://www.w3.org/TR/skos-reference/#Concept">SKOS Concept</a>:</th><th><a href="#Role:validation">role:validation</a></th></tr>
-      </thead>
-      <tbody>
-      <tr><td class="prop">Pref Label:</td><td>Validation</td></tr>
-      <tr><td class="prop">Definition:</td><td>Artifact that is used directly in validation, such as XSD, Schematron, SHACL, ShEx</td></tr>
       <tr><td class="prop">Top Concept Of:</td><td><a href="http://www.w3.org/ns/dx/prof/role/">role:</a></td></tr>
       </tbody>
     </table>
