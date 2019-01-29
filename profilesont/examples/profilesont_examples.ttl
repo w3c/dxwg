@@ -14,7 +14,7 @@
 
 
 :prof_examples
-  rdf:type owl:Ontology ;
+  a owl:Ontology ;
   rdfs:label "Profile examples" ;
   rdfs:comment "Examples of profiles and their relationships modelled with the Profile Descriptions Ontology"@en ;
   dc:creator "Rob Atkinson" , "Nicholas Car" ;
@@ -34,16 +34,15 @@
 	rdfs:comment "The original DCAT specification as published in 2014"@en ;
 	dc:publisher "W3C" ;
 	prof:isProfileOf :dcat2018 ;
-  prof:hasResource :dcat-constraints ;
+    prof:hasResource :dcat-constraints ;
 .
 
 :dcat2018
-	a prof:Profile, prof:BaseSpecification  ;
+	a prof:Profile  ;
 	prof:hasToken "dcat2018" ;
 	rdfs:label "DCAT 2018" ;
 	rdfs:comment "The version of DCAT under development by DXWG, 2018"@en ;
 	dc:publisher "W3C" ;
-	prof:hasProfile <http://www.w3.org/ns/dcat> ;
 .
 
 :dcat-constraints a prof:ResourceDescriptor;
@@ -63,7 +62,6 @@
   rdfs:comment "DCAT Application Profile for data portals in Europe" ;
   dc:publisher "European Union" ;
   prof:isProfileOf <http://www.w3.org/ns/dcat> ;
-  prof:hasProfile <https://joinup.ec.europa.eu/release/geodcat-ap-v10> ;
   prof:hasResource <http://data.europa.eu/w21/016d88c3-a0b3-4506-ae4e-758e7401c096> ,  #  SHACL constraints for the profile
                 <https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f6f27f059_bf785_b4d7d_bb602_b6448aab73bd5> ,  # profile doc in Word (DOCX)
                 <https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f17e18570_b1d77_b4171_b9df5_bb53cb4f017d4> ,  # profile doc in PDF
@@ -147,7 +145,6 @@
   rdfs:comment "The OpenGIS Web Map Server Implementation Specification, v1.3" ;
   prof:hasToken "WMS13" ;
   dct:publisher <http://www.opengis.net/def/auth/ogc> ;
-  prof:hasProfile :wms13_dgiwg ;
 .
 
 :wms13_dgiwg
@@ -171,7 +168,6 @@
   a dct:Standard ;
   rdfs:label "OpenGIS Web Map Tile Service Implementation Standard" ;
   prof:hasToken "WMTS" ;
-  prof:hasProfile :wmts_simple ;
   prof:hasResource <http://schemas.opengis.net/wmts/> ,
                 <http://cite.opengeospatial.org/pub/cite/files/edu/wmts/text/target-api/index.html> ;
 .
@@ -211,7 +207,7 @@
 # PAV
 
 <http://purl.org/pav/>
-  rdf:type prof:Profile ;
+  a prof:Profile ;
   rdfs:label "PAV - Provenance, Authoring and Versioning" ;
   prof:hasResource :pav-rdf ;
   prof:hasResource :pav-gh ;
@@ -221,7 +217,7 @@
   prof:isProfileOf <https://www.w3.org/TR/prov-o/> ;
 .
 :pav-rdf
-  rdf:type prof:ResourceDescriptor ;
+  a prof:ResourceDescriptor ;
   dct:format <https://www.iana.org/assignments/media-types/application/rdf+xml> ;
   dct:conformsTo owl:Ontology ;
   prof:hasRole roles:fullConstraints ;
@@ -229,28 +225,28 @@
   dct:modified "2015-03-17" ;
 .
 :pav-gh
-  rdf:type prof:ResourceDescriptor ;
+  a prof:ResourceDescriptor ;
   dct:format <https://www.iana.org/assignments/media-types/text/html> ;
   prof:hasRole roles:codeRepository ;
   prof:hasArtifact <https://github.com/pav-ontology/pav/> ;
   dct:modified "2015-07-29" ;
 .
 :pav-lode
-  rdf:type prof:ResourceDescriptor ;
+  a prof:ResourceDescriptor ;
   dct:format <https://www.iana.org/assignments/media-types/text/html> ;
   prof:hasRole roles:specification ;
   prof:hasArtifact <http://pav-ontology.github.io/pav/> ;
   dct:modified "2015-03-16T22:21:00Z" ;
 .
 :pav-blogpost
-  rdf:type prof:ResourceDescriptor ;
+  a prof:ResourceDescriptor ;
   dct:format <https://www.iana.org/assignments/media-types/text/html> ;
   prof:hasRole roles:guidance ;
   prof:hasArtifact <https://practicalprovenance.wordpress.com/2016/05/07/tracking-versions-with-pav/> ;
   dct:created "2016-05-07" ;
 .
 :pav-paper
-  rdf:type prof:ResourceDescriptor ;
+  a prof:ResourceDescriptor ;
   dct:format <https://www.iana.org/assignments/media-types/text/html>;
   prof:hasRole roles:specification ;  # this is the official citation for PAV
   prof:hasArtifact <https://jbiomedsem.biomedcentral.com/articles/10.1186/2041-1480-4-37> ;
@@ -259,6 +255,6 @@
   dct:issued "2013-11-22" ;
 .
 <https://www.w3.org/TR/prov-o/>
-  rdf:type prof:BaseSpecification ;
+  a dct:Standard ;
   dct:title "PROV-O: The PROV Ontology" ;
 .
