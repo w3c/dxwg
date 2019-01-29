@@ -480,6 +480,16 @@ This ontology also provides for the description of relationships between such pr
         </tbody>
       </table>
       <div class="issue" data-number="642"></div>
+      <p>
+        To illustrate the use of <code>prof:isInheritedFrom</code>, the following example is given in both pictorial
+        and code forms.
+      </p>
+      <figure id="fig-isInhieritedFrom">
+        <a href="examples/isInheritedFrom.svg">
+          <img src="examples/isInheritedFrom.svg" title="Property isInheritedFrom in use" style="width:90%;" />
+        </a>
+        <figcaption>Property isInheritedFrom in use. Here the <code>prof:ResourceDescriptor</code> RS 2 refers to the same artifact (a constraints file) as RS 1 and it is inherited by <strong>Profile Y</strong> from <code>dct:Standard</code> <strong>Standard X</strong></figcaption>
+      </figure>
       <pre class="example nohighlight turtle" aria-busy="false" aria-live="polite" title="Property isInheritedFrom in use">
 # If Standard X, described using PROF, is given as having a Resource
 # Descriptor, RS_1, with role "Full Constraints" as follows:
@@ -514,7 +524,7 @@ ex2:Profile_Y
     dct:title "Profile Y" ;
     prof:isProfileOf ex1:Standard_X ;  # this is a profile of Standard X
     prof:hasResource [
-        a prof:ResourceDescriptor ;
+        a prof:ResourceDescriptor ;  # RS 2 in diagram
         prof:isInheritedFrom ex1:Standard_X ;  # this Resource Descriptor is inherited from
                                                # Standard X
         dct:conformsTo &lt;http://www.w3.org/ns/shacl#&gt; ;  # as above
@@ -525,7 +535,7 @@ ex2:Profile_Y
         prof:hasArtifact ex1:full_constraints.ttl  # direct URI reference to ex1:RS_1's artifact
     ] ,
     [
-        a prof:ResourceDescriptor ;  # this is not inherited from anywhere
+        a prof:ResourceDescriptor ;  # RS 3 in diagram. This is not inherited from anywhere
         dct:conformsTo &lt;http://www.w3.org/ns/shacl#&gt; ;
         dct:format &lt;https://w3id.org/mediatype/text/turtle&gt; ;
         # these constraints are Profile Y's on top of Standard X's
