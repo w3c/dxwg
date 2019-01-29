@@ -450,6 +450,71 @@ This ontology also provides for the description of relationships between such pr
           <tr><td class="prop">Usage note:</td><td>Profiles within inheritance hierarchies may use this property. If absent, then the Resource Descriptor applies specifically to this Profiles only</td></tr>
         </tbody>
       </table>
+      <div class="issue" data-number="642"></div>
+      <p>
+        To illustrate the use of <code>prof:isInheritedFrom</code>, the following example is given in both pictorial
+        and code forms.
+      </p>
+      <figure id="fig-isInhieritedFrom">
+        <a href="examples/isInheritedFrom.svg">
+          <img src="examples/isInheritedFrom.svg" title="Property isInheritedFrom in use" style="width:90%;" />
+        </a>
+        <figcaption>Property isInheritedFrom in use. Here the <code>prof:ResourceDescriptor</code> RS 2 refers to the same artifact (a constraints file) as RS 1 and it is inherited by <strong>Profile Y</strong> from <code>dct:Standard</code> <strong>Standard X</strong></figcaption>
+      </figure>
+      <pre class="example nohighlight turtle" aria-busy="false" aria-live="polite" title="Property isInheritedFrom in use">
+# If Standard X, described using PROF, is given as having a Resource
+# Descriptor, RS_1, with role "Full Constraints" as follows:
+
+@prefix ex1: &lt;http://example.org/profile1/&gt; .
+@prefix ex2: &lt;http://example.org/profile2/&gt; .
+@prefix dct: &lt;http://purl.org/dc/terms/&gt; .
+@prefix prof: &lt;http://www.w3.org/ns/dx/prof/&gt; .
+@prefix role: &lt;http://www.w3.org/ns/dx/prof/role/&gt; .
+
+
+ex1:Standard_X
+    a dct:Standard , prof:Profile ;  # this may be a 'null' profile,
+                                     # i.e. a profile of nothing, a regular Standard
+    dct:title "Standard X" ;
+    prof:hasResource ex1:RS_1 .
+
+ex1:RS_1
+    a prof:ResourceDescriptor ;
+    dct:conformsTo &lt;http://www.w3.org/ns/shacl#&gt; ;  # the SHACL standard
+    dct:format &lt;https://w3id.org/mediatype/text/turtle&gt; ;  # the RDF Turtle format
+    prof:hasRole role:fullConstraints ;      # this ResourceDescriptor is the total set of
+                                             # constraints needed for validating data
+                                             # against Standard X for conformance
+    prof:hasArtifact ex1:constraints.ttl .
+
+# then, a profile of Standard X, perhaps Profile Y, may use
+# prof:isInheritedFrom to re-use that Resource Descriptor RS_1
+
+ex2:Profile_Y
+    a prof:Profile ;
+    dct:title "Profile Y" ;
+    prof:isProfileOf ex1:Standard_X ;  # this is a profile of Standard X
+    prof:hasResource [
+        a prof:ResourceDescriptor ;  # RS 2 in diagram
+        prof:isInheritedFrom ex1:Standard_X ;  # this Resource Descriptor is inherited from
+                                               # Standard X
+        dct:conformsTo &lt;http://www.w3.org/ns/shacl#&gt; ;  # as above
+        dct:format &lt;https://w3id.org/mediatype/text/turtle&gt; ;  # as above
+        prof:hasRole role:partConstraints ;  # this ResourceDescriptor is now only Part Constraints
+                                             # for Profile Y as it's implementing some of its own,
+                                             # additional constraints (see next Resource Descriptor)
+        prof:hasArtifact ex1:constraints.ttl  # direct URI reference to ex1:RS_1's artifact
+    ] ,
+    [
+        a prof:ResourceDescriptor ;  # RS 3 in diagram. This is not inherited from anywhere
+        dct:conformsTo &lt;http://www.w3.org/ns/shacl#&gt; ;
+        dct:format &lt;https://w3id.org/mediatype/text/turtle&gt; ;
+        # these constraints are Profile Y's on top of Standard X's
+        prof:hasRole role:extensionConstraints ;  # Extension Constraints are those on top of
+                                                  # another base specification's
+        prof:hasArtifact ex2:extension_constraints.ttl  # a file within this Profile
+    ] .
+      </pre>
     </section>
   </section>
   <section id="Class:ResourceRole" class="property">
