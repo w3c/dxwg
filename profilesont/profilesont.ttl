@@ -82,17 +82,19 @@ dct:format rdf:type owl:AnnotationProperty ;
 :isProfileOf rdf:type owl:ObjectProperty ;
            rdfs:domain :Profile ;
            rdfs:range dct:Standard ;
-           skos:definition "A Profile is a profile of a dct:Standard (or another Profile)"@en ;
-           rdfs:label "is profile of" .
+           skos:definition "The subject of 'is profile of' defines constraints on the object which playes the role of a base specification"@en ;
+           rdfs:label "is profile of" ;
+           skos:usageNote "The semantics of the rdfs:Range means that any resource treated as a base specification can be regarded as a Profile (i.e. may be any specification with an empty set of additional constraints)" .
 
 
 ###  http://www.w3.org/ns/dx/prof/isTransitiveProfileOf
 :isTransitiveProfileOf rdf:type owl:ObjectProperty ;
                      rdfs:domain :Profile ;
                      rdfs:range dct:Standard ;
-                     skos:scopeNote "A means to list all the transitive hierarchy of Standards/Profiles that this Profile implies conformance to"@en ;
+                     skos:scopeNote "The subject 'is profile of' the object which may be through a chain of 'is profile of' relationships"@en ;
                      skos:definition "A base specification a Profile conforms to"@en ;
-                     rdfs:label "is transitive profile of" .
+                     rdfs:label "is transitive profile of" ;
+                     skos:usageNote "A convenience predicate that may be used to avoid forcing clients to traverse an entire profile hierarchy to find all Profiles/Standards that the subject declares conformance to" .
 
 
 ###  http://www.w3.org/ns/dx/prof/hasResource
