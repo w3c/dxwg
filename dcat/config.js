@@ -8,7 +8,7 @@ var respecConfig = {
     previousMaturity:     "REC",
 //    previousURI:          "https://www.w3.org/TR/2014/REC-vocab-dcat-20140116/",
     edDraftURI:           "https://w3c.github.io/dxwg/dcat/",
-    issueBase:            "https://github.com/w3c/dxwg/issues/",
+//    issueBase:            "https://github.com/w3c/dxwg/issues/", -- Not needed when github used
     editors: [{
       name:       "Alejandra Gonzalez Beltran",
       company:    "Oxford eResearch Centre, Engineering Science, University of Oxford",
@@ -56,7 +56,7 @@ var respecConfig = {
     wgPatentURI: "https://www.w3.org/2004/01/pp-impl/99375/status",
     inlineCSS: "true",
 	  lint: "false",
-    github: "https://github.com/w3c/dxwg/issues/",
+    github: "https://github.com/w3c/dxwg/",
     localBiblio: {
       "SCHEMA-ORG" : {
         href : "http://schema.org/",
