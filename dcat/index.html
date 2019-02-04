@@ -228,7 +228,7 @@ $(document).ready( function() {
           Data comes in many forms, including numbers, words, pixels, imagery, sound and other multi-media, and potentially other types, any of which may be collected into a dataset.
         </li>
         <li>
-          <code><a href="#Class:Distribution">dcat:Distribution</a></code> represents an accessible form or representation of a dataset, for example a downloadable file.
+          <code><a href="#Class:Distribution">dcat:Distribution</a></code> represents an accessible form of a dataset, for example a downloadable file.
         </li>
         <li>
           <code><a href="#Class:Data_Service">dcat:DataService</a></code> represents a data service in a catalog.
@@ -3655,6 +3655,77 @@ dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/turtle&gt; 
       <p>
           This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/examples/csiro-dap-examples.ttl">csiro-dap-examples.ttl</a>
       </p>
+
+      <p>
+        Additional detail about the nature of the related resources can be given using suitable elements from other RDF vocabularies, along with dataset descriptors from DCAT. For example, the example above might be more fully expressed as follows:
+      </p>
+
+            <pre id="ex-service-gsa" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
+              dap:d33937
+                rdf:type dcat:Dataset ;
+                dct:description "A set of RDF graphs representing the International [Chrono]stratigraphic Chart, ..." ;
+                dct:conformsTo &lt;http://resource.geosciml.org/ontology/timescale/gts&gt; ;
+                dct:identifier "https://doi.org/10.25919/5b4d2b83cbf2d" ;
+                dct:issued "2018-07-07"^^xsd:date ;
+                dct:license &lt;https://creativecommons.org/licenses/by/4.0/&gt; ;
+                dct:publisher &lt;http://www.csiro.au&gt; ;
+                dcat:distribution [
+                    rdf:type dcat:Distribution ;
+                    dct:identifier "isc2017.jsonld" ;
+                    dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/ld+json&gt; ;
+                  ] ;
+                dcat:distribution [
+                    rdf:type dcat:Distribution ;
+                    dct:identifier "isc2017.nt" ;
+                    dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/n-triples&gt; ;
+                  ] ;
+                dcat:distribution [
+                    rdf:type dcat:Distribution ;
+                    dct:identifier "isc2017.rdf" ;
+                    dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/rdf+xml&gt; ;
+                  ] ;
+                dcat:distribution [
+                    rdf:type dcat:Distribution ;
+                    dct:identifier "isc2017.ttl" ;
+                    dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/turtle&gt; ;
+                  ] ;
+                dct:relation [
+                    rdf:type foaf:Document ;
+                    dct:type &lt;http://purl.org/dc/dcmitype/Image&gt; ;
+                    dcat:downloadURL &lt;http://stratigraphy.org/ICSchart/ChronostratChart2017-02.jpg&gt; ;
+                    dcat:mediaType  &lt;https://www.iana.org/assignments/media-types/img/jpeg&gt; ;
+                    dct:description "Coloured image representation of the International Chronostratigraphic Chart" ;
+                    dct:issued "2017-02-01"^^xsd:date ;
+                    dct:title "International Chronostratigraphic Chart" ;
+                  ] ;
+                dct:relation [
+                    rdf:type foaf:Document ;
+                    dct:type &lt;http://purl.org/dc/dcmitype/Image&gt; ;
+                    dcat:downloadURL &lt;http://stratigraphy.org/ICSchart/ChronostratChart2017-02.pdf&gt; ;
+                    dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/pdf&gt; ;
+                    dct:description "Coloured image representation of the International Chronostratigraphic Chart" ;
+                    dct:issued "2017-02-01"^^xsd:date ;
+                    dct:title "International Chronostratigraphic Chart" ;
+                  ] ;
+                dct:relation [
+                    rdf:type adms:Asset ;
+                    dct:type &lt;http://purl.org/adms/assettype/DomainModel&gt; ;
+                    dcat:downloadURL &lt;http://resource.geosciml.org/ontology/timescale/gts&gt; ;
+                    dcat:landingPage &lt;http://resource.geosciml.org/ontology/timescale/gts&gt; ;
+                    dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/turtle&gt; ;
+                    dct:conformsTo &lt;https://www.w3.org/TR/owl2-overview/&gt; ;
+                    dct:description "This is an RDF/OWL representation of the GeoSciML Geologic Timescale model ..." ;
+                    dct:issued "2011-01-01"^^xsd:date ;
+                    dct:issued "2017-04-28"^^xsd:date ;
+                    dct:title "Geologic Timescale model" ;
+                  ] ;
+                dcat:landingPage &lt;https://data.csiro.au/dap/landingpage?pid=csiro:33937&gt; ;
+              .
+      </pre>
+      <p>
+          This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/examples/csiro-stratchart.ttl">csiro-stratchart.ttl</a>
+      </p>
+
   </section>
 
   <section id="examples-dataset-provenance">
