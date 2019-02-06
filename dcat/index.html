@@ -1627,6 +1627,8 @@ $(document).ready( function() {
 
     </section> <!-- end class Dataset -->
 
+
+    <!-- class Distribution -->
     <section id="Class:Distribution">
         <h3>Class: Distribution</h3>
         <p>The following properties are recommended for use on this class:
@@ -1658,9 +1660,7 @@ $(document).ready( function() {
         <table class="definition">
             <thead><tr><th>RDF class:</th><th><a href="http://www.w3.org/ns/dcat#Distribution">dcat:Distribution</a></th></tr></thead>
             <tbody>
-            <tr><td class="prop">Definition:</td><td>A specific representation of a dataset. A dataset might be available in several different forms,
-                and these forms might comprise both different serializations or different schematic arrangements of the same data.
-                Examples of distributions include a CSV file, a netCDF file, a JSON document, or a data-cube</td></tr>
+            <tr><td class="prop">Definition:</td><td>A specific representation of a dataset. A dataset might be available in multiple serializations that may differ in various ways, including natural language, media-type or format, schematic organization, temporal and spatial resolution, level of detail or profiles (which might specify any or all of the above). </td></tr>
             <tr><td class="prop">Usage note:</td><td>This represents a general availability of a dataset. It implies no information
                 about the actual access method of the data, i.e. whether by direct download, API, or through a Web page.
                 The use of <a href="#Property:distribution_downloadurl"><code>dcat:downloadURL</code></a> property indicates directly downloadable distributions.</td></tr>
@@ -1669,6 +1669,10 @@ $(document).ready( function() {
         </table>
 
         <div class="note">
+            <p> Examples of distributions include a CSV file, a netCDF file, a JSON document, or a data-cube, files made accessible according to different profiles, such as XML or JSON schemas or ShEx or SHACL expressions.</p>
+
+            <p>In some cases all distributions of a dataset will be fully informationally equivalent, in the sense that lossless transformations between the representations are possible. An example would be different serializations of an RDF graph using RDF/XML, Turtle, N3, JSON-LD. However, in other cases the distributions might have different levels of fidelity to the underlying data. For example, a graphical representation alongside a CSV file. The question of whether different representations can be understood to be distributions of the same dataset is use-case specific, so the judgement is the responsibility of the provider. </p>
+
             <p>
                 The scope of <code>dcat:Distribution</code> here is narrower than in DCAT-2014 [[?VOCAB-DCAT-20140116]], where it also included APIs and feeds.
                 Data catalogues designed using DCAT-2014 therefore used instances of type <code>dcat:Distribution</code> to describe data distribution services.
@@ -1681,10 +1685,6 @@ $(document).ready( function() {
                 Links between a <code>dcat:Distribution</code> and services or web addresses where it can be accessed are expressed using <a href="#Property:distribution_accessurl"><code>dcat:accessURL</code></a>, <a href="#Property:distribution_accessservice"><code>dcat:accessService</code></a>, <a href="#Property:distribution_downloadurl"><code>dcat:downloadURL</code></a>, as shown in <a href="#UML_DCAT_All_Attr"></a> and described in the definitions below.
             </p>
         </div>
-
-        <p class="note">
-            The definition text of <code>dcat:Distribution</code> has been revised to clarify that distributions are primarily <i>representations</i> of datasets.  As such, all distributions of a given dataset should be informationally equivalent.
-        </p>
 
         <p class="issue" data-number="411">
             The intention of the phrase "informationally equivalent" needs to be clarified, in particular as different serializations may have different expressivity.
