@@ -10,6 +10,10 @@ var respecConfig = {
     edDraftURI:           "https://w3c.github.io/dxwg/dcat/",
 //    issueBase:            "https://github.com/w3c/dxwg/issues/", -- Not needed when github used
     editors: [{
+      name:       "Riccardo Albertoni",
+      company:    "CNR- Consiglio Nazionale delle Richerche, Italy",
+      companyURL: "http://www.cnr.it/"
+    },{
       name:       "Alejandra Gonzalez Beltran",
       company:    "Oxford eResearch Centre, Engineering Science, University of Oxford",
       url: "https://www.oerc.ox.ac.uk/people/alejandra",
@@ -23,6 +27,10 @@ var respecConfig = {
       company: "CSIRO",
       url: "http://people.csiro.au/Simon-Cox",
       companyURL: "https://www.csiro.au/"
+    },{
+      name: "Andrea Perego",
+      company: "European Commission",
+      companyURL: "https://ec.europa.eu/jrc/"
     },{
       name: "Peter Winstanley",
       company: "Scottish Government",
