@@ -41,12 +41,12 @@ var respecConfig = {
         data: [{
             value: "Makx Dekkers",
             href: "http://www.makxdekkers.com"
-//        },{
-//            value: "Antoine Isaac, Europeana Foundation",
-//            href: "https://pro.europeana.eu/person/antoine-isaac"
-//        },{
-//            value: "Andrea Perego, European Commission",
-//            href: "https://ec.europa.eu/jrc/"
+        },{
+            value: "Antoine Isaac, Europeana Foundation",
+            href: "https://pro.europeana.eu/person/antoine-isaac"
+        },{
+            value: "Andrea Perego, European Commission",
+            href: "https://ec.europa.eu/jrc/"
         }]
       },{
         key: "Editors of previous version",
