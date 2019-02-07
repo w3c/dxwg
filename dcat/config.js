@@ -41,9 +41,6 @@ var respecConfig = {
         data: [{
             value: "Makx Dekkers",
             href: "http://www.makxdekkers.com"
-        },{
-            value: "Antoine Isaac, Europeana Foundation",
-            href: "https://pro.europeana.eu/person/antoine-isaac"
         }]
       },{
         key: "Editors of previous version",
