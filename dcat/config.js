@@ -11,7 +11,7 @@ var respecConfig = {
 //    issueBase:            "https://github.com/w3c/dxwg/issues/", -- Not needed when github used
     editors: [{
       name:       "Riccardo Albertoni",
-      company:    "CNR- Consiglio Nazionale delle Richerche, Italy",
+      company:    "CNR- Consiglio Nazionale delle Ricerche, Italy",
       companyURL: "http://www.cnr.it/"
     },{
       name:       "Alejandra Gonzalez Beltran",
