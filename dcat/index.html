@@ -3659,72 +3659,86 @@ ex:Test543L
       </p>
 
       <p>
-        Additional detail about the nature of the related resources can be given using suitable elements from other RDF vocabularies, along with dataset descriptors from DCAT. For example, the example above might be more fully expressed as follows:
+        Additional detail about the nature of the related resources can be given using suitable elements from other RDF vocabularies, along with dataset descriptors from DCAT. For example, the example above might be more fully expressed as follows (embedded comments explain the different resources in the graph):
       </p>
 
             <pre id="ex-service-gsa" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 dap:d33937
   rdf:type dcat:Dataset ;
-  dct:description "A set of RDF graphs representing the International [Chrono]stratigraphic Chart, ..." ;
+  rdfs:comment "The data" ;
   dct:conformsTo &lt;http://resource.geosciml.org/ontology/timescale/gts&gt; ;
+  dct:description "A set of RDF graphs representing the International [Chrono]stratigraphic Chart [...]" ;
   dct:identifier "https://doi.org/10.25919/5b4d2b83cbf2d" ;
   dct:issued "2018-07-07"^^xsd:date ;
   dct:license &lt;https://creativecommons.org/licenses/by/4.0/&gt; ;
   dct:publisher &lt;http://www.csiro.au&gt; ;
+  dct:relation &lt;http://stratigraphy.org/ICSchart/ChronostratChart2017-02.jpg&gt; ;
+  dct:relation &lt;http://stratigraphy.org/ICSchart/ChronostratChart2017-02.pdf&gt; ;
+  dct:relation [
+      rdf:type dcat:Dataset ;
+      dct:conformsTo &lt;https://www.w3.org/TR/owl2-overview/&gt; ;
+      rdfs:comment "The ontology used for the data" ;
+      dct:description "This is an RDF/OWL representation of the GeoSciML Geologic Timescale model ..." ;
+      dct:issued "2011-01-01"^^xsd:date ;
+      dct:issued "2017-04-28"^^xsd:date ;
+      dct:title "Geologic Timescale model" ;
+      dct:type &lt;http://purl.org/adms/assettype/DomainModel&gt; ;
+      dcat:distribution [
+          rdf:type dcat:Distribution ;
+          rdfs:comment "RDF/XML representation of the ontology used for the data" ;
+          dcat:downloadURL &lt;http://resource.geosciml.org/ontology/timescale/gts.rdf&gt; ;
+          dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/rdf+xml&gt; ;
+        ] ;
+      dcat:distribution [
+          rdf:type dcat:Distribution ;
+          rdfs:comment "TTL representation of the ontology used for the data" ;
+          dcat:downloadURL &lt;http://resource.geosciml.org/ontology/timescale/gts.ttl&gt; ;
+          dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/turtle&gt; ;
+        ] ;
+      dcat:distribution [
+          rdf:type dcat:Distribution ;
+          rdfs:comment "Webpage describing the ontology used for the data" ;
+          dcat:downloadURL &lt;http://resource.geosciml.org/ontology/timescale/gts.html&gt; ;
+          dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/html&gt; ;
+        ] ;
+      dcat:landingPage &lt;http://resource.geosciml.org/ontology/timescale/gts&gt; ;
+    ] ;
   dcat:distribution [
       rdf:type dcat:Distribution ;
-      dcat:accessService [
-        rdf:type dcat:DataDistributionService ;
-        dcat:landingPage &lt;https://vocabs.ands.org.au/viewById/196&gt; ;
-      ] ;
       dct:conformsTo &lt;https://www.w3.org/TR/rdf-schema/&gt; ;
+      rdfs:comment "RDF representation of the data" ;
+      dcat:accessService [
+          rdf:type dcat:DataDistributionService ;
+          dct:conformsTo &lt;https://www.w3.org/TR/sparql11-query/&gt; ;
+          dct:title "International Chronostratigraphic Chart hosted at Research Vocabularies Australia" ;
+          rdfs:comment "Service that supports queries to obtain RDF representations of subsets of the data" ;
+          dcat:endpointURL &lt;http://vocabs.ands.org.au/repository/api/sparql/csiro_international-chronostratigraphic-chart_2017&gt; ;
+          dcat:landingPage &lt;https://vocabs.ands.org.au/viewById/196&gt; ;
+        ] ;
     ] ;
   dcat:distribution [
       rdf:type dcat:Distribution ;
       dct:identifier "isc2017.jsonld" ;
+      rdfs:comment "JSON-LD serialization of the RDF representation of the entire dataset" ;
       dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/ld+json&gt; ;
     ] ;
   dcat:distribution [
       rdf:type dcat:Distribution ;
       dct:identifier "isc2017.nt" ;
+      rdfs:comment "N-Triples serialization of the RDF representation of the entire dataset" ;
       dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/n-triples&gt; ;
     ] ;
   dcat:distribution [
       rdf:type dcat:Distribution ;
       dct:identifier "isc2017.rdf" ;
+      rdfs:comment "RDF/XML serialization of the RDF representation of the entire dataset" ;
       dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/rdf+xml&gt; ;
     ] ;
   dcat:distribution [
       rdf:type dcat:Distribution ;
       dct:identifier "isc2017.ttl" ;
+      rdfs:comment "TTL serialization of the RDF representation of the entire dataset" ;
       dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/turtle&gt; ;
-    ] ;
-  dct:relation &lt;http://stratigraphy.org/ICSchart/ChronostratChart2017-02.jpg&gt; ;
-  dct:relation &lt;http://stratigraphy.org/ICSchart/ChronostratChart2017-02.pdf&gt; ;
-  dct:relation [
-      rdf:type dcat:Dataset ;
-      dct:type &lt;http://purl.org/adms/assettype/DomainModel&gt; ;
-      dcat:distribution [
-        rdf:type dcat:Distribution ;
-        dcat:downloadURL &lt;http://resource.geosciml.org/ontology/timescale/gts.ttl&gt; ;
-        dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/turtle&gt; ;
-        ] ;
-      dcat:distribution [
-        rdf:type dcat:Distribution ;
-        dcat:downloadURL &lt;http://resource.geosciml.org/ontology/timescale/gts.rdf&gt; ;
-        dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/rdf+xml&gt; ;
-        ] ;
-      dcat:distribution [
-        rdf:type dcat:Distribution ;
-        dcat:downloadURL &lt;http://resource.geosciml.org/ontology/timescale/gts.html&gt; ;
-        dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/html&gt; ;
-        ] ;
-      dcat:landingPage &lt;http://resource.geosciml.org/ontology/timescale/gts&gt; ;
-      dct:conformsTo &lt;https://www.w3.org/TR/owl2-overview/&gt; ;
-      dct:description "This is an RDF/OWL representation of the GeoSciML Geologic Timescale model ..." ;
-      dct:issued "2011-01-01"^^xsd:date ;
-      dct:issued "2017-04-28"^^xsd:date ;
-      dct:title "Geologic Timescale model" ;
     ] ;
   dcat:landingPage &lt;https://data.csiro.au/dap/landingpage?pid=csiro:33937&gt; ;
 .
