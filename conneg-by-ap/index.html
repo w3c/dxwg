@@ -359,6 +359,13 @@
 		In this case a server implementing content negotiation by profile
 		SHOULD return a <code>Content-Profile</code> header
 		listing all profiles the requested resource conforms to.
+		If the server accepts HTTP <code>PUT</code>, <code>POST</code> or <code>PATCH</code>
+		commands against the specified resource,
+		it also SHOULD also return a <code>Accept-Profile</code> header
+		specifying which profiles are acceptable when sending data
+		to that resource.
+		Both the <code>Accept-Profile</code> and the <code>Content-Profile</code> headers
+		MAY specify q-values for each profile.
 	    </p>
 	    <pre class="example nohighlight" title="Using HTTP OPTIONS to list available profiles" aria-busy="false" aria-live="polite">
 OPTIONS /some/resource HTTP/1.1
@@ -367,6 +374,7 @@ OPTIONS /some/resource HTTP/1.1
 
 HTTP/1.1 200 OK
 Content-Profile: urn:example:profile:1;q=0.8,http://example.org/profiles/2;q=0.5
+Accept-Profile: urn:example:profile:1;q=0.8,http://example.org/profiles/2;q=0.5
 [More headers for this resource]
             </pre>
 	</section>
