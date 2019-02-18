@@ -2273,22 +2273,22 @@ end class DiscoveryService -->
 <section id="Dereferenceable-identifiers" class="informative">
     <h2>Dereferenceable identifiers</h2>
 
-    <p>The scientific and data provider communities use a number of different identifiers for publications,  authors and data. DCAT primarily relies on persistent HTTP URIs as an effective way of making identifiers actionable. Notably, quite a few identifier schemes can be encoded as dereferenceable HTTP URIs, and some of them are also returning machine-readable metadata (e.g., <a href="https://www.doi.org/"> <abbr title="Digital Object Identifier">DOIs</abbr>,  <a href="https://orcid.org/"><abbr title="Open Researcher and Contributor ID">ORCIDs</abbr></a>). Regardless, data providers still might need to refer to legacy identifiers, non-HTTP dereferenceable identifiers, locally minted or third-party-provided identifiers. In these cases, [[?DC11]] and [[?VOCAB-ADMS]] can be of use.</p>
-    <p>The property <a href="#Property:resource_identifier"><code>dct:identifier</code></a>  explicitly indicates HTTP URIs as well as legacy identifiers. In the following examples,  <a href="#Property:resource_identifier"><code>dct:identifier</code></a>  identifies a dataset, but it can similarly be used with any kind of resources.</p>
+    <p>The scientific and data provider communities use a number of different identifiers for publications, authors and data. DCAT primarily relies on persistent HTTP URIs as an effective way of making identifiers actionable. Notably, quite a few identifier schemes can be encoded as dereferenceable HTTP URIs, and some of them are also returning machine-readable metadata (e.g., <abbr title="Digital Object Identifier">DOIs</abbr> [[?ISO-26324]] and <a href="https://orcid.org/"><abbr title="Open Researcher and Contributor ID">ORCIDs</abbr></a>). Regardless, data providers still might need to refer to legacy identifiers, non-HTTP dereferenceable identifiers, locally minted or third-party-provided identifiers. In these cases, [[?DCTERMS]] and [[?VOCAB-ADMS]] can be of use.</p>
+    <p>The property <a href="#Property:resource_identifier"><code>dct:identifier</code></a> explicitly indicates HTTP URIs as well as legacy identifiers. In the following examples,  <a href="#Property:resource_identifier"><code>dct:identifier</code></a> identifies a dataset, but it can similarly be used with any kind of resources.</p>
 
 <pre id="ex-identifier" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 &lt;https://example.org/id&gt; a dcat:Dataset;
 	dct:identifier "https://example.org/id"^^xsd:anyURI
   .</pre>
 
-    <p> Proxy dereferenceable URIs can be used  when resources have not  HTTP dereferenceable IDs. For example, in the following, <code>https://example.org/proxyid</code> is a proxy for <code>id</code>.</p>
+    <p> Proxy dereferenceable URIs can be used when resources have not HTTP dereferenceable IDs. For example, in the following example, <code>https://example.org/proxyid</code> is a proxy for <code>id</code>.</p>
 
 <pre id="ex-proxy-id" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 &lt;https://example.org/proxyid&gt; a dcat:Dataset;
 	dct:identifier  "id"^^xsd:string
     .</pre>
-    <p>The property <a data-cite="VOCAB-ADMS#adms-identifier"><code>adms:identifier</code></a> [[?VOCAB-ADMS]] can express other locally minted identifiers or external identifiers, like <abbr title="Digital Object Identifier">DOI</abbr> [[?ISO-26324]], <a href="https://eur-lex.europa.eu/eli-register/about.html"><abbr title="European Legislation Identifier">ELI</abbr></a>, <a href="https://arxiv.org/">arXiv </a> for creative works and <a href="https://orcid.org/"><abbr title="Open Researcher and Contributor ID">ORCID</abbr></a>, <a href="https://viaf.org/"><abbr title="Virtual International Authority File">VIAF</abbr></a>, <a href="http://www.isni.org/"><abbr title="International Standard Name Identifier">ISNI</abbr></a> for actors such as authors and publishers, as long as the identifiers are globally unique and stable.</p>
-    <p>The following example uses <a data-cite="VOCAB-ADMS#schemaAgency"><code>adms:schemaAgency</code></a> and <a data-cite="DCTerms#creator"><code>dct:creator</code></a> to represent the authority that defines the identifier scheme (e.g., the <a href="https://www.doi.org/">DOI foundation</a> in the example), <code>adms:schemaAgency</code> is used when the authority has no URI associated. The <a href="https://www.crossref.org/display-guidelines/">Crossref </a> and <a href="https://support.datacite.org/docs/datacite-doi-display-guidelines">DataCite</a> display guidelines recommend displaying DOIs as full URL link in the form <code>https://doi.org/xx.xxxx/xxxxx/</code>.
+    <p>The property <a data-cite="VOCAB-ADMS#adms-identifier"><code>adms:identifier</code></a> [[?VOCAB-ADMS]] can express other locally minted identifiers or external identifiers, like DOI, <a href="https://eur-lex.europa.eu/eli-register/about.html"><abbr title="European Legislation Identifier">ELI</abbr></a>, <a href="https://arxiv.org/">ar&Chi;iv</a> for creative works and <a href="https://orcid.org/">ORCID</a>, <a href="https://viaf.org/"><abbr title="Virtual International Authority File">VIAF</abbr></a>, <a href="http://www.isni.org/"><abbr title="International Standard Name Identifier">ISNI</abbr></a> for actors such as authors and publishers, as long as the identifiers are globally unique and stable.</p>
+    <p>The following example uses <a data-cite="VOCAB-ADMS#schemaAgency"><code>adms:schemaAgency</code></a> and <a data-cite="DCTERMS#creator"><code>dct:creator</code></a> to represent the authority that defines the identifier scheme (e.g., the <a href="https://www.doi.org/">DOI foundation</a> in the example), <code>adms:schemaAgency</code> is used when the authority has no URI associated. The <a href="https://www.crossref.org/display-guidelines/">CrossRef</a> and <a href="https://support.datacite.org/docs/datacite-doi-display-guidelines">DataCite</a> display guidelines recommend displaying DOIs as full URL link in the form <code>https://doi.org/10.xxxx/xxxxx/</code>.
     </p>
 
 <pre id="ex-adms-identifier" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
@@ -2308,7 +2308,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
     rdfs:label "International DOI Foundation";
     foaf:homepage &lt;https://www.doi.org/&gt; .
 
-&lt;https://example.org/PoelenJorritH&gt;  a  foaf:Person;
+&lt;https://example.org/PoelenJorritH&gt; a foaf:Person;
     foaf:name "Jorrit H. Poelen" ;
     adms:identifier &lt;https://example.org/PoelenJorritHID&gt; .
     
@@ -2318,8 +2318,8 @@ ex:InternationalDOIFundation a foaf:Organization ;
    adms:schemaAgency "ORCID" .
 </pre>
 
-    <p> The example does not represent the authority responsible for assigning and maintaining identifiers using that scheme (e.g., <a href="https://zenodo.org/">Zenodo</a>) as naming the registrant goes against the philosophy of DOI, where the sub-spaces are abstracted from the organisation that registers them, with the advantage that DOIs don't change when the organisation changes or the responsibility for that sub-space is handed over to someone else. The example shows a locally minted identifier for the creator of the dataset (e.g., <code>https://example.org/PoelenJorritHID</code>) and its correspondent ORCID identifier (e.g., <code>https://orcid.org/0000-0003-3138-4118</code>). </p>
-    <p>When the HTTP dereferenceable ID returns an RDF/OWL description for the dataset, the use of <code>owl:sameAs</code> might be considered. For example, </p>
+    <p> The example does not represent the authority responsible for assigning and maintaining identifiers using that scheme (e.g., <a href="https://zenodo.org/">Zenodo</a>) as naming the registrant goes against the philosophy of DOI, where the sub-spaces are abstracted from the organisation that registers them, with the advantage that DOIs do not change when the organization changes or the responsibility for that sub-space is handed over to someone else. The example shows a locally minted identifier for the creator of the dataset (e.g., <code>https://example.org/PoelenJorritHID</code>) and its correspondent ORCID identifier (e.g., <code>https://orcid.org/0000-0003-3138-4118</code>). </p>
+    <p>When the HTTP dereferenceable ID returns an RDF/OWL description for the dataset, the use of <code>owl:sameAs</code> might be considered. For example,</p>
 
 <pre id="ex-owl-sameas" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 &lt;https://example.org/id&gt; a dcat:Dataset;
@@ -2328,8 +2328,9 @@ ex:InternationalDOIFundation a foaf:Organization ;
 </pre>
     <p>when dereferenced with media type <code>text/turtle</code>,  <code>https://doi.org/10.5281/zenodo.1486279</code> returns a [[?SCHEMA-ORG]] description for the dataset, which might dynamically enrich the description provided by <code>https://example.org/id</code>. </p>
 
-
+<aside class="note">
     <p>Identifiers for datasets should follow the [[?DWBP]] <a data-cite="?DWBP#DataIdentifiers">Data Identifiers Best Practice</a>.</p>
+</aside>
 
     <p>The need to distinguish between primary and alternative (or legacy) identifiers for a dataset within DCAT has been posed as a requirement. However, it is very much application-specific and would be better addressed in application profiles rather than mandating a general approach.</p>
 
@@ -2338,7 +2339,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
     <section id="identifiers-type">
     <h2>Indicating common identifier types</h2>
 
-        <p> If identifiers are not HTTP dereferenceable, common identifier types can be served as <a href="https://www.w3.org/TR/rdf11-concepts/#dfn-recognized-datatype-iris">RDF datatypes</a> or custom <a href="https://www.w3.org/TR/owl2-syntax/#Datatype_Definitions">OWL datatypes</a> for the sake of interoperability, see <code>ex:type</code> in the following example.</p>
+        <p> If identifiers are not HTTP dereferenceable, common identifier types can be served as <a data-cite="RDF11-CONCEPTS#dfn-recognized-datatype-iris">RDF datatypes</a> or custom <a data-cite="OWL2-SYNTAX#Datatype_Definitions">OWL datatypes</a> for the sake of interoperability, see <code>ex:type</code> in the following example.</p>
 
 <pre id="ex-identifier-type" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 &lt;https://example.org/id&gt; a dcat:Dataset;
@@ -2353,7 +2354,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
 	 dcterms:issued "2001-09-12"^^xsd:date .
 </pre>
 
-        <p>If a registered URI type is used (following [[?RFC3986]], <a href="https://tools.ietf.org/html/rfc3986#section-3.1">Section 3.1</a>), the identifier scheme is part of the URI; thus indicating a separate identifier scheme in 'type' is redundant. For example, DOI is registered as a namespace in the <a href="https://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml"><code>info</code> URI scheme</a> (see <a href="https://www.doi.org/faq.html">DOI FAQ #11</a>), so according to [[?RFC3986]] URI it should be encoded as in the following</p>
+        <p>If a registered URI type is used (following [[?RFC3986]], <a href="https://tools.ietf.org/html/rfc3986#section-3.1">Section 3.1</a>), the identifier scheme is part of the URI; thus indicating a separate identifier scheme in 'type' is redundant. For example, DOI is registered as a namespace in the <code>info</code> URI scheme [[IANA-URI-SCHEMES]] (see <a href="https://www.doi.org/faq.html">DOI FAQ #11</a>), so according to [[?RFC3986]], it should be encoded as in the following</p>
 
 <pre id="ex-identifier-type-in-uri" class="example nohighlight turtle" aria-busy="false" aria-live="polite">&lt;https://example.org/sid&gt; rdf:type adms:Identifier ;
  # the actual id
