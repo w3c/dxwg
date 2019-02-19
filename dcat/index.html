@@ -1636,6 +1636,7 @@ $(document).ready( function() {
             <a href="#Property:distribution_accessurl">access URL</a>,
             <a href="#Property:distribution_accessservice">access service</a>,
             <a href="#Property:distribution_size">byte size</a>,
+            <a href="#Property:distribution_compression_format">compression format</a>,
             <a href="#Property:distribution_conformsto">conforms to</a>,
             <a href="#Property:distribution_description">description</a>,
             <a href="#Property:distribution_downloadurl">download URL</a>,
@@ -1643,6 +1644,7 @@ $(document).ready( function() {
             <a href="#Property:distribution_hasPolicy">has Policy</a>,
             <a href="#Property:distribution_license">license</a>,
             <a href="#Property:distribution_media_type">media type</a>,
+            <a href="#Property:distribution_packaging_format">packaging format</a>,
             <a href="#Property:distribution_release_date">release date</a>,
             <a href="#Property:distribution_rights">rights</a>,
             <a href="#Property:distribution_title">title</a>,
@@ -1938,18 +1940,34 @@ $(document).ready( function() {
                 </tbody>
             </table>
         </section>
-	    
-	<section id="Property:distribution_wrapFormat">
-            <h4>Property: wrap format</h4>
+
+        <section id="Property:distribution_compression_format">
+            <h4>Property: compression format</h4>
 
             <table class="definition">
-                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#wrapFormat">dcat:wrapFormat</a></th></tr></thead>
+                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#compressFormat">dcat:compressFormat</a></th></tr></thead>
                 <tbody>
-                <tr><td class="prop">Definition:</td><td>The file format of the file wrapper if the file(s) that make up the distribution are packaged or compressed.</td></tr>
-                <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/MediaTypeOrExtent"><code>dct:MediaTypeOrExtent</code></a></td></tr>
-                <tr><td class="prop">Usage note:</td><td>This provides the information that enable systems to decompress or unpack the file(s) in the wrapper. The object <em title="SHOULD" class="rfc2119">SHOULD</em> be a media type as defined by IANA [[!IANA-MEDIA-TYPES]], if available. For example <a href="https://www.iana.org/assignments/media-types/application/vnd.rar">https://www.iana.org/assignments/media-types/application/vnd.rar</a> or <a href="https://www.iana.org/assignments/media-types/application/zip">https://www.iana.org/assignments/media-types/application/zip</a>. The format of the file(s) inside the wrapper <em title="SHOULD" class="rfc2119">SHOULD</em> be expressed with <a href="#Property:distribution_media_type">media type</a> or <href="#Property:format">format</a>. If there is more than one layer of packaging or compression, <a href="#Property:distribution_media_type">media type</a> or <href="#Property:format">format</a> should indicate the media type or format of the file(s) inside the wrapper that are of primary interest to the user.</td></tr>
+                <tr><td class="prop">Definition:</td><td>The compression format of the distribution.</td></tr>
+                <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/MediaType"><code>dct:MediaType</code></a></td></tr>
+                <tr><td class="prop">Usage note:</td><td>This property to be used when the files in the distribution are compressed, e.g. in a ZIP file. The format <em title="SHOULD" class="rfc2119">SHOULD</em> be expressed using a media type as defined by IANA [[!IANA-MEDIA-TYPES]], if available.</td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Property:distribution_packaging_format">PackageFormat</a>.</td></tr>
                 </tbody>
             </table>
+
+        </section>
+
+        <section id="Property:distribution_packaging_format">
+              <h4>Property: packaging format</h4>
+
+              <table class="definition">
+                  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#packageFormat">dcat:packageFormat</a></th></tr></thead>
+                  <tbody>
+                  <tr><td class="prop">Definition:</td><td>The packaging format of the distribution.</td></tr>
+                  <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/MediaType"><code>dct:MediaType</code></a></td></tr>
+                  <tr><td class="prop">Usage note:</td><td>This property to be used when the files in the distribution are packaged, e.g. in a RAR file. The format <em title="SHOULD" class="rfc2119">SHOULD</em> be expressed using a media type as defined by IANA [[!IANA-MEDIA-TYPES]], if available.</td></tr>
+                  <tr><td class="prop">See also:</td><td><a href="#Property:distribution_compression_format">CompressFormat</a>.</td></tr>
+                  </tbody>
+              </table>
         </section>
     </section> <!-- end class Distribution -->
 
