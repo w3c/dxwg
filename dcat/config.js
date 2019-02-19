@@ -12,12 +12,8 @@ var respecConfig = {
     editors: [{
       name:       "Riccardo Albertoni",
       company:    "CNR - Consiglio Nazionale delle Ricerche, Italy",
+      url: "http://www.imati.cnr.it/joomla/index.php/people/8-curricula/178-riccardo-albertoni",
       companyURL: "http://www.cnr.it/"
-    },{
-      name:       "Alejandra Gonzalez Beltran",
-      company:    "Oxford eResearch Centre, Engineering Science, University of Oxford",
-      url: "https://www.oerc.ox.ac.uk/people/alejandra",
-      companyURL: "http://www.oerc.ox.ac.uk/"
     },{
       name: "Dave Browning",
       company: "Refinitiv",
@@ -28,8 +24,14 @@ var respecConfig = {
       url: "http://people.csiro.au/Simon-Cox",
       companyURL: "https://www.csiro.au/"
     },{
+      name:       "Alejandra Gonzalez Beltran",
+      company:    "Oxford eResearch Centre, Engineering Science, University of Oxford",
+      url: "https://www.oerc.ox.ac.uk/people/alejandra",
+      companyURL: "http://www.oerc.ox.ac.uk/"
+    },{
       name: "Andrea Perego",
       company: "European Commission, Joint Research Centre (JRC)",
+      url: "https://joinup.ec.europa.eu/user/14209",
       companyURL: "https://ec.europa.eu/jrc/"
     },{
       name: "Peter Winstanley",
