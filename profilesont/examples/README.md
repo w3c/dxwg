@@ -1,4 +1,4 @@
-# Profiles Ontology examples
+# Profiles Vocabulary examples
 Here are some examples of the Profile Descriptions Ontology modelling existing or expected profiles.
 
 ### DCAT-AP
