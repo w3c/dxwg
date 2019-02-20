@@ -1636,6 +1636,7 @@ $(document).ready( function() {
             <a href="#Property:distribution_accessurl">access URL</a>,
             <a href="#Property:distribution_accessservice">access service</a>,
             <a href="#Property:distribution_size">byte size</a>,
+            <a href="#Property:distribution_compression_format">compression format</a>,
             <a href="#Property:distribution_conformsto">conforms to</a>,
             <a href="#Property:distribution_description">description</a>,
             <a href="#Property:distribution_downloadurl">download URL</a>,
@@ -1643,10 +1644,11 @@ $(document).ready( function() {
             <a href="#Property:distribution_hasPolicy">has Policy</a>,
             <a href="#Property:distribution_license">license</a>,
             <a href="#Property:distribution_media_type">media type</a>,
+            <a href="#Property:distribution_packaging_format">packaging format</a>,
             <a href="#Property:distribution_release_date">release date</a>,
             <a href="#Property:distribution_rights">rights</a>,
             <a href="#Property:distribution_title">title</a>,
-            <a href="#Property:distribution_update_date">update/modification date</a>
+            <a href="#Property:distribution_update_date">update/modification date</a>,
         </p>
 
         <p class="issue" data-number="54">
@@ -1936,6 +1938,35 @@ $(document).ready( function() {
                 <tr><td class="prop">See also:</td><td><a href="#Property:distribution_media_type">media type</a>, <a href="#Property:distribution_conformsto">conforms to</a></td></tr>
                 </tbody>
             </table>
+        </section>
+
+        <section id="Property:distribution_compression_format">
+            <h4>Property: compression format</h4>
+
+            <table class="definition">
+                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#compressFormat">dcat:compressFormat</a></th></tr></thead>
+                <tbody>
+                <tr><td class="prop">Definition:</td><td>The format of the file in which the data is contained in a compressed form, e.g. to reduce the size of the downloadable file.</td></tr>
+                <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/MediaType"><code>dct:MediaType</code></a></td></tr>
+                <tr><td class="prop">Usage note:</td><td>This property to be used when the files in the distribution are compressed, e.g. in a ZIP file. The format <em title="SHOULD" class="rfc2119">SHOULD</em> be expressed using a media type as defined by IANA [[!IANA-MEDIA-TYPES]], if available.</td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Property:distribution_packaging_format">packaging format</a>.</td></tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <section id="Property:distribution_packaging_format">
+              <h4>Property: packaging format</h4>
+
+              <table class="definition">
+                  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#packageFormat">dcat:packageFormat</a></th></tr></thead>
+                  <tbody>
+                  <tr><td class="prop">Definition:</td><td>The format of the file in which one or more data files are grouped together, e.g. to enable a set of related files to be downloaded together.</td></tr>
+                  <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/MediaType"><code>dct:MediaType</code></a></td></tr>
+                  <tr><td class="prop">Usage note:</td><td>This property to be used when the files in the distribution are packaged, e.g. in a RAR file. The format <em title="SHOULD" class="rfc2119">SHOULD</em> be expressed using a media type as defined by IANA [[!IANA-MEDIA-TYPES]], if available.</td></tr>
+                  <tr><td class="prop">See also:</td><td><a href="#Property:distribution_compression_format">compression format</a>.</td></tr>
+                  </tbody>
+              </table>
         </section>
     </section> <!-- end class Distribution -->
 
@@ -2310,7 +2341,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
 &lt;https://example.org/PoelenJorritH&gt; a foaf:Person;
     foaf:name "Jorrit H. Poelen" ;
     adms:identifier &lt;https://example.org/PoelenJorritHID&gt; .
-    
+
 &lt;https://example.org/PoelenJorritHID&gt; a adms:Identifier;
     skos:notation "https://orcid.org/0000-0003-3138-4118"^^xsd:anyURI ;
     # the authority/agency defining the identifier scheme, used if the agency has no URI
@@ -3947,7 +3978,10 @@ dcat:servesDataset ga-courts:jc ;
         <p>The document has undergone the following changes since the W3C Recommendation of 16 January 2014 [[?VOCAB-DCAT-20140116]]:</p>
 
         <ul>
-          <li>
+            <li>
+                Two new properties were added to specify packaged and compressed distributions: <a href="#Property:distribution_packaging_format">dcat:packageFormat</a> and <a href="#Property:distribution_compression_format">dcat:compressFormat</a>. See <a href="https://github.com/w3c/dxwg/issues/54">Issue #54</a>
+            </li>
+            <li>
               A new section <a href="#qualified-relationship">Relationships between datasets and other resources</a> and new property <a href="#Property:resource_qualifiedRelation">dcat:qualifiedRelation</a> and class <a href="#Class:Relationship">dcat:Relationship</a> added to support relationships between datasets or other resources. See <a href="https://github.com/w3c/dxwg/issues/79">Issue #79</a>
           </li>
 
@@ -4073,7 +4107,6 @@ dcat:servesDataset ga-courts:jc ;
                 Each relevant class section was extended with properties to deal with licensing, acccess rights, other rights and policies associated with the classes, as
                 recommended in the  <a href="#license-rights">License and rights statements</a> section.
             </li>
-
         </ul>
 
     </section>
