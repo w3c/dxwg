@@ -362,6 +362,13 @@ dcat:Distribution
 					  μέσω API ή μέσω μίας ιστοσελίδας. Η χρήση της ιδιότητας dcat:downloadURL δείχνει μόνο άμεσα μεταφορτώσιμες διανομές."""@el ;
   skos:scopeNote "これは、データセットの一般的な利用可能性を表わし、データの実際のアクセス方式に関する情報（つまり、直接ダウンロードなのか、APIなのか、ウェブページを介したものなのか）を意味しません。dcat:downloadURLプロパティーの使用は、直接ダウンロード可能な配信を意味します。"@ja ;
 .
+dcat:Measure
+  rdf:type owl:Class ;
+  rdfs:comment "A quantity expressed as a scaled number" ;
+  rdfs:label "Measure" ;
+  skos:changeNote "New class in this revision" ;
+  skos:editorialNote "Status: Class accepted by DCAT revision team, but details of definition and constraints not yet resolved." ;
+.
 dcat:Relationship
   rdf:type owl:Class ;
   rdfs:comment "An association class for attaching additional information to a relationship between DCAT Resources" ;
@@ -462,6 +469,14 @@ dcat:accessURL
 					Αν η/οι διανομή/ές είναι προσβάσιμη/ες μόνο μέσω μίας ιστοσελίδας αρχικής πρόσβασης (δηλαδή αν δεν υπάρχουν γνωστές διευθύνσεις άμεσης μεταφόρτωσης), τότε ο σύνδεσμος της ιστοσελίδας αρχικής πρόσβασης πρέπει να αναπαραχθεί ως accessURL σε μία διανομή."""@el ;
   skos:scopeNote """確実にダウンロードでない場合や、ダウンロードかどうかが不明である場合は、downloadURLではなく、accessURLを用いてください。
 ランディング・ページを通じてしか配信にアクセスできない場合（つまり、直接的なダウンロードURLが不明）は、配信におけるaccessURLとしてランディング・ページのリンクをコピーすべきです（SHOULD）。"""@ja ;
+.
+dcat:amount
+  rdf:type owl:DatatypeProperty ;
+  rdfs:label "amount" ;
+  rdfs:domain dcat:Measure ;
+  rdfs:range xsd:decimal ;
+  rdfs:comment "The numerical element of a quantity." ;
+  skos:scopeNote "" ;
 .
 dcat:byteSize
   rdf:type rdf:Property ;
@@ -800,15 +815,15 @@ dcat:service
   skos:changeNote "New property in this revision of DCAT" ;
   skos:editorialNote "Status: Property accepted by DCAT revision team, but details of definition and constraints not yet resolved." ;
 .
-dcat:temporalResolution
-  rdf:type owl:DatatypeProperty ;
-  rdfs:comment "minimum time period resolvable in a dataset" ;
-  rdfs:label "temporal resolution" ;
-  rdfs:range xsd:duration ;
+dcat:spatialResolution
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "minimum spatial separation resolvable in a dataset" ;
+  rdfs:label "spatial resolution" ;
+  rdfs:range rdfs:Resource ;
   skos:changeNote "New property in this revision of DCAT" ;
-  skos:editorialNote "Status: Property accepted by DCAT revision team, but details of definition and constraints not yet resolved." ;
+  skos:editorialNote "Status: details of definition and constraints not yet resolved." ;
   skos:editorialNote "Might appear in the description of a Dataset or a Distribution, so no domain is specified" ;
-  skos:scopeNote "If the dataset is a time-series this should correspond to the spacing of items. For other kinds of dataset, this property will usually indicate the smallest time difference between items in the dataset. " ;
+  skos:scopeNote "If the dataset is an image or grid this should correspond to the spacing of items. For other kinds of spatial dataset, this property will usually indicate the smallest distance between items in the dataset. " ;
 .
 dcat:theme
   rdf:type rdf:Property ;
@@ -867,6 +882,13 @@ dcat:themeTaxonomy
   rdfs:label "قائمة التصنيفات"@ar ;
   rdfs:label "テーマ"@ja ;
   rdfs:range skos:ConceptScheme ;
+.
+dcat:unit
+  rdf:type owl:ObjectProperty ;
+  rdfs:label "unit of measure" ;
+  rdfs:domain dcat:Measure ;
+  rdfs:comment "The scale element of a quantity." ;
+  skos:scopeNote "" ;
 .
 prov:qualifiedAttribution
   skos:definition "Link to an Agent having some form of responsibility for the resource" ;
