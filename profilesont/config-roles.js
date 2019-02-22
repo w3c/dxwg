@@ -66,7 +66,7 @@ var respecConfig = {
                 "Nicholas J. Car"
             ],
             href: "https://www.w3.org/TR/2018/WD-dx-prof-20181211/",
-            title: "Profile Descriptions ontology",
+            title: "Profiles Vocabulary",
             date: "2018-12-11",
             status: "First Public Working Draft"
         },

@@ -1,4 +1,4 @@
-# Profiles Ontology examples
+# Profiles Vocabulary examples
 Here are some examples of the Profile Descriptions Ontology modelling existing or expected profiles.
 
 ### DCAT-AP
@@ -10,7 +10,7 @@ The degree to which categorisation of roles is explicitly supported is a subject
 
 The RDF for this example is in [profilesont_examples.ttl](profilesont_examples.ttl).
 
-![](eg_dcat-ap.png)  
+![](dcat-ap.svg)  
 Figure 1: DCAT-AP profile of DCAT
 
 Additionally, there are a range of national DCAT-AP profiles, such as DCAT-AP IT (Italy) which profile DCAT-AP and also other non-national profiles such as GeoDCAT-AP. Note that GeoDCAT-AP profiles both DCAT-AP *and* GeoDCAT. The property `inheritedFrom` is used to show that at least some of the `Implementation Resource Descriptor` content for DCAT-AP-IT is inherited from DCAT & DCAT-AP from which DCAT-AP-IT derives.
@@ -23,7 +23,7 @@ Depending on backwards compatibility outcomes, it is possible that the original 
 
 The RDF for this example is in [profilesont_examples.ttl](profilesont_examples.ttl).
 
-![](eg_dcat.png)  
+![](dcat.svg)  
 Figure 3: DCAT profiles
 
 ### EUDM

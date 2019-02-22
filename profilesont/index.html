@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>The Profiles Ontology</title>
+  <title>The Profiles Vocabulary</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" type="text/css" href="style.css">
@@ -10,11 +10,11 @@
 <section id="abstract">
   <h2>Abstract</h2>
   <p>
-    The Profiles Ontology is an RDF vocabulary to describe profiles of (one or more) standards for information resources. It describes the general pattern of narrowing the scope of a specification with additional, but consistent, constraints, and is particularly relevant to data exchange situations where conformance to such profiles is expected and carries additional context.   The Profiles Ontology enables profile descriptions to specify the role of resources related to data exchange such as schemas, ontologies, rules about use of controlled vocabularies, validation tools, and guidelines. The ontology may however be used to describe the role of artifacts in any situation where constraints are made on a the usage of more general specifications.
+    The Profiles Vocabulary is an RDF vocabulary to describe profiles of (one or more) standards for information resources. It describes the general pattern of narrowing the scope of a specification with additional, but consistent, constraints, and is particularly relevant to data exchange situations where conformance to such profiles is expected and carries additional context.   The Profiles Vocabulary enables profile descriptions to specify the role of resources related to data exchange such as schemas, ontologies, rules about use of controlled vocabularies, validation tools, and guidelines. The ontology may however be used to describe the role of artifacts in any situation where constraints are made on a the usage of more general specifications.
   </p>
   <p style="text-align: center;">
     The namespace for PROF terms is <code>http://www.w3.org/ns/dx/prof/</code>.<br />
-    The PROF ontology, defined in OWL and encoded in RDF Turtle, is available at <a href="profilesont.ttl">profilesont.ttl</a>.
+    The PROF vocabulary, defined in OWL and encoded in RDF Turtle, is available at <a href="profilesont.ttl">profilesont.ttl</a>.
   </p>
 </section>
 <section id="sotd">
@@ -24,6 +24,7 @@
     <p>
       This document is part of a set of documents on profiles, edited by the W3C Dataset Exchange Working Group (DXWG).
       Some of the documents are general while some are technology-specific:
+    </p>
     <ul>
       <li>[[PROF-GUIDANCE]] the top-level general recommendations and guidance on profiling.
         It gives an overview of all DXWG documents on profiles and is the recommended starting point</li>
@@ -36,16 +37,14 @@
 <section id="introduction" class="informative">
   <h2>Introduction</h2>
   <p>
-    This Profiles Ontology provides a structure to describe profiles of information standards. Its
+    This Profiles Vocabulary provides a structure to describe profiles of information standards. Its
     development was triggered by the appearance of multiple profiles of the Dataset Catalog Vocabulary (DCAT)
     [[VOCAB-DCAT-20140116]] and examples of profiles including the Dublin Core Application Profiles guidelines [[DCAP]] and various profiles of OpenGeospatial Consortium specifications.
   </p>
-  <p>The Profiles Ontology is an RDF vocabulary to describe the resources that define and implement a profile. A profile is defined as "A named set of constraints on one or more identified base specifications or other profiles, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of those base specifications necessary to accomplish a particular function." These resources may be human-readable documents (PDFs, textual documents), vocabularies or ontologies (XSD, RDF),  resources specific to validation tools (SHACL, ShEx, Schematron), or any other files or resources that support the profile. Each resource is defined as having a role that defines its function within the profile.
+  <p>The Profiles Vocabulary is an RDF vocabulary to describe the resources that define and implement a profile. A profile is defined as "A named set of constraints on one or more identified base specifications or other profiles, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of those base specifications necessary to accomplish a particular function." These resources may be human-readable documents (PDFs, textual documents), vocabularies or ontologies (XSD, RDF),  resources specific to validation tools (SHACL, ShEx, Schematron), or any other files or resources that support the profile. Each resource is defined as having a role that defines its function within the profile.
 	</p>
-  <p>
-This ontology also provides for the description of relationships between such profiles and the standards to which they conform. A standard in this case can be a vocabulary or it can be another profile from which the described profile is a derivation, expansion, or selection. This ontology provides a standardized, machine readable formalism for describing the context of profiles. The basis of the ontology is a specialization of <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></code>, allowing the use of the <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-conformsTo">dct:conformsTo</a></code> predicate to specify conformance to a profile.
-	</p>
-  <p>
+This vocabulary also provides for the description of relationships between such profiles and the standards to which they conform. A standard in this case can be a vocabulary or it can be another profile from which the described profile is a derivation, expansion, or selection. This vocabulary provides a standardized, machine readable formalism for describing the context of profiles. The basis of this vocabulary is a specialization of <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></code>, allowing the use of the <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-conformsTo">dct:conformsTo</a></code> predicate to specify conformance to a profile.
+	</p><p>
     A "profile" here is represented by the <a href="#Class:Profile">Profile class definition</a> in the
     <a href="#specification">Vocabulary Specification</a> with the following definition: "A named set of constraints on one or more identified base specifications or other profiles, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of those base specifications necessary to accomplish a particular function."
   </p>
@@ -56,7 +55,7 @@ This ontology also provides for the description of relationships between such pr
     have generally been specified through textually-oriented documents, and/or platform specific constraint languages.
 	</p>
   <p>
-    A vocabulary of <code>Resource Role</code>s is provided alongside this ontology and that list is extensible:
+    A vocabulary of <code>Resource Role</code>s is provided alongside this vocabulary and that list is extensible:
   </p>
   <ul>
     <li><a href="https://w3c.github.io/dxwg/profilesont/resource_roles.html">Resource Roles Vocabulary</a></li>
@@ -113,7 +112,7 @@ This ontology also provides for the description of relationships between such pr
 <section id="motivation" class="informative">
   <h2>Motivation</h2>
   <p>
-    Until this ontology, there was no formal W3C method for describing the objects (Internet resources) related to
+    Until this vocabulary's creation, there was no formal W3C method for describing the objects (Internet resources) related to
     <em>profiles</em>.
   </p>
   <p>
@@ -177,7 +176,7 @@ This ontology also provides for the description of relationships between such pr
   </ul>
   <div class="issue" data-number="551"></div>
   <div class="note" title="See the Content Negotiation by Profile document">
-    The details of profile negotiation using this ontology, as suggested immediately above, and other methods,
+    The details of profile negotiation using this vocabulary, as suggested immediately above, and other methods,
     are explained in detail in the related [[PROF-CONNEG]] document.
   </div>
 </section>
@@ -195,17 +194,25 @@ This ontology also provides for the description of relationships between such pr
   <h2>Conceptual Model</h2>
   <figure id="fig-overview">
     <a href="profilesont.svg">
-      <img src="profilesont.svg" alt="Ontology overview diagram" />
+      <img src="profilesont.svg" alt="Vocabulary overview diagram" />
     </a>
-    <figcaption>OWL [[OWL2-OVERVIEW]] overview diagram of this ontology</figcaption>
+    <figcaption>OWL [[OWL2-OVERVIEW]] overview diagram of this vocabulary</figcaption>
   </figure>
     <p>
-    The model takes the <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></code> Class as a starting point and defines two specializations, a <code>Base Specification</code> (a Standard that does not profile anything) or a <code>Profile</code> (a Standard which
-    does). <code>Base Specification</code>s or <code>Profile</code>s can have <code>Resource Descriptor</code>s associated with
-    them that define rules for implementation, provide guidance on how to implement, or some other role. <code>Resource Descriptor</code>s must indicate the role they
+      This vocabulary is for describing relationships between standards/specifications, profiles of them and supporting artifacts such as validating resources.
+    </p>
+    <p>
+      The model takes the <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></code> Class as a starting point and defines a specialization, a <code>Profile</code>, which is a <code>dct:Standard</code> that <em>profiles</em> a <code>dct:Standard</code> or another <code>Profile</code>. <code>Standards</code>s or <code>Profile</code>s can have <code>Resource Descriptor</code>s associated with
+    them that define rules for implementation, provide guidance on how to implement, or play some other role. <code>Resource Descriptor</code>s must indicate the role they
     play (to guide, to validate etc.), the formalism they adhere to (<code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-format">dct:format</a></code>)
-    and any <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></code> that they themselves conform to (<code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-conformsTo">dct:conformsTo</a></code>).
+    and any <code>dct:Standard</code> that they themselves conform to (<code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-conformsTo">dct:conformsTo</a></code>).
   </p>
+  <p>
+    A extensible vocabulary of <code>Resource Role</code>s is provided alongside this vocabulary.
+  </p>
+  <ul>
+    <li><a href="https://w3c.github.io/dxwg/profilesont/resource_roles.html">Resource Roles Vocabulary</a></li>
+  </ul>
   <p>
     <em>The remainder of this section is informative.</em>
   </p>
@@ -276,7 +283,7 @@ CSIRO's publications catalogue."""@en ;
   <section id="roles-vocab">
     <h3>Roles Vocabulary</h3>
     <p>
-      A vocabulary of <code>Resource Role</code>s is provided alongside this ontology and that list is extensible.
+      A extensible vocabulary of <code>Resource Role</code>s is provided alongside this vocabulary.
     </p>
     <ul>
       <li><a href="https://w3c.github.io/dxwg/profilesont/resource_roles.html">Resource Roles Vocabulary</a></li>
@@ -310,20 +317,6 @@ CSIRO's publications catalogue."""@en ;
       normative specification.
     </p>
   </section>
-  <section id="Class:BaseSpecification" class="property">
-    <h4>Class: BaseSpecification</h4>
-    <table class="definition">
-      <thead>
-      <tr><th><a href="https://www.w3.org/TR/owl-syntax/#Classes">OWL Class</a>:</th><th><a href="#Class:BaseSpecification">prof:BaseSpecification</a></th></tr>
-      </thead>
-      <tbody>
-      <tr><td class="prop">Label:</td><td>Base Specification</td></tr>
-      <tr><td class="prop">Definition:</td><td>A specification that defines all implementation constraints, without applying constraints on usage of another specification</td></tr>
-      <tr><td class="prop">Sub class of:</td><td><a href="#Class:Profile">prof:Profile</a></td></tr>
-      <tr><td class="prop">Usage note:</td><td>This may not be a useful class: documents of any specification can be regarded as a trivial profile, so applications only need to be concerned with Profile conformance. If used, a Base Specification may not have the property <a href="#Property:isProfileOf">prof:isProfileOf</a>.</td></tr>
-      </tbody>
-    </table>
-  </section>
   <section id="Class:Profile" class="property">
     <h4>Class: Profile</h4>
     <table class="definition">
@@ -351,22 +344,6 @@ CSIRO's publications catalogue."""@en ;
       </tbody>
     </table>
     <div class=issue" data-number="521"></div>
-    <section id="Property:hasProfile" class="property">
-      <h4>hasProfile</h4>
-      <table class="definition">
-        <thead>
-          <tr><th>RDF Property:</th><th><a href="#Property:hasProfile">prof:hasProfile</a></th></tr>
-        </thead>
-        <tbody>
-          <tr><td class="prop">OWL type:</td><td><a href="https://www.w3.org/TR/owl2-rdf-based-semantics/#table-axiomatic-properties">owl:ObjectProperty</a></td></tr>
-          <tr><td class="prop">Label:</td><td>has profile</td></tr>
-          <tr><td class="prop">Definition:</td><td>A dct:Standard (or a Profile or Base Specification) has a Profile</td></tr>
-          <tr><td class="prop">Domain:</td><td><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></td></tr>
-          <tr><td class="prop">Range:</td><td><a href="#Class:Profile">prof:Profile</a></td></tr>
-          <tr><td class="prop">Inverse of:</td><td><a href="#Property:isProfileOf">prof:isProfileOf</a></td></tr>
-        </tbody>
-      </table>
-    </section>
     <section id="Property:hasResource" class="property">
       <h4>hasResource</h4>
       <table class="definition">
@@ -390,10 +367,9 @@ CSIRO's publications catalogue."""@en ;
         <tbody>
           <tr><td class="prop">OWL type:</td><td><a href="https://www.w3.org/TR/owl2-rdf-based-semantics/#table-axiomatic-properties">owl:ObjectProperty</a></td></tr>
           <tr><td class="prop">Label:</td><td>is profile of</td></tr>
-          <tr><td class="prop">Definition:</td><td>A Profile is a profile of a dct:Standard (or a Base Specification or another Profile)</td></tr>
+          <tr><td class="prop">Definition:</td><td>The subject of 'is profile of' defines constraints on the object which playes the role of a base specification</td></tr>
           <tr><td class="prop">Domain:</td><td><a href="#Class:Profile">prof:Profile</a></td></tr>
           <tr><td class="prop">Range:</td><td><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></td></tr>
-          <tr><td class="prop">Inverse of:</td><td><a href="#Property:hasProfile">prof:hasProfile</a></td></tr>
           <tr><td class="prop">Usage note:</td><td>
             <p>
               The semantics of the rdfs:Range means that any resource treated as a base specification can be regarded as a Profile (i.e. may be any specification with an empty set of additional constraints).
@@ -414,10 +390,10 @@ CSIRO's publications catalogue."""@en ;
         <tbody>
           <tr><td class="prop">OWL type:</td><td><a href="https://www.w3.org/TR/owl2-rdf-based-semantics/#table-axiomatic-properties">owl:ObjectProperty</a></td></tr>
           <tr><td class="prop">Label:</td><td>is a transitive profile of</td></tr>
-          <tr><td class="prop">Definition:</td><td>A dct:Standard (or a Base Specification or another Profile) that a Profile conforms to transitively (through an intermediary)</td></tr>
+          <tr><td class="prop">Definition:</td><td>The subject 'is profile of' the object which may be through a chain of 'is profile of' relationships</td></tr>
           <tr><td class="prop">Domain:</td><td><a href="#Class:Profile">prof:Profile</a></td></tr>
           <tr><td class="prop">Range:</td><td><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></td></tr>
-          <tr><td class="prop">Usage note:</td><td>A means to list all the Profiles/Standards within a transitive profile hierarchy</td></tr>
+          <tr><td class="prop">Usage note:</td><td>A convenience predicate that may be used to avoid forcing clients to traverse an entire profile hierarchy to find all Profiles/Standards that the subject declares conformance to</td></tr>
         </tbody>
       </table>
     </section>
@@ -444,12 +420,12 @@ CSIRO's publications catalogue."""@en ;
         </figcaption>
       </figure>
       <p>
-        This ontology defines <a href="#Property:isTransitiveProfileOf">prof:isTransitiveProfileOf</a> to allow for the
+        This vocabulary defines <a href="#Property:isTransitiveProfileOf">prof:isTransitiveProfileOf</a> to allow for the
         transitive interpretations of hierarchies of Profiles (of other Profiles and Standards) while freeing the
         simpler property, <a href="#Property:isProfileOf">prof:isProfileOf</a> from having to enforce transitivity.
       </p>
       <p>
-        While this ontology provides this <code>prof:isProfileOf</code> &amp; <code>prof:isTransitiveProfileOf</code>
+        While this vocabulary provides this <code>prof:isProfileOf</code> &amp; <code>prof:isTransitiveProfileOf</code>
         pair of properties, it does not specify how a particular implementation of a Profile that is related to another
         Profile or Standard by <code>prof:isTransitiveProfileOf</code> should implement specific inferences.
       </p>
@@ -542,7 +518,7 @@ CSIRO's publications catalogue."""@en ;
           <tr><td class="prop">Definition:</td><td>Functional role of a Resource</td></tr>
           <tr><td class="prop">Domain:</td><td><a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a></td></tr>
           <tr><td class="prop">Range:</td><td><a href="https://www.w3.org/TR/skos-reference/#Concept">skos:Concept</a></td></tr>
-          <tr><td class="prop">Usage note:</td><td>Some roles are published alongside this ontology in a separate vocabulary</td></tr>
+          <tr><td class="prop">Usage note:</td><td>Some roles are published alongside this vocabulary in a separate Roles vocabulary</td></tr>
         </tbody>
       </table>
     </section>
@@ -554,12 +530,77 @@ CSIRO's publications catalogue."""@en ;
         </thead>
         <tbody>
           <tr><td class="prop">Label:</td><td>is inherited from</td></tr>
-          <tr><td class="prop">Definition:</td><td>A Profile's Resource Descriptor has been inherited from a Base Specification</td></tr>
+          <tr><td class="prop">Definition:</td><td>A Profile's Resource Descriptor has been inherited from a base specification</td></tr>
           <tr><td class="prop">Domain:</td><td><a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a></td></tr>
           <tr><td class="prop">Range:</td><td><a href="#Class:Profile">prof:Profile</a></td></tr>
           <tr><td class="prop">Usage note:</td><td>Profiles within inheritance hierarchies may use this property. If absent, then the Resource Descriptor applies specifically to this Profiles only</td></tr>
         </tbody>
       </table>
+      <div class="issue" data-number="642"></div>
+      <p>
+        To illustrate the use of <code>prof:isInheritedFrom</code>, the following example is given in both pictorial
+        and code forms.
+      </p>
+      <figure id="fig-isInhieritedFrom">
+        <a href="examples/isInheritedFrom.svg">
+          <img src="examples/isInheritedFrom.svg" title="Property isInheritedFrom in use" style="width:90%;" />
+        </a>
+        <figcaption>Property isInheritedFrom in use. Here the <code>prof:ResourceDescriptor</code> RS 2 refers to the same artifact (a constraints file) as RS 1 and it is inherited by <strong>Profile Y</strong> from <code>dct:Standard</code> <strong>Standard X</strong></figcaption>
+      </figure>
+      <pre class="example nohighlight turtle" aria-busy="false" aria-live="polite" title="Property isInheritedFrom in use">
+# If Standard X, described using PROF, is given as having a Resource
+# Descriptor, RS_1, with role "Full Constraints" as follows:
+
+@prefix ex1: &lt;http://example.org/profile1/&gt; .
+@prefix ex2: &lt;http://example.org/profile2/&gt; .
+@prefix dct: &lt;http://purl.org/dc/terms/&gt; .
+@prefix prof: &lt;http://www.w3.org/ns/dx/prof/&gt; .
+@prefix role: &lt;http://www.w3.org/ns/dx/prof/role/&gt; .
+
+
+ex1:Standard_X
+    a dct:Standard , prof:Profile ;  # this may be a 'null' profile,
+                                     # i.e. a profile of nothing, a regular Standard
+    dct:title "Standard X" ;
+    prof:hasResource ex1:RS_1 .
+
+ex1:RS_1
+    a prof:ResourceDescriptor ;
+    dct:conformsTo &lt;http://www.w3.org/ns/shacl#&gt; ;  # the SHACL standard
+    dct:format &lt;https://w3id.org/mediatype/text/turtle&gt; ;  # the RDF Turtle format
+    prof:hasRole role:fullConstraints ;      # this ResourceDescriptor is the total set of
+                                             # constraints needed for validating data
+                                             # against Standard X for conformance
+    prof:hasArtifact ex1:constraints.ttl .
+
+# then, a profile of Standard X, perhaps Profile Y, may use
+# prof:isInheritedFrom to re-use that Resource Descriptor RS_1
+
+ex2:Profile_Y
+    a prof:Profile ;
+    dct:title "Profile Y" ;
+    prof:isProfileOf ex1:Standard_X ;  # this is a profile of Standard X
+    prof:hasResource [
+        a prof:ResourceDescriptor ;  # RS 2 in diagram
+        prof:isInheritedFrom ex1:Standard_X ;  # this Resource Descriptor is inherited from
+                                               # Standard X
+        dct:conformsTo &lt;http://www.w3.org/ns/shacl#&gt; ;  # as above
+        dct:format &lt;https://w3id.org/mediatype/text/turtle&gt; ;  # as above
+        prof:hasRole role:partConstraints ;  # this ResourceDescriptor is now only Part Constraints
+                                             # for Profile Y as it's implementing some of its own,
+                                             # additional constraints (see next Resource Descriptor)
+        prof:hasArtifact ex1:constraints.ttl  # direct URI reference to ex1:RS_1's artifact
+    ] ,
+    [
+        a prof:ResourceDescriptor ;  # RS 3 in diagram. This is not inherited from anywhere
+        dct:conformsTo &lt;http://www.w3.org/ns/shacl#&gt; ;
+        dct:format &lt;https://w3id.org/mediatype/text/turtle&gt; ;
+        # these constraints are Profile Y's on top of Standard X's
+        prof:hasRole role:extensionConstraints ;  # Extension Constraints are those on top of
+                                                  # another base specification's
+        prof:hasArtifact ex2:extension_constraints.ttl  # a file within this Profile
+    ] .
+      </pre>
     </section>
   </section>
   <section id="Class:ResourceRole" class="property">
@@ -581,29 +622,29 @@ CSIRO's publications catalogue."""@en ;
 <section id="examples" class="informative">
   <h2>Examples</h2>
   <p>
-    This section contains a few modelled examples of existing profiles to demonstrate aspects of this ontology. While
+    This section contains a few modelled examples of existing profiles to demonstrate aspects of this vocabulary. While
     efforts have been made to ensure they are accurate at the time of this document's publication, they are not to be
-    considered authoritative; their purpose is only to illustrate this ontology's use.
+    considered authoritative; their purpose is only to illustrate this vocabulary's use.
   </p>
   <section id="eg-dcat-ap">
     <h3>DCAT-AP</h3>
-    <p><em>This example showcases this ontology's description of parts of a profile.</em></p>
+    <p><em>This example showcases this vocabulary's description of parts of a profile.</em></p>
     <p>
       DCAT-AP is the widely used European <em>Application Profile</em> of DCAT. DCAT-AP is described in document form
       (PDF & DOCX) and a constraints document for instance validation is available, formulated using the W3C's Shapes
       Constraints Language constraints language [[SHACL]].
     </p>
     <p>
-      The figure below described DCA-AP graphically, using elements from this ontology.
+      The figure below described DCA-AP graphically, using elements from this vocabulary.
     </p>
     <figure id="fig-eg-dcat">
-      <a href="examples/eg_dcat-ap.png">
-        <img src="examples/eg_dcat-ap.png" title="DCAT-AP described using this ontology" style="width:90%;" />
+      <a href="examples/dcat-ap.svg">
+        <img src="examples/dcat-ap.svg" title="DCAT-AP described using this vocabulary" style="width:90%;" />
       </a>
-      <figcaption>DCAT-AP described using this ontology</figcaption>
+      <figcaption>DCAT-AP described using this vocabulary</figcaption>
     </figure>
     <p>
-      In words this ontology's descriptions of DCAT-AP is:
+      In words this vocabulary's descriptions of DCAT-AP is:
     </p>
     <ul>
       <li>
@@ -612,7 +653,6 @@ CSIRO's publications catalogue."""@en ;
           <li>
             with a <a href="#Property:isProfileOf">prof:isProfileOf</a> value of
             <a href="https://www.w3.org/ns/dcat#">https://www.w3.org/ns/dcat</a> - the namespace for the DCAT
-            <a href="#Class:BaseSpecification">prof:BaseSpecification</a>
           </li>
         </ul>
       </li>
@@ -658,7 +698,7 @@ CSIRO's publications catalogue."""@en ;
       </li>
     </ul>
     <p>
-      In RDF (turtle format), DCAT-AP is describe using the Profiles Ontology, with many properties not listed in the
+      In RDF (turtle format), DCAT-AP is described using the Profiles Vocabulary, with many properties not listed in the
       summary descriptions above as:
     </p>
     <pre class="example nohighlight turtle" aria-busy="false" aria-live="polite" title="DCAT-AP described using Profile Ontology in RDF (turtle)">
@@ -675,9 +715,6 @@ CSIRO's publications catalogue."""@en ;
   dc:publisher "European Union" ;
   prof:isProfileOf &lt;http://www.w3.org/ns/dcat&gt; ;
 
-  # this Profile itself has Profiles. Here GeoDCAT-AP is given
-  prof:hasProfile &lt;https://joinup.ec.europa.eu/release/geodcat-ap-v10&gt; ;
-
   # SHACL constraints for the profile, guidance doc in Word & PDF & an image of the profile components
   prof:hasResource
     # Guidance doc in Word (DOCX)
@@ -689,6 +726,12 @@ CSIRO's publications catalogue."""@en ;
     # Constraints in SHACL  
     &lt;https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f016d88c3_ba0b3_b4506_bae4e_b758e7401c096&gt; ;
 .
+
+# The DCAT-AP profile itself has profiles: here GeoDCAT-AP v1.0 is given
+&lt;https://joinup.ec.europa.eu/release/geodcat-ap-v10&gt;
+  a prof:Profile ;
+  rdfs:label "GeoDCAT-AP" ;
+  prof:isProfileOf &lt;https://joinup.ec.europa.eu/release/dcat-ap-v11&gt; ;
 
 &lt;https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f6f27f059_bf785_b4d7d_bb602_b6448aab73bd5&gt;
   a prof:ResourceDescriptor;
@@ -722,7 +765,7 @@ CSIRO's publications catalogue."""@en ;
   </section>
   <section id="eg-hierarchy">
     <h3>DCAT-AP hierarchy</h3>
-    <p><em>This example showcases this ontology being used to indicated profiles within a complex hierarchy.</em></p>
+    <p><em>This example showcases this vocabulary being used to indicated profiles within a complex hierarchy.</em></p>
     <figure id="fig-eg-hierarchy">
       <a href="examples/eg_hierarchy.png">
         <img src="examples/eg_hierarchy.png" title="DCAT-AP and related profiles in a hierarchy" style="width:50%;" />
@@ -743,7 +786,7 @@ CSIRO's publications catalogue."""@en ;
 @prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
 
 &lt;http://www.w3.org/ns/dcat&gt;
-  a prof:BaseSpecification ;
+  a dct:Standard ;
 
 &lt;https://joinup.ec.europa.eu/release/dcat-ap-v11&gt;
   a prof:Profile ;
@@ -781,7 +824,7 @@ CSIRO's publications catalogue."""@en ;
 <section id="testsuite">
   <h2>Test Suite</h2>
   <p>
-    A software suite is made available to test implementations of this ontology for compliance. This suite comprises of
+    A software suite is made available to test implementations of this vocabulary for compliance. This suite comprises of
     [[SHACL]] RDF graph validation templates and instructions for the application of those templates to implementations.
   </p>
   <div class="issue" data-number="407"></div>
@@ -789,7 +832,7 @@ CSIRO's publications catalogue."""@en ;
 </section>
 <section id="implementations" class="informative">
   <h2>Implementations</h2>
-  <p>Implementation conformance reports for this ontology are given in:</p>
+  <p>Implementation conformance reports for this vocabulary are given in:</p>
   <ul>
     <li>
       <a href="https://github.com/CSIRO-enviro-informatics/prof-ont-implementation-results">
@@ -805,7 +848,7 @@ CSIRO's publications catalogue."""@en ;
   <p>This section will list alignments from PROF to other W3C ontologies.</p>
   <section id="alignment-dcat">
     <h3>Alignment with DCAT</h3>
-    <p>This ontology aligns with the Dataset Catalogue vocabulary as per the class and property diagrams below.</p>
+    <p>This vocabulary aligns with the Dataset Catalogue vocabulary as per the class and property diagrams below.</p>
     <p>The RDF file giving the formal alignment is avauilable here: <a href="https://w3c.github.io/dxwg/profilesont/alignment_dcat.ttl">profilesont_dcat_alignment.ttl</a>.</p>
     <figure id="fig-dcat-classes">
       <img src="alignment_dcat_classes.png" alt="Alignment of PROF classes with DCAT 1.1 classes" style="width:90%;" />
@@ -903,21 +946,21 @@ CSIRO's publications catalogue."""@en ;
       <p class="respTitle">RESPONSE FOR 205</p>
       <p>
         This is handled by having URIs for profiles resolve to HTML landing pages and RDF descriptions of the profile
-        created according to this ontology which then lenk to Resource Descriptors and other Profiles.
+        created according to this vocabulary which then lenk to Resource Descriptors and other Profiles.
       </p>
     </div>
     <div class="issue" data-number="207"></div>
     <div class="req-response">
       <p class="respTitle">RESPONSE FOR 207</p>
       <p>
-        This is addressed by a Profile using this ontology to link to other Profiles from which it derives.
+        This is addressed by a Profile using this vocabulary to link to other Profiles from which it derives.
       </p>
     </div>
     <div class="issue" data-number="208"></div>
     <div class="req-response">
       <p class="respTitle">RESPONSE FOR 208</p>
       <p>
-        This is addressed by Profiles using Resource Descriptors from this ontology which then implement constraint
+        This is addressed by Profiles using Resource Descriptors from this vocabulary which then implement constraint
         languages with various Roles such as "Full Constraints".
       </p>
     </div>
@@ -968,7 +1011,7 @@ CSIRO's publications catalogue."""@en ;
     <div class="req-response">
       <p class="respTitle">RESPONSE FOR 215</p>
       <p>
-        Profiles described using this ontology may indicate that they are a <em>profileOf</em> another Profile.
+        Profiles described using this vocabulary may indicate that they are a <em>profileOf</em> another Profile.
       </p>
     </div>
     <div class="issue" data-number="216"></div>
@@ -1024,7 +1067,7 @@ CSIRO's publications catalogue."""@en ;
     <div class="req-response">
       <p class="respTitle">RESPONSE FOR 279</p>
       <p>
-        Using this ontology, a <em>Profile</em> may indicate a <em>Resource Descriptor</em> instance by way of the
+        Using this vocabulary, a <em>Profile</em> may indicate a <em>Resource Descriptor</em> instance by way of the
         <em>resource</em> property. That <em>Resource Descriptor</em> may be a schema that <em>conformsTo</em> a
         constraints language, such as SHACL etc.
       </p>
@@ -1040,7 +1083,7 @@ CSIRO's publications catalogue."""@en ;
     <div class="req-response">
       <p class="respTitle">RESPONSE FOR 284</p>
       <p>
-        Using this ontology, all <em>Profile</em> instances are RDF <em>Resources</em> with their own URIs.
+        Using this vocabulary, all <em>Profile</em> instances are RDF <em>Resources</em> with their own URIs.
         Additionally, the <em>token</em> property is given for use with a <em>Profile</em> to be used to identify it
         where use of a full URI is not possible, such as within HTTP Query String Arguments.
       </p>
@@ -1049,7 +1092,7 @@ CSIRO's publications catalogue."""@en ;
     <div class="req-response">
       <p class="respTitle">RESPONSE FOR 286</p>
       <p>
-        Following relationships from a profile defined using this ontology, a person or machine may discover either
+        Following relationships from a profile defined using this vocabulary, a person or machine may discover either
         <em>Resource Descriptor</em> resources describing any sort of document relevant to the profile or other
         <em>Profile</em>s.
       </p>
@@ -1065,7 +1108,7 @@ CSIRO's publications catalogue."""@en ;
     <div class="req-response">
       <p class="respTitle">RESPONSE FOR 288</p>
       <p>
-        Graph navigation of profiles' information described using this ontology is supported by its RDF mechanics.
+        Graph navigation of profiles' information described using this vocabulary is supported by its RDF mechanics.
       </p>
       <p>
         An instance of a resource claiming adherence to an instance of a <em>Profile</em> might indicate its adherence
