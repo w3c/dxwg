@@ -44,7 +44,7 @@
   <p>The Profiles Vocabulary is an RDF vocabulary to describe the resources that define and implement a profile. A profile is defined as "A named set of constraints on one or more identified base specifications or other profiles, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of those base specifications necessary to accomplish a particular function." These resources may be human-readable documents (PDFs, textual documents), vocabularies or ontologies (XSD, RDF),  resources specific to validation tools (SHACL, ShEx, Schematron), or any other files or resources that support the profile. Each resource is defined as having a role that defines its function within the profile.
 	</p>
 This vocabulary also provides for the description of relationships between such profiles and the standards to which they conform. A standard in this case can be a vocabulary or it can be another profile from which the described profile is a derivation, expansion, or selection. This vocabulary provides a standardized, machine readable formalism for describing the context of profiles. The basis of this vocabulary is a specialization of <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></code>, allowing the use of the <code><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-conformsTo">dct:conformsTo</a></code> predicate to specify conformance to a profile.
-	</p><p>
+	</p>
     A "profile" here is represented by the <a href="#Class:Profile">Profile class definition</a> in the
     <a href="#specification">Vocabulary Specification</a> with the following definition: "A named set of constraints on one or more identified base specifications or other profiles, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of those base specifications necessary to accomplish a particular function."
   </p>
@@ -549,7 +549,7 @@ CSIRO's publications catalogue."""@en ;
       </figure>
       <pre class="example nohighlight turtle" aria-busy="false" aria-live="polite" title="Property isInheritedFrom in use">
 # If Standard X, described using PROF, is given as having a Resource
-# Descriptor, RS_1, with role "Full Constraints" as follows:
+# Descriptor, RD_1, with role "Full Constraints" as follows:
 
 @prefix ex1: &lt;http://example.org/profile1/&gt; .
 @prefix ex2: &lt;http://example.org/profile2/&gt; .
@@ -562,9 +562,9 @@ ex1:Standard_X
     a dct:Standard , prof:Profile ;  # this may be a 'null' profile,
                                      # i.e. a profile of nothing, a regular Standard
     dct:title "Standard X" ;
-    prof:hasResource ex1:RS_1 .
+    prof:hasResource ex1:RD_1 .
 
-ex1:RS_1
+ex1:RD_1
     a prof:ResourceDescriptor ;
     dct:conformsTo &lt;http://www.w3.org/ns/shacl#&gt; ;  # the SHACL standard
     dct:format &lt;https://w3id.org/mediatype/text/turtle&gt; ;  # the RDF Turtle format
@@ -574,7 +574,7 @@ ex1:RS_1
     prof:hasArtifact ex1:constraints.ttl .
 
 # then, a profile of Standard X, perhaps Profile Y, may use
-# prof:isInheritedFrom to re-use that Resource Descriptor RS_1
+# prof:isInheritedFrom to re-use that Resource Descriptor RD_1
 
 ex2:Profile_Y
     a prof:Profile ;
@@ -589,7 +589,7 @@ ex2:Profile_Y
         prof:hasRole role:partConstraints ;  # this ResourceDescriptor is now only Part Constraints
                                              # for Profile Y as it's implementing some of its own,
                                              # additional constraints (see next Resource Descriptor)
-        prof:hasArtifact ex1:constraints.ttl  # direct URI reference to ex1:RS_1's artifact
+        prof:hasArtifact ex1:constraints.ttl  # direct URI reference to ex1:RD_1's artifact
     ] ,
     [
         a prof:ResourceDescriptor ;  # RS 3 in diagram. This is not inherited from anywhere
@@ -631,17 +631,24 @@ ex2:Profile_Y
     <p><em>This example showcases this vocabulary's description of parts of a profile.</em></p>
     <p>
       DCAT-AP is the widely used European <em>Application Profile</em> of DCAT. DCAT-AP is described in document form
-      (PDF & DOCX) and a constraints document for instance validation is available, formulated using the W3C's Shapes
-      Constraints Language constraints language [[SHACL]].
+      (PDF &amp; DOCX) and a constraints resource for instance validation is available, formulated using the W3C's Shapes
+      Constraints Language constraints language [[SHACL]]. An image of the DCAT-AP model is also provided.
     </p>
     <p>
-      The figure below described DCA-AP graphically, using elements from this vocabulary.
+      The figure uses elements from this vocabulary to describe part of the DCAT-AP Profile graphically - PDF &amp; RDF
+      resources only - to simplify the example.
     </p>
     <figure id="fig-eg-dcat">
       <a href="examples/dcat-ap.svg">
         <img src="examples/dcat-ap.svg" title="DCAT-AP described using this vocabulary" style="width:90%;" />
       </a>
-      <figcaption>DCAT-AP described using this vocabulary</figcaption>
+      <figcaption>
+        Part of the DCAT-AP Profile described using this ontology. The DCAT-AP profile of DCAT is outlined in blue.
+        The formats of the DCAT-AP Profile's Resource Descriptors are outlined in orange. The roles that those two
+        Resource Descriptors play are outlines in red. The second Resource Descriptor conforms to SHACL, outline in
+        purple. The artifacts (files) that DCAT-AP has, described here by the Resource Descriptors, are outlined in
+        green.
+      </figcaption>
     </figure>
     <p>
       In words this vocabulary's descriptions of DCAT-AP is:
@@ -667,13 +674,13 @@ ex2:Profile_Y
             <a href="https://w3c.github.io/dxwg/profilesont/resource_roles.html#Concept:Guidance">role:Guidance</a>
           </li>
           <li>
-            a document, with a <a href="#Property:format">dct:format</a> value of
+            <em>(not shown in Figure 5)</em> a document, with a <a href="#Property:format">dct:format</a> value of
             <a href="https://w3id.org/mediatype/application/msword">application/msword</a> and a
             <a href="#Property:hasRole">prof:hasRole</a> value of
             <a href="https://w3c.github.io/dxwg/profilesont/resource_roles.html#Concept:Guidance">role:Guidance</a>
           </li>
           <li>
-            an image, with a <a href="#Property:format">dct:format</a> value of
+            <em>(not shown in Figure 5)</em> an image, with a <a href="#Property:format">dct:format</a> value of
             <a href="https://w3id.org/mediatype/image/png">image/png</a> and a
             <a href="#Property:hasRole">prof:hasRole</a> value of
             <a href="https://w3c.github.io/dxwg/profilesont/resource_roles.html#Concept:Guidance">role:Guidance</a>
@@ -684,7 +691,7 @@ ex2:Profile_Y
             <a href="#Property:conformsTo">dct:conformsTo</a> value of
             <a href="http://www.w3.org/ns/shacl">http://www.w3.org/ns/shacl</a> (the namespace of the [[SHACL]]
             specification) and a <a href="#Property:hasRole">prof:hasRole</a> value of
-            <a href="https://w3c.github.io/dxwg/profilesont/resource_roles.html#Concept:ConformanceTestConstraints">role:ConformanceTest</a>
+            <a href="https://w3c.github.io/dxwg/profilesont/resource_roles.html#Concept:FullConstraints">role:FullConstraints</a>
           </li>
         </ul>
         each with a <a href="#Property:hasArtifact">prof:hasArtifact</a> value of an implementing resource object in the
@@ -759,19 +766,13 @@ ex2:Profile_Y
 	rdfs:label "DCAT-AP Constraints" ;
 	dct:conformsTo &lt;http://www.w3.org/ns/shacl&gt;; # the namespace for SHACL
 	dct:format "text/turtle" ;
-	prof:hasRole role:ConformanceTest ;
+	prof:hasRole role:FullConstraints ;
 .
     </pre>
   </section>
   <section id="eg-hierarchy">
     <h3>DCAT-AP hierarchy</h3>
     <p><em>This example showcases this vocabulary being used to indicated profiles within a complex hierarchy.</em></p>
-    <figure id="fig-eg-hierarchy">
-      <a href="examples/eg_hierarchy.png">
-        <img src="examples/eg_hierarchy.png" title="DCAT-AP and related profiles in a hierarchy" style="width:50%;" />
-      </a>
-      <figcaption>DCAT-AP and related profiles in a hierarchy</figcaption>
-    </figure>
     <p>
       DCAT-AP, a profile of DCAT, has itself been profiled for various European countries, such as Belgium who has
       issued <a href="http://dcat.be/">DCAT-BE</a>. Additionally, there are several domain profiles of DCAT-AP, such as
@@ -780,7 +781,15 @@ ex2:Profile_Y
       for enhancing interoperability between descriptions of statistical datasets. Further to this, there is even an
       Italian profile of GeoDCAT-AP, <a href="https://joinup.ec.europa.eu/news/geodcat-apit">GeoDCAT-AP_IT</a>.
     </p>
-    <p>This profile hierarchy is represented graphically in the figure above and in RDF (turtle) below.</p>
+    <p>
+      This profile hierarchy is represented graphically in the figure and RDF (turtle) below.
+    </p>
+    <figure id="fig-eg-hierarchy">
+      <a href="examples/hierarchy.svg">
+        <img src="examples/hierarchy.svg" title="DCAT-AP and related profiles in a hierarchy" style="width:70%;" alt="DCAT-AP and related profiles in a hierarchy" />
+      </a>
+      <figcaption>DCAT-AP and related profiles in a hierarchy. '?' shows a potential future profile that profiles both DCAT-BE &amp; StatDCAT-AP.</figcaption>
+    </figure>
     <pre class="example nohighlight turtle" aria-busy="false" aria-live="polite" title="The GeoDCAT-AP profile hierarchy described using Profile Ontology in RDF (turtle)">
 @prefix prof: &lt;http://www.w3.org/ns/dx/prof/&gt; .
 @prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
