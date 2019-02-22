@@ -1963,7 +1963,7 @@ $(document).ready( function() {
                   <tbody>
                   <tr><td class="prop">Definition:</td><td>The format of the file in which one or more data files are grouped together, e.g. to enable a set of related files to be downloaded together.</td></tr>
                   <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/MediaType"><code>dct:MediaType</code></a></td></tr>
-                  <tr><td class="prop">Usage note:</td><td>This property to be used when the files in the distribution are packaged, e.g. in a RAR file. The format <em title="SHOULD" class="rfc2119">SHOULD</em> be expressed using a media type as defined by IANA [[!IANA-MEDIA-TYPES]], if available.</td></tr>
+                  <tr><td class="prop">Usage note:</td><td>This property to be used when the files in the distribution are packaged, e.g. in a TAR file. The format <em title="SHOULD" class="rfc2119">SHOULD</em> be expressed using a media type as defined by IANA [[!IANA-MEDIA-TYPES]], if available.</td></tr>
                   <tr><td class="prop">See also:</td><td><a href="#Property:distribution_compression_format">compression format</a>.</td></tr>
                   </tbody>
               </table>
@@ -3954,6 +3954,69 @@ dcat:landingPage &lt;https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/m
 dcat:servesDataset ga-courts:jc ;
 .
 </pre>
+
+  </section>
+
+  <section id="compressed-and-packaged-distributions">
+        <h3>Compressed and packaged distributions</h3>
+
+        <p>The first example is for a distribution with a downloadable file that is compressed into a GZIP file.
+        </p>
+
+        <pre id="compressed-distribution" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
+
+        @prefix dcat: <http://www.w3.org/ns/dcat#> .
+        @prefix dct: <http://purl.org/dc/terms/> .
+
+        <https://data.gov.cz/zdroj/datová-sada/247025684/22> a dcat:Distribution ;
+          dcat:accessURL <https://mvcr1.opendata.cz/czechpoint/2007.csv.gz> ;
+          dcat:downloadURL <https://mvcr1.opendata.cz/czechpoint/2007.csv.gz> ;
+          dct:license <https://data.gov.cz/podmínky-užití/volný-přístup/> ;
+          dct:conformsTo <https://mvcr1.opendata.cz/czechpoint/2007.json> ;
+          dct:format <http://publications.europa.eu/resource/authority/file-type/CSV> ;
+          dcat:mediaType <http://www.iana.org/assignments/media-types/text/csv> ;
+          dcat:compressFormat <http://www.iana.org/assignments/media-types/application/gzip> .
+
+        </pre>
+
+        <p>The second example is for a distribution with several files packed into a TAR file.
+        </p>
+
+        <pre id="packaged-distribution" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
+
+          @prefix dcat: <http://www.w3.org/ns/dcat#> .
+          @prefix dct: <http://purl.org/dc/terms/> .
+
+          <https://data.gov.cz/zdroj/datová-sada/247025684/22> a dcat:Distribution ;
+            dcat:accessURL <https://mvcr1.opendata.cz/czechpoint/data.tar> ;
+            dcat:downloadURL <https://mvcr1.opendata.cz/czechpoint/data.tar> ;
+            dct:license <https://data.gov.cz/podmínky-užití/volný-přístup/> ;
+            dct:conformsTo <https://mvcr1.opendata.cz/czechpoint/2007.json> ;
+            dct:format <http://publications.europa.eu/resource/authority/file-type/CSV> ;
+            dcat:mediaType <http://www.iana.org/assignments/media-types/text/csv> ;
+            dcat:packageFormat <http://publications.europa.eu/resource/authority/file-type/TAR> .
+
+        </pre>
+
+        <p>The third example is for a distribution with several files packed into a TAR file which has been compressed into a GZIP file.
+        </p>
+
+        <pre id="packaged-and-compressed-distribution" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
+
+          @prefix dcat: <http://www.w3.org/ns/dcat#> .
+          @prefix dct: <http://purl.org/dc/terms/> .
+
+          <https://data.gov.cz/zdroj/datová-sada/247025684/22> a dcat:Distribution ;
+            dcat:accessURL <https://mvcr1.opendata.cz/czechpoint/data.tar.gz> ;
+            dcat:downloadURL <https://mvcr1.opendata.cz/czechpoint/data.tar.gz> ;
+            dct:conformsTo <https://mvcr1.opendata.cz/czechpoint/2007.json> ;
+            dct:license <https://data.gov.cz/podmínky-užití/volný-přístup/> ;
+            dct:format <http://publications.europa.eu/resource/authority/file-type/CSV> ;
+            dcat:mediaType <http://www.iana.org/assignments/media-types/text/csv> ;
+            dcat:packageFormat <http://publications.europa.eu/resource/authority/file-type/TAR> ;
+            dcat:compressFormat <http://www.iana.org/assignments/media-types/application/gzip> .
+
+        </pre>
 
   </section>
 
