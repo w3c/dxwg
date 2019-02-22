@@ -43,7 +43,7 @@ These profile descriptions are termed `Implementation Resource Descriptor` insta
 
 The RDF for this example is in [eg_ga.ttl](eg_ga.ttl).
 
-![](eg_ga.png)  
+![](examples/ga.svg)  
 Figure 5: Geoscience Australia profile
 
 ### Open Geospatial Consortium
