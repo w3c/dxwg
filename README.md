@@ -11,7 +11,7 @@
   - [DCAT Revision Second Public Working Draft (SPWD)](https://www.w3.org/TR/vocab-dcat-2/)
   - [DCAT Revision First Public Working Draft (FPWD)](https://www.w3.org/TR/2018/WD-vocab-dcat-2-20180508/)
 - [Dataset Exchange Guidance for Application Profiles](https://w3c.github.io/dxwg/profiles/)
-- [The Profiles Ontology (Editors' Draft)](https://w3c.github.io/dxwg/profilesont/)
+- [The Profiles Vocabulary (Editors' Draft)](https://w3c.github.io/dxwg/profilesont/)
   - [The Profiles Onotlogy First Public Working Draft](https://www.w3.org/TR/2018/WD-dx-prof-20181218/)
 - [Content Negotiation by Profile (Editors' Draft)](https://w3c.github.io/dxwg/conneg-by-ap/)
   - [Content Negotation by Profile First Public Working Draft](https://www.w3.org/TR/2018/WD-dx-prof-conneg-20181218/)

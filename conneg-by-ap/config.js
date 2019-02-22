@@ -42,17 +42,6 @@ var respecConfig = {
     issueBase: "https://github.com/w3c/dxwg/issues/",
     github: "https://github.com/w3c/dxwg/",
     localBiblio: {
-        "DX-PROF-CONNEG": {
-            editors: [
-                "Lars G. Svensson",
-                "Rob Atkinson",
-                "Nicholas J. Car"
-            ],
-            href: "https://www.w3.org/TR/2018/WD-dx-prof-conneg-20181218/",
-            title: "Content Negotiation by Profile",
-            date: " 2018-12-18",
-            status: "W3C First Public Working Draft"
-        },
         "DX-PROF-GUIDANCE": {
             editors: [
                 "Rob Atkinson",
@@ -74,16 +63,6 @@ var respecConfig = {
             title: "Negotiating Profiles in HTTP",
             date: " 2017-10-24",
             status: "IETF Internet Draft"
-        },
-        "DX-PROF": {
-            editors: [
-                "Rob Atkinson",
-                "Nicholas J. Car"
-            ],
-            href: "https://www.w3.org/TR/2018/WD-dx-prof-20181218/",
-            title: "Profile Descriptions ontology",
-            date: "2018-12-18",
-            status: "W3C First Public Working Draft"
         }
     }
 };

@@ -184,15 +184,6 @@ var respecConfig = {
             publisher:"Hydra W3C Community Group",
             status:"Unofficial Draft"
       },
-      "LDP": {
-            authors: [
-                "Leigh Dodds",
-                "Ian Davis"
-            ],
-            href:"http://patterns.dataincubator.org/book/",
-            title:"Linked Data Patterns",
-            date:"31 May 2012"
-      },
       "ODRS": {
             authors: [
                 "Leigh Dodds"
