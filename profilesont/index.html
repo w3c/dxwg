@@ -434,6 +434,68 @@ CSIRO's publications catalogue."""@en ;
         <code>skos:broaderTransitive</code> due to Profiles being complex objects relative to SKOS Concepts.
       </p>
     </div>
+    <figure id="fig-isTransitiveProfileOf">
+      <a href="examples/isTransitiveProfileOf.svg">
+        <img src="examples/isTransitiveProfileOf.svg" title="Property isTransitiveProfileOf in use" style="width:90%;" />
+      </a>
+      <figcaption>Property isInheritedFrom in use. See the full explanation in the example text below.</figcaption>
+    </figure>
+    <pre class="example nohighlight turtle" aria-busy="false" aria-live="polite" title="Property isInheritedFrom in use">
+# A profile that is within a hierarchy of profiles may wish to indicate it profiles
+# things "further up the chain". To do this, prof:isTransitiveProfileOf can be used
+# to indicate anything the profile is related to by a series of one or more
+# prof:isProfileOf properties.
+
+# Here the New Zealand profile of the ISO addressing standard is presented in a chain
+# of profiles:
+
+@prefix dct: &lt;http://purl.org/dc/terms/&gt; .
+@prefix prof: &lt;http://www.w3.org/ns/dx/prof/&gt; .
+@prefix role: &lt;http://www.w3.org/ns/dx/prof/role/&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+
+&lt;http://linked.data.gov.au/def/iso19160-1-address-nz-profile&gt;
+  a prof:Profile ;
+  rdfs:label "New Zealand Profile of ISO19160-1" ;
+  rdfs:comment """This is a country-specific profile of the international
+                  addressing standard, ISO19160-1:2015 (Address)""" ;
+  prof:isProfileOf &lt;http://linked.data.gov.au/def/iso19160-1-address&gt; .
+
+# The ISO thing that the NZ Profile profiles is actually a Web Ontology Language
+# (OWL) version of the original ISO addressing standard
+&lt;http://linked.data.gov.au/def/iso19160-1-address&gt;
+  a prof:Profile ;
+  rdfs:label "OWL Profile of ISO19160-1" ;
+  rdfs:comment """This profile profiles both ISO19160-1 (Addressing) and also
+                  the Web Ontology Language (OWL)""" ;
+  prof:isProfileOf &lt;https://www.iso.org/standard/61710.html&gt; ,
+                   &lt;http://www.w3.org/2002/07/owl#&gt; .
+
+&lt;https://www.iso.org/standard/61710.html&gt;
+  a dct:Standard ;
+  rdfs:label "ISO 19160-1:2015 Addressing -- Part 1: Conceptual model" .
+
+# Now, according to the semantics of prof:isTransitiveProfileOf, using the
+# prof:isProfileOf statements above, one can infer the following additional
+# statements:
+
+&lt;http://linked.data.gov.au/def/iso19160-1-address-nz-profile&gt;
+  prof:isTransitiveProfileOf &lt;http://linked.data.gov.au/def/iso19160-1-address&gt; ,
+                             &lt;https://www.iso.org/standard/61710.html&gt; ,
+                             &lt;http://www.w3.org/2002/07/owl#&gt; .
+
+# These statements may help consumers understand which broad, well-known
+# profiles data they have conforms to when they are presented only with its
+# conformance to most specialised (lowest) profile in a hierarchy which they
+# may not understand.
+
+# In this example too, a user of the profile
+# &lt;http://linked.data.gov.au/def/iso19160-1-address-nz-profile&gt; will also
+# understand that data conforming to it is also conformant with OWL which is not
+# in the direct hierarchy of addressing standards (iso19160-1-address-nz-profile >
+# iso19160-1-address > ISO 19160-1:2015) but is critical to know about when using
+# the specialised standard as it can indicate reasoning possibilities.
+    </pre>
     <section id="Property:hasToken" class="property">
       <h4>hasToken</h4>
       <table class="definition">
