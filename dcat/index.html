@@ -52,7 +52,7 @@ $(document).ready( function() {
         <li>addition of a <a href="#Class:Resource"><code>dcat:Resource</code></a> class for representing any resource than can be included in the catalog, this is
             now the super-class of <a href="#Class:Dataset"><code>dcat:Dataset</code></a></li>
         <li>addition of <a href="#Class:Data_Service"><code>dcat:DataService</code></a>, as a sub-class of <a href="#Class:Resource"><code>dcat:Resource</code></a>, to support cataloguing application programming interfaces (APIs) and other service end-points providing access to resources</li>
-        <li>addition of <code><a href="#Class:DataAPI">dcat:DataAPI</a></code> and <a href="#Class:DataApplication"><code>dcat:DataApplication</code></a>, as sub-classes of <a href="#Class:Data_Service"><code>dcat:DataService</code></a>,
+        <li>addition of <code><a href="#Class:Data_API">dcat:DataAPI</a></code> and <a href="#Class:Data_Application"><code>dcat:DataApplication</code></a>, as sub-classes of <a href="#Class:Data_Service"><code>dcat:DataService</code></a>,
             representing endpoints providing access to datasets and data services through a programmatic interface (data APIs), and interactive web applications providing access to datasets and data services through a user agent (data applications) </li>
         <li>addition of ways of representing <a href="#bag-of-files">loosely structured catalogs</a>, where there is no distinction between a dataset and its distributions</li>
         <li>more details for the ways of representing <a href="#examples-dataset-provenance">dataset provenance</a> and <a href="#quality-information">dataset quality</a></li>
@@ -297,7 +297,7 @@ $(document).ready( function() {
       A catalog is a kind of dataset whose member items are descriptions of datasets and data services.
       Other types of thing might also be catalogued, but the scope of DCAT is currently limited to datasets and data services.
       To extend the scope of a catalog beyond datasets and data services it is recommended to define additional sub-classes of <a href="#Class:Resource"><code>dcat:Resource</code></a> in a DCAT application profile or other DCAT application.
-      To extend the scope of service descriptions beyond data APIs and data applications, it is recommended to define additional properties of <a href="#Class:DataAPI"><code>dcat:DataAPI</code></a> or <a href="#Class:DataApplication"><code>dcat:DataApplication</code></a> in a DCAT application profile or other DCAT application.
+      To extend the scope of service descriptions beyond data APIs and data applications, it is recommended to define additional properties of <a href="#Class:Data_API"><code>dcat:DataAPI</code></a> or <a href="#Class:Data_Application"><code>dcat:DataApplication</code></a> in a DCAT application profile or other DCAT application.
     </p>
 
     <div class="note">
@@ -1665,7 +1665,7 @@ $(document).ready( function() {
             <tr><td class="prop">Usage note:</td><td>This represents a general availability of a dataset. It implies no information
                 about the actual access method of the data, i.e. whether by direct download, API, or through a Web page.
                 The use of <a href="#Property:distribution_downloadurl"><code>dcat:downloadURL</code></a> property indicates directly downloadable distributions.</td></tr>
-            <tr><td class="prop">See also:</td><td><a href="#Class:Data_Distribution_Service" title="">Data distribution service</a></td></tr>
+            <tr><td class="prop">See also:</td><td><a href="#Class:Data_Service" title="">Data service</a></td></tr>
             </tbody>
         </table>
 
@@ -1680,7 +1680,7 @@ $(document).ready( function() {
                 <b>Applications consuming DCAT should be aware that catalogues designed using DCAT-2014 might use <code>dcat:Distribution</code> to represent both services and representations.</b>
             </p>
             <p>
-                Under the revised scope, instances of type <code>dcat:Distribution</code> <em title="SHOULD" class="rfc2119">SHOULD</em> be limited to <i>representations</i> of datasets which might be transported as files, and <em title="SHOULD NOT" class="rfc2119">SHOULD NOT</em> be used for data <i>services</i> such as APIs or feeds. Data services including APIs and feeds <em title="SHOULD" class="rfc2119">SHOULD</em> be described using instances of type <a href="#Class:Data_Service"><code>dcat:DataService</code></a> whose sub-class <a href="#Class:Data_Distribution_Service"><code>dcat:DataDistributionService</code></a> <em title="MAY" class="rfc2119">MAY</em> serve <a href="#Class:Distribution"><code>dcat:Distributions</code></a>.
+                Under the revised scope, instances of type <code>dcat:Distribution</code> <em title="SHOULD" class="rfc2119">SHOULD</em> be limited to <i>representations</i> of datasets which might be transported as files, and <em title="SHOULD NOT" class="rfc2119">SHOULD NOT</em> be used for data <i>services</i> such as APIs or feeds. Data services including APIs and web applications <em title="SHOULD" class="rfc2119">SHOULD</em> be described using instances of type <a href="#Class:Data_API"><code>dcat:DataAPI</code></a> or <a href="#Class:Data_Application"><code>dcat:DataApplication</code></a> which <em title="MAY" class="rfc2119">MAY</em> serve <a href="#Class:Distribution"><code>dcat:Distributions</code></a>.
             </p>
             <p>
                 Links between a <code>dcat:Distribution</code> and services or web addresses where it can be accessed are expressed using <a href="#Property:distribution_accessurl"><code>dcat:accessURL</code></a>, <a href="#Property:distribution_accessservice"><code>dcat:accessService</code></a>, <a href="#Property:distribution_downloadurl"><code>dcat:downloadURL</code></a>, as shown in <a href="#UML_DCAT_All_Attr"></a> and described in the definitions below.
@@ -1843,8 +1843,8 @@ $(document).ready( function() {
                 <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#accessService">dcat:accessService</a></th></tr></thead>
                 <tbody>
                 <tr><td class="prop">Definition:</td><td>A site or end-point that gives access to the distribution of the dataset</td></tr>
-                <tr><td class="prop">Range:</td><td><a href="#Class:Data_Distribution_Service"><code>dcat:DataDistributionService</code></a></td></tr>
-                <tr><td class="prop">Usage note:</td><td><a href="#Property:distribution_accessservice"><code>dcat:accessService</code></a> <em title="SHOULD" class="rfc2119">SHOULD</em> be used to link to a description of a <a href="#Class:Data_Distribution_Service"><code>dcat:DataDistributionService</code></a> that can provide access to this distribution.</td></tr>
+                <tr><td class="prop">Range:</td><td><a href="#Class:Data_Service"><code>dcat:DataService</code></a></td></tr>
+                <tr><td class="prop">Usage note:</td><td><a href="#Property:distribution_accessservice"><code>dcat:accessService</code></a> <em title="SHOULD" class="rfc2119">SHOULD</em> be used to link to a description of a <a href="#Class:Data_API"><code>dcat:DataAPI</code></a> or <a href="#Class:Data_Application"><code>dcat:DataApplication</code></a> that can provide access to this distribution.</td></tr>
                 <tr><td class="prop">See also</td><td><a href="#Property:distribution_downloadurl">download address</a>, <a href="#Property:distribution_accessurl">access address</a></td></tr>
                 </tbody>
             </table>
@@ -2129,7 +2129,7 @@ $(document).ready( function() {
 
     </section> <!-- end class DataAPI -->
 
-    <section id="Class:DataApplication"> <!-- begin class DataApplication -->
+    <section id="Class:Data_Application"> <!-- begin class DataApplication -->
 
         <h3>Class: Data Application</h3>
         <p>The following properties are recommended for use on this class:
@@ -2183,7 +2183,7 @@ $(document).ready( function() {
         </section>
 
         <p class="note">
-            The class <a href="#Class:DataApplication"><code>dcat:DataApplication</code></a> has been added to the DCAT vocabulary in this revision.
+            The class <a href="#Class:Data_Application"><code>dcat:DataApplication</code></a> has been added to the DCAT vocabulary in this revision.
         </p>
 
     </section> <!-- end class DataApplication -->
@@ -3831,7 +3831,7 @@ dap:d33937
       dct:conformsTo &lt;https://www.w3.org/TR/rdf-schema/&gt; ;
       rdfs:comment "RDF representation of the data" ;
       dcat:accessService [
-          rdf:type dcat:DataDistributionService ;
+          rdf:type dcat:DataAPI ;
           dct:conformsTo &lt;https://www.w3.org/TR/sparql11-query/&gt; ;
           dct:title "International Chronostratigraphic Chart hosted at Research Vocabularies Australia" ;
           rdfs:comment "Service that supports queries to obtain RDF representations of subsets of the data" ;
