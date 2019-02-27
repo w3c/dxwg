@@ -135,7 +135,8 @@ $(document).ready( function() {
 </section>
 
 <section id="motivation" class="informative"><h2>Motivation for change</h2>
-    <p>The original Recommendation [[?VOCAB-DCAT-20140116]], published in January 2014, provided the basic framework for describing datasets. Importantly, it made the distinction between a dataset as an abstract idea and a distribution as a manifestation of the dataset. Although DCAT has been widely adopted, it has become clear that the original specification lacked a number of essential features that were added either through application profiles, such as the European Commission's DCAT-AP [[?DCAT-AP]], or the development of larger vocabularies that, to a greater or lesser extent, built upon the base standard, such as the Healthcare and Life Sciences Community Profile [[?HCLS-Dataset]], the Data Tag Suite [[?DATS]] and more. This version of DCAT has been developed to address the specific shortcomings that have come to light through the experiences of different communities, the aim being, of course, to improve interoperability between the outputs of these larger vocabularies.</p>
+    <p>The original Recommendation [[?VOCAB-DCAT-20140116]], published in January 2014, provided the basic framework for describing datasets. Importantly, it made the distinction between a dataset as an abstract idea and a distribution as a manifestation of the dataset. Although DCAT has been widely adopted, it has become clear that the original specification lacked a number of essential features that were added either through application profiles, such as the European Commission's DCAT-AP [[?DCAT-AP]], or the development of larger vocabularies that, to a greater or lesser extent, built upon the base standard, such as the Healthcare and Life Sciences Community Profile [[?HCLS-Dataset]], the Data Tag Suite [[?DATS]] and more. This version of DCAT has been developed to address the specific shortcomings that have come to light through the experiences of different communities, the aim being, of course, to improve interoperability between the outputs of these larger vocabularies.
+        For example, in this new DCAT version, we provide classes, properties and guidance to address <a href="Dereferenceable-identifiers">identifiers</a>, <a href="#quality-information">quality information</a>, <a href="#data-citation">data citation</a> issues.</p>
     <p>This draft includes re-writing of the specification throughout. Significant changes from the 2014 Recommendation are marked within the text using "Note" sections, as well as being described in the <a href="#changes">Change History</a>.</p>
 
 </section>
@@ -938,7 +939,8 @@ $(document).ready( function() {
 
             <p class="note">
                 New property added in this revision of DCAT, specifically added when considering the data citation requirement and
-                added to the <a href="#Class:Resource"><code>dcat:Resource</code></a> class, as the Dataset superclass.
+                added to the <a href="#Class:Resource"><code>dcat:Resource</code></a> class, as the Dataset superclass. For more details, see
+                the <a href="data-citation">data citation</a> section.
             </p>
 
             <p class="issue" data-number="80">
@@ -1473,20 +1475,6 @@ $(document).ready( function() {
 
         <p class="issue" data-number="60">
             The need to provide richer descriptions of dataset aspects (e.g. instrument/sensor used, spatial feature, observable property, quantity kind) has been identified as a requirement to be satisfied in the revision of DCAT.
-        </p>
-
-        <p class="note">
-            <a href="https://www.w3.org/TR/dcat-ucr/#RDSC">Dataset citation</a> is one of the requirements identified for the DCAT revision.
-            Data citation is the practice of referencing data in a similar way as when providing bibliographic references, acknowledging data
-            as a first class output in any investigative process.
-            Data citation offers multiple benefits, such as crediting those producing the data, facilitating data discovery, supporting tracking the impact and reuse of data.
-
-            To support data citation, the dataset description should include at a minimum: the dataset identifier, the dataset creator (added in this DCAT revision
-            as part of the properties recommended for Dataset), the dataset title, the dataset publisher and the dataset release date.
-
-            The constraints on the availability of such properties in the dataset description can be represented as a DCAT data citation profile.
-
-            See the wiki page on <a href="https://github.com/w3c/dxwg/wiki/Provenance-patterns">Data Citation</a> for more discussion.
         </p>
 
         <p class="issue" data-number="63">
@@ -2963,6 +2951,35 @@ ex:Test543L
     <p class="note">
         In this chapter it is planned to describe some patterns for describing Dataset and/or Distribution versions.
         See the wiki page on <a href="https://github.com/w3c/dxwg/wiki/Dataset-versioning">Dataset versioning</a> for more discussion.
+    </p>
+
+</section>
+
+<section id="data-citation" class="informative">
+
+    <h2>Data citation</h2>
+
+    <p>
+        <a href="https://www.w3.org/TR/dcat-ucr/#RDSC">Dataset citation</a> is one of the requirements identified for this DCAT revision.
+        Data citation is the practice of referencing data in a similar way as when providing bibliographic references, acknowledging data
+        as a first class output in any investigative process. Data citation offers multiple benefits, such as supporting proper attribution
+        and credit to those producing the data, facilitating data discovery, supporting tracking the impact and reuse of data, allowing for
+        collaboration and re-use of data, and enabling the reproducibility of results based on the data.
+    </p>
+
+    <p>
+        To support data citation, the dataset description should include at a minimum: the dataset identifier, the dataset creator(s), the dataset title,
+        the dataset publisher and the dataset publication or release date. These elements are those required by the DataCite metadata schema [[?DataCite]],
+        which is the metadata associated by the persistent identifiers (Digital Object Identifiers or DOIs) assigned by [[?DataCite]] to research data.
+    </p>
+
+    <p>
+        In order to support data citation, this DCAT revision has added the consideration of <a href="#Dereferenceable-identifiers">dereferenceable identifiers</a> and support for indicating
+        <a href="#Property:resource_creator">the creators of the catalogued resources</a>. The remaining properties necessary for data citation were already available in DCAT 2014 [[?VOCAB-DCAT-20140116]].
+    </p>
+
+    <p>
+        The constraints on the availability of properties required for data citation in the dataset description can be represented as a DCAT data citation profile.
     </p>
 
 </section>
