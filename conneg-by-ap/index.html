@@ -345,44 +345,10 @@
       <div class="issue" data-number="500"></div>
       <section id="listprofileshttp">
         <h3>list profiles</h3>
-          <p>
-            Listing profiles for a resource using HTTP can be done in two ways.
-        </p>
-	<section id="listprofileshttpoptions">
-	  <h4>Using <code>HTTP OPTIONS</code></h4>
-            <p class="issue" data-number="510">
-		The use of <code>HTTP OPTIONS</code> is discouraged
-		since the responses are not cacheable.
-            </p>
-	    <p>
-	  	The first one is to issue an <code>OPTIONS</code> request against the resource.
-		In this case a server implementing content negotiation by profile
-		SHOULD return a <code>Content-Profile</code> header
-		listing all profiles the requested resource conforms to.
-		If the server accepts HTTP <code>PUT</code>, <code>POST</code> or <code>PATCH</code>
-		commands against the specified resource,
-		it also SHOULD also return a <code>Accept-Profile</code> header
-		specifying which profiles are acceptable when sending data
-		to that resource.
-		Both the <code>Accept-Profile</code> and the <code>Content-Profile</code> headers
-		MAY specify q-values for each profile.
-	    </p>
-	    <pre class="example nohighlight" title="Using HTTP OPTIONS to list available profiles" aria-busy="false" aria-live="polite">
-OPTIONS /some/resource HTTP/1.1
-
----
-
-HTTP/1.1 200 OK
-Content-Profile: urn:example:profile:1;q=0.8,http://example.org/profiles/2;q=0.5
-Accept-Profile: urn:example:profile:1;q=0.8,http://example.org/profiles/2;q=0.5
-[More headers for this resource]
-            </pre>
-	</section>
-	<section id="listprofilehttplink">
-		<h4>Using a <code>HTTP Link</code> header field</h4>
         <p>
-          The second way is to issue an <code>GET</code> or <code>HEAD</code> against the resource. In this 
-          case a server implementing
+          The preferred way to retrieve a list of profiles the server supports for a specific resource
+	  is to issue an <code>GET</code> or <code>HEAD</code> against that resource.
+	  In this case a server implementing
           content negotiation by profile SHOULD return a HTTP <code>Link</code> header containing information about the
           default representation of that resource (i. e. the representation that will be returned after any
           content negotiation has been performed) and information about any alternate representations of that
@@ -428,7 +394,6 @@ Link: &lt;http://example.org/a/resource.prof1.ttl&gt;; rel="self"; type="text/tu
           </pre>
           <div class="issue" data-number="501"></div>
       </section>
-       </section>
       <section id="getresourcebyprofilehttp">
         <h3>get resource by profile</h3>
         <p>
