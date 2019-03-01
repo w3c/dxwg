@@ -42,6 +42,15 @@ var respecConfig = {
     issueBase: "https://github.com/w3c/dxwg/issues/",
     github: "https://github.com/w3c/dxwg/",
     localBiblio: {
+	"ARK" : {
+	   editors: ["J. Kunze", 
+		    "R. Rodgers"
+		    ],
+		href: "https://tools.ietf.org/id/draft-kunze-ark-15.txt",
+		title: "The ARK Identifier Scheme" ,
+		date: "2008-05-22",
+		status: "Internet-Draft"
+	},
         "PROF-CONNEG": {
             editors: [
                 "Lars G. Svensson",
