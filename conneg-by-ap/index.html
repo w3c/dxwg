@@ -308,7 +308,7 @@
         </p>
         <p>
           A <em>client</em> executing a <strong>get resource by profile</strong> <em>request</em> MUST
-          identify the <em>profile</em> with either a URI or a token mappable to a URI.
+          identify the <em>profile</em> with either a URI or a token mapping unambiguously within a session to a URI.
         </p>
         <p>
           A <em>client</em> executing a <strong>get resource by profile</strong> MAY <em>request</em> a
@@ -318,16 +318,40 @@
         <div class="issue" data-number="588"></div>
         <p>
           The server should attempt to reply with a profile that best matches the client request. The order of
-          preference is an exact match, followed by a profile (perhaps transitively) of the requested profile.
-        </p>
-        <p>
-          (+EXAMPLE)
+          preference a server <em>MUST</em> follow to determine a best matching profile is: an exact match, followed by
+          a profile (perhaps transitively) of the requested profile.
         </p>
         <p>
           If a client requests a profile but gets a narrower profile, the Server should set its responses
           Content-Profile header to the profile identifier that the Client requested, not the identifier of the
           narrower profile as the client might not understand the narrower profile identifier.
         </p>
+        <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Get resource by profile, narrower profile response (HTTP realization)">
+# a request for Resource 1 according to Profile A is made
+
+GET http://example.org/resource/1 HTTP/1.1
+Accept-Profile: http://example.org/profile/A
+[more request headers]
+
+---
+
+# the server IS NOT able to respond with a representation
+# of Resource 1 conforming to Profile A
+
+# the server IS able to respond with a representation of
+# Resource 1 according to Profile B which it knows is a
+# profile of Profile A
+
+# the server indicates the response conforms to Profile A,
+# not Profile B so the client is assured of conformance
+
+HTTP/1.1 200 OK
+[other response headers]
+Content-Profile: http://example.org/profile/A
+[more response headers]
+
+[content according to Profile B and thus Profile A which it profiles]
+          </pre>
         <div class="issue" data-number="748"></div>
       </section>
       <section id="listprofilestokens">
