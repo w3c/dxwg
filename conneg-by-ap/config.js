@@ -39,6 +39,7 @@ var respecConfig = {
     wgPatentURI: "https://www.w3.org/2004/01/pp-impl/99375/status",
     inlineCSS: "true",
     lint: "false",
+    maxTocLevel: 3,
     issueBase: "https://github.com/w3c/dxwg/issues/",
     github: "https://github.com/w3c/dxwg/",
     localBiblio: {
