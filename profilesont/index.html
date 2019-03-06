@@ -835,12 +835,6 @@ ex2:Profile_Y
   <section id="eg-hierarchy">
     <h3>DCAT-AP hierarchy</h3>
     <p><em>This example showcases this vocabulary being used to indicated profiles within a complex hierarchy.</em></p>
-    <figure id="fig-eg-hierarchy">
-      <a href="examples/hierarchy.svg">
-        <img src="examples/hierarchy.svg" title="DCAT-AP and related profiles in a hierarchy" style="width:50%;" />
-      </a>
-      <figcaption>DCAT-AP and related profiles in a hierarchy</figcaption>
-    </figure>
     <p>
       DCAT-AP, a profile of DCAT, has itself been profiled for various European countries, such as Belgium who has
       issued <a href="http://dcat.be/">DCAT-BE</a>. Additionally, there are several domain profiles of DCAT-AP, such as
@@ -856,7 +850,11 @@ ex2:Profile_Y
       <a href="examples/hierarchy.svg">
         <img src="examples/hierarchy.svg" title="DCAT-AP and related profiles in a hierarchy" style="width:70%;" alt="DCAT-AP and related profiles in a hierarchy" />
       </a>
-      <figcaption>DCAT-AP and related profiles in a hierarchy. '?' shows a potential future profile that profiles both DCAT-BE &amp; StatDCAT-AP.</figcaption>
+      <figcaption>
+        DCAT-AP and related profiles in a hierarchy. '?' shows a potential future profile instnace that profiles both
+        DCAT-BE &amp; StatDCAT-AP. The '?' instnace's two <code>is profile of</code> properties are highlighted in blue
+        to draw attention to them to indicate allowed multiple use of this property.
+      </figcaption>
     </figure>
     <pre class="example nohighlight turtle" aria-busy="false" aria-live="polite" title="The GeoDCAT-AP profile hierarchy described using Profile Ontology in RDF (turtle)">
 @prefix prof: &lt;http://www.w3.org/ns/dx/prof/&gt; .
@@ -889,6 +887,14 @@ ex2:Profile_Y
   a prof:Profile ;
   rdfs:label "GeoDCAT-AP_IT" ;
   prof:isProfileOf &lt;https://joinup.ec.europa.eu/release/geodcat-ap-v10&gt; ;
+
+# an example as per the Figure above, not an existing profile
+&lt;http://example.org/profile/questionmark&gt;
+  a prof:Profile ;
+  rdfs:label "?" ;
+  prof:isProfileOf
+      &lt;https://joinup.ec.europa.eu/solution/statdcat-application-profile-data-portals-europ&gt; ,
+      &lt;http://dcat.be&gt; .
     </pre>
     <p>
       Since there are no cardinality restrictions on either the property <code>prof:isProfileOf</code> or other restrictions on the class definition of
