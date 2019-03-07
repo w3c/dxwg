@@ -2395,7 +2395,179 @@ end class DiscoveryService -->
           Property added in this revision of DCAT.
         </p>
     </section> <!-- end class Role -->
+	
+<!-- END: Issue https://github.com/w3c/dxwg/issues/83: Implementation of Proposals 1 and 2.a -->	
+	
+    <section id="Class:PeriodOfTime">
+        <h3>Class: Period of Time</h3>
 
+        <table class="definition">
+          <thead><tr><th>RDF Class:</th><th><a data-cite="DCTERMS#terms-PeriodOfTime" title="http://purl.org/dc/terms/PeriodOfTime">dct:PeriodOfTime</a></th></tr></thead>
+          <tbody>
+            <tr>
+	      <td class="prop">Definition:</td>
+	      <td>An interval of time that is named or defined by its start and end dates.</td></tr>
+            <tr>
+	      <td class="prop">Usage note:</td>
+              <td>Start and end of the interval should be specified by using properties <a href="#Property:period_startDate"><code title="http://www.w3.org/ns/dcat#startDate">dcat:startDate</code></a> and  <a href="#Property:period_endDate"><code title="http://www.w3.org/ns/dcat#endDate">dcat:endDate</code></a>, respectively. The interval can also be open - i.e., it can have just a start or just an end: in such a case, only one the properties will be used.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="note">
+          Class added in this revision of DCAT.
+        </p>
+	    
+        <section id="Property:period_startDate">
+            <h4>Property: startDate</h4>
+            <table class="definition">
+              <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#startDate" title="http://www.w3.org/ns/dcat#startDate">dcat:startDate</a></th></tr></thead>
+              <tbody>
+              <tr><td class="prop">Definition:</td><td>The start of the period.</td></tr>
+              <tr><td class="prop">Domain:</td><td><a data-cite="DCTERMS#terms-PeriodOfTime" title="http://purl.org/dc/terms/PeriodOfTime">dct:PeriodOfTime</a></td></tr>
+              <tr><td class="prop">Range:</td><td><a data-cite="RDF-SCHEMA#ch_literal" title="http://www.w3.org/2000/01/rdf-schema#Literal"><code>rdfs:Literal</code></a></td></tr>
+              <tr><td class="prop">Usage note:</td><td>The range of this property is intentionally generic, with the purpose of allowing different level of temporal precision for specifying the start of a period. E.g., it can be expressed with a date (<a data-cite="XMLSCHEMA-2#date" title="http://www.w3.org/2001/XMLSchema#date"><code>xsd:date</code></a>), a date and time (<a data-cite="XMLSCHEMA-2#gYear" title="http://www.w3.org/2001/XMLSchema#dateTime"><code>xsd:dateTime</code></a>), or a year (<a data-cite="XMLSCHEMA-2#gYear" title="http://www.w3.org/2001/XMLSchema#gYear"><code>xsd:gYear</code></a>).</td></tr>
+              </tbody>
+            </table>
+
+            <p class="note">
+              Property added in this revision of DCAT.
+            </p>
+        </section>
+	    
+        <section id="Property:period_endDate">
+            <h4>Property: endDate</h4>
+            <table class="definition">
+              <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#endDate" title="http://www.w3.org/ns/dcat#endDate">dcat:endDate</a></th></tr></thead>
+              <tbody>
+              <tr><td class="prop">Definition:</td><td>The end of the period.</td></tr>
+              <tr><td class="prop">Domain:</td><td><a data-cite="DCTERMS#terms-PeriodOfTime" title="http://purl.org/dc/terms/PeriodOfTime">dct:PeriodOfTime</a></td></tr>
+              <tr><td class="prop">Range:</td><td><a data-cite="RDF-SCHEMA#ch_literal" title="http://www.w3.org/2000/01/rdf-schema#Literal"><code>rdfs:Literal</code></a></td></tr>
+              <tr><td class="prop">Usage note:</td><td>The range of this property is intentionally generic, with the purpose of allowing different level of temporal precision for specifying the end of a period. E.g., it can be expressed with a date (<a data-cite="XMLSCHEMA-2#date" title="http://www.w3.org/2001/XMLSchema#date"><code>xsd:date</code></a>), a date and time (<a data-cite="XMLSCHEMA-2#gYear" title="http://www.w3.org/2001/XMLSchema#dateTime"><code>xsd:dateTime</code></a>), or a year (<a data-cite="XMLSCHEMA-2#gYear" title="http://www.w3.org/2001/XMLSchema#gYear"><code>xsd:gYear</code></a>).</td></tr>
+              </tbody>
+            </table>
+
+            <p class="note">
+              Property added in this revision of DCAT.
+            </p>
+        </section>
+	    
+<aside class="example" id="ex-temporal-coverage-closed-interval" title="Temporal coverage as closed interval">
+<pre>
+a:Dataset a dcat:Dataset ;
+  dct:temporal [
+    dcat:startDate "2016-03-04"^^xsd:date ;
+    dcat:endDate   "2018-08-05"^^xsd:date .
+  ] .
+</pre>
+</aside>
+	    
+<aside class="example" id="ex-temporal-coverage-closed-interval" title="Temporal coverage as closed interval">
+<pre>
+a:Dataset a dcat:Dataset ;
+  dct:temporal [
+    dcat:startDate "2016-03-04"^^xsd:date ;
+    dcat:endDate   "2018-08-05"^^xsd:date .
+  ] .
+</pre>
+</aside>
+
+<aside class="example" id="ex-temporal-coverage-open-end-interval" title="Temporal coverage as open interval (no end date)">
+<pre>
+a:Dataset a dcat:Dataset ;
+  dct:temporal [
+    dcat:startDate "2016-03-04"^^xsd:date .
+  ] .
+</pre>
+</aside>
+
+<aside class="example" id="ex-temporal-coverage-open-start-interval" title="Temporal coverage as open interval (no start date)">
+<pre>
+a:Dataset a dcat:Dataset ;
+  dct:temporal [
+    dcat:endDate   "2018-08-05"^^xsd:date .
+  ] .
+</pre>
+</aside>
+
+    </section>	
+
+<!-- END: Issue https://github.com/w3c/dxwg/issues/83: Implementation of Proposals 1 and 2.a -->	
+	
+<!-- START: Issue https://github.com/w3c/dxwg/issues/83: Implementation of Proposals 1 and 2.a -->
+	
+    <section id="Class:Location">
+        <h3>Class: Location</h3>
+
+        <table class="definition">
+          <thead><tr><th>RDF Class:</th><th><a data-cite="DCTERMS#terms-Location" title="http://purl.org/dc/terms/Location">dct:Location</a></th></tr></thead>
+          <tbody>
+            <tr>
+	      <td class="prop">Definition:</td>
+	      <td>A spatial region or named place.</td></tr>
+            <tr>
+	      <td class="prop">Usage note:</td>
+              <td>In case the spatial region is specified with a geometry (i.e., a set of coordinates denoting the vertices of the relevant geographic area), property <a href="#Property:location_geometry" title="http://www.w3.org/ns/locn#geometry">locn:geometry</a> [[LOCN]] should be used. Moreover, properties <a href="#Property:location_centroid"><code title="http://www.w3.org/ns/dcat#centroid">dcat:centroid</code></a> and <a href="#Property:location_bbox"><code title="http://www.w3.org/ns/dcat#bbox">dcat:bbox</code></a> can be used if the geometry denotes the geographic center of a spatial area (<code>dcat:centroid</code>) or if the geometry denotes the geographic bounding box delimiting a spatial area (<code>dcat:bbox</code>).</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="note">
+          Class added in this revision of DCAT.
+        </p>
+	    
+        <section id="Property:location_geometry">
+            <h4>Property: geometry</h4>
+            <table class="definition">
+              <thead><tr><th>RDF Property:</th><th><a data-cite="LOCN#geometry" title="http://www.w3.org/ns/locn#geometry">locn:geometry</a></th></tr></thead>
+              <tbody>
+              <tr><td class="prop">Definition:</td><td>Associates any resource with the corresponding geometry. [[LOCN]]</td></tr>
+              <tr><td class="prop">Range:</td><td><a data-cite="RDF-SCHEMA#ch_literal" title="http://www.w3.org/2000/01/rdf-schema#Literal"><code>rdfs:Literal</code></a></td></tr>
+              <tr><td class="prop">Usage note:</td><td>The range of this property is intentionally generic, with the purpose of allowing different geometry encodings. E.g., the geometry could be encoded with as <abbr title="Well-known Text">WKT</abbr> (<a href="http://www.opengis.net/ont/geosparql#asWKT" title="http://www.opengis.net/ont/geosparql#asWKT"><code>geosparql:asWKT</code></a> [[GeoSPARQL]]) or [[GML]] (<a href="http://www.opengis.net/ont/geosparql#asGML" title="http://www.opengis.net/ont/geosparql#asGML"><code>geosparql:asGML</code></a> [[GeoSPARQL]]).</td></tr>
+              </tbody>
+            </table>
+
+            <p class="note">
+              Property added in this revision of DCAT.
+            </p>
+        </section>
+	    
+        <section id="Property:location_centroid">
+            <h4>Property: centroid</h4>
+            <table class="definition">
+              <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#centroid" title="http://www.w3.org/ns/dcat#centroid">dcat:centroid</a></th></tr></thead>
+              <tbody>
+              <tr><td class="prop">Definition:</td><td>It denotes the geographic center (centroid) of a resource.</td></tr>
+              <tr><td class="prop">Range:</td><td><a data-cite="RDF-SCHEMA#ch_literal" title="http://www.w3.org/2000/01/rdf-schema#Literal"><code>rdfs:Literal</code></a></td></tr>
+              <tr><td class="prop">Usage note:</td><td>The range of this property is intentionally generic, with the purpose of allowing different geometry encodings. E.g., the geometry could be encoded with as <abbr title="Well-known Text">WKT</abbr> (<a href="http://www.opengis.net/ont/geosparql#asWKT" title="http://www.opengis.net/ont/geosparql#asWKT"><code>geosparql:asWKT</code></a> [[GeoSPARQL]]) or [[GML]] (<a href="http://www.opengis.net/ont/geosparql#asGML" title="http://www.opengis.net/ont/geosparql#asGML"><code>geosparql:asGML</code></a> [[GeoSPARQL]]).</td></tr>
+              </tbody>
+            </table>
+
+            <p class="note">
+              Property added in this revision of DCAT.
+            </p>
+        </section>
+	    
+        <section id="Property:location_bbox">
+            <h4>Property: bbox</h4>
+            <table class="definition">
+              <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#bbox" title="http://www.w3.org/ns/dcat#centroid">dcat:bbox</a></th></tr></thead>
+              <tbody>
+              <tr><td class="prop">Definition:</td><td>It denotes the geographic bounding box of a resource.</td></tr>
+              <tr><td class="prop">Range:</td><td><a data-cite="RDF-SCHEMA#ch_literal" title="http://www.w3.org/2000/01/rdf-schema#Literal"><code>rdfs:Literal</code></a></td></tr>
+              <tr><td class="prop">Usage note:</td><td>The range of this property is intentionally generic, with the purpose of allowing different geometry encodings. E.g., the geometry could be encoded with as <abbr title="Well-known Text">WKT</abbr> (<a href="http://www.opengis.net/ont/geosparql#asWKT" title="http://www.opengis.net/ont/geosparql#asWKT"><code>geosparql:asWKT</code></a> [[GeoSPARQL]]) or [[GML]] (<a href="http://www.opengis.net/ont/geosparql#asGML" title="http://www.opengis.net/ont/geosparql#asGML"><code>geosparql:asGML</code></a> [[GeoSPARQL]]).</td></tr>
+              </tbody>
+            </table>
+
+            <p class="note">
+              Property added in this revision of DCAT.
+            </p>
+        </section>
+	    
+    </section>	
+
+<!-- END: Issue https://github.com/w3c/dxwg/issues/83: Implementation of Proposals 1 and 2.a -->
+	
 </section>
 
 
