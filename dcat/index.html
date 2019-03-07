@@ -2424,7 +2424,7 @@ end class DiscoveryService -->
               <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#startDate" title="http://www.w3.org/ns/dcat#startDate">dcat:startDate</a></th></tr></thead>
               <tbody>
               <tr><td class="prop">Definition:</td><td>The start of the period.</td></tr>
-              <tr><td class="prop">Domain:</td><td><a data-cite="DCTERMS#terms-PeriodOfTime" title="http://purl.org/dc/terms/PeriodOfTime">dct:PeriodOfTime</a></td></tr>
+              <tr><td class="prop">Domain:</td><td><a data-cite="DCTERMS#terms-PeriodOfTime"><code title="http://purl.org/dc/terms/PeriodOfTime">dct:PeriodOfTime</code></a></td></tr>
               <tr><td class="prop">Range:</td><td><a data-cite="RDF-SCHEMA#ch_literal" title="http://www.w3.org/2000/01/rdf-schema#Literal"><code>rdfs:Literal</code></a></td></tr>
               <tr><td class="prop">Usage note:</td><td>The range of this property is intentionally generic, with the purpose of allowing different level of temporal precision for specifying the start of a period. E.g., it can be expressed with a date (<a data-cite="XMLSCHEMA-2#date" title="http://www.w3.org/2001/XMLSchema#date"><code>xsd:date</code></a>), a date and time (<a data-cite="XMLSCHEMA-2#gYear" title="http://www.w3.org/2001/XMLSchema#dateTime"><code>xsd:dateTime</code></a>), or a year (<a data-cite="XMLSCHEMA-2#gYear" title="http://www.w3.org/2001/XMLSchema#gYear"><code>xsd:gYear</code></a>).</td></tr>
               </tbody>
@@ -2441,7 +2441,7 @@ end class DiscoveryService -->
               <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#endDate" title="http://www.w3.org/ns/dcat#endDate">dcat:endDate</a></th></tr></thead>
               <tbody>
               <tr><td class="prop">Definition:</td><td>The end of the period.</td></tr>
-              <tr><td class="prop">Domain:</td><td><a data-cite="DCTERMS#terms-PeriodOfTime" title="http://purl.org/dc/terms/PeriodOfTime">dct:PeriodOfTime</a></td></tr>
+              <tr><td class="prop">Domain:</td><td><a data-cite="DCTERMS#terms-PeriodOfTime"><code title="http://purl.org/dc/terms/PeriodOfTime">dct:PeriodOfTime</code></a></td></tr>
               <tr><td class="prop">Range:</td><td><a data-cite="RDF-SCHEMA#ch_literal" title="http://www.w3.org/2000/01/rdf-schema#Literal"><code>rdfs:Literal</code></a></td></tr>
               <tr><td class="prop">Usage note:</td><td>The range of this property is intentionally generic, with the purpose of allowing different level of temporal precision for specifying the end of a period. E.g., it can be expressed with a date (<a data-cite="XMLSCHEMA-2#date" title="http://www.w3.org/2001/XMLSchema#date"><code>xsd:date</code></a>), a date and time (<a data-cite="XMLSCHEMA-2#gYear" title="http://www.w3.org/2001/XMLSchema#dateTime"><code>xsd:dateTime</code></a>), or a year (<a data-cite="XMLSCHEMA-2#gYear" title="http://www.w3.org/2001/XMLSchema#gYear"><code>xsd:gYear</code></a>).</td></tr>
               </tbody>
@@ -2563,6 +2563,36 @@ a:Dataset a dcat:Dataset ;
               Property added in this revision of DCAT.
             </p>
         </section>
+	    
+<aside class="example" id="ex-spatial-coverage-geometry" title="Spatial coverage as a polygon">
+<pre>
+a:Dataset a dcat:Dataset ;
+  dct:spatial [
+    a dct:Location ;
+      locn:geometry "MULTIPOLYGON (((40 40, 20 45, 45 30, 40 40)), ((20 35, 10 30, 10 10, 30 5, 45 20, 20 35), (30 20, 20 15, 20 25, 30 20)))"^^geosparql:asWKT ;
+  ] .
+</pre>
+</aside>
+	    
+<aside class="example" id="ex-spatial-coverage-centroid" title="Spatial coverage as centroid">
+<pre>
+a:Dataset a dcat:Dataset ;
+  dct:spatial [
+    a dct:Location ;
+      dcat:centroid "POINT(12.005 52.325)"^^geos5)
+  ] .
+</pre>
+</aside>
+	    
+<aside class="example" id="ex-spatial-coverage-bbox" title="Spatial coverage as bounding box">
+<pre>
+a:Dataset a dcat:Dataset ;
+  dct:spatial [
+    a dct:Location ;
+      dcat:bbox "POLYGON((-10.58 70.09,34.59 70.09,34.59 34.56,-10.58 34.56,-10.58 70.09))"^^geosparql:asWKT .
+  ] .
+</pre>
+</aside>
 	    
     </section>	
 
