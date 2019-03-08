@@ -3095,391 +3095,6 @@ ex:Test543L
 
 </section>
 
-<section id="alignments">
-
-    <h2>Alignment with other general purpose metadata vocabularies</h2>
-    <p class="note">
-        See the wiki page on <a href="https://github.com/w3c/dxwg/wiki/Alignments-and-crosswalks">Alignments and Crosswalks</a> for more discussion.
-    </p>
-
-    <section id="dcat-sdo" class="informative">
-        <h3>Schema.org</h3>
-        <p>
-            Schema.org [[?SCHEMA-ORG]] includes a number of types and properties based on the original DCAT work (see <a href="https://schema.org/Dataset">schema:Dataset</a> as a starting point),
-            and the index for Google's <a href="https://g.co/datasetsearch">Dataset Search service</a> relies on structured description in web pages about datasets based on both
-            <a href="https://developers.google.com/search/docs/data-types/dataset">schema.org and DCAT</a>.
-            A comparison of the DCAT backbone, shown in <a href="#UML_DCAT_All_Attr"></a> above with the related classes from [[?SCHEMA-ORG]] in <a href="#UML_SchemaOrg_Data_Cat"></a> shows the similarity:
-        </p>
-        <figure id="UML_SchemaOrg_Data_Cat"><img alt="UML model of schema.org classes and properties related to dataset catalogs" src="UML/schema.org-dataset.png">
-            <figcaption>
-                schema.org support for dataset catalogs, showing a selection of schema.org properties that have the classes shown within their domain and range
-            </figcaption>
-        </figure>
-        <p>
-            General purpose web search services that use metadata at all rely primarily on [[?SCHEMA-ORG]], so the relationship of DCAT to [[?SCHEMA-ORG]] is of interest for data providers
-            who wish their datasets and services to be exposed through those indexes.
-        </p>
-        <p>
-            A <a href="https://www.w3.org/wiki/WebSchemas/Datasets">mapping between DCAT 2014 and schema.org</a> was discussed on the original proposal to extend [[?SCHEMA-ORG]] for describing datasets and data catalogs.
-            Partial mappings between DCAT 2014 [[?VOCAB-DCAT-20140116]] and [[?SCHEMA-ORG]] were provided earlier by the
-            <a href="https://www.w3.org/2015/spatial/wiki/ISO_19115_-_DCAT_-_Schema.org_mapping">Spatial Data on the Web Working Group</a>, building upon previous work.
-        </p>
-        <p>
-            A recommended mapping from the revised DCAT (this document) to [[?SCHEMA-ORG]] is <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/rdf/dcat-schema.ttl">available in an RDF file</a>.
-            This mapping is axiomatized using the predicates <code>rdfs:subClassOf</code>, <code>rdfs:subPropertyOf</code>, <code>owl:equivalentClass</code>, <code>owl:equivalentProperty</code>, <code>skos:closeMatch</code>,
-            and also using the annotation properties <code>schema:domainIncludes</code> and <code>schema:rangeIncludes</code> to match [[?SCHEMA-ORG]] semantics. The mapping is summarized in the table below, considering the prefix <code>schema</code> as <code>http://schema.org/</code>.
-        </p>
-        <p class="issue" data-number="251">
-            This alignment of DCAT with schema.org is provisional and non-normative. Feedback is invited in the <a href="https://github.com/w3c/dxwg/issues/251">issue tracker</a>.
-        </p>
-
-        <table>
-            <thead>
-            <tr>
-                <th style="text-align: right">DCAT element</th>
-                <th style="text-align: center">mapping property</th>
-                <th>target element from schema.org</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td style="text-align: right">dct:description</td>
-                <td style="text-align: center"><code>owl:equivalentProperty</code></td>
-                <td>schema:description</td>
-            </tr>
-            <tr>
-                <td style="text-align: right">dct:format</td>
-                <td style="text-align: center"><code>[ owl:inverseOf rdfs:subPropertyOf ]</code></td>
-                <td>schema:encodingFormat</td>
-            </tr>
-            <tr>
-                <td style="text-align: right">dct:identifier</td>
-                <td style="text-align: center"><code>owl:equivalentProperty</code></td>
-                <td>schema:identifier</td>
-            </tr>
-            <tr>
-                <td style="text-align: right">dct:issued</td>
-                <td style="text-align: center"><code>skos:closeMatch</code></td>
-                <td>schema:datePublished</td>
-            </tr>
-            <tr>
-                <td style="text-align: right">dct:language</td>
-                <td style="text-align: center"><code>owl:equivalentProperty</code></td>
-                <td>schema:inLanguage</td>
-            </tr>
-            <tr>
-                <td style="text-align: right">dct:license</td>
-                <td style="text-align: center"><code>owl:equivalentProperty</code></td>
-                <td>schema:license</td>
-            </tr>
-            <tr>
-                <td style="text-align: right">dct:modified</td>
-                <td style="text-align: center"><code>owl:equivalentProperty</code></td>
-                <td>schema:dateModified</td>
-            </tr>
-            <tr>
-                <td style="text-align: right">dct:publisher</td>
-                <td style="text-align: center"><code>owl:equivalentProperty</code></td>
-                <td>schema:publisher</td>
-            </tr>
-            <tr>
-                <td style="text-align: right">dct:spatial</td>
-                <td style="text-align: center"><code>owl:equivalentProperty</code></td>
-                <td>schema:spatialCoverage</td>
-            </tr>
-            <tr>
-                <td style="text-align: right">dct:temporal</td>
-                <td style="text-align: center"><code>owl:equivalentProperty</code></td>
-                <td>schema:temporalCoverage</td>
-            </tr>
-            <tr>
-                <td style="text-align: right">dct:title</td>
-                <td style="text-align: center"><code>owl:equivalentProperty</code></td>
-                <td>schema:name</td>
-            </tr>
-            <tr>
-                <td style="text-align: right">dct:type</td>
-                <td style="text-align: center"><code>skos:closeMatch</code></td>
-                <td>schema:additionalType</td>
-            </tr>
-            <tr>
-                <td style="text-align: right">dcat:Catalog</td>
-                <td style="text-align: center"><code>owl:equivalentClass</code></td>
-                <td>schema:DataCatalog</td>
-            </tr>
-            <tr>
-                <td style="text-align: right" rowspan="2">dcat:DataService</td>
-                <td style="text-align: center"><code>skos:closeMatch</code></td>
-                <td>schema:DataFeed</td>
-            </tr>
-            <tr>
-                <td style="text-align: center" colspan="2">Unclear if a <code>schema:DataFeed</code> is a data <strong>service</strong>, or a data <strong>collection</strong>.</td>
-            </tr>
-            <tr>
-                <td style="text-align: right">dcat:Dataset</td>
-                <td style="text-align: center"><code>owl:equivalentClass</code></td>
-                <td>schema:Dataset</td>
-            </tr>
-            <tr>
-                <td style="text-align: right">dcat:Distribution</td>
-                <td style="text-align: center"><code>owl:equivalentClass</code></td>
-                <td>schema:DataDownload</td>
-            </tr>
-            <tr>
-                <td style="text-align: right">dcat:Resource</td>
-                <td style="text-align: center"><code>rdfs:subClassOf</code></td>
-                <td>schema:Thing</td>
-            </tr>
-            <tr>
-                <td style="text-align: right" rowspan="3">dcat:accessURL</td>
-                <td style="text-align: center"><code>rdfs:subPropertyOf</code></td>
-                <td>schema:contentUrl</td>
-            </tr>
-            <tr>
-                <td style="text-align: center"><code>schema:domainIncludes</code></td>
-                <td>dcat:Distribution , schema:DataDownload</td>
-            </tr>
-            <tr>
-                <td style="text-align: center"><code>schema:rangeIncludes</code></td>
-                <td>rdfs:Resource , schema:URL</td>
-            </tr>
-            <tr>
-                <td style="text-align: right" rowspan="3">dcat:byteSize</td>
-                <td style="text-align: center"><code>rdfs:subPropertyOf</code></td>
-                <td>schema:contentSize</td>
-            </tr>
-            <tr>
-                <td style="text-align: center"><code>schema:domainIncludes</code></td>
-                <td>dcat:Distribution , schema:DataDownload</td>
-            </tr>
-            <tr>
-                <td style="text-align: center"><code>schema:rangeIncludes</code></td>
-                <td>rdfs:Literal , schema:Text</td>
-            </tr>
-            <tr>
-                <td style="text-align: right" rowspan="2">dcat:catalog</td>
-                <td style="text-align: center"><code>schema:domainIncludes</code></td>
-                <td>dcat:Catalog , schema:DataCatalog</td>
-            </tr>
-            <tr>
-                <td style="text-align: center"><code>schema:rangeIncludes</code></td>
-                <td>dcat:Catalog , schema:DataCatalog</td>
-            </tr>
-            <tr>
-                <td style="text-align: right" rowspan="2">dcat:contactPoint</td>
-                <td style="text-align: center"><code>owl:equivalentProperty</code></td>
-                <td>schema:contactPoint</td>
-            </tr>
-            <tr>
-                <td style="text-align: center"><code>schema:domainIncludes</code></td>
-                <td>dcat:Resource , dcat:Dataset , dcat:DataService , schema:Dataset</td>
-            </tr>
-            <tr>
-                <td style="text-align: right" rowspan="3">dcat:dataset</td>
-                <td style="text-align: center"><code>owl:equivalentProperty</code></td>
-                <td>schema:dataset</td>
-            </tr>
-            <tr>
-                <td style="text-align: center"><code>schema:domainIncludes</code></td>
-                <td>dcat:Catalog , schema:DataCatalog</td>
-            </tr>
-            <tr>
-                <td style="text-align: center"><code>schema:rangeIncludes</code></td>
-                <td>dcat:Dataset , schema:Dataset</td>
-            </tr>
-            <tr>
-                <td style="text-align: right" rowspan="3">dcat:distribution</td>
-                <td style="text-align: center"><code>owl:equivalentProperty</code></td>
-                <td>schema:distribution</td>
-            </tr>
-            <tr>
-                <td style="text-align: center"><code>schema:domainIncludes</code></td>
-                <td>dcat:Dataset , schema:Dataset</td>
-            </tr>
-            <tr>
-                <td style="text-align: center"><code>schema:rangeIncludes</code></td>
-                <td>dcat:Distribution , schema:DataDownload</td>
-            </tr>
-            <tr>
-                <td style="text-align: right" rowspan="3">dcat:downloadURL</td>
-                <td style="text-align: center"><code>rdfs:subPropertyOf</code></td>
-                <td>schema:contentUrl</td>
-            </tr>
-            <tr>
-                <td style="text-align: center"><code>schema:domainIncludes</code></td>
-                <td>dcat:Distribution , schema:DataDownload</td>
-            </tr>
-            <tr>
-                <td style="text-align: center"><code>schema:rangeIncludes</code></td>
-                <td>rdfs:Resource , schema:Thing</td>
-            </tr>
-            <tr>
-                <td style="text-align: right" rowspan="4">dcat:keyword</td>
-                <td style="text-align: center"><code>rdfs:subPropertyOf</code></td>
-                <td>schema:keywords</td>
-            </tr>
-            <tr>
-                <td style="text-align: center" colspan="2"><em>dcat:keyword is singular, schema:keywords is plural</em></td>
-            </tr>
-            <tr>
-                <td style="text-align: center"><code>schema:domainIncludes</code></td>
-                <td>dcat:Resource , dcat:Dataset , dcat:DataService , schema:Dataset</td>
-            </tr>
-            <tr>
-                <td style="text-align: center"><code>schema:rangeIncludes</code></td>
-                <td>rdfs:Literal , schema:Text</td>
-            </tr>
-            <tr>
-                <td style="text-align: right" rowspan="3">dcat:landingPage</td>
-                <td style="text-align: center"><code>rdfs:subPropertyOf</code></td>
-                <td>schema:url</td>
-            </tr>
-            <tr>
-                <td style="text-align: center"><code>schema:domainIncludes</code></td>
-                <td>dcat:Resource , dcat:Dataset , dcat:DataService , schema:Dataset</td>
-            </tr>
-            <tr>
-                <td style="text-align: center"><code>schema:rangeIncludes</code></td>
-                <td>foaf:Document , schema:WebPage</td>
-            </tr>
-            <tr>
-                <td style="text-align: right" rowspan="3">dcat:mediaType</td>
-                <td style="text-align: center"><code>owl:equivalentProperty</code></td>
-                <td>schema:encodingFormat</td>
-            </tr>
-            <tr>
-                <td style="text-align: center"><code>schema:domainIncludes</code></td>
-                <td>dcat:Distribution , schema:DataDownload</td>
-            </tr>
-            <tr>
-                <td style="text-align: center"><code>schema:rangeIncludes</code></td>
-                <td>dct:MediaTypeOrExtent , schema:Text , schema:url </td>
-            </tr>
-            <tr>
-                <td style="text-align: right" rowspan="2">dcat:record</td>
-                <td style="text-align: center"><code>schema:domainIncludes</code></td>
-                <td>dcat:Catalog , schema:DataCatalog</td>
-            </tr>
-            <tr>
-                <td style="text-align: center"><code>schema:rangeIncludes</code></td>
-                <td>dcat:CatalogRecord</td>
-            </tr>
-            <tr>
-                <td style="text-align: right" rowspan="2">dcat:service</td>
-                <td style="text-align: center"><code>schema:domainIncludes</code></td>
-                <td>dcat:Catalog , schema:DataCatalog</td>
-            </tr>
-            <tr>
-                <td style="text-align: center"><code>schema:rangeIncludes</code></td>
-                <td>dcat:DataService</td>
-            </tr>
-            <tr>
-                <td style="text-align: right" rowspan="3">dcat:theme</td>
-                <td style="text-align: center"><code>owl:equivalentProperty</code></td>
-                <td>schema:about</td>
-            </tr>
-            <tr>
-                <td style="text-align: center"><code>schema:domainIncludes</code></td>
-                <td>dcat:Resource , dcat:Dataset , dcat:DataService , schema:Dataset</td>
-            </tr>
-            <tr>
-                <td style="text-align: center"><code>schema:rangeIncludes</code></td>
-                <td>skos:Concept , schema:Class</td>
-            </tr>
-            <tr>
-                <td style="text-align: right" rowspan="2">dcat:themeTaxonomy</td>
-                <td style="text-align: center"><code>schema:domainIncludes</code></td>
-                <td>dcat:Catalog , schema:DataCatalog</td>
-            </tr>
-            <tr>
-                <td style="text-align: center"><code>schema:rangeIncludes</code></td>
-                <td>skos:ConceptScheme</td>
-            </tr>
-            <tr>
-                <td style="text-align: right">foaf:Organization</td>
-                <td style="text-align: center"><code>owl:equivalentClass</code></td>
-                <td>schema:Organization</td>
-            </tr>
-            <tr>
-                <td style="text-align: right">foaf:Person</td>
-                <td style="text-align: center"><code>owl:equivalentClass</code></td>
-                <td>schema:Person</td>
-            </tr>
-            <tr>
-                <td style="text-align: right">foaf:homepage</td>
-                <td style="text-align: center"><code>owl:equivalentProperty</code></td>
-                <td>schema:url</td>
-            </tr>
-            <tr>
-                <td style="text-align: right">foaf:mbox</td>
-                <td style="text-align: center"><code>owl:equivalentProperty</code></td>
-                <td>schema:email</td>
-            </tr>
-            <!--
-            <tr>
-            <td colspan="3"><em>... and potentially of interest to be mixed-in for descriptions of scientific data</em></td>
-            </tr>
-            <tr>
-            <td style="text-align: right">sosa:hasFeatureOfInterest</td>
-            <td style="text-align: center"><code>rdfs:subPropertyOf</code></td>
-            <td>schema:object</td>
-            </tr>
-            <tr>
-            <td style="text-align: right">sosa:hasResult</td>
-            <td style="text-align: center"><code>rdfs:subPropertyOf</code></td>
-            <td>schema:result</td>
-            </tr>
-            <tr>
-            <td style="text-align: right">sosa:madeByActuator</td>
-            <td style="text-align: center"><code>rdfs:subPropertyOf</code></td>
-            <td>schema:instrument</td>
-            </tr>
-            <tr>
-            <td style="text-align: right">sosa:madeBySampler</td>
-            <td style="text-align: center"><code>rdfs:subPropertyOf</code></td>
-            <td>schema:instrument</td>
-            </tr>
-            <tr>
-            <td style="text-align: right">sosa:madeBySensor</td>
-            <td style="text-align: center"><code>rdfs:subPropertyOf</code></td>
-            <td>schema:instrument</td>
-            </tr>
-            <tr>
-            <td style="text-align: right">sosa:observedProperty</td>
-            <td style="text-align: center"><code>owl:equivalentProperty</code></td>
-            <td>schema:variableMeasured</td>
-            </tr>
-            <tr>
-            <td style="text-align: right">sosa:phenomenonTime</td>
-            <td style="text-align: center"><code>rdfs:subPropertyOf</code></td>
-            <td>schema:temporalCoverage</td>
-            </tr>
-            <tr>
-            <td style="text-align: right">sosa:resultTime</td>
-            <td style="text-align: center"><code>rdfs:subPropertyOf</code></td>
-            <td>schema:endTime</td>
-            </tr>
-            <tr>
-            <td style="text-align: right">sosa:usedProcedure</td>
-            <td style="text-align: center"><code>dcat:hasSubProperty</code></td>
-            <td>schema:measurementTechnique</td>
-            </tr>
-            -->
-            </tbody>
-        </table>
-
-    </section>
-
-
-    <section id="dcat-prov-o" class="informative">
-        <h3>PROV-O</h3>
-            An alignment of DCAT with PROV-O [[?PROV-O]] is being prepared, and has been discussed in <a href="https://github.com/w3c/dxwg/issues/128">Issue #128</a>.
-	    A <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/rdf/dcat-prov.ttl">provisional version</a> is available.
-
-    </section>
-
-</section>
-
 <section id="profiles">
 
     <h2>DCAT Profiles</h2>
@@ -3678,6 +3293,234 @@ ex:Test543L
 	ldp:inbox &lt;/datasets/001/inbox/&gt; .
 
 &lt;/datasets/001/inbox/&gt; ldp:contains &lt;/datasets/001/inbox/001&gt; .</pre>
+
+    </section>
+
+</section>
+
+<section class="appendix" id="alignments">
+
+    <h2>Alignment with other general purpose metadata vocabularies</h2>
+    <p class="note">
+        See the wiki page on <a href="https://github.com/w3c/dxwg/wiki/Alignments-and-crosswalks">Alignments and Crosswalks</a> for more discussion.
+    </p>
+
+    <section id="dcat-sdo" class="informative">
+        <h3>Schema.org</h3>
+        <p>
+            Schema.org [[?SCHEMA-ORG]] includes a number of types and properties based on the original DCAT work (see <a href="https://schema.org/Dataset">schema:Dataset</a> as a starting point),
+            and the index for Google's <a href="https://g.co/datasetsearch">Dataset Search service</a> relies on structured description in web pages about datasets distinguishing both
+            <a href="https://developers.google.com/search/docs/data-types/dataset">schema.org and DCAT</a>.
+            A comparison of the DCAT backbone, shown in <a href="#UML_DCAT_All_Attr"></a> above with the related classes from [[?SCHEMA-ORG]] in <a href="#UML_SchemaOrg_Data_Cat"></a> shows the similarity:
+        </p>
+        <figure id="UML_SchemaOrg_Data_Cat"><img alt="UML model of schema.org classes and properties related to dataset catalogs" src="UML/schema.org-dataset.png">
+            <figcaption>
+                schema.org support for dataset catalogs, showing a selection of schema.org properties related to the classes shown
+            </figcaption>
+        </figure>
+        <p>
+            General purpose web search services that use metadata at all rely primarily on [[?SCHEMA-ORG]], so the relationship of DCAT to [[?SCHEMA-ORG]] is of interest for data providers and catalog publishers who wish their datasets and services to be exposed through those indexes.
+        </p>
+        <p>
+            A <a href="https://www.w3.org/wiki/WebSchemas/Datasets">mapping between DCAT 2014 and schema.org</a> was discussed on the original proposal to extend [[?SCHEMA-ORG]] for describing datasets and data catalogs.
+            Partial mappings between DCAT 2014 [[?VOCAB-DCAT-20140116]] and [[?SCHEMA-ORG]] were provided earlier by the
+            <a href="https://www.w3.org/2015/spatial/wiki/ISO_19115_-_DCAT_-_Schema.org_mapping">Spatial Data on the Web Working Group</a>, building upon previous work.
+        </p>
+        <p>
+            A recommended mapping from the revised DCAT (this document) to [[?SCHEMA-ORG]] version 3.4 is <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/rdf/dcat-schema.ttl">available in an RDF file</a>.
+            This mapping is axiomatized using the predicates <code>rdfs:subClassOf</code>, <code>rdfs:subPropertyOf</code>, <code>owl:equivalentClass</code>, <code>owl:equivalentProperty</code>, <code>skos:closeMatch</code>,
+            and also using the annotation properties <code>sdo:domainIncludes</code> and <code>sdo:rangeIncludes</code> to match [[?SCHEMA-ORG]] semantics. The alignment is summarized in the table below, considering the prefix <code>sdo</code> as <code>http://schema.org/</code>.
+        </p>
+        <p class="issue" data-number="251">
+            This alignment of DCAT with schema.org is provisional and non-normative. Feedback is invited in the <a href="https://github.com/w3c/dxwg/issues/251">issue tracker</a>.
+        </p>
+
+        <table>
+            <thead>
+            <tr>
+                <th style="text-align: right">DCAT element</th>
+                <!-- <th style="text-align: center">mapping property</th> -->
+                <th>target element from schema.org</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td style="text-align: right">dcat:Resource</td>
+                <!-- <td style="text-align: center"><code>rdfs:subClassOf</code></td> -->
+                <td>sdo:Thing</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dcat:Catalog</td>
+                <!-- <td style="text-align: center"><code>owl:equivalentClass</code></td> -->
+                <td>sdo:DataCatalog</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dcat:Dataset</td>
+                <!-- <td style="text-align: center"><code>owl:equivalentClass</code></td> -->
+                <td>sdo:Dataset</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dcat:Distribution</td>
+                <!-- <td style="text-align: center"><code>owl:equivalentClass</code></td> -->
+                <td>sdo:DataDownload</td>
+            </tr>
+            <tr>
+                <td style="text-align: right"> ?? </td>
+                <!-- <td style="text-align: center"><code>skos:closeMatch</code></td> -->
+                <td>sdo:DataFeed <br/>
+                  <em>Unclear if a <code>sdo:DataFeed</code> is a data <strong>service</strong>, or a data <strong>collection</strong>.</em> </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dct:hasPart</td>
+                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
+                <td>sdo:hasPart</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dcat:dataset</td>
+                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
+                <td>sdo:dataset</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dcat:distribution</td>
+                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
+                <td>sdo:distribution</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dct:title</td>
+                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
+                <td>sdo:name</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dct:description</td>
+                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
+                <td>sdo:description</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dcat:keyword</td>
+                <!-- <td style="text-align: center"><code>rdfs:subPropertyOf</code></td> -->
+                <td>sdo:keywords <br/>
+                  <em>dcat:keyword is singular, sdo:keywords is plural</em></td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dct:subject</td>
+                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
+                <td>sdo:about</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dcat:theme</td>
+                <!-- <td style="text-align: center"><code>rdfs:subPropertyOf</code></td> -->
+                <td>sdo:about</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dct:identifier</td>
+                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
+                <td>sdo:identifier</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dct:type</td>
+                <!-- <td style="text-align: center"><code>skos:closeMatch</code></td> -->
+                <td>sdo:additionalType</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dct:issued</td>
+                <!-- <td style="text-align: center"><code>skos:closeMatch</code></td> -->
+                <td>sdo:datePublished</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dct:modified</td>
+                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
+                <td>sdo:dateModified</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dct:language</td>
+                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
+                <td>sdo:inLanguage</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dct:license</td>
+                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
+                <td>sdo:license</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dct:publisher</td>
+                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
+                <td>sdo:publisher</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dcat:contactPoint</td>
+                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
+                <td>sdo:contactPoint</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dct:spatial</td>
+                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
+                <td>sdo:spatialCoverage</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dct:temporal</td>
+                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
+                <td>sdo:temporalCoverage</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dct:format</td>
+                <!-- <td style="text-align: center"><code>[ owl:inverseOf rdfs:subPropertyOf ]</code></td> -->
+                <td>sdo:encodingFormat</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dcat:mediaType</td>
+                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
+                <td>sdo:encodingFormat</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dcat:byteSize</td>
+                <!-- <td style="text-align: center"><code>rdfs:subPropertyOf</code></td> -->
+                <td>sdo:contentSize</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dcat:accessURL</td>
+                <!-- <td style="text-align: center"><code>rdfs:subPropertyOf</code></td> -->
+                <td>sdo:contentUrl</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dcat:downloadURL</td>
+                <!-- <td style="text-align: center"><code>rdfs:subPropertyOf</code></td> -->
+                <td>sdo:contentUrl</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dcat:landingPage</td>
+                <!-- <td style="text-align: center"><code>rdfs:subPropertyOf</code></td> -->
+                <td>sdo:url</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">foaf:Organization</td>
+                <!-- <td style="text-align: center"><code>owl:equivalentClass</code></td> -->
+                <td>sdo:Organization</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">foaf:Person</td>
+                <!-- <td style="text-align: center"><code>owl:equivalentClass</code></td> -->
+                <td>sdo:Person</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">foaf:homepage</td>
+                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
+                <td>sdo:url</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">foaf:mbox</td>
+                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
+                <td>sdo:email</td>
+            </tr>
+          </tbody>
+        </table>
+
+    </section>
+
+
+    <section id="dcat-prov-o" class="informative">
+        <h3>PROV-O</h3>
+            An alignment of DCAT with PROV-O [[?PROV-O]] is being prepared, and has been discussed in <a href="https://github.com/w3c/dxwg/issues/128">Issue #128</a>.
+	    A <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/rdf/dcat-prov.ttl">provisional version</a> is available.
 
     </section>
 
