@@ -1562,8 +1562,36 @@ $(document).ready( function() {
                 <tbody>
                 <tr><td class="prop">Definition:</td><td>The frequency at which dataset is published.</td></tr>
                 <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/Frequency"><code>dct:Frequency</code></a> (A rate at which something recurs)</td></tr>
+                <tr><td class="prop">Usage note:</td><td>
+                    The value of <code>dct:accrualPeriodicity</code> gives the rate at which the dataset-as-a-whole is updated. This may be complemented by <a href="#Property:dataset_temporalresolution"><code>dcat:temporalResolution</code></a> to give the time between collected data points in a time series.
+                  </td></tr>
                 </tbody>
             </table>
+
+          <div class="example">
+      <p>
+        For example, a 15-minute time-series that is published daily could be described
+      </p>
+      <pre id="ex-frequency" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
+&lt;ds913&gt;
+    a dcat:Dataset ;
+    dct:accrualPeriodicity &lt;http://purl.org/cld/freq/daily&gt; ;
+    dcat:temporalResolution "PT15M"^^xsd:duration ;
+.
+</pre>
+
+    <p>
+      A dataset composed of items added hourly and published immediately could be described
+    </p>
+    <pre id="ex-frequency" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
+&lt;ds782&gt;
+    a dcat:Dataset ;
+    dct:accrualPeriodicity &lt;http://purl.org/cld/freq/continuous&gt; ;
+    dcat:temporalResolution "PT1H"^^xsd:duration ;
+.
+</pre>
+</div>
+
         </section>
 
         <section id="Property:dataset_spatial">
