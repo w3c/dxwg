@@ -166,7 +166,8 @@
       current version of the IETF draft (-00) is expected to be completely re-written in parallel work with this document and should
       not be seen as anything but work-in-progress.
     </p>
-	  <h3>Existing standards for transporting profile information in HTTP headers</h3>
+	<section id="relatedwork-existingHttpStandards">
+		<h3>Existing standards for transporting profile information in HTTP headers</h3>
 	  <h4>Using Accept/Content Type together with the profile parameter</h4>
 	  <p>The HTTP Accept and Content-Type header fields [[RFC 7231]]
 		  allow a client to specify acceptable media types (<code>Accept</code>)
@@ -181,7 +182,7 @@ Accept: text/turtle;q=0.9;profile="urn:example:profile-1",
 	text/turtle;q=0.7;profile="urn:example:profile-2"
 
 HTTP/1.1 200 OK
-Content-Type: text/turtle;profile=<urn:example:profile-2>
+Content-Type: text/turtle;profile="urn:example:profile-2"
 </pre>
     <p>During TPAC 2018 in Lyon, the DXWG had a longer discussion with the JSON-LD WG
 	and it was concluded that the “profile” parameter in the <code>Accept</code> and <code>Content-Type</code>
@@ -224,11 +225,11 @@ Link: &lt;http://example.com/profile-1&gt;; rel="profile"
     <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Using a Link header with a profile parameter">
 GET /some/resource HTTP/1.1
 Accept: text/turtle
-Prefer: profile=&lt;urn:example:schema&gt;
+Prefer: profile="urn:example:schema"
 
 HTTP/1.1 200 OK
 Content-Type: text/turtle
-Preference-Applied: profile=&lt;urn:example:schema&gt;
+Preference-Applied: profile="urn:example:schema"
     </pre>
 	<p>This approach has two disadvantages.
 		The first is - as with the <code>Link</code> header,
@@ -259,9 +260,7 @@ Preference-Applied: profile=&lt;urn:example:schema&gt;
 	    or other HTTP headers for this use
 	    will be listed and discussed here.
     </p>
-    <div class="issue" data-number="383"></div>
-    <div class="issue" data-number="516"></div>
-    <div class="issue" data-number="384"></div>
+</section>
 	  <section id="relatedWork-ark">
 		  <h3>Archival Resource Key (ark)</h3>
 		  <p>ARK (Archival Resource Key) [[ARK]] is an identifier scheme
@@ -279,6 +278,10 @@ Preference-Applied: profile=&lt;urn:example:schema&gt;
 			refer to different XML encodings of the metadata, one using MODS, the other one using other XML vocabularies.
 		  </p>
 	  </section>
+    <div class="issue" data-number="383"></div>
+    <div class="issue" data-number="516"></div>
+    <div class="issue" data-number="384"></div>
+
   </section>
   <section id="abstractmodel">
     <h2>Abstract Model</h2>
