@@ -51,10 +51,10 @@ $(document).ready( function() {
     <ul>
         <li>addition of a <a href="#Class:Resource"><code>dcat:Resource</code></a> class for representing any resource than can be included in the catalog, this is
             now the super-class of <a href="#Class:Dataset"><code>dcat:Dataset</code></a></li>
-        <li>addition of <a href="#Class:Data_Service"><code>dcat:DataService</code></a>, as a sub-class of <a href="#Class:Resource"><code>dcat:Resource</code></a>, to support cataloguing service end-points providing access to resources</li>
-        <li>addition of <a href="#Class:Data_Distribution_Service"><code>dcat:DataDistributionService</code></a>, as a sub-class of <a href="#Class:Data_Service"><code>dcat:DataService</code></a>,
-            representing service end-points providing access to datasets through their distributions, respectively </li>
-        <li>addition of ways to representing <a href="#bag-of-files">loosely structured catalogs</a>, where there is no distinction between a dataset and its distributions</li>
+        <li>addition of <a href="#Class:Data_Service"><code>dcat:DataService</code></a>, as a sub-class of <a href="#Class:Resource"><code>dcat:Resource</code></a>, to support cataloguing application programming interfaces (APIs) and other service end-points providing access to resources</li>
+        <li>addition of <code><a href="#Class:Data_API">dcat:DataAPI</a></code> and <a href="#Class:Data_Application"><code>dcat:DataApplication</code></a>, as sub-classes of <a href="#Class:Data_Service"><code>dcat:DataService</code></a>,
+            representing endpoints providing access to datasets and data services through a programmatic interface (data APIs), and interactive web applications providing access to datasets and data services through a user agent (data applications) </li>
+        <li>addition of ways of representing <a href="#bag-of-files">loosely structured catalogs</a>, where there is no distinction between a dataset and its distributions</li>
         <li>more details for the ways of representing <a href="#examples-dataset-provenance">dataset provenance</a> and <a href="#quality-information">dataset quality</a></li>
         <li>an <a href="#dcat-sdo">alignment</a> between the DCAT vocabulary and the schema.org vocabulary</li>
     </ul>
@@ -118,8 +118,7 @@ $(document).ready( function() {
     </p>
 
     <p>
-        Data is often provided through a service, accessed through a form or API which supports selection of an extract, sub-set, or combination of data.
-        DCAT allows the description of a data access service to be included in a catalog.
+        Data is often provided through a service, accessed through a graphical interface or an API, which typically supports selection of extracts, subsets, or combinations of data. DCAT allows the description of a data access service to be included in a catalog. DCAT also supports the description of related data applications that may be included in a data catalog, such as data transformation or analysis services.
     </p>
 
     <p>
@@ -229,16 +228,22 @@ $(document).ready( function() {
           Data comes in many forms, including numbers, words, pixels, imagery, sound and other multi-media, and potentially other types, any of which might be collected into a dataset.
         </li>
         <li>
-          <code><a href="#Class:Distribution">dcat:Distribution</a></code> represents an accessible form of a dataset, for example a downloadable file.
+          <a href="#Class:Distribution"><code>dcat:Distribution</code></a> represents an accessible form of a dataset, for example a downloadable file.
         </li>
         <li>
           <a href="#Class:Data_Service"><code>dcat:DataService</code></a> represents a data service in a catalog.
-          A data service is a collection of operations, accessible through an interface (API) that provide access to one or more datasets or data processing functions.
+          A data service is a collection of operations, accessible through a graphical interface or as an application programming interface (API), that provide access to one or more datasets and/or data processing functions.
         </li>
         <li>
-          <a href="#Class:Data_Distribution_Service"><code>dcat:DataDistributionService</code></a> represents a kind of data service that provides access to distributions of one or more datasets or extracts of datasets.
+          <a href="#Class:Data_API"><code>dcat:DataAPI</code></a> represents a kind of data service designed to be interacted with programmatically (an application programming interface). It may provide access to distributions of one or more datasets or extracts of datasets, and it may provide related data services.
+        </li>
+        <li>
+          <a href="#Class:Data_Application"><code>dcat:DataApplication</code></a> represents a kind of data service that can be interacted with via a graphical interface, such as a single web form or a more complex interactive application. It may provide access to distributions of one or more datasets or extracts of datasets, and it may provide related data services.
         </li>
         <!--
+        <li>
+          <code><a href="#Class:Data_Distribution_Service">dcat:DataDistributionService</a></code> represents a kind of data service that provides access to distributions of one or more datasets or extracts of datasets.
+        </li>
           <li>
             <a href="#Class:DataTransformationService"><code>dcat:DataTransformationService</code></a> represents a service that can transform a dataset, e.g. spatial coordinate transformation; interpolation or resampling of a dataset.
           </li>
@@ -251,7 +256,7 @@ $(document).ready( function() {
         </li>
     </ul>
 
-    <figure id="UML_DCAT_All_Attr"><img alt="UML model of DCAT classes and properties" src="UML/DCAT-summary-all-attributes.png">
+    <figure id="UML_DCAT_All_Attr"><img alt="UML model of DCAT classes and properties" src="UML/DCAT2.png">
         <figcaption>
             Overview of DCAT model, showing the classes of resources that can be members of a Catalog, and the relationships between them.
         </figcaption>
@@ -267,26 +272,32 @@ $(document).ready( function() {
     <p>
         A <b>dataset</b> in DCAT is defined as a "collection of data, published or curated by a single agent, and available for access or download in one or more serializations or formats".
         A dataset is a conceptual entity, and can be represented by one or more <b>distributions</b> that serialize the dataset for transfer.
-        Distributions of a dataset can be provided via <b>data distribution services</b>.
-        Detailed properties for a data distribution service API are out of the scope of this version of DCAT.
+        Distributions of a dataset can be provided via <b>data services</b>.
     </p>
 
     <p>
-      A <b>data service</b> in DCAT is a collection of operations or API which provides access to data.
-      An interactive interface such as a web form is often provided to access to the API operations.
+      A <b>data service</b> in DCAT is a collection of operations that provides access to data or to services for working with data. We distinguish between services made available to programmers for manipulation with a programming language (data APIs) and those made available via a user agent (data applications), since they have distinct audiences and purposes. One can think of a catalog record for a data API as access to the back end of a web application, and a record for a data application as access to the front end. Properties such as access methods and rights will differ between the back end and the front end. In many cases, only one of the two will be available to the public.
+    </p>
+    <p>
       A data service typically provides selection, extraction, combination, processing or transformation operations over datasets that might be hosted locally or remote to the service.
-      A data service might be tied to specific datasets, or its source data might be configured at request- or run-time.
-      The result of a request to a data service is a representation of a part or all of a dataset or catalog.
-      A <b>data distribution service</b> is a kind of data service that provides the means to select and download a distribution of a dataset or subset.
-      A data discovery service is a kind of data service that provides the means to find the description of a suitable dataset, often through a portal or catalog service.
-      Other kinds of data service might include data transformation services such as coordinate transformation services, re-sampling and interpolation services, and various data processing services, but these are outside the scope of the current DCAT vocabulary.
+      A data service might be tied to specific datasets, or its source data might be configured at request- or run-time, or it might offer functions that do not involve a specific dataset.
+      The result of a request to a data service is often a representation of a part or all of a dataset or catalog. (A catalog is itself a dataset.) The representation may take many forms, from a JSON-formatted file to a table or visualization. Whether and which datasets are served by a given service are indicated through the use of the servesData property.
+    </p>
+    <p>
+      A <b>data API</b> is a kind of data service that provides the means to select and download one or more dataset distributions or subsets thereof, or to utilize data processing services, as an application programming interface. The specific functions offered by an API can be documented at a location referenced by the endpointDocumentation property.
+    </p>
+    <p>
+      A <b>data application</b> is a kind of data service that enables a user to download one or more dataset distributions or subsets thereof, or to utilize data processing services, through an interactive user agent. Typical services include data discovery, transformation, visualization, and download. The specific features available to users may be described at a location provided via the appDocumentation property.
+    </p>
+    <p>
+      Both data APIs and data applications can offer any combination of functions, from file downloads to data discovery. Other functions include data transformation services such as coordinate transformation services, re-sampling and interpolation services, and various data processing services, but describing these precisely is outside the scope of the current DCAT vocabulary.
     </p>
     <p>
       Descriptions of datasets and data services can be included in a <b>catalog</b>.
       A catalog is a kind of dataset whose member items are descriptions of datasets and data services.
       Other types of thing might also be catalogued, but the scope of DCAT is currently limited to datasets and data services.
       To extend the scope of a catalog beyond datasets and data services it is recommended to define additional sub-classes of <a href="#Class:Resource"><code>dcat:Resource</code></a> in a DCAT application profile or other DCAT application.
-      To extend the scope of service descriptions beyond data distribution services it is recommended to define additional sub-classes of <a href="#Class:Data_Service"><code>dcat:DataService</code></a> in a DCAT application profile or other DCAT application.
+      To extend the scope of service descriptions beyond data APIs and data applications, it is recommended to define additional properties of <a href="#Class:Data_API"><code>dcat:DataAPI</code></a> or <a href="#Class:Data_Application"><code>dcat:DataApplication</code></a> in a DCAT application profile or other DCAT application.
     </p>
 
     <div class="note">
@@ -553,7 +564,7 @@ $(document).ready( function() {
           The <code>dcat:accessURL</code> for each <code>dcat:Distribution</code> corresponds with the <code>dcat:endpointURL</code> of the service.
           Each service is characterized by its general type using <code>dct:type</code> (here using values from the INSPIRE spatial data service type vocabulary),
           its specific API definition using <code>dct:conformsTo</code>,
-          with the detailed description of the individual endpoint parameters and options linked using <code>dcat:endpointDescription</code>.
+          with the detailed description of the individual endpoint parameters and options linked using <code>dcat:endpointDocumentation</code>.
         </p>
 <pre id="ex-access-service" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 :dataset-004
@@ -574,18 +585,18 @@ $(document).ready( function() {
   dcat:mediaType &lt;https://www.iana.org/assignments/media-types/image/png&gt; ;
 .
 :figure-service-006
-  rdf:type dcat:DataDistributionService ;
+  rdf:type dcat:DataAPI ;
   dct:conformsTo &lt;http://example.org/apidef/figure/v1.0&gt; ;
   dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view&gt; ;
-  dcat:endpointDescription &lt;http://example.org/api/figure-006/params&gt; ;
+  dcat:endpointDocumentation &lt;http://example.org/api/figure-006/params&gt; ;
   dcat:endpointURL &lt;http://example.org/api/figure-006&gt; ;
   dcat:servesDataset :dataset-004 ;
 .
 :table-service-005
-  rdf:type dcat:DataDistributionService ;
+  rdf:type dcat:DataAPI ;
   dct:conformsTo &lt;http://example.org/apidef/table/v2.2&gt; ;
   dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download&gt; ;
-  dcat:endpointDescription &lt;http://example.org/api/table-005/capability&gt; ;
+  dcat:endpointDocumentation &lt;http://example.org/api/table-005/capability&gt; ;
   dcat:endpointURL &lt;http://example.org/api/table-005&gt; ;
   dcat:servesDataset :dataset-003, :dataset-004 ;
 .  </pre>
@@ -1718,7 +1729,7 @@ $(document).ready( function() {
             <tr><td class="prop">Usage note:</td><td>This represents a general availability of a dataset. It implies no information
                 about the actual access method of the data, i.e. whether by direct download, API, or through a Web page.
                 The use of <a href="#Property:distribution_downloadurl"><code>dcat:downloadURL</code></a> property indicates directly downloadable distributions.</td></tr>
-            <tr><td class="prop">See also:</td><td><a href="#Class:Data_Distribution_Service" title="">Data distribution service</a></td></tr>
+            <tr><td class="prop">See also:</td><td><a href="#Class:Data_Service" title="">Data service</a></td></tr>
             </tbody>
         </table>
 
@@ -1733,7 +1744,7 @@ $(document).ready( function() {
                 <b>Applications consuming DCAT should be aware that catalogues designed using DCAT-2014 might use <code>dcat:Distribution</code> to represent both services and representations.</b>
             </p>
             <p>
-                Under the revised scope, instances of type <code>dcat:Distribution</code> <em title="SHOULD" class="rfc2119">SHOULD</em> be limited to <i>representations</i> of datasets which might be transported as files, and <em title="SHOULD NOT" class="rfc2119">SHOULD NOT</em> be used for data <i>services</i> such as APIs or feeds. Data services including APIs and feeds <em title="SHOULD" class="rfc2119">SHOULD</em> be described using instances of type <a href="#Class:Data_Service"><code>dcat:DataService</code></a> whose sub-class <a href="#Class:Data_Distribution_Service"><code>dcat:DataDistributionService</code></a> <em title="MAY" class="rfc2119">MAY</em> serve <a href="#Class:Distribution"><code>dcat:Distributions</code></a>.
+                Under the revised scope, instances of type <code>dcat:Distribution</code> <em title="SHOULD" class="rfc2119">SHOULD</em> be limited to <i>representations</i> of datasets which might be transported as files, and <em title="SHOULD NOT" class="rfc2119">SHOULD NOT</em> be used for data <i>services</i> such as APIs or feeds. Data services including APIs and web applications <em title="SHOULD" class="rfc2119">SHOULD</em> be described using instances of type <a href="#Class:Data_API"><code>dcat:DataAPI</code></a> or <a href="#Class:Data_Application"><code>dcat:DataApplication</code></a> which <em title="MAY" class="rfc2119">MAY</em> serve <a href="#Class:Distribution"><code>dcat:Distributions</code></a>.
             </p>
             <p>
                 Links between a <code>dcat:Distribution</code> and services or web addresses where it can be accessed are expressed using <a href="#Property:distribution_accessurl"><code>dcat:accessURL</code></a>, <a href="#Property:distribution_accessservice"><code>dcat:accessService</code></a>, <a href="#Property:distribution_downloadurl"><code>dcat:downloadURL</code></a>, as shown in <a href="#UML_DCAT_All_Attr"></a> and described in the definitions below.
@@ -1896,8 +1907,8 @@ $(document).ready( function() {
                 <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#accessService">dcat:accessService</a></th></tr></thead>
                 <tbody>
                 <tr><td class="prop">Definition:</td><td>A site or end-point that gives access to the distribution of the dataset</td></tr>
-                <tr><td class="prop">Range:</td><td><a href="#Class:Data_Distribution_Service"><code>dcat:DataDistributionService</code></a></td></tr>
-                <tr><td class="prop">Usage note:</td><td><a href="#Property:distribution_accessservice"><code>dcat:accessService</code></a> <em title="SHOULD" class="rfc2119">SHOULD</em> be used to link to a description of a <a href="#Class:Data_Distribution_Service"><code>dcat:DataDistributionService</code></a> that can provide access to this distribution.</td></tr>
+                <tr><td class="prop">Range:</td><td><a href="#Class:Data_Service"><code>dcat:DataService</code></a></td></tr>
+                <tr><td class="prop">Usage note:</td><td><a href="#Property:distribution_accessservice"><code>dcat:accessService</code></a> <em title="SHOULD" class="rfc2119">SHOULD</em> be used to link to a description of a <a href="#Class:Data_API"><code>dcat:DataAPI</code></a> or <a href="#Class:Data_Application"><code>dcat:DataApplication</code></a> that can provide access to this distribution.</td></tr>
                 <tr><td class="prop">See also</td><td><a href="#Property:distribution_downloadurl">download address</a>, <a href="#Property:distribution_accessurl">access address</a></td></tr>
                 </tbody>
             </table>
@@ -2077,8 +2088,7 @@ $(document).ready( function() {
         </p>
 
         <p>The following properties are recommended for use on this class:
-            <a href="#Property:dataservice_endpointdescription">endpointDescription</a>,
-            <a href="#Property:dataservice_endpointurl">endpointURL</a>,
+            <a href="#Property:dataservice_servesdataset">servesDataset</a>,
             <a href="#Property:dataservice_license">license</a>,
             <a href="#Property:dataservice_access_rights">accessRights</a>
         </p>
@@ -2113,33 +2123,17 @@ $(document).ready( function() {
             <tr><td class="prop">Definition:</td><td>A site or end-point providing operations related to the discovery of, access to, or processing functions on, data or related resources</td></tr>
             <tr><td class="prop">Sub class of:</td><td><a href="#Class:Resource">dcat:Resource</a></td></tr>
             <tr><td class="prop">Sub class of:</td><td><a href="http://purl.org/dc/dcmitype/Service">dctype:Service</a></td></tr>
-            <tr><td class="prop">Usage note:</td><td>The class <a href="#Class:Data_Service"><code>dcat:DataService</code></a> is an extension point for the description of any kind of data service. Currently only one subclass is defined - DataDistributionService - but additional subclasses may be defined in a DCAT application profile or other DCAT application for catalogs of other kinds of services</td></tr>
-            <tr><td class="prop">Usage note:</td><td>The kind of service can be indicated using the <a href="http://purl.org/dc/terms/type">dct:type</a> property. Its value may be taken from a controlled vocabulary such as the <a href="https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/">INSPIRE spatial data service type vocabulary</a></td></tr>
+            <tr><td class="prop">Usage note:</td><td>The purpose of the service, such as data discovery or data transformation, can be indicated by using the <a href="http://purl.org/dc/terms/type">dct:type</a> property. Its value may be taken from a controlled vocabulary such as the <a href="https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/">INSPIRE spatial data service type vocabulary</a></td></tr>
             </tbody>
         </table>
 
-        <section id="Property:dataservice_endpointurl">
-            <h4>Property: endpoint address</h4>
+        <section id="Property:dataservice_servesdataset">
+            <h4>Property: serves dataset</h4>
             <table class="definition">
-                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#endpointURL">dcat:endpointURL</a></th></tr></thead>
+                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#servesdataset">dcat:servesDataset</a></th></tr></thead>
                 <tbody>
-                <tr><td class="prop">Definition:</td><td>The location of the service end-point (an IRI).</td></tr>
-                <tr><td class="prop">Domain:</td><td><a href="#Class:Data_Service"><code>dcat:DataService</code></a> </td></tr>
-                <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Resource"><code>rdfs:Resource</code></a> </td></tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section id="Property:dataservice_endpointdescription">
-            <h4>Property: endpoint description</h4>
-            <table class="definition">
-                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#endpointDescription">dcat:endpointDescription</a></th></tr></thead>
-                <tbody>
-                <tr><td class="prop">Definition:</td><td>A description of the service end-point, including its operations, parameters etc.</td></tr>
-                <tr><td class="prop">Domain:</td><td><a href="#Class:Data_Service">dcat:DataService</a> </td></tr>
-                <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Resource"><code>rdfs:Resource</code></a> </td></tr>
-                <tr><td class="prop">Usage note:</td><td>The endpoint description gives specific details of the actual endpoint instance, while <a href="#Property:resource_conformsto">dct:conformsTo</a> is used to indicate the general standard or specification that the endpoint implements.</td></tr>
-                <tr><td class="prop">Usage note:</td><td>An endpoint description may be expressed in a machine-readable form, such as an OpenAPI (Swagger) description [[?OpenAPI]], an OGC getCapabilities response [[?WFS]], [[?ISO-19142]], [[?WMS]], [[?ISO-19128]], a SPARQL Service Description [[?SPARQL11-SERVICE-DESCRIPTION]], an [[?OpenSearch]] or [[?WSDL20]] document, a Hydra API description [[?HYDRA]], else in text or some other informal mode if a formal representation is not possible.</td></tr>
+                <tr><td class="prop">Definition:</td><td>A collection of data that this DataService can distribute</td></tr>
+                <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/dcat#Dataset"><code>dcat:Dataset</code></a></td></tr>
                 </tbody>
             </table>
         </section>
@@ -2170,23 +2164,24 @@ $(document).ready( function() {
 
     </section> <!-- end class DataService -->
 
-    <section id="Class:Data_Distribution_Service">
-        <h3>Class: Data Distribution Service</h3>
+    <section id="Class:Data_API"> <!-- begin class DataAPI -->
+
+        <h3>Class: Data API</h3>
 
         <p class="note">
-            The class <a href="#Class:Data_Distribution_Service"><code>dcat:DataDistributionService</code></a> has been added to the DCAT vocabulary in this revision.
+            The class <a href="#Class:Data_API"><code>dcat:DataAPI</code></a> has been added to the DCAT vocabulary in this revision.
         </p>
 
         <p>The following properties are recommended for use on this class:
-            <a href="#Property:datadistributionservice_servesdataset">servesDataset</a>,
+            <a href="#Property:dataapi_endpointurl">endpointURL</a>,
+            <a href="#Property:dataapi_endpointdocumentation">endpointDocumentation</a>,
         </p>
         <p>The following properties are inherited from the super-class <a href="#Class:Data_Service"><code>dcat:DataService</code></a>:
-            <a href="#Property:dataservice_endpointdescription">endpointDescription</a>,
-            <a href="#Property:dataservice_endpointurl">endpointURL</a>,
+            <a href="#Property:dataservice_servesdataset">servesDataset</a>,
             <a href="#Property:dataservice_license">license</a>,
             <a href="#Property:dataservice_access_rights">accessRights</a>
         </p>
-        <p>The following properties are are inherited from the super-class <a href="#Class:Resource"><code>dcat:Resource</code></a>:
+        <p>The following properties are inherited from the super-class <a href="#Class:Resource"><code>dcat:Resource</code></a>:
             <a href="#Property:resource_conformsto">conformsTo</a>,
             <a href="#Property:resource_contact_point">contact point</a>,
             <a href="#Property:resource_creator">creator</a>,
@@ -2208,28 +2203,101 @@ $(document).ready( function() {
 
 
         <table class="definition">
-            <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#DataDistributionService">dcat:DataDistributionService</a></th></tr></thead>
+            <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#DataAPI">dcat:DataAPI</a></th></tr></thead>
             <tbody>
-            <tr><td class="prop">Definition:</td><td>A site or end-point that provides access to distributions of existing datasets or subsets of datasets</td></tr>
-            <tr><td class="prop">Sub class of:</td><td><a href="#Class:Data_Service">dcat:DataService</a></td></tr>
-            <tr><td class="prop">Usage note:</td><td>A DataDistributionService is usually bound to one or more specified Datasets, which are indicated by the <a href="#Property:datadistributionservice_servesdataset">dcat:servesDataset</a> property.</td></tr>
-            <tr><td class="prop">Usage note:</td><td>A <i>data discovery service</i> supports discovery of data, usually by providing access to a Catalog. In that context the data discovery service can be understood as a DataDistributionService in which least one <a href="#Class:Catalog">dcat:Catalog</a> appears as the object of its <a href="#Property:datadistributionservice_servesdataset">dcat:servesDataset</a> property</td></tr>
+            <tr><td class="prop">Definition:</td><td>A site or end-point that provides access to distributions of existing datasets or subsets of datasets, or related services, via a programmatic interface.</td></tr>
+            <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a></td></tr>
+            <tr><td class="prop">Usage note:</td><td>A DataAPI is usually bound to one or more specified Datasets, which are indicated by the <a href="http://www.w3.org/ns/dcat#servesDataset">dcat:servesDataset</a> property. Implementation in accordance with a specification or standard, such as Hydra, WMS, or OAI-PMH, may be indicated by use of the <a href="#Property:resource_conformsto">conformsTo</a> property.</td></tr>
             </tbody>
         </table>
 
-        <section id="Property:datadistributionservice_servesdataset">
-            <h4>Property: serves dataset</h4>
+        <section id="Property:dataapi_endpointurl">
+            <h4>Property: endpoint address</h4>
             <table class="definition">
-                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#servesdataset">dcat:servesDataset</a></th></tr></thead>
+                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#endpointURL">dcat:endpointURL</a></th></tr></thead>
                 <tbody>
-                <tr><td class="prop">Definition:</td><td>A collection of data that this DataDistributionService can distribute</td></tr>
-                <tr><td class="prop">Range:</td><td><a href="#Class:Dataset"><code>dcat:Dataset</code></a></td></tr>
+                <tr><td class="prop">Definition:</td><td>The IRI of the service's root end-point.</td></tr>
+                <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#DataService"><code>dcat:DataService</code></a> </td></tr>
+                <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/TR/xmlschema11-2/#anyURI"><code>rdfs:Resource</code></a> </td></tr>
                 </tbody>
             </table>
         </section>
 
-    </section> <!-- end class DataDistributionService -->
+        <section id="Property:dataapi_endpointdocumentation">
+            <h4>Property: endpoint documentation</h4>
+            <table class="definition">
+                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#endpointDocumentation">dcat:endpointDocumentation</a></th></tr></thead>
+                <tbody>
+                <tr><td class="prop">Definition:</td><td>A description of the service end-point, including its operations, parameters etc.</td></tr>
+                <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#DataAPI">dcat:DataAPI</a> </td></tr>
+                <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Resource">rdfs:Resource</a> </td></tr>
+                <tr><td class="prop">Usage note:</td><td>The endpoint documentation gives specific details of the actual endpoint instance, while <a href="#Property:resource_conformsto">dct:conformsTo</a> is used to indicate any general standard or specification that the endpoint implements.</td></tr>
+                <tr><td class="prop">Usage note:</td><td>Endpoint documentation may be expressed in a machine-readable form, such as an OpenAPI (Swagger) description [[?OpenAPI]], an OGC getCapabilities response [[?WFS]][[?ISO-19142]][[?WMS]][[?ISO-19128]], a SPARQL Service Description [[?SPARQL11-SERVICE-DESCRIPTION]], an [[?OpenSearch]] or [[?WSDL]] document, a Hydra API description [[?HYDRA]], else in text or some other informal mode if a formal representation is not possible.</td></tr>
+                </tbody>
+            </table>
+        </section>
 
+
+    </section> <!-- end class DataAPI -->
+
+    <section id="Class:Data_Application"> <!-- begin class DataApplication -->
+
+        <h3>Class: Data Application</h3>
+        <p>The following properties are recommended for use on this class:
+            <a href="#Property:dataapplication_appdocumentation">appDocumentation</a>,
+        </p>
+        <p>The following properties are inherited from the super-class <a href="http://www.w3.org/ns/dcat#DataService"><code>dcat:DataService</code></a>:
+            <a href="#Property:dataservice_servesdataset">servesDataset</a>,
+            <a href="#Property:dataservice_license">license</a>,
+            <a href="#Property:dataservice_access_rights">accessRights</a>
+        </p>
+        <p>The following properties are are inherited from the super-class <a href="http://www.w3.org/ns/dcat#Resource"><code>dcat:Resource</code></a>:
+            <a href="#Property:resource_conformsto">conformsTo</a>,
+            <a href="#Property:resource_contact_point">contact point</a>,
+            <a href="#Property:resource_creator">creator</a>,
+            <a href="#Property:resource_description">description</a>,
+            <a href="#Property:resource_identifier">identifier</a>,
+            <a href="#Property:resource_keyword">keyword/tag</a>,
+            <a href="#Property:resource_landing_page">landing page</a>,
+            <a href="#Property:resource_language">resource language</a>,
+            <a href="#Property:resource_relation">relation</a>,
+            <a href="#Property:resource_qualifiedRelation">qualified relation</a>,
+            <a href="#Property:resource_publisher">publisher</a>,
+            <a href="#Property:resource_release_date">release date</a>,
+            <a href="#Property:resource_theme">theme/category</a>,
+            <a href="#Property:resource_title">title</a>,
+            <a href="#Property:resource_type">type/genre</a>,
+            <a href="#Property:resource_update_date">update/modification date</a>,
+            <a href="#Property:resource_qualifiedAttribution">qualified attribution</a>
+        </p>
+
+
+        <table class="definition">
+            <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#DataApplication">dcat:DataApplication</a></th></tr></thead>
+            <tbody>
+            <tr><td class="prop">Definition:</td><td>A site that offers services related to data and datasets, which may include selection and retrieval of datasets and subsets, through an interactive user agent.</td></tr>
+            <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a></td></tr>
+            <tr><td class="prop">Usage note: </td><td>For a data application that is a discovery service (i.e., one that serves a data catalog), at least one <a href="http://www.w3.org/ns/dcat#Catalog">dcat:Catalog</a> must be provided as the object of a <a href="http://www.w3.org/ns/dcat#servesDataset">dcat:servesDataset property</a></td></tr>
+            </tbody>
+        </table>
+
+        <section id="Property:dataapplication_appdocumentation">
+            <h4>Property: application documentation</h4>
+            <table class="definition">
+                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#appDocumentation">dcat:appDocumentation</a></th></tr></thead>
+                <tbody>
+                <tr><td class="prop">Definition:</td><td>A description of the application, including its operations, parameters etc.</td></tr>
+                <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#DataApplication">dcat:DataApplication</a> </td></tr>
+                <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Resource">rdfs:Resource</a> </td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <p class="note">
+            The class <a href="#Class:Data_Application"><code>dcat:DataApplication</code></a> has been added to the DCAT vocabulary in this revision.
+        </p>
+
+    </section> <!-- end class DataApplication -->
 <!--
     <section id="Class:Discovery_Service">
         <h3>Class: Discovery Service</h3>
@@ -3874,7 +3942,7 @@ dap:d33937
       dct:conformsTo &lt;https://www.w3.org/TR/rdf-schema/&gt; ;
       rdfs:comment "RDF representation of the data" ;
       dcat:accessService [
-          rdf:type dcat:DataDistributionService ;
+          rdf:type dcat:DataAPI ;
           dct:conformsTo &lt;https://www.w3.org/TR/sparql11-query/&gt; ;
           dct:title "International Chronostratigraphic Chart hosted at Research Vocabularies Australia" ;
           rdfs:comment "Service that supports queries to obtain RDF representations of subsets of the data" ;
@@ -3988,7 +4056,7 @@ rdfs:seeAlso &lt;https://doi.org/10.1111/j.1365-2966.2006.10100.x&gt; ;
       <h3>Data services</h3>
       <p>
           Data services may be described using DCAT.
-          The values of the classifiers <code>dct:type</code>, <code>dct:conformsTo</code>, and <code>dcat:endpointDescription</code> provide progressively more detail about a service, whose actual endpoint is given by the <code>dcat:endpointURL</code>.
+          The values of the classifiers <code>dct:type</code>, <code>dct:conformsTo</code>, and <code>dcat:endpointDocumentation</code> provide progressively more detail about a service, whose actual endpoint is given by the <code>dcat:endpointURL</code>.
       </p>
       <p>
           The first example describes a data catalog hosted by the European Environment Agency (EEA).
@@ -4016,13 +4084,13 @@ dct:title "European Environment Agency's public catalogue of spatial datasets."@
 dct:type &lt;http://inspire.ec.europa.eu/metadata-codelist/ResourceType/service&gt; ;
 dct:type &lt;http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/discovery&gt; ;
 dcat:contactPoint a:EEA ;
-dcat:endpointDescription &lt;https://sdi.eea.europa.eu/catalogue/srv/eng/csw?service=CSW&request=GetCapabilities&gt; ;
+dcat:endpointDocumentation &lt;https://sdi.eea.europa.eu/catalogue/srv/eng/csw?service=CSW&request=GetCapabilities&gt; ;
 dcat:endpointURL &lt;http://sdi.eea.europa.eu/catalogue/srv/eng/csw&gt; ;
 .
 </pre>
       <p>
-          The next example shows a dataset hosted by Geoscience Australia, which is available from three distinct services, as indicated by the value of the <a href="#Property:datadistributionservice_servesdataset"><code>dcat:servesDataset</code></a> property of each of the service descriptions.
-          These are classified as a <a href="#Class:Data_Distribution_Service"><code>dcat:DataDistributionService</code></a> and also have the <code>dct:type</code> set to <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download">download</a> and <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view">view</a> from the <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/">INSPIRE classification of spatial data service types</a>.
+          The next example shows a dataset hosted by Geoscience Australia, which is available from three distinct services, as indicated by the value of the <a href="#Property:dataservice_servesdataset"><code>dcat:servesDataset</code></a> property of each of the service descriptions.
+          These are classified as a <a href="#Class:Data_API"><code>dcat:DataAPI</code></a> and also have the <code>dct:type</code> set to <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download">download</a> and <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view">view</a> from the <a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/">INSPIRE classification of spatial data service types</a>.
       </p>
       <p>
           This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/examples/ga-courts.ttl">ga-courts.ttl</a>
@@ -4041,7 +4109,7 @@ dct:type &lt;http://purl.org/dc/dcmitype/Dataset&gt; ;
 dcat:landingPage &lt;https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/cc365600-294a-597d-e044-00144fdd4fa6&gt; ;
 .
 ga-courts:jc-esri
-rdf:type dcat:DataDistributionService ;
+rdf:type dcat:DataAPI ;
 dct:conformsTo &lt;https://developers.arcgis.com/rest/&gt; ;
 dct:description "This web service provides access to the National Judicial Courts dataset and presents the spatial locations of all the known Australian High Courts, Australian Federal Courts and the Australian Federal Circuit Courts located within Australia, all complemented with feature attribution." ;
 dct:identifier "2b8540c8-4a43-144d-e053-12a3070a3ff7" ;
@@ -4054,7 +4122,7 @@ dcat:landingPage &lt;https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/m
 dcat:servesDataset ga-courts:jc ;
 .
 ga-courts:jc-wfs
-rdf:type dcat:DataDistributionService ;
+rdf:type dcat:DataAPI ;
 dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wfs/2.0.0&gt; ;
 dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wfs/1.1.0&gt; ;
 dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wfs/1.0.0&gt; ;
@@ -4063,20 +4131,20 @@ dct:identifier "2b8540c8-4a42-144d-e053-12a3070a3ff7" ;
 dct:title "National Judicial Courts WFS" ;
 dct:type &lt;http://purl.org/dc/dcmitype/Service&gt; ;
 dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download&gt; ;
-dcat:endpointDescription &lt;http://services.ga.gov.au/gis/services/Judicial_Courts/MapServer/WFSServer?request=GetCapabilities&service=WFS&gt; ;
+dcat:endpointDocumentation &lt;http://services.ga.gov.au/gis/services/Judicial_Courts/MapServer/WFSServer?request=GetCapabilities&service=WFS&gt; ;
 dcat:endpointURL &lt;http://services.ga.gov.au/gis/services/Judicial_Courts/MapServer/WFSServer&gt; ;
 dcat:landingPage &lt;https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/2b8540c8-4a42-144d-e053-12a3070a3ff7&gt; ;
 dcat:servesDataset ga-courts:jc ;
 .
 ga-courts:jc-wms
-rdf:type dcat:DataDistributionService ;
+rdf:type dcat:DataAPI ;
 dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wms/1.3&gt; ;
 dct:description "This web service provides access to the National Judicial Courts dataset and presents the spatial locations of all the known Australian High Courts, Australian Federal Courts and the Australian Federal Circuit Courts located within Australia, all complemented with feature attribution." ;
 dct:identifier "2b8540c8-4a41-144d-e053-12a3070a3ff7" ;
 dct:title "National Judicial Courts WMS" ;
 dct:type &lt;http://purl.org/dc/dcmitype/Service&gt; ;
 dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view&gt; ;
-dcat:endpointDescription &lt;http://services.ga.gov.au/gis/services/Judicial_Courts/MapServer/WMSServer?request=GetCapabilities&service=WMS&gt; ;
+dcat:endpointDocumentation &lt;http://services.ga.gov.au/gis/services/Judicial_Courts/MapServer/WMSServer?request=GetCapabilities&service=WMS&gt; ;
 dcat:endpointURL &lt;http://services.ga.gov.au/gis/services/Judicial_Courts/MapServer/WMSServer&gt; ;
 dcat:landingPage &lt;https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/2b8540c8-4a41-144d-e053-12a3070a3ff7&gt; ;
 dcat:servesDataset ga-courts:jc ;
@@ -4242,7 +4310,7 @@ dcat:servesDataset ga-courts:jc ;
             </li>
 
             <li>
-                <a href="#Class:Data_Distribution_Service">Class: Data distribution service</a>: In DCAT 2014 [[?VOCAB-DCAT-20140116]] the scope of a <a href="#Class:Catalog"><code>dcat:Catalog</code></a> was limited to Datasets. The new class <code>dcat:DataDistributionService</code> has been added to support cataloguing data distribution services - see <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a> and <a href="https://github.com/w3c/dxwg/issues/56">Issue #56</a>.
+                <a href="#Class:Data_API">Class: Data API</a> and <a href="#Class:Data_Application">Class: Data API</a>: In DCAT 2014 [[VOCAB-DCAT-20140116]] the scope of a <a href="#Class:Catalog"><code>dcat:Catalog</code></a> was limited to Datasets. The new classes <code>dcat:DataAPI</code> and <code>dcat:DataApplication</code> have been added to support cataloguing data distribution services and data discovery services - see <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a> and <a href="https://github.com/w3c/dxwg/issues/56">Issue #56</a>.
             </li>
 
 <!--
