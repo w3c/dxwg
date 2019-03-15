@@ -52,8 +52,6 @@ $(document).ready( function() {
         <li>addition of a <a href="#Class:Resource"><code>dcat:Resource</code></a> class for representing any resource than can be included in the catalog, this is
             now the super-class of <a href="#Class:Dataset"><code>dcat:Dataset</code></a></li>
         <li>addition of <a href="#Class:Data_Service"><code>dcat:DataService</code></a>, as a sub-class of <a href="#Class:Resource"><code>dcat:Resource</code></a>, to support cataloguing service end-points providing access to resources</li>
-        <li>addition of <a href="#Class:Data_Distribution_Service"><code>dcat:DataDistributionService</code></a>, as a sub-class of <a href="#Class:Data_Service"><code>dcat:DataService</code></a>,
-            representing service end-points providing access to datasets through their distributions, respectively </li>
         <li>addition of ways to representing <a href="#bag-of-files">loosely structured catalogs</a>, where there is no distinction between a dataset and its distributions</li>
         <li>more details for the ways of representing <a href="#examples-dataset-provenance">dataset provenance</a> and <a href="#quality-information">dataset quality</a></li>
         <li>an <a href="#dcat-sdo">alignment</a> between the DCAT vocabulary and the schema.org vocabulary</li>
@@ -235,9 +233,6 @@ $(document).ready( function() {
           <a href="#Class:Data_Service"><code>dcat:DataService</code></a> represents a data service in a catalog.
           A data service is a collection of operations, accessible through an interface (API) that provide access to one or more datasets or data processing functions.
         </li>
-        <li>
-          <a href="#Class:Data_Distribution_Service"><code>dcat:DataDistributionService</code></a> represents a kind of data service that provides access to distributions of one or more datasets or extracts of datasets.
-        </li>
         <!--
           <li>
             <a href="#Class:DataTransformationService"><code>dcat:DataTransformationService</code></a> represents a service that can transform a dataset, e.g. spatial coordinate transformation; interpolation or resampling of a dataset.
@@ -267,8 +262,8 @@ $(document).ready( function() {
     <p>
         A <b>dataset</b> in DCAT is defined as a "collection of data, published or curated by a single agent, and available for access or download in one or more serializations or formats".
         A dataset is a conceptual entity, and can be represented by one or more <b>distributions</b> that serialize the dataset for transfer.
-        Distributions of a dataset can be provided via <b>data distribution services</b>.
-        Detailed properties for a data distribution service API are out of the scope of this version of DCAT.
+        Distributions of a dataset can be provided via <b>data services</b>.
+        Detailed properties for a data service API are out of the scope of this version of DCAT.
     </p>
 
     <p>
@@ -277,8 +272,7 @@ $(document).ready( function() {
       A data service typically provides selection, extraction, combination, processing or transformation operations over datasets that might be hosted locally or remote to the service.
       A data service might be tied to specific datasets, or its source data might be configured at request- or run-time.
       The result of a request to a data service is a representation of a part or all of a dataset or catalog.
-      A <b>data distribution service</b> is a kind of data service that provides the means to select and download a distribution of a dataset or subset.
-      A data discovery service is a kind of data service that provides the means to find the description of a suitable dataset, often through a portal or catalog service.
+      A data service might represent a data distribution service to select and download a distribution of a dataset or subset, or a data discovery service to find the description of a suitable dataset, often through a portal or catalog service.
       Other kinds of data service might include data transformation services such as coordinate transformation services, re-sampling and interpolation services, and various data processing services, but these are outside the scope of the current DCAT vocabulary.
     </p>
     <p>
@@ -292,10 +286,10 @@ $(document).ready( function() {
     <div class="note">
       <p>
         The scope of DCAT 2014 [[?VOCAB-DCAT-20140116]] was limited to catalogs of datasets.
-        A number of use cases for the revision involve <b>data distribution services</b> as members of a catalog - see <a href="https://www.w3.org/TR/dcat-ucr/#ID6">DCAT Distribution to describe web services - ID6</a> and
+        A number of use cases for the revision involve <b>data services</b> as members of a catalog - see <a href="https://www.w3.org/TR/dcat-ucr/#ID6">DCAT Distribution to describe web services - ID6</a> and
         <a href="https://www.w3.org/TR/dcat-ucr/#ID18">Modeling service-based data access - ID18</a>.
-        Hence, the scope of this revision of DCAT includes both datasets and data services, with an explicit class for Data Distribution Services, to enable these to be part of a DCAT conformant catalog.
-        Provision for other data services to also be part of a Catalog is also made, as well as for Catalogs to be composed of other Catalogs.
+        Hence, the scope of this revision of DCAT includes both datasets and data services to enable these to be part of a DCAT conformant catalog.
+        Provision for  Catalogs to be composed of other Catalogs is also made.
         See <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>.
       </p>
       <p>
