@@ -711,10 +711,10 @@ $(document).ready( function() {
         <div class="note">
             <p>
                 The scope of DCAT 2014 was catalogs of datasets [[?VOCAB-DCAT-20140116]].
-                A number of use cases for the revision involve also having <b>data distribution services</b> as members of a catalog - see <a href="https://www.w3.org/TR/dcat-ucr/#ID6">DCAT Distribution to describe web services - ID6</a> and
+                A number of use cases for the revision involve also having <b>data services</b> as members of a catalog - see <a href="https://www.w3.org/TR/dcat-ucr/#ID6">DCAT Distribution to describe web services - ID6</a> and
                 <a href="https://www.w3.org/TR/dcat-ucr/#ID18">Modeling service-based data access - ID18</a>.
-                It has been decided to add an explicit class for Data Distribution Services in this revision of DCAT, and to enable these to be part of a Catalog.
-                Provision for other services to also be part of a Catalog is also enabled, as well as for Catalogs to be composed of other Catalogs.
+                It has been decided to add an explicit class for Data Services in this revision of DCAT, and to enable these to be part of a Catalog.
+                Provision for Catalogs to be composed of other Catalogs is also enabled.
                 See <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a> and <a href="https://github.com/w3c/dxwg/issues/116">Issue #116</a>. </p>
         </div>
 
@@ -1740,7 +1740,7 @@ $(document).ready( function() {
             <tr><td class="prop">Usage note:</td><td>This represents a general availability of a dataset. It implies no information
                 about the actual access method of the data, i.e. whether by direct download, API, or through a Web page.
                 The use of <a href="#Property:distribution_downloadurl"><code>dcat:downloadURL</code></a> property indicates directly downloadable distributions.</td></tr>
-            <tr><td class="prop">See also:</td><td><a href="#Class:Data_Distribution_Service" title="">Data distribution service</a></td></tr>
+            <tr><td class="prop">See also:</td><td><a href="#Class:Data_Service" title="">Data service</a></td></tr>
             </tbody>
         </table>
 
@@ -1755,7 +1755,7 @@ $(document).ready( function() {
                 <b>Applications consuming DCAT should be aware that catalogues designed using DCAT-2014 might use <code>dcat:Distribution</code> to represent both services and representations.</b>
             </p>
             <p>
-                Under the revised scope, instances of type <code>dcat:Distribution</code> <em title="SHOULD" class="rfc2119">SHOULD</em> be limited to <i>representations</i> of datasets which might be transported as files, and <em title="SHOULD NOT" class="rfc2119">SHOULD NOT</em> be used for data <i>services</i> such as APIs or feeds. Data services including APIs and feeds <em title="SHOULD" class="rfc2119">SHOULD</em> be described using instances of type <a href="#Class:Data_Service"><code>dcat:DataService</code></a> whose sub-class <a href="#Class:Data_Distribution_Service"><code>dcat:DataDistributionService</code></a> <em title="MAY" class="rfc2119">MAY</em> serve <a href="#Class:Distribution"><code>dcat:Distributions</code></a>.
+                Under the revised scope, instances of type <code>dcat:Distribution</code> <em title="SHOULD" class="rfc2119">SHOULD</em> be limited to <i>representations</i> of datasets which might be transported as files, and <em title="SHOULD NOT" class="rfc2119">SHOULD NOT</em> be used for data <i>services</i> such as APIs or feeds. Data services including APIs and feeds <em title="SHOULD" class="rfc2119">SHOULD</em> be described using instances of type <a href="#Class:Data_Service"><code>dcat:DataService</code></a> which <em title="MAY" class="rfc2119">MAY</em> serve <a href="#Class:Distribution"><code>dcat:Distributions</code></a>.
             </p>
             <p>
                 Links between a <code>dcat:Distribution</code> and services or web addresses where it can be accessed are expressed using <a href="#Property:distribution_accessurl"><code>dcat:accessURL</code></a>, <a href="#Property:distribution_accessservice"><code>dcat:accessService</code></a>, <a href="#Property:distribution_downloadurl"><code>dcat:downloadURL</code></a>, as shown in <a href="#UML_DCAT_All_Attr"></a> and described in the definitions below.
@@ -1918,8 +1918,8 @@ $(document).ready( function() {
                 <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#accessService">dcat:accessService</a></th></tr></thead>
                 <tbody>
                 <tr><td class="prop">Definition:</td><td>A site or end-point that gives access to the distribution of the dataset</td></tr>
-                <tr><td class="prop">Range:</td><td><a href="#Class:Data_Distribution_Service"><code>dcat:DataDistributionService</code></a></td></tr>
-                <tr><td class="prop">Usage note:</td><td><a href="#Property:distribution_accessservice"><code>dcat:accessService</code></a> <em title="SHOULD" class="rfc2119">SHOULD</em> be used to link to a description of a <a href="#Class:Data_Distribution_Service"><code>dcat:DataDistributionService</code></a> that can provide access to this distribution.</td></tr>
+                <tr><td class="prop">Range:</td><td><a href="#Class:Data_Service"><code>dcat:DataService</code></a></td></tr>
+                <tr><td class="prop">Usage note:</td><td><a href="#Property:distribution_accessservice"><code>dcat:accessService</code></a> <em title="SHOULD" class="rfc2119">SHOULD</em> be used to link to a description of a <a href="#Class:Data_Service"><code>dcat:DataService</code></a> that can provide access to this distribution.</td></tr>
                 <tr><td class="prop">See also</td><td><a href="#Property:distribution_downloadurl">download address</a>, <a href="#Property:distribution_accessurl">access address</a></td></tr>
                 </tbody>
             </table>
