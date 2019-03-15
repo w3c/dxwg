@@ -2102,7 +2102,8 @@ $(document).ready( function() {
             <a href="#Property:dataservice_endpointdescription">endpointDescription</a>,
             <a href="#Property:dataservice_endpointurl">endpointURL</a>,
             <a href="#Property:dataservice_license">license</a>,
-            <a href="#Property:dataservice_access_rights">accessRights</a>
+            <a href="#Property:dataservice_access_rights">accessRights</a>,
+            <a href="#Property:dataservice_serves_dataset">servesDataset</a>
         </p>
         <p>The following properties are inherited from the super-class <a href="#Class:Resource"><code>dcat:Resource</code></a>:
             <a href="#Property:resource_accessRights">accessRights</a>,
@@ -2135,8 +2136,10 @@ $(document).ready( function() {
             <tr><td class="prop">Definition:</td><td>A site or end-point providing operations related to the discovery of, access to, or processing functions on, data or related resources</td></tr>
             <tr><td class="prop">Sub class of:</td><td><a href="#Class:Resource">dcat:Resource</a></td></tr>
             <tr><td class="prop">Sub class of:</td><td><a href="http://purl.org/dc/dcmitype/Service">dctype:Service</a></td></tr>
-            <tr><td class="prop">Usage note:</td><td>The class <a href="#Class:Data_Service"><code>dcat:DataService</code></a> is an extension point for the description of any kind of data service. Currently only one subclass is defined - DataDistributionService - but additional subclasses may be defined in a DCAT application profile or other DCAT application for catalogs of other kinds of services</td></tr>
-            <tr><td class="prop">Usage note:</td><td>The kind of service can be indicated using the <a href="http://purl.org/dc/terms/type">dct:type</a> property. Its value may be taken from a controlled vocabulary such as the <a href="https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/">INSPIRE spatial data service type vocabulary</a></td></tr>
+            <tr><td class="prop">Usage note:</td><td>The class <a href="#Class:Data_Service"><code>dcat:DataService</code></a> is an extension point for the description of any kind of data service. Additional subclasses may be defined in a DCAT application profile or other DCAT application for catalogs of specific kinds of services.</td></tr>
+            <tr><td class="prop">Usage note:</td><td>If a  <a href="#Class:Data_Service"><code>dcat:DataService</code></a> is bound to one or more specified Datasets, they are indicated by the dcat:servesDataset property.</td></tr>
+            <tr><td class="prop">Usage note:</td><td>The kind of service can be indicated using the <a href="http://purl.org/dc/terms/type">dct:type</a> property. Its value may be taken from a controlled vocabulary such as the <a href="https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/">INSPIRE spatial data service type vocabulary</a></td></tr>.
+            <tr><td class="prop">Usage note:</td><td>A data discovery service supports discovery of data, usually by providing access to a Catalog. In that context the data discovery service can be understood as a DataService in which least one dcat:Catalog appears as the object of its dcat:servesDataset property</td></tr>
             </tbody>
         </table>
 
@@ -2189,9 +2192,20 @@ $(document).ready( function() {
                 </tbody>
             </table>
         </section>
+        
+        <section id="Property:dataservice_serves_dataset">
+            <h4>Property: serves dataset</h4>
+            <table class="definition">
+                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#servesdataset">dcat:servesDataset</a></th></tr></thead>
+                <tbody>
+                <tr><td class="prop">Definition:</td><td>A collection of data that this DataService can distribute</td></tr>
+                <tr><td class="prop">Range:</td><td><a href="#Class:Dataset"><code>dcat:Dataset</code></a></td></tr>
+                </tbody>
+            </table>
+        </section>
 
     </section> <!-- end class DataService -->
-
+    <!--
     <section id="Class:Data_Distribution_Service">
         <h3>Class: Data Distribution Service</h3>
 
@@ -2250,8 +2264,9 @@ $(document).ready( function() {
             </table>
         </section>
 
-    </section> <!-- end class DataDistributionService -->
-
+    </section>
+   end class DataDistributionService -->
+ 
 <!--
     <section id="Class:Discovery_Service">
         <h3>Class: Discovery Service</h3>
