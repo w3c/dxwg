@@ -1,5 +1,5 @@
 var respecConfig = {
-    specStatus: "WD",
+    specStatus: "ED",
     shortName: "prof-roles",
     edDraftURI: "https://w3c.github.io/dxwg/profilesont/resource_roles.html",
     canonicalURI: "TR",
@@ -26,36 +26,6 @@ var respecConfig = {
     issueBase: "https://github.com/w3c/dxwg/issues/",
     github:    "https://github.com/w3c/dxwg/issues/",
     localBiblio: {
-        DCAP: {
-            authors: [
-                "Karen Coyle",
-                "Thomas Baker"
-            ],
-            href: "http://dublincore.org/documents/dcmi-terms/",
-            title: "Guidelines for Dublin Core Application Profiles (Working Draft)",
-            date: " 2009-05-18",
-            status: "DCMI Recommended Resource"
-        },
-        DCSF: {
-            authors: [
-                "Mikael Nilsson",
-                "Thomas Baker",
-                "Pete Johnston"
-            ],
-            href: "http://dublincore.org/documents/singapore-framework/",
-            title: "The Singapore Framework for Dublin Core Application Profiles",
-            date: " 2008-01-14",
-            status: "DCMI Recommended Resource"
-        },
-        DCDSP: {
-            authors: [
-                "Nilsson, Mikael"
-            ],
-            href: "http://dublincore.org/documents/dc-dsp/",
-            title: "Description Set Profiles: A constraint language for Dublin Core Application Profiles",
-            date: " 2008-03-31",
-            status: "DCMI Working Draft"
-        },
         PDF: {
             href: "https://www.iso.org/standard/51502.html",
             title: "Document management -- Portable document format -- Part 1: PDF 1.7",
@@ -69,13 +39,13 @@ var respecConfig = {
             status: "W3C Community Group Draft Report"
         },
         "PROF-CONNEG": {
-            href: "https://www.w3.org/TR/conneg-by-ap/",
+            href: "https://www.w3.org/TR/2018/WD-dx-prof-conneg-20181211/",
             title: "Content Negotiation by Profile",
-            date: "2018-12-31",
-            status: "W3C Editor's Draft"
+            date: "2018-12-11",
+            status: "First Public Editor's Draft"
         },
-        "PROF-GUIDE": {
-            href: "https://www.w3.org/TR/profile-guidance/",
+        "PROF-GUIDANCE": {
+            href: "https://w3c.github.io/dxwg/profiles/",
             title: "Profile Guidance",
             date: " 2018-12-31",
             status: "W3C Editor's Draft"
@@ -85,20 +55,20 @@ var respecConfig = {
                 "L. Svensson",
                 "R. Verborgh"
             ],
-            href: "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema/",
+            href: "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema",
             title: "Negotiating Profiles in HTTP",
             date: "2017-10-24",
             status: "IETF Internet Draft"
         },
-        "PROF-ONT": {
+        "PROF": {
             editors: [
                 "Rob Atkinson",
                 "Nicholas J. Car"
             ],
-            href: "https://www.w3.org/TR/prof/",
-            title: "Profile Descriptions ontology",
-            date: "2018-09-23",
-            status: "W3C Editor's Draft"
+            href: "https://www.w3.org/TR/2018/WD-dx-prof-20181211/",
+            title: "Profiles Vocabulary",
+            date: "2018-12-11",
+            status: "First Public Working Draft"
         },
         SCHEMATRON: {
             href: "https://www.iso.org/standard/55982.html",

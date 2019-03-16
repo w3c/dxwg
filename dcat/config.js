@@ -8,39 +8,43 @@ var respecConfig = {
     previousMaturity:     "REC",
 //    previousURI:          "https://www.w3.org/TR/2014/REC-vocab-dcat-20140116/",
     edDraftURI:           "https://w3c.github.io/dxwg/dcat/",
-    issueBase:            "https://github.com/w3c/dxwg/issues/",
+//    issueBase:            "https://github.com/w3c/dxwg/issues/", -- Not needed when github used
     editors: [{
-      name:       "Alejandra Gonzalez Beltran",
-      company:    "Oxford eResearch Centre, Engineering Science, University of Oxford",
-      url: "https://www.oerc.ox.ac.uk/people/alejandra",
-      companyURL: "http://www.oerc.ox.ac.uk/"
+      name:       "Riccardo Albertoni",
+      company:    "CNR - Consiglio Nazionale delle Ricerche, Italy",
+      url: "http://www.imati.cnr.it/joomla/index.php/people/8-curricula/178-riccardo-albertoni",
+      companyURL: "http://www.cnr.it/"
     },{
       name: "Dave Browning",
-      company: "Thomson Reuters",
-      companyURL: "https://www.thomsonreuters.com"
+      company: "Refinitiv",
+      companyURL: "https://www.refinitiv.com"
     },{
       name: "Simon Cox",
       company: "CSIRO",
       url: "http://people.csiro.au/Simon-Cox",
       companyURL: "https://www.csiro.au/"
     },{
+      name:       "Alejandra Gonzalez Beltran",
+      company:    "Oxford eResearch Centre, Engineering Science, University of Oxford",
+      url: "https://www.oerc.ox.ac.uk/people/alejandra",
+      companyURL: "http://www.oerc.ox.ac.uk/"
+    },{
+      name: "Andrea Perego",
+      company: "European Commission, Joint Research Centre (JRC)",
+      url: "https://joinup.ec.europa.eu/user/14209",
+      companyURL: "https://ec.europa.eu/jrc/"
+    },{
       name: "Peter Winstanley",
       company: "Scottish Government",
       companyURL: "http://www.gov.scot/"
     }],
     otherLinks: [{
-//        key: "Contributors",
-//        data: [{
-//            value: "Makx Dekkers",
-//            href: "http://www.makxdekkers.com"
-//        },{
-//            value: "Antoine Isaac, Europeana Foundation",
-//            href: "https://pro.europeana.eu/person/antoine-isaac"
-//        },{
-//            value: "Andrea Perego, European Commission",
-//            href: "https://ec.europa.eu/jrc/"
-//        }]
-//      },{
+        key: "Contributors",
+        data: [{
+            value: "Makx Dekkers",
+            href: "http://www.makxdekkers.com"
+        }]
+      },{
         key: "Editors of previous version",
         data: [{
             value: "Fadi Maali, DERI",
@@ -56,6 +60,7 @@ var respecConfig = {
     wgPatentURI: "https://www.w3.org/2004/01/pp-impl/99375/status",
     inlineCSS: "true",
 	  lint: "false",
+    github: "https://github.com/w3c/dxwg/",
     localBiblio: {
       "SCHEMA-ORG" : {
         href : "http://schema.org/",
@@ -72,12 +77,22 @@ var respecConfig = {
           title : "Quality assessment for Linked Data: A Survey",
           authors : [ "Amrapali Zaveri", "Anisa Rula", "Andrea Maurino",
                       "Ricardo Pietrobon", "Jens  Lehmann", "Sören Auer" ],
-          status : "Semantic Web, vol. 7, no. 1, pp. 63-93, 2015",
-          href : "https://dx.doi.org/10.3233/SW-150175"
+          status : "Semantic Web, vol. 7, no. 1, pp. 63-93",
+	  publisher : "IOS Press",
+          href : "https://doi.org/10.3233/SW-150175",
+	  date : "2015"
       },
       "ISOIEC25012" : {
           title : "ISO/IEC 25012 - Data Quality model",
           href : "http://iso25000.com/index.php/en/iso-25000-standards/iso-25012"
+      },
+      "ISO-26324" : {
+	 "authors":["ISO/TC 46/SC 9"],
+	 "href":"https://www.iso.org/standard/43506.html",
+	 "title":"Information and documentation -- Digital object identifier system",
+	 "publisher":"ISO",
+	 "status":"International Standard",
+	 "date":"2012"
       },
       "DDI" : {
          href : "http://www.ddialliance.org/explore-documentation",
@@ -123,19 +138,19 @@ var respecConfig = {
      "LinkedDataPatterns" : {
           title : "Linked Data Patterns: A pattern catalogue for modelling, publishing, and consuming Linked Data",
           authors : [ "Leigh Dodds", "Ian Davis" ],
-         date: "31 May 2012",
+          date: "31 May 2012",
           href : "http://patterns.dataincubator.org/book/"
       },
       "PROF-CONNEG": {
             href: "https://w3c.github.io/dxwg/conneg-by-ap/",
             title: "Content Negotiation by Profile",
-            date: " 2018-10-03",
+            date: "03 October 2018",
             status: "W3C Editor's Draft"
       },
       "PROF-GUIDE": {
             href: "https://w3c.github.io/dxwg/profiles/",
             title: "Profile Guidance",
-            date: " 2018-10-03",
+            date: "03 October 2018",
             status: "W3C Editor's Draft"
       },
       "PROF-IETF": {
@@ -145,8 +160,55 @@ var respecConfig = {
             ],
             href: "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema",
             title: "Negotiating Profiles in HTTP",
-            date: " 2017-10-24",
+            date: "24 October 2017",
             status: "IETF Internet Draft"
-      }
+      },
+      "OpenAPI": {
+            href: "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md",
+            title: "OpenAPI Specification. Version 3.0.2",
+            date: "08 October 2018",
+            publisher: "OAI"
+      },
+      "OpenSearch": {
+            authors: [
+                "DeWitt Clinton"
+            ],
+            href:"https://github.com/dewitt/opensearch/blob/master/opensearch-1-1-draft-6.md",
+            title:"OpenSearch 1.1 Draft 6",
+            date:"17 April 2018",
+            publisher:"OpenSearch"
+      },
+      "HYDRA": {
+            authors: [
+                "Markus Lanthaler"
+            ],
+            href:"https://www.hydra-cg.com/spec/latest/core/",
+            title:"Hydra Core Vocabulary",
+            date:"15 March 2018",
+            publisher:"Hydra W3C Community Group",
+            status:"Unofficial Draft"
+      },
+      "ODRS": {
+            authors: [
+                "Leigh Dodds"
+            ],
+            href:"http://schema.theodi.org/odrs",
+            title:"Open Data Rights Statement Vocabulary",
+            date:"29 July 2013",
+            publisher:"ODI"
+      },
+      "MDR-AR":{
+        "href":"https://publications.europa.eu/en/web/eu-vocabularies/at-dataset/-/resource/dataset/access-right",
+        "title":"Named Authority List: Access rights",
+        "publisher":"Publications Office of the European Union"
+       },
+      "FAIR" : {
+          title : "The FAIR Guiding Principles for scientific data management and stewardship",
+          authors : [ "Mark D. Wilkinson" ],
+	  etAl : true,
+          status : "Scientific Data, vol. 3, Article nr. 160018",
+	  publisher : "Nature",
+          href : "https://doi.org/10.1038/sdata.2016.18"
+      },
     }
   };

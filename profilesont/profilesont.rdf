@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:dct="http://purl.org/dc/terms/"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+   xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+>
+  <rdf:Description rdf:about="http://www.w3.org/ns/dx/prof/isInheritedFrom">
+    <skos:definition xml:lang="en">A Profile's Resource Descriptor has been inherited from a Base Specification</skos:definition>
+    <rdfs:label>is inherited from</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/ns/dx/prof/Profile"/>
+    <skos:usageNote xml:lang="en">Profiles within inheritance hierarchies may use this property. If absent, then the Resource Descriptor applies specifically to this Profiles only</skos:usageNote>
+    <rdfs:domain rdf:resource="http://www.w3.org/ns/dx/prof/ResourceDescriptor"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/ns/dx/prof/Profile">
+    <rdfs:label>Profile</rdfs:label>
+    <skos:definition xml:lang="en">A named set of constraints on one or more identified base specifications or other profiles, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of those base specifications necessary to accomplish a particular function.
+
+This definition includes what are often called "application profiles", "metadata application profiles", or "metadata profiles".</skos:definition>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://purl.org/dc/terms/Standard"/>
+    <dct:source rdf:resource="https://www.w3.org/2017/dxwg/wiki/ProfileContext"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/dc/terms/conformsTo">
+    <rdfs:range rdf:resource="http://purl.org/dc/terms/Standard"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/dc/terms/"/>
+    <rdfs:label>conforms to</rdfs:label>
+    <skos:definition xml:lang="en">An established standard to which the described resource conforms</skos:definition>
+    <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/elements/1.1/relation"/>
+    <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/relation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/ns/dx/prof/isTransitiveProfileOf">
+    <skos:definition xml:lang="en">A base specification an Profile conforms to</skos:definition>
+    <rdfs:label>is transitive profile of</rdfs:label>
+    <skos:scopeNote xml:lang="en">A means to list all the transitive hierarchy of base specifications that this Profile implies conformance to</skos:scopeNote>
+    <rdfs:range rdf:resource="http://purl.org/dc/terms/Standard"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://www.w3.org/ns/dx/prof/Profile"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/ns/dx/prof">
+    <owl:versionIRI rdf:resource="http://www.w3.org/ns/dx/prof/1.0"/>
+    <dc:contributor>Nicholas Car</dc:contributor>
+    <dc:contributor>Simon Cox</dc:contributor>
+    <dct:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-02-16</dct:created>
+    <dct:contributor rdf:resource="http://orcid.org/0000-0002-8742-7730"/>
+    <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-15</dct:modified>
+    <dct:contributor rdf:resource="http://orcid.org/0000-0002-3884-3420"/>
+    <rdfs:comment xml:lang="en">This vocabulary is for describing relationships between standards/specifications, profiles of them and supporting artifacts such as validating resources.
+
+This model starts with [http://dublincore.org/2012/06/14/dcterms#Standard](dct:Standard) entities which can either be Base Specifications (a standard not profiling any other Standard) or Profiles (Standards which do profile others). Base Specifications or Profiles can have Resource Descriptors associated with them that defines implementing rules for the it. Resource Descriptors must indicate the role they play (to guide, to validate etc.) and the formalism they adhere to (dct:format) to allow for content negotiation. A vocabulary of Resource Roles are provided alongside this ontology but that list is extensible.</rdfs:comment>
+    <dc:creator>Rob Atkinson</dc:creator>
+    <rdfs:label>Profile Descriptions Ontology</rdfs:label>
+    <owl:versionInfo>1.0</owl:versionInfo>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+    <dc:contributor>Alejandra Gonzalez-Beltran</dc:contributor>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/ns/dx/prof/hasRole">
+    <rdfs:label>has role</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.w3.org/ns/dx/prof/ResourceDescriptor"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <skos:definition xml:lang="en">Functional role of a Resource</skos:definition>
+    <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:usageNote xml:lang="en">Some roles are published alongside this ontology in a separate vocabulary</skos:usageNote>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/ns/dx/prof/hasProfile">
+    <owl:inverseOf rdf:resource="http://www.w3.org/ns/dx/prof/isProfileOf"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <skos:definition xml:lang="en">A dct:Standard (or a Profile or Base Specification) has a Profile</skos:definition>
+    <rdfs:label>has profile</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/ns/dx/prof/hasArtifact">
+    <rdfs:domain rdf:resource="http://www.w3.org/ns/dx/prof/ResourceDescriptor"/>
+    <skos:usageNote xml:lang="en">A property to link from a Resource Descriptor to an implementing resource object</skos:usageNote>
+    <skos:definition xml:lang="en">An rdfs:Resource that implements the Resource Descriptor</skos:definition>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label>has artifact</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="ub562bL132C36">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:maxCardinality>
+    <owl:onProperty rdf:resource="http://www.w3.org/ns/dx/prof/isProfileOf"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/ns/dx/prof/BaseSpecification">
+    <skos:usageNote xml:lang="en">This may not be a useful class: documents of any specification can be regarded as a trivial profile, so applications only need to be concerned with Profile conformance</skos:usageNote>
+    <rdfs:label>Base Specification</rdfs:label>
+    <skos:definition xml:lang="en">A specification that defines all implementation constraints, without applying constraints on usage of another specification</skos:definition>
+    <rdfs:subClassOf rdf:nodeID="ub562bL132C36"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/dx/prof/Profile"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/ns/dx/prof/isProfileOf">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <skos:definition xml:lang="en">A Profile is a profile of a dct:Standard (or a Base Specification or another Profile)</skos:definition>
+    <rdfs:label>is profile of</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.w3.org/ns/dx/prof/Profile"/>
+    <rdfs:range rdf:resource="http://purl.org/dc/terms/Standard"/>
+    <skos:usageNote xml:lang="en">The semantics of the rdfs:Range means that any resource treated as a base specification can be regarded as a Profile (i.e. may be any specification with an empty set of additional constraints)</skos:usageNote>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/ns/dx/prof/hasToken">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#token"/>
+    <skos:scopeNote xml:lang="en">This property is to be used to indicate a token that identifies this Profile which should be used when the Profile's URI cannot be used. For potential use in content negotiation</skos:scopeNote>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://www.w3.org/ns/dx/prof/Profile"/>
+    <rdfs:label>has token</rdfs:label>
+    <skos:definition xml:lang="en">A property for identifying this Profile for use in APIs</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/ns/dx/prof/hasResource">
+    <rdfs:range rdf:resource="http://www.w3.org/ns/dx/prof/ResourceDescriptor"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <skos:definition xml:lang="en">Property for indicating a Resource Descriptor of this profile</skos:definition>
+    <rdfs:label xml:lang="en">has resource</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/dc/terms/format">
+    <rdfs:range rdf:resource="http://purl.org/dc/terms/MediaTypeOrExtent"/>
+    <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/elements/1.1/format"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/ns/dx/prof/ResourceDescriptor">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Resource Descriptor</rdfs:label>
+    <skos:definition xml:lang="en">A resource that defines an aspect - a particular part or feature - of a Profile</skos:definition>
+    <skos:usageNote xml:lang="en">Can be use to indicate the formalism (via dct:format) and any adherence to a dct:Standard (via dct:conformsTo) to allow for machine mediation as well as its purpose via relation to a ResourceRole (via hasRole)</skos:usageNote>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/ns/dx/prof/ResourceRole">
+    <rdfs:label>Resource Role</rdfs:label>
+    <skos:definition xml:lang="en">The role that an Resource plays</skos:definition>
+    <skos:usageNote xml:lang="en">Specific terms must come from a vocabulary</skos:usageNote>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  </rdf:Description>
+</rdf:RDF>
