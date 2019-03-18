@@ -201,9 +201,9 @@ var respecConfig = {
       "FAIR" : {
           title : "The FAIR Guiding Principles for scientific data management and stewardship",
           authors : [ "Mark D. Wilkinson" ],
-	  etAl : true,
+	      etAl : true,
           status : "Scientific Data, vol. 3, Article nr. 160018",
-	  publisher : "Nature",
+	      publisher : "Nature",
           href : "https://doi.org/10.1038/sdata.2016.18"
       },
     }
