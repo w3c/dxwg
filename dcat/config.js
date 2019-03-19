@@ -206,5 +206,15 @@ var respecConfig = {
             publisher : "Nature",
             href : "https://doi.org/10.1038/sdata.2016.18"
         },
+        "DCAT-AP-SE": {
+            title: "DCAT-AP-SE: Swedish recommendation for DCAT-AP1.1",
+            href: "https://lankadedata.se/spec/DCAT-AP-SE",
+            authors: ["Matthias Palmér"],
+            etAl: false
+        },
+        "DCAT-BE": {
+            title: "Linking data portals across Belgium.",
+            href: "http://dcat.be/"
+        }
     }
 };
