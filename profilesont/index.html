@@ -847,7 +847,7 @@ ex2:Profile_Y
         a <a href="#Class:Profile">prof:Profile</a>
         <ul>
           <li>
-            with a <a href="#Property:isProfileOf">prof:isProfileOf</a> link to the DCAT [[DCAT]] standard
+            with a <a href="#Property:isProfileOf">prof:isProfileOf</a> link to the DCAT [[DCAT}} standard
           </li>
         </ul>
       </li>
@@ -1324,224 +1324,50 @@ _:4
 </section>
 <section id="alignments" class="informative">
   <h2>Alignments</h2>
-  <p>This section lists alignments between PROF and other, related, ontologies.</p>
+  <p>This section will list alignments from PROF to other W3C ontologies.</p>
   <section id="alignment-dcat">
-    <h3>Dataset Catalogue Vocabulary</h3>
-    <div class="note" title="Status of PROF/DCAT alignment">
-      PROF/DCAT relations are being addressed as a major part of PROF's Third Public Working Draft
-    </div>
-    <p>
-      PROF is considered a specialisation of the revised version of the Dataset Catalogue Vocabulary [[VOCAB-DCAT-2]]
-      for the purpose of cataloguing profiles. With this in mind, the main PROF classes - <code>Profile</code> and
-      <code>Resource Descriptor</code>, specialised (are sub classes of) DCAT's <code>Resource</code> and
-      <code>Distributions</code> respectively.
-    </p>
-    <p>
-      These specialisations are indicated in <a href="#fig-align-dcat"></a> below as well as the data element mapping
-      table that follows it.
-    </p>
-    <figure id="fig-align-dcat">
-      <img src="alignments/dcat.svg" alt="Alignment of PROF with DCAT" style="width:60%;" />
-      <figcaption>Alignment of PROF with DCAT [[VOCAB-DCAT-2]].</figcaption>
+    <h3>Alignment with DCAT</h3>
+    <p>This vocabulary aligns with the Dataset Catalogue vocabulary as per the class and property diagrams below.</p>
+    <p>The RDF file giving the formal alignment is avauilable here: <a href="https://w3c.github.io/dxwg/profilesont/alignment_dcat.ttl">profilesont_dcat_alignment.ttl</a>.</p>
+    <figure id="fig-dcat-classes">
+      <img src="alignment_dcat_classes.png" alt="Alignment of PROF classes with DCAT 1.1 classes" style="width:90%;" />
+      <figcaption>Alignment of PROF classes with DCAT 1.1 [[VOCAB-DCAT-2-20180508]] classes. PROF classes are indicated with their rdfs:label text and no namespace prefix.</figcaption>
     </figure>
-    <p>The following table relates PROF and DCAT elements.</p>
+    <figure id="fig-dcat-properties">
+      <img src="alignment_dcat_properties.png" alt="Alignment of PROF properties with DCAT 1.1 properties" style="width:90%;" />
+      <figcaption>Alignment of PROF classes with DCAT 1.1 [[VOCAB-DCAT-2-20180508]] properties. PROF properties are indicated with their rdfs:label text and no namespace prefix.</figcaption>
+    </figure>
+    <p>The following table summarieses the mappings shown graphically in Fig. 2 & 3.</p>
     <table id="alignment-dcat-table">
       <thead>
       <tr><th>PROF element</th><th>Mapping property</th><th>DCAT element</th><th>Notes</th></tr>
       </thead>
       <tbody>
-        <tr><td>prof:Profile</td><td style="text-align: center;"><code>rdfs:subClassOf</code></td><td>dcat:Resource</td><td><code>prof:Profile</code> is not a sub class of <code>dcat:Dataset</code></td></tr>
-        <tr><td>prof:ResourceDescriptor</td><td style="text-align: center;"><code>rdfs:subClassOf</code></td><td>dcat:Distribution</td><td></td></tr>
+      <tr><td>prof:hasResource</td><td style="text-align: center;"><code>rdfs:subPropertyOf</code></td><td>dcat:distribution</td><td></td>
+      <tr><td>dct:conformsTo</td><td style="text-align: center;">-</td><td>-</td><td>Used similarly</td>
+      <tr><td>dct:format</td><td style="text-align: center;">-</td><td>-</td><td>Used similarly</td>
+      <tr><td>prof:hasRole</td><td style="text-align: center;"><code>rdfs:subClassOf</code></td><td>dcat:Distribution</td><td></td></tr>
+      <tr><td>prof:Profile</td><td style="text-align: center;"><code>rdfs:subClassOf</code></td><td>dcat:Resource</td><td>Generic association</td></tr>
       </tbody>
     </table>
-    <p>
-      While DCAT is referenced in the main PROF RDF file, the following separate RDF file contains just the mappings
-      included in the table above too:
-    </p>
-    <ul>
-      <li><a href="alignments/dcat.ttl">alignments/dcat.ttl</a></li>
-    </ul>
   </section>
   <section id="alignment-adms">
-    <h3>Asset Description Metadata Schema</h3>
+    <h3>Alignment with ADMS</h3>
+    <p></p>
     <div class="issue" data-number="240"></div>
-    <p>
-      The Asset Description Metadata Schema (ADMS) [[VOCAB-ADMS]] is a profile of DCAT, used to describe semantic
-      assets. PROF is aligned with ADMS as per <a href="#fig-align-adms"></a> and table below.
-    </p>
-    <p>
-      Due to PROF being aligned with the revised version of DCAT and ADMS also being aligned with DCAT, classes and
-      properties of the two vocabularies may be sensibly used beyond the mappings presented here. In particular the fact
-      that both <code>prof:Profile</code> and <code>adms:Asset</code> are non-disjoint sub classes of
-      <code>dcat:Resource</code>, albeit that the latter is such via being a sub class of <code>dcat:Dataset</code>
-      which subclasses <code>dcat:Resource</code>, means that resources could easily be dually typed as being of both
-      <code>prof:Profile</code> and <code>adms:Asset</code>.
-    </p>
-    <figure id="fig-align-adms">
-      <img src="alignments/adms.svg" alt="Alignment of PROF with ADMS" style="width:80%;" />
-      <figcaption>Alignment of PROF with DCAT [[VOCAB-ADMS]].</figcaption>
-    </figure>
-    <p>The following table relates PROF and ADMS elements.</p>
-    <table id="alignment-adms-table">
-      <thead>
-      <tr><th>PROF element</th><th>Mapping property</th><th>ADMS element</th></tr>
-      </thead>
-      <tbody>
-      <tr><td>prof:ResourceDescriptor</td><td style="text-align: center;"><code>rdfs:subClassOf</code></td><td>adms:AssetDistribution</td></tr>
-      </tbody>
-    </table>
-    <p>
-      The following RDF file contains just the mappings included in the table above:
-    </p>
-    <ul>
-      <li><a href="alignments/adms.ttl">alignments/adms.ttl</a></li>
-    </ul>
-  </section>
-  <section id="alignment-dct">
-    <h3>Dublin Core Terms</h3>
-    <p>
-      PROF makes use of Dublin Core Terms [[DCTERMS]] directly with the PROF class <code>prof:Profile</code> being a
-      sub class of <code>dct:Standard</code> and two Dublin Core Terms properties, <code>dct:format</code> &amp;
-      <code>dct:conformsTo</code> being recommended within PROF for use in describing instances of the
-      <code>prof:ResourceDescriptor</code> class.
-    </p>
-    <p>
-      PROF is aligned with Dublin Core Terms as per <a href="#fig-align-dct"></a> and table below.
-    </p>
-    <figure id="fig-align-dct">
-      <img src="alignments/dct.svg" alt="Alignment of PROF with Dublin Core Terms" style="width:40%;" />
-      <figcaption>Alignment of PROF with Dublin Core Terms [[DCTERMS]].</figcaption>
-    </figure>
-    <p>The following table relates PROF and Dublin Core Terms elements.</p>
-    <table id="alignment-dct-table">
-      <thead>
-      <tr><th>PROF element</th><th>Mapping property</th><th>DCT element</th></tr>
-      </thead>
-      <tbody>
-      <tr><td>prof:Profile</td><td style="text-align: center;"><code>rdfs:subClassOf</code></td><td>dct:Standard</td></tr>
-      </tbody>
-    </table>
-    <p>
-      While Dublin Core Terms is referenced in the main PROF RDF file, the following RDF file contains just the
-      mappings included in the table above:
-    </p>
-    <ul>
-      <li><a href="alignments/dct.ttl">alignments/dct.ttl</a></li>
-    </ul>
-  </section>
-  <section id="alignment-prov">
-    <h3>The Provenance Ontology</h3>
-    <div class="issue" data-number="402"></div>
-    <div class="issue" data-number="797"></div>
-    <p>
-      The Provenance Ontology [[PROV-O]] is used to represent and interchange provenance information.
-    </p>
-    <div class="note" title="Status of PROV-O alignment">
-      Alignment of PROF with PROV-O will be addressed in PROF's Third Public Working Draft.
-    </div>
   </section>
   <section id="alignment-owl">
-    <h3>Web Ontology Language</h3>
-    <p>
-      PROF is a vocabulary formulated using the Web Ontology Language (OWL) [[OWL2-OVERVIEW]]. In addition to the basic
-      modelling mechanics of PROF that use OWL, for example PROF classes being defined as <code>owl:Class</code>
-      objects and PROF properties being OWL <code>owl:ObjectProperty</code> or other OWL property types, some of the
-      core PROF modelling concepts relate to OWL ontology concepts.
-    </p>
-    <p>
-      PROF is aligned with OWL at a conceptual modelling level as per <a href="#fig-align-owl"></a> and table below.
-    </p>
-    <figure id="fig-align-owl">
-      <img src="alignments/owl.svg" alt="Alignment of PROF with OWL" style="width:70%;" />
-      <figcaption>Alignment of PROF with OWL [[OWL2-OVERVIEW]].</figcaption>
-    </figure>
-    <table id="alignment-owl-table">
-      <thead>
-      <tr><th>PROF element</th><th>Mapping property</th><th>OWL element</th></tr>
-      </thead>
-      <tbody>
-      <tr><td>prof:isProfileOf</td><td style="text-align: center;"><code>?</code></td><td>owl:imports</td></tr>
-      </tbody>
-    </table>
-    <p>
-      The following RDF file contains just the mappings included in the table above:
-    </p>
-    <ul>
-      <li><a href="alignments/owl.ttl">alignments/owl.ttl</a></li>
-    </ul>
-    <div class="issue" data-number="696"></div>
+    <h3>Alignment with OWL</h3>
+    <div data-number="696"></div>
   </section>
   <section id="alignment-voaf">
-    <h3>Vocabulary of a Friend</h3>
+    <h3>Alignment with VOAF</h3>
+    <p></p>
     <div class="issue" data-number="235"></div>
-    <p>
-      Vocabulary of a Friend (VOAF) is a vocabulary specification providing elements allowing the description of
-      vocabularies (RDFS vocabularies or OWL ontologies) [[VOAF]]. Due to VOAF being defined for use with RDF resources
-      only, PROF as an alignment with VOAF which is instance-specific: resources described by PROF's
-      <code>prof:ResourceDescriptor</code> class with the property <code>prof:resourceRole</code> linking to the
-      Resource Role <code>role:Vocabulary</code> or a specialized version of it may be a <code>voaf:Vocabulary</code>.
-    </p>
-    <figure id="fig-align-voaf">
-      <img src="alignments/voaf.svg" alt="Alignment of PROF with VOAF" style="width:70%;" />
-      <figcaption>Alignment of PROF with VOAF [[VOAF]].</figcaption>
-    </figure>
-    <table id="alignment-voaf-table">
-      <thead>
-      <tr><th>PROF element</th><th>Mapping property</th><th>VOAF element</th></tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td>instance of rdf:Resource</td>
-        <td style="text-align: center;">related to an instance of a <code>prof:ResourceDescriptor</code> via
-          <code>prof:hasArtifact</code> that also relates to the Role <code>role:Vocabulary</code> or specialisation
-          thereof
-        </td>
-        <td>instance of voaf:Vocabulary</td></tr>
-      </tbody>
-    </table>
-    <p>
-      The following RDF file contains just the mappings included in the table above:
-    </p>
-    <ul>
-      <li><a href="alignments/voaf.ttl">alignments/voaf.ttl</a></li>
-    </ul>
   </section>
   <section id="alignment-modspec">
-    <h3>OGC/ISO Modular Specification</h3>
-    <div class="issue" data-number="403"></div>
-    <div class="issue" data-number="737"></div>
-    <div class="issue" data-number="791"></div>
-  </section>
-  <section id="alignment-skos">
-    <h3>Simple Knowledge Organization System</h3>
-    <p>
-      The Simple Knowledge Organization System (SKOS) [[SKOS-REFERENCE]] is a data model knowledge organization
-      systems, such as thesauri, taxonomies, classification schemes and subject heading systems. PROF declares its
-      instances of <code>Resource Role</code> to be instances of the <code>skos:Concept</code> class to indicate that
-      they should be considered a hierarchy of concepts within a <code>skos:ConceptScheme</code>. Since they are SKOS
-      hierarchy and it is recommended that implementers of PROF extend the hierarchy for their own needs, implementers
-      should consider creating new <code>Resource Role</code> (also <code>skos:Concept</code>) and relating them to the
-      existing instances with SKOS properties, particularly <code>skos:narrower</code>/<code>skos:broader</code>.
-    </p>
-    <figure id="fig-align-skos">
-      <img src="alignments/skos.svg" alt="Alignment of PROF with SKOS" style="width:40%;" />
-      <figcaption>Alignment of PROF with SKOS [[SKOS-REFERENCE]].</figcaption>
-    </figure>
-    <table id="alignment-skos-table">
-      <thead>
-      <tr><th>PROF element</th><th>Mapping property</th><th>SKOS element</th></tr>
-      </thead>
-      <tbody>
-      <tr><td>prof:ResourceRole</td><td style="text-align: center;"><code>rdfs:subClassOf</code></td><td>skos:Concept</td></tr>
-      </tbody>
-    </table>
-    <p>
-      While SKOS is referenced in the main PROF RDF file, the following RDF file contains just the mappings included in
-      the table above:
-    </p>
-    <ul>
-      <li><a href="alignments/skos.ttl">alignments/skos.ttl</a></li>
-    </ul>
+    <h3>Alignment with OGC/ISO Modular specification model</h3>
+    <p></p>
   </section>
   <div class="issue" data-number="405"></div>
 </section>
