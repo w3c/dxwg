@@ -220,12 +220,12 @@ var respecConfig = {
             title: "Linking data portals across Belgium.",
             href: "http://dcat.be/"
         },
-        "DCAT-AP-IT": {
+        "DCAT-AP_IT": {
             title: "Profilo nazionale dei metadati DCAT-AP_IT v1.0",
             href: "https://www.dati.gov.it/content/profilo-nazionale-dei-metadati-dcat-ap-it-v10"
         },
-        "GeoDCAT-AP-IT": {
-            title: "GeoDCAT-AP in Italy, the national guidelines published"
+        "GeoDCAT-AP_IT": {
+            title: "GeoDCAT-AP in Italy, the national guidelines published",
             href: "https://joinup.ec.europa.eu/news/geodcat-apit"
         },
         "DCAT-AP-NO": {
