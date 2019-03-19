@@ -10,10 +10,10 @@ var respecConfig = {
     edDraftURI:           "https://w3c.github.io/dxwg/dcat/",
 //    issueBase:            "https://github.com/w3c/dxwg/issues/", -- Not needed when github used
     editors: [{
-        name:       "Alejandra Gonzalez Beltran",
-        company:    "Oxford eResearch Centre, Engineering Science, University of Oxford",
-        url: "https://www.oerc.ox.ac.uk/people/alejandra",
-        companyURL: "http://www.oerc.ox.ac.uk/"
+      name:       "Riccardo Albertoni",
+      company:    "CNR - Consiglio Nazionale delle Ricerche, Italy",
+      url: "http://www.imati.cnr.it/joomla/index.php/people/8-curricula/178-riccardo-albertoni",
+      companyURL: "http://www.cnr.it/"
     },{
         name: "Dave Browning",
         company: "Refinitiv",
@@ -24,23 +24,27 @@ var respecConfig = {
         url: "http://people.csiro.au/Simon-Cox",
         companyURL: "https://www.csiro.au/"
     },{
-        name: "Peter Winstanley",
-        company: "Scottish Government",
-        companyURL: "http://www.gov.scot/"
+      name:       "Alejandra Gonzalez Beltran",
+      company:    "Oxford eResearch Centre, Engineering Science, University of Oxford",
+      url: "https://www.oerc.ox.ac.uk/people/alejandra",
+      companyURL: "http://www.oerc.ox.ac.uk/"
+    },{
+      name: "Andrea Perego",
+      company: "European Commission, Joint Research Centre (JRC)",
+      url: "https://joinup.ec.europa.eu/user/14209",
+      companyURL: "https://ec.europa.eu/jrc/"
+    },{
+      name: "Peter Winstanley",
+      company: "Scottish Government",
+      companyURL: "http://www.gov.scot/"
     }],
     otherLinks: [{
-//        key: "Contributors",
-//        data: [{
-//            value: "Makx Dekkers",
-//            href: "http://www.makxdekkers.com"
-//        },{
-//            value: "Antoine Isaac, Europeana Foundation",
-//            href: "https://pro.europeana.eu/person/antoine-isaac"
-//        },{
-//            value: "Andrea Perego, European Commission",
-//            href: "https://ec.europa.eu/jrc/"
-//        }]
-//      },{
+        key: "Contributors",
+        data: [{
+            value: "Makx Dekkers",
+            href: "http://www.makxdekkers.com"
+        }]
+      },{
         key: "Editors of previous version",
         data: [{
             value: "Fadi Maali, DERI",
