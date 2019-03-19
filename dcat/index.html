@@ -136,7 +136,7 @@ $(document).ready( function() {
 
 <section id="motivation" class="informative"><h2>Motivation for change</h2>
     <p>The original Recommendation [[?VOCAB-DCAT-20140116]], published in January 2014, provided the basic framework for describing datasets. Importantly, it made the distinction between a dataset as an abstract idea and a distribution as a manifestation of the dataset. Although DCAT has been widely adopted, it has become clear that the original specification lacked a number of essential features that were added either through application profiles, such as the European Commission's DCAT-AP [[?DCAT-AP]], or the development of larger vocabularies that, to a greater or lesser extent, built upon the base standard, such as the Healthcare and Life Sciences Community Profile [[?HCLS-Dataset]], the Data Tag Suite [[?DATS]] and more. This version of DCAT has been developed to address the specific shortcomings that have come to light through the experiences of different communities, the aim being, of course, to improve interoperability between the outputs of these larger vocabularies.
-        For example, in this new DCAT version, we provide classes, properties and guidance to address <a href="Dereferenceable-identifiers">identifiers</a>, <a href="#quality-information">quality information</a>, <a href="#data-citation">data citation</a> issues.</p>
+        For example, in this new DCAT version, we provide classes, properties and guidance to address <a href="#Dereferenceable-identifiers">identifiers</a>, <a href="#quality-information">quality information</a>, <a href="#data-citation">data citation</a> issues.</p>
     <p>This draft includes re-writing of the specification throughout. Significant changes from the 2014 Recommendation are marked within the text using "Note" sections, as well as being described in the <a href="#changes">Change History</a>.</p>
 
 </section>
@@ -367,22 +367,36 @@ $(document).ready( function() {
   dcat:keyword "accountability","transparency" ,"payments"&nbsp;;
   dct:creator&nbsp;:finance-employee-001&nbsp;;
   dct:issued "2011-12-05"^^xsd:date&nbsp;;
-  dct:modified "2011-12-05"^^xsd:date&nbsp;;
+  dct:modified "2011-12-15"^^xsd:date&nbsp;;
   dcat:contactPoint &lt;http://example.org/transparency-office/contact&gt; ;
   dct:temporal &lt;http://reference.data.gov.uk/id/quarter/2006-Q1&gt; ;
+  dcat:temporalResolution "P1D"^^xsd:duration ;
   dct:spatial &lt;http://www.geonames.org/6695072&gt; ;
+  dcat:spatialResolutionInMeters "30.0"^^xsd:decimal ;
   dct:publisher&nbsp;:finance-ministry&nbsp;;
   dct:language &lt;http://id.loc.gov/vocabulary/iso639-1/en&gt; &nbsp;;
   dct:accrualPeriodicity &lt;http://purl.org/linked-data/sdmx/2009/code#freq-W&gt; &nbsp;;
   dcat:distribution&nbsp;:dataset-001-csv&nbsp;;
   .
 </pre>
+        <p>
+          Five distinct temporal descriptors are shown for this dataset.
+          The dataset publication and revision dates are shown in <a href="#Property:resource_release_date"><code>dct:issued</code></a> and <a href="#Property:resource_update_date"><code>dct:modified</code></a>.
+          For the frequency of update of the dataset in <a href="#Property:dataset_frequency"><code>dct:accrualPeriodicity</code></a>, we use an instance from the <a href="http://www.w3.org/TR/vocab-data-cube/#dsd-cog">Content-Oriented Guidelines</a> developed as part of the <abbr title="World Wide Web Consortium">W3C</abbr> Data Cube Vocabulary [[?VOCAB-DATA-CUBE]] efforts.
+          The temporal coverage or extent is given in <a href="#Property:dataset_temporal"><code>dct:temporal</code></a> using an item from the Interval dataset (originally available from http://reference.data.gov.uk/id/interval) from data.gov.uk.
+          The temporal resolution, which describes the minimum spacing of items within the dataset, is given in <a href="#Property:dataset_temporalresolution"><code>dcat:temporalResolution</code></a> using the standard datatype <code>xsd:duration</code>.
+        </p>
+        <p>
+          Additionally, the spatial coverage or extent is given <a href="#Property:dataset_spatial"><code>dct:spatial</code></a> using a URI from <a href="http://www.geonames.org/">Geonames</a>.
+          The spatial resolution, which describes the minimum spatial separation of items within the dataset, is given in <a href="#Property:dataset_spatialresolution"><code>dcat:spatialResolutionInMeters</code></a> using the standard datatype <code>xsd:decimal</code>.
+        </p>
+        <p>
+          A contact point is provided where comments and feedback about the dataset can be sent.
+          Further details about the contact point, such as email address or telephone number, can be provided using vCard [[?VCARD-RDF]].
+        </p>
 
-        <p>In order to express the frequency of update in the example above, we chose to use an instance from the <a href="http://www.w3.org/TR/vocab-data-cube/#dsd-cog">Content-Oriented Guidelines</a> developed as part
-            of the <abbr title="World Wide Web Consortium">W3C</abbr> Data Cube Vocabulary [[?VOCAB-DATA-CUBE]] efforts. Additionally, we chose to describe the spatial and temporal coverage of the example dataset using URIs from <a href="http://www.geonames.org/">Geonames</a> and the Interval dataset (originally available from http://reference.data.gov.uk/id/interval) from data.gov.uk, respectively. A contact point is also provided where comments and feedback about the dataset can be sent. Further details about the contact point, such as email address or telephone number, can be provided using vCard [[?VCARD-RDF]].</p>
-
-        <p>The dataset distribution <code>:dataset-001-csv</code> can be downloaded as a 5Kb CSV file. This information is
-            represented via an RDF resource of type <code>dcat:Distribution</code>.
+        <p>One representation of the dataset <code>:dataset-001-csv</code> can be downloaded as a 5Kb CSV file. This is
+            represented as an RDF resource of type <code>dcat:Distribution</code>.
         </p>
 <pre id="ex-distribution" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 :dataset-001-csv
@@ -674,7 +688,9 @@ $(document).ready( function() {
             <a href="#Property:dataset_distribution">distribution</a>,
             <a href="#Property:dataset_frequency">frequency</a>,
             <a href="#Property:dataset_spatial">spatial/geographic coverage</a>,
+            <a href="#Property:dataset_spatialresolution">spatial resolution</a>,
             <a href="#Property:dataset_temporal">temporal coverage</a>,
+            <a href="#Property:dataset_temporalresolution">temporal resolution</a>,
             <a href="#Property:dataset_wasgeneratedby">was generated by</a>
         </p>
         <p>The following properties are inherited from the super-class <a href="#Class:Resource"><code>dcat:Resource</code></a>:
@@ -937,16 +953,18 @@ $(document).ready( function() {
         <section id="Property:resource_creator">
             <h4>Property: resource creator</h4>
 
-            <p class="note">
+            <div class="note">
+	      <p>
                 New property added in this revision of DCAT, specifically added when considering the data citation requirement and
                 added to the <a href="#Class:Resource"><code>dcat:Resource</code></a> class, as the Dataset superclass. For more details, see
-                the <a href="data-citation">data citation</a> section.
-            </p>
+                the <a href="#data-citation">data citation</a> section.
+	      </p>
 
-            <p class="issue" data-number="80">
+	      <p>
                 The use of the [[?PROV-O]] qualified-attribution pattern is <a href="#qualified-attribution">described below</a>.
                 `dct:creator` corresponds with a general attribution with the role 'creator'.
-            </p>
+              </p>
+	    </div>
 
             <table class="definition">
                 <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/creator">dct:creator</a></th></tr></thead>
@@ -1037,7 +1055,7 @@ $(document).ready( function() {
         <section id="Property:resource_publisher">
             <h4>Property: publisher</h4>
 
-            <p class="issue" data-number="80">
+            <p class="note">
                 The use of the [[?PROV-O]] qualified-attribution pattern is <a href="#qualified-attribution">described below</a>.
                 `dct:publisher` corresponds with a general attribution with the role 'publisher'.
             </p>
@@ -1151,11 +1169,6 @@ $(document).ready( function() {
             <p>
                 Many existing and legacy catalogues do not distinguish between dataset components, representations, documentation, schemata and other resources that are lumped together as part of a dataset.
                 <a href="http://purl.org/dc/terms/relation"><code>dct:relation</code></a> is a super-property of a number of more specific properties which express more precise relationships, so use of <code>dct:relation</code> is not inconsistent with a subsequent reclassification with more specific semantics, though the more specialized sub-properties <em title="SHOULD" class="rfc2119">SHOULD</em> be used to link a dataset to component and supplementary resources if possible.
-            </p>
-
-            <p class="issue" data-number="81">
-                The general need to describe relationships between datasets has been identified as a requirement to be satisfied in the revision of DCAT.
-                Guidance on the use of more specific relationship predicates is required, particularly in the context of the <code>dcat:Dataset</code> sub-class.
             </p>
 
             <p class="note">
@@ -1437,7 +1450,9 @@ $(document).ready( function() {
             <a href="#Property:dataset_distribution">distribution</a>,
             <a href="#Property:dataset_frequency">frequency</a>,
             <a href="#Property:dataset_spatial">spatial/geographic coverage</a>,
+            <a href="#Property:dataset_spatialresolution">spatial resolution</a>,
             <a href="#Property:dataset_temporal">temporal coverage</a>,
+            <a href="#Property:dataset_temporalresolution">temporal resolution</a>,
             <a href="#Property:dataset_wasgeneratedby">was generated by</a>
         </p>
         <p>The following properties are inherited from the super-class <a href="#Class:Resource"><code>dcat:Resource</code></a>:
@@ -1469,10 +1484,6 @@ $(document).ready( function() {
         </p>
 
 
-        <p class="issue" data-number="59">
-            The need to more formally encode access restrictions for both datasets and distributions has been identified as a requirement to be satisfied in the revision of DCAT.
-        </p>
-
         <p class="issue" data-number="60">
             The need to provide richer descriptions of dataset aspects (e.g. instrument/sensor used, spatial feature, observable property, quantity kind) has been identified as a requirement to be satisfied in the revision of DCAT.
         </p>
@@ -1492,9 +1503,6 @@ $(document).ready( function() {
 
         <p class="issue" data-number="86">
             The need to be able to provide usage notes for a dataset or distribution has been identified as a requirement to be satisfied in the revision of DCAT.
-        </p>
-        <p class="issue" data-number="433">
-            The need to be able to provide citations for a distribution has been identified as a potential requirement to be satisfied in the revision of DCAT.
         </p>
 
         <table class="definition">
@@ -1532,11 +1540,6 @@ $(document).ready( function() {
             </table>
         </section>
 
-        <p class="issue" data-number="81">
-            <a href="https://github.com/w3c/dxwg/issues/81">Issue #81</a> concerns the general need to describe relationships between datasets.
-            Guidance on the use of specializations of <code>dct:relation</code> is required in the context of <code>dcat:Dataset</code>.
-        </p>
-
         <section id="Property:dataset_frequency">
             <h4>Property: frequency</h4>
             <table class="definition">
@@ -1544,8 +1547,36 @@ $(document).ready( function() {
                 <tbody>
                 <tr><td class="prop">Definition:</td><td>The frequency at which dataset is published.</td></tr>
                 <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/Frequency"><code>dct:Frequency</code></a> (A rate at which something recurs)</td></tr>
+                <tr><td class="prop">Usage note:</td><td>
+                    The value of <code>dct:accrualPeriodicity</code> gives the rate at which the dataset-as-a-whole is updated. This may be complemented by <a href="#Property:dataset_temporalresolution"><code>dcat:temporalResolution</code></a> to give the time between collected data points in a time series.
+                  </td></tr>
                 </tbody>
             </table>
+
+
+      <p>
+        For example, a 15-minute time-series that is published daily could be described
+      </p>
+      <pre id="ex-freq-daily" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
+&lt;ds913&gt;
+    a dcat:Dataset ;
+    dct:accrualPeriodicity &lt;http://purl.org/cld/freq/daily&gt; ;
+    dcat:temporalResolution "PT15M"^^xsd:duration ;
+.
+</pre>
+
+    <p>
+      A dataset composed of items added hourly and published immediately could be described
+    </p>
+    <pre id="ex-freq-hourly" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
+&lt;ds782&gt;
+    a dcat:Dataset ;
+    dct:accrualPeriodicity &lt;http://purl.org/cld/freq/continuous&gt; ;
+    dcat:temporalResolution "PT1H"^^xsd:duration ;
+.
+</pre>
+
+
         </section>
 
         <section id="Property:dataset_spatial">
@@ -1568,6 +1599,28 @@ $(document).ready( function() {
             </table>
         </section>
 
+        <section id="Property:dataset_spatialresolution">
+            <h4>Property: spatial resolution</h4>
+
+            <table class="definition">
+                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#spatialResolutionInMeters">dcat:spatialResolutionInMeters</a></th></tr></thead>
+                <tbody>
+                <tr><td class="prop">Definition:</td><td>minimum spatial separation resolvable in a dataset, measured in meters</td></tr>
+                <tr><td class="prop">Range:</td><td><a href="https://www.w3.org/TR/xmlschema11-2/#decimal"><code>xsd:decimal</code></a></td></tr>
+                <tr><td class="prop">Usage note:</td><td>If the dataset is an image or grid this should correspond to the spacing of items. For other kinds of spatial dataset, this property will usually indicate the smallest distance between items in the dataset.</td></tr>
+                </tbody>
+            </table>
+
+            <p>The range of this property is a decimal number representing a length in meters.
+            This is intended to provide a summary indication of the spatial resolution of the data as a single number.
+          More complex descriptions of various aspects of spatial precision, accuracy, resolution and other statistics can be provided using the Data Quality Vocabulary [[VOCAB-DQV]]. </p>
+
+            <p class="note">
+                New property in this context in this revision of DCAT.
+            </p>
+
+        </section>
+
         <section id="Property:dataset_temporal">
             <h4>Property: temporal coverage</h4>
 
@@ -1582,6 +1635,28 @@ $(document).ready( function() {
                 <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/PeriodOfTime"><code>dct:PeriodOfTime</code></a> (An interval of time that is named or defined by its start and end dates)</td></tr>
                 </tbody>
             </table>
+        </section>
+
+        <section id="Property:dataset_temporalresolution">
+            <h4>Property: temporal resolution</h4>
+
+            <table class="definition">
+                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#temporalResolution">dcat:temporalResolution</a></th></tr></thead>
+                <tbody>
+                <tr><td class="prop">Definition:</td><td>minimum time period resolvable in the dataset</td></tr>
+                <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/TR/xmlschema-2/#duration"><code>xsd:duration</code></a></td></tr>
+                <tr><td class="prop">Usage note:</td><td>If the dataset is a time-series this should correspond to the spacing of items in the series. For other kinds of dataset, this property will usually indicate the smallest time difference between items in the dataset. </td></tr>
+                </tbody>
+            </table>
+
+
+        <p>This is intended to provide a summary indication of the temporal resolution of the data distribution as a single value.
+        More complex descriptions of various aspects of temporal precision, accuracy, resolution and other statistics can be provided using the Data Quality Vocabulary [[VOCAB-DQV]]. </p>
+
+            <p class="note">
+                New property in this context in this revision of DCAT.
+            </p>
+
         </section>
 
         <section id="Property:dataset_wasgeneratedby">
@@ -1635,16 +1710,10 @@ $(document).ready( function() {
             <a href="#Property:distribution_packaging_format">packaging format</a>,
             <a href="#Property:distribution_release_date">release date</a>,
             <a href="#Property:distribution_rights">rights</a>,
+            <a href="#Property:distribution_spatialresolution">spatial resolution</a>,
+            <a href="#Property:distribution_temporalresolution">temporal resolution</a>,
             <a href="#Property:distribution_title">title</a>,
             <a href="#Property:distribution_update_date">update/modification date</a>,
-        </p>
-
-        <p class="issue" data-number="54">
-            The packaging of files in a <code>dcat:Distribution</code> is being considered as part of the revision of DCAT.
-        </p>
-
-        <p class="issue" data-number="59">
-            The need to more formally encode access restrictions for both datasets and distributions has been identified as a requirement to be satisfied in the revision of DCAT.
         </p>
 
         <table class="definition">
@@ -1870,6 +1939,51 @@ $(document).ready( function() {
                 <tr><td class="prop">Usage note:</td><td>The size in bytes can be approximated when the precise size is not known.</td></tr>
                 </tbody>
             </table>
+        </section>
+
+        <section id="Property:distribution_spatialresolution">
+            <h4>Property: spatial resolution</h4>
+
+            <table class="definition">
+                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#spatialResolutionInMeters">dcat:spatialResolutionInMeters</a></th></tr></thead>
+                <tbody>
+                  <tr><td class="prop">Definition:</td><td>The minimum spatial separation resolvable in a dataset distribution, measured in meters.</td></tr>
+                  <tr><td class="prop">Range:</td><td><a href="https://www.w3.org/TR/xmlschema11-2/#decimal"><code>xsd:decimal</code></a></td></tr>
+                  <tr><td class="prop">Usage note:</td><td>If the dataset is an image or grid this should correspond to the spacing of items. For other kinds of spatial dataset, this property will usually indicate the smallest distance between items in the dataset.</td></tr>
+                <tr><td class="prop">Usage note:</td><td>Alternative spatial resolutions might be provided as different dataset distributions</td></tr>
+                </tbody>
+            </table>
+
+            <p>The range of this property is a decimal number representing a length in meters.
+            This is intended to provide a summary indication of the spatial resolution of the data distribution as a single number.
+          More complex descriptions of various aspects of spatial precision, accuracy, resolution and other statistics can be provided using the Data Quality Vocabulary [[VOCAB-DQV]]. </p>
+
+            <p class="note">
+                New property in this context in this revision of DCAT.
+            </p>
+
+	    </section>
+
+        <section id="Property:distribution_temporalresolution">
+            <h4>Property: temporal resolution</h4>
+
+            <table class="definition">
+                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#temporalResolution">dcat:temporalResolution</a></th></tr></thead>
+                <tbody>
+                <tr><td class="prop">Definition:</td><td>minimum time period resolvable in the dataset distribution</td></tr>
+                <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/TR/xmlschema-2/#duration"><code>xsd:duration</code></a></td></tr>
+                <tr><td class="prop">Usage note:</td><td>If the dataset is a time-series this should correspond to the spacing of items in the series. For other kinds of dataset, this property will usually indicate the smallest time difference between items in the dataset. </td></tr>
+                <tr><td class="prop">Usage note:</td><td>Alternative temporal resolutions might be provided in different dataset distributions</td></tr>
+                </tbody>
+            </table>
+
+            <p>This is intended to provide a summary indication of the temporal resolution of the data distribution as a single value.
+            More complex descriptions of various aspects of temporal precision, accuracy, resolution and other statistics can be provided using the Data Quality Vocabulary [[VOCAB-DQV]]. </p>
+
+            <p class="note">
+                New property in this context in this revision of DCAT.
+            </p>
+
         </section>
 
         <section id="Property:distribution_conformsto">
@@ -4072,14 +4186,22 @@ dcat:servesDataset ga-courts:jc ;
         <p>The document has undergone the following changes since the W3C Recommendation of 16 January 2014 [[?VOCAB-DCAT-20140116]]:</p>
 
         <ul>
-            <li>
-                Two new properties were added to specify packaged and compressed distributions: <a href="#Property:distribution_packaging_format">dcat:packageFormat</a> and <a href="#Property:distribution_compression_format">dcat:compressFormat</a>. See <a href="https://github.com/w3c/dxwg/issues/54">Issue #54</a>
-            </li>
-            <li>
+          <li>
+              A new property <a href="#Property:dataset_spatialresolution">dcat:spatialResolutionInMeters</a> added to support description of the spatial resolution of datasets and distributions. See <a href="https://github.com/w3c/dxwg/issues/84">Issue #84</a>
+          </li>
+
+          <li>
+              A new property <a href="#Property:dataset_temporalresolution">dcat:temporalResolution</a> added to support description of the temporal resolution of datasets and distributions. See <a href="https://github.com/w3c/dxwg/issues/84">Issue #84</a>
+          </li>
+
+          <li>
+              Two new properties were added to specify packaged and compressed distributions: <a href="#Property:distribution_packaging_format">dcat:packageFormat</a> and <a href="#Property:distribution_compression_format">dcat:compressFormat</a>. See <a href="https://github.com/w3c/dxwg/issues/54">Issue #54</a>
+          </li>
+          <li>
               A new section <a href="#qualified-relationship">Relationships between datasets and other resources</a> and new property <a href="#Property:resource_qualifiedRelation">dcat:qualifiedRelation</a> and class <a href="#Class:Relationship">dcat:Relationship</a> added to support relationships between datasets or other resources. See <a href="https://github.com/w3c/dxwg/issues/79">Issue #79</a>
           </li>
 
-            <li>
+          <li>
                 A new  section, <a href="#Dereferenceable-identifiers">Dereferenceable identifiers</a>, is added to describe how to indicate different types of identifiers by using [[!DCTERMS]] and [[?VOCAB-ADMS]] - see <a href="https://github.com/w3c/dxwg/issues/53">Issue #53</a> and <a href="https://github.com/w3c/dxwg/issues/68">Issue #68</a>.
             </li>
 
@@ -4105,7 +4227,7 @@ dcat:servesDataset ga-courts:jc ;
             </li>
 
             <li>
-                <a href="#Property:resource_relation">Property: resource relation</a>: The property <code>dct:relation</code> is recommended for use in the context of a catalogued resource to capture general relationships, including the case where the package of resources associated with a catalogued item includes a mixture of representations, parts, documentation and other elements which are not strictly 'distributions' of a dataset - see <a href="https://github.com/w3c/dxwg/issues/253">Issue #253</a>.
+                <a href="#Property:resource_relation">Property: resource relation</a>: The property <code>dct:relation</code> is recommended for use in the context of a catalogued resource to capture general relationships, including the case where the package of resources associated with a catalogued item includes a mixture of representations, parts, documentation and other elements which are not strictly 'distributions' of a dataset - see <a href="https://github.com/w3c/dxwg/issues/253">Issue #253</a>.  The more general use of <code>dct:relation</code> is driven by the requirement documented in <a href="https://github.com/w3c/dxwg/issues/81">Issue #81</a>.
             </li>
 
 

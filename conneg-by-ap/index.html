@@ -37,10 +37,13 @@
     <p>
       Content delivered by dereferencing Internet identifiers can be negotiated for in different
       ways. When using the HTTP protocol [[RFC7230]], a client may set one or more headers:
-      <ul><li>an <code>Accept</code> header specifying preferred Media Types which the server may or may not supply</li>
+    </p>
+    <ul>
+      <li>an <code>Accept</code> header specifying preferred Media Types which the server may or may not supply</li>
       <li>an <code>Accept-Encoding</code> header to request that a specific content encoding system be used</li>
       <li>an <code>Accept-Language</code> header to indicate a preferred language</li>
-      </ul>
+    </ul>
+    <p>
       However, clients have not had a
       defined way to negotiate for content based on its adherence to an information model - a standard, a specification or
       a <a>profile</a> - and this document addresses this functionality.
@@ -133,8 +136,6 @@
       <dt><dfn>token</dfn></dt>
       <dd>A short name identifying something, in the context of this document a <a>profile</a></dd>
     </dl>
-    <div class="issue" data-number="378"></div>
-    <div class="issue" data-number="537"></div>
   </section>
   <section id="motivation" class="informative">
     <h2>Motivation</h2>
@@ -168,7 +169,89 @@
       current version of the IETF draft (-00) is expected to be completely re-written in parallel work with this document and should
       not be seen as anything but work-in-progress.
     </p>
-    <p class="issue" data-number="380">
+	<section id="relatedwork-existingHttpStandards">
+		<h3>Existing standards for transporting profile information in HTTP headers</h3>
+	  <h4>Using Accept/Content Type together with the profile parameter</h4>
+	  <p>The HTTP Accept and Content-Type header fields [[RFC 7231]]
+		  allow a client to specify acceptable media types (<code>Accept</code>)
+		  and a server to indicate the media type of the payload (<code>Content-Type</code>).
+		  A media type registration can also specify an optional list of media type parameters.
+		  Some media type registrations (e. g. <code>application/ld+json</code>)
+		  have specified the use of a media type parameter named "profile"
+		  that could be used to signal the profile the payload of the message conforms to.</p>
+<pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Using the profile parameter in an Accept header together with the Accept-Profile header">
+GET /some/resource HTTP/1.1
+Accept: text/turtle;q=0.9;profile="urn:example:profile-1",
+	text/turtle;q=0.7;profile="urn:example:profile-2"
+
+HTTP/1.1 200 OK
+Content-Type: text/turtle;profile="urn:example:profile-2"
+</pre>
+    <p>During TPAC 2018 in Lyon, the DXWG had a longer discussion with the JSON-LD WG
+	and it was concluded that the “profile” parameter in the <code>Accept</code> and <code>Content-Type</code>
+	headers should be seen to convey profiles that are specific to the media-type,
+	such as the JSON-LD profiles "expanded" (<code>http://www.w3.org/ns/json-ld#expanded</code>) or
+	"flattened" (<code>http://www.w3.org/ns/json-ld#flattened</code>).
+	In order to signal the use of media-type-independent profiles,
+	the http header fields <code>Accept-Profile</code> and <code>Content-Profile</code> are to be used.</p>
+    <h4>Using a Link-header with rel=”profile” (RFC 6906)</h4>
+    <p>The HTTP Link header field [[RFC 8288]] relates a web resource (Link Context)
+	to a target resource (Link Target
+	by specifying the relation between the two resources.
+	One of the relation types is “profile” as defined in [[RFC 6906]].
+	    RFC 6906 <a href="https://tools.ietf.org/html/rfc6906#section-3">defines a profile</a> as
+	    "additional semantics that can be used to process a resource representation […]
+	    that do not alter the basic media type semantics,"
+	    and specifically states that
+	    "creators and users of profiles MAY define and manage them in a way
+	    that allows them to be used across media types,"
+	    so that the "profile" relation seems like a suitable way
+	    to transport information about acceptable profiles (request) and payload profile (response).</p>
+    <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Using a Link header with a profile parameter">
+HEAD /some/other/resource HTTP/1.1
+Accept: text/turtle;q=0.9,application/rdf+xml;q=0.5
+Link: &lt;http://example.com/profile-1&gt;; rel="profile"
+
+HTTP/1.1 200 OK
+Content-type: text/turtle
+Link: &lt;http://example.com/profile-1&gt;; rel="profile"
+    </pre>
+    <p>There is, however, no possibility to convey quality information (q-values) using the “profile” relation.</p>
+
+    <h4>Using the Prefer/Preference-Applied header fields (RFC 7240)</h4>
+    <p>The http <code>Prefer</code> and <code>Preference-Applied</code> header fields [[RFC 7240]]
+    can be used to convey information about profile preferences.
+    A client could use the <code>Prefer</code> header to tell the server about
+    its preference for a payload conforming to a specific profile. 
+    If the server sends a <code>Preference-Applied</code> header field in the response,
+    the client will know that the preference was honoured.</p>
+    <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Using a Link header with a profile parameter">
+GET /some/resource HTTP/1.1
+Accept: text/turtle
+Prefer: profile="urn:example:schema"
+
+HTTP/1.1 200 OK
+Content-Type: text/turtle
+Preference-Applied: profile="urn:example:schema"
+    </pre>
+	<p>This approach has two disadvantages.
+		The first is - as with the <code>Link</code> header,
+		that there is no possibility to work with q-values.
+		The second one is that the only way for a server to state
+		that it ignored the preference stated by the client
+		is to omit sending a <code>Preference-Applied</code> header field.
+		For the client - however - it is not clear
+		if the <code>Preference-Applied</code> header is absent
+		because the server did not honour the preference,
+		or if it is because the server did not understand
+		the <code>Prefer</code> header in the first place.
+		This could be solved by making it mandatory to send a
+		<code>Link: rel=profil</code> header when answering to a request
+		with a <code>Prefer: profile=''</code> header in it. 
+		That solution requires that a client evaluates two different headers
+		in order to find a response to its request for a specific profile,
+		which would make client implementation more complicated.</p>
+	<p class="issue" data-number="380">
 	    The Internet-Draft for the registration of
 	    <code>Accept-Profile</code> and <code>Content-Profile</code>
 	    is currently work-in progress.
@@ -180,23 +263,41 @@
 	    or other HTTP headers for this use
 	    will be listed and discussed here.
     </p>
+</section>
+	  <section id="relatedWork-ark">
+		  <h3>Archival Resource Key (ark)</h3>
+		  <p>ARK (Archival Resource Key) [[ARK]] is an identifier scheme
+			for the persistent identification of information objects.
+			ARK identifiers can contain an optional qualifier 
+			"that extends the base ARK in order to create a kind of service entry point
+			into the object named by the NAA [sc. Name Assigning Authority]."
+			Through a qualifier, any NMA (Name Mapping Authority, service provider offering ARK resolution)
+			can supply access to variants of that object.
+			The set of qualifiers is open and any ARK NAA or NMA can invent its own.
+			The ARK specification lists versions, languages and formats as examples of qualifiers (§2.5)
+			and a profile name could be used as a qualifier
+			to refer to a representation of an information object conforming to that specific profile.
+			E. g. does <a href="https://api.istex.fr/ark:/67375/6GQ-MLC8GRWC-5/">https://api.istex.fr/ark:/67375/6GQ-MLC8GRWC-5/</a>
+			refer to different XML encodings of the metadata, one using MODS, the other one using other XML vocabularies.
+		  </p>
+	  </section>
     <div class="issue" data-number="383"></div>
     <div class="issue" data-number="516"></div>
     <div class="issue" data-number="384"></div>
-    <div class="issue" data-number="514"></div>
+
   </section>
   <section id="abstractmodel">
     <h2>Abstract Model</h2>
     <p>
       This section describes an abstract conceptual model for content negotiation by profile, independent of any
-      realizations of it within a specific environment.
+      realizations of it within specific environments.
     </p>
     <section id="abstractmodelcontext">
       <h3>Context</h3>
       <p>
         All content negotiation takes place between a <a>client</a> and a <a>server</a> over the Internet with the
         former requesting a representation of a <a>resource</a> or a <em>resource</em>'s <em>metadata</em> through a
-        <em>request</em> and receiving it via a <em>response</em>. In some cases, a <em>server</em> may have to make a 
+        <a>request</a> and receiving it via a <a>response</a>. In some cases, a <em>server</em> may have to make a
         <em>request</em> of a <em>client</em> and receive a <em>response</em>.
       </p>
       <p>
@@ -217,7 +318,14 @@
         In this abstract model, we don't assume any specifics about <em>client</em>, <em>server</em>, <em>resource</em>,
         <em>metadata</em>, <em>request</em> or <em>response</em>.
       </p>
-      <div class="issue" data-number="391"></div>
+      <p>
+        If a URI is used for profile identification, it is recommended that it be an HTTP
+        URI that dereferences to a description of the profile. Other kinds or URIs, e. g. URNs <em>MAY</em> also be used however
+        systems will need to provide means to describe such profiles for a given URN. When a token is used, the
+        server is responsible for declaring the context within which the token may be mapped to a unique profile
+        identifier, such as an HTTP namespace.
+      </p>
+      <div data-number="690" class="issue"></div>
     </section>
     <section id="requestsandresonses">
       <h3>Requests and Responses</h3>
@@ -238,20 +346,8 @@
         </li>
       </ol>
       <p>
-        A third <em>request</em> type is given that is expected not to apply to all realizations of this abstract model
-        and not all clients adhering to this specification need implement it.
-      </p>
-      <ol start="3">
-        <li>
-          <strong>list profiles tokens</strong><br />
-          a <em>client</em> requests the list of <em>token</em>s that the <em>server</em> uses for <em>profile</em>s and for which the
-          <em>server</em> is able to deliver <em>resource</em> representations that conform to the profile. The server also provides a mapping from tokens to
-          <em>profile</em> URIs
-        </li>
-      </ol>
-      <p>
         A <em>server</em> adhering to this specification MUST respond to each request with the following
-        <em>response</em>s. The first two types are required, handling the third depends on the realization environment.
+        <em>response</em>s. 
       </p>
       <ol>
         <li>
@@ -263,11 +359,6 @@
           <strong>get resource by profile</strong><br />
           a <em>server</em> responds with either a specific <em>profile</em> for a <em>resource</em> conforming to a
           requested <em>profile</em> identified by the <em>client</em> or it responds with a default <em>profile</em>
-        </li>
-        <li>
-          <strong>list profiles tokens</strong><br />
-          a <em>server</em> responds with the list of <em>profile </em> <em>token</em>s for which it is able to deliver
-		conformant <em>resource</em> representations and the mapping of the tokens to <em>profile</em> URIs.
         </li>
       </ol>
       <div class="issue" data-number="587"></div>
@@ -286,8 +377,9 @@
         </p>
         <p>
           The <strong>list profiles</strong> <em>request</em> MAY result in a <em>response</em> in one of a
-          number of structures or formats provided that the <em>profile</em>s representations
-          conforming to the request are unambiguously identified either by URI or a <em>token</em> mappable to a URI.
+          number of formats provided that the <em>profile</em>s representations of resources
+          conform to are unambiguously identified either by URI or a <em>token</em> which MUST be mappable to a URI
+          within one particular client/server session.
         </p>
         <p>
           A <em>server</em> MUST NOT list <em>profile</em>s that <em>resource</em> representations conform to if
@@ -303,7 +395,7 @@
         </p>
         <p>
           A <em>client</em> executing a <strong>get resource by profile</strong> <em>request</em> MUST
-          identify the <em>profile</em> with either a URI or a token mappable to a URI.
+          identify the <em>profile</em> with either a URI or a token mapping unambiguously within a session to a URI.
         </p>
         <p>
           A <em>client</em> executing a <strong>get resource by profile</strong> MAY <em>request</em> a
@@ -311,21 +403,43 @@
           expressed in a some form of list ordering.
         </p>
         <div class="issue" data-number="588"></div>
-      </section>
-      <section id="listprofilestokens">
-        <h4>list profiles tokens</h4>
         <p>
-          A <em>client</em>/<em>server</em> pair of agents MAY refer to <em>profile</em>s by identifiers other
-          than URIs, <em>token</em>, as long as both the <em>client</em> and <em>server</em> are able to
-          deterministically map that token to a <em>profile</em>'s URI. This is due to the known requirement for
-          <em>profile</em>s to be able to be referred to within other URIs, such as those of <em>resources</em> and other
-          situations where referring to the <em>profile</em> itself by a URI is not possible.
+          The server should attempt to reply with a profile that best matches the client request. The order of
+          preference a server <em>MUST</em> follow to determine a best matching profile is: an exact match, followed by
+          a profile (perhaps transitively) of the requested profile.
         </p>
         <p>
-          A <em>server</em> responding to a <strong>list profiles tokens</strong> <em>request</em> MUST provide
-          token/URI mappings that list tokens and URIs, either of which can be used for <strong>get resource by
-          profile</strong> <em>requests</em> within the same realization.
+          If a client requests a profile but gets a narrower profile, the Server should set its responses
+          Content-Profile header to the profile identifier that the Client requested, not the identifier of the
+          narrower profile as the client might not understand the narrower profile identifier.
         </p>
+        <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Get resource by profile, narrower profile response (HTTP realization)">
+# a request for Resource 1 according to Profile A is made
+
+GET http://example.org/resource/1 HTTP/1.1
+Accept-Profile: http://example.org/profile/A
+[more request headers]
+
+---
+
+# the server IS NOT able to respond with a representation
+# of Resource 1 conforming to Profile A
+
+# the server IS able to respond with a representation of
+# Resource 1 according to Profile B which it knows is a
+# profile of Profile A
+
+# the server indicates the response conforms to Profile A,
+# not Profile B so the client is assured of conformance
+
+HTTP/1.1 200 OK
+[other response headers]
+Content-Profile: http://example.org/profile/A
+[more response headers]
+
+[content according to Profile B and thus Profile A which it profiles]
+          </pre>
+        <div class="issue" data-number="748"></div>
       </section>
     </section>
   </section>
@@ -345,68 +459,33 @@
       <div class="issue" data-number="500"></div>
       <section id="listprofileshttp">
         <h3>list profiles</h3>
-          <p>
-            Listing profiles for a resource using HTTP can be done in two ways.
-        </p>
-	<section id="listprofileshttpoptions">
-	  <h4>Using <code>HTTP OPTIONS</code></h4>
-            <p class="issue" data-number="510">
-		The use of <code>HTTP OPTIONS</code> is discouraged
-		since the responses are not cacheable.
-            </p>
-	    <p>
-	  	The first one is to issue an <code>OPTIONS</code> request against the resource.
-		In this case a server implementing content negotiation by profile
-		SHOULD return a <code>Content-Profile</code> header
-		listing all profiles the requested resource conforms to.
-		If the server accepts HTTP <code>PUT</code>, <code>POST</code> or <code>PATCH</code>
-		commands against the specified resource,
-		it also SHOULD also return a <code>Accept-Profile</code> header
-		specifying which profiles are acceptable when sending data
-		to that resource.
-		Both the <code>Accept-Profile</code> and the <code>Content-Profile</code> headers
-		MAY specify q-values for each profile.
-	    </p>
-	    <pre class="example nohighlight" title="Using HTTP OPTIONS to list available profiles" aria-busy="false" aria-live="polite">
-OPTIONS /some/resource HTTP/1.1
-
----
-
-HTTP/1.1 200 OK
-Content-Profile: urn:example:profile:1;q=0.8,http://example.org/profiles/2;q=0.5
-Accept-Profile: urn:example:profile:1;q=0.8,http://example.org/profiles/2;q=0.5
-[More headers for this resource]
-            </pre>
-	</section>
-	<section id="listprofilehttplink">
-		<h4>Using a <code>HTTP Link</code> header field</h4>
         <p>
-          The second way is to issue an <code>GET</code> or <code>HEAD</code> against the resource. In this 
-          case a server implementing
-          content negotiation by profile SHOULD return a HTTP <code>Link</code> header containing information about the
-          default representation of that resource (i. e. the representation that will be returned after any
-          content negotiation has been performed) and information about any alternate representations of that
-          resource. The returned representation will be identified by <code>rel="self"</code>, other representations by
+          The preferred way to retrieve a list of profiles the server supports for a specific resource
+	  is to issue a <code>GET</code> or <code>HEAD</code> request for that resource.
+	  In either case, a server implementing
+          content negotiation by profile SHOULD return an HTTP <code>Link</code> header containing information about the
+          default representation of that resource and information about any alternate representations of that
+          resource that that conform to potentially other profiles. The returned representation will be identified by <code>rel="self"</code>, other representations by
           <code>rel="alternate"</code>.
         </p>
-        <p>As an example, consider the resource <code>http://example.org/a/resource</code>  available
-          in the media types <code>application/xml</code>, <code>text/html</code> and <code>text/turtle</code>.
+        <p>As an example, consider the resource <code>http://example.org/a/resource</code> available
+          in the Media Types <code>application/xml</code>, <code>text/html</code> and <code>text/turtle</code>.
           The <code>text/html</code> representation has
           no profile, whereas the <code>application/xml</code> and <code>text/turtle</code> representations are
           both available in the profiles <code>urn:example:profile:1</code> and <code>urn:example:profile:2</code>.
         </p>
         <p>
-          All representations of <code>/a/resource</code> have content-location URLs. This results in the following matrix:
+          All representations of <code>/a/resource</code> have Content-Location URLs. This results in the following matrix:
         </p>
         <table>
-          <tr><th>Media type / profile</th><th>urn:example:profile:1</th><th>urn:example:profile:2</th></tr>
+          <tr><th>Media Type / Profile</th><th>urn:example:profile:1</th><th>urn:example:profile:2</th></tr>
           <tr><th>text/html</th><td>http://example.org/a/resource.html</td><td>http://example.org/a/resource.html</td></tr>
           <tr><th>text/turtle</th><td>http://example.org/a/resource.prof1.ttl</td><td>http://example.org/a/resource.prof2.ttl</td></tr>
           <tr><th>application/xml</th><td>http://example.org/a/resource.prof1.xml</td><td>http://example.org/a/resource.prof2.xml</td></tr>
         </table>
         <p>
           Assuming that a request without an <code>Accept-Profile</code> header per default delivers content conforming to
-          <code>urn:example:profile:1</code> a request/response pair would look as follows:
+          <code>urn:example:profile:1</code>, an HTTP request/response pair would look as follows:
         </p>
         <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Using a Link-header to point to a list of available profiles">
 HEAD /a/resource HTTP/1.1
@@ -425,10 +504,247 @@ Link: &lt;http://example.org/a/resource.prof1.ttl&gt;; rel="self"; type="text/tu
   &lt;http://example.org/a/resource.prof2.xml&gt;; rel="alternate"; type="application/xml"; profile="urn:example:profile:2",
   &lt;http://example.org/a/resource.html&gt;; rel="alternate"; type="text/html"
 [more response headers]
+        </pre>
+        <section id="listprofiles-content">
+          <h3>Optional response content</h3>
+          <p>
+            While the server SHOULD return the canonical list of profiles in the response's Link headers, it MAY also
+            supply the list in response content and if it does so, content negotiation by Media Type CAN be used to request
+            one of the following formats:
+          </p>
+          <dl>
+            <dt>text/uri-list</dt>
+            <dd>
+              <p>
+                A basic, unordered list of profile URIs to which representations of the resource conform - both the 'self'
+                and 'alternate' profiles.
+              </p>
+              <p>
+                Comment lines - lines starting with # - indicating 'self' and 'alternative' may be supplied above each URI
+              </p>
+            </dd>
+            <dt>application/ld+json or <a href="https://www.w3.org/2001/sw/wiki/RDF">RDF data</a> serialized in any format</dt>
+            <dd>
+              <p>
+                A serialization of profile information and resource/profile associations formalised using the Profiles
+                Vocabulary [[PROF]].
+              </p>
+            </dd>
+            <dt>text/html</dt>
+            <dd>A human-readable version of Profiles Vocabulary content.</dd>
+          </dl>
+          <p>
+            The example below shows the same information conveyed according to the three different response content Media
+            Types listed above.
+          </p>
+          <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Different ways to include profiles information in response content">
+# request for /a/resource
+
+GET http://example.org/a/resource HTTP/1.1
+
+---
+
+# header response
+
+HTTP/1.1 200 OK
+Content-Type: text/turtle
+Content-Location: http://example.org/a/resource.prof1.ttl
+Content-Profile: urn:example:profile:1
+Link: &lt;http://example.org/a/resource.prof1.ttl&gt;; rel="self"; type="text/turtle"; profile="urn:example:profile:1",
+  &lt;http://example.org/a/resource.prof2.ttl&gt;; rel="alternate"; type="text/turtle"; profile="urn:example:profile:2",
+  &lt;http://example.org/a/resource.prof1.xml&gt;; rel="alternate"; type="application/xml"; profile="urn:example:profile:1",
+  &lt;http://example.org/a/resource.prof2.xml&gt;; rel="alternate"; type="application/xml"; profile="urn:example:profile:2",
+  &lt;http://example.org/a/resource.html&gt;; rel="alternate"; type="text/html"
+[more response headers]
+
+# response content according to the text/uri-list Media Type, with comments
+
+-
+# self
+urn:example:profile:1
+# alternate
+urn:example:profile:2
+-
+
+# response content according to the application/ld+json Media Type (JSON-LD)
+
+-
+{
+  "@context": {
+    "dct": "http://purl.org/dc/terms/",
+    "prof": "http://www.w3.org/ns/dx/prof/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+  },
+  "@graph": [
+    {
+      "@id": "http://example.org/a/resource.prof2.xml",
+      "dct:conformsTo": {
+        "@id": "urn:example:profile:2"
+      },
+      "dct:format": {
+        "@id": "https://w3id.org/mediatype/application/xml"
+      },
+      "rdfs:comment": "alternate"
+    },
+    {
+      "@id": "http://example.org/a/resource.prof1.ttl",
+      "dct:conformsTo": {
+        "@id": "urn:example:profile:1"
+      },
+      "dct:format": {
+        "@id": "https://w3id.org/mediatype/text/turtle"
+      },
+      "rdfs:comment": "self"
+    },
+    {
+      "@id": "http://example.org/a/resource.prof2.ttl",
+      "dct:conformsTo": {
+        "@id": "urn:example:profile:2"
+      },
+      "dct:format": {
+        "@id": "https://w3id.org/mediatype/text/turtle"
+      },
+      "rdfs:comment": "alternate"
+    },
+    {
+      "@id": "http://example.org/a/resource.prof1.xml",
+      "dct:conformsTo": {
+        "@id": "urn:example:profile:1"
+      },
+      "dct:format": {
+        "@id": "https://w3id.org/mediatype/application/xml"
+      },
+      "rdfs:comment": "alternate"
+    }
+  ]
+}
+-
+
+# response content according to the text/html Media Type
+
+-
+&lt;html&gt;
+  &lt;head&gt;[head information]&lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Alternative Profile information for Resource http://example.org/a/resource&lt;/h1&gt;
+    &lt;table&gt;
+      &lt;tr&gt;
+          &lt;th&gt;Media Type / Profile&lt;/th&gt;
+          &lt;th&gt;urn:example:profile:1&lt;/th&gt;
+          &lt;th&gt;urn:example:profile:2&lt;/th&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;th&gt;text/html&lt;/th&gt;
+          &lt;td&gt;http://example.org/a/resource.html&lt;/td&gt;
+          &lt;td&gt;http://example.org/a/resource.html&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;th&gt;text/turtle&lt;/th&gt;
+          &lt;td&gt;http://example.org/a/resource.prof1.ttl&lt;/td&gt;
+          &lt;td&gt;http://example.org/a/resource.prof2.ttl&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;th&gt;application/xml&lt;/th&gt;
+          &lt;td&gt;http://example.org/a/resource.prof1.xml&lt;/td&gt;
+          &lt;td&gt;http://example.org/a/resource.prof2.xml&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+-
           </pre>
-          <div class="issue" data-number="501"></div>
+        </section>
+        <div class="issue" data-number="290"></div>
+        <section id="listprofiles-tokens">
+          <h3>Token mappings</h3>
+          <p>
+            If HTTP <em>server</em>s wish to allow <em>client</em>s to identify <em>profile</em>s via <em>token</em>,
+            in addition to the the mandatory identification of <em>profile</em>s via via URI, the <em>server</em>s will
+            need to provide a <em>token</em> / URI mapping via this <strong>list profiles</strong> function. In this
+            HTTP realization, this may be implemented in a number of ways. The preferred way is to add "token"
+            parameters to the HTTP Content-Profile and Link HTTP headers.
+          </p>
+          <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="HTTP headers with profile URI / token mappings using 'token' parameters">
+# The Profile with urn:example:profile:1 is mapped to token p1 and URI
+# and the Profile with URI http://example.org/profile/2 is mapped to p2
+
+HEAD /a/resource HTTP/1.1
+Accept: text/turtle
+[more request headers]
+
+---
+
+HTTP/1.1 200 OK
+Content-Type: text/turtle
+Content-Location: http://example.org/a/resource.prof1.ttl
+Content-Profile: urn:example:profile:1;token=p1
+Link: &lt;http://example.org/a/resource.prof1.ttl&gt;; rel="self"; type="text/turtle"; profile="urn:example:profile:1;token=p1",
+  &lt;http://example.org/a/resource.prof2.ttl&gt;; rel="alternate"; type="text/turtle"; profile="http://example.org/profile/2;token=p2",
+  &lt;http://example.org/a/resource.prof1.xml&gt;; rel="alternate"; type="application/xml"; profile="urn:example:profile:1;token=p1",
+  &lt;http://example.org/a/resource.prof2.xml&gt;; rel="alternate"; type="application/xml"; profile="http://example.org/profile/2;token=p2",
+  &lt;http://example.org/a/resource.html&gt;; rel="alternate"; type="text/html"
+[more response headers]
+          </pre>
+          <div class="issue">
+            Nick: I don't think <code>profile="urn:example:profile:1;token=p1"</code> will work within the Link header
+            (too many layers of structured text) however I believe that where ever a profile URI is quoted, the token
+            must be also thus it's necessary.
+          </div>
+          <div class="note" title="Multiple ways of conveying URI / token mappings">
+            <p>
+              There are several methods that many be used to convey URI / token mappings including the recommended
+              method described and exemplified above.
+            </p>
+            <h4>Option 1: token parameters (recommended)</h4>
+            <p>
+              "token" parameters are added to <code>Content-Profile</code> &amp; <code>Link profile=</code> HTT headers.<br />
+              Pros: self-contained,flexible, explicit.<br />
+              Cons: potential redundancy in URIs if many offered
+            </p>
+            <h4>Option 2: registered tokens</h4>
+            <p>
+              Tokens are registered in a global registry and servers may use them in place of a URI<br />
+              <code>Content-profile: token1, URI2</code>
+              Pros: compact<br />
+              Cons: a global registry for profiles not manageable when many systems define profiles and such a registry
+              limits other capabilities of profile description by forcing generic profiles
+            </p>
+            <h4>Option 3: allow namespace declarations</h4>
+            <p>
+              As per the use of CURIEs [[CURIE]] whose specification "...defines a generic, abbreviated syntax for
+              expressing URIs.", within JSON-LD [[JSON-LD]], a token may be indicated for use in place of a URI within
+              a namespacing context. In this method, key/value pairs of tokens/URIs are defined within an HTTP header
+              such as <code>Content-Profile</code> like this:
+            </p>
+            <p>
+              <code>Content-Profile: @:http://example.org/profiles/,@w3c:http://w3.org/knownprofiles#, :token1, w3c:token2</code>
+            </p>
+            <p>
+              Where the first key/value pair of token/URI is key: &lt;nothing&gt;, value: http://example.org/profiles/
+              and the second, is key: &lt;w3c&gt;, value:http://w3.org/knownprofiles#.
+            </p>
+            <p>
+              Pros: compact, no registry requirement<br />
+              Cons: clients have more parsing to do<br />
+              Note: could easily be a JSON-LD payload<br />
+              (alternative syntax using parameter ns2;ns=http://example.org/profiles/)
+            </p>
+            <h4>Option 4: namespace header</h4>
+            <p>
+              In this method, a new HTTP header could be introduced to specifically convey token/URI profile key/value
+              pairs. If <code>Content-Profile-Namespaces</code> is to be the new HTTP header, then a <em>server</em> may
+              respond to a request with the following pair of headers:
+            </p>
+            <p>
+              <code>
+                Content-Profile-Namespaces: :http://example.org/profiles/,w3c:http://w3.org/knownprofiles#<br />
+                Content-Profile: :token1, w3c:token2
+              </code>
+            </p>
+          </div>
+        </section>
+        <div class="issue" data-number="679"></div>
       </section>
-       </section>
       <section id="getresourcebyprofilehttp">
         <h3>get resource by profile</h3>
         <p>
@@ -455,12 +771,6 @@ Content-Profile: urn:example:profile:1
           Having performed content negotiation and returned a resource representation, it is RECOMMENDED
           that the server also include a Link header indicating the availability of alternate resources
           encoded in other media types and conforming to other profiles, as described above.
-        </p>
-      </section>
-      <section id="listprofilestokenshttp">
-        <h3>list profiles tokens</h3>
-        <p>
-          Currently, there is no proposed way to implement this function using HTTP.
         </p>
       </section>
     </section>
@@ -603,10 +913,6 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
           a client requesting profil
         </p>
       </section>
-      <section id="listprofilestokensqsa">
-        <h4>list profiles tokens</h4>
-        <div class="issue" title="To be completed"></div>
-      </section>
     </section>
   </section>
   <section id="testsuites">
@@ -643,6 +949,34 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
     </ul>
     <div class="issue" data-number="467"></div>
   </section>
+<section id="acknowledgements" class="informative">
+	<h2>Acknowledgements</h2>
+	<p>Comments and suggestions from
+		Annette Greiner,
+		Erik Wilde,
+		Gregg Kellogg
+		and Kam Hay Fung
+		improved this specification
+	</p>
+</section>
+<section id="changes" class="informative">
+	<h2>Changes</h2>
+	<p>Changes since the <a href="https://www.w3.org/TR/2018/WD-dx-prof-conneg-20181218/">18 December 2018 Working Draft</a> are:</p>
+	<ul>
+		<li>Added text about existing standards for transporting profile information in http headers
+			to <a href="#relatedwork">related work</a>.
+			(<a href="https://github.com/w3c/dxwg/issues/45">Issue 45</a>)</li>
+		<li>Removed advice on use of HTTP OPTIONS.
+			(<a href="https://github.com/w3c/dxwg/issues/510">Issue 510</a>)</li>
+		<li>Added text about ARK identifiers to <a href="#relatedwork">related work</a>.
+			(<a href="https://github.com/w3c/dxwg/issues/514">Issue 514</a>)</li>
+		<li>Clarified difference between the <code>profile</code> parameter in <code>Accept</code> header fields
+			and the <code>Accept-Profile</code> header field.
+			(<a href="https://github.com/w3c/dxwg/issues/662">Issue 662</a>)</li>
+		<li>Updated the <a href="#security_and_privacy">Security and Privacy</a> section.
+			(<a href="https://github.com/w3c/dxwg/issues/782">Issue 782</a>)</li>
+	</ul>
+</section>
   <section id="security_and_privacy" class="informative">
     <h2>Security and Privacy</h2>
     <p>
@@ -650,8 +984,10 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
       that are relevant for that protocol are also relevant for profile negotiation. E. g.,
       information such as user agent, accept-headers, IP address etc. can potentially be used as
       identifying information, and particularly, the IP address adds information about geolocation
-      and institutional membership. Apart from that, there are no known security or privacy impacts
-      of this feature.
+      and institutional membership.
+      Further, offering a list of acceptable profiles at the beginning of a negotiation process
+      can reveal information about the user's interests
+      that could be used to add such information to a user profile.
     </p>
     <p>
       For a more complete view of those issues, cf. the

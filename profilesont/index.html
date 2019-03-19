@@ -55,12 +55,8 @@ This vocabulary also provides for the description of relationships between such 
     have generally been specified through textually-oriented documents, and/or platform specific constraint languages.
 	</p>
   <p>
-    A vocabulary of <code>Resource Role</code>s is provided alongside this vocabulary and that list is extensible:
+    A vocabulary of <code>Resource Role</code> instances is provided in <a href="#resource-roles-vocab">Section 8.</a>
   </p>
-  <ul>
-    <li><a href="https://w3c.github.io/dxwg/profilesont/resource_roles.html">Resource Roles Vocabulary</a></li>
-  </ul>
-  <div class="issue" data-number="536"></div>
 </section>
 <section id="conformance">
   <!-- boilerplate will be added here -->
@@ -283,16 +279,14 @@ CSIRO's publications catalogue."""@en ;
   <section id="roles-vocab">
     <h3>Roles Vocabulary</h3>
     <p>
-      A extensible vocabulary of <code>Resource Role</code>s is provided alongside this vocabulary.
+      A starting point vocabulary of <code>Resource Role</code> instances that is expected to be extended by
+      implementers of PROF to suite specialised needs is provided within this vocabulary in
+      <a href="#resource-roles-vocab">Section 8</a>.
     </p>
-    <ul>
-      <li><a href="https://w3c.github.io/dxwg/profilesont/resource_roles.html">Resource Roles Vocabulary</a></li>
-    </ul>
   </section>
 </section>
 <section id="specification">
   <h2>Vocabulary Specification</h2>
-  <div class="issue" data-number="406"></div>
   <section id="RDF-representation">
     <h4>RDF representation</h4>
     <p>The PROF vocabulary is <a href="profilesont.ttl">available in RDF</a>. Alongside the primary artifact, there is
@@ -321,7 +315,7 @@ CSIRO's publications catalogue."""@en ;
     <h4>Class: Profile</h4>
     <table class="definition">
       <thead>
-      <tr><th><a href="https://www.w3.org/TR/owl-syntax/#Classes">OWL Class</a>:</th><th><a href="#Class:Profile">prof:Profile</a></th></tr>
+      <tr><th><a href="https://www.w3.org/TR/owl-syntax/#Classes">OWL Class</a></th><th><a href="#Class:Profile">prof:Profile</a></th></tr>
       </thead>
       <tbody>
       <tr><td class="prop">Label:</td><td>Profile</td></tr>
@@ -438,7 +432,7 @@ CSIRO's publications catalogue."""@en ;
       <a href="examples/isTransitiveProfileOf.svg">
         <img src="examples/isTransitiveProfileOf.svg" title="Property isTransitiveProfileOf in use" style="width:90%;" />
       </a>
-      <figcaption>Property isInheritedFrom in use. See the full explanation in the example text below.</figcaption>
+      <figcaption>Property isTransitiveProfileOf in use. See the full explanation in the example text below.</figcaption>
     </figure>
     <pre class="example nohighlight turtle" aria-busy="false" aria-live="polite" title="Property isInheritedFrom in use">
 # A profile that is within a hierarchy of profiles may wish to indicate it profiles
@@ -519,7 +513,7 @@ CSIRO's publications catalogue."""@en ;
     <div class="issue" data-number="573"></div>
     <table class="definition">
       <thead>
-      <tr><th><a href="https://www.w3.org/TR/owl-syntax/#Classes">OWL Class</a>:</th><th><a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a></th></tr>
+      <tr><th><a href="https://www.w3.org/TR/owl-syntax/#Classes">OWL Class</a></th><th><a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a></th></tr>
       </thead>
       <tbody>
       <tr><td class="prop">Label:</td><td>Resource Descriptor</td></tr>
@@ -607,7 +601,9 @@ CSIRO's publications catalogue."""@en ;
         <a href="examples/isInheritedFrom.svg">
           <img src="examples/isInheritedFrom.svg" title="Property isInheritedFrom in use" style="width:90%;" />
         </a>
-        <figcaption>Property isInheritedFrom in use. Here the <code>prof:ResourceDescriptor</code> RS 2 refers to the same artifact (a constraints file) as RS 1 and it is inherited by <strong>Profile Y</strong> from <code>dct:Standard</code> <strong>Standard X</strong></figcaption>
+          <figcaption>
+            Property <code>isInheritedFrom</code> in use. Here the <code>prof:ResourceDescriptor</code> instance <strong>Profile Y, Resource Descriptor 2</strong> refers to the same artifact (a constraints file) as <strong>Profile X, Resource Descriptor 1</strong> and it is inherited by <strong>Profile Y</strong> from <strong>Profile X</strong> which <strong>Profile Y</strong> is a profile of.
+          </figcaption>
       </figure>
       <pre class="example nohighlight turtle" aria-busy="false" aria-live="polite" title="Property isInheritedFrom in use">
 # If Standard X, described using PROF, is given as having a Resource
@@ -615,7 +611,7 @@ CSIRO's publications catalogue."""@en ;
 
 @prefix ex1: &lt;http://example.org/profile1/&gt; .
 @prefix ex2: &lt;http://example.org/profile2/&gt; .
-@prefix dct: &lt;http://purl.org/dc/terms/&gt; .
+@prefix dct: &lt;http://purl.org/dc/terms/&gt; .Property isInheritedFrom in use.
 @prefix prof: &lt;http://www.w3.org/ns/dx/prof/&gt; .
 @prefix role: &lt;http://www.w3.org/ns/dx/prof/role/&gt; .
 
@@ -669,16 +665,150 @@ ex2:Profile_Y
     <h4>Class: ResourceRole</h4>
     <table class="definition">
       <thead>
-      <tr><th><a href="https://www.w3.org/TR/owl-syntax/#Classes">OWL Class</a>:</th><th><a href="#Class:ResourceRole">prof:ResourceRole</a></th></tr>
+      <tr><th><a href="https://www.w3.org/TR/owl-syntax/#Classes">OWL Class</a></th><th><a href="#Class:ResourceRole">prof:ResourceRole</a></th></tr>
       </thead>
       <tbody>
-        <tr><td class="prop">Label:</td><td>Resource Role</td></tr>
-        <tr><td class="prop">Definition:</td><td>The role that an Resource plays</td></tr>
-        <tr><td class="prop">Sub class of:</td><td><a href="https://www.w3.org/TR/skos-reference/#Concept">skos:Concept</a></td></tr>
-        <tr><td class="prop">Usage note:</td><td>Specific terms must come from a vocabulary. Such a vocabulary is provided alongside this ontology and that list is extensible: <a href="https://w3c.github.io/dxwg/profilesont/resource_roles.html">Resource Roles Vocabulary</a></td></tr>
+      <tr><td class="prop">Label:</td><td>Resource Role</td></tr>
+      <tr><td class="prop">Definition:</td><td>The role that an Resource plays</td></tr>
+      <tr><td class="prop">Sub class of:</td><td><a href="https://www.w3.org/TR/skos-reference/#Concept">skos:Concept</a></td></tr>
+      <tr><td class="prop">Usage note:</td><td>Specific terms must come from a vocabulary. Such a vocabulary is provided alongside this ontology and that list is extensible: <a href="https://w3c.github.io/dxwg/profilesont/resource_roles.html">Resource Roles Vocabulary</a></td></tr>
       </tbody>
+      </a>
     </table>
     <div class="issue" data-number="452"></div>
+  </section>
+</section>
+<section id="resource-roles-vocab">
+  <h3>Resource Role Instances</h3>
+  <p>
+    Here are a small set of Resource Role Instances developed during the creation of this vocabulary. Application may
+    choose to extend this list as required with new and specialised Resource Role instances for their purposes.
+  </p>
+  <p>
+    These instances are both <code>owl:NamedIndividual</code>s and <code>skos:Concept</code>s and have basic SKOS
+    [[SKOS-REFERENCE]] properties.
+  </p>
+  <section id="Role:Constraints" class="property">
+    <h4>Resource Role: Constraints</h4>
+    <table class="definition">
+      <thead>
+      <tr>
+        <th><a href="https://www.w3.org/TR/skos-reference/#Concept">SKOS Concept</a></th>
+        <th><a href="#Role:constraints">role:constraints</a></th></tr>
+      </thead>
+      <tbody>
+      <tr><td class="prop">Pref Label:</td><td>Constraints</td></tr>
+      <tr><td class="prop">Definition:</td><td>Descriptions of obligations, limitations or extensions that the profile defines</td></tr>
+      <tr><td class="prop">Usage Note:</td><td>Use this Role when you want to indicate the constraints that the associated Profile imposes on to of base specifications</td></tr>
+      </tbody>
+    </table>
+  </section>
+  <section id="Role:Example" class="property">
+    <h4>Resource Role: Example</h4>
+    <table class="definition">
+      <thead>
+      <tr>
+        <th><a href="https://www.w3.org/TR/skos-reference/#Concept">SKOS Concept</a></th>
+        <th><a href="#Role:example">role:example</a></th></tr>
+      </thead>
+      <tbody>
+      <tr><td class="prop">Pref Label:</td><td>Example</td></tr>
+      <tr><td class="prop">Definition:</td><td>Sample instance data conforming to the profile</td></tr>
+      <tr><td class="prop">Usage Note:</td><td>Use this Role when you want to provide instances of data conforming to the profile to inform users</td></tr>
+      </tbody>
+    </table>
+  </section>
+  <section id="Role:Guidance" class="property">
+    <h4>Resource Role: Guidance</h4>
+    <table class="definition">
+      <thead>
+      <tr>
+        <th><a href="https://www.w3.org/TR/skos-reference/#Concept">SKOS Concept</a></th>
+        <th><a href="#Role:Guidance">role:guidance</a></th></tr>
+      </thead>
+      <tbody>
+      <tr><td class="prop">Pref Label:</td><td>Guidance</td></tr>
+      <tr><td class="prop">Definition:</td><td>Documents, in human-readable form, how to use the profile</td></tr>
+      <tr><td class="prop">Usage Note:</td><td>Many existing profiles treat their human-readable forms (PDF documents etc.) as authoritative. This role is suggestive of non-authoritativeness. For a role for a human-readable resource that is authoritative, see <a href="#Role:Specification">Specification</a>.</td></tr>
+      </tbody>
+    </table>
+  </section>
+  <section id="Role:Mapping" class="property">
+    <h4>Resource Role: Mapping</h4>
+    <table class="definition">
+      <thead>
+      <tr>
+        <th><a href="https://www.w3.org/TR/skos-reference/#Concept">SKOS Concept</a></th>
+        <th><a href="#Role:">role:mapping</a></th></tr>
+      </thead>
+      <tbody>
+      <tr><td class="prop">Pref Label:</td><td>Mapping</td></tr>
+      <tr><td class="prop">Definition:</td><td>Describes conversions between two specifications</td></tr>
+      </tbody>
+    </table>
+  </section>
+  <div class="note">
+    This Role may necessitate the introduction to PROF of <code>mappingFrom</code> and <code>mappingTo</code> properties.
+  </div>
+  <div class="issue" data-number="810"></div>
+  <section id="Role:Schema" class="property">
+    <h4>Resource Role: Schema</h4>
+    <table class="definition">
+      <thead>
+      <tr>
+        <th><a href="https://www.w3.org/TR/skos-reference/#Concept">SKOS Concept</a></th>
+        <th><a href="#Role:">role:schema</a></th></tr>
+      </thead>
+      <tbody>
+      <tr><td class="prop">Pref Label:</td><td>Schema</td></tr>
+      <tr><td class="prop">Alternate Label:</td><td>Shape, Structure</td></tr>
+      <tr><td class="prop">Definition:</td><td>Machine-readable structural descriptions of data defined by the profile</td></tr>
+      </tbody>
+    </table>
+  </section>
+  <section id="Role:Specification" class="property">
+    <h4>Resource Role: Specification</h4>
+    <table class="definition">
+      <thead>
+      <tr>
+        <th><a href="https://www.w3.org/TR/skos-reference/#Concept">SKOS Concept</a></th>
+        <th><a href="#Role:">role:specification</a></th></tr>
+      </thead>
+      <tbody>
+      <tr><td class="prop">Pref Label:</td><td>Specification</td></tr>
+      <tr><td class="prop">Definition:</td><td>Defining the profile in human-readable form</td></tr>
+      <tr><td class="prop">Usage Note:</td><td>This role indicates authoritativeness. For a role for a human-readable resource that is not authoritative, see <a href="#Role:Guidance">Guidance</a></td></tr>
+      </tbody>
+    </table>
+  </section>
+  <section id="Role:Validation" class="property">
+    <h4>Resource Role: Validation</h4>
+    <table class="definition">
+      <thead>
+      <tr>
+        <th><a href="https://www.w3.org/TR/skos-reference/#Concept">SKOS Concept</a></th>
+        <th><a href="#Role:">role:validation</a></th></tr>
+      </thead>
+      <tbody>
+      <tr><td class="prop">Pref Label:</td><td>Validation</td></tr>
+      <tr><td class="prop">Definition:</td><td>Supplies instructions about how to verify conformance of data to the profile</td></tr>
+      <tr><td class="prop">Usage Note:</td><td>This role implies inclusion or import of inherited constraints</td></tr>
+      </tbody>
+    </table>
+  </section>
+  <section id="Role:Vocabulary" class="property">
+    <h4>Resource Role: Vocabulary</h4>
+    <table class="definition">
+      <thead>
+      <tr>
+        <th><a href="https://www.w3.org/TR/skos-reference/#Concept">SKOS Concept</a></th>
+        <th><a href="#Role:Vocabulary">role:vocabulary</a></th></tr>
+      </thead>
+      <tbody>
+      <tr><td class="prop">Pref Label:</td><td>Vocabulary</td></tr>
+      <tr><td class="prop">Definition:</td><td>Defines terms used in the profile specification</td></tr>
+      </tbody>
+    </table>
   </section>
 </section>
 <section id="examples" class="informative">
@@ -705,11 +835,8 @@ ex2:Profile_Y
         <img src="examples/dcat-ap.svg" title="DCAT-AP described using this vocabulary" style="width:90%;" />
       </a>
       <figcaption>
-        Part of the DCAT-AP Profile described using this ontology. The DCAT-AP profile of DCAT is outlined in blue.
-        The formats of the DCAT-AP Profile's Resource Descriptors are outlined in orange. The roles that those two
-        Resource Descriptors play are outlines in red. The second Resource Descriptor conforms to SHACL, outline in
-        purple. The artifacts (files) that DCAT-AP has, described here by the Resource Descriptors, are outlined in
-        green.
+        Part of the DCAT-AP Profile described using this ontology. Here two two Resource Descriptors are shown relating
+        to the Profile indicating resources with "Guidance" and "Constraints" roles.
       </figcaption>
     </figure>
     <p>
@@ -720,30 +847,17 @@ ex2:Profile_Y
         a <a href="#Class:Profile">prof:Profile</a>
         <ul>
           <li>
-            with a <a href="#Property:isProfileOf">prof:isProfileOf</a> value of
-            <a href="https://www.w3.org/ns/dcat#">https://www.w3.org/ns/dcat</a> - the namespace for the DCAT
+            with a <a href="#Property:isProfileOf">prof:isProfileOf</a> link to the DCAT [[DCAT}} standard
           </li>
         </ul>
       </li>
       <li>
-        four <a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a> objects - linked to the
-        <em>prof:Profile</em> object by a <a href="#Property:hasResource">prof:hasResource</a> property
+        two <a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a> objects - linked to the
+        <em>prof:Profile</em> object by <a href="#Property:hasResource">prof:hasResource</a> properties
         <ul>
           <li>
             a document, with a <a href="#Property:format">dct:format</a> value of
             <a href="https://w3id.org/mediatype/application/pdf">application/pdf</a> and a
-            <a href="#Property:hasRole">prof:hasRole</a> value of
-            <a href="https://w3c.github.io/dxwg/profilesont/resource_roles.html#Concept:Guidance">role:Guidance</a>
-          </li>
-          <li>
-            <em>(not shown in Figure 5)</em> a document, with a <a href="#Property:format">dct:format</a> value of
-            <a href="https://w3id.org/mediatype/application/msword">application/msword</a> and a
-            <a href="#Property:hasRole">prof:hasRole</a> value of
-            <a href="https://w3c.github.io/dxwg/profilesont/resource_roles.html#Concept:Guidance">role:Guidance</a>
-          </li>
-          <li>
-            <em>(not shown in Figure 5)</em> an image, with a <a href="#Property:format">dct:format</a> value of
-            <a href="https://w3id.org/mediatype/image/png">image/png</a> and a
             <a href="#Property:hasRole">prof:hasRole</a> value of
             <a href="https://w3c.github.io/dxwg/profilesont/resource_roles.html#Concept:Guidance">role:Guidance</a>
           </li>
@@ -753,22 +867,20 @@ ex2:Profile_Y
             <a href="#Property:conformsTo">dct:conformsTo</a> value of
             <a href="http://www.w3.org/ns/shacl">http://www.w3.org/ns/shacl</a> (the namespace of the [[SHACL]]
             specification) and a <a href="#Property:hasRole">prof:hasRole</a> value of
-            <a href="https://w3c.github.io/dxwg/profilesont/resource_roles.html#Concept:FullConstraints">role:FullConstraints</a>
+            <a href="https://w3c.github.io/dxwg/profilesont/resource_roles.html#Concept:FullConstraints">role:Constraints</a>
           </li>
         </ul>
         each with a <a href="#Property:hasArtifact">prof:hasArtifact</a> value of an implementing resource object in the
         European Commission's <a href="https://joinup.ec.europa.eu">'joinup' data catalogue</a>
         <ul>
-          <li><a href="https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f6f27f059_bf785_b4d7d_bb602_b6448aab73bd5">b6448aab73bd5</a></li>
           <li><a href="https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f17e18570_b1d77_b4171_b9df5_bb53cb4f017d4">bb53cb4f017d4</a></li>
-          <li><a href="https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f1131a208_b92e9_b4427_ba40c_b6c47746cd422">b6c47746cd422</a></li>
           <li><a href="https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f016d88c3_ba0b3_b4506_bae4e_b758e7401c096">b758e7401c096</a></li>
         </ul>
       </li>
     </ul>
     <p>
       In RDF (turtle format), DCAT-AP is described using the Profiles Vocabulary, with many properties not listed in the
-      summary descriptions above as:
+      summary figure and description above as:
     </p>
     <pre class="example nohighlight turtle" aria-busy="false" aria-live="polite" title="DCAT-AP described using Profile Ontology in RDF (turtle)">
 @prefix dc:    &lt;http://purl.org/dc/elements/1.1/&gt; .
@@ -835,12 +947,6 @@ ex2:Profile_Y
   <section id="eg-hierarchy">
     <h3>DCAT-AP hierarchy</h3>
     <p><em>This example showcases this vocabulary being used to indicated profiles within a complex hierarchy.</em></p>
-    <figure id="fig-eg-hierarchy">
-      <a href="examples/hierarchy.svg">
-        <img src="examples/hierarchy.svg" title="DCAT-AP and related profiles in a hierarchy" style="width:50%;" />
-      </a>
-      <figcaption>DCAT-AP and related profiles in a hierarchy</figcaption>
-    </figure>
     <p>
       DCAT-AP, a profile of DCAT, has itself been profiled for various European countries, such as Belgium who has
       issued <a href="http://dcat.be/">DCAT-BE</a>. Additionally, there are several domain profiles of DCAT-AP, such as
@@ -856,7 +962,10 @@ ex2:Profile_Y
       <a href="examples/hierarchy.svg">
         <img src="examples/hierarchy.svg" title="DCAT-AP and related profiles in a hierarchy" style="width:70%;" alt="DCAT-AP and related profiles in a hierarchy" />
       </a>
-      <figcaption>DCAT-AP and related profiles in a hierarchy. '?' shows a potential future profile that profiles both DCAT-BE &amp; StatDCAT-AP.</figcaption>
+      <figcaption>
+        DCAT-AP and related profiles in a hierarchy. The Profile labelled '?' shows a potential future profile instance
+        that profiles both DCAT-BE &amp; StatDCAT-AP.
+      </figcaption>
     </figure>
     <pre class="example nohighlight turtle" aria-busy="false" aria-live="polite" title="The GeoDCAT-AP profile hierarchy described using Profile Ontology in RDF (turtle)">
 @prefix prof: &lt;http://www.w3.org/ns/dx/prof/&gt; .
@@ -889,6 +998,14 @@ ex2:Profile_Y
   a prof:Profile ;
   rdfs:label "GeoDCAT-AP_IT" ;
   prof:isProfileOf &lt;https://joinup.ec.europa.eu/release/geodcat-ap-v10&gt; ;
+
+# an example as per the Figure above, not an existing profile
+&lt;http://example.org/profile/questionmark&gt;
+  a prof:Profile ;
+  rdfs:label "?" ;
+  prof:isProfileOf
+      &lt;https://joinup.ec.europa.eu/solution/statdcat-application-profile-data-portals-europ&gt; ,
+      &lt;http://dcat.be&gt; .
     </pre>
     <p>
       Since there are no cardinality restrictions on either the property <code>prof:isProfileOf</code> or other restrictions on the class definition of
@@ -975,6 +1092,22 @@ ex2:Profile_Y
 
   </p>
   <div class="issue" data-number="479"></div>
+</section>
+<section id=changes" class="informative">
+<h2>Changes</h2>
+ <p>Changes since the <a href="https://www.w3.org/TR/2018/WD-dx-prof-20181218/">First Public Working Draft</a> are:
+ <ul>
+ <li>Removed BaseSpecification class (<a href="https://github.com/w3c/dxwg/issues/641">Issue 641</a>)</li>
+ <li>Changed name to Profiles Vocabulary (<a href="https://github.com/w3c/dxwg/issues/758">Issue 758</a>)</li>
+ <li>Added a set of common roles to the vocabulary (<a href="https://github.com/w3c/dxwg/issues/758">Issue 758)</a></li>
+ <li>Improved introduction to clarify scope</li>
+ <li>Improved examples (<a href="https://github.com/w3c/dxwg/issues/658">Issue 658</a>)</li>
+ <li>Improved diagrams (<a href="https://github.com/w3c/dxwg/issues/697">#697</a>, <a href="https://github.com/w3c/dxwg/issues/689">#689</a>, <a href="https://github.com/w3c/dxwg/issues/731">#731</a>)</li>
+ </ul>
+ </p>
+ <p>
+ A <em>comments disposition document</em> is in preparation and will be available from the <a href="https://www.w3.org/2017/dxwg/wiki/Main_Page">Data Exchange Working Group</a> home page.
+ </p>
 </section>
 <section class="appendix" id="appendices">
   <h2>Appendices</h2>
