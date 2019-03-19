@@ -215,6 +215,22 @@ var respecConfig = {
         "DCAT-BE": {
             title: "Linking data portals across Belgium.",
             href: "http://dcat.be/"
+        },
+        "DCAT-AP_IT": {
+            title: "Profilo nazionale dei metadati DCAT-AP_IT v1.0",
+            href: "https://www.dati.gov.it/content/profilo-nazionale-dei-metadati-dcat-ap-it-v10"
+        },
+        "GeoDCAT-AP_IT": {
+            title: "GeoDCAT-AP in Italy, the national guidelines published"
+            href: "https://joinup.ec.europa.eu/news/geodcat-apit"
+        },
+        "DCAT-AP-NO": {
+            title: "Standard for beskrivelse av datasett og datakataloger (DCAT-AP-NO)",
+            href: "http://difi.github.io/dcat-ap-no/"
+        },
+        "DCAT-AP.de": {
+            title: "DCAT-AP.de als formaler Metadatenstandard für offene Verwaltungsdaten bestätigt",
+            href: "https://www.govdata.de/standardisierung"
         }
     }
 };
