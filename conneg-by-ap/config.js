@@ -39,10 +39,31 @@ var respecConfig = {
     wgPatentURI: "https://www.w3.org/2004/01/pp-impl/99375/status",
     inlineCSS: "true",
     lint: "false",
+    maxTocLevel: 3,
     issueBase: "https://github.com/w3c/dxwg/issues/",
     github: "https://github.com/w3c/dxwg/",
     localBiblio: {
-        "DX-PROF-GUIDANCE": {
+	"ARK" : {
+	   editors: ["J. Kunze", 
+		    "R. Rodgers"
+		    ],
+		href: "https://tools.ietf.org/id/draft-kunze-ark-15.txt",
+		title: "The ARK Identifier Scheme" ,
+		date: "2008-05-22",
+		status: "Internet-Draft"
+	},
+        "PROF-CONNEG": {
+            editors: [
+                "Lars G. Svensson",
+                "Rob Atkinson",
+                "Nicholas J. Car"
+            ],
+            href: "https://www.w3.org/TR/2018/WD-dx-prof-conneg-20181218/",
+            title: "Content Negotiation by Profile",
+            date: " 2018-12-18",
+            status: "W3C First Public Working Draft"
+        },
+        "PROF-GUIDANCE": {
             editors: [
                 "Rob Atkinson",
                 "Karen Coyle",
@@ -54,7 +75,7 @@ var respecConfig = {
             date: " 2018-12-31",
             status: "W3C Editor's Draft"
         },
-        "DX-PROF-IETF": {
+        "PROF-IETF": {
             authors: [
                 "L. Svensson",
                 "R. Verborgh"
@@ -63,6 +84,16 @@ var respecConfig = {
             title: "Negotiating Profiles in HTTP",
             date: " 2017-10-24",
             status: "IETF Internet Draft"
+        },
+        "PROF": {
+            editors: [
+                "Rob Atkinson",
+                "Nicholas J. Car"
+            ],
+            href: "https://www.w3.org/TR/2018/WD-dx-prof-20181218/",
+            title: "Profile Descriptions ontology",
+            date: "2018-12-18",
+            status: "W3C First Public Working Draft"
         }
     }
 };

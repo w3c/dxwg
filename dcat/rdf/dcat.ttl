@@ -746,6 +746,35 @@ dcat:mediaType
   skos:editorialNote "The range of dcat:mediaType has been tightened as part of the revision of DCAT." ;
   skos:scopeNote "This property SHOULD be used when the media type of the distribution is defined in the IANA media types registry https://www.iana.org/assignments/media-types/, otherwise dct:format MAY be used with different values." ;
 .
+
+dcat:compressFormat
+  rdf:type rdf:Property ;
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "The format of the distribution in which the data is contained in a compressed form, e.g. to reduce the size of the downloadable file."@en ;
+  rdfs:comment "El formato de la distribución en el que los datos están en forma comprimida, e.g. para reducir el tamaño del archivo a bajar."@es ;
+  rdfs:domain dcat:Distribution ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-2/> ;
+  rdfs:label "compression format"@en ;
+  rdfs:label "formato de compresión"@es ;
+  rdfs:range dct:MediaType ;
+  rdfs:subPropertyOf dct:format ;
+  skos:changeNote "New property in this revision of DCAT"@en ;
+  skos:scopeNote "This property to be used when the files in the distribution are compressed, e.g. in a ZIP file. The format SHOULD be expressed using a media type as defined by IANA media types registry https://www.iana.org/assignments/media-types/, if available."
+.
+dcat:packageFormat
+  rdf:type rdf:Property ;
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "The format of the file in which one or more data files are grouped together, e.g. to enable a set of related files to be downloaded together."@en ;
+  rdfs:comment "El formato del archivo en que se agrupan uno o más archivos de datos, e.g. para permitir que un conjunto de archivos relacionados se bajen juntos."@es ;
+  rdfs:domain dcat:Distribution ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-2/> ;
+  rdfs:label "packaging format"@en ;
+  rdfs:label "formato de empaquetado"@es ;
+  rdfs:range dct:MediaType ;
+  rdfs:subPropertyOf dct:format ;
+  skos:changeNote "New property in this revision of DCAT"@en ;
+  skos:scopeNote "This property to be used when the files in the distribution are packaged, e.g. in a RAR file. The format SHOULD be expressed using a media type as defined by IANA media types registry https://www.iana.org/assignments/media-types/, if available."
+.
 dcat:qualifiedRelation
   rdf:type owl:ObjectProperty ;
   rdfs:comment "Link to a description of a relationship with another resource."@en ;
@@ -799,6 +828,30 @@ dcat:service
   rdfs:subPropertyOf rdfs:member ;
   skos:changeNote "New property in this revision of DCAT" ;
   skos:editorialNote "Status: Property accepted by DCAT revision team, but details of definition and constraints not yet resolved." ;
+.
+dcat:spatialResolutionInMeters
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "minimum spatial separation resolvable in a dataset, measured in meters"@en-US ;
+  rdfs:comment "minimum spatial separation resolvable in a dataset, measured in metres"@en-GB ;
+  rdfs:label "spatial resolution (meters)"@en-US ;
+  rdfs:label "spatial resolution (metres)"@en-GB ;
+  rdfs:range xsd:decimal ;
+  skos:changeNote "New property in this revision of DCAT" ;
+  skos:editorialNote "Status: details of definition and constraints not yet resolved." ;
+  skos:editorialNote "Might appear in the description of a Dataset or a Distribution, so no domain is specified" ;
+  skos:scopeNote "If the dataset is an image or grid this should correspond to the spacing of items. For other kinds of spatial dataset, this property will usually indicate the smallest distance between items in the dataset. " ;
+  skos:scopeNote "Alternative spatial resolutions might be provided as different dataset distributions" ;
+.
+dcat:temporalResolution
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "minimum time period resolvable in a dataset" ;
+  rdfs:label "temporal resolution" ;
+  rdfs:range xsd:duration ;
+  skos:changeNote "New property in this revision of DCAT" ;
+  skos:editorialNote "Status: Property accepted by DCAT revision team, but details of definition and constraints not yet resolved." ;
+  skos:editorialNote "Might appear in the description of a Dataset or a Distribution, so no domain is specified" ;
+  skos:scopeNote "If the dataset is a time-series this should correspond to the spacing of items in the series. For other kinds of dataset, this property will usually indicate the smallest time difference between items in the dataset. " ;
+  skos:scopeNote "Alternative temporal resolutions might be provided as different dataset distributions" ;
 .
 dcat:theme
   rdf:type rdf:Property ;
@@ -857,6 +910,10 @@ dcat:themeTaxonomy
   rdfs:label "قائمة التصنيفات"@ar ;
   rdfs:label "テーマ"@ja ;
   rdfs:range skos:ConceptScheme ;
+.
+dct:accrualPeriodicity
+  skos:definition "The frequency at which dataset is published." ;
+  skos:scopeNote "The value of dct:accrualPeriodicity gives the rate at which the dataset-as-a-whole is updated. This may be complemented by dcat:temporalResolution to give the time between collected data points in a time series." ;
 .
 prov:qualifiedAttribution
   skos:definition "Link to an Agent having some form of responsibility for the resource" ;

@@ -10,37 +10,41 @@ var respecConfig = {
     edDraftURI:           "https://w3c.github.io/dxwg/dcat/",
 //    issueBase:            "https://github.com/w3c/dxwg/issues/", -- Not needed when github used
     editors: [{
+      name:       "Riccardo Albertoni",
+      company:    "CNR - Consiglio Nazionale delle Ricerche, Italy",
+      url: "http://www.imati.cnr.it/joomla/index.php/people/8-curricula/178-riccardo-albertoni",
+      companyURL: "http://www.cnr.it/"
+    },{
+        name: "Dave Browning",
+        company: "Refinitiv",
+        companyURL: "https://www.refinitiv.com"
+    },{
+        name: "Simon Cox",
+        company: "CSIRO",
+        url: "http://people.csiro.au/Simon-Cox",
+        companyURL: "https://www.csiro.au/"
+    },{
       name:       "Alejandra Gonzalez Beltran",
       company:    "Oxford eResearch Centre, Engineering Science, University of Oxford",
       url: "https://www.oerc.ox.ac.uk/people/alejandra",
       companyURL: "http://www.oerc.ox.ac.uk/"
     },{
-      name: "Dave Browning",
-      company: "Refinitiv",
-      companyURL: "https://www.refinitiv.com"
-    },{
-      name: "Simon Cox",
-      company: "CSIRO",
-      url: "http://people.csiro.au/Simon-Cox",
-      companyURL: "https://www.csiro.au/"
+      name: "Andrea Perego",
+      company: "European Commission, Joint Research Centre (JRC)",
+      url: "https://joinup.ec.europa.eu/user/14209",
+      companyURL: "https://ec.europa.eu/jrc/"
     },{
       name: "Peter Winstanley",
       company: "Scottish Government",
       companyURL: "http://www.gov.scot/"
     }],
     otherLinks: [{
-//        key: "Contributors",
-//        data: [{
-//            value: "Makx Dekkers",
-//            href: "http://www.makxdekkers.com"
-//        },{
-//            value: "Antoine Isaac, Europeana Foundation",
-//            href: "https://pro.europeana.eu/person/antoine-isaac"
-//        },{
-//            value: "Andrea Perego, European Commission",
-//            href: "https://ec.europa.eu/jrc/"
-//        }]
-//      },{
+        key: "Contributors",
+        data: [{
+            value: "Makx Dekkers",
+            href: "http://www.makxdekkers.com"
+        }]
+      },{
         key: "Editors of previous version",
         data: [{
             value: "Fadi Maali, DERI",
@@ -49,107 +53,107 @@ var respecConfig = {
             value: "John Erickson, Tetherless World Constellation (RPI)",
             href: "http://tw.rpi.edu/"
         }]
-      }],
+    }],
     wg: "Dataset Exchange Working Group",
     wgURI: "https://www.w3.org/2017/dxwg/",
     wgPublicList: "public-dxwg-comments",
     wgPatentURI: "https://www.w3.org/2004/01/pp-impl/99375/status",
     inlineCSS: "true",
-	  lint: "false",
+    lint: "false",
     github: "https://github.com/w3c/dxwg/",
     localBiblio: {
-      "SCHEMA-ORG" : {
-        href : "http://schema.org/",
-        title : "Schema.org"
-       },
-       "DATS": {
-         href : "http://wg3-metadataspecifications.readthedocs.io/",
-         title : "Data Tag Suite",
-         authors : ["Philippe Rocca-Serra", "Alejandra Gonzalez-Beltran"],
-         publisher : "NIH Big Data 2 Knowledge bioCADDIE project.",
-         date : "2016"
-       },
-      "ZaveriEtAl" : {
-          title : "Quality assessment for Linked Data: A Survey",
-          authors : [ "Amrapali Zaveri", "Anisa Rula", "Andrea Maurino",
-                      "Ricardo Pietrobon", "Jens  Lehmann", "Sören Auer" ],
-          status : "Semantic Web, vol. 7, no. 1, pp. 63-93",
-	  publisher : "IOS Press",
-          href : "https://doi.org/10.3233/SW-150175",
-	  date : "2015"
-      },
-      "ISOIEC25012" : {
-          title : "ISO/IEC 25012 - Data Quality model",
-          href : "http://iso25000.com/index.php/en/iso-25000-standards/iso-25012"
-      },
-      "ISO-26324" : {
-	 "authors":["ISO/TC 46/SC 9"],
-	 "href":"https://www.iso.org/standard/43506.html",
-	 "title":"Information and documentation -- Digital object identifier system",
-	 "publisher":"ISO",
-	 "status":"International Standard",
-	 "date":"2012"
-      },
-      "DDI" : {
-         href : "http://www.ddialliance.org/explore-documentation",
-         title : "Data Documentation Initiative",
-         publisher : "DDI Alliance"
-      },
-      "DATS": {
-          "href": "https://github.com/datatagsuite/",
-          "title": "Data Tag Suite",
-          "authors": ["Alejandra Gonzalez-Beltran", "Philippe Rocca-Serra"],
-          "publisher": "NIH Big Data 2 Knowledge bioCADDIE and NIH Data Commons projects",
-          "date": "2016"
-      },
-      "DBPEDIA-ONT" : {
-         href:"http://dbpedia.org/ontology/",
-         title:"DBPedia ontology"
-      },
-      "DOAP" : {
-         href:"https://github.com/ewilderj/doap/wiki",
-         title:"Description of a Project",
-         authors: ["Edd Wilder-James"]
-      },
-      "FRAPO" : {
-         href:"http://www.sparontologies.net/ontologies/frapo",
-         title:"FRAPO, the Funding, Research Administration and Projects Ontology",
-         authors: ["David Shotton"],
-         date: "04 September 2017"
-      },
-      "OBO" : {
-         href:"http://www.obofoundry.org/",
-         title:"The OBO Foundry"
-      },
-      "PDO" : {
-         href:"http://vocab.deri.ie/pdo",
-         title:"Project Documents Ontology",
-         authors: ["Pradeep Varma"],
-         date: "09 July 2010"
-      },
-      "VIVO-ISF" : {
-         href:"http://github.com/vivo-isf/vivo-isf",
-         title:"VIVO-ISF Data Standard"
-      },
-     "LinkedDataPatterns" : {
-          title : "Linked Data Patterns: A pattern catalogue for modelling, publishing, and consuming Linked Data",
-          authors : [ "Leigh Dodds", "Ian Davis" ],
-          date: "31 May 2012",
-          href : "http://patterns.dataincubator.org/book/"
-      },
-      "PROF-CONNEG": {
+        "SCHEMA-ORG" : {
+            href : "http://schema.org/",
+            title : "Schema.org"
+        },
+        "DATS": {
+            href : "http://wg3-metadataspecifications.readthedocs.io/",
+            title : "Data Tag Suite",
+            authors : ["Philippe Rocca-Serra", "Alejandra Gonzalez-Beltran"],
+            publisher : "NIH Big Data 2 Knowledge bioCADDIE project.",
+            date : "2016"
+        },
+        "ZaveriEtAl" : {
+            title : "Quality assessment for Linked Data: A Survey",
+            authors : [ "Amrapali Zaveri", "Anisa Rula", "Andrea Maurino",
+                "Ricardo Pietrobon", "Jens  Lehmann", "Sören Auer" ],
+            status : "Semantic Web, vol. 7, no. 1, pp. 63-93",
+            publisher : "IOS Press",
+            href : "https://doi.org/10.3233/SW-150175",
+            date : "2015"
+        },
+        "ISOIEC25012" : {
+            title : "ISO/IEC 25012 - Data Quality model",
+            href : "http://iso25000.com/index.php/en/iso-25000-standards/iso-25012"
+        },
+        "ISO-26324" : {
+            "authors":["ISO/TC 46/SC 9"],
+            "href":"https://www.iso.org/standard/43506.html",
+            "title":"Information and documentation -- Digital object identifier system",
+            "publisher":"ISO",
+            "status":"International Standard",
+            "date":"2012"
+        },
+        "DDI" : {
+            href : "http://www.ddialliance.org/explore-documentation",
+            title : "Data Documentation Initiative",
+            publisher : "DDI Alliance"
+        },
+        "DATS": {
+            "href": "https://github.com/datatagsuite/",
+            "title": "Data Tag Suite",
+            "authors": ["Alejandra Gonzalez-Beltran", "Philippe Rocca-Serra"],
+            "publisher": "NIH Big Data 2 Knowledge bioCADDIE and NIH Data Commons projects",
+            "date": "2016"
+        },
+        "DBPEDIA-ONT" : {
+            href:"http://dbpedia.org/ontology/",
+            title:"DBPedia ontology"
+        },
+        "DOAP" : {
+            href:"https://github.com/ewilderj/doap/wiki",
+            title:"Description of a Project",
+            authors: ["Edd Wilder-James"]
+        },
+        "FRAPO" : {
+            href:"http://www.sparontologies.net/ontologies/frapo",
+            title:"FRAPO, the Funding, Research Administration and Projects Ontology",
+            authors: ["David Shotton"],
+            date: "04 September 2017"
+        },
+        "OBO" : {
+            href:"http://www.obofoundry.org/",
+            title:"The OBO Foundry"
+        },
+        "PDO" : {
+            href:"http://vocab.deri.ie/pdo",
+            title:"Project Documents Ontology",
+            authors: ["Pradeep Varma"],
+            date: "09 July 2010"
+        },
+        "VIVO-ISF" : {
+            href:"http://github.com/vivo-isf/vivo-isf",
+            title:"VIVO-ISF Data Standard"
+        },
+        "LinkedDataPatterns" : {
+            title : "Linked Data Patterns: A pattern catalogue for modelling, publishing, and consuming Linked Data",
+            authors : [ "Leigh Dodds", "Ian Davis" ],
+            date: "31 May 2012",
+            href : "http://patterns.dataincubator.org/book/"
+        },
+        "PROF-CONNEG": {
             href: "https://w3c.github.io/dxwg/conneg-by-ap/",
             title: "Content Negotiation by Profile",
             date: "03 October 2018",
             status: "W3C Editor's Draft"
-      },
-      "PROF-GUIDE": {
+        },
+        "PROF-GUIDE": {
             href: "https://w3c.github.io/dxwg/profiles/",
             title: "Profile Guidance",
             date: "03 October 2018",
             status: "W3C Editor's Draft"
-      },
-      "PROF-IETF": {
+        },
+        "PROF-IETF": {
             authors: [
                 "L. Svensson",
                 "R. Verborgh"
@@ -158,14 +162,14 @@ var respecConfig = {
             title: "Negotiating Profiles in HTTP",
             date: "24 October 2017",
             status: "IETF Internet Draft"
-      },
-      "OpenAPI": {
+        },
+        "OpenAPI": {
             href: "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md",
             title: "OpenAPI Specification. Version 3.0.2",
             date: "08 October 2018",
             publisher: "OAI"
-      },
-      "OpenSearch": {
+        },
+        "OpenSearch": {
             authors: [
                 "DeWitt Clinton"
             ],
@@ -173,8 +177,8 @@ var respecConfig = {
             title:"OpenSearch 1.1 Draft 6",
             date:"17 April 2018",
             publisher:"OpenSearch"
-      },
-      "HYDRA": {
+        },
+        "HYDRA": {
             authors: [
                 "Markus Lanthaler"
             ],
@@ -183,8 +187,8 @@ var respecConfig = {
             date:"15 March 2018",
             publisher:"Hydra W3C Community Group",
             status:"Unofficial Draft"
-      },
-      "ODRS": {
+        },
+        "ODRS": {
             authors: [
                 "Leigh Dodds"
             ],
@@ -192,19 +196,45 @@ var respecConfig = {
             title:"Open Data Rights Statement Vocabulary",
             date:"29 July 2013",
             publisher:"ODI"
-      },
-      "MDR-AR":{
-        "href":"https://publications.europa.eu/en/web/eu-vocabularies/at-dataset/-/resource/dataset/access-right",
-        "title":"Named Authority List: Access rights",
-        "publisher":"Publications Office of the European Union"
-       },
-      "FAIR" : {
-          title : "The FAIR Guiding Principles for scientific data management and stewardship",
-          authors : [ "Mark D. Wilkinson" ],
-	  etAl : true,
-          status : "Scientific Data, vol. 3, Article nr. 160018",
-	  publisher : "Nature",
-          href : "https://doi.org/10.1038/sdata.2016.18"
-      },
+        },
+        "MDR-AR":{
+            "href":"https://publications.europa.eu/en/web/eu-vocabularies/at-dataset/-/resource/dataset/access-right",
+            "title":"Named Authority List: Access rights",
+            "publisher":"Publications Office of the European Union"
+        },
+        "FAIR" : {
+            title : "The FAIR Guiding Principles for scientific data management and stewardship",
+            authors : [ "Mark D. Wilkinson" ],
+            etAl : true,
+            status : "Scientific Data, vol. 3, Article nr. 160018",
+            publisher : "Nature",
+            href : "https://doi.org/10.1038/sdata.2016.18"
+        },
+        "DCAT-AP-SE": {
+            title: "DCAT-AP-SE: Swedish recommendation for DCAT-AP1.1",
+            href: "https://lankadedata.se/spec/DCAT-AP-SE",
+            authors: ["Matthias Palmér"],
+            etAl: false
+        },
+        "DCAT-BE": {
+            title: "Linking data portals across Belgium.",
+            href: "http://dcat.be/"
+        },
+        "DCAT-AP-IT": {
+            title: "Profilo nazionale dei metadati DCAT-AP_IT v1.0",
+            href: "https://www.dati.gov.it/content/profilo-nazionale-dei-metadati-dcat-ap-it-v10"
+        },
+        "GeoDCAT-AP-IT": {
+            title: "GeoDCAT-AP in Italy, the national guidelines published",
+            href: "https://joinup.ec.europa.eu/news/geodcat-apit"
+        },
+        "DCAT-AP-NO": {
+            title: "Standard for beskrivelse av datasett og datakataloger (DCAT-AP-NO)",
+            href: "http://difi.github.io/dcat-ap-no/"
+        },
+        "DCAT-AP.de": {
+            title: "DCAT-AP.de als formaler Metadatenstandard für offene Verwaltungsdaten bestätigt",
+            href: "https://www.govdata.de/standardisierung"
+        }
     }
-  };
+};

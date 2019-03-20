@@ -71,6 +71,7 @@ dct:format rdf:type owl:AnnotationProperty ;
 :isProfileOf rdf:type owl:ObjectProperty ;
            rdfs:domain :Profile ;
            rdfs:range dct:Standard ;
+           rdfs:subPropertyOf :isTransitiveProfileOf ;
            skos:usageNote "The semantics of the rdfs:Range means that any resource treated as a base specification can be regarded as a Profile (i.e. may be any specification with an empty set of additional constraints)"@en ;
            skos:definition "A Profile is a profile of a dct:Standard (or a Base Specification or another Profile)"@en ;
            rdfs:label "is profile of" .
@@ -117,17 +118,6 @@ dct:format rdf:type owl:AnnotationProperty ;
 #################################################################
 #    Classes
 #################################################################
-
-###  http://www.w3.org/ns/dx/prof/BaseSpecification
-:BaseSpecification rdf:type owl:Class ;
-                   rdfs:subClassOf :Profile ,
-                                   [ rdf:type owl:Restriction ;
-                                     owl:onProperty :isProfileOf ;
-                                     owl:maxCardinality "0"^^xsd:nonNegativeInteger
-                                   ] ;
-                   rdfs:label "Base Specification" ;
-                   skos:definition "A specification that defines all implementation constraints, without applying constraints on usage of another specification"@en ;
-                   skos:usageNote "This may not be a useful class: documents of any specification can be regarded as a trivial profile, so applications only need to be concerned with Profile conformance"@en .
 
 
 ###  http://www.w3.org/ns/dx/prof/ResourceDescriptor
