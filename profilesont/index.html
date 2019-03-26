@@ -39,7 +39,7 @@
   <p>
     This Profiles Vocabulary provides a structure to describe profiles of information standards. Its
     development was triggered by the appearance of multiple profiles of the Dataset Catalog Vocabulary (DCAT)
-    [[VOCAB-DCAT-20140116]] and examples of profiles including the Dublin Core Application Profiles guidelines [[DCAP]] and various profiles of OpenGeospatial Consortium specifications.
+    [[VOCAB-DCAT-20140116]] and examples of profiles including the Guidelines for Dublin Core Application Profiles [[DCAP]] and various profiles of OpenGeospatial Consortium specifications.
   </p>
   <p>The Profiles Vocabulary is an RDF vocabulary to describe the resources that define and implement a profile. A profile is defined as "A named set of constraints on one or more identified base specifications or other profiles, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of those base specifications necessary to accomplish a particular function." These resources may be human-readable documents (PDFs, textual documents), vocabularies or ontologies (XSD, RDF),  resources specific to validation tools (SHACL, ShEx, Schematron), or any other files or resources that support the profile. Each resource is defined as having a role that defines its function within the profile.
 	</p>
@@ -189,8 +189,8 @@ This vocabulary also provides for the description of relationships between such 
 <section id="conceptualmodel">
   <h2>Conceptual Model</h2>
   <figure id="fig-overview">
-    <a href="profilesont.svg">
-      <img src="profilesont.svg" alt="Vocabulary overview diagram" />
+    <a href="figures/profilesont.svg">
+      <img src="figures/profilesont.svg" alt="Vocabulary overview diagram" />
     </a>
     <figcaption>OWL [[OWL2-OVERVIEW]] overview diagram of this vocabulary</figcaption>
   </figure>
@@ -219,12 +219,12 @@ This vocabulary also provides for the description of relationships between such 
       The example below illustrates the use of most parts of PROF and indicates how non-PROF profile metadata is stored alongside PROF metadata.
     </p>
     <figure id="fig-initial-example">
-      <img src="examples/initial.svg" title="An example profile of Dublin Core Terms" style="width:90%;" />
+      <img src="figures/initial.svg" title="An example profile of Dublin Core Terms" style="width:90%;" />
       <figcaption>
-        A full example profile described using common metadata and the Profiles Ontology
+        A full example profile described using common metadata and the Profiles Vocabulary
       </figcaption>
     </figure>
-    <pre class="example nohighlight turtle" aria-busy="false" aria-live="polite" title="A full example described using the Profiles Ontology in RDF (turtle)">
+    <pre class="example nohighlight turtle" aria-busy="false" aria-live="polite" title="A full example described using the Profiles Vocabulary in RDF (turtle)">
 @prefix dct: &lt;http://purl.org/dc/terms/&gt; .
 @prefix prof: &lt;http://www.w3.org/ns/dx/prof/&gt; .
 @prefix role: &lt;http://www.w3.org/ns/dx/prof/role/&gt; .
@@ -406,7 +406,7 @@ CSIRO's publications catalogue."""@en ;
         <code>skos:broaderTransitive</code>.
       </p>
       <figure id="fig-skos-4.5.2">
-        <img src="broaderTransitive.jpg" title="Figure 4.5.1 from the SKOS Primer WG Note" style="width:90%;" />
+        <img src="figures/broaderTransitive.jpg" title="Figure 4.5.1 from the SKOS Primer WG Note" style="width:90%;" />
         <figcaption>
           Inferring a transitive hierarchy from asserted skos:broader statements. Dotted arrows represent statements
           inferred from the SKOS data model. Solid arrows represent asserted statements. Reproduction of Figure 4.5.2
@@ -429,8 +429,8 @@ CSIRO's publications catalogue."""@en ;
       </p>
     </div>
     <figure id="fig-isTransitiveProfileOf">
-      <a href="examples/isTransitiveProfileOf.svg">
-        <img src="examples/isTransitiveProfileOf.svg" title="Property isTransitiveProfileOf in use" style="width:90%;" />
+      <a href="figures/isTransitiveProfileOf.svg">
+        <img src="figures/isTransitiveProfileOf.svg" title="Property isTransitiveProfileOf in use" style="width:90%;" />
       </a>
       <figcaption>Property isTransitiveProfileOf in use. See the full explanation in the example text below.</figcaption>
     </figure>
@@ -598,8 +598,8 @@ CSIRO's publications catalogue."""@en ;
         and code forms.
       </p>
       <figure id="fig-isInhieritedFrom">
-        <a href="examples/isInheritedFrom.svg">
-          <img src="examples/isInheritedFrom.svg" title="Property isInheritedFrom in use" style="width:90%;" />
+        <a href="figures/isInheritedFrom.svg">
+          <img src="figures/isInheritedFrom.svg" title="Property isInheritedFrom in use" style="width:90%;" />
         </a>
           <figcaption>
             Property <code>isInheritedFrom</code> in use. Here the <code>prof:ResourceDescriptor</code> instance <strong>Profile Y, Resource Descriptor 2</strong> refers to the same artifact (a constraints file) as <strong>Profile X, Resource Descriptor 1</strong> and it is inherited by <strong>Profile Y</strong> from <strong>Profile X</strong> which <strong>Profile Y</strong> is a profile of.
@@ -814,13 +814,13 @@ ex2:Profile_Y
 <section id="examples" class="informative">
   <h2>Examples</h2>
   <p>
-    This section contains a few modelled examples of existing profiles to demonstrate aspects of this vocabulary. While
+    This section contains a few examples of PROF in use to demonstrate aspects of this vocabulary. While
     efforts have been made to ensure they are accurate at the time of this document's publication, they are not to be
     considered authoritative; their purpose is only to illustrate this vocabulary's use.
   </p>
   <section id="eg-dcat-ap">
     <h3>DCAT-AP</h3>
-    <p><em>This example showcases this vocabulary's description of parts of a profile.</em></p>
+    <p><em>This example showcases this vocabulary's description of parts of an existing, well-known, profile.</em></p>
     <p>
       DCAT-AP is the widely used European <em>Application Profile</em> of DCAT. DCAT-AP is described in document form
       (PDF &amp; DOCX) and a constraints resource for instance validation is available, formulated using the W3C's Shapes
@@ -960,7 +960,7 @@ ex2:Profile_Y
     </p>
     <figure id="fig-eg-hierarchy">
       <a href="examples/hierarchy.svg">
-        <img src="examples/hierarchy.svg" title="DCAT-AP and related profiles in a hierarchy" style="width:70%;" alt="DCAT-AP and related profiles in a hierarchy" />
+        <img src="examples/hierarchy.svg" title="DCAT-AP and related profiles in a hierarchy" style="width:60%;" alt="DCAT-AP and related profiles in a hierarchy" />
       </a>
       <figcaption>
         DCAT-AP and related profiles in a hierarchy. The Profile labelled '?' shows a potential future profile instance
@@ -1013,6 +1013,291 @@ ex2:Profile_Y
       profile of [[StatDCAT-AP]] (e.g., StatDCAT-BE), that would be both a profile of DCAT-BE and [[StatDCAT-AP]]. This
       imagined profile, '?' in the figure above, would not be a profile of GeoDCAT-AP.
     </p>
+  </section>
+  <section id="eg-csiro-dummy-dcap">
+    <h3>CSIRO Dummy Dublin Core AP</h3>
+    <p>
+      <em>
+        This example uses a dummy profile created for this document to show how PROF describes profiles created
+        according to the Guidelines for Dublin Core Application Profiles [[DCAP]].
+      </em>
+    </p>
+    <p>
+      The DCAP Guidelines document "explains the key components of a Dublin Core Application Profile and walks through
+      the process of developing a profile". It "does not address the creation of machine-readable implementations of an
+      application profile" which is what PROF does.
+    </p>
+    <p>
+      In this example, a dummy profile of Dublin Core TERMS [[DCTERMS]] is created to characterise documents in a
+      hypothetical "ePublish" platform. The dummy profile contains many parts:
+    </p>
+    <ul>
+      <li>a profile overview document</li>
+      <li>a <em>How To</em> document offering guidance on how to use the profile</li>
+      <li>two constraint language files - both conforming to DCAP's constraint syntax in plain text and RDF (turtle) formats</li>
+      <li>two profile description files - one an image (the <a href="#fig-eg-csiro-dummy-dcap"></a> below) and the other an RDF file (the example RDF below)</li>
+    </ul>
+    <figure id="fig-eg-csiro-dummy-dcap">
+      <a href="examples/csiro-dummy-dcap.svg">
+        <img src="examples/csiro-dummy-dcap.svg" title="CSIRO Dummy DCAP Profile" style="width:90%;" alt="CSIRO Dummy DCAP Profile" />
+      </a>
+      <figcaption>
+        CSIRO Dummy DCAP Profile characterised using PROF. Only two of the four Resource Descriptors in the RDF below are shown.
+      </figcaption>
+    </figure>
+    <pre class="example nohighlight turtle" aria-busy="false" aria-live="polite" title="The GeoDCAT-AP profile hierarchy described using Profile Ontology in RDF (turtle)">
+#
+#   This document is a description, according to the Profiles Vocabulary (see https://www.w3.org/TR/dx-prof/)
+#   of a dummy "CSIRO ePublish Repository" profile of the Dubline Core standard. This profile is known as a DCAP -
+#   Dublin Core Application Profile
+#
+#   See http://dublincore.org/documents/profile-guidelines/ for more information about Dublin Core Application Profiles
+#
+@prefix dct: &lt;http://purl.org/dc/terms/&gt; .
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+@prefix prof: &lt;http://www.w3.org/ns/dx/prof/&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix role: &lt;http://www.w3.org/ns/dx/prof/role/&gt; .
+
+
+# Base Specification being profiled
+&lt;http://dublincore.org/documents/2012/06/14/dcmi-terms/&gt; a dct:Standard ;
+    rdfs:label "DCMI Metadata Terms" .
+
+# dummy CSIRO profile of DC for ePublish repository
+# URIs not dereferencable
+&lt;http://test.linked.data.gov.au/test/def/CSIRO-ePub-DCAP&gt;
+    a                 prof:Profile ;
+    rdfs:label        "CSIRO's profile of DC for ePublish" ;
+    prof:isProfileOf    &lt;http://dublincore.org/documents/2012/06/14/dcmi-terms/&gt; ;
+    prof:token        "ePubDC"^^xsd:Token ;
+    prof:hasResource  _:1 , _:2 , _:3 , _:4 .
+
+# example's code repository home
+_:1
+    a                 prof:ResourceDescriptor ;
+    rdfs:label        "Profile Specifcation" ;
+    dct:format        &lt;https://w3id.org/mediatype/text/html&gt; ;
+    # the official written text specifying the Profile
+    prof:hasRole      role:Specification ;
+    prof:hasArtifact  &lt;http://linked.data.gov.au/def/CSIRO-ePub-DCAP/&gt; .
+
+# this is an RDF (turtle) version of the DSP constraints for this profile
+_:2
+    a                 prof:ResourceDescriptor ;
+    rdfs:label        "Full constraints in RDF" ;
+    dct:conformsTo    &lt;http://dublincore.org/documents/2008/03/31/dc-dsp/&gt; ; # the constraints conform to the DSP spec
+    dct:format        &lt;https://w3id.org/mediatype/text/turtle&gt; ; # it's in Turtle format
+    # this is full constraints: if your instance passes these, you're compliant with the profile
+    prof:hasRole      role:Constraints ;
+    prof:hasArtifact  &lt;http://test.linked.data.gov.au/test/def/CSIRO-ePub-DCAP/constraints.ttl&gt; .
+
+_:3
+    a                 prof:ResourceDescriptor ;
+    rdfs:label        "Full constraints in DSP constraint language" ;
+    dct:conformsTo    &lt;http://dublincore.org/documents/2008/03/31/dc-dsp/&gt; ; # the constraints conform to the DSP spec
+    dct:format        &lt;https://w3id.org/mediatype/text/plain&gt; ; # it's in plain text format
+    # this is full constraints: if your instance passes these, you're compliant with the profile
+    prof:hasRole      role:Constraints ;
+    prof:hasArtifact  &lt;http://test.linked.data.gov.au/test/def/CSIRO-ePub-DCAP/constraints-dcap-syntax.txt&gt; .
+
+# this resource is a PDF file in the def about how to use the CSIRO-ePub-DCAP
+_:4
+    a                 prof:ResourceDescriptor ;
+    rdfs:label        "Guidance document" ;
+    dct:format        &lt;https://w3id.org/mediatype/application/pdf&gt; ;
+    # general guidance info on how to use/implement this Profile
+    prof:hasRole      role:Guidance ;
+    prof:hasArtifact &lt;http://test.linked.data.gov.au/test/def/CSIRO-ePub-DCAP/HowTo.pdf&gt; .
+    </pre>
+    <p>
+      This DCAP example shows, among other things, that a <code>Profile</code> may contain multiple
+      <code>Resource Descriptor</code> individuals that perform the same <code>Resource Role</code> (here
+      <code>Constraints</code>) that are differentiated on other bases, here on format: plain text &amp; RDF (turtle).
+    </p>
+  </section>
+  <section id="eg-ga">
+    <h3>Geoscience Australia's Profile of ISO19115-1:2014</h3>
+    <p>
+      <em>This example shows a non-RDF profile of a non-RDF standard: ISO19115-1:2014 (Geographic information) [[ISO-19115-1-2014]].</em>
+    </p>
+    <p>
+      Communities commonly make profiles of the International Organization for Standardization's standard
+      ISO19115-1:2014 Geographic information -- Metadata -- Part 1: Fundamentals used for cataloguing spatial datasets.
+      <a href="http://www.ga.gov.au">Geoscience Australia</a>, Australia's national geological survey agency, has
+      created a profile that constrains ISO19115-1:2014 in ways such as making optional properties in the standard
+      mandatory for profile conformance.
+    </p>
+    <p>
+      The GA Profile of ISO19115 is published online as a collection of resources with an index document with the persistent URI
+      <a href="http://pid.geoscience.gov.au/def/schema/ga/ISO19115-1-2014">http://pid.geoscience.gov.au/def/schema/ga/ISO19115-1-2014</a>.
+    </p>
+    <p>
+      Although not initially formulated with PROF in mind, nevertheless the various parts of the GA Profile of ISO19115
+      can be characterised using PROF as per <a href="#fig-eg-ga"></a> and the example RDF below. Note that the
+      persistent URIs assigned to the profile by Geoscience Australia are used within the PROF description.
+    </p>
+    <figure id="fig-eg-ga">
+      <a href="examples/ga.svg">
+        <img src="examples/ga.svg" title="GA Profile of ISO19115 in PROF" style="width:90%;" alt="GA Profile of ISO19115 in PROF" />
+      </a>
+      <figcaption>
+        The GA Profile of ISO19115 characterised using PROF.
+      </figcaption>
+    </figure>
+    <pre class="example nohighlight turtle" aria-busy="false" aria-live="polite" title="GA Profile of ISO19115 according to PROF in RDF (turtle)">
+@prefix : &lt;http://www.w3.org/ns/dx/prof/examples/ga.ttl#&gt; .
+@prefix prof: &lt;http://www.w3.org/ns/dx/prof/&gt; .
+@prefix roles: &lt;http://www.w3.org/ns/dx/prof/roles/&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix dct: &lt;http://purl.org/dc/terms/&gt; .
+@prefix dc: &lt;http://purl.org/dc/elements/1.1/&gt; .
+@prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt; .
+@prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt; .
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+
+:ISO19115-1-2014
+    a dct:Standard ;
+    rdfs:label "ISO ISO19115-1:2014" ;
+    rdfs:comment "The international standard ISO19115-1:2014 Geographic information - Metadata" ;
+    dc:publisher "International Organization for Standardization" ;
+    dct:source &lt;https://www.iso.org/standard/53798.html&gt;
+.
+
+&lt;http://pid.geoscience.gov.au/def/schema/ga/ISO19115-1-2014&gt;
+    a prof:Profile ;
+    prof:token "iso19115-ga" ;
+    rdfs:label "ISO19115-1:2014 GA Profile";
+    rdfs:comment """Provides a means to declare, and discover implementation resources to check, implementations of geographic metadata schema conforming to GA's profile."""@en;
+    dct:publisher &lt;http://pid.geoscience.gov.au/org/ga/geoscienceaustralia&gt; ;
+    prof:profileOf :ISO19115-1-2014 ;
+    prof:hasResource :web , :spec , :schema , :constraints ;
+.
+
+:web
+    a prof:ResourceDescriptor ;
+    rdfs:label "GA Profile guidance document online" ;
+    prof:hasRole roles:guidance ;
+    dct:conformsTo :WebPage ;
+    dct:format &lt;https://w3id.org/mediatypes/text/html&gt; ;
+    prof:hasArtifact &lt;http://pid.geoscience.gov.au/def/schema/ga/ISO19115-1-2014&gt; ;
+.
+
+:spec
+    a prof:ResourceDescriptor ;
+    rdfs:label "GA Profile specification document";
+    prof:hasRole roles:specification ;
+    dct:format &lt;https://w3id.org/mediatypes/application/pdf&gt; ;
+    prof:hasArtifact &lt;http://pid.geoscience.gov.au/dataset/ga/122551&gt; ;
+.
+
+:schema
+    a prof:ResourceDescriptor ;
+    rdfs:label "GA Profile XML Schema";
+    prof:hasRole roles:specification ;
+    dct:conformsTo :XSDSchema ;
+    dct:format &lt;https://w3id.org/mediatypes/text/xml&gt; ;
+    prof:hasArtifact &lt;http://pid.geoscience.gov.au/def/schema/ga/ISO19115-3-2016/gapm.xsd&gt; ;
+.
+
+:constraints
+    a prof:ResourceDescriptor ;
+    rdfs:label "GA Profile Schematron" ;
+    prof:hasRole roles:fullConstraints ;
+    dct:conformsTo :Schematron ;
+    dct:format &lt;https://w3id.org/mediatypes/text/xml&gt; ;
+    prof:hasArtifact &lt;http://pid.geoscience.gov.au/def/schema/ga/schematron-rules-ga.sch&gt; ;
+.
+
+:WebPage a dct:MediaTypeOrExtent ;
+    rdfs:label "Web Page" ;
+    rdfs:comment "A document written in HyperText Markup Language designed for human reading via a web browser." ;
+    dct:source &lt;https://www.w3.org/html/&gt; ;
+.
+
+:Schematron a dct:MediaTypeOrExtent ;
+    rdfs:label "Schematron" ;
+    rdfs:comment "A language for making assertions about the presence or absence of patterns in XML documents." ;
+    dct:source &lt;http://schematron.com&gt; ;
+.
+    </pre>
+  </section>
+  <section id="eg-adms">
+    <h3>Asset Description Metadata Schema</h3>
+    <p>
+      <em>This example shows a <code>Profile</code>, some of whose <code>Resource Descriptors</code> conform to standards.</em>
+    </p>
+    <p>
+      The Asset Description Metadata Schema (ADMS) [[VOCAB-ADMS]] is a profile of DCAT, used to describe semantic
+      assets. Both ADMS the <code>Profile</code> and two of its <code>Resource Descriptors</code> are published
+      according to W3C specifications for <em>Recommendations</em> and <em>Working Group Notes</em>.
+    </p>
+    <figure id="fig-eg-adms">
+      <a href="examples/adms.svg">
+        <img src="examples/adms.svg" title="ADMS profile of DCAT" style="width:90%;" alt="ADMS profile of DCAT" />
+      </a>
+      <figcaption>
+        The ADMS profile of DCAT.
+      </figcaption>
+    </figure>
+    <pre class="example nohighlight turtle" aria-busy="false" aria-live="polite" title="ADMS profile of DCAT according to PROF in RDF (turtle)">
+@prefix : &lt;http://www.w3.org/ns/dx/prof/examples/adms.ttl#&gt; .
+@prefix prof: &lt;http://www.w3.org/ns/dx/prof/&gt; .
+@prefix roles: &lt;http://www.w3.org/ns/dx/prof/roles/&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix dct: &lt;http://purl.org/dc/terms/&gt; .
+@prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt; .
+
+
+#
+#   A series of standards defined in this examples document
+#
+:W3Cnote
+  rdf:type dct:Standard ;
+  rdfs:label "W3C Working Group Note Document" ;
+.
+
+:W3Crec
+  rdf:type dct:Standard ;
+  rdfs:label "W3C Recommendation Document" ;
+.
+
+
+#
+#   ADMS, described as a profile of DCAT (original)
+#
+:ADMS
+    a prof:Profile ;
+    rdfs:label "ADMS" ;
+    # this URI is for DCAT (original) as defined in the DCAT examples
+    prof:profileOf &lt;http://www.w3.org/ns/dx/prof/examples/dcat.ttl#dcat2014&gt; ;
+    prof:hasResource :ADMS-note ,
+                     :ADMS-rdf ,
+.
+
+:ADMS-note
+    a prof:ResourceDescriptor ;
+    rdfs:label "ADMS specification document" ;
+    prof:hasRole roles:specification ;
+    dct:conformsTo prof:W3Cnote ;
+    dct:format &lt;https://w3id.org/mediatypes/text/html&gt; ;
+    prof:hasArtifact &lt;https://www.w3.org/TR/vocab-adms/&gt; ;
+.
+
+:ADMS-rdf
+    a prof:ResourceDescriptor ;
+    rdfs:label "ADMS RDF vocabulary" ;
+    prof:hasRole roles:vocabulary ;
+    dct:conformsTo &lt;https://www.w3.org/TR/owl2-rdf-based-semantics/&gt; ,
+                   &lt;https://www.w3.org/TR/rdf-schema/&gt; ;
+    dct:format &lt;https://w3id.org/mediatypes/text/turtle&gt; ;
+    prof:hasArtifact &lt;https://www.w3.org/ns/adms&gt; ;
+.
+
+# additional information about DCAT (original) not present in the DCAT example
+&lt;http://www.w3.org/ns/dx/prof/examples/dcat.ttl#dcat-orig&gt;
+    dct:conformsTo :W3Crec .
+    </pre>
   </section>
 </section>
 <section id="testsuite">
