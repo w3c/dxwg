@@ -31,7 +31,6 @@ var respecConfig = {
     },{
       name: "Andrea Perego",
       company: "European Commission, Joint Research Centre (JRC)",
-      url: "https://joinup.ec.europa.eu/user/14209",
       companyURL: "https://ec.europa.eu/jrc/"
     },{
       name: "Peter Winstanley",
