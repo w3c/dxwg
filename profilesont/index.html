@@ -39,7 +39,7 @@
   <p>
     This Profiles Vocabulary provides a structure to describe profiles of information standards. Its
     development was triggered by the appearance of multiple profiles of the Dataset Catalog Vocabulary (DCAT)
-    [[VOCAB-DCAT-20140116]] and examples of profiles including the Dublin Core Application Profiles guidelines [[DCAP]] and various profiles of OpenGeospatial Consortium specifications.
+    [[VOCAB-DCAT-20140116]] and examples of profiles including the Guidelines for Dublin Core Application Profiles [[DCAP]] and various profiles of OpenGeospatial Consortium specifications.
   </p>
   <p>The Profiles Vocabulary is an RDF vocabulary to describe the resources that define and implement a profile. A profile is defined as "A named set of constraints on one or more identified base specifications or other profiles, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of those base specifications necessary to accomplish a particular function." These resources may be human-readable documents (PDFs, textual documents), vocabularies or ontologies (XSD, RDF),  resources specific to validation tools (SHACL, ShEx, Schematron), or any other files or resources that support the profile. Each resource is defined as having a role that defines its function within the profile.
 	</p>
@@ -170,11 +170,32 @@ This vocabulary also provides for the description of relationships between such 
       </ul>
     </li>
   </ul>
+  <section id="motivating-requirements">
+    <h4>Motivating Requirements</h4>
+    <p>
+      For the purposes of dataset exchange and with the lack of a formal W3C method for describing the objects related
+      to profiles, the DXWG underwent a process of Use Case and Requirements gathering. They established the
+      <a href="https://www.w3.org/TR/dcat-ucr/">Dataset Exchange Use Case and Requirements</a> document
+      (the UCR document) [[DCAT-UCR]] which groups requirements for profiles into the following sections:
+    </p>
+    <ul>
+      <li><a href="https://www.w3.org/TR/dcat-ucr/#ProfileAbstractRequirements">6.10 Profiles — abstract requirements applying to the general definition of profiles</a></li>
+      <li><a href="https://www.w3.org/TR/dcat-ucr/#ProfileFunctionalityRequirements">6.11 Profiles — Profile functionality</a></li>
+      <li><a href="https://www.w3.org/TR/dcat-ucr/#ProfileDistributionRequirements">6.12 Profiles — Profile distributions</a></li>
+      <li><a href="https://www.w3.org/TR/dcat-ucr/#ProfileMetadataRequirements">6.13 Profiles — Profile metadata</a></li>
+    </ul>
+    <p>
+      This Profiles Vocabulary document addresses many of those Requirements - those that can be addressed by describing
+      profile components and relations - and the Requirements as described in the UCR document link back to the Use
+      Cases that motivated them.
+    </p>
+    <p>
+      Additionally, the UCR document lists a further profiles Requirements section:
+      <a href="https://www.w3.org/TR/dcat-ucr/#ProfileNegotiationRequirements">6.14 Profile and content negotiation</a>
+      however Requirements there are addressed by the related [[PROF-CONNEG]] document.
+    </p>
+  </section>
   <div class="issue" data-number="551"></div>
-  <div class="note" title="See the Content Negotiation by Profile document">
-    The details of profile negotiation using this vocabulary, as suggested immediately above, and other methods,
-    are explained in detail in the related [[PROF-CONNEG]] document.
-  </div>
 </section>
 <section id="relatedwork" class="informative">
   <h2>Related Work</h2>
@@ -189,8 +210,8 @@ This vocabulary also provides for the description of relationships between such 
 <section id="conceptualmodel">
   <h2>Conceptual Model</h2>
   <figure id="fig-overview">
-    <a href="profilesont.svg">
-      <img src="profilesont.svg" alt="Vocabulary overview diagram" />
+    <a href="figures/profilesont.svg">
+      <img src="figures/profilesont.svg" alt="Vocabulary overview diagram" />
     </a>
     <figcaption>OWL [[OWL2-OVERVIEW]] overview diagram of this vocabulary</figcaption>
   </figure>
@@ -219,12 +240,12 @@ This vocabulary also provides for the description of relationships between such 
       The example below illustrates the use of most parts of PROF and indicates how non-PROF profile metadata is stored alongside PROF metadata.
     </p>
     <figure id="fig-initial-example">
-      <img src="examples/initial.svg" title="An example profile of Dublin Core Terms" style="width:90%;" />
+      <img src="figures/initial.svg" title="An example profile of Dublin Core Terms" style="width:90%;" />
       <figcaption>
-        A full example profile described using common metadata and the Profiles Ontology
+        A full example profile described using common metadata and the Profiles Vocabulary
       </figcaption>
     </figure>
-    <pre class="example nohighlight turtle" aria-busy="false" aria-live="polite" title="A full example described using the Profiles Ontology in RDF (turtle)">
+    <pre class="example nohighlight turtle" aria-busy="false" aria-live="polite" title="A full example described using the Profiles Vocabulary in RDF (turtle)">
 @prefix dct: &lt;http://purl.org/dc/terms/&gt; .
 @prefix prof: &lt;http://www.w3.org/ns/dx/prof/&gt; .
 @prefix role: &lt;http://www.w3.org/ns/dx/prof/role/&gt; .
@@ -339,7 +360,7 @@ CSIRO's publications catalogue."""@en ;
     </table>
     <div class=issue" data-number="521"></div>
     <section id="Property:hasResource" class="property">
-      <h4>hasResource</h4>
+      <h4>Property: hasResource</h4>
       <table class="definition">
         <thead>
         <tr><th>RDF Property:</th><th><a href="#Property:hasResource">prof:hasResource</a></th></tr>
@@ -347,13 +368,13 @@ CSIRO's publications catalogue."""@en ;
         <tbody>
           <tr><td class="prop">OWL type:</td><td><a href="https://www.w3.org/TR/owl2-rdf-based-semantics/#table-axiomatic-properties">owl:ObjectProperty</a></td></tr>
           <tr><td class="prop">Label:</td><td>has resource</td></tr>
-          <tr><td class="prop">Definition:</td><td>A Profile has a Resource Descriptor</td></tr>
+          <tr><td class="prop">Definition:</td><td>A resource which describes the nature of an artifact and the role it plays in relation to a profile</td></tr>
           <tr><td class="prop">Range:</td><td><a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a></td></tr>
         </tbody>
       </table>
     </section>
     <section id="Property:isProfileOf" class="property">
-      <h4>isProfileOf</h4>
+      <h4>Property: isProfileOf</h4>
       <table class="definition">
         <thead>
         <tr><th>RDF Property:</th><th><a href="#Property:isProfileOf">prof:isProfileOf</a></th></tr>
@@ -364,19 +385,12 @@ CSIRO's publications catalogue."""@en ;
           <tr><td class="prop">Definition:</td><td>The subject of 'is profile of' defines constraints on the object which playes the role of a base specification</td></tr>
           <tr><td class="prop">Domain:</td><td><a href="#Class:Profile">prof:Profile</a></td></tr>
           <tr><td class="prop">Range:</td><td><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></td></tr>
-          <tr><td class="prop">Usage note:</td><td>
-            <p>
-              The semantics of the rdfs:Range means that any resource treated as a base specification can be regarded as a Profile (i.e. may be any specification with an empty set of additional constraints).
-            </p>
-            <p>
-              There are no cardinality restrictions so a Profile my indicate `isProfileOf` to multiple Standards/Profiles.
-            </p>
-          </td></tr>
+          <tr><td class="prop">Usage Note:</td><td>A Profile may define constraints on the usage of one or more specifications. All constraints of these specifications are inherited, in the sense that an object conforming to a profile conforms to all the constraints specified the targets of prof:isProfileOf relations. This property is optional, allowing any specification to be declared at the root of a profile hierarchy using the Profile class</td></tr>
         </tbody>
       </table>
     </section>
     <section id="Property:isTransitiveProfileOf" class="property">
-      <h4>isTransitiveProfileOf</h4>
+      <h4>Property: isTransitiveProfileOf</h4>
       <table class="definition">
         <thead>
         <tr><th>RDF Property:</th><th><a href="#Property:isTransitiveProfileOf">prof:isTransitiveProfileOf</a></th></tr>
@@ -384,10 +398,10 @@ CSIRO's publications catalogue."""@en ;
         <tbody>
           <tr><td class="prop">OWL type:</td><td><a href="https://www.w3.org/TR/owl2-rdf-based-semantics/#table-axiomatic-properties">owl:ObjectProperty</a></td></tr>
           <tr><td class="prop">Label:</td><td>is a transitive profile of</td></tr>
-          <tr><td class="prop">Definition:</td><td>The subject 'is profile of' the object which may be through a chain of 'is profile of' relationships</td></tr>
+          <tr><td class="prop">Definition:</td><td>A specification for which this Profile defines constraints, possibly through a chain of isProfileOf relationships</td></tr>
           <tr><td class="prop">Domain:</td><td><a href="#Class:Profile">prof:Profile</a></td></tr>
           <tr><td class="prop">Range:</td><td><a href="http://www.dublincore.org/documents/dcmi-terms/#terms-Standard">dct:Standard</a></td></tr>
-          <tr><td class="prop">Usage note:</td><td>A convenience predicate that may be used to avoid forcing clients to traverse an entire profile hierarchy to find all Profiles/Standards that the subject declares conformance to</td></tr>
+          <tr><td class="prop">Usage note:</td><td>This is a convenience predicate that may be used to declare all specifications (including profiles) that the subject profile requires an information resource to conform to. This avoids forcing clients to traverse a profile hierarchy to find all conformance implications and available resources. If present all such relationships should be present so a client can safely avoid hierarchy traversal</td></tr>
         </tbody>
       </table>
     </section>
@@ -406,7 +420,7 @@ CSIRO's publications catalogue."""@en ;
         <code>skos:broaderTransitive</code>.
       </p>
       <figure id="fig-skos-4.5.2">
-        <img src="broaderTransitive.jpg" title="Figure 4.5.1 from the SKOS Primer WG Note" style="width:90%;" />
+        <img src="figures/broaderTransitive.jpg" title="Figure 4.5.1 from the SKOS Primer WG Note" style="width:90%;" />
         <figcaption>
           Inferring a transitive hierarchy from asserted skos:broader statements. Dotted arrows represent statements
           inferred from the SKOS data model. Solid arrows represent asserted statements. Reproduction of Figure 4.5.2
@@ -429,8 +443,8 @@ CSIRO's publications catalogue."""@en ;
       </p>
     </div>
     <figure id="fig-isTransitiveProfileOf">
-      <a href="examples/isTransitiveProfileOf.svg">
-        <img src="examples/isTransitiveProfileOf.svg" title="Property isTransitiveProfileOf in use" style="width:90%;" />
+      <a href="figures/isTransitiveProfileOf.svg">
+        <img src="figures/isTransitiveProfileOf.svg" title="Property isTransitiveProfileOf in use" style="width:90%;" />
       </a>
       <figcaption>Property isTransitiveProfileOf in use. See the full explanation in the example text below.</figcaption>
     </figure>
@@ -491,7 +505,7 @@ CSIRO's publications catalogue."""@en ;
 # the specialised standard as it can indicate reasoning possibilities.
     </pre>
     <section id="Property:hasToken" class="property">
-      <h4>hasToken</h4>
+      <h4>Property: hasToken</h4>
       <table class="definition">
         <thead>
           <tr><th>RDF Property:</th><th><a href="#Property:hasToken">prof:hasToken</a></th></tr>
@@ -499,10 +513,10 @@ CSIRO's publications catalogue."""@en ;
         <tbody>
           <tr><td class="prop">OWL type:</td><td><a href="https://www.w3.org/TR/owl2-rdf-based-semantics/#table-axiomatic-datatypes">owl:DatatypeProperty</a></td></tr>
           <tr><td class="prop">Label:</td><td>has token</td></tr>
-          <tr><td class="prop">Definition:</td><td>A property for identifying this Profile for use in APIs</td></tr>
+          <tr><td class="prop">Definition:</td><td>A preferred alternative identifier for the Profile</td></tr>
           <tr><td class="prop">Domain:</td><td><a href="#Class:Profile">prof:Profile</a></td></tr>
           <tr><td class="prop">Range:</td><td><a href="https://www.w3.org/TR/xmlschema-2/#token">xsd:token</a></td></tr>
-          <tr><td class="prop">Usage note:</td><td>This property is to be used to indicate a token that identifies this Profile which should be used when the Profile's URI cannot be used. For potential use in content negotiation</td></tr>
+          <tr><td class="prop">Usage note:</td><td>A simple lexical form of identifier that may be accepted in some circumstances, such as API arguments to reference this profile. This is a “preferred term”, since alternative identifiers may be declared and used by any implementation</td></tr>
         </tbody>
       </table>
       <div class="issue" data-number="453"></div>
@@ -522,21 +536,21 @@ CSIRO's publications catalogue."""@en ;
       </tbody>
     </table>
     <section id="Property:hasArtifact" class="property">
-      <h4>hasArtifact</h4>
+      <h4>Property: hasArtifact</h4>
       <table class="definition">
         <thead>
         <tr><th>RDF Property:</th><th><a href="#Property:hasArtifact">prof:hasArtifact</a></th></tr>
         </thead>
         <tbody>
         <tr><td class="prop">Label:</td><td>has artifact (resource)</td></tr>
-        <tr><td class="prop">Definition:</td><td>An rdfs:Resource that implements the Resource Descriptor</td></tr>
+        <tr><td class="prop">Definition:</td><td>The URL of a downloadable file with particulars such as its format and role indicated by a Resource Descriptor</td></tr>
         <tr><td class="prop">Domain:</td><td><a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a></td></tr>
         <tr><td class="prop">Usage Note:</td><td>A property to link from a Resource Descriptor to an actual resource (rdfs:Resource; an individual) that implements it</td></tr>
         </tbody>
       </table>
     </section>
     <section id="Property:conformsTo" class="property">
-      <h4>dct:conformsTo</h4>
+      <h4>Property: dct:conformsTo</h4>
       <p><em>This property's details are from the [[DCTERMS]] specification.</em></p>
       <table class="definition">
         <thead>
@@ -550,7 +564,7 @@ CSIRO's publications catalogue."""@en ;
       </table>
     </section>
     <section id="Property:format" class="property">
-      <h4>dct:format</h4>
+      <h4>Property: dct:format</h4>
       <p><em>This property's details are from the [[DCTERMS]] specification.</em></p>
       <table class="definition">
         <thead>
@@ -564,32 +578,32 @@ CSIRO's publications catalogue."""@en ;
       </table>
     </section>
     <section id="Property:hasRole" class="property">
-      <h4>hasRole</h4>
+      <h4>Property: hasRole</h4>
       <table class="definition">
         <thead>
         <tr><th>RDF Property:</th><th><a href="#Property:hasRole">prof:hasRole</a></th></tr>
         </thead>
         <tbody>
           <tr><td class="prop">Label:</td><td>has role</td></tr>
-          <tr><td class="prop">Definition:</td><td>Functional role of a Resource</td></tr>
+          <tr><td class="prop">Definition:</td><td>The function of the described artifact in the expression of the Profile, such as a specification, guidance documentation, SHACL file etc.</td></tr>
           <tr><td class="prop">Domain:</td><td><a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a></td></tr>
           <tr><td class="prop">Range:</td><td><a href="https://www.w3.org/TR/skos-reference/#Concept">skos:Concept</a></td></tr>
-          <tr><td class="prop">Usage note:</td><td>Some roles are published alongside this vocabulary in a separate Roles vocabulary</td></tr>
+          <tr><td class="prop">Usage note:</td><td>A set of common roles are defined by the Profiles Vocabulary. These are not exhaustive or disjoint, and may be extended for situations where finer grained description of purpose is necessary. A resource may perform multiple roles</td></tr>
         </tbody>
       </table>
     </section>
     <section id="Property:isInheritedFrom" class="property">
-      <h4>isInheritedFrom</h4>
+      <h4>Property: isInheritedFrom</h4>
       <table class="definition">
         <thead>
         <tr><th>RDF Property:</th><th><a href="#Property:isInheritedFrom">prof:isInheritedFrom</a></th></tr>
         </thead>
         <tbody>
           <tr><td class="prop">Label:</td><td>is inherited from</td></tr>
-          <tr><td class="prop">Definition:</td><td>A Profile's Resource Descriptor has been inherited from a base specification</td></tr>
+          <tr><td class="prop">Definition:</td><td>This property indicates a Resource Descriptor described by this Profile’s base specification that is to be considered a Resource Descriptor for this Profile also</td></tr>
           <tr><td class="prop">Domain:</td><td><a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a></td></tr>
           <tr><td class="prop">Range:</td><td><a href="#Class:Profile">prof:Profile</a></td></tr>
-          <tr><td class="prop">Usage note:</td><td>Profiles within inheritance hierarchies may use this property. If absent, then the Resource Descriptor applies specifically to this Profiles only</td></tr>
+          <tr><td class="prop">Usage note:</td><td>This property is created for the convenience of clients. When profile describers wish to allow clients to discover all resources relevant to a Profile without having to navigating an inheritance hierarchy of prof:profileOf relations, this predicate may be used to directly associate inherited Profile Descriptors with the Profile. If this property is present, it should be used consistently and all relevant resources a client may need to utilise the profile should be present and described using this predicate</td></tr>
         </tbody>
       </table>
       <div class="issue" data-number="642"></div>
@@ -598,8 +612,8 @@ CSIRO's publications catalogue."""@en ;
         and code forms.
       </p>
       <figure id="fig-isInhieritedFrom">
-        <a href="examples/isInheritedFrom.svg">
-          <img src="examples/isInheritedFrom.svg" title="Property isInheritedFrom in use" style="width:90%;" />
+        <a href="figures/isInheritedFrom.svg">
+          <img src="figures/isInheritedFrom.svg" title="Property isInheritedFrom in use" style="width:90%;" />
         </a>
           <figcaption>
             Property <code>isInheritedFrom</code> in use. Here the <code>prof:ResourceDescriptor</code> instance <strong>Profile Y, Resource Descriptor 2</strong> refers to the same artifact (a constraints file) as <strong>Profile X, Resource Descriptor 1</strong> and it is inherited by <strong>Profile Y</strong> from <strong>Profile X</strong> which <strong>Profile Y</strong> is a profile of.
@@ -814,13 +828,13 @@ ex2:Profile_Y
 <section id="examples" class="informative">
   <h2>Examples</h2>
   <p>
-    This section contains a few modelled examples of existing profiles to demonstrate aspects of this vocabulary. While
+    This section contains a few examples of PROF in use to demonstrate aspects of this vocabulary. While
     efforts have been made to ensure they are accurate at the time of this document's publication, they are not to be
     considered authoritative; their purpose is only to illustrate this vocabulary's use.
   </p>
   <section id="eg-dcat-ap">
     <h3>DCAT-AP</h3>
-    <p><em>This example showcases this vocabulary's description of parts of a profile.</em></p>
+    <p><em>This example showcases this vocabulary's description of parts of an existing, well-known, profile.</em></p>
     <p>
       DCAT-AP is the widely used European <em>Application Profile</em> of DCAT. DCAT-AP is described in document form
       (PDF &amp; DOCX) and a constraints resource for instance validation is available, formulated using the W3C's Shapes
@@ -847,7 +861,7 @@ ex2:Profile_Y
         a <a href="#Class:Profile">prof:Profile</a>
         <ul>
           <li>
-            with a <a href="#Property:isProfileOf">prof:isProfileOf</a> link to the DCAT [[DCAT}} standard
+            with a <a href="#Property:isProfileOf">prof:isProfileOf</a> link to the DCAT [[DCAT]] standard
           </li>
         </ul>
       </li>
@@ -960,7 +974,7 @@ ex2:Profile_Y
     </p>
     <figure id="fig-eg-hierarchy">
       <a href="examples/hierarchy.svg">
-        <img src="examples/hierarchy.svg" title="DCAT-AP and related profiles in a hierarchy" style="width:70%;" alt="DCAT-AP and related profiles in a hierarchy" />
+        <img src="examples/hierarchy.svg" title="DCAT-AP and related profiles in a hierarchy" style="width:60%;" alt="DCAT-AP and related profiles in a hierarchy" />
       </a>
       <figcaption>
         DCAT-AP and related profiles in a hierarchy. The Profile labelled '?' shows a potential future profile instance
@@ -1014,6 +1028,291 @@ ex2:Profile_Y
       imagined profile, '?' in the figure above, would not be a profile of GeoDCAT-AP.
     </p>
   </section>
+  <section id="eg-csiro-dummy-dcap">
+    <h3>CSIRO Dummy Dublin Core AP</h3>
+    <p>
+      <em>
+        This example uses a dummy profile created for this document to show how PROF describes profiles created
+        according to the Guidelines for Dublin Core Application Profiles [[DCAP]].
+      </em>
+    </p>
+    <p>
+      The DCAP Guidelines document "explains the key components of a Dublin Core Application Profile and walks through
+      the process of developing a profile". It "does not address the creation of machine-readable implementations of an
+      application profile" which is what PROF does.
+    </p>
+    <p>
+      In this example, a dummy profile of Dublin Core TERMS [[DCTERMS]] is created to characterise documents in a
+      hypothetical "ePublish" platform. The dummy profile contains many parts:
+    </p>
+    <ul>
+      <li>a profile overview document</li>
+      <li>a <em>How To</em> document offering guidance on how to use the profile</li>
+      <li>two constraint language files - both conforming to DCAP's constraint syntax in plain text and RDF (turtle) formats</li>
+      <li>two profile description files - one an image (the <a href="#fig-eg-csiro-dummy-dcap"></a> below) and the other an RDF file (the example RDF below)</li>
+    </ul>
+    <figure id="fig-eg-csiro-dummy-dcap">
+      <a href="examples/csiro-dummy-dcap.svg">
+        <img src="examples/csiro-dummy-dcap.svg" title="CSIRO Dummy DCAP Profile" style="width:90%;" alt="CSIRO Dummy DCAP Profile" />
+      </a>
+      <figcaption>
+        CSIRO Dummy DCAP Profile characterised using PROF. Only two of the four Resource Descriptors in the RDF below are shown.
+      </figcaption>
+    </figure>
+    <pre class="example nohighlight turtle" aria-busy="false" aria-live="polite" title="The GeoDCAT-AP profile hierarchy described using Profile Ontology in RDF (turtle)">
+#
+#   This document is a description, according to the Profiles Vocabulary (see https://www.w3.org/TR/dx-prof/)
+#   of a dummy "CSIRO ePublish Repository" profile of the Dubline Core standard. This profile is known as a DCAP -
+#   Dublin Core Application Profile
+#
+#   See http://dublincore.org/documents/profile-guidelines/ for more information about Dublin Core Application Profiles
+#
+@prefix dct: &lt;http://purl.org/dc/terms/&gt; .
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+@prefix prof: &lt;http://www.w3.org/ns/dx/prof/&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix role: &lt;http://www.w3.org/ns/dx/prof/role/&gt; .
+
+
+# Base Specification being profiled
+&lt;http://dublincore.org/documents/2012/06/14/dcmi-terms/&gt; a dct:Standard ;
+    rdfs:label "DCMI Metadata Terms" .
+
+# dummy CSIRO profile of DC for ePublish repository
+# URIs not dereferencable
+&lt;http://test.linked.data.gov.au/test/def/CSIRO-ePub-DCAP&gt;
+    a                 prof:Profile ;
+    rdfs:label        "CSIRO's profile of DC for ePublish" ;
+    prof:isProfileOf    &lt;http://dublincore.org/documents/2012/06/14/dcmi-terms/&gt; ;
+    prof:token        "ePubDC"^^xsd:Token ;
+    prof:hasResource  _:1 , _:2 , _:3 , _:4 .
+
+# example's code repository home
+_:1
+    a                 prof:ResourceDescriptor ;
+    rdfs:label        "Profile Specifcation" ;
+    dct:format        &lt;https://w3id.org/mediatype/text/html&gt; ;
+    # the official written text specifying the Profile
+    prof:hasRole      role:Specification ;
+    prof:hasArtifact  &lt;http://linked.data.gov.au/def/CSIRO-ePub-DCAP/&gt; .
+
+# this is an RDF (turtle) version of the DSP constraints for this profile
+_:2
+    a                 prof:ResourceDescriptor ;
+    rdfs:label        "Full constraints in RDF" ;
+    dct:conformsTo    &lt;http://dublincore.org/documents/2008/03/31/dc-dsp/&gt; ; # the constraints conform to the DSP spec
+    dct:format        &lt;https://w3id.org/mediatype/text/turtle&gt; ; # it's in Turtle format
+    # this is full constraints: if your instance passes these, you're compliant with the profile
+    prof:hasRole      role:Constraints ;
+    prof:hasArtifact  &lt;http://test.linked.data.gov.au/test/def/CSIRO-ePub-DCAP/constraints.ttl&gt; .
+
+_:3
+    a                 prof:ResourceDescriptor ;
+    rdfs:label        "Full constraints in DSP constraint language" ;
+    dct:conformsTo    &lt;http://dublincore.org/documents/2008/03/31/dc-dsp/&gt; ; # the constraints conform to the DSP spec
+    dct:format        &lt;https://w3id.org/mediatype/text/plain&gt; ; # it's in plain text format
+    # this is full constraints: if your instance passes these, you're compliant with the profile
+    prof:hasRole      role:Constraints ;
+    prof:hasArtifact  &lt;http://test.linked.data.gov.au/test/def/CSIRO-ePub-DCAP/constraints-dcap-syntax.txt&gt; .
+
+# this resource is a PDF file in the def about how to use the CSIRO-ePub-DCAP
+_:4
+    a                 prof:ResourceDescriptor ;
+    rdfs:label        "Guidance document" ;
+    dct:format        &lt;https://w3id.org/mediatype/application/pdf&gt; ;
+    # general guidance info on how to use/implement this Profile
+    prof:hasRole      role:Guidance ;
+    prof:hasArtifact &lt;http://test.linked.data.gov.au/test/def/CSIRO-ePub-DCAP/HowTo.pdf&gt; .
+    </pre>
+    <p>
+      This DCAP example shows, among other things, that a <code>Profile</code> may contain multiple
+      <code>Resource Descriptor</code> individuals that perform the same <code>Resource Role</code> (here
+      <code>Constraints</code>) that are differentiated on other bases, here on format: plain text &amp; RDF (turtle).
+    </p>
+  </section>
+  <section id="eg-ga">
+    <h3>Geoscience Australia's Profile of ISO19115-1:2014</h3>
+    <p>
+      <em>This example shows a non-RDF profile of a non-RDF standard: ISO19115-1:2014 (Geographic information) [[ISO-19115-1-2014]].</em>
+    </p>
+    <p>
+      Communities commonly make profiles of the International Organization for Standardization's standard
+      ISO19115-1:2014 Geographic information -- Metadata -- Part 1: Fundamentals used for cataloguing spatial datasets.
+      <a href="http://www.ga.gov.au">Geoscience Australia</a>, Australia's national geological survey agency, has
+      created a profile that constrains ISO19115-1:2014 in ways such as making optional properties in the standard
+      mandatory for profile conformance.
+    </p>
+    <p>
+      The GA Profile of ISO19115 is published online as a collection of resources with an index document with the persistent URI
+      <a href="http://pid.geoscience.gov.au/def/schema/ga/ISO19115-1-2014">http://pid.geoscience.gov.au/def/schema/ga/ISO19115-1-2014</a>.
+    </p>
+    <p>
+      Although not initially formulated with PROF in mind, nevertheless the various parts of the GA Profile of ISO19115
+      can be characterised using PROF as per <a href="#fig-eg-ga"></a> and the example RDF below. Note that the
+      persistent URIs assigned to the profile by Geoscience Australia are used within the PROF description.
+    </p>
+    <figure id="fig-eg-ga">
+      <a href="examples/ga.svg">
+        <img src="examples/ga.svg" title="GA Profile of ISO19115 in PROF" style="width:90%;" alt="GA Profile of ISO19115 in PROF" />
+      </a>
+      <figcaption>
+        The GA Profile of ISO19115 characterised using PROF.
+      </figcaption>
+    </figure>
+    <pre class="example nohighlight turtle" aria-busy="false" aria-live="polite" title="GA Profile of ISO19115 according to PROF in RDF (turtle)">
+@prefix : &lt;http://www.w3.org/ns/dx/prof/examples/ga.ttl#&gt; .
+@prefix prof: &lt;http://www.w3.org/ns/dx/prof/&gt; .
+@prefix roles: &lt;http://www.w3.org/ns/dx/prof/roles/&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix dct: &lt;http://purl.org/dc/terms/&gt; .
+@prefix dc: &lt;http://purl.org/dc/elements/1.1/&gt; .
+@prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt; .
+@prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt; .
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+
+:ISO19115-1-2014
+    a dct:Standard ;
+    rdfs:label "ISO ISO19115-1:2014" ;
+    rdfs:comment "The international standard ISO19115-1:2014 Geographic information - Metadata" ;
+    dc:publisher "International Organization for Standardization" ;
+    dct:source &lt;https://www.iso.org/standard/53798.html&gt;
+.
+
+&lt;http://pid.geoscience.gov.au/def/schema/ga/ISO19115-1-2014&gt;
+    a prof:Profile ;
+    prof:token "iso19115-ga" ;
+    rdfs:label "ISO19115-1:2014 GA Profile";
+    rdfs:comment """Provides a means to declare, and discover implementation resources to check, implementations of geographic metadata schema conforming to GA's profile."""@en;
+    dct:publisher &lt;http://pid.geoscience.gov.au/org/ga/geoscienceaustralia&gt; ;
+    prof:profileOf :ISO19115-1-2014 ;
+    prof:hasResource :web , :spec , :schema , :constraints ;
+.
+
+:web
+    a prof:ResourceDescriptor ;
+    rdfs:label "GA Profile guidance document online" ;
+    prof:hasRole roles:guidance ;
+    dct:conformsTo :WebPage ;
+    dct:format &lt;https://w3id.org/mediatypes/text/html&gt; ;
+    prof:hasArtifact &lt;http://pid.geoscience.gov.au/def/schema/ga/ISO19115-1-2014&gt; ;
+.
+
+:spec
+    a prof:ResourceDescriptor ;
+    rdfs:label "GA Profile specification document";
+    prof:hasRole roles:specification ;
+    dct:format &lt;https://w3id.org/mediatypes/application/pdf&gt; ;
+    prof:hasArtifact &lt;http://pid.geoscience.gov.au/dataset/ga/122551&gt; ;
+.
+
+:schema
+    a prof:ResourceDescriptor ;
+    rdfs:label "GA Profile XML Schema";
+    prof:hasRole roles:specification ;
+    dct:conformsTo :XSDSchema ;
+    dct:format &lt;https://w3id.org/mediatypes/text/xml&gt; ;
+    prof:hasArtifact &lt;http://pid.geoscience.gov.au/def/schema/ga/ISO19115-3-2016/gapm.xsd&gt; ;
+.
+
+:constraints
+    a prof:ResourceDescriptor ;
+    rdfs:label "GA Profile Schematron" ;
+    prof:hasRole roles:fullConstraints ;
+    dct:conformsTo :Schematron ;
+    dct:format &lt;https://w3id.org/mediatypes/text/xml&gt; ;
+    prof:hasArtifact &lt;http://pid.geoscience.gov.au/def/schema/ga/schematron-rules-ga.sch&gt; ;
+.
+
+:WebPage a dct:MediaTypeOrExtent ;
+    rdfs:label "Web Page" ;
+    rdfs:comment "A document written in HyperText Markup Language designed for human reading via a web browser." ;
+    dct:source &lt;https://www.w3.org/html/&gt; ;
+.
+
+:Schematron a dct:MediaTypeOrExtent ;
+    rdfs:label "Schematron" ;
+    rdfs:comment "A language for making assertions about the presence or absence of patterns in XML documents." ;
+    dct:source &lt;http://schematron.com&gt; ;
+.
+    </pre>
+  </section>
+  <section id="eg-adms">
+    <h3>Asset Description Metadata Schema</h3>
+    <p>
+      <em>This example shows a <code>Profile</code>, some of whose <code>Resource Descriptors</code> conform to standards.</em>
+    </p>
+    <p>
+      The Asset Description Metadata Schema (ADMS) [[VOCAB-ADMS]] is a profile of DCAT, used to describe semantic
+      assets. Both ADMS the <code>Profile</code> and two of its <code>Resource Descriptors</code> are published
+      according to W3C specifications for <em>Recommendations</em> and <em>Working Group Notes</em>.
+    </p>
+    <figure id="fig-eg-adms">
+      <a href="examples/adms.svg">
+        <img src="examples/adms.svg" title="ADMS profile of DCAT" style="width:90%;" alt="ADMS profile of DCAT" />
+      </a>
+      <figcaption>
+        The ADMS profile of DCAT.
+      </figcaption>
+    </figure>
+    <pre class="example nohighlight turtle" aria-busy="false" aria-live="polite" title="ADMS profile of DCAT according to PROF in RDF (turtle)">
+@prefix : &lt;http://www.w3.org/ns/dx/prof/examples/adms.ttl#&gt; .
+@prefix prof: &lt;http://www.w3.org/ns/dx/prof/&gt; .
+@prefix roles: &lt;http://www.w3.org/ns/dx/prof/roles/&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix dct: &lt;http://purl.org/dc/terms/&gt; .
+@prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt; .
+
+
+#
+#   A series of standards defined in this examples document
+#
+:W3Cnote
+  rdf:type dct:Standard ;
+  rdfs:label "W3C Working Group Note Document" ;
+.
+
+:W3Crec
+  rdf:type dct:Standard ;
+  rdfs:label "W3C Recommendation Document" ;
+.
+
+
+#
+#   ADMS, described as a profile of DCAT (original)
+#
+:ADMS
+    a prof:Profile ;
+    rdfs:label "ADMS" ;
+    # this URI is for DCAT (original) as defined in the DCAT examples
+    prof:profileOf &lt;http://www.w3.org/ns/dx/prof/examples/dcat.ttl#dcat2014&gt; ;
+    prof:hasResource :ADMS-note ,
+                     :ADMS-rdf ,
+.
+
+:ADMS-note
+    a prof:ResourceDescriptor ;
+    rdfs:label "ADMS specification document" ;
+    prof:hasRole roles:specification ;
+    dct:conformsTo prof:W3Cnote ;
+    dct:format &lt;https://w3id.org/mediatypes/text/html&gt; ;
+    prof:hasArtifact &lt;https://www.w3.org/TR/vocab-adms/&gt; ;
+.
+
+:ADMS-rdf
+    a prof:ResourceDescriptor ;
+    rdfs:label "ADMS RDF vocabulary" ;
+    prof:hasRole roles:vocabulary ;
+    dct:conformsTo &lt;https://www.w3.org/TR/owl2-rdf-based-semantics/&gt; ,
+                   &lt;https://www.w3.org/TR/rdf-schema/&gt; ;
+    dct:format &lt;https://w3id.org/mediatypes/text/turtle&gt; ;
+    prof:hasArtifact &lt;https://www.w3.org/ns/adms&gt; ;
+.
+
+# additional information about DCAT (original) not present in the DCAT example
+&lt;http://www.w3.org/ns/dx/prof/examples/dcat.ttl#dcat-orig&gt;
+    dct:conformsTo :W3Crec .
+    </pre>
+  </section>
 </section>
 <section id="testsuite">
   <h2>Test Suite</h2>
@@ -1039,50 +1338,225 @@ ex2:Profile_Y
 </section>
 <section id="alignments" class="informative">
   <h2>Alignments</h2>
-  <p>This section will list alignments from PROF to other W3C ontologies.</p>
+  <p>This section lists alignments between PROF and other, related, ontologies.</p>
   <section id="alignment-dcat">
-    <h3>Alignment with DCAT</h3>
-    <p>This vocabulary aligns with the Dataset Catalogue vocabulary as per the class and property diagrams below.</p>
-    <p>The RDF file giving the formal alignment is avauilable here: <a href="https://w3c.github.io/dxwg/profilesont/alignment_dcat.ttl">profilesont_dcat_alignment.ttl</a>.</p>
-    <figure id="fig-dcat-classes">
-      <img src="alignment_dcat_classes.png" alt="Alignment of PROF classes with DCAT 1.1 classes" style="width:90%;" />
-      <figcaption>Alignment of PROF classes with DCAT 1.1 [[VOCAB-DCAT-2-20180508]] classes. PROF classes are indicated with their rdfs:label text and no namespace prefix.</figcaption>
+    <h3>Dataset Catalogue Vocabulary</h3>
+    <div class="note" title="Status of PROF/DCAT alignment">
+      PROF/DCAT relations are being addressed as a major part of PROF's Third Public Working Draft
+    </div>
+    <p>
+      PROF is considered a specialisation of the revised version of the Dataset Catalogue Vocabulary [[VOCAB-DCAT-2]]
+      for the purpose of cataloguing profiles. With this in mind, the main PROF classes - <code>Profile</code> and
+      <code>Resource Descriptor</code> - specialise (are sub classes of) DCAT's <code>Resource</code> and
+      <code>Distributions</code> respectively. This alignment is not normative, but is provided as a recommended way
+      to consider general metadata needs when describing profiles.
+    </p>
+    <p>
+      These specialisations are indicated in <a href="#fig-align-dcat"></a> below as well as the data element mapping
+      table that follows it.
+    </p>
+    <figure id="fig-align-dcat">
+      <img src="alignments/dcat.svg" alt="Alignment of PROF with DCAT" style="width:60%;" />
+      <figcaption>Alignment of PROF with DCAT [[VOCAB-DCAT-2]].</figcaption>
     </figure>
-    <figure id="fig-dcat-properties">
-      <img src="alignment_dcat_properties.png" alt="Alignment of PROF properties with DCAT 1.1 properties" style="width:90%;" />
-      <figcaption>Alignment of PROF classes with DCAT 1.1 [[VOCAB-DCAT-2-20180508]] properties. PROF properties are indicated with their rdfs:label text and no namespace prefix.</figcaption>
-    </figure>
-    <p>The following table summarieses the mappings shown graphically in Fig. 2 & 3.</p>
+    <p>The following table relates PROF and DCAT elements.</p>
     <table id="alignment-dcat-table">
       <thead>
       <tr><th>PROF element</th><th>Mapping property</th><th>DCAT element</th><th>Notes</th></tr>
       </thead>
       <tbody>
-      <tr><td>prof:hasResource</td><td style="text-align: center;"><code>rdfs:subPropertyOf</code></td><td>dcat:distribution</td><td></td>
-      <tr><td>dct:conformsTo</td><td style="text-align: center;">-</td><td>-</td><td>Used similarly</td>
-      <tr><td>dct:format</td><td style="text-align: center;">-</td><td>-</td><td>Used similarly</td>
-      <tr><td>prof:hasRole</td><td style="text-align: center;"><code>rdfs:subClassOf</code></td><td>dcat:Distribution</td><td></td></tr>
-      <tr><td>prof:Profile</td><td style="text-align: center;"><code>rdfs:subClassOf</code></td><td>dcat:Resource</td><td>Generic association</td></tr>
+        <tr><td>prof:Profile</td><td style="text-align: center;"><code>rdfs:subClassOf</code></td><td>dcat:Resource</td><td><code>prof:Profile</code> is not a sub class of <code>dcat:Dataset</code></td></tr>
+        <tr><td>prof:ResourceDescriptor</td><td style="text-align: center;"><code>rdfs:subClassOf</code></td><td>dcat:Distribution</td><td></td></tr>
       </tbody>
     </table>
+    <p>
+      While DCAT is referenced in the main PROF RDF file, the following separate RDF file contains just the mappings
+      included in the table above too:
+    </p>
+    <ul>
+      <li><a href="alignments/dcat.ttl">alignments/dcat.ttl</a></li>
+    </ul>
   </section>
   <section id="alignment-adms">
-    <h3>Alignment with ADMS</h3>
-    <p></p>
+    <h3>Asset Description Metadata Schema</h3>
     <div class="issue" data-number="240"></div>
+    <p>
+      The Asset Description Metadata Schema (ADMS) [[VOCAB-ADMS]] is a profile of DCAT, used to describe semantic
+      assets. PROF is aligned with ADMS as per <a href="#fig-align-adms"></a> and table below.
+    </p>
+    <p>
+      Due to PROF being aligned with the revised version of DCAT and ADMS also being aligned with DCAT, classes and
+      properties of the two vocabularies may be sensibly used beyond the mappings presented here. In particular the fact
+      that both <code>prof:Profile</code> and <code>adms:Asset</code> are non-disjoint sub classes of
+      <code>dcat:Resource</code>, albeit that the latter is such via being a sub class of <code>dcat:Dataset</code>
+      which subclasses <code>dcat:Resource</code>, means that resources could easily be dually typed as being of both
+      <code>prof:Profile</code> and <code>adms:Asset</code>.
+    </p>
+    <figure id="fig-align-adms">
+      <img src="alignments/adms.svg" alt="Alignment of PROF with ADMS" style="width:80%;" />
+      <figcaption>Alignment of PROF with DCAT [[VOCAB-ADMS]].</figcaption>
+    </figure>
+    <p>The following table relates PROF and ADMS elements.</p>
+    <table id="alignment-adms-table">
+      <thead>
+      <tr><th>PROF element</th><th>Mapping property</th><th>ADMS element</th></tr>
+      </thead>
+      <tbody>
+      <tr><td>prof:ResourceDescriptor</td><td style="text-align: center;"><code>rdfs:subClassOf</code></td><td>adms:AssetDistribution</td></tr>
+      </tbody>
+    </table>
+    <p>
+      The following RDF file contains just the mappings included in the table above:
+    </p>
+    <ul>
+      <li><a href="alignments/adms.ttl">alignments/adms.ttl</a></li>
+    </ul>
+  </section>
+  <section id="alignment-dct">
+    <h3>Dublin Core Terms</h3>
+    <p>
+      PROF makes use of Dublin Core Terms [[DCTERMS]] directly with the PROF class <code>prof:Profile</code> being a
+      sub class of <code>dct:Standard</code> and two Dublin Core Terms properties, <code>dct:format</code> &amp;
+      <code>dct:conformsTo</code> being recommended within PROF for use in describing instances of the
+      <code>prof:ResourceDescriptor</code> class.
+    </p>
+    <p>
+      PROF is aligned with Dublin Core Terms as per <a href="#fig-align-dct"></a> and table below.
+    </p>
+    <figure id="fig-align-dct">
+      <img src="alignments/dct.svg" alt="Alignment of PROF with Dublin Core Terms" style="width:40%;" />
+      <figcaption>Alignment of PROF with Dublin Core Terms [[DCTERMS]].</figcaption>
+    </figure>
+    <p>The following table relates PROF and Dublin Core Terms elements.</p>
+    <table id="alignment-dct-table">
+      <thead>
+      <tr><th>PROF element</th><th>Mapping property</th><th>DCT element</th></tr>
+      </thead>
+      <tbody>
+      <tr><td>prof:Profile</td><td style="text-align: center;"><code>rdfs:subClassOf</code></td><td>dct:Standard</td></tr>
+      </tbody>
+    </table>
+    <p>
+      While Dublin Core Terms is referenced in the main PROF RDF file, the following RDF file contains just the
+      mappings included in the table above:
+    </p>
+    <ul>
+      <li><a href="alignments/dct.ttl">alignments/dct.ttl</a></li>
+    </ul>
+  </section>
+  <section id="alignment-prov">
+    <h3>The Provenance Ontology</h3>
+    <div class="issue" data-number="402"></div>
+    <div class="issue" data-number="797"></div>
+    <p>
+      The Provenance Ontology [[PROV-O]] is used to represent and interchange provenance information.
+    </p>
+    <div class="note" title="Status of PROV-O alignment">
+      Alignment of PROF with PROV-O will be addressed in PROF's Third Public Working Draft.
+    </div>
   </section>
   <section id="alignment-owl">
-    <h3>Alignment with OWL</h3>
-    <div data-number="696"></div>
+    <h3>Web Ontology Language</h3>
+    <p>
+      PROF is a vocabulary formulated using the Web Ontology Language (OWL) [[OWL2-OVERVIEW]]. In addition to the basic
+      modelling mechanics of PROF that use OWL, for example PROF classes being defined as <code>owl:Class</code>
+      objects and PROF properties being OWL <code>owl:ObjectProperty</code> or other OWL property types, some of the
+      core PROF modelling concepts relate to OWL ontology concepts.
+    </p>
+    <p>
+      PROF is aligned with OWL at a conceptual modelling level as per <a href="#fig-align-owl"></a> and table below.
+    </p>
+    <figure id="fig-align-owl">
+      <img src="alignments/owl.svg" alt="Alignment of PROF with OWL" style="width:70%;" />
+      <figcaption>Alignment of PROF with OWL [[OWL2-OVERVIEW]].</figcaption>
+    </figure>
+    <table id="alignment-owl-table">
+      <thead>
+      <tr><th>PROF element</th><th>Mapping property</th><th>OWL element</th></tr>
+      </thead>
+      <tbody>
+      <tr><td>prof:isProfileOf</td><td style="text-align: center;"><code>?</code></td><td>owl:imports</td></tr>
+      </tbody>
+    </table>
+    <p>
+      The following RDF file contains just the mappings included in the table above:
+    </p>
+    <ul>
+      <li><a href="alignments/owl.ttl">alignments/owl.ttl</a></li>
+    </ul>
+    <div class="issue" data-number="696"></div>
   </section>
   <section id="alignment-voaf">
-    <h3>Alignment with VOAF</h3>
-    <p></p>
+    <h3>Vocabulary of a Friend</h3>
     <div class="issue" data-number="235"></div>
+    <p>
+      Vocabulary of a Friend (VOAF) is a vocabulary specification providing elements allowing the description of
+      vocabularies (RDFS vocabularies or OWL ontologies) [[VOAF]]. Due to VOAF being defined for use with RDF resources
+      only, PROF as an alignment with VOAF which is instance-specific: resources described by PROF's
+      <code>prof:ResourceDescriptor</code> class with the property <code>prof:resourceRole</code> linking to the
+      Resource Role <code>role:Vocabulary</code> or a specialized version of it may be a <code>voaf:Vocabulary</code>.
+    </p>
+    <figure id="fig-align-voaf">
+      <img src="alignments/voaf.svg" alt="Alignment of PROF with VOAF" style="width:70%;" />
+      <figcaption>Alignment of PROF with VOAF [[VOAF]].</figcaption>
+    </figure>
+    <table id="alignment-voaf-table">
+      <thead>
+      <tr><th>PROF element</th><th>Mapping property</th><th>VOAF element</th></tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>instance of rdf:Resource</td>
+        <td style="text-align: center;">related to an instance of a <code>prof:ResourceDescriptor</code> via
+          <code>prof:hasArtifact</code> that also relates to the Role <code>role:Vocabulary</code> or specialisation
+          thereof
+        </td>
+        <td>instance of voaf:Vocabulary</td></tr>
+      </tbody>
+    </table>
+    <p>
+      The following RDF file contains just the mappings included in the table above:
+    </p>
+    <ul>
+      <li><a href="alignments/voaf.ttl">alignments/voaf.ttl</a></li>
+    </ul>
   </section>
   <section id="alignment-modspec">
-    <h3>Alignment with OGC/ISO Modular specification model</h3>
-    <p></p>
+    <h3>OGC/ISO Modular Specification</h3>
+    <div class="issue" data-number="403"></div>
+    <div class="issue" data-number="737"></div>
+    <div class="issue" data-number="791"></div>
+  </section>
+  <section id="alignment-skos">
+    <h3>Simple Knowledge Organization System</h3>
+    <p>
+      The Simple Knowledge Organization System (SKOS) [[SKOS-REFERENCE]] is a data model knowledge organization
+      systems, such as thesauri, taxonomies, classification schemes and subject heading systems. PROF declares its
+      instances of <code>Resource Role</code> to be instances of the <code>skos:Concept</code> class to indicate that
+      they should be considered a hierarchy of concepts within a <code>skos:ConceptScheme</code>. Since they are SKOS
+      hierarchy and it is recommended that implementers of PROF extend the hierarchy for their own needs, implementers
+      should consider creating new <code>Resource Role</code> (also <code>skos:Concept</code>) and relating them to the
+      existing instances with SKOS properties, particularly <code>skos:narrower</code>/<code>skos:broader</code>.
+    </p>
+    <figure id="fig-align-skos">
+      <img src="alignments/skos.svg" alt="Alignment of PROF with SKOS" style="width:40%;" />
+      <figcaption>Alignment of PROF with SKOS [[SKOS-REFERENCE]].</figcaption>
+    </figure>
+    <table id="alignment-skos-table">
+      <thead>
+      <tr><th>PROF element</th><th>Mapping property</th><th>SKOS element</th></tr>
+      </thead>
+      <tbody>
+      <tr><td>prof:ResourceRole</td><td style="text-align: center;"><code>rdfs:subClassOf</code></td><td>skos:Concept</td></tr>
+      </tbody>
+    </table>
+    <p>
+      While SKOS is referenced in the main PROF RDF file, the following RDF file contains just the mappings included in
+      the table above:
+    </p>
+    <ul>
+      <li><a href="alignments/skos.ttl">alignments/skos.ttl</a></li>
+    </ul>
   </section>
   <div class="issue" data-number="405"></div>
 </section>
