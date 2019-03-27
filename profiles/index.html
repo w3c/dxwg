@@ -102,7 +102,7 @@
     <p>
 			We recognise that the term 'profile' occurs in several domains, and that there are a range of definitions 
 			available from different communities. We have taken this variability into account but for the purpose of this document we 
-			are using the following definitions:
+			are using the following definition:
     <p>
       <dl>
         <dt><dfn>profile</dfn></dt>
@@ -119,22 +119,13 @@
           </p>
           <p><em>Source: deliberations of the DXWG. See <a href="https://www.w3.org/2017/dxwg/wiki/ProfileContext">ProfileContext wiki page</a>.</em></p>
         </dd>
-				<dl>
-        <dt><dfn>profiling</dfn></dt>
-        <dd>
-          <p>
-            The act of creating a profile  - an activity that has been undertaken by many communities with a range of formalisms.
-          </p>
-				</dd>
-      </dl>
       <div class="issue" data-number="448"></div>
-      <div class="issue" data-number="418"></div>
     </section>
 		
 			
     <section id="motivation">
       <h3>The motivation for profiles</h3>
-		    <p>
+     <p>
       Communities create and use data standards to ensure interoperability for information exchange. Although members
       of a community may use the same basic standard schema, it is very common for different subsets within the larger
       community to need some further specification of the data they create to meet their own needs. To continue to
@@ -142,6 +133,16 @@
       their implementation of the data schema. Profiles serve this purpose. Profiles enumerate vocabulary terms,
       cardinality, and validation rules, and can also include descriptions of the rules used by creators to make
       decisions regarding their data elements.
+    </p>
+    <p>
+      In the <a href="https://www.w3.org/TR/dcat-ucr/">DXWG use case and requirements document</a> [[DCAT-UCR]], our group 
+      has identified typical use cases for profiles, such as:
+    </p>
+    <ul>
+      <li><a href="https://w3c.github.io/dxwg/ucr/#ID7">associating fine-grained semantics for datasets and resources within a dataset</a></li>
+      <li><a href="https://w3c.github.io/dxwg/ucr/#ID41">expression of vocabulary constraints</a>, and</li>
+      <li><a href="https://w3c.github.io/dxwg/ucr/#ID46">support for input functions</a></li>
+    </ul>
     </p>
     </section>
 			
@@ -151,19 +152,19 @@
 			<p>
         Profiles can take a number of forms and can have a variety of relationships to existing vocabularies, 
 				standards, and other profiles. We recognise this variety, but for the purposes of this document we are focusing 
-				on the most general forms of profile and profiling. Although it is not possible to list all of the types 
+				on the most general forms of profiles and profiling. Although it is not possible to list all of the types 
 				of profiles, some illustrations of frequently-used profiles include:
       </p>
 			<ul>
 				<li>
-					profiles that are subsets of a larger vocabulary. These reduce the vocabulary terms of a broad data 
+					<strong>profiles that are subsets of a larger vocabulary</strong>. These reduce the vocabulary terms of a broad data 
 					standard to a smaller number of terms that are useful for a particular community member or application. 
 					An example of this is <a href="http://bibfra.me/">BIBFRA.me</a>, which is designed for library materials and defines 
 					both a core set of terms as well as profiles for specialized communities such as cataloging of rare materials 
 					or early printing trade. In this community, all profiles use only terms from a single vocabulary.
 				</li>
 				<li>
-					profiles that can both reduce and extend a base standard. These profiles are developed by members of a 
+					<strong>profiles that can both reduce and extend a base standard</strong>. These profiles are developed by members of a 
 					data-sharing community but for reasons of jurisdiction or specialization need to add terms beyond the base 
 					standard vocabulary in order to meet their needs. They may also omit terms from the base standard that are not 
 					relevant to their implementations. An example of this is data catalog vocabulary standard, DCAT, its primary 
@@ -172,15 +173,15 @@
 					variant. These profiles generally make use of terms from more than one namespace.
 				</li>
 				<li>
-					profiles that amend a base standard by inheriting or overriding values of that standard. The example here 
+					<strong>profiles that amend a base standard by inheriting or overriding values of that standard</strong>. The example here 
 					is of the Open Digital Rights Language (ODRL) which is a language to support rights in the use of digital 
 					content in publishing, distribution, and consumption of digital media. The ODRL language encodes a policy 
 					that has a core vocabulary that can be extended or overridden by individual instances called "profiles."
 					<div class="issue" data-number="368"></div>
 				</li>
 				<li>
-					profiles that use some vocabulary terms from multiple standards without having a strong relationship to any 
-					base standard. These profiles develop new groupings of existing terms as vocabularies and may define new 
+					<strong>profiles that use some vocabulary terms from multiple standards without having a strong relationship to any 
+					base standard</strong>. These profiles develop new groupings of existing terms as vocabularies and may define new 
 					terms as needed. An example of this is the Asset Description Metadata Schema (ADMS) vocabulary [[vocab-adms]]
 				</li>
 			</ul>
@@ -199,19 +200,56 @@
 
   
   <section id="whatisaprofile">
-      <h2>Profiles defined</h2>
-      <p>This section builds on the formal definition for <a>profile</a> and the requirements DXWG has identified, and lays down a conceptual model for profiles, their components 
-        and their functions.</p>
-      <p>A Profile is based on an existing Specification, which can have the status of a Standard and which can be itself 
+      <h2>Diving into profiles</h2>
+      <p>This section builds on the formal definition for <a>profile</a> as well as the requirements the W3C Data Exchange Working Group (DXWG) has identified, and lays down a conceptual model for profiles, their components 
+        and their functions.
+    </p>
+    <p>Its goal is to establish a general view of profiles that supports the many potentially more specific examples 
+      in practice. Usages of the term 'profile' in other contexts may not be consistent with these requirements, 
+      and are thus out of scope.
+    </p>
+      <p>A Profile is based on an existing Specification, which can have the status of a Standard and which can itself be 
         a Profile of another Specification. A profile can have various Components/Manifestations in various expression languages for profiles.
         These Components/Manifestations play specific Functions (roles) for the implementation of the services that motivate the creation of the Profile. 
         These Components are serialized and published as Distributions in various formats, which are the concrete input for performing these services.
         </p>
+    
+   <div class="note">
+    <p>
+      The idea of the previous paragraph is to have a set of links to various sections, as done in the SKOS Primer at 
+	    https://www.w3.org/TR/skos-primer/#secsimple. 
+	    It needs to be re-written considering the final structure of the document. 
+	    Also, the terminology in this section is still under discussion, e.g. <a href="https://github.com/w3c/dxwg/issues/747">here</a> or 
+      <a href="https://github.com/w3c/dxwg/issues/795">here</a>.
+    </p>
+  </div>
+    
+    <p>The profile may be expressed in a single specification, or it may consist of more than one component. 
+      For example, a profile may have a vocabulary in the form of a schema (such as OWL or XML schema), as 
+      well as a text file containing documentation for persons doing data creation, and actionable validation code, 
+      such as a ShEx or SHACL document. Components may be added or removed without changing the fact that the profile 
+      meets the definition of a profile as stated in this document. A profile can exist independently of the set of 
+      resources that is used to describe it.
+    </p>
+      <div class="issue" data-number="597"></div>
 
  <section class="requirement" id="RPFNCTERMS"> 
-	 <h3>Profiles are named collections of properties</h3>
+	 <h3>Profiles are uniquely named sets of data constraints, such as data elements (e.g. classes, properties, value domains) that describe (meta)data.
+</h3>
     <!--<h3>Named collections of terms [RPFNCTERMS]</h3>-->
-    <p>Profiles SHOULD be made up of a collection of properties or terms, and that collection SHOULD have a name. Properties are selected from existing vocabularies. Because profiles as being described here are not limited to those in RDF, collections could be of metadata terms from any type of metadata schema.</p>
+	 
+    <p>
+	    When building a profile you SHOULD give it a name and you SHOULD build it from properties or terms that 
+	    you have collected from pre-existing sources. Because we are considering a wide range of profiles, 
+	    not just those in RDF, collections could be of metadata terms from any type of metadata schema, but 
+      they might also include collections of identifiers, value lists and enumerations, other data elements, 
+      and anything else that might be helpful in ensuring that the data matches the purpose intended by you 
+      and your community
+    </p>
+    <div class="note">
+      <p>In our context, <em>constraints</em> is a general notion, which includes specification of optional data elements.
+     </p>
+   </div>
 <div class="issue" data-number="275"></div>
     <div class="note"><p>It could also be in roles/functions if there is nothing there about defining terms. Antoine Isaac, 2018-11-11
      </p></div>
@@ -221,7 +259,7 @@
   <section class="requirement" id="RPFMBSPEC">
     <h3>Multiple base specifications [RPFMBSPEC]</h3>
     <p>A profile can have multiple base specifications.</p>
-<a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/268">github:issue/268</a>
+    <div class="issue" data-number="268"></div>
   </section>
 
   <section class="requirement" id="RPFPP">
@@ -371,8 +409,7 @@
 
   <section class="requirement" id="RPFDEPR">
     <h3>Dependency rules [RPFDEPR]</h3>   
-    <p>Profiles may express dependencies between elements of the vocabulary (if A then not B, etc.).</p>
-<a target="_blank" rel="nofollow" class="external free" href="https://github.com/w3c/dxwg/issues/278">github:issue/278</a>
+    <div class="issue" data-number="278"></div>
   </section>
 
   <section class="requirement" id="RPFUI"> 
@@ -622,8 +659,16 @@ Ideally, the profile would have a management cycle for maintenance and updates. 
       <!-- A list of issues will magically appear here -->
     </section>
     
-    <section id="definitions">
+    <section id="appendix-definitions">
       <h3>Definitions</h3>
+       <dl>
+        <dt><dfn>profiling</dfn></dt>
+        <dd>
+          <p>
+            The act of creating a profile  - an activity that has been undertaken by many communities with a range of formalisms.
+          </p>
+	</dd>
+      </dl>
       <dl>
         <dt><dfn>formalism</dfn></dt>
         <dd>
@@ -646,8 +691,24 @@ Ideally, the profile would have a management cycle for maintenance and updates. 
           </p>
           <p><em>Source: [[DCTERMS]]</em>.</p>
         </dd>
+	<dt><dfn>specification</dfn></dt>
+        <dd>
+          <p></p>
+	</dd>
+	<dt><dfn>Base specification</dfn></dt>
+        <dd>
+          <p>A specification MAY assume a role of being a base specification, which is the foundation of the profile.
+          </p>
+	</dd>
+	<dt><dfn>Constraint</dfn></dt>
+        <dd>
+          <p></p>
+	</dd>
+	<dt><dfn>Data element</dfn></dt>
+        <dd>
+          <p></p>
+	</dd>
       </dl>
-      <div class="issue" data-number="371"></div>
       <div class="issue" data-number="418"></div>
     </section>
 

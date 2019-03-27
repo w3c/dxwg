@@ -52,18 +52,18 @@ dct:format rdf:type owl:AnnotationProperty ;
 ###  http://www.w3.org/ns/dx/prof/hasArtifact
 :hasArtifact
   rdf:type owl:ObjectProperty ;
-  skos:definition "An rdfs:Resource that implements the Resource Descriptor"@en ;
+  skos:definition "The URL of a downloadable file with particulars such as its format and role indicated by a Resource Descriptor"@en ;
   rdfs:domain :ResourceDescriptor ;
   rdfs:label "has artifact" ;
-  skos:usageNote "A property to link from a Resource Descriptor to an implementing resource object"@en .
+  skos:usageNote ""@en .
 
 
 ###  http://www.w3.org/ns/dx/prof/isInheritedFrom
 :isInheritedFrom rdf:type owl:ObjectProperty ;
                rdfs:domain :ResourceDescriptor ;
                rdfs:range :Profile ;
-               skos:definition "A Profile's Resource Descriptor has been inherited from a Base Specification"@en ;
-               skos:usageNote "Profiles within inheritance hierarchies may use this property. If absent, then the Resource Descriptor applies specifically to this Profiles only"@en ;
+               skos:definition "This property indicates a Resource Descriptor described by this Profile’s base specification that is to be considered a Resource Descriptor for this Profile also"@en ;
+               skos:usageNote "This property is created for the convenience of clients. When profile describers wish to allow clients to discover all resources relevant to a Profile without having to navigating an inheritance hierarchy of prof:profileOf relations, this predicate may be used to directly associate inherited Profile Descriptors with the Profile. If this property is present, it should be used consistently and all relevant resources a client may need to utilise the profile should be present and described using this predicate"@en ;
                rdfs:label "is inherited from" .
 
 
@@ -72,7 +72,7 @@ dct:format rdf:type owl:AnnotationProperty ;
            rdfs:domain :Profile ;
            rdfs:range dct:Standard ;
            rdfs:subPropertyOf :isTransitiveProfileOf ;
-           skos:usageNote "The semantics of the rdfs:Range means that any resource treated as a base specification can be regarded as a Profile (i.e. may be any specification with an empty set of additional constraints)"@en ;
+           skos:usageNote "A Profile may define constraints on the usage of one or more specifications. All constraints of these specifications are inherited, in the sense that an object conforming to a profile conforms to all the constraints specified the targets of prof:isProfileOf relations. This property is optional, allowing any specification to be declared at the root of a profile hierarchy using the Profile class"@en ;
            skos:definition "A Profile is a profile of a dct:Standard (or a Base Specification or another Profile)"@en ;
            rdfs:label "is profile of" .
 
@@ -81,24 +81,25 @@ dct:format rdf:type owl:AnnotationProperty ;
 :isTransitiveProfileOf rdf:type owl:ObjectProperty ;
                      rdfs:domain :Profile ;
                      rdfs:range dct:Standard ;
-                     skos:scopeNote "A means to list all the transitive hierarchy of base specifications that this Profile implies conformance to"@en ;
                      skos:definition "A base specification an Profile conforms to"@en ;
-                     rdfs:label "is transitive profile of" .
+                     rdfs:label "is transitive profile of" ;
+                     skos:usageNote "This is a convenience predicate that may be used to declare all specifications (including profiles) that the subject profile requires an information resource to conform to. This avoids forcing clients to traverse a profile hierarchy to find all conformance implications and available resources. If present all such relationships should be present so a client can safely avoid hierarchy traversal"@en .
 
 
 ###  http://www.w3.org/ns/dx/prof/hasResource
 :hasResource rdf:type owl:ObjectProperty ;
           rdfs:range :ResourceDescriptor ;
-          skos:definition "Property for indicating a Resource Descriptor of this profile"@en ;
-          rdfs:label "has resource"@en .
+          skos:definition "A resource which describes the nature of an artifact and the role it plays in relation to a profile"@en ;
+          rdfs:label "has resource"@en ;
+          skos:usageNote "This property is analogous to dcat:distribution however the domain is not necessarily dcat:Dataset. dcat:Dataset and prof:Profile are not disjoint, so it is up to implementations to decide if these are equivalent properties"@en .
 
 
 ###  http://www.w3.org/ns/dx/prof/hasRole
 :hasRole rdf:type owl:ObjectProperty ;
               rdfs:domain :ResourceDescriptor ;
               rdfs:range skos:Concept ;
-              skos:usageNote "Some roles are published alongside this vocabulary in a separate Roles vocabulary"@en ;
-              skos:definition "Functional role of a Resource"@en ;
+              skos:usageNote "A set of common roles are defined by the Profiles Vocabulary. These are not exhaustive or disjoint, and may be extended for situations where finer grained description of purpose is necessary. A resource may perform multiple roles"@en ;
+              skos:definition "The function of the described artifactresource in the expression of the Profile, such as a specification, guidance documentation, SHACL file etc."@en ;
               rdfs:label "has role" .
 
 
@@ -110,25 +111,14 @@ dct:format rdf:type owl:AnnotationProperty ;
 :hasToken rdf:type owl:DatatypeProperty ;
        rdfs:domain :Profile ;
        rdfs:range xsd:token ;
-       skos:definition "A property for identifying this Profile for use in APIs"@en ;
-       skos:scopeNote "This property is to be used to indicate a token that identifies this Profile which should be used when the Profile's URI cannot be used. For potential use in content negotiation"@en ;
+       skos:definition "A preferred alternative identifier for the Profile"@en ;
+       skos:usageNote "A simple lexical form of identifier that may be accepted in some circumstances, such as API arguments to reference this profile. This is a “preferred term”, since alternative identifiers may be declared and used by any implementation"@en ;
        rdfs:label "has token" .
 
 
 #################################################################
 #    Classes
 #################################################################
-
-###  http://www.w3.org/ns/dx/prof/BaseSpecification
-:BaseSpecification rdf:type owl:Class ;
-                   rdfs:subClassOf :Profile ,
-                                   [ rdf:type owl:Restriction ;
-                                     owl:onProperty :isProfileOf ;
-                                     owl:maxCardinality "0"^^xsd:nonNegativeInteger
-                                   ] ;
-                   rdfs:label "Base Specification" ;
-                   skos:definition "A specification that defines all implementation constraints, without applying constraints on usage of another specification"@en ;
-                   skos:usageNote "This may not be a useful class: documents of any specification can be regarded as a trivial profile, so applications only need to be concerned with Profile conformance"@en .
 
 
 ###  http://www.w3.org/ns/dx/prof/ResourceDescriptor
