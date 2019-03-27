@@ -1511,7 +1511,7 @@ $(document).ready( function() {
             <tr><td class="prop">Definition:</td><td>A collection of data, published or curated by a single agent, and available for access or download in one or more representations.</td></tr>
             <tr><td class="prop">Sub class of:</td><td><a href="#Class:Resource">dcat:Resource</a></td></tr>
             <tr><td class="prop">Usage note:</td><td>This class describes the conceptual dataset. One or more representations might be available, with differing schematic layouts and formats or serializations.</td></tr>
-            <tr><td class="prop">Usage note:</td><td>This class describes the actual dataset as published by the dataset provider. In cases where a distinction between the actual dataset and its entry in the catalog is necessary (because metadata such as modification date and maintainer might differ), the <i><a href="#Class:Catalog_Record">catalog record</a></i> class can be used for the latter.</td></tr>
+            <tr><td class="prop">Usage note:</td><td>This class describes the actual dataset as published by the dataset provider. In cases where a distinction between the actual dataset and its entry in the catalog is necessary (because metadata such as modification date might differ), the <i><a href="#Class:Catalog_Record">catalog record</a></i> class can be used for the latter.</td></tr>
             </tbody>
         </table>
 
@@ -1730,20 +1730,18 @@ $(document).ready( function() {
         <div class="note">
             <p> Examples of distributions include a CSV file, a netCDF file, a JSON document, or a data-cube, files made accessible according to different profiles, such as XML or JSON schemas or ShEx or SHACL expressions.</p>
 
-            <p>In some cases all distributions of a dataset will be fully informationally equivalent, in the sense that lossless transformations between the representations are possible. An example would be different serializations of an RDF graph using RDF/XML, Turtle, N3, JSON-LD. However, in other cases the distributions might have different levels of fidelity to the underlying data. For example, a graphical representation alongside a CSV file. The question of whether different representations can be understood to be distributions of the same dataset is use-case specific, so the judgement is the responsibility of the provider. </p>
+            <p>In some cases all distributions of a dataset will be fully informationally equivalent, in the sense that lossless transformations between the representations are possible.
+            An example would be different serializations of an RDF graph using RDF/XML, Turtle, N3, JSON-LD.
+            However, in other cases the distributions might have different levels of fidelity to the underlying data.
+            For example, a graphical representation about the data on a CSV file may not contain the same total information recorded in the CSV file, but they could be considered as two distributions for the same dataset as they are about the same data.
+            As a counter-example, budget data for different years would usually be modelled as different datasets, each with their own distributions, since all distributions of one dataset should broadly contain the same data.
+            Nevertheless, the question of whether different representations can be understood to be distributions of the same dataset is use-case specific, so the judgement about how to describe them is the responsibility of the provider. </p>
 
-            <p>
-                The scope of <code>dcat:Distribution</code> here is narrower than in DCAT-2014 [[?VOCAB-DCAT-20140116]], where it also included APIs and feeds.
-                Data catalogues designed using DCAT-2014 therefore used instances of type <code>dcat:Distribution</code> to describe data distribution services.
-                <b>Applications consuming DCAT should be aware that catalogues designed using DCAT-2014 might use <code>dcat:Distribution</code> to represent both services and representations.</b>
-            </p>
-            <p>
-                Under the revised scope, instances of type <code>dcat:Distribution</code> <em title="SHOULD" class="rfc2119">SHOULD</em> be limited to <i>representations</i> of datasets which might be transported as files, and <em title="SHOULD NOT" class="rfc2119">SHOULD NOT</em> be used for data <i>services</i> such as APIs or feeds. Data services including APIs and feeds <em title="SHOULD" class="rfc2119">SHOULD</em> be described using instances of type <a href="#Class:Data_Service"><code>dcat:DataService</code></a> whose sub-class <a href="#Class:Data_Distribution_Service"><code>dcat:DataDistributionService</code></a> <em title="MAY" class="rfc2119">MAY</em> serve <a href="#Class:Distribution"><code>dcat:Distributions</code></a>.
-            </p>
+          </div>
+
             <p>
                 Links between a <code>dcat:Distribution</code> and services or web addresses where it can be accessed are expressed using <a href="#Property:distribution_accessurl"><code>dcat:accessURL</code></a>, <a href="#Property:distribution_accessservice"><code>dcat:accessService</code></a>, <a href="#Property:distribution_downloadurl"><code>dcat:downloadURL</code></a>, as shown in <a href="#UML_DCAT_All_Attr"></a> and described in the definitions below.
             </p>
-        </div>
 
         <section id="Property:distribution_title">
             <h4>Property: title</h4>
