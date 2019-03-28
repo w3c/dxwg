@@ -631,8 +631,7 @@ CSIRO's publications catalogue."""@en ;
 
 
 ex1:Standard_X
-    a dct:Standard , prof:Profile ;  # this may be a 'null' profile,
-                                     # i.e. a profile of nothing, a regular Standard
+    a dct:Standard ;
     dct:title "Standard X" ;
     prof:hasResource ex1:RD_1 .
 
@@ -653,7 +652,7 @@ ex2:Profile_Y
     dct:title "Profile Y" ;
     prof:isProfileOf ex1:Standard_X ;  # this is a profile of Standard X
     prof:hasResource [
-        a prof:ResourceDescriptor ;  # RS 2 in diagram
+        a prof:ResourceDescriptor ;  # Resource Descriptor 2 in diagram
         prof:isInheritedFrom ex1:Standard_X ;  # this Resource Descriptor is inherited from
                                                # Standard X
         dct:conformsTo &lt;http://www.w3.org/ns/shacl#&gt; ;  # as above
@@ -664,7 +663,7 @@ ex2:Profile_Y
         prof:hasArtifact ex1:constraints.ttl  # direct URI reference to ex1:RD_1's artifact
     ] ,
     [
-        a prof:ResourceDescriptor ;  # RS 3 in diagram. This is not inherited from anywhere
+        a prof:ResourceDescriptor ;  # Resource Descriptor 2 in diagram. This is not inherited from anywhere
         dct:conformsTo &lt;http://www.w3.org/ns/shacl#&gt; ;
         dct:format &lt;https://w3id.org/mediatype/text/turtle&gt; ;
         # these constraints are Profile Y's on top of Standard X's
