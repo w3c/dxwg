@@ -33,7 +33,14 @@ var respecConfig = {
       company: "European Commission, Joint Research Centre (JRC)",
       companyURL: "https://ec.europa.eu/jrc/",
       w3cid: "40317",
-      note: "The views expressed are purely those of the author and may not in any circumstances be regarded as stating an official position of the European Commission."
+//      note: "The views expressed are purely those of the author and may not in any circumstances be regarded as stating an official position of the European Commission."
+      extras: [
+        {
+          name: "\u2605",
+          "href": "#disclaimer",
+          "class": "disclaimer"
+        }
+      ]        
     },{
       name: "Peter Winstanley",
       company: "Scottish Government",
