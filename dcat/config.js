@@ -31,7 +31,9 @@ var respecConfig = {
     },{
       name: "Andrea Perego",
       company: "European Commission, Joint Research Centre (JRC)",
-      companyURL: "https://ec.europa.eu/jrc/"
+      companyURL: "https://ec.europa.eu/jrc/",
+      w3cid: "40317",
+      note: "The views expressed are purely those of the author and may not in any circumstances be regarded as stating an official position of the European Commission."
     },{
       name: "Peter Winstanley",
       company: "Scottish Government",
