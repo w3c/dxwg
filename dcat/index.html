@@ -3324,10 +3324,18 @@ ex:Test543L
         <h3>Schema.org</h3>
         <p>
             Schema.org [[?SCHEMA-ORG]] includes a number of types and properties based on the original DCAT work (see <a href="https://schema.org/Dataset">schema:Dataset</a> as a starting point),
-            and the index for Google's <a href="https://g.co/datasetsearch">Dataset Search service</a> relies on structured description in web pages about datasets distinguishing both
+            and the index for Google's <a href="https://g.co/datasetsearch">Dataset Search service</a> relies on structured description in web pages about datasets using both
             <a href="https://developers.google.com/search/docs/data-types/dataset">schema.org and DCAT</a>.
-            A comparison of the DCAT backbone, shown in <a href="#UML_DCAT_All_Attr"></a> above with the related classes from [[?SCHEMA-ORG]] in <a href="#UML_SchemaOrg_Data_Cat"></a> shows the similarity:
+            A comparison of the DCAT backbone, shown in <a href="#UML_DCAT_All_Attr"></a> above with the related classes from [[?SCHEMA-ORG]] in <a href="#UML_SchemaOrg_Data_Cat"></a> shows the similarity, in particular: .
         </p>
+        <ul>
+          <li>
+            the distinction between (abstract) Dataset and (concrete) DataDownload matches  dcat:Dataset / dcat:Distribution 
+          </li>
+          <li>
+            the relationship of Datasets to DataCatalogs
+          </li>
+        </ul>
         <figure id="UML_SchemaOrg_Data_Cat"><img alt="UML model of schema.org classes and properties related to dataset catalogs" src="UML/schema.org-dataset.png">
             <figcaption>
                 schema.org support for dataset catalogs, showing a selection of schema.org properties related to the classes shown
@@ -3437,6 +3445,10 @@ ex:Test543L
                 <td><b>sdo:Dataset</b></td>
             </tr>
             <tr>
+                <td style="text-align: right"><b>dcat:Dataset</b> <br/> <i>dct:accrualPeriodicity fixed to <br/> &lt;http://purl.org/cld/freq/continuous&gt;</i></td>
+                <td><b>sdo:DataFeed</b></td>
+            </tr>
+            <tr>
                 <td style="text-align: right">dct:spatial</td>
                 <td>sdo:spatialCoverage</td>
             </tr>
@@ -3455,10 +3467,6 @@ ex:Test543L
             <tr>
                 <td style="text-align: right"><b>dcat:Distribution</b></td>
                 <td><b>sdo:DataDownload</b></td>
-            </tr>
-            <tr>
-                <td style="text-align: right"><b>dcat:Distribution</b> <br/> <i>where the associated dcat:Dataset has <br/> dct:accrualPeriodicity fixed to <br/> &lt;http://purl.org/cld/freq/continuous&gt;</i></td>
-                <td><b>sdo:DataFeed</b></td>
             </tr>
             <tr>
                 <td style="text-align: right">dct:format</td>
