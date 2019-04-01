@@ -59,7 +59,7 @@ var respecConfig = {
             date: " 2018-12-18",
             status: "W3C First Public Working Draft"
         },
-        "DX-PROF-GUIDANCE": {
+        "PROF-GUIDANCE": {
             editors: [
                 "Rob Atkinson",
                 "Karen Coyle",
