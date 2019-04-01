@@ -1,37 +1,34 @@
 # Profile Vocabulary
-This vocabulary is for describing relationships between standards/specifications, profiles of them and supporting artifacts such as validating resources.
+The Profiles Vocabulary is an RDF vocabulary to describe profiles of (one or more) standards for information resources. It describes the general pattern of narrowing the scope of a specification with additional, but consistent, constraints, and is particularly relevant to data exchange situations where conformance to such profiles is expected and carries additional context.   The Profiles Vocabulary enables profile descriptions to specify the role of resources related to data exchange such as schemas, ontologies, rules about use of controlled vocabularies, validation tools, and guidelines. The ontology may however be used to describe the role of artifacts in any situation where constraints are made on a the usage of more general specifications.
+    
+The namespace for PROF terms is `http://www.w3.org/ns/dx/prof/`. The PROF vocabulary, defined in OWL and encoded in RDF Turtle, is available at [profilesont.ttl](profilesont.ttl).
 
-This model starts with [http://dublincore.org/2012/06/14/dcterms#Standard](dct:Standard) entities which can either be base specifications (Standards not profiling any other Standard) or Profiles (Standards which do profile others). Non-profiling Standards or Profiles can have Resource Descriptors associated with them that define implementing rules for the them. Resource Descriptors must indicate the role they play (to guide, to validate etc.) and the formalism they adhere to (dct:format) to allow for content negotiation. An extensible vocabulary of Resource Roles is provided alongside this vocabulary.
+The latest stable release of this vocabulary document is online at <https://www.w3.org/TR/dx-prof/>. The latest Editor's Draft is online at <https://w3c.github.io/dxwg/profilesont/>.
 
-![](profilesont.svg)  
-**Fig. 1**: Overview diagram of this ontology  
+Development of this ontology is part of the work of the [Data Exchange Working Group](https://www.w3.org/2017/dxwg/) (DXWG)'s work on characterising and handling *profiles*.
 
-Development of this ontology is part of the work of the [Data Exchange Working Group](https://www.w3.org/2017/dxwg/) (DXWG)'s [Profile Guidance](https://w3c.github.io/dxwg/profiles/) work.
+![](figures/profilesont.svg)  
+**Fig. 1**: Overview diagram of this vocabulary  
 
-## Ontology components
+## Components
 The main files of this ontology are:
 
 * [index.html](https://w3c.github.io/dxwg/profilesont/) - ontology description as a web page (HTML)
 * [profilesont.ttl](profilesont.ttl) - ontology source (RDF, turtle)
-* [profilesont.svg](profilesont.svg) - ontology diagram (PNG)
+* [profilesont.rdf](profilesont.rdf) - ontology source (RDF/XML)
+* [profilesont.svg](figures/profilesont.svg) - ontology diagram (PNG)
 
 Additional components:
 
 * **Examples**
-  * [examples](examples/) - this folder contains a series of scenarios in which the Profiles Description Ontology is used to model existing and likely future profiling situations
-* **Roles vocabulary** - a small vocabulary of Implementation Resource Descriptor Roles
-  * [resource_roles.html](https://w3c.github.io/dxwg/profilesont/resource_roles.html) - vocab as a web page (HTML)
-  * [resource_roles.ttl](resource_roles.ttl) - vocab source (RDF, turtle)
-  * [resource_roles.svg](resource_roles.svg) - vocab diagram (PNG)
+  * [examples](examples/)
+  * also within the HTML document
 * **Alignments**
-  * within the main ontology document, Section 'Alignments'
-  * [alignment_dcat.ttl](alignment_dcat.ttl) - alignment source (RDF, turtle)
-  * [alignment_dcat_classes.png](alignment_dcat_classes.png) - alignment diagram for classes (PNG)
-  * [alignment_dcat_properties.png](alignment_dcat_classes.png) - alignment diagram for properties (PNG)
-
-
-## Status
-As of August, 2018, the DXWG is formulating overall profile guidance and current work on this Profile Desc. is focussed on ensuring that it fits within that work.
+  * [alignments](alignments/)
+  * also within the HTML document
+* **Roles vocabulary** - a small vocabulary of `Resource Role` instances
+  * some of these are within the main HTML document
+  * as a web page: [resource_roles.html](https://w3c.github.io/dxwg/profilesont/resource_roles.html)
 
 ## Contact
 Primary contact for this ontology is:

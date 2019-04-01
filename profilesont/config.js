@@ -3,8 +3,8 @@ var respecConfig = {
     shortName: "dx-prof",
     edDraftURI: "https://w3c.github.io/dxwg/profilesont/",
     canonicalURI: "TR",
-    implementationReportURI: "https://github.com/CSIRO-enviro-informatics/prof-ont-implementation-results",
-    testSuiteURI: "https://github.com/CSIRO-enviro-informatics/prof-ont-implementation-results",
+    implementationReportURI: "https://github.com/CSIRO-enviro-informatics/prof-implementations",
+    testSuiteURI: "https://github.com/CSIRO-enviro-informatics/prof-implementations",
     editors: [
       {
         name: "Rob Atkinson",
@@ -59,7 +59,7 @@ var respecConfig = {
             date: " 2018-12-18",
             status: "W3C First Public Working Draft"
         },
-        "DX-PROF-GUIDANCE": {
+        "PROF-GUIDANCE": {
             editors: [
                 "Rob Atkinson",
                 "Karen Coyle",
