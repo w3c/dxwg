@@ -2499,7 +2499,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
 	 skos:notation "PA 1-060-815"^^ex:type ;
  # Human readable schema agency
 	 adms:schemaAgency "US Copyright Office" ;
-	 dcterms:issued "2001-09-12"^^xsd:date .
+	 dct:issued "2001-09-12"^^xsd:date .
 </pre>
 
         <p>If a registered URI type is used (following [[?RFC3986]], <a href="https://tools.ietf.org/html/rfc3986#section-3.1">Section 3.1</a>), the identifier scheme is part of the URI; thus indicating a separate identifier scheme in 'type' is redundant. For example, DOI is registered as a namespace in the <code>info</code> URI scheme [[IANA-URI-SCHEMES]] (see <a href="https://www.doi.org/faq.html">DOI FAQ #11</a>), so according to [[?RFC3986]], it should be encoded as in the following</p>
@@ -2683,7 +2683,7 @@ a:testingActivity a prov:Activity ;
 # Conformance test result
 a:testResult a prov:Entity ;
    # a:notConformant belongs to a SKOS concept scheme about conformance
-   dcterms:type a:notConformant .
+   dct:type a:notConformant .
 
 a:conformanceTest a prov:Plan ;
     # Here one can specify additional information on the test, which in the example is derived by the W3C Data on the Web Best Practices
@@ -2712,7 +2712,7 @@ iso:inherentandSystemDependentDataQuality a dqv:Category ;
    dqv:computedOn a:dataset ;
    dqv:value "50"^^xsd:double ;
    sdmx-attribute:unitMeasure &lt;http://www.wurvoc.org/vocabularies/om-1.8/Percentage&gt; ;
-   dcterms:date "2018-01-10"^^xsd:date ;
+   dct:date "2018-01-10"^^xsd:date ;
    dqv:isMeasurementOf :levelOfComplianceToDWBP .
     </pre></aside>
 
@@ -2746,14 +2746,14 @@ a:conformanceTest a earl:TestRequirement, prov:Plan ;
 
 a:testResult a earl:TestResult ;
         #  results in conformancy .
-        dcterms:type  a:conformant ;
+        dct:type  a:conformant ;
         #the overall set of tests have been passed
         earl:outcome earl:passed .
 
 # the description of the validator
  &lt;http://validator.example.org/&gt; a earl:Assertor, prov:Agent ;
-      dcterms:description "A test execution service that runs conformance test suites."@en ;
-      dcterms:title "Validator"@en .
+      dct:description "A test execution service that runs conformance test suites."@en ;
+      dct:title "Validator"@en .
 
 #the testing activity
 a:testingActivity a prov:Activity ;
@@ -2761,7 +2761,7 @@ a:testingActivity a prov:Activity ;
     prov:use a:dataset ;
     prov:wasAssociatedWith &lt;http://validator.example.org/&gt; .
     </pre></aside>
-            <p>The following example shows how the description would have looked like if the subtest <code>a:testq1</code> had failed. In particular, <code>dcterms:description</code> and <code>earl:info</code> provide additional warnings or error messages in a human-readable form.</p>
+            <p>The following example shows how the description would have looked like if the subtest <code>a:testq1</code> had failed. In particular, <code>dct:description</code> and <code>earl:info</code> provide additional warnings or error messages in a human-readable form.</p>
             <aside class="example" id="ex-conformance-test-earl-fail">
   <pre class="nohighlight turtle" aria-busy="false" aria-live="polite">
 
@@ -2771,11 +2771,11 @@ a:assertion1 a earl:Assertion ;
     earl:result [
         a earl:TestResult ;
         #  results in no conformancy
-        dcterms:type a:nonConformant ;
+        dct:type a:nonConformant ;
         #the overall set of tests have not been passed (!?)
-        dcterms:date "2015-09-29T11:50:00+00:00"^^xsd:dateTime ;
+        dct:date "2015-09-29T11:50:00+00:00"^^xsd:dateTime ;
         # Some XML encoding of the error
-            dcterms:description """
+            dct:description """
                  &lt;ul xmlns="http://www.w3.org/1999/xhtml"&gt;
                  &lt;li&gt; test 1 has failed. Some description of the errors found&lt;/li&gt;
                  &lt;/ul&gt;"^^rdf:XMLLiteral;
@@ -2823,8 +2823,8 @@ a:assertion1 a earl:Assertion ;
 
 a:testResult
     a dqv:QualityMetadata ;
-    #  change the the dcterms:type according to the resulted compliance
-    dcterms:type &lt;http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant&gt; ;
+    #  change the the dct:type according to the resulted compliance
+    dct:type &lt;http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant&gt; ;
     prov:wasAttributedTo &lt;http://validator.example.org/&gt; ;
     prov:generatedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
     prov:wasGeneratedBy a:testingActivity .
