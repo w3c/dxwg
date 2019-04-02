@@ -61,7 +61,9 @@ $(document).ready( function() {
     <p>
         The detailed differences between the two documents can be seen <a href="https://services.w3.org/htmldiff?doc1=https%3A%2F%2Fwww.w3.org%2FTR%2F2018%2FWD-vocab-dcat-2-20180508%2F&doc2=https%3A%2F%2Fwww.w3.org%2FTR%2F2018%2FWD-vocab-dcat-2-20181011%2F">here</a>.
     </p>
-
+    <p>
+        <a href="https://github.com/w3c/dxwg/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Adcat+">Issues, requirements, and features</a> that have been considered and discussed by the Data eXchange Working Group but have not been addressed due to lack of maturity or consensus are collected in GitHub. Those believed to be a priority for a future release are in the milestone <a href="https://github.com/w3c/dxwg/milestone/15">DCAT Future Priority Work</a>.
+    </p>
     <h3 id="dcat_history">DCAT history</h3>
     <p>The original DCAT vocabulary was developed and <a href="http://vocab.deri.ie/dcat">hosted</a> at the Digital Enterprise Research Institute (DERI), then refined by the <a href="http://www.w3.org/egov/">eGov Interest Group</a>, and finally standardized in 2014 [[?VOCAB-DCAT-20140116]] by the <a href="http://www.w3.org/2011/gld/">Government Linked Data (GLD)</a> Working Group.</p>
     <p>This revised version of DCAT was developed by the <a href="https://www.w3.org/2017/dxwg/">Dataset Exchange Working Group</a> in response to a new set of Use Cases and Requirements [[?DCAT-UCR]] gathered from peoples' experience with the DCAT vocabulary from the time of the original version, and new applications that were not considered in the first version. A summary of the changes from  [[?VOCAB-DCAT-20140116]] can be found at <a href="#changes">Change History</a></p>
@@ -74,7 +76,7 @@ $(document).ready( function() {
 
     <h3 id="please_send_comments">Please send comments</h3>
     The Working Group invites publishers to describe their catalogs and datasets with the revised version of DCAT described in this document and to report their implementations following <a href="https://github.com/w3c/dxwg/wiki/DCAT-implementation-evidence">the instruction  to reporting DCAT revised implementations</a>. The information gathered through this means will be augmented by further analysis of implementation available on the Web. The Working Group expects to adduce the combined set of evidence when requesting that the Director advance this document to Proposed Recommendation.
-    
+
 
 </section>
 
@@ -620,7 +622,7 @@ $(document).ready( function() {
             Alongside it are a set of other RDF files that provide additional information, including:</p>
         <ol>
             <li>
-                alignments to other vocabularies, some of which are normative and some of which are only for guidance
+                non-normative alignments to other vocabularies, provided for guidance
             </li>
             <li>
                 additional axioms, which can be useful in some contexts
@@ -1187,6 +1189,10 @@ $(document).ready( function() {
             </p>
 
             <p class="note">
+              Since this property is a sub-property of <a href="http://www.w3.org/ns/prov#qualifiedInfluence">prov:qualifiedInfluence</a>, use of this property on an individual entails that the context resource is a member of the class <a href="http://www.w3.org/ns/prov#Entity">prov:Entity</a> [[RDF-SCHEMA]] .
+            </p>
+
+            <p class="note">
               Property added in this revision of DCAT.
             </p>
         </section>
@@ -1247,6 +1253,10 @@ $(document).ready( function() {
 
             <p>
               This DCAT property follows the common <a href="#qualified-forms">qualified relation pattern</a> .
+            </p>
+
+            <p class="note">
+              Use of this property on an individual entails that the context resource is a member of the class <a href="http://www.w3.org/ns/prov#Entity">prov:Entity</a> [[RDF-SCHEMA]] .
             </p>
 
             <p class="note">
@@ -1663,6 +1673,10 @@ $(document).ready( function() {
                 <tr><td class="prop">Usage note:</td><td>Use <a href="http://www.w3.org/ns/prov#qualifiedGeneration"><code>prov:qualifiedGeneration</code></a> to attach additional details about the relationship between the dataset and the activity, e.g. the exact time that the dataset was produced during the lifetime of a project</td></tr>
                 </tbody>
             </table>
+
+            <p class="note">
+              Use of this property on an individual entails that the context resource is a member of the class <a href="http://www.w3.org/ns/prov#Entity">prov:Entity</a> [[RDF-SCHEMA]] .
+            </p>
 
             <p class="note">
                 New property in this context in this revision of DCAT.
@@ -2853,6 +2867,11 @@ a:testingActivity a prov:Activity;
   <p>
     Note that, while the focus of these qualified forms is to allow for additional <i>roles</i> on a relationship, other aspect of the relationships, such as the applicable time interval, are easily attached when a specific node is used to describe the relationship like this (e.g. see the <a href="https://www.w3.org/TR/prov-o/#qualified-terms-figure">chart of Influence relations</a> in [[?PROV-O]] for some examples).
   </p>
+  <p class="note">
+    Because of the global domain constraints on <a href="https://www.w3.org/TR/prov-o/#qualifiedAttribution">prov:qualifiedAttribution</a> and the super-property of <a href="#Property:resource_qualifiedRelation">dcat:qualifiedRelation</a>, use of the qualified forms entail that the context resources is a member of the class <a href="http://www.w3.org/ns/prov#Entity">prov:Entity</a> [[RDF-SCHEMA]] .
+  </p>
+
+
 <section id="qualified-attribution">
   <h3>Relationships between datasets and agents</h3>
   <p>
@@ -2936,7 +2955,7 @@ ex:Test543L
 
 </section>
 
-
+<!-- Remove separate chapter on Provenance Patterns - highly incomplete
 <section id="prov-patterns">
 
     <h2>Provenance patterns</h2>
@@ -2959,6 +2978,7 @@ ex:Test543L
     See the wiki page on <a href="https://github.com/w3c/dxwg/wiki/Provenance-patterns">Provenance Patterns</a> for more discussion.
 
 </section>
+-->
 
 <section id="license-rights">
 
@@ -3122,11 +3142,11 @@ ex:Test543L
 <section id="security_and_privacy">
     <h2>Security and Privacy</h2>
     <p>
-    The DCAT vocabulary supports the attribution of data and metadata to various participants such as resource <a href="#Property:resource_creator">creators</a>, <a href="#Property:resource_publisher">publishers</a> and other parties or agents via <a href="#qualified-forms">qualified relations</a>, 
-	    and as such defines terms that may be related to personal information.  In addition, it also supports the association of <a href="#Property:resource_rights">rights</a> and <a href="#Property:resource_license">licenses</a> with cataloged Resources and Distributions. 
-	    These rights and licences could potentially include or reference sensitive information such as user and asset identifiers as <a href="https://www.w3.org/TR/odrl-vocab/#privacy-consideration">described</a> in [[!ODRL-VOCAB]].   Implementations that produce, maintain, publish or 
+    The DCAT vocabulary supports the attribution of data and metadata to various participants such as resource <a href="#Property:resource_creator">creators</a>, <a href="#Property:resource_publisher">publishers</a> and other parties or agents via <a href="#qualified-forms">qualified relations</a>,
+	    and as such defines terms that may be related to personal information.  In addition, it also supports the association of <a href="#Property:resource_rights">rights</a> and <a href="#Property:resource_license">licenses</a> with cataloged Resources and Distributions.
+	    These rights and licences could potentially include or reference sensitive information such as user and asset identifiers as <a href="https://www.w3.org/TR/odrl-vocab/#privacy-consideration">described</a> in [[!ODRL-VOCAB]].   Implementations that produce, maintain, publish or
 	    consume such vocabulary terms must take steps to ensure security and privacy considerations are addressed at the application level.
-    </p>  	
+    </p>
 </section>
 
 <section id="other-w3c-recommendations">
@@ -3527,15 +3547,18 @@ ex:Test543L
 
     </section>
 
-
+<!-- this will not happen in DCAT 2
     <section id="dcat-prov-o" class="informative">
         <h3>PROV-O</h3>
             An alignment of DCAT with PROV-O [[?PROV-O]] is being prepared, and has been discussed in <a href="https://github.com/w3c/dxwg/issues/128">Issue #128</a>.
 	    A <a href="https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/rdf/dcat-prov.ttl">provisional version</a> is available.
 
     </section>
+-->
 
 </section>
+
+<!-- alignments section removed due to (a) lack of resources to complete development and documentation (b) they belong in other documents anyway
 
 <section class="appendix" id="alignments-domains">
   <h2>Alignment with external metadata vocabularies</h2>
@@ -3585,6 +3608,7 @@ ex:Test543L
   </section>
 
 </section>
+-->
 
 <section class="appendix" id="issue-summary">
     <!-- A list of issues will magically appear here -->
@@ -3833,7 +3857,7 @@ rdfs:seeAlso &lt;https://doi.org/10.1111/j.1365-2966.2006.10100.x&gt; ;
           </li>
       </ul>
       <p>
-          For a more detailed discussion of the use of PROV for dataset provenance, including recommendations on the use of <i>qualified properties</i>, see the chapter on <a href="#prov-patterns">Provenance Patterns</a> below.
+          Further patterns for the use of <i>qualified properties</i> for resource attribution and interrelationships are described in the chapter on <a href="#qualified-forms">Qualified relations</a> below.
       </p>
 
   </section>
