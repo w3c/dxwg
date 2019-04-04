@@ -3,8 +3,8 @@ var respecConfig = {
     shortName: "dx-prof-conneg",
     edDraftURI: "https://w3c.github.io/dxwg/conneg-by-ap/",
     previousURI: "https://w3c.github.io/dxwg/conneg-by-ap/",
-    testSuiteURI: "https://github.com/CSIRO-enviro-informatics/prof-conneg-jmeter-test-suite",
-    implementationReportURI: "https://github.com/CSIRO-enviro-informatics/prof-conneg-conf-test-results",
+    testSuiteURI: "https://github.com/CSIRO-enviro-informatics/prof-conneg-test-suite",
+    implementationReportURI: "https://github.com/CSIRO-enviro-informatics/prof-conneg-implementations",
     canonicalURI: "TR",
     editors: [{
         name: "Lars G. Svensson",
