@@ -10,13 +10,14 @@ var respecConfig = {
         name: "Lars G. Svensson",
         company: "Deutsche Nationalbibliothek",
         companyURL: "http://www.dnb.de/",
-	orcid: "0000-0002-8714-9718",
+	    orcid: "0000-0002-8714-9718",
         w3cid:  "44603"
       },
       {
         name: "Rob Atkinson",
         company: "Metalinkage, Open Geospatial Consortium",
-        companyURL: "http://www.opengeospatial.org/"
+        companyURL: "http://www.opengeospatial.org/",
+        orcid: "0000-0002-7878-2693"
       },
       {
         name:       "Nicholas J. Car",
@@ -24,6 +25,7 @@ var respecConfig = {
         mailto:     "nicholas.car@csiro.au",
         company:    "CSIRO",
         companyURL: "https://www.csiro.au",
+        orcid:      "0000-0002-8742-7730",
         w3cid:      70131
     }],
     otherLinks: [{
