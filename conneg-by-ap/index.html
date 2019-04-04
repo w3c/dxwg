@@ -802,6 +802,20 @@ Content-Profile: urn:example:profile:1
         web browsers by humans and in other <em>client</em>/<em>server</em> situations to deliver extra information to a
         <em>server</em>.
       </p>
+      <div class="note" title="Maximum length of URLs">
+	<p>
+	  Since Query String Arguments use URIs (or URLs) to convey important information,
+	  implementers should ensure that the total length of the URL
+	  does not exceed possible length restrictions.
+	  <a href="https://tools.ietf.org/html/rfc7230#section-3.1.1">RFC 7230 §3.1.1</a> [[RFC 7230]] recommends
+	  that senders and recipients support request lines of at least 8,000 octets.
+	  Some client and server implementations, however,
+	  cannot accept URLs longer than 2,000 characters
+	  and e. g. the Sitemap protocol has a length limit of 2.048 characters in a URL.
+	  Cf. <a href="https://stackoverflow.com/questions/417142/what-is-the-maximum-length-of-a-url-in-different-browsers">this question on stackoverflow</a>
+	  for a longer discussion of issues related to URL length.
+	</p>
+      </div>
       <p><strong><em>Key naming</em></strong></p>
       <p>
         When content negotiation by profile is to take place using QSAs, the <em>request</em>s and <em>response</em>s
@@ -975,6 +989,8 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
 			(<a href="https://github.com/w3c/dxwg/issues/662">Issue 662</a>)</li>
 		<li>Updated the <a href="#security_and_privacy">Security and Privacy</a> section.
 			(<a href="https://github.com/w3c/dxwg/issues/782">Issue 782</a>)</li>
+		<li>Added a not about length restrictions in URLs to the <a href="#qsa">QSA</a> section.
+			(<a href="https://github.com/w3c/dxwg/issues/592">Issue 592</a>)</li>
 	</ul>
 </section>
   <section id="security_and_privacy" class="informative">
