@@ -22,7 +22,15 @@
   <p>
     This Second Public Working Draft addresses many, but not all, of the comments received on the
     <a href="https://www.w3.org/TR/2018/WD-dx-prof-20181218/">First Public Working Draft</a> of this vocabulary that
-    was released in December, 2018. See <a href="#changes"></a> for more change details.
+    was released in December, 2018. There are also some key issues still being discussed within the working group, such
+    as what it means to be a profile of something, the relationships between profiles, and how and whether inheritance
+    is included in the specification. See <a href="#changes"></a> for more change details and the GitHub issues below
+    for further information on outstanding issues.
+    <div class="issue" data-number="802"></div>
+    <div class="issue" data-number="755"></div>
+    <div class="issue" data-number="857"></div>
+    <div class="issue" data-number="507"></div>
+    <div class="issue" data-number="795"></div>
   </p>
   <section id="profiledocs">
     <h3>Overview of DXWG documents on profiles</h3>
@@ -606,7 +614,8 @@ CSIRO's publications catalogue."""@en ;
           <tr><td class="prop">Usage note:</td><td>This property is created for the convenience of clients. When profile describers wish to allow clients to discover all resources relevant to a Profile without having to navigating an inheritance hierarchy of prof:profileOf relations, this predicate may be used to directly associate inherited Profile Descriptors with the Profile. If this property is present, it should be used consistently and all relevant resources a client may need to utilise the profile should be present and described using this predicate</td></tr>
         </tbody>
       </table>
-      <div class="issue" data-number="642"></div>
+      <div class="issue" data-number="840"></div>				  
+      <div class="issue" data-number="842"></div>
       <p>
         To illustrate the use of <code>prof:isInheritedFrom</code>, the following example is given in both pictorial
         and code forms.
@@ -616,7 +625,7 @@ CSIRO's publications catalogue."""@en ;
           <img src="figures/isInheritedFrom.svg" title="Property isInheritedFrom in use" style="width:90%;" />
         </a>
           <figcaption>
-            Property <code>isInheritedFrom</code> in use. Here the <code>prof:ResourceDescriptor</code> instance <strong>Profile Y, Resource Descriptor 2</strong> refers to the same artifact (a constraints file) as <strong>Profile X, Resource Descriptor 1</strong> and it is inherited by <strong>Profile Y</strong> from <strong>Profile X</strong> which <strong>Profile Y</strong> is a profile of.
+            Property <code>isInheritedFrom</code> in use. Here the <code>prof:ResourceDescriptor</code> instance <strong>Profile Y, Resource Descriptor 2</strong> refers to the same artifact (a constraints file) as <strong>Standard X, Resource Descriptor 1</strong> and it is inherited by <strong>Profile Y</strong> from <strong>Standard X</strong> which <strong>Profile Y</strong> is a profile of.
           </figcaption>
       </figure>
       <pre class="example nohighlight turtle" aria-busy="false" aria-live="polite" title="Property isInheritedFrom in use">
@@ -631,8 +640,7 @@ CSIRO's publications catalogue."""@en ;
 
 
 ex1:Standard_X
-    a dct:Standard , prof:Profile ;  # this may be a 'null' profile,
-                                     # i.e. a profile of nothing, a regular Standard
+    a dct:Standard ;
     dct:title "Standard X" ;
     prof:hasResource ex1:RD_1 .
 
@@ -653,7 +661,7 @@ ex2:Profile_Y
     dct:title "Profile Y" ;
     prof:isProfileOf ex1:Standard_X ;  # this is a profile of Standard X
     prof:hasResource [
-        a prof:ResourceDescriptor ;  # RS 2 in diagram
+        a prof:ResourceDescriptor ;  # Resource Descriptor 2 in diagram
         prof:isInheritedFrom ex1:Standard_X ;  # this Resource Descriptor is inherited from
                                                # Standard X
         dct:conformsTo &lt;http://www.w3.org/ns/shacl#&gt; ;  # as above
@@ -664,7 +672,7 @@ ex2:Profile_Y
         prof:hasArtifact ex1:constraints.ttl  # direct URI reference to ex1:RD_1's artifact
     ] ,
     [
-        a prof:ResourceDescriptor ;  # RS 3 in diagram. This is not inherited from anywhere
+        a prof:ResourceDescriptor ;  # Resource Descriptor 2 in diagram. This is not inherited from anywhere
         dct:conformsTo &lt;http://www.w3.org/ns/shacl#&gt; ;
         dct:format &lt;https://w3id.org/mediatype/text/turtle&gt; ;
         # these constraints are Profile Y's on top of Standard X's
@@ -685,7 +693,7 @@ ex2:Profile_Y
       <tr><td class="prop">Label:</td><td>Resource Role</td></tr>
       <tr><td class="prop">Definition:</td><td>The role that an Resource plays</td></tr>
       <tr><td class="prop">Sub class of:</td><td><a href="https://www.w3.org/TR/skos-reference/#Concept">skos:Concept</a></td></tr>
-      <tr><td class="prop">Usage note:</td><td>Specific terms must come from a vocabulary. Such a vocabulary is provided alongside this ontology and that list is extensible: <a href="https://w3c.github.io/dxwg/profilesont/resource_roles.html">Resource Roles Vocabulary</a></td></tr>
+      <tr><td class="prop">Usage note:</td><td>Specific terms must come from a vocabulary. Such a vocabulary is provided in <a href="#resource-roles-vocab"></a> but other terms may also be used</td></tr>
       </tbody>
     </table>
     <div class="issue" data-number="452"></div>
@@ -1609,13 +1617,6 @@ _:4
 
       </p>
     </div>
-    <div class="issue" data-number="72"></div>
-    <div class="req-response">
-      <p class="respTitle">RESPONSE FOR 72</p>
-      <p>
-
-      </p>
-    </div>
     <div class="issue" data-number="204"></div>
     <div class="req-response">
       <p class="respTitle">RESPONSE FOR 204</p>
@@ -1724,20 +1725,6 @@ _:4
 
       </p>
     </div>
-    <div class="issue" data-number="264"></div>
-    <div class="req-response">
-      <p class="respTitle">RESPONSE FOR 264</p>
-      <p>
-
-      </p>
-    </div>
-    <div class="issue" data-number="268"></div>
-    <div class="req-response">
-      <p class="respTitle">RESPONSE FOR 268</p>
-      <p>
-
-      </p>
-    </div>
     <div class="issue" data-number="272"></div>
     <div class="req-response">
       <p class="respTitle">RESPONSE FOR 272</p>
@@ -1777,13 +1764,6 @@ _:4
         Following relationships from a profile defined using this vocabulary, a person or machine may discover either
         <em>Resource Descriptor</em> resources describing any sort of document relevant to the profile or other
         <em>Profile</em>s.
-      </p>
-    </div>
-    <div class="issue" data-number="287"></div>
-    <div class="req-response">
-      <p class="respTitle">RESPONSE FOR 287</p>
-      <p>
-
       </p>
     </div>
     <div class="issue" data-number="288"></div>
