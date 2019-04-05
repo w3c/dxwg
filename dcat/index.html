@@ -164,7 +164,7 @@ $(document).ready( function() {
         <tr><td>prov</td><td>http://www.w3.org/ns/prov#</td></tr>
         <tr><td>rdf</td><td>http://www.w3.org/1999/02/22-rdf-syntax-ns#</td></tr>
         <tr><td>rdfs</td><td>http://www.w3.org/2000/01/rdf-schema#</td></tr>
-        <tr><td>schema</td><td>https://schema.org/</td></tr>
+        <tr><td>sdo</td><td>https://schema.org/</td></tr>
         <tr><td>skos</td><td>http://www.w3.org/2004/02/skos/core#</td></tr>
         <tr><td>vcard</td><td>http://www.w3.org/2006/vcard/ns#</td></tr>
         <tr><td>xsd</td><td>http://www.w3.org/2001/XMLSchema#</td></tr>
@@ -3343,11 +3343,19 @@ ex:Test543L
     <section id="dcat-sdo" class="informative">
         <h3>Schema.org</h3>
         <p>
-            Schema.org [[?SCHEMA-ORG]] includes a number of types and properties based on the original DCAT work (see <a href="https://schema.org/Dataset">schema:Dataset</a> as a starting point),
-            and the index for Google's <a href="https://g.co/datasetsearch">Dataset Search service</a> relies on structured description in web pages about datasets distinguishing both
+            Schema.org [[?SCHEMA-ORG]] includes a number of types and properties based on the original DCAT work (see <a href="https://schema.org/Dataset">sdo:Dataset</a> as a starting point),
+            and the index for Google's <a href="https://g.co/datasetsearch">Dataset Search service</a> relies on structured description in web pages about datasets using both
             <a href="https://developers.google.com/search/docs/data-types/dataset">schema.org and DCAT</a>.
-            A comparison of the DCAT backbone, shown in <a href="#UML_DCAT_All_Attr"></a> above with the related classes from [[?SCHEMA-ORG]] in <a href="#UML_SchemaOrg_Data_Cat"></a> shows the similarity:
+            A comparison of the DCAT backbone, shown in <a href="#UML_DCAT_All_Attr"></a> above with the related classes from [[?SCHEMA-ORG]] in <a href="#UML_SchemaOrg_Data_Cat"></a> shows the similarity, in particular: .
         </p>
+        <ul>
+          <li>
+            the distinction between (abstract) Dataset and (concrete) DataDownload matches  dcat:Dataset / dcat:Distribution
+          </li>
+          <li>
+            the relationship of Datasets to DataCatalogs
+          </li>
+        </ul>
         <figure id="UML_SchemaOrg_Data_Cat"><img alt="UML model of schema.org classes and properties related to dataset catalogs" src="UML/schema.org-dataset.png">
             <figcaption>
                 schema.org support for dataset catalogs, showing a selection of schema.org properties related to the classes shown
@@ -3380,171 +3388,153 @@ ex:Test543L
             </thead>
             <tbody>
             <tr>
-                <td style="text-align: right">dcat:Resource</td>
-                <!-- <td style="text-align: center"><code>rdfs:subClassOf</code></td> -->
-                <td>sdo:Thing</td>
-            </tr>
-            <tr>
-                <td style="text-align: right">dcat:Catalog</td>
-                <!-- <td style="text-align: center"><code>owl:equivalentClass</code></td> -->
-                <td>sdo:DataCatalog</td>
-            </tr>
-            <tr>
-                <td style="text-align: right">dcat:Dataset</td>
-                <!-- <td style="text-align: center"><code>owl:equivalentClass</code></td> -->
-                <td>sdo:Dataset</td>
-            </tr>
-            <tr>
-                <td style="text-align: right">dcat:Distribution</td>
-                <!-- <td style="text-align: center"><code>owl:equivalentClass</code></td> -->
-                <td>sdo:DataDownload</td>
-            </tr>
-            <tr>
-                <td style="text-align: right"> ?? </td>
-                <!-- <td style="text-align: center"><code>skos:closeMatch</code></td> -->
-                <td>sdo:DataFeed <br/>
-                  <em>Unclear if a <code>sdo:DataFeed</code> is a data <strong>service</strong>, or a data <strong>collection</strong>.</em> </td>
-            </tr>
-            <tr>
-                <td style="text-align: right">dct:hasPart</td>
-                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
-                <td>sdo:hasPart</td>
-            </tr>
-            <tr>
-                <td style="text-align: right">dcat:dataset</td>
-                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
-                <td>sdo:dataset</td>
-            </tr>
-            <tr>
-                <td style="text-align: right">dcat:distribution</td>
-                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
-                <td>sdo:distribution</td>
+                <td style="text-align: right"><b>dcat:Resource</b></td>
+                <td><b>sdo:Thing</b></td>
             </tr>
             <tr>
                 <td style="text-align: right">dct:title</td>
-                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
                 <td>sdo:name</td>
             </tr>
             <tr>
                 <td style="text-align: right">dct:description</td>
-                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
                 <td>sdo:description</td>
             </tr>
             <tr>
                 <td style="text-align: right">dcat:keyword</td>
-                <!-- <td style="text-align: center"><code>rdfs:subPropertyOf</code></td> -->
                 <td>sdo:keywords <br/>
                   <em>dcat:keyword is singular, sdo:keywords is plural</em></td>
             </tr>
             <tr>
-                <td style="text-align: right">dct:subject</td>
-                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
-                <td>sdo:about</td>
-            </tr>
-            <tr>
                 <td style="text-align: right">dcat:theme</td>
-                <!-- <td style="text-align: center"><code>rdfs:subPropertyOf</code></td> -->
                 <td>sdo:about</td>
             </tr>
             <tr>
                 <td style="text-align: right">dct:identifier</td>
-                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
                 <td>sdo:identifier</td>
             </tr>
             <tr>
                 <td style="text-align: right">dct:type</td>
-                <!-- <td style="text-align: center"><code>skos:closeMatch</code></td> -->
                 <td>sdo:additionalType</td>
             </tr>
             <tr>
                 <td style="text-align: right">dct:issued</td>
-                <!-- <td style="text-align: center"><code>skos:closeMatch</code></td> -->
                 <td>sdo:datePublished</td>
             </tr>
             <tr>
                 <td style="text-align: right">dct:modified</td>
-                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
                 <td>sdo:dateModified</td>
             </tr>
             <tr>
                 <td style="text-align: right">dct:language</td>
-                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
                 <td>sdo:inLanguage</td>
             </tr>
             <tr>
-                <td style="text-align: right">dct:license</td>
-                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
-                <td>sdo:license</td>
+                <td style="text-align: right">dct:relation</td>
+                <td>sdo:isRelatedTo</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dcat:landingPage</td>
+                <td>sdo:url</td>
             </tr>
             <tr>
                 <td style="text-align: right">dct:publisher</td>
-                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
                 <td>sdo:publisher</td>
             </tr>
             <tr>
                 <td style="text-align: right">dcat:contactPoint</td>
-                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
                 <td>sdo:contactPoint</td>
             </tr>
             <tr>
+                <td style="text-align: right"><b>dcat:Catalog</b></td>
+                <td><b>sdo:DataCatalog</b></td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dct:hasPart</td>
+                <td>sdo:hasPart</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dcat:dataset</td>
+                <td>sdo:dataset</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dcat:distribution</td>
+                <td>sdo:distribution</td>
+            </tr>
+            <tr>
+                <td style="text-align: right"><b>dcat:Dataset</b></td>
+                <td><b>sdo:Dataset</b></td>
+            </tr>
+            <tr>
+                <td style="text-align: right"><b>dcat:Dataset</b> <br/> <i>dct:accrualPeriodicity fixed to <br/> &lt;http://purl.org/cld/freq/continuous&gt;</i></td>
+                <td><b>sdo:DataFeed</b></td>
+            </tr>
+            <tr>
                 <td style="text-align: right">dct:spatial</td>
-                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
                 <td>sdo:spatialCoverage</td>
             </tr>
             <tr>
                 <td style="text-align: right">dct:temporal</td>
-                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
                 <td>sdo:temporalCoverage</td>
             </tr>
             <tr>
+                <td style="text-align: right">dct:accrualPeriodicity</td>
+                <td>sdo:repeatFrequency</td>
+            </tr>
+            <tr>
+                <td style="text-align: right">prov:wasGeneratedBy</td>
+                <td>[ owl:inverseOf sdo:result ]</td>
+            </tr>
+            <tr>
+                <td style="text-align: right"><b>dcat:Distribution</b></td>
+                <td><b>sdo:DataDownload</b></td>
+            </tr>
+            <tr>
                 <td style="text-align: right">dct:format</td>
-                <!-- <td style="text-align: center"><code>[ owl:inverseOf rdfs:subPropertyOf ]</code></td> -->
                 <td>sdo:encodingFormat</td>
             </tr>
             <tr>
                 <td style="text-align: right">dcat:mediaType</td>
-                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
                 <td>sdo:encodingFormat</td>
             </tr>
             <tr>
                 <td style="text-align: right">dcat:byteSize</td>
-                <!-- <td style="text-align: center"><code>rdfs:subPropertyOf</code></td> -->
                 <td>sdo:contentSize</td>
             </tr>
             <tr>
                 <td style="text-align: right">dcat:accessURL</td>
-                <!-- <td style="text-align: center"><code>rdfs:subPropertyOf</code></td> -->
                 <td>sdo:contentUrl</td>
             </tr>
             <tr>
                 <td style="text-align: right">dcat:downloadURL</td>
-                <!-- <td style="text-align: center"><code>rdfs:subPropertyOf</code></td> -->
                 <td>sdo:contentUrl</td>
             </tr>
             <tr>
-                <td style="text-align: right">dcat:landingPage</td>
-                <!-- <td style="text-align: center"><code>rdfs:subPropertyOf</code></td> -->
+                <td style="text-align: right">dct:license</td>
+                <td>sdo:license</td>
+            </tr>
+            <tr>
+                <td style="text-align: right"><b>dcat:DataService</b></td>
+                <td><b>sdo:WebAPI</b></td>
+            </tr>
+            <tr>
+                <td style="text-align: right">dcat:endPointURL</td>
                 <td>sdo:url</td>
             </tr>
             <tr>
-                <td style="text-align: right">foaf:Organization</td>
-                <!-- <td style="text-align: center"><code>owl:equivalentClass</code></td> -->
-                <td>sdo:Organization</td>
+                <td style="text-align: right">dcat:endPointDescription</td>
+                <td>sdo:documentation , sdo:hasOfferCatalog</td>
             </tr>
             <tr>
-                <td style="text-align: right">foaf:Person</td>
-                <!-- <td style="text-align: center"><code>owl:equivalentClass</code></td> -->
-                <td>sdo:Person</td>
+                <td style="text-align: right">dct:type <br /> <i>in context of a dcat:DataService</i></td>
+                <td>sdo:serviceType</td>
             </tr>
             <tr>
-                <td style="text-align: right">foaf:homepage</td>
-                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
-                <td>sdo:url</td>
+                <td style="text-align: right">dcat:servesDataset</td>
+                <td>sdo:serviceOutput</td>
             </tr>
             <tr>
-                <td style="text-align: right">foaf:mbox</td>
-                <!-- <td style="text-align: center"><code>owl:equivalentProperty</code></td> -->
-                <td>sdo:email</td>
+                <td style="text-align: right"><b>dcat:Relationship</b></td>
+                <td><b>sdo:Role</b></td>
             </tr>
           </tbody>
         </table>
