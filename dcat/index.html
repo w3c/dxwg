@@ -3175,17 +3175,17 @@ ex:Test543L
             First, we will present an example of a LDPC for datasets in a catalog.
             There is one catalog with one dataset.
             The dataset is contained in the <code>&lt;/datasets/&gt;</code> LDP Direct Container.
-            To ensure the <abbr title="Linked Data Platform Container">LDPC</abbr> discovery, we connect it to the Catalog using the <code>dcat-ld:datasets</code> predicate.
+            To ensure the <abbr title="Linked Data Platform Container">LDPC</abbr> discovery, we connect it to the Catalog using the <code>dcat-ldp:datasets</code> predicate.
         </p>
 <pre id="ex-ldpc-dataset" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 @prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt; .
 @prefix ldp:  &lt;http://www.w3.org/ns/ldp#&gt; .
-@prefix dcat-ld:  &lt;http://www.w3.org/ns/dcat-ld#&gt; .
+@prefix dcat-ldp:  &lt;http://www.w3.org/ns/dcat-ldp#&gt; .
 
 @base &lt;https://example.org/resource/catalog&gt; .
 
 &lt;&gt; a dcat:Catalog ;
-	dcat-ld:datasets &lt;/datasets/&gt; ;
+	dcat-ldp:datasets &lt;/datasets/&gt; ;
 	dcat:dataset &lt;/datasets/001&gt; .
 
 &lt;/datasets/&gt; a ldp:Container, ldp:DirectContainer ;
@@ -3195,19 +3195,19 @@ ex:Test543L
 
 &lt;/datasets/001&gt; a dcat:Dataset .</pre>
 
-        <p>In the second example, we add LDPCs <code>&lt;/records/&gt;</code> for Catalog Records and <code>&lt;/services/&gt;</code> for Data Services, discoverable using <code>dcat-ld:records</code> and <code>dcat-ld:services</code> predicates from the Catalog:
+        <p>In the second example, we add LDPCs <code>&lt;/records/&gt;</code> for Catalog Records and <code>&lt;/services/&gt;</code> for Data Services, discoverable using <code>dcat-ldp:records</code> and <code>dcat-ldp:services</code> predicates from the Catalog:
         </p>
 <pre id="ex-ldpc-record" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 @prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt; .
 @prefix ldp:  &lt;http://www.w3.org/ns/ldp#&gt; .
-@prefix dcat-ld:  &lt;http://www.w3.org/ns/dcat-ld#&gt; .
+@prefix dcat-ldp:  &lt;http://www.w3.org/ns/dcat-ldp#&gt; .
 
 @base &lt;https://example.org/resource/catalog&gt; .
 
 &lt;&gt; a dcat:Catalog ;
-	dcat-ld:records &lt;/records/&gt; ;
-	dcat-ld:datasets &lt;/datasets/&gt; ;
-	dcat-ld:services &lt;/services/&gt; ;
+	dcat-ldp:records &lt;/records/&gt; ;
+	dcat-ldp:datasets &lt;/datasets/&gt; ;
+	dcat-ldp:services &lt;/services/&gt; ;
 	dcat:dataset &lt;/datasets/001&gt; .
 
 &lt;/records/&gt; a ldp:Container, ldp:DirectContainer ;
@@ -3233,16 +3233,16 @@ ex:Test543L
 &lt;/services/001&gt; a dcat:DataService .</pre>
 
         <p>Each dataset has its own LDPC for its distributions.
-            In the third example, we show the LDPC <code>&lt;/datasets/001/distributions/&gt;</code> for distributions of a single dataset, <code>&lt;/datasets/001&gt;</code>, discoverable through the <code>dcat-ld:distributions</code> predicate.</p>
+            In the third example, we show the LDPC <code>&lt;/datasets/001/distributions/&gt;</code> for distributions of a single dataset, <code>&lt;/datasets/001&gt;</code>, discoverable through the <code>dcat-ldp:distributions</code> predicate.</p>
 <pre id="ex-ldpc-distribution" class="example nohighlight turtle" aria-busy="false" aria-live="polite">
 @prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt; .
 @prefix ldp:  &lt;http://www.w3.org/ns/ldp#&gt; .
-@prefix dcat-ld:  &lt;http://www.w3.org/ns/dcat-ld#&gt; .
+@prefix dcat-ldp:  &lt;http://www.w3.org/ns/dcat-ldp#&gt; .
 
 @base &lt;https://example.org/resource/catalog&gt; .
 
 &lt;/datasets/001&gt; a dcat:Dataset ;
-	dcat-ld:distributions &lt;/datasets/001/distributions/&gt; ;
+	dcat-ldp:distributions &lt;/datasets/001/distributions/&gt; ;
 	dcat:distribution &lt;/datasets/001/distributions/001&gt; .
 
 &lt;/datasets/001/distributions/&gt; a ldp:Container, ldp:DirectContainer ;
@@ -3263,7 +3263,7 @@ ex:Test543L
             <h4>Property: datasets</h4>
 
             <table class="definition">
-		    <thead><tr><th>RDF Property:</th><th><code>dcat-ld:datasets</code></th></tr></thead>
+		    <thead><tr><th>RDF Property:</th><th><code>dcat-ldp:datasets</code></th></tr></thead>
                 <tbody>
                 <tr><td class="prop">Definition:</td><td>Connects a catalog to the LDP container of its datasets.</td></tr>
                 <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Catalog"><code>dcat:Catalog</code></a></td></tr>
@@ -3276,7 +3276,7 @@ ex:Test543L
             <h4>Property: catalog records</h4>
 
             <table class="definition">
-                <thead><tr><th>RDF Property:</th><th><code>dcat-ld:records</code></th></tr></thead>
+                <thead><tr><th>RDF Property:</th><th><code>dcat-ldp:records</code></th></tr></thead>
                 <tbody>
                 <tr><td class="prop">Definition:</td><td>Connects a catalog to the LDP container of its catalog records.</td></tr>
                 <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Catalog"><code>dcat:Catalog</code></a></td></tr>
@@ -3289,7 +3289,7 @@ ex:Test543L
             <h4>Property: data services</h4>
 
             <table class="definition">
-                <thead><tr><th>RDF Property:</th><th><code>dcat-ld:services</code></th></tr></thead>
+                <thead><tr><th>RDF Property:</th><th><code>dcat-ldp:services</code></th></tr></thead>
                 <tbody>
                 <tr><td class="prop">Definition:</td><td>Connects a catalog to the LDP container of its data services.</td></tr>
                 <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Catalog"><code>dcat:Catalog</code></a></td></tr>
@@ -3302,7 +3302,7 @@ ex:Test543L
             <h4>Property: distributions</h4>
 
             <table class="definition">
-                <thead><tr><th>RDF Property:</th><th><code>dcat-ld:distributions</code></th></tr></thead>
+                <thead><tr><th>RDF Property:</th><th><code>dcat-ldp:distributions</code></th></tr></thead>
                 <tbody>
                 <tr><td class="prop">Definition:</td><td>Connects a dataset to the LDP container of its distributions.</td></tr>
                 <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Dataset"><code>dcat:Dataset</code></a></td></tr>
