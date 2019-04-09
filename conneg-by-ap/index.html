@@ -173,7 +173,7 @@
     <section id="related-http">
       <h3>Existing standards for transporting profile information in HTTP headers</h3>
       <h4>Using Accept/Content Type together with the profile parameter</h4>
-      <p>The HTTP Accept and Content-Type header fields [[RFC 7231]]
+      <p>The HTTP Accept and Content-Type header fields [[RFC7231]]
         allow a client to specify acceptable media types (<code>Accept</code>)
         and a server to indicate the media type of the payload (<code>Content-Type</code>).
         A media type registration can also specify an optional list of media type parameters.
@@ -196,11 +196,11 @@
     In order to signal the use of media-type-independent profiles,
     the http header fields <code>Accept-Profile</code> and <code>Content-Profile</code> are to be used.</p>
       <h4>Using a Link-header with rel=”profile” (RFC 6906)</h4>
-      <p>The HTTP Link header field [[RFC 8288]] relates a web resource (Link Context)
+      <p>The HTTP Link header field [[RFC8288]] relates a web resource (Link Context)
     to a target resource (Link Target
     by specifying the relation between the two resources.
-    One of the relation types is “profile” as defined in [[RFC 6906]].
-        RFC 6906 <a href="https://tools.ietf.org/html/rfc6906#section-3">defines a profile</a> as
+    One of the relation types is “profile” as defined in [[RFC6906]].
+        [[RFC6906]] <a data-cite="RFC6906#section-3">defines a profile</a> as
         "additional semantics that can be used to process a resource representation […]
         that do not alter the basic media type semantics,"
         and specifically states that
@@ -219,7 +219,7 @@
       </pre>
       <p>There is, however, no possibility to convey quality information (q-values) using the “profile” relation.</p>
       <h4>Using the Prefer/Preference-Applied header fields (RFC 7240)</h4>
-      <p>The http <code>Prefer</code> and <code>Preference-Applied</code> header fields [[RFC 7240]]
+      <p>The http <code>Prefer</code> and <code>Preference-Applied</code> header fields [[RFC7240]]
       can be used to convey information about profile preferences.
       A client could use the <code>Prefer</code> header to tell the server about
       its preference for a payload conforming to a specific profile.
@@ -330,6 +330,16 @@
       </p>
     </section>
     <div class="issue" data-number="384"></div>
+    
+<section id="related-csw">
+
+<h2>CSW</h2>
+
+<p>[[CSW]] is the OGC standard used world-wide by the geospatial community to implement a machine-actionable interface to catalog services, providing access to metadata about dataset, other services, as well as other types of resources. Besides harvesting as well as free-text and faceted search functionalities, [[CSW]] supports the possibility of requesting that metadata are returned according to a given metadata schema and format, by using the <code>outputSchema</code> and <code>outputFormat</code> query parameters, respectively. The usually supported metadata schemas are [[DC11]], and [[ISO-19115]], whereas the default format is XML. The actually supported metadata schemas and formats by a given [[CSW]] endpoint are described in the service "capabilities" (a machine-readable description of the service interface, that is returned via a <code>GetCapabilities</code> request.<(p>
+<p>Notably, [[CSW]] theoretically supports content negotiation for the metadata format, and the specification defines a conflict resolution mechanism for requests where this information is specified via an HTTP <code>Accept</code> headers and/or the <code>outputFormat</code> parameter.</p>
+
+</section>    
+    
   </section>
   <section id="abstractmodel">
     <h2>Abstract Model</h2>
@@ -692,7 +702,7 @@ Content-Profile: urn:example:profile:1
 	  Since Query String Arguments use URIs (or URLs) to convey important information,
 	  implementers should ensure that the total length of the URL
 	  does not exceed possible length restrictions.
-	  <a href="https://tools.ietf.org/html/rfc7230#section-3.1.1">RFC 7230 §3.1.1</a> [[RFC 7230]] recommends
+	  [[RFC7230]] <a data-cite="RFC7230#section-3.1.1">§3.1.1</a> recommends
 	  that senders and recipients support request lines of at least 8,000 octets.
 	  Some client and server implementations, however,
 	  cannot accept URLs longer than 2,000 characters
