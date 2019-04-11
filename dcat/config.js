@@ -11,6 +11,7 @@ var respecConfig = {
 //    issueBase:            "https://github.com/w3c/dxwg/issues/", -- Not needed when github used
     editors: [{
       name:       "Riccardo Albertoni",
+       orcid:  "0000-0001-5648-2713",
       company:    "CNR - Consiglio Nazionale delle Ricerche, Italy",
       url: "http://www.imati.cnr.it/joomla/index.php/people/8-curricula/178-riccardo-albertoni",
       companyURL: "http://www.cnr.it/"
@@ -19,28 +20,23 @@ var respecConfig = {
         company: "Refinitiv",
         companyURL: "https://www.refinitiv.com"
     },{
-        name: "Simon Cox",
-        company: "CSIRO",
-        url: "http://people.csiro.au/Simon-Cox",
+        name:       "Simon Cox",
+        orcid:      "0000-0002-3884-3420",
+        company:    "CSIRO",
+        url:        "http://people.csiro.au/Simon-Cox",
         companyURL: "https://www.csiro.au/"
     },{
       name:       "Alejandra Gonzalez Beltran",
+      orcid:      "0000-0003-3499-8262",
       company:    "Oxford eResearch Centre, Engineering Science, University of Oxford",
       url: "https://www.oerc.ox.ac.uk/people/alejandra",
       companyURL: "http://www.oerc.ox.ac.uk/"
     },{
-      name: "Andrea Perego",
-      company: "European Commission, Joint Research Centre",
+      name:       "Andrea Perego",
+      orcid:      "0000-0001-9300-2694",
+      company:    "European Commission, Joint Research Centre",
       companyURL: "https://ec.europa.eu/jrc/",
-      w3cid: "40317",
-//      note: "The views expressed are purely those of the author and may not in any circumstances be regarded as stating an official position of the European Commission."
-      extras: [
-        {
-          name: "\u2605",
-          "href": "#disclaimer",
-          "class": "disclaimer"
-        }
-      ]        
+      w3cid: "40317"
     },{
       name: "Peter Winstanley",
       company: "Scottish Government",
