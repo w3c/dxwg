@@ -1,10 +1,10 @@
 var respecConfig = {
-    specStatus: "FPWD",
-    shortName: "prof",
+    specStatus: "ED",
+    shortName: "dx-prof",
     edDraftURI: "https://w3c.github.io/dxwg/profilesont/",
     canonicalURI: "TR",
-    implementationReportURI: "https://github.com/CSIRO-enviro-informatics/prof-ont-implementation-results",
-    testSuiteURI: "https://github.com/CSIRO-enviro-informatics/prof-ont-implementation-results",
+    implementationReportURI: "https://github.com/CSIRO-enviro-informatics/prof-implementations",
+    testSuiteURI: "https://github.com/CSIRO-enviro-informatics/prof-implementations",
     editors: [
       {
         name: "Rob Atkinson",
@@ -33,59 +33,39 @@ var respecConfig = {
     wgPatentURI: "https://www.w3.org/2004/01/pp-impl/99375/status",
     inlineCSS: "true",
     lint: "false",
-    noRecTrack: "true",
     issueBase: "https://github.com/w3c/dxwg/issues/",
     github:    "https://github.com/w3c/dxwg/issues/",
     localBiblio: {
-        DCAP: {
-            authors: [
-                "Karen Coyle",
-                "Thomas Baker"
-            ],
-            href: "http://dublincore.org/documents/dcmi-terms/",
-            title: "Guidelines for Dublin Core Application Profiles (Working Draft)",
-            date: " 2009-05-18",
-            status: "DCMI Recommended Resource"
-        },
-        DCSF: {
-            authors: [
-                "Mikael Nilsson",
-                "Thomas Baker",
-                "Pete Johnston"
-            ],
-            href: "http://dublincore.org/documents/singapore-framework/",
-            title: "The Singapore Framework for Dublin Core Application Profiles",
-            date: " 2008-01-14",
-            status: "DCMI Recommended Resource"
-        },
-        DCDSP: {
-            authors: [
-                "Nilsson, Mikael"
-            ],
-            href: "http://dublincore.org/documents/dc-dsp/",
-            title: "Description Set Profiles: A constraint language for Dublin Core Application Profiles",
-            date: " 2008-03-31",
-            status: "DCMI Working Draft"
-        },
         PDF: {
             href: "https://www.iso.org/standard/51502.html",
             title: "Document management -- Portable document format -- Part 1: PDF 1.7",
             date: "2008-07",
             status: "ISO Standard"
         },
-        shex: {
+        SHEX: {
             href: "https://shexspec.github.io/spec/",
             title: "Shape Expressions Language 2.next",
             date: "2018-09-06",
             status: "W3C Community Group Draft Report"
         },
         "PROF-CONNEG": {
-            href: "https://www.w3.org/TR/conneg-by-ap/",
+            editors: [
+                "Lars G. Svensson",
+                "Rob Atkinson",
+                "Nicholas J. Car"
+            ],
+            href: "https://www.w3.org/TR/2018/WD-dx-prof-conneg-20181218/",
             title: "Content Negotiation by Profile",
-            date: "2018-12-31",
-            status: "W3C Editor's Draft"
+            date: " 2018-12-18",
+            status: "W3C First Public Working Draft"
         },
-        "PROF-GUIDE": {
+        "PROF-GUIDANCE": {
+            editors: [
+                "Rob Atkinson",
+                "Karen Coyle",
+                "Antoine Isaac",
+                "Nicholas J. Car"
+            ],
             href: "https://www.w3.org/TR/profile-guidance/",
             title: "Profile Guidance",
             date: " 2018-12-31",
@@ -96,10 +76,20 @@ var respecConfig = {
                 "L. Svensson",
                 "R. Verborgh"
             ],
-            href: "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema/",
+            href: "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema",
             title: "Negotiating Profiles in HTTP",
-            date: "2017-10-24",
+            date: " 2017-10-24",
             status: "IETF Internet Draft"
+        },
+        "PROF": {
+            editors: [
+                "Rob Atkinson",
+                "Nicholas J. Car"
+            ],
+            href: "https://www.w3.org/TR/2018/WD-dx-prof-20181218/",
+            title: "Profile Descriptions ontology",
+            date: "2018-12-18",
+            status: "W3C First Public Working Draft"
         },
         SCHEMATRON: {
             href: "https://www.iso.org/standard/55982.html",
@@ -107,7 +97,7 @@ var respecConfig = {
             date: "2016-01",
             status: "ISO Standard"
         },
-        "modspec": {
+        "MODSPEC": {
           editors: [
             "OGC Policy SWG"
           ],
@@ -116,7 +106,7 @@ var respecConfig = {
           status: "OGC Policy Directive" ,
           date: "2009-10-19"
         },
-        "cfg-mgmt": {
+        "CFG-MGMT": {
           authors: [
             "Serena Coetzee",
             "Simon Cox",
@@ -127,18 +117,6 @@ var respecConfig = {
           publisher: "IEEE" ,
           status: "7th International Conference on Standardization and Innovation in Information Technology (SIIT), Berlin, 2011, pp. 1-12" ,
           date: "2011-11-21"
-        },
-        "vocab-dcat-2": {
-            editors: [
-                "Alejandra Gonzalez Beltran",
-                "Dave Browning",
-                "Simon Cox",
-                "Peter Winstanley"
-            ],
-            href: "https://www.w3.org/TR/vocab-dcat-2/",
-            title: "Data Catalog Vocabulary (DCAT) - revised edition",
-            date: "2018-09-07",
-            status: "W3C Editor's Draft"
         }
     }
 };
