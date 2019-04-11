@@ -78,7 +78,7 @@ $(document).ready( function() {
     <p>This revised version of DCAT was developed by the <a href="https://www.w3.org/2017/dxwg/">Dataset Exchange Working Group</a> in response to a new set of Use Cases and Requirements [[?DCAT-UCR]] gathered from peoples' experience with the DCAT vocabulary from the time of the original version, and new applications that were not considered in the first version. A summary of the changes from  [[?VOCAB-DCAT-20140116]] can be found at <a href="#changes">Change History</a></p>
 
     <h3 id="external_terms">External terms</h3>
-    <p>DCAT incorporates terms from pre-existing vocabularies where stable terms with appropriate meanings could be found, such as <a href="http://xmlns.com/foaf/0.1/homepage">foaf:homepage</a> and <a href="http://purl.org/dc/terms/title">dct:title</a>.
+    <p>DCAT incorporates terms from pre-existing vocabularies where stable terms with appropriate meanings could be found, such as <a href="http://xmlns.com/foaf/0.1/homepage"><code>foaf:homepage</code></a> and <a href="http://purl.org/dc/terms/title"><code>dct:title</code></a>.
       Informal summary definitions of the externally-defined terms are included here for convenience, while authoritative definitions are available in the normative references.
       Changes to definitions in the references, if any, supersede the summaries given in this specification.
       Note that conformance to DCAT (Section 4) concerns usage of only the terms in the DCAT namespace itself, so possible changes to the external definitions will not affect the conformance of DCAT implementations.</p>
@@ -147,7 +147,7 @@ $(document).ready( function() {
 <section id="motivation" class="informative"><h2>Motivation for change</h2>
     <p>The original Recommendation [[?VOCAB-DCAT-20140116]] published in January 2014 provided the basic framework for describing datasets. It made an important distinction between a <i>dataset</i> as an abstract idea and a <i>distribution</i> as a manifestation of the dataset. Although DCAT has been widely adopted, it has become clear that the original specification lacked a number of essential features that were added either through the mechanism of an application profile, such as the European Commission's DCAT-AP [[?DCAT-AP]], or the development of larger vocabularies that to a greater or lesser extent built upon the base standard, such as the Healthcare and Life Sciences Community Profile [[?HCLS-Dataset]], the Data Tag Suite [[?DATS]] and more. This revision of DCAT has been developed to address the specific shortcomings that have come to light through the experiences of different communities, the aim being to improve interoperability between the outputs of these larger vocabularies.
     For example, in this new DCAT version we provide classes, properties and guidance to address <a href="#Dereferenceable-identifiers">identifiers</a>, <a href="#quality-information">dataset quality information</a>, and <a href="#data-citation">data citation</a> issues.</p>
-    <p>This draft includes re-writing of the specification throughout. Significant changes from the 2014 Recommendation are marked within the text using "Note" sections, as well as being described in the <a href="#changes">Change History</a>.</p>
+    <p>This draft includes re-writing of the specification throughout. Significant changes from the 2014 Recommendation are marked within the text using "Note" sections, as well as being described in <a class="sectionRef" href="#changes"></a>.</p>
 
 </section>
 
@@ -229,7 +229,7 @@ $(document).ready( function() {
         </li>
         <li>
           <a href="#Class:Resource"><code>dcat:Resource</code></a> represents an individual item in a catalog.
-          This class is not intended to be used directly, but is the parent class of <a href="#Class:Dataset"><code>dcat:Dataset</code></a>, <a href="#Class:Data_Service"><code>dcat:DataService</code></a> and <a href="#Class:Catalog">dcat:Catalog</a>.
+          This class is not intended to be used directly, but is the parent class of <a href="#Class:Dataset"><code>dcat:Dataset</code></a>, <a href="#Class:Data_Service"><code>dcat:DataService</code></a> and <a href="#Class:Catalog"><code>dcat:Catalog</code></a>.
           Member items in a catalog should be members of one of the sub-classes, or of a sub-class of these, or of a sub-class of <a href="#Class:Resource"><code>dcat:Resource</code></a> defined in a DCAT application profile or other DCAT application.
           <a href="#Class:Resource"><code>dcat:Resource</code></a> is effectively an extension point for defining a catalog of any kind of resource.
         </li>
@@ -239,11 +239,11 @@ $(document).ready( function() {
           Data comes in many forms including numbers, words, pixels, imagery, sound and other multi-media, and potentially other types, any of which might be collected into a dataset.
         </li>
         <li>
-          <code><a href="#Class:Distribution">dcat:Distribution</a></code> represents an accessible form of a dataset such as a downloadable file.
+          <a href="#Class:Distribution"><code>dcat:Distribution</code></a> represents an accessible form of a dataset such as a downloadable file.
         </li>
         <li>
           <a href="#Class:Data_Service"><code>dcat:DataService</code></a> represents a data service in a catalog.
-          A data service is a collection of operations accessible through an interface (API) that provide access to one or more datasets or data processing functions.
+          A data service is a collection of operations accessible through an interface (<abbr title="Application Programming Interface">API</abbr>) that provide access to one or more datasets or data processing functions.
         </li>
         <!--
           <li>
@@ -258,15 +258,17 @@ $(document).ready( function() {
         </li>
     </ul>
 
-    <figure id="UML_DCAT_All_Attr"><img alt="UML model of DCAT classes and properties" src="UML/DCAT-summary-all-attributes.png">
-        <figcaption>
-            Overview of DCAT model, showing the classes of resources that can be members of a Catalog, and the relationships between them.
-        </figcaption>
+    <figure id="UML_DCAT_All_Attr">
+      <img alt="UML model of DCAT classes and properties" src="./UML/DCAT-summary-all-attributes.png">
+      <figcaption>
+          Overview of DCAT model, showing the classes of resources that can be members of a Catalog, and the relationships between them.
+      </figcaption>
     </figure>
+    
     <p class="note">
-        Along with the rest of the <a href="#vocabulary-overview">Vocabulary overview</a>, this diagram is <b>non-normative</b>.
+        Along with the rest of <a class="sectionRef" href="#vocabulary-overview"></a>, this diagram is <b>non-normative</b>.
         Furthermore, while the diagram uses UML-style class notation it should be interpreted following the usual RDF open-world assumptions around the presence/absence of properties, relationships, and their cardinality.
-        The properties shown in each class reflect those recommended in the descriptions of classes in the <a href="#vocabulary-specification">Vocabulary specification</a>.
+        The properties shown in each class reflect those recommended in the descriptions of classes in <a href="#vocabulary-specification"></a>.
         To assist in understanding the full scope of each class, properties are copied down from each '::super-class'.
         Cardinalities are shown in a few places to reinforce expectations, but these are not axiomatized or enforced in any way by this recommendation.
     </p>
@@ -298,8 +300,8 @@ $(document).ready( function() {
     <div class="note">
       <p>
         The scope of DCAT 2014 [[?VOCAB-DCAT-20140116]] was limited to catalogs of datasets.
-        A number of use cases for the revision involve <b>data services</b> as members of a catalog - see <a href="https://www.w3.org/TR/dcat-ucr/#ID6">DCAT Distribution to describe web services - ID6</a> and
-        <a href="https://www.w3.org/TR/dcat-ucr/#ID18">Modeling service-based data access - ID18</a>.
+        A number of use cases for the revision [[?DCAT-UCR]] involve <b>data services</b> as members of a catalog - see <a data-cite="DCAT-UCR#ID6">DCAT Distribution to describe web services - ID6</a> and
+        <a data-cite="DCAT-UCR#ID18">Modeling service-based data access - ID18</a>.
         Hence, the scope of this revision of DCAT includes both datasets and data services to enable these to be part of a DCAT conformant catalog.
         Provision for  Catalogs to be composed of other Catalogs is also made.
         See <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>.
@@ -317,7 +319,7 @@ $(document).ready( function() {
       <p id="owl2">
         The DCAT vocabulary is an OWL2 ontology [[?OWL2-OVERVIEW]] formalized using [[?RDF-SCHEMA]].
         Each class and property in DCAT is denoted by an [[?IRI]].
-        Locally defined elements are in the namespace <a href="http://www.w3.org/ns/dcat#">http://www.w3.org/ns/dcat#</a>.
+        Locally defined elements are in the namespace <a href="http://www.w3.org/ns/dcat#"><code>http://www.w3.org/ns/dcat#</code></a>.
         Elements are also adopted from several external vocabularies, in particular [[?FOAF]], [[?DCTERMS]] and [[?PROV-O]]
       </p>
       <p id="blankNodes">
@@ -388,7 +390,7 @@ $(document).ready( function() {
         <p>
           Five distinct temporal descriptors are shown for this dataset.
           The dataset publication and revision dates are shown in <a href="#Property:resource_release_date"><code>dct:issued</code></a> and <a href="#Property:resource_update_date"><code>dct:modified</code></a>.
-          For the frequency of update of the dataset in <a href="#Property:dataset_frequency"><code>dct:accrualPeriodicity</code></a>, we use an instance from the <a href="http://www.w3.org/TR/vocab-data-cube/#dsd-cog">Content-Oriented Guidelines</a> developed as part of the <abbr title="World Wide Web Consortium">W3C</abbr> Data Cube Vocabulary [[?VOCAB-DATA-CUBE]] efforts.
+          For the frequency of update of the dataset in <a href="#Property:dataset_frequency"><code>dct:accrualPeriodicity</code></a>, we use an instance from the <a data-cite="VOCAB-DATA-CUBE#dsd-cog">Content-Oriented Guidelines</a> developed as part of the <abbr title="World Wide Web Consortium">W3C</abbr> Data Cube Vocabulary [[?VOCAB-DATA-CUBE]] efforts.
           The temporal coverage or extent is given in <a href="#Property:dataset_temporal"><code>dct:temporal</code></a> using an item from the Interval dataset (originally available from http://reference.data.gov.uk/id/interval) from data.gov.uk.
           The temporal resolution, which describes the minimum spacing of items within the dataset, is given in <a href="#Property:dataset_temporalresolution"><code>dcat:temporalResolution</code></a> using the standard datatype <code>xsd:duration</code>.
         </p>
@@ -683,7 +685,7 @@ $(document).ready( function() {
         <h3>Class: Catalog</h3>
         <p>The following properties are recommended for use on this class:
             <a href="#Property:catalog_catalog_record">catalog record</a>,
-            <a href="#Property:catalog_hasPart">hasPart</a>,
+            <a href="#Property:catalog_hasPart">has part</a>,
             <a href="#Property:catalog_dataset">dataset</a>,
             <a href="#Property:catalog_service">service</a>,
             <a href="#Property:catalog_catalog">catalog</a>,
@@ -700,7 +702,7 @@ $(document).ready( function() {
             <a href="#Property:dataset_wasgeneratedby">was generated by</a>
         </p>
         <p>The following properties are inherited from the super-class <a href="#Class:Resource"><code>dcat:Resource</code></a>:
-            <a href="#Property:resource_conformsto">conformsTo</a>,
+            <a href="#Property:resource_conformsto">conforms to</a>,
             <a href="#Property:resource_contact_point">contact point</a>,
             <a href="#Property:resource_creator">creator</a>,
             <a href="#Property:resource_description">description</a>,
@@ -766,7 +768,7 @@ $(document).ready( function() {
         </section>
 
         <section id="Property:catalog_hasPart">
-            <h4>Property: hasPart</h4>
+            <h4>Property: has part</h4>
 
             <p class="note">
                 Explicit use of this property added in this revision of DCAT.
@@ -853,8 +855,8 @@ $(document).ready( function() {
         <h3>Class: Catalogued Resource</h3>
 
         <p>The following properties are recommended for use on this class:
-            <a href="#Property:resource_accessRights">accessRights</a>,
-            <a href="#Property:resource_conformsto">conformsTo</a>,
+            <a href="#Property:resource_accessRights">access rights</a>,
+            <a href="#Property:resource_conformsto">conforms to</a>,
             <a href="#Property:resource_contact_point">contact point</a>,
             <a href="#Property:resource_creator">creator</a>,
             <a href="#Property:resource_description">description</a>,
@@ -910,7 +912,7 @@ $(document).ready( function() {
         </p>
 
         <section id="Property:resource_accessRights">
-            <h4>Property: accessRights</h4>
+            <h4>Property: access rights</h4>
 
             <table class="definition">
                 <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/accessRights">dct:accessRights</a></th></tr></thead>
@@ -1193,7 +1195,30 @@ $(document).ready( function() {
               <tr><td class="prop">Sub-property of:</td><td><a href="http://www.w3.org/ns/prov#qualifiedInfluence">prov:qualifiedInfluence</a></td></tr>
               <tr><td class="prop">Domain:</td><td><a href="#Class:Resource">dcat:Resource</a></td></tr>
               <tr><td class="prop">Range:</td><td><a href="#Class:Relationship">dcat:Relationship</a></td></tr>
-              <tr><td class="prop">Usage note:</td><td>Used to link to another resource where the nature of the relationship is known but does not match one of the standard Dublin Core properties (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy) or PROV-O properties (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf).</td></tr>
+              <tr><td class="prop">Usage note:</td><td>Used to link to another resource where the nature of the relationship is known but does not match one of the standard [[?DCTERMS]] properties 
+              (<a href="http://purl.org/dc/terms/hasPart"><code>dct:hasPart</code></a>,
+              <a href="http://purl.org/dc/terms/isPartOf"><code>dct:isPartOf</code></a>,
+              <a href="http://purl.org/dc/terms/conformsTo"><code>dct:conformsTo</code></a>,
+              <a href="http://purl.org/dc/terms/isFormatOf"><code>dct:isFormatOf</code></a>,
+              <a href="http://purl.org/dc/terms/hasFormat"><code>dct:hasFormat</code></a>,
+              <a href="http://purl.org/dc/terms/isVersionOf"><code>dct:isVersionOf</code></a>,
+              <a href="http://purl.org/dc/terms/hasVersion"><code>dct:hasVersion</code></a>,
+              <a href="http://purl.org/dc/terms/replaces"><code>dct:replaces</code></a>,
+              <a href="http://purl.org/dc/terms/isReplacedBy"><code>dct:isReplacedBy</code></a>,
+              <a href="http://purl.org/dc/terms/references"><code>dct:references</code></a>,
+              <a href="http://purl.org/dc/terms/isReferencedBy"><code>dct:isReferencedBy</code></a>,
+              <a href="http://purl.org/dc/terms/requires"><code>dct:requires</code></a>,
+              <a href="http://purl.org/dc/terms/isRequiredBy"><code>dct:isRequiredBy</code></a>)
+              or [[?PROV-O]] properties 
+              (<a href="http://www.w3.org/ns/prov#wasDerivedFrom">prov:wasDerivedFrom</a>, 
+              <a href="http://www.w3.org/ns/prov#wasInfluencedBy">prov:wasInfluencedBy</a>, 
+              <a href="http://www.w3.org/ns/prov#wasQuotedFrom">prov:wasQuotedFrom</a>, 
+              <a href="http://www.w3.org/ns/prov#wasRevisionOf">prov:wasRevisionOf</a>, 
+              <a href="http://www.w3.org/ns/prov#hadPrimarySource">prov:hadPrimarySource</a>, 
+              <a href="http://www.w3.org/ns/prov#alternateOf">prov:alternateOf</a>, 
+              <a href="http://www.w3.org/ns/prov#specializationOf">prov:specializationOf</a>).
+              </td>
+              </tr>
               </tbody>
             </table>
 
@@ -1255,12 +1280,12 @@ $(document).ready( function() {
               <thead><tr><th>RDF Property:</th><th><a href="https://www.w3.org/ns/prov#qualifiedAttribution">prov:qualifiedAttribution</a></th></tr></thead>
               <tbody>
               <tr><td class="prop">Definition:</td><td>Link to an Agent having some form of responsibility for the resource</td></tr>
-              <tr><td class="prop">Sub-property of:</td><td><a href="http://www.w3.org/ns/prov#qualifiedInfluence">prov:qualifiedInfluence</a></td></tr>
+              <tr><td class="prop">Sub-property of:</td><td><a href="http://www.w3.org/ns/prov#qualifiedInfluence"><code>prov:qualifiedInfluence</code></a></td></tr>
               <tr><td class="prop">Domain:</td><td><a href="https://www.w3.org/TR/prov-o/#Entity">prov:Entity</a></td></tr>
               <tr><td class="prop">Range:</td><td><a href="https://www.w3.org/TR/prov-o/#Attribution">prov:Attribution</a></td></tr>
-              <tr><td class="prop">Usage note:</td><td>Used to link to an Agent where the nature of the relationship is known but does not match one of the standard Dublin Core properties (dct:creator, dct:publisher).
-              Use dcat:hadRole on the prov:Attribution to capture the responsibility of the Agent with respect to the Resource.
-              See https://w3c.github.io/dxwg/dcat/#qualified-attribution for usage examples.</td></tr>
+              <tr><td class="prop">Usage note:</td><td>Used to link to an Agent where the nature of the relationship is known but does not match one of the standard [[?DCTERMS]] properties (<a href="http://purl.org/dc/terms/creator"></code>dct:creator</code></a>, <a href="http://purl.org/dc/terms/creator"></code>dct:publisher</code></a>).
+              Use <code>dcat:hadRole</code> on the <a href="http://www.w3.org/ns/prov#Attribution"></code>prov:Attribution</code></a> to capture the responsibility of the Agent with respect to the Resource.
+              See <a class="sectionRef" href="#qualified-attribution></a> for usage examples.</td></tr>
               </tbody>
             </table>
 
@@ -1303,7 +1328,7 @@ $(document).ready( function() {
                 <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/RightsStatement"><code>dct:RightsStatement</code></a></td></tr>
                 <tr><td class="prop">Usage note:</td><td>Information about licenses and rights <em title="MAY" class="rfc2119">MAY</em> be provided for the Resource. See also guidance at <a href="#license-rights">License and rights statements</a>.</td></tr>
 
-                <tr><td class="prop">See also:</td><td><a href="#Property:resource_license" title="">resource license</a>, <a href="#Property:distribution_rights">distribution rights</a>, <a href="#Property:resource_accessRights">resource accessRights</a></td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Property:resource_license" title="">resource license</a>, <a href="#Property:distribution_rights">distribution rights</a>, <a href="#Property:resource_accessRights">resource access rights</a></td></tr>
                 </tbody>
             </table>
         </section>
@@ -1318,7 +1343,7 @@ $(document).ready( function() {
                 <tr><td class="prop">Range:</td><td><a href="https://www.w3.org/TR/odrl-vocab/#term-Policy"><code>odrl:Policy</code></a></td></tr>
                 <tr><td class="prop">Usage note:</td><td>Information about rights expressed as ODRL [[ODRL-VOCAB]] policies <em title="MAY" class="rfc2119">MAY</em> be provided for the Resource. See also guidance at <a href="#license-rights">License and rights statements</a>.</td></tr>
 
-                <tr><td class="prop">See also:</td><td><a href="#Property:resource_license" title="">resource license</a>, <a href="#Property:resource_accessRights" title="">resource accessRights</a>, <a href="#Property:resource_rights" title="">resource rights</a></td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Property:resource_license" title="">resource license</a>, <a href="#Property:resource_accessRights" title="">resource access rights</a>, <a href="#Property:resource_rights" title="">resource rights</a></td></tr>
                 </tbody>
             </table>
         </section>
@@ -1470,8 +1495,8 @@ $(document).ready( function() {
             <a href="#Property:dataset_wasgeneratedby">was generated by</a>
         </p>
         <p>The following properties are inherited from the super-class <a href="#Class:Resource"><code>dcat:Resource</code></a>:
-            <a href="#Property:resource_accessRights">accessRights</a>,
-            <a href="#Property:resource_conformsto">conformsTo</a>,
+            <a href="#Property:resource_accessRights">access rights</a>,
+            <a href="#Property:resource_conformsto">conforms to</a>,
             <a href="#Property:resource_contact_point">contact point</a>,
             <a href="#Property:resource_creator">creator</a>,
             <a href="#Property:resource_description">description</a>,
@@ -1828,7 +1853,7 @@ $(document).ready( function() {
         </section>
 
         <section id="Property:distribution_accessRights">
-            <h4>Property: accessRights</h4>
+            <h4>Property: access rights</h4>
 
             <table class="definition">
                 <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/accessRights">dct:accessRights</a></th></tr></thead>
@@ -1838,7 +1863,7 @@ $(document).ready( function() {
                 <tr><td class="prop">Usage note:</td><td>Information about licenses and rights <em title="MAY" class="rfc2119">MAY</em> be provided for the Distribution. See also guidance at <a href="#license-rights">License and rights statements</a>.</td></tr>
 
                 <tr><td class="prop">See also:</td><td><a href="#Property:distribution_license" title="">distribution license</a>, <a href="#Property:distribution_rights" title="">distribution rights</a>,
-                    <a href="#Property:resource_accessRights" title="">resource accessRights</a></td></tr>
+                    <a href="#Property:resource_accessRights" title="">resource access rights</a></td></tr>
                 </tbody>
             </table>
         </section>
@@ -1871,7 +1896,7 @@ $(document).ready( function() {
                 <tr><td class="prop">Range:</td><td><a href="https://www.w3.org/TR/odrl-vocab/#term-Policy"><code>odrl:Policy</code></a></td></tr>
                 <tr><td class="prop">Usage note:</td><td>Information about rights expressed as ODRL [[ODRL-VOCAB]] policies <em title="MAY" class="rfc2119">MAY</em> be provided for the Distribution. See also guidance at <a href="#license-rights">License and rights statements</a>.</td></tr>
 
-                <tr><td class="prop">See also:</td><td><a href="#Property:resource_license" title="">resource license</a>, <a href="#Property:distribution_accessRights" title="">distribution accessRights</a>, <a href="#Property:distribution_rights" title="">distribution rights</a></td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Property:resource_license" title="">resource license</a>, <a href="#Property:distribution_accessRights" title="">distribution access rights</a>, <a href="#Property:distribution_rights" title="">distribution rights</a></td></tr>
                 </tbody>
             </table>
         </section>
@@ -2095,12 +2120,12 @@ $(document).ready( function() {
             <a href="#Property:dataservice_endpointdescription">endpointDescription</a>,
             <a href="#Property:dataservice_endpointurl">endpointURL</a>,
             <a href="#Property:dataservice_license">license</a>,
-            <a href="#Property:dataservice_access_rights">accessRights</a>,
+            <a href="#Property:dataservice_access_rights">access rights</a>,
             <a href="#Property:dataservice_serves_dataset">servesDataset</a>
         </p>
         <p>The following properties are inherited from the super-class <a href="#Class:Resource"><code>dcat:Resource</code></a>:
-            <a href="#Property:resource_accessRights">accessRights</a>,
-            <a href="#Property:resource_conformsto">conformsTo</a>,
+            <a href="#Property:resource_accessRights">access rights</a>,
+            <a href="#Property:resource_conformsto">conforms to</a>,
             <a href="#Property:resource_contact_point">contact point</a>,
             <a href="#Property:resource_creator">creator</a>,
             <a href="#Property:resource_description">description</a>,
@@ -2211,10 +2236,10 @@ $(document).ready( function() {
             <a href="#Property:dataservice_endpointdescription">endpointDescription</a>,
             <a href="#Property:dataservice_endpointurl">endpointURL</a>,
             <a href="#Property:dataservice_license">license</a>,
-            <a href="#Property:dataservice_access_rights">accessRights</a>
+            <a href="#Property:dataservice_access_rights">access rights</a>
         </p>
         <p>The following properties are are inherited from the super-class <a href="#Class:Resource"><code>dcat:Resource</code></a>:
-            <a href="#Property:resource_conformsto">conformsTo</a>,
+            <a href="#Property:resource_conformsto">conforms to</a>,
             <a href="#Property:resource_contact_point">contact point</a>,
             <a href="#Property:resource_creator">creator</a>,
             <a href="#Property:resource_description">description</a>,
@@ -2265,10 +2290,10 @@ $(document).ready( function() {
             <a href="#Property:dataservice_endpointdescription">endpointDescription</a>,
             <a href="#Property:dataservice_endpointurl">endpointURL</a>,
             <a href="#Property:dataservice_license">license</a>,
-            <a href="#Property:dataservice_access_rights">accessRights</a>
+            <a href="#Property:dataservice_access_rights">access rights</a>
         </p>
         <p>The following properties are are inherited from the super-class <a href="#Class:Resource"><code>dcat:Resource</code></a>:
-            <a href="#Property:resource_conformsto">conformsTo</a>,
+            <a href="#Property:resource_conformsto">conforms to</a>,
             <a href="#Property:resource_contact_point">contact point</a>,
             <a href="#Property:resource_creator">creator</a>,
             <a href="#Property:resource_description">description</a>,
@@ -2354,12 +2379,36 @@ end class DiscoveryService -->
         </p>
 
         <table class="definition">
-            <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Relationship">dcat:Relationship</a></th></tr></thead>
-            <tbody>
+          <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Relationship">dcat:Relationship</a></th></tr></thead>
+          <tbody>
             <tr><td class="prop">Definition:</td><td>An association class for attaching additional information to a relationship between DCAT Resources</td></tr>
             <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/prov#EntityInfluence"><code>prov:EntityInfluence</code></a></td></tr>
-            <tr><td class="prop">Usage note:</td><td>Use to characterize a relationship between datasets, and potentially other resources, where the nature of the relationship is known but is not adequately characterized by the standard Dublin Core properties (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy) or PROV-O properties (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)</td></tr>
-            </tbody>
+            <tr><td class="prop">Usage note:</td><td>
+              Use to characterize a relationship between datasets, and potentially other resources, where the nature of the relationship is known but is not adequately characterized by the standard [[?DCTERMS]] properties 
+              (<a href="http://purl.org/dc/terms/hasPart"><code>dct:hasPart</code></a>,
+              <a href="http://purl.org/dc/terms/isPartOf"><code>dct:isPartOf</code></a>,
+              <a href="http://purl.org/dc/terms/conformsTo"><code>dct:conformsTo</code></a>,
+              <a href="http://purl.org/dc/terms/isFormatOf"><code>dct:isFormatOf</code></a>,
+              <a href="http://purl.org/dc/terms/hasFormat"><code>dct:hasFormat</code></a>,
+              <a href="http://purl.org/dc/terms/isVersionOf"><code>dct:isVersionOf</code></a>,
+              <a href="http://purl.org/dc/terms/hasVersion"><code>dct:hasVersion</code></a>,
+              <a href="http://purl.org/dc/terms/replaces"><code>dct:replaces</code></a>,
+              <a href="http://purl.org/dc/terms/isReplacedBy"><code>dct:isReplacedBy</code></a>,
+              <a href="http://purl.org/dc/terms/references"><code>dct:references</code></a>,
+              <a href="http://purl.org/dc/terms/isReferencedBy"><code>dct:isReferencedBy</code></a>,
+              <a href="http://purl.org/dc/terms/requires"><code>dct:requires</code></a>,
+              <a href="http://purl.org/dc/terms/isRequiredBy"><code>dct:isRequiredBy</code></a>)
+              or [[?PROV-O]] properties 
+              (<a href="http://www.w3.org/ns/prov#wasDerivedFrom">prov:wasDerivedFrom</a>, 
+              <a href="http://www.w3.org/ns/prov#wasInfluencedBy">prov:wasInfluencedBy</a>, 
+              <a href="http://www.w3.org/ns/prov#wasQuotedFrom">prov:wasQuotedFrom</a>, 
+              <a href="http://www.w3.org/ns/prov#wasRevisionOf">prov:wasRevisionOf</a>, 
+              <a href="http://www.w3.org/ns/prov#hadPrimarySource">prov:hadPrimarySource</a>, 
+              <a href="http://www.w3.org/ns/prov#alternateOf">prov:alternateOf</a>, 
+              <a href="http://www.w3.org/ns/prov#specializationOf">prov:specializationOf</a>).        
+            </td>
+            </tr>
+          </tbody>
         </table>
 
         <section id="Property:relationship_relation">
@@ -2526,7 +2575,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
 <section id="quality-information" class="informative">
     <h2>Quality information</h2>
     <aside class="note">
-      <p>This section is not-normative as it provides guidance on how to document the quality of DCAT
+      <p>This section is non-normative as it provides guidance on how to document the quality of DCAT
       first class entities (e.g., datasets, distributions) and it does not define new DCAT terms. The guidance relies on the
       Data Quality Vocabulary (DQV) [[?VOCAB-DQV]], which is a W3C Group Note.</p>
     </aside>
@@ -2555,8 +2604,8 @@ ex:InternationalDOIFundation a foaf:Organization ;
         <p>The following examples make no comments on where the quality information would reside and how it is managed. That
 	is out of scope for the DCAT vocabulary.  The assumption made is that the quality individuals are available using
 	the URIs indicated.
-        Besides, the examples and more in general the DQV  is neutral to the data portal design choices on how to collect
-	quality information. For example, data portals can collect DQV instances by implementing specific UI to annotate
+        Besides, the examples and more in general the [[?VOCAB-DQV]]  is neutral to the data portal design choices on how to collect
+	quality information. For example, data portals can collect [[?VOCAB-DQV]] instances by implementing specific UI to annotate
 	data or by taking inputs from 3rd-party services.
         </p>
     </aside>
@@ -2865,7 +2914,7 @@ a:testingActivity a prov:Activity;
     <br/> and the <a href="https://id.loc.gov/vocabulary/relators">MARC relators</a>. While these relations could be captured with additional sub-properties of <code>dct:relation</code>, <code>dct:contributor</code>, etc, this would lead to an explosion in the number of properties, and anyway the full set of potential roles and relationships is unknown.
   </p>
   <p>
-    A common approach for meeting these kinds of requirement is to introduce an additional resource to carry parameters that qualify the relationship. Precedents are the <a href="https://www.w3.org/TR/prov-o/#description-qualified-terms">qualified terms</a> in [[?PROV-O]] and the <a href="https://www.w3.org/TR/vocab-ssn/#Sample_Relations">sample relations</a> in the Semantic Sensor Network ontology [[?VOCAB-SSN]]. The general <a href="http://patterns.dataincubator.org/book/qualified-relation.html">Qualified Relation pattern</a> is described in [[?LinkedDataPatterns]].
+    A common approach for meeting these kinds of requirement is to introduce an additional resource to carry parameters that qualify the relationship. Precedents are the <a data-cite="PROV-O#description-qualified-terms">qualified terms</a> in [[?PROV-O]] and the <a data-cite="VOCAB-SSN#Sample_Relations">sample relations</a> in the Semantic Sensor Network ontology [[?VOCAB-SSN]]. The general <a href="http://patterns.dataincubator.org/book/qualified-relation.html">Qualified Relation pattern</a> is described in [[?LinkedDataPatterns]].
   </p>
   <p>
     Many of the qualified terms from [[!PROV-O]] are relevant to the description of resources in catalogs but these are incomplete due to the activity-centric viewpoint taken by PROV-O. Addressing some of the gaps, additional forms are included in the DCAT vocabulary to satisfy requirements that do not involve explicit Activities. These are summarized in <a href="#UML-DCAT-Qualified-Relations"></a>:
@@ -2888,7 +2937,7 @@ a:testingActivity a prov:Activity;
 <section id="qualified-attribution">
   <h3>Relationships between datasets and agents</h3>
   <p>
-    The standard Dublin Core properties <a href="http://purl.org/dc/terms/contributor"><code>dct:contributor</code></a>, <a href="http://purl.org/dc/terms/creator"><code>dct:creator</code></a> and <a href="http://purl.org/dc/terms/publisher"><code>dct:publisher</code></a> [[!DC11]], and the generic <a href="https://www.w3.org/TR/prov-o/#wasAttributedTo"><code>prov:wasAttributedTo</code></a> from [[!PROV-O]], support basic associations of responsible agents with a catalogued resource.
+    The standard [[?DCTERMS]] properties <a href="http://purl.org/dc/terms/contributor"><code>dct:contributor</code></a>, <a href="http://purl.org/dc/terms/creator"><code>dct:creator</code></a> and <a href="http://purl.org/dc/terms/publisher"><code>dct:publisher</code></a> [[!DC11]], and the generic <a href="https://www.w3.org/TR/prov-o/#wasAttributedTo"><code>prov:wasAttributedTo</code></a> from [[!PROV-O]], support basic associations of responsible agents with a catalogued resource.
     However, there are many other roles of importance in relation to datasets and services - e.g. funder, distributor, custodian, editor.
     Some of these roles are enumerated in the CI_RoleCode values from [[?ISO-19115-1]], in the [[?DataCite]] metadata schema, and included within the <a href="https://id.loc.gov/vocabulary/relators">MARC relators</a>.
   </p>
@@ -2925,14 +2974,14 @@ ex:DS987
 <section id="qualified-relationship">
   <h3>Relationships between datasets and other resources</h3>
   <p>
-    The standard Dublin Core properties <a href="http://purl.org/dc/terms/relation">dct:relation</a> and sub-properties such as
-    <a href="http://purl.org/dc/terms/hasPart">dct:hasPart</a>/<a href="http://purl.org/dc/terms/isPartOf">dct:isPartOf</a>,
-    <a href="http://purl.org/dc/terms/hasVersion">dct:hasVersion</a>/<a href="http://purl.org/dc/terms/isVersionOf">dct:isVersionOf</a>,
-    <a href="http://purl.org/dc/terms/replaces">dct:replaces</a>/<a href="http://purl.org/dc/terms/isReplacedBy">dct:isReplacedBy</a>,
-    <a href="http://purl.org/dc/terms/requires">dct:requires</a>/<a href="http://purl.org/dc/terms/isRequiredBy">dct:isRequiredBy</a>,
-    <a href="http://www.w3.org/ns/prov#wasDerivedFrom">prov:wasDerivedFrom</a>,
-    <a href="http://www.w3.org/ns/prov#wasQuotedFrom">prov:wasQuotedFrom</a>,
-    support the description of relationships between datasets and other catalogued resources.
+    The standard [[?DCTERMS]] properties <a href="http://purl.org/dc/terms/relation"><code>dct:relation</code></a> and sub-properties such as
+    <a href="http://purl.org/dc/terms/hasPart"><code>dct:hasPart</code></a> / <a href="http://purl.org/dc/terms/isPartOf"><code>dct:isPartOf</code></a>,
+    <a href="http://purl.org/dc/terms/hasVersion"><code>dct:hasVersion</code></a> / <a href="http://purl.org/dc/terms/isVersionOf"><code>dct:isVersionOf</code></a>,
+    <a href="http://purl.org/dc/terms/replaces"><code>dct:replaces</code></a> / <a href="http://purl.org/dc/terms/isReplacedBy"><code>dct:isReplacedBy</code></a>,
+    <a href="http://purl.org/dc/terms/requires"><code>dct:requires</code></a> / <a href="http://purl.org/dc/terms/isRequiredBy"><code>dct:isRequiredBy</code></a>,
+    <a href="http://www.w3.org/ns/prov#wasDerivedFrom"><code>prov:wasDerivedFrom</code></a>,
+    <a href="http://www.w3.org/ns/prov#wasQuotedFrom"><code>prov:wasQuotedFrom</code></a>,
+    support the description of relationships between datasets and other catalogued resources.    
     However, there are many other relationships of importance - e.g. alternate, canonical, original, preview, stereo-mate, working-copy-of.
     Some of these roles are enumerated in the DS_AssociationTypeCode values from [[?ISO-19115-1]], the <a href="https://www.iana.org/assignments/link-relations">IANA Registry of Link Relations</a>, in the [[?DataCite]] metadata schema, and included within the <a href="https://id.loc.gov/vocabulary/relators">MARC relators</a>.
   <p>
