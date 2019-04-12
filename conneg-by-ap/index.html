@@ -20,8 +20,8 @@
     <section id="FamilyOfDocs">
       <h3>Overview of DXWG documents on profiles</h3>
       <p>
-        This document is part of a set of documents on profiles, edited by the W3C Dataset Exchange Working Group (DXWG). 
-	      Some of the documents are general while some are technology-specific:
+        This document is one of a set of documents on profiles, edited by the W3C Dataset Exchange Working Group (DXWG). 
+	      Some of the documents are general whereas others are technology-specific:
       </p>
       <ul>
         <li>[[PROF-GUIDANCE]] the top-level general recommendations and guidance on profiling.
@@ -46,13 +46,13 @@
     <p>
       However, clients have not had a
       defined way to negotiate for content based on its adherence to an information model - a standard, a specification or
-      a <a>profile</a> - and this document addresses this functionality.
+      a <a>profile</a> - and this document describes how this functionality can be delivered.
     </p>
     <p>
       When online information about a resource adheres to one or more profiles, methods described here allow
       clients to list those profiles and request content according to one or more of them in order of preference.
       For example, information about an online book might adhere to the Dublin Core Terms [[DCTERMS]] metadata
-      specification with each field of information, such as <em>title</em>, <em>description</em>, <em>author</em> etc.,
+      specification with each field, such as <em>title</em>, <em>description</em>, <em>author</em> etc.,
       being defined and formatted according to various Dublin Core elements (<code>dct:title</code>,
       <code>dct:description</code> &amp; <code>dct:creator</code>, respectively). Then, a request for the information about this
       book may ask for the list of profiles according to which the metadata is available, or it may ask specifically for a response adhering to the
@@ -370,7 +370,7 @@
         <em>profile</em> for the <em>server</em> within that <em>request</em>/<em>response</em> session.
       </p>
       <p>
-        In this abstract model, we don't assume any specifics about <em>client</em>, <em>server</em>, <em>resource</em>,
+        In this abstract model, we don't assume any specific details about <em>client</em>, <em>server</em>, <em>resource</em>,
         <em>metadata</em>, <em>request</em> or <em>response</em>.
       </p>
       <p>
@@ -422,7 +422,7 @@
         <p>
           A <em>client</em> wishes to know for which <em>profile</em>s a <em>server</em> is able to deliver conformant
           representations of a <em>resource</em>. The content of the list can be known either before a <em>request</em> for a 
-          particular <em>resource</em> representation is made or it is known after an initial <em>request</em> for a
+          particular <em>resource</em> representation is made or it may only be known after an initial <em>request</em> for a
           <em>resource</em> representation is made.
         </p>
         <p>
@@ -461,7 +461,7 @@
         <p>
           The server should attempt to reply with a profile that best matches the client request. The order of
           preference a server <em>MUST</em> follow to determine a best matching profile is: an exact match, followed by
-          a profile (perhaps transitively) of the requested profile.
+          anything that the profile profiles (a more general specification or profile), perhaps transitively.
         </p>
         <p>
           If a client requests a profile but gets a narrower profile, the Server should set its responses
@@ -693,7 +693,7 @@ Content-Profile: urn:example:profile:1
 	      This realization does not preclude other QSA specifications for profile and content negotiation.
       </p>
       <p>
-        A query string is a part of a URI which assigns values to specified parameters. QSAs are commonly used within
+        A query string is a part of a URL which assigns values to specified parameters. QSAs are commonly used within
         web browsers by humans and in other <em>client</em>/<em>server</em> situations to deliver extra information to a
         <em>server</em>.
       </p>
@@ -740,13 +740,13 @@ Content-Profile: urn:example:profile:1
           for Media Types based on the IANA register's tokens.
         </p>
       </div>
-      <p><strong><em>Resource URI</em></strong></p>
+      <p><strong><em>Resource URL</em></strong></p>
       <p>
         Resource URIs for which QSA-based profile negotiation is taking place MUST NOT themselves be QSA values
         of other resource URIs in any QSA-based realization. Such mechanics may be used but must be transparent to the
         realization's <em>client</em> applications.
       </p>
-      <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Resource URIs must not, themselves, be parameters of other URIs">
+      <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Resource URLs must not, themselves, be parameters of other URLs">
 For the representation of Resource X, according to Profile Y, in Media Type Z:
 
 NOT ALLOWED:
@@ -769,17 +769,17 @@ GET /resource/X?_profile=Y&amp;_mediatype=Z HTTP/1.1
         </p>
         <p>
           The complete request for the <em>profile</em>s to which a <em>resource</em>'s representations conform can be
-          communicated in a single URI like thus:
+          communicated in a single URL like thus:
         </p>
         <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Requesting a list of profiles for a resource by QSA">
 GET /a/resource?_profile=list HTTP/1.1
         </pre>
         <!--
-        <p><code>RESOURCE_URI?_profile=list</code></p>
+        <p><code>RESOURCE_URL?_profile=list</code></p>
         <p>where</p>
         -->
         <p>
-          where <code>/a/resource</code> is the URI of the resource for which the list of available profiles is
+          where <code>/a/resource</code> is the URL of the resource for which the list of available profiles is
           requested
         </p>
         <p>
@@ -790,7 +790,7 @@ GET /a/resource?_profile=list HTTP/1.1
         </p>
         <p>An example <em>profile</em> listing for a <em>resource</em> in HTML would look like:
         </p>
-        <!--<p><code>RESOURCE_URI?_profile=list&_mediatype=text/html</code></p>-->
+        <!--<p><code>RESOURCE_URL?_profile=list&_mediatype=text/html</code></p>-->
         <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Requesting a list of profiles for a resource by QSA in HTML">
 GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
         </pre>
@@ -957,7 +957,7 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
             <ul>
               <li>see [[PROF-GUIDANCE]]</li>
               <li>an approach suggested is to provide an <em>alternate view</em> resource for the original
-                resource located at <code>RESOURCE_URI + ?_view=alternates</code> which lists, at a minimum, the
+                resource located at <code>RESOURCE_URL + ?_view=alternates</code> which lists, at a minimum, the
                 <em>profiles</em>, <em>media types</em> (formats) &amp; <em>languages</em> available, as per the
                 <em>alternate views</em> guidance.
               </li>
