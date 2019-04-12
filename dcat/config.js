@@ -66,10 +66,7 @@ var respecConfig = {
     lint: "false",
     github: "https://github.com/w3c/dxwg/",
     localBiblio: {
-        "SCHEMA-ORG" : {
-            href : "http://schema.org/",
-            title : "Schema.org"
-        },
+/*        
         "DATS": {
             href : "http://wg3-metadataspecifications.readthedocs.io/",
             title : "Data Tag Suite",
@@ -77,6 +74,7 @@ var respecConfig = {
             publisher : "NIH Big Data 2 Knowledge bioCADDIE project.",
             date : "2016"
         },
+*/        
         "DATS": {
             "href": "https://github.com/datatagsuite/",
             "title": "Data Tag Suite",
@@ -238,6 +236,10 @@ var respecConfig = {
             title: "Negotiating Profiles in HTTP",
             date: "24 October 2017",
             status: "IETF Internet Draft"
+        },
+        "SCHEMA-ORG" : {
+            href : "http://schema.org/",
+            title : "Schema.org"
         },
         "VIVO-ISF" : {
             href:"http://github.com/vivo-isf/vivo-isf",
