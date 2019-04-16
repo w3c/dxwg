@@ -681,14 +681,26 @@ Content-Profile: urn:example:profile:1
       </section>
     </section>
     <section id="qsa">
-      <h2>Profile Selection and Negotiation Via URLs</h2>
+      <h2>URL Query String Arguments</h2>
       <div class="issue" data-number="594"></div>
       <div class="issue" data-number="538"></div>
       <p>
-	      While the HTTP-header approach to profiles enables fully automated retrieval of datasets that best match a desired profile, it is also advisable to enable humans to select datasets by profile without requiring direct manipulation of request header content. This can be accomplished by existing web development methods where an API supports a graphical interface. The user can be presented a list of available profiles and given the choice of which to retrieve for the dataset of interest. They can even be asked to indicate a ranked choice of possible profiles, which could then be used to retrieve multiple datasets matching a query. As one example of how an API for such a service can be implemented, a Query String Argument (QSA) realization of the <a href="#abstractmodel">Abstract Model</a>
-	      is presented here. Unlike the HTTP-header realization,
- 		which is also the subject of an independent IETF document [[PROF-IETF]],
-	      this realization is fully specified here, though it is not normative. This realization does not preclude other URL schemes, or even other QSA schemes, for profile negotiation. Whatever specific scheme is used, the API should be fully documented and discoverable.
+        While the HTTP-header approach to profiles enables fully automated retrieval of data conforming 
+	to a desired profile, it is also advisable to enable humans to select data by profile without 
+	requiring direct manipulation of request header content. This can be accomplished by existing 
+	web development methods where an API supports a graphical interface. The user can be presented 
+	with a list of available profiles and given the choice of which to retrieve for the dataset of 
+	interest. They can even be asked to indicate a ranked choice of possible profiles, which could 
+	then be used to retrieve multiple resources' data matching a query. 
+      </p>
+      <p>
+	As one example of how an API for such a service can be implemented, a Query String Argument (QSA) 
+	realization of the <a href="#abstractmodel">Abstract Model</a> is presented here. Unlike the HTTP-header 
+	realization, which is also the subject of an independent IETF document [[PROF-IETF]], this realization 
+	is fully specified here but it is not normative. This realization does not preclude other URL schemes, 
+	or even other QSA schemes, for profile negotiation, the general requirement being that any scheme 
+	implements the functions of the Abstract Model. Whatever specific scheme is used, it should be fully 
+	documented and discoverable.
       </p>
       <p>
         A query string is a part of a URL which assigns values to specified parameters. QSAs are commonly used within
@@ -744,11 +756,11 @@ Content-Profile: urn:example:profile:1
       <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Resource URLs must not, themselves, be parameters of other URLs">
 For the representation of Resource X, according to Profile Y, in Media Type Z:
 
-Rather than
-GET /single/endpoint?resource=http://example.org/datasets/resource=X&amp;_profile=Y&amp;_mediatype=Z HTTP/1.1
+Rather than:
+GET /single/endpoint?resource=http://example.org/resource=X&amp;_profile=Y&amp;_mediatype=Z HTTP/1.1
 
-Use
-GET /datasets/X?_profile=Y&amp;_mediatype=Z HTTP/1.1
+Use:
+GET /resource/X?_profile=Y&amp;_mediatype=Z HTTP/1.1
       </pre>
       <section id="listprofilesqsa">
         <h4>list profiles</h4>
@@ -813,7 +825,8 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
           allow a client to specify a preference order for Media Types and also for other dimensions of content
           negotiation, such as language. When using a QSA-only API, Media Type preferences (and language and others in a
           similar fashion) can be specified in a comma-separated list form, most preferred to least, such that
-          a client requesting profiles as <code>aaa,bbb,ccc</code> will receive a dataset that meets the requirements of profile aaa if it is available, else one that meets profile bbb if that is available, and so on.
+          a client requesting profiles as <code>aaa,bbb,ccc</code> will receive a dataset that meets the requirements of profile 
+	  <code>aaa</code> if it is available, else one that meets profile <code>bbb</code> if that is available, and so on.
         </p>
       </section>
     </section>
