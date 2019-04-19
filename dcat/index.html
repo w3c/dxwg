@@ -1619,13 +1619,13 @@ $(document).ready( function() {
         <section id="Property:dataset_spatial">
             <h4>Property: spatial/geographical coverage</h4>
 
-            <p class="issue" data-number="82">
+            <!--backlog p class="issue" data-number="82">
                 The need to indicate the spatial reference system used in the spatial description of a dataset has been identified as a requirement to be satisfied in the revision of DCAT.
-            </p>
+            </p-->
 
-            <p class="issue" data-number="83">
+            <!--backlog p class="issue" data-number="83">
                 The need to be able to describe the spatial coverage of a dataset as a geometry has been identified as a requirement to be satisfied in the revision of DCAT.
-            </p>
+            </p-->
 
             <table class="definition">
                 <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/spatial">dct:spatial</a></th></tr></thead>
@@ -3218,7 +3218,7 @@ ex:Test543L
     </p>
 </section>
 
-<section id="other-w3c-recommendations">
+<section class="appendix" id="other-w3c-recommendations">
 
     <h2>Relation to other W3C Recommendations</h2>
 
@@ -3226,13 +3226,13 @@ ex:Test543L
         DCAT should be aligned with other recent Linked Data based Recommendations.
     </p>
 
-    <section id="ldp">
+    <section id="ldp" class="informative">
         <h3>Linked Data Platform (<abbr title="Linked Data Platform">LDP</abbr>)</h3>
 
         <p>
             DCAT provides a data model for representation of metadata about datasets in the form of Linked Data, but it does not specify how this metadata can be accessed or modified.
             The DCAT compatible metadata can be viewed as collections of Catalog Records, Datasets and Data Services contained in a Catalog, and a collection of Distributions contained in a Dataset.
-            The Linked Data Platform [[!LDP]] specification deals with access to and modification of Linked Data Platform Containers (<abbr title="Linked Data Platform Containers">LDPCs</abbr>).
+            The Linked Data Platform [[?LDP]] specification deals with access to and modification of Linked Data Platform Containers (<abbr title="Linked Data Platform Containers">LDPCs</abbr>).
             This section provides guidance on how to represent DCAT metadata as LDP Containers, which supports namely the implementation of <a href="https://solid.mit.edu/" title="Solid">Solid</a> based DCAT catalogs.
         </p>
 
@@ -3240,16 +3240,17 @@ ex:Test543L
             First, we will present an example of a LDPC for datasets in a catalog.
             There is one catalog with one dataset.
             The dataset is contained in the <code>&lt;/datasets/&gt;</code> LDP Direct Container.
-            To ensure the <abbr title="Linked Data Platform Container">LDPC</abbr> discovery, we connect it to the Catalog using the <code>dcat:datasets</code> predicate.
+            To ensure the <abbr title="Linked Data Platform Container">LDPC</abbr> discovery, we connect it to the Catalog using the <code>dcat-ldp:datasets</code> predicate.
         </p>
 <pre id="ex-ldpc-dataset" class="example nohighlight turtle">
 @prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt; .
 @prefix ldp:  &lt;http://www.w3.org/ns/ldp#&gt; .
+@prefix dcat-ldp:  &lt;http://www.w3.org/ns/dcat-ldp#&gt; .
 
 @base &lt;https://example.org/resource/catalog&gt; .
 
 &lt;&gt; a dcat:Catalog ;
-	dcat:datasets &lt;/datasets/&gt; ;
+	dcat-ldp:datasets &lt;/datasets/&gt; ;
 	dcat:dataset &lt;/datasets/001&gt; .
 
 &lt;/datasets/&gt; a ldp:Container, ldp:DirectContainer ;
@@ -3259,18 +3260,19 @@ ex:Test543L
 
 &lt;/datasets/001&gt; a dcat:Dataset .</pre>
 
-        <p>In the second example, we add LDPCs <code>&lt;/records/&gt;</code> for Catalog Records and <code>&lt;/services/&gt;</code> for Data Services, discoverable using <code>dcat:records</code> and <code>dcat:services</code> predicates from the Catalog:
+        <p>In the second example, we add LDPCs <code>&lt;/records/&gt;</code> for Catalog Records and <code>&lt;/services/&gt;</code> for Data Services, discoverable using <code>dcat-ldp:records</code> and <code>dcat-ldp:services</code> predicates from the Catalog:
         </p>
 <pre id="ex-ldpc-record" class="example nohighlight turtle">
 @prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt; .
 @prefix ldp:  &lt;http://www.w3.org/ns/ldp#&gt; .
+@prefix dcat-ldp:  &lt;http://www.w3.org/ns/dcat-ldp#&gt; .
 
 @base &lt;https://example.org/resource/catalog&gt; .
 
 &lt;&gt; a dcat:Catalog ;
-	dcat:records &lt;/records/&gt; ;
-	dcat:datasets &lt;/datasets/&gt; ;
-	dcat:services &lt;/services/&gt; ;
+	dcat-ldp:records &lt;/records/&gt; ;
+	dcat-ldp:datasets &lt;/datasets/&gt; ;
+	dcat-ldp:services &lt;/services/&gt; ;
 	dcat:dataset &lt;/datasets/001&gt; .
 
 &lt;/records/&gt; a ldp:Container, ldp:DirectContainer ;
@@ -3296,15 +3298,17 @@ ex:Test543L
 &lt;/services/001&gt; a dcat:DataService .</pre>
 
         <p>Each dataset has its own LDPC for its distributions.
-            In the third example, we show the LDPC <code>&lt;/datasets/001/distributions/&gt;</code> for distributions of a single dataset, <code>&lt;/datasets/001&gt;</code>, discoverable through the <code>dcat:distributions</code> predicate.</p>
+            In the third example, we show the LDPC <code>&lt;/datasets/001/distributions/&gt;</code> for distributions of a single dataset, <code>&lt;/datasets/001&gt;</code>, discoverable through the <code>dcat-ldp:distributions</code> predicate.</p>
 <pre id="ex-ldpc-distribution" class="example nohighlight turtle">
+
 @prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt; .
 @prefix ldp:  &lt;http://www.w3.org/ns/ldp#&gt; .
+@prefix dcat-ldp:  &lt;http://www.w3.org/ns/dcat-ldp#&gt; .
 
 @base &lt;https://example.org/resource/catalog&gt; .
 
 &lt;/datasets/001&gt; a dcat:Dataset ;
-	dcat:distributions &lt;/datasets/001/distributions/&gt; ;
+	dcat-ldp:distributions &lt;/datasets/001/distributions/&gt; ;
 	dcat:distribution &lt;/datasets/001/distributions/001&gt; .
 
 &lt;/datasets/001/distributions/&gt; a ldp:Container, ldp:DirectContainer ;
@@ -3325,7 +3329,7 @@ ex:Test543L
             <h4>Property: datasets</h4>
 
             <table class="definition">
-                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#datasets">dcat:datasets</a></th></tr></thead>
+		    <thead><tr><th>RDF Property:</th><th><code>dcat-ldp:datasets</code></th></tr></thead>
                 <tbody>
                 <tr><td class="prop">Definition:</td><td>Connects a catalog to the LDP container of its datasets.</td></tr>
                 <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Catalog"><code>dcat:Catalog</code></a></td></tr>
@@ -3338,7 +3342,7 @@ ex:Test543L
             <h4>Property: catalog records</h4>
 
             <table class="definition">
-                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#records">dcat:records</a></th></tr></thead>
+                <thead><tr><th>RDF Property:</th><th><code>dcat-ldp:records</code></th></tr></thead>
                 <tbody>
                 <tr><td class="prop">Definition:</td><td>Connects a catalog to the LDP container of its catalog records.</td></tr>
                 <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Catalog"><code>dcat:Catalog</code></a></td></tr>
@@ -3351,7 +3355,7 @@ ex:Test543L
             <h4>Property: data services</h4>
 
             <table class="definition">
-                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#services">dcat:services</a></th></tr></thead>
+                <thead><tr><th>RDF Property:</th><th><code>dcat-ldp:services</code></th></tr></thead>
                 <tbody>
                 <tr><td class="prop">Definition:</td><td>Connects a catalog to the LDP container of its data services.</td></tr>
                 <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Catalog"><code>dcat:Catalog</code></a></td></tr>
@@ -3364,7 +3368,7 @@ ex:Test543L
             <h4>Property: distributions</h4>
 
             <table class="definition">
-                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#distributions">dcat:distributions</a></th></tr></thead>
+                <thead><tr><th>RDF Property:</th><th><code>dcat-ldp:distributions</code></th></tr></thead>
                 <tbody>
                 <tr><td class="prop">Definition:</td><td>Connects a dataset to the LDP container of its distributions.</td></tr>
                 <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Dataset"><code>dcat:Dataset</code></a></td></tr>
@@ -3375,11 +3379,11 @@ ex:Test543L
 
     </section>
 
-    <section id="ldn">
+    <section id="ldn" class="informative">
         <h3>Linked Data Notifications (<abbr title="Linked Data Notifications">LDN</abbr>)</h3>
 
         <p>
-            Linked Data Notifications (LDN) [[!LDN]] can be used with DCAT e.g. for feedback collection.
+            Linked Data Notifications (LDN) [[?LDN]] can be used with DCAT e.g. for feedback collection.
             Any resource can have an LDN Inbox.
             In the following example we show a dataset <code>&lt;/datasets/001&gt;</code> as an LDN Target with an LDN Inbox.
         </p>
@@ -3439,9 +3443,9 @@ ex:Test543L
             This mapping is axiomatized using the predicates <code>rdfs:subClassOf</code>, <code>rdfs:subPropertyOf</code>, <code>owl:equivalentClass</code>, <code>owl:equivalentProperty</code>, <code>skos:closeMatch</code>,
             and also using the annotation properties <code>sdo:domainIncludes</code> and <code>sdo:rangeIncludes</code> to match [[?SCHEMA-ORG]] semantics. The alignment is summarized in the table below, considering the prefix <code>sdo</code> as <code>http://schema.org/</code>.
         </p>
-        <p class="issue" data-number="251">
+        <!--backlog p class="issue" data-number="251">
             This alignment of DCAT with schema.org is provisional and non-normative. Feedback is invited in the <a href="https://github.com/w3c/dxwg/issues/251">issue tracker</a>.
-        </p>
+        </p-->
 
         <table>
             <thead>
