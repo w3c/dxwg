@@ -9,6 +9,7 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix dctype: <http://purl.org/dc/dcmitype/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -18,30 +19,6 @@
 @prefix v: <http://www.w3.org/2006/vcard/ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-dct:hasPart
-  skos:scopeNote "See also: Sub-properties of dct:hasPart in particular dcat:dataset, dcat:catalog, dcat:service."@en ;
-  skos:scopeNote "This is the most general predicate for membership of a catalog. Use of a more specific sub-property is recommended when available."@en ;
-.
-dct:language
-  skos:scopeNote "Repeat this property if the resource is available in multiple languages."@en ;
-  skos:scopeNote "The value(s) provided for members of a catalog (i.e. dataset or service) override the value(s) provided for the catalog if they conflict."@en ;
-  skos:scopeNote "If representations of a dataset are available for each language separately, define an instance of dcat:Distribution for each language and describe the specific language of each distribution using dct:language (i.e. the dataset will have multiple dct:language values and each distribution will have just one as the value of its dct:language property)."@en;
-.
-dct:relation
-  skos:scopeNote "In the context of a dcat:Relationship this is expected to point to another dcat:Dataset or other catalogued resource"@en ;
-  skos:scopeNote "See also: Sub-properties of dct:relation in particular dcat:distribution, dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy"@en ;
-  skos:scopeNote "dct:relation SHOULD be used where the nature of the relationship between a catalogued item and related resources is not known. A more specific sub-property SHOULD be used if the nature of the relationship of the link is known. The property dcat:distribution SHOULD be used to link from a dcat:Dataset to a representation of the dataset, described as a dcat:Distribution"@en ;
-.
-dct:type
-  skos:scopeNote """The value SHOULD be taken from a well governed and broadly recognised controlled vocabulary, such as:
-1. DCMI Type vocabulary [DCTERMS]
-2. ISO 19115 scope codes [ISO-19115-1]
-3. Datacite resource types [DataCite]
-4. PARSE.Insight content-types used by re3data.org [RE3DATA-SCHEMA] (see item 15 contentType)
-5. MARC intellectual resource types
-Some members of these controlled vocabularies are not strictly suitable for datasets or data services (e.g. DCMI Type Event, PhysicalObject; ISO 19115 CollectionHardware, CollectionSession, Initiative, Sample, Repository), but might be used in the context of other kinds of catalogs defined in DCAT profiles or applications."""@en ;
-  skos:scopeNote "To describe the file format, physical medium, or dimensions of the resource, use the dct:format element."@en ;
-.
 <http://www.w3.org/ns/dcat>
   rdf:type owl:Ontology ;
   dct:contributor [
@@ -392,7 +369,7 @@ dcat:Relationship
   skos:editorialNote "Status: Class accepted by DCAT revision team, but details of definition and constraints not yet resolved."@en ;
   skos:scopeNote "Use to characterize a relationship between datasets, and potentially other resources, where the nature of the relationship is known but is not adequately characterized by the standard Dublin Core properties (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy) or PROV-O properties (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)"@en ;
   skos:scopeNote "Se usa para caracterizar la relación entre conjuntos de datos, y potencialmente otros recursos, donde la naturaleza de la relación se conoce pero no está caracterizada adecuadamente con propiedades del estándar 'Dublin Core' (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy) or PROV-O properties (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)"@es ;
-  skos:scopeNote "Viene utilizzato per caratterizzare la relazione tra insiemi di dati, e potenzialmente altri tipi di risorse, nei casi in cui la natura della relazione è nota ma non adeguatamente caratterizzata dalle proprietà dello standard 'Dublin Core' (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:require, dct:isRequiredBy) o dalle propietà fornite da PROV-O  (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov: hadPrimarySource, prov:alternateOf, prov:specializationOf)"@it;    
+  skos:scopeNote "Viene utilizzato per caratterizzare la relazione tra insiemi di dati, e potenzialmente altri tipi di risorse, nei casi in cui la natura della relazione è nota ma non adeguatamente caratterizzata dalle proprietà dello standard 'Dublin Core' (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:require, dct:isRequiredBy) o dalle propietà fornite da PROV-O  (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov: hadPrimarySource, prov:alternateOf, prov:specializationOf)"@it;
 .
 
 dcat:Resource
@@ -415,7 +392,7 @@ dcat:Resource
     It is strongly recommended to use a more specific sub-class when available."""@en ;
   skos:scopeNote "La classe di tutte le risorse catalogate, la Superclasse di dcat:Dataset, dcat:DataService, dcat:Catalog e qualsiasi altro membro di dcat:Catalog. Questa classe porta proprietà comuni a tutte le risorse catalogate, inclusi set di dati e servizi dati. Si consiglia vivamente di utilizzare una sottoclasse più specifica quando disponibile."@it ;
   skos:scopeNote "dcat:Resource is an extension point that enables the definition of any kind of catalog. Additional subclasses may be defined in a DCAT profile or application for catalogs of other kinds of resources"@en ;
-  skos:scopeNote "dcat:Resource è un punto di estensione che consente la definizione di qualsiasi tipo di catalogo. Sottoclassi aggiuntive possono essere definite in un profilo DCAT o in un'applicazione per cataloghi di altri tipi di risorse"@it 
+  skos:scopeNote "dcat:Resource è un punto di estensione che consente la definizione di qualsiasi tipo di catalogo. Sottoclassi aggiuntive possono essere definite in un profilo DCAT o in un'applicazione per cataloghi di altri tipi di risorse"@it
   .
 dcat:Role
   rdf:type owl:Class ;
@@ -668,7 +645,7 @@ dcat:endpointDescription
   skos:scopeNote "An endpoint description may be expressed in a machine-readable form, such as an OpenAPI (Swagger) description, an OGC getCapabilities response, a SPARQL Service Description, an OpenSearch or WSDL document, a Hydra API description, else in text or some other informal mode if a formal representation is not possible."@en ;
   skos:scopeNote "Una descrizione dell'endpoint può essere espressa in un formato leggibile dalla macchina, come una descrizione OpenAPI (Swagger), una risposta getCapabilities OGC, una descrizione del servizio SPARQL, un documento OpenSearch o WSDL, una descrizione API Hydra, o con del testo o qualche altra modalità informale se una rappresentazione formale non è possibile."@it ;
   skos:scopeNote "The endpoint decription gives specific details of the actual endpoint instance, while dct:conformsTo is used to indicate the general standard or specification that the endpoint implements."@en ;
-  skos:scopeNote "La descrizione dell'endpoint fornisce dettagli specifici dell'istanza dell'endpoint reale, mentre dct:conformsTo viene utilizzato per indicare lo standard o le specifiche implementate dall'endpoint."@it 
+  skos:scopeNote "La descrizione dell'endpoint fornisce dettagli specifici dell'istanza dell'endpoint reale, mentre dct:conformsTo viene utilizzato per indicare lo standard o le specifiche implementate dall'endpoint."@it
 .
 dcat:endpointURL
   rdf:type owl:ObjectProperty ;
@@ -796,7 +773,7 @@ dcat:mediaType
   skos:editorialNote "Status: English Definition text modified by DCAT revision team, Italian translation provided, other translations pending. Note some inconsistency on def vs. usage"@en ;
   skos:editorialNote "The range of dcat:mediaType has been tightened as part of the revision of DCAT."@en ;
   skos:scopeNote "This property SHOULD be used when the media type of the distribution is defined in the IANA media types registry https://www.iana.org/assignments/media-types/, otherwise dct:format MAY be used with different values."@en ;
-  skos:scopeNote "Questa proprietà DEVE essere usata quando il tipo di media della distribuzione è definito nel registro dei tipi di media IANA https://www.iana.org/assignments/media-types/, altrimenti dct:format PUO 'essere usato con differenti valori"@it 
+  skos:scopeNote "Questa proprietà DEVE essere usata quando il tipo di media della distribuzione è definito nel registro dei tipi di media IANA https://www.iana.org/assignments/media-types/, altrimenti dct:format PUO 'essere usato con differenti valori"@it
 .
 
 dcat:compressFormat
@@ -853,7 +830,7 @@ dcat:qualifiedRelation
   skos:editorialNote "Introdotta in DCAT per integrare le altre relazioni qualificate di PROV."@it ;
   skos:scopeNote "Used to link to another resource where the nature of the relationship is known but does not match one of the standard Dublin Core properties (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy) or PROV-O properties (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)."@en ;
   skos:scopeNote "Se usa para asociar con otro recurso para el cuál la naturaleza de la relación es conocida pero no es ninguna de las propiedades que provee el estándar Dublin Core (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy) or PROV-O properties (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)."@es ;
- skos:scopeNote "Viene utilizzato per associarsi a un'altra risorsa nei casi per i quali la natura della relazione è nota ma non è alcuna delle proprietà fornite dallo standard Dublin Core (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat , dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:require, dct:isRequiredBy) o dalle proprietà fornite da PROV-O (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom , prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)."@it 
+ skos:scopeNote "Viene utilizzato per associarsi a un'altra risorsa nei casi per i quali la natura della relazione è nota ma non è alcuna delle proprietà fornite dallo standard Dublin Core (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat , dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:require, dct:isRequiredBy) o dalle proprietà fornite da PROV-O (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom , prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)."@it
 .
 dcat:record
   rdf:type rdf:Property ;
@@ -885,7 +862,7 @@ dcat:servesDataset
   rdfs:comment "Una raccolta di dati che questo DataService può distribuire"@it ;
   rdfs:domain dcat:DataService ;
   rdfs:label "serves dataset"@en ;
-  rdfs:label "serve set di dati"@it ; 
+  rdfs:label "serve set di dati"@it ;
   rdfs:range dcat:Dataset ;
   skos:changeNote "New property in this revision of DCAT"@en ;
   skos:changeNote "Nuova proprietà in questa revisione di DCAT"@it ;
@@ -929,7 +906,7 @@ dcat:spatialResolutionInMeters
   skos:scopeNote "Se il set di dati è un'immagine o una griglia, questo dovrebbe corrispondere alla spaziatura degli elementi. Per altri tipi di set di dati spaziali, questa proprietà di solito indica la distanza minima tra gli elementi nel set di dati."@it ;
   skos:scopeNote "Alternative spatial resolutions might be provided as different dataset distributions"@en ;
   skos:scopeNote "Distintas distribuciones de un conjunto de datos pueden tener resoluciones espaciales diferentes"@es ;
-  skos:scopeNote "Risoluzioni spaziali alternative possono essere fornite come diverse distribuzioni di set di dati"@it 
+  skos:scopeNote "Risoluzioni spaziali alternative possono essere fornite come diverse distribuzioni di set di dati"@it
 .
 dcat:temporalResolution
   rdf:type owl:DatatypeProperty ;
@@ -1009,9 +986,121 @@ dcat:themeTaxonomy
   rdfs:label "テーマ"@ja ;
   rdfs:range skos:ConceptScheme ;
 .
+dct:accessRights
+  skos:scopeNote "Information about licenses and rights MAY be provided for the Resource. See also guidance at § 10. License and rights statements."@en ;
+  skos:scopeNote "Information about licenses and rights MAY be provided for the Distribution. See also guidance at § 10. License and rights statements."@en ;
+  skos:definition "A rights statement that concerns how the resource is accessed."@en ;
+  skos:definition "A rights statement that concerns how the distribution  is accessed."@en ;
+  skos:definition "Access Rights MAY include information regarding access or restrictions based on privacy, security, or other policies."@en ;
+.
 dct:accrualPeriodicity
   skos:definition "The frequency at which dataset is published."@en ;
   skos:scopeNote "The value of dct:accrualPeriodicity gives the rate at which the dataset-as-a-whole is updated. This may be complemented by dcat:temporalResolution to give the time between collected data points in a time series."@en ;
+.
+dct:conformsTo
+  skos:scopeNote "This property SHOULD be used to indicate the model, schema, ontology, view or profile that the catalogued resource content conforms to."@en ;
+  skos:scopeNote "This property SHOULD be used to indicate the model, schema, ontology, view or profile that this representation of a dataset conforms to. This is (generally) a complementary concern to the media-type or format."@en ;
+  skos:definition "An established standard to which the described catalogued resource conforms."@en ;
+  skos:definition "An established standard to which the distribution conforms."@en ;
+.
+dct:creator
+  skos:scopeNote "Resources of type foaf:Agent are recommended as values for this property."@en ;
+  skos:definition "The entity responsible for producing the resource."@en ;
+.
+dct:description
+  skos:definition "A free-text account of the item."@en ;
+.
+dct:format
+  skos:scopeNote "dcat:mediaType SHOULD be used if the type of the distribution is defined by IANA [IANA-MEDIA-TYPES]."@en ;
+  skos:definition "The file format of the distribution."@en ;
+.
+dct:hasPart
+  skos:scopeNote "See also: Sub-properties of dct:hasPart in particular dcat:dataset, dcat:catalog, dcat:service."@en ;
+  skos:scopeNote "This is the most general predicate for membership of a catalog. Use of a more specific sub-property is recommended when available."@en ;
+.
+dct:identifier
+  skos:scopeNote "The identifier might be used as part of the URI of the item, but still having it represented explicitly is useful."@en ;
+  skos:definition "A unique identifier of the item."@en ;
+.
+dct:issued
+  skos:scopeNote "This property SHOULD be set using the first known date of issuance."@en ;
+  skos:scopeNote "This indicates the date of listing the dataset in the catalog and not the publication date of the dataset itself."@en ;
+  skos:definition "Date of formal issuance (e.g., publication) of the item."@en ;
+  skos:definition "Date of formal issuance (e.g., publication) of the distribution."@en ;
+  skos:definition "The date of listing (i.e. formal recording) of the corresponding dataset or service in the catalog."@en ;
+.
+dct:language
+  skos:scopeNote "Repeat this property if the resource is available in multiple languages."@en ;
+  skos:scopeNote "The value(s) provided for members of a catalog (i.e. dataset or service) override the value(s) provided for the catalog if they conflict."@en ;
+  skos:scopeNote "If representations of a dataset are available for each language separately, define an instance of dcat:Distribution for each language and describe the specific language of each distribution using dct:language (i.e. the dataset will have multiple dct:language values and each distribution will have just one as the value of its dct:language property)."@en;
+  skos:definition "	A language of the item. This refers to the natural language used for textual metadata (i.e. titles, descriptions, etc) of a catalogued resource (i.e. dataset or service) or the textual values of a dataset distribution."@en ;
+.
+dct:license
+  skos:scopeNote "Information about licenses and rights MAY be provided for the Resource. See also guidance at § 10. License and rights statements."@en ;
+  skos:scopeNote "Information about licenses and rights SHOULD be provided on the level of Distribution. Information about licenses and rights MAY be provided for a Dataset in addition to but not instead of the information provided for the Distributions of that Dataset. Providing license or rights information for a Dataset that is different from information provided for a Distribution of that Dataset SHOULD be avoided as this can create legal conflicts. See also guidance at § 10. License and rights statements."@en ;
+  skos:definition "A legal document under which the resource is made available."@en ;
+  skos:definition "A legal document under which the distribution is made available."@en ;
+  skos:definition "A legal document under which the service is made available."@en ;
+.
+dct:modified
+  skos:scopeNote "The value of this property indicates a change to the actual item, not a change to the catalog record. An absent value MAY indicate that the item has never changed after its initial publication, or that the date of last modification is not known, or that the item is continuously updated."@en ;
+  skos:scopeNote "This indicates the date of last change of a catalog entry, i.e. the catalog metadata description of the dataset, and not the date of the dataset itself."@en ;
+  skos:definition "Most recent date on which the item was changed, updated or modified."@en ;
+  skos:definition "Most recent date on which the distribution  was changed, updated or modified."@en ;
+  skos:definition "Most recent date on which the catalog entry was changed, updated or modified."@en ;
+.
+dct:publisher
+  skos:scopeNote "Resources of type foaf:Agent are recommended as values for this property."@en ;
+  skos:definition "	The entity responsible for making the item available."@en ;
+.
+dct:relation
+  skos:scopeNote "In the context of a dcat:Relationship this is expected to point to another dcat:Dataset or other catalogued resource"@en ;
+  skos:scopeNote "See also: Sub-properties of dct:relation in particular dcat:distribution, dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy"@en ;
+  skos:scopeNote "dct:relation SHOULD be used where the nature of the relationship between a catalogued item and related resources is not known. A more specific sub-property SHOULD be used if the nature of the relationship of the link is known. The property dcat:distribution SHOULD be used to link from a dcat:Dataset to a representation of the dataset, described as a dcat:Distribution"@en ;
+  skos:definition "A resource with an unspecified relationship to the catalogued item."@en ;
+  skos:definition "The resource related to the source resource."@en ;
+.
+dct:rights
+  skos:scopeNote "Information about licenses and rights MAY be provided for the Resource. See also guidance at § 10. License and rights statements."@en ;
+  skos:scopeNote """dct:license, which is a sub-property of dct:rights, can be used to link a distribution to a license document. However, dct:rights allows linking to a rights statement that can include licensing information as well as other information that supplements the license such as attribution.
+
+Information about licenses and rights SHOULD be provided on the level of Distribution. Information about licenses and rights MAY be provided for a Dataset in addition to but not instead of the information provided for the Distributions of that Dataset. Providing license or rights information for a Dataset that is different from information provided for a Distribution of that Dataset SHOULD be avoided as this can create legal conflicts. See also guidance at § 10. License and rights statements."""@en ;
+  skos:definition "A statement that concerns all rights not addressed with dct:license or dct:accessRights, such as copyright statements."@en ;
+  skos:definition "Information about rights held in and over the distribution."@en ;
+.
+dct:spatial
+  skos:definition "The geographical area covered by the dataset."@en ;
+.
+dct:temporal
+  skos:definition "The temporal period that the dataset covers."@en ;
+.
+dct:title
+  skos:definition "A name given to the item."@en ;
+  skos:definition "A name given to the distribution."@en ;
+.
+dct:type
+  skos:scopeNote """The value SHOULD be taken from a well governed and broadly recognised controlled vocabulary, such as:
+1. DCMI Type vocabulary [DCTERMS]
+2. ISO 19115 scope codes [ISO-19115-1]
+3. Datacite resource types [DataCite]
+4. PARSE.Insight content-types used by re3data.org [RE3DATA-SCHEMA] (see item 15 contentType)
+5. MARC intellectual resource types
+Some members of these controlled vocabularies are not strictly suitable for datasets or data services (e.g. DCMI Type Event, PhysicalObject; ISO 19115 CollectionHardware, CollectionSession, Initiative, Sample, Repository), but might be used in the context of other kinds of catalogs defined in DCAT profiles or applications."""@en ;
+  skos:scopeNote "To describe the file format, physical medium, or dimensions of the resource, use the dct:format element."@en ;
+  skos:definition "The nature or genre of the resource."@en ;
+.
+foaf:homepage
+  skos:scopeNote "foaf:homepage is an inverse functional property (IFP) which means that it MUST be unique and precisely identify the web-page for the resource. This property indicates the canonical web-page, which might be helpful in cases where there is more than one web-page about the resource."@en ;
+.
+foaf:primaryTopic
+  skos:scopeNote "foaf:primaryTopic property is functional: each catalog record can have at most one primary topic i.e. describes one dataset or service."@en ;
+  skos:definition "The dcat:Resource (dataset or service) described in the record."@en ;
+.
+odrl:hasPolicy
+  skos:definition "	A policy expressing the rights associated with the resource if using the ODRL vocabulary [ODRL-VOCAB]."@en ;
+  skos:definition "	A policy expressing the rights associated with the distribution if using the ODRL vocabulary [ODRL-VOCAB]."@en ;
+  skos:scopeNote "Information about rights expressed as ODRL [ODRL-VOCAB] policies MAY be provided for the Resource. See also guidance at § 10. License and rights statements."@en ;
+  skos:scopeNote "Information about rights expressed as ODRL [ODRL-VOCAB] policies MAY be provided for the Distribution. See also guidance at § 10. License and rights statements."@en ;
 .
 prov:qualifiedAttribution
   skos:definition "Link to an Agent having some form of responsibility for the resource"@en ;
@@ -1030,7 +1119,4 @@ prov:wasGeneratedBy
   rdfs:subPropertyOf dct:relation ;
   skos:scopeNote "The activity associated with generation of a dataset will typically be an initiative, project, mission, survey, on-going activity ('business as usual') etc. Multiple prov:wasGeneratedBy properties can be used to indicate the dataset production context at various levels of granularity."@en ;
   skos:scopeNote "Use prov:qualifiedGeneration to attach additional details about the relationship between the dataset and the activity, e.g. the exact time that the dataset was produced during the lifetime of a project"@en ;
-.
-foaf:homepage
-  skos:scopeNote "foaf:homepage is an inverse functional property (IFP) which means that it MUST be unique and precisely identify the web-page for the resource. This property indicates the canonical web-page, which might be helpful in cases where there is more than one web-page about the resource."@en ;
 .

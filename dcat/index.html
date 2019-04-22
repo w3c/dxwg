@@ -33,9 +33,9 @@ $(document).ready( function() {
 
 </head>
 <body>
-	
+
 <!-- Disclaimer -->
-	
+
 <section  id="abstract">
     <p>DCAT is an RDF vocabulary designed to facilitate interoperability between data catalogs published on the Web.
       This document defines the schema and provides examples for its use.</p>
@@ -164,6 +164,7 @@ $(document).ready( function() {
         <tr><td><code>dctype</code></td><td><code>http://purl.org/dc/dcmitype/</code></td></tr>
         <tr><td><code>dqv</code></td><td><code>http://www.w3.org/ns/dqv#</code></td></tr>
         <tr><td><code>foaf</code></td><td><code>http://xmlns.com/foaf/0.1/</code></td></tr>
+        <tr><td><code>odrl</code></td><td><code>http://www.w3.org/ns/odrl/2/</code></td></tr>
         <tr><td><code>owl</code></td><td><code>http://www.w3.org/2002/07/owl#</code></td></tr>
         <tr><td><code>prov</code></td><td><code>http://www.w3.org/ns/prov#</code></td></tr>
         <tr><td><code>rdf</code></td><td><code>http://www.w3.org/1999/02/22-rdf-syntax-ns#</code></td></tr>
@@ -259,7 +260,7 @@ $(document).ready( function() {
           Overview of DCAT model, showing the classes of resources that can be members of a Catalog, and the relationships between them.
       </figcaption>
     </figure>
-    
+
     <p class="note">
         Along with the rest of <a href="#vocabulary-overview"></a>, this diagram is <b>non-normative</b>.
         Furthermore, while the diagram uses UML-style class notation it should be interpreted following the usual RDF open-world assumptions around the presence/absence of properties, relationships, and their cardinality.
@@ -1029,9 +1030,9 @@ $(document).ready( function() {
                     encoded using the relevant ISO 8601 Date and Time compliant string [[?DATETIME]] and typed using the appropriate XML Schema datatype [[!XMLSCHEMA11-2]]
                 </td></tr>
                 <tr><td class="prop">Usage note:</td><td>The value of this property indicates a change to the actual item, not a change to the catalog record. An absent value MAY indicate that the item has never changed after its initial publication, or that the date of last modification is not known, or that the item is continuously updated.</td></tr>
-<!--                
+<!--
                 <tr><td class="prop">See also:</td><td><a href="#Property:dataset_frequency">dataset frequency</a></td></tr>
--->                
+-->
                 <tr><td class="prop">See also:</td><td><a href="#Property:dataset_frequency">dataset frequency</a>, <a href="#Property:record_update_date" title="">catalog record modification date</a> and <a href="#Property:distribution_update_date" title="">distribution modification date</a></td></tr>
                 </tbody>
             </table>
@@ -1138,7 +1139,7 @@ $(document).ready( function() {
 
         <section id="Property:resource_relation">
             <h4>Property: resource relation</h4>
-            
+
             <p class="note">
                 Use of this [[?DCTERMS]] property in this context added in this revision of DCAT.
             </p>
@@ -1187,7 +1188,7 @@ $(document).ready( function() {
              <p class="note">
               Property added in this revision of DCAT.
             </p>
-            
+
             <table class="definition">
               <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#qualifiedRelation">dcat:qualifiedRelation</a></th></tr></thead>
               <tbody>
@@ -1195,7 +1196,7 @@ $(document).ready( function() {
               <tr><td class="prop">Sub-property of:</td><td><a href="http://www.w3.org/ns/prov#qualifiedInfluence"><code>prov:qualifiedInfluence</code></a></td></tr>
               <tr><td class="prop">Domain:</td><td><a href="#Class:Resource"><code>dcat:Resource</code></a></td></tr>
               <tr><td class="prop">Range:</td><td><a href="#Class:Relationship"><code>dcat:Relationship</code></a></td></tr>
-              <tr><td class="prop">Usage note:</td><td>Used to link to another resource where the nature of the relationship is known but does not match one of the standard [[?DCTERMS]] properties 
+              <tr><td class="prop">Usage note:</td><td>Used to link to another resource where the nature of the relationship is known but does not match one of the standard [[?DCTERMS]] properties
               (<a href="http://purl.org/dc/terms/hasPart"><code>dct:hasPart</code></a>,
               <a href="http://purl.org/dc/terms/isPartOf"><code>dct:isPartOf</code></a>,
               <a href="http://purl.org/dc/terms/conformsTo"><code>dct:conformsTo</code></a>,
@@ -1209,13 +1210,13 @@ $(document).ready( function() {
               <a href="http://purl.org/dc/terms/isReferencedBy"><code>dct:isReferencedBy</code></a>,
               <a href="http://purl.org/dc/terms/requires"><code>dct:requires</code></a>,
               <a href="http://purl.org/dc/terms/isRequiredBy"><code>dct:isRequiredBy</code></a>)
-              or [[?PROV-O]] properties 
-              (<a href="http://www.w3.org/ns/prov#wasDerivedFrom"><code>prov:wasDerivedFrom</code></a>, 
-              <a href="http://www.w3.org/ns/prov#wasInfluencedBy"><code>prov:wasInfluencedBy</code></a>, 
-              <a href="http://www.w3.org/ns/prov#wasQuotedFrom"><code>prov:wasQuotedFrom</code></a>, 
-              <a href="http://www.w3.org/ns/prov#wasRevisionOf"><code>prov:wasRevisionOf</code></a>, 
-              <a href="http://www.w3.org/ns/prov#hadPrimarySource"><code>prov:hadPrimarySource</code></a>, 
-              <a href="http://www.w3.org/ns/prov#alternateOf"><code>prov:alternateOf</code></a>, 
+              or [[?PROV-O]] properties
+              (<a href="http://www.w3.org/ns/prov#wasDerivedFrom"><code>prov:wasDerivedFrom</code></a>,
+              <a href="http://www.w3.org/ns/prov#wasInfluencedBy"><code>prov:wasInfluencedBy</code></a>,
+              <a href="http://www.w3.org/ns/prov#wasQuotedFrom"><code>prov:wasQuotedFrom</code></a>,
+              <a href="http://www.w3.org/ns/prov#wasRevisionOf"><code>prov:wasRevisionOf</code></a>,
+              <a href="http://www.w3.org/ns/prov#hadPrimarySource"><code>prov:hadPrimarySource</code></a>,
+              <a href="http://www.w3.org/ns/prov#alternateOf"><code>prov:alternateOf</code></a>,
               <a href="http://www.w3.org/ns/prov#specializationOf"><code>prov:specializationOf</code></a>).
               </td>
               </tr>
@@ -1702,7 +1703,7 @@ $(document).ready( function() {
             <p class="note">
                 New property in this context in this revision of DCAT.
             </p>
-            
+
             <table class="definition">
                 <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/prov#wasGeneratedBy">prov:wasGeneratedBy</a></th></tr></thead>
                 <tbody>
@@ -2384,7 +2385,7 @@ end class DiscoveryService -->
             <tr><td class="prop">Definition:</td><td>An association class for attaching additional information to a relationship between DCAT Resources</td></tr>
             <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/prov#EntityInfluence"><code>prov:EntityInfluence</code></a></td></tr>
             <tr><td class="prop">Usage note:</td><td>
-              Use to characterize a relationship between datasets, and potentially other resources, where the nature of the relationship is known but is not adequately characterized by the standard [[?DCTERMS]] properties 
+              Use to characterize a relationship between datasets, and potentially other resources, where the nature of the relationship is known but is not adequately characterized by the standard [[?DCTERMS]] properties
               (<a href="http://purl.org/dc/terms/hasPart"><code>dct:hasPart</code></a>,
               <a href="http://purl.org/dc/terms/isPartOf"><code>dct:isPartOf</code></a>,
               <a href="http://purl.org/dc/terms/conformsTo"><code>dct:conformsTo</code></a>,
@@ -2398,14 +2399,14 @@ end class DiscoveryService -->
               <a href="http://purl.org/dc/terms/isReferencedBy"><code>dct:isReferencedBy</code></a>,
               <a href="http://purl.org/dc/terms/requires"><code>dct:requires</code></a>,
               <a href="http://purl.org/dc/terms/isRequiredBy"><code>dct:isRequiredBy</code></a>)
-              or [[?PROV-O]] properties 
-              (<a href="http://www.w3.org/ns/prov#wasDerivedFrom">prov:wasDerivedFrom</a>, 
-              <a href="http://www.w3.org/ns/prov#wasInfluencedBy">prov:wasInfluencedBy</a>, 
-              <a href="http://www.w3.org/ns/prov#wasQuotedFrom">prov:wasQuotedFrom</a>, 
-              <a href="http://www.w3.org/ns/prov#wasRevisionOf">prov:wasRevisionOf</a>, 
-              <a href="http://www.w3.org/ns/prov#hadPrimarySource">prov:hadPrimarySource</a>, 
-              <a href="http://www.w3.org/ns/prov#alternateOf">prov:alternateOf</a>, 
-              <a href="http://www.w3.org/ns/prov#specializationOf">prov:specializationOf</a>).        
+              or [[?PROV-O]] properties
+              (<a href="http://www.w3.org/ns/prov#wasDerivedFrom">prov:wasDerivedFrom</a>,
+              <a href="http://www.w3.org/ns/prov#wasInfluencedBy">prov:wasInfluencedBy</a>,
+              <a href="http://www.w3.org/ns/prov#wasQuotedFrom">prov:wasQuotedFrom</a>,
+              <a href="http://www.w3.org/ns/prov#wasRevisionOf">prov:wasRevisionOf</a>,
+              <a href="http://www.w3.org/ns/prov#hadPrimarySource">prov:hadPrimarySource</a>,
+              <a href="http://www.w3.org/ns/prov#alternateOf">prov:alternateOf</a>,
+              <a href="http://www.w3.org/ns/prov#specializationOf">prov:specializationOf</a>).
             </td>
             </tr>
           </tbody>
@@ -2988,7 +2989,7 @@ ex:DS987
     <a href="http://purl.org/dc/terms/requires"><code>dct:requires</code></a> / <a href="http://purl.org/dc/terms/isRequiredBy"><code>dct:isRequiredBy</code></a>,
     <a href="http://www.w3.org/ns/prov#wasDerivedFrom"><code>prov:wasDerivedFrom</code></a>,
     <a href="http://www.w3.org/ns/prov#wasQuotedFrom"><code>prov:wasQuotedFrom</code></a>,
-    support the description of relationships between datasets and other catalogued resources.    
+    support the description of relationships between datasets and other catalogued resources.
     However, there are many other relationships of importance - e.g. alternate, canonical, original, preview, stereo-mate, working-copy-of.
     Some of these roles are enumerated in the <code>DS_AssociationTypeCode</code> values from [[?ISO-19115-1]], the IANA Registry of Link Relations [[?IANA-RELATIONS]], in the [[?DataCite]] metadata schema, and included within the <a href="https://id.loc.gov/vocabulary/relators">MARC relators</a>.
   <p>
@@ -3137,7 +3138,7 @@ ex:Test543L
     <h2>Versioning</h2>
 <p>Versioning can be applied to any of the first class citizens DCAT resources including Catalogs, Datasets, Distributions. The notion of version is very much related to the community practices,  data management policy and the workflows in place. It is up to data providers to decide when and why a new version should be released. For this reason, DCAT refrains from providing definitions or rules about when changes in a resource should turn in a new release of it. </p>
 
-<p>Versioning may be understood as involving relationships between datasets, which is supported by the <a href="#Property:resource_qualifiedRelation"><code>dcat:qualifiedRelation</code></a> and described in <a href="#qualified-relationship"></a>. The class <a href="#Class:Relationship"><code>dcat:Relationship</code></a> supports providing information about the relationship, and could be extended for versioning information.</p>  
+<p>Versioning may be understood as involving relationships between datasets, which is supported by the <a href="#Property:resource_qualifiedRelation"><code>dcat:qualifiedRelation</code></a> and described in <a href="#qualified-relationship"></a>. The class <a href="#Class:Relationship"><code>dcat:Relationship</code></a> supports providing information about the relationship, and could be extended for versioning information.</p>
 	<!--backlog p class="issue" data-number="90">
 	<p class="issue" data-number="90">
         The need to be able to describe version relationships of datasets has been identified as a requirement to be satisfied in the revision of DCAT. Also see detailed requirements in
@@ -3685,15 +3686,15 @@ ex:Test543L
   <h2>Acknowledgments</h2>
   <p>The editors gratefully acknowledge the contributions made to this document by <a href="https://www.w3.org/2000/09/dbwg/details?group=99375&public=1">all members of the working group</a>, especially Annette Greiner, Antoine Isaac, Dan Brickley, Ine de Visser, Jaroslav Pullmann, Makx Dekkers, Nicholas Car, Rob Atkinson.</p>
 
-  <p>The editors would also like to thank comments received from 
-	  
+  <p>The editors would also like to thank comments received from
+
   <!-- via mailing list -->
   <!-- Clemens Portele, Luca Trani, Daniel Pop, Nuno Freire, Guillaume Duffes, Melanie Barlow, -->
-	  
+
   <!-- via GH -->
   <!-- Jakub Klímek, Stephen Richard, Andreas Kuckartz, Stijn Goedertier, Stephane Fellah, Vladimir Alexiev.-->
   <!-- Jakob Voß, Marco Brattinga, Leigh Dodds, Pano Maria, Armando Stellato, Ian Davis, Bert van Nuffelen, Chris Sweeney, Peter Parslow, Nuno Freire -->
-	  
+
   <!-- Merged and ordered alphabetically by given name -->
   Andreas Kuckartz, Armando Stellato, Bert van Nuffelen, Chris Sweeney, Clemens Portele, Daniel Pop, Guillaume Duffes, Ian Davis, Jakob Voß, Jakub Klímek, Leigh Dodds, Luca Trani, Marco Brattinga, Melanie Barlow, Nuno Freire, Pano Maria, Peter Parslow, Stephane Fellah, Stephen Richard, Stijn Goedertier, Vladimir Alexiev.
   </p>
@@ -3955,13 +3956,13 @@ a:EEA-CSW-Endpoint
   dct:type &lt;http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceCategory/infoCatalogueService&gt; ;
   dct:accessRights &lt;http://publications.europa.eu/resource/authority/access-right/PUBLIC&gt; ;
   dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/csw&gt; ;
-  dct:description "The EEA public catalogue of spatial datasets references 
-    the spatial datasets used by the European Environment Agency as well as 
-    the spatial datasets produced by or for the EEA. In the latter case, 
-    when datasets are publicly available, a link to the location from where 
-    they can be downloaded is included in the dataset's metadata. The 
-    catalogue has been initially populated with the most important spatial 
-    datasets already available on the data&maps section of the EEA website 
+  dct:description "The EEA public catalogue of spatial datasets references
+    the spatial datasets used by the European Environment Agency as well as
+    the spatial datasets produced by or for the EEA. In the latter case,
+    when datasets are publicly available, a link to the location from where
+    they can be downloaded is included in the dataset's metadata. The
+    catalogue has been initially populated with the most important spatial
+    datasets already available on the data&maps section of the EEA website
     and is currently updated with any newly published spatial dataset."@en ;
   dct:identifier "eea-sdi-public-catalogue" ;
   dct:issued "2012-01-01"^^xsd:date ;
@@ -4082,7 +4083,7 @@ ga-courts:jc-wms
     dct:conformsTo &lt;https://mvcr1.opendata.cz/czechpoint/2007.json&gt; ;
     dct:format &lt;http://publications.europa.eu/resource/authority/file-type/CSV&gt; ;
     dcat:mediaType &lt;http://www.iana.org/assignments/media-types/text/csv&gt; ;
-    dcat:packageFormat &lt;http://publications.europa.eu/resource/authority/file-type/TAR&gt; 
+    dcat:packageFormat &lt;http://publications.europa.eu/resource/authority/file-type/TAR&gt;
 .
 </pre>
 
@@ -4101,7 +4102,7 @@ ga-courts:jc-wms
     dct:format &lt;http://publications.europa.eu/resource/authority/file-type/CSV&gt; ;
     dcat:mediaType &lt;http://www.iana.org/assignments/media-types/text/csv&gt; ;
     dcat:packageFormat &lt;http://publications.europa.eu/resource/authority/file-type/TAR&gt; ;
-    dcat:compressFormat &lt;http://www.iana.org/assignments/media-types/application/gzip&gt; 
+    dcat:compressFormat &lt;http://www.iana.org/assignments/media-types/application/gzip&gt;
 .
 </pre>
         <p>
