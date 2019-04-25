@@ -2584,7 +2584,7 @@ a:Dataset a dcat:Dataset ;
         <p>The following properties are recommended for use on this class:
           <a href="#Property:location_geometry">geometry</a>,
           <a href="#Property:location_centroid">centroid</a>,
-          <a href="#Property:location_centroidpoint">centroidPoint</a>,
+          <a href="#Property:location_point">point</a>,
           <a href="#Property:location_bbox">bounding box</a>.
         </p>
 
@@ -2597,7 +2597,7 @@ a:Dataset a dcat:Dataset ;
             <tr>
 	      <td class="prop">Usage note:</td>
               <td>For an extensive geometry (i.e., a set of coordinates denoting the vertices of the relevant geographic area), the property <a href="#Property:location_geometry" title="http://www.w3.org/ns/locn#geometry">locn:geometry</a> [[LOCN]] should be used.
-              For the geographic center of a spatial area, the property <a href="#Property:location_centroid"><code title="http://www.w3.org/ns/dcat#centroid">dcat:centroid</code></a> or <a href="#Property:location_centroidpoint"><code title="http://www.w3.org/ns/dcat#centroidPoint">dcat:centroidPoint</code></a> should be used.
+              For the geographic center of a spatial area, or another characteristic point, the property <a href="#Property:location_centroid"><code title="http://www.w3.org/ns/dcat#centroid">dcat:centroid</code></a> or <a href="#Property:location_point"><code title="http://www.w3.org/ns/dcat#point">dcat:point</code></a> should be used.
               For a geographic bounding box delimiting a spatial area the property <a href="#Property:location_bbox"><code title="http://www.w3.org/ns/dcat#bbox">dcat:bbox</code></a> should be used.</td>
             </tr>
           </tbody>
@@ -2628,7 +2628,7 @@ a:Dataset a dcat:Dataset ;
             <table class="definition">
               <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#centroid" title="http://www.w3.org/ns/dcat#centroid">dcat:centroid</a></th></tr></thead>
               <tbody>
-              <tr><td class="prop">Definition:</td><td>It denotes the geographic center (centroid) of a resource.</td></tr>
+              <tr><td class="prop">Definition:</td><td>The geographic center (centroid) of a resource.</td></tr>
               <tr><td class="prop">Range:</td><td><a data-cite="RDF-SCHEMA#ch_literal" title="http://www.w3.org/2000/01/rdf-schema#Literal"><code>rdfs:Literal</code></a></td></tr>
               <tr><td class="prop">Usage note:</td><td>The range of this property is intentionally generic, with the purpose of allowing different geometry encodings. E.g., the geometry could be encoded with as <abbr title="Well-known Text">WKT</abbr> (<a href="http://www.opengis.net/ont/geosparql#asWKT" title="http://www.opengis.net/ont/geosparql#asWKT"><code>geosparql:asWKT</code></a> [[GeoSPARQL]]) or [[GML]] (<a href="http://www.opengis.net/ont/geosparql#asGML" title="http://www.opengis.net/ont/geosparql#asGML"><code>geosparql:asGML</code></a> [[GeoSPARQL]]).</td></tr>
               </tbody>
@@ -2639,12 +2639,12 @@ a:Dataset a dcat:Dataset ;
             </p>
         </section>
 
-        <section id="Property:location_centroidpoint">
-            <h4>Property: centroidPoint</h4>
+        <section id="Property:location_point">
+            <h4>Property: point</h4>
             <table class="definition">
-              <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#centroidPoint" title="http://www.w3.org/ns/dcat#centroidPoint">dcat:centroidPoint</a></th></tr></thead>
+              <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#point" title="http://www.w3.org/ns/dcat#point">dcat:point</a></th></tr></thead>
               <tbody>
-              <tr><td class="prop">Definition:</td><td>The geographic center (centroid) of a resource.</td></tr>
+              <tr><td class="prop">Definition:</td><td>A characteristic point location of a resource.</td></tr>
               <tr><td class="prop">Range:</td><td><a data-cite="RDF-SCHEMA#ch_literal" title="http://www.w3.org/2003/01/geo/wgs84_pos#Point"><code>w3cgeo:Point</code></a></td></tr>
               <tr><td class="prop">Usage note:</td><td>The <code>Point</code> class from [[w3c-basic-geo]] encodes latitude, longitude and altitude in separate RDF properties. </td></tr>
               </tbody>
@@ -2660,7 +2660,7 @@ a:Dataset a dcat:Dataset ;
             <table class="definition">
               <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#bbox" title="http://www.w3.org/ns/dcat#centroid">dcat:bbox</a></th></tr></thead>
               <tbody>
-              <tr><td class="prop">Definition:</td><td>It denotes the geographic bounding box of a resource.</td></tr>
+              <tr><td class="prop">Definition:</td><td>The geographic bounding box of a resource.</td></tr>
               <tr><td class="prop">Range:</td><td><a data-cite="RDF-SCHEMA#ch_literal" title="http://www.w3.org/2000/01/rdf-schema#Literal"><code>rdfs:Literal</code></a></td></tr>
               <tr><td class="prop">Usage note:</td><td>The range of this property is intentionally generic, with the purpose of allowing different geometry encodings. E.g., the geometry could be encoded with as <abbr title="Well-known Text">WKT</abbr> (<a href="http://www.opengis.net/ont/geosparql#asWKT" title="http://www.opengis.net/ont/geosparql#asWKT"><code>geosparql:asWKT</code></a> [[GeoSPARQL]]) or [[GML]] (<a href="http://www.opengis.net/ont/geosparql#asGML" title="http://www.opengis.net/ont/geosparql#asGML"><code>geosparql:asGML</code></a> [[GeoSPARQL]]).</td></tr>
               </tbody>
@@ -2696,7 +2696,7 @@ a:Dataset a dcat:Dataset ;
 a:Dataset a dcat:Dataset ;
   dct:spatial [
     a dct:Location ;
-    dcat:centroidPoint [
+    dcat:point [
       a w3cgeo:Point ;
       w3cgeo:lat 52.325 ;
       w3cgeo:long 12.005 .
