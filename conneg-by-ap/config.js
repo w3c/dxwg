@@ -72,9 +72,9 @@ var respecConfig = {
                 "Antoine Isaac",
                 "Nicholas J. Car"
             ],
-            href: "https://www.w3.org/TR/profile-guidance/",
+            href: "https://w3c.github.io/dxwg/profiles/",
             title: "Profile Guidance",
-            date: " 2018-12-31",
+            date: " 2019-04-24",
             status: "W3C Editor's Draft"
         },
         "PROF-IETF": {
@@ -82,7 +82,7 @@ var respecConfig = {
                 "L. Svensson",
                 "R. Verborgh"
             ],
-            href: "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema/",
+            href: "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema",
             title: "Negotiating Profiles in HTTP",
             date: " 2017-10-24",
             status: "IETF Internet Draft"
