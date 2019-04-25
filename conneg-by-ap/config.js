@@ -2,7 +2,7 @@ var respecConfig = {
     specStatus: "FPWD",
     shortName: "dx-prof-conneg",
     edDraftURI: "https://w3c.github.io/dxwg/conneg-by-ap/",
-    previousURI: "https://w3c.github.io/dxwg/conneg-by-ap/",
+    prevRecURI: "https://www.w3.org/TR/2018/WD-dx-prof-conneg-20181218/",
     testSuiteURI: "https://github.com/CSIRO-enviro-informatics/prof-conneg-test-suite",
     implementationReportURI: "https://github.com/CSIRO-enviro-informatics/prof-conneg-implementations",
     canonicalURI: "TR",
