@@ -16,6 +16,7 @@
 @prefix schema: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix v: <http://www.w3.org/2006/vcard/ns#> .
+@prefix w3cgeo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 dct:hasPart
@@ -392,7 +393,7 @@ dcat:Relationship
   skos:editorialNote "Status: Class accepted by DCAT revision team, but details of definition and constraints not yet resolved."@en ;
   skos:scopeNote "Use to characterize a relationship between datasets, and potentially other resources, where the nature of the relationship is known but is not adequately characterized by the standard Dublin Core properties (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy) or PROV-O properties (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)"@en ;
   skos:scopeNote "Se usa para caracterizar la relación entre conjuntos de datos, y potencialmente otros recursos, donde la naturaleza de la relación se conoce pero no está caracterizada adecuadamente con propiedades del estándar 'Dublin Core' (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy) or PROV-O properties (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)"@es ;
-  skos:scopeNote "Viene utilizzato per caratterizzare la relazione tra insiemi di dati, e potenzialmente altri tipi di risorse, nei casi in cui la natura della relazione è nota ma non adeguatamente caratterizzata dalle proprietà dello standard 'Dublin Core' (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:require, dct:isRequiredBy) o dalle propietà fornite da PROV-O  (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov: hadPrimarySource, prov:alternateOf, prov:specializationOf)"@it;    
+  skos:scopeNote "Viene utilizzato per caratterizzare la relazione tra insiemi di dati, e potenzialmente altri tipi di risorse, nei casi in cui la natura della relazione è nota ma non adeguatamente caratterizzata dalle proprietà dello standard 'Dublin Core' (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:require, dct:isRequiredBy) o dalle propietà fornite da PROV-O  (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov: hadPrimarySource, prov:alternateOf, prov:specializationOf)"@it;
 .
 
 dcat:Resource
@@ -415,7 +416,7 @@ dcat:Resource
     It is strongly recommended to use a more specific sub-class when available."""@en ;
   skos:scopeNote "La classe di tutte le risorse catalogate, la Superclasse di dcat:Dataset, dcat:DataService, dcat:Catalog e qualsiasi altro membro di dcat:Catalog. Questa classe porta proprietà comuni a tutte le risorse catalogate, inclusi set di dati e servizi dati. Si consiglia vivamente di utilizzare una sottoclasse più specifica quando disponibile."@it ;
   skos:scopeNote "dcat:Resource is an extension point that enables the definition of any kind of catalog. Additional subclasses may be defined in a DCAT profile or application for catalogs of other kinds of resources"@en ;
-  skos:scopeNote "dcat:Resource è un punto di estensione che consente la definizione di qualsiasi tipo di catalogo. Sottoclassi aggiuntive possono essere definite in un profilo DCAT o in un'applicazione per cataloghi di altri tipi di risorse"@it 
+  skos:scopeNote "dcat:Resource è un punto di estensione che consente la definizione di qualsiasi tipo di catalogo. Sottoclassi aggiuntive possono essere definite in un profilo DCAT o in un'applicazione per cataloghi di altri tipi di risorse"@it
   .
 dcat:Role
   rdf:type owl:Class ;
@@ -497,6 +498,14 @@ dcat:accessURL
   skos:scopeNote """確実にダウンロードでない場合や、ダウンロードかどうかが不明である場合は、downloadURLではなく、accessURLを用いてください。
 ランディング・ページを通じてしか配信にアクセスできない場合（つまり、直接的なダウンロードURLが不明）は、配信におけるaccessURLとしてランディング・ページのリンクをコピーすべきです（SHOULD）。"""@ja ;
 .
+dcat:bbox
+  rdf:type rdf:Property ;
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain dct:Location ;
+  rdfs:range rdfs:Literal ;
+  skos:definition "The geographic bounding box of a resource"@en ;
+  skos:scopeNote "The range of this property is intentionally generic, with the purpose of allowing different geometry encodings. E.g., the geometry could be encoded with as WKT (geosparql:asWKT [GeoSPARQL]) or [GML] (geosparql:asGML [GeoSPARQL])."@en ;
+.
 dcat:byteSize
   rdf:type rdf:Property ;
   rdf:type owl:DatatypeProperty ;
@@ -545,6 +554,14 @@ dcat:catalog
   skos:changeNote "New property in this revision of DCAT"@en ;
   skos:changeNote "Nuova proprietà in questa revisione di DCAT"@it ;
   skos:editorialNote "Status: Property accepted by DCAT revision team, but details of definition and constraints not yet resolved."@en ;
+.
+dcat:centroid
+  rdf:type rdf:Property ;
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain dct:Location ;
+  rdfs:range rdfs:Literal ;
+  skos:definition "The geographic center (centroid) of a resource"@en ;
+  skos:scopeNote "The range of this property is intentionally generic, with the purpose of allowing different geometry encodings. E.g., the geometry could be encoded with as WKT (geosparql:asWKT [GeoSPARQL]) or [GML] (geosparql:asGML [GeoSPARQL])."@en ;
 .
 dcat:contactPoint
   rdf:type rdf:Property ;
@@ -668,7 +685,7 @@ dcat:endpointDescription
   skos:scopeNote "An endpoint description may be expressed in a machine-readable form, such as an OpenAPI (Swagger) description, an OGC getCapabilities response, a SPARQL Service Description, an OpenSearch or WSDL document, a Hydra API description, else in text or some other informal mode if a formal representation is not possible."@en ;
   skos:scopeNote "Una descrizione dell'endpoint può essere espressa in un formato leggibile dalla macchina, come una descrizione OpenAPI (Swagger), una risposta getCapabilities OGC, una descrizione del servizio SPARQL, un documento OpenSearch o WSDL, una descrizione API Hydra, o con del testo o qualche altra modalità informale se una rappresentazione formale non è possibile."@it ;
   skos:scopeNote "The endpoint decription gives specific details of the actual endpoint instance, while dct:conformsTo is used to indicate the general standard or specification that the endpoint implements."@en ;
-  skos:scopeNote "La descrizione dell'endpoint fornisce dettagli specifici dell'istanza dell'endpoint reale, mentre dct:conformsTo viene utilizzato per indicare lo standard o le specifiche implementate dall'endpoint."@it 
+  skos:scopeNote "La descrizione dell'endpoint fornisce dettagli specifici dell'istanza dell'endpoint reale, mentre dct:conformsTo viene utilizzato per indicare lo standard o le specifiche implementate dall'endpoint."@it
 .
 dcat:endpointURL
   rdf:type owl:ObjectProperty ;
@@ -796,9 +813,8 @@ dcat:mediaType
   skos:editorialNote "Status: English Definition text modified by DCAT revision team, Italian translation provided, other translations pending. Note some inconsistency on def vs. usage"@en ;
   skos:editorialNote "The range of dcat:mediaType has been tightened as part of the revision of DCAT."@en ;
   skos:scopeNote "This property SHOULD be used when the media type of the distribution is defined in the IANA media types registry https://www.iana.org/assignments/media-types/, otherwise dct:format MAY be used with different values."@en ;
-  skos:scopeNote "Questa proprietà DEVE essere usata quando il tipo di media della distribuzione è definito nel registro dei tipi di media IANA https://www.iana.org/assignments/media-types/, altrimenti dct:format PUO 'essere usato con differenti valori"@it 
+  skos:scopeNote "Questa proprietà DEVE essere usata quando il tipo di media della distribuzione è definito nel registro dei tipi di media IANA https://www.iana.org/assignments/media-types/, altrimenti dct:format PUO 'essere usato con differenti valori"@it
 .
-
 dcat:compressFormat
   rdf:type rdf:Property ;
   rdf:type owl:ObjectProperty ;
@@ -835,6 +851,14 @@ dcat:packageFormat
   skos:scopeNote "This property to be used when the files in the distribution are packaged, e.g. in a RAR file. The format SHOULD be expressed using a media type as defined by IANA media types registry https://www.iana.org/assignments/media-types/, if available."@en;
   skos:scopeNote "Questa proprietà deve essere utilizzata quando i file nella distribuzione sono impacchettati, ad esempio in un file RAR. Il formato DOVREBBE essere espresso utilizzando un tipo di supporto come definito dal registro dei tipi di media IANA https://www.iana.org/assignments/media-types/, se disponibili."@it
 .
+dcat:point
+  rdf:type rdf:Property ;
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain dct:Location ;
+  rdfs:range w3cgeo:Point ;
+  skos:definition "A characteristic point location of a resource."@en ;
+  skos:scopeNote "The Point class from [w3c-basic-geo] encodes latitude, longitude and altitude in separate RDF properties. "@en ;
+.
 dcat:qualifiedRelation
   rdf:type owl:ObjectProperty ;
   rdfs:comment "Link to a description of a relationship with another resource."@en ;
@@ -853,7 +877,7 @@ dcat:qualifiedRelation
   skos:editorialNote "Introdotta in DCAT per integrare le altre relazioni qualificate di PROV."@it ;
   skos:scopeNote "Used to link to another resource where the nature of the relationship is known but does not match one of the standard Dublin Core properties (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy) or PROV-O properties (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)."@en ;
   skos:scopeNote "Se usa para asociar con otro recurso para el cuál la naturaleza de la relación es conocida pero no es ninguna de las propiedades que provee el estándar Dublin Core (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy) or PROV-O properties (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)."@es ;
- skos:scopeNote "Viene utilizzato per associarsi a un'altra risorsa nei casi per i quali la natura della relazione è nota ma non è alcuna delle proprietà fornite dallo standard Dublin Core (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat , dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:require, dct:isRequiredBy) o dalle proprietà fornite da PROV-O (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom , prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)."@it 
+ skos:scopeNote "Viene utilizzato per associarsi a un'altra risorsa nei casi per i quali la natura della relazione è nota ma non è alcuna delle proprietà fornite dallo standard Dublin Core (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat , dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:require, dct:isRequiredBy) o dalle proprietà fornite da PROV-O (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom , prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)."@it
 .
 dcat:record
   rdf:type rdf:Property ;
@@ -885,7 +909,7 @@ dcat:servesDataset
   rdfs:comment "Una raccolta di dati che questo DataService può distribuire"@it ;
   rdfs:domain dcat:DataService ;
   rdfs:label "serves dataset"@en ;
-  rdfs:label "serve set di dati"@it ; 
+  rdfs:label "serve set di dati"@it ;
   rdfs:range dcat:Dataset ;
   skos:changeNote "New property in this revision of DCAT"@en ;
   skos:changeNote "Nuova proprietà in questa revisione di DCAT"@it ;
@@ -929,7 +953,7 @@ dcat:spatialResolutionInMeters
   skos:scopeNote "Se il set di dati è un'immagine o una griglia, questo dovrebbe corrispondere alla spaziatura degli elementi. Per altri tipi di set di dati spaziali, questa proprietà di solito indica la distanza minima tra gli elementi nel set di dati."@it ;
   skos:scopeNote "Alternative spatial resolutions might be provided as different dataset distributions"@en ;
   skos:scopeNote "Distintas distribuciones de un conjunto de datos pueden tener resoluciones espaciales diferentes"@es ;
-  skos:scopeNote "Risoluzioni spaziali alternative possono essere fornite come diverse distribuzioni di set di dati"@it 
+  skos:scopeNote "Risoluzioni spaziali alternative possono essere fornite come diverse distribuzioni di set di dati"@it
 .
 dcat:temporalResolution
   rdf:type owl:DatatypeProperty ;
