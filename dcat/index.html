@@ -30,7 +30,6 @@ $(document).ready( function() {
 
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="small.css" media="only all and (max-width: 649px)">
-
 </head>
 <body>
 
@@ -158,20 +157,25 @@ $(document).ready( function() {
     <table id="namespaces">
         <thead><tr><th>Prefix</th><th>Namespace</th></tr></thead>
         <tbody>
-        <tr><td><code>adms</code></td><td><code>https://www.w3.org/ns/adms#</code></td></tr>
-        <tr><td><code>dcat</code></td><td><code>http://www.w3.org/ns/dcat#</code></td></tr>
-        <tr><td><code>dct</code></td><td><code>http://purl.org/dc/terms/</code></td></tr>
-        <tr><td><code>dctype</code></td><td><code>http://purl.org/dc/dcmitype/</code></td></tr>
-        <tr><td><code>dqv</code></td><td><code>http://www.w3.org/ns/dqv#</code></td></tr>
-        <tr><td><code>foaf</code></td><td><code>http://xmlns.com/foaf/0.1/</code></td></tr>
-        <tr><td><code>owl</code></td><td><code>http://www.w3.org/2002/07/owl#</code></td></tr>
-        <tr><td><code>prov</code></td><td><code>http://www.w3.org/ns/prov#</code></td></tr>
-        <tr><td><code>rdf</code></td><td><code>http://www.w3.org/1999/02/22-rdf-syntax-ns#</code></td></tr>
-        <tr><td><code>rdfs</code></td><td><code>http://www.w3.org/2000/01/rdf-schema#</code></td></tr>
-        <tr><td><code>sdo</code></td><td><code>https://schema.org/</code></td></tr>
-        <tr><td><code>skos</code></td><td><code>http://www.w3.org/2004/02/skos/core#</code></td></tr>
-        <tr><td><code>vcard</code></td><td><code>http://www.w3.org/2006/vcard/ns#</code></td></tr>
-        <tr><td><code>xsd</code></td><td><code>http://www.w3.org/2001/XMLSchema#</code></td></tr>
+        <tr><td>adms</td><td>https://www.w3.org/ns/adms#</td></tr>
+        <tr><td>dc</td><td>http://purl.org/dc/elements/1.1/</td></tr>
+        <tr><td>dcat</td><td>http://www.w3.org/ns/dcat#</td></tr>
+        <tr><td>dct</td><td>http://purl.org/dc/terms/</td></tr>
+        <tr><td>dctype</td><td>http://purl.org/dc/dcmitype/</td></tr>
+        <tr><td>dqv</td><td>http://www.w3.org/ns/dqv#</td></tr>
+        <tr><td>earl</td><td>http://www.w3.org/ns/earl#</td></tr>
+        <tr><td>foaf</td><td>http://xmlns.com/foaf/0.1/</td></tr>
+        <tr><td>oa</td><td>http://www.w3.org/ns/oa#</td></tr>
+        <tr><td>odrl</td><td>https://www.w3.org/TR/odrl-vocab/#</td></tr>
+        <tr><td>owl</td><td>http://www.w3.org/2002/07/owl#</td></tr>
+        <tr><td>prov</td><td>http://www.w3.org/ns/prov#</td></tr>
+        <tr><td>rdf</td><td>http://www.w3.org/1999/02/22-rdf-syntax-ns#</td></tr>
+        <tr><td>rdfs</td><td>http://www.w3.org/2000/01/rdf-schema#</td></tr>
+        <tr><td>sdo</td><td>https://schema.org/</td></tr>
+        <tr><td>sdmx-attribute</td><td>http://purl.org/linked-data/sdmx/2009/attribute#</td></tr>
+        <tr><td>skos</td><td>http://www.w3.org/2004/02/skos/core#</td></tr>
+        <tr><td>vcard</td><td>http://www.w3.org/2006/vcard/ns#</td></tr>
+        <tr><td>xsd</td><td>http://www.w3.org/2001/XMLSchema#</td></tr>
         </tbody>
     </table>
 </section>
@@ -2566,7 +2570,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
 	 skos:notation "PA 1-060-815"^^ex:type ;
  # Human readable schema agency
 	 adms:schemaAgency "US Copyright Office" ;
-	 dcterms:issued "2001-09-12"^^xsd:date .
+	 dct:issued "2001-09-12"^^xsd:date .
 </pre>
 
         <p>If a registered URI type is used (following [[?RFC3986]], <a href="https://tools.ietf.org/html/rfc3986#section-3.1">Section 3.1</a>), the identifier scheme is part of the URI; thus indicating a separate identifier scheme in 'type' is redundant. For example, DOI is registered as a namespace in the <code>info</code> URI scheme [[IANA-URI-SCHEMES]] (see <a href="https://www.doi.org/faq.html">DOI FAQ #11</a>), so according to [[?RFC3986]], it should be encoded as in the following</p>
@@ -2750,7 +2754,7 @@ a:testingActivity a prov:Activity ;
 # Conformance test result
 a:testResult a prov:Entity ;
    # a:notConformant belongs to a SKOS concept scheme about conformance
-   dcterms:type a:notConformant .
+   dct:type a:notConformant .
 
 a:conformanceTest a prov:Plan ;
     # Here one can specify additional information on the test, which in the example is derived by the W3C Data on the Web Best Practices
@@ -2779,7 +2783,7 @@ iso:inherentandSystemDependentDataQuality a dqv:Category ;
    dqv:computedOn a:dataset ;
    dqv:value "50"^^xsd:double ;
    sdmx-attribute:unitMeasure &lt;http://www.wurvoc.org/vocabularies/om-1.8/Percentage&gt; ;
-   dcterms:date "2018-01-10"^^xsd:date ;
+   dct:date "2018-01-10"^^xsd:date ;
    dqv:isMeasurementOf :levelOfComplianceToDWBP .
     </pre></aside>
 
@@ -2813,14 +2817,14 @@ a:conformanceTest a earl:TestRequirement, prov:Plan ;
 
 a:testResult a earl:TestResult ;
         #  results in conformancy .
-        dcterms:type  a:conformant ;
+        dct:type  a:conformant ;
         #the overall set of tests have been passed
         earl:outcome earl:passed .
 
 # the description of the validator
  &lt;http://validator.example.org/&gt; a earl:Assertor, prov:Agent ;
-      dcterms:description "A test execution service that runs conformance test suites."@en ;
-      dcterms:title "Validator"@en .
+      dct:description "A test execution service that runs conformance test suites."@en ;
+      dct:title "Validator"@en .
 
 #the testing activity
 a:testingActivity a prov:Activity ;
@@ -2828,7 +2832,7 @@ a:testingActivity a prov:Activity ;
     prov:use a:dataset ;
     prov:wasAssociatedWith &lt;http://validator.example.org/&gt; .
     </pre></aside>
-            <p>The following example shows how the description would have looked like if the subtest <code>a:testq1</code> had failed. In particular, <code>dcterms:description</code> and <code>earl:info</code> provide additional warnings or error messages in a human-readable form.</p>
+            <p>The following example shows how the description would have looked like if the subtest <code>a:testq1</code> had failed. In particular, <code>dct:description</code> and <code>earl:info</code> provide additional warnings or error messages in a human-readable form.</p>
             <aside class="example" id="ex-conformance-test-earl-fail">
   <pre class="nohighlight turtle">
 
@@ -2838,11 +2842,11 @@ a:assertion1 a earl:Assertion ;
     earl:result [
         a earl:TestResult ;
         #  results in no conformancy
-        dcterms:type a:nonConformant ;
+        dct:type a:nonConformant ;
         #the overall set of tests have not been passed (!?)
-        dcterms:date "2015-09-29T11:50:00+00:00"^^xsd:dateTime ;
+        dct:date "2015-09-29T11:50:00+00:00"^^xsd:dateTime ;
         # Some XML encoding of the error
-            dcterms:description """
+            dct:description """
                  &lt;ul xmlns="http://www.w3.org/1999/xhtml"&gt;
                  &lt;li&gt; test 1 has failed. Some description of the errors found&lt;/li&gt;
                  &lt;/ul&gt;"^^rdf:XMLLiteral;
@@ -2890,8 +2894,8 @@ a:assertion1 a earl:Assertion ;
 
 a:testResult
     a dqv:QualityMetadata ;
-    #  change the the dcterms:type according to the resulted compliance
-    dcterms:type &lt;http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant&gt; ;
+    #  change the the dct:type according to the resulted compliance
+    dct:type &lt;http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant&gt; ;
     prov:wasAttributedTo &lt;http://validator.example.org/&gt; ;
     prov:generatedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
     prov:wasGeneratedBy a:testingActivity .
