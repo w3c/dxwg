@@ -2656,7 +2656,9 @@ a:Dataset a dcat:Dataset ;
         <p>The following properties are recommended for use on this class:
           <a href="#Property:location_geometry">geometry</a>,
           <a href="#Property:location_centroid">centroid</a>,
-          <a href="#Property:location_point">point</a>,
+          <a href="#Property:location_lat">latitude</a>,
+          <a href="#Property:location_long">longitude</a>,
+          <a href="#Property:location_alt">altitude</a>,
           <a href="#Property:location_bbox">bounding box</a>.
         </p>
 
@@ -2669,7 +2671,7 @@ a:Dataset a dcat:Dataset ;
             <tr>
 	      <td class="prop">Usage note:</td>
               <td>For an extensive geometry (i.e., a set of coordinates denoting the vertices of the relevant geographic area), the property <a href="#Property:location_geometry" title="http://www.w3.org/ns/locn#geometry">locn:geometry</a> [[LOCN]] should be used.
-              For the geographic center of a spatial area, or another characteristic point, the property <a href="#Property:location_centroid"><code title="http://www.w3.org/ns/dcat#centroid">dcat:centroid</code></a> or <a href="#Property:location_point"><code title="http://www.w3.org/ns/dcat#point">dcat:point</code></a> should be used.
+              For the geographic center of a spatial area, or another characteristic point, the property <a href="#Property:location_centroid"><code title="http://www.w3.org/ns/dcat#centroid">dcat:centroid</code></a>, or <a href="#Property:location_lat"><code title="http://www.w3.org/2003/01/geo/wgs84_pos#lat">w3cgeo:lat</code></a> and <a href="#Property:location_long"><code title="http://www.w3.org/2003/01/geo/wgs84_pos#long">w3cgeo:long</code></a> should be used.
               For a geographic bounding box delimiting a spatial area the property <a href="#Property:location_bbox"><code title="http://www.w3.org/ns/dcat#bbox">dcat:bbox</code></a> should be used.</td>
             </tr>
           </tbody>
@@ -2711,19 +2713,54 @@ a:Dataset a dcat:Dataset ;
             </p>
         </section>
 
-        <section id="Property:location_point">
-            <h4>Property: point</h4>
+        <section id="Property:location_lat">
+            <h4>Property: lat</h4>
             <table class="definition">
-              <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#point" title="http://www.w3.org/ns/dcat#point">dcat:point</a></th></tr></thead>
+              <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/2003/01/geo/wgs84_pos#lat" title="http://www.w3.org/2003/01/geo/wgs84_pos#lat">w3cgeo:lat</a></th></tr></thead>
               <tbody>
-              <tr><td class="prop">Definition:</td><td>A characteristic point location of a resource.</td></tr>
-              <tr><td class="prop">Range:</td><td><a data-cite="RDF-SCHEMA#ch_literal" title="http://www.w3.org/2003/01/geo/wgs84_pos#Point"><code>w3cgeo:Point</code></a></td></tr>
-              <tr><td class="prop">Usage note:</td><td>The <code>Point</code> class from [[w3c-basic-geo]] encodes latitude, longitude and altitude in separate RDF properties. </td></tr>
+              <tr><td class="prop">Definition:</td><td>Latitude of a characteristic point location of a resource.</td></tr>
+              <tr><td class="prop">Range:</td><td><a data-cite="XMLSCHEMA11-2#decimal"><code>xsd:decimal</code></a></td></tr>
+              <tr><td class="prop">Usage note:</td><td>The coordinate reference system for lat/long/alt values is WGS84 (horizontally) and Mean Sea Level (verically). It is recommended to encode the value as a <code>xsd:decimal</code>. </td></tr>
+              <tr><td class="prop">Usage note:</td><td>Use of this property entails that value of the dct:spatial property is a member of the <code>w3cgeo:Point</code> class from [[w3c-basic-geo]]. This could be taken to imply that <code>w3cgeo:Point</code> is a subclass of <code>dct:Location</code></td></tr>
               </tbody>
             </table>
 
             <p class="note">
-              Property added in this revision of DCAT.
+              Property added in this context in this revision of DCAT.
+            </p>
+        </section>
+
+        <section id="Property:location_long">
+            <h4>Property: long</h4>
+            <table class="definition">
+              <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/2003/01/geo/wgs84_pos#long" title="http://www.w3.org/2003/01/geo/wgs84_pos#long">w3cgeo:long</a></th></tr></thead>
+              <tbody>
+              <tr><td class="prop">Definition:</td><td>Longitude of a characteristic point location of a resource.</td></tr>
+              <tr><td class="prop">Range:</td><td><a data-cite="XMLSCHEMA11-2#decimal"><code>xsd:decimal</code></a></td></tr>
+              <tr><td class="prop">Usage note:</td><td>The coordinate reference system for lat/long/alt values is WGS84 (horizontally) and Mean Sea Level (verically). It is recommended to encode the value as a <code>xsd:decimal</code>. </td></tr>
+              <tr><td class="prop">Usage note:</td><td>Use of this property entails that value of the dct:spatial property is a member of the <code>w3cgeo:Point</code> class from [[w3c-basic-geo]]. This could be taken to imply that <code>w3cgeo:Point</code> is a subclass of <code>dct:Location</code></td></tr>
+              </tbody>
+            </table>
+
+            <p class="note">
+              Property added in this context in this revision of DCAT.
+            </p>
+        </section>
+
+        <section id="Property:location_alt">
+            <h4>Property: alt</h4>
+            <table class="definition">
+              <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/2003/01/geo/wgs84_pos#alt" title="http://www.w3.org/2003/01/geo/wgs84_pos#alt">w3cgeo:alt</a></th></tr></thead>
+              <tbody>
+              <tr><td class="prop">Definition:</td><td>Altitude (elevation) of a characteristic point location of a resource.</td></tr>
+              <tr><td class="prop">Range:</td><td><a data-cite="XMLSCHEMA11-2#decimal"><code>xsd:decimal</code></a></td></tr>
+              <tr><td class="prop">Usage note:</td><td>The coordinate reference system for lat/long/alt values is WGS84 (horizontally) and Mean Sea Level (vertically). It is recommended to encode the value as a <code>xsd:decimal</code>. </td></tr>
+              <tr><td class="prop">Usage note:</td><td>Use of this property entails that value of the dct:spatial property is a member of the <code>w3cgeo:Point</code> class from [[w3c-basic-geo]]. This could be taken to imply that <code>w3cgeo:Point</code> is a subclass of <code>dct:Location</code></td></tr>
+              </tbody>
+            </table>
+
+            <p class="note">
+              Property added in this context in this revision of DCAT.
             </p>
         </section>
 
@@ -2767,12 +2804,9 @@ a:Dataset a dcat:Dataset ;
 <pre>
 a:Dataset a dcat:Dataset ;
   dct:spatial [
-    a dct:Location ;
-    dcat:point [
-      a w3cgeo:Point ;
-      w3cgeo:lat 52.325 ;
-      w3cgeo:long 12.005 .
-    ] ;
+    a dct:Location , w3cgeo:Point ;
+    w3cgeo:lat 52.325 ;
+    w3cgeo:long 12.005 .
   ] .
 </pre>
 </aside>
