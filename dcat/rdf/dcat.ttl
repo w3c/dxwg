@@ -44,7 +44,10 @@ dct:type
 Some members of these controlled vocabularies are not strictly suitable for datasets or data services (e.g. DCMI Type Event, PhysicalObject; ISO 19115 CollectionHardware, CollectionSession, Initiative, Sample, Repository), but might be used in the context of other kinds of catalogs defined in DCAT profiles or applications."""@en ;
   skos:scopeNote "To describe the file format, physical medium, or dimensions of the resource, use the dct:format element."@en ;
 .
-dct:PeriodOfTime owl:equivalentClass time:ProperInterval .
+dct:PeriodOfTime
+  skos:definition "An interval of time that is named or defined by its start and end." ;
+  skos:scopeNote "The start and end of the interval may be given by using properties dcat:startDate or time:hasBeginning, and dcat:endDate or time:hasEnd, respectively. The interval can also be open - i.e., it can have just a start or just an end." ;
+.
 <http://www.w3.org/ns/dcat>
   rdf:type owl:Ontology ;
   dct:contributor [
@@ -1075,6 +1078,12 @@ prov:wasGeneratedBy
 .
 foaf:homepage
   skos:scopeNote "foaf:homepage is an inverse functional property (IFP) which means that it MUST be unique and precisely identify the web-page for the resource. This property indicates the canonical web-page, which might be helpful in cases where there is more than one web-page about the resource."@en ;
+.
+time:hasBeginning
+  skos:scopeNote "Use of the property time:hasBeginning entails that value of the dct:temporal property is a member of the time:TemporalEntity class from [OWL-TIME]. In this context this could be taken to imply that dct:PeriodOfTime is equivalent to the subclass time:ProperInterval" ;
+.
+time:hasEnd
+  skos:scopeNote "Use of the property time:hasEnd entails that value of the dct:temporal property is a member of the time:TemporalEntity class from [OWL-TIME]. In this context this could be taken to imply that dct:PeriodOfTime is equivalent to the subclass time:ProperInterval" ;
 .
 w3cgeo:alt
   rdfs:range xsd:decimal ;
