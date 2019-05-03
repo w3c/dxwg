@@ -6,31 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script class="remove" src="https://www.w3.org/Tools/respec/respec-w3c-common"></script>
     <script class="remove" src="config.js"></script>
-
-    <script>
-// @andrea-perego
-function popCrossRefs() {
-  $('a[href^="#"]').each( function () {
-    var href = $(this).attr('href');
-    var id = href.trim().replace('#','');
-    var text = $(this).text();
-    if (text.trim().length == 0 && id.length > 0 && ( $(href).hasClass('example') || $(href).hasClass('practicelab') )) {
-      var label = $('.example:has(#' + id + ') > .example-title, *[id="' + id + '"].example > .example-title, *[id="' + id + '"].illegal-example > .example-title, *[id="' + id + '"].practicelab').text();
-      if (label.trim().length > 0) {
-        $(this).text(label);
-      }
-    }
-  } );
-}
-$(document).ready( function() {
-  popCrossRefs();
-});
-// @andrea-perego
-    </script>
-
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="small.css" media="only all and (max-width: 649px)">
-
 </head>
 <body>
 
@@ -158,21 +135,25 @@ $(document).ready( function() {
     <table id="namespaces">
         <thead><tr><th>Prefix</th><th>Namespace</th></tr></thead>
         <tbody>
-        <tr><td><code>adms</code></td><td><code>https://www.w3.org/ns/adms#</code></td></tr>
-        <tr><td><code>dcat</code></td><td><code>http://www.w3.org/ns/dcat#</code></td></tr>
-        <tr><td><code>dct</code></td><td><code>http://purl.org/dc/terms/</code></td></tr>
-        <tr><td><code>dctype</code></td><td><code>http://purl.org/dc/dcmitype/</code></td></tr>
-        <tr><td><code>dqv</code></td><td><code>http://www.w3.org/ns/dqv#</code></td></tr>
-        <tr><td><code>foaf</code></td><td><code>http://xmlns.com/foaf/0.1/</code></td></tr>
-        <tr><td><code>odrl</code></td><td><code>http://www.w3.org/ns/odrl/2/</code></td></tr>
-        <tr><td><code>owl</code></td><td><code>http://www.w3.org/2002/07/owl#</code></td></tr>
-        <tr><td><code>prov</code></td><td><code>http://www.w3.org/ns/prov#</code></td></tr>
-        <tr><td><code>rdf</code></td><td><code>http://www.w3.org/1999/02/22-rdf-syntax-ns#</code></td></tr>
-        <tr><td><code>rdfs</code></td><td><code>http://www.w3.org/2000/01/rdf-schema#</code></td></tr>
-        <tr><td><code>sdo</code></td><td><code>https://schema.org/</code></td></tr>
-        <tr><td><code>skos</code></td><td><code>http://www.w3.org/2004/02/skos/core#</code></td></tr>
-        <tr><td><code>vcard</code></td><td><code>http://www.w3.org/2006/vcard/ns#</code></td></tr>
-        <tr><td><code>xsd</code></td><td><code>http://www.w3.org/2001/XMLSchema#</code></td></tr>
+        <tr><td>adms</td><td>https://www.w3.org/ns/adms#</td></tr>
+        <tr><td>dc</td><td>http://purl.org/dc/elements/1.1/</td></tr>
+        <tr><td>dcat</td><td>http://www.w3.org/ns/dcat#</td></tr>
+        <tr><td>dct</td><td>http://purl.org/dc/terms/</td></tr>
+        <tr><td>dctype</td><td>http://purl.org/dc/dcmitype/</td></tr>
+        <tr><td>dqv</td><td>http://www.w3.org/ns/dqv#</td></tr>
+        <tr><td>earl</td><td>http://www.w3.org/ns/earl#</td></tr>
+        <tr><td>foaf</td><td>http://xmlns.com/foaf/0.1/</td></tr>
+        <tr><td>oa</td><td>http://www.w3.org/ns/oa#</td></tr>
+        <tr><td>odrl</td><td>https://www.w3.org/TR/odrl-vocab/#</td></tr>
+        <tr><td>owl</td><td>http://www.w3.org/2002/07/owl#</td></tr>
+        <tr><td>prov</td><td>http://www.w3.org/ns/prov#</td></tr>
+        <tr><td>rdf</td><td>http://www.w3.org/1999/02/22-rdf-syntax-ns#</td></tr>
+        <tr><td>rdfs</td><td>http://www.w3.org/2000/01/rdf-schema#</td></tr>
+        <tr><td>sdo</td><td>https://schema.org/</td></tr>
+        <tr><td>sdmx-attribute</td><td>http://purl.org/linked-data/sdmx/2009/attribute#</td></tr>
+        <tr><td>skos</td><td>http://www.w3.org/2004/02/skos/core#</td></tr>
+        <tr><td>vcard</td><td>http://www.w3.org/2006/vcard/ns#</td></tr>
+        <tr><td>xsd</td><td>http://www.w3.org/2001/XMLSchema#</td></tr>
         </tbody>
     </table>
 </section>
@@ -2567,7 +2548,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
 	 skos:notation "PA 1-060-815"^^ex:type ;
  # Human readable schema agency
 	 adms:schemaAgency "US Copyright Office" ;
-	 dcterms:issued "2001-09-12"^^xsd:date .
+	 dct:issued "2001-09-12"^^xsd:date .
 </pre>
 
         <p>If a registered URI type is used (following [[?RFC3986]], <a href="https://tools.ietf.org/html/rfc3986#section-3.1">Section 3.1</a>), the identifier scheme is part of the URI; thus indicating a separate identifier scheme in 'type' is redundant. For example, DOI is registered as a namespace in the <code>info</code> URI scheme [[IANA-URI-SCHEMES]] (see <a href="https://www.doi.org/faq.html">DOI FAQ #11</a>), so according to [[?RFC3986]], it should be encoded as in the following</p>
@@ -2751,7 +2732,7 @@ a:testingActivity a prov:Activity ;
 # Conformance test result
 a:testResult a prov:Entity ;
    # a:notConformant belongs to a SKOS concept scheme about conformance
-   dcterms:type a:notConformant .
+   dct:type a:notConformant .
 
 a:conformanceTest a prov:Plan ;
     # Here one can specify additional information on the test, which in the example is derived by the W3C Data on the Web Best Practices
@@ -2780,7 +2761,7 @@ iso:inherentandSystemDependentDataQuality a dqv:Category ;
    dqv:computedOn a:dataset ;
    dqv:value "50"^^xsd:double ;
    sdmx-attribute:unitMeasure &lt;http://www.wurvoc.org/vocabularies/om-1.8/Percentage&gt; ;
-   dcterms:date "2018-01-10"^^xsd:date ;
+   dct:date "2018-01-10"^^xsd:date ;
    dqv:isMeasurementOf :levelOfComplianceToDWBP .
     </pre></aside>
 
@@ -2814,14 +2795,14 @@ a:conformanceTest a earl:TestRequirement, prov:Plan ;
 
 a:testResult a earl:TestResult ;
         #  results in conformancy .
-        dcterms:type  a:conformant ;
+        dct:type  a:conformant ;
         #the overall set of tests have been passed
         earl:outcome earl:passed .
 
 # the description of the validator
  &lt;http://validator.example.org/&gt; a earl:Assertor, prov:Agent ;
-      dcterms:description "A test execution service that runs conformance test suites."@en ;
-      dcterms:title "Validator"@en .
+      dct:description "A test execution service that runs conformance test suites."@en ;
+      dct:title "Validator"@en .
 
 #the testing activity
 a:testingActivity a prov:Activity ;
@@ -2829,7 +2810,7 @@ a:testingActivity a prov:Activity ;
     prov:use a:dataset ;
     prov:wasAssociatedWith &lt;http://validator.example.org/&gt; .
     </pre></aside>
-            <p>The following example shows how the description would have looked like if the subtest <code>a:testq1</code> had failed. In particular, <code>dcterms:description</code> and <code>earl:info</code> provide additional warnings or error messages in a human-readable form.</p>
+            <p>The following example shows how the description would have looked like if the subtest <code>a:testq1</code> had failed. In particular, <code>dct:description</code> and <code>earl:info</code> provide additional warnings or error messages in a human-readable form.</p>
             <aside class="example" id="ex-conformance-test-earl-fail">
   <pre class="nohighlight turtle">
 
@@ -2839,11 +2820,11 @@ a:assertion1 a earl:Assertion ;
     earl:result [
         a earl:TestResult ;
         #  results in no conformancy
-        dcterms:type a:nonConformant ;
+        dct:type a:nonConformant ;
         #the overall set of tests have not been passed (!?)
-        dcterms:date "2015-09-29T11:50:00+00:00"^^xsd:dateTime ;
+        dct:date "2015-09-29T11:50:00+00:00"^^xsd:dateTime ;
         # Some XML encoding of the error
-            dcterms:description """
+            dct:description """
                  &lt;ul xmlns="http://www.w3.org/1999/xhtml"&gt;
                  &lt;li&gt; test 1 has failed. Some description of the errors found&lt;/li&gt;
                  &lt;/ul&gt;"^^rdf:XMLLiteral;
@@ -2891,8 +2872,8 @@ a:assertion1 a earl:Assertion ;
 
 a:testResult
     a dqv:QualityMetadata ;
-    #  change the the dcterms:type according to the resulted compliance
-    dcterms:type &lt;http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant&gt; ;
+    #  change the the dct:type according to the resulted compliance
+    dct:type &lt;http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant&gt; ;
     prov:wasAttributedTo &lt;http://validator.example.org/&gt; ;
     prov:generatedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
     prov:wasGeneratedBy a:testingActivity .
@@ -3219,190 +3200,6 @@ ex:Test543L
 	    These rights and licences could potentially include or reference sensitive information such as user and asset identifiers as <a data-cite="?ODRL-VOCAB#privacy-consideration">described</a> in [[!ODRL-VOCAB]].   Implementations that produce, maintain, publish or
 	    consume such vocabulary terms must take steps to ensure security and privacy considerations are addressed at the application level.
     </p>
-</section>
-
-<section class="appendix" id="other-w3c-recommendations">
-
-    <h2>Relation to other W3C Recommendations</h2>
-
-    <p class="issue" data-number="254">
-        DCAT should be aligned with other recent Linked Data based Recommendations.
-    </p>
-
-    <section id="ldp" class="informative">
-        <h3>Linked Data Platform (<abbr title="Linked Data Platform">LDP</abbr>)</h3>
-
-        <p>
-            DCAT provides a data model for representation of metadata about datasets in the form of Linked Data, but it does not specify how this metadata can be accessed or modified.
-            The DCAT compatible metadata can be viewed as collections of Catalog Records, Datasets and Data Services contained in a Catalog, and a collection of Distributions contained in a Dataset.
-            The Linked Data Platform [[?LDP]] specification deals with access to and modification of Linked Data Platform Containers (<abbr title="Linked Data Platform Containers">LDPCs</abbr>).
-            This section provides guidance on how to represent DCAT metadata as LDP Containers, which supports namely the implementation of <a href="https://solid.mit.edu/" title="Solid">Solid</a> based DCAT catalogs.
-        </p>
-
-        <p>
-            First, we will present an example of a LDPC for datasets in a catalog.
-            There is one catalog with one dataset.
-            The dataset is contained in the <code>&lt;/datasets/&gt;</code> LDP Direct Container.
-            To ensure the <abbr title="Linked Data Platform Container">LDPC</abbr> discovery, we connect it to the Catalog using the <code>dcat-ldp:datasets</code> predicate.
-        </p>
-<pre id="ex-ldpc-dataset" class="example nohighlight turtle">
-@prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt; .
-@prefix ldp:  &lt;http://www.w3.org/ns/ldp#&gt; .
-@prefix dcat-ldp:  &lt;http://www.w3.org/ns/dcat-ldp#&gt; .
-
-@base &lt;https://example.org/resource/catalog&gt; .
-
-&lt;&gt; a dcat:Catalog ;
-	dcat-ldp:datasets &lt;/datasets/&gt; ;
-	dcat:dataset &lt;/datasets/001&gt; .
-
-&lt;/datasets/&gt; a ldp:Container, ldp:DirectContainer ;
-	ldp:membershipResource &lt;&gt; ;
-	ldp:hasMemberRelation dcat:dataset ;
-	ldp:contains &lt;/datasets/001&gt; .
-
-&lt;/datasets/001&gt; a dcat:Dataset .</pre>
-
-        <p>In the second example, we add LDPCs <code>&lt;/records/&gt;</code> for Catalog Records and <code>&lt;/services/&gt;</code> for Data Services, discoverable using <code>dcat-ldp:records</code> and <code>dcat-ldp:services</code> predicates from the Catalog:
-        </p>
-<pre id="ex-ldpc-record" class="example nohighlight turtle">
-@prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt; .
-@prefix ldp:  &lt;http://www.w3.org/ns/ldp#&gt; .
-@prefix dcat-ldp:  &lt;http://www.w3.org/ns/dcat-ldp#&gt; .
-
-@base &lt;https://example.org/resource/catalog&gt; .
-
-&lt;&gt; a dcat:Catalog ;
-	dcat-ldp:records &lt;/records/&gt; ;
-	dcat-ldp:datasets &lt;/datasets/&gt; ;
-	dcat-ldp:services &lt;/services/&gt; ;
-	dcat:dataset &lt;/datasets/001&gt; .
-
-&lt;/records/&gt; a ldp:Container, ldp:DirectContainer ;
-	ldp:membershipResource &lt;&gt; ;
-	ldp:hasMemberRelation dcat:record ;
-	ldp:contains &lt;/records/001&gt; .
-
-&lt;/datasets/&gt; a ldp:Container, ldp:DirectContainer ;
-	ldp:membershipResource &lt;&gt; ;
-	ldp:hasMemberRelation dcat:dataset ;
-	ldp:contains &lt;/datasets/001&gt; .
-
-&lt;/services/&gt; a ldp:Container, ldp:DirectContainer ;
-	ldp:membershipResource &lt;&gt; ;
-	ldp:hasMemberRelation dcat:service ;
-	ldp:contains &lt;/services/001&gt; .
-
-&lt;/records/001&gt; a dcat:CatalogRecord ;
-	foaf:primaryTopic &lt;/datasets/001&gt; .
-
-&lt;/datasets/001&gt; a dcat:Dataset ;
-
-&lt;/services/001&gt; a dcat:DataService .</pre>
-
-        <p>Each dataset has its own LDPC for its distributions.
-            In the third example, we show the LDPC <code>&lt;/datasets/001/distributions/&gt;</code> for distributions of a single dataset, <code>&lt;/datasets/001&gt;</code>, discoverable through the <code>dcat-ldp:distributions</code> predicate.</p>
-<pre id="ex-ldpc-distribution" class="example nohighlight turtle">
-
-@prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt; .
-@prefix ldp:  &lt;http://www.w3.org/ns/ldp#&gt; .
-@prefix dcat-ldp:  &lt;http://www.w3.org/ns/dcat-ldp#&gt; .
-
-@base &lt;https://example.org/resource/catalog&gt; .
-
-&lt;/datasets/001&gt; a dcat:Dataset ;
-	dcat-ldp:distributions &lt;/datasets/001/distributions/&gt; ;
-	dcat:distribution &lt;/datasets/001/distributions/001&gt; .
-
-&lt;/datasets/001/distributions/&gt; a ldp:Container, ldp:DirectContainer ;
-	ldp:membershipResource &lt;/datasets/001&gt; ;
-	ldp:hasMemberRelation dcat:distribution ;
-	ldp:contains &lt;/datasets/001/distributions/001&gt; .
-
-&lt;/datasets/001/distributions/001&gt; a dcat:Distribution .</pre>
-
-        <p class="note">For catalogs with many datasets, catalog records, data services or distributions,
-            the Linked Data Platform Paging mechanism [[?LDP-Paging]] SHOULD be used to provide access to them.</p>
-
-        <p>
-            In the next sections we formally define the additional properties used for discovery of LDP containers.
-        </p>
-
-        <section id="Property:catalog_datasets">
-            <h4>Property: datasets</h4>
-
-            <table class="definition">
-		    <thead><tr><th>RDF Property:</th><th><code>dcat-ldp:datasets</code></th></tr></thead>
-                <tbody>
-                <tr><td class="prop">Definition:</td><td>Connects a catalog to the LDP container of its datasets.</td></tr>
-                <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Catalog"><code>dcat:Catalog</code></a></td></tr>
-                <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/ldp#DirectContainer"><code>ldp:DirectContainer</code></a></td></tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section id="Property:catalog_records">
-            <h4>Property: catalog records</h4>
-
-            <table class="definition">
-                <thead><tr><th>RDF Property:</th><th><code>dcat-ldp:records</code></th></tr></thead>
-                <tbody>
-                <tr><td class="prop">Definition:</td><td>Connects a catalog to the LDP container of its catalog records.</td></tr>
-                <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Catalog"><code>dcat:Catalog</code></a></td></tr>
-                <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/ldp#DirectContainer"><code>ldp:DirectContainer</code></a></td></tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section id="Property:catalog_services">
-            <h4>Property: data services</h4>
-
-            <table class="definition">
-                <thead><tr><th>RDF Property:</th><th><code>dcat-ldp:services</code></th></tr></thead>
-                <tbody>
-                <tr><td class="prop">Definition:</td><td>Connects a catalog to the LDP container of its data services.</td></tr>
-                <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Catalog"><code>dcat:Catalog</code></a></td></tr>
-                <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/ldp#DirectContainer"><code>ldp:DirectContainer</code></a></td></tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section id="Property:dataset_distributions">
-            <h4>Property: distributions</h4>
-
-            <table class="definition">
-                <thead><tr><th>RDF Property:</th><th><code>dcat-ldp:distributions</code></th></tr></thead>
-                <tbody>
-                <tr><td class="prop">Definition:</td><td>Connects a dataset to the LDP container of its distributions.</td></tr>
-                <tr><td class="prop">Domain:</td><td><a href="http://www.w3.org/ns/dcat#Dataset"><code>dcat:Dataset</code></a></td></tr>
-                <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/ns/ldp#DirectContainer"><code>ldp:DirectContainer</code></a></td></tr>
-                </tbody>
-            </table>
-        </section>
-
-    </section>
-
-    <section id="ldn" class="informative">
-        <h3>Linked Data Notifications (<abbr title="Linked Data Notifications">LDN</abbr>)</h3>
-
-        <p>
-            Linked Data Notifications (LDN) [[?LDN]] can be used with DCAT e.g. for feedback collection.
-            Any resource can have an LDN Inbox.
-            In the following example we show a dataset <code>&lt;/datasets/001&gt;</code> as an LDN Target with an LDN Inbox.
-        </p>
-<pre id="ex-ldn-dataset" class="example nohighlight turtle">
-@prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt; .
-@prefix ldp:  &lt;http://www.w3.org/ns/ldp#&gt; .
-
-@base &lt;https://example.org/resource/catalog&gt; .
-
-&lt;/datasets/001&gt; a dcat:Dataset ;
-	ldp:inbox &lt;/datasets/001/inbox/&gt; .
-
-&lt;/datasets/001/inbox/&gt; ldp:contains &lt;/datasets/001/inbox/001&gt; .</pre>
-
-    </section>
-
 </section>
 
 <section class="appendix" id="alignments">
