@@ -2466,7 +2466,7 @@ end class DiscoveryService -->
 
     </section> <!-- end class Role -->
 
-<!-- END: Issue https://github.com/w3c/dxwg/issues/83: Implementation of Proposals 1 and 2.a -->
+<!-- START: Issue https://github.com/w3c/dxwg/issues/85: Implementation of proposed properties -->
 
     <section id="Class:PeriodOfTime">
         <h3>Class: Period of Time</h3>
@@ -2586,18 +2586,18 @@ end class DiscoveryService -->
 <aside class="example" id="ex-temporal-coverage-closed-interval" title="Temporal coverage as closed interval">
 <pre>
 &lt;&gt; a dcat:Dataset ;
-  dct:temporal [
-    a dct:PeriodOfTime ;
+  dct:temporal [ a dct:PeriodOfTime ;
     dcat:startDate "2016-03-04"^^xsd:date ;
     dcat:endDate   "2018-08-05"^^xsd:date .
   ] .
 </pre>
 </aside>
 
-<aside class="example" id="ex-temporal-coverage-closed-proper-interval" title="Temporal coverage as proper interval">
+<aside class="example" id="ex-temporal-coverage-closed-proper-interval" title="Temporal coverage as closed interval, using time:ProperInterval">
+<p>The following dataset specification is equivalent to the one in <a href="#ex-temporal-coverage-closed-interval"></a>, but it uses [[OWL-TIME]]:</p>
 <pre>
 &lt;&gt; a dcat:Dataset ;
-  dct:temporal [ a time:ProperInterval ;
+  dct:temporal [ a dct:PeriodOfTime , time:ProperInterval ;
     time:hasBeginning [ a time:Instant ;
       time:inXSDDate "2016-03-04"^^xsd:date .
     ] ;
@@ -2611,7 +2611,7 @@ end class DiscoveryService -->
 <aside class="example" id="ex-temporal-coverage-closed-proper-interval-gyear" title="Temporal coverage as proper interval using gYear">
 <pre>
 &lt;&gt; a dcat:Dataset ;
-  dct:temporal [ a time:ProperInterval ;
+  dct:temporal [ a dct:PeriodOfTime , time:ProperInterval ;
     time:hasBeginning [ a time:Instant ;
       time:inXSDgYear "1914"^^xsd:gYear .
     ] ;
@@ -2625,7 +2625,7 @@ end class DiscoveryService -->
 <aside class="example" id="ex-temporal-coverage-geologic" title="Temporal coverage for a geologic dataset">
 <pre>
 &lt;&gt; a dcat:Dataset ;
-  dct:temporal [ a time:ProperInterval ;
+  dct:temporal [ a dct:PeriodOfTime , time:ProperInterval ;
     time:hasBeginning [ a time:Instant ;
       time:inTimePosition [ a time:TimePosition ;
         time:hasTRS <http://resource.geosciml.org/classifier/cgi/geologicage/ma> ;
@@ -2645,8 +2645,7 @@ end class DiscoveryService -->
 <aside class="example" id="ex-temporal-coverage-open-end-interval" title="Temporal coverage as open interval (no end date)">
 <pre>
 &lt;&gt; a dcat:Dataset ;
-  dct:temporal [
-    a dct:PeriodOfTime ;
+  dct:temporal [ a dct:PeriodOfTime ;
     dcat:startDate "2016-03-04"^^xsd:date .
   ] .
 </pre>
@@ -2655,13 +2654,15 @@ end class DiscoveryService -->
 <aside class="example" id="ex-temporal-coverage-open-begin-interval" title="Temporal coverage as open interval (no beginning)">
 <pre>
 &lt;&gt; a dcat:Dataset ;
-  dct:temporal [
+  dct:temporal [ a dct:PeriodOfTime , time:ProperInterval ;
     time:hasEnd [ time:inXSDDate "2018-08-05"^^xsd:date ] .
   ] .
 </pre>
 </aside>
 
     </section>
+
+<!-- END: Issue https://github.com/w3c/dxwg/issues/85: Implementation of proposed properties -->
 
 <!-- START: Issue https://github.com/w3c/dxwg/issues/83: Implementation of Proposals 1 and 2.a -->
 
@@ -2849,7 +2850,7 @@ a:Dataset a dcat:Dataset ;
 </aside>
 
 <aside class="example" id="ex-spatial-coverage-centroid-w3cgeo" title="Spatial coverage as centroid, by using w3cgeo:Point">
-<p>The following dataset specification is equivalent to the one in <a href="#ex-spatial-coverage-centroid"></a>, by using [[W3C-BASIC-GEO]] instead of <code>dcat:centroid</code>:</p>
+<p>The following dataset specification is equivalent to the one in <a href="#ex-spatial-coverage-centroid"></a>, but it uses [[W3C-BASIC-GEO]] instead of <code>dcat:centroid</code>:</p>
 <pre>
 a:Dataset a dcat:Dataset ;
   dct:spatial [
