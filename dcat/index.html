@@ -2857,7 +2857,7 @@ a:Dataset a dcat:Dataset ;
 </figure>	
 </aside>
 
-<aside class="example" id="ex-spatial-coverage-geometry-with-crs" title="Spatial coverage as a polygon">
+<aside class="example" id="ex-spatial-coverage-geometry-with-crs" title="Spatial coverage as a polygon, using a specific CRS">
 <p>The same dataset in <a href="#ex-spatial-coverage-geometry"></a>, but where the coordinates of the polygon are specified by using the national Dutch <abbr title="Coordinate Reference System">CRS</abbr> - <a href="http://epsg-registry.org/?display=entity&amp;urn=urn:ogc:def:crs:EPSG::28992">EPSG:28992</a> ("Amersfoort / RD New").</p>
 <pre>
 a:Dataset a dcat:Dataset ;
@@ -2898,7 +2898,7 @@ a:Dataset a dcat:Dataset ;
 a:Dataset a dcat:Dataset ;
   dct:spatial [
     a dct:Location , w3cgeo:Point ;
-    w3cgeo:lat "52.37509"^^xsd:decimal ;
+    w3cgeo:lat  "52.37509"^^xsd:decimal ;
     w3cgeo:long "4.88412"^^xsd:decimal .
   ] .
 </pre>
@@ -2914,10 +2914,14 @@ a:Dataset a dcat:Dataset ;
                    beschikbaar voor heel Nederland"@nl ;
   dct:description "INSPIRE addresses derived from the Addresses base registry,
                    available for the Netherlands"@en ;
-  dcat:theme <http://inspire.ec.europa.eu/theme/ad> ;
+  dcat:theme &lt;http://inspire.ec.europa.eu/theme/ad&gt; ;
   dct:spatial [
     a dct:Location ;
-    dcat:bbox "POLYGON((3.053 47.975,7.24 47.975,7.24 53.504,3.053 53.504,3.053 47.975))"^^geosparql:asWKT .
+    dcat:bbox "POLYGON((
+      3.053 47.975 , 7.24  47.975 ,
+      7.24  53.504 , 3.053 53.504 ,
+      3.053 47.975
+    ))"^^geosparql:asWKT .
   ] .
 </pre>
 <figure id="fig-spatial-coverage-bbox">	
