@@ -53,7 +53,7 @@
     <p>DCAT incorporates terms from pre-existing vocabularies where stable terms with appropriate meanings could be found, such as <a href="http://xmlns.com/foaf/0.1/homepage"><code>foaf:homepage</code></a> and <a href="http://purl.org/dc/terms/title"><code>dct:title</code></a>.
       Informal summary definitions of the externally-defined terms are included here for convenience, while authoritative definitions are available in the normative references.
       Changes to definitions in the references, if any, supersede the summaries given in this specification.
-      Note that conformance to DCAT (Section 4) concerns usage of only the terms in the DCAT namespace itself, so possible changes to the external definitions will not affect the conformance of DCAT implementations.</p>
+      Note that conformance to DCAT (<a href="#conformance"></a>) concerns usage of only the terms in the DCAT namespace itself, so possible changes to the external definitions will not affect the conformance of DCAT implementations.</p>
 
     <h3 id="please_send_comments">Please send comments</h3>
     The Working Group invites publishers to describe their catalogs and datasets with the revised version of DCAT described in this document and to report their implementations following <a href="https://github.com/w3c/dxwg/wiki/DCAT-implementation-evidence">the instruction  to reporting DCAT revised implementations</a>. The information gathered through this means will be augmented by further analysis of implementation available on the Web. The Working Group expects to adduce the combined set of evidence when requesting that the Director advance this document to Proposed Recommendation.
@@ -1326,7 +1326,7 @@
         </section>
 
         <section id="Property:resource_hasPolicy">
-            <h4>Property: hasPolicy</h4>
+            <h4>Property: has policy</h4>
 
             <table class="definition">
                 <thead><tr><th>RDF Property:</th><th><a href="https://www.w3.org/TR/odrl-vocab/#term-hasPolicy">odrl:hasPolicy</a></th></tr></thead>
@@ -1954,7 +1954,7 @@
         </section>
 
         <section id="Property:distribution_size">
-            <h4>Property: byteSize</h4>
+            <h4>Property: byte size</h4>
 
             <!--backlog p class="issue" data-number="125">
                 The axiomatization of <code>dcat:byteSize</code> is being re-evaluated as part of the revision of DCAT.
@@ -2418,7 +2418,7 @@ end class DiscoveryService -->
         </section>
 
         <section id="Property:relationship_hadRole">
-            <h4>Property: hadRole</h4>
+            <h4>Property: had role</h4>
 
             <p class="note">
               Property added in this revision of DCAT.
@@ -2960,22 +2960,28 @@ a:Dataset a dcat:Dataset ;
     <p>The scientific and data provider communities use a number of different identifiers for publications, authors and data. DCAT primarily relies on persistent HTTP URIs as an effective way of making identifiers actionable. Notably, quite a few identifier schemes can be encoded as dereferenceable HTTP URIs, and some of them are also returning machine-readable metadata (e.g., <abbr title="Digital Object Identifier">DOIs</abbr> [[?ISO-26324]] and <a href="https://orcid.org/"><abbr title="Open Researcher and Contributor ID">ORCIDs</abbr></a>). Regardless, data providers still might need to refer to legacy identifiers, non-HTTP dereferenceable identifiers, locally minted or third-party-provided identifiers. In these cases, [[?DCTERMS]] and [[?VOCAB-ADMS]] can be of use.</p>
     <p>The property <a href="#Property:resource_identifier"><code>dct:identifier</code></a> explicitly indicates HTTP URIs as well as legacy identifiers. In the following examples,  <a href="#Property:resource_identifier"><code>dct:identifier</code></a> identifies a dataset, but it can similarly be used with any kind of resources.</p>
 
-<pre id="ex-identifier" class="example nohighlight turtle">
+<aside id="ex-identifier" class="example">
+<pre class="nohighlight turtle">
 &lt;https://example.org/id&gt; a dcat:Dataset;
 	dct:identifier "https://example.org/id"^^xsd:anyURI
   .</pre>
+</aside>
 
-    <p> Proxy dereferenceable URIs can be used when resources have not HTTP dereferenceable IDs. For example, in the following example, <code>https://example.org/proxyid</code> is a proxy for <code>id</code>.</p>
+    <p> Proxy dereferenceable URIs can be used when resources have not HTTP dereferenceable IDs. For example, in <a id="#ex-proxy-id"></a>, <code>https://example.org/proxyid</code> is a proxy for <code>id</code>.</p>
 
-<pre id="ex-proxy-id" class="example nohighlight turtle">
+<aside id="ex-proxy-id" class="example">
+<pre class="nohighlight turtle">
 &lt;https://example.org/proxyid&gt; a dcat:Dataset;
 	dct:identifier  "id"^^xsd:string
     .</pre>
+</aside>
+    
     <p>The property <a data-cite="VOCAB-ADMS#adms-identifier"><code>adms:identifier</code></a> [[?VOCAB-ADMS]] can express other locally minted identifiers or external identifiers, like DOI, <a href="https://eur-lex.europa.eu/eli-register/about.html"><abbr title="European Legislation Identifier">ELI</abbr></a>, <a href="https://arxiv.org/">ar&Chi;iv</a> for creative works and <a href="https://orcid.org/">ORCID</a>, <a href="https://viaf.org/"><abbr title="Virtual International Authority File">VIAF</abbr></a>, <a href="http://www.isni.org/"><abbr title="International Standard Name Identifier">ISNI</abbr></a> for actors such as authors and publishers, as long as the identifiers are globally unique and stable.</p>
     <p>The following example uses <a data-cite="VOCAB-ADMS#schemaAgency"><code>adms:schemaAgency</code></a> and <a data-cite="?DCTERMS#creator"><code>dct:creator</code></a> to represent the authority that defines the identifier scheme (e.g., the <a href="https://www.doi.org/">DOI foundation</a> in the example), <code>adms:schemaAgency</code> is used when the authority has no URI associated. The <a href="https://www.crossref.org/display-guidelines/">CrossRef</a> and <a href="https://support.datacite.org/docs/datacite-doi-display-guidelines">DataCite</a> display guidelines recommend displaying DOIs as full URL link in the form <code>https://doi.org/10.xxxx/xxxxx/</code>.
     </p>
 
-<pre id="ex-adms-identifier" class="example nohighlight turtle">
+<aside id="ex-adms-identifier" class="example">
+<pre class="nohighlight turtle">
 &lt;https://example.org/id&gt; a dcat:Dataset;
    adms:identifier  &lt;https://example.org/iddoi&gt; ;
    dct:publisher &lt;https://example.org/PoelenJorritH&gt;.
@@ -3001,15 +3007,19 @@ ex:InternationalDOIFundation a foaf:Organization ;
    # the authority/agency defining the identifier scheme, used if the agency has no URI
    adms:schemaAgency "ORCID" .
 </pre>
+</aside>
 
-    <p> The example does not represent the authority responsible for assigning and maintaining identifiers using that scheme (e.g., <a href="https://zenodo.org/">Zenodo</a>) as naming the registrant goes against the philosophy of DOI, where the sub-spaces are abstracted from the organisation that registers them, with the advantage that DOIs do not change when the organization changes or the responsibility for that sub-space is handed over to someone else. The example shows a locally minted identifier for the creator of the dataset (e.g., <code>https://example.org/PoelenJorritHID</code>) and its correspondent ORCID identifier (e.g., <code>https://orcid.org/0000-0003-3138-4118</code>). </p>
+    <p><a href="#ex-adms-identifier"></a> does not represent the authority responsible for assigning and maintaining identifiers using that scheme (e.g., <a href="https://zenodo.org/">Zenodo</a>) as naming the registrant goes against the philosophy of DOI, where the sub-spaces are abstracted from the organisation that registers them, with the advantage that DOIs do not change when the organization changes or the responsibility for that sub-space is handed over to someone else. The example shows a locally minted identifier for the creator of the dataset (e.g., <code>https://example.org/PoelenJorritHID</code>) and its correspondent ORCID identifier (e.g., <code>https://orcid.org/0000-0003-3138-4118</code>). </p>
     <p>When the HTTP dereferenceable ID returns an RDF/OWL description for the dataset, the use of <code>owl:sameAs</code> might be considered. For example,</p>
 
-<pre id="ex-owl-sameas" class="example nohighlight turtle">
+<aside id="ex-owl-sameas" class="example">
+<pre class="nohighlight turtle">
 &lt;https://example.org/id&gt; a dcat:Dataset;
 	...
 	owl:sameAs &lt;https://doi.org/10.5281/zenodo.1486279&gt; .
 </pre>
+</aside>
+
     <p>when dereferenced with media type <code>text/turtle</code>,  <code>https://doi.org/10.5281/zenodo.1486279</code> returns a [[?SCHEMA-ORG]] description for the dataset, which might dynamically enrich the description provided by <code>https://example.org/id</code>. </p>
 
 <aside class="note">
@@ -3023,9 +3033,10 @@ ex:InternationalDOIFundation a foaf:Organization ;
     <section id="identifiers-type">
     <h2>Indicating common identifier types</h2>
 
-        <p> If identifiers are not HTTP dereferenceable, common identifier types can be served as <a data-cite="?RDF11-CONCEPTS#dfn-recognized-datatype-iris">RDF datatypes</a> [[?RDF11-CONCEPTS]] or custom <a data-cite="?OWL2-SYNTAX#Datatype_Definitions">OWL datatypes</a> [[OWL2-SYNTAX]] for the sake of interoperability, see <code>ex:type</code> in the following example.</p>
+        <p> If identifiers are not HTTP dereferenceable, common identifier types can be served as <a data-cite="?RDF11-CONCEPTS#dfn-recognized-datatype-iris">RDF datatypes</a> [[?RDF11-CONCEPTS]] or custom <a data-cite="?OWL2-SYNTAX#Datatype_Definitions">OWL datatypes</a> [[OWL2-SYNTAX]] for the sake of interoperability, see <code>ex:type</code> in <a href="#ex-identifier-type"></a>.</p>
 
-<pre id="ex-identifier-type" class="example nohighlight turtle">
+<aside id="ex-identifier-type" class="example">
+<pre class="nohighlight turtle">
 &lt;https://example.org/id&gt; a dcat:Dataset;
 	...
 	adms:identifier &lt;https://example.org/sid&gt; .
@@ -3037,14 +3048,17 @@ ex:InternationalDOIFundation a foaf:Organization ;
 	 adms:schemaAgency "US Copyright Office" ;
 	 dct:issued "2001-09-12"^^xsd:date .
 </pre>
+</aside>
 
-        <p>If a registered URI type is used (following [[?RFC3986]], <a href="https://tools.ietf.org/html/rfc3986#section-3.1">Section 3.1</a>), the identifier scheme is part of the URI; thus indicating a separate identifier scheme in 'type' is redundant. For example, DOI is registered as a namespace in the <code>info</code> URI scheme [[IANA-URI-SCHEMES]] (see <a href="https://www.doi.org/faq.html">DOI FAQ #11</a>), so according to [[?RFC3986]], it should be encoded as in the following</p>
+        <p>If a registered URI type is used (following [[?RFC3986]], <a data-cite="?RFC3986#section-3.1"><span class="secno">&sect;&nbsp;3.1</span> <span class="sec-title">Scheme</span></a>), the identifier scheme is part of the URI; thus indicating a separate identifier scheme in 'type' is redundant. For example, DOI is registered as a namespace in the <code>info</code> URI scheme [[?IANA-URI-SCHEMES]] (see <a href="https://www.doi.org/faq.html">DOI FAQ #11</a>), so according to [[?RFC3986]], it should be encoded as in <a href="#ex-identifier-type-in-uri"></a>.</p>
 
-<pre id="ex-identifier-type-in-uri" class="example nohighlight turtle">&lt;https://example.org/sid&gt; rdf:type adms:Identifier ;
+<aside id="ex-identifier-type-in-uri" class="example">
+<pre class="nohighlight turtle">&lt;https://example.org/sid&gt; rdf:type adms:Identifier ;
  # the actual id
 	 skos:notation "info:doi/10.1109/5.771073"^^xsd:anyURI
  .
 </pre>
+</aside>
 
         <p>Otherwise, examples of common types for identifier scheme (<a href="https://arxiv.org/help/arxiv_identifier">arXiv</a>, etc.) are defined in <a href="https://schema.datacite.org/meta/kernel-4.1/include/datacite-relatedIdentifierType-v4.xsd">DataCite schema</a> and <a href="https://fairsharing.org/standards/?q=&selected_facets=type_exact:identifier%20schema">FAIRsharing Registry</a>.</p>
     </section>
@@ -3165,7 +3179,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
     <section id="quality-conformance">
         <h2>Documenting conformance to standards</h2>
 
-	<p> This subsection  shows different modelling patterns combining [[?VOCAB-DQV]] with [[?PROV-O]] and EARL [[?EARL10-Schema]] to represent the conformance degree to a stated quality standard and the details about the conformance tests.
+	<p> This section shows different modelling patterns combining [[?VOCAB-DQV]] with [[?PROV-O]] and EARL [[?EARL10-Schema]] to represent the conformance degree to a stated quality standard and the details about the conformance tests.
         </p>
 
         <section id="quality-conformance-statement">
@@ -3488,7 +3502,7 @@ ex:Test543L
 </pre>
 
 <p class="note">
-  The property <a href="#Property:resource_qualifiedRelation"><code>dcat:qualifiedRelation</code></a> and association-class <a href="#Class:Relationship"><code>dcat:Relationship</code></a> follow the pattern established in W3C [[!PROV-O]] and described in the section <a data-cite="?PROV-O#description-qualified-terms">Qualified Terms</a>.
+  The property <a href="#Property:resource_qualifiedRelation"><code>dcat:qualifiedRelation</code></a> and association-class <a href="#Class:Relationship"><code>dcat:Relationship</code></a> follow the pattern established in W3C [[!PROV-O]] and described in <a data-cite="?PROV-O#description-qualified-terms"><span class="secno">&sect;&nbsp;3.3</span> <span class="sec-title">Qualified Terms</a></a>.
   However, [[!PROV-O]] is activity-centric, and does not support Entity-Entity relations except for the single case of 'was derived from', thus necessitating the new elements shown here to support the general case.
 </p>
 </section>
@@ -4442,7 +4456,7 @@ ga-courts:jc-wms
             </li>
 
             <li>
-                A new section on <a href="#qualified-attribution"></a> was added to recommend a pattern for assigning an agent to a catalogued resource with a qualified relationship.
+                A new section <a href="#qualified-attribution"></a> was added to recommend a pattern for assigning an agent to a catalogued resource with a qualified relationship.
             </li>
 
             <li>
