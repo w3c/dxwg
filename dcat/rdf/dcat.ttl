@@ -14,7 +14,7 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix schema: <http://schema.org/> .
+@prefix sdo: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix v: <http://www.w3.org/2006/vcard/ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -26,29 +26,33 @@
       rdfs:seeAlso <https://orcid.org/0000-0002-3884-3420> ;
       foaf:name "Simon J D Cox" ;
       foaf:workInfoHomepage <http://people.csiro.au/Simon-Cox> ;
+      sdo:affiliation [
+        foaf:homepage <https://csiro.au> ;
+        foaf:name "Commonwealth Scientific and Industrial Research Organisation" ;
+      ] ;
     ] ;
   dct:contributor [
-      schema:affiliation <http://www.w3.org/data#W3C> ;
+      sdo:affiliation <http://www.w3.org/data#W3C> ;
       rdfs:seeAlso <http://philarcher.org/foaf.rdf#me> ;
       foaf:homepage <http://www.w3.org/People/all#phila> ;
       foaf:name "Phil Archer" ;
     ] ;
   dct:contributor [
-      schema:affiliation [
+      sdo:affiliation [
           foaf:homepage <http://ec.europa.eu/dgs/informatics/> ;
           foaf:name "European Commission, DG DIGIT" ;
         ] ;
       foaf:name "Vassilios Peristeras" ;
     ] ;
   dct:contributor [
-      schema:affiliation [
+      sdo:affiliation [
           foaf:homepage <http://okfn.org> ;
           foaf:name "Open Knowledge Foundation" ;
         ] ;
       foaf:name "Rufus Pollock" ;
     ] ;
   dct:contributor [
-      schema:affiliation [
+      sdo:affiliation [
           foaf:homepage <http://www.refinitiv.com> ;
           foaf:name "Refinitiv" ;
         ] ;
@@ -984,7 +988,10 @@ dcat:themeTaxonomy
   rdfs:label "Ταξινομία θεματικών κατηγοριών."@el ;
   rdfs:label "قائمة التصنيفات"@ar ;
   rdfs:label "テーマ"@ja ;
-  rdfs:range skos:ConceptScheme ;
+#  rdfs:range skos:ConceptScheme ;
+  rdfs:range rdfs:Resource ;
+  sdo:rangeIncludes skos:ConceptScheme , skos:Collection , owl:Ontology ;
+  skos:scopeNote "It is recommended that the taxonomy is organized in a skos:ConceptScheme, skos:Collection, owl:Ontology or similar, which allows each member to be denoted by an IRI and published as linked-data."@en ;
 .
 dct:accessRights
   skos:scopeNote "Information about licenses and rights MAY be provided for the Resource. See also guidance at § 10. License and rights statements."@en ;
