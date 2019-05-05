@@ -2435,13 +2435,13 @@ end class DiscoveryService -->
               <a href="http://purl.org/dc/terms/requires"><code>dct:requires</code></a>,
               <a href="http://purl.org/dc/terms/isRequiredBy"><code>dct:isRequiredBy</code></a>)
               or [[?PROV-O]] properties
-              (<a href="http://www.w3.org/ns/prov#wasDerivedFrom">prov:wasDerivedFrom</a>,
-              <a href="http://www.w3.org/ns/prov#wasInfluencedBy">prov:wasInfluencedBy</a>,
-              <a href="http://www.w3.org/ns/prov#wasQuotedFrom">prov:wasQuotedFrom</a>,
-              <a href="http://www.w3.org/ns/prov#wasRevisionOf">prov:wasRevisionOf</a>,
-              <a href="http://www.w3.org/ns/prov#hadPrimarySource">prov:hadPrimarySource</a>,
-              <a href="http://www.w3.org/ns/prov#alternateOf">prov:alternateOf</a>,
-              <a href="http://www.w3.org/ns/prov#specializationOf">prov:specializationOf</a>).
+              (<a href="http://www.w3.org/ns/prov#wasDerivedFrom"><code>prov:wasDerivedFrom</code></a>,
+              <a href="http://www.w3.org/ns/prov#wasInfluencedBy"><code>prov:wasInfluencedBy</code></a>,
+              <a href="http://www.w3.org/ns/prov#wasQuotedFrom"><code>prov:wasQuotedFrom</code></a>,
+              <a href="http://www.w3.org/ns/prov#wasRevisionOf"><code>prov:wasRevisionOf</code></a>,
+              <a href="http://www.w3.org/ns/prov#hadPrimarySource"><code>prov:hadPrimarySource</code></a>,
+              <a href="http://www.w3.org/ns/prov#alternateOf"><code>prov:alternateOf</code></a>,
+              <a href="http://www.w3.org/ns/prov#specializationOf"><code>prov:specializationOf</code></a>)              
             </td>
             </tr>
           </tbody>
@@ -4281,7 +4281,7 @@ rdfs:seeAlso &lt;https://doi.org/10.1111/j.1365-2966.2006.10100.x&gt; ;
           Note that as the project is ongoing, the activity has no end date.
       </p>
       <p>
-          Further provenance information might be provided using the other <i>starting point properties</i> from PROV, in particular <a href="http://www.w3.org/TR/prov-o/#wasAttributedTo"><code>prov:wasAttributedTo</code></a> (to link to an agent associated with the dataset production) and <a href="http://www.w3.org/TR/prov-o/#wasDerivedFrom"><code>prov:wasDerivedFrom</code></a> (to link to a predecessor dataset). Both of these complement Dublin Core properties already used in DCAT, as follows:
+          Further provenance information might be provided using the other <i>starting point properties</i> from PROV, in particular <a data-cite="PROV-O#wasAttributedTo"><code>prov:wasAttributedTo</code></a> (to link to an agent associated with the dataset production) and <a data-cite="PROV-O#wasDerivedFrom"><code>prov:wasDerivedFrom</code></a> (to link to a predecessor dataset). Both of these complement Dublin Core properties already used in DCAT, as follows:
       </p>
       <ul>
           <li>
@@ -4341,20 +4341,29 @@ a:EEA-CSW-Endpoint
 .
 </pre>
       <p>
-          The next example shows a dataset hosted by Geoscience Australia, which is available from three distinct services, as indicated by the value of the <a href="#Property:dataservice_serves_dataset"><code>dcat:servesDataset</code></a> property of each of the service descriptions.
+          <a href="#ex-service-gsa"></a> shows a dataset hosted by Geoscience Australia, which is available from three distinct services, as indicated by the value of the <a href="#Property:dataservice_serves_dataset"><code>dcat:servesDataset</code></a> property of each of the service descriptions.
           These are classified as a <a href="#Class:Data_Service"><code>dcat:DataService</code></a> and also have the <code>dct:type</code> set to &quot;<a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download">download</a>&quot; and &quot;<a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view">view</a>&quot; from the INSPIRE classification of spatial data service types [[?INSPIRE-SDST]].
       </p>
       <p>
-          This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://w3c.github.io/dxwg/dcat/examples/ga-courts.ttl"><code>ga-courts.ttl</code></a>
+          <a href="#ex-service-gsa"></a> is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://w3c.github.io/dxwg/dcat/examples/ga-courts.ttl"><code>ga-courts.ttl</code></a>
       </p>
 
-<pre id="ex-service-gsa" class="example nohighlight turtle">
+<aside id="ex-service-gsa" class="example">
+<pre class="nohighlight turtle">
 ga-courts:jc
   rdf:type dcat:Dataset ;
   dct:description "The dataset contains spatial locations, in point format, of the Australian High Court, Australian Federal Courts and the Australian Magistrates Courts." ;
   dct:spatial [
     rdf:type dct:Location ;
-    locn:geometry "&lt;gml:Envelope srsName=\"http://www.opengis.net/def/crs/EPSG/0/4283\"&gt;&lt;gml:lowerCorner&gt;115.864566 -42.885989&lt;/gml:lowerCorner&gt;&lt;gml:upperCorner&gt;153.276835 -12.460578&lt;/gml:upperCorner&gt;&lt;/gml:Envelope&gt;"^^gsp:gmlLiteral ;
+<!--    
+    locn:geometry "&lt;gml:Envelope srsName=\"http://www.opengis.net/def/crs/EPSG/0/4283\"&gt;&lt;gml:lowerCorner&gt;115.864566 -42.885989&lt;/gml:lowerCorner&gt;&lt;gml:upperCorner&gt;153.276835 -12.460578&lt;/gml:upperCorner&gt;&lt;/gml:Envelope&gt;"^^geosparql:gmlLiteral ;
+  ] ;
+-->  
+    locn:geometry "&lt;http://www.opengis.net/def/crs/EPSG/0/4283&gt; POLYGON((
+      115.864566 -42.885989 , 115.864566 -12.460578 ,
+      153.276835 -12.460578 , 153.276835 -42.885989 , 
+      115.864566 -42.885989
+    ))"^^geosparql:wktLiteral ;
   ] ;
   dct:title "Judicial Courts" ;
   dct:type &lt;http://purl.org/dc/dcmitype/Dataset&gt; ;
@@ -4403,8 +4412,8 @@ ga-courts:jc-wms
   dcat:endpointURL &lt;http://services.ga.gov.au/gis/services/Judicial_Courts/MapServer/WMSServer&gt; ;
   dcat:landingPage &lt;https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/2b8540c8-4a41-144d-e053-12a3070a3ff7&gt; ;
   dcat:servesDataset ga-courts:jc ;
-.
-</pre>
+.</pre>
+</aside>
 
   </section>
 
