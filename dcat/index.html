@@ -330,7 +330,7 @@
         </p>
 
 <aside id="ex-catalog" class="example">
-<pre class="nohighlight turtle">
+<pre>
 :catalog
   a dcat:Catalog&nbsp;;
   dct:title "Imaginary Catalog"&nbsp;;
@@ -347,7 +347,7 @@
         </p>
 
 <aside id="ex-publisher" class="example">
-<pre class="nohighlight turtle">
+<pre>
 :transparency-office
   a foaf:Organization&nbsp;;
   rdfs:label "Transparency Office"&nbsp;;
@@ -358,7 +358,7 @@
         </p>
 
 <aside id="ex-dataset" class="example">
-<pre class="nohighlight turtle">
+<pre>
 :dataset-001
   a dcat:Dataset&nbsp;;
   dct:title "Imaginary dataset"&nbsp;;
@@ -400,7 +400,7 @@
         </p>
 
 <aside id="ex-distribution" class="example">
-<pre class="nohighlight turtle">
+<pre>
 :dataset-001-csv
   a dcat:Distribution&nbsp;;
   dcat:downloadURL &lt;http://www.example.org/files/001.csv&gt; ;
@@ -419,7 +419,7 @@
         </p>
 
 <aside id="ex-thematic-classification" class="example">
-<pre class="nohighlight turtle">
+<pre>
 :catalog&nbsp;dcat:themeTaxonomy&nbsp;:themes&nbsp;.
 
 :themes
@@ -427,8 +427,7 @@
   skos:prefLabel "A set of domains to classify documents"&nbsp;;
   .
 
-:dataset-001 dcat:theme&nbsp;:accountability&nbsp; .
-</pre>
+:dataset-001 dcat:theme&nbsp;:accountability&nbsp; .</pre>
 </aside>
 
         <p>Notice that this dataset is classified under the domain represented by the relative URI&nbsp;<code>:accountability</code>.
@@ -436,13 +435,12 @@
         </p>
 
 <aside id="ex-theme-accountability" class="example">
-<pre class="nohighlight turtle">
+<pre>
 :accountability
   a skos:Concept&nbsp;;
   skos:inScheme&nbsp;:themes&nbsp;;
   skos:prefLabel "Accountability"&nbsp;;
-  .
-</pre>
+  .</pre>
 </aside>
 
     </section>
@@ -464,7 +462,7 @@
         </p>
 
 <aside id="ex-dataset-type" class="example">
-<pre class="nohighlight turtle">
+<pre>
 :dataset-001
   rdf:type  dcat:Dataset ;
   dct:type  &lt;http://purl.org/dc/dcmitype/Text&gt; ;
@@ -473,8 +471,7 @@
 :dataset-001
   rdf:type  dcat:Dataset ;
   dct:type  &lt;http://id.loc.gov/vocabulary/marcgt/man&gt; ;
-  .
-</pre>
+  .</pre>
 </aside>
 
         <p>
@@ -482,7 +479,7 @@
         </p>
 
 <aside id="ex-dataset-multiple-types" class="example">
-<pre class="nohighlight turtle">
+<pre>
 :dataset-001
   rdf:type  dcat:Dataset ;
   dct:type  &lt;http://purl.org/dc/dcmitype/Text&gt; ;
@@ -499,8 +496,7 @@
 &lt;http://registry.it.csiro.au/def/re3data/contentType/doc&gt;
   rdfs:label "Standard office documents" ;
   dct:source "Re3data content types" ;
-  .
-</pre>
+  .</pre>
 </aside>
 
     </section>
@@ -514,15 +510,14 @@
         </p>
 
 <aside id="ex-catalog-record" class="example">
-<pre class="nohighlight turtle">
+<pre>
 :catalog  dcat:record&nbsp;:record-001&nbsp; .
 
 :record-001
   a dcat:CatalogRecord&nbsp;;
-  foaf:primaryTopic&nbsp;:dataset-001&nbsp;;
-  dct:issued "2011-12-11"^^xsd:date&nbsp;;
-  .
-</pre>
+  foaf:primaryTopic&nbsp;:dataset-001&nbsp; ;
+  dct:issued "2011-12-11"^^xsd:date&nbsp; ;
+  .</pre>
 </aside>
 
     </section>
@@ -534,7 +529,7 @@
             before accessing the data.</p>
 
 <aside id="ex-landing-page" class="example">
-<pre class="nohighlight turtle">
+<pre>
 :dataset-002
   a dcat:Dataset ;
   dcat:landingPage &lt;http://example.org/dataset-002.html&gt; ;
@@ -544,8 +539,7 @@
   a dcat:Distribution ;
   dcat:accessURL &lt;http://example.org/dataset-002.html&gt; ;
   dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/csv&gt; ;
-  .
-</pre>
+  .</pre>
 </aside>
 
         <p>Notice the use of a <code>dcat:landingPage</code> and the definition of the <code>dcat:Distribution</code> instance.</p>
@@ -557,7 +551,7 @@
         </p>
 
 <aside id="ex-access-and-download-url" class="example">
-<pre class="nohighlight turtle">
+<pre>
 :dataset-003
   a dcat:Dataset ;
   dcat:landingPage &lt;http://example.org/dataset-003.html&gt; ;
@@ -567,8 +561,7 @@
   a dcat:Distribution ;
   dcat:downloadURL &lt;http://example.org/dataset-003.csv&gt; ;
   dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/csv&gt; ;
-  .
-</pre>
+  .</pre>
 </aside>
 
         <p>Notice that we used <code>dcat:downloadURL</code> with the downloadable distribution and that the other distribution accessible through the landing page
@@ -585,24 +578,27 @@
         </p>
 
 <aside id="ex-access-service" class="example">
-<pre class="nohighlight turtle">
+<pre>
 :dataset-004
   rdf:type dcat:Dataset ;
   dcat:distribution :dataset-004-csv ;
   dcat:distribution :dataset-004-png ;
-.
+  .
+  
 :dataset-004-csv
   rdf:type dcat:Distribution ;
   dcat:accessService :table-service-005 ;
   dcat:accessURL &lt;http://example.org/api/table-005&gt; ;
   dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/csv&gt; ;
-.
+  .
+  
 :dataset-004-png
   rdf:type dcat:Distribution ;
   dcat:accessService :figure-service-006 ;
   dcat:accessURL &lt;http://example.org/api/figure-006&gt; ;
   dcat:mediaType &lt;https://www.iana.org/assignments/media-types/image/png&gt; ;
-.
+  .
+
 :figure-service-006
   rdf:type dcat:DataService ;
   dct:conformsTo &lt;http://example.org/apidef/figure/v1.0&gt; ;
@@ -610,7 +606,8 @@
   dcat:endpointDescription &lt;http://example.org/api/figure-006/params&gt; ;
   dcat:endpointURL &lt;http://example.org/api/figure-006&gt; ;
   dcat:servesDataset :dataset-004 ;
-.
+  .
+
 :table-service-005
   rdf:type dcat:DataService ;
   dct:conformsTo &lt;http://example.org/apidef/table/v2.2&gt; ;
@@ -618,7 +615,7 @@
   dcat:endpointDescription &lt;http://example.org/api/table-005/capability&gt; ;
   dcat:endpointURL &lt;http://example.org/api/table-005&gt; ;
   dcat:servesDataset :dataset-003, :dataset-004 ;
-.  </pre>
+  .</pre>
 </aside>
 
    </section>
@@ -1698,8 +1695,7 @@
             <p>
               Options for expressing the details of a <code>dct:PeriodOfTime</code> are provided in <a href="#Class:PeriodOfTime"></a>.
             </p>
-                </tbody>
-            </table>
+
         </section>
 
         <section id="Property:dataset_temporalresolution">
@@ -2541,10 +2537,10 @@ end class DiscoveryService -->
             <tr>
 	             <td class="prop">Usage note:</td>
                <td>The start and end of the interval SHOULD be given by using properties
-                <a href="#Property:period_startDate"><code title="http://www.w3.org/ns/dcat#startDate"><code>dcat:startDate</code></code></a>
-                or <a href="#Property:period_hasBeginning"><code title="http://www.w3.org/2006/time#hasBeginning"><code>time:hasBeginning</code></code></a>,
-                and  <a href="#Property:period_endDate"><code title="http://www.w3.org/ns/dcat#endDate"><code>dcat:endDate</code></code></a>
-                or <a href="#Property:period_hasEnd"><code title="http://www.w3.org/2006/time#hasEnd"><code>time:hasEnd</code></code></a>, respectively.
+                <a href="#Property:period_startDate"><code title="http://www.w3.org/ns/dcat#startDate">dcat:startDate</code></a>
+                or <a href="#Property:period_hasBeginning"><code title="http://www.w3.org/2006/time#hasBeginning">time:hasBeginning</code></a>,
+                and  <a href="#Property:period_endDate"><code title="http://www.w3.org/ns/dcat#endDate">dcat:endDate</code></a>
+                or <a href="#Property:period_hasEnd"><code title="http://www.w3.org/2006/time#hasEnd">time:hasEnd</code></a>, respectively.
                 The interval can also be open - i.e., it can have just a start or just an end.</td>
             </tr>
           </tbody>
@@ -2828,7 +2824,7 @@ end class DiscoveryService -->
     <p>The property <a href="#Property:resource_identifier"><code>dct:identifier</code></a> explicitly indicates HTTP URIs as well as legacy identifiers. In the following examples,  <a href="#Property:resource_identifier"><code>dct:identifier</code></a> identifies a dataset, but it can similarly be used with any kind of resources.</p>
 
 <aside id="ex-identifier" class="example">
-<pre class="nohighlight turtle">
+<pre>
 &lt;https://example.org/id&gt; a dcat:Dataset;
 	dct:identifier "https://example.org/id"^^xsd:anyURI
   .</pre>
@@ -2837,10 +2833,10 @@ end class DiscoveryService -->
     <p> Proxy dereferenceable URIs can be used when resources have not HTTP dereferenceable IDs. For example, in <a href="#ex-proxy-id"></a>, <code>https://example.org/proxyid</code> is a proxy for <code>id</code>.</p>
 
 <aside id="ex-proxy-id" class="example">
-<pre class="nohighlight turtle">
+<pre>
 &lt;https://example.org/proxyid&gt; a dcat:Dataset;
-	dct:identifier  "id"^^xsd:string
-    .</pre>
+	dct:identifier "id"^^xsd:string
+  .</pre>
 </aside>
 
     <p>The property <a data-cite="VOCAB-ADMS#adms-identifier"><code>adms:identifier</code></a> [[?VOCAB-ADMS]] can express other locally minted identifiers or external identifiers, like DOI, <a href="https://eur-lex.europa.eu/eli-register/about.html"><abbr title="European Legislation Identifier">ELI</abbr></a>, <a href="https://arxiv.org/">ar&Chi;iv</a> for creative works and <a href="https://orcid.org/">ORCID</a>, <a href="https://viaf.org/"><abbr title="Virtual International Authority File">VIAF</abbr></a>, <a href="http://www.isni.org/"><abbr title="International Standard Name Identifier">ISNI</abbr></a> for actors such as authors and publishers, as long as the identifiers are globally unique and stable.</p>
@@ -2848,43 +2844,46 @@ end class DiscoveryService -->
     </p>
 
 <aside id="ex-adms-identifier" class="example">
-<pre class="nohighlight turtle">
+<pre>
 &lt;https://example.org/id&gt; a dcat:Dataset;
-   adms:identifier  &lt;https://example.org/iddoi&gt; ;
-   dct:publisher &lt;https://example.org/PoelenJorritH&gt;.
+  adms:identifier  &lt;https://example.org/iddoi&gt; ;
+  dct:publisher &lt;https://example.org/PoelenJorritH&gt; ;
+  .
 
 &lt;https://example.org/iddoi&gt; a adms:Identifier ;
-   # reading https://www.w3.org/TR/skos-reference/#notations more than one skos:notation can be set
-   skos:notation "https://doi.org/10.5281/zenodo.1486279"^^xsd:anyURI;
-   # the authority/agency defining the identifier scheme, used if the agency has no URI
-   adms:schemaAgency "International DOI Foundation" ;
-   # the authority/agency defining the identifier scheme, used if the agency has URI
-   dct:creator  ex:InternationalDOIFundation .
+  # reading https://www.w3.org/TR/skos-reference/#notations more than one skos:notation can be set
+  skos:notation "https://doi.org/10.5281/zenodo.1486279"^^xsd:anyURI;
+  # the authority/agency defining the identifier scheme, used if the agency has no URI
+  adms:schemaAgency "International DOI Foundation" ;
+  # the authority/agency defining the identifier scheme, used if the agency has URI
+  dct:creator  ex:InternationalDOIFundation ;
+  .
 
 ex:InternationalDOIFundation a foaf:Organization ;
-    rdfs:label "International DOI Foundation";
-    foaf:homepage &lt;https://www.doi.org/&gt; .
+  rdfs:label "International DOI Foundation";
+  foaf:homepage &lt;https://www.doi.org/&gt; ;
+  .
 
 &lt;https://example.org/PoelenJorritH&gt; a foaf:Person;
-    foaf:name "Jorrit H. Poelen" ;
-    adms:identifier &lt;https://example.org/PoelenJorritHID&gt; .
+  foaf:name "Jorrit H. Poelen" ;
+  adms:identifier &lt;https://example.org/PoelenJorritHID&gt; ;
+  .
 
 &lt;https://example.org/PoelenJorritHID&gt; a adms:Identifier;
-   skos:notation "https://orcid.org/0000-0003-3138-4118"^^xsd:anyURI ;
-   # the authority/agency defining the identifier scheme, used if the agency has no URI
-   adms:schemaAgency "ORCID" .
-</pre>
+  skos:notation "https://orcid.org/0000-0003-3138-4118"^^xsd:anyURI ;
+  # the authority/agency defining the identifier scheme, used if the agency has no URI
+  adms:schemaAgency "ORCID" ;
+  .</pre>
 </aside>
 
     <p><a href="#ex-adms-identifier"></a> does not represent the authority responsible for assigning and maintaining identifiers using that scheme (e.g., <a href="https://zenodo.org/">Zenodo</a>) as naming the registrant goes against the philosophy of DOI, where the sub-spaces are abstracted from the organization that registers them, with the advantage that DOIs do not change when the organization changes or the responsibility for that sub-space is handed over to someone else. <a href="#ex-adms-identifier"></a> shows a locally minted identifier for the creator of the dataset (e.g., <code>https://example.org/PoelenJorritHID</code>) and its correspondent ORCID identifier (e.g., <code>https://orcid.org/0000-0003-3138-4118</code>). </p>
     <p>When the HTTP dereferenceable ID returns an RDF/OWL description for the dataset, the use of <code>owl:sameAs</code> might be considered. For example,</p>
 
 <aside id="ex-owl-sameas" class="example">
-<pre class="nohighlight turtle">
+<pre>
 &lt;https://example.org/id&gt; a dcat:Dataset;
 	...
-	owl:sameAs &lt;https://doi.org/10.5281/zenodo.1486279&gt; .
-</pre>
+	owl:sameAs &lt;https://doi.org/10.5281/zenodo.1486279&gt; .</pre>
 </aside>
 
     <p>when dereferenced with media type <code>text/turtle</code>,  <code>https://doi.org/10.5281/zenodo.1486279</code> returns a [[?SCHEMA-ORG]] description for the dataset, which might dynamically enrich the description provided by <code>https://example.org/id</code>. </p>
@@ -2903,28 +2902,25 @@ ex:InternationalDOIFundation a foaf:Organization ;
         <p> If identifiers are not HTTP dereferenceable, common identifier types can be served as <a data-cite="?RDF11-CONCEPTS#dfn-recognized-datatype-iris">RDF datatypes</a> [[?RDF11-CONCEPTS]] or custom <a data-cite="?OWL2-SYNTAX#Datatype_Definitions">OWL datatypes</a> [[OWL2-SYNTAX]] for the sake of interoperability, see <code>ex:type</code> in <a href="#ex-identifier-type"></a>.</p>
 
 <aside id="ex-identifier-type" class="example">
-<pre class="nohighlight turtle">
+<pre>
 &lt;https://example.org/id&gt; a dcat:Dataset;
 	...
 	adms:identifier &lt;https://example.org/sid&gt; .
 
- &lt;https://example.org/sid&gt; rdf:type adms:Identifier ;
- # the actual id
-	 skos:notation "PA 1-060-815"^^ex:type ;
- # Human readable schema agency
-	 adms:schemaAgency "US Copyright Office" ;
-	 dct:issued "2001-09-12"^^xsd:date .
-</pre>
+  &lt;https://example.org/sid&gt; rdf:type adms:Identifier ;
+  # the actual id
+	skos:notation "PA 1-060-815"^^ex:type ;
+  # Human readable schema agency
+	adms:schemaAgency "US Copyright Office" ;
+	dct:issued "2001-09-12"^^xsd:date .</pre>
 </aside>
 
         <p>If a registered URI type is used (following [[?RFC3986]], <a data-cite="?RFC3986#section-3.1"><span class="secno">&sect;&nbsp;3.1</span> <span class="sec-title">Scheme</span></a>), the identifier scheme is part of the URI; thus indicating a separate identifier scheme in 'type' is redundant. For example, DOI is registered as a namespace in the <code>info</code> URI scheme [[?IANA-URI-SCHEMES]] (see <a href="https://www.doi.org/faq.html">DOI FAQ #11</a>), so according to [[?RFC3986]], it should be encoded as in <a href="#ex-identifier-type-in-uri"></a>.</p>
 
 <aside id="ex-identifier-type-in-uri" class="example">
-<pre class="nohighlight turtle">&lt;https://example.org/sid&gt; rdf:type adms:Identifier ;
- # the actual id
-	 skos:notation "info:doi/10.1109/5.771073"^^xsd:anyURI
- .
-</pre>
+<pre>&lt;https://example.org/sid&gt; rdf:type adms:Identifier ;
+  # the actual id
+  skos:notation "info:doi/10.1109/5.771073"^^xsd:anyURI .</pre>
 </aside>
 
         <p>Otherwise, examples of common types for identifier scheme (<a href="https://arxiv.org/help/arxiv_identifier">arXiv</a>, etc.) are defined in <a href="https://schema.datacite.org/meta/kernel-4.1/include/datacite-relatedIdentifierType-v4.xsd">DataCite schema</a> and <a href="https://fairsharing.org/standards/?q=&selected_facets=type_exact:identifier%20schema">FAIRsharing Registry</a>.</p>
@@ -2979,66 +2975,70 @@ ex:InternationalDOIFundation a foaf:Organization ;
 	warn that the dataset includes only 20500 out of the 30000 stops.
         </p>
 
-        <aside class="example" id="ex-genoa-bus-stops-dataset-completeness-note">
-  <pre class="nohighlight turtle">
+<aside class="example" id="ex-genoa-bus-stops-dataset-completeness-note">
+<pre>
 :genoaBusStopsDataset a dcat:Dataset ;
-    dqv:hasQualityAnnotation :genoaBusStopsDatasetCompletenessNote .
+  dqv:hasQualityAnnotation :genoaBusStopsDatasetCompletenessNote .
 
 :genoaBusStopsDatasetCompletenessNote a dqv:UserQualityFeedback ;
-    oa:hasTarget :genoaBusStopsDataset ;
-    oa:hasBody :textBody ;
-    oa:motivatedBy dqv:qualityAssessment ;
-    prov:wasAttributedTo :consumer1 ;
-    prov:generatedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
-    dqv:inDimension ldqd:completeness
-    .
+  oa:hasTarget :genoaBusStopsDataset ;
+  oa:hasBody :textBody ;
+  oa:motivatedBy dqv:qualityAssessment ;
+  prov:wasAttributedTo :consumer1 ;
+  prov:generatedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
+  dqv:inDimension ldqd:completeness
+  .
 
 :textBody a oa:TextualBody ;
-    rdf:value "Incomplete dataset: it contains only 20500 out of 30000 existing bus stops" ;
-    dc:language "en" ;
-    dc:format "text/plain"
-    .
-    </pre></aside>
+  rdf:value "Incomplete dataset: it contains only 20500 out of 30000 existing bus stops" ;
+  dc:language "en" ;
+  dc:format "text/plain"
+  .</pre>
+</aside>
+
 	<p>
 	The activity <code>:myQualityChecking</code> employs the service <code>:myQualityChecker</code> to check the
 	quality of the <code>:genoaBusStopsDataset</code> dataset. The metric <code>:completenessWRTExpectedNumberOfEntities</code>
 	is applied to measure the dataset completeness (<code>ldqd:completeness</code>) and it results in the quality measurement
 	<code>:genoaBusStopsDatasetCompletenessMeasurement</code>.
 	</p>
-        <aside class="example" id="ex-genoa-bus-stops-dataset-completeness-measure">
-  <pre class="nohighlight turtle">
+
+<aside class="example" id="ex-genoa-bus-stops-dataset-completeness-measure">
+<pre>
 :genoaBusStopsDataset
-    dqv:hasQualityMeasurement :genoaBusStopsDatasetCompletenessMeasurement .
+  dqv:hasQualityMeasurement :genoaBusStopsDatasetCompletenessMeasurement .
 
 :genoaBusStopsDatasetCompletenessMeasurement a dqv:QualityMeasurement ;
-    dqv:computedOn :genoaBusStopsDataset ;
-    dqv:isMeasurementOf :completenessWRTExpectedNumberOfEntities ;
-    dqv:value "0.6833333"^^xsd:decimal  ;
-    prov:wasAttributedTo :myQualityChecker ;
-    prov:generatedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
-    prov:wasGeneratedBy :myQualityChecking
-    .
+  dqv:computedOn :genoaBusStopsDataset ;
+  dqv:isMeasurementOf :completenessWRTExpectedNumberOfEntities ;
+  dqv:value "0.6833333"^^xsd:decimal  ;
+  prov:wasAttributedTo :myQualityChecker ;
+  prov:generatedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
+  prov:wasGeneratedBy :myQualityChecking
+  .
 
 :completenessWRTExpectedNumberOfEntities a dqv:Metric ;
-    skos:definition "The degree of completeness as ratio between the actual number of entities included in the dataset and the declared expected number of entities."@en ;
-    dqv:expectedDataType xsd:decimal ;
-    dqv:inDimension ldqd:completeness .
+  skos:definition "The degree of completeness as ratio between the actual number of entities included in the dataset and the declared expected number of entities."@en ;
+  dqv:expectedDataType xsd:decimal ;
+  dqv:inDimension ldqd:completeness .
 
 # :myQualityChecker is a service computing some quality metrics
 :myQualityChecker a prov:SoftwareAgent ;
-    rdfs:label "A quality assessment service"^^xsd:string .
-    # Further details about quality service/software can be provided, for example,
-    # deploying  vocabularies such as Dataset Usage Vocabulary (DUV), Dublin Core or ADMS.SW
+  rdfs:label "A quality assessment service"^^xsd:string .
+  # Further details about quality service/software can be provided, for example,
+  # deploying  vocabularies such as Dataset Usage Vocabulary (DUV), Dublin Core or ADMS.SW
 
-# :myQualityChecking is the activity that has generated :genoaBusStopsDatasetCompletenessMeasurement from :genoaBusStopsDataset
+# :myQualityChecking is the activity that has generated 
+# :genoaBusStopsDatasetCompletenessMeasurement from :genoaBusStopsDataset
 :myQualityChecking a prov:Activity ;
-    rdfs:label "The checking of genoaBusStopsDataset's quality"^^xsd:string ;
-    prov:wasAssociatedWith :myQualityChecker ;
-    prov:used :genoaBusStopsDataset ;
-    prov:generated :genoaBusStopsDatasetCompletenessMeasurement ;
-    prov:endedAtTime 2018-05-27T02:52:02Z"^^xsd:dateTime ;
-    prov:startedAtTime "2018-05-27T00:52:02Z"^^xsd:dateTime .
-    </pre></aside>
+  rdfs:label "The checking of genoaBusStopsDataset's quality"^^xsd:string ;
+  prov:wasAssociatedWith :myQualityChecker ;
+  prov:used :genoaBusStopsDataset ;
+  prov:generated :genoaBusStopsDatasetCompletenessMeasurement ;
+  prov:endedAtTime 2018-05-27T02:52:02Z"^^xsd:dateTime ;
+  prov:startedAtTime "2018-05-27T00:52:02Z"^^xsd:dateTime .</pre>
+</aside>
+
     <p>
       Other examples of quality documentation are available in [[?VOCAB-DQV]], including examples about
       <a data-cite="VOCAB-DQV#ExpressDatasetAccuracyPrecision">how to express dataset accuracy and precision</a>.
@@ -3053,21 +3053,20 @@ ex:InternationalDOIFundation a foaf:Organization ;
             <h3>Conformance to a standard</h3>
             <p>The use of <a data-cite="?DCTERMS#terms-conformsTo"><code>dct:conformsTo</code></a> and
 	    <a data-cite="?DCTERMS#terms-Standard"><code>dct:Standard</code></a> is a well-known pattern
-            to represent the conformance to a standard. <a href="#ex-inspire-conformant-dataset"></a>, directly borrowed from [[?SDW-BP]] (<a data-cite="SDW-BP#ex-geodcat-ap-dataset-conformance-with-specification">Example 51</a>), declares a fictional <code>a:dataset</code>
+            to represent the conformance to a standard. <a href="#ex-inspire-conformant-dataset"></a>, directly borrowed from [[?SDW-BP]] (<a data-cite="SDW-BP#ex-geodcat-ap-dataset-conformance-with-specification">Example 51</a>), declares a fictional <code>a:Dataset</code>
 	    conformant to the EU INSPIRE Regulation on interoperability of spatial data sets and services (<a href="http://data.europa.eu/eli/reg/2014/1312/oj">"Commission Regulation (EU) No 1089/2010
 	    of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards
 	    interoperability of spatial data sets and services"</a>).</p>
 
 <aside class="example" id="ex-inspire-conformant-dataset">
-  <pre class="nohighlight turtle">
-a:dataset a dcat:Dataset;
-    dct:conformsTo &lt;http://data.europa.eu/eli/reg/2014/1312/oj&gt; .
+<pre>
+a:Dataset a dcat:Dataset;
+  dct:conformsTo &lt;http://data.europa.eu/eli/reg/2014/1312/oj&gt; .
 
 # Reference standard / specification
 &lt;http://data.europa.eu/eli/reg/2014/1312/oj&gt; a dct:Standard ;
-    dct:title "Commission Regulation (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards interoperability of spatial data sets and services"@en ;
-    dct:issued "2010-11-23"^^xsd:date .
-</pre>
+  dct:title "Commission Regulation (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards interoperability of spatial data sets and services"@en ;
+  dct:issued "2010-11-23"^^xsd:date .</pre>
 </aside>
 
 <!-- @andrea-perego: added proposed example on how to specify a dataset's CRS -->
@@ -3075,7 +3074,7 @@ a:dataset a dcat:Dataset;
 <p>Another example concerns the specification of the coordinate reference system (CRS) used in a dataset - an information which is typically included in geospatial metadata. <a href="#ex-dataset-crs"></a> shows how the CRS of a dataset can be specified in DCAT:</p>
 
 <aside class="example" id="ex-dataset-crs">
-<pre class="nohighlight turtle">
+<pre>
 a:Dataset a dcat:Dataset;
   dct:conformsTo &lt;http://www.opengis.net/def/crs/EPSG/0/28992&gt; .</pre>
 </aside>
@@ -3104,56 +3103,58 @@ a:Dataset a dcat:Dataset;
        </aside>
 
 <aside class="example" id="ex-conformance-degree">
-<pre class="nohighlight turtle">
-a:dataset a dcat:Dataset ;
-    prov:wasUsedBy a:testingActivity .
+<pre>
+a:Dataset a dcat:Dataset ;
+  prov:wasUsedBy a:testingActivity .
 
 a:testingActivity a prov:Activity ;
-      prov:generated a:testResult ;
-      prov:qualifiedAssociation [
-        a prov:Association ;
-        # http://validator.example.org/ is the agent who ran the test.
-        prov:agent  &lt;http://validator.example.org/&gt;
-        # following the plan a:conformanceTest
-        prov:hadPlan a:conformanceTest
-        ] .
+  prov:generated a:testResult ;
+  prov:qualifiedAssociation [
+    a prov:Association ;
+    # http://validator.example.org/ is the agent who ran the test.
+    prov:agent  &lt;http://validator.example.org/&gt;
+    # following the plan a:conformanceTest
+    prov:hadPlan a:conformanceTest
+  ] .
 
 # Conformance test result
 a:testResult a prov:Entity ;
-   # a:notConformant belongs to a SKOS concept scheme about conformance
-   dct:type a:notConformant .
+  # a:notConformant belongs to a SKOS concept scheme about conformance
+  dct:type a:notConformant .
 
 a:conformanceTest a prov:Plan ;
-    # Here one can specify additional information on the test, which in the example is derived by the W3C Data on the Web Best Practices
-    prov:wasDerivedFrom &lt;https://www.w3.org/TR/dwbp/&gt; .
-    </pre></aside>
+  # Here one can specify additional information on the test, which in the example is derived by the W3C Data on the Web Best Practices
+  prov:wasDerivedFrom &lt;https://www.w3.org/TR/dwbp/&gt; .</pre>
+</aside>
+  
             <p>Also, [[?VOCAB-DQV]] can be deployed to  measure the compliance to a specific standard. In <a href="#ex-conformance-degree-percentage"></a>, the <code>:levelOfComplianceToDWBP</code> is a quality metrics which measures the compliance of a dataset to [[?DWBP]] in terms of the percentage of passed compliance tests. <a href="#ex-conformance-degree-percentage"></a> assumes <code>iso</code> as a namespace prefix representing the quality dimensions and categories defined in the ISO/IEC 25012 [[?ISO-IEC-25012]].</p>
 
 <aside class="example" id="ex-conformance-degree-percentage">
-<pre class="nohighlight turtle">
+<pre>
 :levelOfComplianceToDWBP a dqv:Metric ;
-    skos:definition "The degree of compliance to DWBP defined as the percentage of passed compliance tests."@en ;
-    dqv:expectedDataType xsd:double ;
-    dqv:inDimension  iso:compliance .
+  skos:definition "The degree of compliance to DWBP defined as the percentage of passed compliance tests."@en ;
+  dqv:expectedDataType xsd:double ;
+  dqv:inDimension  iso:compliance .
 
 iso:compliance a dqv:Dimension ;
-    skos:prefLabel "Compliance"@en ;
-    skos:definition "The degree to which data has attributes that adhere to standards, conventions or regulations in force and similar rules relating to data quality in a specific context of use."@en ;
-    dqv:inCategory iso:inherentandSystemDependentDataQuality
-    .
+  skos:prefLabel "Compliance"@en ;
+  skos:definition "The degree to which data has attributes that adhere to standards, conventions or regulations in force and similar rules relating to data quality in a specific context of use."@en ;
+  dqv:inCategory iso:inherentandSystemDependentDataQuality .
+  
 iso:inherentandSystemDependentDataQuality a dqv:Category ;
-   skos:prefLabel "Inherent and System-Dependent Data Quality"@en .
-        </pre></aside>
-            <p>The quality measurement <code>:measurement_complianceToDWBP</code> represents the level of compliance for dataset <code>a:dataset</code>, namely, measurement of the metric <code>:levelOfComplianceToDWBP</code>. If only a part of the compliance tests succeeds (e.g. half of the compliance tests), the measurement would look like in <a href="#ex-conformance-test-partial-success"></a>.</p>
+  skos:prefLabel "Inherent and System-Dependent Data Quality"@en .</pre>
+</aside>
+
+            <p>The quality measurement <code>:measurement_complianceToDWBP</code> represents the level of compliance for dataset <code>a:Dataset</code>, namely, measurement of the metric <code>:levelOfComplianceToDWBP</code>. If only a part of the compliance tests succeeds (e.g. half of the compliance tests), the measurement would look like in <a href="#ex-conformance-test-partial-success"></a>.</p>
 
 <aside class="example" id="ex-conformance-test-partial-success">
-<pre class="nohighlight turtle">
+<pre>
 :measurement_complianceToDWBP a dqv:QualityMeasurement ;
-   dqv:computedOn a:dataset ;
-   dqv:value "50"^^xsd:double ;
-   sdmx-attribute:unitMeasure &lt;http://www.wurvoc.org/vocabularies/om-1.8/Percentage&gt; ;
-   dct:date "2018-01-10"^^xsd:date ;
-   dqv:isMeasurementOf :levelOfComplianceToDWBP .</pre>
+  dqv:computedOn a:Dataset ;
+  dqv:value "50"^^xsd:double ;
+  sdmx-attribute:unitMeasure &lt;http://www.wurvoc.org/vocabularies/om-1.8/Percentage&gt; ;
+  dct:date "2018-01-10"^^xsd:date ;
+  dqv:isMeasurementOf :levelOfComplianceToDWBP .</pre>
 </aside>
 
         </section>
@@ -3163,129 +3164,130 @@ iso:inherentandSystemDependentDataQuality a dqv:Category ;
 	    classes to describe the testing activity, which can be adopted in conjunction with [[?PROV-O]].
 	    <a href="#ex-conformance-test-results-earl"></a> describes the Testing activity <code>a:testingActivity</code> as an <code>earl:Assertion</code>
 	    instead of a qualified association on the <code>prov:Activity</code>. The <code>earl:Assertion</code> states
-	    that dataset <code>a:dataset</code> has been tested with the conformance test <code>a:conformanceTest</code>, and it
+	    that dataset <code>a:Dataset</code> has been tested with the conformance test <code>a:conformanceTest</code>, and it
 		    has passed the test as described in <code>a:testResult</code>.
             </p>
 
 <aside class="example" id="ex-conformance-test-results-earl">
-<pre class="nohighlight turtle">
+<pre>
 a:assertion a earl:Assertion ;
-    earl:subject a:dataset ;
-    earl:test a:conformanceTest ;
-    earl:result a:testResult ;
-    # let's indicate if the test was manual, automatic, or what ..
-    earl:mode earl:automatic ;
-    earl:assertedBy &lt;http://validator.example.org/&gt; ;
-    prov:wasAttributedTo  &lt;http://validator.example.org/&gt; .
+  earl:subject a:Dataset ;
+  earl:test a:conformanceTest ;
+  earl:result a:testResult ;
+  # let's indicate if the test was manual, automatic, or what ..
+  earl:mode earl:automatic ;
+  earl:assertedBy &lt;http://validator.example.org/&gt; ;
+  prov:wasAttributedTo  &lt;http://validator.example.org/&gt; .
 
 a:conformanceTest a earl:TestRequirement, prov:Plan ;
-    dct:title "Set of conformance test derived from the W3C Data on the Web Best Practices"@en" ;
-    # it includes different subtests
-    dct:hasPart a:testBP1, a:testBP2, ...,  a:testBP35 ;
-    #It is derived  by the reference standard
-    prov:wasDerivedFrom  &lt;https://www.w3.org/TR/dwbp/&gt; .
+  dct:title "Set of conformance test derived from the W3C Data on the Web Best Practices"@en" ;
+  # it includes different subtests
+  dct:hasPart a:testBP1, a:testBP2, ...,  a:testBP35 ;
+  #It is derived  by the reference standard
+  prov:wasDerivedFrom  &lt;https://www.w3.org/TR/dwbp/&gt; .
 
 a:testResult a earl:TestResult ;
-    #  results in conformancy .
-    dct:type  a:conformant ;
-    #the overall set of tests have been passed
-    earl:outcome earl:passed .
+  #  results in conformancy .
+  dct:type  a:conformant ;
+  #the overall set of tests have been passed
+  earl:outcome earl:passed .
 
 # the description of the validator
- &lt;http://validator.example.org/&gt; a earl:Assertor, prov:Agent ;
-    dct:description "A test execution service that runs conformance test suites."@en ;
-    dct:title "Validator"@en .
+&lt;http://validator.example.org/&gt; a earl:Assertor, prov:Agent ;
+  dct:description "A test execution service that runs conformance test suites."@en ;
+  dct:title "Validator"@en .
 
 #the testing activity
 a:testingActivity a prov:Activity ;
-    prov:generated a:TestAssertion, a:testResult ;
-    prov:use a:dataset ;
-    prov:wasAssociatedWith &lt;http://validator.example.org/&gt; .</pre>
+  prov:generated a:TestAssertion, a:testResult ;
+  prov:use a:Dataset ;
+  prov:wasAssociatedWith &lt;http://validator.example.org/&gt; .</pre>
 </aside>
 
 <p><a href="#ex-conformance-test-earl-fail"></a> shows how the description would have looked like if the subtest <code>a:testq1</code> had failed. In particular, <code>dct:description</code> and <code>earl:info</code> provide additional warnings or error messages in a human-readable form.</p>
 
 <aside class="example" id="ex-conformance-test-earl-fail">
-<pre class="nohighlight turtle">
+<pre>
 a:assertion1 a earl:Assertion ;
-    earl:subject a:dataset ;
-    earl:test a:testq1 ;
-    earl:result [
-        a earl:TestResult ;
-        #  results in no conformancy
-        dct:type a:nonConformant ;
-        #the overall set of tests have not been passed (!?)
-        dct:date "2015-09-29T11:50:00+00:00"^^xsd:dateTime ;
-        # Some XML encoding of the error
-            dct:description """
-                 &lt;ul xmlns="http://www.w3.org/1999/xhtml"&gt;
-                 &lt;li&gt; test 1 has failed. Some description of the errors found&lt;/li&gt;
-                 &lt;/ul&gt;"^^rdf:XMLLiteral;
-            earl:info """"
-                &lt;test-method duration-ms="47" finished-at="2015-09-29T11:50:00Z"
-                name="validate" signature="validate()" started-at="2015-09-29T11:50:00Z"
-                status="FAIL"&gt;
-                &lt;exception class="java.lang.AssertionError"&gt;
-                    &lt;message&gt;
-                     Total validation errors found: 2
-                     &lt;/message&gt;
-               &lt;/exception&gt;
-             &lt;/test-method&gt;"""^^rdf:XMLLiteral ;
-       earl:outcome earl:fail .
-        ];
-    # we do not know if the test was manual, automatic, or what ..
-    earl:mode earl:automatic.</pre>
+  earl:subject a:Dataset ;
+  earl:test a:testq1 ;
+  earl:result [
+    a earl:TestResult ;
+    #  results in no conformancy
+    dct:type a:nonConformant ;
+    #the overall set of tests have not been passed (!?)
+    dct:date "2015-09-29T11:50:00+00:00"^^xsd:dateTime ;
+    # Some XML encoding of the error
+      dct:description """
+        &lt;ul xmlns="http://www.w3.org/1999/xhtml"&gt;
+          &lt;li&gt; test 1 has failed. Some description of the errors found&lt;/li&gt;
+        &lt;/ul&gt;"^^rdf:XMLLiteral;
+      earl:info """
+        &lt;test-method duration-ms="47" finished-at="2015-09-29T11:50:00Z"
+        name="validate" signature="validate()" started-at="2015-09-29T11:50:00Z"
+        status="FAIL"&gt;
+          &lt;exception class="java.lang.AssertionError"&gt;
+            &lt;message&gt;
+              Total validation errors found: 2
+            &lt;/message&gt;
+          &lt;/exception&gt;
+        &lt;/test-method&gt;"""^^rdf:XMLLiteral ;
+     earl:outcome earl:fail .
+  ];
+  # we do not know if the test was manual, automatic, or what ..
+  earl:mode earl:automatic.</pre>
 </aside>
 
             <p>Depending on the details required about tests, [[?VOCAB-DQV]] can express the testing activity and errors as well. In <a href="#ex-conformance-test-error"></a>, <code>:error</code> is a quality annotation that represents the previous error, and  <code>a:testResult</code> is defined as a <code>dqv:QualityMetadata</code> to  collect the above annotations and the compliance measurements providing  provenance information.
 
 <aside class="example" id="ex-conformance-test-error">
-<pre class="nohighlight turtle">
+<pre>
 :error
-    a dqv:QualityAnnotation ;
-    #this annotation is derived by the measurement
-    prov:wasGeneratedBy  a:testingActivity;
-    oa:hasTarget a:dataset ;
-    oa:hasBody [
-        #errors/failed test description
-          a  oa:TextualBody;
-          rdf:value  """&lt;test-method duration-ms="47" finished-at="2015-09-29T11:50:00Z"
-                name="validate" signature="validate()" started-at="2015-09-29T11:50:00Z"
-                status="FAIL"&gt;
-                &lt;exception class="java.lang.AssertionError"&gt;
-                    &lt;message&gt;
-                     Total validation errors found: 2
-                     &lt;/message&gt;
-               &lt;/exception&gt;
-             &lt;/test-method&gt;"""^^rdf:XMLLiteral ;
-          #it can be in any format suppored by dc
-          dct:format  "text/xml"
-          ]
-    oa:motivatedBy dqv:qualityAssessment, oa:assessing ;
-    dqv:inDimension iso:compliance
-    .
+  a dqv:QualityAnnotation ;
+  #this annotation is derived by the measurement
+  prov:wasGeneratedBy  a:testingActivity;
+  oa:hasTarget a:Dataset ;
+  oa:hasBody [
+    #errors/failed test description
+    a oa:TextualBody;
+    rdf:value  """
+      &lt;test-method duration-ms="47" finished-at="2015-09-29T11:50:00Z"
+        name="validate" signature="validate()" started-at="2015-09-29T11:50:00Z"
+        status="FAIL"&gt;
+        &lt;exception class="java.lang.AssertionError"&gt;
+          &lt;message&gt;
+            Total validation errors found: 2
+          &lt;/message&gt;
+        &lt;/exception&gt;
+      &lt;/test-method&gt;"""^^rdf:XMLLiteral ;
+    #it can be in any format suppored by dc
+    dc:format  "text/xml"
+  ] ;
+  oa:motivatedBy dqv:qualityAssessment, oa:assessing ;
+  dqv:inDimension iso:compliance
+  .
 
 a:testResult
-    a dqv:QualityMetadata ;
-    #  change the the dct:type according to the resulted compliance
-    dct:type &lt;http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant&gt; ;
-    prov:wasAttributedTo &lt;http://validator.example.org/&gt; ;
-    prov:generatedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
-    prov:wasGeneratedBy a:testingActivity .
+  a dqv:QualityMetadata ;
+  #  change the the dct:type according to the resulted compliance
+  dct:type &lt;http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant&gt; ;
+  prov:wasAttributedTo &lt;http://validator.example.org/&gt; ;
+  prov:generatedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
+  prov:wasGeneratedBy a:testingActivity .
 
 # The graph contains the rest of the statements presented in the previous examples.
 a:testResult {
-    a:dataset
-        dqv:hasQualityMeasurement :measurement_complianceToDWBP;
-        dqv:hasQualityAnnotation :errors .
+  a:Dataset
+    dqv:hasQualityMeasurement :measurement_complianceToDWBP;
+    dqv:hasQualityAnnotation :errors .
 }
 
 #the testing activity
 a:testingActivity a prov:Activity;
-    prov:generated  a:testResult;
-    prov:use a:dataset ;
-    prov:wasAssociatedWith  &lt;http://validator.example.org/&gt;
-     .</pre>
+  prov:generated  a:testResult;
+  prov:use a:Dataset ;
+  prov:wasAssociatedWith &lt;http://validator.example.org/&gt;
+  .</pre>
 </aside>
 
           <p>Of course,  the above modelling patterns can represent any quality tests not only conformance to standards.</p>
@@ -3334,7 +3336,7 @@ a:testingActivity a prov:Activity;
   </p>
 
 <aside id="ex-qualified-attribution" class="example">
-<pre class="nohighlight turtle">
+<pre>
 ex:DS987
   a dcat:Dataset ;
   prov:qualifiedAttribution [
@@ -3349,6 +3351,7 @@ ex:DS987
   ] ;
 .
 </pre>
+</aside>
 
 <p>
   In <a href="#ex-qualified-attribution"></a> the roles are taken from [[?ISO-19115-1]] which are available as linked data in a <a href="http://registry.it.csiro.au/def/isotc211/CI_RoleCode">code list</a>.
@@ -3380,7 +3383,7 @@ ex:DS987
   </p>
 
 <aside id="ex-dataset-resource" class="example">
-<pre class="nohighlight turtle">
+<pre>
 ex:Test987
   a dcat:Dataset ;
   dcat:qualifiedRelation [
@@ -3402,7 +3405,7 @@ ex:Test543L
 </aside>
 
 <aside class="note">
-<p>The property <a href="#Property:resource_qualifiedRelation"><code>dcat:qualifiedRelation</code></a> and association-class <a href="#Class:Relationship"><code>dcat:Relationship</code></a> follow the pattern established in W3C [[!PROV-O]] and described in <a data-cite="?PROV-O#description-qualified-terms"><span class="secno">&sect;&nbsp;3.3</span> <span class="sec-title">Qualified Terms</a></a>.
+<p>The property <a href="#Property:resource_qualifiedRelation"><code>dcat:qualifiedRelation</code></a> and association-class <a href="#Class:Relationship"><code>dcat:Relationship</code></a> follow the pattern established in W3C [[!PROV-O]] and described in <a data-cite="?PROV-O#description-qualified-terms"><span class="secno">&sect;&nbsp;3.3</span> <span class="sec-title">Qualified Terms</span></a>.
   However, [[!PROV-O]] is activity-centric, and does not support Entity-Entity relations except for the single case of 'was derived from', thus necessitating the new elements shown here to support the general case.</p>
 </aside>
 
@@ -3529,36 +3532,36 @@ ex:Test543L
       </p>
       <ol>
         <li>
-          The release time of a resource is given using <a href="#Property:resource_release_date"><code title="http://purl.org/dc/terms/issued"><code>dct:issued</code></code></a>.
+          The release time of a resource is given using <a href="#Property:resource_release_date"><code title="http://purl.org/dc/terms/issued">dct:issued</code></a>.
           The value is usually encoded as a <a data-cite="XMLSCHEMA11-2#date"><code>xsd:date</code></a>.
         </li>
         <li>
-          The revision or update time of a resource is given using <a href="#Property:resource_update_date"><code title="http://purl.org/dc/terms/modified"><code>dct:modified</code></code></a>.
+          The revision or update time of a resource is given using <a href="#Property:resource_update_date"><code title="http://purl.org/dc/terms/modified">dct:modified</code></a>.
           The value is usually encoded as a <a data-cite="XMLSCHEMA11-2#date"><code>xsd:date</code></a>.
         </li>
         <li>
-          The update schedule for a resource is indicated using <a href="#Property:dataset_frequency"><code title="http://purl.org/dc/terms/accrualPeriodicity"><code>dct:accrualPeriodicity</code></code></a>.
+          The update schedule for a resource is indicated using <a href="#Property:dataset_frequency"><code title="http://purl.org/dc/terms/accrualPeriodicity">dct:accrualPeriodicity</code></a>.
           The value should be taken from a controlled vocabulary such as <a href="http://www.dublincore.org/specifications/dublin-core/collection-description/frequency/">Dublin Core Collection Description Frequency Vocabulary</a>.
         </li>
         <li>
-          The minimum temporal separation of items in a dataset is given using <a href="#Property:dataset_temporalresolution"><code title="http://www.w3.org/ns/dcat#temporalResolution"><code>dcat:temporalResolution</code></code></a>.
+          The minimum temporal separation of items in a dataset is given using <a href="#Property:dataset_temporalresolution"><code title="http://www.w3.org/ns/dcat#temporalResolution">dcat:temporalResolution</code></a>.
           The value is encoded as a <a data-cite="XMLSCHEMA11-2#duration"><code>xsd:duration</code></a>.
           The update schedule and the temporal resolution can be combined to support the description of different kinds of time-series data as shown below.
         </li>
         <li>
-          The temporal extent of a dataset is given using <a href="#Property:dataset_temporal"><code title="http://purl.org/dc/terms/temporal"><code>dct:temporal</code></code></a>.
+          The temporal extent of a dataset is given using <a href="#Property:dataset_temporal"><code title="http://purl.org/dc/terms/temporal">dct:temporal</code></a>.
           The value is a <a href="http://purl.org/dc/terms/PeriodOfTime"><code>dct:PeriodOfTime</code></a>.
           A number of options for expressing the details of a <code>dct:PeriodOfTime</code> are recommended in <a href="#Class:PeriodOfTime"></a>.
           Examples of these follow.
         </li>
       </ol>
 
-      <aside class="example" id="ex-time-series-1" title="15-minute time-series published daily">
-      <pre>
+<aside class="example" id="ex-time-series-1" title="15-minute time-series published daily">
+<pre>
 &lt;ds913&gt;
-    a dcat:Dataset ;
-    dct:accrualPeriodicity &lt;http://purl.org/cld/freq/daily&gt; ;
-    dcat:temporalResolution "PT15M"^^xsd:duration ;
+  a dcat:Dataset ;
+  dct:accrualPeriodicity &lt;http://purl.org/cld/freq/daily&gt; ;
+  dcat:temporalResolution "PT15M"^^xsd:duration ;
 .
 </pre>
 </aside>
@@ -3566,89 +3569,89 @@ ex:Test543L
 <aside class="example" id="ex-time-series-2" title="Hourly data published immediately">
 <pre>
 &lt;ds782&gt;
-    a dcat:Dataset ;
-    dct:accrualPeriodicity &lt;http://purl.org/cld/freq/continuous&gt; ;
-    dcat:temporalResolution "PT1H"^^xsd:duration ;
+  a dcat:Dataset ;
+  dct:accrualPeriodicity &lt;http://purl.org/cld/freq/continuous&gt; ;
+  dcat:temporalResolution "PT1H"^^xsd:duration ;
 .
 </pre>
 </aside>
 
-      <aside class="example" id="ex-temporal-coverage-closed-interval" title="Temporal coverage as closed interval">
-      <pre>
-      &lt;&gt; a dcat:Dataset ;
-        dct:temporal [ a dct:PeriodOfTime ;
-          dcat:startDate "2016-03-04"^^xsd:date ;
-          dcat:endDate   "2018-08-05"^^xsd:date .
-        ] .
-      </pre>
-      </aside>
+<aside class="example" id="ex-temporal-coverage-closed-interval" title="Temporal coverage as closed interval">
+<pre>
+&lt;&gt; a dcat:Dataset ;
+  dct:temporal [ a dct:PeriodOfTime ;
+    dcat:startDate "2016-03-04"^^xsd:date ;
+    dcat:endDate   "2018-08-05"^^xsd:date .
+  ] .
+</pre>
+</aside>
 
-      <aside class="example" id="ex-temporal-coverage-closed-proper-interval" title="Temporal coverage as closed interval, using time:ProperInterval">
-      <p>The following dataset specification is equivalent to the one in <a href="#ex-temporal-coverage-closed-interval"></a>, but it uses [[OWL-TIME]]:</p>
-      <pre>
-      &lt;&gt; a dcat:Dataset ;
-        dct:temporal [ a dct:PeriodOfTime , time:ProperInterval ;
-          time:hasBeginning [ a time:Instant ;
-            time:inXSDDate "2016-03-04"^^xsd:date .
-          ] ;
-          time:hasEnd [ a time:Instant ;
-            time:inXSDDate "2018-08-05"^^xsd:date .
-          ] ;
-        ] .
-      </pre>
-      </aside>
+<aside class="example" id="ex-temporal-coverage-closed-proper-interval" title="Temporal coverage as closed interval, using time:ProperInterval">
+<p>The following dataset specification is equivalent to the one in <a href="#ex-temporal-coverage-closed-interval"></a>, but it uses [[OWL-TIME]]:</p>
+<pre>
+&lt;&gt; a dcat:Dataset ;
+  dct:temporal [ a dct:PeriodOfTime , time:ProperInterval ;
+    time:hasBeginning [ a time:Instant ;
+      time:inXSDDate "2016-03-04"^^xsd:date .
+    ] ;
+    time:hasEnd [ a time:Instant ;
+      time:inXSDDate "2018-08-05"^^xsd:date .
+    ] ;
+  ] .
+</pre>
+</aside>
 
-      <aside class="example" id="ex-temporal-coverage-closed-proper-interval-gyear" title="Temporal coverage as proper interval using gYear">
-      <pre>
-      &lt;&gt; a dcat:Dataset ;
-        dct:temporal [ a dct:PeriodOfTime , time:ProperInterval ;
-          time:hasBeginning [ a time:Instant ;
-            time:inXSDgYear "1914"^^xsd:gYear .
-          ] ;
-          time:hasEnd [ a time:Instant ;
-            time:inXSDgYear "1939"^^xsd:gYear .
-          ] ;
-        ] .
-      </pre>
-      </aside>
+<aside class="example" id="ex-temporal-coverage-closed-proper-interval-gyear" title="Temporal coverage as proper interval using gYear">
+<pre>
+&lt;&gt; a dcat:Dataset ;
+  dct:temporal [ a dct:PeriodOfTime , time:ProperInterval ;
+    time:hasBeginning [ a time:Instant ;
+      time:inXSDgYear "1914"^^xsd:gYear .
+    ] ;
+    time:hasEnd [ a time:Instant ;
+      time:inXSDgYear "1939"^^xsd:gYear .
+    ] ;
+  ] .
+</pre>
+</aside>
 
-      <aside class="example" id="ex-temporal-coverage-geologic" title="Temporal coverage for a geologic dataset">
-      <pre>
-      &lt;&gt; a dcat:Dataset ;
-        dct:temporal [ a dct:PeriodOfTime , time:ProperInterval ;
-          time:hasBeginning [ a time:Instant ;
-            time:inTimePosition [ a time:TimePosition ;
-              time:hasTRS &lt;http://resource.geosciml.org/classifier/cgi/geologicage/ma&gt; ;
-              time:numericPosition 541.0 ;
-            ] .
-          ] ;
-          time:hasEnd [ a time:Instant ;
-            time:inTimePosition [ a time:TimePosition ;
-              time:hasTRS &lt;http://resource.geosciml.org/classifier/cgi/geologicage/ma&gt; ;
-              time:numericPosition 251.902 ;
-          ] .
-          ] ;
-        ] .
-      </pre>
-      </aside>
+<aside class="example" id="ex-temporal-coverage-geologic" title="Temporal coverage for a geologic dataset">
+<pre>
+&lt;&gt; a dcat:Dataset ;
+  dct:temporal [ a dct:PeriodOfTime , time:ProperInterval ;
+    time:hasBeginning [ a time:Instant ;
+      time:inTimePosition [ a time:TimePosition ;
+        time:hasTRS &lt;http://resource.geosciml.org/classifier/cgi/geologicage/ma&gt; ;
+        time:numericPosition 541.0 ;
+      ] .
+    ] ;
+    time:hasEnd [ a time:Instant ;
+      time:inTimePosition [ a time:TimePosition ;
+        time:hasTRS &lt;http://resource.geosciml.org/classifier/cgi/geologicage/ma&gt; ;
+        time:numericPosition 251.902 ;
+    ] .
+    ] ;
+  ] .
+</pre>
+</aside>
 
-      <aside class="example" id="ex-temporal-coverage-open-end-interval" title="Temporal coverage as open interval (no end date)">
-      <pre>
-      &lt;&gt; a dcat:Dataset ;
-        dct:temporal [ a dct:PeriodOfTime ;
-          dcat:startDate "2016-03-04"^^xsd:date .
-        ] .
-      </pre>
-      </aside>
+<aside class="example" id="ex-temporal-coverage-open-end-interval" title="Temporal coverage as open interval (no end date)">
+<pre>
+&lt;&gt; a dcat:Dataset ;
+  dct:temporal [ a dct:PeriodOfTime ;
+    dcat:startDate "2016-03-04"^^xsd:date .
+  ] .
+</pre>
+</aside>
 
-      <aside class="example" id="ex-temporal-coverage-open-begin-interval" title="Temporal coverage as open interval (no beginning)">
-      <pre>
-      &lt;&gt; a dcat:Dataset ;
-        dct:temporal [ a dct:PeriodOfTime , time:ProperInterval ;
-          time:hasEnd [ time:inXSDDate "2018-08-05"^^xsd:date ] .
-        ] .
-      </pre>
-      </aside>
+<aside class="example" id="ex-temporal-coverage-open-begin-interval" title="Temporal coverage as open interval (no beginning)">
+<pre>
+&lt;&gt; a dcat:Dataset ;
+  dct:temporal [ a dct:PeriodOfTime , time:ProperInterval ;
+    time:hasEnd [ time:inXSDDate "2018-08-05"^^xsd:date ] .
+  ] .
+</pre>
+</aside>
 
     </section>
     <section id="spatial-properties">
@@ -3659,14 +3662,15 @@ ex:Test543L
       </p>
       <ol>
         <li>
-          The minimum spatial separation of items in a dataset is given using <a href="#Property:dataset_spatialresolution"><code title="http://www.w3.org/ns/dcat#spatialResolutionInMeters"><code>dcat:spatialResolutionInMeters</code></code></a>.
-          The value is a decimal number.
+          <p>The minimum spatial separation of items in a dataset is given using <a href="#Property:dataset_spatialresolution"><code title="http://www.w3.org/ns/dcat#spatialResolutionInMeters">dcat:spatialResolutionInMeters</code></a>.
+          The value is a decimal number.</p>
+          <p>An example of the use of <a href="#Property:dataset_spatialresolution"><code title="http://www.w3.org/ns/dcat#spatialResolutionInMeters">dcat:spatialResolutionInMeters</code></a> is given in <a href="#ex-dataset"></a>.</p>
         </li>
         <li>
-          The spatial extent of a dataset is given using <a href="#Property:dataset_spatial"><code title="http://purl.org/dc/terms/spatial"><code>dct:spatial</code></code></a>.
+          <p>The spatial extent of a dataset is given using <a href="#Property:dataset_spatial"><code title="http://purl.org/dc/terms/spatial">dct:spatial</code></a>.
           The value is a <a href="http://purl.org/dc/terms/Location"><code>dct:Location</code></a>.
-          A number of options for expressing the details of a <code>dct:Location</code> are recommended in <a href="#Class:Location"></a>.
-          Examples of these follow.
+          A number of options for expressing the details of a <code>dct:Location</code> are recommended in <a href="#Class:Location"></a>.</p>
+          <p>Examples of these follow.</p>
         </li>
       </ol>
 
@@ -3675,102 +3679,102 @@ ex:Test543L
       <p>In the examples, for properties <code>locn:geometry</code>, <code>dcat:centroid</code>, and <code>dct:bbox</code>, the geometry is always specified with WKT. As per [[GeoSPARQL]], when the CRS specification is omitted this implies that the default CRS is used - namely CRS84 (corresponding to WGS84, but with axis order longitude/latitude).</p>
       </aside>
 
-      <aside class="example" id="ex-spatial-coverage-geometry" title="Spatial coverage as a polygon">
-      <p>A dataset whose spatial coverage corresponds to Anne Frank's house in Amsterdam, specified as a polygon (the coordinate reference system is CRS84).</p>
-      <pre>
-      a:Dataset a dcat:Dataset ;
-        dct:spatial [
-          a dct:Location ;
-          locn:geometry "POLYGON ((
-            4.8842353 52.375108 , 4.884276 52.375153 ,
-            4.8842567 52.375159 , 4.883981 52.375254 ,
-            4.8838502 52.375109 , 4.883819 52.375075 ,
-            4.8841037 52.374979 , 4.884143 52.374965 ,
-            4.8842069 52.375035 , 4.884263 52.375016 ,
-            4.8843200 52.374996 , 4.884255 52.374926 ,
-            4.8843289 52.374901 , 4.884451 52.375034 ,
-            4.8842353 52.375108
-          ))"^^geosparql:asWKT ;
-        ] .
-      </pre>
-      <figure id="fig-spatial-coverage-geometry">
-      <img src="./images/ex-spatial-coverage-geometry-anne-frank-house.png"/>
-      <figcaption>Map preview of a spatial coverage specified with a geometry<figcaption>
-      </figure>
-      </aside>
+<aside class="example" id="ex-spatial-coverage-geometry" title="Spatial coverage as a polygon">
+<p>A dataset whose spatial coverage corresponds to Anne Frank's house in Amsterdam, specified as a polygon (the coordinate reference system is CRS84).</p>
+<pre>
+a:Dataset a dcat:Dataset ;
+  dct:spatial [
+    a dct:Location ;
+    locn:geometry """POLYGON ((
+      4.8842353 52.375108 , 4.884276 52.375153 ,
+      4.8842567 52.375159 , 4.883981 52.375254 ,
+      4.8838502 52.375109 , 4.883819 52.375075 ,
+      4.8841037 52.374979 , 4.884143 52.374965 ,
+      4.8842069 52.375035 , 4.884263 52.375016 ,
+      4.8843200 52.374996 , 4.884255 52.374926 ,
+      4.8843289 52.374901 , 4.884451 52.375034 ,
+      4.8842353 52.375108
+    ))"""^^geosparql:asWKT ;
+  ] .
+</pre>
+<figure id="fig-spatial-coverage-geometry">
+<img src="./images/ex-spatial-coverage-geometry-anne-frank-house.png"/>
+<figcaption>Map preview of a spatial coverage specified with a geometry</figcaption>
+</figure>
+</aside>
 
-      <aside class="example" id="ex-spatial-coverage-geometry-with-crs" title="Spatial coverage as a polygon, using a specific CRS">
-      <p>The same dataset in <a href="#ex-spatial-coverage-geometry"></a>, but where the coordinates of the polygon are specified by using the national Dutch <abbr title="Coordinate Reference System">CRS</abbr> - <a href="http://epsg-registry.org/?display=entity&amp;urn=urn:ogc:def:crs:EPSG::28992">EPSG:28992</a> ("Amersfoort / RD New").</p>
-      <pre>
-      a:Dataset a dcat:Dataset ;
-        dct:spatial [
-          a dct:Location ;
-          locn:geometry "&lt;http://www.opengis.net/def/crs/EPSG/0/28992&gt; POLYGON ((
-            120749.725 487589.422 , 120752.55 487594.375  ,
-            120751.227 487595.129 , 120732.539 487605.788 ,
-            120723.505 487589.745 , 120721.387 487585.939 ,
-            120740.668 487575.07  , 120743.316 487573.589 ,
-            120747.735 487581.337 , 120751.564 487579.154 ,
-            120755.411 487576.96  , 120750.935 487569.172 ,
-            120755.941 487566.288 , 120764.369 487581.066 ,
-            120749.725 487589.422
-          ))"^^geosparql:asWKT ;
-        ] .
-      </pre>
-      </aside>
+<aside class="example" id="ex-spatial-coverage-geometry-with-crs" title="Spatial coverage as a polygon, using a specific CRS">
+<p>The same dataset in <a href="#ex-spatial-coverage-geometry"></a>, but where the coordinates of the polygon are specified by using the national Dutch <abbr title="Coordinate Reference System">CRS</abbr> - <a href="http://epsg-registry.org/?display=entity&amp;urn=urn:ogc:def:crs:EPSG::28992">EPSG:28992</a> ("Amersfoort / RD New").</p>
+<pre>
+a:Dataset a dcat:Dataset ;
+  dct:spatial [
+    a dct:Location ;
+    locn:geometry """&lt;http://www.opengis.net/def/crs/EPSG/0/28992&gt; POLYGON ((
+      120749.725 487589.422 , 120752.55 487594.375  ,
+      120751.227 487595.129 , 120732.539 487605.788 ,
+      120723.505 487589.745 , 120721.387 487585.939 ,
+      120740.668 487575.07  , 120743.316 487573.589 ,
+      120747.735 487581.337 , 120751.564 487579.154 ,
+      120755.411 487576.96  , 120750.935 487569.172 ,
+      120755.941 487566.288 , 120764.369 487581.066 ,
+      120749.725 487589.422
+    ))"""^^geosparql:asWKT ;
+  ] .
+</pre>
+</aside>
 
-      <aside class="example" id="ex-spatial-coverage-centroid" title="Spatial coverage as centroid">
-      <p>The same dataset of <a href="#ex-spatial-coverage-geometry"></a>, buth where spatial coverage is specified by using the centroid / representative point of Anne Frank's house.</p>
-      <pre>
-      a:Dataset a dcat:Dataset ;
-        dct:spatial [
-          a dct:Location ;
-          dcat:centroid "POINT(4.88412 52.37509)"^^geosparql:asWKT .
-        ] .
-      </pre>
-      <figure id="fig-spatial-coverage-centroid">
-      <img src="./images/ex-spatial-coverage-centroid-anne-frank-house.png"/>
-      <figcaption>Map preview of a spatial coverage specified with a centroid</figcaption>
-      </figure>
-      </aside>
+<aside class="example" id="ex-spatial-coverage-centroid" title="Spatial coverage as centroid">
+<p>The same dataset of <a href="#ex-spatial-coverage-geometry"></a>, buth where spatial coverage is specified by using the centroid / representative point of Anne Frank's house.</p>
+<pre>
+a:Dataset a dcat:Dataset ;
+  dct:spatial [
+    a dct:Location ;
+    dcat:centroid "POINT(4.88412 52.37509)"^^geosparql:asWKT .
+  ] .
+</pre>
+<figure id="fig-spatial-coverage-centroid">
+<img src="./images/ex-spatial-coverage-centroid-anne-frank-house.png"/>
+<figcaption>Map preview of a spatial coverage specified with a centroid</figcaption>
+</figure>
+</aside>
 
-      <aside class="example" id="ex-spatial-coverage-centroid-w3cgeo" title="Spatial coverage as centroid, by using w3cgeo:Point">
-      <p>The following dataset specification is equivalent to the one in <a href="#ex-spatial-coverage-centroid"></a>, but it uses [[W3C-BASIC-GEO]] instead of <code>dcat:centroid</code>:</p>
-      <pre>
-      a:Dataset a dcat:Dataset ;
-        dct:spatial [
-          a dct:Location , w3cgeo:Point ;
-          w3cgeo:lat  "52.37509"^^xsd:decimal ;
-          w3cgeo:long "4.88412"^^xsd:decimal .
-        ] .
-      </pre>
-      </aside>
+<aside class="example" id="ex-spatial-coverage-centroid-w3cgeo" title="Spatial coverage as centroid, by using w3cgeo:Point">
+<p>The following dataset specification is equivalent to the one in <a href="#ex-spatial-coverage-centroid"></a>, but it uses [[W3C-BASIC-GEO]] instead of <code>dcat:centroid</code>:</p>
+<pre>
+a:Dataset a dcat:Dataset ;
+  dct:spatial [
+    a dct:Location , w3cgeo:Point ;
+    w3cgeo:lat  "52.37509"^^xsd:decimal ;
+    w3cgeo:long "4.88412"^^xsd:decimal .
+  ] .
+</pre>
+</aside>
 
-      <aside class="example" id="ex-spatial-coverage-bbox" title="Spatial coverage as bounding box">
-      <p>The Dutch dataset of postal addresses, with its spatial coverage (Netherlands) specified as a bounding box.</p>
-      <pre>
-      <> a dcat:Dataset ;
-        dct:title "Adressen"@nl ;
-        dct:title "Addresses"@en ;
-        dct:description "INSPIRE Adressen afkomstig uit de basisregistratie Adressen,
-                         beschikbaar voor heel Nederland"@nl ;
-        dct:description "INSPIRE addresses derived from the Addresses base registry,
-                         available for the Netherlands"@en ;
-        dcat:theme &lt;http://inspire.ec.europa.eu/theme/ad&gt; ;
-        dct:spatial [
-          a dct:Location ;
-          dcat:bbox "POLYGON((
-            3.053 47.975 , 7.24  47.975 ,
-            7.24  53.504 , 3.053 53.504 ,
-            3.053 47.975
-          ))"^^geosparql:asWKT .
-        ] .
-      </pre>
-      <figure id="fig-spatial-coverage-bbox">
-      <img src="./images/ex-spatial-coverage-bbox-netherlands.png"/>
-      <figcaption>Map preview of a spatial coverage specified with a bounding box</figcaption>
-      </figure>
-      </aside>
+<aside class="example" id="ex-spatial-coverage-bbox" title="Spatial coverage as bounding box">
+<p>The Dutch dataset of postal addresses, with its spatial coverage (Netherlands) specified as a bounding box.</p>
+<pre>
+&lt;&gt; a dcat:Dataset ;
+  dct:title "Adressen"@nl ;
+  dct:title "Addresses"@en ;
+  dct:description "INSPIRE Adressen afkomstig uit de basisregistratie Adressen,
+                   beschikbaar voor heel Nederland"@nl ;
+  dct:description "INSPIRE addresses derived from the Addresses base registry,
+                   available for the Netherlands"@en ;
+  dcat:theme &lt;http://inspire.ec.europa.eu/theme/ad&gt; ;
+  dct:spatial [
+    a dct:Location ;
+    dcat:bbox """POLYGON((
+      3.053 47.975 , 7.24  47.975 ,
+      7.24  53.504 , 3.053 53.504 ,
+      3.053 47.975
+    ))"""^^geosparql:asWKT .
+  ] .
+</pre>
+<figure id="fig-spatial-coverage-bbox">
+<img src="./images/ex-spatial-coverage-bbox-netherlands.png"/>
+<figcaption>Map preview of a spatial coverage specified with a bounding box</figcaption>
+</figure>
+</aside>
 
     </section>
 </section>
@@ -4174,7 +4178,9 @@ ex:Test543L
       <p>
           If the nature of the relationships between a dataset and component resources in a catalog, repository, or elsewhere are not known, <code>dct:relation</code> can be used:
       </p>
-<pre id="ex-dataset-as-bag-of-files" class="example nohighlight turtle">
+
+<aside id="ex-dataset-as-bag-of-files" class="example">
+<pre>
 :d33937
   dct:description "A set of RDF graphs representing the International [Chrono]stratigraphic Chart, ..." ;
   dct:identifier "https://doi.org/10.25919/5b4d2b83cbf2d"^^xsd:anyURI ;
@@ -4189,12 +4195,14 @@ ex:Test543L
   dct:relation :isc2017.ttl ;
 .
 </pre>
+</aside>
 
       <p>
           If it is clear that any of these related resources is a proper <i>representation</i> of the dataset, <code>dcat:distribution</code> should be used.
       </p>
 
-<pre id="ex-when-using-distribution" class="example nohighlight turtle">
+<aside id="ex-when-using-distribution" class="example">
+<pre>
 :d33937
   rdf:type dcat:Dataset ;
   dct:description "A set of RDF graphs representing the International [Chrono]stratigraphic Chart, ..." ;
@@ -4229,6 +4237,7 @@ ex:Test543L
   dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/turtle&gt; ;
 .
 </pre>
+</aside>
 
       <p>
           This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://w3c.github.io/dxwg/dcat/examples/csiro-dap-examples.ttl"><code>csiro-dap-examples.ttl</code></a>.
@@ -4238,10 +4247,11 @@ ex:Test543L
         Additional detail about the nature of the related resources can be given using suitable elements from other RDF vocabularies, along with dataset descriptors from DCAT. For example, the example above might be more fully expressed as follows (embedded comments explain the different resources in the graph):
       </p>
 
-            <pre id="ex-elaborated-bag" class="example nohighlight turtle">
+<aside id="ex-elaborated-bag" class="example">
+<pre>
 dap:d33937
   rdf:type dcat:Dataset ;
-  rdfs:comment "The data" ;
+  dct:title "The data" ;
   dct:conformsTo &lt;http://resource.geosciml.org/ontology/timescale/gts&gt; ;
   dct:description "A set of RDF graphs representing the International [Chrono]stratigraphic Chart [...]" ;
   dct:identifier "https://doi.org/10.25919/5b4d2b83cbf2d" ;
@@ -4251,91 +4261,92 @@ dap:d33937
   dct:relation &lt;http://stratigraphy.org/ICSchart/ChronostratChart2017-02.jpg&gt; ;
   dct:relation &lt;http://stratigraphy.org/ICSchart/ChronostratChart2017-02.pdf&gt; ;
   dct:relation [
-      rdf:type dcat:Dataset ;
-      dct:conformsTo &lt;https://www.w3.org/TR/owl2-overview/&gt; ;
-      rdfs:comment "The ontology used for the data" ;
-      dct:description "This is an RDF/OWL representation of the GeoSciML Geologic Timescale model ..." ;
-      dct:issued "2011-01-01"^^xsd:date ;
-      dct:modified "2017-04-28"^^xsd:date ;
-      dct:title "Geologic Timescale model" ;
-      dct:type &lt;http://purl.org/adms/assettype/DomainModel&gt; ;
-      dcat:distribution [
-          rdf:type dcat:Distribution ;
-          rdfs:comment "RDF/XML representation of the ontology used for the data" ;
-          dcat:downloadURL &lt;http://resource.geosciml.org/ontology/timescale/gts.rdf&gt; ;
-          dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/rdf+xml&gt; ;
-        ] ;
-      dcat:distribution [
-          rdf:type dcat:Distribution ;
-          rdfs:comment "TTL representation of the ontology used for the data" ;
-          dcat:downloadURL &lt;http://resource.geosciml.org/ontology/timescale/gts.ttl&gt; ;
-          dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/turtle&gt; ;
-        ] ;
-      dcat:distribution [
-          rdf:type dcat:Distribution ;
-          rdfs:comment "Webpage describing the ontology used for the data" ;
-          dcat:downloadURL &lt;http://resource.geosciml.org/ontology/timescale/gts.html&gt; ;
-          dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/html&gt; ;
-        ] ;
-      dcat:landingPage &lt;http://resource.geosciml.org/ontology/timescale/gts&gt; ;
-    ] ;
-  dcat:distribution [
+    rdf:type dcat:Dataset ;
+    dct:conformsTo &lt;https://www.w3.org/TR/owl2-overview/&gt; ;
+    dct:title "The ontology used for the data" ;
+    dct:description "This is an RDF/OWL representation of the GeoSciML Geologic Timescale model ..." ;
+    dct:issued "2011-01-01"^^xsd:date ;
+    dct:modified "2017-04-28"^^xsd:date ;
+    dct:title "Geologic Timescale model" ;
+    dct:type &lt;http://purl.org/adms/assettype/DomainModel&gt; ;
+    dcat:distribution [
       rdf:type dcat:Distribution ;
-      dct:conformsTo &lt;https://www.w3.org/TR/rdf-schema/&gt; ;
-      rdfs:comment "RDF representation of the data" ;
-      dcat:accessService [
-          rdf:type dcat:DataService ;
-          dct:conformsTo &lt;https://www.w3.org/TR/sparql11-query/&gt; ;
-          dct:title "International Chronostratigraphic Chart hosted at Research Vocabularies Australia" ;
-          rdfs:comment "Service that supports queries to obtain RDF representations of subsets of the data" ;
-          dcat:endpointURL &lt;http://vocabs.ands.org.au/repository/api/sparql/csiro_international-chronostratigraphic-chart_2017&gt; ;
-          dcat:landingPage &lt;https://vocabs.ands.org.au/viewById/196&gt; ;
-        ] ;
-    ] ;
-  dcat:distribution [
-      rdf:type dcat:Distribution ;
-      dct:identifier "isc2017.jsonld" ;
-      rdfs:comment "JSON-LD serialization of the RDF representation of the entire dataset" ;
-      dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/ld+json&gt; ;
-    ] ;
-  dcat:distribution [
-      rdf:type dcat:Distribution ;
-      dct:identifier "isc2017.nt" ;
-      rdfs:comment "N-Triples serialization of the RDF representation of the entire dataset" ;
-      dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/n-triples&gt; ;
-    ] ;
-  dcat:distribution [
-      rdf:type dcat:Distribution ;
-      dct:identifier "isc2017.rdf" ;
-      rdfs:comment "RDF/XML serialization of the RDF representation of the entire dataset" ;
+      dct:title "RDF/XML representation of the ontology used for the data" ;
+      dcat:downloadURL &lt;http://resource.geosciml.org/ontology/timescale/gts.rdf&gt; ;
       dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/rdf+xml&gt; ;
     ] ;
-  dcat:distribution [
+    dcat:distribution [
       rdf:type dcat:Distribution ;
-      dct:identifier "isc2017.ttl" ;
-      rdfs:comment "TTL serialization of the RDF representation of the entire dataset" ;
+      dct:title "TTL representation of the ontology used for the data" ;
+      dcat:downloadURL &lt;http://resource.geosciml.org/ontology/timescale/gts.ttl&gt; ;
       dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/turtle&gt; ;
     ] ;
+    dcat:distribution [
+      rdf:type dcat:Distribution ;
+      dct:title "Webpage describing the ontology used for the data" ;
+      dcat:downloadURL &lt;http://resource.geosciml.org/ontology/timescale/gts.html&gt; ;
+      dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/html&gt; ;
+    ] ;
+    dcat:landingPage &lt;http://resource.geosciml.org/ontology/timescale/gts&gt; ;
+  ] ;
+  dcat:distribution [
+    rdf:type dcat:Distribution ;
+    dct:conformsTo &lt;https://www.w3.org/TR/rdf-schema/&gt; ;
+    dct:title "RDF representation of the data" ;
+    dcat:accessService [
+      rdf:type dcat:DataService ;
+      dct:conformsTo &lt;https://www.w3.org/TR/sparql11-query/&gt; ;
+      dct:title "International Chronostratigraphic Chart hosted at Research Vocabularies Australia" ;
+      dct:description "Service that supports queries to obtain RDF representations of subsets of the data" ;
+      dcat:endpointURL &lt;http://vocabs.ands.org.au/repository/api/sparql/csiro_international-chronostratigraphic-chart_2017&gt; ;
+      dcat:landingPage &lt;https://vocabs.ands.org.au/viewById/196&gt; ;
+    ] ;
+  ] ;
+  dcat:distribution [
+    rdf:type dcat:Distribution ;
+    dct:identifier "isc2017.jsonld" ;
+    dct:title "JSON-LD serialization of the RDF representation of the entire dataset" ;
+    dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/ld+json&gt; ;
+  ] ;
+  dcat:distribution [
+    rdf:type dcat:Distribution ;
+    dct:identifier "isc2017.nt" ;
+    dct:title "N-Triples serialization of the RDF representation of the entire dataset" ;
+    dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/n-triples&gt; ;
+  ] ;
+  dcat:distribution [
+    rdf:type dcat:Distribution ;
+    dct:identifier "isc2017.rdf" ;
+    dct:title "RDF/XML serialization of the RDF representation of the entire dataset" ;
+    dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/rdf+xml&gt; ;
+  ] ;
+  dcat:distribution [
+    rdf:type dcat:Distribution ;
+    dct:identifier "isc2017.ttl" ;
+    dct:title "TTL serialization of the RDF representation of the entire dataset" ;
+    dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/turtle&gt; ;
+  ] ;
   dcat:landingPage &lt;https://data.csiro.au/dap/landingpage?pid=csiro:33937&gt; ;
 .
 
 &lt;http://stratigraphy.org/ICSchart/ChronostratChart2017-02.jpg&gt;
-    rdf:type foaf:Document ;
-    dct:type &lt;http://purl.org/dc/dcmitype/Image&gt; ;
-    dct:format  &lt;https://www.iana.org/assignments/media-types/img/jpeg&gt; ;
-    dct:description "Coloured image representation of the International Chronostratigraphic Chart" ;
-    dct:issued "2017-02-01"^^xsd:date ;
-    dct:title "International Chronostratigraphic Chart" ;
+  rdf:type foaf:Document ;
+  dct:type &lt;http://purl.org/dc/dcmitype/Image&gt; ;
+  dct:format  &lt;https://www.iana.org/assignments/media-types/img/jpeg&gt; ;
+  dct:description "Coloured image representation of the International Chronostratigraphic Chart" ;
+  dct:issued "2017-02-01"^^xsd:date ;
+  dct:title "International Chronostratigraphic Chart" ;
 .
 &lt;http://stratigraphy.org/ICSchart/ChronostratChart2017-02.pdf&gt;
-    rdf:type foaf:Document ;
-    dct:type &lt;http://purl.org/dc/dcmitype/Image&gt; ;
-    dct:format &lt;https://www.iana.org/assignments/media-types/application/pdf&gt; ;
-    dct:description "Coloured image representation of the International Chronostratigraphic Chart" ;
-    dct:issued "2017-02-01"^^xsd:date ;
-    dct:title "International Chronostratigraphic Chart" ;
-.
-      </pre>
+  rdf:type foaf:Document ;
+  dct:type &lt;http://purl.org/dc/dcmitype/Image&gt; ;
+  dct:format &lt;https://www.iana.org/assignments/media-types/application/pdf&gt; ;
+  dct:description "Coloured image representation of the International Chronostratigraphic Chart" ;
+  dct:issued "2017-02-01"^^xsd:date ;
+  dct:title "International Chronostratigraphic Chart" ;
+.</pre>
+</aside>
+
       <p>
           This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://w3c.github.io/dxwg/dcat/examples/csiro-stratchart.ttl"><code>csiro-stratchart.ttl</code></a>.
       </p>
@@ -4350,25 +4361,28 @@ dap:d33937
       <p>
           For example, a simple link from a dataset description to the project that generated the dataset can be formalized as follows (other details elided for clarity):
       </p>
-<pre id="ex-dataset-project" class="example nohighlight turtle">
+
+<aside id="ex-dataset-project" class="example">
+<pre>
 dap:atnf-P366-2003SEPT
-rdf:type dcat:Dataset ;
-dct:bibliographicCitation "Burgay, M; McLaughlin, M; Kramer, M; Lyne, A; Joshi, B; Pearce, G; D'Amico, N; Possenti, A; Manchester, R; Camilo, F (2017): Parkes observations for project P366 semester 2003SEPT. v1. CSIRO. Data Collection. https://doi.org/10.4225/08/598dc08d07bb7" ;
-dct:title "Parkes observations for project P366 semester 2003SEPT" ;
-dcat:landingPage &lt;https://data.csiro.au/dap/landingpage?pid=csiro:P366-2003SEPT&gt; ;
-prov:wasGeneratedBy dap:P366 ;
-.
+  rdf:type dcat:Dataset ;
+  dct:bibliographicCitation "Burgay, M; McLaughlin, M; Kramer, M; Lyne, A; Joshi, B; Pearce, G; D'Amico, N; Possenti, A; Manchester, R; Camilo, F (2017): Parkes observations for project P366 semester 2003SEPT. v1. CSIRO. Data Collection. https://doi.org/10.4225/08/598dc08d07bb7" ;
+  dct:title "Parkes observations for project P366 semester 2003SEPT" ;
+  dcat:landingPage &lt;https://data.csiro.au/dap/landingpage?pid=csiro:P366-2003SEPT&gt; ;
+  prov:wasGeneratedBy dap:P366 ;
+  .
 
 dap:P366
-rdf:type prov:Activity ;
-dct:type "Observation" ;
-prov:startedAtTime "2000-11-01"^^xsd:date ;
-prov:used dap:Parkes-radio-telescope ;
-prov:wasInformedBy dap:ATNF ;
-rdfs:label "P366 - Parkes multibeam high-latitude pulsar survey" ;
-rdfs:seeAlso &lt;https://doi.org/10.1111/j.1365-2966.2006.10100.x&gt; ;
-.
-</pre>
+  rdf:type prov:Activity ;
+  dct:type "Observation" ;
+  prov:startedAtTime "2000-11-01"^^xsd:date ;
+  prov:used dap:Parkes-radio-telescope ;
+  prov:wasInformedBy dap:ATNF ;
+  rdfs:label "P366 - Parkes multibeam high-latitude pulsar survey" ;
+  rdfs:seeAlso &lt;https://doi.org/10.1111/j.1365-2966.2006.10100.x&gt; ;
+  .</pre>
+</aside>
+
       <p>
           This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://w3c.github.io/dxwg/dcat/examples/csiro-dap-examples.ttl"><code>csiro-dap-examples.ttl</code></a>.
       </p>
@@ -4407,7 +4421,9 @@ rdfs:seeAlso &lt;https://doi.org/10.1111/j.1365-2966.2006.10100.x&gt; ;
       <p>
           This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://w3c.github.io/dxwg/dcat/examples/eea-csw.ttl"><code>eea-csw.ttl</code></a>
       </p>
-<pre id="ex-service-eea" class="example nohighlight turtle">
+
+<aside id="ex-service-eea" class="example">
+<pre>
 a:EEA-CSW-Endpoint
   rdf:type dcat:DataService ;
   dct:type &lt;http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceCategory/infoCatalogueService&gt; ;
@@ -4427,7 +4443,7 @@ a:EEA-CSW-Endpoint
   dct:spatial [
     rdf:type dct:Location ;
 <!--
-    dcat:bbox "&lt;gml:Envelope srsName=\"http://www.opengis.net/def/crs/OGC/1.3/CRS84\"&gt;&lt;gml:lowerCorner&gt;-180 -90&lt;/gml:lowerCorner&gt;&lt;gml:upperCorner&gt;180 90&lt;/gml:upperCorner&gt;&lt;/gml:Envelope&gt;"^^gsp:gmlLiteral ;
+    dcat:bbox """&lt;gml:Envelope srsName=\"http://www.opengis.net/def/crs/OGC/1.3/CRS84\"&gt;&lt;gml:lowerCorner&gt;-180 -90&lt;/gml:lowerCorner&gt;&lt;gml:upperCorner&gt;180 90&lt;/gml:upperCorner&gt;&lt;/gml:Envelope&gt;"""^^gsp:gmlLiteral ;
 -->
     dcat:bbox "POLYGON((-180 90,180 90,180 -90,-180 -90,-180 90))"^^gsp:wktLiteral ;
   ] ;
@@ -4437,8 +4453,9 @@ a:EEA-CSW-Endpoint
   dcat:contactPoint a:EEA ;
   dcat:endpointDescription &lt;https://sdi.eea.europa.eu/catalogue/srv/eng/csw?service=CSW&request=GetCapabilities&gt; ;
   dcat:endpointURL &lt;http://sdi.eea.europa.eu/catalogue/srv/eng/csw&gt; ;
-.
-</pre>
+.</pre>
+</aside>
+
       <p>
           <a href="#ex-service-gsa"></a> shows a dataset hosted by Geoscience Australia, which is available from three distinct services, as indicated by the value of the <a href="#Property:dataservice_serves_dataset"><code>dcat:servesDataset</code></a> property of each of the service descriptions.
           These are classified as a <a href="#Class:Data_Service"><code>dcat:DataService</code></a> and also have the <code>dct:type</code> set to &quot;<a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download">download</a>&quot; and &quot;<a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view">view</a>&quot; from the INSPIRE classification of spatial data service types [[?INSPIRE-SDST]].
@@ -4448,21 +4465,21 @@ a:EEA-CSW-Endpoint
       </p>
 
 <aside id="ex-service-gsa" class="example">
-<pre class="nohighlight turtle">
+<pre>
 ga-courts:jc
   rdf:type dcat:Dataset ;
   dct:description "The dataset contains spatial locations, in point format, of the Australian High Court, Australian Federal Courts and the Australian Magistrates Courts." ;
   dct:spatial [
     rdf:type dct:Location ;
 <!--
-    dcat:bbox "&lt;gml:Envelope srsName=\"http://www.opengis.net/def/crs/EPSG/0/4283\"&gt;&lt;gml:lowerCorner&gt;115.864566 -42.885989&lt;/gml:lowerCorner&gt;&lt;gml:upperCorner&gt;153.276835 -12.460578&lt;/gml:upperCorner&gt;&lt;/gml:Envelope&gt;"^^geosparql:gmlLiteral ;
+    dcat:bbox """&lt;gml:Envelope srsName=\"http://www.opengis.net/def/crs/EPSG/0/4283\"&gt;&lt;gml:lowerCorner&gt;115.864566 -42.885989&lt;/gml:lowerCorner&gt;&lt;gml:upperCorner&gt;153.276835 -12.460578&lt;/gml:upperCorner&gt;&lt;/gml:Envelope&gt;"""^^geosparql:gmlLiteral ;
   ] ;
 -->
-    dcat:bbox "&lt;http://www.opengis.net/def/crs/EPSG/0/4283&gt; POLYGON((
+    dcat:bbox """&lt;http://www.opengis.net/def/crs/EPSG/0/4283&gt; POLYGON((
       115.864566 -42.885989 , 115.864566 -12.460578 ,
       153.276835 -12.460578 , 153.276835 -42.885989 ,
       115.864566 -42.885989
-    ))"^^geosparql:wktLiteral ;
+    ))"""^^geosparql:wktLiteral ;
   ] ;
   dct:title "Judicial Courts" ;
   dct:type &lt;http://purl.org/dc/dcmitype/Dataset&gt; ;
@@ -4522,7 +4539,8 @@ ga-courts:jc-wms
         <p>The first example is for a distribution with a downloadable file that is compressed into a GZIP file.
         </p>
 
-<pre id="compressed-distribution" class="example nohighlight turtle">
+<aside id="compressed-distribution" class="example">
+<pre>
 @prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt; .
 @prefix dct: &lt;http://purl.org/dc/terms/&gt; .
 
@@ -4534,45 +4552,48 @@ ga-courts:jc-wms
   dct:format &lt;http://publications.europa.eu/resource/authority/file-type/CSV&gt; ;
   dcat:mediaType &lt;http://www.iana.org/assignments/media-types/text/csv&gt; ;
   dcat:compressFormat &lt;http://www.iana.org/assignments/media-types/application/gzip&gt;
-.
-</pre>
+.</pre>
+</aside>
 
         <p>The second example is for a distribution with several files packed into a TAR file.
         </p>
 
-<pre id="packaged-distribution" class="example nohighlight turtle">
-  @prefix dcat: &lt;http://www.w3.org/ns/dcat#> .
-  @prefix dct: &lt;http://purl.org/dc/terms/> .
+<aside id="packaged-distribution" class="example">
+<pre>
+@prefix dcat: &lt;http://www.w3.org/ns/dcat#> .
+@prefix dct: &lt;http://purl.org/dc/terms/> .
 
-  &lt;https://data.gov.cz/zdroj/datová-sada/247025684/22&gt; a dcat:Distribution ;
-    dcat:accessURL &lt;https://mvcr1.opendata.cz/czechpoint/data.tar&gt; ;
-    dcat:downloadURL &lt;https://mvcr1.opendata.cz/czechpoint/data.tar&gt; ;
-    dct:license &lt;https://data.gov.cz/podmínky-užití/volný-přístup/&gt; ;
-    dct:conformsTo &lt;https://mvcr1.opendata.cz/czechpoint/2007.json&gt; ;
-    dct:format &lt;http://publications.europa.eu/resource/authority/file-type/CSV&gt; ;
-    dcat:mediaType &lt;http://www.iana.org/assignments/media-types/text/csv&gt; ;
-    dcat:packageFormat &lt;http://publications.europa.eu/resource/authority/file-type/TAR&gt;
-.
-</pre>
+&lt;https://data.gov.cz/zdroj/datová-sada/247025684/22&gt; a dcat:Distribution ;
+  dcat:accessURL &lt;https://mvcr1.opendata.cz/czechpoint/data.tar&gt; ;
+  dcat:downloadURL &lt;https://mvcr1.opendata.cz/czechpoint/data.tar&gt; ;
+  dct:license &lt;https://data.gov.cz/podmínky-užití/volný-přístup/&gt; ;
+  dct:conformsTo &lt;https://mvcr1.opendata.cz/czechpoint/2007.json&gt; ;
+  dct:format &lt;http://publications.europa.eu/resource/authority/file-type/CSV&gt; ;
+  dcat:mediaType &lt;http://www.iana.org/assignments/media-types/text/csv&gt; ;
+  dcat:packageFormat &lt;http://publications.europa.eu/resource/authority/file-type/TAR&gt;
+.</pre>
+</aside>
 
         <p>The third example is for a distribution with several files packed into a TAR file which has been compressed into a GZIP file.
         </p>
 
-<pre id="packaged-and-compressed-distribution" class="example nohighlight turtle">
-  @prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt; .
-  @prefix dct: &lt;http://purl.org/dc/terms/&gt; .
+<aside id="packaged-and-compressed-distribution" class="example">
+<pre>
+@prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt; .
+@prefix dct: &lt;http://purl.org/dc/terms/&gt; .
 
-  &lt;https://data.gov.cz/zdroj/datová-sada/247025684/22&gt; a dcat:Distribution ;
-    dcat:accessURL &lt;https://mvcr1.opendata.cz/czechpoint/data.tar.gz&gt; ;
-    dcat:downloadURL &lt;https://mvcr1.opendata.cz/czechpoint/data.tar.gz&gt; ;
-    dct:conformsTo &lt;https://mvcr1.opendata.cz/czechpoint/2007.json&gt; ;
-    dct:license &lt;https://data.gov.cz/podmínky-užití/volný-přístup/&gt; ;
-    dct:format &lt;http://publications.europa.eu/resource/authority/file-type/CSV&gt; ;
-    dcat:mediaType &lt;http://www.iana.org/assignments/media-types/text/csv&gt; ;
-    dcat:packageFormat &lt;http://publications.europa.eu/resource/authority/file-type/TAR&gt; ;
-    dcat:compressFormat &lt;http://www.iana.org/assignments/media-types/application/gzip&gt;
-.
-</pre>
+&lt;https://data.gov.cz/zdroj/datová-sada/247025684/22&gt; a dcat:Distribution ;
+  dcat:accessURL &lt;https://mvcr1.opendata.cz/czechpoint/data.tar.gz&gt; ;
+  dcat:downloadURL &lt;https://mvcr1.opendata.cz/czechpoint/data.tar.gz&gt; ;
+  dct:conformsTo &lt;https://mvcr1.opendata.cz/czechpoint/2007.json&gt; ;
+  dct:license &lt;https://data.gov.cz/podmínky-užití/volný-přístup/&gt; ;
+  dct:format &lt;http://publications.europa.eu/resource/authority/file-type/CSV&gt; ;
+  dcat:mediaType &lt;http://www.iana.org/assignments/media-types/text/csv&gt; ;
+  dcat:packageFormat &lt;http://publications.europa.eu/resource/authority/file-type/TAR&gt; ;
+  dcat:compressFormat &lt;http://www.iana.org/assignments/media-types/application/gzip&gt;
+  .</pre>
+</aside>
+
         <p>
             These examples are available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://w3c.github.io/dxwg/dcat/examples/compress-and-package.ttl"><code>compress-and-package.ttl</code></a>
         </p>
