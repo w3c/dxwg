@@ -328,7 +328,7 @@
 
         <p>First, the catalog description:
         </p>
-        
+
 <aside id="ex-catalog" class="example">
 <pre class="nohighlight turtle">
 :catalog
@@ -345,7 +345,7 @@
 
         <p>The publisher of the catalog has the relative URI&nbsp;<code>:transparency-office</code>. Further description of the publisher can be provided as in <a href="#ex-publisher"></a>:
         </p>
-        
+
 <aside id="ex-publisher" class="example">
 <pre class="nohighlight turtle">
 :transparency-office
@@ -398,7 +398,7 @@
         <p>One representation of the dataset <code>:dataset-001-csv</code> can be downloaded as a 5Kb CSV file. This is
             represented as an RDF resource of type <code>dcat:Distribution</code>.
         </p>
-        
+
 <aside id="ex-distribution" class="example">
 <pre class="nohighlight turtle">
 :dataset-001-csv
@@ -512,7 +512,7 @@
             describing the datasets), <code>dcat:CatalogRecord</code> can be used. For example,
             while <code>:dataset-001</code> was issued on 2011-12-05, its description on Imaginary Catalog was added on 2011-12-11. This can be represented by DCAT as in <a href="#ex-catalog-record"></a>:
         </p>
-        
+
 <aside id="ex-catalog-record" class="example">
 <pre class="nohighlight turtle">
 :catalog  dcat:record&nbsp;:record-001&nbsp; .
@@ -583,7 +583,7 @@
           its specific API definition using <code>dct:conformsTo</code>,
           with the detailed description of the individual endpoint parameters and options linked using <code>dcat:endpointDescription</code>.
         </p>
-        
+
 <aside id="ex-access-service" class="example">
 <pre class="nohighlight turtle">
 :dataset-004
@@ -1621,35 +1621,15 @@
                 <tr><td class="prop">Definition:</td><td>The frequency at which dataset is published.</td></tr>
                 <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/Frequency"><code>dct:Frequency</code></a> (A rate at which something recurs)</td></tr>
                 <tr><td class="prop">Usage note:</td><td>
-                    The value of <code>dct:accrualPeriodicity</code> gives the rate at which the dataset-as-a-whole is updated. This may be complemented by <a href="#Property:dataset_temporalresolution"><code>dcat:temporalResolution</code></a> to give the time between collected data points in a time series.
+                    The value of <code>dct:accrualPeriodicity</code> gives the rate at which the dataset-as-a-whole is updated.
+                    This may be complemented by <a href="#Property:dataset_temporalresolution"><code>dcat:temporalResolution</code></a> to give the time between collected data points in a time series.
                   </td></tr>
                 </tbody>
             </table>
 
-
-      <p>
-        For example, a 15-minute time-series that is published daily could be described
-      </p>
-      <pre id="ex-freq-daily" class="example nohighlight turtle">
-&lt;ds913&gt;
-    a dcat:Dataset ;
-    dct:accrualPeriodicity &lt;http://purl.org/cld/freq/daily&gt; ;
-    dcat:temporalResolution "PT15M"^^xsd:duration ;
-.
-</pre>
-
-    <p>
-      A dataset composed of items added hourly and published immediately could be described
-    </p>
-    <pre id="ex-freq-hourly" class="example nohighlight turtle">
-&lt;ds782&gt;
-    a dcat:Dataset ;
-    dct:accrualPeriodicity &lt;http://purl.org/cld/freq/continuous&gt; ;
-    dcat:temporalResolution "PT1H"^^xsd:duration ;
-.
-</pre>
-
-
+            <p>
+              Examples showing how <code>dct:accrualPeriodicity</code> and <a href="#Property:dataset_temporalresolution"><code>dcat:temporalResolution</code></a> may be combined are given in <a href="#temporal-properties"></a>.
+            </p>
         </section>
 
         <section id="Property:dataset_spatial">
@@ -1668,8 +1648,13 @@
                 <tbody>
                 <tr><td class="prop">Definition:</td><td>The geographical area covered by the dataset.</td></tr>
                 <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/Location"><code>dct:Location</code></a> (A spatial region or named place)</td></tr>
+                <tr><td class="prop">Usage note:</td><td>The spatial coverage of a dataset may be encoded as an instance of <a href="http://purl.org/dc/terms/Location"><code>dct:Location</code></a>, or may be indicated using a URI reference (link) to a resource describing a location. It is recommended that links are to entries in a well maintained gazetteer such as <a href="http://www.geonames.org/">Geonames</a>.</td></tr>
                 </tbody>
             </table>
+
+            <p>
+              Options for expressing the details of a <code>dct:Location</code> are provided in <a href="#Class:Location"></a>.
+            </p>
         </section>
 
         <section id="Property:dataset_spatialresolution">
@@ -1706,6 +1691,13 @@
                 <tbody>
                 <tr><td class="prop">Definition:</td><td>The temporal period that the dataset covers.</td></tr>
                 <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/PeriodOfTime"><code>dct:PeriodOfTime</code></a> (An interval of time that is named or defined by its start and end dates)</td></tr>
+                <tr><td class="prop">Usage note:</td><td>The temporal coverage of a dataset may be encoded as an instance of <a href="http://purl.org/dc/terms/PeriodOfTime"><code>dct:PeriodOfTime</code></a>, or may be indicated using a URI reference (link) to a resource describing a time period or interval.</td></tr>
+                </tbody>
+            </table>
+
+            <p>
+              Options for expressing the details of a <code>dct:PeriodOfTime</code> are provided in <a href="#Class:PeriodOfTime"></a>.
+            </p>
                 </tbody>
             </table>
         </section>
@@ -1726,9 +1718,12 @@
                 </tbody>
             </table>
 
-
         <p>This is intended to provide a summary indication of the temporal resolution of the data distribution as a single value.
         More complex descriptions of various aspects of temporal precision, accuracy, resolution and other statistics can be provided using the Data Quality Vocabulary [[?VOCAB-DQV]].</p>
+
+        <p>
+          The distinction between <code>dcat:temporalResolution</code> and <a href="#Property:dataset_frequency"><code>dct:accrualPeriodicity</code></a> is illustrated by examples in <a href="#temporal-properties"></a>.
+        </p>
 
         </section>
 
@@ -2441,7 +2436,7 @@ end class DiscoveryService -->
               <a href="http://www.w3.org/ns/prov#wasRevisionOf"><code>prov:wasRevisionOf</code></a>,
               <a href="http://www.w3.org/ns/prov#hadPrimarySource"><code>prov:hadPrimarySource</code></a>,
               <a href="http://www.w3.org/ns/prov#alternateOf"><code>prov:alternateOf</code></a>,
-              <a href="http://www.w3.org/ns/prov#specializationOf"><code>prov:specializationOf</code></a>)              
+              <a href="http://www.w3.org/ns/prov#specializationOf"><code>prov:specializationOf</code></a>)
             </td>
             </tr>
           </tbody>
@@ -2553,11 +2548,11 @@ end class DiscoveryService -->
 
         <section id="Property:period_startDate">
             <h4>Property: start date</h4>
-            
+
             <p class="note">
               Property added in this revision of DCAT.
             </p>
-            
+
             <table class="definition">
               <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#startDate" title="http://www.w3.org/ns/dcat#startDate">dcat:startDate</a></th></tr></thead>
               <tbody>
@@ -2572,11 +2567,11 @@ end class DiscoveryService -->
 
         <section id="Property:period_endDate">
             <h4>Property: end date</h4>
-            
+
             <p class="note">
               Property added in this revision of DCAT.
             </p>
-            
+
             <table class="definition">
               <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#endDate" title="http://www.w3.org/ns/dcat#endDate">dcat:endDate</a></th></tr></thead>
               <tbody>
@@ -2591,11 +2586,11 @@ end class DiscoveryService -->
 
         <section id="Property:period_hasBeginning">
             <h4>Property: beginning</h4>
-            
+
             <p class="note">
               Property added in this context in this revision of DCAT.
             </p>
-            
+
             <table class="definition">
               <thead><tr><th>RDF Property:</th><th><a title="http://www.w3.org/2006/time#hasBeginning" data-cite="OWL-TIME#time:hasBeginning">time:hasBeginning</a></th></tr></thead>
               <tbody>
@@ -2620,7 +2615,7 @@ end class DiscoveryService -->
             <p class="note">
               Property added in this context in this revision of DCAT.
             </p>
-            
+
             <table class="definition">
               <thead><tr><th>RDF Property:</th><th><a title="http://www.w3.org/2006/time#hasEnd" data-cite="OWL-TIME#time:hasEnd">time:hasEnd</a></th></tr></thead>
               <tbody>
@@ -2636,86 +2631,12 @@ end class DiscoveryService -->
             <p>
               The value of <a data-cite="OWL-TIME#time:hasEnd"><code title="http://www.w3.org/2006/time#hasEnd">time:hasEnd</code></a> is a <a data-cite="OWL-TIME#time:Instant" title="http://www.w3.org/2006/time#Instant"><code>time:Instant</code></a> for whose position several options are available. In particular times that do not use the conventional Gregorian calendar can be expressed, such as geological and archeological periods, and times given as numeric positions on a time-line.
             </p>
-            
+
         </section>
 
-
-<aside class="example" id="ex-temporal-coverage-closed-interval" title="Temporal coverage as closed interval">
-<pre>
-&lt;&gt; a dcat:Dataset ;
-  dct:temporal [ a dct:PeriodOfTime ;
-    dcat:startDate "2016-03-04"^^xsd:date ;
-    dcat:endDate   "2018-08-05"^^xsd:date .
-  ] .
-</pre>
-</aside>
-
-<aside class="example" id="ex-temporal-coverage-closed-proper-interval" title="Temporal coverage as closed interval, using time:ProperInterval">
-<p>The following dataset specification is equivalent to the one in <a href="#ex-temporal-coverage-closed-interval"></a>, but it uses [[OWL-TIME]]:</p>
-<pre>
-&lt;&gt; a dcat:Dataset ;
-  dct:temporal [ a dct:PeriodOfTime , time:ProperInterval ;
-    time:hasBeginning [ a time:Instant ;
-      time:inXSDDate "2016-03-04"^^xsd:date .
-    ] ;
-    time:hasEnd [ a time:Instant ;
-      time:inXSDDate "2018-08-05"^^xsd:date .
-    ] ;
-  ] .
-</pre>
-</aside>
-
-<aside class="example" id="ex-temporal-coverage-closed-proper-interval-gyear" title="Temporal coverage as proper interval using gYear">
-<pre>
-&lt;&gt; a dcat:Dataset ;
-  dct:temporal [ a dct:PeriodOfTime , time:ProperInterval ;
-    time:hasBeginning [ a time:Instant ;
-      time:inXSDgYear "1914"^^xsd:gYear .
-    ] ;
-    time:hasEnd [ a time:Instant ;
-      time:inXSDgYear "1939"^^xsd:gYear .
-    ] ;
-  ] .
-</pre>
-</aside>
-
-<aside class="example" id="ex-temporal-coverage-geologic" title="Temporal coverage for a geologic dataset">
-<pre>
-&lt;&gt; a dcat:Dataset ;
-  dct:temporal [ a dct:PeriodOfTime , time:ProperInterval ;
-    time:hasBeginning [ a time:Instant ;
-      time:inTimePosition [ a time:TimePosition ;
-        time:hasTRS <http://resource.geosciml.org/classifier/cgi/geologicage/ma> ;
-        time:numericPosition 541.0 ;
-      ] .
-    ] ;
-    time:hasEnd [ a time:Instant ;
-      time:inTimePosition [ a time:TimePosition ;
-        time:hasTRS <http://resource.geosciml.org/classifier/cgi/geologicage/ma> ;
-        time:numericPosition 251.902 ;
-    ] .
-    ] ;
-  ] .
-</pre>
-</aside>
-
-<aside class="example" id="ex-temporal-coverage-open-end-interval" title="Temporal coverage as open interval (no end date)">
-<pre>
-&lt;&gt; a dcat:Dataset ;
-  dct:temporal [ a dct:PeriodOfTime ;
-    dcat:startDate "2016-03-04"^^xsd:date .
-  ] .
-</pre>
-</aside>
-
-<aside class="example" id="ex-temporal-coverage-open-begin-interval" title="Temporal coverage as open interval (no beginning)">
-<pre>
-&lt;&gt; a dcat:Dataset ;
-  dct:temporal [ a dct:PeriodOfTime , time:ProperInterval ;
-    time:hasEnd [ time:inXSDDate "2018-08-05"^^xsd:date ] .
-  ] .
-</pre>
-</aside>
+        <p>
+          Examples illustrating these encodings of the temporal coverage of a dataset are given in <a href="#temporal-properties"></a>.
+        </p>
 
     </section>
 
@@ -2753,14 +2674,14 @@ end class DiscoveryService -->
             </tr>
           </tbody>
         </table>
-        
+
         <section id="Property:location_geometry">
             <h4>Property: geometry</h4>
-            
+
             <p class="note">
               Property added in this revision of DCAT.
             </p>
-            
+
             <table class="definition">
               <thead><tr><th>RDF Property:</th><th><a data-cite="LOCN#geometry" title="http://www.w3.org/ns/locn#geometry">locn:geometry</a></th></tr></thead>
               <tbody>
@@ -2778,11 +2699,11 @@ end class DiscoveryService -->
 
         <section id="Property:location_centroid">
             <h4>Property: centroid</h4>
-            
+
             <p class="note">
               Property added in this revision of DCAT.
             </p>
-            
+
             <table class="definition">
               <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#centroid" title="http://www.w3.org/ns/dcat#centroid">dcat:centroid</a></th></tr></thead>
               <tbody>
@@ -2800,11 +2721,11 @@ end class DiscoveryService -->
 
         <section id="Property:location_lat">
             <h4>Property: latitude</h4>
-            
+
             <p class="note">
               Property added in this context in this revision of DCAT.
             </p>
-            
+
             <table class="definition">
               <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/2003/01/geo/wgs84_pos#lat" title="http://www.w3.org/2003/01/geo/wgs84_pos#lat">w3cgeo:lat</a></th></tr></thead>
               <tbody>
@@ -2827,7 +2748,7 @@ end class DiscoveryService -->
             <p class="note">
               Property added in this context in this revision of DCAT.
             </p>
-            
+
             <table class="definition">
               <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/2003/01/geo/wgs84_pos#long" title="http://www.w3.org/2003/01/geo/wgs84_pos#long">w3cgeo:long</a></th></tr></thead>
               <tbody>
@@ -2841,7 +2762,7 @@ end class DiscoveryService -->
             <p>
               The coordinate reference system for <code>w3cgeo:long</code> values is <a href="https://en.wikipedia.org/wiki/World_Geodetic_System#WGS84">WGS84</a>.
             </p>
-            
+
         </section>
 
         <section id="Property:location_alt">
@@ -2850,7 +2771,7 @@ end class DiscoveryService -->
             <p class="note">
               Property added in this context in this revision of DCAT.
             </p>
-            
+
             <table class="definition">
               <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/2003/01/geo/wgs84_pos#alt" title="http://www.w3.org/2003/01/geo/wgs84_pos#alt">w3cgeo:alt</a></th></tr></thead>
               <tbody>
@@ -2869,11 +2790,11 @@ end class DiscoveryService -->
 
         <section id="Property:location_bbox">
             <h4>Property: bounding box</h4>
-            
+
             <p class="note">
               Property added in this revision of DCAT.
             </p>
-            
+
             <table class="definition">
               <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#bbox" title="http://www.w3.org/ns/dcat#centroid">dcat:bbox</a></th></tr></thead>
               <tbody>
@@ -2889,107 +2810,9 @@ end class DiscoveryService -->
 
         </section>
 
-<aside class="note">
-<p>The following examples are built on the relevant ones included in [[?SDW-BP]] (in particular, <a data-cite="?SDW-BP#geometry-and-crs"><span class="secno">&sect;&nbsp;12.2.2</span> <span class="sec-title">Geometries and coordinate reference systems</span></a>).</p>
-<p>In the examples, for properties <code>locn:geometry</code>, <code>dcat:centroid</code>, and <code>dct:bbox</code>, the geometry is always specified with WKT. As per [[GeoSPARQL]], when the CRS specification is omitted this implies that the default CRS is used - namely CRS84 (corresponding to WGS84, but with axis order longitude/latitude).</p>
-</aside>
-
-<aside class="example" id="ex-spatial-coverage-geometry" title="Spatial coverage as a polygon">
-<p>A dataset whose spatial coverage corresponds to Anne Frank's house in Amsterdam, specified as a polygon (the coordinate reference system is CRS84).</p>
-<pre>
-a:Dataset a dcat:Dataset ;
-  dct:spatial [
-    a dct:Location ;
-    locn:geometry "POLYGON ((
-      4.8842353 52.375108 , 4.884276 52.375153 , 
-      4.8842567 52.375159 , 4.883981 52.375254 , 
-      4.8838502 52.375109 , 4.883819 52.375075 , 
-      4.8841037 52.374979 , 4.884143 52.374965 , 
-      4.8842069 52.375035 , 4.884263 52.375016 , 
-      4.8843200 52.374996 , 4.884255 52.374926 , 
-      4.8843289 52.374901 , 4.884451 52.375034 , 
-      4.8842353 52.375108
-    ))"^^geosparql:asWKT ;
-  ] .
-</pre>
-<figure id="fig-spatial-coverage-geometry">	
-<img src="./images/ex-spatial-coverage-geometry-anne-frank-house.png"/>	
-<figcaption>Map preview of a spatial coverage specified with a geometry<figcaption>
-</figure>	
-</aside>
-
-<aside class="example" id="ex-spatial-coverage-geometry-with-crs" title="Spatial coverage as a polygon, using a specific CRS">
-<p>The same dataset in <a href="#ex-spatial-coverage-geometry"></a>, but where the coordinates of the polygon are specified by using the national Dutch <abbr title="Coordinate Reference System">CRS</abbr> - <a href="http://epsg-registry.org/?display=entity&amp;urn=urn:ogc:def:crs:EPSG::28992">EPSG:28992</a> ("Amersfoort / RD New").</p>
-<pre>
-a:Dataset a dcat:Dataset ;
-  dct:spatial [
-    a dct:Location ;
-    locn:geometry "&lt;http://www.opengis.net/def/crs/EPSG/0/28992&gt; POLYGON ((
-      120749.725 487589.422 , 120752.55 487594.375  ,   
-      120751.227 487595.129 , 120732.539 487605.788 ,
-      120723.505 487589.745 , 120721.387 487585.939 , 
-      120740.668 487575.07  , 120743.316 487573.589 , 
-      120747.735 487581.337 , 120751.564 487579.154 , 
-      120755.411 487576.96  , 120750.935 487569.172 , 
-      120755.941 487566.288 , 120764.369 487581.066 , 
-      120749.725 487589.422
-    ))"^^geosparql:asWKT ;
-  ] .
-</pre>
-</aside>
-
-<aside class="example" id="ex-spatial-coverage-centroid" title="Spatial coverage as centroid">
-<p>The same dataset of <a href="#ex-spatial-coverage-geometry"></a>, buth where spatial coverage is specified by using the centroid / representative point of Anne Frank's house.</p>
-<pre>
-a:Dataset a dcat:Dataset ;
-  dct:spatial [
-    a dct:Location ;
-    dcat:centroid "POINT(4.88412 52.37509)"^^geosparql:asWKT .
-  ] .
-</pre>
-<figure id="fig-spatial-coverage-centroid">	
-<img src="./images/ex-spatial-coverage-centroid-anne-frank-house.png"/>	
-<figcaption>Map preview of a spatial coverage specified with a centroid</figcaption>
-</figure>	
-</aside>
-
-<aside class="example" id="ex-spatial-coverage-centroid-w3cgeo" title="Spatial coverage as centroid, by using w3cgeo:Point">
-<p>The following dataset specification is equivalent to the one in <a href="#ex-spatial-coverage-centroid"></a>, but it uses [[W3C-BASIC-GEO]] instead of <code>dcat:centroid</code>:</p>
-<pre>
-a:Dataset a dcat:Dataset ;
-  dct:spatial [
-    a dct:Location , w3cgeo:Point ;
-    w3cgeo:lat  "52.37509"^^xsd:decimal ;
-    w3cgeo:long "4.88412"^^xsd:decimal .
-  ] .
-</pre>
-</aside>
-
-<aside class="example" id="ex-spatial-coverage-bbox" title="Spatial coverage as bounding box">
-<p>The Dutch dataset of postal addresses, with its spatial coverage (Netherlands) specified as a bounding box.</p>
-<pre>
-<> a dcat:Dataset ;
-  dct:title "Adressen"@nl ;
-  dct:title "Addresses"@en ;
-  dct:description "INSPIRE Adressen afkomstig uit de basisregistratie Adressen,
-                   beschikbaar voor heel Nederland"@nl ;
-  dct:description "INSPIRE addresses derived from the Addresses base registry,
-                   available for the Netherlands"@en ;
-  dcat:theme &lt;http://inspire.ec.europa.eu/theme/ad&gt; ;
-  dct:spatial [
-    a dct:Location ;
-    dcat:bbox "POLYGON((
-      3.053 47.975 , 7.24  47.975 ,
-      7.24  53.504 , 3.053 53.504 ,
-      3.053 47.975
-    ))"^^geosparql:asWKT .
-  ] .
-</pre>
-<figure id="fig-spatial-coverage-bbox">	
-<img src="./images/ex-spatial-coverage-bbox-netherlands.png"/>	
-<figcaption>Map preview of a spatial coverage specified with a bounding box</figcaption>
-</figure>	
-</aside>
+        <p>
+          Examples illustrating these encodings of the spatial coverage of a dataset are given in <a href="#spatial-properties"></a>.
+        </p>
 
     </section>
 
@@ -3019,7 +2842,7 @@ a:Dataset a dcat:Dataset ;
 	dct:identifier  "id"^^xsd:string
     .</pre>
 </aside>
-    
+
     <p>The property <a data-cite="VOCAB-ADMS#adms-identifier"><code>adms:identifier</code></a> [[?VOCAB-ADMS]] can express other locally minted identifiers or external identifiers, like DOI, <a href="https://eur-lex.europa.eu/eli-register/about.html"><abbr title="European Legislation Identifier">ELI</abbr></a>, <a href="https://arxiv.org/">ar&Chi;iv</a> for creative works and <a href="https://orcid.org/">ORCID</a>, <a href="https://viaf.org/"><abbr title="Virtual International Authority File">VIAF</abbr></a>, <a href="http://www.isni.org/"><abbr title="International Standard Name Identifier">ISNI</abbr></a> for actors such as authors and publishers, as long as the identifiers are globally unique and stable.</p>
     <p><a href="#ex-adms-identifier"></a> uses <a data-cite="VOCAB-ADMS#schemaAgency"><code>adms:schemaAgency</code></a> and <a data-cite="?DCTERMS#creator"><code>dct:creator</code></a> to represent the authority that defines the identifier scheme (e.g., the <a href="https://www.doi.org/">DOI foundation</a> in the example), <code>adms:schemaAgency</code> is used when the authority has no URI associated. The <a href="https://www.crossref.org/display-guidelines/">CrossRef</a> and <a href="https://support.datacite.org/docs/datacite-doi-display-guidelines">DataCite</a> display guidelines recommend displaying DOIs as full URL link in the form <code>https://doi.org/10.xxxx/xxxxx/</code>.
     </p>
@@ -3234,7 +3057,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
 	    conformant to the EU INSPIRE Regulation on interoperability of spatial data sets and services (<a href="http://data.europa.eu/eli/reg/2014/1312/oj">"Commission Regulation (EU) No 1089/2010
 	    of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards
 	    interoperability of spatial data sets and services"</a>).</p>
-	    
+
 <aside class="example" id="ex-inspire-conformant-dataset">
   <pre class="nohighlight turtle">
 a:dataset a dcat:Dataset;
@@ -3305,7 +3128,7 @@ a:conformanceTest a prov:Plan ;
     prov:wasDerivedFrom &lt;https://www.w3.org/TR/dwbp/&gt; .
     </pre></aside>
             <p>Also, [[?VOCAB-DQV]] can be deployed to  measure the compliance to a specific standard. In <a href="#ex-conformance-degree-percentage"></a>, the <code>:levelOfComplianceToDWBP</code> is a quality metrics which measures the compliance of a dataset to [[?DWBP]] in terms of the percentage of passed compliance tests. <a href="#ex-conformance-degree-percentage"></a> assumes <code>iso</code> as a namespace prefix representing the quality dimensions and categories defined in the ISO/IEC 25012 [[?ISO-IEC-25012]].</p>
-            
+
 <aside class="example" id="ex-conformance-degree-percentage">
 <pre class="nohighlight turtle">
 :levelOfComplianceToDWBP a dqv:Metric ;
@@ -3322,7 +3145,7 @@ iso:inherentandSystemDependentDataQuality a dqv:Category ;
    skos:prefLabel "Inherent and System-Dependent Data Quality"@en .
         </pre></aside>
             <p>The quality measurement <code>:measurement_complianceToDWBP</code> represents the level of compliance for dataset <code>a:dataset</code>, namely, measurement of the metric <code>:levelOfComplianceToDWBP</code>. If only a part of the compliance tests succeeds (e.g. half of the compliance tests), the measurement would look like in <a href="#ex-conformance-test-partial-success"></a>.</p>
-            
+
 <aside class="example" id="ex-conformance-test-partial-success">
 <pre class="nohighlight turtle">
 :measurement_complianceToDWBP a dqv:QualityMeasurement ;
@@ -3379,7 +3202,7 @@ a:testingActivity a prov:Activity ;
     prov:use a:dataset ;
     prov:wasAssociatedWith &lt;http://validator.example.org/&gt; .</pre>
 </aside>
-    
+
 <p><a href="#ex-conformance-test-earl-fail"></a> shows how the description would have looked like if the subtest <code>a:testq1</code> had failed. In particular, <code>dct:description</code> and <code>earl:info</code> provide additional warnings or error messages in a human-readable form.</p>
 
 <aside class="example" id="ex-conformance-test-earl-fail">
@@ -3415,7 +3238,7 @@ a:assertion1 a earl:Assertion ;
 </aside>
 
             <p>Depending on the details required about tests, [[?VOCAB-DQV]] can express the testing activity and errors as well. In <a href="#ex-conformance-test-error"></a>, <code>:error</code> is a quality annotation that represents the previous error, and  <code>a:testResult</code> is defined as a <code>dqv:QualityMetadata</code> to  collect the above annotations and the compliance measurements providing  provenance information.
-            
+
 <aside class="example" id="ex-conformance-test-error">
 <pre class="nohighlight turtle">
 :error
@@ -3694,6 +3517,262 @@ ex:Test543L
 
   <p>Recommendations on the use of these properties on the different types of resources defined in DCAT are provided in the relevant class descriptions.</p>
 
+</section>
+
+<section id="time-and-space" class="informative">
+  <h2>Time and space</h2>
+    <section id="temporal-properties">
+      <h3>Temporal properties</h3>
+
+      <p>
+        Five temporal properties of resources may be described using DCAT.
+      </p>
+      <ol>
+        <li>
+          The release time of a resource is given using <a href="#Property:resource_release_date"><code title="http://purl.org/dc/terms/issued"><code>dct:issued</code></code></a>.
+          The value is usually encoded as a <a data-cite="XMLSCHEMA11-2#date"><code>xsd:date</code></a>.
+        </li>
+        <li>
+          The revision or update time of a resource is given using <a href="#Property:resource_update_date"><code title="http://purl.org/dc/terms/modified"><code>dct:modified</code></code></a>.
+          The value is usually encoded as a <a data-cite="XMLSCHEMA11-2#date"><code>xsd:date</code></a>.
+        </li>
+        <li>
+          The update schedule for a resource is indicated using <a href="#Property:dataset_frequency"><code title="http://purl.org/dc/terms/accrualPeriodicity"><code>dct:accrualPeriodicity</code></code></a>.
+          The value should be taken from a controlled vocabulary such as <a data-cite="http://www.dublincore.org/specifications/dublin-core/collection-description/frequency/">Dublin Core Collection Description Frequency Vocabulary</a>.
+        </li>
+        <li>
+          The minimum temporal separation of items in a dataset is given using <a href="#Property:dataset_temporalresolution"><code title="http://www.w3.org/ns/dcat#temporalResolution"><code>dcat:temporalResolution</code></code></a>.
+          The value is encoded as a <a data-cite="XMLSCHEMA11-2#duration"><code>xsd:duration</code></a>.
+          The update schedule and the temporal resolution can be combined to support the description of different kinds of time-series data as shown below.
+        </li>
+        <li>
+          The temporal extent of a dataset is given using <a href="#Property:dataset_temporal"><code title="http://purl.org/dc/terms/temporal"><code>dct:temporal</code></code></a>.
+          The value is a <a href="http://purl.org/dc/terms/PeriodOfTime"><code>dct:PeriodOfTime</code></a>.
+          A number of options for expressing the details of a <code>dct:PeriodOfTime</code> are recommended in <a href="#Class:PeriodOfTime"></a>.
+          Examples of these follow.
+        </li>
+      </ol>
+
+      <aside class="example" id="ex-time-series-1" title="15-minute time-series published daily">
+      <pre>
+&lt;ds913&gt;
+    a dcat:Dataset ;
+    dct:accrualPeriodicity &lt;http://purl.org/cld/freq/daily&gt; ;
+    dcat:temporalResolution "PT15M"^^xsd:duration ;
+.
+</pre>
+</aside>
+
+<aside class="example" id="ex-time-series-2" title="Hourly data published immediately">
+<pre>
+&lt;ds782&gt;
+    a dcat:Dataset ;
+    dct:accrualPeriodicity &lt;http://purl.org/cld/freq/continuous&gt; ;
+    dcat:temporalResolution "PT1H"^^xsd:duration ;
+.
+</pre>
+</aside>
+
+      <aside class="example" id="ex-temporal-coverage-closed-interval" title="Temporal coverage as closed interval">
+      <pre>
+      &lt;&gt; a dcat:Dataset ;
+        dct:temporal [ a dct:PeriodOfTime ;
+          dcat:startDate "2016-03-04"^^xsd:date ;
+          dcat:endDate   "2018-08-05"^^xsd:date .
+        ] .
+      </pre>
+      </aside>
+
+      <aside class="example" id="ex-temporal-coverage-closed-proper-interval" title="Temporal coverage as closed interval, using time:ProperInterval">
+      <p>The following dataset specification is equivalent to the one in <a href="#ex-temporal-coverage-closed-interval"></a>, but it uses [[OWL-TIME]]:</p>
+      <pre>
+      &lt;&gt; a dcat:Dataset ;
+        dct:temporal [ a dct:PeriodOfTime , time:ProperInterval ;
+          time:hasBeginning [ a time:Instant ;
+            time:inXSDDate "2016-03-04"^^xsd:date .
+          ] ;
+          time:hasEnd [ a time:Instant ;
+            time:inXSDDate "2018-08-05"^^xsd:date .
+          ] ;
+        ] .
+      </pre>
+      </aside>
+
+      <aside class="example" id="ex-temporal-coverage-closed-proper-interval-gyear" title="Temporal coverage as proper interval using gYear">
+      <pre>
+      &lt;&gt; a dcat:Dataset ;
+        dct:temporal [ a dct:PeriodOfTime , time:ProperInterval ;
+          time:hasBeginning [ a time:Instant ;
+            time:inXSDgYear "1914"^^xsd:gYear .
+          ] ;
+          time:hasEnd [ a time:Instant ;
+            time:inXSDgYear "1939"^^xsd:gYear .
+          ] ;
+        ] .
+      </pre>
+      </aside>
+
+      <aside class="example" id="ex-temporal-coverage-geologic" title="Temporal coverage for a geologic dataset">
+      <pre>
+      &lt;&gt; a dcat:Dataset ;
+        dct:temporal [ a dct:PeriodOfTime , time:ProperInterval ;
+          time:hasBeginning [ a time:Instant ;
+            time:inTimePosition [ a time:TimePosition ;
+              time:hasTRS &lt;http://resource.geosciml.org/classifier/cgi/geologicage/ma&gt; ;
+              time:numericPosition 541.0 ;
+            ] .
+          ] ;
+          time:hasEnd [ a time:Instant ;
+            time:inTimePosition [ a time:TimePosition ;
+              time:hasTRS &lt;http://resource.geosciml.org/classifier/cgi/geologicage/ma&gt; ;
+              time:numericPosition 251.902 ;
+          ] .
+          ] ;
+        ] .
+      </pre>
+      </aside>
+
+      <aside class="example" id="ex-temporal-coverage-open-end-interval" title="Temporal coverage as open interval (no end date)">
+      <pre>
+      &lt;&gt; a dcat:Dataset ;
+        dct:temporal [ a dct:PeriodOfTime ;
+          dcat:startDate "2016-03-04"^^xsd:date .
+        ] .
+      </pre>
+      </aside>
+
+      <aside class="example" id="ex-temporal-coverage-open-begin-interval" title="Temporal coverage as open interval (no beginning)">
+      <pre>
+      &lt;&gt; a dcat:Dataset ;
+        dct:temporal [ a dct:PeriodOfTime , time:ProperInterval ;
+          time:hasEnd [ time:inXSDDate "2018-08-05"^^xsd:date ] .
+        ] .
+      </pre>
+      </aside>
+
+    </section>
+    <section id="spatial-properties">
+      <h3>Spatial properties</h3>
+
+      <p>
+        Two spatial properties of datasets may be described using DCAT.
+      </p>
+      <ol>
+        <li>
+          The minimum spatial separation of items in a dataset is given using <a href="#Property:dataset_spatialresolution"><code title="http://www.w3.org/ns/dcat#spatialResolutionInMeters"><code>dcat:spatialResolutionInMeters</code></code></a>.
+          The value is a decimal number.
+        </li>
+        <li>
+          The spatial extent of a dataset is given using <a href="#Property:dataset_spatial"><code title="http://purl.org/dc/terms/spatial"><code>dct:spatial</code></code></a>.
+          The value is a <a href="http://purl.org/dc/terms/Location"><code>dct:Location</code></a>.
+          A number of options for expressing the details of a <code>dct:Location</code> are recommended in <a href="#Class:Location"></a>.
+          Examples of these follow.
+        </li>
+      </ol>
+
+      <aside class="note">
+      <p>The following examples are built on the relevant ones included in [[?SDW-BP]] (in particular, <a data-cite="?SDW-BP#geometry-and-crs"><span class="secno">&sect;&nbsp;12.2.2</span> <span class="sec-title">Geometries and coordinate reference systems</span></a>).</p>
+      <p>In the examples, for properties <code>locn:geometry</code>, <code>dcat:centroid</code>, and <code>dct:bbox</code>, the geometry is always specified with WKT. As per [[GeoSPARQL]], when the CRS specification is omitted this implies that the default CRS is used - namely CRS84 (corresponding to WGS84, but with axis order longitude/latitude).</p>
+      </aside>
+
+      <aside class="example" id="ex-spatial-coverage-geometry" title="Spatial coverage as a polygon">
+      <p>A dataset whose spatial coverage corresponds to Anne Frank's house in Amsterdam, specified as a polygon (the coordinate reference system is CRS84).</p>
+      <pre>
+      a:Dataset a dcat:Dataset ;
+        dct:spatial [
+          a dct:Location ;
+          locn:geometry "POLYGON ((
+            4.8842353 52.375108 , 4.884276 52.375153 ,
+            4.8842567 52.375159 , 4.883981 52.375254 ,
+            4.8838502 52.375109 , 4.883819 52.375075 ,
+            4.8841037 52.374979 , 4.884143 52.374965 ,
+            4.8842069 52.375035 , 4.884263 52.375016 ,
+            4.8843200 52.374996 , 4.884255 52.374926 ,
+            4.8843289 52.374901 , 4.884451 52.375034 ,
+            4.8842353 52.375108
+          ))"^^geosparql:asWKT ;
+        ] .
+      </pre>
+      <figure id="fig-spatial-coverage-geometry">
+      <img src="./images/ex-spatial-coverage-geometry-anne-frank-house.png"/>
+      <figcaption>Map preview of a spatial coverage specified with a geometry<figcaption>
+      </figure>
+      </aside>
+
+      <aside class="example" id="ex-spatial-coverage-geometry-with-crs" title="Spatial coverage as a polygon, using a specific CRS">
+      <p>The same dataset in <a href="#ex-spatial-coverage-geometry"></a>, but where the coordinates of the polygon are specified by using the national Dutch <abbr title="Coordinate Reference System">CRS</abbr> - <a href="http://epsg-registry.org/?display=entity&amp;urn=urn:ogc:def:crs:EPSG::28992">EPSG:28992</a> ("Amersfoort / RD New").</p>
+      <pre>
+      a:Dataset a dcat:Dataset ;
+        dct:spatial [
+          a dct:Location ;
+          locn:geometry "&lt;http://www.opengis.net/def/crs/EPSG/0/28992&gt; POLYGON ((
+            120749.725 487589.422 , 120752.55 487594.375  ,
+            120751.227 487595.129 , 120732.539 487605.788 ,
+            120723.505 487589.745 , 120721.387 487585.939 ,
+            120740.668 487575.07  , 120743.316 487573.589 ,
+            120747.735 487581.337 , 120751.564 487579.154 ,
+            120755.411 487576.96  , 120750.935 487569.172 ,
+            120755.941 487566.288 , 120764.369 487581.066 ,
+            120749.725 487589.422
+          ))"^^geosparql:asWKT ;
+        ] .
+      </pre>
+      </aside>
+
+      <aside class="example" id="ex-spatial-coverage-centroid" title="Spatial coverage as centroid">
+      <p>The same dataset of <a href="#ex-spatial-coverage-geometry"></a>, buth where spatial coverage is specified by using the centroid / representative point of Anne Frank's house.</p>
+      <pre>
+      a:Dataset a dcat:Dataset ;
+        dct:spatial [
+          a dct:Location ;
+          dcat:centroid "POINT(4.88412 52.37509)"^^geosparql:asWKT .
+        ] .
+      </pre>
+      <figure id="fig-spatial-coverage-centroid">
+      <img src="./images/ex-spatial-coverage-centroid-anne-frank-house.png"/>
+      <figcaption>Map preview of a spatial coverage specified with a centroid</figcaption>
+      </figure>
+      </aside>
+
+      <aside class="example" id="ex-spatial-coverage-centroid-w3cgeo" title="Spatial coverage as centroid, by using w3cgeo:Point">
+      <p>The following dataset specification is equivalent to the one in <a href="#ex-spatial-coverage-centroid"></a>, but it uses [[W3C-BASIC-GEO]] instead of <code>dcat:centroid</code>:</p>
+      <pre>
+      a:Dataset a dcat:Dataset ;
+        dct:spatial [
+          a dct:Location , w3cgeo:Point ;
+          w3cgeo:lat  "52.37509"^^xsd:decimal ;
+          w3cgeo:long "4.88412"^^xsd:decimal .
+        ] .
+      </pre>
+      </aside>
+
+      <aside class="example" id="ex-spatial-coverage-bbox" title="Spatial coverage as bounding box">
+      <p>The Dutch dataset of postal addresses, with its spatial coverage (Netherlands) specified as a bounding box.</p>
+      <pre>
+      <> a dcat:Dataset ;
+        dct:title "Adressen"@nl ;
+        dct:title "Addresses"@en ;
+        dct:description "INSPIRE Adressen afkomstig uit de basisregistratie Adressen,
+                         beschikbaar voor heel Nederland"@nl ;
+        dct:description "INSPIRE addresses derived from the Addresses base registry,
+                         available for the Netherlands"@en ;
+        dcat:theme &lt;http://inspire.ec.europa.eu/theme/ad&gt; ;
+        dct:spatial [
+          a dct:Location ;
+          dcat:bbox "POLYGON((
+            3.053 47.975 , 7.24  47.975 ,
+            7.24  53.504 , 3.053 53.504 ,
+            3.053 47.975
+          ))"^^geosparql:asWKT .
+        ] .
+      </pre>
+      <figure id="fig-spatial-coverage-bbox">
+      <img src="./images/ex-spatial-coverage-bbox-netherlands.png"/>
+      <figcaption>Map preview of a spatial coverage specified with a bounding box</figcaption>
+      </figure>
+      </aside>
+
+    </section>
 </section>
 
 <section id="dataset-versions">
@@ -4347,9 +4426,9 @@ a:EEA-CSW-Endpoint
   dct:license &lt;https://creativecommons.org/licenses/by/2.5/dk/&gt; ;
   dct:spatial [
     rdf:type dct:Location ;
-<!--    
+<!--
     dcat:bbox "&lt;gml:Envelope srsName=\"http://www.opengis.net/def/crs/OGC/1.3/CRS84\"&gt;&lt;gml:lowerCorner&gt;-180 -90&lt;/gml:lowerCorner&gt;&lt;gml:upperCorner&gt;180 90&lt;/gml:upperCorner&gt;&lt;/gml:Envelope&gt;"^^gsp:gmlLiteral ;
--->    
+-->
     dcat:bbox "POLYGON((-180 90,180 90,180 -90,-180 -90,-180 90))"^^gsp:wktLiteral ;
   ] ;
   dct:title "European Environment Agency's public catalogue of spatial datasets."@en ;
@@ -4375,13 +4454,13 @@ ga-courts:jc
   dct:description "The dataset contains spatial locations, in point format, of the Australian High Court, Australian Federal Courts and the Australian Magistrates Courts." ;
   dct:spatial [
     rdf:type dct:Location ;
-<!--    
+<!--
     dcat:bbox "&lt;gml:Envelope srsName=\"http://www.opengis.net/def/crs/EPSG/0/4283\"&gt;&lt;gml:lowerCorner&gt;115.864566 -42.885989&lt;/gml:lowerCorner&gt;&lt;gml:upperCorner&gt;153.276835 -12.460578&lt;/gml:upperCorner&gt;&lt;/gml:Envelope&gt;"^^geosparql:gmlLiteral ;
   ] ;
--->  
+-->
     dcat:bbox "&lt;http://www.opengis.net/def/crs/EPSG/0/4283&gt; POLYGON((
       115.864566 -42.885989 , 115.864566 -12.460578 ,
-      153.276835 -12.460578 , 153.276835 -42.885989 , 
+      153.276835 -12.460578 , 153.276835 -42.885989 ,
       115.864566 -42.885989
     ))"^^geosparql:wktLiteral ;
   ] ;
