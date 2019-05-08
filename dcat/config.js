@@ -70,17 +70,8 @@ var respecConfig = {
     lint: "false",
     github: "https://github.com/w3c/dxwg/",
     localBiblio: {
-/*        
         "DATS": {
-            href : "http://wg3-metadataspecifications.readthedocs.io/",
-            title : "Data Tag Suite",
-            authors : ["Philippe Rocca-Serra", "Alejandra Gonzalez-Beltran"],
-            publisher : "NIH Big Data 2 Knowledge bioCADDIE project.",
-            date : "2016"
-        },
-*/        
-        "DATS": {
-            "href": "https://github.com/datatagsuite/",
+            "href": "https://datatagsuite.github.io/docs/html/",
             "title": "Data Tag Suite",
             "authors": ["Alejandra Gonzalez-Beltran", "Philippe Rocca-Serra"],
             "publisher": "NIH Big Data 2 Knowledge bioCADDIE and NIH Data Commons projects",
