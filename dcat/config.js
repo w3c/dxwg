@@ -9,6 +9,10 @@ var respecConfig = {
 //    previousURI:          "https://www.w3.org/TR/2014/REC-vocab-dcat-20140116/",
     edDraftURI:           "https://w3c.github.io/dxwg/dcat/",
 //    issueBase:            "https://github.com/w3c/dxwg/issues/", -- Not needed when github used
+    alternateFormats: [{
+      label: "Turtle",
+      uri: "https://w3c.github.io/dxwg/dcat/rdf/dcat.ttl",
+    }], 
     editors: [{
       name:       "Riccardo Albertoni",
        orcid:  "0000-0001-5648-2713",
