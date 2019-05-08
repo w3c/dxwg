@@ -2647,11 +2647,11 @@ end class DiscoveryService -->
 
         <p>The following properties are recommended for use on this class:
           <a href="#Property:location_geometry">geometry</a>,
+          <a href="#Property:location_bbox">bounding box</a>,
           <a href="#Property:location_centroid">centroid</a>,
           <a href="#Property:location_lat">latitude</a>,
           <a href="#Property:location_long">longitude</a>,
-          <a href="#Property:location_alt">altitude</a>,
-          <a href="#Property:location_bbox">bounding box</a>.
+          <a href="#Property:location_alt">altitude</a>.
         </p>
 
         <p>
@@ -2665,10 +2665,14 @@ end class DiscoveryService -->
 	      <td class="prop">Definition:</td>
 	      <td>A spatial region or named place.</td></tr>
             <tr>
-	      <td class="prop">Usage note:</td>
-              <td>For an extensive geometry (i.e., a set of coordinates denoting the vertices of the relevant geographic area), the property <a href="#Property:location_geometry"><code title="http://www.w3.org/ns/locn#geometry">locn:geometry</code></a> [[LOCN]] SHOULD be used.
-              For the geographic center of a spatial area, or another characteristic point, the property <a href="#Property:location_centroid"><code title="http://www.w3.org/ns/dcat#centroid">dcat:centroid</code></a>, or <a href="#Property:location_lat"><code title="http://www.w3.org/2003/01/geo/wgs84_pos#lat">w3cgeo:lat</code></a> and <a href="#Property:location_long"><code title="http://www.w3.org/2003/01/geo/wgs84_pos#long">w3cgeo:long</code></a> SHOULD be used.
-              For a geographic bounding box delimiting a spatial area the property <a href="#Property:location_bbox"><code title="http://www.w3.org/ns/dcat#bbox">dcat:bbox</code></a> SHOULD be used.</td>
+              <td class="prop">Usage note:</td>
+              <td>
+              <ul>
+              <li>For an extensive geometry (i.e., a set of coordinates denoting the vertices of the relevant geographic area), the property <a href="#Property:location_geometry"><code title="http://www.w3.org/ns/locn#geometry">locn:geometry</code></a> [[LOCN]] SHOULD be used.</li>
+              <li>For a geographic bounding box delimiting a spatial area the property <a href="#Property:location_bbox"><code title="http://www.w3.org/ns/dcat#bbox">dcat:bbox</code></a> SHOULD be used.</li>
+              <li>For the geographic center of a spatial area, or another characteristic point, the property <a href="#Property:location_centroid"><code title="http://www.w3.org/ns/dcat#centroid">dcat:centroid</code></a>, or, alternatively, <a href="#Property:location_lat"><code title="http://www.w3.org/2003/01/geo/wgs84_pos#lat">w3cgeo:lat</code></a> and <a href="#Property:location_long"><code title="http://www.w3.org/2003/01/geo/wgs84_pos#long">w3cgeo:long</code></a> SHOULD be used.</li>
+              </ul>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -2691,6 +2695,28 @@ end class DiscoveryService -->
 
             <p>
               The WKT encoding supports geospatial positions expressed in coordinate reference systems other than <a href="https://en.wikipedia.org/wiki/World_Geodetic_System#WGS84"><abbr title="Wolrd Geodetic System 1984">WGS84</abbr></a>.
+            </p>
+
+        </section>
+
+        <section id="Property:location_bbox">
+            <h4>Property: bounding box</h4>
+
+            <p class="note">
+              Property added in this revision of DCAT.
+            </p>
+
+            <table class="definition">
+              <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#bbox" title="http://www.w3.org/ns/dcat#centroid">dcat:bbox</a></th></tr></thead>
+              <tbody>
+              <tr><td class="prop">Definition:</td><td>The geographic bounding box of a resource.</td></tr>
+              <tr><td class="prop">Range:</td><td><a data-cite="RDF-SCHEMA#ch_literal" title="http://www.w3.org/2000/01/rdf-schema#Literal"><code>rdfs:Literal</code></a></td></tr>
+              <tr><td class="prop">Usage note:</td><td>The range of this property is intentionally generic, with the purpose of allowing different geometry encodings. E.g., the geometry could be encoded as <abbr title="Well-known Text">WKT</abbr> (<a href="http://www.opengis.net/ont/geosparql#asWKT" title="http://www.opengis.net/ont/geosparql#asWKT"><code>geosparql:asWKT</code></a> [[GeoSPARQL]]).</td></tr>
+              </tbody>
+            </table>
+
+            <p>
+              The WKT encoding supports geospatial positions expressed in coordinate reference systems other than <a href="https://en.wikipedia.org/wiki/World_Geodetic_System#WGS84">WGS84</a>.
             </p>
 
         </section>
@@ -2782,28 +2808,6 @@ end class DiscoveryService -->
 
             <p>
               The datum for <code>w3cgeo:alt</code> values is <a href="https://en.wikipedia.org/wiki/World_Geodetic_System#WGS84">WGS84</a>.
-            </p>
-
-        </section>
-
-        <section id="Property:location_bbox">
-            <h4>Property: bounding box</h4>
-
-            <p class="note">
-              Property added in this revision of DCAT.
-            </p>
-
-            <table class="definition">
-              <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#bbox" title="http://www.w3.org/ns/dcat#centroid">dcat:bbox</a></th></tr></thead>
-              <tbody>
-              <tr><td class="prop">Definition:</td><td>The geographic bounding box of a resource.</td></tr>
-              <tr><td class="prop">Range:</td><td><a data-cite="RDF-SCHEMA#ch_literal" title="http://www.w3.org/2000/01/rdf-schema#Literal"><code>rdfs:Literal</code></a></td></tr>
-              <tr><td class="prop">Usage note:</td><td>The range of this property is intentionally generic, with the purpose of allowing different geometry encodings. E.g., the geometry could be encoded as <abbr title="Well-known Text">WKT</abbr> (<a href="http://www.opengis.net/ont/geosparql#asWKT" title="http://www.opengis.net/ont/geosparql#asWKT"><code>geosparql:asWKT</code></a> [[GeoSPARQL]]).</td></tr>
-              </tbody>
-            </table>
-
-            <p>
-              The WKT encoding supports geospatial positions expressed in coordinate reference systems other than <a href="https://en.wikipedia.org/wiki/World_Geodetic_System#WGS84">WGS84</a>.
             </p>
 
         </section>
@@ -3674,7 +3678,12 @@ ex:Test543L
 
       <aside class="note">
       <p>The following examples are built on the relevant ones included in [[?SDW-BP]] (in particular, <a data-cite="?SDW-BP#geometry-and-crs"><span class="secno">&sect;&nbsp;12.2.2</span> <span class="sec-title">Geometries and coordinate reference systems</span></a>).</p>
-      <p>In the examples, for properties <code>locn:geometry</code>, <code>dcat:centroid</code>, and <code>dct:bbox</code>, the geometry is always specified with WKT. As per [[GeoSPARQL]], when the CRS specification is omitted this implies that the default CRS is used - namely CRS84 (corresponding to WGS84, but with axis order longitude/latitude).</p>
+      <p>In the examples, for properties <code>locn:geometry</code>, <code>dct:bbox</code>, and <code>dcat:centroid</code>, the geometry is always specified with WKT. As per [[GeoSPARQL]], when the CRS specification is omitted this implies that the default CRS is used - namely CRS84 (corresponding to WGS84, but with axis order longitude/latitude).</p>
+      <p>For more details on coordinate reference systems and geometry encoding, we refer the reader to [[?SDW-BP]], and, in particular, to the following sections:</p>
+      <ul>
+        <li><a data-cite="?SDW-BP#CRS-background"><span class="secno">&sect;&nbsp;9</span> <span class="sec-title">Coordinate Reference Systems (CRS)</span></a></li>
+        <li><a data-cite="?SDW-BP#geometry-and-crs"><span class="secno">&sect;&nbsp;12.2.2</span> <span class="sec-title">Geometries and coordinate reference systems</span></a></li>
+      </ul>
       </aside>
 
 <aside class="example" id="ex-spatial-coverage-geometry" title="Spatial coverage as a polygon">
@@ -4625,7 +4634,7 @@ A new section <a href="#time-and-space"></a> was added to describe how to indica
 </li>
 
 <li>
-A new class <a href="#Class:Location"><code>dct:Location</code></a> and five new properties (<a href="#Property:location_geometry"><code>locn:geometry</code></a>, <a href="#Property:location_centroid"><code>dcat:centroid</code></a>, <a href="#Property:location_lat"><code>w3cgeo:lat</code></a>, <a href="#Property:location_long"><code>w3cgeo:long</code></a>, <a href="#Property:location_alt"><code>w3cgeo:alt</code></a>, <a href="#Property:location_bbox"><code>dcat:bbox</code></a>) added to support description of the coordinates of a geographical area, to be used for specifying the spatial coverage of a resource. See <a href="https://github.com/w3c/dxwg/issues/83">Issue #83</a>
+A new class <a href="#Class:Location"><code>dct:Location</code></a> and five new properties (<a href="#Property:location_geometry"><code>locn:geometry</code></a>, <a href="#Property:location_bbox"><code>dcat:bbox</code></a>, <a href="#Property:location_centroid"><code>dcat:centroid</code></a>, <a href="#Property:location_lat"><code>w3cgeo:lat</code></a>, <a href="#Property:location_long"><code>w3cgeo:long</code></a>, <a href="#Property:location_alt"><code>w3cgeo:alt</code></a>) added to support description of the coordinates of a geographical area, to be used for specifying the spatial coverage of a resource. See <a href="https://github.com/w3c/dxwg/issues/83">Issue #83</a>
 </li>
 
 <li>
