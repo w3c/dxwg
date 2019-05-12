@@ -718,14 +718,10 @@
         <h3>Class: Catalog</h3>
 
         <aside class="note">
-          <p>
-            The scope of DCAT 2014 was catalogs of datasets [[?VOCAB-DCAT-20140116]].
-            A number of use cases for the revision involve also having <b>data services</b> as members of a catalog - see [[DCAT-UCR]], <a data-cite="DCAT-UCR#ID6"><span class="secno">&sect;&nbsp;5.6</span> <span class="sec-title">DCAT Distribution to describe web services</span></a> and
-            <a data-cite="DCAT-UCR#ID18"><span class="secno">&sect;&nbsp;5.18</span> <span class="sec-title">Modeling service-based data access</span></a>.
-            It has been decided to add an explicit class for Data Services in this revision of DCAT, and to enable these to be part of a Catalog.
-            Provision for Catalogs to be composed of other Catalogs is also enabled.
-            See <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a> and <a href="https://github.com/w3c/dxwg/issues/116">Issue #116</a>. 
-          </p>
+          <p>The scope of DCAT 2014 was catalogs of datasets [[?VOCAB-DCAT-20140116]]. This has been generalized, and properties common to all cataloged resources are now associated with a super-class <a href="#Class:Resource"><code>dcat:Resource</code></a>.</p>
+          <p>Moreover, an explicit class for <a href="#Class:Data_Service">data services</a> has been added in this revision of DCAT, to enable these to be part of a catalog.</p>
+          <p>Finally, <code>dcat:Catalog</code> has been made a sub-class of <code>dcat:Dataset</code>, and provision for catalogs to be composed of other catalogs is also enabled.</p>
+          <p>See <a href="https://github.com/w3c/dxwg/issues/116">Issue #116</a> and <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>.</p>
         </aside>
 
         <p>The following properties are recommended for use on this class:
@@ -5043,6 +5039,16 @@ Each relevant class section was extended with properties to deal with licensing,
 
 <li>
 A new section <a href="#license-rights"></a> was added to provide guidance and recommendations for the use of <a data-cite="?DCTERMS#terms-license"><code>dct:license</code></a>, <a data-cite="?DCTERMS#terms-accessRights"><code>dct:accessRights</code></a>, and <a data-cite="?DCTERMS#terms-rights"><code>dct:rights</code></a> in the context of dcat catalogs and distributions. See <a href="https://github.com/w3c/dxwg/issues/114">Issue #114</a> for the background discussion.
+</li>
+
+<li>
+<p><a href="#Class:Catalog">Class: Catalog</a>:
+This class has been made a sub-class of <code>dcat:Dataset</code>. Moreover, the following properties have been added:</p>
+<ul>
+<li><a href="#Property:catalog_hasPart"><code>dct:hasPart</code></a>, to specify a cataloged resource, irrespective of its type</li>
+<li><a href="#Property:catalog_service"><code>dcat:service</code></a>, to specify a cataloged data service</li>
+<li><a href="#Property:catalog_catalog"><code>dcat:catalog</code></a>, to specify sub-catalogs</li>
+</ul>
 </li>
 
 </ul>
