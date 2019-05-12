@@ -186,7 +186,7 @@ dct:contributor [
   owl:imports <http://www.w3.org/2004/02/skos/core> ;
   owl:imports <http://www.w3.org/ns/prov-o#> ;
   owl:versionInfo """Esta es una copia del vocabulario DCAT v1.0 disponible en https://www.w3.org/ns/dcat.ttl
-con modificaciones en progreso para la nueva versión de DCAT que resultará del grupo 'W3C Data Exchange Working Group'"""@en ;
+con modificaciones en progreso para la nueva versión de DCAT que resultará del grupo 'W3C Data Exchange Working Group'"""@es ;
   owl:versionInfo """This is a copy of v1.0 of the DCAT vocabulary, taken from https://www.w3.org/ns/dcat.ttl
 Temporarily added imports for DCTerms, SKOS, FOAF to assist in development of v1.* or v2.0 by W3C Data Exchange Working Group"""@en ;
   foaf:maker [
@@ -205,6 +205,7 @@ dcat:Catalog
   rdfs:comment "Μια επιμελημένη συλλογή μεταδεδομένων περί συνόλων δεδομένων"@el ;
   rdfs:comment "مجموعة من توصيفات قوائم البيانات"@ar ;
   rdfs:comment "データ・カタログは、データセットに関するキュレートされたメタデータの集合です。"@ja ;
+  rdfs:comment "O culegere de metadate despre seturi de date și servicii de date"@ro ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "Catalog"@en ;
   rdfs:label "Catalogo"@it ;
@@ -214,6 +215,7 @@ dcat:Catalog
   rdfs:label "Κατάλογος"@el ;
   rdfs:label "فهرس قوائم البيانات"@ar ;
   rdfs:label "カタログ"@ja ;
+  rdfs:label "Catalog"@ro ;
   rdfs:subClassOf dcat:Dataset ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
@@ -227,6 +229,7 @@ dcat:Catalog
   skos:scopeNote "Webový datový katalog je typicky reprezentován jako jedna instance této třídy."@cs ;
   skos:scopeNote "Συνήθως, ένας κατάλογος δεδομένων στον Παγκόσμιο Ιστό αναπαρίσταται ως ένα στιγμιότυπο αυτής της κλάσης."@el ;
   skos:scopeNote "通常、ウェブ・ベースのデータ・カタログは、このクラスの1つのインスタンスとして表わされます。"@ja ;
+  skos:scopeNote "În mod normal, un catalog de date disponibil în mediul Web este reprezentat ca o unică instanță a acestei clase."@ro ;
 .
 dcat:CatalogRecord
   rdf:type rdfs:Class ;
@@ -238,6 +241,7 @@ dcat:CatalogRecord
   rdfs:comment "Un registro en un catálogo de datos que describe un solo conjunto de datos o un servicio de datos."@es ;
   rdfs:comment "Záznam v datovém katalogu popisující jednu datovou sadu."@cs ;
   rdfs:comment "Μία καταγραφή ενός καταλόγου, η οποία περιγράφει ένα συγκεκριμένο σύνολο δεδομένων."@el ;
+  rdfs:comment "O înregistrare în catalogul de date care descrie un singur set de date sau un singur serviciu de date."@ro ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "Catalog Record"@en ;
   rdfs:label "Record di catalogo"@it ;
@@ -247,6 +251,7 @@ dcat:CatalogRecord
   rdfs:label "Καταγραφή καταλόγου"@el ;
   rdfs:label "سجل"@ar ;
   rdfs:label "カタログ・レコード"@ja ;
+  rdfs:label "Înregistare de catalog"@ro ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:allValuesFrom dcat:Resource ;
@@ -288,13 +293,21 @@ dcat:CatalogRecord
 					  Σε περιπτώσεις που οι δύο ημερομηνίες διαφέρουν, ή που μόνο η τελευταία είναι γνωστή, η ημερομηνία δημοσίευσης θα πρέπει να δίνεται για την καταγραφή του καταλόγου.
 					  Να σημειωθεί πως η οντολογία W3C PROV επιτρέπει την περιγραφή επιπλέον πληροφοριών ιστορικού όπως λεπτομέρειες για τη διαδικασία και τον δράστη που εμπλέκονται σε μία συγκεκριμένη αλλαγή εντός του συνόλου δεδομένων."""@el ;
   skos:scopeNote "このクラスはオプションで、すべてのカタログがそれを用いるとは限りません。これは、データセットに関するメタデータとカタログ内のデータセットのエントリーに関するメタデータとで区別が行われるカタログのために存在しています。例えば、データセットの公開日プロパティーは、公開機関が情報を最初に利用可能とした日付を示しますが、カタログ・レコードの公開日は、データセットがカタログに追加された日付です。両方の日付が異っていたり、後者だけが分かっている場合は、カタログ・レコードに対してのみ公開日を指定すべきです。W3CのPROVオントロジー[prov-o]を用いれば、データセットに対する特定の変更に関連するプロセスやエージェントの詳細などの、さらに詳しい来歴情報の記述が可能となることに注意してください。"@ja ;
-.
+  skos:scopeNote """Această clasă este optională. Există doar în cataloagele în care se face o distincție între metadatele
+  asociate cu seturile sau serviciile de date și metadatele care descriu o intrare pentru un set sau serviciu de date în catalog.
+  De exemplu, data publicării unui set de date reflectă data inițială la care informația a fost făcută publică de către editor,
+  în timp ce data publicării asociată cu înregistrarea din catalog reprezintă data la care setul de date a fost adăugat la catalog.
+  În cazurile în care cele două date diferă, sau este cunoscută doar cea din urmă, se va specifica doar data publicării asociată cu înregistrarea din catalog.
+  Trebuie menționat faptul că ontologia W3C PROV Ontology permite descrierea informațiilor de proveniență, cum ar fi detaliile legate de procesul, sau agentul implicați
+  într-o modificare a setului de date."""@ro ;
 
 dcat:DataService
   rdf:type owl:Class ;
   rdfs:comment "A site or end-point providing operations related to the discovery of, access to, or processing functions on, data or related resources"@en ;
   rdfs:comment "Un sito o end-point che fornisce operazioni relative alla scoperta, all'accesso o all'elaborazione di funzioni su dati o risorse correlate"@it;
+  rdfs:comment "Un site sau un punct de acces (end-point) care oferă operații de descoperire, acces sau procesare a datelor sau a altor resurse asociate cu datele."@ro ;
   rdfs:label "Data service"@en ;
+  rdfs:label "Serviciu de date"@ro ;
   rdfs:subClassOf dctype:Service ;
   rdfs:subClassOf dcat:Resource ;
   rdfs:subClassOf [
@@ -305,11 +318,14 @@ dcat:DataService
   skos:changeNote "New class in this revision of DCAT"@en ;
   skos:changeNote "Nueva clase en esta revisión de DCAT"@es ;
   skos:changeNote "Nuova classe in questa revisione di DCAT"@it ;
+  skos:changeNote "O clasă nou introdusă în această revizie a DCAT"@ro ;
   skos:editorialNote "Status: Class accepted by DCAT revision team, but details of definition and constraints not yet resolved."@en ;
   skos:scopeNote "The kind of service can be indicated using the dct:type property. Its value may be taken from a controlled vocabulary such as the INSPIRE spatial data service type vocabulary"@en ;
+  skos:scopeNote "Tipul serviciului poate fi indicat folosind proprietatea dct:type a cărei valoare poate fi luată dintr-un alt vocabular, cum ar fi vocabularul INSPIRE pentru date spațiale."@ro ;
   skos:scopeNote "Il tipo di servizio può essere indicato usando la proprietà dct:type. Il suo valore può essere preso da un vocabolario controllato come il vocabolario dei tipi di servizi per dati spaziali  di INSPIRE"@it ;
   skos:scopeNote "If a dcat:DataService is bound to one or more specified Datasets, they are indicated by the dcat:servesDataset property."@en ;
   skos:scopeNote "Se un dcat:DataService è associato a uno o più Dataset specificati, questi sono indicati dalla proprietà dcat:serveDataset."@it
+  skos:scopeNote "Dacă un dcat:DataService este legat de una sau mai multe surse de date, acestea sunt precizate prin intermediul proprietății dcat:servesDataset."@ro ;
 .
 
 dcat:Dataset
@@ -323,6 +339,7 @@ dcat:Dataset
   rdfs:comment "Une collection de données, publiée ou élaborée par une seule source, et disponible pour accès ou téléchargement dans un ou plusieurs formats"@fr ;
   rdfs:comment "Μία συλλογή από δεδομένα, δημοσιευμένη ή επιμελημένη από μία και μόνο πηγή, διαθέσιμη δε προς πρόσβαση ή μεταφόρτωση σε μία ή περισσότερες μορφές"@el ;
   rdfs:comment "قائمة بيانات منشورة أو مجموعة من قبل مصدر ما و متاح الوصول إليها أو تحميلها"@ar ;
+  rdfs:comment "O colecție de date, publicate de către o unică sursă și disponibilă pentru acces sau descărcare într-una sau mai multe reprezentări"@ro ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "Conjunto de datos"@es ;
   rdfs:label "Dataset"@en ;
@@ -332,8 +349,10 @@ dcat:Dataset
   rdfs:label "Σύνολο Δεδομένων"@el ;
   rdfs:label "قائمة بيانات"@ar ;
   rdfs:label "データセット"@ja ;
+  rdfs:label "Set de date"@ro ;
   rdfs:subClassOf dcat:Resource ;
   skos:changeNote "2018-02 - subclass of dctype:Dataset removed because scope of dcat:Dataset includes several other types from the dctype vocabulary."@en ;
+  skos:changeNote "2018-02 - nu mai este o subclasă a dctype:Dataset deoarece scopul dcat:Dataset acoperă acum și alte tipuri din vocabularul dctype."@ro ;
   skos:scopeNote """Cette classe représente le jeu de données publié par le fournisseur de données. Dans les cas où une distinction est nécessaire entre le jeu de donénes et son
 					  entrée dans le catalogue, la classe registre de données peut être utilisée pour ce dernier. """@fr ;
   skos:scopeNote """Esta clase representa el conjunto de datos publicados. En los casos donde es necesario distinguir entre el
@@ -341,6 +360,7 @@ dcat:Dataset
   skos:scopeNote "Questa classe rappresenta il dataset come pubblicato dall’editore. Nel caso in cui sia necessario operare  una distinzione fra i metadati originali del dataset e il record dei metadati ad esso associato nel catalogo (ad esempio, per distinguere la data di modifica del dataset da quella del dataset nel catalogo) si può impiegare la classe catalog record."@it ;
   skos:scopeNote "Tato třída reprezentuje datovou sadu tak, jak je publikována poskytovatelem dat. V případě potřeby rozlišení datové sady a jejího záznamu v katalogu (jelikož metadata jako datum modifikace se mohou lišit) pro něj může být použita třída \"záznam v katalogu\"."@cs ;
   skos:scopeNote "This class describes the conceptual dataset. One or more representations might be available, with differing schematic layouts and formats or serializations."@en ;
+  skos:scopeNote "Această clasă descrie setul de date conceptual. Pot fi disponibile una sau mai multe reprezentări, cu scheme, formate sau moduri de serializare diferite."@ro ;
   skos:scopeNote """This class represents the actual dataset as published by the dataset provider. In
           cases where a distinction between the actual dataset and its entry in the catalog is
           necessary (because metadata such as modification date and maintainer might differ), the
@@ -349,6 +369,9 @@ dcat:Dataset
           Σε περιπτώσεις όπου είναι απαραίτητος ο διαχωρισμός μεταξύ του συνόλου δεδομένων και της καταγραφής αυτού στον κατάλογο (γιατί μεταδεδομένα όπως η ημερομηνία αλλαγής και ο συντηρητής μπορεί να διαφέρουν)
           η κλάση της καταγραφής καταλόγου μπορεί να χρησιμοποιηθεί για το τελευταίο."""@el ;
   skos:scopeNote "このクラスは、データセットの公開者が公開する実際のデータセットを表わします。カタログ内の実際のデータセットとそのエントリーとの区別が必要な場合（修正日と維持者などのメタデータが異なるかもしれないので）は、後者にcatalog recordというクラスを使用できます。"@ja ;
+  skos:scopeNote """Această clasă reprezintă setul de date actual, publicat de furnizorul de seturi de date.
+  În cazul în care este necesară o distincție între setul de date real și intrarea acestuia în catalog (deoarece metadatele, cum ar fi data modificării
+  sau cel care îl întreține pot diferi), clasa înregistrării din catalog poate fi utilizată pentru aceasta din urmă."""@ro ;
 .
 dcat:Distribution
   rdf:type rdfs:Class ;
@@ -369,6 +392,8 @@ dcat:Distribution
 					Παραδείγματα διανομών συμπεριλαμβάνουν ένα μεταφορτώσιμο αρχείο μορφής CSV, ένα API ή ένα RSS feed."""@el ;
   rdfs:comment "شكل محدد لقائمة البيانات يمكن الوصول إليه. قائمة بيانات ما يمكن أن تكون متاحه باشكال و أنواع متعددة.  ملف يمكن تحميله أو واجهة برمجية يمكن من خلالها الوصول إلى البيانات هي أمثلة على ذلك."@ar ;
   rdfs:comment "データセットの特定の利用可能な形式を表わします。各データセットは、異なる形式で利用できることがあり、これらの形式は、データセットの異なる形式や、異なるエンドポイントを表わす可能性があります。配信の例には、ダウンロード可能なCSVファイル、API、RSSフィードが含まれます。"@ja ;
+  rdfs:comment "Reprezintă o reprezentare specifică a unui set de date. Un set de date poate fi disponibil în diferite forme,
+               care pot diferi in diverse moduri, cum ar fi limba, formatul, organizare schematic[, rezoluția spațială sau temporală, nivelul de detaliu sau profilul."@ro ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "Distribuce"@cs ;
   rdfs:label "Distribución"@es ;
@@ -378,6 +403,7 @@ dcat:Distribution
   rdfs:label "Διανομή"@el ;
   rdfs:label "التوزيع"@ar ;
   rdfs:label "配信"@ja ;
+  rdfs:label "Distribuție"@ja ;
   skos:scopeNote """Ceci représente une disponibilité générale du jeu de données, et implique qu'il n'existe pas d'information
 					sur la méthode d'accès réelle des données, par exple, si c'est un lien de téléchargement direct ou à travers une page Web. """@fr ;
   skos:scopeNote """Esto representa una disponibilidad general de un conjunto de datos, e implica que no existe información acerca
@@ -389,15 +415,20 @@ dcat:Distribution
   skos:scopeNote """Αυτό αναπαριστά μία γενική διαθεσιμότητα ενός συνόλου δεδομένων και δεν υπονοεί τίποτα περί του πραγματικού τρόπου πρόσβασης στα δεδομένα, αν είναι άμεσα μεταφορτώσιμα,
 					  μέσω API ή μέσω μίας ιστοσελίδας. Η χρήση της ιδιότητας dcat:downloadURL δείχνει μόνο άμεσα μεταφορτώσιμες διανομές."""@el ;
   skos:scopeNote "これは、データセットの一般的な利用可能性を表わし、データの実際のアクセス方式に関する情報（つまり、直接ダウンロードなのか、APIなのか、ウェブページを介したものなのか）を意味しません。dcat:downloadURLプロパティーの使用は、直接ダウンロード可能な配信を意味します。"@ja ;
+  skos:scopeNote """Aceasta reprezintă o disponibilitate generală a unui set de date și nu implică informații despre
+                    metoda de acces reală a datelor, adică dacă se face prin descărcarea directă, prin intermediul unui API sau printr-o pagină Web.
+                    Utilizarea proprietății dcat:downloadURL indică distribuții direct descărcabile."""@ro ;
 .
 dcat:Relationship
   rdf:type owl:Class ;
   rdfs:comment "An association class for attaching additional information to a relationship between DCAT Resources."@en ;
   rdfs:comment "Una clase de asociación para adjuntar información adicional a una relación entre recursos DCAT."@es ;
   rdfs:comment "Una classe di associazione per il collegamento di informazioni aggiuntive a una relazione tra le risorse DCAT."@it ;
+  rdfs:comment "O clasă de asociere pentru atașarea informațiilor suplimentare la o relație între resursele DCAT."@ro ;
   rdfs:label "Relationship"@en ;
   rdfs:label "Relación"@es ;
   rdfs:label "Relazione"@it ;
+  rdfs:label "Relație (relaționare)"@ro ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:minCardinality "1"^^xsd:nonNegativeInteger ;
@@ -406,18 +437,22 @@ dcat:Relationship
   skos:changeNote "New class in this DCAT revision"@en ;
   skos:changeNote "Nueva clase en esta revisión de DCAT"@es ;
   skos:changeNote "Nuova classe in questa revisione DCAT"@it ;
+  skos:changeNote "O clasă nouă în această revizie a DCAT"@ro ;
   skos:editorialNote "Status: Class accepted by DCAT revision team, but details of definition and constraints not yet resolved."@en ;
   skos:scopeNote "Use to characterize a relationship between datasets, and potentially other resources, where the nature of the relationship is known but is not adequately characterized by the standard Dublin Core properties (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy) or PROV-O properties (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)"@en ;
   skos:scopeNote "Se usa para caracterizar la relación entre conjuntos de datos, y potencialmente otros recursos, donde la naturaleza de la relación se conoce pero no está caracterizada adecuadamente con propiedades del estándar 'Dublin Core' (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy) or PROV-O properties (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)"@es ;
   skos:scopeNote "Viene utilizzato per caratterizzare la relazione tra insiemi di dati, e potenzialmente altri tipi di risorse, nei casi in cui la natura della relazione è nota ma non adeguatamente caratterizzata dalle proprietà dello standard 'Dublin Core' (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:require, dct:isRequiredBy) o dalle propietà fornite da PROV-O  (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov: hadPrimarySource, prov:alternateOf, prov:specializationOf)"@it;
+  skos:scopeNote "A se utiliza pentru a caracteriza o relație între seturi de date și, eventual, alte resurse, în cazul în care natura relației este cunoscută, dar nu este caracterizată în mod adecvat de proprietățile standardului Dublin Core (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy) sau proprietăți PROV-O (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)"@ro ;
 .
 
 dcat:Resource
   rdf:type owl:Class ;
   rdfs:comment "Resource published or curated by a single agent"@en ;
   rdfs:comment "Risorsa pubblicata o curata da un singolo agente"@it ;
+  rdfs:comment "Resursă publicată de un singur agent"@ro ;
   rdfs:label "Catalogued resource"@en ;
   rdfs:label "Risorsa catalogata"@it ;
+  rdfs:label "Resursă catalogată"@ro ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:minCardinality "1"^^xsd:nonNegativeInteger ;
@@ -425,6 +460,7 @@ dcat:Resource
     ] ;
   skos:changeNote "New class in this revision"@en ;
   skos:changeNote "Nuova classe in questa revisione"@it ;
+  skos:changeNote "O clasă nouă în această revizie"@ro ;
   skos:editorialNote "Status: Class accepted by DCAT revision team, but details of definition and constraints not yet resolved."@en ;
   skos:scopeNote """The class of all catalogued resources, the Superclass of
     dcat:Dataset, dcat:DataService, dcat:Catalog and any other member of a dcat:Catalog.
@@ -433,38 +469,55 @@ dcat:Resource
   skos:scopeNote "La classe di tutte le risorse catalogate, la Superclasse di dcat:Dataset, dcat:DataService, dcat:Catalog e qualsiasi altro membro di dcat:Catalog. Questa classe porta proprietà comuni a tutte le risorse catalogate, inclusi set di dati e servizi dati. Si consiglia vivamente di utilizzare una sottoclasse più specifica quando disponibile."@it ;
   skos:scopeNote "dcat:Resource is an extension point that enables the definition of any kind of catalog. Additional subclasses may be defined in a DCAT profile or application for catalogs of other kinds of resources"@en ;
   skos:scopeNote "dcat:Resource è un punto di estensione che consente la definizione di qualsiasi tipo di catalogo. Sottoclassi aggiuntive possono essere definite in un profilo DCAT o in un'applicazione per cataloghi di altri tipi di risorse"@it
-  .
+  skos:scopeNote """Clasa tuturor resurselor catalogate, o superclasă a dcat:Dataset, dcat:DataService, dcat:Catalog și orice alt membru al unui dcat:Catalog.
+     Această clasă reunește proprietățile comune tuturor resurselor catalogate, inclusiv seturi de date și servicii de date.
+     Se recomandă utilizarea unei subclase mai specifice de fiecare dată când specializarea este disponibilă."""@ro ;
+.
+
 dcat:Role
   rdf:type owl:Class ;
   rdfs:label "Role"@en ;
   rdfs:label "Ruolo"@it ;
+  rdfs:label "Rol"@ro ;
   rdfs:seeAlso dcat:hadRole ;
   rdfs:subClassOf skos:Concept ;
   skos:changeNote "New class in this revision of DCAT"@en ;
   skos:changeNote "Nuova classe in questa revisione di DCAT"@it ;
+  skos:changeNote "O clasă nouă în această revizie a DCAT"@en ;
   skos:editorialNote "Introduced into DCAT to complement prov:Role (whose use is limited to roles in the context of an activity, as the range of prov:hadRole)"@en ;
   skos:editorialNote "Introdotta in DCAT per completare prov:Role (il cui uso è limitato ai ruoli nel contesto di un'attività, in conseguenza alla definizione del codominio di prov:hadRole)"@it ;
   skos:scopeNote "Used in a qualified-attribution to specify the role of an Agent with respect to an Entity. It is recommended that the values be managed as a controlled vocabulary of agent roles, such as http://registry.it.csiro.au/def/isotc211/CI_RoleCode"@en ;
   skos:scopeNote "Utilizzato in un'attribuzione qualificata per specificare il ruolo di un agente rispetto a un'entità. Si consiglia di attribuire i valori considerando un vocabolario controllato dei ruoli dell'agente, ad esempio http://registry.it.csiro.au/def/isotc211/CI_RoleCode"@it ;
+  skos:scopeNote "Folosit într-o atribuire calificată pentru a specifica rolul unui Agent în ceea ce privește o Entitate. Se recomandă ca valorile să fie gestionate ca un vocabular controlat al rolurilor agentului, cum ar fi http://registry.it.csiro.au/def/isotc211/CI_RoleCode"@ro ;
   skos:scopeNote """Used in a qualified-relation to specify the role of an Entity with respect to another Entity.
   It is recommended that the values be managed as a controlled vocabulary of entity roles such as
   - ISO 19115 DS_AssociationTypeCode http://registry.it.csiro.au/def/isotc211/DS_AssociationTypeCode
   - IANA Registry of Link Relations https://www.iana.org/assignments/link-relation
   - DataCite metadata schema
   - MARC relators https://id.loc.gov/vocabulary/relators"""@en ;
+  skos:scopeNote """Folosit într-o relație calificată pentru a specifica rolul unei Entități în relație cu o altă Entitate.
+  Se recomandă ca valorile să fie gestionate ca un vocabular controlat al rolurilor entității, cum ar fi
+  - ISO 19115 DS_AssociationTypeCode http://registry.it.csiro.au/def/isotc211/DS_AssociationTypeCode
+  - IANA Registry of Link Relations https://www.iana.org/assignments/link-relation
+  - schema metadatelor DataCite
+  - MARC https://id.loc.gov/vocabulary/relators"""@ro ;
   skos:scopeNote "Utilizzato in una relazione qualificata per specificare il ruolo di un'entità rispetto a un'altra entità. Si raccomanda che il valore sia preso da un vocabolario controllato di ruoli di entità come ISO 19115 DS_AssociationTypeCode http://registry.it.csiro.au/def/isotc211/DS_AssociationTypeCode, IANA Registry of Link Relations https://www.iana.org/assignments/link-relation, DataCite metadata schema, o MARC relators https://id.loc.gov/vocabulary/relators"@it ;
   rdfs:comment "A role is the function of a resource or agent with respect to another resource, in the context of resource attribution or resource relationships."@en ;
- rdfs:comment "Un ruolo è la funzione di una risorsa o di un agente rispetto ad un'altra risorsa, nel contesto dell'attribuzione delle risorse o delle relazioni tra risorse."@it
+  rdfs:comment "Un ruolo è la funzione di una risorsa o di un agente rispetto ad un'altra risorsa, nel contesto dell'attribuzione delle risorse o delle relazioni tra risorse."@it
+  rdfs:comment "Un rol este funcția unei resurse sau a unui agent în raport cu o altă resursă, în contextul atribuirii resurselor sau al relaționării între resurse."@ro ;
 .
 dcat:accessService
   rdf:type owl:ObjectProperty ;
   rdfs:comment "A site or end-point that gives access to the distribution of the dataset"@en ;
   rdfs:comment "Un sito o end-point che dà accesso alla distribuzione del set di dati"@it ;
+  rdfs:comment "Un site sau punct de acces care permite accesul la distribuția unui set de date"@ro ;
   rdfs:label "data access service"@en ;
   rdfs:label "servizio di accesso ai dati"@it ;
+  rdfs:label "Serviciu de acces la date"@ro ;
   rdfs:range dcat:DataService ;
   skos:changeNote "New property in this revision of DCAT"@en ;
   skos:changeNote "Nuova proprietà in questa revisione di DCAT"@it ;
+  skos:changeNote "O nouă proprietate în această revizie a DCAT"@ro ;
   skos:editorialNote "Status: Property accepted by DCAT revision team, but details of definition and constraints not yet resolved."@en ;
 .
 dcat:accessURL
@@ -482,6 +535,8 @@ dcat:accessURL
           μεταφόρτωση, feed URL, σημείο διάθεσης SPARQL. Να χρησιμοποιείται όταν ο κατάλογος δεν περιέχει πληροφορίες εαν πρόκειται ή όχι για μεταφορτώσιμο αρχείο."""@el ;
   rdfs:comment "أي رابط يتيح الوصول إلى البيانات. إذا كان الرابط هو ربط مباشر لملف يمكن تحميله استخدم الخاصية downloadURL"@ar ;
   rdfs:comment "データセットの配信にアクセス権を与えるランディング・ページ、フィード、SPARQLエンドポイント、その他の種類の資源。"@ja ;
+  rdfs:comment """O adresă URL a unei resurse care permite accesul la distribuția setului de date. De exemplu, pagina principală a unui site, feed sau un punct de acces SPARQL.
+               Utilizați pentru toate cazurile, cu excepția unui simplu link de descărcare, caz în care downloadURL este preferat."""@ro ;
   rdfs:domain dcat:Distribution ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "URL d'accès"@fr ;
@@ -492,6 +547,7 @@ dcat:accessURL
   rdfs:label "přístupové URL"@cs ;
   rdfs:label "رابط وصول"@ar ;
   rdfs:label "アクセスURL"@ja ;
+  rdfs:label "Adresă URL de acces"@ro ;
   rdfs:range rdfs:Resource ;
   owl:propertyChainAxiom (
       dcat:accessService
@@ -513,6 +569,8 @@ dcat:accessURL
 					Αν η/οι διανομή/ές είναι προσβάσιμη/ες μόνο μέσω μίας ιστοσελίδας αρχικής πρόσβασης (δηλαδή αν δεν υπάρχουν γνωστές διευθύνσεις άμεσης μεταφόρτωσης), τότε ο σύνδεσμος της ιστοσελίδας αρχικής πρόσβασης πρέπει να αναπαραχθεί ως accessURL σε μία διανομή."""@el ;
   skos:scopeNote """確実にダウンロードでない場合や、ダウンロードかどうかが不明である場合は、downloadURLではなく、accessURLを用いてください。
 ランディング・ページを通じてしか配信にアクセスできない場合（つまり、直接的なダウンロードURLが不明）は、配信におけるaccessURLとしてランディング・ページのリンクをコピーすべきです（SHOULD）。"""@ja ;
+  skos:scopeNote """Dacă distribuția (distribuirile) sunt accesibile numai prin intermediul unei pagini principale (adică adresele URL directe de descărcare nu sunt cunoscute),
+          atunci link-ul paginii principale ar trebui deasemnea să fie duplicat ca accesURL-ul distribuției."""@ro ;
 .
 dcat:bbox
   rdf:type rdf:Property ;
@@ -520,7 +578,9 @@ dcat:bbox
   rdfs:domain dct:Location ;
   rdfs:range rdfs:Literal ;
   skos:definition "The geographic bounding box of a resource"@en ;
+  skos:definition "Dreptunghiul de delimitare geografică a unei resurse"@ro ;
   skos:scopeNote "The range of this property is intentionally generic, with the purpose of allowing different geometry encodings. E.g., the geometry could be encoded with as WKT (geosparql:asWKT [GeoSPARQL]) or [GML] (geosparql:asGML [GeoSPARQL])."@en ;
+  skos:scopeNote "Domeniul acestei proprietăți este lăsat generic în mod intenționat cu scopul de a permite codificări geometrice diferite. De exemplu, geometria ar putea fi codificată ca fiind WKT (geosparql:asWKT [GeoSPARQL]) sau [GML] (geosparql:asGML [GeoSPARQL])."@ro ;
 .
 dcat:byteSize
   rdf:type rdf:Property ;
@@ -533,6 +593,7 @@ dcat:byteSize
   rdfs:comment "Το μέγεθος μιας διανομής σε bytes."@el ;
   rdfs:comment "الحجم بالبايتات "@ar ;
   rdfs:comment "バイトによる配信のサイズ。"@ja ;
+  rdfs:comment "Dimensiunea (în octeți) unei distribuții"@ro ;
   rdfs:domain dcat:Distribution ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "byte size"@en ;
@@ -543,6 +604,7 @@ dcat:byteSize
   rdfs:label "μέγεθος σε bytes"@el ;
   rdfs:label "الحجم بالبايت"@ar ;
   rdfs:label "バイト・サイズ"@ja ;
+  rdfs:label "dimensiunea în octeți"@ro ;
   rdfs:range rdfs:Literal ;
   skos:scopeNote """El tamaño en bytes puede ser aproximado cuando se desconoce el tamaño exacto.
           El valor literal de dcat:byteSize debe tener tipo 'xsd:decimal'"""@es ;
@@ -556,19 +618,24 @@ dcat:byteSize
           Η τιμή της dcat:byteSize θα πρέπει να δίνεται με τύπο δεδομένων xsd:decimal"""@el ;
   skos:scopeNote "الحجم يمكن أن يكون تقريبي إذا كان الحجم الدقيق غير معروف"@ar ;
   skos:scopeNote "正確なサイズが不明である場合、サイズは、バイトによる近似値を示すことができます。"@ja ;
+  skos:scopeNote """Dimensiunea în octeți poate fi aproximată atunci când dimensiunea exactă nu este cunoscută.
+          Valoarea pentru dcat:byteSize trebuie să fie de tipul xsd:decimal."""@ro ;
 .
 dcat:catalog
   rdf:type owl:ObjectProperty ;
   rdfs:comment "A catalog whose contents are of interest in the context of this catalog"@en ;
   rdfs:comment "Un catalogo i cui contenuti sono di interesse nel contesto di questo catalogo"@it ;
+  rdfs:comment "Un catalog al cărui conținut este de interes în contextul acestui catalog"@ro ;
   rdfs:domain dcat:Catalog ;
   rdfs:label "catalog"@en ;
   rdfs:label "catalogo"@it ;
+  rdfs:label "catalog"@ro ;
   rdfs:range dcat:Catalog ;
   rdfs:subPropertyOf dct:hasPart ;
   rdfs:subPropertyOf rdfs:member ;
   skos:changeNote "New property in this revision of DCAT"@en ;
   skos:changeNote "Nuova proprietà in questa revisione di DCAT"@it ;
+  skos:changeNote "O nouă proprietate în această revizie a DCAT"@ro ;
   skos:editorialNote "Status: Property accepted by DCAT revision team, but details of definition and constraints not yet resolved."@en ;
 .
 dcat:centroid
@@ -577,7 +644,9 @@ dcat:centroid
   rdfs:domain dct:Location ;
   rdfs:range rdfs:Literal ;
   skos:definition "The geographic center (centroid) of a resource"@en ;
+  skos:definition "Centrul geografic al resursei"@ro ;
   skos:scopeNote "The range of this property is intentionally generic, with the purpose of allowing different geometry encodings. E.g., the geometry could be encoded with as WKT (geosparql:asWKT [GeoSPARQL]) or [GML] (geosparql:asGML [GeoSPARQL])."@en ;
+  skos:scopeNote "Domeniul acestei proprietăți este lăsat generic în mod intenționat cu scopul de a permite codificări geometrice diferite. De exemplu, geometria ar putea fi codificată ca fiind WKT (geosparql:asWKT [GeoSPARQL]) sau [GML] (geosparql:asGML [GeoSPARQL])."@ro ;
 .
 dcat:contactPoint
   rdf:type rdf:Property ;
@@ -590,6 +659,7 @@ dcat:contactPoint
   rdfs:comment "Συνδέει ένα σύνολο δεδομένων με ένα σχετικό σημείο επικοινωνίας, μέσω VCard."@el ;
   rdfs:comment "تربط قائمة البيانات بعنوان اتصال موصف  باستخدام VCard"@ar ;
   rdfs:comment "データセットを、VCardを用いて提供されている適切な連絡先情報にリンクします。"@ja ;
+  rdfs:comment "Informații de contact relevante pentru resursa catalogată. Este recomandată utilizarea vCard-ului."@ro ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "Punto de contacto"@es ;
   rdfs:label "contact point"@en ;
@@ -599,6 +669,7 @@ dcat:contactPoint
   rdfs:label "σημείο επικοινωνίας"@el ;
   rdfs:label "عنوان اتصال"@ar ;
   rdfs:label "窓口"@ja ;
+  rdfs:label "punct de contact"@ro ;
   rdfs:range v:Kind ;
   skos:editorialNote "Status: English Definition text modified by DCAT revision team, Italian translations provided, other translations pending."@en ;
 .
@@ -613,6 +684,7 @@ dcat:dataset
   rdfs:comment "Συνδέει έναν κατάλογο με ένα σύνολο δεδομένων το οποίο ανήκει στον εν λόγω κατάλογο."@el ;
   rdfs:comment "تربط الفهرس بقائمة بيانات ضمنه"@ar ;
   rdfs:comment "カタログの一部であるデータセット。"@ja ;
+  rdfs:comment "O colecție de date care este listată în catalog."@ro ;
   rdfs:domain dcat:Catalog ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "conjunto de datos"@es ;
@@ -623,6 +695,7 @@ dcat:dataset
   rdfs:label "σύνολο δεδομένων"@el ;
   rdfs:label "قائمة بيانات"@ar ;
   rdfs:label "データセット"@ja ;
+  rdfs:label "set de date"@ro ;
   rdfs:range dcat:Dataset ;
   rdfs:subPropertyOf dct:hasPart ;
   rdfs:subPropertyOf rdfs:member ;
@@ -639,6 +712,7 @@ dcat:distribution
   rdfs:comment "Συνδέει ένα σύνολο δεδομένων με μία από τις διαθέσιμες διανομές του."@el ;
   rdfs:comment "تربط قائمة البيانات بطريقة أو بشكل يسمح  الوصول الى البيانات"@ar ;
   rdfs:comment "データセットを、その利用可能な配信に接続します。"@ja ;
+  rdfs:comment "Una dintre distribuțiile disponibile pentru setul de date."@ro ;
   rdfs:domain dcat:Dataset ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "distribuce"@cs ;
@@ -649,6 +723,7 @@ dcat:distribution
   rdfs:label "διανομή"@el ;
   rdfs:label "توزيع"@ar ;
   rdfs:label "データセット配信"@ja ;
+  rdfs:label "distribuție"@ro ;
   rdfs:range dcat:Distribution ;
   rdfs:subPropertyOf dct:relation ;
   skos:editorialNote "Status: English Definition text modified by DCAT revision team, translations pending (except for Italian)."@en ;
@@ -668,6 +743,8 @@ dcat:downloadURL
   rdfs:comment """Είναι ένας σύνδεσμος άμεσης μεταφόρτωσης ενός αρχείου σε μια δεδομένη μορφή. Π.χ. ένα αρχείο CSV ή RDF.
 					Η μορφη αρχείου περιγράφεται από τις ιδιότητες dct:format ή/και dcat:mediaType της διανομής"""@el ;
   rdfs:comment "رابط مباشر لملف يمكن تحميله. نوع الملف يتم توصيفه باستخدام الخاصية dct:format dcat:mediaType "@ar ;
+  rdfs:comment """Adresa URL a fișierului descărcabil într-un anumit format, de exemplu, fișier CSV sau RDF.
+          Formatul este indicat în proprietățile dct:format și/sau dcat:mediaType ale distribuției."""@ro ;
   rdfs:domain dcat:Distribution ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "URL de descarga"@es ;
@@ -678,6 +755,7 @@ dcat:downloadURL
   rdfs:label "download URL"@en ;
   rdfs:label "رابط تحميل"@ar ;
   rdfs:label "ダウンロードURL"@ja ;
+  rdfs:label "URL de descărcare"@ro ;
   rdfs:range rdfs:Resource ;
   skos:editorialNote "Status: English  Definition text modified by DCAT revision team, Italian translation updated, other translations pending."@en ;
   skos:editorialNote "rdfs:label, rdfs:comment and/or skos:scopeNote have been modified. Non-english versions must be updated."@en ;
@@ -687,6 +765,7 @@ dcat:downloadURL
   skos:scopeNote "La valeur est une URL."@fr ;
   skos:scopeNote "dcat:downloadURL SHOULD be used for the address at which this distribution is available directly, typically through a HTTP Get request."@en ;
   skos:scopeNote "Η τιμή είναι ένα URL."@el ;
+  skos:scopeNote "Ar trebui utilizat dcat:downloadURL pentru adresa la care această distribuție este disponibilă direct, de obicei printr-o cerere de tipul HTTP Get."@ro ;
 .
 dcat:endDate
   rdf:type rdf:Property ;
@@ -694,39 +773,50 @@ dcat:endDate
   rdfs:domain dct:PeriodOfTime ;
   rdfs:range rdfs:Literal ;
   skos:definition "The end of the period"@en ;
+  skos:definition "Sfârșitul perioadei"@ro ;
   skos:scopeNote "The range of this property is intentionally generic, with the purpose of allowing different level of temporal precision for specifying the end of a period. E.g., it can be expressed with a date (xsd:date), a date and time (xsd:dateTime), or a year (xsd:gYear)."@en ;
+  skos:scopeNote "Domeniul acestei proprietăți este lăsat generic în mod intenționat cu scopul de a permite niveluri diferite de precizie temporală pentru specificarea sfârșitului perioadei. De exemplu, poate fi exprimată cu dată (xsd: date), dată și timp (xsd: dateTime) sau doar an (xsd: gYear)."@ro ;
 .
 dcat:endpointDescription
   rdf:type owl:ObjectProperty ;
   rdfs:comment "A description of the service end-point, including its operations, parameters etc."@en ;
   rdfs:comment "Una descrizione dell'endpoint del servizio, incluse le sue operazioni, parametri, ecc."@it ;
+  rdfs:comment "O descriere a punctului de acces al serviciului, incluzând operațiunile, parametrii și alte atribute ale sale"@ro ;
   rdfs:domain dcat:DataService ;
   rdfs:label "description of service end-point"@en ;
   rdfs:label "descrizione dell'endpoint del servizio"@it ;
+  rdfs:label "descrierea punctului de acces al serviciului"@ro ;
   skos:changeNote "New property in this revision of DCAT"@en ;
   skos:changeNote "Nuova proprietà in questa revisione di DCAT"@it ;
+  skos:changeNote "O nouă proprietate în această revizie a DCAT"@ro ;
   skos:editorialNote "Status: Property accepted by DCAT revision team, but details of definition and constraints not yet resolved."@en ;
   skos:scopeNote "An endpoint description may be expressed in a machine-readable form, such as an OpenAPI (Swagger) description, an OGC getCapabilities response, a SPARQL Service Description, an OpenSearch or WSDL document, a Hydra API description, else in text or some other informal mode if a formal representation is not possible."@en ;
   skos:scopeNote "Una descrizione dell'endpoint può essere espressa in un formato leggibile dalla macchina, come una descrizione OpenAPI (Swagger), una risposta getCapabilities OGC, una descrizione del servizio SPARQL, un documento OpenSearch o WSDL, una descrizione API Hydra, o con del testo o qualche altra modalità informale se una rappresentazione formale non è possibile."@it ;
+  skos:scopeNote "Descriere punctului de acces poate fi exprimată într-o formă care poate fi citită de mașină, cum ar fi o descriere OpenAPI (Swagger), un răspuns OGC getCapabilities, o descriere SPARQL Service Description, un document OpenSearch sau WSDL, o descriere Hydra API, sau moduri informale de descriere atunci când o reprezentare formală nu este posibilă."@ro ;
   skos:scopeNote "The endpoint decription gives specific details of the actual endpoint instance, while dct:conformsTo is used to indicate the general standard or specification that the endpoint implements."@en ;
   skos:scopeNote "La descrizione dell'endpoint fornisce dettagli specifici dell'istanza dell'endpoint reale, mentre dct:conformsTo viene utilizzato per indicare lo standard o le specifiche implementate dall'endpoint."@it
+  skos:scopeNote "Descrierea punctului de acces furnizează detalii specifice privind instanța efectivă a punctului de acces, în timp ce dct:conformTo este utilizată pentru a indica standardul sau specificația generală implementată de către punctul de acces."@ro ;
 .
 dcat:endpointURL
   rdf:type owl:ObjectProperty ;
   rdfs:comment "The URI of the service end-point"@en ;
   rdfs:comment "URI dell'endpoint del servizio"@it;
+  rdfs:comment "URI-ul punctului de access al serviciului"@ro ;
   rdfs:domain dcat:DataService ;
   rdfs:range rdfs:Resource ;
   rdfs:label "service end-point"@en ;
   rdfs:label "end-point del servizio"@it ;
+  rdfs:label "punctul de acces al serviciului"@en ;
   skos:changeNote "New property in this revision of DCAT"@en ;
   skos:changeNote "Nuova proprietà in questa revisione di DCAT"@it ;
+  skos:changeNote "O nouă proprietate în această revizie a DCAT"@ro ;
   skos:editorialNote "Status: Property accepted by DCAT revision team, but details of definition and constraints not yet resolved."@en ;
 .
 dcat:hadRole
   rdf:type owl:ObjectProperty ;
   rdfs:comment "The function of an entity or agent with respect to another entity or resource."@en ;
-rdfs:comment "La funzione di un'entità o un agente rispetto ad un'altra entità o risorsa."@it ;
+  rdfs:comment "La funzione di un'entità o un agente rispetto ad un'altra entità o risorsa."@it ;
+  rdfs:comment "Funcția unei entități sau a unui agent relativ la o altă entitate sau resursă."@ro ;
   rdfs:domain [
       rdf:type owl:Class ;
       owl:unionOf (
@@ -736,13 +826,16 @@ rdfs:comment "La funzione di un'entità o un agente rispetto ad un'altra entità
     ] ;
   rdfs:label "hadRole"@en ;
   rdfs:label "haRuolo"@it ;
+  rdfs:label "avuseRol"@ro ;
   rdfs:range dcat:Role ;
   skos:changeNote "New property in this revision of DCAT"@en ;
   skos:changeNote "Nuova proprietà in questa revisione di DCAT"@it ;
+  skos:changeNote "O nouă proprietate în această revizie a DCAT"@ro ;
   skos:editorialNote "Introduced into DCAT to complement prov:hadRole (whose use is limited to roles in the context of an activity, with the domain of prov:Association)"@en ;
   skos:editorialNote "Introdotta in DCAT per completare prov:hadRole (il cui uso è limitato ai ruoli nel contesto di un'attività, con il dominio di prov:Association)"@it ;
   skos:scopeNote "May be used in a qualified-attribution to specify the role of an Agent with respect to an Entity. It is recommended that the value be taken from a controlled vocabulary of agent roles, such as http://registry.it.csiro.au/def/isotc211/CI_RoleCode"@en ;
   skos:scopeNote "Può essere utilizzato in un'attribuzione qualificata per specificare il ruolo di un agente rispetto a un'entità. Si raccomanda che il valore sia preso da un vocabolario controllato di ruoli di agente, come ad esempio http://registry.it.csiro.au/def/isotc211/CI_RoleCode"@it ;
+  skos:scopeNote "Poate fi utilizată într-o atribuire calificată pentru a specifica rolul unui Agent relativ la o Entitate. Se recomandă ca valoarea să fie luată dintr-un vocabular controlat al rolurilor agentului, cum ar fi http://registry.it.csiro.au/def/isotc211/CI_RoleCode"@ro ;
   skos:scopeNote """May be used in a qualified-relation to specify the role of an Entity with respect to another Entity.
   It is recommended that the value be taken from a controlled vocabulary of entity roles such as
   - ISO 19115 DS_AssociationTypeCode http://registry.it.csiro.au/def/isotc211/DS_AssociationTypeCode
@@ -750,6 +843,12 @@ rdfs:comment "La funzione di un'entità o un agente rispetto ad un'altra entità
   - DataCite metadata schema
   - MARC relators https://id.loc.gov/vocabulary/relators"""@en ;
   skos:scopeNote "Può essere utilizzata in una relazione qualificata per specificare il ruolo di un'entità rispetto a un'altra entità. Si raccomanda che il valore sia preso da un vocabolario controllato di ruoli di entità come ISO 19115 DS_AssociationTypeCode http://registry.it.csiro.au/def/isotc211/DS_AssociationTypeCode, IANA Registry of Link Relations https://www.iana.org/assignments/link-relation, DataCite metadata schema, o MARC relators https://id.loc.gov/vocabulary/relators"@it ;
+  skos:scopeNote """Poate fi utilizată într-o atribuire calificată pentru a specifica rolul unei Entități relativ la o altă Entitate.
+  Se recomandă ca valoarea să fie luată dintr-un vocabular controlat al rolurilor entității, cum ar fi
+  - ISO 19115 DS_AssociationTypeCode http://registry.it.csiro.au/def/isotc211/DS_AssociationTypeCode
+  - IANA Registry of Link Relations https://www.iana.org/assignments/link-relation
+  - schema metadatelor DataCite
+  - MARC https://id.loc.gov/vocabulary/relators"""@ro ;
 .
 dcat:keyword
   rdf:type rdf:Property ;
@@ -762,6 +861,7 @@ dcat:keyword
   rdfs:comment "Μία λέξη-κλειδί ή μία ετικέτα που περιγράφει το σύνολο δεδομένων."@el ;
   rdfs:comment "كلمة  مفتاحيه توصف قائمة البيانات"@ar ;
   rdfs:comment "データセットを記述しているキーワードまたはタグ。"@ja ;
+  rdfs:comment "Un cuvânt cheie sau etichetă ce descrie o resursă."@ro ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "keyword"@en ;
   rdfs:label "klíčové slovo"@cs ;
@@ -771,6 +871,7 @@ dcat:keyword
   rdfs:label "λέξη-κλειδί"@el ;
   rdfs:label "كلمة  مفتاحية "@ar ;
   rdfs:label "キーワード/タグ"@ja ;
+  rdfs:label "cuvânt cheie"@ro ;
   rdfs:range rdfs:Literal ;
   rdfs:subPropertyOf dct:subject ;
 .
@@ -785,6 +886,7 @@ dcat:landingPage
   rdfs:comment "Μία ιστοσελίδα πλοηγίσιμη μέσω ενός φυλλομετρητή (Web browser) που δίνει πρόσβαση στο σύνολο δεδομένων, τις διανομές αυτού ή/και επιπρόσθετες πληροφορίες."@el ;
   rdfs:comment "صفحة وب يمكن من خلالها الوصول الى قائمة البيانات أو إلى معلومات إضافية متعلقة بها "@ar ;
   rdfs:comment "データセット、その配信および（または）追加情報にアクセスするためにウエブ・ブラウザでナビゲートできるウェブページ。"@ja ;
+  rdfs:comment "O pagină Web la care se poate naviga într-un browser Web pentru a obține acces la catalog, la un set de date, la distribuții și / sau informații suplimentare."@ro ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "landing page"@en ;
   rdfs:label "page d'atterrissage"@fr ;
@@ -794,6 +896,7 @@ dcat:landingPage
   rdfs:label "ιστοσελίδα αρχικής πρόσβασης"@el ;
   rdfs:label "صفحة وصول"@ar ;
   rdfs:label "ランディング・ページ"@ja ;
+  rdfs:label "pagina principală"@ro ;
   rdfs:range foaf:Document ;
   rdfs:subPropertyOf foaf:page ;
   skos:scopeNote """If the distribution(s) are accessible only through a landing page (i.e. direct download
@@ -807,6 +910,7 @@ dcat:landingPage
 						le lien de la page d'atterrissage doit être dupliqué comme accessURL sur la distribution."""@fr ;
   skos:scopeNote "Αν η/οι διανομή/ές είναι προσβάσιμη/ες μόνο μέσω μίας ιστοσελίδας αρχικής πρόσβασης (δηλαδή αν δεν υπάρχουν γνωστές διευθύνσεις άμεσης μεταφόρτωσης), τότε ο σύνδεσμος της ιστοσελίδας αρχικής πρόσβασης πρέπει να αναπαραχθεί ως accessURL σε μία διανομή."@el ;
   skos:scopeNote "ランディング・ページを通じてしか配信にアクセスできない場合（つまり、直接的なダウンロードURLが不明）には、配信におけるaccessURLとしてランディング・ページのリンクをコピーすべきです（SHOULD）。"@ja ;
+  skos:scopeNote """Dacă distribuția (distribuțiile) sunt accesibile numai prin intermediul unei pagini principale (adică adresele de descărcare directă nu sunt cunoscute), atunci linkul paginii principale ar trebui să fie duplicat și ca accesURL."""@ro ;
 .
 dcat:mediaType
   rdf:type rdf:Property ;
@@ -822,6 +926,7 @@ dcat:mediaType
           η ιδιότητα dct:format ΔΥΝΑΤΑΙ να χρησιμοποιηθεί με διαφορετικές τιμές."""@el ;
   rdfs:comment "يجب استخدام هذه الخاصية إذا كان نوع الملف معرف ضمن IANA"@ar ;
   rdfs:comment "このプロパティーは、配信のメディア・タイプがIANAで定義されているときに使用すべきで（SHOULD）、そうでない場合には、dct:formatを様々な値と共に使用できます（MAY）。"@ja ;
+  rdfs:comment "Tipul de suport al distribuției, definit de către IANA"@ro ;
   rdfs:domain dcat:Distribution ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "media type"@en ;
@@ -832,48 +937,58 @@ dcat:mediaType
   rdfs:label "τύπος μέσου"@el ;
   rdfs:label "نوع الميديا"@ar ;
   rdfs:label "メディア・タイプ"@ja ;
+  rdfs:label "tipul de suport"@ro ;
   rdfs:range dct:MediaType ;
   rdfs:subPropertyOf dct:format ;
   skos:editorialNote "Status: English Definition text modified by DCAT revision team, Italian translation provided, other translations pending. Note some inconsistency on def vs. usage"@en ;
   skos:editorialNote "The range of dcat:mediaType has been tightened as part of the revision of DCAT."@en ;
   skos:scopeNote "This property SHOULD be used when the media type of the distribution is defined in the IANA media types registry https://www.iana.org/assignments/media-types/, otherwise dct:format MAY be used with different values."@en ;
   skos:scopeNote "Questa proprietà DEVE essere usata quando il tipo di media della distribuzione è definito nel registro dei tipi di media IANA https://www.iana.org/assignments/media-types/, altrimenti dct:format PUO 'essere usato con differenti valori"@it
+  skos:scopeNote "Această proprietate ar TREBUI să fie utilizată atunci când tipul de suport al distribuției este definit în registrul de tipuri de suport IANA https://www.iana.org/assignments/media-types/, altfel dct:format POATE fi folosit cu alte valori."@ro ;
 .
 dcat:compressFormat
   rdf:type rdf:Property ;
   rdf:type owl:ObjectProperty ;
   rdfs:comment "The format of the distribution in which the data is contained in a compressed form, e.g. to reduce the size of the downloadable file."@en ;
   rdfs:comment "El formato de la distribución en el que los datos están en forma comprimida, e.g. para reducir el tamaño del archivo a bajar."@es ;
-rdfs:comment "Il formato della distribuzione nella quale i dati sono in forma compressa, ad es. per ridurre le dimensioni del file da scaricare."@it ;
+  rdfs:comment "Il formato della distribuzione nella quale i dati sono in forma compressa, ad es. per ridurre le dimensioni del file da scaricare."@it ;
+  rdfs:comment "Formatul distribuției în cazul în care datele sunt reprezentate într-o formă comprimată, de ex. pentru a reduce dimensiunea fișierului descărcabil."@ro ;
   rdfs:domain dcat:Distribution ;
   rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-2/> ;
   rdfs:label "compression format"@en ;
   rdfs:label "formato de compresión"@es ;
   rdfs:label "formato di compressione"@it ;
+  rdfs:label "formatul compresiei"@ro ;
   rdfs:range dct:MediaType ;
   rdfs:subPropertyOf dct:format ;
   skos:changeNote "New property in this revision of DCAT"@en ;
   skos:changeNote "Nuova proprietà in questa revisione di DCAT"@it ;
+  skos:changeNote "O nouă proprietate în această revizie a DCAT"@ro ;
   skos:scopeNote "This property to be used when the files in the distribution are compressed, e.g. in a ZIP file. The format SHOULD be expressed using a media type as defined by IANA media types registry https://www.iana.org/assignments/media-types/, if available."@en ;
   skos:scopeNote "Questa proprietà deve essere utilizzata quando i file nella distribuzione sono compressi, ad es. in un file ZIP. Il formato DOVREBBE essere espresso usando un tipo di media come definito dal registro dei tipi di media IANA https://www.iana.org/assignments/media-types/, se disponibile."@it ;
+  skos:scopeNote "Această proprietate va fi utilizată atunci când fișierele din distribuție sunt comprimate, de ex. într-un fișier ZIP. Atunci când este posibil, formatul ar TREBUI să fie exprimat utilizând un tip de suport media definit de registrul tipurilor de suport IANA https://www.iana.org/assignments/media-types/."@ro ;
 .
 dcat:packageFormat
   rdf:type rdf:Property ;
   rdf:type owl:ObjectProperty ;
   rdfs:comment "The format of the file in which one or more data files are grouped together, e.g. to enable a set of related files to be downloaded together."@en ;
   rdfs:comment "El formato del archivo en que se agrupan uno o más archivos de datos, e.g. para permitir que un conjunto de archivos relacionados se bajen juntos."@es ;
- rdfs:comment "Il formato del file in cui uno o più file di dati sono raggruppati insieme, ad es. per abilitare un insieme di file correlati da scaricare insieme."@it ;
+  rdfs:comment "Il formato del file in cui uno o più file di dati sono raggruppati insieme, ad es. per abilitare un insieme di file correlati da scaricare insieme."@it ;
+  rdfs:comment "Formatul fișierului în care unul sau mai multe fișiere de date sunt grupate împreună, de ex. pentru a permite ca un set de fișiere asociate să fie descărcate împreună."@ro ;
   rdfs:domain dcat:Distribution ;
   rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-2/> ;
   rdfs:label "packaging format"@en ;
   rdfs:label "formato de empaquetado"@es ;
   rdfs:label "formato di impacchettamento"@it ;
+  rdfs:label "formatul fișierului pachet"@ro ;
   rdfs:range dct:MediaType ;
   rdfs:subPropertyOf dct:format ;
   skos:changeNote "New property in this revision of DCAT"@en ;
   skos:changeNote "Nuova proprietà in questa revisione di DCAT"@it ;
+  skos:changeNote "O nouă proprietate în această revizie a DCAT"@ro ;
   skos:scopeNote "This property to be used when the files in the distribution are packaged, e.g. in a RAR file. The format SHOULD be expressed using a media type as defined by IANA media types registry https://www.iana.org/assignments/media-types/, if available."@en;
   skos:scopeNote "Questa proprietà deve essere utilizzata quando i file nella distribuzione sono impacchettati, ad esempio in un file RAR. Il formato DOVREBBE essere espresso utilizzando un tipo di supporto come definito dal registro dei tipi di media IANA https://www.iana.org/assignments/media-types/, se disponibili."@it
+  skos:scopeNote "Această proprietate este utilizată atunci când fișierele din distribuție sunt împachetate, de ex. într-un fișier RAR. Atunci când este posibil, formatul ar TREBUI să fie exprimat utilizând un tip de suport definit de registrul de tipuri de suport IANA https://www.iana.org/assignments/media-types/."@ro ;
 .
 #dcat:point
 #  rdf:type rdf:Property ;
@@ -888,20 +1003,24 @@ dcat:qualifiedRelation
   rdfs:comment "Link to a description of a relationship with another resource."@en ;
   rdfs:comment "Enlace a una descripción de la relación con otro recurso."@es ;
   rdfs:comment "Link a una descrizione di una relazione con un'altra risorsa."@it ;
+  rdfs:comment "Link către o descriere a unei relaționări cu o altă resursă."@ro ;
   rdfs:domain dcat:Resource ;
   rdfs:label "qualified relation"@en ;
   rdfs:label "relación calificada"@es ;
   rdfs:label "relazione qualificata"@it ;
+  rdfs:label "relaționare calificată"@ro ;
   rdfs:range dcat:Relationship ;
   skos:changeNote "New property in this revision of DCAT"@en ;
   skos:changeNote "Propiedad nueva en esta revisión de DCAT"@es ;
   skos:changeNote "Nuova proprietà in questa revisione di DCAT"@it ;
+  skos:changeNote "O nouă proprietate în această revizie a DCAT"@ro ;
   skos:editorialNote "Introduced into DCAT to complement the other PROV qualified relations. "@en ;
   skos:editorialNote "Se incluyó en DCAT para complementar las relaciones calificadas disponibles en PROV. "@es ;
   skos:editorialNote "Introdotta in DCAT per integrare le altre relazioni qualificate di PROV."@it ;
   skos:scopeNote "Used to link to another resource where the nature of the relationship is known but does not match one of the standard Dublin Core properties (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy) or PROV-O properties (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)."@en ;
   skos:scopeNote "Se usa para asociar con otro recurso para el cuál la naturaleza de la relación es conocida pero no es ninguna de las propiedades que provee el estándar Dublin Core (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy) or PROV-O properties (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)."@es ;
  skos:scopeNote "Viene utilizzato per associarsi a un'altra risorsa nei casi per i quali la natura della relazione è nota ma non è alcuna delle proprietà fornite dallo standard Dublin Core (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat , dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:require, dct:isRequiredBy) o dalle proprietà fornite da PROV-O (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom , prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)."@it
+  skos:scopeNote "A se utiliza pentru o legătură la o altă resursă atunci când natura relaționării este cunoscută dar nu este una dintre proprietățile standardelor Dublin Core (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy) sau PROV-O (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)."@ro ;
 .
 dcat:record
   rdf:type rdf:Property ;
@@ -914,6 +1033,7 @@ dcat:record
   rdfs:comment "Συνδέει έναν κατάλογο με τις καταγραφές του."@el ;
   rdfs:comment "تربط الفهرس بسجل ضمنه"@ar ;
   rdfs:comment "カタログの一部であるカタログ・レコード。"@ja ;
+  rdfs:comment "O înregistrare care descrie înregistrarea unui singur set de date sau a unui serviciu de date ca parte din catalog."@ro ;
   rdfs:domain dcat:Catalog ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "record"@en ;
@@ -924,6 +1044,7 @@ dcat:record
   rdfs:label "καταγραφή"@el ;
   rdfs:label "سجل"@ar ;
   rdfs:label "カタログ・レコード"@ja ;
+  rdfs:label "înregistrare"@ro ;
   rdfs:range dcat:CatalogRecord ;
   skos:editorialNote "Status: English, Italian and Spanish Definitions modified by DCAT revision team, other translations pending."@en ;
 .
@@ -931,12 +1052,15 @@ dcat:servesDataset
   rdf:type owl:ObjectProperty ;
   rdfs:comment "A collection of data that this DataService can distribute"@en ;
   rdfs:comment "Una raccolta di dati che questo DataService può distribuire"@it ;
+  rdfs:comment "O colecție de date pe care acest DataService le poate distribui"@ro ;
   rdfs:domain dcat:DataService ;
   rdfs:label "serves dataset"@en ;
   rdfs:label "serve set di dati"@it ;
+  rdfs:label "servește setul de date"@ro ;
   rdfs:range dcat:Dataset ;
   skos:changeNote "New property in this revision of DCAT"@en ;
   skos:changeNote "Nuova proprietà in questa revisione di DCAT"@it ;
+  skos:changeNote "O nouă proprietate în această revizie a DCAT"@ro ;
   skos:editorialNote "Status: Property accepted by DCAT revision team, but details of definition and constraints not yet resolved."@en ;
 .
 dcat:service
@@ -944,16 +1068,19 @@ dcat:service
   rdfs:comment "A site or endpoint that is listed in the catalog."@en ;
   rdfs:comment "Un sitio o 'endpoint' que está listado en el catálogo."@es ;
   rdfs:comment "Un sito o endpoint elencato nel catalogo."@it ;
+  rdfs:comment "Un site sau un punct de acces care este listat în catalog."@ro ;
   rdfs:domain dcat:Catalog ;
   rdfs:label "service"@en ;
   rdfs:label "servicio"@es ;
   rdfs:label "servizio"@it ;
+  rdfs:label "serviciu"@ro ;
   rdfs:range dcat:DataService ;
   rdfs:subPropertyOf dct:hasPart ;
   rdfs:subPropertyOf rdfs:member ;
   skos:changeNote "New property in this revision of DCAT"@en ;
   skos:changeNote "Nueva propiedad en esta revisión de DCAT"@es ;
   skos:changeNote "Nuova proprietà in questa revisione di DCAT"@it ;
+  skos:changeNote "O nouă proprietate în această revizie a DCAT"@ro ;
   skos:editorialNote "Status: Property accepted by DCAT revision team, but details of definition and constraints not yet resolved."@en ;
 .
 dcat:spatialResolutionInMeters
@@ -961,23 +1088,28 @@ dcat:spatialResolutionInMeters
   rdfs:comment "minimum spatial separation resolvable in a dataset, measured in meters"@en-US ;
   rdfs:comment "minimum spatial separation resolvable in a dataset, measured in metres"@en-GB ;
   rdfs:comment "mínima separacíon espacial disponible en un conjunto de datos, medida en metros"@es ;
- rdfs:comment "separazione spaziale minima risolvibile in un set di dati, misurata in metri"@it ;
+  rdfs:comment "separazione spaziale minima risolvibile in un set di dati, misurata in metri"@it ;
+  rdfs:comment "valoare minimă a separabilității spațiale rezolvabilă într-un set de date, măsurată în metri"@ro ;
   rdfs:label "spatial resolution (meters)"@en-US ;
   rdfs:label "spatial resolution (metres)"@en-GB ;
   rdfs:label "resolución espacial (metros)"@es ;
   rdfs:label "risoluzione spaziale (metros)"@it ;
+  rdfs:label "rezoluția spațială (metri)"@ro ;
   rdfs:range xsd:decimal ;
   skos:changeNote "New property in this revision of DCAT"@en ;
   skos:changeNote "Nueva propiedad en esta revisión de DCAT"@es ;
- skos:changeNote "Nuova proprietà in questa revisione di DCAT"@it ;
+  skos:changeNote "Nuova proprietà in questa revisione di DCAT"@it ;
+  skos:changeNote "O nouă proprietate în această revizie a DCAT"@ro ;
   skos:editorialNote "Status: details of definition and constraints not yet resolved."@en ;
   skos:editorialNote "Might appear in the description of a Dataset or a Distribution, so no domain is specified"@en ;
   skos:scopeNote "If the dataset is an image or grid this should correspond to the spacing of items. For other kinds of spatial dataset, this property will usually indicate the smallest distance between items in the dataset. "@en ;
   skos:scopeNote "Si el conjunto de datos es una imágen o grilla, esta propiedad corresponde al espaciado de los elementos. Para otro tipo de conjunto de datos espaciales, esta propieda usualmente indica la menor distancia entre los elementos de dichos datos."@es ;
   skos:scopeNote "Se il set di dati è un'immagine o una griglia, questo dovrebbe corrispondere alla spaziatura degli elementi. Per altri tipi di set di dati spaziali, questa proprietà di solito indica la distanza minima tra gli elementi nel set di dati."@it ;
+  skos:scopeNote "Dacă setul de date este o imagine sau o rețea rectangulară, aceasta ar trebui să corespundă spațiilor dintre elemente. Pentru alte tipuri de seturi de date spațiale, această proprietate va indica de obicei cea mai mică distanță dintre elementele din setul de date."@ro ;
   skos:scopeNote "Alternative spatial resolutions might be provided as different dataset distributions"@en ;
   skos:scopeNote "Distintas distribuciones de un conjunto de datos pueden tener resoluciones espaciales diferentes"@es ;
-  skos:scopeNote "Risoluzioni spaziali alternative possono essere fornite come diverse distribuzioni di set di dati"@it
+  skos:scopeNote "Risoluzioni spaziali alternative possono essere fornite come diverse distribuzioni di set di dati"@it ;
+  skos:scopeNote "Rezoluții spațiale diferite pentru un același set de date pot fi furnizate ca distribuții diferite ale setului de date."@ro ;
 .
 dcat:startDate
   rdf:type rdf:Property ;
@@ -985,28 +1117,35 @@ dcat:startDate
   rdfs:domain dct:PeriodOfTime ;
   rdfs:range rdfs:Literal ;
   skos:definition "The start of the period"@en ;
+  skos:definition "Începutul perioadei"@ro ;
   skos:scopeNote "The range of this property is intentionally generic, with the purpose of allowing different level of temporal precision for specifying the start of a period. E.g., it can be expressed with a date (xsd:date), a date and time (xsd:dateTime), or a year (xsd:gYear)."@en ;
+  skos:scopeNote "Domeniul acestei proprietăți este lăsat generic în mod intenționat, cu scopul de a permite niveluri diferite de precizie temporală pentru specificarea începutului unei perioade. De exemplu, poate fi exprimată ca dată (xsd:date), ca dată și timp (xsd:dateTime) sau doar ca an (xsd:gYear)."@ro ;
 .
 dcat:temporalResolution
   rdf:type owl:DatatypeProperty ;
   rdfs:comment "minimum time period resolvable in a dataset"@en ;
   rdfs:comment "período de tiempo mínimo en el conjunto de datos"@es ;
   rdfs:comment "periodo di tempo minimo risolvibile in un set di dati"@it;
+  rdfs:comment "perioada minimă de timp care poate fi rezolvată într-un set de date"@ro ;
   rdfs:label "temporal resolution"@en ;
   rdfs:label "resolución temporal"@es ;
   rdfs:label "risoluzione temporale"@it ;
+  rdfs:label "rezoluția temporală"@ro ;
   rdfs:range xsd:duration ;
   skos:changeNote "New property in this revision of DCAT"@en ;
   skos:changeNote "Nueva propiedad en esta revisión de DCAT"@es ;
- skos:changeNote "Nuova proprietà in questa revisione di DCAT"@it ;
+  skos:changeNote "Nuova proprietà in questa revisione di DCAT"@it ;
+  skos:changeNote "O nouă proprietate în această revizie a DCAT"@ro ;
   skos:editorialNote "Status: Property accepted by DCAT revision team, but details of definition and constraints not yet resolved."@en ;
   skos:editorialNote "Might appear in the description of a Dataset or a Distribution, so no domain is specified"@en ;
   skos:scopeNote "If the dataset is a time-series this should correspond to the spacing of items in the series. For other kinds of dataset, this property will usually indicate the smallest time difference between items in the dataset. "@en ;
   skos:scopeNote "Si el conjunto de datos es una serie temporal, debe corresponder al espaciado de los elementos de la serie. Para otro tipo de conjuntos de datos, esta propiedad indicará usualmente la menor diferencia de tiempo entre elementos en el dataset."@es ;
   skos:scopeNote "Se il set di dati è una serie temporale, questo dovrebbe corrispondere alla spaziatura degli elementi della serie. Per altri tipi di set di dati, questa proprietà di solito indica la più piccola differenza di tempo tra gli elementi nel set di dati."@it ;
+  skos:scopeNote "Dacă setul de date este o serie de timp, această proprietate ar trebui să corespundă distanței dintre elementele din serie. Pentru alte tipuri de seturi de date, această proprietate va indica de obicei cea mai mică diferență de timp dintre elementele din setul de date."@ro ;
   skos:scopeNote "Alternative temporal resolutions might be provided as different dataset distributions"@en ;
   skos:scopeNote "Distintas distribuciones del conjunto de datos pueden tener resoluciones temporales diferentes."@es ;
- skos:scopeNote "Risoluzioni temporali alternative potrebbero essere fornite come diverse distribuzioni di set di dati"@it
+  skos:scopeNote "Risoluzioni temporali alternative potrebbero essere fornite come diverse distribuzioni di set di dati"@it ;
+  skos:scopeNote "Atunci când există mai multe rezoluții temporale ale aceluiași set de date, acestea pot fi furnizate ca distribuții diferite ale setului de date."@ro ;
 .
 dcat:theme
   rdf:type rdf:Property ;
@@ -1019,6 +1158,7 @@ dcat:theme
   rdfs:comment "Η κύρια κατηγορία του συνόλου δεδομένων. Ένα σύνολο δεδομένων δύναται να έχει πολλαπλά θέματα."@el ;
   rdfs:comment "التصنيف الرئيسي لقائمة البيانات. قائمة البيانات يمكن أن تملك أكثر من تصنيف رئيسي واحد."@ar ;
   rdfs:comment "データセットの主要カテゴリー。データセットは複数のテーマを持つことができます。"@ja ;
+  rdfs:comment "Categoria principală a resursei. O resursă poate avea mai multe tematici."@ro ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "tema"@es ;
   rdfs:label "tema"@it ;
@@ -1028,6 +1168,7 @@ dcat:theme
   rdfs:label "Θέμα"@el ;
   rdfs:label "التصنيف"@ar ;
   rdfs:label "テーマ/カテゴリー"@ja ;
+  rdfs:label "tematică (temă)"@ro ;
   rdfs:range skos:Concept ;
   rdfs:subPropertyOf dct:subject ;
   skos:editorialNote "Status: English Definition text modified by DCAT revision team, all except for Italian translations are pending."@en ;
@@ -1041,6 +1182,7 @@ dcat:theme
   skos:scopeNote """Το σετ των skos:Concepts που χρησιμοποιείται για να κατηγοριοποιήσει τα σύνολα δεδομένων είναι οργανωμένο εντός
           ενός skos:ConceptScheme που περιγράφει όλες τις κατηγορίες και τις σχέσεις αυτών στον κατάλογο."""@el ;
   skos:scopeNote "データセットを分類するために用いられるskos:Conceptの集合は、カタログのすべてのカテゴリーとそれらの関係を記述しているskos:ConceptSchemeで組織化されます。"@ja ;
+  skos:scopeNote "Mulțimea de skos:Concepts folosite pentru a caracteriza resursele sunt organizate în skos:ConceptScheme descriind toate categoriile și relațiile lor în catalog."@ro ;
 .
 dcat:themeTaxonomy
   rdf:type rdf:Property ;
@@ -1053,6 +1195,7 @@ dcat:themeTaxonomy
   rdfs:comment "Το σύστημα οργάνωσης γνώσης που χρησιμοποιείται για την κατηγοριοποίηση των συνόλων δεδομένων του καταλόγου."@el ;
   rdfs:comment "لائحة التصنيفات المستخدمه لتصنيف قوائم البيانات ضمن الفهرس"@ar ;
   rdfs:comment "カタログのデータセットを分類するために用いられる知識組織化体系（KOS；knowledge organization system）。"@ja ;
+  rdfs:comment "Sistemul de organizarea a cunoștințelor (KOS) folosit în clasificarea seturilor de date din catalog."@ro ;
   rdfs:domain dcat:Catalog ;
   rdfs:isDefinedBy <http://www.w3.org/TR/vocab-dcat/> ;
   rdfs:label "tassonomia dei temi"@it ;
@@ -1063,38 +1206,56 @@ dcat:themeTaxonomy
   rdfs:label "Ταξινομία θεματικών κατηγοριών."@el ;
   rdfs:label "قائمة التصنيفات"@ar ;
   rdfs:label "テーマ"@ja ;
+  rdfs:label "taxonomia temelor"@ro ;
 #  rdfs:range skos:ConceptScheme ;
   rdfs:range rdfs:Resource ;
   sdo:rangeIncludes skos:ConceptScheme , skos:Collection , owl:Ontology ;
   skos:scopeNote "It is recommended that the taxonomy is organized in a skos:ConceptScheme, skos:Collection, owl:Ontology or similar, which allows each member to be denoted by an IRI and published as linked-data."@en ;
+  skos:scopeNote "Se recomandă ca taxonomia să fie organizată ca skos:ConceptScheme, skos:Collection, owl:Ontology sau similar, structură ce permite ca fiecare membru să fie indicat printr-un IRI și publicat ca date legate (linked-data)."@ro ;
 .
 dct:accessRights
   skos:scopeNote "Information about licenses and rights MAY be provided for the Resource. See also guidance at § 10. License and rights statements."@en ;
+  skos:scopeNote "Informațiile despre licențe și drepturi care POT fi furnizate pentru o Resursă. Consultați deasemenea și îndrumările de la § 10. Declarații de licență și drepturi."@ro ;
   skos:scopeNote "Information about licenses and rights MAY be provided for the Distribution. See also guidance at § 10. License and rights statements."@en ;
+  skos:scopeNote "Informațiile despre licențe și drepturi care POT fi furnizate pentru o Distribuție. Consultați deasemenea și îndrumările de la § 10. Declarații de licență și drepturi."@ro ;
   skos:definition "A rights statement that concerns how the resource is accessed."@en ;
+  skos:definition "O declarație de drepturi care privește modul în care este accesată resursa."@ro ;
   skos:definition "A rights statement that concerns how the distribution  is accessed."@en ;
+  skos:definition "O declarație de drepturi care privește modul în care este accesată distribuția."@ro ;
   skos:definition "Access Rights MAY include information regarding access or restrictions based on privacy, security, or other policies."@en ;
+  skos:definition "Drepturile de acces POT include informații privind accesul sau restricțiile bazate pe confidențialitate, securitate sau alte politici."@ro ;
 .
 dct:accrualPeriodicity
   skos:definition "The frequency at which dataset is published."@en ;
+  skos:definition "Frecvența de publicare a setului de date."@ro ;
   skos:scopeNote "The value of dct:accrualPeriodicity gives the rate at which the dataset-as-a-whole is updated. This may be complemented by dcat:temporalResolution to give the time between collected data points in a time series."@en ;
+  skos:scopeNote "Valoarea proprietății dct:accrualPeriodicity precizează rata la care se actualizează setul de date ca întreg. Acest lucru poate fi completat de către dcat:temporalResolution pentru a indica diferența de timp între elementele seriei de timp."@ro ;
 .
 dct:conformsTo
   skos:scopeNote "This property SHOULD be used to indicate the model, schema, ontology, view or profile that the catalogued resource content conforms to."@en ;
+  skos:scopeNote "Această proprietate ar TREBUI sa fie utilizată pentru a indica modelul, schema, ontologia, vederea sau profilul la care aderă conținutul resursei catalogate."@ro ;
   skos:scopeNote "This property SHOULD be used to indicate the model, schema, ontology, view or profile that this representation of a dataset conforms to. This is (generally) a complementary concern to the media-type or format."@en ;
+  skos:scopeNote "Această proprietate ar TREBUI sa fie utilizată pentru a indica modelul, schema, ontologia, vederea sau profilul la care aderă aderă aceastp reprezentare a setului de date. Aceasta este (în general) un aspect complementar tipului de suport sau a formatului."@ro ;
   skos:definition "An established standard to which the described catalogued resource conforms."@en ;
+  skos:definition "Un standard bine stabilit la care aderă resursa catalogată descrisă."@ro ;
   skos:definition "An established standard to which the distribution conforms."@en ;
+  skos:definition "Un standard bine stabilit la care aderă distribuția."@ro ;
 .
 dct:creator
   skos:scopeNote "Resources of type foaf:Agent are recommended as values for this property."@en ;
+  skos:scopeNote "Ca valori pentru această proprietate se recomandă folosirea resursele de tip foaf:Agent."@ro ;
   skos:definition "The entity responsible for producing the resource."@en ;
+  skos:definition "Entitatea responsabilă pentru producerea acestei resurse."@ro ;
 .
 dct:description
   skos:definition "A free-text account of the item."@en ;
+  skos:definition "O descriere liberă a articolului."@ro ;
 .
 dct:format
   skos:scopeNote "dcat:mediaType SHOULD be used if the type of the distribution is defined by IANA [IANA-MEDIA-TYPES]."@en ;
+  skos:scopeNote "Dacă tipul distribuției este definit de IANA [IANA-MEDIA-TYPES] atunci ar TREBUI folosită proprietatea dcat:mediaType."@ro ;
   skos:definition "The file format of the distribution."@en ;
+  skos:definition "Formatul de fișier al distribuției."@ro ;
 .
 dct:hasPart
   skos:scopeNote "See also: Sub-properties of dct:hasPart in particular dcat:dataset, dcat:catalog, dcat:service."@en ;
