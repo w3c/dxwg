@@ -9,6 +9,7 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix dctype: <http://purl.org/dc/dcmitype/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix locn: <http://www.w3.org/ns/locn#> .
 @prefix odrl: <http://www.w3.org/ns/odrl/2/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
@@ -50,8 +51,15 @@ Some members of these controlled vocabularies are not strictly suitable for data
 .
 dct:PeriodOfTime
   skos:definition "An interval of time that is named or defined by its start and end." ;
-  skos:changeNote "Class added in this context in this revision of DCAT"@en ;
-  skos:scopeNote "The start and end of the interval may be given by using properties dcat:startDate or time:hasBeginning, and dcat:endDate or time:hasEnd, respectively. The interval can also be open - i.e., it can have just a start or just an end." ;
+  skos:changeNote "Class added in this context in this revision of DCAT."@en ;
+  skos:scopeNote "The start and end of the interval may be given by using properties dcat:startDate or time:hasBeginning, and dcat:endDate or time:hasEnd, respectively. The interval can also be open - i.e., it can have just a start or just an end."@en ;
+.
+dct:Location
+  skos:definition "A spatial region or named place."@en ;
+  skos:changeNote "Class added in this context in this revision of DCAT."@en ;
+  skos:scopeNote "For an extensive geometry (i.e., a set of coordinates denoting the vertices of the relevant geographic area), the property locn:geometry [[LOCN]] SHOULD be used."@en ;
+  skos:scopeNote "For a geographic bounding box delimiting a spatial area the property dcat:bbox SHOULD be used."@en ;
+  skos:scopeNote "For the geographic center of a spatial area, or another characteristic point, the property dcat:centroid or, alternatively w3cgeo:lat and w3cgeo:long SHOULD be used."@en ;
 .
 <http://www.w3.org/ns/dcat>
   rdf:type owl:Ontology ;
@@ -1224,6 +1232,12 @@ time:hasBeginning
 .
 time:hasEnd
   skos:scopeNote "Use of the property time:hasEnd entails that value of the dct:temporal property is a member of the time:TemporalEntity class from [OWL-TIME]. In this context this could be taken to imply that dct:PeriodOfTime is equivalent to the subclass time:ProperInterval" ;
+  skos:changeNote "Property added in this context in this revision of DCAT"@en ;
+.
+locn:geometry
+  rdfs:range rdfs:Literal ;
+  skos:definition "Associates any resource with the corresponding geometry. [[LOCN]]"@en ;
+  skos:scopeNote "The range of this property is intentionally generic, with the purpose of allowing different geometry encodings. E.g., the geometry could be encoded as WKT (geosparql:asWKT [GeoSPARQL])."@en ;
   skos:changeNote "Property added in this context in this revision of DCAT"@en ;
 .
 w3cgeo:alt
