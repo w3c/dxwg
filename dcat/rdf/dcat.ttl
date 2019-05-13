@@ -16,9 +16,39 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sdo: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix time: <http://www.w3.org/2006/time#> .
 @prefix v: <http://www.w3.org/2006/vcard/ns#> .
+@prefix w3cgeo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+dct:hasPart
+  skos:scopeNote "See also: Sub-properties of dct:hasPart in particular dcat:dataset, dcat:catalog, dcat:service."@en ;
+  skos:scopeNote "This is the most general predicate for membership of a catalog. Use of a more specific sub-property is recommended when available."@en ;
+.
+dct:language
+  skos:scopeNote "Repeat this property if the resource is available in multiple languages."@en ;
+  skos:scopeNote "The value(s) provided for members of a catalog (i.e. dataset or service) override the value(s) provided for the catalog if they conflict."@en ;
+  skos:scopeNote "If representations of a dataset are available for each language separately, define an instance of dcat:Distribution for each language and describe the specific language of each distribution using dct:language (i.e. the dataset will have multiple dct:language values and each distribution will have just one as the value of its dct:language property)."@en;
+.
+dct:relation
+  skos:scopeNote "In the context of a dcat:Relationship this is expected to point to another dcat:Dataset or other catalogued resource"@en ;
+  skos:scopeNote "See also: Sub-properties of dct:relation in particular dcat:distribution, dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy"@en ;
+  skos:scopeNote "dct:relation SHOULD be used where the nature of the relationship between a catalogued item and related resources is not known. A more specific sub-property SHOULD be used if the nature of the relationship of the link is known. The property dcat:distribution SHOULD be used to link from a dcat:Dataset to a representation of the dataset, described as a dcat:Distribution"@en ;
+.
+dct:type
+  skos:scopeNote """The value SHOULD be taken from a well governed and broadly recognised controlled vocabulary, such as:
+1. DCMI Type vocabulary [DCTERMS]
+2. ISO 19115 scope codes [ISO-19115-1]
+3. Datacite resource types [DataCite]
+4. PARSE.Insight content-types used by re3data.org [RE3DATA-SCHEMA] (see item 15 contentType)
+5. MARC intellectual resource types
+Some members of these controlled vocabularies are not strictly suitable for datasets or data services (e.g. DCMI Type Event, PhysicalObject; ISO 19115 CollectionHardware, CollectionSession, Initiative, Sample, Repository), but might be used in the context of other kinds of catalogs defined in DCAT profiles or applications."""@en ;
+  skos:scopeNote "To describe the file format, physical medium, or dimensions of the resource, use the dct:format element."@en ;
+.
+dct:PeriodOfTime
+  skos:definition "An interval of time that is named or defined by its start and end." ;
+  skos:scopeNote "The start and end of the interval may be given by using properties dcat:startDate or time:hasBeginning, and dcat:endDate or time:hasEnd, respectively. The interval can also be open - i.e., it can have just a start or just an end." ;
+.
 <http://www.w3.org/ns/dcat>
   rdf:type owl:Ontology ;
   dct:contributor [
@@ -157,6 +187,7 @@ Temporarily added imports for DCTerms, SKOS, FOAF to assist in development of v1
       foaf:homepage <http://www.w3.org/2011/gld/> ;
       foaf:name "Government Linked Data WG" ;
     ] ;
+  dct:license <https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document>;
 .
 dcat:Catalog
   rdf:type rdfs:Class ;
@@ -478,6 +509,15 @@ dcat:accessURL
   skos:scopeNote """確実にダウンロードでない場合や、ダウンロードかどうかが不明である場合は、downloadURLではなく、accessURLを用いてください。
 ランディング・ページを通じてしか配信にアクセスできない場合（つまり、直接的なダウンロードURLが不明）は、配信におけるaccessURLとしてランディング・ページのリンクをコピーすべきです（SHOULD）。"""@ja ;
 .
+dcat:bbox
+  rdfs:label "bounding box"@en;
+  rdf:type rdf:Property ;
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain dct:Location ;
+  rdfs:range rdfs:Literal ;
+  skos:definition "The geographic bounding box of a resource"@en ;
+  skos:scopeNote "The range of this property is intentionally generic, with the purpose of allowing different geometry encodings. E.g., the geometry could be encoded with as WKT (geosparql:asWKT [GeoSPARQL]) or [GML] (geosparql:asGML [GeoSPARQL])."@en ;
+.
 dcat:byteSize
   rdf:type rdf:Property ;
   rdf:type owl:DatatypeProperty ;
@@ -526,6 +566,15 @@ dcat:catalog
   skos:changeNote "New property in this revision of DCAT"@en ;
   skos:changeNote "Nuova proprietà in questa revisione di DCAT"@it ;
   skos:editorialNote "Status: Property accepted by DCAT revision team, but details of definition and constraints not yet resolved."@en ;
+.
+dcat:centroid
+  rdfs:label "centroid"@en;
+  rdf:type rdf:Property ;
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain dct:Location ;
+  rdfs:range rdfs:Literal ;
+  skos:definition "The geographic center (centroid) of a resource"@en ;
+  skos:scopeNote "The range of this property is intentionally generic, with the purpose of allowing different geometry encodings. E.g., the geometry could be encoded with as WKT (geosparql:asWKT [GeoSPARQL]) or [GML] (geosparql:asGML [GeoSPARQL])."@en ;
 .
 dcat:contactPoint
   rdf:type rdf:Property ;
@@ -635,6 +684,15 @@ dcat:downloadURL
   skos:scopeNote "La valeur est une URL."@fr ;
   skos:scopeNote "dcat:downloadURL SHOULD be used for the address at which this distribution is available directly, typically through a HTTP Get request."@en ;
   skos:scopeNote "Η τιμή είναι ένα URL."@el ;
+.
+dcat:endDate
+  rdfs:label "end date"@en;
+  rdf:type rdf:Property ;
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain dct:PeriodOfTime ;
+  rdfs:range rdfs:Literal ;
+  skos:definition "The end of the period"@en ;
+  skos:scopeNote "The range of this property is intentionally generic, with the purpose of allowing different level of temporal precision for specifying the end of a period. E.g., it can be expressed with a date (xsd:date), a date and time (xsd:dateTime), or a year (xsd:gYear)."@en ;
 .
 dcat:endpointDescription
   rdf:type owl:ObjectProperty ;
@@ -779,7 +837,6 @@ dcat:mediaType
   skos:scopeNote "This property SHOULD be used when the media type of the distribution is defined in the IANA media types registry https://www.iana.org/assignments/media-types/, otherwise dct:format MAY be used with different values."@en ;
   skos:scopeNote "Questa proprietà DEVE essere usata quando il tipo di media della distribuzione è definito nel registro dei tipi di media IANA https://www.iana.org/assignments/media-types/, altrimenti dct:format PUO 'essere usato con differenti valori"@it
 .
-
 dcat:compressFormat
   rdf:type rdf:Property ;
   rdf:type owl:ObjectProperty ;
@@ -816,6 +873,14 @@ dcat:packageFormat
   skos:scopeNote "This property to be used when the files in the distribution are packaged, e.g. in a RAR file. The format SHOULD be expressed using a media type as defined by IANA media types registry https://www.iana.org/assignments/media-types/, if available."@en;
   skos:scopeNote "Questa proprietà deve essere utilizzata quando i file nella distribuzione sono impacchettati, ad esempio in un file RAR. Il formato DOVREBBE essere espresso utilizzando un tipo di supporto come definito dal registro dei tipi di media IANA https://www.iana.org/assignments/media-types/, se disponibili."@it
 .
+#dcat:point
+#  rdf:type rdf:Property ;
+#  rdf:type owl:ObjectProperty ;
+#  rdfs:domain dct:Location ;
+#  rdfs:range w3cgeo:Point ;
+#  skos:definition "A characteristic point location of a resource."@en ;
+#  skos:scopeNote "The Point class from [w3c-basic-geo] encodes latitude, longitude and altitude in separate RDF properties. "@en ;
+#.
 dcat:qualifiedRelation
   rdf:type owl:ObjectProperty ;
   rdfs:comment "Link to a description of a relationship with another resource."@en ;
@@ -834,7 +899,7 @@ dcat:qualifiedRelation
   skos:editorialNote "Introdotta in DCAT per integrare le altre relazioni qualificate di PROV."@it ;
   skos:scopeNote "Used to link to another resource where the nature of the relationship is known but does not match one of the standard Dublin Core properties (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy) or PROV-O properties (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)."@en ;
   skos:scopeNote "Se usa para asociar con otro recurso para el cuál la naturaleza de la relación es conocida pero no es ninguna de las propiedades que provee el estándar Dublin Core (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat, dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:requires, dct:isRequiredBy) or PROV-O properties (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)."@es ;
- skos:scopeNote "Viene utilizzato per associarsi a un'altra risorsa nei casi per i quali la natura della relazione è nota ma non è alcuna delle proprietà fornite dallo standard Dublin Core (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat , dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:require, dct:isRequiredBy) o dalle proprietà fornite da PROV-O (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom , prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)."@it
+  skos:scopeNote "Viene utilizzato per associarsi a un'altra risorsa nei casi per i quali la natura della relazione è nota ma non è alcuna delle proprietà fornite dallo standard Dublin Core (dct:hasPart, dct:isPartOf, dct:conformsTo, dct:isFormatOf, dct:hasFormat , dct:isVersionOf, dct:hasVersion, dct:replaces, dct:isReplacedBy, dct:references, dct:isReferencedBy, dct:require, dct:isRequiredBy) o dalle proprietà fornite da PROV-O (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom , prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)."@it
 .
 dcat:record
   rdf:type rdf:Property ;
@@ -894,7 +959,7 @@ dcat:spatialResolutionInMeters
   rdfs:comment "minimum spatial separation resolvable in a dataset, measured in meters"@en-US ;
   rdfs:comment "minimum spatial separation resolvable in a dataset, measured in metres"@en-GB ;
   rdfs:comment "mínima separacíon espacial disponible en un conjunto de datos, medida en metros"@es ;
- rdfs:comment "separazione spaziale minima risolvibile in un set di dati, misurata in metri"@it ;
+  rdfs:comment "separazione spaziale minima risolvibile in un set di dati, misurata in metri"@it ;
   rdfs:label "spatial resolution (meters)"@en-US ;
   rdfs:label "spatial resolution (metres)"@en-GB ;
   rdfs:label "resolución espacial (metros)"@es ;
@@ -902,7 +967,7 @@ dcat:spatialResolutionInMeters
   rdfs:range xsd:decimal ;
   skos:changeNote "New property in this revision of DCAT"@en ;
   skos:changeNote "Nueva propiedad en esta revisión de DCAT"@es ;
- skos:changeNote "Nuova proprietà in questa revisione di DCAT"@it ;
+  skos:changeNote "Nuova proprietà in questa revisione di DCAT"@it ;
   skos:editorialNote "Status: details of definition and constraints not yet resolved."@en ;
   skos:editorialNote "Might appear in the description of a Dataset or a Distribution, so no domain is specified"@en ;
   skos:scopeNote "If the dataset is an image or grid this should correspond to the spacing of items. For other kinds of spatial dataset, this property will usually indicate the smallest distance between items in the dataset. "@en ;
@@ -911,6 +976,15 @@ dcat:spatialResolutionInMeters
   skos:scopeNote "Alternative spatial resolutions might be provided as different dataset distributions"@en ;
   skos:scopeNote "Distintas distribuciones de un conjunto de datos pueden tener resoluciones espaciales diferentes"@es ;
   skos:scopeNote "Risoluzioni spaziali alternative possono essere fornite come diverse distribuzioni di set di dati"@it
+.
+dcat:startDate
+  rdfs:label "start date"@en;
+  rdf:type rdf:Property ;
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain dct:PeriodOfTime ;
+  rdfs:range rdfs:Literal ;
+  skos:definition "The start of the period"@en ;
+  skos:scopeNote "The range of this property is intentionally generic, with the purpose of allowing different level of temporal precision for specifying the start of a period. E.g., it can be expressed with a date (xsd:date), a date and time (xsd:dateTime), or a year (xsd:gYear)."@en ;
 .
 dcat:temporalResolution
   rdf:type owl:DatatypeProperty ;
@@ -923,7 +997,7 @@ dcat:temporalResolution
   rdfs:range xsd:duration ;
   skos:changeNote "New property in this revision of DCAT"@en ;
   skos:changeNote "Nueva propiedad en esta revisión de DCAT"@es ;
- skos:changeNote "Nuova proprietà in questa revisione di DCAT"@it ;
+  skos:changeNote "Nuova proprietà in questa revisione di DCAT"@it ;
   skos:editorialNote "Status: Property accepted by DCAT revision team, but details of definition and constraints not yet resolved."@en ;
   skos:editorialNote "Might appear in the description of a Dataset or a Distribution, so no domain is specified"@en ;
   skos:scopeNote "If the dataset is a time-series this should correspond to the spacing of items in the series. For other kinds of dataset, this property will usually indicate the smallest time difference between items in the dataset. "@en ;
@@ -931,7 +1005,7 @@ dcat:temporalResolution
   skos:scopeNote "Se il set di dati è una serie temporale, questo dovrebbe corrispondere alla spaziatura degli elementi della serie. Per altri tipi di set di dati, questa proprietà di solito indica la più piccola differenza di tempo tra gli elementi nel set di dati."@it ;
   skos:scopeNote "Alternative temporal resolutions might be provided as different dataset distributions"@en ;
   skos:scopeNote "Distintas distribuciones del conjunto de datos pueden tener resoluciones temporales diferentes."@es ;
- skos:scopeNote "Risoluzioni temporali alternative potrebbero essere fornite come diverse distribuzioni di set di dati"@it
+  skos:scopeNote "Risoluzioni temporali alternative potrebbero essere fornite come diverse distribuzioni di set di dati"@it
 .
 dcat:theme
   rdf:type rdf:Property ;
@@ -1077,13 +1151,23 @@ Information about licenses and rights SHOULD be provided on the level of Distrib
 .
 dct:spatial
   skos:definition "The geographical area covered by the dataset."@en ;
+  skos:scopeNote "The spatial coverage of a dataset may be encoded as an instance of dct:Location, or may be indicated using a URI reference (link) to a resource describing a location. It is recommended that links are to entries in a well maintained gazetteer such as Geonames."@en ;
 .
 dct:temporal
   skos:definition "The temporal period that the dataset covers."@en ;
+  skos:scopeNote "The temporal coverage of a dataset may be encoded as an instance of dct:PeriodOfTime, or may be indicated using a URI reference (link) to a resource describing a time period or interval."@en ;
 .
 dct:title
   skos:definition "A name given to the item."@en ;
   skos:definition "A name given to the distribution."@en ;
+.
+dct:isReferencedBy
+  skos:definition "A related resource, such as a publication, that references, cites, or otherwise points to the catalogued resource.."@en ;
+  skos:definition "Un recurso relacionado, como por ejemplo una publicación, que referencia, cita, o apunta al recurso del catálogo."@es ;
+  skos:scopeNote "In relation to the use case of data citation, when the catalogued resource is a dataset, the dct:isReferencedBy property allows to relate the dataset to the resources (such as scholarly publications) that cite or point to the dataset. Multiple dct:isReferencedBy properties can be used to indicate the dataset has been referenced by multiple publications, or other resources."@en ;
+  skos:scopeNote "En relación al caso de uso sobre cita de datos, cuando el recurso catalogado es un conjunto de datos, la propiedad dct:isReferencedBy permite relacionar el conjunto de datos a publicaciones que citan o apuntan al conjunto de datos. Se pueden utilizar múltiples propiedades dct:isReferencedBy para indicar que el conjunto de datos se ha referenciado en múltiples publicaciones u otros recursos."@es ;
+  skos:scopeNote "This property is used to associate a resource to the catalogued resource (of type dcat:Resource) in question. For other relations to resources not covered with this property, the more generic property dcat:qualifiedRelation can be used. See also the section about § 9. Qualified relations ."@en ;
+  skos:scopeNote "Esta propiedad se usa para asociar un recurso a un elemento del catálogo  (de tipo dcat:Resource). Para representar otro tipo de associaciones a recursos, se puede utilizar la propiedad más genérica dcat:qualifiedRelation. Para más detalle, ver la sección en relaciones calificadas de la especificación."@en ;
 .
 dct:type
   skos:scopeNote """The value SHOULD be taken from a well governed and broadly recognised controlled vocabulary, such as:
@@ -1126,4 +1210,31 @@ prov:wasGeneratedBy
   rdfs:subPropertyOf dct:relation ;
   skos:scopeNote "The activity associated with generation of a dataset will typically be an initiative, project, mission, survey, on-going activity ('business as usual') etc. Multiple prov:wasGeneratedBy properties can be used to indicate the dataset production context at various levels of granularity."@en ;
   skos:scopeNote "Use prov:qualifiedGeneration to attach additional details about the relationship between the dataset and the activity, e.g. the exact time that the dataset was produced during the lifetime of a project"@en ;
+.
+foaf:homepage
+  skos:scopeNote "foaf:homepage is an inverse functional property (IFP) which means that it MUST be unique and precisely identify the web-page for the resource. This property indicates the canonical web-page, which might be helpful in cases where there is more than one web-page about the resource."@en ;
+.
+time:hasBeginning
+  skos:scopeNote "Use of the property time:hasBeginning entails that value of the dct:temporal property is a member of the time:TemporalEntity class from [OWL-TIME]. In this context this could be taken to imply that dct:PeriodOfTime is equivalent to the subclass time:ProperInterval" ;
+.
+time:hasEnd
+  skos:scopeNote "Use of the property time:hasEnd entails that value of the dct:temporal property is a member of the time:TemporalEntity class from [OWL-TIME]. In this context this could be taken to imply that dct:PeriodOfTime is equivalent to the subclass time:ProperInterval" ;
+.
+w3cgeo:alt
+  rdfs:range xsd:decimal ;
+  skos:definition "Altitude (elevation) of a characteristic point location of a resource." ;
+  skos:scopeNote "It is recommended to encode the value as a xsd:decimal. " ;
+  skos:scopeNote "Use of this property entails that value of the dct:spatial property is a member of the w3cgeo:Point class from [[w3c-basic-geo]]. This could be taken to imply that w3cgeo:Point is a subclass of dct:Location" ;
+.
+w3cgeo:lat
+  rdfs:range xsd:decimal ;
+  skos:definition "Latitude of a characteristic point location of a resource." ;
+  skos:scopeNote "It is recommended to encode the value as a xsd:decimal. " ;
+  skos:scopeNote "Use of this property entails that value of the dct:spatial property is a member of the w3cgeo:Point class from [[w3c-basic-geo]]. This could be taken to imply that w3cgeo:Point is a subclass of dct:Location" ;
+.
+w3cgeo:long
+  rdfs:range xsd:decimal ;
+  skos:definition "Longitude of a characteristic point location of a resource." ;
+  skos:scopeNote "It is recommended to encode the value as a xsd:decimal. " ;
+  skos:scopeNote "Use of this property entails that value of the dct:spatial property is a member of the w3cgeo:Point class from [[w3c-basic-geo]]. This could be taken to imply that w3cgeo:Point is a subclass of dct:Location" ;
 .
