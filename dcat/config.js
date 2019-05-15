@@ -23,7 +23,8 @@ var respecConfig = {
       extras: [{
           name: "formally at Thomson Reuters",
           href: "http://thomsonreuters.com",
-          class: "company",
+          class: "company"
+      }],
       w3cid: "98704"
     },{
       name:       "Simon Cox",
