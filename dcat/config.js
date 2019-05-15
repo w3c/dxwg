@@ -16,22 +16,24 @@ var respecConfig = {
       url: "http://www.imati.cnr.it/joomla/index.php/people/8-curricula/178-riccardo-albertoni",
       companyURL: "http://www.cnr.it/"
     },{
-        name: "David Browning",
-        company: "Refinitiv",
-        companyURL: "https://www.refinitiv.com",
-        w3cid: "98704"
+      name: "David Browning",
+      company: "Refinitiv",
+      companyURL: "https://www.refinitiv.com",
+      w3cid: "98704"
     },{
-        name:       "Simon Cox",
-        orcid:      "0000-0002-3884-3420",
-        company:    "CSIRO",
-        url:        "http://people.csiro.au/Simon-Cox",
-        companyURL: "https://www.csiro.au/"
+      name:       "Simon Cox",
+      orcid:      "0000-0002-3884-3420",
+      company:    "CSIRO",
+      url:        "http://people.csiro.au/Simon-Cox",
+      companyURL: "https://www.csiro.au/",
+      w3cid: "1796"
     },{
       name:       "Alejandra Gonzalez Beltran",
       orcid:      "0000-0003-3499-8262",
       company:    "Oxford eResearch Centre, Engineering Science, University of Oxford",
       url: "https://www.oerc.ox.ac.uk/people/alejandra",
-      companyURL: "http://www.oerc.ox.ac.uk/"
+      companyURL: "http://www.oerc.ox.ac.uk/",
+      w3cid: "61587"
     },{
       name:       "Andrea Perego",
       orcid:      "0000-0001-9300-2694",
@@ -41,7 +43,8 @@ var respecConfig = {
     },{
       name: "Peter Winstanley",
       company: "Scottish Government",
-      companyURL: "http://www.gov.scot/"
+      companyURL: "http://www.gov.scot/",
+      w3cid: "64374"
     }],
     otherLinks: [{
         key: "Contributors",
