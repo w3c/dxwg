@@ -16,9 +16,10 @@ var respecConfig = {
       url: "http://www.imati.cnr.it/joomla/index.php/people/8-curricula/178-riccardo-albertoni",
       companyURL: "http://www.cnr.it/"
     },{
-        name: "Dave Browning",
+        name: "David Browning",
         company: "Refinitiv",
-        companyURL: "https://www.refinitiv.com"
+        companyURL: "https://www.refinitiv.com",
+        w3cid: "98704"
     },{
         name:       "Simon Cox",
         orcid:      "0000-0002-3884-3420",
