@@ -9,55 +9,79 @@ var respecConfig = {
 //    previousURI:          "https://www.w3.org/TR/2014/REC-vocab-dcat-20140116/",
     edDraftURI:           "https://w3c.github.io/dxwg/dcat/",
 //    issueBase:            "https://github.com/w3c/dxwg/issues/", -- Not needed when github used
+    alternateFormats: [{
+      label: "Turtle",
+      uri: "https://w3c.github.io/dxwg/dcat/rdf/dcat.ttl",
+    }], 
     editors: [{
       name:       "Riccardo Albertoni",
-       orcid:  "0000-0001-5648-2713",
+      orcid:  "0000-0001-5648-2713",
       company:    "CNR - Consiglio Nazionale delle Ricerche, Italy",
       url: "http://www.imati.cnr.it/joomla/index.php/people/8-curricula/178-riccardo-albertoni",
-      companyURL: "http://www.cnr.it/"
+      companyURL: "http://www.cnr.it/",
+      w3cid: 72458
     },{
-        name: "Dave Browning",
-        company: "Refinitiv",
-        companyURL: "https://www.refinitiv.com"
+      name: "Dave Browning",
+      company: "Refinitiv",
+      companyURL: "https://www.refinitiv.com",
+      w3cid: 98704
     },{
-        name:       "Simon Cox",
-        orcid:      "0000-0002-3884-3420",
-        company:    "CSIRO",
-        url:        "http://people.csiro.au/Simon-Cox",
-        companyURL: "https://www.csiro.au/"
+      name:       "Simon Cox",
+      orcid:      "0000-0002-3884-3420",
+      company:    "CSIRO",
+      url:        "http://people.csiro.au/Simon-Cox",
+      companyURL: "https://www.csiro.au/",
+      w3cid: 1796
     },{
       name:       "Alejandra Gonzalez Beltran",
       orcid:      "0000-0003-3499-8262",
       company:    "Oxford eResearch Centre, Engineering Science, University of Oxford",
       url: "https://www.oerc.ox.ac.uk/people/alejandra",
-      companyURL: "http://www.oerc.ox.ac.uk/"
+      companyURL: "http://www.oerc.ox.ac.uk/",
+      w3cid: 61587
     },{
       name:       "Andrea Perego",
       orcid:      "0000-0001-9300-2694",
       company:    "European Commission, Joint Research Centre",
       companyURL: "https://ec.europa.eu/jrc/",
-      w3cid: "40317"
+      w3cid: 40317
     },{
       name: "Peter Winstanley",
       company: "Scottish Government",
-      companyURL: "http://www.gov.scot/"
+      companyURL: "http://www.gov.scot/",
+      w3cid: 64374
     }],
+    formerEditors: [{
+      name: "Fadi Maali",
+      company: "DERI",
+      companyURL: "https://en.wikipedia.org/wiki/Digital_Enterprise_Research_Institute"
+    }, {
+      name: "John Erickson",
+      company: "Tetherless World Constellation (RPI)",
+      companyURL: "http://tw.rpi.edu/"
+    }],    
     otherLinks: [{
         key: "Contributors",
         data: [{
             value: "Makx Dekkers",
             href: "http://www.makxdekkers.com"
         }]
-      },{
+      },
+/*                 
+      {
         key: "Editors of previous version",
         data: [{
             value: "Fadi Maali, DERI",
             href: "https://en.wikipedia.org/wiki/Digital_Enterprise_Research_Institute"
-        },{
+          },
+          {
             value: "John Erickson, Tetherless World Constellation (RPI)",
             href: "http://tw.rpi.edu/"
-        }]
-    }],
+          }
+        ]
+      }
+*/      
+    ],
     wg: "Dataset Exchange Working Group",
     wgURI: "https://www.w3.org/2017/dxwg/",
     wgPublicList: "public-dxwg-comments",
@@ -66,17 +90,8 @@ var respecConfig = {
     lint: "false",
     github: "https://github.com/w3c/dxwg/",
     localBiblio: {
-/*        
         "DATS": {
-            href : "http://wg3-metadataspecifications.readthedocs.io/",
-            title : "Data Tag Suite",
-            authors : ["Philippe Rocca-Serra", "Alejandra Gonzalez-Beltran"],
-            publisher : "NIH Big Data 2 Knowledge bioCADDIE project.",
-            date : "2016"
-        },
-*/        
-        "DATS": {
-            "href": "https://github.com/datatagsuite/",
+            "href": "https://datatagsuite.github.io/docs/html/",
             "title": "Data Tag Suite",
             "authors": ["Alejandra Gonzalez-Beltran", "Philippe Rocca-Serra"],
             "publisher": "NIH Big Data 2 Knowledge bioCADDIE and NIH Data Commons projects",
