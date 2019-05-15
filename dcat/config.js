@@ -19,12 +19,11 @@ var respecConfig = {
       name: "David Browning",
       company: "Refinitiv",
       companyURL: "https://www.refinitiv.com",
-      url: "http://www.w3.org/",
-      extras: [{
-          name: "formally at Thomson Reuters",
-          href: "http://thomsonreuters.com",
-          class: "company"
-      }],
+//      extras: [{
+//          name: "(formally at Thomson Reuters)",
+//          href: "http://thomsonreuters.com",
+//          class: "company"
+//      }],
       w3cid: "98704"
     },{
       name:       "Simon Cox",
