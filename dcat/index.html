@@ -35,7 +35,7 @@
         <li>addition of a <a href="#Class:Resource"><code>dcat:Resource</code></a> class for representing any asset than can be included in the catalog, this is
             now the super-class of <a href="#Class:Dataset"><code>dcat:Dataset</code></a></li>
         <li>addition of <a href="#Class:Data_Service"><code>dcat:DataService</code></a>, as a sub-class of <a href="#Class:Resource"><code>dcat:Resource</code></a>, to support catalog service end-points providing access to data assets</li>
-        <li>addition of ways to represent <a href="#bag-of-files">loosely structured catalogs</a>, where there is no distinction between a dataset and its distributions</li>
+        <li>addition of ways to represent <a href="#examples-bag-of-files">loosely structured catalogs</a>, where there is no distinction between a dataset and its distributions</li>
         <li>more details for the ways of representing <a href="#examples-dataset-provenance">dataset provenance</a> and <a href="#quality-information">quality</a></li>
         <li>an <a href="#dcat-sdo">alignment</a> between the DCAT vocabulary and the schema.org vocabulary</li>
     </ul>
@@ -774,10 +774,10 @@
         <table class="definition">
             <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Catalog">dcat:Catalog</a></th></tr></thead>
             <tbody>
-            <tr><td class="prop">Sub-class of:</td><td><a href="#Class:Dataset"><code title="http://www.w3.org/ns/dcat#Dataset">Dataset</code></a></td></tr>
             <tr><td class="prop">Definition:</td><td>A curated collection of metadata about datasets and data services</td></tr>
+            <tr><td class="prop">Sub-class of:</td><td><a href="#Class:Dataset"><code title="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</code></a></td></tr>
             <tr><td class="prop">Usage note:</td><td>A web-based data catalog is typically represented as a single instance of this class.</td></tr>
-            <tr><td class="prop">See also:</td><td> <a href="#Class:Catalog_Record">Catalog record</a>, <a href="#Class:Dataset">Dataset</a></td></tr>
+            <tr><td class="prop">See also:</td><td> <a href="#Class:Catalog_Record"></a>, <a href="#Class:Dataset"></a></td></tr>
             </tbody>
         </table>
 
@@ -843,7 +843,7 @@
                 <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#dataset">dcat:dataset</a></th></tr></thead>
                 <tbody>
                 <tr><td class="prop">Definition:</td><td>A collection of data that is listed in the catalog.</td></tr>
-                <tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/terms/hasPart"><code>dct:hasPart</code></a></td></tr>
+                <tr><td class="prop">Sub-property of:</td><td><a href="http://purl.org/dc/terms/hasPart"><code>dct:hasPart</code></a></td></tr>
                 <tr><td class="prop">Domain:</td><td><a href="#Class:Catalog"><code>dcat:Catalog</code></a></td></tr>
                 <tr><td class="prop">Range:</td><td><a href="#Class:Dataset"><code>dcat:Dataset</code></a></td></tr>
                 </tbody>
@@ -863,7 +863,7 @@
                 <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#service">dcat:service</a></th></tr></thead>
                 <tbody>
                 <tr><td class="prop">Definition:</td><td>A site or end-point that is listed in the catalog.</td></tr>
-                <tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/terms/hasPart"><code>dct:hasPart</code></a></td></tr>
+                <tr><td class="prop">Sub-property of:</td><td><a href="http://purl.org/dc/terms/hasPart"><code>dct:hasPart</code></a></td></tr>
                 <tr><td class="prop">Domain:</td><td><a href="#Class:Catalog"><code>dcat:Catalog</code></a></td></tr>
                 <tr><td class="prop">Range:</td><td><a href="#Class:Data_Service"><code>dcat:DataService</code></a></td></tr>
                 </tbody>
@@ -883,7 +883,7 @@
                 <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#catalog">dcat:catalog</a></th></tr></thead>
                 <tbody>
                 <tr><td class="prop">Definition:</td><td>A catalog whose contents are of interest in the context of this catalog</td></tr>
-                <tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/terms/hasPart"><code>dct:hasPart</code></a></td></tr>
+                <tr><td class="prop">Sub-property of:</td><td><a href="http://purl.org/dc/terms/hasPart"><code>dct:hasPart</code></a></td></tr>
                 <tr><td class="prop">Domain:</td><td><a href="#Class:Catalog"><code>dcat:Catalog</code></a></td></tr>
                 <tr><td class="prop">Range:</td><td><a href="#Class:Catalog"><code>dcat:Catalog</code></a></td></tr>
                 </tbody>
@@ -956,13 +956,13 @@
             <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a></th></tr></thead>
             <tbody>
             <tr><td class="prop">Definition:</td><td>Resource published or curated by a single agent.</td></tr>
-            <tr><td class="prop">Usage note:</td><td>The class of all cataloged resources, the superclass of
+            <tr><td class="prop">Usage note:</td><td>The class of all cataloged resources, the super-class of
             <a href="#Class:Dataset"><code>dcat:Dataset</code></a>, <a href="#Class:Data_Service"><code>dcat:DataService</code></a>, <a href="#Class:Catalog"><code>dcat:Catalog</code></a> and any other member of a <a href="#Class:Catalog"><code>dcat:Catalog</code></a>.
             This class carries properties common to all cataloged resources, including datasets and data services.
 
             It is strongly recommended to use a more specific sub-class when available.</td></tr>
-            <tr><td class="prop">Usage note:</td><td><a href="#Class:Resource"><code>dcat:Resource</code></a> is an extension point that enables the definition of any kind of catalog. Additional subclasses may be defined in a DCAT application profile or other DCAT application for catalogs of other kinds of resources</td></tr>
-            <tr><td class="prop">See also:</td><td><a href="#Class:Catalog_Record" title="">Catalog record</a></td></tr>
+            <tr><td class="prop">Usage note:</td><td><a href="#Class:Resource"><code>dcat:Resource</code></a> is an extension point that enables the definition of any kind of catalog. Additional sub-classes may be defined in a DCAT application profile or other DCAT application for catalogs of other kinds of resources</td></tr>
+            <tr><td class="prop">See also:</td><td><a href="#Class:Catalog_Record"></a></td></tr>
             </tbody>
         </table>
 
@@ -977,7 +977,7 @@
                 <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/RightsStatement"><code>dct:RightsStatement</code></a></td></tr>
                 <tr><td class="prop">Usage note:</td><td>Information about licenses and rights MAY be provided for the Resource. See also guidance at <a href="#license-rights"></a>.</td></tr>
 
-                <tr><td class="prop">See also:</td><td><a href="#Property:resource_rights" title="">resource rights</a></td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Property:resource_rights"></a></td></tr>
                 </tbody>
             </table>
         </section>
@@ -1034,13 +1034,13 @@
                 <tr><td class="prop">Range:</td><td><a href="http://xmlns.com/foaf/0.1/Agent"><code>foaf:Agent</code></a></td></tr>
                 <tr><td class="prop">Usage note:</td><td>Resources of type <a href="http://xmlns.com/foaf/0.1/Agent"><code>foaf:Agent</code></a>
                     are recommended as values for this property.</td></tr>
-                <tr><td class="prop">See also:</td><td><a href="#Class:Organization_Person">Class: Organization/Person</a></td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Class:Organization_Person"></a></td></tr>
                 </tbody>
             </table>
 
             <aside class="note">
               <p>
-                This property is added to the <a href="#Class:Resource"><code>dcat:Resource</code></a> class, as the <code>dcat:Dataset</code> superclass. For more details, see <a href="#data-citation"></a>.
+                This property is added to the <a href="#Class:Resource"><code>dcat:Resource</code></a> class, as the <code>dcat:Dataset</code> super-class. For more details, see <a href="#data-citation"></a>.
               </p>
               <p>
                 The use of the [[?PROV-O]] qualified-attribution pattern is described in <a href="#qualified-attribution"></a>. <code>dct:creator</code> corresponds with a general attribution with the role 'creator'.
@@ -1082,7 +1082,7 @@
                     encoded using the relevant ISO 8601 Date and Time compliant string [[?DATETIME]] and typed using the appropriate XML Schema datatype [[!XMLSCHEMA11-2]]
                 </td></tr>
                 <tr><td class="prop">Usage note:</td><td>This property SHOULD be set using the first known date of issuance.</td></tr>
-                <tr><td class="prop">See also:</td><td> <a href="#Property:record_listing_date">catalog record listing date</a> and <a href="#Property:distribution_release_date" title="">distribution release date</a></td></tr>
+                <tr><td class="prop">See also:</td><td> <a href="#Property:record_listing_date"></a> and <a href="#Property:distribution_release_date"></a></td></tr>
                 </tbody>
             </table>
         </section>
@@ -1097,10 +1097,7 @@
                     encoded using the relevant ISO 8601 Date and Time compliant string [[?DATETIME]] and typed using the appropriate XML Schema datatype [[!XMLSCHEMA11-2]]
                 </td></tr>
                 <tr><td class="prop">Usage note:</td><td>The value of this property indicates a change to the actual item, not a change to the catalog record. An absent value MAY indicate that the item has never changed after its initial publication, or that the date of last modification is not known, or that the item is continuously updated.</td></tr>
-<!--
-                <tr><td class="prop">See also:</td><td><a href="#Property:dataset_frequency">dataset frequency</a></td></tr>
--->
-                <tr><td class="prop">See also:</td><td><a href="#Property:dataset_frequency">dataset frequency</a>, <a href="#Property:record_update_date" title="">catalog record modification date</a> and <a href="#Property:distribution_update_date" title="">distribution modification date</a></td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Property:dataset_frequency"></a>, <a href="#Property:record_update_date"></a> and <a href="#Property:distribution_update_date"></a></td></tr>
                 </tbody>
             </table>
         </section>
@@ -1139,7 +1136,7 @@
                 <tr><td class="prop">Definition:</td><td>The entity responsible for making the item available.</td></tr>
                 <tr><td class="prop">Usage note:</td><td>Resources of type <a href="http://xmlns.com/foaf/0.1/Agent"><code>foaf:Agent</code></a>
                     are recommended as values for this property.</td></tr>
-                <tr><td class="prop">See also:</td><td><a href="#Class:Organization_Person">Class: Organization/Person</a></td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Class:Organization_Person"></a></td></tr>
                 </tbody>
             </table>
         </section>
@@ -1172,10 +1169,10 @@
                 <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#theme">dcat:theme</a></th></tr></thead>
                 <tbody>
                 <tr><td class="prop">Definition:</td><td>A main category of the resource. A resource can have multiple themes.</td></tr>
-                <tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/terms/subject"><code>dct:subject</code></a></td></tr>
+                <tr><td class="prop">Sub-property of:</td><td><a href="http://purl.org/dc/terms/subject"><code>dct:subject</code></a></td></tr>
                 <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2004/02/skos/core#Concept"><code>skos:Concept</code></a></td></tr>
                 <tr><td class="prop">Usage note:</td><td>The set of <a href="http://www.w3.org/2004/02/skos/core#Concept"><code>skos:Concept</code></a>s used to categorize the resources are organized in a <a href="http://www.w3.org/2004/02/skos/core#ConceptScheme"><code>skos:ConceptScheme</code></a> describing all the categories and their relations in the catalog.</td></tr>
-                <tr><td>See also:</td><td><a href="#Property:catalog_themes">catalog themes</a></td></tr>
+                <tr><td>See also:</td><td><a href="#Property:catalog_themes"></a></td></tr>
                 </tbody>
             </table>
         </section>
@@ -1194,7 +1191,7 @@
               <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/type">dct:type</a></th></tr></thead>
               <tbody>
                 <tr><td class="prop">Definition:</td><td>The nature or genre of the resource.</td></tr>
-                <tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/elements/1.1/type"><code>dc:type</code></a></td></tr>
+                <tr><td class="prop">Sub-property of:</td><td><a href="http://purl.org/dc/elements/1.1/type"><code>dc:type</code></a></td></tr>
                 <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Class"><code>rdfs:Class</code></a></td></tr>
                 <tr><td class="prop">Usage note:</td><td>The value SHOULD be taken from a well governed and broadly recognised controlled vocabulary, such as:
                     <ol>
@@ -1344,7 +1341,7 @@
                 <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#landingPage">dcat:landingPage</a></th></tr></thead>
                 <tbody>
                 <tr><td class="prop">Definition:</td><td>A Web page that can be navigated to in a Web browser to gain access to the catalog, a dataset, its distributions and/or additional information.</td></tr>
-                <tr><td class="prop">Sub property of:</td><td><a href="http://xmlns.com/foaf/0.1/page"><code>foaf:page</code></a></td></tr>
+                <tr><td class="prop">Sub-property of:</td><td><a href="http://xmlns.com/foaf/0.1/page"><code>foaf:page</code></a></td></tr>
                 <tr><td class="prop">Range:</td><td><a href="http://xmlns.com/foaf/0.1/Document"><code>foaf:Document</code></a></td></tr>
                 <tr><td class="prop">Usage note:</td><td>
                     If the distribution(s) are accessible only through a landing page
@@ -1399,7 +1396,7 @@
                 <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/LicenseDocument"><code>dct:LicenseDocument</code></a></td></tr>
                 <tr><td class="prop">Usage note:</td><td>Information about licenses and rights MAY be provided for the Resource. See also guidance at <a href="#license-rights"></a>.</td></tr>
 
-                <tr><td class="prop">See also:</td><td><a href="#Property:resource_rights">resource rights</a>, <a href="#Property:distribution_license">distribution license</a></td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Property:resource_rights"></a>, <a href="#Property:distribution_license"></a></td></tr>
                 </tbody>
             </table>
         </section>
@@ -1410,11 +1407,11 @@
             <table class="definition">
                 <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/rights">dct:rights</a></th></tr></thead>
                 <tbody>
-                <tr><td class="prop">Definition:</td><td>A statement that concerns all rights not addressed with <a href="#Property:resource_license" title="">dct:license</a> or <a href="#Property:resource_access_rights" title="">dct:accessRights</a>, such as copyright statements.</td></tr>
+                <tr><td class="prop">Definition:</td><td>A statement that concerns all rights not addressed with <a href="#Property:resource_license">dct:license</a> or <a href="#Property:resource_access_rights">dct:accessRights</a>, such as copyright statements.</td></tr>
                 <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/RightsStatement"><code>dct:RightsStatement</code></a></td></tr>
                 <tr><td class="prop">Usage note:</td><td>Information about licenses and rights MAY be provided for the Resource. See also guidance at <a href="#license-rights"></a>.</td></tr>
 
-                <tr><td class="prop">See also:</td><td><a href="#Property:resource_license" title="">resource license</a>, <a href="#Property:distribution_rights">distribution rights</a>, <a href="#Property:resource_access_rights">resource access rights</a></td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Property:resource_license"></a>, <a href="#Property:distribution_rights"></a>, <a href="#Property:resource_access_rights"></a></td></tr>
                 </tbody>
             </table>
         </section>
@@ -1429,7 +1426,7 @@
                 <tr><td class="prop">Range:</td><td><a href="https://www.w3.org/TR/odrl-vocab/#term-Policy"><code>odrl:Policy</code></a></td></tr>
                 <tr><td class="prop">Usage note:</td><td>Information about rights expressed as ODRL [[ODRL-VOCAB]] policies MAY be provided for the Resource. See also guidance at <a href="#license-rights"></a>.</td></tr>
 
-                <tr><td class="prop">See also:</td><td><a href="#Property:resource_license" title="">resource license</a>, <a href="#Property:resource_access_rights" title="">resource access rights</a>, <a href="#Property:resource_rights" title="">resource rights</a></td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Property:resource_license"></a>, <a href="#Property:resource_access_rights"></a>, <a href="#Property:resource_rights"></a></td></tr>
                 </tbody>
             </table>
         </section>
@@ -1453,7 +1450,7 @@
                 </tbody>
             </table>
 
-            <p>An example of the use of this property is available in <a href="#dataset-publication-example"></a>.</p>
+            <p>For examples on the use of this property, see <a href="#examples-dataset-publication"></a>.</p>
 
         </section>
 
@@ -1490,7 +1487,7 @@
                 In cases where both dates differ, or where only the latter is known, the <em>publication date</em> SHOULD only be specified for the catalog record.
                 Notice that the <abbr title="World Wide Web Consortium">W3C</abbr> PROV Ontology [[?PROV-O]] allows describing further provenance information such as the details of the process and the agent involved in a particular change to a dataset or its registration.
             </td></tr>
-            <tr><td class="prop">See also</td><td><a href="#Class:Dataset">Dataset</a></td></tr>
+            <tr><td class="prop">See also</td><td><a href="#Class:Dataset"></a></td></tr>
             </tbody>
         </table>
 
@@ -1533,7 +1530,7 @@
                     encoded using the relevant ISO 8601 Date and Time compliant string [[?DATETIME]] and typed using the appropriate XML Schema datatype [[!XMLSCHEMA11-2]]
                 </td></tr>
                 <tr><td class="prop">Usage note:</td><td>This indicates the date of listing the dataset in the catalog and not the publication date of the dataset itself.</td></tr>
-                <tr><td class="prop">See also:</td><td><a href="#Property:resource_release_date" title="">resource release date</a></td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Property:resource_release_date"></a></td></tr>
                 </tbody>
             </table>
         </section>
@@ -1548,7 +1545,7 @@
                     encoded using the relevant ISO 8601 Date and Time compliant string [[?DATETIME]] and typed using the appropriate XML Schema datatype [[!XMLSCHEMA11-2]]
                 </td></tr>
                 <tr><td class="prop">Usage note:</td><td>This indicates the date of last change of a catalog entry, i.e. the catalog metadata description of the dataset, and not the date of the dataset itself.</td></tr>
-                <tr><td class="prop">See also:</td><td><a href="#Property:resource_update_date" title="">resource modification date</a></td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Property:resource_update_date"></a></td></tr>
                 </tbody>
             </table>
         </section>
@@ -1663,7 +1660,7 @@
             <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a></th></tr></thead>
             <tbody>
             <tr><td class="prop">Definition:</td><td>A collection of data, published or curated by a single agent, and available for access or download in one or more representations.</td></tr>
-            <tr><td class="prop">Sub class of:</td><td><a href="#Class:Resource">dcat:Resource</a></td></tr>
+            <tr><td class="prop">Sub-class of:</td><td><a href="#Class:Resource"><code title="http://www.w3.org/ns/dcat#Resource">dcat:Resource</code></a></td></tr>
             <tr><td class="prop">Usage note:</td><td>This class describes the conceptual dataset. One or more representations might be available, with differing schematic layouts and formats or serializations.</td></tr>
             <tr><td class="prop">Usage note:</td><td>This class describes the actual dataset as published by the dataset provider. In cases where a distinction between the actual dataset and its entry in the catalog is necessary (because metadata such as modification date might differ), the <i><a href="#Class:Catalog_Record">catalog record</a></i> class can be used for the latter.</td></tr>
             </tbody>
@@ -1687,7 +1684,7 @@
                 <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#distribution">dcat:distribution</a></th></tr></thead>
                 <tbody>
                 <tr><td class="prop">Definition:</td><td>An available distribution of the dataset.</td></tr>
-                <tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/terms/relation"><code>dct:relation</code></a></td></tr>
+                <tr><td class="prop">Sub-property of:</td><td><a href="http://purl.org/dc/terms/relation"><code>dct:relation</code></a></td></tr>
                 <tr><td class="prop">Domain:</td><td><a href="#Class:Dataset"><code>dcat:Dataset</code></a></td></tr>
                 <tr><td class="prop">Range:</td><td><a href="#Class:Distribution"><code>dcat:Distribution</code></a></td></tr>
                 </tbody>
@@ -1890,7 +1887,7 @@
             <tr><td class="prop">Usage note:</td><td>This represents a general availability of a dataset. It implies no information
                 about the actual access method of the data, i.e. whether by direct download, API, or through a Web page.
                 The use of <a href="#Property:distribution_download_url"><code>dcat:downloadURL</code></a> property indicates directly downloadable distributions.</td></tr>
-            <tr><td class="prop">See also:</td><td><a href="#Class:Data_Service" title="">Data service</a></td></tr>
+            <tr><td class="prop">See also:</td><td><a href="#Class:Data_Service"></a></td></tr>
             </tbody>
         </table>
 
@@ -1942,7 +1939,7 @@
                     encoded using the relevant ISO 8601 Date and Time compliant string [[?DATETIME]] and typed using the appropriate XML Schema datatype [[!XMLSCHEMA11-2]]
                 </td></tr>
                 <tr><td class="prop">Usage note:</td><td>This property SHOULD be set using the first known date of issuance.</td></tr>
-                <tr><td class="prop">See also:</td><td><a href="#Property:resource_release_date" title="">resource release date</a></td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Property:resource_release_date"></a></td></tr>
                 </tbody>
             </table>
         </section>
@@ -1955,7 +1952,7 @@
                 <tr><td class="prop">Definition:</td><td>Most recent date on which the distribution was changed, updated or modified.</td></tr>
                 <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Literal"><code>rdfs:Literal</code></a>
                     encoded using the relevant ISO 8601 Date and Time compliant string [[?DATETIME]] and typed using the appropriate XML Schema datatype [[!XMLSCHEMA11-2]]</td></tr>
-                <tr><td class="prop">See also:</td><td><a href="#Property:resource_update_date" title="">resource modification date</a></td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Property:resource_update_date"></a></td></tr>
                 </tbody>
             </table>
         </section>
@@ -1970,8 +1967,8 @@
                 <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/LicenseDocument"><code>dct:LicenseDocument</code></a></td></tr>
                 <tr><td class="prop">Usage note:</td><td>Information about licenses and rights SHOULD be provided on the level of Distribution. Information about licenses and rights MAY be provided for a Dataset in addition to but not instead of the information provided for the Distributions of that Dataset. Providing license or rights information for a Dataset that is different from information provided for a Distribution of that Dataset SHOULD be avoided as this can create legal conflicts. See also guidance at <a href="#license-rights"></a>.</td></tr>
 
-		<tr><td class="prop">See also:</td><td><a href="#Property:distribution_rights" title="">distribution rights</a>
-                    <a href="#Property:resource_license" title="">resource license</a></td></tr>
+		<tr><td class="prop">See also:</td><td><a href="#Property:distribution_rights"></a>
+                    <a href="#Property:resource_license"></a></td></tr>
                 </tbody>
             </table>
         </section>
@@ -1985,9 +1982,7 @@
                 <tr><td class="prop">Definition:</td><td>A rights statement that concerns how the distribution is accessed.</td></tr>
                 <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/RightsStatement"><code>dct:RightsStatement</code></a></td></tr>
                 <tr><td class="prop">Usage note:</td><td>Information about licenses and rights MAY be provided for the Distribution. See also guidance at <a href="#license-rights"></a>.</td></tr>
-
-                <tr><td class="prop">See also:</td><td><a href="#Property:distribution_license" title="">distribution license</a>, <a href="#Property:distribution_rights" title="">distribution rights</a>,
-                    <a href="#Property:resource_access_rights" title="">resource access rights</a></td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Property:distribution_license"></a>, <a href="#Property:distribution_rights"></a>, <a href="#Property:resource_access_rights"></a></td></tr>
                 </tbody>
             </table>
         </section>
@@ -2004,8 +1999,8 @@
                 <p><code>dct:license</code>, which is a sub-property of <code>dct:rights</code>, can be used to link a distribution to a license document. However, <code>dct:rights</code> allows linking to a rights statement that can include licensing information as well as other information that supplements the license such as attribution.</p>
                 <p>Information about licenses and rights SHOULD be provided on the level of Distribution. Information about licenses and rights MAY be provided for a Dataset in addition to but not instead of the information provided for the Distributions of that Dataset. Providing license or rights information for a Dataset that is different from information provided for a Distribution of that Dataset SHOULD be avoided as this can create legal conflicts. See also guidance at <a href="#license-rights"></a>.</p>
                 </td></tr>
-                <tr><td class="prop">See also:</td><td><a href="#Property:distribution_license" title="">distribution license</a>,
-                    <a href="#Property:resource_rights" title="">resource rights</a></td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Property:distribution_license"></a>,
+                    <a href="#Property:resource_rights"></a></td></tr>
                 </tbody>
             </table>
         </section>
@@ -2020,7 +2015,7 @@
                 <tr><td class="prop">Range:</td><td><a href="https://www.w3.org/TR/odrl-vocab/#term-Policy"><code>odrl:Policy</code></a></td></tr>
                 <tr><td class="prop">Usage note:</td><td>Information about rights expressed as ODRL [[ODRL-VOCAB]] policies MAY be provided for the Distribution. See also guidance at <a href="#license-rights"></a>.</td></tr>
 
-                <tr><td class="prop">See also:</td><td><a href="#Property:resource_license" title="">resource license</a>, <a href="#Property:distribution_access_rights" title="">distribution access rights</a>, <a href="#Property:distribution_rights" title="">distribution rights</a></td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Property:resource_license"></a>, <a href="#Property:distribution_access_rights"></a>, <a href="#Property:distribution_rights"></a></td></tr>
                 </tbody>
             </table>
         </section>
@@ -2043,7 +2038,7 @@
                 <p><a href="#Property:distribution_download_url"><code>dcat:downloadURL</code></a> is preferred for direct links to downloadable resources.</p>
                 <p>If the distribution(s) are accessible only through a landing page (i.e. direct download URLs are not known), then the landing page URL associated with the <code>dcat:Dataset</code> SHOULD be duplicated as access URL on a distribution (see <a href="#example-landing-page"></a>).</p>
                 </td></tr>
-                <tr><td class="prop">See also</td><td><a href="#Property:distribution_download_url">download URL</a>, <a href="#Property:distribution_access_service">access service</a></td></tr>
+                <tr><td class="prop">See also</td><td><a href="#Property:distribution_download_url"></a>, <a href="#Property:distribution_access_service"></a></td></tr>
                 </tbody>
             </table>
 
@@ -2067,7 +2062,7 @@
                 <tr><td class="prop">Definition:</td><td>A data service that gives access to the distribution of the dataset</td></tr>
                 <tr><td class="prop">Range:</td><td><a href="#Class:Data_Service"><code>dcat:DataService</code></a></td></tr>
                 <tr><td class="prop">Usage note:</td><td><a href="#Property:distribution_access_service"><code>dcat:accessService</code></a> SHOULD be used to link to a description of a <a href="#Class:Data_Service"><code>dcat:DataService</code></a> that can provide access to this distribution.</td></tr>
-                <tr><td class="prop">See also</td><td><a href="#Property:distribution_download_url">download URL</a>, <a href="#Property:distribution_access_url">access URL</a></td></tr>
+                <tr><td class="prop">See also</td><td><a href="#Property:distribution_download_url"></a>, <a href="#Property:distribution_access_url"></a></td></tr>
                 </tbody>
             </table>
         </section>
@@ -2082,7 +2077,7 @@
                 <tr><td class="prop">Domain:</td><td><a href="#Class:Distribution"><code>dcat:Distribution</code></a></td></tr>
                 <tr><td class="prop">Range:</td><td><a href="http://www.w3.org/2000/01/rdf-schema#Resource"><code>rdfs:Resource</code></a></td></tr>
                 <tr><td class="prop">Usage note:</td><td><a href="#Property:distribution_download_url"><code>dcat:downloadURL</code></a> SHOULD be used for the URL at which this distribution is available directly, typically through a HTTP Get request.  </td></tr>
-                <tr><td class="prop">See also</td><td><a href="#Property:distribution_access_url">access URL</a>, <a href="#Property:distribution_access_service">access service</a></td></tr>
+                <tr><td class="prop">See also</td><td><a href="#Property:distribution_access_url"></a>, <a href="#Property:distribution_access_service"></a></td></tr>
                 </tbody>
             </table>
         </section>
@@ -2170,7 +2165,7 @@
                 <tr><td class="prop">Definition:</td><td>An established standard to which the distribution conforms.</td></tr>
                 <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/Standard"><code>dct:Standard</code></a> (A basis for comparison; a reference point against which other things can be evaluated.)</td></tr>
                 <tr><td class="prop">Usage note:</td><td>This property SHOULD be used to indicate the model, schema, ontology, view or profile that this representation of a dataset conforms to. This is (generally) a complementary concern to the media-type or format. </td></tr>
-                <tr><td class="prop">See also:</td><td><a href="#Property:distribution_format">format</a>, <a href="#Property:distribution_media_type">media type</a></td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Property:distribution_format"></a>, <a href="#Property:distribution_media_type"></a></td></tr>
                 </tbody>
             </table>
 
@@ -2194,11 +2189,11 @@
                 <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#mediaType">dcat:mediaType</a></th></tr></thead>
                 <tbody>
                 <tr><td class="prop">Definition:</td><td>The media type of the distribution as defined by IANA [[!IANA-MEDIA-TYPES]].</td></tr>
-                <tr><td class="prop">Sub property of:</td><td><a href="http://purl.org/dc/terms/format"><code>dct:format</code></a></td></tr>
+                <tr><td class="prop">Sub-property of:</td><td><a href="http://purl.org/dc/terms/format"><code>dct:format</code></a></td></tr>
                 <tr><td class="prop">Domain:</td><td><a href="#Class:Distribution"><code>dcat:Distribution</code></a></td></tr>
                 <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/MediaType"><code>dct:MediaType</code></a></td></tr>
                 <tr><td class="prop">Usage note:</td><td>This property SHOULD be used when the media type of the distribution is defined in IANA [[!IANA-MEDIA-TYPES]], otherwise <code>dct:format</code> MAY be used with different values.</td></tr>
-                <tr><td class="prop">See also:</td><td><a href="#Property:distribution_format">format</a> , <a href="#Property:distribution_conforms_to">conforms to</a></td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Property:distribution_format"></a>, <a href="#Property:distribution_conforms_to"></a></td></tr>
                 </tbody>
             </table>
         </section>
@@ -2212,7 +2207,7 @@
                 <tr><td class="prop">Definition:</td><td>The file format of the distribution.</td></tr>
                 <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/MediaTypeOrExtent"><code>dct:MediaTypeOrExtent</code></a></td></tr>
                 <tr><td class="prop">Usage note:</td><td> <a href="#Property:distribution_media_type"><code>dcat:mediaType</code></a> SHOULD be used if the type of the distribution is defined by IANA [[!IANA-MEDIA-TYPES]].</td></tr>
-                <tr><td class="prop">See also:</td><td><a href="#Property:distribution_media_type">media type</a>, <a href="#Property:distribution_conforms_to">conforms to</a></td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Property:distribution_media_type"></a>, <a href="#Property:distribution_conforms_to"></a></td></tr>
                 </tbody>
             </table>
         </section>
@@ -2232,9 +2227,11 @@
                 <tr><td class="prop">Definition:</td><td>The format of the file in which the data is contained in a compressed form, e.g. to reduce the size of the downloadable file.</td></tr>
                 <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/MediaType"><code>dct:MediaType</code></a></td></tr>
                 <tr><td class="prop">Usage note:</td><td>This property to be used when the files in the distribution are compressed, e.g. in a ZIP file. The format SHOULD be expressed using a media type as defined by IANA [[!IANA-MEDIA-TYPES]], if available.</td></tr>
-                <tr><td class="prop">See also:</td><td><a href="#Property:distribution_packaging_format">packaging format</a>.</td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Property:distribution_packaging_format"></a>.</td></tr>
                 </tbody>
             </table>
+            
+            <p>For examples on the use of this property, see <a href="#examples-compressed-and-packaged-distributions"></a>.</p>
 
         </section>
 
@@ -2247,15 +2244,18 @@
               </p>
             </aside>
 
-              <table class="definition">
-                  <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#packageFormat">dcat:packageFormat</a></th></tr></thead>
-                  <tbody>
-                  <tr><td class="prop">Definition:</td><td>The format of the file in which one or more data files are grouped together, e.g. to enable a set of related files to be downloaded together.</td></tr>
-                  <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/MediaType"><code>dct:MediaType</code></a></td></tr>
-                  <tr><td class="prop">Usage note:</td><td>This property to be used when the files in the distribution are packaged, e.g. in a TAR file. The format SHOULD be expressed using a media type as defined by IANA [[!IANA-MEDIA-TYPES]], if available.</td></tr>
-                  <tr><td class="prop">See also:</td><td><a href="#Property:distribution_compression_format">compression format</a>.</td></tr>
-                  </tbody>
-              </table>
+            <table class="definition">
+                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#packageFormat">dcat:packageFormat</a></th></tr></thead>
+                <tbody>
+                <tr><td class="prop">Definition:</td><td>The format of the file in which one or more data files are grouped together, e.g. to enable a set of related files to be downloaded together.</td></tr>
+                <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/MediaType"><code>dct:MediaType</code></a></td></tr>
+                <tr><td class="prop">Usage note:</td><td>This property to be used when the files in the distribution are packaged, e.g. in a TAR file. The format SHOULD be expressed using a media type as defined by IANA [[!IANA-MEDIA-TYPES]], if available.</td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Property:distribution_compression_format"></a>.</td></tr>
+                </tbody>
+            </table>
+              
+            <p>For examples on the use of this property, see <a href="#examples-compressed-and-packaged-distributions"></a>.</p>
+
         </section>
     </section> <!-- end class Distribution -->
 
@@ -2305,12 +2305,14 @@
             <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#DataService">dcat:DataService</a></th></tr></thead>
             <tbody>
             <tr><td class="prop">Definition:</td><td>A collection of operations that provides access to one or more datasets or data processing functions.</td></tr>
-            <tr><td class="prop">Sub class of:</td><td><a href="#Class:Resource"><code>dcat:Resource</code></a></td></tr>
-            <tr><td class="prop">Sub class of:</td><td><a href="http://purl.org/dc/dcmitype/Service"><code>dctype:Service</code></a></td></tr>
+            <tr><td class="prop">Sub-class of:</td><td><a href="#Class:Resource"><code>dcat:Resource</code></a></td></tr>
+            <tr><td class="prop">Sub-class of:</td><td><a href="http://purl.org/dc/dcmitype/Service"><code>dctype:Service</code></a></td></tr>
             <tr><td class="prop">Usage note:</td><td>If a  <a href="#Class:Data_Service"><code>dcat:DataService</code></a> is bound to one or more specified Datasets, they are indicated by the <a href="#Property:data_service_serves_dataset"><code>dcat:servesDataset</code></a> property.</td></tr>
             <tr><td class="prop">Usage note:</td><td>The kind of service can be indicated using the <a href="http://purl.org/dc/terms/type"><code>dct:type</code></a> property. Its value may be taken from a controlled vocabulary such as the INSPIRE spatial data service type code list [[?INSPIRE-SDST]].</td></tr>
             </tbody>
         </table>
+
+        <p>For examples on the use of this class and related properties, see <a href="#examples-data-service"></a>.</p>
 
         <section id="Property:data_service_endpoint_url">
             <h4>Property: endpoint URL</h4>
@@ -2345,8 +2347,7 @@
                 <tbody>
                 <tr><td class="prop">Definition:</td><td>A legal document under which the service is made available.</td></tr>
                 <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/LicenseDocument"><code>dct:LicenseDocument</code></a></td></tr>
-                <tr><td class="prop">See also:</td><td><a href="#Property:distribution_rights" title="">distribution rights</a>,
-                    <a href="#Property:resource_license" title="">resource license</a></td></tr>
+                <tr><td class="prop">See also:</td><td><a href="#Property:distribution_rights"></a>, <a href="#Property:resource_license"></a></td></tr>
                 </tbody>
             </table>
         </section>
@@ -2418,7 +2419,7 @@
             <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#DataDistributionService">dcat:DataDistributionService</a></th></tr></thead>
             <tbody>
             <tr><td class="prop">Definition:</td><td>A site or end-point that provides access to distributions of existing datasets or subsets of datasets</td></tr>
-            <tr><td class="prop">Sub class of:</td><td><a href="#Class:Data_Service">dcat:DataService</a></td></tr>
+            <tr><td class="prop">Sub-class of:</td><td><a href="#Class:Data_Service">dcat:DataService</a></td></tr>
             <tr><td class="prop">Usage note:</td><td>A DataDistributionService is usually bound to one or more specified Datasets, which are indicated by the <a href="#Property:datadistributionservice_servesdataset">dcat:servesDataset</a> property.</td></tr>
             <tr><td class="prop">Usage note:</td><td>A <i>data discovery service</i> supports discovery of data, usually by providing access to a Catalog. In that context the data discovery service can be understood as a DataDistributionService in which least one <a href="#Class:Catalog">dcat:Catalog</a> appears as the object of its <a href="#Property:datadistributionservice_servesdataset">dcat:servesDataset</a> property</td></tr>
             </tbody>
@@ -2472,7 +2473,7 @@
             <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#DiscoveryService">dcat:DiscoveryService</a></th></tr></thead>
             <tbody>
             <tr><td class="prop">Definition:</td><td>A site or end-point that supports data discovery, usually by providing access to catalogs</td></tr>
-            <tr><td class="prop">Sub class of:</td><td><a href="#Class:DataDistributionService">dcat:DataDistributionService</a></td></tr>
+            <tr><td class="prop">Sub-class of:</td><td><a href="#Class:DataDistributionService">dcat:DataDistributionService</a></td></tr>
             <tr><td class="prop">Usage note:</td><td>At least one <a href="#Class:Catalog">dcat:Catalog</a> must be provided as the object of a <a href="http://www.w3.org/ns/dcat#servesDataset">dcat:servesDataset property</a></td></tr>
             <tr><td class="prop">See also:</td><td> </td></tr>
             </tbody>
@@ -2494,7 +2495,7 @@ end class DiscoveryService -->
             <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/2004/02/skos/core#ConceptScheme">skos:ConceptScheme</a></th></tr></thead>
             <tbody>
             <tr><td class="prop">Definition:</td><td>A knowledge organization system (KOS) used to represent themes/categories of datasets in the catalog.</td></tr>
-            <tr><td class="prop">See also:</td><td><a href="#Property:catalog_themes">catalog themes</a>, <a href="#Property:resource_theme">dataset theme</a></td></tr>
+            <tr><td class="prop">See also:</td><td><a href="#Property:catalog_themes"></a>, <a href="#Property:resource_theme"></a></td></tr>
             </tbody>
         </table>
     </section> <!-- end class Concept_Scheme -->
@@ -2507,7 +2508,7 @@ end class DiscoveryService -->
             <tr><td class="prop">Definition:</td><td>A category or a theme used to describe datasets in the catalog.</td></tr>
             <tr><td class="prop">Usage note:</td><td>It is recommended to use either <code>skos:inScheme</code> or <code>skos:topConceptOf</code> on every <code>skos:Concept</code>
                 used to classify datasets to link it to the concept scheme it belongs to. This concept scheme is typically associated with the catalog using <code>dcat:themeTaxonomy</code>.</td></tr>
-            <tr><td class="prop">See also:</td><td><a href="#Property:catalog_themes">catalog themes</a>, <a href="#Property:resource_theme">dataset theme</a></td></tr>
+            <tr><td class="prop">See also:</td><td><a href="#Property:catalog_themes"></a>, <a href="#Property:resource_theme"></a></td></tr>
             </tbody>
         </table>
     </section> <!-- end class Concept -->
@@ -2541,7 +2542,7 @@ end class DiscoveryService -->
           <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Relationship">dcat:Relationship</a></th></tr></thead>
           <tbody>
             <tr><td class="prop">Definition:</td><td>An association class for attaching additional information to a relationship between DCAT Resources</td></tr>
-            <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/ns/prov#EntityInfluence"><code>prov:EntityInfluence</code></a></td></tr>
+            <tr><td class="prop">Sub-class of:</td><td><a href="http://www.w3.org/ns/prov#EntityInfluence"><code>prov:EntityInfluence</code></a></td></tr>
             <tr><td class="prop">Usage note:</td><td>
               Use to characterize a relationship between datasets, and potentially other resources, where the nature of the relationship is known but is not adequately characterized by the standard [[?DCTERMS]] properties
               (<a href="http://purl.org/dc/terms/hasPart"><code>dct:hasPart</code></a>,
@@ -2623,7 +2624,7 @@ end class DiscoveryService -->
             <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Role">dcat:Role</a></th></tr></thead>
             <tbody>
             <tr><td class="prop">Definition:</td><td>A role is the function of a resource or agent with respect to another resource, in the context of resource attribution or resource relationships.</td></tr>
-            <tr><td class="prop">Sub class of:</td><td><a href="http://www.w3.org/2004/02/skos/core#Concept"><code>skos:Concept</code></a></td></tr>
+            <tr><td class="prop">Sub-class of:</td><td><a href="http://www.w3.org/2004/02/skos/core#Concept"><code>skos:Concept</code></a></td></tr>
             <tr><td class="prop">Usage note:</td><td>Used in a qualified-attribution to specify the role of an Agent with respect to an Entity. It is recommended that the values be managed as a controlled vocabulary of agent roles, such as [[?ISO-19115-1]] <a href="http://registry.it.csiro.au/def/isotc211/CI_RoleCode"><code>CI_RoleCode</code></a>.</td></tr>
             <tr><td class="prop">Usage note:</td><td>
             <p>Used in a qualified-relation to specify the role of an Entity with respect to another Entity.
@@ -2740,7 +2741,7 @@ end class DiscoveryService -->
               <tr><td class="prop">Range:</td><td><a data-cite="OWL-TIME#time:Instant"><code title="http://www.w3.org/2006/time#Instant">time:Instant</code></a></td></tr>
               <tr>
                  <td class="prop">Usage note:</td>
-                 <td>Use of the property <code>time:hasBeginning</code> entails that value of the <code>dct:temporal</code> property is a member of the <code>time:TemporalEntity</code> class from [[OWL-TIME]]. In this context this could be taken to imply that <code>dct:PeriodOfTime</code> is equivalent to the subclass <a data-cite="OWL-TIME#time:ProperInterval"><code title="http://www.w3.org/2006/time#ProperInterval">time:ProperInterval</code></a></td>
+                 <td>Use of the property <code>time:hasBeginning</code> entails that value of the <code>dct:temporal</code> property is a member of the <code>time:TemporalEntity</code> class from [[OWL-TIME]]. In this context this could be taken to imply that <code>dct:PeriodOfTime</code> is equivalent to the sub-class <a data-cite="OWL-TIME#time:ProperInterval"><code title="http://www.w3.org/2006/time#ProperInterval">time:ProperInterval</code></a></td>
               </tr>
               </tbody>
             </table>
@@ -2769,7 +2770,7 @@ end class DiscoveryService -->
               <tr><td class="prop">Range:</td><td><a data-cite="OWL-TIME#time:Instant"><code title="http://www.w3.org/2006/time#Instant">time:Instant</code></a></td></tr>
               <tr>
                  <td class="prop">Usage note:</td>
-                 <td>Use of the property <code>time:hasEnd</code> entails that value of the <code>dct:temporal</code> property is a member of the <code>time:TemporalEntity</code> class from [[OWL-TIME]]. In this context this could be taken to imply that <code>dct:PeriodOfTime</code> is equivalent to the subclass <a data-cite="OWL-TIME#time:ProperInterval"><code title="http://www.w3.org/2006/time#ProperInterval">time:ProperInterval</code></a></td>
+                 <td>Use of the property <code>time:hasEnd</code> entails that value of the <code>dct:temporal</code> property is a member of the <code>time:TemporalEntity</code> class from [[OWL-TIME]]. In this context this could be taken to imply that <code>dct:PeriodOfTime</code> is equivalent to the sub-class <a data-cite="OWL-TIME#time:ProperInterval"><code title="http://www.w3.org/2006/time#ProperInterval">time:ProperInterval</code></a></td>
               </tr>
               </tbody>
             </table>
@@ -2922,7 +2923,7 @@ end class DiscoveryService -->
               <tr><td class="prop">Definition:</td><td>Latitude of a characteristic point location of a resource.</td></tr>
               <tr><td class="prop">Range:</td><td><a data-cite="XMLSCHEMA11-2#decimal"><code>xsd:decimal</code></a></td></tr>
               <tr><td class="prop">Usage note:</td><td>It is recommended to encode the value as a <code>xsd:decimal</code>.</td></tr>
-              <tr><td class="prop">Usage note:</td><td>Use of this property entails that value of the <code>dct:spatial</code> property is a member of the <code>w3cgeo:Point</code> class from [[W3C-BASIC-GEO]]. This could be taken to imply that <code>w3cgeo:Point</code> is a subclass of <code>dct:Location</code></td></tr>
+              <tr><td class="prop">Usage note:</td><td>Use of this property entails that value of the <code>dct:spatial</code> property is a member of the <code>w3cgeo:Point</code> class from [[W3C-BASIC-GEO]]. This could be taken to imply that <code>w3cgeo:Point</code> is a sub-class of <code>dct:Location</code></td></tr>
               </tbody>
             </table>
 
@@ -2949,7 +2950,7 @@ end class DiscoveryService -->
               <tr><td class="prop">Definition:</td><td>Longitude of a characteristic point location of a resource.</td></tr>
               <tr><td class="prop">Range:</td><td><a data-cite="XMLSCHEMA11-2#decimal"><code>xsd:decimal</code></a></td></tr>
               <tr><td class="prop">Usage note:</td><td>It is recommended to encode the value as a <code>xsd:decimal</code>. </td></tr>
-              <tr><td class="prop">Usage note:</td><td>Use of this property entails that value of the <code>dct:spatial</code> property is a member of the <code>w3cgeo:Point</code> class from [[W3C-BASIC-GEO]]. This could be taken to imply that <code>w3cgeo:Point</code> is a subclass of <code>dct:Location</code></td></tr>
+              <tr><td class="prop">Usage note:</td><td>Use of this property entails that value of the <code>dct:spatial</code> property is a member of the <code>w3cgeo:Point</code> class from [[W3C-BASIC-GEO]]. This could be taken to imply that <code>w3cgeo:Point</code> is a sub-class of <code>dct:Location</code></td></tr>
               </tbody>
             </table>
 
@@ -2976,7 +2977,7 @@ end class DiscoveryService -->
               <tr><td class="prop">Definition:</td><td>Altitude (elevation) of a characteristic point location of a resource.</td></tr>
               <tr><td class="prop">Range:</td><td><a data-cite="XMLSCHEMA11-2#decimal"><code>xsd:decimal</code></a></td></tr>
               <tr><td class="prop">Usage note:</td><td>It is recommended to encode the value as a <code>xsd:decimal</code>. </td></tr>
-              <tr><td class="prop">Usage note:</td><td>Use of this property entails that value of the <code>dct:spatial</code> property is a member of the <code>w3cgeo:Point</code> class from [[W3C-BASIC-GEO]]. This could be taken to imply that <code>w3cgeo:Point</code> is a subclass of <code>dct:Location</code></td></tr>
+              <tr><td class="prop">Usage note:</td><td>Use of this property entails that value of the <code>dct:spatial</code> property is a member of the <code>w3cgeo:Point</code> class from [[W3C-BASIC-GEO]]. This could be taken to imply that <code>w3cgeo:Point</code> is a sub-class of <code>dct:Location</code></td></tr>
               </tbody>
             </table>
 
@@ -4278,7 +4279,7 @@ ex:Test543L
             </tr>
             <tr>
                 <td style="text-align: right">dcat:endPointDescription</td>
-                <td>sdo:documentation , sdo:hasOfferCatalog</td>
+                <td>sdo:documentation, sdo:hasOfferCatalog</td>
             </tr>
             <tr>
                 <td style="text-align: right">dct:type <br /> <i>in context of a dcat:DataService</i></td>
@@ -4372,12 +4373,12 @@ ex:Test543L
 
 <section id="collection-of-examples" class="appendix informative">
   <h2>Examples</h2>
-  <section id="bag-of-files">
+  <section id="examples-bag-of-files">
       <h3>Loosely structured catalog</h3>
 
       <aside class="note">
         <p>
-          The background to this example is discussed in <a href="https://github.com/w3c/dxwg/issues/253">Best practice for a loosely-structured catalog</a>.
+          The background to this example is discussed in <a href="https://github.com/w3c/dxwg/issues/253">Issue #253</a> ("Best practice for a loosely-structured catalog").
       </p>
       </aside>
 
@@ -4618,7 +4619,7 @@ dap:P366
   </section>
 
 
-  <section id="dataset-publication-example">
+  <section id="examples-dataset-publication">
       <h3>Link datasets and publications</h3>
 
       <p>Often datasets are associated with publications (scholarly articles, reports, etc) and this version of DCAT relies on the property <code>dct:isReferencedBy</code> to provide a way to link publications about a dataset to the dataset</p>
@@ -4644,7 +4645,7 @@ dap:P366
 
   </section>
 
-  <section id="data-service-examples">
+  <section id="examples-data-service">
       <h3>Data services</h3>
       <p>
           Data services may be described using DCAT.
@@ -4677,8 +4678,7 @@ a:EEA-CSW-Endpoint
   dct:issued "2012-01-01"^^xsd:date ;
   dct:license &lt;https://creativecommons.org/licenses/by/2.5/dk/&gt; ;
   dct:spatial [
-    rdf:type dct:Location ;
-<!--
+    rdf:type dct:Location ;<!--
     dcat:bbox """&lt;gml:Envelope srsName=\"http://www.opengis.net/def/crs/OGC/1.3/CRS84\"&gt;&lt;gml:lowerCorner&gt;-180 -90&lt;/gml:lowerCorner&gt;&lt;gml:upperCorner&gt;180 90&lt;/gml:upperCorner&gt;&lt;/gml:Envelope&gt;"""^^gsp:gmlLiteral ;
 -->
     dcat:bbox "POLYGON((-180 90,180 90,180 -90,-180 -90,-180 90))"^^gsp:wktLiteral ;
@@ -4706,8 +4706,7 @@ ga-courts:jc
   rdf:type dcat:Dataset ;
   dct:description "The dataset contains spatial locations, in point format, of the Australian High Court, Australian Federal Courts and the Australian Magistrates Courts." ;
   dct:spatial [
-    rdf:type dct:Location ;
-<!--
+    rdf:type dct:Location ;<!--
     dcat:bbox """&lt;gml:Envelope srsName=\"http://www.opengis.net/def/crs/EPSG/0/4283\"&gt;&lt;gml:lowerCorner&gt;115.864566 -42.885989&lt;/gml:lowerCorner&gt;&lt;gml:upperCorner&gt;153.276835 -12.460578&lt;/gml:upperCorner&gt;&lt;/gml:Envelope&gt;"""^^geosparql:gmlLiteral ;
   ] ;
 -->
@@ -4769,7 +4768,7 @@ ga-courts:jc-wms
 
   </section>
 
-  <section id="compressed-and-packaged-distributions">
+  <section id="examples-compressed-and-packaged-distributions">
         <h3>Compressed and packaged distributions</h3>
 
         <p>The first example is for a distribution with a downloadable file that is compressed into a GZIP file.
