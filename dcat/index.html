@@ -1990,7 +1990,7 @@
                 <tr><td class="prop">Range:</td><td><a href="http://purl.org/dc/terms/LicenseDocument"><code>dct:LicenseDocument</code></a></td></tr>
                 <tr><td class="prop">Usage note:</td><td>Information about licenses and rights SHOULD be provided on the level of Distribution. Information about licenses and rights MAY be provided for a Dataset in addition to but not instead of the information provided for the Distributions of that Dataset. Providing license or rights information for a Dataset that is different from information provided for a Distribution of that Dataset SHOULD be avoided as this can create legal conflicts. See also guidance at <a href="#license-rights"></a>.</td></tr>
 
-		<tr><td class="prop">See also:</td><td><a href="#Property:distribution_rights"></a>
+    <tr><td class="prop">See also:</td><td><a href="#Property:distribution_rights"></a>
                     <a href="#Property:resource_license"></a></td></tr>
                 </tbody>
             </table>
@@ -2146,7 +2146,7 @@
             This is intended to provide a summary indication of the spatial resolution of the data distribution as a single number.
           More complex descriptions of various aspects of spatial precision, accuracy, resolution and other statistics can be provided using the Data Quality Vocabulary [[?VOCAB-DQV]]. </p>
 
-	    </section>
+      </section>
 
         <section id="Property:distribution_temporal_resolution">
             <h4>Property: temporal resolution</h4>
@@ -2693,11 +2693,11 @@ end class DiscoveryService -->
           <thead><tr><th>RDF Class:</th><th><a data-cite="DCTERMS#terms-PeriodOfTime" title="http://purl.org/dc/terms/PeriodOfTime">dct:PeriodOfTime</a></th></tr></thead>
           <tbody>
             <tr>
-	             <td class="prop">Definition:</td>
-	             <td>An interval of time that is named or defined by its start and end.</td>
+               <td class="prop">Definition:</td>
+               <td>An interval of time that is named or defined by its start and end.</td>
             </tr>
             <tr>
-	             <td class="prop">Usage note:</td>
+               <td class="prop">Usage note:</td>
                <td>The start and end of the interval SHOULD be given by using properties
                 <a href="#Property:period_start_date"><code title="http://www.w3.org/ns/dcat#startDate">dcat:startDate</code></a>
                 or <a href="#Property:period_has_beginning"><code title="http://www.w3.org/2006/time#hasBeginning">time:hasBeginning</code></a>,
@@ -2838,8 +2838,8 @@ end class DiscoveryService -->
           <thead><tr><th>RDF Class:</th><th><a data-cite="DCTERMS#terms-Location" title="http://purl.org/dc/terms/Location">dct:Location</a></th></tr></thead>
           <tbody>
             <tr>
-	      <td class="prop">Definition:</td>
-	      <td>A spatial region or named place.</td></tr>
+        <td class="prop">Definition:</td>
+        <td>A spatial region or named place.</td></tr>
             <tr>
               <td class="prop">Usage note:</td>
               <td>
@@ -3028,7 +3028,7 @@ end class DiscoveryService -->
 <aside id="ex-identifier" class="example">
 <pre class="nohighlight turtle">
 &lt;https://example.org/id&gt; a dcat:Dataset;
-	dct:identifier "https://example.org/id"^^xsd:anyURI
+  dct:identifier "https://example.org/id"^^xsd:anyURI ,
   .</pre>
 </aside>
 
@@ -3037,7 +3037,7 @@ end class DiscoveryService -->
 <aside id="ex-proxy-id" class="example">
 <pre class="nohighlight turtle">
 &lt;https://example.org/proxyid&gt; a dcat:Dataset;
-	dct:identifier "id"^^xsd:string
+  dct:identifier "id"^^xsd:string ,
   .</pre>
 </aside>
 
@@ -3084,14 +3084,15 @@ ex:InternationalDOIFundation a foaf:Organization ;
 <aside id="ex-owl-sameas" class="example">
 <pre class="nohighlight turtle">
 &lt;https://example.org/id&gt; a dcat:Dataset;
-	...
-	owl:sameAs &lt;https://doi.org/10.5281/zenodo.1486279&gt; .</pre>
+  ...
+  owl:sameAs &lt;https://doi.org/10.5281/zenodo.1486279&gt; ,
+  .</pre>
 </aside>
 
     <p>when dereferenced with media type <code>text/turtle</code>,  <code>https://doi.org/10.5281/zenodo.1486279</code> returns a [[?SCHEMA-ORG]] description for the dataset, which might dynamically enrich the description provided by <code>https://example.org/id</code>. </p>
 
 <aside class="note">
-    <p>Identifiers for datasets should follow the [[?DWBP]] <a data-cite="?DWBP#DataIdentifiers">Data Identifiers Best Practice</a>.</p>
+  <p>Identifiers for datasets should follow the best practices in <a data-cite="?DWBP#DataIdentifiers"><span class="secno">&sect;&nbsp;8.7</span> <span class="sec-title">Data Identifiers</span></a> of [[?DWBP]].</p>
 </aside>
 
     <p>The need to distinguish between primary and alternative (or legacy) identifiers for a dataset within DCAT has been posed as a requirement. However, it is very much application-specific and would be better addressed in application profiles rather than mandating a general approach.</p>
@@ -3101,26 +3102,28 @@ ex:InternationalDOIFundation a foaf:Organization ;
     <section id="identifiers-type">
     <h2>Indicating common identifier types</h2>
 
-        <p> If identifiers are not HTTP dereferenceable, common identifier types can be served as <a data-cite="?RDF11-CONCEPTS#dfn-recognized-datatype-iris">RDF datatypes</a> [[?RDF11-CONCEPTS]] or custom <a data-cite="?OWL2-SYNTAX#Datatype_Definitions">OWL datatypes</a> [[OWL2-SYNTAX]] for the sake of interoperability, see <code>ex:type</code> in <a href="#ex-identifier-type"></a>.</p>
+    <p> If identifiers are not HTTP dereferenceable, common identifier types can be served as <a data-cite="?RDF11-CONCEPTS#dfn-recognized-datatype-iris">RDF datatypes</a> [[?RDF11-CONCEPTS]] or custom <a data-cite="?OWL2-SYNTAX#Datatype_Definitions">OWL datatypes</a> [[OWL2-SYNTAX]] for the sake of interoperability, see <code>ex:type</code> in <a href="#ex-identifier-type"></a>.</p>
 
 <aside id="ex-identifier-type" class="example">
 <pre class="nohighlight turtle">
 &lt;https://example.org/id&gt; a dcat:Dataset;
-	...
-	adms:identifier &lt;https://example.org/sid&gt; .
+  ...
+  adms:identifier &lt;https://example.org/sid&gt; .
 
   &lt;https://example.org/sid&gt; rdf:type adms:Identifier ;
   # the actual id
-	skos:notation "PA 1-060-815"^^ex:type ;
+  skos:notation "PA 1-060-815"^^ex:type ;
   # Human readable schema agency
-	adms:schemaAgency "US Copyright Office" ;
-	dct:issued "2001-09-12"^^xsd:date .</pre>
+  adms:schemaAgency "US Copyright Office" ;
+  dct:issued "2001-09-12"^^xsd:date ;
+  .</pre>
 </aside>
 
         <p>If a registered URI type is used (following [[?RFC3986]], <a data-cite="?RFC3986#section-3.1"><span class="secno">&sect;&nbsp;3.1</span> <span class="sec-title">Scheme</span></a>), the identifier scheme is part of the URI; thus indicating a separate identifier scheme in 'type' is redundant. For example, DOI is registered as a namespace in the <code>info</code> URI scheme [[?IANA-URI-SCHEMES]] (see <a href="https://www.doi.org/faq.html">DOI FAQ #11</a>), so according to [[?RFC3986]], it should be encoded as in <a href="#ex-identifier-type-in-uri"></a>.</p>
 
 <aside id="ex-identifier-type-in-uri" class="example">
-<pre class="nohighlight turtle">&lt;https://example.org/sid&gt; rdf:type adms:Identifier ;
+<pre class="nohighlight turtle">
+&lt;https://example.org/sid&gt; rdf:type adms:Identifier ;
   # the actual id
   skos:notation "info:doi/10.1109/5.771073"^^xsd:anyURI .</pre>
 </aside>
@@ -3133,66 +3136,66 @@ ex:InternationalDOIFundation a foaf:Organization ;
 
     <h2>License and rights statements</h2>
 
-	<aside class="note">
-	  <p>
-		DCAT 2014 handling of license and rights do not appear to satisfy all requirements [[?VOCAB-DCAT-20140116]].
-		The recently completed W3C ODRL vocabulary [[!ODRL-VOCAB]] provides a rich language for describing many kinds of rights and obligations.
-		In this section, we describe some patterns for linking DCAT Datasets and/or Distributions to suitable license and rights expressions.
-	</p>
-	</aside>
+  <aside class="note">
+    <p>
+    DCAT 2014 handling of license and rights do not appear to satisfy all requirements [[?VOCAB-DCAT-20140116]].
+    The recently completed W3C ODRL vocabulary [[!ODRL-VOCAB]] provides a rich language for describing many kinds of rights and obligations.
+    In this section, we describe some patterns for linking DCAT Datasets and/or Distributions to suitable license and rights expressions.
+  </p>
+  </aside>
 
-	<p>
-		Selecting the right way to express conditions for access to and re-use of resources can be complex.
-		Implementers should always seek legal advice before deciding which conditions apply to the resource being described.
-	</p>
+  <p>
+    Selecting the right way to express conditions for access to and re-use of resources can be complex.
+    Implementers should always seek legal advice before deciding which conditions apply to the resource being described.
+  </p>
 <!--
-	<aside class="ednote" title="Original text">
-	<p>
-		This specification distinguishes three main situations: one where a statement is associated with the resource that is explicitly declared as a 'license';
-		a second where the statement is not explicitly declared as a 'license'; and a third where the conditions are explicitly expressed as an ODRL Policy.
-	</p>
-	<p>The following approach is recommended:</p>
-		<ol>
-			<li>use <a data-cite="?DCTERMS#terms-license"><code>dct:license</code></a> to refer to well-known licenses such as <a href="https://creativecommons.org/share-your-work/licensing-types-examples/">those defined by Creative Commons</a></br>
-			The object of <code>dct:license</code>, a <a data-cite="?DCTERMS#terms-LicenseDocument"><code>dct:LicenseDocument</code></a>, is "A legal document giving official permission to do something with a Resource."</li>
-			<li>use <a data-cite="?DCTERMS#terms-rights"><code>dct:rights</code></a> to refer to rights statements that are not licenses, such as copyright statements</br>
-			The object of <code>dct:rights</code>, a <a data-cite="?DCTERMS#terms-RightsStatement"><code>dct:RightsStatement</code></a>, is "A statement about the intellectual property rights (IPR) held in or over a Resource, a legal document giving official permission to do something with a resource, or a statement about access rights."
-			This is more general than a <a data-cite="?DCTERMS#terms-LicenseDocument"><code>dct:LicenseDocument</code></a> and therefore should be used if it the statement contains more general information about rights.</li>
-			<li>use <a href="https://www.w3.org/TR/odrl-vocab/#term-hasPolicy"><code>odrl:hasPolicy</code></a> for linking to <a href="https://www.w3.org/TR/odrl-vocab/#term-Policy">ODRL policies</a></br>
-			The Open Digital Rights Language (ODRL) is a policy expression language that provides a flexible and interoperable information model, vocabulary, and encoding mechanisms for representing statements about usage (i.e. permissions, prohibitions, and obligations) of content and services.</li>
-		</ol>
-	</aside>
+  <aside class="ednote" title="Original text">
+  <p>
+    This specification distinguishes three main situations: one where a statement is associated with the resource that is explicitly declared as a 'license';
+    a second where the statement is not explicitly declared as a 'license'; and a third where the conditions are explicitly expressed as an ODRL Policy.
+  </p>
+  <p>The following approach is recommended:</p>
+    <ol>
+      <li>use <a data-cite="?DCTERMS#terms-license"><code>dct:license</code></a> to refer to well-known licenses such as <a href="https://creativecommons.org/share-your-work/licensing-types-examples/">those defined by Creative Commons</a></br>
+      The object of <code>dct:license</code>, a <a data-cite="?DCTERMS#terms-LicenseDocument"><code>dct:LicenseDocument</code></a>, is "A legal document giving official permission to do something with a Resource."</li>
+      <li>use <a data-cite="?DCTERMS#terms-rights"><code>dct:rights</code></a> to refer to rights statements that are not licenses, such as copyright statements</br>
+      The object of <code>dct:rights</code>, a <a data-cite="?DCTERMS#terms-RightsStatement"><code>dct:RightsStatement</code></a>, is "A statement about the intellectual property rights (IPR) held in or over a Resource, a legal document giving official permission to do something with a resource, or a statement about access rights."
+      This is more general than a <a data-cite="?DCTERMS#terms-LicenseDocument"><code>dct:LicenseDocument</code></a> and therefore should be used if it the statement contains more general information about rights.</li>
+      <li>use <a href="https://www.w3.org/TR/odrl-vocab/#term-hasPolicy"><code>odrl:hasPolicy</code></a> for linking to <a href="https://www.w3.org/TR/odrl-vocab/#term-Policy">ODRL policies</a></br>
+      The Open Digital Rights Language (ODRL) is a policy expression language that provides a flexible and interoperable information model, vocabulary, and encoding mechanisms for representing statements about usage (i.e. permissions, prohibitions, and obligations) of content and services.</li>
+    </ol>
+  </aside>
 -->
-	<p>
+  <p>
     This specification distinguishes three main situations:
     one where a statement is associated with a resource that is explicitly declared as a 'license';
     a second, where the statement is associated with a resource denoting only access rights;
     a third, covering all the other cases - i.e., statements not concerning licensing conditions and/or access rights (e.g., copyright statements).
-	</p>
-
-	<aside class="note">
-	  <p>
-	  The provision of licensing conditions and access rights complies with the Best Practices 4 ("<a data-cite="DWBP#licenses">Provide data license information</a>") and 22 ("<a data-cite="DWBP#DataUnavailabilityReference">Provide an explanation for data that is not available</a>"), respectively, from [[DWBP]].
-	</p>
-	</aside>
-
-	<p>
-		To address these scenarios, it is recommended to use the property <code>dct:rights</code>, and its sub-properties <code>dct:license</code> and <code>dct:accessRights</code>. More precisely:
   </p>
-		<ol>
-			<li>
-			  <p>use <a data-cite="?DCTERMS#terms-license"><code>dct:license</code></a> to refer to licenses;</p>
+
+  <aside class="note">
+    <p>
+    The provision of licensing conditions and access rights complies with the Best Practices 4 ("<a data-cite="DWBP#licenses">Provide data license information</a>") and 22 ("<a data-cite="DWBP#DataUnavailabilityReference">Provide an explanation for data that is not available</a>"), respectively, from [[DWBP]].
+  </p>
+  </aside>
+
+  <p>
+    To address these scenarios, it is recommended to use the property <code>dct:rights</code>, and its sub-properties <code>dct:license</code> and <code>dct:accessRights</code>. More precisely:
+  </p>
+    <ol>
+      <li>
+        <p>use <a data-cite="?DCTERMS#terms-license"><code>dct:license</code></a> to refer to licenses;</p>
 <!--
-			<p>The object of <code>dct:license</code>, a <a data-cite="?DCTERMS#terms-LicenseDocument"><code>dct:LicenseDocument</code></a>, is "A legal document giving official permission to do something with a Resource."</p>
+      <p>The object of <code>dct:license</code>, a <a data-cite="?DCTERMS#terms-LicenseDocument"><code>dct:LicenseDocument</code></a>, is "A legal document giving official permission to do something with a Resource."</p>
 -->
         <aside class="note">
           <p>
           For interoperability, it is recommended to use canonical URIs of well-known licenses such as <a href="https://creativecommons.org/share-your-work/licensing-types-examples/">those defined by Creative Commons</a>.
         </p>
         </aside>
-			</li>
-			<li>
-			  <p>use <a data-cite="?DCTERMS#terms-accessRights"><code>dct:accessRights</code></a>  to express statements concerning only access rights (e.g., whether data can be accessed by anyone or just by authorized parties);</p>
+      </li>
+      <li>
+        <p>use <a data-cite="?DCTERMS#terms-accessRights"><code>dct:accessRights</code></a>  to express statements concerning only access rights (e.g., whether data can be accessed by anyone or just by authorized parties);</p>
 <!--
         <p>The object of <code>dct:accessRights</code> is a <code>dct:RightsStatement</code> providing "Information about who can access the resource or an indication of its security status."</p>
 -->
@@ -3202,22 +3205,22 @@ ex:InternationalDOIFundation a foaf:Organization ;
         </p>
         </aside>
       </li>
-			<li>
-			  <p>use <a data-cite="?DCTERMS#terms-rights"><code>dct:rights</code></a> for all the other types of rights statements - those which are not covered by <code>dct:license</code> and <code>dct:accessRights</code>, such as copyright statements.</p>
+      <li>
+        <p>use <a data-cite="?DCTERMS#terms-rights"><code>dct:rights</code></a> for all the other types of rights statements - those which are not covered by <code>dct:license</code> and <code>dct:accessRights</code>, such as copyright statements.</p>
 <!--
-			  <p>The object of <code>dct:rights</code>, a <a data-cite="?DCTERMS#terms-RightsStatement"><code>dct:RightsStatement</code></a>, is "A statement about the intellectual property rights (IPR) held in or over a Resource, a legal document giving official permission to do something with a resource, or a statement about access rights."
-			This is more general than a <a data-cite="?DCTERMS#terms-LicenseDocument"><code>dct:LicenseDocument</code></a> and therefore should be used if it the statement contains more general information about rights.</p>
+        <p>The object of <code>dct:rights</code>, a <a data-cite="?DCTERMS#terms-RightsStatement"><code>dct:RightsStatement</code></a>, is "A statement about the intellectual property rights (IPR) held in or over a Resource, a legal document giving official permission to do something with a resource, or a statement about access rights."
+      This is more general than a <a data-cite="?DCTERMS#terms-LicenseDocument"><code>dct:LicenseDocument</code></a> and therefore should be used if it the statement contains more general information about rights.</p>
 -->
         <aside class="note">
           <p>
-			    A more sophisticated approach to express rights, based on and extending [[?DCTERMS]], is provided by the Open Data Rights Statement Vocabulary (ODRS) [[?ODRS]], which defines properties for specifying, among others, copyright statements and copyright notices.
-			  </p>
-			  </aside>
-			</li>
-		</ol>
+          A more sophisticated approach to express rights, based on and extending [[?DCTERMS]], is provided by the Open Data Rights Statement Vocabulary (ODRS) [[?ODRS]], which defines properties for specifying, among others, copyright statements and copyright notices.
+        </p>
+        </aside>
+      </li>
+    </ol>
 
-	<p>Finally, in the particular case when rights are expressed via <a data-cite="?ODRL-VOCAB#term-Policy">ODRL policies</a>, it is recommended to use use the <a data-cite="?ODRL-VOCAB#term-hasPolicy"><code>odrl:hasPolicy</code></a> property as the link from the description of the cataloged resource or distribution to the ODRL policy, in addition to the relevant <code>dct</code> property.</p>
-	
+  <p>Finally, in the particular case when rights are expressed via <a data-cite="?ODRL-VOCAB#term-Policy">ODRL policies</a>, it is recommended to use use the <a data-cite="?ODRL-VOCAB#term-hasPolicy"><code>odrl:hasPolicy</code></a> property as the link from the description of the cataloged resource or distribution to the ODRL policy, in addition to the relevant <code>dct</code> property.</p>
+  
 <aside class="note">
 <p>The Open Digital Rights Language (ODRL) [[!ODRL-VOCAB]] is a policy expression language that provides a flexible and interoperable information model, vocabulary, and encoding mechanisms for representing statements about usage (i.e. permissions, prohibitions, and obligations) of content and services.</p>
 </aside>
@@ -3493,8 +3496,8 @@ a:Dataset a dcat:Dataset ;
 <p>Versioning can be applied to any of the first class citizens DCAT resources including Catalogs, Datasets, Distributions. The notion of version is very much related to the community practices,  data management policy and the workflows in place. It is up to data providers to decide when and why a new version should be released. For this reason, DCAT refrains from providing definitions or rules about when changes in a resource should turn in a new release of it. </p>
 
 <p>Versioning may be understood as involving relationships between datasets, which is supported by the <a href="#Property:resource_qualified_relation"><code>dcat:qualifiedRelation</code></a> and described in <a href="#qualified-relationship"></a>. The class <a href="#Class:Relationship"><code>dcat:Relationship</code></a> supports providing information about the relationship, and could be extended for versioning information.</p>
-	<!--backlog p class="issue" data-number="90">
-	<p class="issue" data-number="90">
+  <!--backlog p class="issue" data-number="90">
+  <p class="issue" data-number="90">
         The need to be able to describe version relationships of datasets has been identified as a requirement to be satisfied in the revision of DCAT. Also see detailed requirements in
         <a href="https://github.com/w3c/dxwg/issues/89">Issue #89</a>,
         <a href="https://github.com/w3c/dxwg/issues/91">Issue #91</a>,
@@ -3570,11 +3573,11 @@ See the wiki page on <a href="https://github.com/w3c/dxwg/wiki/Dataset-versionin
 
     <aside class="note">
         <p>The following examples make no comments on where the quality information would reside and how it is managed. That
-	is out of scope for the DCAT vocabulary.  The assumption made is that the quality individuals are available using
-	the URIs indicated.
+  is out of scope for the DCAT vocabulary.  The assumption made is that the quality individuals are available using
+  the URIs indicated.
         Besides, the examples and more in general the [[?VOCAB-DQV]]  is neutral to the data portal design choices on how to collect
-	quality information. For example, data portals can collect [[?VOCAB-DQV]] instances by implementing specific UI to annotate
-	data or by taking inputs from 3rd-party services.
+  quality information. For example, data portals can collect [[?VOCAB-DQV]] instances by implementing specific UI to annotate
+  data or by taking inputs from 3rd-party services.
         </p>
     </aside>
 
@@ -3583,9 +3586,9 @@ See the wiki page on <a href="https://github.com/w3c/dxwg/wiki/Dataset-versionin
 
         <p>
         A data consumer (<code>:consumer1</code>)  describes the quality of the dataset <code>:genoaBusStopsDataset</code>
-	that includes a georeferenced list of bus stops in Genoa. He/she annotates the dataset with a DQV quality note
-	(<code>:genoaBusStopsDatasetCompletenessNote</code>) about data completeness (<code>ldqd:completeness</code>) to
-	warn that the dataset includes only 20500 out of the 30000 stops.
+  that includes a georeferenced list of bus stops in Genoa. He/she annotates the dataset with a DQV quality note
+  (<code>:genoaBusStopsDatasetCompletenessNote</code>) about data completeness (<code>ldqd:completeness</code>) to
+  warn that the dataset includes only 20500 out of the 30000 stops.
         </p>
 
 <aside class="example" id="ex-genoa-bus-stops-dataset-completeness-note">
@@ -3609,12 +3612,12 @@ See the wiki page on <a href="https://github.com/w3c/dxwg/wiki/Dataset-versionin
   .</pre>
 </aside>
 
-	<p>
-	The activity <code>:myQualityChecking</code> employs the service <code>:myQualityChecker</code> to check the
-	quality of the <code>:genoaBusStopsDataset</code> dataset. The metric <code>:completenessWRTExpectedNumberOfEntities</code>
-	is applied to measure the dataset completeness (<code>ldqd:completeness</code>) and it results in the quality measurement
-	<code>:genoaBusStopsDatasetCompletenessMeasurement</code>.
-	</p>
+  <p>
+  The activity <code>:myQualityChecking</code> employs the service <code>:myQualityChecker</code> to check the
+  quality of the <code>:genoaBusStopsDataset</code> dataset. The metric <code>:completenessWRTExpectedNumberOfEntities</code>
+  is applied to measure the dataset completeness (<code>ldqd:completeness</code>) and it results in the quality measurement
+  <code>:genoaBusStopsDatasetCompletenessMeasurement</code>.
+  </p>
 
 <aside class="example" id="ex-genoa-bus-stops-dataset-completeness-measure">
 <pre class="nohighlight turtle">
@@ -3659,17 +3662,17 @@ See the wiki page on <a href="https://github.com/w3c/dxwg/wiki/Dataset-versionin
     <section id="quality-conformance">
         <h2>Documenting conformance to standards</h2>
 
-	<p> This section shows different modelling patterns combining [[?VOCAB-DQV]] with [[?PROV-O]] and EARL [[?EARL10-Schema]] to represent the conformance degree to a stated quality standard and the details about the conformance tests.
+  <p> This section shows different modelling patterns combining [[?VOCAB-DQV]] with [[?PROV-O]] and EARL [[?EARL10-Schema]] to represent the conformance degree to a stated quality standard and the details about the conformance tests.
         </p>
 
         <section id="quality-conformance-statement">
             <h3>Conformance to a standard</h3>
             <p>The use of <a data-cite="?DCTERMS#terms-conformsTo"><code>dct:conformsTo</code></a> and
-	    <a data-cite="?DCTERMS#terms-Standard"><code>dct:Standard</code></a> is a well-known pattern
+      <a data-cite="?DCTERMS#terms-Standard"><code>dct:Standard</code></a> is a well-known pattern
             to represent the conformance to a standard. <a href="#ex-inspire-conformant-dataset"></a>, directly borrowed from [[?SDW-BP]] (<a data-cite="SDW-BP#ex-geodcat-ap-dataset-conformance-with-specification">Example 51</a>), declares a fictional <code>a:Dataset</code>
-	    conformant to the EU INSPIRE Regulation on interoperability of spatial data sets and services (<a href="http://data.europa.eu/eli/reg/2014/1312/oj">"Commission Regulation (EU) No 1089/2010
-	    of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards
-	    interoperability of spatial data sets and services"</a>).</p>
+      conformant to the EU INSPIRE Regulation on interoperability of spatial data sets and services (<a href="http://data.europa.eu/eli/reg/2014/1312/oj">"Commission Regulation (EU) No 1089/2010
+      of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards
+      interoperability of spatial data sets and services"</a>).</p>
 
 <aside class="example" id="ex-inspire-conformant-dataset">
 <pre class="nohighlight turtle">
@@ -3702,17 +3705,17 @@ a:Dataset a dcat:Dataset;
         <section id="quality-conformance-degree">
             <h3>Degree of conformance</h3>
             <p>Some legal context requires to specify the degree of conformance. For example, INSPIRE metadata adopts a
-	    specific controlled vocabulary [[?INSPIRE-DoC]]
-	    to express non-conformance and non-evaluation beside the full compliance. Similar controlled vocabularies can
-	    be defined in other contexts.</p>
-	    <p><a href="#ex-conformance-degree"></a> specifies some newly minted concepts representing the degree of conformance (i.e., conformant, not conformant) and  declares the
-	    <a data-cite="?DCTERMS#terms-type"><code>dct:type</code></a> for indicating
-	    the result of conformance test. Following a pattern used in [[?GeoDCAT-AP]], the example uses a <code>prov:Entity</code> to model the  conformance test (e.g.,
-	    <code>a:testResult</code>), a <code>prov:Activity</code> to model the testing activity (e.g.,
-	    <code>a:testingActivity</code>), a <code>prov:Plan</code> derived from the Data on the Web Best Practices [[?DWBP]] (e.g., <code>a:conformanceTest</code>) to check for the whole set of best practices. A qualified PROV association binds the testing activity to the conformance test.</p>
+      specific controlled vocabulary [[?INSPIRE-DoC]]
+      to express non-conformance and non-evaluation beside the full compliance. Similar controlled vocabularies can
+      be defined in other contexts.</p>
+      <p><a href="#ex-conformance-degree"></a> specifies some newly minted concepts representing the degree of conformance (i.e., conformant, not conformant) and  declares the
+      <a data-cite="?DCTERMS#terms-type"><code>dct:type</code></a> for indicating
+      the result of conformance test. Following a pattern used in [[?GeoDCAT-AP]], the example uses a <code>prov:Entity</code> to model the  conformance test (e.g.,
+      <code>a:testResult</code>), a <code>prov:Activity</code> to model the testing activity (e.g.,
+      <code>a:testingActivity</code>), a <code>prov:Plan</code> derived from the Data on the Web Best Practices [[?DWBP]] (e.g., <code>a:conformanceTest</code>) to check for the whole set of best practices. A qualified PROV association binds the testing activity to the conformance test.</p>
 
-	    <aside class="note">
-	    <p>Depending of the kind of dataset, other best practices and standards, such as the FAIR Principles [[?FAIR]] or the Spatial Data on the Web Best Practices [[?SDW-BP]], can be considered as a replacement or used in combination with [[?DWBP]].</p>
+      <aside class="note">
+      <p>Depending of the kind of dataset, other best practices and standards, such as the FAIR Principles [[?FAIR]] or the Spatial Data on the Web Best Practices [[?SDW-BP]], can be considered as a replacement or used in combination with [[?DWBP]].</p>
        </aside>
 
 <aside class="example" id="ex-conformance-degree">
@@ -3774,11 +3777,11 @@ iso:inherentandSystemDependentDataQuality a dqv:Category ;
         <section id="quality-conformance-test-results">
             <h3>Conformance test results</h3>
             <p> Further information about the tests can be provided using EARL [[?EARL10-Schema]]. EARL provides specific
-	    classes to describe the testing activity, which can be adopted in conjunction with [[?PROV-O]].
-	    <a href="#ex-conformance-test-results-earl"></a> describes the Testing activity <code>a:testingActivity</code> as an <code>earl:Assertion</code>
-	    instead of a qualified association on the <code>prov:Activity</code>. The <code>earl:Assertion</code> states
-	    that dataset <code>a:Dataset</code> has been tested with the conformance test <code>a:conformanceTest</code>, and it
-		    has passed the test as described in <code>a:testResult</code>.
+      classes to describe the testing activity, which can be adopted in conjunction with [[?PROV-O]].
+      <a href="#ex-conformance-test-results-earl"></a> describes the Testing activity <code>a:testingActivity</code> as an <code>earl:Assertion</code>
+      instead of a qualified association on the <code>prov:Activity</code>. The <code>earl:Assertion</code> states
+      that dataset <code>a:Dataset</code> has been tested with the conformance test <code>a:conformanceTest</code>, and it
+        has passed the test as described in <code>a:testResult</code>.
             </p>
 
 <aside class="example" id="ex-conformance-test-results-earl">
@@ -4036,7 +4039,7 @@ ex:Test543L
     <h2>Provenance patterns</h2>
     <p class="ednote">
         In this section it is planned to describe patterns for the use of the [[!PROV-O]] vocabulary to support the various provenance-related requirements.
-	A number of requirements identify the need to provide better support for Dataset and Record provenance - see
+  A number of requirements identify the need to provide better support for Dataset and Record provenance - see
         <a href="https://github.com/w3c/dxwg/issues/77">Issue #78</a>,
         <a href="https://github.com/w3c/dxwg/issues/128">Issue #128</a>,
         <a href="https://github.com/w3c/dxwg/issues/77">Issue #77</a>,
@@ -4065,9 +4068,9 @@ ex:Test543L
         an application profile extends one of the DCAT extensions themselves.
     </p>
 
-	<p>Some of the DCAT application profiles are:</p>
+  <p>Some of the DCAT application profiles are:</p>
 
-	<ul>
+  <ul>
             <li>DCAT-AP [[?DCAT-AP]]: the DCAT application profile for data portals in Europe</li>
             <li>GeoDCAT-AP [[?GeoDCAT-AP]]: the geo-spatial extension to DCAT-AP</li>
             <li>StatDCAT-AP [[?StatDCAT-AP]]: Statistical extension to DCAT-AP</li>
@@ -4085,9 +4088,9 @@ ex:Test543L
     <h2>Security and Privacy</h2>
     <p>
     The DCAT vocabulary supports the attribution of data and metadata to various participants such as resource <a href="#Property:resource_creator">creators</a>, <a href="#Property:resource_publisher">publishers</a> and other parties or agents via <a href="#qualified-forms">qualified relations</a>,
-	    and as such defines terms that may be related to personal information.  In addition, it also supports the association of <a href="#Property:resource_rights">rights</a> and <a href="#Property:resource_license">licenses</a> with cataloged Resources and Distributions.
-	    These rights and licenses could potentially include or reference sensitive information such as user and asset identifiers as <a data-cite="?ODRL-VOCAB#privacy-consideration">described</a> in [[!ODRL-VOCAB]].   Implementations that produce, maintain, publish or
-	    consume such vocabulary terms must take steps to ensure security and privacy considerations are addressed at the application level.
+      and as such defines terms that may be related to personal information.  In addition, it also supports the association of <a href="#Property:resource_rights">rights</a> and <a href="#Property:resource_license">licenses</a> with cataloged Resources and Distributions.
+      These rights and licenses could potentially include or reference sensitive information such as user and asset identifiers as <a data-cite="?ODRL-VOCAB#privacy-consideration">described</a> in [[!ODRL-VOCAB]].   Implementations that produce, maintain, publish or
+      consume such vocabulary terms must take steps to ensure security and privacy considerations are addressed at the application level.
     </p>
 </section>
 
@@ -4325,7 +4328,7 @@ ex:Test543L
     <section id="dcat-prov-o" class="informative">
         <h3>PROV-O</h3>
             An alignment of DCAT with PROV-O [[?PROV-O]] is being prepared, and has been discussed in <a href="https://github.com/w3c/dxwg/issues/128">Issue #128</a>.
-	    A <a href="https://w3c.github.io/dxwg/dcat/rdf/dcat-prov.ttl">provisional version</a> is available.
+      A <a href="https://w3c.github.io/dxwg/dcat/rdf/dcat-prov.ttl">provisional version</a> is available.
 
     </section>
 -->
