@@ -1,5 +1,6 @@
 var respecConfig = {
 //	preProcess: [dfn_index],
+    subtitle: "Revised edition",
     specStatus: "ED",
     shortName: "vocab-dcat-2",
     canonicalURI: "TR",
