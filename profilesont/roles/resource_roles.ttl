@@ -1,0 +1,91 @@
+@prefix : <http://www.w3.org/ns/dx/prof/role/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prof: <http://www.w3.org/ns/dx/prof/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:aggregatedConstraints a owl:NamedIndividual,
+        skos:Concept,
+        prof:ResourceRole ;
+    skos:broader :fullConstraints ;
+    skos:definition "Full Constraints not only for this Profile but also for all dependencies (Profiles or dct:Standards)"@en ;
+    skos:usageNote "Use this Role when you want to provide a resource that validates data according to this profile and also its dependents. You must include the Full Constraints of all dependencies within this resource" ;
+    skos:prefLabel "Aggregated Constraints"@en .
+
+:codeRepository a owl:NamedIndividual,
+        skos:Concept,
+        prof:ResourceRole ;
+    skos:definition "Repository for source code and profile artifacts"@en ;
+    skos:prefLabel "Code repository"@en ;
+    skos:topConceptOf : .
+
+:vocabulary a owl:NamedIndividual,
+        skos:Concept,
+        prof:ResourceRole ;
+    skos:definition "Examples of the Profile in use"@en ;
+    skos:prefLabel "Examples"@en ;
+    skos:topConceptOf : .
+
+:extensionConstraints a owl:NamedIndividual,
+        skos:Concept,
+        prof:ResourceRole ;
+    skos:broader :partConstraints ;
+    skos:definition "Constraints implemented by this Profile building on dependencies but not including them"@en ;
+    skos:usageNote "Use this Role when you want to provide a resource that validates data according to this profile but only in so far as it is a constraint on its dependents. Therefore, this resource must not also include any dependents' constraints" ;
+    skos:prefLabel "Extension Constraints"@en .
+
+:fullConstraints a owl:NamedIndividual,
+        skos:Concept,
+        prof:ResourceRole ;
+    skos:definition "Complete set of constraints for a profile"@en ;
+    skos:prefLabel "Full Constraints"@en ;
+    skos:topConceptOf : .
+
+:guidance a owl:NamedIndividual,
+        skos:Concept,
+        prof:ResourceRole ;
+    skos:definition "Guidance notes of profile"@en ;
+    skos:prefLabel "Guidance"@en ;
+    skos:topConceptOf : .
+
+:partConstraints a owl:NamedIndividual,
+        skos:Concept,
+        prof:ResourceRole ;
+    skos:definition "Partial set of constraints for a profile"@en ;
+    skos:prefLabel "Part Constraints"@en ;
+    skos:topConceptOf : .
+
+:specification a owl:NamedIndividual,
+        skos:Concept,
+        prof:ResourceRole ;
+    skos:definition "Reference document which describes the standard"@en ;
+    skos:prefLabel "Specification document"@en ;
+    skos:topConceptOf : .
+
+:vocabulary a owl:NamedIndividual,
+        skos:Concept,
+        prof:ResourceRole ;
+    skos:definition "Machine readable definition of a vocabulary or schema. Typically expressed in RDF, XSD, UML DDL, Table Schema or similar"@en ;
+    skos:prefLabel "Vocabulary"@en ;
+    skos:topConceptOf : .
+
+: a skos:ConceptScheme ;
+    rdfs:label "Resource Roles vocabulary"@en ;
+    dc:contributor "Nicholas Car",
+        "Simon Cox" ;
+    dc:creator "Rob Atkinson" ;
+    dct:contributor <http://orcid.org/0000-0002-3884-3420>,
+        <http://orcid.org/0000-0002-8742-7730> ;
+    dct:created "2018-02-16"^^xsd:date ;
+    dct:modified "2019-01-28"^^xsd:date ;
+    rdfs:comment """A vocabulary of ResourceRole instances.
+
+This vocabulary is both a SKOS vocabulary and also a list of instances of the Profiles Vocabulary's [ResourceRole](www.w3.org/ns/dx/prof/ResourceRole) class."""@en .
