@@ -122,7 +122,7 @@
 
 <h2>Motivation for change</h2>
 
-    <p>The original Recommendation [[?VOCAB-DCAT-20140116]] published in January 2014 provided the basic framework for describing datasets. It made an important distinction between a <i>dataset</i> as an abstract idea and a <i>distribution</i> as a manifestation of the dataset. Although DCAT has been widely adopted, it has become clear that the original specification lacked a number of essential features that were added either through the mechanism of an application profile, such as the European Commission's DCAT-AP [[?DCAT-AP]], or the development of larger vocabularies that to a greater or lesser extent built upon the base standard, such as the Healthcare and Life Sciences Community Profile [[?HCLS-Dataset]], the Data Tag Suite [[?DATS]] and more. This revision of DCAT has been developed to address the specific shortcomings that have come to light through the experiences of different communities, the aim being to improve interoperability between the outputs of these larger vocabularies.
+    <p>The original Recommendation [[?VOCAB-DCAT-20140116]] published in January 2014 provided the basic framework for describing datasets. It made an important distinction between a <i>dataset</i> as an abstract idea and a <i>distribution</i> as a manifestation of the dataset. Although DCAT has been widely adopted, it has become clear that the original specification lacked a number of essential features that were added either through the mechanism of a profile, such as the European Commission's DCAT-AP [[?DCAT-AP]], or the development of larger vocabularies that to a greater or lesser extent built upon the base standard, such as the Healthcare and Life Sciences Community Profile [[?HCLS-Dataset]], the Data Tag Suite [[?DATS]] and more. This revision of DCAT has been developed to address the specific shortcomings that have come to light through the experiences of different communities, the aim being to improve interoperability between the outputs of these larger vocabularies.
     For example, in this new DCAT version we provide classes, properties and guidance to address <a href="#dereferenceable-identifiers">identifiers</a>, <a href="#quality-information">dataset quality information</a>, and <a href="#data-citation">data citation</a> issues.</p>
     <p>This draft includes re-writing of the specification throughout. Significant changes from the 2014 Recommendation are marked within the text using "Note" sections, as well as being described in <a href="#changes"></a>.</p>
 
@@ -224,7 +224,7 @@
         <li>
           <a href="#Class:Resource"><code>dcat:Resource</code></a> represents an individual item in a catalog.
           This class is not intended to be used directly, but is the parent class of <a href="#Class:Dataset"><code>dcat:Dataset</code></a>, <a href="#Class:Data_Service"><code>dcat:DataService</code></a> and <a href="#Class:Catalog"><code>dcat:Catalog</code></a>.
-          Member items in a catalog should be members of one of the sub-classes, or of a sub-class of these, or of a sub-class of <a href="#Class:Resource"><code>dcat:Resource</code></a> defined in a DCAT application profile or other DCAT application.
+          Member items in a catalog should be members of one of the sub-classes, or of a sub-class of these, or of a sub-class of <a href="#Class:Resource"><code>dcat:Resource</code></a> defined in a DCAT profile or other DCAT application.
           <a href="#Class:Resource"><code>dcat:Resource</code></a> is effectively an extension point for defining a catalog of any kind of resource.
         </li>
         <li>
@@ -291,8 +291,8 @@
       Descriptions of datasets and data services can be included in a <b>catalog</b>.
       A catalog is a kind of dataset whose member items are descriptions of datasets and data services.
       Other types of things might also be cataloged, but the scope of DCAT is currently limited to datasets and data services.
-      To extend the scope of a catalog beyond datasets and data services it is recommended to define additional sub-classes of <a href="#Class:Resource"><code>dcat:Resource</code></a> in a DCAT application profile or other DCAT application.
-      To extend the scope of service descriptions beyond data distribution services it is recommended to define additional sub-classes of <a href="#Class:Data_Service"><code>dcat:DataService</code></a> in a DCAT application profile or other DCAT application.
+      To extend the scope of a catalog beyond datasets and data services it is recommended to define additional sub-classes of <a href="#Class:Resource"><code>dcat:Resource</code></a> in a DCAT profile or other DCAT application.
+      To extend the scope of service descriptions beyond data distribution services it is recommended to define additional sub-classes of <a href="#Class:Data_Service"><code>dcat:DataService</code></a> in a DCAT profile or other DCAT application.
     </p>
 
     <aside class="note">
@@ -306,7 +306,7 @@
       </p>
       <p>
         Catalogs of other kinds of things might be designed following the DCAT pattern, e.g. dealing with facilities, instruments, samples and specimens, other physical artefacts, events or activities.
-        These are currently out of scope for DCAT, but might be defined through further sub-classes of <a href="#Class:Resource"><code>dcat:Resource</code></a>, which could be specified in a DCAT application profile or other DCAT application.
+        These are currently out of scope for DCAT, but might be defined through further sub-classes of <a href="#Class:Resource"><code>dcat:Resource</code></a>, which could be specified in a DCAT profile or other DCAT application.
       </p>
     </aside>
 
@@ -965,7 +965,7 @@
             This class carries properties common to all cataloged resources, including datasets and data services.
 
             It is strongly recommended to use a more specific sub-class when available.</td></tr>
-            <tr><td class="prop">Usage note:</td><td><a href="#Class:Resource"><code>dcat:Resource</code></a> is an extension point that enables the definition of any kind of catalog. Additional sub-classes may be defined in a DCAT application profile or other DCAT application for catalogs of other kinds of resources</td></tr>
+            <tr><td class="prop">Usage note:</td><td><a href="#Class:Resource"><code>dcat:Resource</code></a> is an extension point that enables the definition of any kind of catalog. Additional sub-classes may be defined in a DCAT profile or other DCAT application for catalogs of other kinds of resources</td></tr>
             <tr><td class="prop">See also:</td><td><a href="#Class:Catalog_Record"></a></td></tr>
             </tbody>
         </table>
@@ -1919,10 +1919,10 @@
         </table>
 
         <aside class="note">
-            <p> Examples of distributions include a CSV file, a netCDF file, a JSON document, or a data-cube, files made accessible according to different profiles, such as XML or JSON schemas or ShEx or SHACL expressions.</p>
+            <p> Examples of distributions include a CSV file, a [[?netCDF]] file, a JSON document, or a data-cube, files made accessible according to different profiles, such as XML or JSON schemas or [[?ShEx]] or [[?SHACL]] expressions.</p>
 
             <p>In some cases all distributions of a dataset will be fully informationally equivalent, in the sense that lossless transformations between the representations are possible.
-            An example would be different serializations of an RDF graph using RDF/XML, Turtle, N3, JSON-LD.
+            An example would be different serializations of an RDF graph using RDF/XML [[?RDF-SYNTAX-GRAMMAR]], [[?Turtle]], [[?N3]], [[?JSON-LD]].
             However, in other cases the distributions might have different levels of fidelity to the underlying data.
             For example, a graphical representation about the data on a CSV file may not contain the same total information recorded in the CSV file, but they could be considered as two distributions for the same dataset as they are about the same data.
             As a counter-example, budget data for different years would usually be modelled as different datasets, each with their own distributions, since all distributions of one dataset should broadly contain the same data.
@@ -3099,7 +3099,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
   <p>Identifiers for datasets should follow the best practices in <a data-cite="?DWBP#DataIdentifiers">&sect;&nbsp;<span class="secno">8.7 </span>Data Identifiers</a> of [[?DWBP]].</p>
 </aside>
 
-    <p>The need to distinguish between primary and alternative (or legacy) identifiers for a dataset within DCAT has been posed as a requirement. However, it is very much application-specific and would be better addressed in application profiles rather than mandating a general approach.</p>
+    <p>The need to distinguish between primary and alternative (or legacy) identifiers for a dataset within DCAT has been posed as a requirement. However, it is very much application-specific and would be better addressed in DCAT profiles rather than mandating a general approach.</p>
 
     <p>Depending on the application context, specific guidelines such as <a href="https://joinup.ec.europa.eu/release/dcat-ap-how-manage-duplicates">"DCAT-AP: How to manage duplicates?"</a> can be adopted for distinguishing authoritative datasets from dataset harvested by third parties catalogs.</p>
 
@@ -4068,22 +4068,22 @@ ex:Test543L
 
     <p>
         The DCAT-2014 vocabulary [[?VOCAB-DCAT-20140116]] has been extended for application in data catalogs in different domains.
-        Each of these new specifications constitutes a DCAT profile, i.e. a named set of constraints based on DCAT. In some cases,
-        an application profile extends one of the DCAT extensions themselves.
+        Each of these new specifications constitutes a DCAT profile, i.e. a named set of constraints based on DCAT (see <a href="#conformance"></a>). In some cases,
+        a profile extends one of the DCAT profiles themselves, by adding classes and properties for metadata fields not covered in the reference DCAT profile.
     </p>
 
-  <p>Some of the DCAT application profiles are:</p>
+  <p>Some of the DCAT profiles are:</p>
 
   <ul>
-            <li>DCAT-AP [[?DCAT-AP]]: the DCAT application profile for data portals in Europe</li>
-            <li>GeoDCAT-AP [[?GeoDCAT-AP]]: the geo-spatial extension to DCAT-AP</li>
-            <li>StatDCAT-AP [[?StatDCAT-AP]]: Statistical extension to DCAT-AP</li>
-            <li>DCAT-AP_IT [[?DCAT-AP-IT]]: Italian extension to DCAT-AP</li>
-            <li>GeoDCAT-AP_IT [[?GeoDCAT-AP-IT]]: Italian extension to GeoDCAT-AP</li>
-            <li>DCAT-AP-NO [[?DCAT-AP-NO]]: Norwegian extension to DCAT-AP</li>
-            <li>DCAT-AP.de [[?DCAT-AP.de]]: German extension to DCAT-AP</li>
-            <li>DCAT-BE [[?DCAT-BE]]: Belgian extension to DCAT-AP</li>
-            <li>DCAT-AP-SE [[?DCAT-AP-SE]]: Swedish extension to DCAT-AP</li>
+            <li>DCAT-AP [[?DCAT-AP]]: The <cite>DCAT application profile for data portals in Europe</cite></li>
+            <li>GeoDCAT-AP [[?GeoDCAT-AP]]: Geospatial profile of [[?DCAT-AP]]</li>
+            <li>StatDCAT-AP [[?StatDCAT-AP]]: Statistical profile of [[?DCAT-AP]]</li>
+            <li>DCAT-AP_IT [[?DCAT-AP_IT]]: Italian profile of [[?DCAT-AP]]</li>
+            <li>GeoDCAT-AP_IT [[?GeoDCAT-AP_IT]]: Italian profile of [[?GeoDCAT-AP]]</li>
+            <li>DCAT-AP-NO [[?DCAT-AP-NO]]: Norwegian profile of [[?DCAT-AP]]</li>
+            <li>DCAT-AP.de [[?DCAT-AP.de]]: German profile of [[?DCAT-AP]]</li>
+            <li>DCAT-BE [[?DCAT-BE]]: Belgian profile of [[?DCAT-AP]]</li>
+            <li>DCAT-AP-SE [[?DCAT-AP-SE]]: Swedish profile of [[?DCAT-AP]]</li>
         </ul>
 
 </section>
