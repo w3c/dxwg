@@ -1,5 +1,6 @@
 var respecConfig = {
 //	preProcess: [dfn_index],
+//    subtitle: "Version 2",
     specStatus: "ED",
     shortName: "vocab-dcat-2",
     canonicalURI: "TR",
@@ -9,55 +10,79 @@ var respecConfig = {
 //    previousURI:          "https://www.w3.org/TR/2014/REC-vocab-dcat-20140116/",
     edDraftURI:           "https://w3c.github.io/dxwg/dcat/",
 //    issueBase:            "https://github.com/w3c/dxwg/issues/", -- Not needed when github used
+    alternateFormats: [{
+      label: "Turtle",
+      uri: "https://w3c.github.io/dxwg/dcat/rdf/dcat.ttl",
+    }], 
     editors: [{
       name:       "Riccardo Albertoni",
-       orcid:  "0000-0001-5648-2713",
+      orcid:  "0000-0001-5648-2713",
       company:    "CNR - Consiglio Nazionale delle Ricerche, Italy",
       url: "http://www.imati.cnr.it/joomla/index.php/people/8-curricula/178-riccardo-albertoni",
-      companyURL: "http://www.cnr.it/"
+      companyURL: "http://www.cnr.it/",
+      w3cid: 72458
     },{
-        name: "Dave Browning",
-        company: "Refinitiv",
-        companyURL: "https://www.refinitiv.com"
+      name: "Dave Browning",
+      company: "Refinitiv",
+      companyURL: "https://www.refinitiv.com",
+      w3cid: 98704
     },{
-        name:       "Simon Cox",
-        orcid:      "0000-0002-3884-3420",
-        company:    "CSIRO",
-        url:        "http://people.csiro.au/Simon-Cox",
-        companyURL: "https://www.csiro.au/"
+      name:       "Simon Cox",
+      orcid:      "0000-0002-3884-3420",
+      company:    "CSIRO",
+      url:        "http://people.csiro.au/Simon-Cox",
+      companyURL: "https://www.csiro.au/",
+      w3cid: 1796
     },{
       name:       "Alejandra Gonzalez Beltran",
       orcid:      "0000-0003-3499-8262",
       company:    "Oxford eResearch Centre, Engineering Science, University of Oxford",
       url: "https://www.oerc.ox.ac.uk/people/alejandra",
-      companyURL: "http://www.oerc.ox.ac.uk/"
+      companyURL: "http://www.oerc.ox.ac.uk/",
+      w3cid: 61587
     },{
       name:       "Andrea Perego",
       orcid:      "0000-0001-9300-2694",
       company:    "European Commission, Joint Research Centre",
       companyURL: "https://ec.europa.eu/jrc/",
-      w3cid: "40317"
+      w3cid: 40317
     },{
       name: "Peter Winstanley",
       company: "Scottish Government",
-      companyURL: "http://www.gov.scot/"
+      companyURL: "http://www.gov.scot/",
+      w3cid: 64374
     }],
+    formerEditors: [{
+      name: "Fadi Maali",
+      company: "DERI",
+      companyURL: "https://en.wikipedia.org/wiki/Digital_Enterprise_Research_Institute"
+    }, {
+      name: "John Erickson",
+      company: "Tetherless World Constellation (RPI)",
+      companyURL: "http://tw.rpi.edu/"
+    }],    
     otherLinks: [{
         key: "Contributors",
         data: [{
             value: "Makx Dekkers",
             href: "http://www.makxdekkers.com"
         }]
-      },{
+      },
+/*                 
+      {
         key: "Editors of previous version",
         data: [{
             value: "Fadi Maali, DERI",
             href: "https://en.wikipedia.org/wiki/Digital_Enterprise_Research_Institute"
-        },{
+          },
+          {
             value: "John Erickson, Tetherless World Constellation (RPI)",
             href: "http://tw.rpi.edu/"
-        }]
-    }],
+          }
+        ]
+      }
+*/      
+    ],
     wg: "Dataset Exchange Working Group",
     wgURI: "https://www.w3.org/2017/dxwg/",
     wgPublicList: "public-dxwg-comments",
@@ -66,17 +91,8 @@ var respecConfig = {
     lint: "false",
     github: "https://github.com/w3c/dxwg/",
     localBiblio: {
-/*        
         "DATS": {
-            href : "http://wg3-metadataspecifications.readthedocs.io/",
-            title : "Data Tag Suite",
-            authors : ["Philippe Rocca-Serra", "Alejandra Gonzalez-Beltran"],
-            publisher : "NIH Big Data 2 Knowledge bioCADDIE project.",
-            date : "2016"
-        },
-*/        
-        "DATS": {
-            "href": "https://github.com/datatagsuite/",
+            "href": "https://datatagsuite.github.io/docs/html/",
             "title": "Data Tag Suite",
             "authors": ["Alejandra Gonzalez-Beltran", "Philippe Rocca-Serra"],
             "publisher": "NIH Big Data 2 Knowledge bioCADDIE and NIH Data Commons projects",
@@ -97,8 +113,9 @@ var respecConfig = {
             href: "http://dcat.be/"
         },
         "DCAT-AP-IT": {
-            title: "Profilo nazionale dei metadati DCAT-AP_IT v1.0",
-            href: "https://www.dati.gov.it/content/profilo-nazionale-dei-metadati-dcat-ap-it-v10"
+            title: "Profilo metadatazione DCAT-AP_IT",
+            href: "https://docs.italia.it/italia/daf/linee-guida-cataloghi-dati-dcat-ap-it/it/stabile/dcat-ap_it.html",
+			publisher: "AgID & Team Digitale"
         },
         "DCAT-AP-NO": {
             title: "Standard for beskrivelse av datasett og datakataloger (DCAT-AP-NO)",
@@ -179,6 +196,11 @@ var respecConfig = {
             "title":"Named Authority List: Access rights",
             "publisher":"Publications Office of the European Union"
         },
+        "netCDF": {
+            href: "https://www.unidata.ucar.edu/software/netcdf/",
+            title: "Network Common Data Form (NetCDF)",
+            publisher: "UNIDATA"
+        },
         "OBO" : {
             href:"http://www.obofoundry.org/",
             title:"The OBO Foundry"
@@ -241,6 +263,13 @@ var respecConfig = {
             href : "http://schema.org/",
             title : "Schema.org"
         },
+        "ShEx" : {
+            href : "http://shex.io/shex-semantics/",
+            title : "Shape Expressions Language 2.1",
+            date: "17 November 2018",
+            status: "Draft Community Group Report",
+			publisher: "Shape Expressions W3C Community Group"
+        },
         "VIVO-ISF" : {
             href:"http://github.com/vivo-isf/vivo-isf",
             title:"VIVO-ISF Data Standard"
@@ -257,3 +286,4 @@ var respecConfig = {
         
     }
 };
+
