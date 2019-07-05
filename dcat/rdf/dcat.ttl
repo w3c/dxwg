@@ -79,9 +79,13 @@ dct:Location
   skos:definition "A spatial region or named place."@en ;
   skos:definition "A spatial region or named place."@es ;
   skos:changeNote "Class added in this context in this revision of DCAT."@en ;
+  skos:changeNote "Esta clase se agregó en este contexto en esta revisión de DCAT."@es ;
   skos:scopeNote "For an extensive geometry (i.e., a set of coordinates denoting the vertices of the relevant geographic area), the property locn:geometry [[LOCN]] SHOULD be used."@en ;
+  skos:scopeNote "Para una geometría extensiva (es decir, un conjunto de coordinadas que denotan los vértices de un área geográfica), DEBE usarse la propiedad locn:geometry [[LOCN]]."@es ;
   skos:scopeNote "For a geographic bounding box delimiting a spatial area the property dcat:bbox SHOULD be used."@en ;
+  skos:scopeNote "Para un cuadro delimitador geográfico que delimita un área espacial se DEBE usar la propiedad dcat:bbox."@es ;
   skos:scopeNote "For the geographic center of a spatial area, or another characteristic point, the property dcat:centroid or, alternatively w3cgeo:lat and w3cgeo:long SHOULD be used."@en ;
+  skos:scopeNote "Para el centro geográfico de un área espacial, o algún otro punto característico, se DEBE usar la propriedad dcat:centroid o, alternativamente las propiedades w3cgeo:lat y w3cgeo:long."@es ;
 .
 <http://www.w3.org/ns/dcat>
   rdf:type owl:Ontology ;
@@ -144,6 +148,10 @@ dct:Location
       foaf:name "Alejandra Gonzalez-Beltran" ;
       foaf:homepage <https://agbeltran.github.io> ;
       rdfs:seeAlso <https://orcid.org/0000-0003-3499-8262> ;
+      sdo:affiliation [
+                foaf:homepage <http://stfc.ac.uk> ;
+                foaf:name "Science and Technology Facilities Council, UK" ;
+       ] ;
     ] ;
  dct:contributor [
       foaf:name "Riccardo Albertoni" ;
@@ -322,9 +330,11 @@ dcat:CatalogRecord
 
 dcat:DataService
   rdf:type owl:Class ;
-  rdfs:comment "A site or end-point providing operations related to the discovery of, access to, or processing functions on, data or related resources"@en ;
-  rdfs:comment "Un sito o end-point che fornisce operazioni relative alla scoperta, all'accesso o all'elaborazione di funzioni su dati o risorse correlate"@it;
+  rdfs:comment "A site or end-point providing operations related to the discovery of, access to, or processing functions on, data or related resources."@en ;
+  rdfs:comment "Un sitio o end-point que provee operaciones relacionadas a funciones de descubrimiento, acceso, o procesamiento de datos o recursos relacionados."@es ;
+  rdfs:comment "Un sito o end-point che fornisce operazioni relative alla scoperta, all'accesso o all'elaborazione di funzioni su dati o risorse correlate."@it;
   rdfs:label "Data service"@en ;
+  rdfs:label "Servicio de datos"@es ;
   rdfs:subClassOf dctype:Service ;
   rdfs:subClassOf dcat:Resource ;
   rdfs:subClassOf [
@@ -336,8 +346,10 @@ dcat:DataService
   skos:changeNote "Nueva clase en esta revisión de DCAT"@es ;
   skos:changeNote "Nuova classe in questa revisione di DCAT"@it ;
   skos:scopeNote "The kind of service can be indicated using the dct:type property. Its value may be taken from a controlled vocabulary such as the INSPIRE spatial data service type vocabulary"@en ;
-  skos:scopeNote "Il tipo di servizio può essere indicato usando la proprietà dct:type. Il suo valore può essere preso da un vocabolario controllato come il vocabolario dei tipi di servizi per dati spaziali  di INSPIRE"@it ;
+  skos:scopeNote "El tipo de servicio puede indicarse usando la propiedad dct:type. Su valor puede provenir de un vocabulario controlado, como por ejemplo el vocabulario de servicios de datos espaciales de INSPIRE."@es ;
+  skos:scopeNote "Il tipo di servizio può essere indicato usando la proprietà dct:type. Il suo valore può essere preso da un vocabolario controllato come il vocabolario dei tipi di servizi per dati spaziali  di INSPIRE."@it ;
   skos:scopeNote "If a dcat:DataService is bound to one or more specified Datasets, they are indicated by the dcat:servesDataset property."@en ;
+  skos:scopeNote "Si un dcat:DataService está asociado con uno o más conjuntos de datos especificados, dichos conjuntos de datos pueden indicarse con la propiedad dcat:servesDataset."@es ;
   skos:scopeNote "Se un dcat:DataService è associato a uno o più Dataset specificati, questi sono indicati dalla proprietà dcat:serveDataset."@it
 .
 
@@ -363,6 +375,7 @@ dcat:Dataset
   rdfs:label "データセット"@ja ;
   rdfs:subClassOf dcat:Resource ;
   skos:changeNote "2018-02 - subclass of dctype:Dataset removed because scope of dcat:Dataset includes several other types from the dctype vocabulary."@en ;
+  skos:changeNote "2018-02 - se eliminó el axioma de subclase con dctype:Dataset porque el alcance de dcat:Dataset incluye muchos otros tipos del vocabulario dctype."@es ;
   skos:scopeNote """Cette classe représente le jeu de données publié par le fournisseur de données. Dans les cas où une distinction est nécessaire entre le jeu de donénes et son
 					  entrée dans le catalogue, la classe registre de données peut être utilisée pour ce dernier. """@fr ;
   skos:scopeNote """Esta clase representa el conjunto de datos publicados. En los casos donde es necesario distinguir entre el
@@ -409,7 +422,7 @@ dcat:Distribution
   rdfs:label "配信"@ja ;
   skos:scopeNote """Ceci représente une disponibilité générale du jeu de données, et implique qu'il n'existe pas d'information
 					sur la méthode d'accès réelle des données, par exple, si c'est un lien de téléchargement direct ou à travers une page Web. """@fr ;
-  skos:scopeNote """Esto representa una disponibilidad general de un conjunto de datos, e implica que no existe información acerca
+  skos:scopeNote """Esta clase representa una disponibilidad general de un conjunto de datos, e implica que no existe información acerca
           del método de acceso real a los datos, i.e., si es un enlace de descarga directa o a través de una página Web."""@es ;
   skos:scopeNote "Questa classe rappresenta una disponibilità generale di un dataset e non implica alcuna informazione sul metodo di accesso effettivo ai dati, ad esempio se si tratta di un accesso a download diretto, API, o attraverso una pagina Web. L'utilizzo della proprietà dcat:downloadURL indica distribuzioni direttamente scaricabili."@it ;
   skos:scopeNote """This represents a general availability of a dataset it implies no information about the
@@ -442,9 +455,11 @@ dcat:Relationship
 
 dcat:Resource
   rdf:type owl:Class ;
-  rdfs:comment "Resource published or curated by a single agent"@en ;
-  rdfs:comment "Risorsa pubblicata o curata da un singolo agente"@it ;
+  rdfs:comment "Resource published or curated by a single agent."@en ;
+  rdfs:comment "Recurso publicado o curado por un agente único."@es ;
+  rdfs:comment "Risorsa pubblicata o curata da un singolo agente."@it ;
   rdfs:label "Catalogued resource"@en ;
+  rdfs:label "Recurso catalogado"@es ;
   rdfs:label "Risorsa catalogata"@it ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
@@ -452,12 +467,18 @@ dcat:Resource
       owl:onProperty dct:type ;
     ] ;
   skos:changeNote "New class added in this revision of DCAT"@en ;
+  skos:changeNote "Nueva clase agregada en esta revisión de DCAT"@es ;
   skos:changeNote "Nuova classe in questa revisione"@it ;
   skos:editorialNote "Status: Class accepted by DCAT revision team, but details of definition and constraints not yet resolved."@en ;
+  skos:editorialNote "Estado: esta clase se aceptó por el equipo de revisión de DCAT, pero los detalles de la definición y restricciones no están resueltos aún."@es ;
   skos:scopeNote """The class of all catalogued resources, the Superclass of
     dcat:Dataset, dcat:DataService, dcat:Catalog and any other member of a dcat:Catalog.
     This class carries properties common to all catalogued resources, including datasets and data services.
     It is strongly recommended to use a more specific sub-class when available."""@en ;
+  skos:scopeNote """La clase de todos los recursos catalogados, la superclase de
+        dcat:Dataset, dcat:DataService, dcat:Catalog y cualquier otro miembro de un dcat:Catalog.
+        Esta clase tiene propiedades comunes a todos los recursos catalogados, incluyendo conjuntos de datos y servicios de datos.
+        Se recomienda fuertemente que se use una clase más específica cuando esté disponible."""@es ;
   skos:scopeNote "La classe di tutte le risorse catalogate, la Superclasse di dcat:Dataset, dcat:DataService, dcat:Catalog e qualsiasi altro membro di dcat:Catalog. Questa classe porta proprietà comuni a tutte le risorse catalogate, inclusi set di dati e servizi dati. Si consiglia vivamente di utilizzare una sottoclasse più specifica quando disponibile."@it ;
   skos:scopeNote "dcat:Resource is an extension point that enables the definition of any kind of catalog. Additional subclasses may be defined in a DCAT profile or application for catalogs of other kinds of resources"@en ;
   skos:scopeNote "dcat:Resource è un punto di estensione che consente la definizione di qualsiasi tipo di catalogo. Sottoclassi aggiuntive possono essere definite in un profilo DCAT o in un'applicazione per cataloghi di altri tipi di risorse"@it
@@ -465,12 +486,15 @@ dcat:Resource
 dcat:Role
   rdf:type owl:Class ;
   rdfs:label "Role"@en ;
+  rdfs:label "Rol"@es ;
   rdfs:label "Ruolo"@it ;
   rdfs:seeAlso dcat:hadRole ;
   rdfs:subClassOf skos:Concept ;
-  skos:changeNote "New class added in this revision of DCAT"@en ;
-  skos:changeNote "Nuova classe in questa revisione di DCAT"@it ;
+  skos:changeNote "New class added in this revision of DCAT."@en ;
+  skos:changeNote "Nuova classe in questa revisione di DCAT."@it ;
+  skos:changeNote "Nueva clase en esta revisión de DCAT."@es ;
   skos:editorialNote "Introduced into DCAT to complement prov:Role (whose use is limited to roles in the context of an activity, as the range of prov:hadRole)"@en ;
+  skos:editorialNote "Incluída en DCAT para complementar prov:Role (cuyo uso está limitado a roles en el contexto de una actividad, ya que es el rango es prov:hadRole)"@es ;
   skos:editorialNote "Introdotta in DCAT per completare prov:Role (il cui uso è limitato ai ruoli nel contesto di un'attività, in conseguenza alla definizione del codominio di prov:hadRole)"@it ;
   skos:scopeNote "Used in a qualified-attribution to specify the role of an Agent with respect to an Entity. It is recommended that the values be managed as a controlled vocabulary of agent roles, such as http://registry.it.csiro.au/def/isotc211/CI_RoleCode"@en ;
   skos:scopeNote "Utilizzato in un'attribuzione qualificata per specificare il ruolo di un agente rispetto a un'entità. Si consiglia di attribuire i valori considerando un vocabolario controllato dei ruoli dell'agente, ad esempio http://registry.it.csiro.au/def/isotc211/CI_RoleCode"@it ;
