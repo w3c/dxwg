@@ -528,6 +528,22 @@ Content-Profile: http://example.org/profile/A
 	      <code>Accept-Profile</code> and <code>Content-Profile</code>
 	      that are to be defined in an upcoming Internet-Draft [[PROF-IETF]].
       </p>
+      <p>
+	      Although servers are free to implement negotiation as they see fit,
+	      if the User Agent sends an <code>Accept-Profile</code> header,
+	      they SHOULD consider representations not conforming to any of the listed profiles
+	      as non-interpretable by the client.
+	      This means that a representation that conforms to a listed profile,
+	      but has a low preference score on other dimensions,
+	      SHOULD be considered as more desired than
+	      a representation with a higher preference score on other dimensions
+	      but that does not conform to any listed profile.
+	      If no <code>Accept-Profile</code> header preference is given,
+	      the profile dimension SHOULD be ignored for negotiation purposes.
+	      Nonetheless, in all cases,
+	      the server's response SHOULD contain a <code>Content-Profile</code> header
+	      listing the URIs of all profiles to which it knows the representation conforms.
+      </p>
       <div class="issue" data-number="500"></div>
       <section id="listprofileshttp">
         <h3>list profiles</h3>
