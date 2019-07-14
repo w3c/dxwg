@@ -82,9 +82,9 @@ var respecConfig = {
                 "L. Svensson",
                 "R. Verborgh"
             ],
-            href: "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema/",
-            title: "Negotiating Profiles in HTTP",
-            date: " 2017-10-24",
+            href: "https://profilenegotiation.github.io/I-D-Profile-Negotiation/I-D-Profile-Negotiation",
+            title: "Indicating and Negotiating Profiles in HTTP",
+            date: " 2019-07-11",
             status: "IETF Internet Draft"
         },
         "PROF": {
