@@ -214,12 +214,14 @@ var respecConfig = {
             date:"29 July 2013",
             publisher:"ODI"
         },
+/*	    
         "OpenAPI": {
             href: "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md",
             title: "OpenAPI Specification. Version 3.0.2",
             date: "08 October 2018",
             publisher: "OAI"
         },
+*/	
         "OpenSearch": {
             authors: [
                 "DeWitt Clinton"

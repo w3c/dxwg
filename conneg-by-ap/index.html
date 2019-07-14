@@ -24,11 +24,10 @@
 	      Some of the documents are general whereas others are technology-specific:
       </p>
       <ul>
-        <li>[[PROF-GUIDANCE]] the top-level general recommendations and guidance on profiling.
-          It gives an overview of all DXWG documents on profiles and is the recommended starting point</li>
         <li>[[PROF]] an RDF vocabulary that describes profiles and related resources</li>
         <li><strong>[PROF-CONNEG] this document, specific guidance on how to negotiate for Internet resource content using profiles</strong></li>
         <li>[[PROF-IETF]] an <a href="http://www.ietf.org">IETF</a> <a href="http://www.ietf.org/standards/ids/">Internet-Draft</a> defining HTTP Headers for HTTP content negotiation by profile</li>
+        <li>It is also planned to provide [[PROF-GUIDANCE]] as general recommendations and guidance on profiling.</li>
       </ul>
     </section>
   </section>
@@ -51,13 +50,13 @@
     <p>
       When online information about a resource adheres to one or more profiles, methods described here allow
       clients to list those profiles and request content according to one or more of them in order of preference.
-      For example, information about an online book might adhere to the Dublin Core Terms [[DCTERMS]] metadata
-      specification with each field, such as <em>title</em>, <em>description</em>, <em>author</em> etc.,
-      being defined and formatted according to various Dublin Core elements (<code>dct:title</code>,
-      <code>dct:description</code> &amp; <code>dct:creator</code>, respectively). Then, a request for the information about this
-      book may ask for the list of profiles according to which the metadata is available, or it may ask specifically for a response adhering to the
-      Dublin Core Terms. When no profile or an unsupported profile is requested, a server returns default content, that
+      For example, a catalog may offer a dataset description using alternative representations using [[VOID]], [[VOCAB-DATA-CUBE]] and [[VOCAB-DCAT]]. Furthermore, the [[VOCAB-DCAT]] representation might conform to the [[DCAT-AP]] profile, the [[GeoDCAT-AP]] profile and also an organisation specific profile "MyOrgDCATProfile" which constrain various elements. These profiles may be related - for example "MyOrgDCATProfile" may be a further profile of [[GeoDCAT-AP]].
+      A request for the information about this 
+      dataset description resource may ask for the list of profiles available, or it may ask specifically for a response adhering to, for example [[GeoDCAT-AP]]. When no profile or an unsupported profile is requested, a server returns default content, that
       is, content conforming to the default profile supported by the server.
+    </p>
+    <p class="issue" data-number="990">
+        Where documents contain data specifications (specifying requirements for certain types of data) in addition to other content, such as recommendations, annotations, usage notes) then this can be accomodated by publishing explicit identifiers for each section that represents a data specification that can be conformed to. All such specifications can be regarded as profiles, and communities may choose to reference the document as a profile provided that it defines the means to determine conformance to the document as a whole.
     </p>
     <p>
       When selecting a content negotiation mechanism, an Internet client may use the HTTP protocol but it may also use
@@ -68,17 +67,16 @@
       as when manually entering requests into web browsers. This document also provides guidance for both HTTP and non-HTTP methods
       of content negotiation and ensures they all adhere to a single functional specification, ensuring their functional equivalency.
     </p>
-    <p>
+<!--   <p>
       Guidance for the creation of <a>profile</a>s is provided in the [[PROF-GUIDANCE]] document created
       by the Dataset Exchange Working Group (DXWG).
-    </p>
+    </p> -->
     <p>
       Describing the parts of profiles and their relation to other profiles is the function of the Profiles Vocabulary
       [[PROF]], also produced by the DXWG.
     </p>
   </section>
   <section id="conformance">
-    <h2>Conformance</h2>
     <p>
       For the purpose of compliance, the normative sections of this document are
       <a href="#definitions">Section 3</a>,
@@ -86,6 +84,7 @@
       <a href="#realizations">Section 7</a> and
       <a href="#testsuites">Section 8</a>.
     </p>
+    <p>NB Profiles and specifications embody their own notions of conformance (of data), which are out of scope for this document.</p>
   </section>
   <section id="definitions">
     <h2>Definitions</h2>
