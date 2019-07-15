@@ -24,11 +24,10 @@
 	      Some of the documents are general whereas others are technology-specific:
       </p>
       <ul>
-        <li>[[PROF-GUIDANCE]] the top-level general recommendations and guidance on profiling.
-          It gives an overview of all DXWG documents on profiles and is the recommended starting point</li>
         <li>[[PROF]] an RDF vocabulary that describes profiles and related resources</li>
         <li><strong>[PROF-CONNEG] this document, specific guidance on how to negotiate for Internet resource content using profiles</strong></li>
         <li>[[PROF-IETF]] an <a href="http://www.ietf.org">IETF</a> <a href="http://www.ietf.org/standards/ids/">Internet-Draft</a> defining HTTP Headers for HTTP content negotiation by profile</li>
+        <li>It is also planned to provide [[PROF-GUIDANCE]] as general recommendations and guidance on profiling.</li>
       </ul>
     </section>
   </section>
@@ -51,14 +50,17 @@
     <p>
       When online information about a resource adheres to one or more profiles, methods described here allow
       clients to list those profiles and request content according to one or more of them in order of preference.
-      For example, information about an online book might adhere to the DCMI Metadata Terms [[DCTERMS]] metadata
-      specification with each field, such as <em>title</em>, <em>description</em>, <em>author</em> etc.,
-      being defined and formatted according to various Dublin Core elements (<code>dct:title</code>,
-      <code>dct:description</code> &amp; <code>dct:creator</code>, respectively). Then, a request for the information about this
-      book may ask for the list of profiles according to which the metadata is available,
-      or it may ask specifically for a response adhering to the DCMI Metadata Terms.
-      When no profile or an unsupported profile is requested, a server returns default content, that
-      is, content conforming to the default profile supported by the server.
+      For example, a catalog may offer a dataset description using alternative representations using [[VOID]], 
+      [[VOCAB-DATA-CUBE]] and [[VOCAB-DCAT]]. Furthermore, the [[VOCAB-DCAT]] representation might conform to the 
+      [[DCAT-AP]] profile, the [[GeoDCAT-AP]] profile and also an organisation specific profile "MyOrgDCATProfile" 
+      which constrains various elements. These profiles may be related - for example "MyOrgDCATProfile" may be a 
+      further profile of [[GeoDCAT-AP]]. A request for the information about this dataset description resource may 
+      ask for the list of profiles available, or it may ask specifically for a response adhering to, for example 
+      [[GeoDCAT-AP]]. When no profile or an unsupported profile is requested, a server returns default content, 
+      that is, content conforming to the default profile supported by the server.
+    </p>
+    <p class="issue" data-number="990">
+        Where documents contain data specifications (specifying requirements for certain types of data) in addition to other content, such as recommendations, annotations, usage notes) then this can be accomodated by publishing explicit identifiers for each section that represents a data specification that can be conformed to. All such specifications can be regarded as profiles, and communities may choose to reference the document as a profile provided that it defines the means to determine conformance to the document as a whole.
     </p>
     <p>
       When selecting a content negotiation mechanism, an Internet client may use the HTTP protocol but it may also use
@@ -69,17 +71,16 @@
       as when manually entering requests into web browsers. This document also provides guidance for both HTTP and non-HTTP methods
       of content negotiation and ensures they all adhere to a single functional specification, ensuring their functional equivalency.
     </p>
-    <p>
+<!--   <p>
       Guidance for the creation of <a>profile</a>s is provided in the [[PROF-GUIDANCE]] document created
       by the Dataset Exchange Working Group (DXWG).
-    </p>
+    </p> -->
     <p>
       Describing the parts of profiles and their relation to other profiles is the function of the Profiles Vocabulary
       [[PROF]], also produced by the DXWG.
     </p>
   </section>
   <section id="conformance">
-    <h2>Conformance</h2>
     <p>
       For the purpose of compliance, the normative sections of this document are
       <a href="#definitions">Section 3</a>,
@@ -87,6 +88,7 @@
       <a href="#realizations">Section 7</a> and
       <a href="#testsuites">Section 8</a>.
     </p>
+    <p>NB Profiles and specifications embody their own notions of conformance (of data), which are out of scope for this document.</p>
   </section>
   <section id="definitions">
     <h2>Definitions</h2>
@@ -322,7 +324,7 @@
         specifies Query String Argument-based "Protocol Requests and Responses" that allow clients of
         <em>Data Providers</em> to: retrieve the metadata formats available from a repository
         (<code>ListMetadataFormats</code>); retrieve metadata for an identified record (<code>GetRecord</code>),
-        according to an identified metadata profile; perform a number of other repository interrogation tasks; and to
+	according to an identified metadata profile (<code>metadataPrefix</code>); perform a number of other repository interrogation tasks; and to
         harvest collections of record's metadata, filtered by parameters such as modified date.
       </p>
       <p>
@@ -342,7 +344,7 @@
 	as well as other types of resources. Besides supporting common functions such as free-text and faceted search, CSW supports the retrieval of metadata according to a given metadata schema and format, indicated respectively by using <code>outputSchema</code> and <code>outputFormat</code> query parameters. Commonly supported metadata schemas are [[DC11]], and [[ISO-19115]], and the default format is XML. A given CSW instance's supported metadata schemas and formats are described in the service "capabilities" -- a machine-readable description of the service interface, that is returned via a <code>GetCapabilities</code> request.
       </p>
       <p>
-        Notably, CSW theoretically supports HTTP content negotiation for the metadata format, and the specification defines a conflict resolution mechanism for requests where this information is specified both via HTTP <code>Accept</code> headers and the <code>outputFormat</code> parameter (see <a href="http://docs.opengeospatial.org/is/12-176r7/12-176r7.html#8">Section 6.2</a> of the <cite>OGC CSW 3.0 specification - HTTP Protocol Binding</cite>).
+        Notably, CSW theoretically supports HTTP content negotiation for the metadata format, and the specification defines a conflict resolution mechanism for requests where this information is specified both via HTTP <code>Accept</code> headers and the <code>outputFormat</code> parameter (see Section 6.2 of the <a href="http://docs.opengeospatial.org/is/12-176r7/12-176r7.html">OGC CSW 3.0 specification - HTTP Protocol Binding</a>).
       </p>
     </section>
   </section>
@@ -529,6 +531,22 @@ Content-Profile: http://example.org/profile/A
 	      <code>Accept-Profile</code> and <code>Content-Profile</code>
 	      that are to be defined in an upcoming Internet-Draft [[PROF-IETF]].
       </p>
+      <p>
+	      Although servers are free to implement negotiation as they see fit,
+	      if the User Agent sends an <code>Accept-Profile</code> header,
+	      they SHOULD consider representations not conforming to any of the listed profiles
+	      as non-interpretable by the client.
+	      This means that a representation that conforms to a listed profile,
+	      but has a low preference score on other dimensions,
+	      SHOULD be considered as more desired than
+	      a representation with a higher preference score on other dimensions
+	      but that does not conform to any listed profile.
+	      If no <code>Accept-Profile</code> header preference is given,
+	      the profile dimension SHOULD be ignored for negotiation purposes.
+	      Nonetheless, in all cases,
+	      the server's response SHOULD contain a <code>Content-Profile</code> header
+	      listing the URIs of all profiles to which it knows the representation conforms.
+      </p>
       <div class="issue" data-number="500"></div>
       <section id="listprofileshttp">
         <h3>list profiles</h3>
@@ -695,7 +713,7 @@ Content-Profile: urn:example:profile:1
       </section>
     </section>
     <section id="qsa">
-      <h2>URL Query String Arguments</h2>
+      <h3>URL Query String Arguments</h3>
       <div class="issue" data-number="594"></div>
       <div class="issue" data-number="538"></div>
       <p>
@@ -898,9 +916,9 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
     </p>
   </section>
   <section id="changes" class="informative">
-	<h2>Changes</h2>
-	<p>Changes since the <a href="https://www.w3.org/TR/2018/WD-dx-prof-conneg-20181218/">18 December 2018 Working Draft</a> are:</p>
-	<ul>
+	  <h2>Changes</h2>
+	  <p>Changes since the <a href="https://www.w3.org/TR/2018/WD-dx-prof-conneg-20181218/">18 December 2018 Working Draft</a> are:</p>
+	  <ul>
     <li>
       Added Related Work subsections for
       Linked Data APIs (<a href="https://github.com/w3c/dxwg/issues/383">Issue 383</a>),
@@ -922,7 +940,7 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
 		<li>Added a not about length restrictions in URLs to the <a href="#qsa">QSA</a> section.
 			(<a href="https://github.com/w3c/dxwg/issues/592">Issue 592</a>)</li>
 	</ul>
-</section>
+  </section>
   <section id="security_and_privacy" class="informative">
     <h2>Security and Privacy</h2>
     <p>
@@ -943,7 +961,7 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
   <section id="appendices" class="appendix">
     <h2>Appendices</h2>
     <section id="requirements">
-      <h2>Requirements</h2>
+      <h3>Requirements</h3>
       <p>
         This section lists, and then addresses, individual requirements that the Dataset Exchange Working Group
         considered important for content negotiation by profile.
@@ -957,59 +975,6 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
           These requirement responses may not survive in their current form in later drafts of this document nor may
           individual listings of requirements; they may be subsumed into the flowing txt of the document.
         </p>
-      </div>
-      <div class="issue" data-number="72"></div>
-      <div class="req-response">
-        <p class="respTitle">RESPONSE FOR Req. 72</p>
-        <p>
-
-        </p>
-      </div>
-      <div class="issue" data-number="73"></div>
-      <div class="req-response">
-        <p class="respTitle">RESPONSE FOR Req. 73</p>
-        <p>
-          This requirement is addressed by suggesting how an Internet resource in general, rather than specifically a
-          <code>dcat:Dataset</code> or <code>dcat:Distribution</code> should list profiles it implements. A DCAT-
-          specific solution should not be any different from the general case.
-        </p>
-        <div class="note" title="">Profile definition and constraints on properties are not addressed here. See
-          [[PROF-GUIDANCE]].</div>
-        <p>
-          This requirement is taken to mean "create a way to list the profiles implemented by a Internet resource for
-          <em>humans</em> and <em>machines</em> to use". For the former (humans), the options are:
-        </p>
-        <ul>
-          <li>
-            discovery via HTML representation
-            <ul>
-              <li>see [[PROF-GUIDANCE]]</li>
-              <li>an approach suggested is to provide an <em>alternate view</em> resource for the original
-                resource located at <code>RESOURCE_URL + ?_view=alternates</code> which lists, at a minimum, the
-                <em>profiles</em>, <em>media types</em> (formats) &amp; <em>languages</em> available, as per the
-                <em>alternate views</em> guidance.
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <div class="issue" data-number="392"></div>
-        <p>For the latter (machines):</p>
-        <ul>
-          <li>
-            discovery via HTTP
-            <ul>
-              <li>see [[PROF-IETF]]</li>
-              <li>HTTP mechanics are described that allow clients to negotiate with servers for profile listings</li>
-            </ul>
-          </li>
-          <li>
-            discovery via RDF graph
-            <ul>
-              <li>see [[PROF]]</li>
-            </ul>
-          </li>
-        </ul>
-        <div class="issue" data-number="393"></div>
       </div>
       <div class="issue" data-number="74"></div>
       <div class="req-response">
@@ -1099,7 +1064,7 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
       <!-- A list of issues will magically appear here -->
     </section>
     <section id="extra-issues" class="appendix">
-      <h2>Additional Issues</h2>
+      <h3>Additional Issues</h3>
       <p><em>This section will be removed in a later version of this document.</em></p>
       <p>Additional Issues related to this document and not yet placed within it are listed at the:</p>
       <ul>
