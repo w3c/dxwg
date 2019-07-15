@@ -1,8 +1,10 @@
 var respecConfig = {
-    specStatus: "FPWD",
+    specStatus: "WD",
     shortName: "dx-prof-conneg",
     edDraftURI: "https://w3c.github.io/dxwg/conneg-by-ap/",
-    previousURI: "https://w3c.github.io/dxwg/conneg-by-ap/",
+    previousPublishDate: "2018-12-18",
+    previousMaturity: "FPWD",
+    prevRecURI: "https://www.w3.org/TR/2018/WD-dx-prof-conneg-20181218/",
     testSuiteURI: "https://github.com/CSIRO-enviro-informatics/prof-conneg-test-suite",
     implementationReportURI: "https://github.com/CSIRO-enviro-informatics/prof-conneg-implementations",
     canonicalURI: "TR",
@@ -72,9 +74,9 @@ var respecConfig = {
                 "Antoine Isaac",
                 "Nicholas J. Car"
             ],
-            href: "https://www.w3.org/TR/profile-guidance/",
+            href: "https://w3c.github.io/dxwg/profiles/",
             title: "Profile Guidance",
-            date: " 2018-12-31",
+            date: " 2019-04-24",
             status: "W3C Editor's Draft"
         },
         "PROF-IETF": {
@@ -82,9 +84,9 @@ var respecConfig = {
                 "L. Svensson",
                 "R. Verborgh"
             ],
-            href: "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema/",
-            title: "Negotiating Profiles in HTTP",
-            date: " 2017-10-24",
+            href: "https://profilenegotiation.github.io/I-D-Profile-Negotiation/I-D-Profile-Negotiation",
+            title: "Indicating and Negotiating Profiles in HTTP",
+            date: " 2019-07-11",
             status: "IETF Internet Draft"
         },
         "PROF": {
