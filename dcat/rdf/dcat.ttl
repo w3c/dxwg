@@ -18,7 +18,6 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix time: <http://www.w3.org/2006/time#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
-@prefix w3cgeo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 dct:hasPart
@@ -84,8 +83,8 @@ dct:Location
   skos:scopeNote "Para una geometría extensiva (es decir, un conjunto de coordinadas que denotan los vértices de un área geográfica), DEBE usarse la propiedad locn:geometry [[LOCN]]."@es ;
   skos:scopeNote "For a geographic bounding box delimiting a spatial area the property dcat:bbox SHOULD be used."@en ;
   skos:scopeNote "Para un cuadro delimitador geográfico que delimita un área espacial se DEBE usar la propiedad dcat:bbox."@es ;
-  skos:scopeNote "For the geographic center of a spatial area, or another characteristic point, the property dcat:centroid or, alternatively w3cgeo:lat and w3cgeo:long SHOULD be used."@en ;
-  skos:scopeNote "Para el centro geográfico de un área espacial, o algún otro punto característico, se DEBE usar la propriedad dcat:centroid o, alternativamente las propiedades w3cgeo:lat y w3cgeo:long."@es ;
+  skos:scopeNote "For the geographic center of a spatial area, or another characteristic point, the property dcat:centroid SHOULD be used."@en ;
+  skos:scopeNote "Para el centro geográfico de un área espacial, o algún otro punto característico, se DEBE usar la propriedad dcat:centroid."@es ;
 .
 <http://www.w3.org/ns/dcat>
   rdf:type owl:Ontology ;
@@ -800,9 +799,9 @@ dcat:endpointDescription
 .
 dcat:endpointURL
   rdf:type owl:ObjectProperty ;
-  rdfs:comment "The URI of the service end-point."@en ;
-  rdfs:comment "URI dell'endpoint del servizio."@it;
-  rdfs:comment "La URI del endpoint del servicio."@es ;
+  rdfs:comment "The root location or primary endpoint of the service (a web-resolvable IRI)"@en ;
+  rdfs:comment "La locazione principale o l'endpoint primario del servizio (un IRI risolvibile via web)"@it;
+  rdfs:comment "The "@es;
   rdfs:domain dcat:DataService ;
   rdfs:range rdfs:Resource ;
   rdfs:label "service end-point"@en ;
@@ -980,14 +979,6 @@ dcat:packageFormat
   skos:scopeNote "Esta propiedad se debe usar cuando los archivos de la distribución están empaquetados, por ejemplo en un archivo RAR. El formato DEBERÍA expresarse usando un 'media type', tales como los definidos en el registro IANA de 'media types' https://www.iana.org/assignments/media-types/, si está disponibles."@es ;
   skos:scopeNote "Questa proprietà deve essere utilizzata quando i file nella distribuzione sono impacchettati, ad esempio in un file RAR. Il formato DOVREBBE essere espresso utilizzando un tipo di supporto come definito dal registro dei tipi di media IANA https://www.iana.org/assignments/media-types/, se disponibili."@it
 .
-#dcat:point
-#  rdf:type rdf:Property ;
-#  rdf:type owl:ObjectProperty ;
-#  rdfs:domain dct:Location ;
-#  rdfs:range w3cgeo:Point ;
-#  skos:definition "A characteristic point location of a resource."@en ;
-#  skos:scopeNote "The Point class from [w3c-basic-geo] encodes latitude, longitude and altitude in separate RDF properties. "@en ;
-#.
 dcat:qualifiedRelation
   rdf:type owl:ObjectProperty ;
   rdfs:comment "Link to a description of a relationship with another resource."@en ;
@@ -1427,36 +1418,25 @@ locn:geometry
   skos:changeNote "Property added in this context in this revision of DCAT"@en ;
   skos:changeNote "Esta propiedad se agregó en este contexto en esta revisión de DCAT"@es ;
 .
-w3cgeo:alt
-  rdfs:range xsd:decimal ;
-  skos:definition "Altitude (elevation) of a characteristic point location of a resource."@en ;
-  skos:definition "Altitud (elevación) de una posición característica del recurso"@es ;
-  skos:scopeNote "It is recommended to encode the value as a xsd:decimal. "@en ;
-  skos:scopeNote "Se recomienda codificar el valor como un xsd:decimal. "@es ;
-  skos:scopeNote "Use of this property entails that value of the dct:spatial property is a member of the w3cgeo:Point class from [[w3c-basic-geo]]. This could be taken to imply that w3cgeo:Point is a subclass of dct:Location"@en ;
-  skos:scopeNote "El uso de esta propiedad implica que el valor de la propiedad dct:spatial es un miembro de la clase w3cgeo:Point de [[w3c-basic-geo]]. Esto puede interpretarse como que implica que w3cgeo:Point es una subclase de dct:Location"@es ;
-  skos:changeNote "Property added in this context in this revision of DCAT"@en ;
-  skos:changeNote "Esta propiedad se agregó en este contexto en esta revisión de DCAT"@es ;
-.
-w3cgeo:lat
-  rdfs:range xsd:decimal ;
-  skos:definition "Latitude of a characteristic point location of a resource."@en ;
-  skos:definition "Latitud de una posición característica del recurso."@es ;
-  skos:scopeNote "It is recommended to encode the value as a xsd:decimal. "@en ;
-  skos:scopeNote "Se recomienda codificar el valor como un xsd:decimal. "@es ;
-  skos:scopeNote "Use of this property entails that value of the dct:spatial property is a member of the w3cgeo:Point class from [[w3c-basic-geo]]. This could be taken to imply that w3cgeo:Point is a subclass of dct:Location"@en ;
-  skos:scopeNote "El uso de esta propiedad implica que el valor de la propiedad dct:spatial es un miembro de la clase w3cgeo:Point de [[w3c-basic-geo]]. Esto puede interpretarse como que implica que w3cgeo:Point es una subclase de dct:Location"@es ;
-  skos:changeNote "Property added in this context in this revision of DCAT"@en ;
-  skos:changeNote "Esta propiedad se agregó en este contexto en esta revisión de DCAT"@es ;
-.
-w3cgeo:long
-  rdfs:range xsd:decimal ;
-  skos:definition "Longitude of a characteristic point location of a resource."@en ;
-  skos:definition "Línea de longitud de una posición característico del recurso."@es ;
-  skos:scopeNote "It is recommended to encode the value as a xsd:decimal. "@en ;
-  skos:scopeNote "Se recomienda codificar el valor como un xsd:decimal. "@es ;
-  skos:scopeNote "Use of this property entails that value of the dct:spatial property is a member of the w3cgeo:Point class from [[w3c-basic-geo]]. This could be taken to imply that w3cgeo:Point is a subclass of dct:Location"@en ;
-  skos:scopeNote "El uso de esta propiedad implica que el valor de la propiedad dct:spatial es un miembro de la clase w3cgeo:Point de [[w3c-basic-geo]]. Esto puede interpretarse como que implica que w3cgeo:Point es una subclase de dct:Location"@es ;
-  skos:changeNote "Property added in this context in this revision of DCAT"@en ;
-  skos:changeNote "Esta propiedad se agregó en este contexto en esta revisión de DCAT"@es ;
-.
+
+#w3cgeo:alt
+#  rdfs:range xsd:decimal ;
+#  skos:definition "Altitude (elevation) of a characteristic point location of a resource." ;
+#  skos:scopeNote "It is recommended to encode the value as a xsd:decimal. " ;
+#  skos:scopeNote "Use of this property entails that value of the dct:spatial property is a member of the w3cgeo:Point class from [[w3c-basic-geo]]. This could be taken to imply that w3cgeo:Point is a subclass of dct:Location" ;
+#  skos:changeNote "Property added in this context in this revision of DCAT"@en ;
+#.
+#w3cgeo:lat
+#  rdfs:range xsd:decimal ;
+#  skos:definition "Latitude of a characteristic point location of a resource." ;
+#  skos:scopeNote "It is recommended to encode the value as a xsd:decimal. " ;
+#  skos:scopeNote "Use of this property entails that value of the dct:spatial property is a member of the w3cgeo:Point class from [[w3c-basic-geo]]. This could be taken to imply that w3cgeo:Point is a subclass of dct:Location" ;
+#  skos:changeNote "Property added in this context in this revision of DCAT"@en ;
+#.
+#w3cgeo:long
+#  rdfs:range xsd:decimal ;
+#  skos:definition "Longitude of a characteristic point location of a resource." ;
+#  skos:scopeNote "It is recommended to encode the value as a xsd:decimal. " ;
+#  skos:scopeNote "Use of this property entails that value of the dct:spatial property is a member of the w3cgeo:Point class from [[w3c-basic-geo]]. This could be taken to imply that w3cgeo:Point is a subclass of dct:Location" ;
+#  skos:changeNote "Property added in this context in this revision of DCAT"@en ;
+#.
