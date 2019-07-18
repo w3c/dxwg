@@ -96,7 +96,7 @@
         The namespace prefix for these profiles used in <a href="#fig-table-profiles"></a> is:
       </p>
       <ul>
-        <li><code>pp</code> &rarr; <code>http://www.w3.org/ns/dx/prof/profile/</code></li>
+        <li><code>pc</code> &rarr; <code>http://www.w3.org/ns/dx/conneg/profile/</code></li>
       </ul>
       <figure id="fig-table-profiles">
         <table>
@@ -110,33 +110,42 @@
           </thead>
           <tbody>
           <tr>
-            <td><code>pp:abstract</code></td>
+            <td><code><a href="http://www.w3.org/ns/dx/conneg/profile/abstract">cp:abstract</a></code></td>
             <td>Abstract Model</td>
             <td>For conformance with the model presented in <a href="#abstractmodel"></a>.</td>
             <td>Not to be used if a resource also conforms to a more concrete profile (all of the others)</td>
           </tr>
           <tr>
-            <td><code>pp:http</code></td>
+            <td><code><a href="http://www.w3.org/ns/dx/conneg/profile/abstract">cp:http</a></code></td>
             <td>HTTP Realization</td>
             <td>For conformance with the realization presented in <a href="#http"></a>.</td>
             <td>To be used if a resource conforms to the HTTP Realization</td>
           </tr>
           <tr>
-            <td><code><span style="white-space: nowrap">pp:qsa-strict</span></code></td>
-            <td>QSA Realization (strict)</td>
+            <td><code><span style="white-space: nowrap"><a href="http://www.w3.org/ns/dx/conneg/profile/abstract">cp:qsa</a></span></code></td>
+            <td>QSA Realization</td>
             <td>For conformance with the realization presented in <a href="#qsa"></a>.</td>
             <td>
-              To be used if a resource conforms to the strict form of the QSA Realization where the Query String Arguments <code>_profile</code> and <code>_mediatype</code>
-              are used as per the recommendations in <a href="#qsa"></a>.
+              To be used if a resource conforms to the QSA Realization using the Query String Arguments <code>_profile</code> and <code>_mediatype</code> as per the recommendations
+              in <a href="#qsa"></a>.
             </td>
           </tr>
           <tr>
-            <td><code><span style="white-space: nowrap">pp:qsa-loose</span></code></td>
-            <td>QSA Realization (loose)</td>
+            <td><code><span style="white-space: nowrap"><a href="http://www.w3.org/ns/dx/conneg/profile/abstract">cp:qsa-alt</a></span></code></td>
+            <td>QSA Realization (alternate keywords)</td>
             <td>For conformance with the realization presented in <a href="#qsa"></a>.</td>
             <td>
-              To be used if a resource conforms to the loose form of the QSA Realization where the Query String Arguments may differ from <code>_profile</code> and
-              <code>_mediatype</code>. Should not be used if the conforming implementation adheres to the QSA (strict) profile.
+              To be used if a resource conforms to the QSA Realization but uses alternate keywords for the Query String Arguments <code>_profile</code> and
+              <code>_mediatype</code>, as allowed by the recommendations in <a href="#qsa"></a>.
+            </td>
+          </tr>
+          <tr>
+            <td><code><span style="white-space: nowrap"><a href="http://www.w3.org/ns/dx/conneg/profile/rrd">cp:rrd</a></span></code></td>
+            <td>Resource Representation Description</td>
+            <td>For conformance with <a href="#getresourcebyprofile"></a>.</td>
+            <td>
+              To be used if a resource representation is able to indicate which profile(s) it conforms to, in its appropriate realization, as per the abstract specification in
+              <a href="#getresourcebyprofile"></a>.
             </td>
           </tr>
           </tbody>
@@ -147,15 +156,15 @@
         </figcaption>
       </figure>
       <p>
-        The namespace used for the above profiles, <code>http://www.w3.org/ns/dx/prof/profile/</code>, is part of the Profiles Vocabulary [[PROF]]'s namespace and is used for
-        these instances of PROF's <code>prof:Profile</code> class just as instances of PROF's <code>prof:Role</code> class use <code>http://www.w3.org/ns/dx/prof/role/</code>
-        (see [[PROF]]).
+        The namespace used for the above profiles, <code>http://www.w3.org/ns/dx/conneg/profile/</code>, is part of the Dataset Exchange Working Group's reserved W3C namespace,
+        <code>http://www.w3.org/ns/dx/</code>, which is provisioned for all namespace requirements to do with issues addressed by that Working Group. The <code>/profile/</code> path segment
+        indicates a register of profile objects which currently contains just the 5 instances above from <a href="#fig-table-profiles"></a>.
       </p>
       <p>
         If a system wishes to show conformance to this specification, conformance to at least one of the profiles listed in <a href="#fig-table-profiles"></a> MUST be indicated.
       </p>
       <div class="note">
-        Another sentense/paragraph is needed here to indicate what shows conformance. It's not <code>/resource/a</code>'s representation but something else as <code>/resource/a</code>
+        Another sentense/paragraph is needed here to indicate what shows conformance. It's not <code>/a/resource</code>'s representation but something else as <code>/a/resource</code>
         may conform to some (data) profile but that data profile has nothing to do with CONNEG. It's the systems <em>mechanics</em> that are conformant here, unless we have a required
         resource that all implementations of this must implement that can describe the system function that conforms to the above.
       </div>
