@@ -96,7 +96,7 @@
         The namespace prefix for these profiles used in <a href="#fig-table-profiles"></a> is:
       </p>
       <ul>
-        <li><code>pc</code> &rarr; <code>http://www.w3.org/ns/dx/conneg/profile/</code></li>
+        <li><code>cnpr</code> &rarr; <code>http://www.w3.org/ns/dx/conneg/profile/</code></li>
       </ul>
       <figure id="fig-table-profiles">
         <table>
@@ -110,19 +110,19 @@
           </thead>
           <tbody>
           <tr>
-            <td><code><a href="http://www.w3.org/ns/dx/conneg/profile/abstract">cp:abstract</a></code></td>
+            <td><code><a href="http://www.w3.org/ns/dx/conneg/profile/abstract">cnpr:abstract</a></code></td>
             <td>Abstract Model</td>
             <td>For conformance with the model presented in <a href="#abstractmodel"></a>.</td>
             <td>Not to be used if a resource also conforms to a more concrete profile (all of the others)</td>
           </tr>
           <tr>
-            <td><code><a href="http://www.w3.org/ns/dx/conneg/profile/http">cp:http</a></code></td>
+            <td><code><a href="http://www.w3.org/ns/dx/conneg/profile/http">cnpr:http</a></code></td>
             <td>HTTP Realization</td>
             <td>For conformance with the realization presented in <a href="#http"></a>.</td>
             <td>To be used if a resource conforms to the HTTP Realization</td>
           </tr>
           <tr>
-            <td><code><span style="white-space: nowrap"><a href="http://www.w3.org/ns/dx/conneg/profile/qsa">cp:qsa</a></span></code></td>
+            <td><code><span style="white-space: nowrap"><a href="http://www.w3.org/ns/dx/conneg/profile/qsa">cnpr:qsa</a></span></code></td>
             <td>QSA Realization</td>
             <td>For conformance with the realization presented in <a href="#qsa"></a>.</td>
             <td>
@@ -131,7 +131,7 @@
             </td>
           </tr>
           <tr>
-            <td><code><span style="white-space: nowrap"><a href="http://www.w3.org/ns/dx/conneg/profile/qsa-alt">cp:qsa-alt</a></span></code></td>
+            <td><code><span style="white-space: nowrap"><a href="http://www.w3.org/ns/dx/conneg/profile/qsa-alt">cnpr:qsa-alt</a></span></code></td>
             <td>QSA Alternate Keywords Realization</td>
             <td>For conformance with the realization presented in <a href="#qsa"></a>.</td>
             <td>
@@ -1054,29 +1054,36 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
 @prefix prof: &lt;http://www.w3.org/ns/dx/prof/> .
 @prefix role: &lt;http://www.w3.org/ns/dx/prof/role/> .
 @prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#> .
+@prefix cnpr: &lt;http://www.w3.org/ns/dx/conneg/profile/> .
 
 &lt;https://www.w3.org/TR/dx-prof-conneg/> a dct:Standard ;
-    rdfs:label "Content Negotiation by Profile" .
+    rdfs:label "Content Negotiation by Profile" ;
+    rdfs:comment "The W3C Recommendation (a standard) for Content Negotiation by Profile" .
 
-&lt;http://www.w3.org/ns/dx/conneg/profile/abstract> a prof:Profile ;
+cnpr:abstract a prof:Profile ;
     prof:isProfileOf &lt;https://www.w3.org/TR/dx-prof-conneg/> ;
-    rdfs:label "Abstract Model profile of Content Negotiation by Profile" .
+    rdfs:label "Abstract Model Profile" ;
+    rdfs:comment "Abstract Model profile of Content Negotiation by Profile" .
 
-&lt;http://www.w3.org/ns/dx/conneg/profile/http> a prof:Profile ;
+cnpr:http a prof:Profile ;
     prof:isProfileOf &lt;https://www.w3.org/TR/dx-prof-conneg/> ;
-    rdfs:label "HTTP Realization profile of Content Negotiation by Profile" .
+    rdfs:label "HTTP Realization Profile" ;
+    rdfs:comment "HTTP Realization profile of Content Negotiation by Profile" .
 
-&lt;http://www.w3.org/ns/dx/conneg/profile/qsa> a prof:Profile ;
+cnpr:qsa a prof:Profile ;
     prof:isProfileOf &lt;http://www.w3.org/ns/dx/conneg/profile/abstract> ;
-    rdfs:label "QSA Realization profile of Content Negotiation by Profile" .
+    rdfs:label "QSA Realization Profile" ;
+    rdfs:comment "QSA Realization profile of Content Negotiation by Profile" .
 
-&lt;http://www.w3.org/ns/dx/conneg/profile/qsa-alt> a prof:Profile ;
+cnpr:qsa-alt a prof:Profile ;
     prof:isProfileOf &lt;http://www.w3.org/ns/dx/conneg/profile/abstract> ;
-    rdfs:label "QSA Alternate Keywords Realization profile of Content Negotiation by Profile" .
+    rdfs:label "QSA Alternate Keywords Realization Profile" ;
+    rdfs:comment "Query String Argument Alternate Keywords Realization profile of Content Negotiation by Profile" .
 
-&lt;http://www.w3.org/ns/dx/conneg/profile/rrd> a prof:Profile ;
+cnpr:rrd a prof:Profile ;
     prof:isProfileOf &lt;https://www.w3.org/TR/dx-prof-conneg/> ;
-    rdfs:label "Resource Representation Description profile of Content Negotiation by Profile" .
+    rdfs:label "Resource Representation Description Profile" ;
+    rdfs:comment "Resource Representation Description profile of Content Negotiation by Profile" .
       </pre>
       <p>
         The code listing <a href="#profiles-in-prof"></a> describes this <em>Content Negotiation by Profile</em> specification as a
@@ -1093,12 +1100,15 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
         <h4>Demonstrating conformance to profiles</h4>
         <p>
           With the identification of profiles of this specification given in <a href="#conformance-profiles"></a> and their description of them using the Profiles Vocabulary [[PROF]] in this
-          appendix, it is possible for <span style="color:red;">XXX</span> to show conformance to one of more of these profiles as per
+          appendix, it is possible for services that deliver content according to the specification or any of the profiles to show conformance to the specification or any of the profiles by
+          using the same mechanisms recommended in [[PROF]] for a data resource to show conformance to a profile. For data resources, the recommendation is that they declare an RDF statement
+          such as <code>&lt;/a/resource&gt; dct:conformsTo &lt;SPEC_OR_PROFILE_URI&gt; .</code>. This, adapted for use with services, is shown in <a href="#conformance-to-profiles"></a>.
         </p>
-        <pre id="conformance-to-profiles" class="example nohighlight" aria-busy="false" aria-live="polite" title="Demonstrating the conformance of XX to profiles of this specification described using PROF, in the RDF turtle notation">
+        <pre id="conformance-to-profiles" class="example nohighlight" aria-busy="false" aria-live="polite" title="Demonstrating the conformance of XXXX to profiles of this specification described using PROF, in the RDF turtle notation">
 @prefix dct: &lt;http://purl.org/dc/terms/> .
+@prefix cnpr: &lt;http://www.w3.org/ns/dx/conneg/profile/> .
 
-&lt;XXXX> dct:conformsTo &lt;http://www.w3.org/ns/dx/conneg/profile/abstract> .
+&lt;XXXX> dct:conformsTo cnpr:qsa-alt .
       </pre>
       <p>
         The information in <a href="conformance-to-profiles"></a> can be used to...
