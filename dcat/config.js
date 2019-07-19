@@ -1,5 +1,6 @@
 var respecConfig = {
 //	preProcess: [dfn_index],
+//    subtitle: "Version 2",
     specStatus: "ED",
     shortName: "vocab-dcat-2",
     canonicalURI: "TR",
@@ -112,8 +113,9 @@ var respecConfig = {
             href: "http://dcat.be/"
         },
         "DCAT-AP-IT": {
-            title: "Profilo nazionale dei metadati DCAT-AP_IT v1.0",
-            href: "https://www.dati.gov.it/content/profilo-nazionale-dei-metadati-dcat-ap-it-v10"
+            title: "Profilo metadatazione DCAT-AP_IT",
+            href: "https://docs.italia.it/italia/daf/linee-guida-cataloghi-dati-dcat-ap-it/it/stabile/dcat-ap_it.html",
+			publisher: "AgID & Team Digitale"
         },
         "DCAT-AP-NO": {
             title: "Standard for beskrivelse av datasett og datakataloger (DCAT-AP-NO)",
@@ -194,6 +196,11 @@ var respecConfig = {
             "title":"Named Authority List: Access rights",
             "publisher":"Publications Office of the European Union"
         },
+        "netCDF": {
+            href: "https://www.unidata.ucar.edu/software/netcdf/",
+            title: "Network Common Data Form (NetCDF)",
+            publisher: "UNIDATA"
+        },
         "OBO" : {
             href:"http://www.obofoundry.org/",
             title:"The OBO Foundry"
@@ -207,12 +214,14 @@ var respecConfig = {
             date:"29 July 2013",
             publisher:"ODI"
         },
+/*	    
         "OpenAPI": {
             href: "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md",
             title: "OpenAPI Specification. Version 3.0.2",
             date: "08 October 2018",
             publisher: "OAI"
         },
+*/	
         "OpenSearch": {
             authors: [
                 "DeWitt Clinton"
@@ -256,6 +265,13 @@ var respecConfig = {
             href : "http://schema.org/",
             title : "Schema.org"
         },
+        "ShEx" : {
+            href : "http://shex.io/shex-semantics/",
+            title : "Shape Expressions Language 2.1",
+            date: "17 November 2018",
+            status: "Draft Community Group Report",
+			publisher: "Shape Expressions W3C Community Group"
+        },
         "VIVO-ISF" : {
             href:"http://github.com/vivo-isf/vivo-isf",
             title:"VIVO-ISF Data Standard"
@@ -272,3 +288,4 @@ var respecConfig = {
         
     }
 };
+
