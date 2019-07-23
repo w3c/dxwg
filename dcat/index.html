@@ -371,8 +371,8 @@
 <pre class="nohighlight turtle">
 :catalog
   a dcat:Catalog&nbsp;;
-  dct:title "Imaginary Catalog"&nbsp;;
-  rdfs:label "Imaginary Catalog"&nbsp;;
+  dct:title "Imaginary Catalog"@en&nbsp;;
+  rdfs:label "Imaginary Catalog"@en&nbsp;;
   foaf:homepage &lt;http://example.org/catalog&gt;&nbsp;;
   dct:publisher&nbsp;:transparency-office&nbsp;;
   dct:language &lt;http://id.loc.gov/vocabulary/iso639-1/en&gt; &nbsp;;
@@ -388,7 +388,7 @@
 <pre class="nohighlight turtle">
 :transparency-office
   a foaf:Organization&nbsp;;
-  rdfs:label "Transparency Office"&nbsp;;
+  rdfs:label "Transparency Office"@en&nbsp;;
   .
 </pre>
 </aside>
@@ -399,8 +399,8 @@
 <pre class="nohighlight turtle">
 :dataset-001
   a dcat:Dataset&nbsp;;
-  dct:title "Imaginary dataset"&nbsp;;
-  dcat:keyword "accountability","transparency" ,"payments"&nbsp;;
+  dct:title "Imaginary dataset"@en&nbsp;;
+  dcat:keyword "accountability"@en, "transparency"@en, "payments"@en&nbsp;;
   dct:creator&nbsp;:finance-employee-001&nbsp;;
   dct:issued "2011-12-05"^^xsd:date&nbsp;;
   dct:modified "2011-12-15"^^xsd:date&nbsp;;
@@ -442,7 +442,7 @@
 :dataset-001-csv
   a dcat:Distribution&nbsp;;
   dcat:downloadURL &lt;http://www.example.org/files/001.csv&gt; ;
-  dct:title "CSV distribution of imaginary dataset 001" ;
+  dct:title "CSV distribution of imaginary dataset 001"@en ;
   dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/csv&gt; ;
   dcat:byteSize "5120"^^xsd:decimal ;
   .
@@ -462,7 +462,7 @@
 
 :themes
   a skos:ConceptScheme&nbsp;;
-  skos:prefLabel "A set of domains to classify documents"&nbsp;;
+  skos:prefLabel "A set of domains to classify documents"@en&nbsp;;
   .
 
 :dataset-001 dcat:theme&nbsp;:accountability&nbsp; .</pre>
@@ -477,7 +477,7 @@
 :accountability
   a skos:Concept&nbsp;;
   skos:inScheme&nbsp;:themes&nbsp;;
-  skos:prefLabel "Accountability"&nbsp;;
+  skos:prefLabel "Accountability"@en&nbsp;;
   .</pre>
 </aside>
 
@@ -527,13 +527,13 @@
 .
 
 &lt;http://registry.it.csiro.au/def/datacite/resourceType/Text&gt;
-  rdfs:label "Text" ;
-  dct:source "DataCite resource types" ;
+  rdfs:label "Text"@en ;
+  dct:source "DataCite resource types"@en ;
   .
 
 &lt;http://registry.it.csiro.au/def/re3data/contentType/doc&gt;
-  rdfs:label "Standard office documents" ;
-  dct:source "Re3data content types" ;
+  rdfs:label "Standard office documents"@en ;
+  dct:source "Re3data content types"@en ;
   .</pre>
 </aside>
 
@@ -2999,7 +2999,7 @@ end class DiscoveryService -->
   .
 
 ex:InternationalDOIFundation a foaf:Organization ;
-  rdfs:label "International DOI Foundation";
+  rdfs:label "International DOI Foundation" ;
   foaf:homepage &lt;https://www.doi.org/&gt; ;
   .
 
@@ -3047,7 +3047,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
   ...
   adms:identifier &lt;https://example.org/sid&gt; .
 
-  &lt;https://example.org/sid&gt; rdf:type adms:Identifier ;
+&lt;https://example.org/sid&gt; rdf:type adms:Identifier ;
   # the actual id
   skos:notation "PA 1-060-815"^^ex:type ;
   # Human readable schema agency
@@ -4358,7 +4358,7 @@ ex:Test543L
 <aside id="ex-dataset-as-bag-of-files" class="example">
 <pre class="nohighlight turtle">
 :d33937
-  dct:description "A set of RDF graphs representing the International [Chrono]stratigraphic Chart, ..." ;
+  dct:description "A set of RDF graphs representing the International [Chrono]stratigraphic Chart, ..."@en ;
   dct:identifier "https://doi.org/10.25919/5b4d2b83cbf2d"^^xsd:anyURI ;
   dct:creator &lt;https://orcid.org/0000-0002-3884-3420&gt;;
   dct:relation &lt;https://vocabs.ands.org.au/viewById/196&gt; ;
@@ -4381,7 +4381,7 @@ ex:Test543L
 <pre class="nohighlight turtle">
 :d33937
   rdf:type dcat:Dataset ;
-  dct:description "A set of RDF graphs representing the International [Chrono]stratigraphic Chart, ..." ;
+  dct:description "A set of RDF graphs representing the International [Chrono]stratigraphic Chart, ..."@en ;
   dct:identifier "https://doi.org/10.25919/5b4d2b83cbf2d"^^xsd:anyURI ;
   dct:relation &lt;https://vocabs.ands.org.au/viewById/196&gt; ;
   dct:relation :ChronostratChart2017-02.pdf  ;
@@ -4427,9 +4427,9 @@ ex:Test543L
 <pre class="nohighlight turtle">
 dap:d33937
   rdf:type dcat:Dataset ;
-  dct:title "The data" ;
+  dct:title "The data"@en ;
   dct:conformsTo &lt;http://resource.geosciml.org/ontology/timescale/gts&gt; ;
-  dct:description "A set of RDF graphs representing the International [Chrono]stratigraphic Chart [...]" ;
+  dct:description "A set of RDF graphs representing the International [Chrono]stratigraphic Chart [...]"@en ;
   dct:identifier "https://doi.org/10.25919/5b4d2b83cbf2d" ;
   dct:issued "2018-07-07"^^xsd:date ;
   dct:license &lt;https://creativecommons.org/licenses/by/4.0/&gt; ;
@@ -4439,27 +4439,27 @@ dap:d33937
   dct:relation [
     rdf:type dcat:Dataset ;
     dct:conformsTo &lt;https://www.w3.org/TR/owl2-overview/&gt; ;
-    dct:title "The ontology used for the data" ;
-    dct:description "This is an RDF/OWL representation of the GeoSciML Geologic Timescale model ..." ;
+    dct:title "The ontology used for the data"@en ;
+    dct:description "This is an RDF/OWL representation of the GeoSciML Geologic Timescale model ..."@en ;
     dct:issued "2011-01-01"^^xsd:date ;
     dct:modified "2017-04-28"^^xsd:date ;
     dct:title "Geologic Timescale model" ;
     dct:type &lt;http://purl.org/adms/assettype/DomainModel&gt; ;
     dcat:distribution [
       rdf:type dcat:Distribution ;
-      dct:title "RDF/XML representation of the ontology used for the data" ;
+      dct:title "RDF/XML representation of the ontology used for the data"@en ;
       dcat:downloadURL &lt;http://resource.geosciml.org/ontology/timescale/gts.rdf&gt; ;
       dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/rdf+xml&gt; ;
     ] ;
     dcat:distribution [
       rdf:type dcat:Distribution ;
-      dct:title "TTL representation of the ontology used for the data" ;
+      dct:title "TTL representation of the ontology used for the data"@en ;
       dcat:downloadURL &lt;http://resource.geosciml.org/ontology/timescale/gts.ttl&gt; ;
       dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/turtle&gt; ;
     ] ;
     dcat:distribution [
       rdf:type dcat:Distribution ;
-      dct:title "Webpage describing the ontology used for the data" ;
+      dct:title "Webpage describing the ontology used for the data"@en ;
       dcat:downloadURL &lt;http://resource.geosciml.org/ontology/timescale/gts.html&gt; ;
       dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/html&gt; ;
     ] ;
@@ -4468,12 +4468,12 @@ dap:d33937
   dcat:distribution [
     rdf:type dcat:Distribution ;
     dct:conformsTo &lt;https://www.w3.org/TR/rdf-schema/&gt; ;
-    dct:title "RDF representation of the data" ;
+    dct:title "RDF representation of the data"@en ;
     dcat:accessService [
       rdf:type dcat:DataService ;
       dct:conformsTo &lt;https://www.w3.org/TR/sparql11-query/&gt; ;
-      dct:title "International Chronostratigraphic Chart hosted at Research Vocabularies Australia" ;
-      dct:description "Service that supports queries to obtain RDF representations of subsets of the data" ;
+      dct:title "International Chronostratigraphic Chart hosted at Research Vocabularies Australia"@en ;
+      dct:description "Service that supports queries to obtain RDF representations of subsets of the data"@en ;
       dcat:endpointURL &lt;http://vocabs.ands.org.au/repository/api/sparql/csiro_international-chronostratigraphic-chart_2017&gt; ;
       dcat:landingPage &lt;https://vocabs.ands.org.au/viewById/196&gt; ;
     ] ;
@@ -4481,25 +4481,25 @@ dap:d33937
   dcat:distribution [
     rdf:type dcat:Distribution ;
     dct:identifier "isc2017.jsonld" ;
-    dct:title "JSON-LD serialization of the RDF representation of the entire dataset" ;
+    dct:title "JSON-LD serialization of the RDF representation of the entire dataset"@en ;
     dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/ld+json&gt; ;
   ] ;
   dcat:distribution [
     rdf:type dcat:Distribution ;
     dct:identifier "isc2017.nt" ;
-    dct:title "N-Triples serialization of the RDF representation of the entire dataset" ;
+    dct:title "N-Triples serialization of the RDF representation of the entire dataset"@en ;
     dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/n-triples&gt; ;
   ] ;
   dcat:distribution [
     rdf:type dcat:Distribution ;
     dct:identifier "isc2017.rdf" ;
-    dct:title "RDF/XML serialization of the RDF representation of the entire dataset" ;
+    dct:title "RDF/XML serialization of the RDF representation of the entire dataset"@en ;
     dcat:mediaType &lt;https://www.iana.org/assignments/media-types/application/rdf+xml&gt; ;
   ] ;
   dcat:distribution [
     rdf:type dcat:Distribution ;
     dct:identifier "isc2017.ttl" ;
-    dct:title "TTL serialization of the RDF representation of the entire dataset" ;
+    dct:title "TTL serialization of the RDF representation of the entire dataset"@en ;
     dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/turtle&gt; ;
   ] ;
   dcat:landingPage &lt;https://data.csiro.au/dap/landingpage?pid=csiro:33937&gt; ;
@@ -4509,17 +4509,17 @@ dap:d33937
   rdf:type foaf:Document ;
   dct:type &lt;http://purl.org/dc/dcmitype/Image&gt; ;
   dct:format  &lt;https://www.iana.org/assignments/media-types/img/jpeg&gt; ;
-  dct:description "Coloured image representation of the International Chronostratigraphic Chart" ;
+  dct:description "Coloured image representation of the International Chronostratigraphic Chart"@en ;
   dct:issued "2017-02-01"^^xsd:date ;
-  dct:title "International Chronostratigraphic Chart" ;
+  dct:title "International Chronostratigraphic Chart"@en ;
 .
 &lt;http://stratigraphy.org/ICSchart/ChronostratChart2017-02.pdf&gt;
   rdf:type foaf:Document ;
   dct:type &lt;http://purl.org/dc/dcmitype/Image&gt; ;
   dct:format &lt;https://www.iana.org/assignments/media-types/application/pdf&gt; ;
-  dct:description "Coloured image representation of the International Chronostratigraphic Chart" ;
+  dct:description "Coloured image representation of the International Chronostratigraphic Chart"@en ;
   dct:issued "2017-02-01"^^xsd:date ;
-  dct:title "International Chronostratigraphic Chart" ;
+  dct:title "International Chronostratigraphic Chart"@en ;
 .</pre>
 </aside>
 
@@ -4543,18 +4543,18 @@ dap:d33937
 dap:atnf-P366-2003SEPT
   rdf:type dcat:Dataset ;
   dct:bibliographicCitation "Burgay, M; McLaughlin, M; Kramer, M; Lyne, A; Joshi, B; Pearce, G; D'Amico, N; Possenti, A; Manchester, R; Camilo, F (2017): Parkes observations for project P366 semester 2003SEPT. v1. CSIRO. Data Collection. https://doi.org/10.4225/08/598dc08d07bb7" ;
-  dct:title "Parkes observations for project P366 semester 2003SEPT" ;
+  dct:title "Parkes observations for project P366 semester 2003SEPT"@en ;
   dcat:landingPage &lt;https://data.csiro.au/dap/landingpage?pid=csiro:P366-2003SEPT&gt; ;
   prov:wasGeneratedBy dap:P366 ;
   .
 
 dap:P366
   rdf:type prov:Activity ;
-  dct:type "Observation" ;
+  dct:type &lt;http://dbpedia.org/resource/Observation&gt; ;
   prov:startedAtTime "2000-11-01"^^xsd:date ;
   prov:used dap:Parkes-radio-telescope ;
   prov:wasInformedBy dap:ATNF ;
-  rdfs:label "P366 - Parkes multibeam high-latitude pulsar survey" ;
+  rdfs:label "P366 - Parkes multibeam high-latitude pulsar survey"@en ;
   rdfs:seeAlso &lt;https://doi.org/10.1111/j.1365-2966.2006.10100.x&gt; ;
   .</pre>
 </aside>
@@ -4595,8 +4595,8 @@ dap:P366
 <aside id="dataset-publication" class="example">
 <pre class="nohighlight turtle">
 :globtherm
-  dct:title "Data from: GlobTherm, a global database on thermal tolerances for aquatic and terrestrial organisms" ;
-  dct:description "How climate affects species distributions is a longstanding question receiving renewed interest owing to the need to predict the impacts of global warming on biodiversity. Is climate change forcing species to live near their critical thermal limits? Are these limits likely to change through natural selection? These and other important questions can be addressed with models relating geographical distributions of species with climate data, but inferences made with these models are highly contingent on non-climatic factors such as biotic interactions. Improved understanding of climate change effects on species will require extensive analysis of thermal physiological traits, but such data are scarce and scattered. To overcome current limitations, we created the GlobTherm database. The database contains experimentally derived species’ thermal tolerance data currently comprising over 2,000 species of terrestrial, freshwater, intertidal and marine multicellular algae, pl ants, fungi, and animals. The GlobTherm database will be maintained and curated by iDiv with the aim of expanding it, and enable further investigations on the effects of climate on the distribution of life on Earth." ;
+  dct:title "Data from: GlobTherm, a global database on thermal tolerances for aquatic and terrestrial organisms"@en ;
+  dct:description "How climate affects species distributions is a longstanding question receiving renewed interest owing to the need to predict the impacts of global warming on biodiversity. Is climate change forcing species to live near their critical thermal limits? Are these limits likely to change through natural selection? These and other important questions can be addressed with models relating geographical distributions of species with climate data, but inferences made with these models are highly contingent on non-climatic factors such as biotic interactions. Improved understanding of climate change effects on species will require extensive analysis of thermal physiological traits, but such data are scarce and scattered. To overcome current limitations, we created the GlobTherm database. The database contains experimentally derived species’ thermal tolerance data currently comprising over 2,000 species of terrestrial, freshwater, intertidal and marine multicellular algae, pl ants, fungi, and animals. The GlobTherm database will be maintained and curated by iDiv with the aim of expanding it, and enable further investigations on the effects of climate on the distribution of life on Earth."@en ;
   dct:identifier "https://doi.org/10.5061/dryad.1cv08"^^xsd:anyURI ;
   dct:creator &lt;https://orcid.org/0000-0002-7883-3577&gt; ;
   dct:relation &lt;https://doi.org/10.5061/dryad.1cv08/6&gt; ;
@@ -4670,7 +4670,7 @@ a:EEA-CSW-Endpoint
 <pre class="nohighlight turtle">
 ga-courts:jc
   rdf:type dcat:Dataset ;
-  dct:description "The dataset contains spatial locations, in point format, of the Australian High Court, Australian Federal Courts and the Australian Magistrates Courts." ;
+  dct:description "The dataset contains spatial locations, in point format, of the Australian High Court, Australian Federal Courts and the Australian Magistrates Courts."@en ;
   dct:spatial [
     rdf:type dct:Location ;<!--
     dcat:bbox """&lt;gml:Envelope srsName=\"http://www.opengis.net/def/crs/EPSG/0/4283\"&gt;&lt;gml:lowerCorner&gt;115.864566 -42.885989&lt;/gml:lowerCorner&gt;&lt;gml:upperCorner&gt;153.276835 -12.460578&lt;/gml:upperCorner&gt;&lt;/gml:Envelope&gt;"""^^geosparql:gmlLiteral ;
@@ -4682,7 +4682,7 @@ ga-courts:jc
       115.864566 -42.885989
     ))"""^^geosparql:wktLiteral ;
   ] ;
-  dct:title "Judicial Courts" ;
+  dct:title "Judicial Courts"@en ;
   dct:type &lt;http://purl.org/dc/dcmitype/Dataset&gt; ;
   dcat:landingPage &lt;https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/cc365600-294a-597d-e044-00144fdd4fa6&gt; ;
 .
@@ -4690,9 +4690,9 @@ ga-courts:jc
 ga-courts:jc-esri
   rdf:type dcat:DataService ;
   dct:conformsTo &lt;https://developers.arcgis.com/rest/&gt; ;
-  dct:description "This web service provides access to the National Judicial Courts dataset and presents the spatial locations of all the known Australian High Courts, Australian Federal Courts and the Australian Federal Circuit Courts located within Australia, all complemented with feature attribution." ;
+  dct:description "This web service provides access to the National Judicial Courts dataset and presents the spatial locations of all the known Australian High Courts, Australian Federal Courts and the Australian Federal Circuit Courts located within Australia, all complemented with feature attribution."@en ;
   dct:identifier "2b8540c8-4a43-144d-e053-12a3070a3ff7" ;
-  dct:title "National Judicial Courts MapServer" ;
+  dct:title "National Judicial Courts MapServer"@en ;
   dct:type &lt;http://purl.org/dc/dcmitype/Service&gt; ;
   dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download&gt; ;
   dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view&gt; ;
@@ -4706,9 +4706,9 @@ ga-courts:jc-wfs
   dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wfs/2.0.0&gt; ;
   dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wfs/1.1.0&gt; ;
   dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wfs/1.0.0&gt; ;
-  dct:description "This web service provides access to the National Judicial Courts dataset and presents the spatial locations of all the known Australian High Courts, Australian Federal Courts and the Australian Federal Circuit Courts located within Australia, all complemented with feature attribution." ;
+  dct:description "This web service provides access to the National Judicial Courts dataset and presents the spatial locations of all the known Australian High Courts, Australian Federal Courts and the Australian Federal Circuit Courts located within Australia, all complemented with feature attribution."@en ;
   dct:identifier "2b8540c8-4a42-144d-e053-12a3070a3ff7" ;
-  dct:title "National Judicial Courts WFS" ;
+  dct:title "National Judicial Courts WFS"@en ;
   dct:type &lt;http://purl.org/dc/dcmitype/Service&gt; ;
   dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download&gt; ;
   dcat:endpointDescription &lt;http://services.ga.gov.au/gis/services/Judicial_Courts/MapServer/WFSServer?request=GetCapabilities&service=WFS&gt; ;
@@ -4720,9 +4720,9 @@ ga-courts:jc-wfs
 ga-courts:jc-wms
   rdf:type dcat:DataService ;
   dct:conformsTo &lt;http://www.opengis.net/def/serviceType/ogc/wms/1.3&gt; ;
-  dct:description "This web service provides access to the National Judicial Courts dataset and presents the spatial locations of all the known Australian High Courts, Australian Federal Courts and the Australian Federal Circuit Courts located within Australia, all complemented with feature attribution." ;
+  dct:description "This web service provides access to the National Judicial Courts dataset and presents the spatial locations of all the known Australian High Courts, Australian Federal Courts and the Australian Federal Circuit Courts located within Australia, all complemented with feature attribution."@en ;
   dct:identifier "2b8540c8-4a41-144d-e053-12a3070a3ff7" ;
-  dct:title "National Judicial Courts WMS" ;
+  dct:title "National Judicial Courts WMS"@en ;
   dct:type &lt;http://purl.org/dc/dcmitype/Service&gt; ;
   dct:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view&gt; ;
   dcat:endpointDescription &lt;http://services.ga.gov.au/gis/services/Judicial_Courts/MapServer/WMSServer?request=GetCapabilities&service=WMS&gt; ;
