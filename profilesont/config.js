@@ -9,13 +9,15 @@ var respecConfig = {
       {
         name: "Rob Atkinson",
         company: "Metalinkage, Open Geospatial Consortium",
-        companyURL: "http://www.opengeospatial.org/"
+        companyURL: "http://www.opengeospatial.org/",
+        orcid: "0000-0002-7878-2693"
       },
       {
         name:       "Nicholas J. Car",
         url:        "https://people.csiro.au/Nicholas-Car",
-        company:    "CSIRO",
-        companyURL: "https://www.csiro.au/",
+        company:    "Formerly with CSIRO, now SURROUND Australia Pty Ltd",
+        companyURL: "https://surroundaustralia.com",
+        orcid:      "0000-0002-8742-7730",
         w3cid:      70131
     }],
     otherLinks: [{
