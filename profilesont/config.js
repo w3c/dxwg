@@ -14,7 +14,6 @@ var respecConfig = {
       },
       {
         name:       "Nicholas J. Car",
-        url:        "https://people.csiro.au/Nicholas-Car",
         company:    "Formerly with CSIRO, now SURROUND Australia Pty Ltd",
         companyURL: "https://surroundaustralia.com",
         orcid:      "0000-0002-8742-7730",
