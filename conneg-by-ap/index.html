@@ -964,6 +964,115 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
   </section>
   <section id="appendices" class="appendix">
     <h2>Appendices</h2>
+    <section id="profiles">
+      <h3>Profiles of this specification</h3>
+      <p>
+        This specification contains a number of distinct <a>profiles</a> that are identified and described in words in
+        <a href="#conformance-profiles"></a>. This appendix presents descriptions of these profiles, and the relations
+        between them, according to the Profiles Vocabulary [[PROF]].
+      </p>
+      <p>
+        The code listing <a href="#profiles-in-prof"></a> describes this <em>Content Negotiation by Profile</em>
+        specification as a <code><a href="http://purl.org/dc/terms/Standard">dct:Standard</a></code> and the 5 profiles
+        of it in a profile hierarchy with the Abstract Model and Resource Representation Description profiles profiling
+        the specification directly and the other four profiles profiling the Abstract Model profile. This is also shown
+        graphically in <a href="#fig-profile-hierarchy"></a> below the code listing.
+      </p>
+      <pre id="profiles-in-prof" class="example nohighlight" aria-busy="false" aria-live="polite" title="Profiles of Content Negotiation by Profile described using PROF, in the RDF turtle notation">
+@prefix dct: &lt;http://purl.org/dc/terms/> .
+@prefix prof: &lt;http://www.w3.org/ns/dx/prof/> .
+@prefix role: &lt;http://www.w3.org/ns/dx/prof/role/> .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#> .
+@prefix cnpr: &lt;http://www.w3.org/ns/dx/conneg/profile/> .
+
+&lt;https://www.w3.org/TR/dx-prof-conneg/> a dct:Standard ;
+    rdfs:label "Content Negotiation by Profile" ;
+    rdfs:comment "The W3C Recommendation (a standard) for Content Negotiation by Profile" .
+
+cnpr:abstract a prof:Profile ;
+    prof:isProfileOf &lt;https://www.w3.org/TR/dx-prof-conneg/> ;
+    rdfs:label "Abstract Model Profile" ;
+    rdfs:comment "Abstract Model profile of Content Negotiation by Profile" .
+
+cnpr:http a prof:Profile ;
+    prof:isProfileOf &lt;https://www.w3.org/TR/dx-prof-conneg/> ;
+    rdfs:label "HTTP Realization Profile" ;
+    rdfs:comment "HTTP Realization profile of Content Negotiation by Profile" .
+
+cnpr:qsa a prof:Profile ;
+    prof:isProfileOf &lt;http://www.w3.org/ns/dx/conneg/profile/abstract> ;
+    rdfs:label "QSA Realization Profile" ;
+    rdfs:comment "QSA Realization profile of Content Negotiation by Profile" .
+
+cnpr:qsa-alt a prof:Profile ;
+    prof:isProfileOf &lt;http://www.w3.org/ns/dx/conneg/profile/abstract> ;
+    rdfs:label "QSA Alternate Keywords Realization Profile" ;
+    rdfs:comment "Query String Argument Alternate Keywords Realization profile of Content Negotiation by Profile" .
+
+cnpr:rrd a prof:Profile ;
+    prof:isProfileOf &lt;https://www.w3.org/TR/dx-prof-conneg/> ;
+    rdfs:label "Resource Representation Description Profile" ;
+    rdfs:comment "Resource Representation Description profile of Content Negotiation by Profile" .
+      </pre>
+      <figure id="fig-profile-hierarchy">
+        <a href="profile-hierarchy.svg">
+          <img src="profile-hierarchy.svg" alt="Profile hierarchy of this specification" style="width:500px;" />
+        </a>
+        <figcaption>
+          The specification and profiles of this Content Negotiation by Profile standard shown in a [[PROF] profiles
+          hierarchy.
+        </figcaption>
+      </figure>
+      <section id="conformancetoprofiles">
+        <h4>Demonstrating conformance to profiles</h4>
+        <p>
+          With the identification of profiles of this specification given in <a href="#conformance-profiles"></a> and
+          their relations described using the Profiles Vocabulary [[PROF]] in this appendix, it is possible for
+          resources to show conformance to the this specification or any of the profiles by using mechanisms recommended
+          in [[PROF]]. PROF's recommendation is that any resource, for example <code>&lt;/a/resource&gt;</code>,
+          wishing to claim conformance to a <a>specification</a> or a <a>profile</a> use the [[DCTERMS]]
+          <a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-conformsTo"><code>
+          dct:conformsTo</code></a> predicate like this:
+        </p>
+        <p>
+          <code>&lt;/a/resource&gt; dct:conformsTo &lt;SPEC_OR_PROFILE_URI&gt; .</code>
+        </p>
+        <p>
+          The <code>&lt;SPEC_OR_PROFILE_URI&gt;</code> may be this specification's URI but, in the best case, would be
+          one of the profile URIs listed in <a href="#conformance-profiles"></a> since it is much clearer what is being
+          conformed to when the profile URIs are cited.
+        </p>
+        <p>
+          The code listing <a href="#service-conforming"></a> shows an imaginary Web Service documented using
+          [[VOCAB-DCAT-2]] that includes a <code>dct:conformsTo</code> predicate, as VOCAB-DCAT-2 as well as [[PROF]]
+          suggests for use. Conformance here is claimed to be to the <em>QSA Alternate Keywords Realization</em> profile
+          indicated by the URI <code>http://www.w3.org/ns/dx/conneg/profile/qsa-alt</code>, as per
+          <a href="#conformance-profiles"></a>.
+        </p>
+        <pre id="service-conforming" class="example nohighlight" aria-busy="false" aria-live="polite"
+             title="An example Web Service claiming conformance to the QSA Alternate Keywords Realization profile of
+             this specification">
+&lt;/service/xx>
+    a dcat:DataService ;
+    dct:title "Web Service XX" ;
+    dct:description "A dummy Web Service claiming conformance to a profile of the Content
+                     Negotiation by Profile specification also annotated with other
+                     DCAT-2 recommended properties."@en ;
+
+    # URI for the QSA Alternate Keywords Realization profile
+    <strong>dct:conformsTo &lt;http://www.w3.org/ns/dx/conneg/profile/qsa-alt> ;</strong>
+
+    # it's a public service
+    dct:accessRights &lt;http://publications.europa.eu/resource/authority/access-right/PUBLIC>
+
+    # where the service actually is, online
+    dcat:endpointURL &lt;http://example.com/service/v2/xx> ;
+
+    # a human- and machine-readable documentation endpoint for the service using the
+    # Swagger UI system
+    dcat:endpointDescription &lt;http://example.com/service/v2/xx/swagger> ;
+      </section>
+    </section>
     <section id="requirements">
       <h3>Requirements</h3>
       <p>
