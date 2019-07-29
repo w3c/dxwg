@@ -560,7 +560,7 @@ Content-Profile: http://example.org/profile/A
 	  In either case, a server implementing
           content negotiation by profile SHOULD return an HTTP <code>Link</code> header containing information about the
           default representation of that resource and information about any alternate representations of that
-          resource that that conform to potentially other profiles. The returned representation will be identified by <code>rel="self"</code>, other representations by
+          resource conforming to other profiles. The returned representation will be identified by <code>rel="self"</code>, other representations by
           <code>rel="alternate"</code>.
         </p>
         <p>As an example, consider the resource <code>http://example.org/a/resource</code> available
@@ -570,19 +570,55 @@ Content-Profile: http://example.org/profile/A
           both available in the profiles <code>urn:example:profile:1</code> and <code>urn:example:profile:2</code>.
         </p>
         <p>
-          All representations of <code>/a/resource</code> have Content-Location URLs. This results in the following matrix:
-        </p>
-        <table>
-          <tr><th>Media Type / Profile</th><th>urn:example:profile:1</th><th>urn:example:profile:2</th></tr>
-          <tr><th>text/html</th><td>http://example.org/a/resource.html</td><td>http://example.org/a/resource.html</td></tr>
-          <tr><th>text/turtle</th><td>http://example.org/a/resource.prof1.ttl</td><td>http://example.org/a/resource.prof2.ttl</td></tr>
-          <tr><th>application/xml</th><td>http://example.org/a/resource.prof1.xml</td><td>http://example.org/a/resource.prof2.xml</td></tr>
-        </table>
-        <p>
           Assuming that a request without an <code>Accept-Profile</code> header per default delivers content conforming to
-          <code>urn:example:profile:1</code>, an HTTP request/response pair would look as follows:
+          <code>urn:example:profile:1</code>, an HTTP request/response pair would look as per
+          <a href="#eg-link-headers"></a>.
         </p>
-        <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Using a Link-header to point to a list of available profiles">
+        <pre id="eg-link-headers" class="example nohighlight" aria-busy="false" aria-live="polite"
+             title="Server returns a Link header to indicate available profiles">
+HEAD /a/resource HTTP/1.1
+Accept: text/turtle
+[more request headers]
+
+---
+
+HTTP/1.1 200 OK
+Content-Type: text/turtle
+Content-Profile: urn:example:profile:1
+Link:
+  &lt;http://example.org/a/resource&gt;;
+          rel="self";
+          type="text/turtle";
+          profile="urn:example:profile:1",
+  &lt;http://example.org/a/resource&gt;;
+          rel="alternate";
+          type="text/turtle";
+          profile="urn:example:profile:2",
+  &lt;http://example.org/a/resource&gt;;
+          rel="alternate";
+          type="application/xml";
+          profile="urn:example:profile:1",
+  &lt;http://example.org/a/resource&gt;;
+          rel="alternate";
+          type="application/xml";
+          profile="urn:example:profile:2",
+  &lt;http://example.org/a/resource&gt;;
+          rel="alternate";
+          type="text/html"
+[more response headers]
+        </pre>
+        <p>
+          In <a href="#eg-link-headers"></a>, for each of the different Media Type / Profile combinations, the URI of
+          the resource remains unchanged and it is the <code>Accept</code> and <code>Accept-Profile</code> headers for
+          Media Type and Profile respectively that alter the returned response.
+        </p>
+        <p>
+          A server MAY use <code>Content-Location</code> HTTP headers to indicate direct links to representations of the
+          resource according to Media Type / Profile combinations and, if it does so, it may replace the unchanged URI
+          in the Link header with those direct URIs, as per example <a href=""></a>.
+        </p>
+        <pre id="eg-link-headers-loc" class="example nohighlight" aria-busy="false" aria-live="polite"
+             title="Server returns Link header with Content-Location URIs for some Profiles and Media Types">
 HEAD /a/resource HTTP/1.1
 Accept: text/turtle
 [more request headers]
@@ -593,12 +629,28 @@ HTTP/1.1 200 OK
 Content-Type: text/turtle
 Content-Location: http://example.org/a/resource.prof1.ttl
 Content-Profile: urn:example:profile:1
-Link: &lt;http://example.org/a/resource.prof1.ttl&gt;; rel="self"; type="text/turtle"; profile="urn:example:profile:1",
-  &lt;http://example.org/a/resource.prof2.ttl&gt;; rel="alternate"; type="text/turtle"; profile="urn:example:profile:2",
-  &lt;http://example.org/a/resource.prof1.xml&gt;; rel="alternate"; type="application/xml"; profile="urn:example:profile:1",
-  &lt;http://example.org/a/resource.prof2.xml&gt;; rel="alternate"; type="application/xml"; profile="urn:example:profile:2",
-  &lt;http://example.org/a/resource.html&gt;; rel="alternate"; type="text/html"
+Link:
+  <strong>&lt;http://example.org/a/resource.prof1.ttl&gt;;</strong>
+          rel="self"; type="text/turtle";
+          profile="urn:example:profile:1",
+  &lt;http://example.org/a/resource&gt;;
+          rel="alternate";
+          type="text/turtle";
+          profile="urn:example:profile:2",
+  <strong>&lt;http://example.org/a/resource.prof1.xml&gt;;</strong>
+          rel="alternate";
+          type="application/xml";
+          profile="urn:example:profile:1",
+  &lt;http://example.org/a/resource&gt;;
+          rel="alternate";
+          type="application/xml";
+          profile="urn:example:profile:2",
+  &lt;http://example.org/a/resource&gt;;
+          rel="alternate";
+          type="text/html"
 [more response headers]
+
+[Content-Location URIs are only shown for resources conforming to profile &lt;urn:example:profile:1>]
         </pre>
         <div class="issue" data-number="290"></div>
         <section id="listprofiles-tokens">
