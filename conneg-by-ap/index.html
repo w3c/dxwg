@@ -50,10 +50,14 @@
     <p>
       When online information about a resource adheres to one or more profiles, methods described here allow
       clients to list those profiles and request content according to one or more of them in order of preference.
-      For example, a catalog may offer a dataset description using alternative representations using [[VOID]], [[VOCAB-DATA-CUBE]] and [[VOCAB-DCAT]]. Furthermore, the [[VOCAB-DCAT]] representation might conform to the [[DCAT-AP]] profile, the [[GeoDCAT-AP]] profile and also an organisation specific profile "MyOrgDCATProfile" which constrain various elements. These profiles may be related - for example "MyOrgDCATProfile" may be a further profile of [[GeoDCAT-AP]].
-      A request for the information about this
-      dataset description resource may ask for the list of profiles available, or it may ask specifically for a response adhering to, for example [[GeoDCAT-AP]]. When no profile or an unsupported profile is requested, a server returns default content, that
-      is, content conforming to the default profile supported by the server.
+      For example, a catalog may offer a dataset description using alternative representations using [[VOID]],
+      [[VOCAB-DATA-CUBE]] and [[VOCAB-DCAT]]. Furthermore, the [[VOCAB-DCAT]] representation might conform to the
+      [[DCAT-AP]] profile, the [[GeoDCAT-AP]] profile and also an organisation specific profile "MyOrgDCATProfile"
+      which constrains various elements. These profiles may be related - for example "MyOrgDCATProfile" may be a
+      further profile of [[GeoDCAT-AP]]. A request for the information about this dataset description resource may
+      ask for the list of profiles available, or it may ask specifically for a response adhering to, for example
+      [[GeoDCAT-AP]]. When no profile or an unsupported profile is requested, a server returns default content,
+      that is, content conforming to the default profile supported by the server.
     </p>
     <p class="issue" data-number="990">
         Where documents contain data specifications (specifying requirements for certain types of data) in addition to other content, such as recommendations, annotations, usage notes) then this can be accomodated by publishing explicit identifiers for each section that represents a data specification that can be conformed to. All such specifications can be regarded as profiles, and communities may choose to reference the document as a profile provided that it defines the means to determine conformance to the document as a whole.
@@ -67,10 +71,12 @@
       as when manually entering requests into web browsers. This document also provides guidance for both HTTP and non-HTTP methods
       of content negotiation and ensures they all adhere to a single functional specification, ensuring their functional equivalency.
     </p>
-<!--   <p>
+    <!--
+    <p>
       Guidance for the creation of <a>profile</a>s is provided in the [[PROF-GUIDANCE]] document created
       by the Dataset Exchange Working Group (DXWG).
-    </p> -->
+    </p>
+    -->
     <p>
       Describing the parts of profiles and their relation to other profiles is the function of the Profiles Vocabulary
       [[PROF]], also produced by the DXWG.
@@ -173,38 +179,40 @@
   <section id="definitions">
     <h2>Definitions</h2>
     <dl>
-      <dt><dfn>specification</dfn></dt>
+      <dt><dfn data-lt="specification">specification</dfn></dt>
       <dd>
         <p>
-          An act of identifying something precisely or of stating a precise requirement. - <a href="https://en.oxforddictionaries.com/definition/specification">Oxford English Dictionary</a>
+          A basis for comparison; a reference point against which other things can be evaluated.
         </p>
         <p>
-          One form of a <em>specification</em> is a <em>standard</em> which is a "basis for comparison; a reference
-          point against which other things can be evaluated" - [[DCTERMS]]
+          <em>Source: DCMI Metadata Terms [[DCTERMS]]'s definition for a <a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-Standard"><code>Standard</code></a>.</em>
         </p>
       </dd>
-      <dt><dfn>profile</dfn></dt>
+      <dt><dfn data-lt="data specification">data specification</dfn></dt>
       <dd>
         <p>
-          A named set of constraints on one or more identified base <em>specifications</em>,
-          including the identification of any implementing subclasses of datatypes,
-          semantic interpretations, vocabularies, options and parameters of those base specifications
-          necessary to accomplish a particular function.
+          A <a>specification</a>, with human- and/or machine-processable representations, that defines the content and structure of data used in a given context.
+        </p>
+        <p><em>Source: deliberations of the DXWG.</em></p>
+      </dd>
+      <dt><dfn data-lt="profile">data profile</dfn></dt>
+      <dd>
+        <p>
+          A <a>data specification</a> that constrains, extends, combines, or provides guidance or explanation about the usage of other data specifications.
         </p>
         <p>
-          This definition includes what are often called "application profiles", "metadata application
-          profiles", or "metadata profiles".
+          This definition includes what are sometimes called "application profiles", "metadata application
+          profiles", or "metadata profiles". In this document, these, and "data profiles", are all referred to as just "profiles".
         </p>
-        <p><em>Source: deliberations of the DXWG. See <a href="https://www.w3.org/2017/dxwg/wiki/ProfileContext">ProfileContext wiki page</a>.</em></p>
+        <p><em>Source: deliberations of the DXWG.</em></p>
       </dd>
       <dt><dfn>client</dfn></dt>
       <dd>
-        A program that establishes a connection to a server for the purpose of sending one or more HTTP requests
-        [[RFC7230]]
+        A program that establishes a connection to a <a>server</a> for the purpose of sending one or more HTTP requests. [[RFC7230]]
       </dd>
       <dt><dfn>server</dfn></dt>
       <dd>
-        A program that accepts connections in order to service HTTP requests by sending HTTP responses. [[RFC7230]]
+        A program that accepts connections in order to service HTTP <a>requests</a> by sending HTTP <a>responses</a>. [[RFC7230]]
       </dd>
       <dt><dfn>resource</dfn></dt>
       <dd>
@@ -212,13 +220,13 @@
         document, an image, a source of information with a consistent purpose. [[RFC3986]]
       </dd>
       <dt><dfn>metadata</dfn></dt>
-      <dd>Information that is supplied about a resource [[RFC3986]]</dd>
+      <dd>Information that is supplied about a resource. [[RFC3986]]</dd>
       <dt><dfn>request</dfn></dt>
-      <dd>A message sent over the Internet, from a <em>client</em> to a <em>server</em>, for a information about a <em>resource</em> [[RFC7230]]</dd>
+      <dd>A message sent over the Internet, from a <em>client</em> to a <em>server</em>, for a information about a <em>resource</em>. [[RFC7230]]</dd>
       <dt><dfn>response</dfn></dt>
-      <dd>A message sent over the Internet, from a <em>server</em> to a <em>client</em> answering a <em>request</em> for information about a <em>resource</em> [[RFC7230]]</dd>
+      <dd>A message sent over the Internet, from a <em>server</em> to a <em>client</em> answering a <em>request</em> for information about a <em>resource</em>. [[RFC7230]]</dd>
       <dt><dfn>token</dfn></dt>
-      <dd>A short name identifying something, in the context of this document a <a>profile</a></dd>
+      <dd>A short name identifying something, in the context of this document, a <a>profile</a>.</dd>
     </dl>
   </section>
   <section id="motivation" class="informative">
