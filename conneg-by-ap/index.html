@@ -770,30 +770,52 @@ Content-Profile: urn:example:profile:1
     </section>
     <section id="qsa">
       <h3>URL Query String Arguments</h3>
-      <div class="issue" data-number="594"></div>
       <div class="issue" data-number="538"></div>
       <p>
-        While the HTTP-header approach to profiles enables fully automated retrieval of data conforming
-	to a desired profile, it is also advisable to enable humans to select data by profile without
-	requiring direct manipulation of request header content. This can be accomplished by existing
-	web development methods where an API supports a graphical interface. The user can be presented
-	with a list of available profiles and given the choice of which to retrieve for the dataset of
-	interest. They can even be asked to indicate a ranked choice of possible profiles, which could
-	then be used to retrieve multiple resources' data matching a query.
+        While the HTTP Realization's approach to profile negotiation enables fully automated content negotiation by
+        profile, the motivating use cases for this specification included human actionable negotiation. Also, as related
+        in <a href="#relatedwork"></a>, previous and existing systems already allow for human-actionable content
+        negotiation by profile by a number of means.
       </p>
       <p>
-	As one example of how an API for such a service can be implemented, a Query String Argument (QSA)
-	realization of the <a href="#abstractmodel">Abstract Model</a> is presented here. Unlike the HTTP-header
-	realization, which is also the subject of an independent IETF document [[PROF-IETF]], this realization
-	is fully specified here but it is not normative. This realization does not preclude other URL schemes,
-	or even other QSA schemes, for profile negotiation, the general requirement being that any scheme
-	implements the functions of the Abstract Model. Whatever specific scheme is used, it should be fully
-	documented and discoverable.
+        To both allow for human-actionable content negotiation by profile and also to show how mechanics similar to
+        existing systems might fulfill all aspects of this specification's Abstract Model, here we present a Query
+        String Argument (QSA) Realization of the Abstract Model. This Realization is functionally equivalent to the
+        HTTP Realization in that all required functions of the Abstract Model are supported however it is not mutually
+        exclusive of the HTTP, or any other, Realization: a server may implement multiple Realizations in parallel as
+        long as reach Realization fully supports the Abstract Model.
       </p>
+      <p>
+	      Unlike the HTTP-header Realization which is also the subject of an independent IETF document [[PROF-IETF]],
+        this QSA Realization is fully specified here. Two forms of this QSA approach are presented too: the first is the
+        fixed keyword "QSA Realization" and the second is the "QSA Alternate Keywords Realization" according to which
+        servers may implement any keywords they choose. These two forms, the Abstract Model and the HTTP Realization are
+        all identified in <a href="#conformance-profiles"></a> and conformance of a server to any one or multiple of
+        these <a>profiles</a> of this <a>specification</a> may be demonstrated as per
+        <a href="#conformancetoprofiles"></a>. Note that it is not required that a server indicates conformance to one
+        or more profiles of this specification since not all servers will have the ability to either produce information
+        as per <a href="#conformancetoprofiles"></a> or to be able to be documented in that way elsewhere (e.g. a
+        services catalogue).
+      </p>
+      <h4>Implementation Details</h4>
       <p>
         A query string is a part of a URL which assigns values to specified parameters. QSAs are commonly used within
         web browsers by humans and in other <em>client</em>/<em>server</em> situations to deliver extra information to a
-        <em>server</em>.
+        <em>server</em>. Query string key/value pairs are separated from the scheme, authority and path of a URI by
+        a question mark symbol, <code>?</code>, and consist of key/value pairs connected by an equals symbol,
+        <code>=</code>, and separated from each other key/value pair by an ampersand symbol, <code>&amp;</code>, as per
+        [[RFC3986]].
+      </p>
+      <p>
+        An example URI with profile negotiation by QSA demonstration elements is:
+      </p>
+      <p>
+        <code>http://example.com/path/to/a/resource?<strong>_profile=prof-01</strong>&<strong>_mediatype=text/turtle</strong></code>
+      </p>
+      <p>
+        In the example URI with QSA above, the profile requested for the resource representation is indicated by the
+        token <code>prof-01</code> and the Media Type is RDF (turtle) indicated by the
+        <a href="http://www.iana.org/assignments/media-types">IANA Media Types list</a> token <code>text/turtle</code>.
       </p>
       <div class="note" title="Maximum length of URLs">
 	<p>
@@ -809,9 +831,12 @@ Content-Profile: urn:example:profile:1
 	  for a longer discussion of issues related to URL length.
 	</p>
       </div>
-      <p><strong><em>Key naming</em></strong></p>
+      <h4>Key naming</h4>
       <div class="issue" data-number="511"></div>
       <p>
+        This Realization includes two different profiles of this specification that describe two different conformance
+        targets which are based on key naming in QSA key/value pairs.
+        conforming to it. for both
         When content negotiation by profile is to take place using QSAs, the <em>request</em>s and <em>response</em>s
         of the <a href="#abstractmodel">Abstract Model</a> can be implemented by using key/value pairs using key terms of the implementer's choosing.
 	      In this realization, <code>_profile</code> and <code>_mediatype</code> are used
@@ -835,7 +860,7 @@ Content-Profile: urn:example:profile:1
           for Media Types based on the IANA registry's tokens.
         </p>
       </div>
-      <p><strong><em>Resource URL</em></strong></p>
+      <h4>Resource URL</h4>
       <p>
         Resource URLs for which QSA-based profile negotiation is taking place should not themselves be QSA values
         of other resource URIs in any QSA-based realization. Such mechanics may be used internally but are best kept transparent to the
