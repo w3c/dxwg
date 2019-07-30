@@ -770,118 +770,121 @@ Content-Profile: urn:example:profile:1
     </section>
     <section id="qsa">
       <h3>URL Query String Arguments</h3>
-      <div class="issue" data-number="538"></div>
-      <p>
-        While the HTTP Realization's approach to profile negotiation enables fully automated content negotiation by
-        profile, the motivating use cases for this specification included human actionable negotiation. Also, as related
-        in <a href="#relatedwork"></a>, previous and existing systems already allow for human-actionable content
-        negotiation by profile by a number of means.
-      </p>
-      <p>
-        To both allow for human-actionable content negotiation by profile and also to show how mechanics similar to
-        existing systems might fulfill all aspects of this specification's Abstract Model, here we present a Query
-        String Argument (QSA) Realization of the Abstract Model. This Realization is functionally equivalent to the
-        HTTP Realization in that all required functions of the Abstract Model are supported however it is not mutually
-        exclusive of the HTTP, or any other, Realization: a server may implement multiple Realizations in parallel as
-        long as reach Realization fully supports the Abstract Model.
-      </p>
-      <p>
-	      Unlike the HTTP-header Realization which is also the subject of an independent IETF document [[PROF-IETF]],
-        this QSA Realization is fully specified here. Two forms of this QSA approach are presented too: the first is the
-        fixed keyword "QSA Realization" and the second is the "QSA Alternate Keywords Realization" according to which
-        servers may implement any keywords they choose. These two forms, the Abstract Model and the HTTP Realization are
-        all identified in <a href="#conformance-profiles"></a> and conformance of a server to any one or multiple of
-        these <a>profiles</a> of this <a>specification</a> may be demonstrated as per
-        <a href="#conformancetoprofiles"></a>. Note that it is not required that a server indicates conformance to one
-        or more profiles of this specification since not all servers will have the ability to either produce information
-        as per <a href="#conformancetoprofiles"></a> or to be able to be documented in that way elsewhere (e.g. a
-        services catalogue).
-      </p>
-      <h5>QSA URI description</h5>
-      <p>
-        A query string is a part of a URL which assigns values to specified parameters. QSAs are commonly used within
-        web browsers by humans and in other <a>client</a>/<a>server</a> situations to deliver extra information to a
-        <em>server</em>. Query string key/value pairs are separated from the scheme, authority and path of a URI by
-        a question mark symbol, <code>?</code>, and consist of key/value pairs connected by an equals symbol,
-        <code>=</code>, and separated from each other key/value pair by an ampersand symbol, <code>&amp;</code>, as per
-        [[RFC3986]].
-      </p>
-      <p>
-        An example URI with profile negotiation by QSA demonstration elements is:
-      </p>
-      <p>
-        <code>http://example.com/path/to/a/resource?<strong>_profile=prof-01</strong>&<strong>_mediatype=text/turtle</strong></code>
-      </p>
-      <p>
-        In the example URI with QSA above, the profile requested for the resource representation is indicated by the
-        token <code>prof-01</code> and the Media Type is RDF (turtle) indicated by the
-        <a href="http://www.iana.org/assignments/media-types">IANA Media Types list</a> token <code>text/turtle</code>.
-        As per <a href="#listprofiles"></a>'s allowance, a <em>token</em> is used here to identify the profile -
-        <code>prof-01</code> - but that token MUST be mappable to a URI within one particular client/server session and
-        mechanics for that are described below.
-      </p>
-      <div class="note" title="Maximum length of URLs">
-	<p>
-	  Since Query String Arguments use URIs (or URLs) to convey important information,
-	  implementers should ensure that the total length of the URL
-	  does not exceed possible length restrictions.
-	  [[RFC7230]] <a data-cite="RFC7230#section-3.1.1">§3.1.1</a> recommends
-	  that senders and recipients support request lines of at least 8,000 octets.
-	  Some client and server implementations, however,
-	  cannot accept URLs longer than 2,000 characters
-	  and e. g. the Sitemap protocol has a length limit of 2,048 characters in a URL.
-	  Cf. <a href="https://stackoverflow.com/questions/417142/what-is-the-maximum-length-of-a-url-in-different-browsers">this question on stackoverflow</a>
-	  for a longer discussion of issues related to URL length.
-	</p>
-      </div>
-      <h5>Key naming</h5>
-      <div class="issue" data-number="511"></div>
-      <p>
-        This Realization includes two different profiles of this specification that describe two different conformance
-        targets which are differentiated by the QSA key naming. The two profiles are the "QSA Realization" and "QSA
-        Alternate Keywords Realization" (see <a href="#confromance-profiles"></a>).
-      </p>
-      <p>
-        To conform to the "QSA Realization" profile, the QSA key <code>_profile</code> must be used to indicate a
-        profile token or URI and <code>_mediatype</code> must be used to indicate a resource representation's Media
-        Type. Other content negotiation dimensions are not specified here but other specifications or conventions are
-        suggested such as <code>lang</code> or perhaps <code>_lang</code> to indicate a requested language.
-      </p>
-      <p>
-        When conforming to the profile "QSA Alternate Keywords Realization", any key values to indicate profile and
-        Media Type may be used however this profile requires that a mechanism to discover what keys are used is supplied
-        and this is detailed below in <a href="#xxxx"></a>.
-      </p>
-      <h5>Token use</h5>
-      <p>
-        Currently, the convention in HTTP content negotiation by Media Type uses tokens for Media Types, such as
-        <code>text/html</code> or <code>application/ld+json</code> with the tokens registered at
-        <a href="http://www.iana.org/assignments/media-types">IANA's Media Types list</a> and this specification
-        indicates that implementers SHOULD use tokens from that list for Media Type identifiers.
-      </p>
-      <p>
-        There is no proposal to create a central register of profiles, as this is thought by these authors to be
-        unsustainable in the long term, given the likely numbers of profiles to be established and likely community-
-        specific nature of profiles (individual communities will create profiles for their own needs that will not be
-        widely relevant).
-      </p>
-      <p>
-        For this reason, the QSA Realizations of this specification allow universally unique and un-registered (no
-        central registry) URIs or tokens to be used to identify profiles.
-      </p>
-      <p>
-        Several initiatives exist that have created URIs for Media Types, such as <a href="https://conneg.info">
-        conneg.info</a> based on IANA's tokens. As per the URI or token allowance for profiles, these URIs MAY be
-        used to indicate Media Types.
-      </p>
-      <h5>Resource URL</h5>
-      <p>
-        Resource URLs for which QSA-based profile negotiation is taking place SHOULD NOT themselves be QSA values
-        of other resource URIs in any QSA-based realization. Such mechanics may be used internally and are used by
-        legacy systems for profile negotiation but are best hidden from to the <em>client</em> applications to make
-        conformance to these QSA profiles more recognizable. <a href="#eg-resource-url"></a> shows this.
-      </p>
-      <pre id="eg-resource-url"
+      <section id="qsa-description">
+        <h4>QSA Realization description</h4>
+        <div class="issue" data-number="538"></div>
+        <p>
+          While the HTTP Realization's approach to profile negotiation enables fully automated content negotiation by
+          profile, the motivating use cases for this specification included human actionable negotiation. Also, as related
+          in <a href="#relatedwork"></a>, previous and existing systems already allow for human-actionable content
+          negotiation by profile by a number of means.
+        </p>
+        <p>
+          To both allow for human-actionable content negotiation by profile and also to show how mechanics similar to
+          existing systems might fulfill all aspects of this specification's Abstract Model, here we present a Query
+          String Argument (QSA) Realization of the Abstract Model. This Realization is functionally equivalent to the
+          HTTP Realization in that all required functions of the Abstract Model are supported however it is not mutually
+          exclusive of the HTTP, or any other, Realization: a server may implement multiple Realizations in parallel as
+          long as reach Realization fully supports the Abstract Model.
+        </p>
+        <p>
+          Unlike the HTTP-header Realization which is also the subject of an independent IETF document [[PROF-IETF]],
+          this QSA Realization is fully specified here. Two forms of this QSA approach are presented too: the first is the
+          fixed keyword "QSA Realization" and the second is the "QSA Alternate Keywords Realization" according to which
+          servers may implement any keywords they choose. These two forms, the Abstract Model and the HTTP Realization are
+          all identified in <a href="#conformance-profiles"></a> and conformance of a server to any one or multiple of
+          these <a>profiles</a> of this <a>specification</a> may be demonstrated as per
+          <a href="#conformancetoprofiles"></a>. Note that it is not required that a server indicates conformance to one
+          or more profiles of this specification since not all servers will have the ability to either produce information
+          as per <a href="#conformancetoprofiles"></a> or to be able to be documented in that way elsewhere (e.g. a
+          services catalogue).
+        </p>
+        <section id="qsa-uri">
+          <h5>QSA URI description</h5>
+          <p>
+            A query string is a part of a URL which assigns values to specified parameters. QSAs are commonly used within
+            web browsers by humans and in other <a>client</a>/<a>server</a> situations to deliver extra information to a
+            <em>server</em>. Query string key/value pairs are separated from the scheme, authority and path of a URI by
+            a question mark symbol, <code>?</code>, and consist of key/value pairs connected by an equals symbol,
+            <code>=</code>, and separated from each other key/value pair by an ampersand symbol, <code>&amp;</code>, as per
+            [[RFC3986]].
+          </p>
+          <p>
+            An example URI with profile negotiation by QSA demonstration elements is:
+          </p>
+          <p>
+            <code>http://example.com/path/to/a/resource?<strong>_profile=prof-01</strong>&<strong>_mediatype=text/turtle</strong></code>
+          </p>
+          <p>
+            In the example URI with QSA above, the profile requested for the resource representation is indicated by the
+            token <code>prof-01</code> and the Media Type is RDF (turtle) indicated by the
+            <a href="http://www.iana.org/assignments/media-types">IANA Media Types list</a> token <code>text/turtle</code>.
+            As per <a href="#listprofiles"></a>'s allowance, a <em>token</em> is used here to identify the profile -
+            <code>prof-01</code> - but that token MUST be mappable to a URI within one particular client/server session and
+            mechanics for that are described below.
+          </p>
+          <div class="note" title="Maximum length of URLs">
+            If Query String Arguments may use URIs (or URLs) to convey important information, implementers should ensure
+            that the total length of the total requesting URI within which the QSAs using URIs/URLs exist does not exceed
+            length restrictions. [[RFC7230]]'s <a data-cite="RFC7230#section-3.1.1">§3.1.1</a> recommends that senders and
+            recipients support request lines of at least 8,000 octets. Some client and server implementations, however,
+            cannot accept URLs longer than 2,000 characters, for example, the Sitemap protocol which has a length limit of
+            2,048 characters in a URL. Cf.
+            <a href="https://stackoverflow.com/questions/417142/what-is-the-maximum-length-of-a-url-in-different-browsers">
+            this question on stackoverflow</a> for a longer discussion of issues related to URL length.
+          </div>
+        </section>
+        <section id="qsa-key-naming">
+          <h5>Key naming</h5>
+          <div class="issue" data-number="511"></div>
+          <p>
+            This Realization includes two different profiles of this specification that describe two different conformance
+            targets which are differentiated by the QSA key naming. The two profiles are the "QSA Realization" and "QSA
+            Alternate Keywords Realization" (see <a href="#confromance-profiles"></a>).
+          </p>
+          <p>
+            To conform to the "QSA Realization" profile, the QSA key <code>_profile</code> must be used to indicate a
+            profile token or URI and <code>_mediatype</code> must be used to indicate a resource representation's Media
+            Type. Other content negotiation dimensions are not specified here but other specifications or conventions are
+            suggested such as <code>lang</code> or perhaps <code>_lang</code> to indicate a requested language.
+          </p>
+        <p>
+          When conforming to the profile "QSA Alternate Keywords Realization", any key values to indicate profile and
+          Media Type may be used however this profile requires that a mechanism to discover what keys are used is supplied
+          and this is detailed below in <a href="#xxxx"></a>.
+        </p>
+        </section>
+        <section id="qsa-token-use">
+        <h5>Token use</h5>
+          <p>
+            Currently, the convention in HTTP content negotiation by Media Type uses tokens for Media Types, such as
+            <code>text/html</code> or <code>application/ld+json</code> with the tokens registered at
+            <a href="http://www.iana.org/assignments/media-types">IANA's Media Types list</a> and this specification
+            indicates that implementers SHOULD use tokens from that list for Media Type identifiers.
+          </p>
+          <p>
+            There is no proposal to create a central register of profiles, as this is thought by these authors to be
+            unsustainable in the long term, given the likely numbers of profiles to be established and likely community-
+            specific nature of profiles (individual communities will create profiles for their own needs that will not be
+            widely relevant).
+          </p>
+          <p>
+            For this reason, the QSA Realizations of this specification allow universally unique and un-registered (no
+            central registry) URIs or tokens to be used to identify profiles.
+          </p>
+          <p>
+            Several initiatives exist that have created URIs for Media Types, such as <a href="https://conneg.info">
+            conneg.info</a> based on IANA's tokens. As per the URI or token allowance for profiles, these URIs MAY be
+            used to indicate Media Types.
+          </p>
+          <h5>Resource URL</h5>
+          <p>
+            Resource URLs for which QSA-based profile negotiation is taking place SHOULD NOT themselves be QSA values
+            of other resource URIs in any QSA-based realization. Such mechanics may be used internally and are used by
+            legacy systems for profile negotiation but are best hidden from to the <em>client</em> applications to make
+            conformance to these QSA profiles more recognizable. <a href="#eg-resource-url"></a> shows this.
+          </p>
+          <pre id="eg-resource-url"
            class="example nohighlight" aria-busy="false" aria-live="polite"
            title="Resource URLs must not, themselves, be parameters of other URLs">
 For the representation of Resource X, according to Profile Y, in Media Type Z:
@@ -892,7 +895,9 @@ GET /single/endpoint?resource=http://example.org/resource=X&amp;_profile=Y&amp;_
 Use:
 GET /resource/X?_profile=Y&amp;_mediatype=Z HTTP/1.1
       </pre>
-      <section id="listprofilesqsa">
+        </section>
+      </section>
+      <section id="qsa-listprofiles">
         <h4>list profiles</h4>
         <p>
           For conformance to the "QSA Realization Profile", the <code>_profile</code> QSA key SHOULD be supported by the
@@ -902,7 +907,8 @@ GET /resource/X?_profile=Y&amp;_mediatype=Z HTTP/1.1
         <div class="issue" data-number="589"></div>
         <p>
           For conformance to the "QSA Alternate Keywords Realization", other key/value pairs MAY be used, such as
-          <code>_view=alternates</code>.
+          <code>_view=alternates</code> but then the implementing server MUST supply a means of discovering that key,
+          as per <a href="#qsa-keydiscovery"></a>.
         </p>
         <p>
           The <em>server's</em> <a>response</a> to a <em>list profiles</em> <a>request</a> SHOULD be to present a list
@@ -924,7 +930,7 @@ GET /resource/X?_profile=Y&amp;_mediatype=Z HTTP/1.1
         <p>
           An example <em>request</em> for the alternate profile representations of a <em>resource</em> to be delivered
           as HTTP body content as well as HTTP header content in the JSON format could look like
-          <a href="eg-list-profiles-mediatype"></a>
+          <a href="#eg-list-profiles-mediatype"></a>
         </p>
         <pre id="eg-list-profiles-mediatype" class="example nohighlight" aria-busy="false" aria-live="polite"
              title="Requesting a list of profiles for a resource by QSA in HTML">
@@ -932,27 +938,30 @@ GET http://example.org/resources/a?_profile=all&amp;_mediatype=application/json 
 
 ---
 
-# the response shows that representations of the resource can be delivered according
+# The response shows that representations of the resource can be delivered according
 # to two profiles identified by the tokens <em>profile-x</em> &amp; <em>profile-y</em>
-# and that <em>profile-x</em>-conformant representations are available in XML &mp; JSON
+# and that <em>profile-x</em>-conformant representations are available in XML &amp; JSON
 # where as <em>profile-y</em>-conformant representations are only available in XML
 
-# the content in the JSON body of the response is equivalent to that of the Link header
+# The content in the JSON body of the response is equivalent to that of the Link header
+
+# Both the Link header and the JSON body include profile URI/token mappings
 
 HTTP/1.1 200 OK
 Content-Type: application/json
+Content-Profile: &lt;http://www.w3.org/ns/dx/conneg/profile/qsa>
 Link:
   &lt;http://example.org/resources/a?_profile=profile-x&amp;_mediatype=application/json>;
           rel="self"; type="text/html";
-          profile="profile-x",
+          profile="http://otherexample.org/profile/x",
   &lt;http://example.org/resources/a?_profile=profile-x&amp;_mediatype=text/xml>;
           rel="alternate";
           type="text/xml";
-          profile="profile-x",
+          profile="http://otherexample.org/profile/x",
   &lt;http://example.org/resources/a?_profile=profile-y&amp;_mediatype=text/xml>;
           rel="alternate";
           type="text/xml";
-          profile="profile-y"
+          profile="http://otherexample.org/profile/y"
 
 {
     "resource": "http://example.org/resources/a",
@@ -971,40 +980,64 @@ Link:
 }
         </pre>
       </section>
-      <section id="getresourcebyprofileqsa">
+      <section id="qsa-getresourcebyprofile">
         <h4>get resource by profile</h4>
-        <div class="issue" title="To be completed"></div>
-
-        <p><strong><em>Expressing profile preference</em></strong></p>
         <p>
-          A <em>server</em> implementing <em>profile</em> listing for <em>resource</em>s could allow the
-          requester to indicate preferences by allowing the QSA indicating the desired
-          profile, e.g., <code>_profile</code>, to have a comma-separated list as its value so, for a
-          <em>client</em> desiring representations of <code>/a/resource</code> according to profiles with tokens
-          <code>aaa</code>, <code>bbb</code> &amp; <code>ccc</code> we have:
-        </p>
-        <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Requesting a list of profiles for a resource by QSA in HTML">
-  GET /a/resource?_profile=aaa,bbb,ccc HTTP/1.1
-        </pre>
-        <p>
-          Servers can support any combination of profile URIs or tokens for this
-		(e.g. <code>aaa,http://example.org/profile-x,bbb</code>).
-		However, in this situation, profile URIs containing commas would need to be escaped.
+          To be conformant with the "QSA Realization" profile of this specification, a <em>server</em> MUST allow
+          clients to request resources according to profiles they identify with a <code>_profile</code> query string.
+          Since either <a>tokens</a> or URIs may be used to identify a profile, servers MUST accept either. Servers MAY
+          accept both encoded and un-encoded URIs but MAY also only accept one or the other.
         </p>
         <p>
-          Similarly, a <em>server</em> implementing multiple Media Type return formats for its <em>profile</em> listing should
-          allow a client to specify a preference order for Media Types and also for other dimensions of content
-          negotiation, such as language. When using a QSA-only API, Media Type preferences (and language and others in a
-          similar fashion) can be specified in a comma-separated list form, most preferred to least, such that
-          a client requesting profiles as <code>aaa,bbb,ccc</code> will receive a resource that meets the requirements of profile
-	  <code>aaa</code> if it is available, else one that meets profile <code>bbb</code> if that is available, and so on.
+          To be conformant with the "QSA Alternate Keywords Realization" profile of this specification, a
+          <em>server</em> MUST allow clients to request resources according to profiles they identify with a key of the
+          server implementor's choosing but then the server MUST also supply a means of discovering that key, as per
+          <a href="#qsa-keydiscovery"></a>.
+        </p>
+        <p>
+          A QSA <em>server</em> implementing <em>get resource by profile</em> SHOULD allow a client to indicate
+          profile preferences by allowing ordered profile identifiers in the QSA key/value pair for profiles. For
+          example, a client preferring <em>profile-z</em> but also accepting <em>profile-y</em> and <em>profile-x</em>,
+          in that preference order, could make a request using comma separation of the profile tokes, such as
+          <code>GET http://example.com/resource/a?_profile=profile-z,profile-y,profile-x</code>.
+        </p>
+        <p>
+          Servers SHOULD support any combination of profile URIs or tokens for this (e.g.
+          <code>profile-z,http://example.org/profile-y,profile-x</code>) and SHOULD return resource representations
+          according to preference. Servers MUST indicate the profile actually returned by including a
+          <code>Content-Profile</code> HTTP header in the response and MAY also indicate the returned profile in other
+          ways. Servers SHOULD support escaped URIs and MAY also support un-escaped URIs identifying profiles, or both.
+        </p>
+        <p>
+          A server implementing multiple Media Type formats for its resource representations SHOULD allow a client to
+          specify a preference order for them in a similar way.
         </p>
       </section>
-      <section id="qsadiscovery">
-        <h4>QSA discovery</h4>
+      <section id="qsa-keydiscovery">
+        <h4>QSA key discovery</h4>
         <p>
-          <em>How QSA keys for alternat profile-conforming services are discovered.</em>
+          <em>This function is only relevant for servers claiming conformance to the "QSA Alternate Keywords Realization"
+          profile of this specification.</em>
         </p>
+        <p>
+          Servers claiming conformance to the "QSA Alternate Keywords Realization" MUST implement methods to allow
+          clients to discover the QSA keys used in place of the "QSA Realization" profile's <code>_profile</code> and
+          <code>_mediatype</code> and also the equivalent of the <code>_profile=all</code> key/value combination. This
+          allows clients with little knowledge of the server to discover how to create <em>list profile</em> and
+          <em>get resource by profile</em> requests.
+        </p>
+        <p>
+          A server responding to any request for a resource for which "QSA Alternate Keywords Realization" is supported
+          SHOULD include HTTP headers that indicate alternate profiles and Media Types, as per the HTTP Realization.
+          They MAY instead, or in addition, provide HTTP body content indicating the same information. If they do, such
+          information SHOULD be present in the default response to a URI request, i.e. in response to a request without
+          any QSAs. A series of example requests, as implemented by the <a href="https://pypi.org/project/pyldapi/">
+          pyLDAPI Python library for Linked Data</a>, is given in <a href="#eg-qsa-keydiscovery"></a>
+        </p>
+        <pre id="eg-qsa-keydiscovery" class="example nohighlight" aria-busy="false" aria-live="polite"
+             title="Example requests and responses for QSA key discovery">
+          UP TO HERE
+        </pre>
       </section>
     </section>
   </section>
