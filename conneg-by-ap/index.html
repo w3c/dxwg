@@ -561,9 +561,9 @@
           anything that the profile profiles (a more general specification or profile), perhaps transitively.
         </p>
         <p>
-          If a client requests a profile but gets a narrower profile, the Server should set its responses
-          Content-Profile header to the profile identifier that the Client requested, not the identifier of the
-          narrower profile as the client might not understand the narrower profile identifier.
+          A <a>server</a> SHOULD set a <code>Content-Profile</code> header in HTTP <a>response</a> to the profile
+          identifier (URI) that the Client requested, not the identifier of any narrower profile that is also applicable
+          since the client might not understand the narrower profile identifier.
         </p>
         <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Get resource by profile, narrower profile response (HTTP realization)">
 # a request for Resource 1 according to Profile A is made
@@ -586,11 +586,28 @@ Accept-Profile: http://example.org/profile/A
 
 HTTP/1.1 200 OK
 [other response headers]
-Content-Profile: http://example.org/profile/A
+Content-Profile: &lt;http://example.org/profile/A>
 [more response headers]
 
 [content according to Profile B and thus Profile A which it profiles]
           </pre>
+        <p>
+          When a resource is returned that conforms to two or more profiles not within a profile hierarchy
+          (i.e. none of the multiple profiles the resource conforms to is a profiles of another), the server MUST
+          indicate all profiles individually within the <code>Content-Profile</code> header as such:
+        </p>
+        <p>
+          <code>Content-Profile: &lt;PROFILE_1>, &lt;PROFILE_2></code>
+        </p>
+        <p>
+          For example, a response from a server that conforms to both [[?GeoDCAT-AP]] and also [[?statdcat-ap]], given
+          that neither profiles the other and thus no single indication of conformance will suffice for both, (note they
+          both do profile [[?DCAT-AP]], see the <a href="https://www.w3.org/TR/dx-prof/#eg-hierarchy">DCAT-AP Hierarchy
+          example in [[PROF]]</a>), using profile URIs for [[?GeoDCAT-AP]] and [[?statdcat-ap]] could be:
+        </p>
+        <p>
+          <code>Content-Profile: &lt;https://joinup.ec.europa.eu/release/geodcat-ap-v10>, &lt;https://joinup.ec.europa.eu/release/statdcat-ap/101></code>
+        </p>
         <div class="issue" data-number="748"></div>
       </section>
     </section>
@@ -676,7 +693,7 @@ Accept: text/turtle
 HTTP/1.1 200 OK
 Content-Type: text/turtle
 Content-Location: http://example.org/a/resource.prof1.ttl
-Content-Profile: urn:example:profile:1
+Content-Profile: &lt;urn:example:profile:1>
 Link: &lt;http://example.org/a/resource.prof1.ttl&gt;; rel="self"; type="text/turtle"; profile="urn:example:profile:1",
   &lt;http://example.org/a/resource.prof2.ttl&gt;; rel="alternate"; type="text/turtle"; profile="urn:example:profile:2",
   &lt;http://example.org/a/resource.prof1.xml&gt;; rel="alternate"; type="application/xml"; profile="urn:example:profile:1",
@@ -707,7 +724,7 @@ Accept: text/turtle
 HTTP/1.1 200 OK
 Content-Type: text/turtle
 Content-Location: http://example.org/a/resource.prof1.ttl
-Content-Profile: urn:example:profile:1;token=p1
+Content-Profile: &lt;urn:example:profile:1;token=p1>
 Link: &lt;http://example.org/a/resource.prof1.ttl&gt;; rel="self"; type="text/turtle"; profile="urn:example:profile:1;token=p1",
   &lt;http://example.org/a/resource.prof2.ttl&gt;; rel="alternate"; type="text/turtle"; profile="http://example.org/profile/2;token=p2",
   &lt;http://example.org/a/resource.prof1.xml&gt;; rel="alternate"; type="application/xml"; profile="urn:example:profile:1;token=p1",
@@ -730,7 +747,7 @@ Link: &lt;http://example.org/a/resource.prof1.ttl&gt;; rel="self"; type="text/tu
             <h4>Option 2: registered tokens</h4>
             <p>
               Tokens are registered in a global registry and servers may use them in place of a URI<br />
-              <code>Content-profile: token1, URI2</code>
+              <code>Content-profile: token1, &lt;URI2></code>
               Pros: compact<br />
               Cons: a global registry for profiles not manageable when many systems define profiles and such a registry
               limits other capabilities of profile description by forcing generic profiles
@@ -790,7 +807,7 @@ Accept-Profile: urn:example:profile:1;q=1.0,urn:example:profile:2;q=0.6
 
 HTTP/1.1 200 OK
 Content-Type: text/turtle
-Content-Profile: urn:example:profile:1
+Content-Profile: &lt;urn:example:profile:1>
 [more response headers]
         </pre>
         <p>
