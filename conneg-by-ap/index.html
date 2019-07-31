@@ -90,7 +90,91 @@
       <a href="#realizations">Section 7</a> and
       <a href="#testsuites">Section 8</a>.
     </p>
-    <p>NB Profiles and specifications embody their own notions of conformance (of data), which are out of scope for this document.</p>
+    <p class="note">Specifications and Profiles embody their own notions of conformance, which are out of scope for this specification.</p>
+    <section id="conformance-profiles">
+      <h3>Profiles for Conformance</h3>
+      <p>
+        This specification includes several <a>profiles</a> of it that may be conformed to by systems claiming to implement a form of this specification.
+        These profiles, given in the table below, are identified by their URIs and conformance to them by Internet resources should be indicated as per this document (use of
+        <code>Content-Profile</code> HTTP header).
+      </p>
+      <p>
+        The namespace prefix for these profiles used in <a href="#fig-table-profiles"></a> is:
+      </p>
+      <ul>
+        <li><code>cnpr</code> &rarr; <code>http://www.w3.org/ns/dx/conneg/profile/</code></li>
+      </ul>
+      <figure id="fig-table-profiles">
+        <table>
+          <thead>
+          <tr>
+            <th>URI</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Usage Note</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><code><a href="http://www.w3.org/ns/dx/conneg/profile/abstract">cnpr:abstract</a></code></td>
+            <td>Abstract Model</td>
+            <td>For conformance with the model presented in <a href="#abstractmodel"></a>.</td>
+            <td>Not to be used if a resource also conforms to a more concrete profile (all of the others)</td>
+          </tr>
+          <tr>
+            <td><code><a href="http://www.w3.org/ns/dx/conneg/profile/http">cnpr:http</a></code></td>
+            <td>HTTP Realization</td>
+            <td>For conformance with the realization presented in <a href="#http"></a>.</td>
+            <td>To be used if a resource conforms to the HTTP Realization</td>
+          </tr>
+          <tr>
+            <td><code><span style="white-space: nowrap"><a href="http://www.w3.org/ns/dx/conneg/profile/qsa">cnpr:qsa</a></span></code></td>
+            <td>QSA Realization</td>
+            <td>For conformance with the realization presented in <a href="#qsa"></a>.</td>
+            <td>
+              To be used if a resource conforms to the QSA Realization using the Query String Arguments <code>_profile</code> and <code>_mediatype</code> as per the recommendations
+              in <a href="#qsa"></a>.
+            </td>
+          </tr>
+          <tr>
+            <td><code><span style="white-space: nowrap"><a href="http://www.w3.org/ns/dx/conneg/profile/qsa-alt">cnpr:qsa-alt</a></span></code></td>
+            <td>QSA Alternate Keywords Realization</td>
+            <td>For conformance with the realization presented in <a href="#qsa"></a>.</td>
+            <td>
+              To be used if a resource conforms to the QSA Realization but uses alternate keywords for the Query String Arguments <code>_profile</code> and
+              <code>_mediatype</code>, as allowed by the recommendations in <a href="#qsa"></a>.
+            </td>
+          </tr>
+          <tr>
+            <td><code><span style="white-space: nowrap"><a href="http://www.w3.org/ns/dx/conneg/profile/rrd">cp:rrd</a></span></code></td>
+            <td>Resource Representation Description</td>
+            <td>For conformance with <a href="#getresourcebyprofile"></a>.</td>
+            <td>
+              To be used if a resource representation is able to indicate which profile(s) it conforms to, in its appropriate realization, as per the abstract specification in
+              <a href="#getresourcebyprofile"></a>.
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <figcaption>
+          Profiles of this <em>Content Negotiation by Profile</em> specification to be used by resources and systems to indicate conformance to one or more forms
+          of it.
+        </figcaption>
+      </figure>
+      <p>
+        The namespace used for the above profiles, <code>http://www.w3.org/ns/dx/conneg/profile/</code>, is part of the Dataset Exchange Working Group's reserved W3C namespace,
+        <code>http://www.w3.org/ns/dx/</code>, which is provisioned for all namespace requirements to do with issues addressed by that Working Group. The <code>/profile/</code> path segment
+        indicates a register of profile objects which currently contains just the 5 instances above from <a href="#fig-table-profiles"></a>.
+      </p>
+      <p>
+        If a system wishes to show conformance to this specification, conformance to at least one of the profiles listed in <a href="#fig-table-profiles"></a> MUST be indicated.
+      </p>
+      <div class="note">
+        This section's identifications of <a>profiles</a> of this <a>specification</a> exemplifies <em>functional</em> profiles which profile a functional specification, rather than a
+        data profile which profiles a data specification. This specification describes how a system should behave and this section indicates different profiles of that behaviour, rather
+        than content (data).
+      </div>
+    </section>
   </section>
   <section id="definitions">
     <h2>Definitions</h2>
@@ -477,9 +561,9 @@
           anything that the profile profiles (a more general specification or profile), perhaps transitively.
         </p>
         <p>
-          If a client requests a profile but gets a narrower profile, the Server should set its responses
-          Content-Profile header to the profile identifier that the Client requested, not the identifier of the
-          narrower profile as the client might not understand the narrower profile identifier.
+          A <a>server</a> SHOULD set a <code>Content-Profile</code> header in HTTP <a>response</a> to the profile
+          identifier (URI) that the Client requested, not the identifier of any narrower profile that is also applicable
+          since the client might not understand the narrower profile identifier.
         </p>
         <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Get resource by profile, narrower profile response (HTTP realization)">
 # a request for Resource 1 according to Profile A is made
@@ -502,11 +586,28 @@ Accept-Profile: http://example.org/profile/A
 
 HTTP/1.1 200 OK
 [other response headers]
-Content-Profile: http://example.org/profile/A
+Content-Profile: &lt;http://example.org/profile/A>
 [more response headers]
 
 [content according to Profile B and thus Profile A which it profiles]
           </pre>
+        <p>
+          When a resource is returned that conforms to two or more profiles not within a profile hierarchy
+          (i.e. none of the multiple profiles the resource conforms to is a profiles of another), the server MUST
+          indicate all profiles individually within the <code>Content-Profile</code> header as such:
+        </p>
+        <p>
+          <code>Content-Profile: &lt;PROFILE_1>, &lt;PROFILE_2></code>
+        </p>
+        <p>
+          For example, a response from a server that conforms to both [[?GeoDCAT-AP]] and also [[?statdcat-ap]], given
+          that neither profiles the other and thus no single indication of conformance will suffice for both, (note they
+          both do profile [[?DCAT-AP]], see the <a href="https://www.w3.org/TR/dx-prof/#eg-hierarchy">DCAT-AP Hierarchy
+          example in [[PROF]]</a>), using profile URIs for [[?GeoDCAT-AP]] and [[?statdcat-ap]] could be:
+        </p>
+        <p>
+          <code>Content-Profile: &lt;https://joinup.ec.europa.eu/release/geodcat-ap-v10>, &lt;https://joinup.ec.europa.eu/release/statdcat-ap/101></code>
+        </p>
         <div class="issue" data-number="748"></div>
       </section>
     </section>
@@ -627,6 +728,12 @@ Accept: text/turtle
 HTTP/1.1 200 OK
 Content-Type: text/turtle
 Content-Location: http://example.org/a/resource.prof1.ttl
+Content-Profile: &lt;urn:example:profile:1>
+Link: &lt;http://example.org/a/resource.prof1.ttl&gt;; rel="self"; type="text/turtle"; profile="urn:example:profile:1",
+  &lt;http://example.org/a/resource.prof2.ttl&gt;; rel="alternate"; type="text/turtle"; profile="urn:example:profile:2",
+  &lt;http://example.org/a/resource.prof1.xml&gt;; rel="alternate"; type="application/xml"; profile="urn:example:profile:1",
+  &lt;http://example.org/a/resource.prof2.xml&gt;; rel="alternate"; type="application/xml"; profile="urn:example:profile:2",
+  &lt;http://example.org/a/resource.html&gt;; rel="alternate"; type="text/html"
 Content-Profile: urn:example:profile:1
 Link:
   <strong>&lt;http://example.org/a/resource.prof1.ttl&gt;;</strong>
@@ -674,7 +781,7 @@ Accept: text/turtle
 HTTP/1.1 200 OK
 Content-Type: text/turtle
 Content-Location: http://example.org/a/resource.prof1.ttl
-Content-Profile: urn:example:profile:1;token=p1
+Content-Profile: &lt;urn:example:profile:1;token=p1>
 Link: &lt;http://example.org/a/resource.prof1.ttl&gt;; rel="self"; type="text/turtle"; profile="urn:example:profile:1;token=p1",
   &lt;http://example.org/a/resource.prof2.ttl&gt;; rel="alternate"; type="text/turtle"; profile="http://example.org/profile/2;token=p2",
   &lt;http://example.org/a/resource.prof1.xml&gt;; rel="alternate"; type="application/xml"; profile="urn:example:profile:1;token=p1",
@@ -697,7 +804,7 @@ Link: &lt;http://example.org/a/resource.prof1.ttl&gt;; rel="self"; type="text/tu
             <h4>Option 2: registered tokens</h4>
             <p>
               Tokens are registered in a global registry and servers may use them in place of a URI<br />
-              <code>Content-profile: token1, URI2</code>
+              <code>Content-profile: token1, &lt;URI2></code>
               Pros: compact<br />
               Cons: a global registry for profiles not manageable when many systems define profiles and such a registry
               limits other capabilities of profile description by forcing generic profiles
@@ -757,7 +864,7 @@ Accept-Profile: urn:example:profile:1;q=1.0,urn:example:profile:2;q=0.6
 
 HTTP/1.1 200 OK
 Content-Type: text/turtle
-Content-Profile: urn:example:profile:1
+Content-Profile: &lt;urn:example:profile:1>
 [more response headers]
         </pre>
         <p>
