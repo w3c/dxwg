@@ -123,7 +123,7 @@ var respecConfig = {
         },
         "DCAT-AP.de": {
             title: "DCAT-AP.de als formaler Metadatenstandard für offene Verwaltungsdaten bestätigt",
-            href: "https://www.govdata.de/standardisierung"
+            href: "https://dcat-ap.de/def/"
         },
         "DDI" : {
             href : "http://www.ddialliance.org/explore-documentation",
