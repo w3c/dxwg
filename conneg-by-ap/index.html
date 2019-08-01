@@ -285,12 +285,12 @@
         that could be used to signal the profile the payload of the message conforms to.</p>
       <pre id="eg-profile-and-accept" class="example nohighlight" aria-busy="false" aria-live="polite"
            title="Using the profile parameter in an Accept header together with the Accept-Profile header">
-  GET http://example.org/resource/a HTTP/1.1
-  Accept: text/turtle;q=0.9;profile="urn:example:profile-1",
-    text/turtle;q=0.7;profile="urn:example:profile-2"
+GET /resource/a HTTP/1.1
+Accept: text/turtle;q=0.9;profile="urn:example:profile-1",
+  text/turtle;q=0.7;profile="urn:example:profile-2"
 
-  HTTP/1.1 200 OK
-  Content-Type: text/turtle;profile="urn:example:profile-2"
+HTTP/1.1 200 OK
+Content-Type: text/turtle;profile="urn:example:profile-2"
   </pre>
       <p>During TPAC 2018 in Lyon, the DXWG had a longer discussion with the JSON-LD WG
     and it was concluded that the “profile” parameter in the <code>Accept</code> and <code>Content-Type</code>
@@ -314,13 +314,13 @@
         to transport information about acceptable profiles (request) and payload profile (response).</p>
       <pre id="eg-link-header-with-profile" class="example nohighlight" aria-busy="false" aria-live="polite"
            title="Using a Link header with a profile parameter">
-  HEAD http://example.org/resource/a HTTP/1.1
-  Accept: text/turtle;q=0.9,application/rdf+xml;q=0.5
-  Link: &lt;http://example.com/profile/x&gt;; rel="profile"
+HEAD /resource/a HTTP/1.1
+Accept: text/turtle;q=0.9,application/rdf+xml;q=0.5
+Link: &lt;http://example.com/profile/x&gt;; rel="profile"
 
-  HTTP/1.1 200 OK
-  Content-type: text/turtle
-  Link: &lt;http://example.com/profile/x&gt;; rel="profile"
+HTTP/1.1 200 OK
+Content-type: text/turtle
+Link: &lt;http://example.com/profile/x&gt;; rel="profile"
       </pre>
       <p>There is, however, no possibility to convey quality information (q-values) using the “profile” relation.</p>
       <h4>Using the Prefer/Preference-Applied header fields (RFC 7240)</h4>
@@ -332,13 +332,13 @@
       the client will know that the preference was honoured.</p>
       <pre id="eg-prefer-header-with-profile" class="example nohighlight" aria-busy="false" aria-live="polite"
            title="Using a Prefer header with a profile parameter">
-  GET http://example.org/resource/a HTTP/1.1
-  Accept: text/turtle
-  Prefer: profile="urn:example:schema"
+GET /resource/a HTTP/1.1
+Accept: text/turtle
+Prefer: profile="urn:example:schema"
 
-  HTTP/1.1 200 OK
-  Content-Type: text/turtle
-  Preference-Applied: profile="urn:example:schema"
+HTTP/1.1 200 OK
+Content-Type: text/turtle
+Preference-Applied: profile="urn:example:schema"
       </pre>
       <p>This approach has two disadvantages.
       The first is - as with the <code>Link</code> header,
@@ -689,7 +689,7 @@ Content-Profile: &lt;http://example.org/profile/A>
         </p>
         <pre id="eg-link-headers" class="example nohighlight" aria-busy="false" aria-live="polite"
              title="Server returns a Link header to indicate available profiles">
-HEAD http://example.org/resource/a HTTP/1.1
+HEAD /resource/a HTTP/1.1
 Accept: text/turtle
 [more request headers]
 
@@ -732,7 +732,7 @@ Link:
         </p>
         <pre id="eg-link-headers-loc" class="example nohighlight" aria-busy="false" aria-live="polite"
              title="Server returns Link header with Content-Location URIs for some Profiles and Media Types">
-HEAD http://example.org/resource/a HTTP/1.1
+HEAD /resource/a HTTP/1.1
 Accept: text/turtle
 [more request headers]
 
@@ -786,7 +786,7 @@ Link:
 # The Profile with urn:example:profile:1 is mapped to token p1 and URI
 # and the Profile with URI http://example.org/profile/2 is mapped to p2
 
-HEAD http://example.org/resource/a HTTP/1.1
+HEAD /resource/a HTTP/1.1
 Accept: text/turtle
 [more request headers]
 
@@ -870,7 +870,7 @@ Link: &lt;http://example.org/resource/a.prof1.ttl&gt;; rel="self"; type="text/tu
         </p>
         <pre id="eg-get-http" class="example nohighlight" aria-busy="false" aria-live="polite"
              title="Requesting a resource representation conforming to a specific profile using HTTP headers">
-GET http://example.org/resource/a HTTP/1.1
+GET /resource/a HTTP/1.1
 Accept: text/turtle;q=0.8, application/xml;q=0.5
 Accept-Profile: urn:example:profile:1;q=1.0,urn:example:profile:2;q=0.6
 [more request headers]
@@ -1058,7 +1058,7 @@ GET http://example.org/resource/X?_profile=Y&amp;_mediatype=Z HTTP/1.1
         </p>
         <pre id="eg-list-profiles-mediatype" class="example nohighlight" aria-busy="false" aria-live="polite"
              title="Requesting a list of profiles for a resource by QSA in HTML">
-GET http://example.org/resource/a?_profile=all&amp;_mediatype=application/json HTTP/1.1
+GET /resource/a?_profile=all&amp;_mediatype=application/json HTTP/1.1
 
 ---
 
@@ -1168,7 +1168,7 @@ Link:
 # header just in case. For extra efficiency, the client could have
 # made a HEAD request instead of a GET
 
-GET http://example.org/resource/a HTTP/1.1
+GET /resource/a HTTP/1.1
 Accept-Profile: http://example.org/profile/x
 
 # The server does not understand the HTTP Get Resource By Profile
