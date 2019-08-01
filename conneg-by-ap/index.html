@@ -219,6 +219,15 @@
         The entity that is identified by a URI. Familiar examples include an electronic
         document, an image, a source of information with a consistent purpose. [[RFC3986]]
       </dd>
+      <dt><dfn>representation</dfn></dt>
+      <dd>
+        <p>
+          An abstraction of the current or desired state of a thing in HTTP communications. [[RFC7230]]
+        </p>
+        <p>
+          In this specification, <em>representations</em> are of <a>resources</a>.
+        </p>
+      </dd>
       <dt><dfn>metadata</dfn></dt>
       <dd>Information that is supplied about a resource. [[RFC3986]]</dd>
       <dt><dfn>request</dfn></dt>
@@ -492,13 +501,13 @@
       <ol>
         <li>
           <strong>list profiles</strong><br />
-          a <em>client</em> requests the list of URIs of <em>profile</em>s for which a <em>server</em> is able to deliver
-          conformant <em>resource</em>s
+          a <a>client</a> requests the list of URIs of <a>profile</a>s for which a <a>server</a> is able to deliver
+          conformant <a>resource</a> <a>representations</a>
         </li>
         <li>
           <strong>get resource by profile</strong>
-          <br />a <em>client</em> requests a representation of the requested <em>resource</em> represented conforming
-          to a particular <em>profile</em>
+          <br />a <a>client</a> requests a <a>representation</a> of the requested <a>resource</a> represented conforming
+          to a particular <a>profile</a>
         </li>
       </ol>
       <p>
@@ -508,13 +517,13 @@
       <ol>
         <li>
           <strong>list profiles</strong><br />
-          a <em>server</em> responds to a <em>client</em> with the list of <em>profile</em> URIs for the <em>profile</em>s for which it is able to
-		deliver conformant <em>resource</em> representations
+          a <a>server</a> responds to a <a>client</a> with the list of URIs of the <a>profiles</a> for which it is able
+          to deliver conformant <a>resource</a> <a>representations</a>
         </li>
         <li>
           <strong>get resource by profile</strong><br />
-          a <em>server</em> responds with either a specific <em>profile</em> for a <em>resource</em> conforming to a
-          requested <em>profile</em> identified by the <em>client</em> or it responds with a default <em>profile</em>
+          a <a>server</a> responds with either a specific <a>profile</a> for a <a>resource</a> conforming to a
+          requested <a>profile</a> identified by the <a>client</a> or it responds with a default <a>profile</a>
         </li>
       </ol>
       <p>More detailed descriptions of these requests and their responses are given next.</p>
@@ -1187,6 +1196,63 @@ Link:
 # (there is no Content-Profile header present) but this can be inferred
 # by the link header with rel="self"
         </pre>
+        <p>
+          While the Link header response above communicates all the information that a <em>list profiles</em> request
+          does, it is not visible directly in a web browser. While <a href="#eg-list-profiles-mediatype"></a> shows a
+          requests/response pair that include equivalent Link header and HTTP body information listing profiles, the
+          latter of which is visible in a browser, it is dependent on a client knowing that the QSA key/value pair
+          <code>_profile=all</code> is used to trigger this response as opposed to the server's default resource
+          representation.
+        </p>
+        <p>
+          To communicate to a client what QSA key/value pair is used for <em>list profiles</em> when the "QSA Alternate
+          Keywords Realization" is conformed to, a server SHOULD...
+        </p>
+        <div class="note">
+          <p>
+            Nick: it appears we are dependent on an identifier for the "profile of a resource that lists all others
+            profiles". This is analogous in content to the Link header response for <em>list profiles</em> and is exactly
+            what the existing QSA systems respond with when asked for <code>?_view=alternates</code> and what is given
+            above as <code>?_profile=all</code>. So it's a URI that is equivalent to the QSA Realization profile's token
+            of <em>all</em>.
+          </p>
+          <p>
+            If we had such a URI, I would be able to say something like a Link header response should include this to
+            indicate how a client can show how to trigger <code>?_profile=all</code> (list profiles):
+          </p>
+          <p>
+            <pre class="nohighlight">Link:
+    &lt;http://example.org/resource/a&gt;;
+      rel="self";
+      type="text/turtle";
+      profile="urn:example:profile:1",
+    <strong>&lt;http://example.org/resource/a&gt;;
+      rel="alternate";
+      type="text/turtle";
+      profile="http://example.org/profile/alternates",</strong>
+    &lt;http://example.org/resource/a&gt;;
+      rel="alternate";
+      type="text/turtle";
+      profile="urn:example:profile:2",
+    &lt;http://example.org/resource/a&gt;;
+      rel="alternate";
+      type="application/xml";
+      profile="urn:example:profile:1",
+    &lt;http://example.org/resource/a&gt;;
+      rel="alternate";
+      type="application/xml";
+      profile="urn:example:profile:2",
+    &lt;http://example.org/resource/a&gt;;
+      rel="alternate";
+      type="text/html"
+            </pre>
+          </p>
+          <p>
+            The bolded part of the Link header above is the alternate profile for the resource that lists other profiles
+            which we know since the profile identifier is <strong><code>http://example.org/profile/alternates</code>
+            </strong> in some format (here <code>text/turtle</code>.
+          </p>
+        </div>
       </section>
     </section>
   </section>
