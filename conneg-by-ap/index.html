@@ -579,27 +579,27 @@ Preference-Applied: profile="urn:example:schema"
         </p>
         <pre id="eg-narrower-profile-response" class="example nohighlight" aria-busy="false" aria-live="polite"
              title="Get resource by profile, narrower profile response (HTTP realization)">
-# a request for Resource 1 according to Profile A is made
+# a request for Resource a according to Profile x is made
 
-GET http://example.org/resource/1 HTTP/1.1
-Accept-Profile: http://example.org/profile/A
+GET /resource/a HTTP/1.1
+Accept-Profile: http://example.org/profile/x
 [more request headers]
 
 ---
 
 # the server IS NOT able to respond with a representation
-# of Resource 1 conforming to Profile A
+# of Resource a conforming to Profile x
 
 # the server IS able to respond with a representation of
-# Resource 1 according to Profile B which it knows is a
-# profile of Profile A
+# Resource a according to Profile B which it knows is a
+# profile of Profile x
 
-# the server indicates the response conforms to Profile A,
-# not Profile B so the client is assured of conformance
+# the server indicates the response conforms to Profile x,
+# not Profile y so the client is assured of conformance
 
 HTTP/1.1 200 OK
 [other response headers]
-Content-Profile: &lt;http://example.org/profile/A>
+Content-Profile: &lt;http://example.org/profile/x>
 [more response headers]
 
 [content according to Profile B and thus Profile A which it profiles]
@@ -680,11 +680,11 @@ Content-Profile: &lt;http://example.org/profile/A>
           in the Media Types <code>application/xml</code>, <code>text/html</code> and <code>text/turtle</code>.
           The <code>text/html</code> representation has
           no profile, whereas the <code>application/xml</code> and <code>text/turtle</code> representations are
-          both available in the profiles <code>urn:example:profile:1</code> and <code>urn:example:profile:2</code>.
+          both available in the profiles <code>urn:example:profile:x</code> and <code>urn:example:profile:y</code>.
         </p>
         <p>
           Assuming that a request without an <code>Accept-Profile</code> header per default delivers content conforming to
-          <code>urn:example:profile:1</code>, an HTTP request/response pair would look as per
+          <code>urn:example:profile:x</code>, an HTTP request/response pair would look as per
           <a href="#eg-link-headers"></a>.
         </p>
         <pre id="eg-link-headers" class="example nohighlight" aria-busy="false" aria-live="polite"
@@ -697,24 +697,24 @@ Accept: text/turtle
 
 HTTP/1.1 200 OK
 Content-Type: text/turtle
-Content-Profile: urn:example:profile:1
+Content-Profile: urn:example:profile:x
 Link:
   &lt;http://example.org/resource/a&gt;;
           rel="self";
           type="text/turtle";
-          profile="urn:example:profile:1",
+          profile="urn:example:profile:x",
   &lt;http://example.org/resource/a&gt;;
           rel="alternate";
           type="text/turtle";
-          profile="urn:example:profile:2",
+          profile="urn:example:profile:y",
   &lt;http://example.org/resource/a&gt;;
           rel="alternate";
           type="application/xml";
-          profile="urn:example:profile:1",
+          profile="urn:example:profile:x",
   &lt;http://example.org/resource/a&gt;;
           rel="alternate";
           type="application/xml";
-          profile="urn:example:profile:2",
+          profile="urn:example:profile:y",
   &lt;http://example.org/resource/a&gt;;
           rel="alternate";
           type="text/html"
@@ -741,30 +741,30 @@ Accept: text/turtle
 HTTP/1.1 200 OK
 Content-Type: text/turtle
 Content-Location: http://example.org/resource/a.prof1.ttl
-Content-Profile: &lt;urn:example:profile:1>
+Content-Profile: &lt;urn:example:profile:x>
 Link:
   <strong>&lt;http://example.org/resource/a.prof1.ttl&gt;;</strong>
           rel="self"; type="text/turtle";
-          profile="urn:example:profile:1",
+          profile="urn:example:profile:x",
   &lt;http://example.org/resource/a&gt;;
           rel="alternate";
           type="text/turtle";
-          profile="urn:example:profile:2",
+          profile="urn:example:profile:y",
   <strong>&lt;http://example.org/resource/a.prof1.xml&gt;;</strong>
           rel="alternate";
           type="application/xml";
-          profile="urn:example:profile:1",
+          profile="urn:example:profile:x",
   &lt;http://example.org/resource/a&gt;;
           rel="alternate";
           type="application/xml";
-          profile="urn:example:profile:2",
+          profile="urn:example:profile:y",
   &lt;http://example.org/resource/a&gt;;
           rel="alternate";
           type="text/html"
 [more response headers]
 
 [In the Link header, Content-Location URIs are only used as context
-URIs for resources conforming to profile urn:example:profile:1]
+URIs for resources conforming to profile urn:example:profile:x]
         </pre>
         <div class="issue" data-number="290"></div>
         <section id="listprofiles-tokens">
@@ -778,8 +778,8 @@ URIs for resources conforming to profile urn:example:profile:1]
           </p>
           <pre id="eg-uri-token" class="example nohighlight" aria-busy="false" aria-live="polite"
                title="HTTP headers with profile URI / token mappings using 'token' parameters">
-# The Profile with urn:example:profile:1 is mapped to token p1 and URI
-# and the Profile with URI http://example.org/profile/2 is mapped to p2
+# The Profile with urn:example:profile:x is mapped to token px and URI
+# and the Profile with URI http://example.org/profile/y is mapped to py
 
 HEAD /resource/a HTTP/1.1
 Accept: text/turtle
@@ -789,12 +789,12 @@ Accept: text/turtle
 
 HTTP/1.1 200 OK
 Content-Type: text/turtle
-Content-Location: http://example.org/resource/a.prof1.ttl
-Content-Profile: &lt;urn:example:profile:1;token=p1>
-Link: &lt;http://example.org/resource/a.prof1.ttl&gt;; rel="self"; type="text/turtle"; profile="urn:example:profile:1;token=p1",
-  &lt;http://example.org/resource/a.prof2.ttl&gt;; rel="alternate"; type="text/turtle"; profile="http://example.org/profile/2;token=p2",
-  &lt;http://example.org/resource/a.prof1.xml&gt;; rel="alternate"; type="application/xml"; profile="urn:example:profile:1;token=p1",
-  &lt;http://example.org/resource/a.prof2.xml&gt;; rel="alternate"; type="application/xml"; profile="http://example.org/profile/2;token=p2",
+Content-Location: http://example.org/resource/a.profx.ttl
+Content-Profile: &lt;urn:example:profile:x;token=px>
+Link: &lt;http://example.org/resource/a.profx.ttl&gt;; rel="self"; type="text/turtle"; profile="urn:example:profile:x;token=px",
+  &lt;http://example.org/resource/a.profy.ttl&gt;; rel="alternate"; type="text/turtle"; profile="http://example.org/profile/2;token=py",
+  &lt;http://example.org/resource/a.profx.xml&gt;; rel="alternate"; type="application/xml"; profile="urn:example:profile:x;token=px",
+  &lt;http://example.org/resource/a.profy.xml&gt;; rel="alternate"; type="application/xml"; profile="http://example.org/profile/2;token=py",
   &lt;http://example.org/resource/a.html&gt;; rel="alternate"; type="text/html"
 [more response headers]
           </pre>
@@ -867,14 +867,14 @@ Link: &lt;http://example.org/resource/a.prof1.ttl&gt;; rel="self"; type="text/tu
              title="Requesting a resource representation conforming to a specific profile using HTTP headers">
 GET /resource/a HTTP/1.1
 Accept: text/turtle;q=0.8, application/xml;q=0.5
-Accept-Profile: urn:example:profile:1;q=1.0,urn:example:profile:2;q=0.6
+Accept-Profile: urn:example:profile:x;q=1.0,urn:example:profile:y;q=0.6
 [more request headers]
 
 ---
 
 HTTP/1.1 200 OK
 Content-Type: text/turtle
-Content-Profile: &lt;urn:example:profile:1>
+Content-Profile: &lt;urn:example:profile:x>
 [more response headers]
         </pre>
         <p>
@@ -1010,10 +1010,10 @@ Content-Profile: &lt;urn:example:profile:1>
 For the representation of Resource X, according to Profile Y, in Media Type Z:
 
 Rather than:
-GET http://example.org/single/endpoint?resource=http://example.org/resource=X&amp;_profile=Y&amp;_mediatype=Z HTTP/1.1
+GET /single/endpoint?resource=http://example.org/resource=X&amp;_profile=Y&amp;_mediatype=Z HTTP/1.1
 
 Use:
-GET http://example.org/resource/X?_profile=Y&amp;_mediatype=Z HTTP/1.1
+GET /resource/X?_profile=Y&amp;_mediatype=Z HTTP/1.1
       </pre>
         </section>
       </section>
@@ -1119,11 +1119,11 @@ Link:
           profile preferences by allowing ordered profile identifiers in the QSA key/value pair for profiles. For
           example, a client preferring <em>profile-z</em> but also accepting <em>profile-y</em> and <em>profile-x</em>,
           in that preference order, could make a request using comma separation of the profile tokes, such as
-          <code>GET http://example.com/resource/a?_profile=profile-z,profile-y,profile-x</code>.
+          <code>GET /resource/a?_profile=profile-z,profile-y,profile-x</code>.
         </p>
         <p>
           Servers SHOULD support any combination of profile URIs or tokens for this (e.g.
-          <code>profile-z,http://example.org/profile-y,profile-x</code>) and SHOULD return resource representations
+          <code>profile-z,http://example.org/profile/x,profile-y</code>) and SHOULD return resource representations
           according to preference. Servers MUST indicate the profile actually returned by including a
           <code>Content-Profile</code> HTTP header in the response and MAY also indicate the returned profile in other
           ways. Servers SHOULD support escaped URIs and MAY also support un-escaped URIs identifying profiles, or both.
@@ -1220,7 +1220,7 @@ Link:
     &lt;http://example.org/resource/a&gt;;
       rel="self";
       type="text/turtle";
-      profile="urn:example:profile:1",
+      profile="urn:example:profile:x",
     <strong>&lt;http://example.org/resource/a&gt;;
       rel="alternate";
       type="text/turtle";
@@ -1228,15 +1228,15 @@ Link:
     &lt;http://example.org/resource/a&gt;;
       rel="alternate";
       type="text/turtle";
-      profile="urn:example:profile:2",
+      profile="urn:example:profile:y",
     &lt;http://example.org/resource/a&gt;;
       rel="alternate";
       type="application/xml";
-      profile="urn:example:profile:1",
+      profile="urn:example:profile:x",
     &lt;http://example.org/resource/a&gt;;
       rel="alternate";
       type="application/xml";
-      profile="urn:example:profile:2",
+      profile="urn:example:profile:y",
     &lt;http://example.org/resource/a&gt;;
       rel="alternate";
       type="text/html"
