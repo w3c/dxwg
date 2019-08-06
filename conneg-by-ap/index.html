@@ -90,7 +90,91 @@
       <a href="#realizations">Section 7</a> and
       <a href="#testsuites">Section 8</a>.
     </p>
-    <p>NB Profiles and specifications embody their own notions of conformance (of data), which are out of scope for this document.</p>
+    <p class="note">Specifications and Profiles embody their own notions of conformance, which are out of scope for this specification.</p>
+    <section id="conformance-profiles">
+      <h3>Profiles for Conformance</h3>
+      <p>
+        This specification includes several <a>profiles</a> of it that may be conformed to by systems claiming to implement a form of this specification.
+        These profiles, given in the table below, are identified by their URIs and conformance to them by Internet resources should be indicated as per this document (use of
+        <code>Content-Profile</code> HTTP header).
+      </p>
+      <p>
+        The namespace prefix for these profiles used in <a href="#fig-table-profiles"></a> is:
+      </p>
+      <ul>
+        <li><code>cnpr</code> &rarr; <code>http://www.w3.org/ns/dx/conneg/profile/</code></li>
+      </ul>
+      <figure id="fig-table-profiles">
+        <table>
+          <thead>
+          <tr>
+            <th>URI</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Usage Note</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><code><a href="http://www.w3.org/ns/dx/conneg/profile/abstract">cnpr:abstract</a></code></td>
+            <td>Abstract Model</td>
+            <td>For conformance with the model presented in <a href="#abstractmodel"></a>.</td>
+            <td>Not to be used if a resource also conforms to a more concrete profile (all of the others)</td>
+          </tr>
+          <tr>
+            <td><code><a href="http://www.w3.org/ns/dx/conneg/profile/http">cnpr:http</a></code></td>
+            <td>HTTP Realization</td>
+            <td>For conformance with the realization presented in <a href="#http"></a>.</td>
+            <td>To be used if a resource conforms to the HTTP Realization</td>
+          </tr>
+          <tr>
+            <td><code><span style="white-space: nowrap"><a href="http://www.w3.org/ns/dx/conneg/profile/qsa">cnpr:qsa</a></span></code></td>
+            <td>QSA Realization</td>
+            <td>For conformance with the realization presented in <a href="#qsa"></a>.</td>
+            <td>
+              To be used if a resource conforms to the QSA Realization using the Query String Arguments <code>_profile</code> and <code>_mediatype</code> as per the recommendations
+              in <a href="#qsa"></a>.
+            </td>
+          </tr>
+          <tr>
+            <td><code><span style="white-space: nowrap"><a href="http://www.w3.org/ns/dx/conneg/profile/qsa-alt">cnpr:qsa-alt</a></span></code></td>
+            <td>QSA Alternate Keywords Realization</td>
+            <td>For conformance with the realization presented in <a href="#qsa"></a>.</td>
+            <td>
+              To be used if a resource conforms to the QSA Realization but uses alternate keywords for the Query String Arguments <code>_profile</code> and
+              <code>_mediatype</code>, as allowed by the recommendations in <a href="#qsa"></a>.
+            </td>
+          </tr>
+          <tr>
+            <td><code><span style="white-space: nowrap"><a href="http://www.w3.org/ns/dx/conneg/profile/rrd">cp:rrd</a></span></code></td>
+            <td>Resource Representation Description</td>
+            <td>For conformance with <a href="#getresourcebyprofile"></a>.</td>
+            <td>
+              To be used if a resource representation is able to indicate which profile(s) it conforms to, in its appropriate realization, as per the abstract specification in
+              <a href="#getresourcebyprofile"></a>.
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <figcaption>
+          Profiles of this <em>Content Negotiation by Profile</em> specification to be used by resources and systems to indicate conformance to one or more forms
+          of it.
+        </figcaption>
+      </figure>
+      <p>
+        The namespace used for the above profiles, <code>http://www.w3.org/ns/dx/conneg/profile/</code>, is part of the Dataset Exchange Working Group's reserved W3C namespace,
+        <code>http://www.w3.org/ns/dx/</code>, which is provisioned for all namespace requirements to do with issues addressed by that Working Group. The <code>/profile/</code> path segment
+        indicates a register of profile objects which currently contains just the 5 instances above from <a href="#fig-table-profiles"></a>.
+      </p>
+      <p>
+        If a system wishes to show conformance to this specification, conformance to at least one of the profiles listed in <a href="#fig-table-profiles"></a> MUST be indicated.
+      </p>
+      <div class="note">
+        This section's identifications of <a>profiles</a> of this <a>specification</a> exemplifies <em>functional</em> profiles which profile a functional specification, rather than a
+        data profile which profiles a data specification. This specification describes how a system should behave and this section indicates different profiles of that behaviour, rather
+        than content (data).
+      </div>
+    </section>
   </section>
   <section id="definitions">
     <h2>Definitions</h2>
