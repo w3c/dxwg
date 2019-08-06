@@ -555,13 +555,69 @@
           anything that the profile profiles (a more general specification or profile), perhaps transitively.
         </p>
         <p>
+          A simple request/response pair, according to the <a href="#http">HTTP Realization</a>, is shown in
+          <a href="#eg-simple"></a>.
+        </p>
+        <pre id="eg-simple"
+             class="example nohighlight" aria-busy="false" aria-live="polite"
+             title="Simple get resource by profile request & response (HTTP Realization)">
+# A request for resource a according to Profile x is made
+GET /resource/a HTTP/1.1
+Accept-Profile: http://example.org/profile/x
+
+---
+
+# The server returns a representation of Resource a conforming with Profile x
+HTTP/1.1 200 OK
+Content-Profile: &lt;http://example.org/profile/x>
+
+[response body]
+        </pre>
+        <div class="note">
+          Since <em>get resource by profile</em> requests are for <em>representations of a resource</em> and resources
+          for which there are profile-conformant representations may not be information resources, it is important to
+          note that a server's response may take the form of a redirect to another resource. This is as per the
+          <a href="https://lists.w3.org/Archives/Public/www-tag/2005Jun/0039.html">W3C's recommendations to handle the
+          so-called 'httpRange-14' issue</a>. An example of a redirecting response is given in <a href="#eg-range14"></a>.
+        </div>
+        <pre id="eg-range14"
+             class="example nohighlight" aria-busy="false" aria-live="polite"
+             title="Get resource by profile request & response (HTTP Realization) with 303 redirect">
+# A request for a non-information resource a according to Profile x is made
+GET /resource/a HTTP/1.1
+Accept-Profile: http://example.org/profile/x
+
+---
+
+# The server returns a 303 Redirect to another URI identifying an information
+# resource that then returns the requested resource representation
+HTTP/1.1 303 See Other
+Location: http://example.org/info-resource/b
+
+---
+
+# The client now requests the indicated information resource. Note that the
+# Accept-Profile header is no longer needed since the original response has
+# catered for that in the redirect response
+GET /info-resource/b HTTP/1.1
+
+---
+
+# The final server response with the information resource. Note that this
+# response does include the profile-indicating Content-Profile header
+HTTP/1.1 200 OK
+Content-Profile: &lt;http://example.org/profile/x>
+
+[response body]
+        </pre>
+        <p>
           A <a>server</a> SHOULD set a <code>Content-Profile</code> header in HTTP <a>response</a> to the profile
           identifier (URI) that the Client requested, not the identifier of any narrower profile that is also applicable
-          since the client might not understand the narrower profile identifier.
+          since the client might not understand the narrower profile identifier. This is shown in
+          <a href="#eg-narrower-profile-response"></a>.
         </p>
         <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Get resource by profile, narrower profile response (HTTP realization)">
 # a request for Resource 1 according to Profile A is made
-
 GET http://example.org/resource/1 HTTP/1.1
 Accept-Profile: http://example.org/profile/A
 [more request headers]
