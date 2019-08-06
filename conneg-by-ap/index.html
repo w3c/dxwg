@@ -342,13 +342,6 @@
       That solution requires that a client evaluates two different headers
       in order to find a response to its request for a specific profile,
       which would make client implementation more complicated.</p>
-      <p class="issue" data-number="380">
-        The Internet-Draft for the registration of
-        <code>Accept-Profile</code> and <code>Content-Profile</code>
-        is currently work-in progress.
-        When that work is completed, the above text will be adjusted accordingly
-        or deleted.
-      </p>
       <p class="issue" data-number="382">
         Previous uses of <code>Accept-*</code> headers
         or other HTTP headers for this use
@@ -441,7 +434,7 @@
       environment-specific.
     </p>
     <section id="abstractmodelcontext">
-      <h3>Context</h3>
+      <h3>Content Negotiation Background</h3>
       <p>
         All content negotiation takes place between a <a>client</a> and a <a>server</a> over the Internet with the
         former requesting a representation of a <a>resource</a> or a <em>resource</em>'s <em>metadata</em> through a
@@ -451,20 +444,28 @@
       <p>
         An Internet <em>resource</em> may have many aspects over which a <em>client</em>/<em>server</em> pair of
         agents might negotiate for content. These aspects are to be treated independently so content negotiation for a
-        resource involving negotiation by profile and any other aspects of a resource will not affect
-        each other. For this reason, other than a directive to maintain independence, no further discussion of
+        resource involving negotiation by profile and any other aspects will not affect each other.
+      </p>
+      <!--
+      <p>
+        For this reason, other than a directive to maintain independence, no further discussion of
         negotiation by profile and the relations to other forms of negotiation are given. Specific realizations might
         require special handling of profile and other forms of negotiation.
       </p>
+      -->
+      <p>
+        In this abstract model, we don't assume any specific details about <em>client</em>, <em>server</em>,
+        <em>resource</em>, <em>metadata</em>, <em>request</em> or <em>response</em> other than those details already
+        provided in those terms' definitions in <a href="#definitions"></a>.
+      </p>
+    </section>
+    <section id="profileid">
+      <h3>Profile Identification</h3>
       <p>
         A <em>client</em> <em>request</em>ing the representation of a <em>resource</em> conforming to a <em>profile</em>
         MUST identify the <em>resource</em> by a Uniform Resource Identifier (URI) [[RFC3986]] and MUST
         identify a <em>profile</em> either by a URI or a <em>token</em> that unambiguously identifies the
         <em>profile</em> for the <em>server</em> within that <em>request</em>/<em>response</em> session.
-      </p>
-      <p>
-        In this abstract model, we don't assume any specific details about <em>client</em>, <em>server</em>, <em>resource</em>,
-        <em>metadata</em>, <em>request</em> or <em>response</em>.
       </p>
       <p>
         If a URI is used for profile identification, it is recommended that it be an HTTP
