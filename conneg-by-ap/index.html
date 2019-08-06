@@ -59,9 +59,6 @@
       [[GeoDCAT-AP]]. When no profile or an unsupported profile is requested, a server returns default content,
       that is, content conforming to the default profile supported by the server.
     </p>
-    <p class="issue" data-number="990">
-        Where documents contain data specifications (specifying requirements for certain types of data) in addition to other content, such as recommendations, annotations, usage notes) then this can be accomodated by publishing explicit identifiers for each section that represents a data specification that can be conformed to. All such specifications can be regarded as profiles, and communities may choose to reference the document as a profile provided that it defines the means to determine conformance to the document as a whole.
-    </p>
     <p>
       When selecting a content negotiation mechanism, an Internet client may use the HTTP protocol but it may also use
       other methods for providing instructions to a server,
@@ -275,7 +272,7 @@
         have specified the use of a media type parameter named "profile"
         that could be used to signal the profile the payload of the message conforms to.</p>
       <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Using the profile parameter in an Accept header together with the Accept-Profile header">
-  GET /some/resource HTTP/1.1
+  GET /resource/a HTTP/1.1
   Accept: text/turtle;q=0.9;profile="urn:example:profile-1",
     text/turtle;q=0.7;profile="urn:example:profile-2"
 
@@ -377,7 +374,6 @@
       <a href="https://www.loc.gov/standards/mods/">Metadata Object Description Schema</a>.
 		  </p>
 	  </section>
-    <div class="issue" data-number="383"></div>
     <section id="related-altviews">
       <h3>Linked Data APIs</h3>
       <p>
@@ -403,7 +399,6 @@
         <em>format</em>, is available at <a href="http://linked.data.gov.au/dataset/gnaf/address/GAACT714845933?_view=ISO19160&_format=text/turtle">http://linked.data.gov.au/dataset/gnaf/address/GAACT714845933<strong>?_view=ISO19160&amp;_format=text/turtle</strong></a>.
       </p>
     </section>
-    <div class="issue" data-number="516"></div>
     <section id="related-oai-pmh">
       <h3>OAI-PMH</h3>
       <p>
@@ -423,7 +418,6 @@
         common metadata.
       </p>
     </section>
-    <div class="issue" data-number="384"></div>
     <section id="related-csw">
       <h3>Catalogue Service for the Web (CSW)</h3>
       <p>
@@ -538,7 +532,6 @@
           it is unable to deliver those representations when presented with a <strong>get resource by profile</strong>
           <em>request</em>.
         </p>
-        <div class="issue" data-number="602"></div>
       </section>
       <section id="getresourcebyprofile">
         <h4>get resource by profile</h4>
@@ -608,7 +601,6 @@ Content-Profile: &lt;http://example.org/profile/A>
         <p>
           <code>Content-Profile: &lt;https://joinup.ec.europa.eu/release/geodcat-ap-v10>, &lt;https://joinup.ec.europa.eu/release/statdcat-ap/101></code>
         </p>
-        <div class="issue" data-number="748"></div>
       </section>
     </section>
   </section>
@@ -652,7 +644,6 @@ Content-Profile: &lt;http://example.org/profile/A>
 	      the server's response SHOULD contain a <code>Content-Profile</code> header
 	      listing the URIs of all profiles to which it knows the representation conforms.
       </p>
-      <div class="issue" data-number="500"></div>
       <section id="listprofileshttp">
         <h3>list profiles</h3>
         <p>
@@ -701,7 +692,6 @@ Link: &lt;http://example.org/a/resource.prof1.ttl&gt;; rel="self"; type="text/tu
   &lt;http://example.org/a/resource.html&gt;; rel="alternate"; type="text/html"
 [more response headers]
         </pre>
-        <div class="issue" data-number="290"></div>
         <section id="listprofiles-tokens">
           <h3>Token mappings</h3>
           <p>
@@ -786,7 +776,6 @@ Link: &lt;http://example.org/a/resource.prof1.ttl&gt;; rel="self"; type="text/tu
             </p>
           </div>
         </section>
-        <div class="issue" data-number="679"></div>
       </section>
       <section id="getresourcebyprofilehttp">
         <h3>get resource by profile</h3>
@@ -819,7 +808,6 @@ Content-Profile: &lt;urn:example:profile:1>
     </section>
     <section id="qsa">
       <h3>URL Query String Arguments</h3>
-      <div class="issue" data-number="594"></div>
       <div class="issue" data-number="538"></div>
       <p>
         While the HTTP-header approach to profiles enables fully automated retrieval of data conforming
@@ -859,7 +847,6 @@ Content-Profile: &lt;urn:example:profile:1>
 	</p>
       </div>
       <p><strong><em>Key naming</em></strong></p>
-      <div class="issue" data-number="511"></div>
       <p>
         When content negotiation by profile is to take place using QSAs, the <em>request</em>s and <em>response</em>s
         of the <a href="#abstractmodel">Abstract Model</a> can be implemented by using key/value pairs using key terms of the implementer's choosing.
@@ -905,7 +892,6 @@ GET /resource/X?_profile=Y&amp;_mediatype=Z HTTP/1.1
           A QSA with a fixed value such as <code>_profile=list</code> should be supported by the <em>server</em> to allow a <em>client</em> to
           make a <strong>list profiles</strong> <em>request</em>.
         </p>
-        <div class="issue" data-number="589"></div>
         <p>
           Other QSA key/value pairs can be used, such as <code>_view=alternates</code>, as long as this is discoverable.
         </p>
@@ -939,8 +925,6 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
       </section>
       <section id="getresourcebyprofileqsa">
         <h4>get resource by profile</h4>
-        <div class="issue" title="To be completed"></div>
-
         <p><strong><em>Expressing profile preference</em></strong></p>
         <p>
           A <em>server</em> implementing <em>profile</em> listing for <em>resource</em>s could allow the
@@ -1095,13 +1079,6 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
       <div class="issue" data-number="86"></div>
       <div class="req-response">
         <p class="respTitle">RESPONSE FOR Req. 86</p>
-        <p>
-
-        </p>
-      </div>
-      <div class="issue" data-number="261"></div>
-      <div class="req-response">
-        <p class="respTitle">RESPONSE FOR Req. 261</p>
         <p>
 
         </p>
