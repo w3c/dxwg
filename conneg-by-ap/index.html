@@ -185,7 +185,7 @@
           A basis for comparison; a reference point against which other things can be evaluated.
         </p>
         <p>
-          <em>Source: DCMI Metadata Terms [[DCTERMS]]'s definition for a <a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-Standard"><code>Standard</code></a>.</em>
+          <em>Source: DCMI Metadata Terms [[DCTERMS]]'s definition for a <code><a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-Standard">Standard</a></code>.</em>
         </p>
       </dd>
       <dt><dfn data-lt="data specification">data specification</dfn></dt>
@@ -1073,13 +1073,16 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
         between them, according to the Profiles Vocabulary [[PROF]].
       </p>
       <p>
-        The code listing <a href="#profiles-in-prof"></a> describes this <em>Content Negotiation by Profile</em>
-        specification as a <code><a href="http://purl.org/dc/terms/Standard">dct:Standard</a></code> and the 5 profiles
-        of it in a profile hierarchy with the Abstract Model and Resource Representation Description profiles profiling
-        the specification directly and the other four profiles profiling the Abstract Model profile. This is also shown
-        graphically in <a href="#fig-profile-hierarchy"></a> below the code listing.
+        The code in <a href="#profiles-in-prof"></a> defines <em>Content Negotiation by Profile</em> as a
+        <code><a href="http://purl.org/dc/terms/Standard">dct:Standard</a></code>, the definition of which in [[PROF]]
+        matches the definition of <a>specification</a> in this document. The 5 profiles of it are then, as per regular
+        PROF modelling, termed <code><a href="https://www.w3.org/TR/dx-prof/#Class:Profile">prof:Profiles</a></code>.
+        The 5 profiles are presented in a profile hierarchy with the Abstract Model and Resource Representation
+        Description profiles profiling the specification directly and the other four profiles profiling the Abstract
+        Model profile. This is also shown graphically in <a href="#fig-profile-hierarchy"></a> below the code listing.
       </p>
-      <pre id="profiles-in-prof" class="example nohighlight" aria-busy="false" aria-live="polite" title="Profiles of Content Negotiation by Profile described using PROF, in the RDF turtle notation">
+      <pre id="profiles-in-prof" class="example nohighlight" aria-busy="false" aria-live="polite"
+           title="Profiles of Content Negotiation by Profile described using PROF, in the RDF turtle notation">
 @prefix dct: &lt;http://purl.org/dc/terms/> .
 @prefix prof: &lt;http://www.w3.org/ns/dx/prof/> .
 @prefix role: &lt;http://www.w3.org/ns/dx/prof/role/> .
@@ -1088,7 +1091,7 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
 
 &lt;https://www.w3.org/TR/dx-prof-conneg/> a dct:Standard ;
     rdfs:label "Content Negotiation by Profile" ;
-    rdfs:comment "The W3C Recommendation (a standard) for Content Negotiation by Profile" .
+    rdfs:comment "W3C Recommendation (a standard) for Content Negotiation by Profile" .
 
 cnpr:abstract a prof:Profile ;
     prof:isProfileOf &lt;https://www.w3.org/TR/dx-prof-conneg/> ;
@@ -1108,12 +1111,14 @@ cnpr:qsa a prof:Profile ;
 cnpr:qsa-alt a prof:Profile ;
     prof:isProfileOf &lt;http://www.w3.org/ns/dx/conneg/profile/abstract> ;
     rdfs:label "QSA Alternate Keywords Realization Profile" ;
-    rdfs:comment "Query String Argument Alternate Keywords Realization profile of Content Negotiation by Profile" .
+    rdfs:comment "Query String Argument Alternate Keywords Realization profile of
+        Content Negotiation by Profile" .
 
 cnpr:rrd a prof:Profile ;
     prof:isProfileOf &lt;https://www.w3.org/TR/dx-prof-conneg/> ;
     rdfs:label "Resource Representation Description Profile" ;
-    rdfs:comment "Resource Representation Description profile of Content Negotiation by Profile" .
+    rdfs:comment "Resource Representation Description profile of Content
+        Negotiation by Profile" .
       </pre>
       <figure id="fig-profile-hierarchy">
         <a href="profile-hierarchy.svg">
@@ -1130,31 +1135,32 @@ cnpr:rrd a prof:Profile ;
           With the identification of profiles of this specification given in <a href="#conformance-profiles"></a> and
           their relations described using the Profiles Vocabulary [[PROF]] in this appendix, it is possible for
           resources to show conformance to the this specification or any of the profiles by using mechanisms recommended
-          in [[PROF]]. PROF's recommendation is that any resource, for example <code>&lt;/a/resource&gt;</code>,
+          in [[PROF]]. PROF's recommendation is that any resource, for example <code>&lt;/resource/a&gt;</code>,
           wishing to claim conformance to a <a>specification</a> or a <a>profile</a> use the [[DCTERMS]]
-          <a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-conformsTo"><code>
-          dct:conformsTo</code></a> predicate like this:
+          <code><a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-conformsTo">
+            dct:conformsTo</a></code> predicate like this:
         </p>
         <p>
-          <code>&lt;/a/resource&gt; dct:conformsTo &lt;SPEC_OR_PROFILE_URI&gt; .</code>
+          <code>&lt;/resource/a&gt; dct:conformsTo &lt;SPEC_OR_PROFILE_URI&gt; .</code>
         </p>
         <p>
           The <code>&lt;SPEC_OR_PROFILE_URI&gt;</code> may be this specification's URI but, in the best case, would be
           one of the profile URIs listed in <a href="#conformance-profiles"></a> since it is much clearer what is being
-          conformed to when the profile URIs are cited.
+          conformed to when the profile URIs are cited as they are narrow in scope than the specification as a whole.
         </p>
         <p>
-          The code listing <a href="#service-conforming"></a> shows an imaginary Web Service documented using
-          [[VOCAB-DCAT-2]] and borrowing parts from its examples such as
+          The code in <a href="#service-conforming"></a> shows an imaginary Web Service documented using
+          [[VOCAB-DCAT-2]] and borrowing parts from its examples, such as
           <a href="https://www.w3.org/TR/vocab-dcat-2/#ex-service-eea">Example 49</a>,
-          that includes a <code>dct:conformsTo</code> predicate, as VOCAB-DCAT-2 as well as [[PROF]] suggests for use.
-          Conformance here is claimed to be to the <em>QSA Alternate Keywords Realization</em> profile indicated by the
-          URI <code>http://www.w3.org/ns/dx/conneg/profile/qsa-alt</code>, as per <a href="#conformance-profiles"></a>.
+          that includes a <code>dct:conformsTo</code> predicate as [[VOCAB-DCAT-2]], as well as [[PROF]], suggest for
+          use. Conformance here is claimed to be to the <em>QSA Alternate Keywords Realization</em> profile indicated by
+          the URI <code>http://www.w3.org/ns/dx/conneg/profile/qsa-alt</code>, as it is identified in
+          <a href="#conformance-profiles"></a>.
         </p>
         <pre id="service-conforming" class="example nohighlight" aria-busy="false" aria-live="polite"
              title="An example Web Service claiming conformance to the QSA Alternate Keywords Realization profile of
              this specification">
-&lt;/service/xx>
+&lt;http://example.com/service/xx>
     a dcat:DataService ;
     dct:title "Web Service XX" ;
     dct:description "A dummy Web Service claiming conformance to a profile of the Content
