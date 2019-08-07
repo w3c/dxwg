@@ -90,7 +90,91 @@
       <a href="#realizations">Section 7</a> and
       <a href="#testsuites">Section 8</a>.
     </p>
-    <p>NB Profiles and specifications embody their own notions of conformance (of data), which are out of scope for this document.</p>
+    <p class="note">Specifications and Profiles embody their own notions of conformance, which are out of scope for this specification.</p>
+    <section id="conformance-profiles">
+      <h3>Profiles for Conformance</h3>
+      <p>
+        This specification includes several <a>profiles</a> of it that may be conformed to by systems claiming to implement a form of this specification.
+        These profiles, given in the table below, are identified by their URIs and conformance to them by Internet resources should be indicated as per this document (use of
+        <code>Content-Profile</code> HTTP header).
+      </p>
+      <p>
+        The namespace prefix for these profiles used in <a href="#fig-table-profiles"></a> is:
+      </p>
+      <ul>
+        <li><code>cnpr</code> &rarr; <code>http://www.w3.org/ns/dx/conneg/profile/</code></li>
+      </ul>
+      <figure id="fig-table-profiles">
+        <table>
+          <thead>
+          <tr>
+            <th>URI</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Usage Note</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><code><a href="http://www.w3.org/ns/dx/conneg/profile/abstract">cnpr:abstract</a></code></td>
+            <td>Abstract Model</td>
+            <td>For conformance with the model presented in <a href="#abstractmodel"></a>.</td>
+            <td>Not to be used if a resource also conforms to a more concrete profile (all of the others)</td>
+          </tr>
+          <tr>
+            <td><code><a href="http://www.w3.org/ns/dx/conneg/profile/http">cnpr:http</a></code></td>
+            <td>HTTP Realization</td>
+            <td>For conformance with the realization presented in <a href="#http"></a>.</td>
+            <td>To be used if a resource conforms to the HTTP Realization</td>
+          </tr>
+          <tr>
+            <td><code><span style="white-space: nowrap"><a href="http://www.w3.org/ns/dx/conneg/profile/qsa">cnpr:qsa</a></span></code></td>
+            <td>QSA Realization</td>
+            <td>For conformance with the realization presented in <a href="#qsa"></a>.</td>
+            <td>
+              To be used if a resource conforms to the QSA Realization using the Query String Arguments <code>_profile</code> and <code>_mediatype</code> as per the recommendations
+              in <a href="#qsa"></a>.
+            </td>
+          </tr>
+          <tr>
+            <td><code><span style="white-space: nowrap"><a href="http://www.w3.org/ns/dx/conneg/profile/qsa-alt">cnpr:qsa-alt</a></span></code></td>
+            <td>QSA Alternate Keywords Realization</td>
+            <td>For conformance with the realization presented in <a href="#qsa"></a>.</td>
+            <td>
+              To be used if a resource conforms to the QSA Realization but uses alternate keywords for the Query String Arguments <code>_profile</code> and
+              <code>_mediatype</code>, as allowed by the recommendations in <a href="#qsa"></a>.
+            </td>
+          </tr>
+          <tr>
+            <td><code><span style="white-space: nowrap"><a href="http://www.w3.org/ns/dx/conneg/profile/rrd">cp:rrd</a></span></code></td>
+            <td>Resource Representation Description</td>
+            <td>For conformance with <a href="#getresourcebyprofile"></a>.</td>
+            <td>
+              To be used if a resource representation is able to indicate which profile(s) it conforms to, in its appropriate realization, as per the abstract specification in
+              <a href="#getresourcebyprofile"></a>.
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <figcaption>
+          Profiles of this <em>Content Negotiation by Profile</em> specification to be used by resources and systems to indicate conformance to one or more forms
+          of it.
+        </figcaption>
+      </figure>
+      <p>
+        The namespace used for the above profiles, <code>http://www.w3.org/ns/dx/conneg/profile/</code>, is part of the Dataset Exchange Working Group's reserved W3C namespace,
+        <code>http://www.w3.org/ns/dx/</code>, which is provisioned for all namespace requirements to do with issues addressed by that Working Group. The <code>/profile/</code> path segment
+        indicates a register of profile objects which currently contains just the 5 instances above from <a href="#fig-table-profiles"></a>.
+      </p>
+      <p>
+        If a system wishes to show conformance to this specification, conformance to at least one of the profiles listed in <a href="#fig-table-profiles"></a> MUST be indicated.
+      </p>
+      <div class="note">
+        This section's identifications of <a>profiles</a> of this <a>specification</a> exemplifies <em>functional</em> profiles which profile a functional specification, rather than a
+        data profile which profiles a data specification. This specification describes how a system should behave and this section indicates different profiles of that behaviour, rather
+        than content (data).
+      </div>
+    </section>
   </section>
   <section id="definitions">
     <h2>Definitions</h2>
@@ -134,6 +218,15 @@
       <dd>
         The entity that is identified by a URI. Familiar examples include an electronic
         document, an image, a source of information with a consistent purpose. [[RFC3986]]
+      </dd>
+      <dt><dfn>representation</dfn></dt>
+      <dd>
+        <p>
+          An abstraction of the current or desired state of a thing in HTTP communications. [[RFC7230]]
+        </p>
+        <p>
+          In this specification, <em>representations</em> are of <a>resources</a>.
+        </p>
       </dd>
       <dt><dfn>metadata</dfn></dt>
       <dd>Information that is supplied about a resource. [[RFC3986]]</dd>
@@ -190,13 +283,14 @@
         Some media type registrations (e. g. <code>application/ld+json</code>)
         have specified the use of a media type parameter named "profile"
         that could be used to signal the profile the payload of the message conforms to.</p>
-      <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Using the profile parameter in an Accept header together with the Accept-Profile header">
-  GET /some/resource HTTP/1.1
-  Accept: text/turtle;q=0.9;profile="urn:example:profile-1",
-    text/turtle;q=0.7;profile="urn:example:profile-2"
+      <pre id="eg-profile-and-accept" class="example nohighlight" aria-busy="false" aria-live="polite"
+           title="Using the profile parameter in an Accept header together with the Accept-Profile header">
+GET /resource/a HTTP/1.1
+Accept: text/turtle;q=0.9;profile="urn:example:profile-1",
+  text/turtle;q=0.7;profile="urn:example:profile-2"
 
-  HTTP/1.1 200 OK
-  Content-Type: text/turtle;profile="urn:example:profile-2"
+HTTP/1.1 200 OK
+Content-Type: text/turtle;profile="urn:example:profile-2"
   </pre>
       <p>During TPAC 2018 in Lyon, the DXWG had a longer discussion with the JSON-LD WG
     and it was concluded that the “profile” parameter in the <code>Accept</code> and <code>Content-Type</code>
@@ -218,14 +312,15 @@
         that allows them to be used across media types,"
         so that the "profile" relation seems like a suitable way
         to transport information about acceptable profiles (request) and payload profile (response).</p>
-      <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Using a Link header with a profile parameter">
-  HEAD /some/other/resource HTTP/1.1
-  Accept: text/turtle;q=0.9,application/rdf+xml;q=0.5
-  Link: &lt;http://example.com/profile-1&gt;; rel="profile"
+      <pre id="eg-link-header-with-profile" class="example nohighlight" aria-busy="false" aria-live="polite"
+           title="Using a Link header with a profile parameter">
+HEAD /resource/a HTTP/1.1
+Accept: text/turtle;q=0.9,application/rdf+xml;q=0.5
+Link: &lt;http://example.com/profile/x&gt;; rel="profile"
 
-  HTTP/1.1 200 OK
-  Content-type: text/turtle
-  Link: &lt;http://example.com/profile-1&gt;; rel="profile"
+HTTP/1.1 200 OK
+Content-type: text/turtle
+Link: &lt;http://example.com/profile/x&gt;; rel="profile"
       </pre>
       <p>There is, however, no possibility to convey quality information (q-values) using the “profile” relation.</p>
       <h4>Using the Prefer/Preference-Applied header fields (RFC 7240)</h4>
@@ -235,14 +330,15 @@
       its preference for a payload conforming to a specific profile.
       If the server sends a <code>Preference-Applied</code> header field in the response,
       the client will know that the preference was honoured.</p>
-      <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Using a Link header with a profile parameter">
-  GET /some/resource HTTP/1.1
-  Accept: text/turtle
-  Prefer: profile="urn:example:schema"
+      <pre id="eg-prefer-header-with-profile" class="example nohighlight" aria-busy="false" aria-live="polite"
+           title="Using a Prefer header with a profile parameter">
+GET /resource/a HTTP/1.1
+Accept: text/turtle
+Prefer: profile="urn:example:schema"
 
-  HTTP/1.1 200 OK
-  Content-Type: text/turtle
-  Preference-Applied: profile="urn:example:schema"
+HTTP/1.1 200 OK
+Content-Type: text/turtle
+Preference-Applied: profile="urn:example:schema"
       </pre>
       <p>This approach has two disadvantages.
       The first is - as with the <code>Link</code> header,
@@ -405,13 +501,13 @@
       <ol>
         <li>
           <strong>list profiles</strong><br />
-          a <em>client</em> requests the list of URIs of <em>profile</em>s for which a <em>server</em> is able to deliver
-          conformant <em>resource</em>s
+          a <a>client</a> requests the list of URIs of <a>profile</a>s for which a <a>server</a> is able to deliver
+          conformant <a>resource</a> <a>representations</a>
         </li>
         <li>
           <strong>get resource by profile</strong>
-          <br />a <em>client</em> requests a representation of the requested <em>resource</em> represented conforming
-          to a particular <em>profile</em>
+          <br />a <a>client</a> requests a <a>representation</a> of the requested <a>resource</a> represented conforming
+          to a particular <a>profile</a>
         </li>
       </ol>
       <p>
@@ -421,13 +517,13 @@
       <ol>
         <li>
           <strong>list profiles</strong><br />
-          a <em>server</em> responds to a <em>client</em> with the list of <em>profile</em> URIs for the <em>profile</em>s for which it is able to
-		deliver conformant <em>resource</em> representations
+          a <a>server</a> responds to a <a>client</a> with the list of URIs of the <a>profiles</a> for which it is able
+          to deliver conformant <a>resource</a> <a>representations</a>
         </li>
         <li>
           <strong>get resource by profile</strong><br />
-          a <em>server</em> responds with either a specific <em>profile</em> for a <em>resource</em> conforming to a
-          requested <em>profile</em> identified by the <em>client</em> or it responds with a default <em>profile</em>
+          a <a>server</a> responds with either a specific <a>profile</a> for a <a>resource</a> conforming to a
+          requested <a>profile</a> identified by the <a>client</a> or it responds with a default <a>profile</a>
         </li>
       </ol>
       <p>More detailed descriptions of these requests and their responses are given next.</p>
@@ -481,28 +577,29 @@
           identifier (URI) that the Client requested, not the identifier of any narrower profile that is also applicable
           since the client might not understand the narrower profile identifier.
         </p>
-        <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Get resource by profile, narrower profile response (HTTP realization)">
-# a request for Resource 1 according to Profile A is made
+        <pre id="eg-narrower-profile-response" class="example nohighlight" aria-busy="false" aria-live="polite"
+             title="Get resource by profile, narrower profile response (HTTP realization)">
+# a request for Resource a according to Profile x is made
 
-GET http://example.org/resource/1 HTTP/1.1
-Accept-Profile: http://example.org/profile/A
+GET /resource/a HTTP/1.1
+Accept-Profile: http://example.org/profile/x
 [more request headers]
 
 ---
 
 # the server IS NOT able to respond with a representation
-# of Resource 1 conforming to Profile A
+# of Resource a conforming to Profile x
 
 # the server IS able to respond with a representation of
-# Resource 1 according to Profile B which it knows is a
-# profile of Profile A
+# Resource a according to Profile B which it knows is a
+# profile of Profile x
 
-# the server indicates the response conforms to Profile A,
-# not Profile B so the client is assured of conformance
+# the server indicates the response conforms to Profile x,
+# not Profile y so the client is assured of conformance
 
 HTTP/1.1 200 OK
 [other response headers]
-Content-Profile: &lt;http://example.org/profile/A>
+Content-Profile: &lt;http://example.org/profile/x>
 [more response headers]
 
 [content according to Profile B and thus Profile A which it profiles]
@@ -568,7 +665,6 @@ Content-Profile: &lt;http://example.org/profile/A>
 	      the server's response SHOULD contain a <code>Content-Profile</code> header
 	      listing the URIs of all profiles to which it knows the representation conforms.
       </p>
-      <div class="issue" data-number="500"></div>
       <section id="listprofileshttp">
         <h3>list profiles</h3>
         <p>
@@ -577,30 +673,23 @@ Content-Profile: &lt;http://example.org/profile/A>
 	  In either case, a server implementing
           content negotiation by profile SHOULD return an HTTP <code>Link</code> header containing information about the
           default representation of that resource and information about any alternate representations of that
-          resource that that conform to potentially other profiles. The returned representation will be identified by <code>rel="self"</code>, other representations by
+          resource conforming to other profiles. The returned representation will be identified by <code>rel="self"</code>, other representations by
           <code>rel="alternate"</code>.
         </p>
-        <p>As an example, consider the resource <code>http://example.org/a/resource</code> available
+        <p>As an example, consider the resource <code>http://example.org/resource/a</code> available
           in the Media Types <code>application/xml</code>, <code>text/html</code> and <code>text/turtle</code>.
           The <code>text/html</code> representation has
           no profile, whereas the <code>application/xml</code> and <code>text/turtle</code> representations are
-          both available in the profiles <code>urn:example:profile:1</code> and <code>urn:example:profile:2</code>.
+          both available in the profiles <code>urn:example:profile:x</code> and <code>urn:example:profile:y</code>.
         </p>
-        <p>
-          All representations of <code>/a/resource</code> have Content-Location URLs. This results in the following matrix:
-        </p>
-        <table>
-          <tr><th>Media Type / Profile</th><th>urn:example:profile:1</th><th>urn:example:profile:2</th></tr>
-          <tr><th>text/html</th><td>http://example.org/a/resource.html</td><td>http://example.org/a/resource.html</td></tr>
-          <tr><th>text/turtle</th><td>http://example.org/a/resource.prof1.ttl</td><td>http://example.org/a/resource.prof2.ttl</td></tr>
-          <tr><th>application/xml</th><td>http://example.org/a/resource.prof1.xml</td><td>http://example.org/a/resource.prof2.xml</td></tr>
-        </table>
         <p>
           Assuming that a request without an <code>Accept-Profile</code> header per default delivers content conforming to
-          <code>urn:example:profile:1</code>, an HTTP request/response pair would look as follows:
+          <code>urn:example:profile:x</code>, an HTTP request/response pair would look as per
+          <a href="#eg-link-headers"></a>.
         </p>
-        <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Using a Link-header to point to a list of available profiles">
-HEAD /a/resource HTTP/1.1
+        <pre id="eg-link-headers" class="example nohighlight" aria-busy="false" aria-live="polite"
+             title="Server returns a Link header to indicate available profiles">
+HEAD /resource/a HTTP/1.1
 Accept: text/turtle
 [more request headers]
 
@@ -608,14 +697,74 @@ Accept: text/turtle
 
 HTTP/1.1 200 OK
 Content-Type: text/turtle
-Content-Location: http://example.org/a/resource.prof1.ttl
-Content-Profile: &lt;urn:example:profile:1>
-Link: &lt;http://example.org/a/resource.prof1.ttl&gt;; rel="self"; type="text/turtle"; profile="urn:example:profile:1",
-  &lt;http://example.org/a/resource.prof2.ttl&gt;; rel="alternate"; type="text/turtle"; profile="urn:example:profile:2",
-  &lt;http://example.org/a/resource.prof1.xml&gt;; rel="alternate"; type="application/xml"; profile="urn:example:profile:1",
-  &lt;http://example.org/a/resource.prof2.xml&gt;; rel="alternate"; type="application/xml"; profile="urn:example:profile:2",
-  &lt;http://example.org/a/resource.html&gt;; rel="alternate"; type="text/html"
+Content-Profile: urn:example:profile:x
+Link:
+  &lt;http://example.org/resource/a&gt;;
+          rel="self";
+          type="text/turtle";
+          profile="urn:example:profile:x",
+  &lt;http://example.org/resource/a&gt;;
+          rel="alternate";
+          type="text/turtle";
+          profile="urn:example:profile:y",
+  &lt;http://example.org/resource/a&gt;;
+          rel="alternate";
+          type="application/xml";
+          profile="urn:example:profile:x",
+  &lt;http://example.org/resource/a&gt;;
+          rel="alternate";
+          type="application/xml";
+          profile="urn:example:profile:y",
+  &lt;http://example.org/resource/a&gt;;
+          rel="alternate";
+          type="text/html"
 [more response headers]
+        </pre>
+        <p>
+          In <a href="#eg-link-headers"></a>, for each of the different Media Type / Profile combinations, the URI of
+          the resource remains unchanged and it is the <code>Accept</code> and <code>Accept-Profile</code> headers for
+          Media Type and Profile respectively that alter the returned response.
+        </p>
+        <p>
+          A server MAY use <code>Content-Location</code> HTTP headers to indicate direct links to representations of the
+          resource according to Media Type / Profile combinations and, if it does so, it may replace the unchanged URI
+          in the Link header with those direct URIs, as per example <a href=""></a>.
+        </p>
+        <pre id="eg-link-headers-loc" class="example nohighlight" aria-busy="false" aria-live="polite"
+             title="Server returns Link header with Content-Location URIs for some Profiles and Media Types">
+HEAD /resource/a HTTP/1.1
+Accept: text/turtle
+[more request headers]
+
+---
+
+HTTP/1.1 200 OK
+Content-Type: text/turtle
+Content-Location: http://example.org/resource/a.prof1.ttl
+Content-Profile: &lt;urn:example:profile:x>
+Link:
+  <strong>&lt;http://example.org/resource/a.prof1.ttl&gt;;</strong>
+          rel="self"; type="text/turtle";
+          profile="urn:example:profile:x",
+  &lt;http://example.org/resource/a&gt;;
+          rel="alternate";
+          type="text/turtle";
+          profile="urn:example:profile:y",
+  <strong>&lt;http://example.org/resource/a.prof1.xml&gt;;</strong>
+          rel="alternate";
+          type="application/xml";
+          profile="urn:example:profile:x",
+  &lt;http://example.org/resource/a&gt;;
+          rel="alternate";
+          type="application/xml";
+          profile="urn:example:profile:y",
+  &lt;http://example.org/resource/a&gt;;
+          rel="alternate";
+          type="text/html"
+[more response headers]
+
+[In the Link header, Content-Location URIs are only used as context
+URIs for resources conforming to profile urn:example:profile:x]
         </pre>
         <div class="issue" data-number="290"></div>
         <section id="listprofiles-tokens">
@@ -627,11 +776,12 @@ Link: &lt;http://example.org/a/resource.prof1.ttl&gt;; rel="self"; type="text/tu
             HTTP realization, this may be implemented in a number of ways. The preferred way is to add "token"
             parameters to the HTTP Content-Profile and Link HTTP headers.
           </p>
-          <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="HTTP headers with profile URI / token mappings using 'token' parameters">
-# The Profile with urn:example:profile:1 is mapped to token p1 and URI
-# and the Profile with URI http://example.org/profile/2 is mapped to p2
+          <pre id="eg-uri-token" class="example nohighlight" aria-busy="false" aria-live="polite"
+               title="HTTP headers with profile URI / token mappings using 'token' parameters">
+# The Profile with urn:example:profile:x is mapped to token px and URI
+# and the Profile with URI http://example.org/profile/y is mapped to py
 
-HEAD /a/resource HTTP/1.1
+HEAD /resource/a HTTP/1.1
 Accept: text/turtle
 [more request headers]
 
@@ -639,13 +789,13 @@ Accept: text/turtle
 
 HTTP/1.1 200 OK
 Content-Type: text/turtle
-Content-Location: http://example.org/a/resource.prof1.ttl
-Content-Profile: &lt;urn:example:profile:1;token=p1>
-Link: &lt;http://example.org/a/resource.prof1.ttl&gt;; rel="self"; type="text/turtle"; profile="urn:example:profile:1;token=p1",
-  &lt;http://example.org/a/resource.prof2.ttl&gt;; rel="alternate"; type="text/turtle"; profile="http://example.org/profile/2;token=p2",
-  &lt;http://example.org/a/resource.prof1.xml&gt;; rel="alternate"; type="application/xml"; profile="urn:example:profile:1;token=p1",
-  &lt;http://example.org/a/resource.prof2.xml&gt;; rel="alternate"; type="application/xml"; profile="http://example.org/profile/2;token=p2",
-  &lt;http://example.org/a/resource.html&gt;; rel="alternate"; type="text/html"
+Content-Location: http://example.org/resource/a.profx.ttl
+Content-Profile: &lt;urn:example:profile:x;token=px>
+Link: &lt;http://example.org/resource/a.profx.ttl&gt;; rel="self"; type="text/turtle"; profile="urn:example:profile:x;token=px",
+  &lt;http://example.org/resource/a.profy.ttl&gt;; rel="alternate"; type="text/turtle"; profile="http://example.org/profile/2;token=py",
+  &lt;http://example.org/resource/a.profx.xml&gt;; rel="alternate"; type="application/xml"; profile="urn:example:profile:x;token=px",
+  &lt;http://example.org/resource/a.profy.xml&gt;; rel="alternate"; type="application/xml"; profile="http://example.org/profile/2;token=py",
+  &lt;http://example.org/resource/a.html&gt;; rel="alternate"; type="text/html"
 [more response headers]
           </pre>
           <div class="issue" data-number="904"></div>
@@ -713,17 +863,18 @@ Link: &lt;http://example.org/a/resource.prof1.ttl&gt;; rel="self"; type="text/tu
           	It is possible to specify a range of acceptable profile URIs
 		and also to indicate preferences by using quality indicators (q-values).
         </p>
-        <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Requesting a representation conforming to a specific profile using HTTP headers">
-GET /a/resource HTTP/1.1
+        <pre id="eg-get-http" class="example nohighlight" aria-busy="false" aria-live="polite"
+             title="Requesting a resource representation conforming to a specific profile using HTTP headers">
+GET /resource/a HTTP/1.1
 Accept: text/turtle;q=0.8, application/xml;q=0.5
-Accept-Profile: urn:example:profile:1;q=1.0,urn:example:profile:2;q=0.6
+Accept-Profile: urn:example:profile:x;q=1.0,urn:example:profile:y;q=0.6
 [more request headers]
 
 ---
 
 HTTP/1.1 200 OK
 Content-Type: text/turtle
-Content-Profile: &lt;urn:example:profile:1>
+Content-Profile: &lt;urn:example:profile:x>
 [more response headers]
         </pre>
         <p>
@@ -735,78 +886,127 @@ Content-Profile: &lt;urn:example:profile:1>
     </section>
     <section id="qsa">
       <h3>URL Query String Arguments</h3>
-      <div class="issue" data-number="594"></div>
-      <div class="issue" data-number="538"></div>
-      <p>
-        While the HTTP-header approach to profiles enables fully automated retrieval of data conforming
-	to a desired profile, it is also advisable to enable humans to select data by profile without
-	requiring direct manipulation of request header content. This can be accomplished by existing
-	web development methods where an API supports a graphical interface. The user can be presented
-	with a list of available profiles and given the choice of which to retrieve for the dataset of
-	interest. They can even be asked to indicate a ranked choice of possible profiles, which could
-	then be used to retrieve multiple resources' data matching a query.
-      </p>
-      <p>
-	As one example of how an API for such a service can be implemented, a Query String Argument (QSA)
-	realization of the <a href="#abstractmodel">Abstract Model</a> is presented here. Unlike the HTTP-header
-	realization, which is also the subject of an independent IETF document [[PROF-IETF]], this realization
-	is fully specified here but it is not normative. This realization does not preclude other URL schemes,
-	or even other QSA schemes, for profile negotiation, the general requirement being that any scheme
-	implements the functions of the Abstract Model. Whatever specific scheme is used, it should be fully
-	documented and discoverable.
-      </p>
-      <p>
-        A query string is a part of a URL which assigns values to specified parameters. QSAs are commonly used within
-        web browsers by humans and in other <em>client</em>/<em>server</em> situations to deliver extra information to a
-        <em>server</em>.
-      </p>
-      <div class="note" title="Maximum length of URLs">
-	<p>
-	  Since Query String Arguments use URIs (or URLs) to convey important information,
-	  implementers should ensure that the total length of the URL
-	  does not exceed possible length restrictions.
-	  [[RFC7230]] <a data-cite="RFC7230#section-3.1.1">§3.1.1</a> recommends
-	  that senders and recipients support request lines of at least 8,000 octets.
-	  Some client and server implementations, however,
-	  cannot accept URLs longer than 2,000 characters
-	  and e. g. the Sitemap protocol has a length limit of 2,048 characters in a URL.
-	  Cf. <a href="https://stackoverflow.com/questions/417142/what-is-the-maximum-length-of-a-url-in-different-browsers">this question on stackoverflow</a>
-	  for a longer discussion of issues related to URL length.
-	</p>
-      </div>
-      <p><strong><em>Key naming</em></strong></p>
-      <div class="issue" data-number="511"></div>
-      <p>
-        When content negotiation by profile is to take place using QSAs, the <em>request</em>s and <em>response</em>s
-        of the <a href="#abstractmodel">Abstract Model</a> can be implemented by using key/value pairs using key terms of the implementer's choosing.
-	      In this realization, <code>_profile</code> and <code>_mediatype</code> are used
-	      to indicate a single profile or a list of
-        preference-ordered profiles, or one or more Media types, respectively, with profiles or Media Types indicated by either URI or
-        token.
-      </p>
-      <div class="note" title="Current use of tokens for negotiation by Media Type">
+      <section id="qsa-description">
+        <h4>QSA Realization description</h4>
+        <div class="issue" data-number="538"></div>
         <p>
-          Currently, the convention in HTTP content negotiation by media type uses tokens for Media Types, such as
-          <code>text/html</code> or <code>application/ld+json</code> with the tokens registered at
-          <a href="http://www.iana.org/assignments/media-types">IANA's Media Types list</a>.
+          While the HTTP Realization's approach to profile negotiation enables fully automated content negotiation by
+          profile, the motivating use cases for this specification included human actionable negotiation. Also, as related
+          in <a href="#relatedwork"></a>, previous and existing systems already allow for human-actionable content
+          negotiation by profile by a number of means.
         </p>
         <p>
-          There is no proposal yet to create a central register of profiles, as this is thought by the authors to be
-          unsustainable in the long term, given the likely numbers of profiles to be established.
+          To both allow for human-actionable content negotiation by profile and also to show how mechanics similar to
+          existing systems might fulfill all aspects of this specification's Abstract Model, here we present a Query
+          String Argument (QSA) Realization of the Abstract Model. This Realization is functionally equivalent to the
+          HTTP Realization in that all required functions of the Abstract Model are supported however it is not mutually
+          exclusive of the HTTP, or any other, Realization: a server may implement multiple Realizations in parallel as
+          long as each Realization fully supports the Abstract Model.
         </p>
         <p>
-          For this reason, this QSA realization allows either URIs or tokens for profiles to be used, and it is expected that other URL-based realizations will also allow URIs or tokens for Media Types and other
-          content negotiation dimensions, such as language. There are already several initiatives that have created URIs
-          for Media Types based on the IANA registry's tokens.
+          Unlike the HTTP-header Realization which is also the subject of an independent IETF document [[PROF-IETF]],
+          this QSA Realization is fully specified here. Two forms of this QSA approach are presented too: the first is the
+          fixed keyword "QSA Realization" and the second is the "QSA Alternate Keywords Realization" according to which
+          servers may implement any keywords they choose. These two forms, the Abstract Model and the HTTP Realization are
+          all identified in <a href="#conformance-profiles"></a>.
+          <!-- #text commented out pending Appendix profile description work#
+          Conformance of a server to any one or multiple of
+          these <a>profiles</a> of this <a>specification</a> may be demonstrated as per
+          <a href="#conformancetoprofiles"></a>. Note that it is not required that a server indicates conformance to one
+          or more profiles of this specification since not all servers will have the ability to either produce information
+          as per <a href="#conformancetoprofiles"></a> and may be described in that way elsewhere (e.g. a
+          services catalogue).
+          -->
         </p>
-      </div>
-      <p><strong><em>Resource URL</em></strong></p>
-      <p>
-        Resource URLs for which QSA-based profile negotiation is taking place should not themselves be QSA values
-        of other resource URIs in any QSA-based realization. Such mechanics may be used internally but are best kept transparent to the
-        realization's <em>client</em> applications.
-      </p>
-      <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Resource URLs must not, themselves, be parameters of other URLs">
+        <section id="qsa-uri">
+          <h5>QSA URI description</h5>
+          <p>
+            A query string is a part of a URL which assigns values to specified parameters. QSAs are commonly used within
+            web browsers by humans and in other <a>client</a>/<a>server</a> situations to deliver extra information to a
+            <em>server</em>. Query string key/value pairs are separated from the scheme, authority and path of a URI by
+            a question mark symbol, <code>?</code>, and consist of key/value pairs connected by an equals symbol,
+            <code>=</code>, and separated from each other key/value pair by an ampersand symbol, <code>&amp;</code>, as per
+            [[RFC3986]].
+          </p>
+          <p>
+            An example URI with profile negotiation by QSA demonstration elements is:
+          </p>
+          <p>
+            <code>http://example.com/path/to/resource/a?<strong>_profile=prof-01</strong>&<strong>_mediatype=text/turtle</strong></code>
+          </p>
+          <p>
+            In the example URI with QSA above, the profile requested for the resource representation is indicated by the
+            token <code>prof-01</code> and the Media Type is RDF (turtle) indicated by the
+            <a href="http://www.iana.org/assignments/media-types">IANA Media Types list</a> token <code>text/turtle</code>.
+            As per <a href="#listprofiles"></a>'s allowance, a <em>token</em> is used here to identify the profile -
+            <code>prof-01</code> - but that token MUST be mappable to a URI within one particular client/server session and
+            mechanics for that are described below.
+          </p>
+          <div class="note" title="Maximum length of URLs">
+            If Query String Arguments may use URIs (or URLs) to convey important information, implementers should ensure
+            that the total length of the total requesting URI within which the QSAs using URIs/URLs exist does not exceed
+            length restrictions. [[RFC7230]]'s <a data-cite="RFC7230#section-3.1.1">§3.1.1</a> recommends that senders and
+            recipients support request lines of at least 8,000 octets. Some client and server implementations, however,
+            cannot accept URLs longer than 2,000 characters, for example, the Sitemap protocol which has a length limit of
+            2,048 characters in a URL. Cf.
+            <a href="https://stackoverflow.com/questions/417142/what-is-the-maximum-length-of-a-url-in-different-browsers">
+            this question on stackoverflow</a> for a longer discussion of issues related to URL length.
+          </div>
+        </section>
+        <section id="qsa-key-naming">
+          <h5>Key naming</h5>
+          <div class="issue" data-number="511"></div>
+          <p>
+            This Realization includes two different profiles of this specification that describe two different conformance
+            targets which are differentiated by the QSA key naming. The two profiles are the "QSA Realization" and "QSA
+            Alternate Keywords Realization" (see <a href="#conformance-profiles"></a>).
+          </p>
+          <p>
+            To conform to the "QSA Realization" profile, the QSA key <code>_profile</code> MUST be used to indicate a
+            profile token or URI and <code>_mediatype</code> MUST be used to indicate a resource representation's Media
+            Type.
+          </p>
+          <p>
+            When conforming to the profile "QSA Alternate Keywords Realization", any key values to indicate profile and
+            Media Type MAY be used, however this profile requires that a mechanism to discover what keys are used MUST be
+            supplied and this is detailed below in <a href="#qsa-keydiscovery"></a>.
+          </p>
+        </section>
+        <section id="qsa-token-use">
+          <h5>Token and URI use</h5>
+          <p>
+            Currently, the convention in HTTP content negotiation by Media Type uses tokens for Media Types, such as
+            <code>text/html</code> or <code>application/ld+json</code> with the tokens registered at
+            <a href="http://www.iana.org/assignments/media-types">IANA's Media Types list</a> and this specification
+            indicates that implementers SHOULD use tokens from that list for Media Type identifiers.
+          </p>
+          <p>
+            There is no proposal to create a central register of profiles, as this is thought by these authors to be
+            unsustainable in the long term, given the likely numbers of profiles to be established and likely community-
+            specific nature of profiles (individual communities will create profiles for their own needs that will not be
+            widely relevant).
+          </p>
+          <p>
+            For this reason, the QSA Realizations of this specification allow universally unique and un-registered (no
+            central registry) identifiers to be used for profiles. These identifiers MAY be either URIs or tokens. If
+            tokens are used, there MUST exist a 1:1 mapping per resource and session between profile tokens and profile
+            URIs that is discoverable by clients.
+          </p>
+          <p>
+            Several initiatives exist that have created URIs for Media Types, such as <a href="https://conneg.info">
+            conneg.info</a> based on IANA's tokens. As per the URI or token allowance for profiles, these URIs MAY be
+            used to indicate Media Types.
+          </p>
+          <h5>Resource URL</h5>
+          <p>
+            Resource URLs for which QSA-based profile negotiation is taking place SHOULD NOT themselves be QSA values
+            of other resource URIs in any QSA-based realization. Such mechanics may be used internally and are used by
+            legacy systems for profile negotiation but are best hidden from to the <em>client</em> applications to make
+            conformance to these QSA profiles more recognizable. <a href="#eg-resource-url"></a> shows this.
+          </p>
+          <pre id="eg-resource-url"
+           class="example nohighlight" aria-busy="false" aria-live="polite"
+           title="Resource URLs must not, themselves, be parameters of other URLs">
 For the representation of Resource X, according to Profile Y, in Media Type Z:
 
 Rather than:
@@ -815,72 +1015,238 @@ GET /single/endpoint?resource=http://example.org/resource=X&amp;_profile=Y&amp;_
 Use:
 GET /resource/X?_profile=Y&amp;_mediatype=Z HTTP/1.1
       </pre>
-      <section id="listprofilesqsa">
+        </section>
+      </section>
+      <section id="qsa-listprofiles">
         <h4>list profiles</h4>
         <p>
-          A QSA with a fixed value such as <code>_profile=list</code> should be supported by the <em>server</em> to allow a <em>client</em> to
-          make a <strong>list profiles</strong> <em>request</em>.
+          For conformance to the "QSA Realization Profile", the <code>_profile</code> QSA key SHOULD be supported by the
+          <a>server</a> to allow a <a>client</a> to make a <strong>list profiles</strong> <em>request</em>. For this
+          request, the reserved token <code>all</code> SHOULD be used, e.g. <code>_profile=all</code>.
         </p>
         <div class="issue" data-number="589"></div>
         <p>
-          Other QSA key/value pairs can be used, such as <code>_view=alternates</code>, as long as this is discoverable.
+          For conformance to the "QSA Alternate Keywords Realization", other key/value pairs MAY be used, such as
+          <code>_view=alternates</code> but then the implementing server MUST supply a means of discovering that key,
+          as per <a href="#qsa-keydiscovery"></a>.
         </p>
         <p>
-          The complete request for the <em>profile</em>s to which a <em>resource</em>'s representations conform can thus be
-          communicated in a single URL like thus:
-        </p>
-        <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Requesting a list of profiles for a resource by QSA">
-GET /a/resource?_profile=list HTTP/1.1
-        </pre>
-        <!--
-        <p><code>RESOURCE_URL?_profile=list</code></p>
-        <p>where</p>
-        -->
-        <p>
-          where <code>/a/resource</code> is the URL of the resource for which the list of available profiles is
-          requested
+          The <em>server's</em> <a>response</a> to a <em>list profiles</em> <a>request</a> SHOULD be to present a list
+          of all profiles that it supports representations of the resource for and optionally also supported Media Types
+          for those representations.
         </p>
         <p>
-          It's possible for a <em>client</em> making this <em>request</em> to negotiate for particular formats of the response by
-          using a QSA equivalent to the HTTP <code>Accept</code> header to indicate a Media Type. The <em>server</em>
-          would implement a <code>_mediatype</code> QSA for this but might offer an alternative, such
-          as <code>_format</code>, as long as this is discoverable.
+          The server SHOULD represent the alternate profiles information in the HTTP header of the <em>response</em>, as
+          per the HTTP Realization (using a Link header) and it MAY also represent the information in the response body
+          in place of the default profile representation of a resource. This body content allowance is to enable humans
+          to read alternate profile-conformant representation options for a resource easily in a web browser without
+          having to view lower-level HTTP information.
         </p>
-        <p>An example <em>profile</em> listing for a <em>resource</em> in HTML would look like:
+        <p>
+          Where a server does provide alternate profiles information in an HTTP body, the server MAY allow clients to
+          negotiate for particular Media Types of the response by using the same Media Type negotiation method used for
+          the <em>get resource by profile</em> function below.
         </p>
-        <!--<p><code>RESOURCE_URL?_profile=list&_mediatype=text/html</code></p>-->
-        <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Requesting a list of profiles for a resource by QSA in HTML">
-GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
+        <p>
+          An example <em>request</em> for the alternate profile representations of a <em>resource</em> to be delivered
+          as HTTP body content as well as HTTP header content in the JSON format could look like
+          <a href="#eg-list-profiles-mediatype"></a>
+        </p>
+        <pre id="eg-list-profiles-mediatype" class="example nohighlight" aria-busy="false" aria-live="polite"
+             title="Requesting a list of profiles for a resource by QSA in HTML">
+GET /resource/a?_profile=all&amp;_mediatype=application/json HTTP/1.1
+
+---
+
+# The response shows that representations of the resource can be delivered according
+# to two profiles identified by the tokens <em>profile-x</em> &amp; <em>profile-y</em>
+# and that <em>profile-x</em>-conformant representations are available in XML &amp; JSON
+# where as <em>profile-y</em>-conformant representations are only available in XML
+
+# The content in the JSON body of the response is equivalent to that of the Link header
+
+# Both the Link header and the JSON body include profile URI/token mappings
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Profile: &lt;http://www.w3.org/ns/dx/conneg/profile/qsa>
+Link:
+  &lt;http://example.org/resource/a?_profile=profile-x&amp;_mediatype=application/json>;
+          rel="self"; type="text/html";
+          profile="http://otherexample.org/profile/x",
+  &lt;http://example.org/resource/a?_profile=profile-x&amp;_mediatype=text/xml>;
+          rel="alternate";
+          type="text/xml";
+          profile="http://otherexample.org/profile/x",
+  &lt;http://example.org/resource/a?_profile=profile-y&amp;_mediatype=text/xml>;
+          rel="alternate";
+          type="text/xml";
+          profile="http://otherexample.org/profile/y"
+
+{
+    "resource": "http://example.org/resource/a",
+    "profiles": [
+        {
+            "token": "profile-x",
+            "uri": "http://otherexample.org/profile/x",
+            "media_types": ["application/json", "text/xml"]
+        },
+        {
+            "token": "profile-y",
+            "uri": "http://otherexample.org/profile/y",
+            "media_types": ["text/xml"]
+        }
+    ]
+}
         </pre>
       </section>
-      <section id="getresourcebyprofileqsa">
+      <section id="qsa-getresourcebyprofile">
         <h4>get resource by profile</h4>
-        <div class="issue" title="To be completed"></div>
-
-        <p><strong><em>Expressing profile preference</em></strong></p>
         <p>
-          A <em>server</em> implementing <em>profile</em> listing for <em>resource</em>s could allow the
-          requester to indicate preferences by allowing the QSA indicating the desired
-          profile, e.g., <code>_profile</code>, to have a comma-separated list as its value so, for a
-          <em>client</em> desiring representations of <code>/a/resource</code> according to profiles with tokens
-          <code>aaa</code>, <code>bbb</code> &amp; <code>ccc</code> we have:
+          To be conformant with the "QSA Realization" profile of this specification, a <em>server</em> MUST allow
+          clients to request resources according to profiles they identify with a <code>_profile</code> query string.
+          Since either <a>tokens</a> or URIs may be used to identify a profile, servers MUST accept either. Servers MAY
+          accept both encoded and un-encoded URIs but MAY also only accept one or the other.
         </p>
-        <pre class="example nohighlight" aria-busy="false" aria-live="polite" title="Requesting a list of profiles for a resource by QSA in HTML">
-  GET /a/resource?_profile=aaa,bbb,ccc HTTP/1.1
+        <p>
+          To be conformant with the "QSA Alternate Keywords Realization" profile of this specification, a
+          <em>server</em> MUST allow clients to request resources according to profiles they identify with a key of the
+          server implementor's choosing but then the server MUST also supply a means of discovering that key, as per
+          <a href="#qsa-keydiscovery"></a>.
+        </p>
+        <p>
+          A QSA <em>server</em> implementing <em>get resource by profile</em> SHOULD allow a client to indicate
+          profile preferences by allowing ordered profile identifiers in the QSA key/value pair for profiles. For
+          example, a client preferring <em>profile-z</em> but also accepting <em>profile-y</em> and <em>profile-x</em>,
+          in that preference order, could make a request using comma separation of the profile tokes, such as
+          <code>GET /resource/a?_profile=profile-z,profile-y,profile-x</code>.
+        </p>
+        <p>
+          Servers SHOULD support any combination of profile URIs or tokens for this (e.g.
+          <code>profile-z,http://example.org/profile/x,profile-y</code>) and SHOULD return resource representations
+          according to preference. Servers MUST indicate the profile actually returned by including a
+          <code>Content-Profile</code> HTTP header in the response and MAY also indicate the returned profile in other
+          ways. Servers SHOULD support escaped URIs and MAY also support un-escaped URIs identifying profiles, or both.
+        </p>
+        <p>
+          A server implementing multiple Media Type formats for its resource representations SHOULD allow a client to
+          specify a preference order for them in a similar way.
+        </p>
+      </section>
+      <section id="qsa-keydiscovery">
+        <h4>QSA key discovery</h4>
+        <p>
+          <em>This function is only relevant for servers claiming conformance to the "QSA Alternate Keywords
+          Realization" profile of this specification.</em>
+        </p>
+        <p>
+          Servers claiming conformance to the "QSA Alternate Keywords Realization" MUST implement methods to allow
+          clients to discover the QSA keys used in place of the "QSA Realization" profile's <code>_profile</code> and
+          <code>_mediatype</code> and also the equivalent of the <code>_profile=all</code> key/value combination. This
+          allows clients with little knowledge of the server to discover how to create <em>list profile</em> and
+          <em>get resource by profile</em> requests.
+        </p>
+        <p>
+          A server responding to any request for a resource for which "QSA Alternate Keywords Realization" is supported
+          SHOULD include HTTP headers that indicate alternate profiles and Media Types, as per the HTTP Realization.
+          They MAY instead, or in addition, provide HTTP body content indicating the same information. If they do, such
+          information SHOULD be present in the default response to a URI request, i.e. in response to a request without
+          any QSAs. A series of example requests is given in <a href="#eg-qsa-keydiscovery"></a>.
+        </p>
+        <!--
+          , as implemented by the <a href="https://pypi.org/project/pyldapi/">
+          pyLDAPI Python library for Linked Data</a>,
+          -->
+        <pre id="eg-qsa-keydiscovery" class="example nohighlight" aria-busy="false" aria-live="polite"
+             title="Example requests and responses for QSA key discovery">
+# A client makes a request for Resource A not knowing if any Content
+# Negotiation by Profile is supported. It supplies an Accept-Profile
+# header just in case. For extra efficiency, the client could have
+# made a HEAD request instead of a GET
+
+GET /resource/a HTTP/1.1
+Accept-Profile: http://example.org/profile/x
+
+# The server does not understand the HTTP Get Resource By Profile
+# request (doesn't support the HTTP Realization) but is able to
+# supply an HTTP Link header indicating alternate profiles. It can be
+# seen from the Link header that keys other than _profile &
+# _mediatype are in use - view & format - thus this is QSA Alt, not a
+# QSA Realization-conformant system
+
+# The resource representations available conform to profile-x & profile-y.
+# The profile-y-conformant representation is only available in XML
+
+HTTP/1.1 200 OK
+Link:
+  &lt;http://example.org/resource/a?view=profile-x>;
+          rel="self";
+          type="text/html";
+          profile="http://otherexample.org/profile/x",
+  &lt;http://example.org/resource/a?view=profile-y&amp;format=text/xml>;
+          rel="alternate";
+          type="text/xml";
+          profile="http://otherexample.org/profile/y",
+
+# Note that here the server does not directly indicate the profile served
+# (there is no Content-Profile header present) but this can be inferred
+# by the link header with rel="self"
         </pre>
         <p>
-          Servers can support any combination of profile URIs or tokens for this
-		(e.g. <code>aaa,http://example.org/profile-x,bbb</code>).
-		However, in this situation, profile URIs containing commas would need to be escaped.
+          While the Link header response above communicates all the information that a <em>list profiles</em> request
+          does, it is not visible directly in a web browser. While <a href="#eg-list-profiles-mediatype"></a> shows a
+          requests/response pair that include equivalent Link header and HTTP body information listing profiles, the
+          latter of which is visible in a browser, it is dependent on a client knowing that the QSA key/value pair
+          <code>_profile=all</code> is used to trigger this response as opposed to the server's default resource
+          representation.
         </p>
         <p>
-          Similarly, a <em>server</em> implementing multiple Media Type return formats for its <em>profile</em> listing should
-          allow a client to specify a preference order for Media Types and also for other dimensions of content
-          negotiation, such as language. When using a QSA-only API, Media Type preferences (and language and others in a
-          similar fashion) can be specified in a comma-separated list form, most preferred to least, such that
-          a client requesting profiles as <code>aaa,bbb,ccc</code> will receive a resource that meets the requirements of profile
-	  <code>aaa</code> if it is available, else one that meets profile <code>bbb</code> if that is available, and so on.
+          To communicate to a client what QSA key/value pair is used for <em>list profiles</em> when the "QSA Alternate
+          Keywords Realization" is conformed to, a server SHOULD...
         </p>
+        <div class="note">
+          <p>
+            Nick: it appears we are dependent on an identifier for the "profile of a resource that lists all others
+            profiles". This is analogous in content to the Link header response for <em>list profiles</em> and is exactly
+            what the existing QSA systems respond with when asked for <code>?_view=alternates</code> and what is given
+            above as <code>?_profile=all</code>. So it's a URI that is equivalent to the QSA Realization profile's token
+            of <em>all</em>.
+          </p>
+          <p>
+            If we had such a URI, I would be able to say something like a Link header response should include this to
+            indicate how a client can show how to trigger <code>?_profile=all</code> (list profiles):
+          </p>
+          <pre class="nohighlight">Link:
+    &lt;http://example.org/resource/a&gt;;
+      rel="self";
+      type="text/turtle";
+      profile="urn:example:profile:x",
+    <strong>&lt;http://example.org/resource/a&gt;;
+      rel="alternate";
+      type="text/turtle";
+      profile="http://example.org/profile/alternates",</strong>
+    &lt;http://example.org/resource/a&gt;;
+      rel="alternate";
+      type="text/turtle";
+      profile="urn:example:profile:y",
+    &lt;http://example.org/resource/a&gt;;
+      rel="alternate";
+      type="application/xml";
+      profile="urn:example:profile:x",
+    &lt;http://example.org/resource/a&gt;;
+      rel="alternate";
+      type="application/xml";
+      profile="urn:example:profile:y",
+    &lt;http://example.org/resource/a&gt;;
+      rel="alternate";
+      type="text/html"
+            </pre>
+          <p>
+            The bolded part of the Link header above is the alternate profile for the resource that lists other profiles
+            which we know since the profile identifier is <strong><code>http://example.org/profile/alternates</code>
+            </strong> in some format (here <code>text/turtle</code>.
+          </p>
+        </div>
       </section>
     </section>
   </section>
