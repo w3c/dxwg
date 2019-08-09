@@ -294,7 +294,7 @@ Content-Type: text/turtle;profile="urn:example:profile-2"
     headers should be seen to convey profiles that are specific to the media-type,
     such as the JSON-LD profiles "expanded" (<code>http://www.w3.org/ns/json-ld#expanded</code>) or
     "flattened" (<code>http://www.w3.org/ns/json-ld#flattened</code>).
-    In order to signal the use of media-type-independent profiles,
+    In order to signal the use of Media Type-independent profiles,
     the http header fields <code>Accept-Profile</code> and <code>Content-Profile</code> are to be used.</p>
       <h4>Using a Link-header with rel=”profile” (RFC 6906)</h4>
       <p>The HTTP Link header field [[RFC8288]] relates a web resource (Link Context)
@@ -559,7 +559,7 @@ Preference-Applied: profile="urn:example:schema"
         <p>
           A <em>client</em> executing a <strong>get resource by profile</strong> MAY <em>request</em> a
           <em>resource</em> representation conforming to one of any number of <em>profile</em>s with its preference
-          expressed in a some form of list ordering.
+          expressed in a realization-specific ordering.
         </p>
         <p>
           The server should attempt to reply with a profile that best matches the client request. The order of
@@ -716,7 +716,7 @@ Content-Profile: &lt;http://example.org/profile/x>
 	      the server's response SHOULD contain a <code>Content-Profile</code> header
 	      listing the URIs of all profiles to which it knows the representation conforms.
       </p>
-      <section id="listprofileshttp">
+      <section id="http-listprofiles">
         <h3>list profiles</h3>
         <p>
           The preferred way to retrieve a list of profiles the server supports for a specific resource
@@ -903,16 +903,21 @@ Link: &lt;http://example.org/resource/a.profx.ttl&gt;; rel="self"; type="text/tu
           </div>
         </section>
       </section>
-      <section id="getresourcebyprofilehttp">
+      <section id="http-getresourcebyprofile">
         <h3>get resource by profile</h3>
         <p>
           	Getting a resource representation conforming to a specific profile is done
 		by issuing an <code>HTTP GET</code> request against the resource
 		and specifying the desired profile URI in an <code>Accept-Profile</code> header.
           	It is possible to specify a range of acceptable profile URIs
-		and also to indicate preferences by using quality indicators (q-values).
+		and also to indicate preferences by using quality indicators (q-values). <a href="#eg-http-get"></a> shows a simple
+          request for a resource, <code>/resource/a</code>, with a preference for representations according to profiles
+          identified by the URIs (URNs, in this example) <code>urn:example:profile:x</code> &amp;
+          <code>urn:example:profile:y</code> with 'q' values indicating a higher preference for the first. A response
+          is returned by the server which indicates conformance with <code>urn:example:profile:x</code> by inclusion of
+          that identifier in the <code>Content-Profile</code> HTTP header.
         </p>
-        <pre id="eg-get-http" class="example nohighlight" aria-busy="false" aria-live="polite"
+        <pre id="eg-http-get" class="example nohighlight" aria-busy="false" aria-live="polite"
              title="Requesting a resource representation conforming to a specific profile using HTTP headers">
 GET /resource/a HTTP/1.1
 Accept: text/turtle;q=0.8, application/xml;q=0.5
@@ -1164,11 +1169,15 @@ Link:
           <a href="#qsa-keydiscovery"></a>.
         </p>
         <p>
-          A QSA <em>server</em> implementing <em>get resource by profile</em> SHOULD allow a client to indicate
-          profile preferences by allowing ordered profile identifiers in the QSA key/value pair for profiles. For
-          example, a client preferring <em>profile-z</em> but also accepting <em>profile-y</em> and <em>profile-x</em>,
-          in that preference order, could make a request using comma separation of the profile tokes, such as
-          <code>GET /resource/a?_profile=profile-z,profile-y,profile-x</code>.
+          A QSA <em>server</em> implementing <em>get resource by profile</em> SHOULD allow a client to indicate a
+          preference for representations of the resource according to any one of a number of profiles. Such a request
+          MUST indicate profile preference in by inclusion of an ordered list of profile identifiers (URIS or tokens)
+          within the value of the QSA key/value pair used to identify profiles. For example, a client preferring
+          resource representations according to <em>profile-z</em> and then <em>profile-y</em> and finally
+          <em>profile-x</em>, in that preference order, could make a request like this:
+        </p>
+        <p>
+          <code>GET /resource/a?_profile=profile-z,profile-y,profile-x</code>
         </p>
         <p>
           Servers SHOULD support any combination of profile URIs or tokens for this (e.g.
