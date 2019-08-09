@@ -95,7 +95,7 @@
       <h3>Profiles for Conformance</h3>
       <p>
         This specification includes several <a>profiles</a> of it that may be conformed to by systems claiming to implement a form of this specification.
-        These profiles, given in the table below, are identified by their URIs and conformance to them by Internet resources should be indicated as per this document (use of
+        These profiles, given in the table below, are identified by URIs and conformance to them by Internet resources should be indicated as per this document (use of
         <code>Content-Profile</code> HTTP header).
       </p>
       <p>
@@ -115,12 +115,6 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td><code><a href="http://www.w3.org/ns/dx/conneg/profile/abstract">cnpr:abstract</a></code></td>
-            <td>Abstract Model</td>
-            <td>For conformance with the model presented in <a href="#abstractmodel"></a>.</td>
-            <td>Not to be used if a resource also conforms to a more concrete profile (all of the others)</td>
-          </tr>
           <tr>
             <td><code><a href="http://www.w3.org/ns/dx/conneg/profile/http">cnpr:http</a></code></td>
             <td>HTTP Realization</td>
@@ -1073,56 +1067,85 @@ GET /a/resource?_profile=list&amp;_mediatype=text/html HTTP/1.1
         between them, according to the Profiles Vocabulary [[PROF]].
       </p>
       <p>
-        The code in <a href="#profiles-in-prof"></a> defines <em>Content Negotiation by Profile</em> as a
-        <code><a href="http://purl.org/dc/terms/Standard">dct:Standard</a></code>, the definition of which in [[PROF]]
-        matches the definition of <a>specification</a> in this document. The 5 profiles of it are then, as per regular
-        PROF modelling, termed <code><a href="https://www.w3.org/TR/dx-prof/#Class:Profile">prof:Profiles</a></code>.
-        The 5 profiles are presented in a profile hierarchy with the Abstract Model and Resource Representation
-        Description profiles profiling the specification directly and the other four profiles profiling the Abstract
-        Model profile. This is also shown graphically in <a href="#fig-profile-hierarchy"></a> below the code listing.
+        The RDF (turtle syntax) code in <a href="#profiles-in-prof">Code Listing 1</a> defines <em>Content Negotiation
+        by Profile</em> as a <code><a href="http://purl.org/dc/terms/Standard">dct:Standard</a></code>, the definition
+        of which in [[PROF]] matches the definition of <a>specification</a> in this document. The 4 profiles of it are
+        then, as per regular PROF modelling, termed <code><a href="https://www.w3.org/TR/dx-prof/#Class:Profile">
+        prof:Profiles</a></code>. The 4 profiles are presented in a hierarchy with the all profiles either directly
+        profiling the standard or, in the case of the <em>QSA Realization</em> profile, profiling another profile that
+        profiles the standard. This is also shown graphically in <a href="#fig-profile-hierarchy"></a> below the code
+        listing.
       </p>
-      <pre id="profiles-in-prof" class="example nohighlight" aria-busy="false" aria-live="polite"
+      <p>
+        The code presented in <a href="#profiles-in-prof">Code Listing 1</a> is also available in the RDF file:
+      </p>
+      <ul><li><a href="profiles.ttl">profiles.ttl</a></li></ul>
+      <p>
+        The reason that the <em>QSA Realization</em> profile is modelled as profiling the <em>QSA Alternate Keywords
+        Realization</em> profile is that the <em>QSA Realization</em> profile is a more constrained 'narrower'
+        specification of <em>Content Negotiation by Profile</em> than <em>QSA Alternate Keywords Realization</em> and
+        anything that is conformant with the <em>QSA Realization</em> profile would necessarily by conformant with the
+        <em>QSA Alternate Keywords Realization</em> profile which thus meets the [[PROF]] definition of what it means
+        to be the profile of something.
+      </p>
+      <pre id="profiles-in-prof" class="nohighlight" aria-busy="false" aria-live="polite"
+           style="border:solid 1px black; padding:5px;"
            title="Profiles of Content Negotiation by Profile described using PROF, in the RDF turtle notation">
 @prefix dct: &lt;http://purl.org/dc/terms/> .
 @prefix prof: &lt;http://www.w3.org/ns/dx/prof/> .
 @prefix role: &lt;http://www.w3.org/ns/dx/prof/role/> .
 @prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: &lt;http://www.w3.org/2004/02/skos/core#> .
+
 @prefix cnpr: &lt;http://www.w3.org/ns/dx/conneg/profile/> .
 
 &lt;https://www.w3.org/TR/dx-prof-conneg/> a dct:Standard ;
     rdfs:label "Content Negotiation by Profile" ;
     rdfs:comment "W3C Recommendation (a standard) for Content Negotiation by Profile" .
 
-cnpr:abstract a prof:Profile ;
-    prof:isProfileOf &lt;https://www.w3.org/TR/dx-prof-conneg/> ;
-    rdfs:label "Abstract Model Profile" ;
-    rdfs:comment "Abstract Model profile of Content Negotiation by Profile" .
-
 cnpr:http a prof:Profile ;
     prof:isProfileOf &lt;https://www.w3.org/TR/dx-prof-conneg/> ;
-    rdfs:label "HTTP Realization Profile" ;
-    rdfs:comment "HTTP Realization profile of Content Negotiation by Profile" .
+    rdfs:label "HTTP Realization" ;
+    rdfs:comment "For conformance with the realization of Content Negotiation by Profile
+                  presented in § 7.1 Hypertext Transfer Protocol Headers." ;
+    skos:scopeNote "To be used if a resource conforms to the HTTP Realization" .
 
 cnpr:qsa a prof:Profile ;
-    prof:isProfileOf &lt;http://www.w3.org/ns/dx/conneg/profile/abstract> ;
+    prof:isProfileOf cnpr:qsa-alt ;
     rdfs:label "QSA Realization Profile" ;
-    rdfs:comment "QSA Realization profile of Content Negotiation by Profile" .
+    rdfs:comment "For conformance with the realization of Content Negotiation by Profile
+                  presented in § 7.2 URL Query String Arguments." ;
+    skos:scopeNote "To be used if a resource conforms to the QSA Realization using the
+                    Query String Arguments _profile and _mediatype as per the
+                    recommendations in § 7.2 URL Query String Arguments. " .
 
 cnpr:qsa-alt a prof:Profile ;
-    prof:isProfileOf &lt;http://www.w3.org/ns/dx/conneg/profile/abstract> ;
+    prof:isProfileOf &lt;https://www.w3.org/TR/dx-prof-conneg/> ;
     rdfs:label "QSA Alternate Keywords Realization Profile" ;
-    rdfs:comment "Query String Argument Alternate Keywords Realization profile of
-        Content Negotiation by Profile" .
+    rdfs:comment "For conformance with the realization of Content Negotiation by Profile
+                  presented in § 7.2 URL Query String Arguments." ;
+    skos:scopeNote "To be used if a resource conforms to the QSA Realization but uses
+                    alternate keywords for the Query String Arguments _profile and
+                    _mediatype, as allowed by the recommendations in § 7.2 URL Query
+                    String Arguments." .
 
 cnpr:rrd a prof:Profile ;
     prof:isProfileOf &lt;https://www.w3.org/TR/dx-prof-conneg/> ;
     rdfs:label "Resource Representation Description Profile" ;
-    rdfs:comment "Resource Representation Description profile of Content
-        Negotiation by Profile" .
+    rdfs:comment "For conformance with Content Negotiation by Profile § 6.2.2 get
+                  resource by profile." ;
+    skos:scopeNote "To be used if a resource representation is able to indicate which
+                    profile(s) it conforms to, in its appropriate realization, as per
+                    the abstract specification in § 6.2.2 get resource by profile. " .
       </pre>
+      <div class="listing-caption"
+           style="font-style:italic; margin-left:10px; margin-right:10px;">
+        Code Listing 1 Description of this specification and its profiles, as listed in
+        <a href="#conformance-profiles"></a> using the Profiles Vocabulary [[PROF]]
+      </div>
       <figure id="fig-profile-hierarchy">
-        <a href="profile-hierarchy.svg">
-          <img src="profile-hierarchy.svg" alt="Profile hierarchy of this specification" style="width:500px;" />
+        <a href="profiles-hierarchy.svg">
+          <img src="profiles-hierarchy.svg" alt="Profiles hierarchy of this specification" style="width:500px;" />
         </a>
         <figcaption>
           The specification and profiles of this Content Negotiation by Profile standard shown in a [[PROF] profiles
@@ -1135,13 +1158,13 @@ cnpr:rrd a prof:Profile ;
           With the identification of profiles of this specification given in <a href="#conformance-profiles"></a> and
           their relations described using the Profiles Vocabulary [[PROF]] in this appendix, it is possible for
           resources to show conformance to the this specification or any of the profiles by using mechanisms recommended
-          in [[PROF]]. PROF's recommendation is that any resource, for example <code>&lt;/resource/a&gt;</code>,
+          in [[PROF]]. PROF's recommendation is that any resource, for example <code>&lt;http://example.org/resource/a&gt;</code>,
           wishing to claim conformance to a <a>specification</a> or a <a>profile</a> use the [[DCTERMS]]
           <code><a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-conformsTo">
             dct:conformsTo</a></code> predicate like this:
         </p>
         <p>
-          <code>&lt;/resource/a&gt; dct:conformsTo &lt;SPEC_OR_PROFILE_URI&gt; .</code>
+          <code>&lt;hjttp://example.com/resource/a&gt; dct:conformsTo &lt;SPEC_OR_PROFILE_URI&gt; .</code>
         </p>
         <p>
           The <code>&lt;SPEC_OR_PROFILE_URI&gt;</code> may be this specification's URI but, in the best case, would be
