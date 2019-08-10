@@ -996,19 +996,36 @@ Content-Profile: &lt;urn:example:profile:x>
             [[RFC3986]].
           </p>
           <p>
-            An example URI with profile negotiation by QSA demonstration elements is:
+            An example resource-requesting URI with content negotiation by profile implemented using QSA is shown in
+            <a href="#eg-qsa-uri"></a>.
+          </p>
+          <pre id="eg-qsa-uri"
+               class="example nohighlight" aria-busy="false" aria-live="polite"
+               title="Example resource-requesting URI with content negotiation by profile implemented using QSA">
+http://example.com/path/to/resource/a?<strong>_profile=prof-01</strong>
+          </pre>
+          <p>
+            In <a href="#eg-qsa-uri"></a>, the profile requested for the resource representation is indicated by the
+            token <code>prof-01</code> which MUST be appended to the resource's URI as a Query String Argument. As per
+            this specification's <a href="#listprofiles"></a>'s allowance, a <em>token</em> is used here to identify the
+            profile - <code>prof-01</code> - but that token MUST be mappable to a URI within one particular
+            client/server session and mechanics for that are described below.
           </p>
           <p>
-            <code>http://example.com/path/to/resource/a?<strong>_profile=prof-01</strong>&<strong>_mediatype=text/turtle</strong></code>
+            Additional aspects of content negotiation MAY be included in such URIs by the use of additional QSA or by
+            any other techniques (for example HTTP headers) but, if they are, they MUST NOT change the actions of the
+            request for content negotiation by profile. To demonstrate an acceptable inclusion, if the client using the
+            URI in <a href="#eg-qsa-uri"></a> wished to indicate a preference for the content of the request to be
+            serialised as RDF, according to the  Turtle [[?TURTLE]] specification, it could use the
+            <a href="http://www.iana.org/assignments/media-types">IANA Media Types list</a>'s token for Turtle which is
+            <code>text/turtle</code> and formulate the URI as per <a href="#eg-qsa-uri-mt"></a> which is accordance with
+            URI formulation requirements [[RFC3986]].
           </p>
-          <p>
-            In the example URI with QSA above, the profile requested for the resource representation is indicated by the
-            token <code>prof-01</code> and the Media Type is RDF (turtle) indicated by the
-            <a href="http://www.iana.org/assignments/media-types">IANA Media Types list</a> token <code>text/turtle</code>.
-            As per <a href="#listprofiles"></a>'s allowance, a <em>token</em> is used here to identify the profile -
-            <code>prof-01</code> - but that token MUST be mappable to a URI within one particular client/server session and
-            mechanics for that are described below.
-          </p>
+          <pre id="eg-qsa-uri-mt"
+               class="example nohighlight" aria-busy="false" aria-live="polite"
+               title="Example QSA URI with content negotiation by profile and Media Type">
+http://example.com/path/to/resource/a?<strong>_profile=prof-01&amp;_mediatype=text/turtle</strong>
+          </pre>
           <div class="note" title="Maximum length of URLs">
             If Query String Arguments may use URIs (or URLs) to convey important information, implementers should ensure
             that the total length of the total requesting URI within which the QSAs using URIs/URLs exist does not exceed
@@ -1084,7 +1101,7 @@ GET /single/endpoint?resource=http://example.org/resource=X&amp;_profile=Y&amp;_
 
 Use:
 GET /resource/X?_profile=Y&amp;_mediatype=Z HTTP/1.1
-      </pre>
+          </pre>
         </section>
       </section>
       <section id="qsa-listprofiles">
