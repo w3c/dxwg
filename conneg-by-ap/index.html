@@ -11,8 +11,8 @@
     <h2>Abstract</h2>
     <p>
       This document describes how Internet clients may negotiate for content provided by servers according to
-      <em>profiles</em>. This is distinct from negotiating by Media Type or Language: the <em>profile</em> is expected
-      to specify the content of information returned, which may be a subset of the information the responding server has about the requested resource, and may be structured in a specific way to meet interoperability requirements of a community of practice.
+      <em>profiles</em>. This is distinct from negotiating by Media Type or Language: a <em>profile</em> may
+      specify the content of information returned, which may be a subset of the information the responding server has about the requested resource, and may be structured in a specific way to meet interoperability requirements of a community of practice.
     </p>
   </section>
   <section id="sotd">
@@ -20,14 +20,14 @@
     <section id="FamilyOfDocs">
       <h3>Overview of DXWG documents on profiles</h3>
       <p>
-        This document is one within a set of documents on profiles, edited by the W3C Dataset Exchange Working Group (DXWG).
-	      Some of the documents are general whereas others are technology-specific:
+        This document is one from set of documents on profiles, edited by the W3C Dataset Exchange Working Group (DXWG)
+        and the Internet Engineering Taskforce (IETF). The documents are:
       </p>
       <ul>
-        <li>[[PROF]] an RDF vocabulary that describes profiles and related resources</li>
+        <li>[[PROF]] - the <em>Profiles Vocabulary</em>: an RDF vocabulary that describes profiles and related resources</li>
         <li><strong>[PROF-CONNEG] this document, specific guidance on how to negotiate for Internet resource content using profiles</strong></li>
-        <li>[[PROF-IETF]] an <a href="http://www.ietf.org">IETF</a> <a href="http://www.ietf.org/standards/ids/">Internet-Draft</a> defining HTTP Headers for HTTP content negotiation by profile</li>
-        <li>It is also planned to provide [[PROF-GUIDANCE]] as general recommendations and guidance on profiling.</li>
+        <li>[[PROF-IETF]] - <em>Indicating and Negotiating Profiles in HTTP</em>: an <a href="http://www.ietf.org">IETF</a> <a href="http://www.ietf.org/standards/ids/">Internet-Draft</a> defining HTTP Headers for HTTP content negotiation by profile</li>
+        <li>The DXWG also plans to provide [[PROF-GUIDANCE]] - <em>Profile Guidance</em>: general recommendations and guidance on profiling.</li>
       </ul>
     </section>
   </section>
@@ -35,7 +35,7 @@
     <h2>Introduction</h2>
     <p>
       Content delivered by dereferencing Internet identifiers can be negotiated for in different
-      ways. When using the HTTP protocol [[RFC7230]], a client may set one or more headers:
+      ways. When using the HTTP protocol [[RFC7230]], a client may set one or more request headers:
     </p>
     <ul>
       <li>an <code>Accept</code> header specifying preferred Media Types which the server may or may not supply</li>
@@ -44,29 +44,35 @@
     </ul>
     <p>
       However, clients have not had a
-      defined way to negotiate for content based on its adherence to an information model - a standard, a specification or
-      a <a>profile</a> - and this document describes how this functionality can be delivered.
+      defined way to negotiate for content based on its adherence to an information model - a standard, a <a>specification</a> or
+      a <a>profile</a>. This document describes how such functionality can be delivered.
     </p>
     <p>
       When online information about a resource adheres to one or more profiles, methods described here allow
-      clients to list those profiles and request content according to one or more of them in order of preference.
-      For example, a catalog may offer a dataset description using alternative representations using [[VOID]],
+      clients to request lists of those profiles and request content according to one or more of them, in order of preference.
+    </p>
+    <p>
+      For example, a catalog may offer choices of representations of a dataset's description that conform to different information models, perhaps [[VOID]],
       [[VOCAB-DATA-CUBE]] and [[VOCAB-DCAT]]. Furthermore, the [[VOCAB-DCAT]] representation might conform to the
-      [[DCAT-AP]] profile, the [[GeoDCAT-AP]] profile and also an organisation specific profile "MyOrgDCATProfile"
-      which constrains various elements. These profiles may be related - for example "MyOrgDCATProfile" may be a
-      further profile of [[GeoDCAT-AP]]. A request for the information about this dataset description resource may
-      ask for the list of profiles available, or it may ask specifically for a response adhering to, for example
+      [[DCAT-AP]] profile, the [[GeoDCAT-AP]] profile and perhaps also an organisation-specific profile "MyOrgDCATProfile".
+      These "narrower" profiles constrains various elements of the dataset's description above and beyond the "broader", more general, specification or profile that they profile.
+      A request for information about this dataset description's possible forms may
+      ask for the list of the profiles to representations of it are available, or may ask specifically for a representation adhering to one profile, for example
       [[GeoDCAT-AP]]. When no profile or an unsupported profile is requested, a server returns default content,
       that is, content conforming to the default profile supported by the server.
     </p>
     <p>
-      When selecting a content negotiation mechanism, an Internet client may use the HTTP protocol but it may also use
-      other methods for providing instructions to a server,
-      such as URI Query String Arguments (<abbr title="Query String Arguments">QSAs</abbr>).
-      QSAs are
-      established as useful for humans and machines for situations where negotiation via HTTP is not practical, such
-      as when manually entering requests into web browsers. This document also provides guidance for both HTTP and non-HTTP methods
+      When selecting a content negotiation mechanism, an Internet client may use the HTTP protocol, but it may also use
+      other methods for providing instructions to a server. One of potentially many mechanisms is URI Query String
+      Arguments (<abbr title="Query String Arguments">QSAs</abbr>). QSAs are
+      useful for humans and machines for situations where negotiation via HTTP is not practical, such
+      as when manually entering requests into web browsers. This specification provides guidance for both HTTP and non-HTTP methods
       of content negotiation and ensures they all adhere to a single functional specification, ensuring their functional equivalency.
+    </p>
+    <p>
+      While this specification only describes HTTP and QSA methods for content negotiation by profile, it is expected
+      that implementers will want to implement functionally equivalent methods for other environments, some of which may
+      not yet be realized; future environments.
     </p>
     <!--
     <p>
@@ -75,7 +81,8 @@
     </p>
     -->
     <p>
-      Describing the parts of profiles and their relation to other profiles is the function of the Profiles Vocabulary
+      Describing how resources' representations conform to profiles and how profiles and specifications relate to one
+      another is not part of this specification. Parts of those questions are addressed by the Profiles Vocabulary
       [[PROF]], also produced by the DXWG.
     </p>
   </section>
@@ -84,7 +91,7 @@
       For the purpose of compliance, the normative sections of this document are
       <a href="#definitions">Section 3</a>,
       <a href="#abstractmodel">Section 6</a>,
-      <a href="#realizations">Section 7</a> and
+      <a href="#application-profiles">Section 7</a> and
       <a href="#testsuites">Section 8</a>.
     </p>
     <p class="note">Specifications and Profiles embody their own notions of conformance, which are out of scope for this specification.</p>
@@ -120,25 +127,25 @@
           </tr>
           <tr>
             <td><code><a href="http://www.w3.org/ns/dx/conneg/profile/http">cnpr:http</a></code></td>
-            <td>HTTP Realization</td>
-            <td>For conformance with the realization presented in <a href="#http"></a>.</td>
-            <td>To be used if a resource conforms to the HTTP Realization</td>
+            <td>HTTP Application Profile</td>
+            <td>For conformance with the application profile presented in <a href="#http"></a>.</td>
+            <td>To be used if a resource conforms to the HTTP Application Profile</td>
           </tr>
           <tr>
             <td><code><span style="white-space: nowrap"><a href="http://www.w3.org/ns/dx/conneg/profile/qsa">cnpr:qsa</a></span></code></td>
-            <td>QSA Realization</td>
-            <td>For conformance with the realization presented in <a href="#qsa"></a>.</td>
+            <td>QSA Application Profile</td>
+            <td>For conformance with the application profile presented in <a href="#qsa"></a>.</td>
             <td>
-              To be used if a resource conforms to the QSA Realization using the Query String Arguments <code>_profile</code> and <code>_mediatype</code> as per the recommendations
+              To be used if a resource conforms to the QSA Application Profile using the Query String Arguments <code>_profile</code> and <code>_mediatype</code> as per the recommendations
               in <a href="#qsa"></a>.
             </td>
           </tr>
           <tr>
             <td><code><span style="white-space: nowrap"><a href="http://www.w3.org/ns/dx/conneg/profile/qsa-alt">cnpr:qsa-alt</a></span></code></td>
-            <td>QSA Alternate Keywords Realization</td>
-            <td>For conformance with the realization presented in <a href="#qsa"></a>.</td>
+            <td>QSA Alternate Keywords Application Profile</td>
+            <td>For conformance with the application profile presented in <a href="#qsa"></a>.</td>
             <td>
-              To be used if a resource conforms to the QSA Realization but uses alternate keywords for the Query String Arguments <code>_profile</code> and
+              To be used if a resource conforms to the QSA Application Profile but uses alternate keywords for the Query String Arguments <code>_profile</code> and
               <code>_mediatype</code>, as allowed by the recommendations in <a href="#qsa"></a>.
             </td>
           </tr>
@@ -147,7 +154,7 @@
             <td>Resource Representation Description</td>
             <td>For conformance with <a href="#getresourcebyprofile"></a>.</td>
             <td>
-              To be used if a resource representation is able to indicate which profile(s) it conforms to, in its appropriate realization, as per the abstract specification in
+              To be used if a resource representation is able to indicate which profile(s) it conforms to, in its appropriate application profile, as per the abstract specification in
               <a href="#getresourcebyprofile"></a>.
             </td>
           </tr>
@@ -253,12 +260,12 @@
       <abbr title="Catalogue Service for the Web">CSW</abbr> [[CSW]] protocols.
     </p>
     <p>
-      This document describes an abstract, functions-based, model for content negotiation by profile and gives both the
-      HTTP header <em>realization</em> and also a recommended query string argument-based <em>realization</em> too. The query string
-	   approach provides a "fall back" required by the
-      <a href="https://www.w3.org/2017/dxwg/charter">Dataset Exchange Working Group's Charter</a> (Section 2.3). Other query string or REST-based <em>realizations</em>
-      are considered possible but are not given here. In general, existing APIs that support specification of alternative
-      profiles for resource representations may support this model too by implementing its functions.
+      This document describes an abstract, functions-based, specification for content negotiation by profile and gives both an
+      HTTP application profile and also a Query String Argument-based application profile for the specification's implementation in different environments too. The query string
+	   approach provides a "fall back", as required by the
+      <a href="https://www.w3.org/2017/dxwg/charter">Dataset Exchange Working Group's Charter</a> (Section 2.3). Other query string or REST-based application profiles
+      are considered possible but are not specified here. In general, existing APIs that support the specification of alternative
+      profiles for resource representations may support and demonstrate conformance to this specification too by implementing its required functionality, as the given application profiles do.
     </p>
   </section>
   <section id="relatedwork" class="informative">
@@ -439,10 +446,10 @@ Preference-Applied: profile="urn:example:schema"
     <h2>Abstract Model</h2>
     <p>
       This section describes a conceptual, abstract, model for content negotiation by profile, independent of any
-      realizations of it within specific environments.
+      application profile of it within specific environments.
     </p>
     <p>
-      Realizations of this abstract model MUST implement its functions, but how they do this will be
+      Application profiles of this abstract model MUST implement its functions, but how they do this will be
       environment-specific.
     </p>
     <section id="abstractmodelcontext">
@@ -461,8 +468,8 @@ Preference-Applied: profile="urn:example:schema"
       <!--
       <p>
         For this reason, other than a directive to maintain independence, no further discussion of
-        negotiation by profile and the relations to other forms of negotiation are given. Specific realizations might
-        require special handling of profile and other forms of negotiation.
+        negotiation by profile and the relations to other forms of negotiation are given. Specific application profiles
+        might require special handling of profile and other forms of negotiation.
       </p>
       -->
       <p>
@@ -532,7 +539,7 @@ Preference-Applied: profile="urn:example:schema"
         </p>
         <p>
           The <strong>list profiles</strong> <em>request</em> MUST be either an independent request or part of another
-          realization's request.
+          application profile's request.
         </p>
         <p>
           The <strong>list profiles</strong> <em>request</em> MAY result in a <em>response</em> in one of a
@@ -559,7 +566,7 @@ Preference-Applied: profile="urn:example:schema"
         <p>
           A <em>client</em> executing a <strong>get resource by profile</strong> MAY <em>request</em> a
           <em>resource</em> representation conforming to one of any number of <em>profile</em>s with its preference
-          expressed in a realization-specific ordering.
+          expressed in a application profile-specific ordering.
         </p>
         <p>
           The server should attempt to reply with a profile that best matches the client request. The order of
@@ -567,12 +574,12 @@ Preference-Applied: profile="urn:example:schema"
           anything that the profile profiles (a more general specification or profile), perhaps transitively.
         </p>
         <p>
-          A simple request/response pair, according to the <a href="#http">HTTP Realization</a>, is shown in
+          A simple request/response pair, according to the <a href="#http">HTTP Application Profile</a>, is shown in
           <a href="#eg-simple"></a>.
         </p>
         <pre id="eg-simple"
              class="example nohighlight" aria-busy="false" aria-live="polite"
-             title="Simple get resource by profile request & response (HTTP Realization)">
+             title="Simple get resource by profile request & response (HTTP Application Profile)">
 # A request for resource a according to Profile x is made
 GET /resource/a HTTP/1.1
 Accept-Profile: http://example.org/profile/x
@@ -594,7 +601,7 @@ Content-Profile: &lt;http://example.org/profile/x>
         </div>
         <pre id="eg-range14"
              class="example nohighlight" aria-busy="false" aria-live="polite"
-             title="Get resource by profile request & response (HTTP Realization) with 303 redirect">
+             title="Get resource by profile request & response (HTTP Application Profile) with 303 redirect">
 # A request for a non-information resource a according to Profile x is made
 GET /resource/a HTTP/1.1
 Accept-Profile: http://example.org/profile/x
@@ -630,7 +637,7 @@ Content-Profile: &lt;http://example.org/profile/x>
           <a href="#eg-narrower-profile-response"></a>.
         </p>
         <pre id="eg-narrower-profile-response" class="example nohighlight" aria-busy="false" aria-live="polite"
-             title="Get resource by profile, narrower profile response (HTTP realization)">
+             title="Get resource by profile, narrower profile response (HTTP Application Profile)">
 # a request for Resource a according to Profile x is made
 
 GET /resource/a HTTP/1.1
@@ -676,29 +683,34 @@ Content-Profile: &lt;http://example.org/profile/x>
       </section>
     </section>
   </section>
-  <section id="realizations">
-    <h2>Realizations</h2>
+  <section id="application-profiles">
+    <h2>Application Profiles</h2>
     <p>
-      This section describes <em>realizations</em> of the abstract model which are implementations of it in different
-      environments.
+      This section describes <a>profiles</a> of this <a>specification</a>'s abstract model which are applications of it
+      in different environments; they are profiles and may be referred to as "application profiles". These profiles are
+      formally identified in <a href="#conformance-profiles"></a> and are to be used as conformance targets for specific
+      implementations of systems within different environments wishing to conform to this specification.
     </p>
     <p>
-      This document provides onw two <em>realizations</em> however it is expected that implementers of content
-      negotiation by profile may implement further realizations in other environments.
+      This document only provides application profiles for two environments - HTTP &amp; human browser (Query String
+      Argument functionality) however it is expected that implementers of content negotiation by profile may implement
+      further application profiles in other environments and they are encouraged to do so further profiling this
+      specification.
     </p>
-    <p class="note" title="Realization requirements">
-      Implementers of Content Negotiation by Profile need not implement multiple realizations of the
-      <a href="#abstractmodel">Abstract Model</a>. They need only implement the realizations relevant to them - either
-      those defined in this document or new ones they define, however each realization MUST accord with the Abstract
-      Model.
+    <p class="note" title="Conformance to profiles">
+      Implementers of Content Negotiation by Profile need not ensure systems conform to multiple application profiles
+      of this specification. They need only conform to the application profile relevant to their environment. In some
+      cases, for example the Query String Argument-relevant human browser environment, there is a choice of more than
+      one application profile. Since all application profiles of this specification conform to the specification by
+      design, conformance to any application profile means conformance to the specification.
     </p>
     <section id="http">
       <h3>Hypertext Transfer Protocol Headers</h3>
       <p>
-        A realization of the Abstract Model using Hypertext Transfer Protocol (HTTP) headers is presented here.
+        An application profile of the Abstract Model using Hypertext Transfer Protocol (HTTP) headers is presented here.
         This implementation is based on HTTP content negotiation and uses two new HTTP headers,
-	      <code>Accept-Profile</code> and <code>Content-Profile</code>
-	      that are to be defined in an upcoming Internet-Draft [[PROF-IETF]].
+	      <code>Accept-Profile</code> and <code>Content-Profile</code> that are to be defined in an upcoming
+        Internet-Draft [[PROF-IETF]].
       </p>
       <p>
 	      Although servers are free to implement negotiation as they see fit,
@@ -823,8 +835,8 @@ URIs for resources conforming to profile urn:example:profile:x]
             If HTTP <em>server</em>s wish to allow <em>client</em>s to identify <em>profile</em>s via <em>token</em>,
             in addition to the the mandatory identification of <em>profile</em>s via via URI, the <em>server</em>s will
             need to provide a <em>token</em> / URI mapping via this <strong>list profiles</strong> function. In this
-            HTTP realization, this may be implemented in a number of ways. The preferred way is to add "token"
-            parameters to the HTTP Content-Profile and Link HTTP headers.
+            HTTP application profile of this specification, this may be implemented in a number of ways. The preferred
+            way is to add "token" parameters to the HTTP Content-Profile and Link HTTP headers.
           </p>
           <pre id="eg-uri-token" class="example nohighlight" aria-busy="false" aria-live="polite"
                title="HTTP headers with profile URI / token mappings using 'token' parameters">
@@ -941,10 +953,10 @@ Content-Profile: &lt;urn:example:profile:x>
     <section id="qsa">
       <h3>URL Query String Arguments</h3>
       <section id="qsa-description">
-        <h4>QSA Realization description</h4>
+        <h4>QSA Application Profile description</h4>
         <div class="issue" data-number="538"></div>
         <p>
-          While the HTTP Realization's approach to profile negotiation enables fully automated content negotiation by
+          While the HTTP application profile's approach to profile negotiation enables fully automated content negotiation by
           profile, the motivating use cases for this specification included human actionable negotiation. Also, as related
           in <a href="#relatedwork"></a>, previous and existing systems already allow for human-actionable content
           negotiation by profile by a number of means.
@@ -952,16 +964,17 @@ Content-Profile: &lt;urn:example:profile:x>
         <p>
           To both allow for human-actionable content negotiation by profile and also to show how mechanics similar to
           existing systems might fulfill all aspects of this specification's Abstract Model, here we present a Query
-          String Argument (QSA) Realization of the Abstract Model. This Realization is functionally equivalent to the
-          HTTP Realization in that all required functions of the Abstract Model are supported however it is not mutually
-          exclusive of the HTTP, or any other, Realization: a server may implement multiple Realizations in parallel as
-          long as each Realization fully supports the Abstract Model.
+          String Argument (QSA) application profile of the Abstract Model. This application profile is functionally equivalent to the
+          HTTP application profile in that all required functions of the Abstract Model are supported however it is not mutually
+          exclusive of the HTTP, or any other, application profile: an implementation of this specification may
+          be conformant to multiple application profiles of it to implement content negotiation by profile functionality
+          in multiple environments or in different ways within the same environment.
         </p>
         <p>
-          Unlike the HTTP-header Realization which is also the subject of an independent IETF document [[PROF-IETF]],
-          this QSA Realization is fully specified here. Two forms of this QSA approach are presented too: the first is the
-          fixed keyword "QSA Realization" and the second is the "QSA Alternate Keywords Realization" according to which
-          servers may implement any keywords they choose. These two forms, the Abstract Model and the HTTP Realization are
+          Unlike the HTTP application profile which is also the subject of an independent IETF document [[PROF-IETF]],
+          this QSA application profile is fully specified here. Two forms of this QSA approach are presented too: the first is the
+          fixed keyword "QSA Application Profile" and the second is the "QSA Alternate Keywords Application Profile" according to which
+          servers may implement any keywords they choose. These various application profiles are
           all identified in <a href="#conformance-profiles"></a>.
           <!-- #text commented out pending Appendix profile description work#
           Conformance of a server to any one or multiple of
@@ -1011,17 +1024,20 @@ Content-Profile: &lt;urn:example:profile:x>
           <h5>Key naming</h5>
           <div class="issue" data-number="511"></div>
           <p>
-            This Realization includes two different profiles of this specification that describe two different conformance
-            targets which are differentiated by the QSA key naming. The two profiles are the "QSA Realization" and "QSA
-            Alternate Keywords Realization" (see <a href="#conformance-profiles"></a>).
+            This specification includes two different application profiles of it for use by human clients using Query
+            String Arguments that are differentiated by their requirements for QSA key naming. The two application
+            profiles are the "QSA Application Profile" and "QSA Alternate Keywords Application Profile" with the former
+            being a profile of the latter. This is due to the former containing more stringent conformance rules
+            ("narrower" rules) about how to achieve this specification's required functionality. These application
+            profiles are identified and defined in <a href="#conformance-profiles"></a>.
           </p>
           <p>
-            To conform to the "QSA Realization" profile, the QSA key <code>_profile</code> MUST be used to indicate a
+            To conform to the "QSA Application Profile", the QSA key <code>_profile</code> MUST be used to indicate a
             profile token or URI and <code>_mediatype</code> MUST be used to indicate a resource representation's Media
             Type.
           </p>
           <p>
-            When conforming to the profile "QSA Alternate Keywords Realization", any key values to indicate profile and
+            When conforming to the profile "QSA Alternate Keywords Application Profile", any key values to indicate profile and
             Media Type MAY be used, however this profile requires that a mechanism to discover what keys are used MUST be
             supplied and this is detailed below in <a href="#qsa-keydiscovery"></a>.
           </p>
@@ -1041,7 +1057,7 @@ Content-Profile: &lt;urn:example:profile:x>
             widely relevant).
           </p>
           <p>
-            For this reason, the QSA Realizations of this specification allow universally unique and un-registered (no
+            For this reason, the QSA application profiles of this specification allow universally unique and un-registered (no
             central registry) identifiers to be used for profiles. These identifiers MAY be either URIs or tokens. If
             tokens are used, there MUST exist a 1:1 mapping per resource and session between profile tokens and profile
             URIs that is discoverable by clients.
@@ -1054,7 +1070,7 @@ Content-Profile: &lt;urn:example:profile:x>
           <h5>Resource URL</h5>
           <p>
             Resource URLs for which QSA-based profile negotiation is taking place SHOULD NOT themselves be QSA values
-            of other resource URIs in any QSA-based realization. Such mechanics may be used internally and are used by
+            of other resource URIs in any QSA-based system. Such mechanics may be used internally and are used by
             legacy systems for profile negotiation but are best hidden from to the <em>client</em> applications to make
             conformance to these QSA profiles more recognizable. <a href="#eg-resource-url"></a> shows this.
           </p>
@@ -1074,12 +1090,12 @@ GET /resource/X?_profile=Y&amp;_mediatype=Z HTTP/1.1
       <section id="qsa-listprofiles">
         <h4>list profiles</h4>
         <p>
-          For conformance to the "QSA Realization Profile", the <code>_profile</code> QSA key SHOULD be supported by the
+          For conformance to the "QSA Application Profile", the <code>_profile</code> QSA key SHOULD be supported by the
           <a>server</a> to allow a <a>client</a> to make a <strong>list profiles</strong> <em>request</em>. For this
           request, the reserved token <code>all</code> SHOULD be used, e.g. <code>_profile=all</code>.
         </p>
         <p>
-          For conformance to the "QSA Alternate Keywords Realization", other key/value pairs MAY be used, such as
+          For conformance to the "QSA Alternate Keywords Application Profile", other key/value pairs MAY be used, such as
           <code>_view=alternates</code> but then the implementing server MUST supply a means of discovering that key,
           as per <a href="#qsa-keydiscovery"></a>.
         </p>
@@ -1090,7 +1106,7 @@ GET /resource/X?_profile=Y&amp;_mediatype=Z HTTP/1.1
         </p>
         <p>
           The server SHOULD represent the alternate profiles information in the HTTP header of the <em>response</em>, as
-          per the HTTP Realization (using a Link header) and it MAY also represent the information in the response body
+          per the HTTP application profile (using a Link header) and it MAY also represent the information in the response body
           in place of the default profile representation of a resource. This body content allowance is to enable humans
           to read alternate profile-conformant representation options for a resource easily in a web browser without
           having to view lower-level HTTP information.
@@ -1157,13 +1173,13 @@ Link:
         <h4>get resource by profile</h4>
         <p><strong><em>Expressing profile preference</em></strong></p>
         <p>
-          To be conformant with the "QSA Realization" profile of this specification, a <em>server</em> MUST allow
+          To be conformant with the "QSA Application Profile" profile of this specification, a <em>server</em> MUST allow
           clients to request resources according to profiles they identify with a <code>_profile</code> query string.
           Since either <a>tokens</a> or URIs may be used to identify a profile, servers MUST accept either. Servers MAY
           accept both encoded and un-encoded URIs but MAY also only accept one or the other.
         </p>
         <p>
-          To be conformant with the "QSA Alternate Keywords Realization" profile of this specification, a
+          To be conformant with the "QSA Alternate Keywords Application Profile" profile of this specification, a
           <em>server</em> MUST allow clients to request resources according to profiles they identify with a key of the
           server implementor's choosing but then the server MUST also supply a means of discovering that key, as per
           <a href="#qsa-keydiscovery"></a>.
@@ -1195,18 +1211,18 @@ Link:
         <h4>QSA key discovery</h4>
         <p>
           <em>This function is only relevant for servers claiming conformance to the "QSA Alternate Keywords
-          Realization" profile of this specification.</em>
+          Application Profile" profile of this specification.</em>
         </p>
         <p>
-          Servers claiming conformance to the "QSA Alternate Keywords Realization" MUST implement methods to allow
-          clients to discover the QSA keys used in place of the "QSA Realization" profile's <code>_profile</code> and
+          Servers claiming conformance to the "QSA Alternate Keywords Application Profile" MUST implement methods to allow
+          clients to discover the QSA keys used in place of the "QSA Application Profile"'s <code>_profile</code> and
           <code>_mediatype</code> and also the equivalent of the <code>_profile=all</code> key/value combination. This
           allows clients with little knowledge of the server to discover how to create <em>list profile</em> and
           <em>get resource by profile</em> requests.
         </p>
         <p>
-          A server responding to any request for a resource for which "QSA Alternate Keywords Realization" is supported
-          SHOULD include HTTP headers that indicate alternate profiles and Media Types, as per the HTTP Realization.
+          A server responding to any request for a resource for which "QSA Alternate Keywords Applic" is supported
+          SHOULD include HTTP headers that indicate alternate profiles and Media Types, as per the HTTP Application Profile.
           They MAY instead, or in addition, provide HTTP body content indicating the same information. If they do, such
           information SHOULD be present in the default response to a URI request, i.e. in response to a request without
           any QSAs. A series of example requests is given in <a href="#eg-qsa-keydiscovery"></a>.
@@ -1226,11 +1242,11 @@ GET /resource/a HTTP/1.1
 Accept-Profile: http://example.org/profile/x
 
 # The server does not understand the HTTP Get Resource By Profile
-# request (doesn't support the HTTP Realization) but is able to
+# request (doesn't support the HTTP Application Profile) but is able to
 # supply an HTTP Link header indicating alternate profiles. It can be
 # seen from the Link header that keys other than _profile &
 # _mediatype are in use - view & format - thus this is QSA Alt, not a
-# QSA Realization-conformant system
+# QSA Application Profile-conformant system
 
 # The resource representations available conform to profile-x & profile-y.
 # The profile-y-conformant representation is only available in XML
@@ -1260,14 +1276,14 @@ Link:
         </p>
         <p>
           To communicate to a client what QSA key/value pair is used for <em>list profiles</em> when the "QSA Alternate
-          Keywords Realization" is conformed to, a server SHOULD...
+          Keywords Application Profile" is conformed to, a server SHOULD...
         </p>
         <div class="note">
           <p>
             Nick: it appears we are dependent on an identifier for the "profile of a resource that lists all others
             profiles". This is analogous in content to the Link header response for <em>list profiles</em> and is exactly
             what the existing QSA systems respond with when asked for <code>?_view=alternates</code> and what is given
-            above as <code>?_profile=all</code>. So it's a URI that is equivalent to the QSA Realization profile's token
+            above as <code>?_profile=all</code>. So it's a URI that is equivalent to the QSA Application Profile profile's token
             of <em>all</em>.
           </p>
           <p>
@@ -1311,8 +1327,8 @@ Link:
   <section id="testsuites">
     <h2>Test Suites</h2>
     <p>
-      This section includes links to software tools to be used for testing the adherence of implementations to the realizations
-      given in this document.
+      This section includes links to software tools to be used for testing the adherence of implementations to the
+      application profiles given in this document.
     </p>
     <dl>
       <dt>Apache JMeter</dt>
@@ -1330,8 +1346,8 @@ Link:
   <section id="implementations" class="informative">
     <h2>Implementations</h2>
     <p>
-      This section includes implementations of the realizations given in this document and their conformance test results. The tools
-      used for conformance testing are listed in the section above.
+      This section includes implementations of the application profiles given in this document and their conformance
+      test results. The tools used for conformance testing are listed in the section above.
     </p>
     <ul>
       <li>
