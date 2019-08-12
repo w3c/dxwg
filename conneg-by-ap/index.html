@@ -457,8 +457,8 @@ Preference-Applied: profile="urn:example:schema"
       <p>
         All content negotiation takes place between a <a>client</a> and a <a>server</a> over the Internet with the
         former requesting a representation of a <a>resource</a> or a <em>resource</em>'s <em>metadata</em> through a
-        <a>request</a> and receiving it via a <a>response</a>. In some cases, a <em>server</em> may have to make a
-        <em>request</em> of a <em>client</em> and receive a <em>response</em>.
+        <a>request</a> and receiving it via a <a>response</a>. For any given pair of communicating machines, the
+        the roles of <em>client</em> and <em>server</em> may be reversed as information is requested back and forth.
       </p>
       <p>
         An Internet <em>resource</em> may have many aspects over which a <em>client</em>/<em>server</em> pair of
@@ -1061,29 +1061,31 @@ http://example.com/path/to/resource/a?<strong>_profile=prof-01&amp;_mediatype=te
           </p>
         </section>
         <section id="qsa-token-use">
-          <h5>Token and URI use</h5>
+          <h5>URI and token use</h5>
           <p>
             Currently, the convention in HTTP content negotiation by Media Type uses tokens for Media Types, such as
             <code>text/html</code> or <code>application/ld+json</code> with the tokens registered at
-            <a href="http://www.iana.org/assignments/media-types">IANA's Media Types list</a> and this specification
-            indicates that implementers SHOULD use tokens from that list for Media Type identifiers.
+            <a href="http://www.iana.org/assignments/media-types">IANA's Media Types list</a> and Content Negotiation by
+            Profile system implementers SHOULD use tokens from that list for Media Type identifiers and follow HTTP
+            content negotiation best practice for identifiers for other content negotiation dimensions (language etc.).
           </p>
+          <div class="note">
+            Several initiatives exist that have created URIs for Media Types based on IANA's tokens, such as
+            <a href="https://conneg.info">
+            conneg.info</a>. These URIs may be used to indicate Media Types.
+          </div>
           <p>
             There is no proposal to create a central register of profiles, as this is thought by these authors to be
             unsustainable in the long term, given the likely numbers of profiles to be established and likely community-
-            specific nature of profiles (individual communities will create profiles for their own needs that will not be
-            widely relevant).
+            specific nature of profiles (individual communities will create profiles for their own needs that will not
+            be widely relevant).
           </p>
           <p>
-            For this reason, the QSA functional profiles of this specification allow universally unique and un-registered (no
-            central registry) identifiers to be used for profiles. These identifiers MAY be either URIs or tokens. If
-            tokens are used, there MUST exist a 1:1 mapping per resource and session between profile tokens and profile
-            URIs that is discoverable by clients.
-          </p>
-          <p>
-            Several initiatives exist that have created URIs for Media Types, such as <a href="https://conneg.info">
-            conneg.info</a> based on IANA's tokens. As per the URI or token allowance for profiles, these URIs MAY be
-            used to indicate Media Types.
+            As per <a href="#profileid"></a>, all profiles MUST be identified by URI since URIs are universally unique
+            and therefore do not require registration to avoid identifier duplication. However, systems conforming to
+            either of the QSA functional profiles of this specification, instead of using URIs to identify profiles
+            during client/server interactions, MAY use un-registered and non-universally unique tokens to identify
+            profiles but, if they do, they MUST provide a way for clients to discover profile token/URI mappings.
           </p>
           <h5>Resource URL</h5>
           <p>
