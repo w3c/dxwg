@@ -570,12 +570,25 @@ Preference-Applied: profile="urn:example:schema"
         </p>
         <p>
           The server should attempt to reply with a profile that best matches the client request. The order of
-          preference a server <em>MUST</em> follow to determine a best matching profile is: an exact match, followed by
-          anything that the profile profiles (a more general specification or profile), perhaps transitively.
+          preference a server <em>MUST</em> follow to determine a best matching profile is: an exact match, followed the
+          next most specific profile that the resource representation conforms to. Note that resource representations
+          might conform to more general specifications/other profiles via a hierarchy (i.e. transitively).
         </p>
         <p>
+          If a server redirects to another resource it MUST indicate the selected choice of profile from the list
+          requested by the client and SHOULD indicate a specific narrower profile expected to be returned (if known)
+          in the redirection request (303 response).
+        </p>
+        <div class="note" title="Redirection to another resource">
+          Since <em>get resource by profile</em> requests are for <em>representations of a resource</em> and resources
+          for which there are profile-conformant representations may not be information resources, it is important to
+          note that a server's response may take the form of a redirect to another resource. This is as per the
+          <a href="https://lists.w3.org/Archives/Public/www-tag/2005Jun/0039.html">W3C's recommendations to handle the
+            so-called 'httpRange-14' issue</a>. An example of a redirecting response is given in <a href="#eg-range14"></a>.
+        </div>
+        <p>
           A simple request/response pair, according to the <a href="#http">HTTP Functional Profile</a>, is shown in
-          <a href="#eg-simple"></a>.
+          <a href="#eg-simple"></a> and an example with a redirect is shown in <a href="#eg-range14"></a>.
         </p>
         <pre id="eg-simple"
              class="example nohighlight" aria-busy="false" aria-live="polite"
@@ -588,17 +601,10 @@ Accept-Profile: http://example.org/profile/x
 
 # The server returns a representation of Resource a conforming with Profile x
 HTTP/1.1 200 OK
-Content-Profile: &lt;http://example.org/profile/x>
+Content-Profile: http://example.org/profile/x
 
 [response body]
         </pre>
-        <div class="note">
-          Since <em>get resource by profile</em> requests are for <em>representations of a resource</em> and resources
-          for which there are profile-conformant representations may not be information resources, it is important to
-          note that a server's response may take the form of a redirect to another resource. This is as per the
-          <a href="https://lists.w3.org/Archives/Public/www-tag/2005Jun/0039.html">W3C's recommendations to handle the
-          so-called 'httpRange-14' issue</a>. An example of a redirecting response is given in <a href="#eg-range14"></a>.
-        </div>
         <pre id="eg-range14"
              class="example nohighlight" aria-busy="false" aria-live="polite"
              title="Get resource by profile request & response (HTTP Functional Profile) with 303 redirect">
@@ -609,9 +615,12 @@ Accept-Profile: http://example.org/profile/x
 ---
 
 # The server returns a 303 Redirect to another URI identifying an information
-# resource that then returns the requested resource representation
+# resource that then returns the requested resource representation. The redirecting
+# server indicates the profile to which the redirected to resource representation
+# conforms
 HTTP/1.1 303 See Other
 Location: http://example.org/info-resource/b
+Content-Profile: http://example.org/profile/x
 
 ---
 
@@ -623,22 +632,20 @@ GET /info-resource/b HTTP/1.1
 ---
 
 # The final server response with the information resource. Note that this
-# response does include the profile-indicating Content-Profile header
+# response does not include the profile-indicating Content-Profile header
 HTTP/1.1 200 OK
-Content-Profile: &lt;http://example.org/profile/x>
 
 [response body]
         </pre>
         <div class="issue" data-number="603"></div>
         <p>
-          A <a>server</a> SHOULD set a <code>Content-Profile</code> header in HTTP <a>response</a> to the profile
-          identifier (URI) that the Client requested, not the identifier of any narrower profile that is also applicable
-          since the client might not understand the narrower profile identifier. This is shown in
+          Example
           <a href="#eg-narrower-profile-response"></a>.
         </p>
         <pre id="eg-narrower-profile-response" class="example nohighlight" aria-busy="false" aria-live="polite"
              title="Get resource by profile, narrower profile response (HTTP Functional Profile)">
-# a request for Resource a according to Profile x is made
+# A request for Resource A whose representation conforms
+# to Profile X is made
 
 GET /resource/a HTTP/1.1
 Accept-Profile: http://example.org/profile/x
@@ -646,22 +653,24 @@ Accept-Profile: http://example.org/profile/x
 
 ---
 
-# the server IS NOT able to respond with a representation
-# of Resource a conforming to Profile x
+# The server is able to respond with a representation of
+# Resource a according to Profile Y which it knows is a
+# profile of Profile X
 
-# the server IS able to respond with a representation of
-# Resource a according to Profile B which it knows is a
-# profile of Profile x
-
-# the server indicates the response conforms to Profile x,
-# not Profile y so the client is assured of conformance
+# The server responds with the list of profiles that it knows
+# the resource representations conforms to ensuring that the
+# requested profile, Profile X, is lists. Here Profile Y and
+# a further profile irrelevant for the client, Profile Z, are
+# indicated.
 
 HTTP/1.1 200 OK
 [other response headers]
-Content-Profile: &lt;http://example.org/profile/x>
+Content-Profile: http://example.org/profile/x, \
+                 http://example.org/profile/y, \
+                 http://example.org/profile/z
 [more response headers]
 
-[content according to Profile B and thus Profile A which it profiles]
+[content conforming to to Profile X, Y & Z]
         </pre>
         <p>
           When a resource is returned that conforms to two or more profiles not within a profile hierarchy
