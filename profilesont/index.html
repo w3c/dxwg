@@ -238,12 +238,17 @@
   them that define rules for implementation, provide guidance on how to implement, or play some other role. <code>Resource Descriptor</code>s must indicate the role they
   play (to guide, to validate etc.), the formalism they adhere to (<code><a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-format">dct:format</a></code>)
   and any <code>dct:Standard</code> that they themselves conform to (<code><a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-conformsTo">dct:conformsTo</a></code>).
-</p>
+  </p>
+  <p>
+    Any <code>rdfs:Resource</code> MAY indicate conformance to a profile as per <a href="#eg-conformance-to-profile"></a>
+    by using <code>dct:conformsTo</code>. Individual communities MAY determine what constitutes an appropriate URI to
+    identify a profile.
+  </p>
   <p>
     <em>The remainder of this section is informative.</em>
   </p>
-  <section id="initial-example">
-    <h3>Initial Example</h3>
+  <section id="initial-examples">
+    <h3>Initial Examples</h3>
     <p>
       The example below illustrates the use of most parts of PROF and indicates how non-PROF profile metadata is stored alongside PROF metadata.
     </p>
@@ -253,7 +258,9 @@
         A full example profile described using common metadata and the Profiles Vocabulary
       </figcaption>
     </figure>
-    <pre class="example nohighlight turtle" aria-busy="false" aria-live="polite" title="A full example described using the Profiles Vocabulary in RDF (turtle)">
+    <pre id="eg-initial"
+         class="example nohighlight turtle" aria-busy="false" aria-live="polite"
+         title="A full example described using the Profiles Vocabulary in RDF (turtle)">
 @prefix dct: &lt;http://purl.org/dc/terms/&gt; .
 @prefix prof: &lt;http://www.w3.org/ns/dx/prof/&gt; .
 @prefix role: &lt;http://www.w3.org/ns/dx/prof/role/&gt; .
@@ -287,7 +294,7 @@ CSIRO's publications catalogue."""@en ;
     dct:format &lt;https://w3id.org/mediatype/text/turtle&gt; ;
 
     # it conforms to SHACL, here refered to by its namespace URI as a Profile
-    dct:conformsTo &lt;http://www.w3.org/ns/shacl#&gt; ;
+    dct:conformsTo &lt;https://www.w3.org/TR/shacl/&gt; ;
 
     # this resource plays the role of "Validation"
     # described in this ontology's accompanying Roles vocabulary
@@ -303,6 +310,31 @@ CSIRO's publications catalogue."""@en ;
   # a short code to refer to the Profile with when a URI can't be used
   prof:hasToken "profx"
 .
+    </pre>
+    <p>
+      The following example demonstrates how resources can indicate conformance to a profile. Note that in
+      <a href="#eg-initial"></a>, there is also an example of this pattern whereby the <code>ResourceDescriptor</code>
+      is indicated as conforming to the [[SHACL]] specification, which is also understood to be a profile to which
+      things may conform.
+    </p>
+    <pre id="eg-conformance-to-profile"
+         class="example nohighlight turtle" aria-busy="false" aria-live="polite"
+         title="An example demonstrating how resources can indicate conformance to profiles.">
+# Profile X
+<strong>&lt;http://example.org/profile/x> a prof:Profile</strong> ;
+      dct:title "Profile X" .
+
+# A resource indicating conformance to Profile X.
+# In this example it's a DCAT Dataset's Distribution
+&lt;http://example.org/dataset/001>
+      a dcat:Dataset ;
+      dcat:distribution :dataset-001-x .
+
+:dataset-001-x
+      a dcat:Distribution ;
+      dct:title "Distribution of imaginary dataset 001 that conforms to Profile X" ;
+      dcat:downloadURL &lt;http://www.example.org/files/001.x> ;
+      <strong>dct:conformsTo &lt;http://example.org/profile/x></strong> .
     </pre>
   </section>
   <section id="roles-vocab">
