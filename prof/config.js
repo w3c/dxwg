@@ -1,7 +1,7 @@
 var respecConfig = {
     specStatus: "ED",
     shortName: "dx-prof",
-    edDraftURI: "https://w3c.github.io/dxwg/profilesont/",
+    edDraftURI: "https://w3c.github.io/dxwg/prof/",
     canonicalURI: "TR",
     implementationReportURI: "https://github.com/CSIRO-enviro-informatics/prof-implementations",
     testSuiteURI: "https://github.com/CSIRO-enviro-informatics/prof-implementations",
