@@ -1601,25 +1601,29 @@ Link:
         by Profile</em> as a <code><a href="http://purl.org/dc/terms/Standard">dct:Standard</a></code>, the definition
         of which in [[PROF]] matches the definition of <a>specification</a> in this document. The 4 profiles of it are
         then, as per regular PROF modelling, termed <code><a href="https://www.w3.org/TR/dx-prof/#Class:Profile">
-        prof:Profiles</a></code>. The 4 profiles are presented in a hierarchy with the all profiles either directly
-        profiling the standard or, in the case of the <em>QSA Realization</em> profile, profiling another profile that
+        prof:Profiles</a></code>. The 4 profiles are presented in a hierarchy with the profiles either directly
+        profiling the standard or, in the case of the <em>QSA Realization</em> profile, profiling another profile that then
         profiles the standard. This is also shown graphically in <a href="#fig-profile-hierarchy"></a> below the code
         listing.
       </p>
       <p>
-        The code presented in <a href="#profiles-in-prof">Code Listing 1</a> is also available in the RDF file:
+        The code presented in <a href="#profiles-in-prof">Code Listing 1</a> is also available in the RDF file <a href="profiles.ttl">profiles.ttl</a>.
       </p>
-      <ul><li><a href="profiles.ttl">profiles.ttl</a></li></ul>
       <p>
-        The reason that the <em>QSA Realization</em> profile is modelled as profiling the <em>QSA Alternate Keywords
-        Realization</em> profile is that the <em>QSA Realization</em> profile is a more constrained 'narrower'
-        specification of <em>Content Negotiation by Profile</em> than <em>QSA Alternate Keywords Realization</em> and
-        anything that is conformant with the <em>QSA Realization</em> profile would necessarily by conformant with the
-        <em>QSA Alternate Keywords Realization</em> profile which thus meets the [[PROF]] definition of what it means
+        The reason that the <em>QSA Functional Profile</em> profile is modelled as profiling the <em>QSA Alternate Keywords
+        Functional Profile</em> profile is that the <em>QSA Functional Profile</em> profile is a more constrained 'narrower'
+        specification of <em>Content Negotiation by Profile</em> than <em>QSA Alternate Keywords Functional Profile</em> and
+        anything that is conformant with the <em>QSA Functional Profile</em> profile would necessarily by conformant with the
+        <em>QSA Alternate Keywords Functional Profile</em> profile which thus meets the [[PROF]] definition of what it means
         to be the profile of something.
       </p>
-      <pre id="profiles-in-prof" class="nohighlight" aria-busy="false" aria-live="polite"
-           style="border:solid 1px black; padding:5px;">
+      <pre id="profiles-in-prof"
+           class="codelisting nohighlight" aria-busy="false" aria-live="polite"
+           title="Description of this specification and its profiles according to PROF">
+<div class="codelisting-title">
+<a href="#profiles-in-prof">CODE LISTING 1</a>: Description of this specification and its profiles, as listed in <a href="#conformance-profiles"></a>
+using the Profiles Vocabulary [[PROF]]
+</div>
 @prefix dct: &lt;http://purl.org/dc/terms/> .
 @prefix prof: &lt;http://www.w3.org/ns/dx/prof/> .
 @prefix role: &lt;http://www.w3.org/ns/dx/prof/role/> .
@@ -1634,27 +1638,27 @@ Link:
 
 cnpr:http a prof:Profile ;
     prof:isProfileOf &lt;https://www.w3.org/TR/dx-prof-conneg/> ;
-    rdfs:label "HTTP Realization" ;
-    rdfs:comment "For conformance with the realization of Content Negotiation by Profile
-                  presented in § 7.1 Hypertext Transfer Protocol Headers." ;
-    skos:scopeNote "To be used if a resource conforms to the HTTP Realization" .
+    rdfs:label "HTTP Functional Profile" ;
+    rdfs:comment "For conformance with the functional profile of Content Negotiation by
+                  Profile presented in § 7.1 Hypertext Transfer Protocol Headers." ;
+    skos:scopeNote "To be used if a resource conforms to the HTTP Functional Profile" .
 
 cnpr:qsa a prof:Profile ;
     prof:isProfileOf cnpr:qsa-alt ;
-    rdfs:label "QSA Realization Profile" ;
-    rdfs:comment "For conformance with the realization of Content Negotiation by Profile
-                  presented in § 7.2 URL Query String Arguments." ;
-    skos:scopeNote "To be used if a resource conforms to the QSA Realization using the
-                    Query String Arguments _profile and _mediatype as per the
+    rdfs:label "QSA Functional Profile" ;
+    rdfs:comment "For conformance with the functional profile of Content Negotiation by
+                  Profile presented in § 7.2 URL Query String Arguments." ;
+    skos:scopeNote "To be used if a resource conforms to the QSA Functional Profile using
+                    the Query String Arguments _profile and _mediatype as per the
                     recommendations in § 7.2 URL Query String Arguments. " .
 
 cnpr:qsa-alt a prof:Profile ;
     prof:isProfileOf &lt;https://www.w3.org/TR/dx-prof-conneg/> ;
-    rdfs:label "QSA Alternate Keywords Realization Profile" ;
-    rdfs:comment "For conformance with the realization of Content Negotiation by Profile
-                  presented in § 7.2 URL Query String Arguments." ;
-    skos:scopeNote "To be used if a resource conforms to the QSA Realization but uses
-                    alternate keywords for the Query String Arguments _profile and
+    rdfs:label "QSA Alternate Keywords Functional Profile" ;
+    rdfs:comment "For conformance with the functional profile of Content Negotiation by
+                  Profile presented in § 7.2 URL Query String Arguments." ;
+    skos:scopeNote "To be used if a resource conforms to the QSA Functional Profile but
+                    uses alternate keywords for the Query String Arguments _profile and
                     _mediatype, as allowed by the recommendations in § 7.2 URL Query
                     String Arguments." .
 
@@ -1664,14 +1668,10 @@ cnpr:rrd a prof:Profile ;
     rdfs:comment "For conformance with Content Negotiation by Profile § 6.2.2 get
                   resource by profile." ;
     skos:scopeNote "To be used if a resource representation is able to indicate which
-                    profile(s) it conforms to, in its appropriate realization, as per
-                    the abstract specification in § 6.2.2 get resource by profile. " .
+                    profile(s) it conforms to, in its appropriate functional profile,
+                    as per the abstract specification in § 6.2.2 get resource by
+                    profile. " .
       </pre>
-      <div class="listing-caption"
-           style="font-style:italic; margin-left:10px; margin-right:10px;">
-        Code Listing 1 Description of this specification and its profiles, as listed in
-        <a href="#conformance-profiles"></a> using the Profiles Vocabulary [[PROF]]
-      </div>
       <figure id="fig-profile-hierarchy">
         <a href="profiles-hierarchy.svg">
           <img src="profiles-hierarchy.svg" alt="Profiles hierarchy of this specification" style="width:500px;" />
@@ -1705,7 +1705,7 @@ cnpr:rrd a prof:Profile ;
           [[?VOCAB-DCAT-2]] and borrowing parts from its examples, such as
           <a href="https://www.w3.org/TR/vocab-dcat-2/#ex-service-eea">Example 49</a>,
           that includes a <code>dct:conformsTo</code> predicate as [[?VOCAB-DCAT-2]], as well as [[PROF]], suggest for
-          use. Conformance here is claimed to be to the <em>QSA Alternate Keywords Realization</em> profile indicated by
+          use. Conformance here is claimed to be to the <em>QSA Alternate Keywords Functional Profile</em> profile indicated by
           the URI <code>http://www.w3.org/ns/dx/conneg/profile/qsa-alt</code>, as it is identified in
           <a href="#conformance-profiles"></a>.
         </p>
@@ -1718,7 +1718,7 @@ cnpr:rrd a prof:Profile ;
                      Negotiation by Profile specification also annotated with other
                      DCAT-2 recommended properties."@en ;
 
-    # URI for the QSA Alternate Keywords Realization profile
+    # URI for the QSA Alternate Keywords Functional Profile
     <strong>dct:conformsTo &lt;http://www.w3.org/ns/dx/conneg/profile/qsa-alt> ;</strong>
 
     # it's a public service
@@ -1733,7 +1733,7 @@ cnpr:rrd a prof:Profile ;
         </pre>
         <div class="listing-caption"
              style="font-style:italic; margin-left:10px; margin-right:10px;">
-          Code Listing 2 An example Web Service claiming conformance to the QSA Alternate Keywords Realization profile
+          Code Listing 2 An example Web Service claiming conformance to the QSA Alternate Keywords Functional Profile
           of this specification
         </div>
       </section>
