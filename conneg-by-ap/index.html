@@ -91,7 +91,7 @@
       For the purpose of compliance, the normative sections of this document are
       <a href="#definitions">Section 3</a>,
       <a href="#abstractmodel">Section 6</a>,
-      <a href="#application-profiles">Section 7</a> and
+      <a href="#functional-profiles">Section 7</a> and
       <a href="#testsuites">Section 8</a>.
     </p>
     <p class="note">Specifications and Profiles to which the content of resource representations may conform embody their own notions of conformance, which are out of scope for this specification.</p>
@@ -370,11 +370,6 @@ Preference-Applied: profile="urn:example:schema"
       That solution requires that a client evaluates two different headers
       to find a response to its request for a specific profile,
       which would make client implementation more complicated.</p>
-      <p class="issue" data-number="382">
-        Previous uses of <code>Accept-*</code> headers
-        or other HTTP headers for this use
-        will be listed and discussed here.
-      </p>
     </section>
 	  <section id="related-ark">
 		  <h3>Archival Resource Key (ARK)</h3>
@@ -750,7 +745,7 @@ Content-Profile: http://example.org/profile/x, \
       </section>
     </section>
   </section>
-  <section id="application-profiles">
+  <section id="functional-profiles">
     <h2>Functional Profiles</h2>
     <p>
       This section describes <a>profiles</a> of this <a>specification</a>'s abstract model which are implementations of it
@@ -939,46 +934,42 @@ Link: &lt;http://example.org/resource/a.profx.ttl&gt;; rel="self"; type="text/tu
   &lt;http://example.org/resource/a.html&gt;; rel="alternate"; type="text/html"
 [more response headers]
           </pre>
-          <div class="note" title="Multiple ways of conveying URI / token mappings">
+          <div class="note" title="Alternate ways of conveying URI / token mappings">
             <p>
-              There are several methods that many be used to convey URI / token mappings including the recommended
+              There are several alternate methods that many be used to convey URI / token mappings in addition to the recommended
               method described and exemplified above.
             </p>
-            <h4>Option 1: token parameters (recommended)</h4>
+            <p><strong>Option 1: registered tokens</strong></p>
             <p>
-              "token" parameters are added to <code>Content-Profile</code> &amp; <code>Link profile=</code> HTT headers.<br />
-              Pros: self-contained,flexible, explicit.<br />
-              Cons: potential redundancy in URIs if many offered
-            </p>
-            <h4>Option 2: registered tokens</h4>
-            <p>
-              Tokens are registered in a global registry and servers may use them in place of a URI<br />
+              Tokens are registered in a global registry and servers may use them in place of a URI, e.g.
               <code>Content-profile: token1, &lt;URI2></code>
-              Pros: compact<br />
-              Cons: a global registry for profiles not manageable when many systems define profiles and such a registry
+            </p>
+            <p>
+              <em>Pros</em>: compact<br />
+              <em>Cons</em>: a global registry for profiles not manageable when many systems define profiles and such a registry
               limits other capabilities of profile description by forcing generic profiles
             </p>
-            <h4>Option 3: allow namespace declarations</h4>
+            <p><strong>Option 2: allow namespace declarations</strong></p>
             <p>
               As per the use of CURIEs [[CURIE]] whose specification "...defines a generic, abbreviated syntax for
-              expressing URIs.", within JSON-LD [[JSON-LD]], a token may be indicated for use in place of a URI within
+              expressing URIs." within JSON-LD [[JSON-LD]], a token may be indicated for use in place of a URI within
               a namespacing context. In this method, key/value pairs of tokens/URIs are defined within an HTTP header
-              such as <code>Content-Profile</code> like this:
+              such as <code>Content-Profile</code> e.g:
             </p>
             <p>
               <code>Content-Profile: @:http://example.org/profiles/,@w3c:http://w3.org/knownprofiles#, :token1, w3c:token2</code>
             </p>
             <p>
-              Where the first key/value pair of token/URI is key: &lt;nothing&gt;, value: http://example.org/profiles/
-              and the second, is key: &lt;w3c&gt;, value:http://w3.org/knownprofiles#.
+              Here the first key/value pair of token/URI is key: &lt;nothing&gt;, value: http://example.org/profiles/
+              and the second, is key: &lt;w3c&gt;, value: http://w3.org/knownprofiles#.
             </p>
             <p>
-              Pros: compact, no registry requirement<br />
-              Cons: clients have more parsing to do<br />
-              Note: could easily be a JSON-LD payload<br />
+              <em>Pros</em>: compact, no registry requirement<br />
+              <em>Cons</em>: clients have more parsing to do<br />
+              <em>Note</em>: could easily be a JSON-LD payload<br />
               (alternative syntax using parameter ns2;ns=http://example.org/profiles/)
             </p>
-            <h4>Option 4: namespace header</h4>
+            <p><strong>Option 3: namespace header</strong></p>
             <p>
               In this method, a new HTTP header could be introduced to specifically convey token/URI profile key/value
               pairs. If <code>Content-Profile-Namespaces</code> is to be the new HTTP header, then a <a>server</a> may
@@ -989,6 +980,10 @@ Link: &lt;http://example.org/resource/a.profx.ttl&gt;; rel="self"; type="text/tu
                 Content-Profile-Namespaces: :http://example.org/profiles/,w3c:http://w3.org/knownprofiles#<br />
                 Content-Profile: :token1, w3c:token2
               </code>
+            </p>
+            <p>
+              <em>Pros</em>: dedicated, unambiguous, mechanics<br />
+              <em>Cons</em>: clients have another header to deal with, registration of another HTTP header (and thus alternation to [[PROF-IETF]]<br />
             </p>
           </div>
         </section>
@@ -1144,7 +1139,7 @@ http://example.com/path/to/resource/a?<strong>_profile=prof-01&amp;_mediatype=te
             Profile system implementers SHOULD use tokens from that list for Media Type identifiers and follow HTTP
             content negotiation best practice for identifiers for other content negotiation dimensions (language etc.).
           </p>
-          <div class="note">
+          <div class="note" title="URI use for Media Types">
             Several initiatives exist that have created URIs for Media Types based on IANA's tokens, such as
             <a href="https://conneg.info">
             conneg.info</a>. These URIs may be used to indicate Media Types.
@@ -1175,7 +1170,10 @@ http://example.com/path/to/resource/a?<strong>_profile=prof-01&amp;_mediatype=te
 For the representation of Resource X, according to Profile Y, in Media Type Z:
 
 Rather than:
-GET /single/endpoint?resource=http://example.org/resource=X&amp;_profile=Y&amp;_mediatype=Z HTTP/1.1
+GET /single/endpoint \
+            ?resource=http://example.org/resource/X \
+            &amp;_profile=Y \
+            &amp;_mediatype=Z HTTP/1.1
 
 Use:
 GET /resource/X?_profile=Y&amp;_mediatype=Z HTTP/1.1
@@ -1266,7 +1264,6 @@ Link:
       </section>
       <section id="qsa-getresourcebyprofile">
         <h4>get resource by profile</h4>
-        <p><strong><em>Expressing profile preference</em></strong></p>
         <p>
           To be conformant with the "QSA Functional Profile" profile of this specification, a <a>server</a> MUST allow
           clients to request resources according to profiles they identify with a <code>_profile</code> query string.
@@ -1416,7 +1413,7 @@ Link:
           Alternate Profiles Data Model, the HTTP body of that response will also list the alternate profiles for
           <code>/resource/a</code> as opposed to the default representation of it.
         </p>
-        <div class="note">
+        <div class="note" title="For further investigation: alternates profile">
           <p>
             Nick: it appears we are dependent on an identifier for the "profile of a resource that lists all others
             profiles". This is analogous in content to the Link header response for <em>list profiles</em> and is exactly
@@ -1479,7 +1476,6 @@ Link:
         </p>
       </dd>
     </dl>
-    <div class="issue" data-number="385"></div>
   </section>
   <section id="implementations" class="informative">
     <h2>Implementations</h2>
@@ -1515,29 +1511,66 @@ Link:
   </section>
   <section id="changes" class="informative">
 	  <h2>Changes</h2>
-	  <p>Changes since the <a href="https://www.w3.org/TR/2018/WD-dx-prof-conneg-20181218/">18 December 2018 Working Draft</a> are:</p>
+    <p>Changes since the <a href="https://www.w3.org/TR/2019/WD-dx-prof-conneg-20190430/">2nd Public Working Draft, 30 April 2019</a> are:</p>
+    <ul>
+      <li>Metadata: Two authors (Car & Svensson) changed affiliation</li>
+      <li><a href="#abstract"></a>: slight wording change</li>
+      <li><a href="#sotd">Status of this Document</a>: slight changes to listing of other docs</li>
+      <li><a href="#introduction"></a>: small changes to wording</li>
+      <li><a href="#conformance"></a>: addition of <a href="#conformance-profiles"></a></li>
+      <li><a href="#motivation"></a>: addition of a 3rd paragraph describing relation of this work to existing systems</li>
+      <li><a href="#relatedwork"></a>: updated ref to IETF doc since it's changed, aligned examples with other section's examples, minor wording changes, removed closed issues</li>
+      <li><a href="#abstractmodel"></a>: replaced the "Context" subsection with 3 subsections: intro text, Background, Profile Identification but with essentially the same content, removal of closed issues, addition of 3 new examples (now 4, 5 & 6 with 7 being an updated version of the old 4), addition of a note & text about redirection</li>
+      <li><a href="#functional-profiles"></a>: retitling of this section from <em>Realizations</em> to its current title, expanded intro text, description of conformance to this spec's functional profiles, addition of Issue 678 and a response not for it.
+        <ul>
+          <li>
+            <a href="#http"></a>:
+            <ul>
+              <li>Within "list profiles": removal of Content-Location URLs in intro text, alteration of Example 8 (previously Example 5) to reflect Link header decisions, addition of new text and an example (9) about Content-Location HTTP headers, removal of an irrelevant Issue</li>
+              <li>Within "Token mappings": removal of closed issue, enhancement of the alternate mappings note</li>
+              <li>Within "get resource by profile": expanded explanatory text</li>
+            </ul>
+          </li>
+          <li>
+            <a href="#qsa"></a>:
+            <ul>
+              <li>Removal of closed issues</li>
+              <li>Altered text throughout to reflect wording changes like Realization &rarr; Functional Profile</li>
+              <li>Movement of text sections into numbered subsections</li>
+              <li>Addition of <a href="#qsa-uri"></a> to explain QSA background with two new examples, 12 &amp; 13</li>
+              <li>Split of section <em>Key naming</em> into <em>Key naming</em> &amp; <em>URI and token use</em> with extended content</li>
+              <li>Within "list profiles": expanded text, removal of closed issues, extended example (15)</li>
+              <li>Within "get resource by profile": expanded text</li>
+              <li>Addition of new subsection "QSA key discovery" with normative text, two examples and a note</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#testsuites"></a>: </li>
+    </ul>
+	  <p>Changes since the <a href="https://www.w3.org/TR/2018/WD-dx-prof-conneg-20181218/">1st Public Working Draft, 18 December 2018</a> are:</p>
 	  <ul>
-    <li>
+      <li>
       Added Related Work subsections for
       Linked Data APIs (<a href="https://github.com/w3c/dxwg/issues/383">Issue 383</a>),
       OAI-PMH (<a href="https://github.com/w3c/dxwg/issues/516">Issue 516</a>),
       &amp; CSW (<a href="https://github.com/w3c/dxwg/issues/882">Issue 882</a>).
-    </li>
-		<li>Added text about existing standards for transporting profile information in http headers
-			to <a href="#relatedwork">related work</a>.
-			(<a href="https://github.com/w3c/dxwg/issues/45">Issue 45</a>)</li>
-		<li>Removed advice on use of HTTP OPTIONS.
-			(<a href="https://github.com/w3c/dxwg/issues/510">Issue 510</a>)</li>
-		<li>Added text about ARK identifiers to <a href="#relatedwork">related work</a>.
-			(<a href="https://github.com/w3c/dxwg/issues/514">Issue 514</a>)</li>
-		<li>Clarified difference between the <code>profile</code> parameter in <code>Accept</code> header fields
-			and the <code>Accept-Profile</code> header field.
-			(<a href="https://github.com/w3c/dxwg/issues/662">Issue 662</a>)</li>
-		<li>Updated the <a href="#security_and_privacy">Security and Privacy</a> section.
-			(<a href="https://github.com/w3c/dxwg/issues/782">Issue 782</a>)</li>
-		<li>Added a not about length restrictions in URLs to the <a href="#qsa">QSA</a> section.
-			(<a href="https://github.com/w3c/dxwg/issues/592">Issue 592</a>)</li>
-	</ul>
+      </li>
+      <li>Added text about existing standards for transporting profile information in http headers
+        to <a href="#relatedwork">related work</a>.
+        (<a href="https://github.com/w3c/dxwg/issues/45">Issue 45</a>)</li>
+      <li>Removed advice on use of HTTP OPTIONS.
+        (<a href="https://github.com/w3c/dxwg/issues/510">Issue 510</a>)</li>
+      <li>Added text about ARK identifiers to <a href="#relatedwork">related work</a>.
+        (<a href="https://github.com/w3c/dxwg/issues/514">Issue 514</a>)</li>
+      <li>Clarified difference between the <code>profile</code> parameter in <code>Accept</code> header fields
+        and the <code>Accept-Profile</code> header field.
+        (<a href="https://github.com/w3c/dxwg/issues/662">Issue 662</a>)</li>
+      <li>Updated the <a href="#security_and_privacy">Security and Privacy</a> section.
+        (<a href="https://github.com/w3c/dxwg/issues/782">Issue 782</a>)</li>
+      <li>Added a not about length restrictions in URLs to the <a href="#qsa">QSA</a> section.
+        (<a href="https://github.com/w3c/dxwg/issues/592">Issue 592</a>)</li>
+    </ul>
   </section>
   <section id="security_and_privacy" class="informative">
     <h2>Security and Privacy</h2>
