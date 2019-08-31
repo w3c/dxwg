@@ -542,9 +542,9 @@ Preference-Applied: profile="urn:example:schema"
         <h4>list profiles</h4>
         <p>
           A <a>client</a> wishes to know for which <a>profile</a>s a <a>server</a> is able to deliver conformant
-          representations of a <a>resource</a>. The content of the list can be known either before a <a>request</a> for a
-          particular <a>resource</a> representation is made or it may only be known after an initial <a>request</a> for a
-          <a>resource</a> representation is made.
+          representations of a <a>resource</a>. The list of profiles may be known either before a <a>request</a> for a
+          particular <a>resource</a> representation is made or it may only be known after an initial <a>request</a> is
+          made.
         </p>
         <p>
           The <strong>list profiles</strong> <a>request</a> MUST be either an independent request or part of another
@@ -552,15 +552,66 @@ Preference-Applied: profile="urn:example:schema"
         </p>
         <p>
           The <strong>list profiles</strong> <a>request</a> MAY result in a <a>response</a> in one of a
-          number of formats provided that the <a>profile</a>s representations of resources
-          conform to are unambiguously identified either by URI or a <a>token</a> which MUST be mappable to a URI
-          within one particular client/server session.
+          number of formats, provided that the <a>profile</a>s representations of resources
+          conform to are unambiguously identified either by either a URI or a <a>token</a>. If the latter, it MUST be
+          mappable to a URI within one particular client/server message pair.
         </p>
         <p>
           A <a>server</a> MUST NOT list <a>profile</a>s that <a>resource</a> representations conform to if
           it is unable to deliver those representations when presented with a <strong>get resource by profile</strong>
           <a>request</a>.
         </p>
+        <p>
+          <a href="#eg-list-simple"></a> shows a request/response pair of messages, conforming to the QSA Functional
+          Profile, where the request is a <em>list profiles</em> request for a particular resource.
+        </p>
+        <pre id="eg-list-simple"
+             class="example nohighlight" aria-busy="false" aria-live="polite"
+             title="Simple list profiles request & response messages (QSA Functional Profile)">
+# A request for all the profiles to which representations of resource a conform
+GET /resource/a<strong>?_profile=all</strong> HTTP/1.1
+
+---
+
+# The server returns a list of profiles both in its HTTP response header and also
+# in the response body (HTML). Note that the action of returning the response message
+# conforms to the QSA Functional Profile and this is indicated with the Content-Profile
+# header.
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Profile: &lt;http://www.w3.org/ns/dx/conneg/profile/qsa>
+# This Link header indicates representations ar available that conform to Profile X
+# &amp; Y and that the Profile X-conformant representations are available in HTML
+# &amp; XML Media Types.
+Link:
+  &lt;http://example.org/resource/a?_profile=profile-x&_mediatype=text/html>;
+          rel="self"; type="text/html";
+          profile="http://otherexample.org/profile/x",
+  &lt;http://example.org/resource/a?_profile=profile-x&_mediatype=text/xml>;
+          rel="alternate";
+          type="text/xml";
+          profile="http://otherexample.org/profile/x",
+  &lt;http://example.org/resource/a?_profile=profile-y&_mediatype=text/xml>;
+          rel="alternate";
+          type="text/xml";
+          profile="http://otherexample.org/profile/y"
+
+&lt;!DOCTYPE html>
+&lt;html>
+  &lt;head>
+    &lt;meta charset="UTF-8">
+    &lt;title>Profiles for Resource A&lt;/title>
+  &lt;/head>
+  &lt;body>
+    &lt;h1>Profiles available for Resource X&lt;/h1>
+    &lt;ul>
+      &lt;li>&lt;a href="?_profile=profile-x&_mediatype=text/html">X, in HTML&lt;/a>&lt;/li>
+      &lt;li>&lt;a href="?_profile=profile-x&_mediatype=text/xml">X, in XML&lt;/a>&lt;/li>
+      &lt;li>&lt;a href="?_profile=profile-y&_mediatype=text/xml">Y, in XML&lt;/a>&lt;/li>
+    &lt;/ul>
+  &lt;/body>
+&lt;/html>
+        </pre>
       </section>
       <section id="getresourcebyprofile">
         <h4>get resource by profile</h4>
@@ -730,7 +781,7 @@ Content-Profile: http://example.org/profile/x, \
         Internet-Draft [[PROF-IETF]].
       </p>
       <div class="issue" data-number="678"></div>
-      <div class="note" title="POST/PUT out of scope">
+      <div class="note" title="Issue 678: POST/PUT out of scope">
         <p>
           POST &amp; PUT methods are considered out-of-scope for this Functional Profile. It is not clear what functions of
         the proposed Abstract Model these HTTP methods would implement.
@@ -752,7 +803,7 @@ Content-Profile: http://example.org/profile/x, \
 	      but that does not conform to any listed profile.
 	      If no <code>Accept-Profile</code> header preference is given,
 	      the profile dimension SHOULD be ignored for negotiation purposes.
-	      Nonetheless, in all cases,
+	      Nevertheless, in all cases,
 	      the server's response SHOULD contain a <code>Content-Profile</code> header
 	      listing the URIs of all profiles to which it knows the representation conforms.
       </p>
@@ -1188,7 +1239,7 @@ Content-Type: application/json
 Content-Profile: &lt;http://www.w3.org/ns/dx/conneg/profile/qsa>
 Link:
   &lt;http://example.org/resource/a?_profile=profile-x&amp;_mediatype=application/json>;
-          rel="self"; type="text/html";
+          rel="self"; type="application/json";
           profile="http://otherexample.org/profile/x",
   &lt;http://example.org/resource/a?_profile=profile-x&amp;_mediatype=text/xml>;
           rel="alternate";
