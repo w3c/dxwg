@@ -10,10 +10,10 @@ var respecConfig = {
     canonicalURI: "TR",
     editors: [{
         name:       "Lars G. Svensson",
-        company:    "Deutsche Nationalbibliothek",
+        company:    "Invited Expert and before at Deutsche Nationalbibliothek",
         companyURL: "http://www.dnb.de/",
 	    orcid:      "0000-0002-8714-9718",
-        w3cid:      "44603"
+        w3cid:      44603
       },
       {
         name:       "Rob Atkinson",
@@ -24,8 +24,8 @@ var respecConfig = {
       {
         name:       "Nicholas J. Car",
         mailto:     "nicholas.car@surroundaustralia.com",
-        company:    "SURROUND Australia Pty Ltd, formerly CSIRO",
-        companyURL: "https://surroundaustralia.com",
+        company:    "Invited Expert and before at CSIRO",
+        companyURL: "https://www.csiro.au",
         orcid:      "0000-0002-8742-7730",
         w3cid:      70131
     }],
