@@ -5,8 +5,8 @@ var respecConfig = {
     previousPublishDate: "2019-04-30",
     previousMaturity: "PWD",
     prevRecURI: "https://www.w3.org/TR/2019/WD-dx-prof-conneg-20190430/",
-    testSuiteURI: "https://github.com/CSIRO-enviro-informatics/prof-conneg-test-suite",
-    implementationReportURI: "https://github.com/CSIRO-enviro-informatics/prof-conneg-implementations",
+    testSuiteURI: "https://github.com/w3c/conneg-prof-testing",
+    implementationReportURI: "https://github.com/w3c/conneg-prof-testing",
     canonicalURI: "TR",
     editors: [{
         name:       "Lars G. Svensson",
