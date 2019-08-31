@@ -130,9 +130,9 @@
           <tbody>
           <tr>
             <td><code><a href="http://www.w3.org/ns/dx/conneg/profile/http">cnpr:http</a></code></td>
-            <td>HTTP Functional Profile</td>
+            <td>HTTP Headers Functional Profile</td>
             <td>For conformance with the functional profile presented in <a href="#http"></a>.</td>
-            <td>To be used if a resource conforms to the HTTP Functional Profile</td>
+            <td>To be used if a resource conforms to the HTTP Headers Functional Profile</td>
           </tr>
           <tr>
             <td><code><span style="white-space: nowrap"><a href="http://www.w3.org/ns/dx/conneg/profile/qsa">cnpr:qsa</a></span></code></td>
@@ -597,14 +597,14 @@ Preference-Applied: profile="urn:example:schema"
         </div>
         <p>
           A simple request/response message pair with <code>Accept-Profile</code> and <code>Content-Profile</code>
-          headers included, according to the <a href="#http">HTTP Functional Profile</a>, is shown in
+          headers included, according to the <a href="#http">HTTP Headers Functional Profile</a>, is shown in
           <a href="#eg-simple"></a> and an example with a redirect is shown in <a href="#eg-range14"></a>.
-          <a href="#eg-narrower-profile-response"></a> shows an HTTP Functional Profile message pair indicating a
+          <a href="#eg-narrower-profile-response"></a> shows an HTTP Headers Functional Profile message pair indicating a
           narrower profile response than the requested profile.
         </p>
         <pre id="eg-simple"
              class="example nohighlight" aria-busy="false" aria-live="polite"
-             title="Simple get resource by profile request & response (HTTP Functional Profile)">
+             title="Simple get resource by profile request & response (HTTP Headers Functional Profile)">
 # A request for resource a according to Profile x is made
 GET /resource/a HTTP/1.1
 Accept-Profile: http://example.org/profile/x
@@ -619,7 +619,7 @@ Content-Profile: http://example.org/profile/x
         </pre>
         <pre id="eg-range14"
              class="example nohighlight" aria-busy="false" aria-live="polite"
-             title="Get resource by profile request & response (HTTP Functional Profile) with 303 redirect">
+             title="Get resource by profile request & response (HTTP Headers Functional Profile) with 303 redirect">
 # A request for a non-information resource a according to Profile x is made
 GET /resource/a HTTP/1.1
 Accept-Profile: http://example.org/profile/x
@@ -650,7 +650,7 @@ HTTP/1.1 200 OK
 [response body]
         </pre>
         <pre id="eg-narrower-profile-response" class="example nohighlight" aria-busy="false" aria-live="polite"
-             title="Get resource by profile, narrower profile response (HTTP Functional Profile)">
+             title="Get resource by profile, narrower profile response (HTTP Headers Functional Profile)">
 # A request for Resource A whose representation conforms
 # to Profile X is made
 
@@ -708,17 +708,18 @@ Content-Profile: http://example.org/profile/x, \
       implementations of systems within different environments wishing to conform to this specification.
     </p>
     <p>
-      This document only provides functional profiles for two environments - HTTP &amp; human browser (Query String
-      Argument functionality) however it is expected that implementers of content negotiation by profile may implement
-      further functional profiles in other environments and they are encouraged to do so further profiling this
+      This document provides functional profiles for two environments - HTTP &amp; human browser (Query String
+      Argument functionality) only. For the human browser environment, two functional profiles are presented.
+      Further functional profiles of this specification MAY be implemented either for other environments and or even for
+      constrained scenarios within these environments and implementers are encouraged to do this by further profiling this
       specification.
     </p>
     <p class="note" title="Conformance to profiles">
       Implementers of Content Negotiation by Profile need not ensure systems conform to multiple functional profiles
-      of this specification. They need only conform to the functional profile relevant to their environment. In some
+      of this specification. They need only conform to the functional profile(s) relevant to their environment. In some
       cases, for example the Query String Argument-relevant human browser environment, there is a choice of more than
-      one functional profile. Since all functional profiles of this specification conform to the specification, by
-      design, conformance to any functional profile means conformance to the specification.
+      one functional profile. Since all functional profiles of this specification themselves must conform to this specification, by
+      design, conformance to any functional profile guarantees conformance to the specification.
     </p>
     <section id="http">
       <h3>Hypertext Transfer Protocol Headers</h3>
@@ -1293,9 +1294,9 @@ GET /resource/a HTTP/1.1
 Accept-Profile: http://example.org/profile/x
 
 # The server does not understand the HTTP Get Resource By Profile
-# request (doesn't support the HTTP Functional Profile) but is able to
-# supply an HTTP Link header indicating alternate profiles. It can be
-# seen from the Link header that keys other than _profile &
+# request (doesn't support the HTTP Headers Functional Profile) but is
+# able to supply an HTTP Link header indicating alternate profiles. It
+# can be seen from the Link header that keys other than _profile &
 # _mediatype are in use - view & format - thus this is QSA Alt, not a
 # QSA Functional Profile-conformant system
 
