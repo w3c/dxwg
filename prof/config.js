@@ -14,7 +14,8 @@ var respecConfig = {
       },
       {
         name:       "Nicholas J. Car",
-        company:    "Formerly with CSIRO, now SURROUND Australia Pty Ltd",
+        mailto:     "nicholas.car@surroundaustralia.com",
+        company:    "SURROUND Australia Pty Ltd and before CSIRO",
         companyURL: "https://surroundaustralia.com",
         orcid:      "0000-0002-8742-7730",
         w3cid:      70131
@@ -121,12 +122,3 @@ var respecConfig = {
         }
     }
 };
-
-/*
-,
-        extras:     [{
-          name:  "<img src='orcid_logo.png' alt='orcid logo' />",
-          href:  "https://orcid.org/0000-0002-8742-7730",
-          class: "orcid"
-        }]
- */
