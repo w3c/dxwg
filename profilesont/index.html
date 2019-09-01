@@ -50,27 +50,19 @@
 <section id="introduction" class="informative">
   <h2>Introduction</h2>
   <p>
-    This Profiles Vocabulary provides a structure to describe profiles of information standards. Its
-    development was triggered by the appearance of multiple profiles of the Dataset Catalog Vocabulary (DCAT)
-    [[VOCAB-DCAT-20140116]] and examples of profiles including the Guidelines for Dublin Core Application Profiles [[DCAP]] and various profiles of OpenGeospatial Consortium specifications.
+    This Profiles Vocabulary provides a standardized, structured and human- and machine-readable set of terms to describe profiles. Its development was triggered by the appearance of multiple profiles of the Dataset Catalog Vocabulary (DCAT) [[VOCAB-DCAT]] and examples of profile description and implementation guidance systems such as the Guidelines for Dublin Core Application Profiles [[DCAP]] and the OpenGeospatial Consortium's Standard for Modular specifications [[MODSPEC]].
   </p>
   <p>
-    The Profiles Vocabulary is an RDF vocabulary to describe the resources that define and implement a profile. A profile is defined as "A named set of constraints on one or more identified base specifications or other profiles, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of those base specifications necessary to accomplish a particular function." These resources may be human-readable documents (PDFs, textual documents), vocabularies or ontologies (XSD, RDF),  resources specific to validation tools (SHACL, ShEx, Schematron), or any other files or resources that support the profile. Each resource is defined as having a role that defines its function within the profile.
+    Profiles aim to increase interoperability within a community of users by introducing constraints, extensions or combinations on the use of more general specifications. This Profiles Vocabulary is an RDF vocabulary to describe the resources that define and implement a <em>profile</em>. A profile, such as a <em>data profile</em> or perhaps an <em>application profile</em>, is defined as "A data specification that constrains, extends, combines, or provides guidance or explanation about the usage of other data specifications". A <em>data specification</em> is "A specification, with human- and/or machine-processable representations, that defines the content and structure of data used in a given context". Profile resources may be human-readable documents (PDFs, textual documents), vocabularies or ontologies (XSD, RDF), constraint language resources used by specific validation tools (SHACL, ShEx, Schematron), or any other files or resources that support the profile. In this specification, each resource is defined as having a role that defines its function within the profile.
 	</p>
   <p>
-    This vocabulary also provides for the description of relationships between such profiles and the standards to which they conform. A standard in this case can be a vocabulary or it can be another profile from which the described profile is a derivation, expansion, or selection. This vocabulary provides a standardized, machine readable formalism for describing the context of profiles. The basis of this vocabulary is a specialization of <code><a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-Standard">dct:Standard</a></code>, allowing the use of the <code><a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-conformsTo">dct:conformsTo</a></code> predicate to specify conformance to a profile.
+    This vocabulary provides for descriptions of relationships between a <a>profile</a> and a <a>specification</a> or another <a>profile</a> upon which a profile is based. These descriptions are are both human- and machine-readable and use existing, standardized vocabularies as much as possible. The basis of these descriptions is a specialization of the <code><a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-Standard">dct:Standard</a></code> class which is defined here as a <code><a href="#Class:Profile">prof:Profile</a></code>. A <code>prof:Profile</code> is related to either a <code>dct:Standard</code> or another <code>prof:Profile</code> by being a <em>profile of</em> it, formally, <a href="#Property:isProfileOf"><code>prof:isProfileOf</code></a>. Resources that conform to either a <code>dct:Standard</code> or a <code>prof:Profile</code> are formally described as doing so with the use of the <code><a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-conformsTo">dct:conformsTo</a></code> predicate.
 	</p>
   <p>
-    A "profile" here is represented by the <a href="#Class:Profile">Profile class definition</a> in the <a href="#specification">Vocabulary Specification</a> with the following definition: "A named set of constraints on one or more identified base specifications or other profiles, including the identification of any implementing subclasses of datatypes, semantic interpretations, vocabularies, options and parameters of those base specifications necessary to accomplish a particular function."
+    In recognition of the existence of specifications and profiles that are made up of multiple resources (perhaps PDF documents, machine-readable constraint language files, code lists etc.), this vocabulary also provides for the description of the parts that constitute a profile/specification. The vocabulary defines a <a href="#Class:ResourceDescriptor"><code>prof:ResourceDescriptor</code></a> class which is used to qualify the relationship between a profile and its part resources. The <code>prof:Profile</code> may have any number of <a href="#Property:hasResource"><code>prof:hasResource</code></a> predicates indicating a <code>prof:ResourceDescriptor</code> which then indicates the location (a URI) of the actual resource artifact with <a href="#Property:hasArtifact"><code>prof:hasArtifact</code></a>, describes the artifact's format &amp; any specifications it conforms to with <a href="#Property:format"><code>dct:format</code></a> &amp; <a href="#Property:conformsTo"><code>dct:conformsTo</code></a> respectively and describes the role that the resource plays with respect to the profile by indicating a <a href="#Class:ResourceRole"><code>prof:ResourceRole</code></a> class instance with the <a href="#Property:hasRole"><code>prof:hasRole</code></a> predicate.
   </p>
   <p>
-    Profiles aim to increase interoperability within a community of users by introducing
-    certain constraints on the use of a more general standard such as a published vocabulary. Such constraints include restrictions on the cardinality of certain
-    properties, or a requirement to select values of a property from a specified controlled vocabulary. Profiles
-    have generally been specified through textually-oriented documents, and/or platform specific constraint languages.
-	</p>
-  <p>
-    A vocabulary of <code>Resource Role</code> instances is provided in <a href="#resource-roles-vocab">Section 8.</a>
+    A vocabulary of <code>prof:ResourceRole</code> instances is provided in <a href="#resource-roles-vocab">Section 8.</a>
   </p>
 </section>
 <section id="conformance">
@@ -84,11 +76,50 @@
   <section id="notationalconventions">
     <h3>Notational Conventions</h3>
     <p>
-      The key words <dfn>may</dfn>, <dfn>must</dfn>, <dfn>must not</dfn>, <dfn>optional</dfn>, <dfn>shall</dfn>,
+      The keywords <dfn>may</dfn>, <dfn>must</dfn>, <dfn>must not</dfn>, <dfn>optional</dfn>, <dfn>shall</dfn>,
       <dfn>shall not</dfn>, <dfn>should</dfn>, <dfn>should not</dfn>, <dfn>recommended</dfn>, <dfn>required</dfn>,
       in this document are to be interpreted as described in [[RFC2119]].
     </p>
   </section>
+</section>
+<section id="definitions">
+  <h2>Definitions</h2>
+  <dl>
+    <dt><dfn data-lt="specification">specification</dfn></dt>
+    <dd>
+      <p>
+        A basis for comparison; a reference point against which other things can be evaluated.
+      </p>
+      <p>
+        <em>Source: DCMI Metadata Terms [[DCTERMS]]'s definition for a <a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-Standard"><code>Standard</code></a>.</em>
+      </p>
+    </dd>
+    <dt><dfn data-lt="data specification">data specification</dfn></dt>
+    <dd>
+      <p>
+        A <a>specification</a>, with human- and/or machine-processable representations, that defines the content and structure of data used in a given context.
+      </p>
+    </dd>
+    <dt><dfn data-lt="profile">data profile</dfn></dt>
+    <dd>
+      <p>
+        A data specification that constrains, extends, combines, or provides guidance or explanation about the usage of other data specifications.
+      </p>
+      <p>
+        This definition includes what are sometimes called "application profiles", "metadata application profiles", or "metadata profiles". In this document, these, and "data profiles", are all referred to as just "profiles".
+      </p>
+    </dd>
+    <dt><dfn>resource</dfn></dt>
+    <dd>
+      The entity that is identified by a URI. Familiar examples include an electronic document, an image, a source of information with a consistent purpose. [[RFC3986]]
+    </dd>
+    <dt><dfn>metadata</dfn></dt>
+    <dd>Information that is supplied about a resource. [[RFC3986]]</dd>
+    <dt><dfn>token</dfn></dt>
+    <dd>
+      <p>A short name identifying something.</p>
+      <p>In the context of this specification, it is a <a>profile</a> that is usually identified by a token.</dd>
+  </dl>
 </section>
 <section id="namespaces">
   <h2>Namespaces</h2>
@@ -357,13 +388,14 @@ CSIRO's publications catalogue."""@en ;
             and parameters of those base specifications necessary to accomplish a particular function.
           </p>
           <p>
-            This definition includes what are often called "application profiles", "metadata application profiles", or
-            "metadata profiles".
+            This definition includes what are sometimes called "application profiles", "metadata application profiles",
+            or "metadata profiles".
           </p>
         </td>
       </tr>
       <tr><td class="prop">Sub class of:</td><td><a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-Standard">dct:Standard</a></td></tr>
       <tr><td class="prop">Source:</td><td><a href="https://www.w3.org/2017/dxwg/wiki/ProfileContext">https://www.w3.org/2017/dxwg/wiki/ProfileContext</a></td></tr>
+      <tr><td class="prop">Usage Note:</td><td>The Profile class "may be used to model aspects of data structure and content (as per <a>data profile</a>) or any other declared behaviour where a base specification can be identified and further requirements asserted.</td></tr>
       </tbody>
     </table>
     <div class="issue" data-number="521"></div>
