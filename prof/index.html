@@ -47,19 +47,47 @@
 <section id="introduction" class="informative">
   <h2>Introduction</h2>
   <p>
-    This Profiles Vocabulary provides a standardized, structured and human- and machine-readable set of terms to describe profiles. Its development was triggered by the appearance of multiple profiles of the Dataset Catalog Vocabulary (DCAT) [[VOCAB-DCAT]] and examples of profile description and implementation guidance systems such as the Guidelines for Dublin Core Application Profiles [[DCAP]] and the OpenGeospatial Consortium's Standard for Modular specifications [[MODSPEC]].
+    This Profiles Vocabulary provides a standardized, structured and human- &amp; machine-readable set of terms to describe profiles. Its development was triggered by the appearance of multiple profiles of the Dataset Catalog Vocabulary (DCAT) [[VOCAB-DCAT]] and examples of profile description and implementation guidance systems such as the Guidelines for Dublin Core Application Profiles [[DCAP]] and the OpenGeospatial Consortium's Standard for Modular specifications [[MODSPEC]].
   </p>
   <p>
-    Profiles aim to increase interoperability within a community of users by introducing constraints, extensions or combinations on the use of more general specifications. This Profiles Vocabulary is an RDF vocabulary to describe the resources that define and implement a <em>profile</em>. A profile, such as a <em>data profile</em> or perhaps an <em>application profile</em>, is defined as "A data specification that constrains, extends, combines, or provides guidance or explanation about the usage of other data specifications". A <em>data specification</em> is "A specification, with human- and/or machine-processable representations, that defines the content and structure of data used in a given context". Profile resources may be human-readable documents (PDFs, textual documents), vocabularies or ontologies (XSD, RDF), constraint language resources used by specific validation tools (SHACL, ShEx, Schematron), or any other files or resources that support the profile. In this specification, each resource is defined as having a role that defines its function within the profile.
+    Profiles aim to increase interoperability within a community of users by introducing constraints, extensions or
+    combinations on the use of more general specifications. This Profiles Vocabulary (PROF) is an RDF vocabulary created
+    to describe relations between <a>specifications</a> and profiles and the resources that define and implement
+    <a>profiles</a>. A <em>specification</em> is "A basis for comparison; a reference point against which other things
+    can be evaluated." (see the definition below) and a A profile, such as a <a>data profile</a> or perhaps an
+    <em>application profile</em>, is defined as "A [data/application] specification that constrains, extends, combines,
+    or provides guidance or explanation about the usage of other [data/application] specifications". Profile resources
+    may be human-readable documents (PDFs, textual documents), vocabularies, schemas or ontologies (XSD, RDF),
+    constraint language resources used by specific validation tools (SHACL, ShEx, Schematron), or any other files or
+    resources that support the profile. In this specification, each resource is defined as having a role that defines
+    its function within the profile.
 	</p>
   <p>
-    This vocabulary provides for descriptions of relationships between a <a>profile</a> and a <a>specification</a> or another <a>profile</a> upon which a profile is based. These descriptions are are both human- and machine-readable and use existing, standardized vocabularies as much as possible. The basis of these descriptions is a specialization of the <code><a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-Standard">dct:Standard</a></code> class which is defined here as a <code><a href="#Class:Profile">prof:Profile</a></code>. A <code>prof:Profile</code> is related to either a <code>dct:Standard</code> or another <code>prof:Profile</code> by being a <em>profile of</em> it, formally, <a href="#Property:isProfileOf"><code>prof:isProfileOf</code></a>. Resources that conform to either a <code>dct:Standard</code> or a <code>prof:Profile</code> are formally described as doing so with the use of the <code><a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-conformsTo">dct:conformsTo</a></code> predicate.
+    This vocabulary's ontological basis for specification/profile relations is a specialization of the
+    <code><a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-Standard">dct:Standard</a></code>
+    class which is defined here as a <code><a href="#Class:Profile">prof:Profile</a></code>. A <code>prof:Profile</code>
+    is related to either <code>dct:Standard</code> or <code>prof:Profile</code> instances by being a <em>profile of</em>
+    it, formally, <a href="#Property:isProfileOf"><code>prof:isProfileOf</code></a>. Resources that conform to either a
+    <code>dct:Standard</code> or a <code>prof:Profile</code> are formally described as doing so with the use of the
+    <code><a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-conformsTo">dct:conformsTo</a></code>
+    predicate.
 	</p>
   <p>
-    In recognition of the existence of specifications and profiles that are made up of multiple resources (perhaps PDF documents, machine-readable constraint language files, code lists etc.), this vocabulary also provides for the description of the parts that constitute a profile/specification. The vocabulary defines a <a href="#Class:ResourceDescriptor"><code>prof:ResourceDescriptor</code></a> class which is used to qualify the relationship between a profile and its part resources. The <code>prof:Profile</code> may have any number of <a href="#Property:hasResource"><code>prof:hasResource</code></a> predicates indicating a <code>prof:ResourceDescriptor</code> which then indicates the location (a URI) of the actual resource artifact with <a href="#Property:hasArtifact"><code>prof:hasArtifact</code></a>, describes the artifact's format &amp; any specifications it conforms to with <a href="#Property:format"><code>dct:format</code></a> &amp; <a href="#Property:conformsTo"><code>dct:conformsTo</code></a> respectively and describes the role that the resource plays with respect to the profile by indicating a <a href="#Class:ResourceRole"><code>prof:ResourceRole</code></a> class instance with the <a href="#Property:hasRole"><code>prof:hasRole</code></a> predicate.
+    In recognition of the existence of specifications and profiles that are made up of multiple resources &ndash;
+    perhaps PDF documents, machine-readable constraint language files, code lists etc. &ndash; this vocabulary also
+    provides for the description of the parts that constitute a profile or a specification. It defines a
+    <a href="#Class:ResourceDescriptor"><code>prof:ResourceDescriptor</code></a> class which is used to qualify the
+    relationship between a profile and its part resources. A <code>prof:Profile</code> may have any number of
+    <a href="#Property:hasResource"><code>prof:hasResource</code></a> predicates indicating <code>prof:ResourceDescriptor</code>
+    instances which then indicates the location (a URI) of the actual resource artifact with a
+    <a href="#Property:hasArtifact"><code>prof:hasArtifact</code></a> predicate and then may describes the artifact's
+    format &ampand any specifications it conforms to with <a href="#Property:format"><code>dct:format</code></a> &amp;
+    <a href="#Property:conformsTo"><code>dct:conformsTo</code></a> predicates respectively. The role that the resource
+    plays with respect to the profile may be indicating using a <a href="#Class:ResourceRole"><code>prof:ResourceRole</code></a>
+    class instance linked to it with the <a href="#Property:hasRole"><code>prof:hasRole</code></a> predicate.
   </p>
   <p>
-    A vocabulary of <code>prof:ResourceRole</code> instances is provided in <a href="#resource-roles-vocab">Section 8.</a>
+    A vocabulary of <code>prof:ResourceRole</code> instances is provided in <a href="#resource-roles-vocab"></a>.
   </p>
 </section>
 <section id="conformance">
