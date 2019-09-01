@@ -315,7 +315,7 @@
     <h3>Asset Description Metadata Schema (ADMS)</h3>
     <div class="issue" data-number="401"></div>
     <p>
-      ADMS is "a profile of DCAT, used to describe <em>semantic assets</em>" and, as such, follows DCAT's structures
+      ADMS [[VOCAB-ADMS]] is "a profile of DCAT, used to describe <em>semantic assets</em>" and, as such, follows DCAT's structures
       with many class alignments including <code>adms:Asset</code> &amp; <code>adms:AssetDistribution</code> classes
       which parallel DCAT's <code>dcat:Dataset</code> &amp; <code>dcat:Distribution</code> classes.
     </p>
@@ -330,6 +330,35 @@
     <p>
       As with DCAT, PROF can and should be used with ADMS however no normative alignment between them is presented here
       but an informative alignment is given in <a href="#alignment-adms"></a>.
+    </p>
+  </section>
+  <section id="related-prov">
+    <h3>PROV-O: The PROV Ontology</h3>
+    <p>
+      PROV-O [[PROV-O]] is an ontology that "provides a set of classes, properties, and restrictions that can be used
+      to represent and interchange provenance information". Further: "It can also be specialized to create new classes
+      and properties to model provenance information for different applications and domains.".
+    </p>
+    <p>
+      PROV-O is concerned with <em>derivation</em> of things from other things (<code>prov:Entity</code>s from
+      <code>prov:Entity</code>s), <em>usage/generation</em> of things by events (<code>prov:Entity</code>s from
+      <code>prov:Activity</code>s), attribution of things to things with agency (<code>prov:Entity</code>s to
+      <code>prov:Agent</code>s) and the association of events with things with agency and these concerns are presented
+      as a series of "Starting Point classes and properties" with many "Expanded and qualified classes and properties"
+      that can be used to specialise their use.
+    </p>
+    <p>
+      PROV-O does not address notions of conformance &ndash; of data to specifications/profiles or specifications/
+      profiles to other specifications/profiles &ndash; however the DXWG debated whether <code>prof:isProfileOf</code>
+      could be considered a sub-property of PROV-O's <code>prov:wasDerivedFrom</code> (see discussion within
+      <a href="https://github.com/w3c/dxwg/issues/485">DXWG's Issue 485</a>). The outcome of that discussion was that
+      DXWG felt that since <code>prov:wasDerivedFrom</code> doesn’t say anything about dependency but that
+      <code>prof:isProfileOf</code> does, it would be of no value to make an <code>rdfs:subPropertyOf</code> assertion
+      between the two properties. Moreover, <code>prof:isProfileOf</code>'s dependency assertion is seen as conceptual
+      rather than axiomatic so it would be difficult to define an axiom that could be true in a wide variety of cases.
+    </p>
+    <p>
+      An informative alignment between PROV-O &amp; PROF is given in <a href="#alignment-prov"></a>.
     </p>
   </section>
   <div class="issue" data-number="402"></div>
