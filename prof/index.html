@@ -282,6 +282,46 @@
 </section>
 <section id="relatedwork" class="informative">
   <h2>Related Work</h2>
+  <p>
+    Here several RDF vocabularies related to PROF are described as well as non-RDF initiatives and models.
+  </p>
+  <section id="related-owl">
+    <h3>Web Ontology Language (OWL)</h3>
+    <p>
+      OWL [[OWL2-OVERVIEW]] is an RDF-based ontology language that provides for the description of classes, properties,
+      individuals, and data values which are stored as Semantic Web documents. PROF uses many OWL properties, classes
+      and structures and is easily recognizable as a specialized OWL ontology.
+    </p>
+    <p>
+      Regarding profiling, none of the various OWL (or the updated OWL2) specifications directly address profiling, as
+      it's understood here, however OWL does include "ontology properties" that "can be used to associate information
+      with an ontology" [[owl2-rdf-based-semantics]] (<a href="https://www.w3.org/TR/owl2-syntax/#Ontology_Annotations">&#167; 3.5 Ontology Annotations</a>).
+      In particular, the ontology and annotation property <code>owl:imports</code> allows an ontology to indicate that
+      it <em>imports</em> other ontology[ies] "in order to gain access to their entities, expressions, and axioms,
+      thus providing the basic facility for ontology modularization" (<a href="https://www.w3.org/TR/owl2-syntax/#Imports">&#167; 3.4 Imports</a>).
+    </p>
+    <p>
+      <code>owl:imports</code> is included in OWL to facilitate the closure of ontology semantics within systems used to
+      manipulate ontology data and is a technical convenience mechanism. It does not make any strong ontological claim
+      about the relationship of the two ontologies joined by it nor does it make any conceptual claim about the
+      importing ontology's specific use of the imported ontology, only that some use/reuse is implied. It is not possbile,
+      with <code>owl:imports</code>, or any other OWL ontology property, to know that data conforming to an ontology
+      also conforms to another ontology.
+    </p>
+    <p>
+      It <em>is</em> possible to know, on a per-class or property basis, that data elements conform to particular
+      ontologies through inspection of those elements. Ontologies that use OWL (and RDF [[RDF11-CONCEPTS]] &amp; RDF
+      Schema [[RDF-SCHEMA]]) declare classes and properties as being of a particular defined class by using
+      <code>rdf:type</code> &ndash; <code>:myNewClassInstance rdf:type ex:SomeExistingClass</code> &ndash; which claims
+      conformance to the indicated class or property. Newly declared classes and properties may also claim conformance
+       to existing classes or properties by using <code>rdfs:subClassOf</code> or <code>rdfs:subPropertyOf</code>
+      respectively.
+    </p>
+    <p>
+      These data or ontology element conformances do not indicate conformance or whole profiles to other specifications
+      or profiles or of instance data to specifications or profiles.
+    </p>
+  </section>
   <section id="related-dcat">
     <h3>Data Catalog Vocabulary (DCAT)</h3>
     <p>
@@ -313,7 +353,6 @@
   </section>
   <section id="related-adms">
     <h3>Asset Description Metadata Schema (ADMS)</h3>
-    <div class="issue" data-number="401"></div>
     <p>
       ADMS [[VOCAB-ADMS]] is "a profile of DCAT, used to describe <em>semantic assets</em>" and, as such, follows DCAT's structures
       with many class alignments including <code>adms:Asset</code> &amp; <code>adms:AssetDistribution</code> classes
@@ -361,8 +400,38 @@
       An informative alignment between PROV-O &amp; PROF is given in <a href="#alignment-prov"></a>.
     </p>
   </section>
-  <div class="issue" data-number="402"></div>
-  <div class="issue" data-number="403"></div>
+  <section id="related-void">
+    <h3>The VoID Vocabulary</h3>
+    <p>
+      "VoID is an RDF Schema vocabulary for expressing metadata about RDF datasets." [[VOID]]. It provides for the
+      describing of partitioned datasets and links between datasets. It is able to do this since, unlike DCAT (and ADMS),
+      it caters for datasets only, not datasets in general, and thus is able to know about dataset's structure (as RDF
+      triples) and therefore how to describe parts within datasets.
+    </p>
+    <p>
+      VoID also allows for indications of how one RDF dataset <em>uses</em> uses one or more RDFS vocabularies or OWL
+      ontologies. For example, a dataset may indicate the most important, not necessarily all, of the vocabularies it
+      uses with the <code>void:vocabulary</code> predicate with the used vocabulary's namespaces URI as the object value.
+      This is similar to OWL's [[OWL2-PRIMER]] <code>owl:imports</code> in that this is an annotation property and does
+      not make any strong axiomatic claim.
+    </p>
+    <p>
+      VoID does not address <em>dependence</em> or <em>conformance</em> of resource on or two other resources.
+    </p>
+  </section>
+  <section id="related-voaf">
+    <h3>Vocabulary of a Friend (OWL)</h3>
+  </section>
+  <section id="related-modspec">
+    <h3>OGC's ModSpec</h3>
+    <div class="issue" data-number="403"></div>
+  </section>
+  <section id="related-constraintlanguages">
+    <h3>Constraint Languages</h3>
+    <p>
+      Constraint languages such as [[SHACL]], [[SHEX]], [[SCHEMATRON]] and the [[DCDSP]]
+    </p>
+  </section>
 </section>
 <section id="conceptualmodel">
   <h2>Conceptual Model</h2>
