@@ -173,10 +173,14 @@
       <p>
         If a system wishes to show conformance to this specification, conformance to at least one of the profiles listed in <a href="#fig-table-profiles"></a> MUST be indicated.
       </p>
-      <div class="note">
-        This section's identifications of <a>profiles</a> of this <a>specification</a> exemplifies <em>functional</em> profiles which profile a functional specification, rather than a
-        data profile which profiles a data specification. This specification describes how a system should behave and this section indicates different profiles of that behaviour, rather
-        than content (data).
+      <div class="note" title="Different forms of specification and profile">
+        The <a>profiles</a> identified and described in this section are of a <em>functional</em> <a>specification</a>
+        since Content Negotiation by Profile describes how systems should behave and it follows that these profiles
+        are <em>functional</em> profiles. This specification offers test suites (see <a href="#testsuites"></a>) for
+        assessing the conformance of systems to this functional specification and these functional profiles but does not
+        address the conformance of resources to the data specifications and data profiles that Content Negotiation by
+        Profile supplies methods to negotiate about. Such testing is left to the implementers of those data
+        specifications and data profiles that resources are indicated to conform to.
       </div>
     </section>
   </section>
@@ -199,14 +203,16 @@
         </p>
         <p><em>Source: deliberations of the DXWG.</em></p>
       </dd>
-      <dt><dfn data-lt="profile">data profile</dfn></dt>
+      <dt><dfn data-lt="profile">profile</dfn></dt>
       <dd>
         <p>
-          A <a>data specification</a> that constrains, extends, combines, or provides guidance or explanation about the usage of other data specifications.
+          A <a>specification</a> that constrains, extends, combines, or provides guidance or explanation about the usage of other specifications.
         </p>
         <p>
           This definition includes what are sometimes called "application profiles", "metadata application
-          profiles", or "metadata profiles". In this document, these, and "data profiles", are all referred to as just "profiles".
+          profiles", "data profiles" (when applied to <a>data specifications</a>) or "metadata profiles".
+          In this document, these are all referred to as just "profiles" and no distinction, in wording, is made
+          between profiles of different types of specification: data, functional etc.
         </p>
         <p><em>Source: deliberations of the DXWG.</em></p>
       </dd>
@@ -272,8 +278,8 @@
     <h2>Related Work</h2>
     <p>
       The standardization of the content-negotiation HTTP headers is the purview of the IETF. A first proposal
-      for an <a href="https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema">Internet Draft
-      for Negotiating Profiles in HTTP</a> [[PROF-IETF]] is available but has not yet been submitted to the IETF. The
+      for an <a href="https://profilenegotiation.github.io/I-D-Profile-Negotiation/I-D-Profile-Negotiation">Internet Draft
+      for Indicating and Negotiating Profiles in HTTP</a> [[PROF-IETF]] is available but has not yet been submitted to the IETF. The
       current version of the IETF draft (-00) is expected to be completely re-written in parallel work with this document and should
       not be seen as anything but work-in-progress.
     </p>
@@ -996,15 +1002,14 @@ Content-Profile: &lt;urn:example:profile:x>
           fixed keyword "QSA Functional Profile" and the second is the "QSA Alternate Keywords Functional Profile" according to which
           servers may implement any keywords they choose. These various functional profiles are
           all identified in <a href="#conformance-profiles"></a>.
-          <!-- #text commented out pending Appendix profile description work#
-          Conformance of a server to any one or multiple of
-          these <a>profiles</a> of this <a>specification</a> may be demonstrated as per
-          <a href="#conformancetoprofiles"></a>. Note that it is not required that a server indicates conformance to one
-          or more profiles of this specification since not all servers will have the ability to either produce information
-          as per <a href="#conformancetoprofiles"></a> and may be described in that way elsewhere (e.g. a
-          services catalogue).
-          -->
         </p>
+        <div class="note">
+          Conformance of a system to any one, or perhaps multiple, of these profiles may be demonstrated as per
+          <a href="#conformancetoprofiles"></a>. Note that it is not required that a system, perhaps a server, indicate
+          conformance to one or more profiles of this specification since not all servers will have the ability to
+          either produce information as per <a href="#conformancetoprofiles"></a>. Systems may also show conformance to
+          the specification or profile in other ways, such as by a listing in a services catalogue. services catalogue).
+        </div>
         <section id="qsa-uri">
           <h5>QSA URI description</h5>
           <p>
