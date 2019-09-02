@@ -420,7 +420,57 @@
     </p>
   </section>
   <section id="related-voaf">
-    <h3>Vocabulary of a Friend (OWL)</h3>
+    <h3>Vocabulary of a Friend (VOAF)</h3>
+    <p>
+      [[VOAF]] provides elements allowing for the description of vocabularies (RDFS vocabularies or OWL ontologies) and,
+      in particular, "provides properties expressing the different ways such vocabularies can rely on, extend, specify,
+      annotate or otherwise link to each other.".
+    </p>
+    <p>
+      VOAF declares a <code>voaf:Vocabulary</code> class for identifying RDf vocabularies in order to associate its
+      properties with them and also makes references to datasets that use vocabulary data. It uses VoID's <code>void:Dataset</code>
+      class to identify datasets and <code>voaf:Vocabulary</code> is declared as being a sub class of it.
+    </p>
+    <p>
+      VOAF includes a series of predicates to indicate specific relationships between vocabularies and those related to
+      profiling-like activities are given in the table below.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Property</th><th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>voaf:reliesOn</code></td><td>Indicates that the subject vocabulary uses or extends some class or property of the object vocabulary</td>
+        </tr>
+        <tr>
+          <td><code>voaf:usedBy</code></td><td>Indicates that the subject vocabulary is used by the object vocabulary</td>
+        </tr>
+        <tr>
+          <td><code>voaf:extends</code></td><td>Indicates that the subject vocabulary extends the expressivity of the object vocabulary by declaring subsumption relationships, using object vocabulary class as domain or range of a subject vocabulary property, defining local restrictions etc</td>
+        </tr>
+        <tr>
+          <td><code>voaf:specializes</code></td><td>Indicates that the subject vocabulary defines some subclasses or subproperties of the object vocabulary, or local restrictions on those</td>
+        </tr>
+        <tr>
+          <td><code>voaf:generalizes</code></td><td>Indicates that the subject vocabulary generalizes by some superclasses or superproperties the object vocabulary.</td>
+        </tr>
+        <tr>
+          <td><code>voaf:hasEquivalencesWith</code></td><td>Indicates that the subject vocabulary declares some equivalent classes or properties with the object vocabulary</td>
+        </tr>
+        <tr>
+          <td><code>voaf:hasDisjunctionsWith</code></td><td>Indicates that the subject vocabulary declares some disjunct classes with the object vocabulary.</td>
+        </tr>
+        <tr>
+          <td><code>voaf:similar</code></td><td>Used to assert that two vocabularies are similar in scope and objectives, independently of the fact that they otherwise refer to each other</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      VOAF/PROF differentiator here
+    </p>
   </section>
   <section id="related-modspec">
     <h3>OGC's ModSpec</h3>
@@ -1757,13 +1807,12 @@ _:4
   </section>
   <section id="alignment-voaf">
     <h3>Vocabulary of a Friend</h3>
-    <div class="issue" data-number="235"></div>
     <p>
       Vocabulary of a Friend (VOAF) is a vocabulary specification providing elements allowing the description of
-      vocabularies (RDFS vocabularies or OWL ontologies) [[VOAF]]. Due to VOAF being defined for use with RDF resources
-      only, PROF as an alignment with VOAF which is instance-specific: resources described by PROF's
+      vocabularies (RDFS vocabularies or OWL ontologies) [[VOAF]]. Due to VOAF being defined for use with RDF resources instances
+      only, PROF has an alignment with VOAF which is instance-specific: resources described by instances of PROF's
       <code>prof:ResourceDescriptor</code> class with the property <code>prof:resourceRole</code> linking to the
-      Resource Role <code>role:Vocabulary</code> or a specialized version of it may be a <code>voaf:Vocabulary</code>.
+      Resource Role <code>role:Vocabulary</code>, or a specialized version of it, may be a <code>voaf:Vocabulary</code>.
     </p>
     <figure id="fig-align-voaf">
       <img src="alignments/voaf.svg" alt="Alignment of PROF with VOAF" style="width:70%;" />
