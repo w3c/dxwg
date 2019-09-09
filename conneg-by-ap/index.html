@@ -1435,6 +1435,98 @@ Link:
     ]
 }
         </pre>
+        <section id="qsa-altp">
+          <h4>QSA Alternate Representations Data Model Implementation</h4>
+          <p>
+            Implementations of this specification according to the QSA Functional Profiles MUST communicate their
+            alternate representations information as per the Alternate Representations Data Model. They MAY do so using
+            HTTP <code>Link</code> headers, as per the HTTP Functional Profile, or they MAY use other approaches.
+          </p>
+          <p>
+            As noted in [[RFQ8288]] (<em>Web Linking</em>)'s introduction, HTML and some other data models have
+            "well-defined concepts of linking" so QSA implementers could implement communication of Alternate
+            Representations Data Model information via HTTP body content in HTML. This would assist human <a>client</a>
+            users of QSA implementations by being either visible in a web broswer or downloadable as a file.
+          </p>
+          <p>
+            An HTML expression of the <code>Link</code> header information in <a href="#eg-link-headers-altp"></a> is
+            given in <a href="#eg-html-altp"></a>.
+          </p>
+            <pre id="eg-html-altp"
+               class="example nohighlight" aria-busy="false" aria-live="polite"
+               title="HTML expression of previous example's Link header information">
+# Link headers from previous example with one altered to show Blank Node v.
+# absolute URIs for altp:Representation class instance
+# (&lt;http://example.org/resource/a&gt;; &rarr; &lt;http://example.org/resource/different&gt;;)
+Link:
+  &lt;http://example.org/resource/a&gt;;
+          rel="self";
+          type="text/turtle";
+          profile="urn:example:profile:x",
+  &lt;http://example.org/resource/a&gt;;
+          rel="alternate";
+          type="text/turtle";
+          profile="urn:example:profile:y",
+  &lt;http://example.org/resource/a&gt;;
+          rel="alternate";
+          type="application/xml";
+          profile="urn:example:profile:x",
+  &lt;http://example.org/resource/different&gt;;
+          rel="alternate";
+          type="application/xml";
+          profile="urn:example:profile:y",
+  &lt;http://example.org/resource/a&gt;;
+          rel="alternate";
+          type="text/html"
+
+# Link headers above represented HTML, assuming the Alternate Profile's rdfs:Resource
+# is known from the request that generated this response and not given in the HTML
+# content
+&lt;h3>Alternate Representations&lt;/h3>
+&lt;table>
+  &lt;thead>
+    &lt;tr>
+      &lt;th>Link to Representation&lt;/th>
+      &lt;th>Profile&lt;/th>
+      &lt;th>Media Type&lt;/th>
+      &lt;th>Is Default?&lt;/th>
+    &lt;/tr>
+  &lt;/thead>
+  &lt;tbody>
+    &lt;tr>
+      &lt;td>&lt;a href="?_profile=x">Profile X, RDF&lt;/a>&lt;/td>
+      &lt;td>&lt;code>urn:example:profile:x&lt;/code>&lt;/td>
+      &lt;td>&lt;a href="https://w3id.org/mediatype/text/turtle">RDF (turtle)&lt;/a>&lt;/td>
+      &lt;td>yes&lt;/td>
+    &lt;/tr>
+    &lt;tr>
+      &lt;td>&lt;a href="?_profile=y&_mediatype=text/turtle">Profile Y, RDF&lt;/a>&lt;/td>
+      &lt;td>&lt;code>urn:example:profile:y&lt;/code>&lt;/td>
+      &lt;td>&lt;a href="https://w3id.org/mediatype/text/turtle">RDF (turtle)&lt;/a>&lt;/td>
+      &lt;td>-&lt;/td>
+    &lt;/tr>
+    &lt;tr>
+      &lt;td>&lt;a href="?_profile=x&_mediatype=application/xml">Profile X, XML&lt;/a>&lt;/td>
+      &lt;td>&lt;code>urn:example:profile:x&lt;/code>&lt;/td>
+      &lt;td>&lt;a href="https://w3id.org/mediatype/application/xml">XML&lt;/a>&lt;/td>
+      &lt;td>-&lt;/td>
+    &lt;/tr>
+    &lt;tr>
+      &lt;td>&lt;a href="http://example.org/resource/different?_mediatype=application/xml">Profile Y, XML&lt;/a>&lt;/td>
+      &lt;td>&lt;code>urn:example:profile:y&lt;/code>&lt;/td>
+      &lt;td>&lt;a href="https://w3id.org/mediatype/application/xml">XML&lt;/a>&lt;/td>
+      &lt;td>-&lt;/td>
+    &lt;/tr>
+    &lt;tr>
+      &lt;td>&lt;a href="?_mediatype=text/html">No Profile, HTML&lt;/a>&lt;/td>
+      &lt;td>-&lt;/td>
+      &lt;td>&lt;a href="https://w3id.org/mediatype/text/html">HTML&lt;/a>&lt;/td>
+      &lt;td>-&lt;/td>
+    &lt;/tr>
+  &lt;/tbody>
+&lt;/table>
+          </pre>
+        </section>
       </section>
       <section id="qsa-getresourcebyprofile">
         <h4>get resource by profile</h4>
