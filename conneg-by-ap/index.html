@@ -67,12 +67,24 @@
       Arguments (<abbr title="Query String Arguments">QSAs</abbr>). QSAs are
       useful for humans and machines for situations where negotiation via HTTP is not practical, such
       as when manually entering requests into web browsers. This specification provides an abstract model
-      of content negotiation by profile and presents guidance on the use of two specific methods, HTTP &amp; QSA, that both conform to the abstract model meaning they are.
+      of content negotiation by profile and presents guidance on the use of two specific methods, HTTP &amp; QSA, that both conform to the abstract model.
     </p>
     <p>
-      While this specification only describes HTTP and QSA methods for content negotiation by profile, it is expected
-      that implementers will want to implement functionally equivalent methods for other environments, some of which may
-      not yet be realized; future environments. Implementers may add additional functions/features to their implementations for other environments as long as they ensure their implementation conforms to this specification's abstract model, as the HTTP and QSA methods do.
+      The HTTP and QSA methods are formally defined in a series of <em>Functional Profiles</em> of the Abstract Model.
+      While this specification only describes these Functional Profiles, it is expected
+      that implementers will want to implement methods for other environments, some of which may
+      not yet be realized; future environments.
+      To do so, implementers are encouraged to define additional Functional Profiles.
+      Implementers may add additional features to their implementations which they may define in their Functional Profiles
+      as long as they ensure they always conform to the Abstract Model.
+    </p>
+    <p>
+      In addition to taking as implementation examples the HTTP &amp; QSA Functional Profiles that this specification
+      defines, implementers are guided by the Alternate Representations Data Model which has concrete examples for
+      implementation in this specification's appendixes. Implementers will need to ensure that any Functional Profile
+      they define can represent alternate representations information as per this model. Such demonstration would be
+      best implemented by a published mapping between their environment's native alternate profiles model representation
+      and a concrete implementation of the model given here, such as the <a href="#altr-owl">OWL ontology representation</a>.
     </p>
     <p>
       While this specification only describes HTTP and QSA methods for content negotiation by profile, it is expected
@@ -459,8 +471,20 @@ Preference-Applied: profile="urn:example:schema"
       implementation it within specific environments.
     </p>
     <p>
-      Implementations of this abstract model for different environments are called <em>functional <a>profiles</a></em> and to be a valid functional profile they MUST implement these abstract model functions. How they do this will be
+      Implementations of this Abstract Model for different environments are called <em>Functional <a>Profiles</a></em> and to be a valid functional profile they MUST implement these abstract model functions. How they do this will be
       environment-specific.
+    </p>
+    <p>
+      Functional Profiles MAY extend upon this Abstract Model with additional features of their own as but these
+      additions MUST NOT invalidate the functions defined here.
+    </p>
+    <p>
+      A data model for describing the representations of a resource that conform to different profiles is given here
+      and this model MUST be used by all Functional Profiles. How the data model is realized is left to implementers to
+      determine. How conformance of implemented data models is demonstrated is not addressed here in detail and only this
+      guidance is given: implementers SHOULD demonstrate conformance of their Alternate Representations data model
+      implementations by providing a published mapping between their environment-specific realization of the model and
+      a concrete realization of the model given in this specification, such as its <a href="#altr-owl">OWL ontology representation</a>.
     </p>
     <section id="connegbackground">
       <h3>Content Negotiation Background</h3>
@@ -916,7 +940,8 @@ Content-Location: http://example.org/resource/a.prof1.ttl
 Content-Profile: &lt;urn:example:profile:x>
 Link:
   <strong>&lt;http://example.org/resource/a.prof1.ttl&gt;;</strong>
-          rel="self"; type="text/turtle";
+          rel="self";
+          type="text/turtle";
           profile="urn:example:profile:x",
   &lt;http://example.org/resource/a&gt;;
           rel="alternate";
@@ -938,25 +963,120 @@ Link:
 [In the Link header, Content-Location URIs are only used as context
 URIs for resources conforming to profile urn:example:profile:x]
         </pre>
-        <p>
-          The <code>Link</code> HTTP header used to communicate alternate profiles for a resource as per
-          <a href="#eg-link-headers"></a> conforms to the Alternate Profiles Data Model
-          (<a href="#altr"></a>) with the mapping given in <a href=""></a>
-        </p>
-        <figure id="fig-altr-link-header-mapping">
-          <table>
-            <tr>
-              <th>Link Header Element</th><th>Alternate Reresentations Data Model Element</th>
-            </tr>
-            <tr>
-              <td></td><td></td>
-            </tr>
-          </table>
-          <figcaption>
-            A mapping of the elements within an HTTP <code>Link</code> header communicating alternat representations
-            information to the elements within the Alternate Profiles Data Model.
-          </figcaption>
-        </figure>
+        <section id="http-altp">
+          <h4>HTTP Alternate Representations Data Model Implementation</h4>
+          <p>
+            An HTTP <code>Link</code> is (from [[RFC8288]]) "a typed connection between two resources and is comprised of":
+          </p>
+          <ul>
+            <li>A <em>link context</em>,</li>
+            <li>a <em>link target</em>,</li>
+            <li>a link <em>relation type</em>, and</li>
+            <li>optionally, <em>target attributes</em>.</li>
+          </ul>
+          <p>
+            The <em>link context</em> is the resource for which the Link header is being delivered. The <em>relation type</em>
+            is given with a <code>rel</code> attribute key name, the <em>link target</em> is a URI and other optional
+            <em>target attributes</em> may include <em>profile</em>, given with a <code>profile</code> attribute key name.
+          </p>
+          <p>
+            In <a href="#eg-link-headers-loc"></a>, the first portion of the Link header returned for the request for
+            the <em>link context</em> <code>resource/a</code> has these parts:
+          </p>
+          <ul>
+            <li><em>link target</em> - <code>&lt;http://example.org/resource/a.prof1.ttl&gt;</code></li>
+            <li><em>relation type</em> - <code>rel="self"</code></li>
+            <li><em>target attributes</em> - <code>type="text/turtle"</code> &amp; <code>profile="urn:example:profile:x"</code></li>
+          </ul>
+          <p>
+            Using these <code>Link</code> HTTP header parts, this HTTP Functional Profile is able to communicate
+            alternate profiles for a resource as per the <a href="#altr">Alternate Profiles Data Model</a> with the
+            mapping given in <a href="#fig-altr-link-header-mapping"></a> below.
+          </p>
+          <figure id="fig-altr-link-header-mapping">
+            <table>
+              <tr>
+                <th>Alternate Representations Data Model Element</th><th>Link Header Element</th>
+              </tr>
+              <tr>
+                <td><code>rdf:Resource</code></td><td>the <em>link context</em> URI indicates an instance</td>
+              </tr>
+              <tr>
+                <td><code>altp:Representation</code></td><td>the <em>link target</em> URI indicates an instance</td>
+              </tr>
+              <tr>
+                <td><code>prof:Profile</code></td><td>a <em>target attribute</em> of <code>profile</code> may indicates the URI of an instance</td>
+              </tr>
+              <tr>
+                <td><code>dct:conformsTo</code></td><td>understood to link the <em>link target</em> to the <em>target attribute</em> of <code>profile</code></td>
+              </tr>
+              <tr>
+                <td><code>altp:hasRepresentation</code></td><td>understood to link <em>link context</em> to the <em>link target</em> where a <em>relation type</em> <code>alternate</code> is given</td>
+              </tr>
+              <tr>
+                <td><code>altp:hasDefaultRepresentation</code></td><td>understood to link <em>link context</em> to the <em>link target</em> where a <em>relation type</em> <code>self</code> is given</td>
+              </tr>
+            </table>
+            <figcaption>
+              A mapping of the elements within an HTTP <code>Link</code> header communicating alternate representations'
+              information to the elements within the <a href="#altr">Alternate Profiles Data Model</a> as identified in
+              its <a href="#altr-owl">OWL ontology</a> representation.
+            </figcaption>
+          </figure>
+          <p>
+          </p>
+          <pre id="eg-link-headers-altp"
+               class="example nohighlight" aria-busy="false" aria-live="polite"
+               title="HTTP Link header mapping to Alternate Profiles Data Model">
+# Link headers from previous example with one altered to show Blank Node v.
+# absolute URIs for altp:Representation class instance
+# (&lt;http://example.org/resource/a&gt;; &rarr; &lt;http://example.org/resource/different&gt;;)
+Link:
+  &lt;http://example.org/resource/a&gt;;
+          rel="self";
+          type="text/turtle";
+          profile="urn:example:profile:x",
+  &lt;http://example.org/resource/a&gt;;
+          rel="alternate";
+          type="text/turtle";
+          profile="urn:example:profile:y",
+  &lt;http://example.org/resource/a&gt;;
+          rel="alternate";
+          type="application/xml";
+          profile="urn:example:profile:x",
+  &lt;http://example.org/resource/different&gt;;
+          rel="alternate";
+          type="application/xml";
+          profile="urn:example:profile:y",
+  &lt;http://example.org/resource/a&gt;;
+          rel="alternate";
+          type="text/html"
+
+# Link headers above represented in Alternate Profiles Data Model
+# as an OWL ontology
+&lt;http://example.org/resource/a&gt;
+    altp:hasDefaultRepresentation [
+        dct:format "text/turtle" ;
+        dct:conformsTo &lt;urn:example:profile:x> ;
+    ] ,
+    altp:hasRepresentation [
+        dct:format "text/turtle" ;
+        dct:conformsTo &lt;urn:example:profile:y> ;
+    ] ,
+    [
+        dct:format "application/xml" ;
+        dct:conformsTo &lt;urn:example:profile:x> ;
+    ] ,
+    &lt;http://example.org/resource/different&gt; ,
+    [
+        dct:format "text/html" ;
+    ] .
+
+&lt;http://example.org/resource/different&gt;
+    dct:format "application/xml" ;
+    dct:conformsTo &lt;urn:example:profile:y> .
+        </pre>
+        </section>
         <section id="listprofiles-tokens">
           <h3>Token mappings</h3>
           <p>
@@ -1677,7 +1797,7 @@ Link:
            title="Description of this specification and its profiles according to PROF">
 <div class="codelisting-title">
 <a href="#profiles-in-prof">CODE LISTING 1</a>: Description of this specification and its profiles, as listed in <a href="#conformance-profiles"></a>
-using the Profiles Vocabulary [[PROF]]
+using the Profiles Vocabulary.
 </div>
 @prefix dct: &lt;http://purl.org/dc/terms/> .
 @prefix prof: &lt;http://www.w3.org/ns/dx/prof/> .
@@ -1764,8 +1884,13 @@ cnpr:rrd a prof:Profile ;
           the URI <code>http://www.w3.org/ns/dx/conneg/profile/qsa-alt</code>, as it is identified in
           <a href="#conformance-profiles"></a>.
         </p>
-        <pre id="service-conforming" class="nohighlight" aria-busy="false" aria-live="polite"
-             style="border:solid 1px black; padding:5px;">
+        <pre id="service-conforming"
+             class="codelisting nohighlight" aria-busy="false" aria-live="polite"
+             title="An example Web Service claiming conformance to the QSA Alternate Keywords Functional Profile of this specification">
+<div class="codelisting-title">
+<a href="#service-conforming">CODE LISTING 2</a>: An example Web Service claiming conformance to the QSA Alternate Keywords
+Functional Profile of this specification
+</div>
 &lt;http://example.com/service/xx>
     a dcat:DataService ;
     dct:title "Web Service XX" ;
@@ -1786,11 +1911,6 @@ cnpr:rrd a prof:Profile ;
     # Swagger UI system
     dcat:endpointDescription &lt;http://example.com/service/v2/xx/swagger> ;
         </pre>
-        <div class="listing-caption"
-             style="font-style:italic; margin-left:10px; margin-right:10px;">
-          Code Listing 2 An example Web Service claiming conformance to the QSA Alternate Keywords Functional Profile
-          of this specification
-        </div>
       </section>
     </section>
     <section id="altr-detail">
@@ -1805,14 +1925,14 @@ cnpr:rrd a prof:Profile ;
         <div class="issue" data-number="1041"></div>
         <p>
           A Web Ontology Language [[OWL2-OVERVIEW]] implementation of the data model in <a href="#altr"></a> is given
-          below in <a href="#altr-owl">Code Listing 1</a>. It is also available in the file
+          below in <a href="#altr-owl">Code Listing 3</a>. It is also available in the file
           <a href="altr.ttl">altr.ttl</a>.
         </p>
         <pre id="altr-owl"
              class="codelisting nohighlight" aria-busy="false" aria-live="polite"
              title="Alternate Profiles Data Model as an OWL ontology">
 <div class="codelisting-title">
-<a href="#altr-owl">CODE LISTING 1</a>: Alternate Profiles Data Model as an OWL ontology
+<a href="#altr-owl">CODE LISTING 3</a>: Alternate Profiles Data Model as an OWL ontology
 </div>
 @prefix altr: &lt;http://www.w3.org/ns/dx/conneg/altr#> .
 @prefix dct: &lt;http://purl.org/dc/terms/> .
@@ -1920,17 +2040,17 @@ dct:Standard
         <p>
           The <a href="#altr">Alternate Profiles Data Model</a> may be extended to include additional information of use in
           content negotiation by profile situations. One obviously useful extension is the inclusion of information about
-          other dimensions of content negotiation, particularly Media Type. <a href="#altr-ontology-ext-1">Code Listing 2</a>
+          other dimensions of content negotiation, particularly Media Type. <a href="#altr-ontology-ext-1">Code Listing 3</a>
           includes RDF definitions of Dublin Core Term's [[DCTERMS]] <code>dct:format</code> property and
           <code>dct:MediaType</code> class for Media Type indications that could be added to the Data Model, as
-          represented in OWL in <a href="#altr-owl">Code Listing 1</a>. <a href="#eg-altr-ext"></a> gives an example of this
+          represented in OWL in <a href="#altr-owl">Code Listing 4</a>. <a href="#eg-altr-ext"></a> gives an example of this
           extended model's use following on from the content in <a href="#eg-altr"></a>.
         </p>
         <pre id="altr-ontology-ext-1"
              class="codelisting nohighlight" aria-busy="false" aria-live="polite"
              title="Alternate Profiles Data Model as an OWL ontology">
 <div class="codelisting-title">
-<a href="#altr-ontology-ext-1">CODE LISTING 2</a>: Suggested extension to this specification's Alternate Profiles Data Model in OWL to
+<a href="#altr-ontology-ext-1">CODE LISTING 4</a>: Suggested extension to this specification's Alternate Profiles Data Model in OWL to
 cater for Media Type representations
 </div>
 @prefix ex: &lt;http://example.org/altr-ext#> .
