@@ -71,20 +71,13 @@
     </p>
     <p>
       The HTTP and QSA methods are formally defined in a series of <em>Functional Profiles</em> of the Abstract Model.
-      While this specification only describes these Functional Profiles, it is expected
-      that implementers will want to implement methods for other environments, some of which may
-      not yet be realized; future environments.
-      To do so, implementers are encouraged to define additional Functional Profiles.
-      Implementers may add additional features to their implementations which they may define in their Functional Profiles
-      as long as they ensure they always conform to the Abstract Model.
+      While this specification only describes these two Functional Profiles, it is expected
+      that implementers will want to implement methods, and thus Functional Profiles of the Abstract Model, for other environments, some of which may
+      not yet be realized &ndash; future environments.
     </p>
     <p>
-      In addition to taking as implementation examples the HTTP &amp; QSA Functional Profiles that this specification
-      defines, implementers are guided by the Alternate Representations Data Model which has concrete examples for
-      implementation in this specification's appendixes. Implementers will need to ensure that any Functional Profile
-      they define can represent alternate representations information as per this model. Such demonstration would be
-      best implemented by a published mapping between their environment's native alternate profiles model representation
-      and a concrete implementation of the model given here, such as the <a href="#altr-owl">OWL ontology representation</a>.
+      Implementers will need to ensure that any Functional Profile
+      they define implements the Abstract Model's functions and can represent alternate representation information as per the Alternate Representations Data Model.
     </p>
     <p>
       While this specification only describes HTTP and QSA methods for content negotiation by profile, it is expected
@@ -471,7 +464,7 @@ Preference-Applied: profile="urn:example:schema"
       implementation it within specific environments.
     </p>
     <p>
-      Implementations of this Abstract Model for different environments are called <em>Functional <a>Profiles</a></em> and to be a valid functional profile they MUST implement these abstract model functions. How they do this will be
+      Implementations of this Abstract Model for different environments are called <em>Functional <a>Profiles</a></em> and to be a valid functional profile they MUST implement these Abstract Model functions. How they do this will be
       environment-specific.
     </p>
     <p>
@@ -507,7 +500,7 @@ Preference-Applied: profile="urn:example:schema"
       </p>
       -->
       <p>
-        In this abstract model, we don't assume any specific details about <a>client</a>, <a>server</a>,
+        In this Abstract Model, we don't assume any specific details about <a>client</a>, <a>server</a>,
         <a>resource</a>, <em>metadata</em>, <a>request</a> or <a>response</a> other than those details already
         provided in those terms' definitions in <a href="#definitions"></a>.
       </p>
@@ -807,7 +800,7 @@ Content-Profile: http://example.org/profile/x, \
   <section id="functional-profiles">
     <h2>Functional Profiles</h2>
     <p>
-      This section describes <a>profiles</a> of this <a>specification</a>'s abstract model which are implementations of it
+      This section describes <a>profiles</a> of this <a>specification</a>'s Abstract Model which are implementations of it
       in different environments; they are profiles and may be referred to as "functional profiles". These profiles are
       formally identified in <a href="#conformance-profiles"></a> and are to be used as conformance targets for specific
       implementations of systems within different environments wishing to conform to this specification.
@@ -999,22 +992,22 @@ URIs for resources conforming to profile urn:example:profile:x]
                 <th>Alternate Representations Data Model Element</th><th>Link Header Element</th>
               </tr>
               <tr>
-                <td><code>rdf:Resource</code></td><td>the <em>link context</em> URI indicates an instance</td>
+                <td><code>rdf:Resource</code></td><td>the <em>link context</em> URI indicates an instance of rdf:Resource</td>
               </tr>
               <tr>
-                <td><code>altp:Representation</code></td><td>the <em>link target</em> URI indicates an instance</td>
+                <td><code>altp:Representation</code></td><td>the <em>link target</em> URI indicates an instance altp:Representation</td>
               </tr>
               <tr>
-                <td><code>prof:Profile</code></td><td>a <em>target attribute</em> of <code>profile</code> may indicates the URI of an instance</td>
+                <td><code>prof:Profile</code></td><td>a <em>target attribute</em> of <code>profile</code> indicates the URI of an instance of prof:Profile, if present</td>
               </tr>
               <tr>
-                <td><code>dct:conformsTo</code></td><td>understood to link the <em>link target</em> to the <em>target attribute</em> of <code>profile</code></td>
+                <td><code>dct:conformsTo</code></td><td>the implicit relation between the <em>link target</em> URI and the <em>target attribute</em> <code>profile</code> URI</td>
               </tr>
               <tr>
-                <td><code>altp:hasRepresentation</code></td><td>understood to link <em>link context</em> to the <em>link target</em> where a <em>relation type</em> <code>alternate</code> is given</td>
+                <td><code>altp:hasRepresentation</code></td><td>the implicit relation between the <em>link context</em> URI and the <em>link target</em> URI where a <em>relation type</em> of <code>alternate</code> is given</td>
               </tr>
               <tr>
-                <td><code>altp:hasDefaultRepresentation</code></td><td>understood to link <em>link context</em> to the <em>link target</em> where a <em>relation type</em> <code>self</code> is given</td>
+                <td><code>altp:hasDefaultRepresentation</code></td><td>the implicit relation between the <em>link context</em> URI and the <em>link target</em> URI where a <em>relation type</em> of <code>self</code> is given</td>
               </tr>
             </table>
             <figcaption>
@@ -1443,7 +1436,7 @@ Link:
             HTTP <code>Link</code> headers, as per the HTTP Functional Profile, or they MAY use other approaches.
           </p>
           <p>
-            As noted in [[RFQ8288]] (<em>Web Linking</em>)'s introduction, HTML and some other data models have
+            As noted in [[RFC8288]] (<em>Web Linking</em>)'s introduction, HTML and some other data models have
             "well-defined concepts of linking" so QSA implementers could implement communication of Alternate
             Representations Data Model information via HTTP body content in HTML. This would assist human <a>client</a>
             users of QSA implementations by being either visible in a web broswer or downloadable as a file.
