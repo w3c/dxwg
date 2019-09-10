@@ -3035,7 +3035,7 @@ end class DiscoveryService -->
 <aside id="ex-identifier" class="example">
 <pre class="nohighlight turtle">
 &lt;https://example.org/id&gt; a dcat:Dataset;
-  dct:identifier "https://example.org/id"^^xsd:anyURI ,
+  dct:identifier "https://example.org/id"^^xsd:anyURI ;
   .</pre>
 </aside>
 
@@ -3044,7 +3044,7 @@ end class DiscoveryService -->
 <aside id="ex-proxy-id" class="example">
 <pre class="nohighlight turtle">
 &lt;https://example.org/proxyid&gt; a dcat:Dataset;
-  dct:identifier "id"^^xsd:string ,
+  dct:identifier "id"^^xsd:string ;
   .</pre>
 </aside>
 
@@ -3054,12 +3054,12 @@ end class DiscoveryService -->
 
 <aside id="ex-adms-identifier" class="example">
 <pre class="nohighlight turtle">
-&lt;https://example.org/id&gt; a dcat:Dataset;
+&lt;https://dcat.example.org/id&gt; a dcat:Dataset;
   adms:identifier  &lt;https://example.org/iddoi&gt; ;
   dct:publisher &lt;https://example.org/PoelenJorritH&gt; ;
   .
 
-&lt;https://example.org/iddoi&gt; a adms:Identifier ;
+&lt;https://dcat.example.org/iddoi&gt; a adms:Identifier ;
   # reading https://www.w3.org/TR/skos-reference/#notations more than one skos:notation can be set
   skos:notation "https://doi.org/10.5281/zenodo.1486279"^^xsd:anyURI;
   # the authority/agency defining the identifier scheme, used if the agency has no URI
@@ -3073,12 +3073,12 @@ ex:InternationalDOIFundation a foaf:Organization ;
   foaf:homepage &lt;https://www.doi.org/&gt; ;
   .
 
-&lt;https://example.org/PoelenJorritH&gt; a foaf:Person;
+&lt;https://dcat.example.org/PoelenJorritH&gt; a foaf:Person;
   foaf:name "Jorrit H. Poelen" ;
   adms:identifier &lt;https://example.org/PoelenJorritHID&gt; ;
   .
 
-&lt;https://example.org/PoelenJorritHID&gt; a adms:Identifier;
+&lt;https://dcat.example.org/PoelenJorritHID&gt; a adms:Identifier;
   skos:notation "https://orcid.org/0000-0003-3138-4118"^^xsd:anyURI ;
   # the authority/agency defining the identifier scheme, used if the agency has no URI
   adms:schemaAgency "ORCID" ;
@@ -3090,9 +3090,9 @@ ex:InternationalDOIFundation a foaf:Organization ;
 
 <aside id="ex-owl-sameas" class="example">
 <pre class="nohighlight turtle">
-&lt;https://example.org/id&gt; a dcat:Dataset;
+&lt;https://dcat.example.org/id3&gt; a dcat:Dataset;
   ...
-  owl:sameAs &lt;https://doi.org/10.5281/zenodo.1486279&gt; ,
+  owl:sameAs &lt;https://doi.org/10.5281/zenodo.1486279&gt; ;
   .</pre>
 </aside>
 
@@ -3113,11 +3113,11 @@ ex:InternationalDOIFundation a foaf:Organization ;
 
 <aside id="ex-identifier-type" class="example">
 <pre class="nohighlight turtle">
-&lt;https://example.org/id&gt; a dcat:Dataset;
+&lt;https://dcat.example.org/id4&gt; a dcat:Dataset;
   ...
   adms:identifier &lt;https://example.org/sid&gt; .
 
-&lt;https://example.org/sid&gt; rdf:type adms:Identifier ;
+&lt;https://dcat.example.org/sid5&gt; rdf:type adms:Identifier ;
   # the actual id
   skos:notation "PA 1-060-815"^^ex:type ;
   # Human readable schema agency
@@ -3130,7 +3130,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
 
 <aside id="ex-identifier-type-in-uri" class="example">
 <pre class="nohighlight turtle">
-&lt;https://example.org/sid&gt; rdf:type adms:Identifier ;
+&lt;https://dcat.example.org/sid6&gt; rdf:type adms:Identifier ;
   # the actual id
   skos:notation "info:doi/10.1109/5.771073"^^xsd:anyURI .</pre>
 </aside>
@@ -3292,10 +3292,10 @@ ex:InternationalDOIFundation a foaf:Organization ;
 
 <aside class="example" id="ex-temporal-coverage-closed-interval" title="Temporal coverage as closed interval">
 <pre class="nohighlight turtle">
-&lt;&gt; a dcat:Dataset ;
+&lt;ds257&gt; a dcat:Dataset ;
   dct:temporal [ a dct:PeriodOfTime ;
     dcat:startDate "2016-03-04"^^xsd:date ;
-    dcat:endDate   "2018-08-05"^^xsd:date .
+    dcat:endDate   "2018-08-05"^^xsd:date ;
   ] .
 </pre>
 </aside>
@@ -3303,13 +3303,13 @@ ex:InternationalDOIFundation a foaf:Organization ;
 <aside class="example" id="ex-temporal-coverage-closed-proper-interval" title="Temporal coverage as closed interval, using time:ProperInterval">
 <p>The following dataset specification is equivalent to the one in <a href="#ex-temporal-coverage-closed-interval"></a>, but it uses [[OWL-TIME]]:</p>
 <pre class="nohighlight turtle">
-&lt;&gt; a dcat:Dataset ;
+&lt;ds348&gt; a dcat:Dataset ;
   dct:temporal [ a dct:PeriodOfTime , time:ProperInterval ;
     time:hasBeginning [ a time:Instant ;
-      time:inXSDDate "2016-03-04"^^xsd:date .
+      time:inXSDDate "2016-03-04"^^xsd:date ;
     ] ;
     time:hasEnd [ a time:Instant ;
-      time:inXSDDate "2018-08-05"^^xsd:date .
+      time:inXSDDate "2018-08-05"^^xsd:date ;
     ] ;
   ] .
 </pre>
@@ -3317,13 +3317,13 @@ ex:InternationalDOIFundation a foaf:Organization ;
 
 <aside class="example" id="ex-temporal-coverage-closed-proper-interval-gyear" title="Temporal coverage as proper interval using gYear">
 <pre class="nohighlight turtle">
-&lt;&gt; a dcat:Dataset ;
+&lt;ds429&gt; a dcat:Dataset ;
   dct:temporal [ a dct:PeriodOfTime , time:ProperInterval ;
     time:hasBeginning [ a time:Instant ;
-      time:inXSDgYear "1914"^^xsd:gYear .
+      time:inXSDgYear "1914"^^xsd:gYear ;
     ] ;
     time:hasEnd [ a time:Instant ;
-      time:inXSDgYear "1939"^^xsd:gYear .
+      time:inXSDgYear "1939"^^xsd:gYear ;
     ] ;
   ] .
 </pre>
@@ -3331,19 +3331,19 @@ ex:InternationalDOIFundation a foaf:Organization ;
 
 <aside class="example" id="ex-temporal-coverage-geologic" title="Temporal coverage for a geologic dataset">
 <pre class="nohighlight turtle">
-&lt;&gt; a dcat:Dataset ;
+&lt;ds850&gt; a dcat:Dataset ;
   dct:temporal [ a dct:PeriodOfTime , time:ProperInterval ;
     time:hasBeginning [ a time:Instant ;
       time:inTimePosition [ a time:TimePosition ;
         time:hasTRS &lt;http://resource.geosciml.org/classifier/cgi/geologicage/ma&gt; ;
         time:numericPosition "541.0"^^xsd:decimal ;
-      ] .
+      ] ;
     ] ;
     time:hasEnd [ a time:Instant ;
       time:inTimePosition [ a time:TimePosition ;
         time:hasTRS &lt;http://resource.geosciml.org/classifier/cgi/geologicage/ma&gt; ;
         time:numericPosition "251.902"^^xsd:decimal ;
-    ] .
+      ] ;
     ] ;
   ] .
 </pre>
@@ -3351,18 +3351,18 @@ ex:InternationalDOIFundation a foaf:Organization ;
 
 <aside class="example" id="ex-temporal-coverage-open-end-interval" title="Temporal coverage as open interval (no end date)">
 <pre class="nohighlight turtle">
-&lt;&gt; a dcat:Dataset ;
+&lt;ds127&gt; a dcat:Dataset ;
   dct:temporal [ a dct:PeriodOfTime ;
-    dcat:startDate "2016-03-04"^^xsd:date .
+    dcat:startDate "2016-03-04"^^xsd:date ;
   ] .
 </pre>
 </aside>
 
 <aside class="example" id="ex-temporal-coverage-open-begin-interval" title="Temporal coverage as open interval (no beginning)">
 <pre class="nohighlight turtle">
-&lt;&gt; a dcat:Dataset ;
+&lt;ds586&gt; a dcat:Dataset ;
   dct:temporal [ a dct:PeriodOfTime , time:ProperInterval ;
-    time:hasEnd [ time:inXSDDate "2018-08-05"^^xsd:date ] .
+    time:hasEnd [ time:inXSDDate "2018-08-05"^^xsd:date ] ;
   ] .
 </pre>
 </aside>
@@ -3401,7 +3401,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
 <aside class="example" id="ex-spatial-coverage-geometry" title="Spatial coverage as a polygon">
 <p>A dataset whose spatial coverage corresponds to Anne Frank's house in Amsterdam, specified as a polygon (the coordinate reference system is CRS84).</p>
 <pre class="nohighlight turtle">
-&lt;&gt; a dcat:Dataset ;
+&lt;AnneFrank_0&gt; a dcat:Dataset ;
   dct:spatial [
     a dct:Location ;
     locn:geometry """POLYGON ((
@@ -3425,7 +3425,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
 <aside class="example" id="ex-spatial-coverage-geometry-with-crs" title="Spatial coverage as a polygon, using a specific CRS">
 <p>The same dataset in <a href="#ex-spatial-coverage-geometry"></a>, but where the coordinates of the polygon are specified by using the national Dutch <abbr title="Coordinate Reference System">CRS</abbr> - <a href="http://www.epsg-registry.org/?display=entity&amp;urn=urn:ogc:def:crs:EPSG::28992">EPSG:28992</a> ("Amersfoort / RD New").</p>
 <pre class="nohighlight turtle">
-&lt;&gt; a dcat:Dataset ;
+&lt;AnneFrank_1&gt; a dcat:Dataset ;
   dct:spatial [
     a dct:Location ;
     locn:geometry """&lt;http://www.opengis.net/def/crs/EPSG/0/28992&gt; POLYGON ((
@@ -3445,10 +3445,10 @@ ex:InternationalDOIFundation a foaf:Organization ;
 <aside class="example" id="ex-spatial-coverage-centroid" title="Spatial coverage as centroid">
 <p>The same dataset of <a href="#ex-spatial-coverage-geometry"></a>, buth where spatial coverage is specified by using the centroid / representative point of Anne Frank's house.</p>
 <pre class="nohighlight turtle">
-&lt;&gt; a dcat:Dataset ;
+&lt;AnneFrank_2&gt; a dcat:Dataset ;
   dct:spatial [
     a dct:Location ;
-    dcat:centroid "POINT(4.88412 52.37509)"^^geosparql:asWKT .
+    dcat:centroid "POINT(4.88412 52.37509)"^^geosparql:asWKT ;
   ] .
 </pre>
 <figure id="fig-spatial-coverage-centroid">
@@ -3461,12 +3461,12 @@ If it is required to provide the <code>w3cgeo:Point</code> formulation, then it 
 This ensures interoperability with other DCAT dataset descriptions. 
 For example:
 <pre class="nohighlight turtle">
-  &lt;&gt; a dcat:Dataset ;
+  &lt;AnneFrank_3&gt; a dcat:Dataset ;
     dct:spatial [
       a dct:Location , w3cgeo:Point ;
       dcat:centroid "POINT(4.88412 52.37509)"^^geosparql:asWKT ;
       w3cgeo:lat  "52.37509"^^xsd:decimal ;
-      w3cgeo:long "4.88412"^^xsd:decimal .
+      w3cgeo:long "4.88412"^^xsd:decimal ;
     ] .
   </pre>
 </div>
@@ -3475,13 +3475,13 @@ For example:
 <aside class="example" id="ex-spatial-coverage-bbox" title="Spatial coverage as bounding box">
 <p>The Dutch dataset of postal addresses, with its spatial coverage (Netherlands) specified as a bounding box.</p>
 <pre class="nohighlight turtle">
-&lt;&gt; a dcat:Dataset ;
+&lt;Dutch-postal&gt; a dcat:Dataset ;
   dct:title "Adressen"@nl ;
   dct:title "Addresses"@en ;
-  dct:description "INSPIRE Adressen afkomstig uit de basisregistratie Adressen,
-                   beschikbaar voor heel Nederland"@nl ;
-  dct:description "INSPIRE addresses derived from the Addresses base registry,
-                   available for the Netherlands"@en ;
+  dct:description """INSPIRE Adressen afkomstig uit de basisregistratie Adressen,
+                   beschikbaar voor heel Nederland"""@nl ;
+  dct:description """INSPIRE addresses derived from the Addresses base registry,
+                   available for the Netherlands"""@en ;
   dcat:theme &lt;http://inspire.ec.europa.eu/theme/ad&gt; ;
   dct:spatial [
     a dct:Location ;
@@ -3489,7 +3489,7 @@ For example:
       3.053 47.975 , 7.24  47.975 ,
       7.24  53.504 , 3.053 53.504 ,
       3.053 47.975
-    ))"""^^geosparql:asWKT .
+    ))"""^^geosparql:asWKT ;
   ] .
 </pre>
 <figure id="fig-spatial-coverage-bbox">
@@ -3661,7 +3661,7 @@ See the wiki page on <a href="https://github.com/w3c/dxwg/wiki/Dataset-versionin
   prov:wasAssociatedWith :myQualityChecker ;
   prov:used :genoaBusStopsDataset ;
   prov:generated :genoaBusStopsDatasetCompletenessMeasurement ;
-  prov:endedAtTime 2018-05-27T02:52:02Z"^^xsd:dateTime ;
+  prov:endedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
   prov:startedAtTime "2018-05-27T00:52:02Z"^^xsd:dateTime .</pre>
 </aside>
 
@@ -3686,7 +3686,7 @@ See the wiki page on <a href="https://github.com/w3c/dxwg/wiki/Dataset-versionin
 
 <aside class="example" id="ex-inspire-conformant-dataset">
 <pre class="nohighlight turtle">
-a:Dataset a dcat:Dataset;
+:Dataset-1 a dcat:Dataset;
   dct:conformsTo &lt;http://data.europa.eu/eli/reg/2014/1312/oj&gt; .
 
 # Reference standard / specification
@@ -3701,7 +3701,7 @@ a:Dataset a dcat:Dataset;
 
 <aside class="example" id="ex-dataset-crs">
 <pre class="nohighlight turtle">
-a:Dataset a dcat:Dataset;
+:Dataset-2 a dcat:Dataset;
   dct:conformsTo &lt;http://www.opengis.net/def/crs/EPSG/0/28992&gt; .</pre>
 </aside>
 
@@ -3730,25 +3730,25 @@ a:Dataset a dcat:Dataset;
 
 <aside class="example" id="ex-conformance-degree">
 <pre class="nohighlight turtle">
-a:Dataset a dcat:Dataset ;
-  prov:wasUsedBy a:testingActivity .
+:Dataset-3 a dcat:Dataset ;
+  prov:wasUsedBy :testingActivity .
 
-a:testingActivity a prov:Activity ;
-  prov:generated a:testResult ;
+:testingActivity a prov:Activity ;
+  prov:generated :testResult ;
   prov:qualifiedAssociation [
     a prov:Association ;
     # http://validator.example.org/ is the agent who ran the test.
     prov:agent  &lt;http://validator.example.org/&gt;
     # following the plan a:conformanceTest
-    prov:hadPlan a:conformanceTest
+    prov:hadPlan :conformanceTest
   ] .
 
 # Conformance test result
-a:testResult a prov:Entity ;
-  # a:notConformant belongs to a SKOS concept scheme about conformance
-  dct:type a:notConformant .
+:testResult a prov:Entity ;
+  # :notConformant belongs to a SKOS concept scheme about conformance
+  dct:type :notConformant .
 
-a:conformanceTest a prov:Plan ;
+:conformanceTest a prov:Plan ;
   # Here one can specify additional information on the test, which in the example is derived by the W3C Data on the Web Best Practices
   prov:wasDerivedFrom &lt;https://www.w3.org/TR/dwbp/&gt; .</pre>
 </aside>
@@ -3806,7 +3806,7 @@ a:assertion a earl:Assertion ;
   prov:wasAttributedTo  &lt;http://validator.example.org/&gt; .
 
 a:conformanceTest a earl:TestRequirement, prov:Plan ;
-  dct:title "Set of conformance test derived from the W3C Data on the Web Best Practices"@en" ;
+  dct:title "Set of conformance test derived from the W3C Data on the Web Best Practices"@en ;
   # it includes different subtests
   dct:hasPart a:testBP1, a:testBP2, ...,  a:testBP35 ;
   #It is derived  by the reference standard
@@ -3847,7 +3847,7 @@ a:assertion1 a earl:Assertion ;
       dct:description """
         &lt;ul xmlns="http://www.w3.org/1999/xhtml"&gt;
           &lt;li&gt; test 1 has failed. Some description of the errors found&lt;/li&gt;
-        &lt;/ul&gt;"^^rdf:XMLLiteral;
+        &lt;/ul&gt;"""^^rdf:HTML ;
       earl:info """
         &lt;test-method duration-ms="47" finished-at="2015-09-29T11:50:00Z"
         name="validate" signature="validate()" started-at="2015-09-29T11:50:00Z"
@@ -3868,14 +3868,14 @@ a:assertion1 a earl:Assertion ;
 
 <aside class="example" id="ex-conformance-test-error">
 <pre class="nohighlight turtle">
-:error
+:errors
   a dqv:QualityAnnotation ;
   #this annotation is derived by the measurement
   prov:wasGeneratedBy  a:testingActivity;
   oa:hasTarget a:Dataset ;
   oa:hasBody [
     #errors/failed test description
-    a oa:TextualBody;
+    a oa:TextualBody ;
     rdf:value  """
       &lt;test-method duration-ms="47" finished-at="2015-09-29T11:50:00Z"
         name="validate" signature="validate()" started-at="2015-09-29T11:50:00Z"
@@ -3887,10 +3887,10 @@ a:assertion1 a earl:Assertion ;
         &lt;/exception&gt;
       &lt;/test-method&gt;"""^^rdf:XMLLiteral ;
     #it can be in any format suppored by dc
-    dc:format  "application/xml"
+    dc:format  "application/xml" ;
   ] ;
-  oa:motivatedBy dqv:qualityAssessment, oa:assessing ;
-  dqv:inDimension iso:compliance
+  oa:motivatedBy dqv:qualityAssessment , oa:assessing ;
+  dqv:inDimension iso:compliance ;
   .
 
 a:testResult
@@ -3902,17 +3902,17 @@ a:testResult
   prov:wasGeneratedBy a:testingActivity .
 
 # The graph contains the rest of the statements presented in the previous examples.
-a:testResult {
-  a:Dataset
-    dqv:hasQualityMeasurement :measurement_complianceToDWBP;
-    dqv:hasQualityAnnotation :errors .
-}
+a:testResult 
+  a dcat:Dataset ;
+  dqv:hasQualityMeasurement :measurement_complianceToDWBP ;
+  dqv:hasQualityAnnotation :errors .
+
 
 #the testing activity
-a:testingActivity a prov:Activity;
-  prov:generated  a:testResult;
+a:testingActivity a prov:Activity ;
+  prov:generated  a:testResult ;
   prov:use a:Dataset ;
-  prov:wasAssociatedWith &lt;http://validator.example.org/&gt;
+  prov:wasAssociatedWith &lt;http://validator.example.org/&gt; ;
   .</pre>
 </aside>
 
