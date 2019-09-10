@@ -2,39 +2,39 @@ var respecConfig = {
     specStatus: "WD",
     shortName: "dx-prof-conneg",
     edDraftURI: "https://w3c.github.io/dxwg/conneg-by-ap/",
-    previousPublishDate: "2018-12-18",
-    previousMaturity: "FPWD",
-    prevRecURI: "https://www.w3.org/TR/2018/WD-dx-prof-conneg-20181218/",
-    testSuiteURI: "https://github.com/CSIRO-enviro-informatics/prof-conneg-test-suite",
-    implementationReportURI: "https://github.com/CSIRO-enviro-informatics/prof-conneg-implementations",
+    previousPublishDate: "2019-04-30",
+    previousMaturity: "PWD",
+    prevRecURI: "https://www.w3.org/TR/2019/WD-dx-prof-conneg-20190430/",
+    testSuiteURI: "https://github.com/w3c/conneg-prof-testing",
+    implementationReportURI: "https://github.com/w3c/conneg-prof-testing",
     canonicalURI: "TR",
     editors: [{
-        name: "Lars G. Svensson",
-        company: "Invited Expert (and before at Deutsche Nationalbibliothek)",
-        orcid: "0000-0002-8714-9718",
-        w3cid:  "44603"
+        name:       "Lars G. Svensson",
+        company:    "Invited Expert and before at Deutsche Nationalbibliothek",
+        companyURL: "http://www.dnb.de/",
+	    orcid:      "0000-0002-8714-9718",
+        w3cid:      44603
       },
       {
-        name: "Rob Atkinson",
-        company: "Metalinkage, Open Geospatial Consortium",
+        name:       "Rob Atkinson",
+        company:    "Metalinkage, Open Geospatial Consortium",
         companyURL: "http://www.opengeospatial.org/",
-        orcid: "0000-0002-7878-2693"
+        orcid:      "0000-0002-7878-2693"
       },
       {
         name:       "Nicholas J. Car",
-        url:        "https://people.csiro.au/Nicholas-Car",
-        mailto:     "nicholas.car@csiro.au",
-        company:    "CSIRO",
-        companyURL: "https://www.csiro.au",
+        mailto:     "nicholas.car@surroundaustralia.com",
+        company:    "SURROUND Australia Pty Ltd and before at CSIRO",
+        companyURL: "https://surroundaustralia.com",
         orcid:      "0000-0002-8742-7730",
         w3cid:      70131
     }],
     otherLinks: [{
     	key: "Contributors",
 	    data: [{
-		value:       "Ruben Verborgh",
-		href:        "https://ruben.verborgh.org/"
-	      }]
+            value: "Ruben Verborgh",
+            href:  "https://ruben.verborgh.org/"
+    	}]
     }],
     wg: "Dataset Exchange Working Group",
     wgURI: "https://www.w3.org/2017/dxwg/",
@@ -46,15 +46,16 @@ var respecConfig = {
     issueBase: "https://github.com/w3c/dxwg/issues/",
     github: "https://github.com/w3c/dxwg/",
     localBiblio: {
-	"ARK" : {
-	   editors: ["J. Kunze", 
-		    "R. Rodgers"
-		    ],
-		href: "https://tools.ietf.org/id/draft-kunze-ark-15.txt",
-		title: "The ARK Identifier Scheme" ,
-		date: "2008-05-22",
-		status: "Internet-Draft"
-	},
+        "ARK" : {
+           editors: [
+               "J. Kunze",
+               "R. Rodgers"
+            ],
+            href: "https://tools.ietf.org/id/draft-kunze-ark-15.txt",
+            title: "The ARK Identifier Scheme" ,
+            date: "2008-05-22",
+            status: "Internet-Draft"
+        },
         "PROF-CONNEG": {
             editors: [
                 "Lars G. Svensson",
