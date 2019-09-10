@@ -7,9 +7,15 @@
   }, {
     "@id" : "_:b1",
     "@type" : "oa:TextualBody",
-    "format" : "application/xml"
+    "format" : "application/xml",
+    "rdf:value" : "\n      <test-method duration-ms=\"47\" finished-at=\"2015-09-29T11:50:00Z\"\n        name=\"validate\" signature=\"validate()\" started-at=\"2015-09-29T11:50:00Z\"\n        status=\"FAIL\">\n        <exception class=\"java.lang.AssertionError\">\n          <message>\n            Total validation errors found: 2\n          </message>\n        </exception>\n      </test-method>"
   }, {
     "@id" : "_:b2",
+    "@type" : "oa:TextualBody",
+    "dc:format" : "text/xml",
+    "rdf:value" : "\n      <test-method duration-ms=\"47\" finished-at=\"2015-09-29T11:50:00Z\"\n        name=\"validate\" signature=\"validate()\" started-at=\"2015-09-29T11:50:00Z\"\n        status=\"FAIL\">\n        <exception class=\"java.lang.AssertionError\">\n          <message>\n            Total validation errors found: 2\n          </message>\n        </exception>\n      </test-method>"
+  }, {
+    "@id" : "_:b3",
     "@type" : "earl:TestResult",
     "dct:date" : {
       "@type" : "xsd:dateTime",
@@ -17,7 +23,7 @@
     },
     "description" : {
       "@type" : "rdf:HTML",
-      "@value" : "\r\n        <ul xmlns=\"http://www.w3.org/1999/xhtml\">\r\n          <li> test 1 has failed. Some description of the errors found</li>\r\n        </ul>"
+      "@value" : "\n        <ul xmlns=\"http://www.w3.org/1999/xhtml\">\n          <li> test 1 has failed. Some description of the errors found</li>\n        </ul>"
     },
     "type" : "https://dcat.example.org/nonConformant",
     "outcome" : "earl:fail"
@@ -41,16 +47,9 @@
       "@value" : "Validator"
     }
   }, {
-    "@id" : "https://dcat.example.org/Dataset-1",
+    "@id" : "https://dcat.example.org/Dataset",
     "@type" : "dcat:Dataset",
-    "conformsTo" : "http://data.europa.eu/eli/reg/2014/1312/oj"
-  }, {
-    "@id" : "https://dcat.example.org/Dataset-2",
-    "@type" : "dcat:Dataset",
-    "conformsTo" : "http://www.opengis.net/def/crs/EPSG/0/28992"
-  }, {
-    "@id" : "https://dcat.example.org/Dataset-3",
-    "@type" : "dcat:Dataset",
+    "conformsTo" : [ "http://www.opengis.net/def/crs/EPSG/0/28992", "http://data.europa.eu/eli/reg/2014/1312/oj" ],
     "wasUsedBy" : "https://dcat.example.org/testingActivity"
   }, {
     "@id" : "iso:compliance",
@@ -84,7 +83,7 @@
     "@id" : "https://dcat.example.org/assertion1",
     "@type" : "earl:Assertion",
     "mode" : "earl:automatic",
-    "result" : "_:b2",
+    "result" : "_:b3",
     "subject" : "https://dcat.example.org/Dataset",
     "test" : "https://dcat.example.org/testq1"
   }, {
@@ -100,6 +99,14 @@
       "@value" : "Set of conformance test derived from the W3C Data on the Web Best Practices"
     },
     "wasDerivedFrom" : "https://www.w3.org/TR/dwbp/"
+  }, {
+    "@id" : "https://dcat.example.org/error",
+    "@type" : "dqv:QualityAnnotation",
+    "inDimension" : "iso:compliance",
+    "hasBody" : "_:b2",
+    "hasTarget" : "https://dcat.example.org/Dataset",
+    "motivatedBy" : [ "oa:assessing", "dqv:qualityAssessment" ],
+    "wasGeneratedBy" : "https://dcat.example.org/testingActivity"
   }, {
     "@id" : "https://dcat.example.org/errors",
     "@type" : "dqv:QualityAnnotation",
@@ -126,6 +133,11 @@
     "isMeasurementOf" : "https://dcat.example.org/levelOfComplianceToDWBP",
     "dqv:value" : 50.0
   }, {
+    "@graph" : [ {
+      "@id" : "https://dcat.example.org/Dataset",
+      "hasQualityAnnotation" : "https://dcat.example.org/errors",
+      "hasQualityMeasurement" : "https://dcat.example.org/measurement_complianceToDWBP"
+    } ],
     "@id" : "https://dcat.example.org/testResult",
     "@type" : [ "prov:Entity", "dcat:Dataset", "dqv:QualityMetadata", "earl:TestResult" ],
     "type" : [ "https://dcat.example.org/notConformant", "http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant", "https://dcat.example.org/conformant" ],
@@ -144,10 +156,6 @@
     "wasAssociatedWith" : "http://validator.example.org/"
   } ],
   "@context" : {
-    "wasUsedBy" : {
-      "@id" : "http://www.w3.org/ns/prov#wasUsedBy",
-      "@type" : "@id"
-    },
     "wasAssociatedWith" : {
       "@id" : "http://www.w3.org/ns/prov#wasAssociatedWith",
       "@type" : "@id"
@@ -205,10 +213,6 @@
       "@id" : "http://www.w3.org/2002/07/owl#imports",
       "@type" : "@id"
     },
-    "conformsTo" : {
-      "@id" : "http://purl.org/dc/terms/conformsTo",
-      "@type" : "@id"
-    },
     "wasAttributedTo" : {
       "@id" : "http://www.w3.org/ns/prov#wasAttributedTo",
       "@type" : "@id"
@@ -233,18 +237,23 @@
       "@id" : "http://www.w3.org/ns/earl#subject",
       "@type" : "@id"
     },
-    "format" : {
-      "@id" : "http://purl.org/dc/terms/format"
-    },
     "prefLabel" : {
       "@id" : "http://www.w3.org/2004/02/skos/core#prefLabel"
     },
-    "outcome" : {
-      "@id" : "http://www.w3.org/ns/earl#outcome",
+    "hadPlan" : {
+      "@id" : "http://www.w3.org/ns/prov#hadPlan",
       "@type" : "@id"
     },
-    "type" : {
-      "@id" : "http://purl.org/dc/terms/type",
+    "agent" : {
+      "@id" : "http://www.w3.org/ns/prov#agent",
+      "@type" : "@id"
+    },
+    "wasUsedBy" : {
+      "@id" : "http://www.w3.org/ns/prov#wasUsedBy",
+      "@type" : "@id"
+    },
+    "conformsTo" : {
+      "@id" : "http://purl.org/dc/terms/conformsTo",
       "@type" : "@id"
     },
     "hasPart" : {
@@ -259,6 +268,14 @@
       "@id" : "http://www.w3.org/ns/dqv#hasQualityAnnotation",
       "@type" : "@id"
     },
+    "outcome" : {
+      "@id" : "http://www.w3.org/ns/earl#outcome",
+      "@type" : "@id"
+    },
+    "type" : {
+      "@id" : "http://purl.org/dc/terms/type",
+      "@type" : "@id"
+    },
     "generatedAtTime" : {
       "@id" : "http://www.w3.org/ns/prov#generatedAtTime",
       "@type" : "http://www.w3.org/2001/XMLSchema#dateTime"
@@ -271,21 +288,8 @@
       "@id" : "http://www.w3.org/ns/prov#wasGeneratedBy",
       "@type" : "@id"
     },
-    "hadPlan" : {
-      "@id" : "http://www.w3.org/ns/prov#hadPlan",
-      "@type" : "@id"
-    },
-    "agent" : {
-      "@id" : "http://www.w3.org/ns/prov#agent",
-      "@type" : "@id"
-    },
-    "issued" : {
-      "@id" : "http://purl.org/dc/terms/issued",
-      "@type" : "http://www.w3.org/2001/XMLSchema#date"
-    },
-    "inCategory" : {
-      "@id" : "http://www.w3.org/ns/dqv#inCategory",
-      "@type" : "@id"
+    "format" : {
+      "@id" : "http://purl.org/dc/terms/format"
     },
     "motivatedBy" : {
       "@id" : "http://www.w3.org/ns/oa#motivatedBy",
@@ -299,13 +303,21 @@
       "@id" : "http://www.w3.org/ns/oa#hasTarget",
       "@type" : "@id"
     },
+    "issued" : {
+      "@id" : "http://purl.org/dc/terms/issued",
+      "@type" : "http://www.w3.org/2001/XMLSchema#date"
+    },
+    "inCategory" : {
+      "@id" : "http://www.w3.org/ns/dqv#inCategory",
+      "@type" : "@id"
+    },
     "@vocab" : "https://dcat.example.org/",
-    "iso" : "https://dcat.example.org/ISO-IEC-25012/",
     "adms" : "https://www.w3.org/ns/adms#",
+    "iso" : "https://dcat.example.org/ISO-IEC-25012/",
     "owl" : "http://www.w3.org/2002/07/owl#",
     "w3cgeo" : "http://www.w3.org/2003/01/geo/wgs84_pos#",
-    "xsd" : "http://www.w3.org/2001/XMLSchema#",
     "dqv" : "http://www.w3.org/ns/dqv#",
+    "xsd" : "http://www.w3.org/2001/XMLSchema#",
     "skos" : "http://www.w3.org/2004/02/skos/core#",
     "rdfs" : "http://www.w3.org/2000/01/rdf-schema#",
     "geosparql" : "http://www.opengis.net/ont/geosparql#",
@@ -319,6 +331,7 @@
     "locn" : "http://www.w3.org/ns/locn#",
     "sdmx-attribute" : "http://purl.org/linked-data/sdmx/2009/attribute#",
     "prov" : "http://www.w3.org/ns/prov#",
-    "foaf" : "http://xmlns.com/foaf/0.1/"
+    "foaf" : "http://xmlns.com/foaf/0.1/",
+    "dc" : "http://purl.org/dc/elements/1.1/"
   }
 }
