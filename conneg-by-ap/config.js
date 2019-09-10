@@ -5,8 +5,8 @@ var respecConfig = {
     previousPublishDate: "2019-04-30",
     previousMaturity: "PWD",
     prevRecURI: "https://www.w3.org/TR/2019/WD-dx-prof-conneg-20190430/",
-    testSuiteURI: "https://github.com/CSIRO-enviro-informatics/prof-conneg-test-suite",
-    implementationReportURI: "https://github.com/CSIRO-enviro-informatics/prof-conneg-implementations",
+    testSuiteURI: "https://github.com/w3c/conneg-prof-testing",
+    implementationReportURI: "https://github.com/w3c/conneg-prof-testing",
     canonicalURI: "TR",
     editors: [{
         name:       "Lars G. Svensson",
@@ -24,7 +24,7 @@ var respecConfig = {
       {
         name:       "Nicholas J. Car",
         mailto:     "nicholas.car@surroundaustralia.com",
-        company:    "SURROUND Australia Pty Ltd, formerly CSIRO",
+        company:    "SURROUND Australia Pty Ltd and before at CSIRO",
         companyURL: "https://surroundaustralia.com",
         orcid:      "0000-0002-8742-7730",
         w3cid:      70131
