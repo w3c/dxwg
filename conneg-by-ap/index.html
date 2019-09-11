@@ -848,33 +848,36 @@ Content-Profile: http://example.org/profile/x, \
 	<p>
 	  When used in a <code>Link</code> header field,
 	  the attribute <code>token</code> is used to specify
-	  the mapping between the profile URI
-	  (specified using the <code>anchor</code> attribute)
-	  and a <a>token</a> used as an alternative to the full profile URI.
+	  a <a>token</<a> that a client MAY use
+	  as an alternative to the full profile URI
+	  given in the <code>anchor</code> attribute.
 	</p>
 	<p>
-	  It should be noted that the scope of the mapping between the token and the profile URI
+	  It should be noted that the use of the token as an alternative to the profile URI
 	  is per default limited to the current resource
 	  (i. e. the resource identified by the current request URI).
-	  Servers MAY use a larger scope for their mappings
+	  Servers MAY use a larger scope for this
 	  but clients should not depend on that
-	  unless the server documentation explicitly gives other instructions.
+	  unless the server documentation explicitly gives other instructions through some other means.
 	</p>
 	<p>
-	  The ABNF for the profile attribute's value is <code>token</code>,
-	  where "token" is defined as in 
+	  The ABNF for the profile attribute's value is <code>token / quoted-string</code>,
+	  where "token"and "quoted-string" are defined as in 
 		<a href="https://tools.ietf.org/html/rfc7230#section-3.2.6">section 3.2.6</a>
-	  of [[RFC7230]].
+	  of [[RFC7230]]. The rules for <code>link-param</code> values defined in
+		<a href="https://tools.ietf.org/html/rfc8288#section-3">section 3</a> of [[RFC8288]] apply.
 	</p>
 	<pre id="eg-link-attribute-token" class="example nohighlight" aria-busy="false" aria-live="polite"
            title="Using the Link attribute "token" to link a profile URI to a token">
-# The profile URI in the "anchor" element is linked to the token "px"
+# The profile URI in the "anchor" element is linked to the token "igsn-r1"
 
 # Further, the relation "type" is used to inform
 # that the anchor resource is of type "prof:Profile"
 
-Link:
-  &lt;http://www.w3.org/ns/dx/prof/Profile&gt;; rel="type"; token="px"; anchor=&lt;urn:example:profile:x&gt;
+Link: &lt;http://www.w3.org/ns/dx/prof/Profile&gt;;
+  rel="type";
+  token="igsn-r1";
+  anchor=&lt;http://schema.igsn.org/description/1.0&gt;
 	</pre>
       </section>
   </section>
