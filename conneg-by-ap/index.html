@@ -841,6 +841,43 @@ Content-Profile: http://example.org/profile/x, \
       </p>
     </section>
   </section>
+  <section id="link-attributes">
+    <h2>Link Attributes</h2>
+      <section id="link-attributes-token">
+	<h3>Token</h3>
+	<p>
+	  When used in a <code>Link</code> header field,
+	  the attribute <code>token</code> is used to specify
+	  the mapping between the profile URI
+	  (specified using the <code>anchor</code> attribute)
+	  and a <a>token</a> used as an alternative to the full profile URI.
+	</p>
+	<p>
+	  It should be noted that the scope of the mapping between the token and the profile URI
+	  is per default limited to the current resource
+	  (i. e. the resource identified by the current request URI).
+	  Servers MAY use a larger scope for their mappings
+	  but clients should not depend on that
+	  unless the server documentation explicitly gives other instructions.
+	</p>
+	<p>
+	  The ABNF for the profile attribute's value is <code>token</code>,
+	  where "token" is defined as in 
+		<a href="https://tools.ietf.org/html/rfc7230#section-3.2.6">section 3.2.6</a>
+	  of [[RFC7230]].
+	</p>
+	<pre id="eg-link-attribute-token" class="example nohighlight" aria-busy="false" aria-live="polite"
+           title="Using the Link attribute "token" to link a profile URI to a token">
+# The profile URI in the "anchor" element is linked to the token "px"
+
+# Further, the relation "type" is used to inform
+# that the anchor resource is of type "prof:Profile"
+
+Link:
+  &lt;http://www.w3.org/ns/dx/prof/Profile&gt;; rel="type"; token="px"; anchor=&lt;urn:example:profile:x&gt;
+	</pre>
+      </section>
+  </section>
   <section id="functional-profiles">
     <h2>Functional Profiles</h2>
     <p>
