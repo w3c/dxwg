@@ -36,7 +36,7 @@ var respecConfig = {
     inlineCSS: "true",
     lint: "false",
     issueBase: "https://github.com/w3c/dxwg/issues/",
-    github:    "https://github.com/w3c/dxwg/issues/",
+    github:    "https://github.com/w3c/dxwg/",
     localBiblio: {
         PDF: {
             href: "https://www.iso.org/standard/51502.html",
