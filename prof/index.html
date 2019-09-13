@@ -18,7 +18,7 @@
   </p>
   <p style="text-align: center;">
     The namespace for PROF terms is <code>http://www.w3.org/ns/dx/prof/</code>.<br />
-    The PROF vocabulary, defined in OWL and encoded in RDF Turtle, is available at <a href="rdf/prof.ttl">profilesont.ttl</a>.
+    The PROF vocabulary, defined in OWL and encoded in RDF Turtle, is available at <a href="rdf/prof.ttl">prof.ttl</a>.
   </p>
 </section>
 <section id="sotd">
@@ -71,11 +71,17 @@
     <code><a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-Standard">dct:Standard</a></code>
     class which is defined here as a <code><a href="#Class:Profile">prof:Profile</a></code>. A <code>prof:Profile</code>
     is related to either <code>dct:Standard</code> or <code>prof:Profile</code> instances by being a <em>profile of</em>
-    it, formally, <a href="#Property:isProfileOf"><code>prof:isProfileOf</code></a>. Resources that conform to either a
+    them, formally, <a href="#Property:isProfileOf"><code>prof:isProfileOf</code></a>. Resources that conform to either a
     <code>dct:Standard</code> or a <code>prof:Profile</code> are formally described as doing so with the use of the
     <code><a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-conformsTo">dct:conformsTo</a></code>
     predicate.
 	</p>
+  <p>
+    Data that conforms to a profile, in PROF, must conform to anything the profile is a profile of. Formally, this vocabulary
+    includes the property chain axiom <code>dct:conformsTo owl:propertyChainAxiom ( prof:isProfileOf dct:conformsTo )</code>.
+    Individual communities may define what conformance to their profiles and the things they profile means and how to
+    test for conformance if indeed they wish to.
+  </p>
   <p>
     In recognition of the existence of specifications and profiles that are made up of multiple resources &ndash;
     perhaps PDF documents, machine-readable constraint language files, code lists etc. &ndash; this vocabulary also
@@ -85,13 +91,15 @@
     <a href="#Property:hasResource"><code>prof:hasResource</code></a> predicates indicating <code>prof:ResourceDescriptor</code>
     instances which then indicates the location (a URI) of the actual resource artifact with a
     <a href="#Property:hasArtifact"><code>prof:hasArtifact</code></a> predicate and then may describes the artifact's
-    format &ampand any specifications it conforms to with <a href="#Property:format"><code>dct:format</code></a> &amp;
+    format and any specifications it conforms to with <a href="#Property:format"><code>dct:format</code></a> &amp;
     <a href="#Property:conformsTo"><code>dct:conformsTo</code></a> predicates respectively. The role that the resource
     plays with respect to the profile may be indicating using a <a href="#Class:ResourceRole"><code>prof:ResourceRole</code></a>
     class instance linked to it with the <a href="#Property:hasRole"><code>prof:hasRole</code></a> predicate.
   </p>
   <p>
-    A vocabulary of <code>prof:ResourceRole</code> instances is provided in <a href="#resource-roles-vocab"></a>.
+    A vocabulary of <code>prof:ResourceRole</code> instances is provided in <a href="#resource-roles-vocab"></a> but
+    communities are encouraged to create additional <code>prof:ResourceRole</code> instances with definitions suited to
+    their purposes.
   </p>
 </section>
 <section id="conformance">
@@ -100,9 +108,9 @@
     For the purpose of compliance, the normative sections of this document are:
   </p>
   <ul>
-    <li><a href="#conceptualmodel"></a> <em>Conceptual Model</em>,</li>
-    <li><a href="#specification"></a> <em>Vocabulary Specification</em> &amp;</li>
-    <li><a href="#testsuite"></a> <em>Test Suite</em>.</li>
+    <li><a href="#conceptualmodel"></a>,</li>
+    <li><a href="#specification"></a> &amp;</li>
+    <li><a href="#testsuite"></a>.</li>
   </ul>
   <section id="notationalconventions">
     <h3>Notational Conventions</h3>
@@ -161,7 +169,7 @@
   </p>
   <p>
     PROF also makes use of derivative namespaces of it's namespace for auxiliary vocabulary elements, such as instances
-    of the <code>prof:Role</code> which are within the <code>http://www.w3.org/ns/dx/prof/role/</code> namespace.
+    of the <code>prof:ResourceRole</code> which are within the <code>http://www.w3.org/ns/dx/prof/role/</code> namespace.
   </p>
   <p>
     A full set of namespaces and prefixes used in this specification is given in the table below.
@@ -574,7 +582,7 @@ CSIRO's publications catalogue."""@en ;
     </pre>
     <p>
       The following example demonstrates how resources can indicate conformance to a profile. Note that in
-      <a href="#eg-initial"></a>, there is also an example of this pattern whereby the <code>ResourceDescriptor</code>
+      <a href="#eg-initial-example"></a>, there is also an example of this pattern whereby the <code>ResourceDescriptor</code>
       is indicated as conforming to the [[SHACL]] specification, which is also understood to be a profile to which
       things  may conform.
     </p>
@@ -596,6 +604,28 @@ CSIRO's publications catalogue."""@en ;
       dct:title "Distribution of imaginary dataset 001 that conforms to Profile X" ;
       dcat:downloadURL &lt;http://www.example.org/files/001.x> ;
       <strong>dct:conformsTo &lt;http://example.org/profile/x></strong> .
+    </pre>
+    <p>
+      This next example shows how a conclusion about conformance can be drawn due to this vocabulary's inclusion of a
+      property chain axiom about conformance.
+    </p>
+    <pre id="eg-conformance-axiom"
+         class="example nohighlight turtle" aria-busy="false" aria-live="polite"
+         title="Demonstrating conformance via the vocabulary's dct:conformsTo/prof:isProfileOf property chain.">
+# Profile X, is a profile of Specification Y
+&lt;http://example.org/profile/x> a prof:Profile ;
+      prof:isProfileOf &lt;http://example.org/specification/y>
+      dct:title "Profile X" .
+
+# A resource indicating conformance to Profile X is given
+&lt;http://example.org/resource/a>
+      dct:conformsTo &lt;http://example.org/profile/x> .
+
+# Due to the property chain axiom:
+# dct:conformsTo owl:propertyChainAxiom ( prof:isProfileOf dct:conformsTo )
+# the resource above can be inferred to conform to Specification Y
+&lt;http://example.org/resource/a>
+      <strong>dct:conformsTo &lt;http://example.org/specification/y></strong> .  # this triple is inferred
     </pre>
   </section>
   <section id="roles-vocab">
@@ -856,7 +886,7 @@ CSIRO's publications catalogue."""@en ;
     </section>
     <section id="Property:conformsTo" class="property">
       <h4>Property: dct:conformsTo</h4>
-      <p><em>This property's details are from the [[DCTERMS]] specification.</em></p>
+      <p><em>This property is from the [[DCTERMS]] specification however the property chain axiom declared here is new in PROF.</em></p>
       <table class="definition">
         <thead>
         <tr><th>RDF Property:</th><th><a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-conformsTo">dct:conformsTo</a></th></tr>
@@ -865,6 +895,25 @@ CSIRO's publications catalogue."""@en ;
           <tr><td class="prop">Label:</td><td>Conforms To</td></tr>
           <tr><td class="prop">Definition:</td><td>An established standard to which the described resource conforms</td></tr>
           <tr><td class="prop">Sub property of:</td><td><a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#elements-relation">dc:relation</a>, <a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-relation">dct:relation</a></td></tr>
+          <tr><td class="prop">Property Chain Axiom:</td><td><code>owl:propertyChainAxiom ( prof:isProfileOf dct:conformsTo )</code></td></tr>
+          <tr>
+            <td class="prop">Usage note:</td>
+            <td>
+              <p>
+                This property is to be used to show conformance of a resource to a specification (<code>dct:Standard</code>)
+                or a profile (<code>prof:Profile</code>).
+              </p>
+              <p>
+                The property chain axiom declared for this property means that if the thing conformed to is a profile of
+                something else (indicated by <code>prof:isProfileOf</code>), then the conforming resource will be
+                inferred to be conformant to that other thing too.
+              </p>
+              <p>
+                PROF does not specify the nature of conformance: communities using <a>specifications</a> and <a>profiles</a>
+                are free to define appropriate conformance for their purposes.
+              </p>
+            </td>
+          </tr>
         </tbody>
       </table>
     </section>
@@ -893,7 +942,7 @@ CSIRO's publications catalogue."""@en ;
           <tr><td class="prop">Definition:</td><td>The function of the described artifact in the expression of the Profile, such as a specification, guidance documentation, SHACL file etc.</td></tr>
           <tr><td class="prop">Domain:</td><td><a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a></td></tr>
           <tr><td class="prop">Range:</td><td><a href="https://www.w3.org/TR/skos-reference/#Concept">skos:Concept</a></td></tr>
-          <tr><td class="prop">Usage note:</td><td>A set of common roles are defined by the Profiles Vocabulary. These are not exhaustive or disjoint, and may be extended for situations where finer grained description of purpose is necessary. A resource may perform multiple roles</td></tr>
+          <tr><td class="prop">Usage note:</td><td>A set of common roles are defined by the Profiles Vocabulary. These are not exhaustive or disjoint, and may be extended for situations where finer-grained description of purpose is necessary. A resource may perform multiple roles</td></tr>
         </tbody>
       </table>
     </section>
