@@ -122,7 +122,7 @@ var respecConfig = {
             href: "http://difi.github.io/dcat-ap-no/"
         },
         "DCAT-AP.de": {
-            title: "DCAT-AP.de als formaler Metadatenstandard für offene Verwaltungsdaten bestätigt",
+            title: "Vokabulare und Dokumente für DCAT-AP.de",
             href: "https://dcat-ap.de/def/"
         },
         "DDI" : {
