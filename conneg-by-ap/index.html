@@ -868,7 +868,7 @@ Content-Profile: http://example.org/profile/x, \
 		<a href="https://tools.ietf.org/html/rfc8288#section-3">section 3</a> of [[RFC8288]] apply.
 	</p>
 	<pre id="eg-link-attribute-token" class="example nohighlight" aria-busy="false" aria-live="polite"
-           title="Using the Link attribute "token" to link a profile URI to a token">
+           title="Using the Link attribute ''token'' to link a profile URI to a token">
 # The profile URI in the "anchor" element is linked to the token "igsn-r1"
 
 # Further, the relation "type" is used to inform
@@ -1163,16 +1163,45 @@ Link:
         <section id="listprofiles-tokens">
           <h3>Token mappings</h3>
           <p>
-            If HTTP <a>server</a>s wish to allow <a>client</a>s to identify <a>profile</a>s via <a>token</a>,
+            If HTTP <a>server</a>s wish to allow <a>client</a>s to identify <a>profile</a>s via <a>token</a>s,
             in addition to the the mandatory identification of <a>profile</a>s via via URI, the <a>server</a>s will
-            need to provide a <a>token</a> / URI mapping via this <strong>list profiles</strong> function. In this
-            HTTP functional profile of this specification, this may be implemented in a number of ways. The preferred
-            way is to add "token" parameters to the HTTP Content-Profile and Link HTTP headers.
+            need to provide a <a>token</a> / URI mapping via this <strong>list profiles</strong> function.
+            When implementing the HTTP functional profile of this specification,
+            a server MUST include a <code>Link</code> header ([[RFC8288]])
+            for each <code>profile</code>/<code>token</code> pair in its response.
+            Each <code>Link</code> header MUST use the <code>Link Target</code>
+            "<code>http://www.w3.org/ns/dx/prof/Profile</code>"
+            and MUST contain the following <code>Target Attribute</code>s:
+          </p>
+	        <table>
+            <thead>
+              <tr>
+                  <th>Target Attribute</th>
+                  <th>Target Attribute value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+            <td><code>rel</code></td>
+            <td><code>"type"</code></td>
+              </tr>
+              <tr>
+            <td><code>token</code></td>
+            <td>The token mapped to the profile URI in the <code>anchor</code> attribute
+              </tr>
+              <tr>
+            <td><code>anchor</code></td>
+            <td>The profile URI of the profile mapped to the token in the <code>token</code> attribute
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            Servers MAY add more attributes to that <code>Link</code> header.
           </p>
           <pre id="eg-uri-token" class="example nohighlight" aria-busy="false" aria-live="polite"
                title="HTTP headers with profile URI / token mappings using 'token' parameters">
-# The Profile with urn:example:profile:x is mapped to token px and URI
-# and the Profile with URI http://example.org/profile/y is mapped to py
+# The Profile with URI urn:example:profile:marc21-dnb is mapped to the token "dnb"
+# and the Profile with URI http://example.org/profiles/marc21-loc is mapped to the token "loc"
 
 HEAD /resource/a HTTP/1.1
 Accept: text/turtle
@@ -1185,67 +1214,15 @@ Content-Type: text/turtle
 Content-Location: http://example.org/resource/a.profx.ttl
 Content-Profile: &lt;urn:example:profile:x&gt;
 Link:
-  &lt;http://www.w3.org/ns/dx/prof/Profile&gt;; rel="type"; token="px"; anchor=&lt;urn:example:profile:x&gt;,
-  &lt;http://www.w3.org/ns/dx/prof/Profile&gt;; rel="type"; token="py"; anchor=&lt;http://example.org/profile/2&gt;,
-  &lt;http://example.org/resource/a.profx.ttl&gt;; rel="self"; type="text/turtle"; profile="urn:example:profile:x",
-  &lt;http://example.org/resource/a.profy.ttl&gt;; rel="alternate"; type="text/turtle"; profile="http://example.org/profile/2",
-  &lt;http://example.org/resource/a.profx.xml&gt;; rel="alternate"; type="application/xml"; profile="urn:example:profile:x",
-  &lt;http://example.org/resource/a.profy.xml&gt;; rel="alternate"; type="application/xml"; profile="http://example.org/profile/2",
+  &lt;http://www.w3.org/ns/dx/prof/Profile&gt;; rel="type"; token="dnb"; anchor=&lt;urn:example:profile:marc21-dnb&gt;,
+  &lt;http://www.w3.org/ns/dx/prof/Profile&gt;; rel="type"; token="loc"; anchor=&lt;http://example.org/profiles/marc21-loc&gt;,
+  &lt;http://example.org/resource/a.profdnb.ttl&gt;; rel="self"; type="text/turtle"; profile="urn:example:profile:marc21-dnb",
+  &lt;http://example.org/resource/a.profloc.ttl&gt;; rel="alternate"; type="text/turtle"; profile="http://example.org/profiles/marc21-loc",
+  &lt;http://example.org/resource/a.profdnb.xml&gt;; rel="alternate"; type="application/xml"; profile="urn:example:profile:marc21-dnb",
+  &lt;http://example.org/resource/a.profloc.xml&gt;; rel="alternate"; type="application/xml"; profile="http://example.org/profiles/marc21-loc",
   &lt;http://example.org/resource/a.html&gt;; rel="alternate"; type="text/html"
 [more response headers]
           </pre>
-          <div class="note" title="Alternate ways of conveying URI / token mappings">
-            <p>
-              There are several alternate methods that many be used to convey URI / token mappings in addition to the recommended
-              method described and exemplified above.
-            </p>
-            <p><strong>Option 1: registered tokens</strong></p>
-            <p>
-              Tokens are registered in a global registry and servers may use them in place of a URI, e.g.
-              <code>Content-profile: token1, &lt;URI2></code>
-            </p>
-            <p>
-              <em>Pros</em>: compact<br />
-              <em>Cons</em>: a global registry for profiles not manageable when many systems define profiles and such a registry
-              limits other capabilities of profile description by forcing generic profiles
-            </p>
-            <p><strong>Option 2: allow namespace declarations</strong></p>
-            <p>
-              As per the use of CURIEs [[CURIE]] whose specification "...defines a generic, abbreviated syntax for
-              expressing URIs." within JSON-LD [[JSON-LD]], a token may be indicated for use in place of a URI within
-              a namespacing context. In this method, key/value pairs of tokens/URIs are defined within an HTTP header
-              such as <code>Content-Profile</code> e.g:
-            </p>
-            <p>
-              <code>Content-Profile: @:http://example.org/profiles/,@w3c:http://w3.org/knownprofiles#, :token1, w3c:token2</code>
-            </p>
-            <p>
-              Here the first key/value pair of token/URI is key: &lt;nothing&gt;, value: http://example.org/profiles/
-              and the second, is key: &lt;w3c&gt;, value: http://w3.org/knownprofiles#.
-            </p>
-            <p>
-              <em>Pros</em>: compact, no registry requirement<br />
-              <em>Cons</em>: clients have more parsing to do<br />
-              <em>Note</em>: could easily be a JSON-LD payload<br />
-              (alternative syntax using parameter ns2;ns=http://example.org/profiles/)
-            </p>
-            <p><strong>Option 3: namespace header</strong></p>
-            <p>
-              In this method, a new HTTP header could be introduced to specifically convey token/URI profile key/value
-              pairs. If <code>Content-Profile-Namespaces</code> is to be the new HTTP header, then a <a>server</a> may
-              respond to a request with the following pair of headers:
-            </p>
-            <p>
-              <code>
-                Content-Profile-Namespaces: :http://example.org/profiles/,w3c:http://w3.org/knownprofiles#<br />
-                Content-Profile: :token1, w3c:token2
-              </code>
-            </p>
-            <p>
-              <em>Pros</em>: dedicated, unambiguous, mechanics<br />
-              <em>Cons</em>: clients have another header to deal with, registration of another HTTP header (and thus alternation to [[PROF-IETF]]<br />
-            </p>
-          </div>
         </section>
       </section>
       <section id="http-getresourcebyprofile">
@@ -1763,7 +1740,7 @@ Link:
           <a href="#eg-qsa-keydisco-altprofiles"></a> shows that for resource <code>/resource/a</code> there is a
           representation of it that conforms to the specification/profile
           <code>http://www.w3.org/ns/dx/conneg/altprofiles</code> which is the URI identifying the Alternate Profiles
-          Data Model defined in <a href="#altprofiles-model"></a>. Since the example also shows the QSA
+          Data Model defined in <a href="#altr"></a>. Since the example also shows the QSA
           <code>view=altprofiles</code> can be used to formulate a request for this representation, dereferencing
           <code>http://example.org/resource/a?view=altprofiles</code> will generate a response that also yields the
           content of the request in <a href="#eg-qsa-keydisco-altprofiles"></a> but, since it is conformant to the
