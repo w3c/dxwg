@@ -862,13 +862,13 @@ Content-Profile: http://example.org/profile/x, \
 	</p>
 	<p>
 	  The ABNF for the profile attribute's value is <code>(token / quoted-string)</code>,
-	  where "token"and "quoted-string" are defined as in 
+	  where "token"and "quoted-string" are defined as in
 		<a href="https://tools.ietf.org/html/rfc7230#section-3.2.6">section 3.2.6</a>
 	  of [[RFC7230]]. The rules for <code>link-param</code> values defined in
 		<a href="https://tools.ietf.org/html/rfc8288#section-3">section 3</a> of [[RFC8288]] apply.
 	</p>
 	<pre id="eg-link-attribute-token" class="example nohighlight" aria-busy="false" aria-live="polite"
-           title="Using the Link attribute "token" to link a profile URI to a token">
+           title="Using the Link attribute ''token'' to link a profile URI to a token">
 # The profile URI in the "anchor" element is linked to the token "igsn-r1"
 
 # Further, the relation "type" is used to inform
@@ -1160,39 +1160,41 @@ Link:
             If HTTP <a>server</a>s wish to allow <a>client</a>s to identify <a>profile</a>s via <a>token</a>s,
             in addition to the the mandatory identification of <a>profile</a>s via via URI, the <a>server</a>s will
             need to provide a <a>token</a> / URI mapping via this <strong>list profiles</strong> function.
-	    When implementing the HTTP functional profile of this specification,
-	    a server MUST include a <code>Link</code> header ([[RFC 8288]])
-	    for each <code>profile</code>/<code>token</code> pair in its response.
-		  Each <code>Link</code> header MUST use the <code>Link Target</code>
-		  "<code>http://www.w3.org/ns/dx/prof/Profile</code>"
-		  and MUST contain the following <code>Target Attribute</code>s:
-	    <table>
-	      <thead>
-		<tr>
-		    <th>Target Attribute</th>
-		    <th>Target Attribute value</th>
-		</tr>
- 	      </thead>
-	      <tbody>
-	        <tr>
-		    <td><code>rel</code></td>
-		    <td><code>"type"</code></td>
-	        </tr>
-	        <tr>
-		    <td><code>token</code></td>
-		    <td>The token mapped to the profile URI in the <code>anchor</code> attribute
-	        </tr>
-	        <tr>
-		    <td><code>anchor</code></td>
-		    <td>The profile URI of the profile mapped to the token in the <code>token</code> attribute
-	        </tr>
-	      </tbody>
-	    </table>
-		Servers MAY add more attributes to that <code>Link</code> header.
+            When implementing the HTTP functional profile of this specification,
+            a server MUST include a <code>Link</code> header ([[RFC8288]])
+            for each <code>profile</code>/<code>token</code> pair in its response.
+            Each <code>Link</code> header MUST use the <code>Link Target</code>
+            "<code>http://www.w3.org/ns/dx/prof/Profile</code>"
+            and MUST contain the following <code>Target Attribute</code>s:
+          </p>
+	        <table>
+            <thead>
+              <tr>
+                  <th>Target Attribute</th>
+                  <th>Target Attribute value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+            <td><code>rel</code></td>
+            <td><code>"type"</code></td>
+              </tr>
+              <tr>
+            <td><code>token</code></td>
+            <td>The token mapped to the profile URI in the <code>anchor</code> attribute
+              </tr>
+              <tr>
+            <td><code>anchor</code></td>
+            <td>The profile URI of the profile mapped to the token in the <code>token</code> attribute
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            Servers MAY add more attributes to that <code>Link</code> header.
           </p>
           <pre id="eg-uri-token" class="example nohighlight" aria-busy="false" aria-live="polite"
                title="HTTP headers with profile URI / token mappings using 'token' parameters">
-# The Profile with URI urn:example:profile:marc21-dnb is mapped to the token "dnb" 
+# The Profile with URI urn:example:profile:marc21-dnb is mapped to the token "dnb"
 # and the Profile with URI http://example.org/profiles/marc21-loc is mapped to the token "loc"
 
 HEAD /resource/a HTTP/1.1
@@ -1732,7 +1734,7 @@ Link:
           <a href="#eg-qsa-keydisco-altprofiles"></a> shows that for resource <code>/resource/a</code> there is a
           representation of it that conforms to the specification/profile
           <code>http://www.w3.org/ns/dx/conneg/altprofiles</code> which is the URI identifying the Alternate Profiles
-          Data Model defined in <a href="#altprofiles-model"></a>. Since the example also shows the QSA
+          Data Model defined in <a href="#altr"></a>. Since the example also shows the QSA
           <code>view=altprofiles</code> can be used to formulate a request for this representation, dereferencing
           <code>http://example.org/resource/a?view=altprofiles</code> will generate a response that also yields the
           content of the request in <a href="#eg-qsa-keydisco-altprofiles"></a> but, since it is conformant to the
