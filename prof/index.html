@@ -747,6 +747,7 @@ CSIRO's publications catalogue."""@en ;
           <tr><td class="prop">OWL type:</td><td><a href="https://www.w3.org/TR/owl2-rdf-based-semantics/#table-axiomatic-properties">owl:ObjectProperty</a></td></tr>
           <tr><td class="prop">Label:</td><td>is profile of</td></tr>
           <tr><td class="prop">Definition:</td><td>The subject of 'is profile of' defines constraints on the object which playes the role of a base specification</td></tr>
+          <tr><td class="prop">Sub property of:</td><td><a href="#Property:isTransitiveProfileOf">prof:isTransitiveProfileOf</a></td></tr>
           <tr><td class="prop">Domain:</td><td><a href="#Class:Profile">prof:Profile</a></td></tr>
           <tr><td class="prop">Range:</td><td><a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-Standard">dct:Standard</a></td></tr>
           <tr><td class="prop">Usage Note:</td>
@@ -756,6 +757,9 @@ CSIRO's publications catalogue."""@en ;
               </p>
               <p>
                 Note that the axiom within this vocabulary that allows the inference that conformance to a profile means conformance to anything it profiles is part of the definition <code><a href="#Property:conformsTo"></a></code>.
+              </p>
+              <p>
+                The use of this prof:isTransitiveProfileOf as a super-property of prof:isProfileOf allows communities of practice to exploit transitive interpretations of hierarchical network of profiles as they see fit, while not interfering with the semantics of prof:isProfileOf, which cannot enforce such transitivity. Intuitively, one can interpret prof:isProfileOf statements as explicitly asserted direct profiling links, while prof:isTransitiveProfileOf is used to reflect more-general (and possibly indirect) ancestor relationships.
               </p>
             </td>
           </tr>
@@ -772,9 +776,20 @@ CSIRO's publications catalogue."""@en ;
           <tr><td class="prop">OWL type:</td><td><a href="https://www.w3.org/TR/owl2-rdf-based-semantics/#table-axiomatic-properties">owl:ObjectProperty</a></td></tr>
           <tr><td class="prop">Label:</td><td>is a transitive profile of</td></tr>
           <tr><td class="prop">Definition:</td><td>A specification for which this Profile defines constraints, possibly through a chain of isProfileOf relationships</td></tr>
+          <tr><td class="prop">Super property of:</td><td><a href="#Property:isProfileOf">prof:isProfileOf</a></td></tr>
           <tr><td class="prop">Domain:</td><td><a href="#Class:Profile">prof:Profile</a></td></tr>
           <tr><td class="prop">Range:</td><td><a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-Standard">dct:Standard</a></td></tr>
-          <tr><td class="prop">Usage note:</td><td>This is a convenience predicate that may be used to declare all specifications (including profiles) that the subject profile requires an information resource to conform to. This avoids forcing clients to traverse a profile hierarchy to find all conformance implications and available resources. If present all such relationships should be present so a client can safely avoid hierarchy traversal</td></tr>
+          <tr>
+            <td class="prop">Usage note:</td>
+            <td>
+              <p>
+                This is a convenience predicate that may be used to declare all specifications (including profiles) that the subject profile requires an information resource to conform to. This avoids forcing clients to traverse a profile hierarchy to find all conformance implications and available resources. If present all such relationships should be present so a client can safely avoid hierarchy traversal.
+              </p>
+              <p>
+                The use of this prof:isTransitiveProfileOf as a super-property of prof:isProfileOf allows communities of practice to exploit transitive interpretations of hierarchical network of profiles as they see fit, while not interfering with the semantics of prof:isProfileOf, which cannot enforce such transitivity. Intuitively, one can interpret prof:isProfileOf statements as explicitly asserted direct profiling links, while prof:isTransitiveProfileOf is used to reflect more-general (and possibly indirect) ancestor relationships.
+              </p>
+            </td>
+          </tr>
         </tbody>
       </table>
     </section>
