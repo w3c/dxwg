@@ -841,46 +841,6 @@ Content-Profile: http://example.org/profile/x, \
       </p>
     </section>
   </section>
-  <section id="link-attributes">
-    <h2>Link Attributes</h2>
-      <section id="link-attributes-token">
-	<h3>Token</h3>
-	<p>
-	  When used in a <code>Link</code> header field,
-	  the attribute <code>token</code> is used to specify
-	  a <a>token</a> that a client MAY use
-	  as an alternative to the full profile URI
-	  given in the <code>anchor</code> attribute.
-	</p>
-	<p>
-	  It should be noted that the use of the token as an alternative to the profile URI
-	  is per default limited to the current resource
-	  (i. e. the resource identified by the current request URI).
-	  Servers MAY use a larger scope for this
-	  but clients should not depend on that
-	  unless the server documentation explicitly gives other instructions through some other means.
-	</p>
-	<p>
-	  The ABNF for the profile attribute's value is <code>(token / quoted-string)</code>,
-	  where "token"and "quoted-string" are defined as in
-		<a href="https://tools.ietf.org/html/rfc7230#section-3.2.6">section 3.2.6</a>
-	  of [[RFC7230]]. The rules for <code>link-param</code> values defined in
-		<a href="https://tools.ietf.org/html/rfc8288#section-3">section 3</a> of [[RFC8288]] apply.
-	</p>
-	<pre id="eg-link-attribute-token" class="example nohighlight" aria-busy="false" aria-live="polite"
-           title="Using the Link attribute ''token'' to link a profile URI to a token">
-# The profile URI in the "anchor" element is linked to the token "igsn-r1"
-
-# Further, the relation "type" is used to inform
-# that the anchor resource is of type "prof:Profile"
-
-Link: &lt;http://www.w3.org/ns/dx/prof/Profile&gt;;
-  rel="type";
-  token="igsn-r1";
-  anchor=&lt;http://schema.igsn.org/description/1.0&gt;
-	</pre>
-      </section>
-  </section>
   <section id="functional-profiles">
     <h2>Functional Profiles</h2>
     <p>
@@ -907,7 +867,8 @@ Link: &lt;http://www.w3.org/ns/dx/prof/Profile&gt;;
       <h3>Hypertext Transfer Protocol Headers</h3>
       <p>
         An functional profile of the Abstract Model using Hypertext Transfer Protocol (HTTP) headers is presented here.
-        This implementation is based on HTTP content negotiation and uses two new HTTP headers,
+        This implementation is based on HTTP content negotiation and uses <code>Link</code> headers formulated in
+        particular ways and two new HTTP headers,
 	      <code>Accept-Profile</code> and <code>Content-Profile</code> that are to be defined in an upcoming
         Internet-Draft [[PROF-IETF]].
       </p>
@@ -1163,9 +1124,9 @@ Link:
         <section id="listprofiles-tokens">
           <h3>Token mappings</h3>
           <p>
-            If HTTP <a>server</a>s wish to allow <a>client</a>s to identify <a>profile</a>s via <a>token</a>s,
-            in addition to the the mandatory identification of <a>profile</a>s via via URI, the <a>server</a>s will
-            need to provide a <a>token</a> / URI mapping via this <strong>list profiles</strong> function.
+            If an HTTP <a>server</a> wishes to allow a <a>client</a> to identify a <a>profile</a> via a <a>token</a>,
+            in addition to the the mandatory identification of <a>profile</a>s via via URI, the <a>server</a>s MAY
+            provide a <a>token</a> / URI mapping via the <strong>list profiles</strong> function.
             When implementing the HTTP functional profile of this specification,
             a server MUST include a <code>Link</code> header ([[RFC8288]])
             for each <code>profile</code>/<code>token</code> pair in its response.
@@ -1173,32 +1134,65 @@ Link:
             "<code>http://www.w3.org/ns/dx/prof/Profile</code>"
             and MUST contain the following <code>Target Attribute</code>s:
           </p>
-	        <table>
+          <table>
             <thead>
-              <tr>
-                  <th>Target Attribute</th>
-                  <th>Target Attribute value</th>
-              </tr>
+            <tr>
+              <th>Target Attribute</th>
+              <th>Target Attribute value</th>
+            </tr>
             </thead>
             <tbody>
-              <tr>
-            <td><code>rel</code></td>
-            <td><code>"type"</code></td>
-              </tr>
-              <tr>
-            <td><code>token</code></td>
-            <td>The token mapped to the profile URI in the <code>anchor</code> attribute
-              </tr>
-              <tr>
-            <td><code>anchor</code></td>
-            <td>The profile URI of the profile mapped to the token in the <code>token</code> attribute
-              </tr>
+            <tr>
+              <td><code>rel</code></td>
+              <td><code>"type"</code></td>
+            </tr>
+            <tr>
+              <td><code>token</code></td>
+              <td>The token mapped to the profile URI in the <code>anchor</code> attribute
+            </tr>
+            <tr>
+              <td><code>anchor</code></td>
+              <td>The profile URI of the profile mapped to the token in the <code>token</code> attribute
+            </tr>
             </tbody>
           </table>
           <p>
-            Servers MAY add more attributes to that <code>Link</code> header.
+            The ABNF for the profile attribute's value is <code>(token / quoted-string)</code>,
+            where "token"and "quoted-string" are defined as in
+            <a href="https://tools.ietf.org/html/rfc7230#section-3.2.6">section 3.2.6</a>
+            of [[RFC7230]]. The rules for <code>link-param</code> values defined in
+            <a href="https://tools.ietf.org/html/rfc8288#section-3">section 3</a> of [[RFC8288]] apply.
+          </p>
+          <p>
+            An example <code>Link</code> header used to communicate a token/URI mapping is given in <a href="#eg-uri-token"></a>.
           </p>
           <pre id="eg-uri-token" class="example nohighlight" aria-busy="false" aria-live="polite"
+               title="Using the Link attribute ''token'' to link a profile URI to a token">
+# The profile URI in the "anchor" element is linked to the token "igsn-r1"
+
+# Further, the relation "type" is used to inform
+# that the anchor resource is of type "prof:Profile"
+
+Link: &lt;http://www.w3.org/ns/dx/prof/Profile&gt;;
+  rel="type";
+  token="igsn-r1";
+  anchor=&lt;http://schema.igsn.org/description/1.0&gt;
+	      </pre>
+
+          <p>
+            It should be noted that the use of the token as an alternative to the profile URI
+            is, by default, limited to the current resource
+            (i. e. the resource identified by the current request URI).
+            Servers MAY use a larger scope for this
+            but clients should not depend on that
+            unless the server documentation explicitly gives other instructions through some other means.
+          </p>
+          <p>
+            Servers MAY add more attributes to a <code>Link</code> header alongside token/URI mappings, for example
+            Alternate Representations data model content. <a href="#eg-uri-token-multi"></a> shows tokens a
+            <code>Link</code> header with multiple attributes.
+          </p>
+          <pre id="eg-uri-token-multi" class="example nohighlight" aria-busy="false" aria-live="polite"
                title="HTTP headers with profile URI / token mappings using 'token' parameters">
 # The Profile with URI urn:example:profile:marc21-dnb is mapped to the token "dnb"
 # and the Profile with URI http://example.org/profiles/marc21-loc is mapped to the token "loc"
