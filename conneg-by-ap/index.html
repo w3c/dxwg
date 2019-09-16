@@ -1121,7 +1121,7 @@ Link:
     dct:conformsTo &lt;urn:example:profile:y> .
         </pre>
         </section>
-        <section id="listprofiles-tokens">
+        <section id="http-tokens">
           <h3>Token mappings</h3>
           <p>
             If an HTTP <a>server</a> wishes to allow a <a>client</a> to identify a <a>profile</a> via a <a>token</a>,
@@ -1361,55 +1361,6 @@ http://example.com/path/to/resource/a?<strong>_profile=prof-01&amp;_mediatype=te
             discover what value is used, as detailed below in <a href="#qsa-keydiscovery"></a>.
           </p>
         </section>
-        <section id="qsa-token-use">
-          <h5>URI and token use</h5>
-          <p>
-            Currently, the convention in HTTP content negotiation by Media Type uses tokens for Media Types, such as
-            <code>text/html</code> or <code>application/ld+json</code> with the tokens registered at
-            <a href="http://www.iana.org/assignments/media-types">IANA's Media Types list</a> and Content Negotiation by
-            Profile system implementers SHOULD use tokens from that list for Media Type identifiers and follow HTTP
-            content negotiation best practice for identifiers for other content negotiation dimensions (language etc.).
-          </p>
-          <div class="note" title="URI use for Media Types">
-            Several initiatives exist that have created URIs for Media Types based on IANA's tokens, such as
-            <a href="https://conneg.info">
-            conneg.info</a>. These URIs may be used to indicate Media Types.
-          </div>
-          <p>
-            There is no proposal to create a central register of profiles, as this is thought by these authors to be
-            unsustainable in the long term, given the likely numbers of profiles to be established and likely community-
-            specific nature of profiles (individual communities will create profiles for their own needs that will not
-            be widely relevant).
-          </p>
-          <p>
-            As per <a href="#profileid"></a>, all profiles MUST be identified by URI since URIs are universally unique
-            and therefore do not require registration to avoid identifier duplication. However, systems conforming to
-            either of the QSA functional profiles of this specification, instead of using URIs to identify profiles
-            during client/server interactions, MAY use un-registered and non-universally unique tokens to identify
-            profiles but, if they do, they MUST provide a way for clients to discover profile token/URI mappings.
-          </p>
-          <h5>Resource URL</h5>
-          <p>
-            Resource URLs for which QSA-based profile negotiation is taking place SHOULD NOT themselves be QSA values
-            of other resource URIs in any QSA-based system. Such mechanics may be used internally and are used by
-            legacy systems for profile negotiation but are best hidden from to the <a>client</a> to make
-            conformance to these QSA profiles more recognizable. <a href="#eg-resource-url"></a> shows this.
-          </p>
-          <pre id="eg-resource-url"
-           class="example nohighlight" aria-busy="false" aria-live="polite"
-           title="Resource URLs must not, themselves, be parameters of other URLs">
-For the representation of Resource X, according to Profile Y, in Media Type Z:
-
-Rather than:
-GET /single/endpoint \
-            ?resource=http://example.org/resource/X \
-            &amp;_profile=Y \
-            &amp;_mediatype=Z HTTP/1.1
-
-Use:
-GET /resource/X?_profile=Y&amp;_mediatype=Z HTTP/1.1
-          </pre>
-        </section>
       </section>
       <section id="qsa-listprofiles">
         <h4>list profiles</h4>
@@ -1586,6 +1537,61 @@ Link:
     &lt;/tr>
   &lt;/tbody>
 &lt;/table>
+          </pre>
+        </section>
+        <section id="qsa-tokens">
+          <h5>Token mappings</h5>
+          <p>
+            Currently, the convention in HTTP content negotiation by Media Type uses tokens for Media Types, such as
+            <code>text/html</code> or <code>application/ld+json</code> with the tokens registered at
+            <a href="http://www.iana.org/assignments/media-types">IANA's Media Types list</a> and Content Negotiation by
+            Profile system implementers SHOULD use tokens from that list for Media Type identifiers and follow HTTP
+            content negotiation best practice for identifiers for other content negotiation dimensions (language etc.).
+          </p>
+          <div class="note" title="URI use for Media Types">
+            Several initiatives exist that have created URIs for Media Types based on IANA's tokens, such as
+            <a href="https://conneg.info">
+              conneg.info</a>. These URIs may be used to indicate Media Types.
+          </div>
+          <p>
+            There is no proposal to create a central register of profiles, as this is thought by these authors to be
+            unsustainable in the long term, given the likely numbers of profiles to be established and likely community-
+            specific nature of profiles (individual communities will create profiles for their own needs that will not
+            be widely relevant).
+          </p>
+          <p>
+            As per <a href="#profileid"></a>, all profiles MUST be identified by URI since URIs are universally unique
+            and therefore do not require registration to avoid identifier duplication. However, systems conforming to
+            either of the QSA functional profiles of this specification, instead of using URIs to identify profiles
+            during client/server interactions, MAY use un-registered and non-universally unique tokens to identify
+            profiles but, if they do, they MUST provide a way for clients to discover profile token/URI mappings.
+          </p>
+          <p>
+            QSA servers wishing to make tokens for profile URIs available to clients SHOULD follow the instructions
+            provided for the HTTP Functional Profile in <a href="#http-tokens"></a>.
+          </p>
+        </section>
+        <section id="qsa-resource-url">
+          <h5>Resource URL</h5>
+          <p>
+            Resource URLs for which QSA-based profile negotiation is taking place SHOULD NOT themselves be QSA values
+            of other resource URIs in any QSA-based system. Such mechanics may be used internally and are used by
+            legacy systems for profile negotiation but are best hidden from to the <a>client</a> to make
+            conformance to these QSA profiles more recognizable. <a href="#eg-resource-url"></a> shows this.
+          </p>
+          <pre id="eg-resource-url"
+               class="example nohighlight" aria-busy="false" aria-live="polite"
+               title="Resource URLs must not, themselves, be parameters of other URLs">
+For the representation of Resource X, according to Profile Y, in Media Type Z:
+
+Rather than:
+GET /single/endpoint \
+            ?resource=http://example.org/resource/X \
+            &amp;_profile=Y \
+            &amp;_mediatype=Z HTTP/1.1
+
+Use:
+GET /resource/X?_profile=Y&amp;_mediatype=Z HTTP/1.1
           </pre>
         </section>
       </section>
