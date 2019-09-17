@@ -841,46 +841,6 @@ Content-Profile: http://example.org/profile/x, \
       </p>
     </section>
   </section>
-  <section id="link-attributes">
-    <h2>Link Attributes</h2>
-      <section id="link-attributes-token">
-	<h3>Token</h3>
-	<p>
-	  When used in a <code>Link</code> header field,
-	  the attribute <code>token</code> is used to specify
-	  a <a>token</a> that a client MAY use
-	  as an alternative to the full profile URI
-	  given in the <code>anchor</code> attribute.
-	</p>
-	<p>
-	  It should be noted that the use of the token as an alternative to the profile URI
-	  is per default limited to the current resource
-	  (i. e. the resource identified by the current request URI).
-	  Servers MAY use a larger scope for this
-	  but clients should not depend on that
-	  unless the server documentation explicitly gives other instructions through some other means.
-	</p>
-	<p>
-	  The ABNF for the profile attribute's value is <code>(token / quoted-string)</code>,
-	  where "token"and "quoted-string" are defined as in
-		<a href="https://tools.ietf.org/html/rfc7230#section-3.2.6">section 3.2.6</a>
-	  of [[RFC7230]]. The rules for <code>link-param</code> values defined in
-		<a href="https://tools.ietf.org/html/rfc8288#section-3">section 3</a> of [[RFC8288]] apply.
-	</p>
-	<pre id="eg-link-attribute-token" class="example nohighlight" aria-busy="false" aria-live="polite"
-           title="Using the Link attribute ''token'' to link a profile URI to a token">
-# The profile URI in the "anchor" element is linked to the token "igsn-r1"
-
-# Further, the relation "type" is used to inform
-# that the anchor resource is of type "prof:Profile"
-
-Link: &lt;http://www.w3.org/ns/dx/prof/Profile&gt;;
-  rel="type";
-  token="igsn-r1";
-  anchor=&lt;http://schema.igsn.org/description/1.0&gt;
-	</pre>
-      </section>
-  </section>
   <section id="functional-profiles">
     <h2>Functional Profiles</h2>
     <p>
@@ -907,7 +867,8 @@ Link: &lt;http://www.w3.org/ns/dx/prof/Profile&gt;;
       <h3>Hypertext Transfer Protocol Headers</h3>
       <p>
         An functional profile of the Abstract Model using Hypertext Transfer Protocol (HTTP) headers is presented here.
-        This implementation is based on HTTP content negotiation and uses two new HTTP headers,
+        This implementation is based on HTTP content negotiation and uses <code>Link</code> headers formulated in
+        particular ways and two new HTTP headers,
 	      <code>Accept-Profile</code> and <code>Content-Profile</code> that are to be defined in an upcoming
         Internet-Draft [[PROF-IETF]].
       </p>
@@ -1160,12 +1121,12 @@ Link:
     dct:conformsTo &lt;urn:example:profile:y> .
         </pre>
         </section>
-        <section id="listprofiles-tokens">
+        <section id="http-tokens">
           <h3>Token mappings</h3>
           <p>
-            If HTTP <a>server</a>s wish to allow <a>client</a>s to identify <a>profile</a>s via <a>token</a>s,
-            in addition to the the mandatory identification of <a>profile</a>s via via URI, the <a>server</a>s will
-            need to provide a <a>token</a> / URI mapping via this <strong>list profiles</strong> function.
+            If an HTTP <a>server</a> wishes to allow a <a>client</a> to identify a <a>profile</a> via a <a>token</a>,
+            in addition to the the mandatory identification of <a>profile</a>s via via URI, the <a>server</a>s MAY
+            provide a <a>token</a> / URI mapping via the <strong>list profiles</strong> function.
             When implementing the HTTP functional profile of this specification,
             a server MUST include a <code>Link</code> header ([[RFC8288]])
             for each <code>profile</code>/<code>token</code> pair in its response.
@@ -1173,32 +1134,65 @@ Link:
             "<code>http://www.w3.org/ns/dx/prof/Profile</code>"
             and MUST contain the following <code>Target Attribute</code>s:
           </p>
-	        <table>
+          <table>
             <thead>
-              <tr>
-                  <th>Target Attribute</th>
-                  <th>Target Attribute value</th>
-              </tr>
+            <tr>
+              <th>Target Attribute</th>
+              <th>Target Attribute value</th>
+            </tr>
             </thead>
             <tbody>
-              <tr>
-            <td><code>rel</code></td>
-            <td><code>"type"</code></td>
-              </tr>
-              <tr>
-            <td><code>token</code></td>
-            <td>The token mapped to the profile URI in the <code>anchor</code> attribute
-              </tr>
-              <tr>
-            <td><code>anchor</code></td>
-            <td>The profile URI of the profile mapped to the token in the <code>token</code> attribute
-              </tr>
+            <tr>
+              <td><code>rel</code></td>
+              <td><code>"type"</code></td>
+            </tr>
+            <tr>
+              <td><code>token</code></td>
+              <td>The token mapped to the profile URI in the <code>anchor</code> attribute
+            </tr>
+            <tr>
+              <td><code>anchor</code></td>
+              <td>The profile URI of the profile mapped to the token in the <code>token</code> attribute
+            </tr>
             </tbody>
           </table>
           <p>
-            Servers MAY add more attributes to that <code>Link</code> header.
+            The ABNF for the profile attribute's value is <code>(token / quoted-string)</code>,
+            where "token"and "quoted-string" are defined as in
+            <a href="https://tools.ietf.org/html/rfc7230#section-3.2.6">section 3.2.6</a>
+            of [[RFC7230]]. The rules for <code>link-param</code> values defined in
+            <a href="https://tools.ietf.org/html/rfc8288#section-3">section 3</a> of [[RFC8288]] apply.
+          </p>
+          <p>
+            An example <code>Link</code> header used to communicate a token/URI mapping is given in <a href="#eg-uri-token"></a>.
           </p>
           <pre id="eg-uri-token" class="example nohighlight" aria-busy="false" aria-live="polite"
+               title="Using the Link attribute ''token'' to link a profile URI to a token">
+# The profile URI in the "anchor" element is linked to the token "igsn-r1"
+
+# Further, the relation "type" is used to inform
+# that the anchor resource is of type "prof:Profile"
+
+Link: &lt;http://www.w3.org/ns/dx/prof/Profile&gt;;
+  rel="type";
+  token="igsn-r1";
+  anchor=&lt;http://schema.igsn.org/description/1.0&gt;
+	      </pre>
+
+          <p>
+            It should be noted that the use of the token as an alternative to the profile URI
+            is, by default, limited to the current resource
+            (i. e. the resource identified by the current request URI).
+            Servers MAY use a larger scope for this
+            but clients should not depend on that
+            unless the server documentation explicitly gives other instructions through some other means.
+          </p>
+          <p>
+            Servers MAY add more attributes to a <code>Link</code> header alongside token/URI mappings, for example
+            Alternate Representations data model content. <a href="#eg-uri-token-multi"></a> shows tokens a
+            <code>Link</code> header with multiple attributes.
+          </p>
+          <pre id="eg-uri-token-multi" class="example nohighlight" aria-busy="false" aria-live="polite"
                title="HTTP headers with profile URI / token mappings using 'token' parameters">
 # The Profile with URI urn:example:profile:marc21-dnb is mapped to the token "dnb"
 # and the Profile with URI http://example.org/profiles/marc21-loc is mapped to the token "loc"
@@ -1366,55 +1360,6 @@ http://example.com/path/to/resource/a?<strong>_profile=prof-01&amp;_mediatype=te
             functional profile is conformed to, servers MUST additionally present a mechanism to allow clients to
             discover what value is used, as detailed below in <a href="#qsa-keydiscovery"></a>.
           </p>
-        </section>
-        <section id="qsa-token-use">
-          <h5>URI and token use</h5>
-          <p>
-            Currently, the convention in HTTP content negotiation by Media Type uses tokens for Media Types, such as
-            <code>text/html</code> or <code>application/ld+json</code> with the tokens registered at
-            <a href="http://www.iana.org/assignments/media-types">IANA's Media Types list</a> and Content Negotiation by
-            Profile system implementers SHOULD use tokens from that list for Media Type identifiers and follow HTTP
-            content negotiation best practice for identifiers for other content negotiation dimensions (language etc.).
-          </p>
-          <div class="note" title="URI use for Media Types">
-            Several initiatives exist that have created URIs for Media Types based on IANA's tokens, such as
-            <a href="https://conneg.info">
-            conneg.info</a>. These URIs may be used to indicate Media Types.
-          </div>
-          <p>
-            There is no proposal to create a central register of profiles, as this is thought by these authors to be
-            unsustainable in the long term, given the likely numbers of profiles to be established and likely community-
-            specific nature of profiles (individual communities will create profiles for their own needs that will not
-            be widely relevant).
-          </p>
-          <p>
-            As per <a href="#profileid"></a>, all profiles MUST be identified by URI since URIs are universally unique
-            and therefore do not require registration to avoid identifier duplication. However, systems conforming to
-            either of the QSA functional profiles of this specification, instead of using URIs to identify profiles
-            during client/server interactions, MAY use un-registered and non-universally unique tokens to identify
-            profiles but, if they do, they MUST provide a way for clients to discover profile token/URI mappings.
-          </p>
-          <h5>Resource URL</h5>
-          <p>
-            Resource URLs for which QSA-based profile negotiation is taking place SHOULD NOT themselves be QSA values
-            of other resource URIs in any QSA-based system. Such mechanics may be used internally and are used by
-            legacy systems for profile negotiation but are best hidden from to the <a>client</a> to make
-            conformance to these QSA profiles more recognizable. <a href="#eg-resource-url"></a> shows this.
-          </p>
-          <pre id="eg-resource-url"
-           class="example nohighlight" aria-busy="false" aria-live="polite"
-           title="Resource URLs must not, themselves, be parameters of other URLs">
-For the representation of Resource X, according to Profile Y, in Media Type Z:
-
-Rather than:
-GET /single/endpoint \
-            ?resource=http://example.org/resource/X \
-            &amp;_profile=Y \
-            &amp;_mediatype=Z HTTP/1.1
-
-Use:
-GET /resource/X?_profile=Y&amp;_mediatype=Z HTTP/1.1
-          </pre>
         </section>
       </section>
       <section id="qsa-listprofiles">
@@ -1594,10 +1539,64 @@ Link:
 &lt;/table>
           </pre>
         </section>
+        <section id="qsa-tokens">
+          <h5>Token mappings</h5>
+          <p>
+            Currently, the convention in HTTP content negotiation by Media Type uses tokens for Media Types, such as
+            <code>text/html</code> or <code>application/ld+json</code> with the tokens registered at
+            <a href="http://www.iana.org/assignments/media-types">IANA's Media Types list</a> and Content Negotiation by
+            Profile system implementers SHOULD use tokens from that list for Media Type identifiers and follow HTTP
+            content negotiation best practice for identifiers for other content negotiation dimensions (language etc.).
+          </p>
+          <div class="note" title="URI use for Media Types">
+            Several initiatives exist that have created URIs for Media Types based on IANA's tokens, such as
+            <a href="https://conneg.info">
+              conneg.info</a>. These URIs may be used to indicate Media Types.
+          </div>
+          <p>
+            There is no proposal to create a central register of profiles, as this is thought by these authors to be
+            unsustainable in the long term, given the likely numbers of profiles to be established and likely community-
+            specific nature of profiles (individual communities will create profiles for their own needs that will not
+            be widely relevant).
+          </p>
+          <p>
+            As per <a href="#profileid"></a>, all profiles MUST be identified by URI since URIs are universally unique
+            and therefore do not require registration to avoid identifier duplication. However, systems conforming to
+            either of the QSA functional profiles of this specification, instead of using URIs to identify profiles
+            during client/server interactions, MAY use un-registered and non-universally unique tokens to identify
+            profiles but, if they do, they MUST provide a way for clients to discover profile token/URI mappings.
+          </p>
+          <p>
+            QSA servers wishing to make tokens for profile URIs available to clients SHOULD follow the instructions
+            provided for the HTTP Functional Profile in <a href="#http-tokens"></a>.
+          </p>
+        </section>
+        <section id="qsa-resource-url">
+          <h5>Resource URL</h5>
+          <p>
+            Resource URLs for which QSA-based profile negotiation is taking place SHOULD NOT themselves be QSA values
+            of other resource URIs in any QSA-based system. Such mechanics may be used internally and are used by
+            legacy systems for profile negotiation but are best hidden from to the <a>client</a> to make
+            conformance to these QSA profiles more recognizable. <a href="#eg-resource-url"></a> shows this.
+          </p>
+          <pre id="eg-resource-url"
+               class="example nohighlight" aria-busy="false" aria-live="polite"
+               title="Resource URLs must not, themselves, be parameters of other URLs">
+For the representation of Resource X, according to Profile Y, in Media Type Z:
+
+Rather than:
+GET /single/endpoint \
+            ?resource=http://example.org/resource/X \
+            &amp;_profile=Y \
+            &amp;_mediatype=Z HTTP/1.1
+
+Use:
+GET /resource/X?_profile=Y&amp;_mediatype=Z HTTP/1.1
+          </pre>
+        </section>
       </section>
       <section id="qsa-getresourcebyprofile">
         <h4>get resource by profile</h4>
-        <p><strong><em>Expressing profile preference</em></strong></p>
         <p>
           To be conformant with the "QSA Functional Profile" profile of this specification, a <a>server</a> MUST allow
           clients to request resources according to profiles they identify with a <code>_profile</code> query string.
@@ -1674,10 +1673,10 @@ Accept-Profile: http://example.org/profile/x
 
 # The server does not understand the HTTP Get Resource By Profile
 # request (doesn't support the HTTP Headers Functional Profile) but is
-# able to supply an HTTP Link header indicating alternate profiles. It
-# can be seen from the Link header that keys other than _profile &
-# _mediatype are in use - view & format - thus this is QSA Alt, not a
-# QSA Functional Profile-conformant system
+# able to supply an HTTP Link header indicating alternate resource
+# representations. It can be seen from the Link header that keys other
+# than _profile & _mediatype are in use - view & format - thus this is
+# QSA Alt, not a QSA Functional Profile-conformant system
 
 # The resource representations available conform to profile-x & profile-y.
 # The profile-y-conformant representation is only available in XML
@@ -1698,7 +1697,7 @@ Link:
 # by the link header with rel="self"
         </pre>
         <p>
-          While the Link header response above communicates all the information that a <em>list profiles</em> request
+          While the Link header in <a href="#eg-qsa-keydiscovery"></a> above communicates all the information that a <em>list profiles</em> request
           does, it is not visible directly in a web browser. <a href="#eg-list-profiles-mediatype"></a> shows a
           requests/response pair that include equivalent Link header and HTTP body information listing profiles, the
           latter of which is visible in a browser but a client formulating this request is dependent on a it knowing
@@ -1707,8 +1706,8 @@ Link:
         </p>
         <p>
           To communicate to a client what QSA key/value pair is used for <em>list profiles</em> when the "QSA Alternate
-          Keywords Functional Profile" is conformed to, a server SHOULD indicate, following the methods above for
-          <em>list profiles</em> communication, that a representation of the resource is available that conforms to the
+          Keywords Functional Profile" is conformed to, a server SHOULD, following the methods above for
+          <em>list profiles</em> communication, indicate that a representation of the resource is available that conforms to the
           Alternate Profiles Data Model described in <a href="#eg-qsa-keydisco-altprofiles"></a>. This is demonstrated
           as an extension to <a href="#eg-qsa-keydiscovery"></a> in <a href="#eg-qsa-keydisco-altprofiles"></a>.
         </p>
@@ -1747,49 +1746,6 @@ Link:
           Alternate Profiles Data Model, the HTTP body of that response will also list the alternate profiles for
           <code>/resource/a</code> as opposed to the default representation of it.
         </p>
-        <div class="note" title="For further investigation: alternates profiles profile">
-          <p>
-            Nick: it appears we are dependent on an identifier for the "profile of a resource that lists all others
-            profiles". This is analogous in content to the Link header response for <em>list profiles</em> and is exactly
-            what the existing QSA systems respond with when asked for <code>?_view=alternates</code> and what is given
-            above as <code>?_profile=all</code>. So it's a URI that is equivalent to the QSA Functional Profile profile's token
-            of <em>all</em>.
-          </p>
-          <p>
-            If we had such a URI, I would be able to say something like a Link header response should include this to
-            indicate how a client can show how to trigger <code>?_profile=all</code> (list profiles):
-          </p>
-          <pre class="nohighlight">Link:
-    &lt;http://example.org/resource/a&gt;;
-      rel="self";
-      type="text/turtle";
-      profile="urn:example:profile:x",
-    <strong>&lt;http://example.org/resource/a&gt;;
-      rel="alternate";
-      type="text/turtle";
-      profile="http://example.org/profile/alternates",</strong>
-    &lt;http://example.org/resource/a&gt;;
-      rel="alternate";
-      type="text/turtle";
-      profile="urn:example:profile:y",
-    &lt;http://example.org/resource/a&gt;;
-      rel="alternate";
-      type="application/xml";
-      profile="urn:example:profile:x",
-    &lt;http://example.org/resource/a&gt;;
-      rel="alternate";
-      type="application/xml";
-      profile="urn:example:profile:y",
-    &lt;http://example.org/resource/a&gt;;
-      rel="alternate";
-      type="text/html"
-            </pre>
-          <p>
-            The bolded part of the Link header above is the alternate profile for the resource that lists other profiles
-            which we know since the profile identifier is <strong><code>http://example.org/profile/alternates</code>
-            </strong> in some format (here <code>text/turtle</code>.
-          </p>
-        </div>
       </section>
     </section>
   </section>
@@ -2055,7 +2011,7 @@ cnpr:rrd a prof:Profile ;
             dct:conformsTo</a></code> predicate like this:
         </p>
         <p>
-          <code>&lt;hjttp://example.com/resource/a&gt; dct:conformsTo &lt;SPEC_OR_PROFILE_URI&gt; .</code>
+          <code>&lt;http://example.com/resource/a&gt; dct:conformsTo &lt;SPEC_OR_PROFILE_URI&gt; .</code>
         </p>
         <p>
           The <code>&lt;SPEC_OR_PROFILE_URI&gt;</code> may be this specification's URI but, in the best case, would be
@@ -2063,7 +2019,7 @@ cnpr:rrd a prof:Profile ;
           conformed to when the profile URIs are cited as they are narrow in scope than the specification as a whole.
         </p>
         <p>
-          The code in <a href="#service-conforming"></a> shows an imaginary Web Service documented using
+          The code in <a href="#service-conforming">Code Listing 2</a> shows an imaginary Web Service documented using
           [[?VOCAB-DCAT-2]] and borrowing parts from its examples, such as
           <a href="https://www.w3.org/TR/vocab-dcat-2/#ex-service-eea">Example 49</a>,
           that includes a <code>dct:conformsTo</code> predicate as [[?VOCAB-DCAT-2]], as well as [[PROF]], suggest for
