@@ -1,7 +1,7 @@
 var respecConfig = {
     specStatus: "ED",
     shortName: "dx-prof",
-    edDraftURI: "https://w3c.github.io/dxwg/profilesont/",
+    edDraftURI: "https://w3c.github.io/dxwg/prof/",
     canonicalURI: "TR",
     implementationReportURI: "https://github.com/CSIRO-enviro-informatics/prof-implementations",
     testSuiteURI: "https://github.com/CSIRO-enviro-informatics/prof-implementations",
@@ -14,9 +14,9 @@ var respecConfig = {
       },
       {
         name:       "Nicholas J. Car",
-        url:        "https://people.csiro.au/Nicholas-Car",
-        company:    "CSIRO",
-        companyURL: "https://www.csiro.au/",
+        mailto:     "nicholas.car@surroundaustralia.com",
+        company:    "SURROUND Australia Pty Ltd and before CSIRO",
+        companyURL: "https://surroundaustralia.com",
         orcid:      "0000-0002-8742-7730",
         w3cid:      70131
     }],
@@ -36,7 +36,7 @@ var respecConfig = {
     inlineCSS: "true",
     lint: "false",
     issueBase: "https://github.com/w3c/dxwg/issues/",
-    github:    "https://github.com/w3c/dxwg/issues/",
+    github:    "https://github.com/w3c/dxwg/",
     localBiblio: {
         PDF: {
             href: "https://www.iso.org/standard/51502.html",
@@ -122,12 +122,3 @@ var respecConfig = {
         }
     }
 };
-
-/*
-,
-        extras:     [{
-          name:  "<img src='orcid_logo.png' alt='orcid logo' />",
-          href:  "https://orcid.org/0000-0002-8742-7730",
-          class: "orcid"
-        }]
- */
