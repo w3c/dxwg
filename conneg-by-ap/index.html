@@ -283,13 +283,13 @@
   </section>
   <section id="relatedwork" class="informative">
     <h2>Related Work</h2>
-    <p>
+    <div class="note"
       The standardization of the content-negotiation HTTP headers is the purview of the IETF. A first proposal
       for an <a href="https://profilenegotiation.github.io/I-D-Profile-Negotiation/I-D-Profile-Negotiation">Internet Draft
       for Indicating and Negotiating Profiles in HTTP</a> [[PROF-IETF]] is available but has not yet been submitted to the IETF. The
       current version of the IETF draft (-00) is expected to be completely re-written in parallel work with this document and should
       not be seen as anything but work-in-progress until this paragraph is removed from this document.
-    </p>
+    </div>
     <section id="related-http">
       <h3>Existing standards for transporting profile information in HTTP headers</h3>
       <h4>Using Accept/Content Type together with the profile parameter</h4>
@@ -1235,7 +1235,7 @@ Link:
 		by issuing an <code>HTTP GET</code> request against the resource
 		and specifying the desired profile URI in an <code>Accept-Profile</code> header.
           	It is possible to specify a range of acceptable profile URIs
-		and also to indicate preferences by using quality indicators (q-values). <a href="#eg-http-get"></a> shows a simple
+		and also to indicate preferences by using quality indicators (q-values) as an ordering mechanism. <a href="#eg-http-get"></a> shows a simple
           request for a resource, <code>/resource/a</code>, with a preference for representations according to profiles
           identified by the URIs (URNs, in this example) <code>urn:example:profile:x</code> &amp;
           <code>urn:example:profile:y</code> with 'q' values indicating a higher preference for the first. A response
@@ -1363,6 +1363,7 @@ http://example.com/path/to/resource/a?<strong>_profile=prof-01&amp;_mediatype=te
             profile token or URI and SHOULD use <code>_mediatype</code> to indicate a resource representation's Media
             Type.
           </p>
+          <div class="note">The recommendation to standardise the use of _mediatype in QSA is <strong>at risk</strong></div>
           <p>
             When conforming to the profile "QSA Alternate Keywords Functional Profile", any key values acceptable
             within the specification of [[RFC3986]] may be used to indicate profile MAY be used, however if this
@@ -1893,7 +1894,8 @@ Link:
 		  </p>
 		  <ul>
 			  <li>Use of <a href="#http">HTTP protocol headers</a>
-				  for information about which profiles the response's message conforms to.
+				  for information about which profiles the response's message conforms to.</li>
+              <li>Recommendation to use _mediatype to define preferred encoding in QSA implementations.</li>
 		  </ul>
 	  </section>
   </section>
