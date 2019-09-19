@@ -1,0 +1,61 @@
+# baseURI: https://dcat.example.org/basic-example
+
+@prefix adms: <https://www.w3.org/ns/adms#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix ex: <https://dcat.example.org/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix locn: <http://www.w3.org/ns/locn#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix w3cgeo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:basic-example
+  a owl:Ontology ;
+.
+ex:catalog
+  a dcat:Catalog ;
+  dct:language <http://id.loc.gov/vocabulary/iso639-1/en> ;
+  dct:publisher ex:transparency-office ;
+  dct:title "Imaginary Catalog"@en ;
+  rdfs:label "Imaginary Catalog"@en ;
+  dcat:dataset ex:dataset-001 ;
+  dcat:dataset ex:dataset-002 ;
+  dcat:dataset ex:dataset-003 ;
+  foaf:homepage <http://example.org/catalog> ;
+.
+ex:dataset-001
+  a dcat:Dataset ;
+  dct:accrualPeriodicity <http://purl.org/linked-data/sdmx/2009/code#freq-W> ;
+  dct:creator ex:finance-employee-001 ;
+  dct:issued "2011-12-05"^^xsd:date ;
+  dct:language <http://id.loc.gov/vocabulary/iso639-1/en> ;
+  dct:modified "2011-12-15"^^xsd:date ;
+  dct:publisher ex:finance-ministry ;
+  dct:spatial <http://www.geonames.org/6695072> ;
+  dct:temporal <http://reference.data.gov.uk/id/quarter/2006-Q1> ;
+  dct:title "Imaginary dataset"@en ;
+  dcat:contactPoint <http://example.org/transparency-office/contact> ;
+  dcat:distribution ex:dataset-001-csv ;
+  dcat:keyword "accountability"@en ;
+  dcat:keyword "payments"@en ;
+  dcat:keyword "transparency"@en ;
+  dcat:spatialResolutionInMeters 30.0 ;
+  dcat:temporalResolution "P1D"^^xsd:duration ;
+.
+ex:dataset-001-csv
+  a dcat:Distribution ;
+  dct:title "CSV distribution of imaginary dataset 001"@en ;
+  dcat:byteSize "5120"^^xsd:decimal ;
+  dcat:downloadURL <http://www.example.org/files/001.csv> ;
+  dcat:mediaType <https://www.iana.org/assignments/media-types/text/csv> ;
+.
+ex:transparency-office
+  a foaf:Organization ;
+  rdfs:label "Transparency Office"@en ;
+.
