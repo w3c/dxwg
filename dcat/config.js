@@ -3,6 +3,7 @@ var respecConfig = {
 //    subtitle: "Version 2",
     specStatus: "CR",
     crEnd: "2019-10-24",
+    implementationReportURI: "http://example.com/rep/",
     shortName: "vocab-dcat-2",
     canonicalURI: "TR",
     prevRecURI:           "https://www.w3.org/TR/vocab-dcat/",
