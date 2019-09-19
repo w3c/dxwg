@@ -2,12 +2,15 @@ var respecConfig = {
 //	preProcess: [dfn_index],
 //    subtitle: "Version 2",
     specStatus: "ED",
+//    specStatus: "CR",
+//    crEnd: "2019-10-24",
+//    implementationReportURI: "http://example.com/rep/",
     shortName: "vocab-dcat-2",
     canonicalURI: "TR",
     prevRecURI:           "https://www.w3.org/TR/vocab-dcat/",
     previousPublishDate:  "2014-01-16",
     previousMaturity:     "REC",
-//    previousURI:          "https://www.w3.org/TR/2014/REC-vocab-dcat-20140116/",
+//    previousURI:          "https://www.w3.org/TR/2014/REC-vocab-dcat-20140116/", -- Needed for CR etc
     edDraftURI:           "https://w3c.github.io/dxwg/dcat/",
 //    issueBase:            "https://github.com/w3c/dxwg/issues/", -- Not needed when github used
     alternateFormats: [{
@@ -22,7 +25,7 @@ var respecConfig = {
       companyURL: "http://www.cnr.it/",
       w3cid: 72458
     },{
-      name: "Dave Browning",
+      name: "David Browning",
       company: "Refinitiv",
       companyURL: "https://www.refinitiv.com",
       w3cid: 98704
