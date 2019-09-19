@@ -2,6 +2,7 @@ var respecConfig = {
 //	preProcess: [dfn_index],
 //    subtitle: "Version 2",
     specStatus: "CR",
+    crEnd: "2019-10-24",
     shortName: "vocab-dcat-2",
     canonicalURI: "TR",
     prevRecURI:           "https://www.w3.org/TR/vocab-dcat/",
