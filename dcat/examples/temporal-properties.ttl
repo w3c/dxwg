@@ -1,0 +1,107 @@
+# baseURI: https://dcat.example.org/temporal-properties
+# imports: http://www.w3.org/ns/dcat
+
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix ex: <https://dcat.example.org/> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix locn: <http://www.w3.org/ns/locn#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix w3cgeo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:ds127
+  a dcat:Dataset ;
+  dct:temporal [
+      a dct:PeriodOfTime ;
+      dcat:startDate "2016-03-04"^^xsd:date ;
+    ] ;
+.
+ex:ds257
+  a dcat:Dataset ;
+  dct:temporal [
+      a dct:PeriodOfTime ;
+      dcat:endDate "2018-08-05"^^xsd:date ;
+      dcat:startDate "2016-03-04"^^xsd:date ;
+    ] ;
+.
+ex:ds348
+  a dcat:Dataset ;
+  dct:temporal [
+      a dct:PeriodOfTime ;
+      a time:ProperInterval ;
+      time:hasBeginning [
+          a time:Instant ;
+          time:inXSDDate "2016-03-04"^^xsd:date ;
+        ] ;
+      time:hasEnd [
+          a time:Instant ;
+          time:inXSDDate "2018-08-05"^^xsd:date ;
+        ] ;
+    ] ;
+.
+ex:ds429
+  a dcat:Dataset ;
+  dct:temporal [
+      a dct:PeriodOfTime ;
+      a time:ProperInterval ;
+      time:hasBeginning [
+          a time:Instant ;
+          time:inXSDgYear "1914"^^xsd:gYear ;
+        ] ;
+      time:hasEnd [
+          a time:Instant ;
+          time:inXSDgYear "1939"^^xsd:gYear ;
+        ] ;
+    ] ;
+.
+ex:ds586
+  a dcat:Dataset ;
+  dct:temporal [
+      a dct:PeriodOfTime ;
+      a time:ProperInterval ;
+      time:hasEnd [
+          time:inXSDDate "2018-08-05"^^xsd:date ;
+        ] ;
+    ] ;
+.
+ex:ds782
+  a dcat:Dataset ;
+  dct:accrualPeriodicity <http://purl.org/cld/freq/continuous> ;
+  dcat:temporalResolution "PT1H"^^xsd:duration ;
+.
+ex:ds850
+  a dcat:Dataset ;
+  dct:temporal [
+      a dct:PeriodOfTime ;
+      a time:ProperInterval ;
+      time:hasBeginning [
+          a time:Instant ;
+          time:inTimePosition [
+              a time:TimePosition ;
+              time:hasTRS <http://resource.geosciml.org/classifier/cgi/geologicage/ma> ;
+              time:numericPosition 541.0 ;
+            ] ;
+        ] ;
+      time:hasEnd [
+          a time:Instant ;
+          time:inTimePosition [
+              a time:TimePosition ;
+              time:hasTRS <http://resource.geosciml.org/classifier/cgi/geologicage/ma> ;
+              time:numericPosition 251.902 ;
+            ] ;
+        ] ;
+    ] ;
+.
+ex:ds913
+  a dcat:Dataset ;
+  dct:accrualPeriodicity <http://purl.org/cld/freq/daily> ;
+  dcat:temporalResolution "PT15M"^^xsd:duration ;
+.
+ex:temporal-properties
+  a owl:Ontology ;
+  owl:imports <http://www.w3.org/ns/dcat> ;
+.

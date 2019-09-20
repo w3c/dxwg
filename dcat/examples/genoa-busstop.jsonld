@@ -1,0 +1,174 @@
+{
+  "@graph" : [ {
+    "@id" : "https://dcat.example.org/completenessWRTExpectedNumberOfEntities",
+    "@type" : "dqv:Metric",
+    "definition" : {
+      "@language" : "en",
+      "@value" : "The degree of completeness as ratio between the actual number of entities included in the dataset and the declared expected number of entities."
+    },
+    "expectedDataType" : "xsd:decimal",
+    "inDimension" : "ldqd:completeness"
+  }, {
+    "@id" : "https://dcat.example.org/genoa-busstop",
+    "@type" : "owl:Ontology",
+    "imports" : "http://www.w3.org/ns/dcat"
+  }, {
+    "@id" : "https://dcat.example.org/genoaBusStopsDataset",
+    "@type" : "dcat:Dataset",
+    "hasQualityAnnotation" : "https://dcat.example.org/genoaBusStopsDatasetCompletenessNote",
+    "hasQualityMeasurement" : "https://dcat.example.org/genoaBusStopsDatasetCompletenessMeasurement"
+  }, {
+    "@id" : "https://dcat.example.org/genoaBusStopsDatasetCompletenessMeasurement",
+    "@type" : "dqv:QualityMeasurement",
+    "computedOn" : "https://dcat.example.org/genoaBusStopsDataset",
+    "isMeasurementOf" : "https://dcat.example.org/completenessWRTExpectedNumberOfEntities",
+    "dqv:value" : {
+      "@type" : "xsd:decimal",
+      "@value" : "0.6833333"
+    },
+    "generatedAtTime" : "2018-05-27T02:52:02Z",
+    "wasAttributedTo" : "https://dcat.example.org/myQualityChecker",
+    "wasGeneratedBy" : "https://dcat.example.org/myQualityChecking"
+  }, {
+    "@id" : "https://dcat.example.org/genoaBusStopsDatasetCompletenessNote",
+    "@type" : "dqv:UserQualityFeedback",
+    "inDimension" : "ldqd:completeness",
+    "hasBody" : "https://dcat.example.org/textBody",
+    "hasTarget" : "https://dcat.example.org/genoaBusStopsDataset",
+    "motivatedBy" : "dqv:qualityAssessment",
+    "generatedAtTime" : "2018-05-27T02:52:02Z",
+    "wasAttributedTo" : "https://dcat.example.org/consumer1"
+  }, {
+    "@id" : "https://dcat.example.org/myQualityChecker",
+    "@type" : "prov:SoftwareAgent",
+    "label" : {
+      "@language" : "en",
+      "@value" : "A quality assessment service"
+    }
+  }, {
+    "@id" : "https://dcat.example.org/myQualityChecking",
+    "@type" : "prov:Activity",
+    "label" : {
+      "@language" : "en",
+      "@value" : "The checking of genoaBusStopsDataset's quality"
+    },
+    "endedAtTime" : "2018-05-27T02:52:02Z",
+    "generated" : "https://dcat.example.org/genoaBusStopsDatasetCompletenessMeasurement",
+    "startedAtTime" : "2018-05-27T00:52:02Z",
+    "used" : "https://dcat.example.org/genoaBusStopsDataset",
+    "wasAssociatedWith" : "https://dcat.example.org/myQualityChecker"
+  }, {
+    "@id" : "https://dcat.example.org/textBody",
+    "@type" : "oa:TextualBody",
+    "format" : "text/plain",
+    "language" : "en",
+    "value" : "Incomplete dataset: it contains only 20500 out of 30000 existing bus stops"
+  } ],
+  "@context" : {
+    "inDimension" : {
+      "@id" : "http://www.w3.org/ns/dqv#inDimension",
+      "@type" : "@id"
+    },
+    "generatedAtTime" : {
+      "@id" : "http://www.w3.org/ns/prov#generatedAtTime",
+      "@type" : "http://www.w3.org/2001/XMLSchema#dateTime"
+    },
+    "wasAttributedTo" : {
+      "@id" : "http://www.w3.org/ns/prov#wasAttributedTo",
+      "@type" : "@id"
+    },
+    "motivatedBy" : {
+      "@id" : "http://www.w3.org/ns/oa#motivatedBy",
+      "@type" : "@id"
+    },
+    "hasBody" : {
+      "@id" : "http://www.w3.org/ns/oa#hasBody",
+      "@type" : "@id"
+    },
+    "hasTarget" : {
+      "@id" : "http://www.w3.org/ns/oa#hasTarget",
+      "@type" : "@id"
+    },
+    "format" : {
+      "@id" : "http://purl.org/dc/terms/format"
+    },
+    "language" : {
+      "@id" : "http://purl.org/dc/terms/language"
+    },
+    "value" : {
+      "@id" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#value"
+    },
+    "startedAtTime" : {
+      "@id" : "http://www.w3.org/ns/prov#startedAtTime",
+      "@type" : "http://www.w3.org/2001/XMLSchema#dateTime"
+    },
+    "endedAtTime" : {
+      "@id" : "http://www.w3.org/ns/prov#endedAtTime",
+      "@type" : "http://www.w3.org/2001/XMLSchema#dateTime"
+    },
+    "generated" : {
+      "@id" : "http://www.w3.org/ns/prov#generated",
+      "@type" : "@id"
+    },
+    "used" : {
+      "@id" : "http://www.w3.org/ns/prov#used",
+      "@type" : "@id"
+    },
+    "wasAssociatedWith" : {
+      "@id" : "http://www.w3.org/ns/prov#wasAssociatedWith",
+      "@type" : "@id"
+    },
+    "label" : {
+      "@id" : "http://www.w3.org/2000/01/rdf-schema#label"
+    },
+    "wasGeneratedBy" : {
+      "@id" : "http://www.w3.org/ns/prov#wasGeneratedBy",
+      "@type" : "@id"
+    },
+    "isMeasurementOf" : {
+      "@id" : "http://www.w3.org/ns/dqv#isMeasurementOf",
+      "@type" : "@id"
+    },
+    "computedOn" : {
+      "@id" : "http://www.w3.org/ns/dqv#computedOn",
+      "@type" : "@id"
+    },
+    "hasQualityMeasurement" : {
+      "@id" : "http://www.w3.org/ns/dqv#hasQualityMeasurement",
+      "@type" : "@id"
+    },
+    "hasQualityAnnotation" : {
+      "@id" : "http://www.w3.org/ns/dqv#hasQualityAnnotation",
+      "@type" : "@id"
+    },
+    "expectedDataType" : {
+      "@id" : "http://www.w3.org/ns/dqv#expectedDataType",
+      "@type" : "@id"
+    },
+    "definition" : {
+      "@id" : "http://www.w3.org/2004/02/skos/core#definition"
+    },
+    "imports" : {
+      "@id" : "http://www.w3.org/2002/07/owl#imports",
+      "@type" : "@id"
+    },
+    "@vocab" : "https://dcat.example.org/",
+    "adms" : "https://www.w3.org/ns/adms#",
+    "owl" : "http://www.w3.org/2002/07/owl#",
+    "w3cgeo" : "http://www.w3.org/2003/01/geo/wgs84_pos#",
+    "xsd" : "http://www.w3.org/2001/XMLSchema#",
+    "dqv" : "http://www.w3.org/ns/dqv#",
+    "skos" : "http://www.w3.org/2004/02/skos/core#",
+    "rdfs" : "http://www.w3.org/2000/01/rdf-schema#",
+    "geosparql" : "http://www.opengis.net/ont/geosparql#",
+    "oa" : "http://www.w3.org/ns/oa#",
+    "dct" : "http://purl.org/dc/terms/",
+    "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "ldqd" : "http://dcat.example.org/ldqd/",
+    "time" : "http://www.w3.org/2006/time#",
+    "dcat" : "http://www.w3.org/ns/dcat#",
+    "locn" : "http://www.w3.org/ns/locn#",
+    "prov" : "http://www.w3.org/ns/prov#",
+    "foaf" : "http://xmlns.com/foaf/0.1/"
+  }
+}

@@ -1,0 +1,337 @@
+{
+  "@graph" : [ {
+    "@id" : "_:b0",
+    "@type" : "prov:Association",
+    "agent" : "http://validator.example.org/",
+    "hadPlan" : "https://dcat.example.org/conformanceTest"
+  }, {
+    "@id" : "_:b1",
+    "@type" : "oa:TextualBody",
+    "format" : "application/xml",
+    "rdf:value" : "\n      <test-method duration-ms=\"47\" finished-at=\"2015-09-29T11:50:00Z\"\n        name=\"validate\" signature=\"validate()\" started-at=\"2015-09-29T11:50:00Z\"\n        status=\"FAIL\">\n        <exception class=\"java.lang.AssertionError\">\n          <message>\n            Total validation errors found: 2\n          </message>\n        </exception>\n      </test-method>"
+  }, {
+    "@id" : "_:b2",
+    "@type" : "oa:TextualBody",
+    "dc:format" : "text/xml",
+    "rdf:value" : "\n      <test-method duration-ms=\"47\" finished-at=\"2015-09-29T11:50:00Z\"\n        name=\"validate\" signature=\"validate()\" started-at=\"2015-09-29T11:50:00Z\"\n        status=\"FAIL\">\n        <exception class=\"java.lang.AssertionError\">\n          <message>\n            Total validation errors found: 2\n          </message>\n        </exception>\n      </test-method>"
+  }, {
+    "@id" : "_:b3",
+    "@type" : "earl:TestResult",
+    "dct:date" : {
+      "@type" : "xsd:dateTime",
+      "@value" : "2015-09-29T11:50:00+00:00"
+    },
+    "description" : {
+      "@type" : "rdf:HTML",
+      "@value" : "\n        <ul xmlns=\"http://www.w3.org/1999/xhtml\">\n          <li> test 1 has failed. Some description of the errors found</li>\n        </ul>"
+    },
+    "type" : "https://dcat.example.org/nonConformant",
+    "outcome" : "earl:fail"
+  }, {
+    "@id" : "http://data.europa.eu/eli/reg/2014/1312/oj",
+    "@type" : "dct:Standard",
+    "issued" : "2010-11-23",
+    "title" : {
+      "@language" : "en",
+      "@value" : "Commission Regulation (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards interoperability of spatial data sets and services"
+    }
+  }, {
+    "@id" : "http://validator.example.org/",
+    "@type" : [ "prov:Agent", "earl:Assertor" ],
+    "description" : {
+      "@language" : "en",
+      "@value" : "A test execution service that runs conformance test suites."
+    },
+    "title" : {
+      "@language" : "en",
+      "@value" : "Validator"
+    }
+  }, {
+    "@id" : "https://dcat.example.org/Dataset",
+    "@type" : "dcat:Dataset",
+    "conformsTo" : [ "http://www.opengis.net/def/crs/EPSG/0/28992", "http://data.europa.eu/eli/reg/2014/1312/oj" ],
+    "wasUsedBy" : "https://dcat.example.org/testingActivity"
+  }, {
+    "@id" : "iso:compliance",
+    "@type" : "dqv:Dimension",
+    "definition" : {
+      "@language" : "en",
+      "@value" : "The degree to which data has attributes that adhere to standards, conventions or regulations in force and similar rules relating to data quality in a specific context of use."
+    },
+    "prefLabel" : {
+      "@language" : "en",
+      "@value" : "Compliance"
+    },
+    "inCategory" : "iso:inherentAndSystemDependentDataQuality"
+  }, {
+    "@id" : "iso:inherentAndSystemDependentDataQuality",
+    "@type" : "dqv:Category",
+    "prefLabel" : {
+      "@language" : "en",
+      "@value" : "Inherent and System-Dependent Data Quality"
+    }
+  }, {
+    "@id" : "https://dcat.example.org/assertion",
+    "@type" : "earl:Assertion",
+    "assertedBy" : "http://validator.example.org/",
+    "mode" : "earl:automatic",
+    "result" : "https://dcat.example.org/testResult",
+    "subject" : "https://dcat.example.org/Dataset",
+    "test" : "https://dcat.example.org/conformanceTest",
+    "wasAttributedTo" : "http://validator.example.org/"
+  }, {
+    "@id" : "https://dcat.example.org/assertion1",
+    "@type" : "earl:Assertion",
+    "mode" : "earl:automatic",
+    "result" : "_:b3",
+    "subject" : "https://dcat.example.org/Dataset",
+    "test" : "https://dcat.example.org/testq1"
+  }, {
+    "@id" : "https://dcat.example.org/conformance-standards",
+    "@type" : "owl:Ontology",
+    "imports" : "http://www.w3.org/ns/dcat"
+  }, {
+    "@id" : "https://dcat.example.org/conformanceTest",
+    "@type" : [ "earl:TestRequirement", "prov:Plan" ],
+    "hasPart" : [ "https://dcat.example.org/testBP35", "https://dcat.example.org/testBP2", "https://dcat.example.org/testBP1" ],
+    "title" : {
+      "@language" : "en",
+      "@value" : "Set of conformance test derived from the W3C Data on the Web Best Practices"
+    },
+    "wasDerivedFrom" : "https://www.w3.org/TR/dwbp/"
+  }, {
+    "@id" : "https://dcat.example.org/error",
+    "@type" : "dqv:QualityAnnotation",
+    "inDimension" : "iso:compliance",
+    "hasBody" : "_:b2",
+    "hasTarget" : "https://dcat.example.org/Dataset",
+    "motivatedBy" : [ "oa:assessing", "dqv:qualityAssessment" ],
+    "wasGeneratedBy" : "https://dcat.example.org/testingActivity"
+  }, {
+    "@id" : "https://dcat.example.org/errors",
+    "@type" : "dqv:QualityAnnotation",
+    "inDimension" : "iso:compliance",
+    "hasBody" : "_:b1",
+    "hasTarget" : "https://dcat.example.org/Dataset",
+    "motivatedBy" : [ "oa:assessing", "dqv:qualityAssessment" ],
+    "wasGeneratedBy" : "https://dcat.example.org/testingActivity"
+  }, {
+    "@id" : "https://dcat.example.org/levelOfComplianceToDWBP",
+    "@type" : "dqv:Metric",
+    "definition" : {
+      "@language" : "en",
+      "@value" : "The degree of compliance to DWBP defined as the percentage of passed compliance tests."
+    },
+    "expectedDataType" : "xsd:double",
+    "inDimension" : "iso:compliance"
+  }, {
+    "@id" : "https://dcat.example.org/measurement_complianceToDWBP",
+    "@type" : "dqv:QualityMeasurement",
+    "date" : "2018-01-10",
+    "unitMeasure" : "http://www.wurvoc.org/vocabularies/om-1.8/Percentage",
+    "computedOn" : "https://dcat.example.org/Dataset",
+    "isMeasurementOf" : "https://dcat.example.org/levelOfComplianceToDWBP",
+    "dqv:value" : 50.0
+  }, {
+    "@graph" : [ {
+      "@id" : "https://dcat.example.org/Dataset",
+      "hasQualityAnnotation" : "https://dcat.example.org/errors",
+      "hasQualityMeasurement" : "https://dcat.example.org/measurement_complianceToDWBP"
+    } ],
+    "@id" : "https://dcat.example.org/testResult",
+    "@type" : [ "prov:Entity", "dcat:Dataset", "dqv:QualityMetadata", "earl:TestResult" ],
+    "type" : [ "https://dcat.example.org/notConformant", "http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant", "https://dcat.example.org/conformant" ],
+    "hasQualityAnnotation" : "https://dcat.example.org/errors",
+    "hasQualityMeasurement" : "https://dcat.example.org/measurement_complianceToDWBP",
+    "outcome" : "earl:passed",
+    "generatedAtTime" : "2018-05-27T02:52:02Z",
+    "wasAttributedTo" : "http://validator.example.org/",
+    "wasGeneratedBy" : "https://dcat.example.org/testingActivity"
+  }, {
+    "@id" : "https://dcat.example.org/testingActivity",
+    "@type" : "prov:Activity",
+    "generated" : [ "https://dcat.example.org/TestAssertion", "https://dcat.example.org/testResult" ],
+    "qualifiedAssociation" : "_:b0",
+    "use" : "https://dcat.example.org/Dataset",
+    "wasAssociatedWith" : "http://validator.example.org/"
+  } ],
+  "@context" : {
+    "wasAssociatedWith" : {
+      "@id" : "http://www.w3.org/ns/prov#wasAssociatedWith",
+      "@type" : "@id"
+    },
+    "use" : {
+      "@id" : "http://www.w3.org/ns/prov#use",
+      "@type" : "@id"
+    },
+    "generated" : {
+      "@id" : "http://www.w3.org/ns/prov#generated",
+      "@type" : "@id"
+    },
+    "qualifiedAssociation" : {
+      "@id" : "http://www.w3.org/ns/prov#qualifiedAssociation",
+      "@type" : "@id"
+    },
+    "inDimension" : {
+      "@id" : "http://www.w3.org/ns/dqv#inDimension",
+      "@type" : "@id"
+    },
+    "expectedDataType" : {
+      "@id" : "http://www.w3.org/ns/dqv#expectedDataType",
+      "@type" : "@id"
+    },
+    "definition" : {
+      "@id" : "http://www.w3.org/2004/02/skos/core#definition"
+    },
+    "isMeasurementOf" : {
+      "@id" : "http://www.w3.org/ns/dqv#isMeasurementOf",
+      "@type" : "@id"
+    },
+    "date" : {
+      "@id" : "http://purl.org/dc/terms/date",
+      "@type" : "http://www.w3.org/2001/XMLSchema#date"
+    },
+    "unitMeasure" : {
+      "@id" : "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
+      "@type" : "@id"
+    },
+    "value" : {
+      "@id" : "http://www.w3.org/ns/dqv#value",
+      "@type" : "http://www.w3.org/2001/XMLSchema#double"
+    },
+    "computedOn" : {
+      "@id" : "http://www.w3.org/ns/dqv#computedOn",
+      "@type" : "@id"
+    },
+    "title" : {
+      "@id" : "http://purl.org/dc/terms/title"
+    },
+    "description" : {
+      "@id" : "http://purl.org/dc/terms/description"
+    },
+    "imports" : {
+      "@id" : "http://www.w3.org/2002/07/owl#imports",
+      "@type" : "@id"
+    },
+    "wasAttributedTo" : {
+      "@id" : "http://www.w3.org/ns/prov#wasAttributedTo",
+      "@type" : "@id"
+    },
+    "assertedBy" : {
+      "@id" : "http://www.w3.org/ns/earl#assertedBy",
+      "@type" : "@id"
+    },
+    "mode" : {
+      "@id" : "http://www.w3.org/ns/earl#mode",
+      "@type" : "@id"
+    },
+    "result" : {
+      "@id" : "http://www.w3.org/ns/earl#result",
+      "@type" : "@id"
+    },
+    "test" : {
+      "@id" : "http://www.w3.org/ns/earl#test",
+      "@type" : "@id"
+    },
+    "subject" : {
+      "@id" : "http://www.w3.org/ns/earl#subject",
+      "@type" : "@id"
+    },
+    "prefLabel" : {
+      "@id" : "http://www.w3.org/2004/02/skos/core#prefLabel"
+    },
+    "hadPlan" : {
+      "@id" : "http://www.w3.org/ns/prov#hadPlan",
+      "@type" : "@id"
+    },
+    "agent" : {
+      "@id" : "http://www.w3.org/ns/prov#agent",
+      "@type" : "@id"
+    },
+    "wasUsedBy" : {
+      "@id" : "http://www.w3.org/ns/prov#wasUsedBy",
+      "@type" : "@id"
+    },
+    "conformsTo" : {
+      "@id" : "http://purl.org/dc/terms/conformsTo",
+      "@type" : "@id"
+    },
+    "hasPart" : {
+      "@id" : "http://purl.org/dc/terms/hasPart",
+      "@type" : "@id"
+    },
+    "wasDerivedFrom" : {
+      "@id" : "http://www.w3.org/ns/prov#wasDerivedFrom",
+      "@type" : "@id"
+    },
+    "hasQualityAnnotation" : {
+      "@id" : "http://www.w3.org/ns/dqv#hasQualityAnnotation",
+      "@type" : "@id"
+    },
+    "outcome" : {
+      "@id" : "http://www.w3.org/ns/earl#outcome",
+      "@type" : "@id"
+    },
+    "type" : {
+      "@id" : "http://purl.org/dc/terms/type",
+      "@type" : "@id"
+    },
+    "generatedAtTime" : {
+      "@id" : "http://www.w3.org/ns/prov#generatedAtTime",
+      "@type" : "http://www.w3.org/2001/XMLSchema#dateTime"
+    },
+    "hasQualityMeasurement" : {
+      "@id" : "http://www.w3.org/ns/dqv#hasQualityMeasurement",
+      "@type" : "@id"
+    },
+    "wasGeneratedBy" : {
+      "@id" : "http://www.w3.org/ns/prov#wasGeneratedBy",
+      "@type" : "@id"
+    },
+    "format" : {
+      "@id" : "http://purl.org/dc/terms/format"
+    },
+    "motivatedBy" : {
+      "@id" : "http://www.w3.org/ns/oa#motivatedBy",
+      "@type" : "@id"
+    },
+    "hasBody" : {
+      "@id" : "http://www.w3.org/ns/oa#hasBody",
+      "@type" : "@id"
+    },
+    "hasTarget" : {
+      "@id" : "http://www.w3.org/ns/oa#hasTarget",
+      "@type" : "@id"
+    },
+    "issued" : {
+      "@id" : "http://purl.org/dc/terms/issued",
+      "@type" : "http://www.w3.org/2001/XMLSchema#date"
+    },
+    "inCategory" : {
+      "@id" : "http://www.w3.org/ns/dqv#inCategory",
+      "@type" : "@id"
+    },
+    "@vocab" : "https://dcat.example.org/",
+    "adms" : "https://www.w3.org/ns/adms#",
+    "iso" : "https://dcat.example.org/ISO-IEC-25012/",
+    "owl" : "http://www.w3.org/2002/07/owl#",
+    "w3cgeo" : "http://www.w3.org/2003/01/geo/wgs84_pos#",
+    "dqv" : "http://www.w3.org/ns/dqv#",
+    "xsd" : "http://www.w3.org/2001/XMLSchema#",
+    "skos" : "http://www.w3.org/2004/02/skos/core#",
+    "rdfs" : "http://www.w3.org/2000/01/rdf-schema#",
+    "geosparql" : "http://www.opengis.net/ont/geosparql#",
+    "oa" : "http://www.w3.org/ns/oa#",
+    "dct" : "http://purl.org/dc/terms/",
+    "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "earl" : "http://www.w3.org/ns/earl#",
+    "ldqd" : "http://dcat.example.org/ldqd/",
+    "time" : "http://www.w3.org/2006/time#",
+    "dcat" : "http://www.w3.org/ns/dcat#",
+    "locn" : "http://www.w3.org/ns/locn#",
+    "sdmx-attribute" : "http://purl.org/linked-data/sdmx/2009/attribute#",
+    "prov" : "http://www.w3.org/ns/prov#",
+    "foaf" : "http://xmlns.com/foaf/0.1/",
+    "dc" : "http://purl.org/dc/elements/1.1/"
+  }
+}

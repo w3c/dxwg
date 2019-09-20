@@ -1,0 +1,74 @@
+# baseURI: https://dcat.example.org/genoa-busstop
+# imports: http://www.w3.org/ns/dcat
+
+@prefix : <https://dcat.example.org/> .
+@prefix adms: <https://www.w3.org/ns/adms#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dqv: <http://www.w3.org/ns/dqv#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix ldqd: <http://dcat.example.org/ldqd/> .
+@prefix locn: <http://www.w3.org/ns/locn#> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix w3cgeo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:completenessWRTExpectedNumberOfEntities
+  a dqv:Metric ;
+  skos:definition "The degree of completeness as ratio between the actual number of entities included in the dataset and the declared expected number of entities."@en ;
+  dqv:expectedDataType xsd:decimal ;
+  dqv:inDimension ldqd:completeness ;
+.
+:genoa-busstop
+  a owl:Ontology ;
+  owl:imports <http://www.w3.org/ns/dcat> ;
+.
+:genoaBusStopsDataset
+  a dcat:Dataset ;
+  dqv:hasQualityAnnotation :genoaBusStopsDatasetCompletenessNote ;
+  dqv:hasQualityMeasurement :genoaBusStopsDatasetCompletenessMeasurement ;
+.
+:genoaBusStopsDatasetCompletenessMeasurement
+  a dqv:QualityMeasurement ;
+  dqv:computedOn :genoaBusStopsDataset ;
+  dqv:isMeasurementOf :completenessWRTExpectedNumberOfEntities ;
+  dqv:value 0.6833333 ;
+  prov:generatedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
+  prov:wasAttributedTo :myQualityChecker ;
+  prov:wasGeneratedBy :myQualityChecking ;
+.
+:genoaBusStopsDatasetCompletenessNote
+  a dqv:UserQualityFeedback ;
+  dqv:inDimension ldqd:completeness ;
+  oa:hasBody :textBody ;
+  oa:hasTarget :genoaBusStopsDataset ;
+  oa:motivatedBy dqv:qualityAssessment ;
+  prov:generatedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
+  prov:wasAttributedTo :consumer1 ;
+.
+:myQualityChecker
+  a prov:SoftwareAgent ;
+  rdfs:label "A quality assessment service"@en ;
+.
+:myQualityChecking
+  a prov:Activity ;
+  rdfs:label "The checking of genoaBusStopsDataset's quality"@en ;
+  prov:endedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
+  prov:generated :genoaBusStopsDatasetCompletenessMeasurement ;
+  prov:startedAtTime "2018-05-27T00:52:02Z"^^xsd:dateTime ;
+  prov:used :genoaBusStopsDataset ;
+  prov:wasAssociatedWith :myQualityChecker ;
+.
+:textBody
+  a oa:TextualBody ;
+  dct:format "text/plain" ;
+  dct:language "en" ;
+  rdf:value "Incomplete dataset: it contains only 20500 out of 30000 existing bus stops" ;
+.

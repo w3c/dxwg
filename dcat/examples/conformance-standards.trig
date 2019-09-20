@@ -1,0 +1,213 @@
+# baseURI: https://dcat.example.org/conformance-standards
+# imports: http://www.w3.org/ns/dcat
+
+@prefix : <https://dcat.example.org/> .
+@prefix adms: <https://www.w3.org/ns/adms#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dqv: <http://www.w3.org/ns/dqv#> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix iso: <https://dcat.example.org/ISO-IEC-25012/> .
+@prefix ldqd: <http://dcat.example.org/ldqd/> .
+@prefix locn: <http://www.w3.org/ns/locn#> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sdmx-attribute: <http://purl.org/linked-data/sdmx/2009/attribute#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix w3cgeo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/>.
+
+:conformance-standards
+  a owl:Ontology ;
+  owl:imports <http://www.w3.org/ns/dcat> .
+
+:Dataset a dcat:Dataset ;
+  dct:conformsTo <http://data.europa.eu/eli/reg/2014/1312/oj> .
+
+<http://data.europa.eu/eli/reg/2014/1312/oj> a dct:Standard ;
+  dct:title "Commission Regulation (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards interoperability of spatial data sets and services"@en ;
+  dct:issued "2010-11-23"^^xsd:date .
+
+  :Dataset a dcat:Dataset;
+  dct:conformsTo <http://www.opengis.net/def/crs/EPSG/0/28992> .
+
+  :Dataset a dcat:Dataset ;
+  prov:wasUsedBy :testingActivity .
+
+:testingActivity a prov:Activity ;
+  prov:generated :testResult ;
+  prov:qualifiedAssociation [
+    a prov:Association ;
+    prov:agent  <http://validator.example.org/> ;
+    prov:hadPlan :conformanceTest ;
+  ] .
+
+:testResult a prov:Entity ;
+  dct:type :notConformant .
+
+:conformanceTest a prov:Plan ;
+  prov:wasDerivedFrom <https://www.w3.org/TR/dwbp/> .
+
+:levelOfComplianceToDWBP a dqv:Metric ;
+  skos:definition "The degree of compliance to DWBP defined as the percentage of passed compliance tests."@en ;
+  dqv:expectedDataType xsd:double ;
+  dqv:inDimension  iso:compliance .
+
+iso:compliance a dqv:Dimension ;
+  skos:prefLabel "Compliance"@en ;
+  skos:definition "The degree to which data has attributes that adhere to standards, conventions or regulations in force and similar rules relating to data quality in a specific context of use."@en ;
+  dqv:inCategory iso:inherentAndSystemDependentDataQuality .
+  
+iso:inherentAndSystemDependentDataQuality a dqv:Category ;
+  skos:prefLabel "Inherent and System-Dependent Data Quality"@en .
+
+  :measurement_complianceToDWBP a dqv:QualityMeasurement ;
+  dqv:computedOn :Dataset ;
+  dqv:value "50"^^xsd:double ;
+  sdmx-attribute:unitMeasure <http://www.wurvoc.org/vocabularies/om-1.8/Percentage> ;
+  dct:date "2018-01-10"^^xsd:date ;
+  dqv:isMeasurementOf :levelOfComplianceToDWBP .
+
+  :assertion a earl:Assertion ;
+  earl:subject :Dataset ;
+  earl:test :conformanceTest ;
+  earl:result :testResult ;
+  earl:mode earl:automatic ;
+  earl:assertedBy <http://validator.example.org/> ;
+  prov:wasAttributedTo  <http://validator.example.org/> .
+
+:conformanceTest a earl:TestRequirement, prov:Plan ;
+  dct:title "Set of conformance test derived from the W3C Data on the Web Best Practices"@en ;
+  dct:hasPart :testBP1, :testBP2, :testBP35 ;
+  prov:wasDerivedFrom  <https://www.w3.org/TR/dwbp/> .
+
+:testResult a earl:TestResult ;
+  dct:type  :conformant ;
+  earl:outcome earl:passed .
+
+<http://validator.example.org/> a earl:Assertor, prov:Agent ;
+  dct:description "A test execution service that runs conformance test suites."@en ;
+  dct:title "Validator"@en .
+
+:testingActivity a prov:Activity ;
+  prov:generated :TestAssertion, :testResult ;
+  prov:use :Dataset ;
+  prov:wasAssociatedWith <http://validator.example.org/> .
+
+  :assertion1 a earl:Assertion ;
+  earl:subject :Dataset ;
+  earl:test :testq1 ;
+  earl:result [
+    a earl:TestResult ;
+    dct:type :nonConformant ;
+    dct:date "2015-09-29T11:50:00+00:00"^^xsd:dateTime ;
+      dct:description """
+        <ul xmlns="http://www.w3.org/1999/xhtml">
+          <li> test 1 has failed. Some description of the errors found</li>
+        </ul>"""^^rdf:HTML ;
+#      earl:info """<test-method duration-ms="47" finished-at="2015-09-29T11:50:00Z" name="validate" signature="validate()" started-at="2015-09-29T11:50:00Z" status="FAIL">
+#          <exception class="java.lang.AssertionError">
+#            <message>
+#              Total validation errors found: 2
+#            </message>
+#          </exception>
+#        </test-method>"""^^rdf:XMLLiteral ;
+     earl:outcome earl:fail ;
+  ] ;
+  earl:mode earl:automatic .
+
+  :errors
+  a dqv:QualityAnnotation ;
+  prov:wasGeneratedBy  :testingActivity;
+  oa:hasTarget :Dataset ;
+  oa:hasBody [
+    a oa:TextualBody ;
+    rdf:value  """
+      <test-method duration-ms="47" finished-at="2015-09-29T11:50:00Z"
+        name="validate" signature="validate()" started-at="2015-09-29T11:50:00Z"
+        status="FAIL">
+        <exception class="java.lang.AssertionError">
+          <message>
+            Total validation errors found: 2
+          </message>
+        </exception>
+      </test-method>"""; #^^rdf:XMLLiteral ;
+    dct:format  "application/xml" ;
+  ] ;
+  oa:motivatedBy dqv:qualityAssessment , oa:assessing ;
+  dqv:inDimension iso:compliance ;
+  .
+
+:testResult
+  a dqv:QualityMetadata ;
+  dct:type <http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant> ;
+  prov:wasAttributedTo <http://validator.example.org/> ;
+  prov:generatedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
+  prov:wasGeneratedBy :testingActivity .
+
+:testResult 
+  a dcat:Dataset ;
+    dqv:hasQualityMeasurement :measurement_complianceToDWBP;
+    dqv:hasQualityAnnotation :errors ;
+.
+
+:testingActivity a prov:Activity;
+  prov:generated  :testResult;
+  prov:use :Dataset ;
+  prov:wasAssociatedWith <http://validator.example.org/>
+  .
+
+:error
+  a dqv:QualityAnnotation ;
+  #this annotation is derived by the measurement
+  prov:wasGeneratedBy  :testingActivity;
+  oa:hasTarget :Dataset ;
+  oa:hasBody [
+    #errors/failed test description
+    a oa:TextualBody;
+    rdf:value  """
+      <test-method duration-ms="47" finished-at="2015-09-29T11:50:00Z"
+        name="validate" signature="validate()" started-at="2015-09-29T11:50:00Z"
+        status="FAIL">
+        <exception class="java.lang.AssertionError">
+          <message>
+            Total validation errors found: 2
+          </message>
+        </exception>
+      </test-method>""" ; #^^rdf:XMLLiteral ;
+    #it can be in any format suppored by dc
+    dc:format  "text/xml"
+  ] ;
+  oa:motivatedBy dqv:qualityAssessment, oa:assessing ;
+  dqv:inDimension iso:compliance
+  .
+
+:testResult
+  a dqv:QualityMetadata ;
+  #  change the the dct:type according to the resulted compliance
+  dct:type <http://inspire.ec.europa.eu/metadata-codelist/DegreeOfConformity/conformant> ;
+  prov:wasAttributedTo <http://validator.example.org/> ;
+  prov:generatedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
+  prov:wasGeneratedBy :testingActivity .
+
+# The graph contains the rest of the statements presented in the previous examples.
+# The graph is expressed according to TRIG syntax not TTL (see https://www.w3.org/TR/trig/)
+:testResult {
+  :Dataset
+    dqv:hasQualityMeasurement :measurement_complianceToDWBP;
+    dqv:hasQualityAnnotation :errors .
+}
+
+#the testing activity
+:testingActivity a prov:Activity;
+  prov:generated  :testResult;
+  prov:use :Dataset ;
+  prov:wasAssociatedWith <http://validator.example.org/>
+  .

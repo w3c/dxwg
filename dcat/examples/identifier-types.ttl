@@ -1,0 +1,71 @@
+# baseURI: https://dcat.example.org/identifier-types
+# imports: http://www.w3.org/ns/dcat
+
+@prefix adms: <https://www.w3.org/ns/adms#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix ex: <https://dcat.example.org/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix locn: <http://www.w3.org/ns/locn#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix w3cgeo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:InternationalDOIFundation
+  a foaf:Organization ;
+  rdfs:label "International DOI Foundation" ;
+  foaf:homepage <https://www.doi.org/> ;
+.
+ex:PoelenJorritH
+  a foaf:Person ;
+  foaf:name "Jorrit H. Poelen" ;
+  adms:identifier <https://example.org/PoelenJorritHID> ;
+.
+ex:PoelenJorritHID
+  a adms:Identifier ;
+  skos:notation "https://orcid.org/0000-0003-3138-4118"^^xsd:anyURI ;
+  adms:schemaAgency "ORCID" ;
+.
+ex:id
+  a dcat:Dataset ;
+  dct:identifier "https://example.org/id"^^xsd:anyURI ;
+  dct:publisher <https://example.org/PoelenJorritH> ;
+  adms:identifier <https://example.org/iddoi> ;
+.
+ex:id3
+  a dcat:Dataset ;
+  owl:sameAs <https://doi.org/10.5281/zenodo.1486279> ;
+.
+ex:id4
+  a dcat:Dataset ;
+  adms:identifier <https://example.org/sid> ;
+.
+ex:iddoi
+  a adms:Identifier ;
+  dct:creator ex:InternationalDOIFundation ;
+  skos:notation "https://doi.org/10.5281/zenodo.1486279"^^xsd:anyURI ;
+  adms:schemaAgency "International DOI Foundation" ;
+.
+ex:identifier-types
+  a owl:Ontology ;
+  owl:imports <http://www.w3.org/ns/dcat> ;
+.
+ex:proxyid
+  a dcat:Dataset ;
+  dct:identifier "id" ;
+.
+ex:si6
+  a adms:Identifier ;
+  skos:notation "info:doi/10.1109/5.771073"^^xsd:anyURI ;
+.
+ex:sid5
+  a adms:Identifier ;
+  dct:issued "2001-09-12"^^xsd:date ;
+  skos:notation "PA 1-060-815"^^ex:type ;
+  adms:schemaAgency "US Copyright Office" ;
+.
