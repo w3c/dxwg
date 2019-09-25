@@ -105,88 +105,6 @@
       <a href="#testsuites">Section 8</a>.
     </p>
     <p class="note">Specifications and Profiles to which the content of resource representations may conform embody their own notions of conformance, which are out of scope for this specification.</p>
-    <section id="conformance-profiles">
-      <h3>Profiles for Conformance</h3>
-      <p>
-        This specification includes several functional <a>profiles</a> of it that may be conformed to by systems claiming to implement a form of this specification.
-        These profiles, given in the table below, are identified by URIs and conformance to them by Internet resources should be indicated as per this document (use of
-        <code>Content-Profile</code> HTTP header).
-      </p>
-      <div class="note" title="Different forms of specification and profile">
-        The <a>profiles</a> identified and described in this section are of a <em>functional</em> <a>specification</a>
-        since Content Negotiation by Profile describes how systems should behave and it follows that these profiles
-        are <em>functional</em> profiles. This specification offers test suites (see <a href="#testsuites"></a>) for
-        assessing the conformance of systems to this functional specification and these functional profiles but does not
-        address the conformance of resources to the data specifications and data profiles that Content Negotiation by
-        Profile supplies methods to negotiate about. Such testing is left to the implementers of those data
-        specifications and data profiles that resources are indicated to conform to.
-      </div>
-      <p>
-        The namespace prefix for the functional profiles used in <a href="#fig-table-profiles"></a>, the table below, is:
-      </p>
-      <ul>
-        <li><code>cnpr</code> &rarr; <code>http://www.w3.org/ns/dx/conneg/profile/</code></li>
-      </ul>
-      <figure id="fig-table-profiles">
-        <table>
-          <thead>
-          <tr>
-            <th>URI</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Usage Note</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td><code><a href="http://www.w3.org/ns/dx/conneg/profile/http">cnpr:http</a></code></td>
-            <td>HTTP Headers Functional Profile</td>
-            <td>For conformance with the functional profile presented in <a href="#http"></a>.</td>
-            <td>To be used if a resource conforms to the HTTP Headers Functional Profile</td>
-          </tr>
-          <tr>
-            <td><code><span style="white-space: nowrap"><a href="http://www.w3.org/ns/dx/conneg/profile/qsa">cnpr:qsa</a></span></code></td>
-            <td>QSA Functional Profile</td>
-            <td>For conformance with the functional profile presented in <a href="#qsa"></a>.</td>
-            <td>
-              To be used if a resource conforms to the QSA Functional Profile using the Query String Arguments <code>_profile</code> and <code>_mediatype</code> as per the recommendations
-              in <a href="#qsa"></a>.
-            </td>
-          </tr>
-          <tr>
-            <td><code><span style="white-space: nowrap"><a href="http://www.w3.org/ns/dx/conneg/profile/qsa-alt">cnpr:qsa-alt</a></span></code></td>
-            <td>QSA Alternate Keywords Functional Profile</td>
-            <td>For conformance with the functional profile presented in <a href="#qsa"></a>.</td>
-            <td>
-              To be used if a resource conforms to the QSA Functional Profile but uses alternate keywords for the Query String Arguments <code>_profile</code> and
-              <code>_mediatype</code>, as allowed by the recommendations in <a href="#qsa"></a>.
-            </td>
-          </tr>
-          <tr>
-            <td><code><span style="white-space: nowrap"><a href="http://www.w3.org/ns/dx/conneg/profile/rrd">cp:rrd</a></span></code></td>
-            <td>Resource Representation Description</td>
-            <td>For conformance with <a href="#getresourcebyprofile"></a>.</td>
-            <td>
-              To be used if a resource representation is able to indicate which profile(s) it conforms to, in its appropriate functional profile, as per the abstract specification in
-              <a href="#getresourcebyprofile"></a>.
-            </td>
-          </tr>
-          </tbody>
-        </table>
-        <figcaption>
-          Profiles of this <em>Content Negotiation by Profile</em> specification to be used by resources and systems to indicate conformance to one or more forms
-          of it.
-        </figcaption>
-      </figure>
-      <p>
-        If a system wishes to show conformance to this specification, conformance to at least one of the profiles listed in <a href="#fig-table-profiles"></a> MUST be indicated.
-      </p>
-      <p>
-        The namespace used for the above profiles, <code>http://www.w3.org/ns/dx/conneg/profile/</code>, is part of the Dataset Exchange Working Group's reserved W3C namespace,
-        <code>http://www.w3.org/ns/dx/</code>, which is provisioned for all namespace requirements to do with issues addressed by that Working Group. The <code>/profile/</code> path segment
-        indicates a register of profile objects which currently contains just the 4 instances above from <a href="#fig-table-profiles"></a>.
-      </p>
-    </section>
   </section>
   <section id="definitions">
     <h2>Definitions</h2>
@@ -213,10 +131,27 @@
           A <a>specification</a> that constrains, extends, combines, or provides guidance or explanation about the usage of other specifications.
         </p>
         <p>
-          This definition includes what are sometimes called "application profiles", "metadata application
-          profiles", "data profiles" (when applied to <a>data specifications</a>) or "metadata profiles".
-          In this document, these are all referred to as just "profiles" and no distinction, in wording, is made
-          between profiles of different types of specification: data, functional etc.
+          If the specification profiled is a specialized type of specification, for example a data or a functional
+          specification, the profile will be of the same sort - a data or functional profile.
+        </p>
+        <p>
+          This Content Negotiation by Profile specification concerns negotiation for data profiles, and specifies functional profiles for different ways of achieving this.
+        </p>
+      </dd>
+      <dt><dfn data-lt="data profile">data profile</dfn></dt>
+      <dd>
+        <p>
+          A <a>data specification</a> that constrains, extends, combines, or provides guidance or explanation about the usage of other data specifications.
+        </p>
+        <p>
+          This definition includes what are sometimes called "application profiles", "metadata profiles" or "metadata application profiles".
+        </p>
+        <p><em>Source: deliberations of the DXWG.</em></p>
+      </dd>
+      <dt><dfn data-lt="functional profile">functional profile</dfn></dt>
+      <dd>
+        <p>
+          A <a>functional specification</a> that constrains, extends, combines, or provides guidance or explanation about the usage of other functional specifications.
         </p>
         <p><em>Source: deliberations of the DXWG.</em></p>
       </dd>
@@ -464,7 +399,7 @@ Preference-Applied: profile="urn:example:schema"
       implementation it within specific environments.
     </p>
     <p>
-      Implementations of this Abstract Model for different environments are called <em>Functional <a>Profiles</a></em> and to be a valid functional profile they MUST implement these Abstract Model functions. How they do this will be
+      Implementations of this Abstract Model for different environments are called <em>Functional Profiles</em> and to be a valid <a>functional profile</a> they MUST implement these Abstract Model functions. How they do this will be
       environment-specific.
     </p>
     <p>
@@ -810,26 +745,101 @@ Content-Profile: http://example.org/profile/x, \
   </section>
   <section id="functional-profiles">
     <h2>Functional Profiles</h2>
-    <p>
-      This section describes <a>profiles</a> of this <a>specification</a>'s Abstract Model which are implementations of it
-      in different environments; they are profiles and may be referred to as "functional profiles". These profiles are
+    <section id="functional-profiles-definition">
+      <h3>Functional Profiles of this specification</h3>
+      <p>
+      This section describes <a>functional profiles</a> of this <a>specification</a>'s Abstract Model which are implementations of it
+      in different environments. These functional profiles are
       formally identified in <a href="#conformance-profiles"></a> and are to be used as conformance targets for specific
       implementations of systems within different environments wishing to conform to this specification.
-    </p>
-    <p>
-      This document provides functional profiles for two environments - HTTP &amp; human browser (Query String
-      Argument functionality) only. For the human browser environment, two functional profiles are presented.
-      Further functional profiles of this specification MAY be implemented either for other environments and or even for
-      constrained scenarios within these environments and implementers are encouraged to do this by further profiling this
-      specification.
-    </p>
-    <p class="note" title="Conformance to profiles">
+      </p>
+      <p>
+        This document provides functional profiles for two environments - HTTP &amp; human browser (Query String
+        Argument functionality) only. For the human browser environment, two functional profiles are presented.
+        Further functional profiles of this specification MAY be implemented either for other environments and or even for
+        constrained scenarios within these environments and implementers are encouraged to do this by further profiling this
+        specification.
+      </p>
+      <p class="note" title="Conformance to multiple functional profiles">
       Implementers of Content Negotiation by Profile need not ensure systems conform to multiple functional profiles
       of this specification. They need only conform to the functional profile(s) relevant to their environment. In some
       cases, for example the Query String Argument-relevant human browser environment, there is a choice of more than
       one functional profile. Since all functional profiles of this specification themselves must conform to this specification, by
       design, conformance to any functional profile guarantees conformance to the specification.
     </p>
+    </section>
+    <section id="conformance-profiles">
+      <h3>Conformance to Functional Profiles</h3>
+      <p>
+        This specification defines several <a>functional profiles</a> that may be conformed to by systems.
+        These functional profiles are identified by URIs and given in the table below.
+      </p>
+      <p>
+        The namespace prefix for the functional profiles used in <a href="#fig-table-profiles"></a>, the table below, is:
+      </p>
+      <ul>
+        <li><code>cnpr</code> &rarr; <code>http://www.w3.org/ns/dx/conneg/profile/</code></li>
+      </ul>
+      <figure id="fig-table-profiles">
+        <table>
+          <thead>
+          <tr>
+            <th>URI</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Usage Note</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><code><a href="http://www.w3.org/ns/dx/conneg/profile/http">cnpr:http</a></code></td>
+            <td>HTTP Headers Functional Profile</td>
+            <td>For conformance with the functional profile presented in <a href="#http"></a>.</td>
+            <td>To be used if a resource conforms to the HTTP Headers Functional Profile</td>
+          </tr>
+          <tr>
+            <td><code><span style="white-space: nowrap"><a href="http://www.w3.org/ns/dx/conneg/profile/qsa">cnpr:qsa</a></span></code></td>
+            <td>QSA Functional Profile</td>
+            <td>For conformance with the functional profile presented in <a href="#qsa"></a>.</td>
+            <td>
+              To be used if a resource conforms to the QSA Functional Profile using the Query String Arguments <code>_profile</code> and <code>_mediatype</code> as per the recommendations
+              in <a href="#qsa"></a>.
+            </td>
+          </tr>
+          <tr>
+            <td><code><span style="white-space: nowrap"><a href="http://www.w3.org/ns/dx/conneg/profile/qsa-alt">cnpr:qsa-alt</a></span></code></td>
+            <td>QSA Alternate Keywords Functional Profile</td>
+            <td>For conformance with the functional profile presented in <a href="#qsa"></a>.</td>
+            <td>
+              To be used if a resource conforms to the QSA Functional Profile but uses alternate keywords for the Query String Arguments <code>_profile</code> and
+              <code>_mediatype</code>, as allowed by the recommendations in <a href="#qsa"></a>.
+            </td>
+          </tr>
+          <tr>
+            <td><code><span style="white-space: nowrap"><a href="http://www.w3.org/ns/dx/conneg/profile/rrd">cp:rrd</a></span></code></td>
+            <td>Resource Representation Description</td>
+            <td>For conformance with <a href="#getresourcebyprofile"></a>.</td>
+            <td>
+              To be used if a resource representation is able to indicate which profile(s) it conforms to, in its appropriate functional profile, as per the abstract specification in
+              <a href="#getresourcebyprofile"></a>.
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <figcaption>
+          Profiles of this <em>Content Negotiation by Profile</em> specification to be used by resources and systems to indicate conformance to one or more forms
+          of it.
+        </figcaption>
+      </figure>
+      <p>
+        If a system wishes to show conformance to this specification, conformance to at least one of the functional profiles listed in <a href="#fig-table-profiles"></a> MUST be indicated.
+      </p>
+      <p>
+        The namespace used for the above functional profiles, <code>http://www.w3.org/ns/dx/conneg/profile/</code>, is part of the Dataset Exchange Working Group's reserved W3C namespace,
+        <code>http://www.w3.org/ns/dx/</code>, which is provisioned for all namespace requirements to do with issues addressed by that Working Group. The <code>/profile/</code> path segment
+        indicates a register of profile objects which currently contains just the 4 instances above from <a href="#fig-table-profiles"></a>.
+      </p>
+    </section>
     <section id="http">
       <h3>Hypertext Transfer Protocol Headers</h3>
       <p>
@@ -1900,8 +1910,8 @@ Link: &lt;http://www.w3.org/ns/dx/prof/Profile&gt;;
     <section id="profiles">
       <h3>Profiles of this specification</h3>
       <p>
-        This specification contains a number of distinct <a>profiles</a> that are identified and described in words in
-        <a href="#conformance-profiles"></a>. This appendix presents descriptions of these profiles, and the relations
+        This specification contains a number of distinct <a>functional profiles</a> that are identified and described in words in
+        <a href="#conformance-profiles"></a>. This appendix presents descriptions of these functional profiles, and the relations
         between them, according to the Profiles Vocabulary [[PROF]].
       </p>
       <p>
@@ -2165,10 +2175,6 @@ dct:Standard
       </section>
       <section id="altr-extensions">
         <h4>Extensions</h4>
-        <div class="note" title="AltP / PROF work requried">
-          See the reference to Issue #1041 in the previous subsection for discussion of work needed to relate the
-          Alternative Profiles Data Model to the Profiles Vocabulary.
-        </div>
         <p>
           The <a href="#altr">Alternate Profiles Data Model</a> may be extended to include additional information of use in
           content negotiation by profile situations. One obviously useful extension is the inclusion of information about
