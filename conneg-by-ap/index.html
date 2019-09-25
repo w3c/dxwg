@@ -236,7 +236,7 @@
         have specified the use of a Media Type parameter "profile"
         that could be used to signal the profile that the body of the response conforms to.</p>
       <pre id="eg-profile-and-accept" class="example nohighlight" aria-busy="false" aria-live="polite"
-           title="Using the profile parameter in an Accept header together with the Accept-Profile header">
+           title="Using the HTTP Accept header together with a 'profile' parameter">
 GET /resource/a HTTP/1.1
 Accept: text/turtle;q=0.9;profile="urn:example:profile-1", \
         text/turtle;q=0.7;profile="urn:example:profile-2"
@@ -447,50 +447,6 @@ Preference-Applied: profile="urn:example:schema"
         MUST identify the <a>resource</a> by a Uniform Resource Identifier (URI) [[RFC3986]] and MUST
         identify the <a>profile</a> either by a URI or a <a>token</a>.
       </p>
-      <div class="issue" data-number="290">
-	<p>The use of tokens for profile identification
-		was a controversially discussed topic within the working group
-		(cf. discussion in <a href="https://github.com/w3c/dxwg/issues/290">#290</a>).</p>
-	<p>The proponents of tokens stressed the value of short mnemonic identifiers
-		for human actors using web browsers.
-		Since browsers usually do not easily allow request headers to be set or modified
-		the easiest way for human actors to negotiate for profiles
-		(or any other content dimension)
-		is to use Query String Arguments (QSAs).
-		When using QSAs, the profile identifier is put in the query part of the request URI
-		and since all content in the query part needs to be URL-encoded
-		this requires that several characters that are common in URIs
-		(e. g. '<code>:</code>' and '<code>/</code>')
-		be percent-encoded which is an error-prone process if done manually.
-		Since tokens are usually restricted to the character group <code>[A-Za-z0-9]</code>,
-		they have not only the advantage of being shorter than most URIs,
-		but also that they can be used in the query part of the request URI
-		without the need to percent-encode any of its characters.
-		Further, there are several systems already deployed
-		that build on standards that use tokens for profile identification.</p>
-	<p>The opponents of tokens questioned the use of tokens from two main angles.
-		One argument was that while URIs are universally unique,
-		tokens will introduce non-uniqueness challenges
-		since there is no universal registry for token/URI mappings
-		(nor is it likely that there will be one).
-		The proposed approach that servers publish token/URI mappings for the resources they serve
-		was seen as unsatisfactory since the scope of that mapping would not be clear:
-		Would it be valid for a domain, a sub-domain or only for the requested resource?
-		Following on that, the benefits of such a mapping was generally questioned
-		on the grounds that machine-driven clients would likely use
-		http content negotiation with the Accept-Profile and Content-Profile headers
-		and full profile URIs instead of tokens.
-		Also, since tokens are not unique,
-		a client would either need to know a server’s URI/token mappings <em>before</em> using the token
-		(in which case it could use the URI instead)
-		or it would need to look it up through the URI/token mapping
-		(in which case it would need to know the profile URI).
-		In each case, the client would need to know the profile URI,
-		which means that tokens do not make client and/or server implementation easier
-		since in order to conform to the specification
-		they need to support not only profile URIs but profile tokens, too.</p>
-	<p>[When this #290 has been resolved, this issue should be turned into a note also saying what the resolution was]</p>
-      </div>
       <p>
         If a URI is used for profile identification, it SHOULD be an HTTP
         URI that dereferences to a description of the profile. Other kinds or URIs, e. g. URNs MAY also be used and these may no be capable of dereferencing.
@@ -654,7 +610,7 @@ Link:
              title="Simple get resource by profile request & response (HTTP Headers Functional Profile)">
 # A request for resource a according to Profile x is made
 GET /resource/a HTTP/1.1
-Accept-Profile: http://example.org/profile/x
+Accept-Profile: &lt;http://example.org/profile/x>
 
 ---
 
@@ -669,7 +625,7 @@ Content-Profile: http://example.org/profile/x
              title="Get resource by profile request & response (HTTP Headers Functional Profile) with 303 redirect">
 # A request for a non-information resource a according to Profile x is made
 GET /resource/a HTTP/1.1
-Accept-Profile: http://example.org/profile/x
+Accept-Profile: &lt;http://example.org/profile/x>
 
 ---
 
@@ -702,7 +658,7 @@ HTTP/1.1 200 OK
 # to Profile X is made
 
 GET /resource/a HTTP/1.1
-Accept-Profile: http://example.org/profile/x
+Accept-Profile: &lt;http://example.org/profile/x>
 [more request headers]
 
 ---
@@ -893,21 +849,14 @@ Content-Profile: http://example.org/profile/x, \
 	      <code>Accept-Profile</code> and <code>Content-Profile</code> that are to be defined in an upcoming
         Internet-Draft [[PROF-IETF]].
       </p>
-      <div class="note" title="Feature at risk">
-        <p>
-	  The use of HTTP headers to transport information
-	  about which profiles the response message's content conforms to
-	  is <strong>at risk</strong> pending the IETF standardisation work.
-        </p>
-      </div><div class="issue" data-number="678"></div>
-      <div class="note" title="Issue 678: POST/PUT out of scope">
+      <div class="note" title="POST/PUT out of scope">
         <p>
           POST &amp; PUT methods are considered out-of-scope for this Functional Profile. It is not clear what functions of
         the proposed Abstract Model these HTTP methods would implement.
         </p>
         <p>
-          <code>Content-Profile</code> headers may be specified in POST &amp; PUT request to communicate the conformance of a
-          request message's content but the Working Group has no specified requirements for this.
+          <code>Content-Profile</code> headers may be specified in POST &amp; PUT requests to communicate the conformance of
+          a request message's content.
         </p>
       </div>
       <p>
@@ -1229,9 +1178,13 @@ Link:
         <p>
           	Getting a resource representation conforming to a specific profile is done
 		by issuing an <code>HTTP GET</code> request against the resource
-		and specifying the desired profile URI in an <code>Accept-Profile</code> header.
-          	It is possible to specify a range of acceptable profile URIs
-		and also to indicate preferences by using quality indicators (q-values) as an ordering mechanism. <a href="#eg-http-get"></a> shows a simple
+		and specifying the desired profile URI in an <code>Accept-Profile</code> header. URIs MUST be enclosed in angled brackets, '&lt;' &amp; '&gt;'.
+          	It is possible to specify a range of acceptable profile URIs and, when using multiple URIs, they MUST be delimited by a comma
+          be in separate <code>Accept-Profile</code> headers.
+          Preferences may be indicated by using quality indicators (q-values) as an ordering mechanism separated
+          from the URI by a semi-colon, ';'. An example of a URI (in this case a URN) with a q-value is <code>&lt;urn:example:profile:x&gt;;q=1.0,</code> where the URI
+           is <code>&lt;urn:example:profile:x&gt;</code> and the q-value is <code>q=1.0</code>.</p>
+        <p><a href="#eg-http-get"></a> shows a simple
           request for a resource, <code>/resource/a</code>, with a preference for representations according to profiles
           identified by the URIs (URNs, in this example) <code>urn:example:profile:x</code> &amp;
           <code>urn:example:profile:y</code> with 'q' values indicating a higher preference for the first. A response
@@ -1242,7 +1195,7 @@ Link:
              title="Requesting a resource representation conforming to a specific profile using HTTP headers">
 GET /resource/a HTTP/1.1
 Accept: text/turtle;q=0.8, application/xml;q=0.5
-Accept-Profile: urn:example:profile:x;q=1.0,urn:example:profile:y;q=0.6
+Accept-Profile: &lt;urn:example:profile:x>;q=1.0,&lt;urn:example:profile:y>;q=0.6
 [more request headers]
 
 ---
@@ -1255,7 +1208,7 @@ Content-Profile: &lt;urn:example:profile:x>
         <p>
           Having performed content negotiation and returned a resource representation, it is RECOMMENDED
           that the server also include a Link header indicating the availability of alternate resources
-          encoded in other Media Types and conforming to other profiles, as described above.
+          encoded in other Media Types and conforming to other profiles, as per <a href="#http-listprofiles"></a>.
         </p>
       </section>
     </section>
@@ -1675,7 +1628,7 @@ GET /resource/X?_profile=Y&amp;_mediatype=Z HTTP/1.1
 # made a HEAD request instead of a GET
 
 GET /resource/a HTTP/1.1
-Accept-Profile: http://example.org/profile/x
+Accept-Profile: &lt;http://example.org/profile/x>
 
 # The server does not understand the HTTP Get Resource By Profile
 # request (doesn't support the HTTP Headers Functional Profile) but is
@@ -1720,7 +1673,7 @@ Link:
         <pre id="eg-qsa-keydisco-altprofiles" class="example nohighlight" aria-busy="false" aria-live="polite"
              title="Extension of previous example showing of Alternate Profiles Data Model-conformant responses">
 GET /resource/a HTTP/1.1
-Accept-Profile: http://example.org/profile/x
+Accept-Profile: &lt;http://example.org/profile/x>
 
 --
 
@@ -2391,18 +2344,6 @@ Link:
 ---------------------------------------------------------------------------------------
         </pre>
       </section>
-    <section id="issue-summary" class="appendix">
-      <h3>Issue Summary</h3>
-      <!-- A list of issues will magically appear here -->
-    </section>
-    <section id="extra-issues" class="appendix">
-      <h3>Additional Issues</h3>
-      <p><em>This section will be removed in a later version of this document.</em></p>
-      <p>Additional Issues related to this document and not yet placed within it are listed at the:</p>
-      <ul>
-        <li><a href="https://github.com/w3c/dxwg/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Aprofile-negotiation+sort%3Acreated-asc+">GitHub Issues tracker for profile-negotiation</a></li>
-      </ul>
-    </section>
   </section>
   <script class="remove" src="config.js"></script>
   <script class="remove" src="https://www.w3.org/Tools/respec/respec-w3c-common"></script>
