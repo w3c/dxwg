@@ -719,7 +719,7 @@ Link:
              title="Simple get resource by profile request & response (HTTP Headers Functional Profile)">
 # A request for resource a according to Profile x is made
 GET /resource/a HTTP/1.1
-Accept-Profile: http://example.org/profile/x
+Accept-Profile: &lt;http://example.org/profile/x>
 
 ---
 
@@ -734,7 +734,7 @@ Content-Profile: http://example.org/profile/x
              title="Get resource by profile request & response (HTTP Headers Functional Profile) with 303 redirect">
 # A request for a non-information resource a according to Profile x is made
 GET /resource/a HTTP/1.1
-Accept-Profile: http://example.org/profile/x
+Accept-Profile: &lt;http://example.org/profile/x>
 
 ---
 
@@ -767,7 +767,7 @@ HTTP/1.1 200 OK
 # to Profile X is made
 
 GET /resource/a HTTP/1.1
-Accept-Profile: http://example.org/profile/x
+Accept-Profile: &lt;http://example.org/profile/x>
 [more request headers]
 
 ---
@@ -843,8 +843,8 @@ Content-Profile: http://example.org/profile/x, \
     <section id="precendence">
       <h3>Order of Precedence for Implementation Profiles</h3>
       <p>
-        It is possible that multiple functional profiles MAY be implemented by a service, including HTTP, QSA and possibly other approaches. In such clases a client MAY specify conflicting choices via different mechanisms. The order of precedence determines which mechanism MUST be used. 
-      </p>     
+        It is possible that multiple functional profiles MAY be implemented by a service, including HTTP, QSA and possibly other approaches. In such clases a client MAY specify conflicting choices via different mechanisms. The order of precedence determines which mechanism MUST be used.
+      </p>
       <p>
         The order of precedence is QSA over HTTP - on the basis that the more exactly a URI points to a resource, the more likely it is that the agent intends to request that precise resource irrespective of which HTTP headers are sent with that request.
         </p>
@@ -1219,9 +1219,12 @@ Link:
         <p>
           	Getting a resource representation conforming to a specific profile is done
 		by issuing an <code>HTTP GET</code> request against the resource
-		and specifying the desired profile URI in an <code>Accept-Profile</code> header.
-          	It is possible to specify a range of acceptable profile URIs
-		and also to indicate preferences by using quality indicators (q-values) as an ordering mechanism. <a href="#eg-http-get"></a> shows a simple
+		and specifying the desired profile URI in an <code>Accept-Profile</code> header. URIs MUST be enclosed in angled brackets, '&lt;' &amp; '&gt;'.
+          	It is possible to specify a range of acceptable profile URIs and, when using multiple URIs, they MUST be delimited by a comma.
+          Preferences may be indicated by using quality indicators (q-values) as an ordering mechanism separated
+          from the URI by a semi-colon, ';'. An example of a URI (in this case a URN) with a q-value is <code>&lt;urn:example:profile:x&gt;;q=1.0,</code> where the URI
+           is <code>&lt;urn:example:profile:x&gt;</code> and the q-value is <code>q=1.0</code>.</p>
+        <p><a href="#eg-http-get"></a> shows a simple
           request for a resource, <code>/resource/a</code>, with a preference for representations according to profiles
           identified by the URIs (URNs, in this example) <code>urn:example:profile:x</code> &amp;
           <code>urn:example:profile:y</code> with 'q' values indicating a higher preference for the first. A response
@@ -1232,7 +1235,7 @@ Link:
              title="Requesting a resource representation conforming to a specific profile using HTTP headers">
 GET /resource/a HTTP/1.1
 Accept: text/turtle;q=0.8, application/xml;q=0.5
-Accept-Profile: urn:example:profile:x;q=1.0,urn:example:profile:y;q=0.6
+Accept-Profile: &lt;urn:example:profile:x>;q=1.0,&lt;urn:example:profile:y>;q=0.6
 [more request headers]
 
 ---
@@ -1665,7 +1668,7 @@ GET /resource/X?_profile=Y&amp;_mediatype=Z HTTP/1.1
 # made a HEAD request instead of a GET
 
 GET /resource/a HTTP/1.1
-Accept-Profile: http://example.org/profile/x
+Accept-Profile: &lt;http://example.org/profile/x>
 
 # The server does not understand the HTTP Get Resource By Profile
 # request (doesn't support the HTTP Headers Functional Profile) but is
@@ -1710,7 +1713,7 @@ Link:
         <pre id="eg-qsa-keydisco-altprofiles" class="example nohighlight" aria-busy="false" aria-live="polite"
              title="Extension of previous example showing of Alternate Profiles Data Model-conformant responses">
 GET /resource/a HTTP/1.1
-Accept-Profile: http://example.org/profile/x
+Accept-Profile: &lt;http://example.org/profile/x>
 
 --
 
@@ -1766,7 +1769,7 @@ Link:
 	</p>
 	<p>
 	  The ABNF for the profile attribute's value is <code>token / quoted-string</code>,
-	  where "token" and "quoted-string" are defined as in 
+	  where "token" and "quoted-string" are defined as in
 		<a href="https://tools.ietf.org/html/rfc7230#section-3.2.6">section 3.2.6</a>
 	  of [[RFC7230]]. The rules for <code>link-param</code> values defined in
 		<a href="https://tools.ietf.org/html/rfc8288#section-3">section 3</a> of [[RFC8288]] apply.
