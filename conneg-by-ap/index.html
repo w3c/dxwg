@@ -1261,9 +1261,9 @@ Content-Profile: &lt;urn:example:profile:x>
         <div class="note">
           Conformance of a system to any one, or perhaps multiple, of these functional profiles may be demonstrated as per
           <a href="#conformancetoprofiles"></a>. Note that it is not required that a system, perhaps a server, indicate
-          conformance to one or more functional profiles of this specification since not all servers will have the ability to
-          either produce information as per <a href="#conformancetoprofiles"></a>. Systems may also show conformance to
-          the specification or functional profile in other ways, such as by a listing in a services catalogue.
+          conformance to one or more functional profiles of this specification since not all systems will have the ability to
+          do so themselves. Systems may also show conformance to
+          functional profiles in multiple ways, such as with annotated entries in a services catalogue.
         </div>
         <section id="qsa-uri">
           <h5>QSA URI description</h5>
@@ -1580,7 +1580,8 @@ GET /resource/X?_profile=Y&amp;_mediatype=Z HTTP/1.1
           To be conformant with the "QSA Functional Profile" profile of this specification, a <a>server</a> MUST allow
           clients to request resources according to profiles they identify with a <code>_profile</code> query string.
           Since either <a>tokens</a> or URIs may be used to identify a profile, servers MUST accept either. Servers MAY
-          accept both encoded and un-encoded URIs but MAY also only accept one or the other.
+          accept both encoded and un-encoded URIs but MAY also only accept one or the other. URIs MUST be enclosed in
+          angled brackets, '&lt;' &amp; '&gt;'.
         </p>
         <p>
           To be conformant with the "QSA Alternate Keywords Functional Profile" profile of this specification, a
@@ -1591,18 +1592,16 @@ GET /resource/X?_profile=Y&amp;_mediatype=Z HTTP/1.1
         <p>
           A QSA <a>server</a> implementing <em>get resource by profile</em> SHOULD allow a client to indicate a
           preference for representations of the resource according to any one of a number of profiles. Such a request
-          MUST indicate profile preference in by inclusion of an ordered list of profile identifiers (URIS or tokens)
+          MUST indicate profile preference in by inclusion of an ordered list of profile identifiers (URIs or tokens)
           within the value of the QSA key/value pair used to identify profiles. For example, a client preferring
-          resource representations according to <em>profile-z</em> and then <em>profile-y</em> and finally
-          <em>profile-x</em>, in that preference order, could make a request like this:
+          resource representations according to <code>profile-z</code> and then <code>http://example.org/profile/y</code> and finally
+          <code>profile-x</code>, in that preference order, could make a request like this:
         </p>
         <p>
-          <code>GET /resource/a?_profile=profile-z,profile-y,profile-x</code>
+          <code>GET /resource/a?_profile=profile-z,&lt;http://example.org/profile/y>,profile-x</code>
         </p>
         <p>
-          Servers SHOULD support any combination of profile URIs or tokens for this (e.g.
-          <code>profile-z,http://example.org/profile/x,profile-y</code>) and SHOULD return resource representations
-          according to preference. Servers MUST indicate the profile actually returned by including a
+          Servers MUST indicate the profile actually returned by including a
           <code>Content-Profile</code> HTTP header in the response and MAY also indicate the returned profile in other
           ways. Servers SHOULD support escaped URIs and MAY also support un-escaped URIs identifying profiles, or both.
         </p>
