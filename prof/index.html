@@ -87,9 +87,9 @@
     In recognition of the existence of specifications and profiles that are made up of multiple resources &ndash;
     perhaps PDF documents, machine-readable constraint language files, code lists etc. &ndash; this vocabulary also
     provides for the description of the parts that constitute a profile or a specification. It defines a
-    <a href="#Class:ResourceDescriptor"><code>prof:ResourceDescriptor</code></a> class which is used to qualify the
+    <a href="#Class:ProfileResource"><code>prof:ProfileResource</code></a> class which is used to qualify the
     relationship between a profile and its part resources. A <code>prof:Profile</code> may have any number of
-    <a href="#Property:hasResource"><code>prof:hasResource</code></a> predicates indicating <code>prof:ResourceDescriptor</code>
+    <a href="#Property:hasResource"><code>prof:hasResource</code></a> predicates indicating <code>prof:ProfileResource</code>
     instances which then indicates the location (a URI) of the actual resource artifact with a
     <a href="#Property:hasArtifact"><code>prof:hasArtifact</code></a> predicate and then may describes the artifact's
     format and any specifications it conforms to with <a href="#Property:format"><code>dct:format</code></a> &amp;
@@ -357,7 +357,7 @@
       as <code>dcat:Distribution</code> instances.
     </p>
     <p>
-      PROF borrows its main structures from DCAT in that PROF's <code>prof:Profile</code> &amp; <code>prof:ResourceDescriptor</code>
+      PROF borrows its main structures from DCAT in that PROF's <code>prof:Profile</code> &amp; <code>prof:ProfileResource</code>
       classes parallel DCAT's <code>dcat:Dataset</code> &amp; <code>dcat:Distribution</code> classes.
     </p>
     <p>
@@ -510,7 +510,7 @@
       documents, examples of use and other resources too.
     </p>
     <p>
-      PROF does include the possibility of defining profile parts via instances of the <code>prof:ResourceDescriptor</code>
+      PROF does include the possibility of defining profile parts via instances of the <code>prof:ProfileResource</code>
       class with roles via the <code>prof:hasRole</code> property. Using these, profiles may indicate constraint
       language profile resources with an appropriate role, such as "constraints" or "validation". The list of
       <code>prof:ResourceRoles</code> instances given in <a href="#resource-roles-vocab"></a> may be extended by PROF users
@@ -534,8 +534,8 @@
     This vocabulary is for describing relationships between standards/specifications, profiles of them and supporting artifacts such as validating resources.
   </p>
   <p>
-    The model takes the <code><a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-Standard">dct:Standard</a></code> Class as a starting point and defines a specialization, a <code>Profile</code>, which is a <code>dct:Standard</code> that <em>profiles</em> a <code>dct:Standard</code> or another <code>Profile</code>. <code>Standards</code>s or <code>Profile</code>s can have <code>Resource Descriptor</code>s associated with
-  them that define rules for implementation, provide guidance on how to implement, or play some other role. <code>Resource Descriptor</code>s must indicate the role they
+    The model takes the <code><a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-Standard">dct:Standard</a></code> Class as a starting point and defines a specialization, a <code>Profile</code>, which is a <code>dct:Standard</code> that <em>profiles</em> a <code>dct:Standard</code> or another <code>Profile</code>. <code>Standards</code>s or <code>Profile</code>s can have <code>Profile Resource</code>s associated with
+  them that define rules for implementation, provide guidance on how to implement, or play some other role. <code>Profile Resource</code>s must indicate the role they
   play (to guide, to validate etc.), the formalism they adhere to (<code><a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-format">dct:format</a></code>)
   and any <code>dct:Standard</code> that they themselves conform to (<code><a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-conformsTo">dct:conformsTo</a></code>).
   </p>
@@ -590,7 +590,7 @@ CSIRO's publications catalogue."""@en ;
 
   # this profile has a SHACL resource that constrains it's use of Dublin Core
   prof:hasResource [
-    a prof:ResourceDescriptor ;
+    a prof:ProfileResource ;
 
     # it's in Turtle format
     dct:format &lt;https://w3id.org/mediatype/text/turtle&gt; ;
@@ -615,7 +615,7 @@ CSIRO's publications catalogue."""@en ;
     </pre>
     <p>
       The following example demonstrates how resources can indicate conformance to a profile. Note that in
-      <a href="#eg-initial-example"></a>, there is also an example of this pattern whereby the <code>ResourceDescriptor</code>
+      <a href="#eg-initial-example"></a>, there is also an example of this pattern whereby the <code>ProfileResource</code>
       is indicated as conforming to the [[SHACL]] specification, which is also understood to be a profile to which
       things  may conform.
     </p>
@@ -733,7 +733,7 @@ CSIRO's publications catalogue."""@en ;
           <tr><td class="prop">OWL type:</td><td><a href="https://www.w3.org/TR/owl2-rdf-based-semantics/#table-axiomatic-properties">owl:ObjectProperty</a></td></tr>
           <tr><td class="prop">Label:</td><td>has resource</td></tr>
           <tr><td class="prop">Definition:</td><td>A resource which describes the nature of an artifact and the role it plays in relation to a profile</td></tr>
-          <tr><td class="prop">Range:</td><td><a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a></td></tr>
+          <tr><td class="prop">Range:</td><td><a href="#Class:ProfileResource">prof:ProfileResource</a></td></tr>
         </tbody>
       </table>
     </section>
@@ -910,15 +910,15 @@ CSIRO's publications catalogue."""@en ;
       </table>
     </section>
   </section>
-  <section id="Class:ResourceDescriptor" class="property">
-    <h4>Class: ResourceDescriptor</h4>
+  <section id="Class:ProfileResource" class="property">
+    <h4>Class: ProfileResource</h4>
     <div class="issue" data-number="573"></div>
     <table class="definition">
       <thead>
-      <tr><th><a href="https://www.w3.org/TR/owl-syntax/#Classes">OWL Class</a></th><th><a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a></th></tr>
+      <tr><th><a href="https://www.w3.org/TR/owl-syntax/#Classes">OWL Class</a></th><th><a href="#Class:ProfileResource">prof:ProfileResource</a></th></tr>
       </thead>
       <tbody>
-      <tr><td class="prop">Label:</td><td>Resource Descriptor</td></tr>
+      <tr><td class="prop">Label:</td><td>Profile Resource</td></tr>
       <tr><td class="prop">Definition:</td><td>A resource that defines an aspect - a particular part or feature - of a Profile</td></tr>
       <tr><td class="prop">Usage note:</td><td>Used to indicate the formalism (via dct:format) and any adherence to a dct:Standard (via dct:conformsTo) to allow for machine mediation as well as its purpose via relation to a ResourceRole (via hasRole)</td></tr>
       </tbody>
@@ -931,9 +931,9 @@ CSIRO's publications catalogue."""@en ;
         </thead>
         <tbody>
         <tr><td class="prop">Label:</td><td>has artifact (resource)</td></tr>
-        <tr><td class="prop">Definition:</td><td>The URL of a downloadable file with particulars such as its format and role indicated by a Resource Descriptor</td></tr>
-        <tr><td class="prop">Domain:</td><td><a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a></td></tr>
-        <tr><td class="prop">Usage Note:</td><td>A property to link from a Resource Descriptor to an actual resource (rdfs:Resource; an individual) that implements it</td></tr>
+        <tr><td class="prop">Definition:</td><td>The URL of a downloadable file with particulars such as its format and role indicated by a Profile Resource</td></tr>
+        <tr><td class="prop">Domain:</td><td><a href="#Class:ProfileResource">prof:ProfileResource</a></td></tr>
+        <tr><td class="prop">Usage Note:</td><td>A property to link from a Profile Resource to an actual resource (rdfs:Resource; an individual) that implements it</td></tr>
         </tbody>
       </table>
     </section>
@@ -994,7 +994,7 @@ CSIRO's publications catalogue."""@en ;
         <tbody>
           <tr><td class="prop">Label:</td><td>has role</td></tr>
           <tr><td class="prop">Definition:</td><td>The function of the described artifact in the expression of the Profile, such as a specification, guidance documentation, SHACL file etc.</td></tr>
-          <tr><td class="prop">Domain:</td><td><a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a></td></tr>
+          <tr><td class="prop">Domain:</td><td><a href="#Class:ProfileResource">prof:ProfileResource</a></td></tr>
           <tr><td class="prop">Range:</td><td><a href="https://www.w3.org/TR/skos-reference/#Concept">skos:Concept</a></td></tr>
           <tr><td class="prop">Usage note:</td><td>A set of common roles are defined by the Profiles Vocabulary. These are not exhaustive or disjoint, and may be extended for situations where finer-grained description of purpose is necessary. A resource may perform multiple roles</td></tr>
         </tbody>
@@ -1008,10 +1008,10 @@ CSIRO's publications catalogue."""@en ;
         </thead>
         <tbody>
           <tr><td class="prop">Label:</td><td>is inherited from</td></tr>
-          <tr><td class="prop">Definition:</td><td>This property indicates a Resource Descriptor described by this Profile’s base specification that is to be considered a Resource Descriptor for this Profile also</td></tr>
-          <tr><td class="prop">Domain:</td><td><a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a></td></tr>
+          <tr><td class="prop">Definition:</td><td>This property indicates a Profile Resource described by this Profile’s base specification that is to be considered a Profile Resource for this Profile also</td></tr>
+          <tr><td class="prop">Domain:</td><td><a href="#Class:ProfileResource">prof:ProfileResource</a></td></tr>
           <tr><td class="prop">Range:</td><td><a href="#Class:Profile">prof:Profile</a></td></tr>
-          <tr><td class="prop">Usage note:</td><td>This property is created for the convenience of clients. When profile describers wish to allow clients to discover all resources relevant to a Profile without having to navigating an inheritance hierarchy of prof:profileOf relations, this predicate may be used to directly associate inherited Profile Descriptors with the Profile. If this property is present, it should be used consistently and all relevant resources a client may need to utilise the profile should be present and described using this predicate</td></tr>
+          <tr><td class="prop">Usage note:</td><td>This property is created for the convenience of clients. When profile describers wish to allow clients to discover all resources relevant to a Profile without having to navigating an inheritance hierarchy of prof:profileOf relations, this predicate may be used to directly associate inherited Profile Resources with the Profile. If this property is present, it should be used consistently and all relevant resources a client may need to utilise the profile should be present and described using this predicate</td></tr>
         </tbody>
       </table>
       <div class="issue" data-number="842"></div>
@@ -1025,14 +1025,14 @@ CSIRO's publications catalogue."""@en ;
           <img src="figures/isInheritedFrom.svg" title="Property isInheritedFrom in use" style="width:90%;" />
         </a>
           <figcaption>
-            Property <code>isInheritedFrom</code> in use. Here the <code>prof:ResourceDescriptor</code> instance <strong>Profile Y, Resource Descriptor 2</strong> refers to the same artifact (a constraints file) as <strong>Standard X, Resource Descriptor 1</strong> and it is inherited by <strong>Profile Y</strong> from <strong>Standard X</strong> which <strong>Profile Y</strong> is a profile of.
+            Property <code>isInheritedFrom</code> in use. Here the <code>prof:ProfileResource</code> instance <strong>Profile Y, Profile Resource 2</strong> refers to the same artifact (a constraints file) as <strong>Standard X, Profile Resource 1</strong> and it is inherited by <strong>Profile Y</strong> from <strong>Standard X</strong> which <strong>Profile Y</strong> is a profile of.
           </figcaption>
       </figure>
       <pre id="eg-isInheritedFrom"
            class="example nohighlight turtle" aria-busy="false" aria-live="polite"
            title="Property isInheritedFrom in use">
-# If Standard X, described using PROF, is given as having a Resource
-# Descriptor, RD_1, with role "Full Constraints" as follows:
+# If Standard X, described using PROF, is given as having a Profile
+# Resource, PR_1, with role "Full Constraints" as follows:
 
 @prefix ex1: &lt;http://example.org/profile1/&gt; .
 @prefix ex2: &lt;http://example.org/profile2/&gt; .
@@ -1044,37 +1044,37 @@ CSIRO's publications catalogue."""@en ;
 ex1:Standard_X
     a dct:Standard ;
     dct:title "Standard X" ;
-    prof:hasResource ex1:RD_1 .
+    prof:hasResource ex1:PR_1 .
 
-ex1:RD_1
-    a prof:ResourceDescriptor ;
+ex1:PR_1
+    a prof:ProfileResource ;
     dct:conformsTo &lt;http://shex.io/shex-semantics/&gt; ;  # the ShEx Expression Language
     dct:format &lt;https://w3id.org/mediatype/application/json&gt; ;  # JSON
-    prof:hasRole role:validation ;       # this ResourceDescriptor is to be used to
+    prof:hasRole role:validation ;       # this ProfileResource is to be used to
                                          # validate instance data claiming conformance
                                          # to Standard X
     prof:hasArtifact ex1:constraints.json . # the actual file the ResourceDescritor describes
 
 # then, a profile of Standard X, perhaps Profile Y, may use
-# prof:isInheritedFrom to re-use that Resource Descriptor RD_1
+# prof:isInheritedFrom to re-use that Profile Resource PR_1
 
 ex2:Profile_Y
     a prof:Profile ;
     dct:title "Profile Y" ;
     prof:isProfileOf ex1:Standard_X ;  # this is a profile of Standard X
     prof:hasResource [
-        a prof:ResourceDescriptor ;  # Resource Descriptor 2 in diagram
-        prof:isInheritedFrom ex1:Standard_X ;  # this Resource Descriptor is inherited from
+        a prof:ProfileResource ;  # Profile Resource 2 in diagram
+        prof:isInheritedFrom ex1:Standard_X ;  # this Profile Resource is inherited from
                                                # Standard X
         dct:conformsTo &lt;http://www.w3.org/ns/shacl#&gt; ;  # as above
         dct:format &lt;https://w3id.org/mediatype/text/turtle&gt; ;  # as above
-        prof:hasRole role:partConstraints ;  # this ResourceDescriptor is now only Part Constraints
+        prof:hasRole role:partConstraints ;  # this ProfileResource is now only Part Constraints
                                              # for Profile Y as it's implementing some of its own,
-                                             # additional constraints (see next Resource Descriptor)
-        prof:hasArtifact ex1:constraints.ttl  # direct URI reference to ex1:RD_1's artifact
+                                             # additional constraints (see next Profile Resource)
+        prof:hasArtifact ex1:constraints.ttl  # direct URI reference to ex1:PR_1's artifact
     ] ,
     [
-        a prof:ResourceDescriptor ;  # Resource Descriptor 2 in diagram. This is not inherited from anywhere
+        a prof:ProfileResource ;  # Profile Resource 2 in diagram. This is not inherited from anywhere
         dct:conformsTo &lt;http://www.w3.org/ns/shacl#&gt; ;
         dct:format &lt;https://w3id.org/mediatype/text/turtle&gt; ;
         # these constraints are Profile Y's on top of Standard X's
@@ -1260,7 +1260,7 @@ ex2:Profile_Y
         <img src="examples/dcat-ap.svg" title="DCAT-AP described using this vocabulary" style="width:90%;" />
       </a>
       <figcaption>
-        Part of the DCAT-AP Profile described using this ontology. Here two two Resource Descriptors are shown relating
+        Part of the DCAT-AP Profile described using this ontology. Here two two Profile Resources are shown relating
         to the Profile indicating resources with "Guidance" and "Constraints" roles.
       </figcaption>
     </figure>
@@ -1277,7 +1277,7 @@ ex2:Profile_Y
         </ul>
       </li>
       <li>
-        two <a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a> objects - linked to the
+        two <a href="#Class:ProfileResource">prof:ProfileResource</a> objects - linked to the
         <em>prof:Profile</em> object by <a href="#Property:hasResource">prof:hasResource</a> properties
         <ul>
           <li>
@@ -1342,28 +1342,28 @@ ex2:Profile_Y
   prof:isProfileOf &lt;https://joinup.ec.europa.eu/release/dcat-ap-v11&gt; ;
 
 &lt;https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f6f27f059_bf785_b4d7d_bb602_b6448aab73bd5&gt;
-  a prof:ResourceDescriptor;
+  a prof:ProfileResource;
 	rdfs:label "DCAT-AP Guidance Document (Word)" ;
 	dct:format &lt;https://w3id.org/mediatype/application/msword&gt; ;
 	prof:hasRole role:Guidance ;
 .
 
 &lt;https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f17e18570_b1d77_b4171_b9df5_bb53cb4f017d4&gt;
-  a prof:ResourceDescriptor;
+  a prof:ProfileResource;
 	rdfs:label "DCAT-AP Guidance Document (PDF)" ;
 	dct:format &lt;https://w3id.org/mediatype/application/pdf&gt; ;
 	prof:hasRole role:Guidance ;
 .
 
 &lt;https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f1131a208_b92e9_b4427_ba40c_b6c47746cd422&gt;
-  a prof:ResourceDescriptor;
+  a prof:ProfileResource;
 	rdfs:label "DCAT-AP Image" ;
 	dct:format &lt;https://w3id.org/mediatype/image/png&gt; ;
 	prof:hasRole role:Guidance ;
 .
 
 &lt;https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f016d88c3_ba0b3_b4506_bae4e_b758e7401c096&gt;
-  a prof:ResourceDescriptor;
+  a prof:ProfileResource;
 	rdfs:label "DCAT-AP Constraints" ;
 	dct:conformsTo &lt;http://www.w3.org/ns/shacl&gt;; # the namespace for SHACL
 	dct:format "text/turtle" ;
@@ -1471,7 +1471,7 @@ ex2:Profile_Y
         <img src="examples/csiro-dummy-dcap.svg" title="CSIRO Dummy DCAP Profile" style="width:90%;" alt="CSIRO Dummy DCAP Profile" />
       </a>
       <figcaption>
-        CSIRO Dummy DCAP Profile characterised using PROF. Only two of the four Resource Descriptors in the RDF below are shown.
+        CSIRO Dummy DCAP Profile characterised using PROF. Only two of the four Profile Resources in the RDF below are shown.
       </figcaption>
     </figure>
     <pre id="eg-eg-csiro-dummy-dcap"
@@ -1506,7 +1506,7 @@ ex2:Profile_Y
 
 # example's code repository home
 _:1
-    a                 prof:ResourceDescriptor ;
+    a                 prof:ProfileResource ;
     rdfs:label        "Profile Specifcation" ;
     dct:format        &lt;https://w3id.org/mediatype/text/html&gt; ;
     # the official written text specifying the Profile
@@ -1515,7 +1515,7 @@ _:1
 
 # this is an RDF (turtle) version of the DSP constraints for this profile
 _:2
-    a                 prof:ResourceDescriptor ;
+    a                 prof:ProfileResource ;
     rdfs:label        "Full constraints in RDF" ;
     dct:conformsTo    &lt;http://dublincore.org/documents/2008/03/31/dc-dsp/&gt; ; # the constraints conform to the DSP spec
     dct:format        &lt;https://w3id.org/mediatype/text/turtle&gt; ; # it's in Turtle format
@@ -1524,7 +1524,7 @@ _:2
     prof:hasArtifact  &lt;http://test.linked.data.gov.au/test/def/CSIRO-ePub-DCAP/constraints.ttl&gt; .
 
 _:3
-    a                 prof:ResourceDescriptor ;
+    a                 prof:ProfileResource ;
     rdfs:label        "Full constraints in DSP constraint language" ;
     dct:conformsTo    &lt;http://dublincore.org/documents/2008/03/31/dc-dsp/&gt; ; # the constraints conform to the DSP spec
     dct:format        &lt;https://w3id.org/mediatype/text/plain&gt; ; # it's in plain text format
@@ -1534,7 +1534,7 @@ _:3
 
 # this resource is a PDF file in the def about how to use the CSIRO-ePub-DCAP
 _:4
-    a                 prof:ResourceDescriptor ;
+    a                 prof:ProfileResource ;
     rdfs:label        "Guidance document" ;
     dct:format        &lt;https://w3id.org/mediatype/application/pdf&gt; ;
     # general guidance info on how to use/implement this Profile
@@ -1543,7 +1543,7 @@ _:4
     </pre>
     <p>
       This DCAP example shows, among other things, that a <code>Profile</code> may contain multiple
-      <code>Resource Descriptor</code> individuals that perform the same <code>Resource Role</code> (here
+      <code>Profile Resource</code> individuals that perform the same <code>Resource Role</code> (here
       <code>Constraints</code>) that are differentiated on other bases, here on format: plain text &amp; RDF (turtle).
     </p>
   </section>
@@ -1608,7 +1608,7 @@ _:4
 .
 
 :web
-    a prof:ResourceDescriptor ;
+    a prof:ProfileResource ;
     rdfs:label "GA Profile guidance document online" ;
     prof:hasRole roles:guidance ;
     dct:conformsTo :WebPage ;
@@ -1617,7 +1617,7 @@ _:4
 .
 
 :spec
-    a prof:ResourceDescriptor ;
+    a prof:ProfileResource ;
     rdfs:label "GA Profile specification document";
     prof:hasRole roles:specification ;
     dct:format &lt;https://w3id.org/mediatypes/application/pdf&gt; ;
@@ -1625,7 +1625,7 @@ _:4
 .
 
 :schema
-    a prof:ResourceDescriptor ;
+    a prof:ProfileResource ;
     rdfs:label "GA Profile XML Schema";
     prof:hasRole roles:specification ;
     dct:conformsTo :XSDSchema ;
@@ -1634,7 +1634,7 @@ _:4
 .
 
 :constraints
-    a prof:ResourceDescriptor ;
+    a prof:ProfileResource ;
     rdfs:label "GA Profile Schematron" ;
     prof:hasRole roles:fullConstraints ;
     dct:conformsTo :Schematron ;
@@ -1658,11 +1658,11 @@ _:4
   <section id="eg-adms">
     <h3>Asset Description Metadata Schema</h3>
     <p>
-      <em>This example shows a <code>Profile</code>, some of whose <code>Resource Descriptors</code> conform to standards.</em>
+      <em>This example shows a <code>Profile</code>, some of whose <code>Profile Resources</code> conform to standards.</em>
     </p>
     <p>
       The Asset Description Metadata Schema (ADMS) [[VOCAB-ADMS]] is a profile of DCAT, used to describe semantic
-      assets. Both ADMS the <code>Profile</code> and two of its <code>Resource Descriptors</code> are published
+      assets. Both ADMS the <code>Profile</code> and two of its <code>Profile Resources</code> are published
       according to W3C specifications for <em>Recommendations</em> and <em>Working Group Notes</em>.
     </p>
     <figure id="fig-eg-adms">
@@ -1711,7 +1711,7 @@ _:4
 .
 
 :ADMS-note
-    a prof:ResourceDescriptor ;
+    a prof:ProfileResource ;
     rdfs:label "ADMS specification document" ;
     prof:hasRole roles:specification ;
     dct:conformsTo prof:W3Cnote ;
@@ -1720,7 +1720,7 @@ _:4
 .
 
 :ADMS-rdf
-    a prof:ResourceDescriptor ;
+    a prof:ProfileResource ;
     rdfs:label "ADMS RDF vocabulary" ;
     prof:hasRole roles:vocabulary ;
     dct:conformsTo &lt;https://www.w3.org/TR/owl2-rdf-based-semantics/&gt; ,
@@ -1764,7 +1764,7 @@ _:4
     <p>
       PROF is considered a specialisation of the revised version of the Dataset Catalogue Vocabulary [[VOCAB-DCAT-2]]
       for the purpose of cataloguing profiles. With this in mind, the main PROF classes - <code>Profile</code> and
-      <code>Resource Descriptor</code> - specialise (are sub classes of) DCAT's <code>Resource</code> and
+      <code>Profile Resource</code> - specialise (are sub classes of) DCAT's <code>Resource</code> and
       <code>Distributions</code> respectively. This alignment is not normative, but is provided as a recommended way
       to consider general metadata needs when describing profiles.
     </p>
@@ -1783,7 +1783,7 @@ _:4
       </thead>
       <tbody>
         <tr><td>prof:Profile</td><td style="text-align: center;"><code>rdfs:subClassOf</code></td><td>dcat:Resource</td><td><code>prof:Profile</code> is not a sub class of <code>dcat:Dataset</code></td></tr>
-        <tr><td>prof:ResourceDescriptor</td><td style="text-align: center;"><code>rdfs:subClassOf</code></td><td>dcat:Distribution</td><td></td></tr>
+        <tr><td>prof:ProfileResource</td><td style="text-align: center;"><code>rdfs:subClassOf</code></td><td>dcat:Distribution</td><td></td></tr>
       </tbody>
     </table>
     <p>
@@ -1818,7 +1818,7 @@ _:4
       <tr><th>PROF element</th><th>Mapping property</th><th>ADMS element</th></tr>
       </thead>
       <tbody>
-      <tr><td>prof:ResourceDescriptor</td><td style="text-align: center;"><code>rdfs:subClassOf</code></td><td>adms:AssetDistribution</td></tr>
+      <tr><td>prof:ProfileResource</td><td style="text-align: center;"><code>rdfs:subClassOf</code></td><td>adms:AssetDistribution</td></tr>
       </tbody>
     </table>
     <p>
@@ -1834,7 +1834,7 @@ _:4
       PROF makes use of Dublin Core Terms [[DCTERMS]] directly with the PROF class <code>prof:Profile</code> being a
       sub class of <code>dct:Standard</code> and two Dublin Core Terms properties, <code>dct:format</code> &amp;
       <code>dct:conformsTo</code> being recommended within PROF for use in describing instances of the
-      <code>prof:ResourceDescriptor</code> class.
+      <code>prof:ProfileResource</code> class.
     </p>
     <p>
       PROF is aligned with Dublin Core Terms as per <a href="#fig-align-dct"></a> and table below.
@@ -1897,7 +1897,7 @@ _:4
       Vocabulary of a Friend (VOAF) is a vocabulary specification providing elements allowing the description of
       vocabularies (RDFS vocabularies or OWL ontologies) [[VOAF]]. Due to VOAF being defined for use with RDF resources instances
       only, PROF has an alignment with VOAF which is instance-specific: resources described by instances of PROF's
-      <code>prof:ResourceDescriptor</code> class with the property <code>prof:resourceRole</code> linking to the
+      <code>prof:ProfileResource</code> class with the property <code>prof:resourceRole</code> linking to the
       Resource Role <code>role:Vocabulary</code>, or a specialized version of it, may be a <code>voaf:Vocabulary</code>.
     </p>
     <figure id="fig-align-voaf">
@@ -1911,7 +1911,7 @@ _:4
       <tbody>
       <tr>
         <td>instance of rdf:Resource</td>
-        <td style="text-align: center;">related to an instance of a <code>prof:ResourceDescriptor</code> via
+        <td style="text-align: center;">related to an instance of a <code>prof:ProfileResource</code> via
           <code>prof:hasArtifact</code> that also relates to the Role <code>role:Vocabulary</code> or specialisation
           thereof
         </td>
@@ -1971,7 +1971,7 @@ _:4
     <a href="http://purl.org/dc/terms/publisher">publishers</a> and other parties or agents via <em>qualified
     relations</em> and, as such, may define terms that may be related to personal information.  In addition, it may also
     be used with extensions that support the association of <a href="http://purl.org/dc/terms/rights">rights</a> and
-    <a href="http://purl.org/dc/terms/license">licenses</a> with modelled Profiles and Resource Descriptors.
+    <a href="http://purl.org/dc/terms/license">licenses</a> with modelled Profiles and Profile Resources.
     These rights and licenses could potentially include or reference sensitive information such as user and asset
     identifiers as <a href="https://www.w3.org/TR/odrl-vocab/#privacy-consideration">described</a> in [[ODRL-VOCAB]].
     Implementations that produce, maintain, publish or consume such vocabulary terms must take steps to ensure security
@@ -2024,7 +2024,7 @@ _:4
         </ul>
       </li>
       <li>
-        <code><a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a></code>
+        <code><a href="#Class:ProfileResource">prof:ProfileResource</a></code>
         <ul>
           <li><code><a href="#Property:hasArtifact">prof:hasArtifact</a></code></li>
           <li>

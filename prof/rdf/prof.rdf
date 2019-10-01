@@ -8,9 +8,9 @@
   xmlns:skos="http://www.w3.org/2004/02/skos/core#"
 >
   <owl:ObjectProperty rdf:about="http://www.w3.org/ns/dx/prof/isInheritedFrom">
-    <rdfs:domain rdf:resource="http://www.w3.org/ns/dx/prof/ResourceDescriptor"/>
-    <skos:definition xml:lang="en">This property indicates a Resource Descriptor described by this Profile’s base specification that is to be considered a Resource Descriptor for this Profile also</skos:definition>
-    <skos:usageNote xml:lang="en">This property is created for the convenience of clients. When profile describers wish to allow clients to discover all resources relevant to a Profile without having to navigating an inheritance hierarchy of prof:profileOf relations, this predicate may be used to directly associate inherited Profile Descriptors with the Profile. If this property is present, it should be used consistently and all relevant resources a client may need to utilise the profile should be present and described using this predicate</skos:usageNote>
+    <rdfs:domain rdf:resource="http://www.w3.org/ns/dx/prof/ProfileResource"/>
+    <skos:definition xml:lang="en">This property indicates a Profile Resource described by this Profile’s base specification that is to be considered a Profile Resource for this Profile also</skos:definition>
+    <skos:usageNote xml:lang="en">This property is created for the convenience of clients. When profile describers wish to allow clients to discover all resources relevant to a Profile without having to navigating an inheritance hierarchy of prof:profileOf relations, this predicate may be used to directly associate inherited Profile Resources with the Profile. If this property is present, it should be used consistently and all relevant resources a client may need to utilise the profile should be present and described using this predicate</skos:usageNote>
     <rdfs:label>is inherited from</rdfs:label>
     <rdfs:range rdf:resource="http://www.w3.org/ns/dx/prof/Profile"/>
   </owl:ObjectProperty>
@@ -27,13 +27,13 @@
     <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-15</dct:modified>
     <rdfs:comment xml:lang="en">This vocabulary is for describing relationships between standards/specifications, profiles of them and supporting artifacts such as validating resources.
 
-This model starts with [http://dublincore.org/2012/06/14/dcterms#Standard](dct:Standard) entities which can either be Base Specifications (a standard not profiling any other Standard) or Profiles (Standards which do profile others). Base Specifications or Profiles can have Resource Descriptors associated with them that defines implementing rules for the it. Resource Descriptors must indicate the role they play (to guide, to validate etc.) and the formalism they adhere to (dct:format) to allow for content negotiation. A vocabulary of Resource Roles are provided alongside this vocabulary but that list is extensible.</rdfs:comment>
+This model starts with [http://dublincore.org/2012/06/14/dcterms#Standard](dct:Standard) entities which can either be Base Specifications (a standard not profiling any other Standard) or Profiles (Standards which do profile others). Base Specifications or Profiles can have Profile Resources associated with them that defines implementing rules for the it. Profile Resources must indicate the role they play (to guide, to validate etc.) and the formalism they adhere to (dct:format) to allow for content negotiation. A vocabulary of Resource Roles are provided alongside this vocabulary but that list is extensible.</rdfs:comment>
     <dct:contributor rdf:resource="http://orcid.org/0000-0002-3884-3420"/>
   </owl:Ontology>
   <owl:ObjectProperty rdf:about="http://www.w3.org/ns/dx/prof/hasRole">
     <skos:definition xml:lang="en">The function of the described artifactresource in the expression of the Profile, such as a specification, guidance documentation, SHACL file etc.</skos:definition>
     <skos:usageNote xml:lang="en">A set of common roles are defined by the Profiles Vocabulary. These are not exhaustive or disjoint, and may be extended for situations where finer grained description of purpose is necessary. A resource may perform multiple roles</skos:usageNote>
-    <rdfs:domain rdf:resource="http://www.w3.org/ns/dx/prof/ResourceDescriptor"/>
+    <rdfs:domain rdf:resource="http://www.w3.org/ns/dx/prof/ProfileResource"/>
     <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
     <rdfs:label>has role</rdfs:label>
   </owl:ObjectProperty>
@@ -55,7 +55,7 @@ This model starts with [http://dublincore.org/2012/06/14/dcterms#Standard](dct:S
     <rdfs:label xml:lang="en">has resource</rdfs:label>
     <skos:usageNote xml:lang="en">This property is analogous to dcat:distribution however the domain is not necessarily dcat:Dataset. dcat:Dataset and prof:Profile are not disjoint, so it is up to implementations to decide if these are equivalent properties</skos:usageNote>
     <skos:definition xml:lang="en">A resource which describes the nature of an artifact and the role it plays in relation to a profile</skos:definition>
-    <rdfs:range rdf:resource="http://www.w3.org/ns/dx/prof/ResourceDescriptor"/>
+    <rdfs:range rdf:resource="http://www.w3.org/ns/dx/prof/ProfileResource"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:about="http://www.w3.org/ns/dx/prof/isProfileOf">
     <skos:definition xml:lang="en">A Profile is a profile of a dct:Standard (or a Base Specification or another Profile)</skos:definition>
@@ -75,9 +75,9 @@ This model starts with [http://dublincore.org/2012/06/14/dcterms#Standard](dct:S
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:about="http://www.w3.org/ns/dx/prof/hasArtifact">
     <rdfs:label>has artifact</rdfs:label>
-    <rdfs:domain rdf:resource="http://www.w3.org/ns/dx/prof/ResourceDescriptor"/>
+    <rdfs:domain rdf:resource="http://www.w3.org/ns/dx/prof/ProfileResource"/>
     <skos:usageNote xml:lang="en"></skos:usageNote>
-    <skos:definition xml:lang="en">The URL of a downloadable file with particulars such as its format and role indicated by a Resource Descriptor</skos:definition>
+    <skos:definition xml:lang="en">The URL of a downloadable file with particulars such as its format and role indicated by a Profile Resource</skos:definition>
   </owl:ObjectProperty>
   <owl:DatatypeProperty rdf:about="http://www.w3.org/ns/dx/prof/hasToken">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#token"/>
@@ -98,9 +98,9 @@ This definition includes what are often called "application profiles", "metadata
     <dct:source rdf:resource="https://www.w3.org/2017/dxwg/wiki/ProfileContext"/>
     <rdfs:subClassOf rdf:resource="http://purl.org/dc/terms/Standard"/>
   </owl:Class>
-  <owl:Class rdf:about="http://www.w3.org/ns/dx/prof/ResourceDescriptor">
+  <owl:Class rdf:about="http://www.w3.org/ns/dx/prof/ProfileResource">
     <skos:definition xml:lang="en">A resource that defines an aspect - a particular part or feature - of a Profile</skos:definition>
-    <rdfs:label xml:lang="en">Resource Descriptor</rdfs:label>
+    <rdfs:label xml:lang="en">Profile Resource</rdfs:label>
     <skos:usageNote xml:lang="en">Can be use to indicate the formalism (via dct:format) and any adherence to a dct:Standard (via dct:conformsTo) to allow for machine mediation as well as its purpose via relation to a ResourceRole (via hasRole)</skos:usageNote>
   </owl:Class>
 </rdf:RDF>
