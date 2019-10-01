@@ -77,7 +77,7 @@
     </p>
     <p>
       Implementers will need to ensure that any Functional Profile
-      they define implements the Abstract Model's functions and can represent alternate representation information as per the Alternate Representations Data Model.
+      they define implements the Abstract Model's functions and can deliver alternate representation information as per the Alternate Representations Data Model.
     </p>
     <p>
       While this specification only describes HTTP and QSA methods for content negotiation by profile, it is expected
@@ -1003,6 +1003,12 @@ URIs for resources conforming to profile urn:example:profile:x]
         <section id="http-altp">
           <h4>HTTP Alternate Representations Data Model Implementation</h4>
           <p>
+            Functional profile implementations need to ensure that they, in addition to implementing the Abstract
+            Model's functions, can deliver alternate representation information as per the Alternate Representations
+            Data Model. In this HTTP functional profile, the chosen mechanics for doing this are <code>Links</code>
+            headers (from [[RFC8288]]), as described below.
+          </p>
+          <p>
             An HTTP <code>Link</code> is (from [[RFC8288]]) "a typed connection between two resources and is comprised of":
           </p>
           <ul>
@@ -1027,8 +1033,10 @@ URIs for resources conforming to profile urn:example:profile:x]
           </ul>
           <p>
             Using these <code>Link</code> HTTP header parts, this HTTP Functional Profile is able to communicate
-            alternate profiles for a resource as per the <a href="#altr">Alternate Profiles Data Model</a> with the
-            mapping given in <a href="#fig-altr-link-header-mapping"></a> below.
+            alternate profiles for a resource as per the <a href="#altr">Alternate Profiles Data Model</a> and
+            <a href="#fig-altr-link-header-mapping"></a> below maps the header parts to the
+            <a href="#altr-owl">OWL ontology</a> representation of the Alternate Profiles Data Model which is a concrete
+            and formal realization of it. All Functional Profiles should do as per <a href="#abstractmodel"></a>.
           </p>
           <figure id="fig-altr-link-header-mapping">
             <table>
@@ -1939,10 +1947,11 @@ Link: &lt;http://www.w3.org/ns/dx/prof/Profile&gt;;
       <p>
         The RDF (turtle syntax) code in <a href="#profiles-in-prof">Code Listing 1</a> defines <em>Content Negotiation
         by Profile</em> as a <code><a href="http://purl.org/dc/terms/Standard">dct:Standard</a></code>, the definition
-        of which in [[?PROF]] matches the definition of <a>specification</a> in this document. The 4 profiles of it are
+        of which in [[?PROF]] matches the definition of <a>specification</a> in this document. Note that, since this
+        document is describing behaviours, this specification is a <a>functional specification</a>. The 4 profiles of it are
         then, as per regular PROF modelling, termed <code><a href="https://www.w3.org/TR/dx-prof/#Class:Profile">
-        prof:Profiles</a></code>. The 4 profiles are presented in a hierarchy with the profiles either directly
-        profiling the standard or, in the case of the <em>QSA Realization</em> profile, profiling another profile that then
+        prof:Profiles</a></code>. These 4 functional profiles are presented in a hierarchy with the profiles either directly
+        profiling the standard or, in the case of the <em>QSA Functional Profile</em>, profiling another profile that then
         profiles the standard. This is also shown graphically in <a href="#fig-profile-hierarchy"></a> below the code
         listing.
       </p>
