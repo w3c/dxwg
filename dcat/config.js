@@ -10,7 +10,7 @@ var respecConfig = {
     canonicalURI: "TR",
     prevRecURI:           "https://www.w3.org/TR/REC-vocab-dcat-20140116/",    
     previousPublishDate:  "2019-05-28",
-    previousMaturity:     "WD",
+    previousMaturity:     "FPWD",
 //    previousURI:          "https://www.w3.org/TR/2019/WD-vocab-dcat-2-20190528/",
     edDraftURI:           "https://w3c.github.io/dxwg/dcat/",
 //    issueBase:            "https://github.com/w3c/dxwg/issues/", -- Not needed when github used
