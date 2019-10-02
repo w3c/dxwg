@@ -123,7 +123,7 @@ var respecConfig = {
         },
         "DCAT-AP-NO": {
             title: "Standard for beskrivelse av datasett og datakataloger (DCAT-AP-NO)",
-            href: "http://difi.github.io/dcat-ap-no/"
+            href: "https://doc.difi.no/dcat-ap-no/"
         },
         "DCAT-AP.de": {
             title: "Vokabulare und Dokumente für DCAT-AP.de",
