@@ -3,14 +3,15 @@ var respecConfig = {
 //    subtitle: "Version 2",
     specStatus: "ED",
 //    specStatus: "CR",
-//    crEnd: "2019-10-24",
-//    implementationReportURI: "http://example.com/rep/",
+//  crEnd: "2019-10-24",
+    implementationReportURI: "https://docs.google.com/spreadsheets/d/1eEVUuPFAGO2GjS5ocxylY8T1AlpqlwnOTc3er_Mhcv4/edit#gid=1108132380%22",
     shortName: "vocab-dcat-2",
+    prevRecShortname: "vocab-dcat",
     canonicalURI: "TR",
-    prevRecURI:           "https://www.w3.org/TR/vocab-dcat/",
-    previousPublishDate:  "2014-01-16",
-    previousMaturity:     "REC",
-//    previousURI:          "https://www.w3.org/TR/2014/REC-vocab-dcat-20140116/", -- Needed for CR etc
+    prevRecURI:           "https://www.w3.org/TR/REC-vocab-dcat-20140116/",    
+    previousPublishDate:  "2019-05-28",
+    previousMaturity:     "WD",
+//    previousURI:          "https://www.w3.org/TR/2019/WD-vocab-dcat-2-20190528/",
     edDraftURI:           "https://w3c.github.io/dxwg/dcat/",
 //    issueBase:            "https://github.com/w3c/dxwg/issues/", -- Not needed when github used
     alternateFormats: [{
@@ -122,7 +123,7 @@ var respecConfig = {
         },
         "DCAT-AP-NO": {
             title: "Standard for beskrivelse av datasett og datakataloger (DCAT-AP-NO)",
-            href: "http://difi.github.io/dcat-ap-no/"
+            href: "https://doc.difi.no/dcat-ap-no/"
         },
         "DCAT-AP.de": {
             title: "Vokabulare und Dokumente für DCAT-AP.de",
