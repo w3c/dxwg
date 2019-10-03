@@ -8,7 +8,7 @@ var respecConfig = {
     shortName: "vocab-dcat-2",
     prevRecShortname: "vocab-dcat",
     canonicalURI: "TR",
-    prevRecURI:           "https://www.w3.org/TR/REC-vocab-dcat-20140116/",    
+    prevRecURI:           "https://www.w3.org/TR/2014/REC-vocab-dcat-20140116/",    
     previousPublishDate:  "2019-05-28",
     previousMaturity:     "WD",
 //    previousURI:          "https://www.w3.org/TR/2019/WD-vocab-dcat-2-20190528/",
