@@ -75,7 +75,7 @@
     </p>
     <p>
       Implementers will need to ensure that any Functional Profile
-      they define implements the Abstract Model's functions and can represent alternate representation information as per the Alternate Representations Data Model.
+      they define implements the Abstract Model's functions and can deliver alternate representation information as per the Alternate Representations Data Model.
     </p>
     <p>
       While this specification only describes HTTP and QSA methods for content negotiation by profile, it is expected
@@ -97,10 +97,11 @@
   <section id="conformance">
     <p>
       For the purpose of compliance, the normative sections of this document are
-      <a href="#definitions">Section 3</a>,
-      <a href="#abstractmodel">Section 6</a>,
-      <a href="#functional-profiles">Section 7</a> and
-      <a href="#testsuites">Section 8</a>.
+      <a href="#definitions"></a>,
+      <a href="#abstractmodel"></a>,
+      <a href="#functional-profiles"></a> and
+      <a href="#testsuites"></a>.
+      Appendices are non-normative.
     </p>
     <p class="note">Specifications and Profiles to which the content of resource representations may conform will embody their own notions of conformance, which are out of scope for this specification.</p>
   </section>
@@ -423,7 +424,7 @@ Preference-Applied: profile="urn:example:schema"
       A data model for describing the representations of a resource that conform to different data profiles is given here
       and this model MUST be used by all Functional Profiles. How the data model is realized is left to implementers to
       determine. How conformance of implemented data models is demonstrated is not addressed here in detail and only this
-      guidance is given: implementers SHOULD demonstrate conformance of their Alternate Representations data model
+      guidance is given: implementers SHOULD demonstrate conformance of their Alternate Representations Data Model
       implementations by providing a published mapping between their environment-specific realization of the model and
       a concrete realization of the model given in this specification, such as its <a href="#altr-owl">OWL ontology representation</a>.
     </p>
@@ -766,10 +767,13 @@ Content-Profile: http://example.org/profile/x, \
     <section id="functional-profiles-definition">
       <h3>Functional Profiles of this specification</h3>
       <p>
-      This section describes <a>functional profiles</a> of this <a>specification</a>'s Abstract Model which are implementations of the Abstract Model
-      in different environments. These functional profiles are
-      formally identified in <a href="#conformance-profiles"></a> and are to be used as conformance targets for specific
-      implementations of systems within different environments wishing to conform to this specification.
+        This section illustrates a few conformant <a>functional profiles</a> of this
+        <a>specification</a>'s <a href="#abstractmodel">Abstract Model</a> for different system environments. These
+        functional profiles are formally described in <a href="#conformancetoprofiles"></a>
+        and may be used within different environments
+        wishing to conform to this specification. Implementation of the profiles
+        illustrated here is not mandatory; any profile that conforms to the
+        Abstract Model fulfills conformance to this specification.
       </p>
       <p>
         This document provides functional profiles for two environments: HTTP and human browser (Query String
@@ -779,12 +783,16 @@ Content-Profile: http://example.org/profile/x, \
         specification.
       </p>
       <p class="note" title="Conformance to multiple functional profiles">
-      Implementers of Content Negotiation by Profile need not provide systems that conform to multiple functional profiles
-      of this specification, only the functional profile(s) that are relevant to the target environment. In some
-      cases, for example the Query String Argument-relevant human browser environment, there is a choice of more than
-      one functional profile. Since all functional profiles of this specification themselves must conform to this specification, by
-      design, conformance to any functional profile guarantees conformance to the specification.
-    </p>
+        The functional profiles provided here are conformant with the Abstract
+        Model. Systems may implement one or more of the profiles provided in
+        this document or may develop other functional profiles that conform to
+        the abstract model. Conformance to one of the profiles provided here
+        guarantees conformance to the abstract model, but conformance can be
+        achieved with other functional profiles. Implementers of Content
+        Negotiation by Profile need not ensure systems conform to multiple
+        functional profiles of this specification, they need only conform to the
+        functional profile(s) relevant to their environment.
+      </p>
     </section>
     <section id="conformance-profiles">
       <h3>Conformance to Functional Profiles</h3>
@@ -795,8 +803,8 @@ Content-Profile: http://example.org/profile/x, \
       <p>
         If a system wishes to show conformance to this specification, conformance to at least one functional profile of
         it, such as those listed <a href="#fig-table-profiles"></a> MUST be indicated. <a href="#fig-table-profiles"></a>
-        is not an exhaustive list of functional profiles of this specification and users MAY instead make other or additional
-        functional profiles for their environments, as described in the previous section.
+        is not an exhaustive list of functional profiles of this specification and users MAY instead make others
+        for their environments, as described in the previous section.
       </p>
       <p>
         The namespace prefix for the functional profiles used in <a href="#fig-table-profiles"></a>, the table below, is:
@@ -1001,6 +1009,12 @@ URIs for resources conforming to profile urn:example:profile:x]
         <section id="http-altp">
           <h4>HTTP Alternate Representations Data Model Implementation</h4>
           <p>
+            Functional profile implementations need to ensure that they, in addition to implementing the Abstract
+            Model's functions, can deliver alternate representation information as per the Alternate Representations
+            Data Model. In this HTTP functional profile, the chosen mechanics for doing this are <code>Links</code>
+            headers (from [[RFC8288]]), as described below.
+          </p>
+          <p>
             An HTTP <code>Link</code> is (from [[RFC8288]]) "a typed connection between two resources and is comprised of":
           </p>
           <ul>
@@ -1025,8 +1039,14 @@ URIs for resources conforming to profile urn:example:profile:x]
           </ul>
           <p>
             Using these <code>Link</code> HTTP header parts, this HTTP Functional Profile is able to communicate
-            alternate profiles for a resource as per the <a href="#altr">Alternate Profiles Data Model</a> with the
-            mapping given in <a href="#fig-altr-link-header-mapping"></a> below.
+            alternate data profiles for a resource as per the <a href="#altr">Alternate Profiles Data Model</a> and
+            <a href="#fig-altr-link-header-mapping"></a> below maps the header parts to the
+            <a href="#altr-owl">OWL ontology</a> representation of the Data Model which is a concrete
+            and formal realization of it. This mapping is presented as per the directive in the <a href="#abstractmodel"></a>
+            that "implementers SHOULD demonstrate conformance of their Alternate Representations Data Model
+            implementations by providing a published mapping between their environment-specific realization of the
+            model and a concrete realization of the model given in this specification, such as its OWL ontology
+            representation.
           </p>
           <figure id="fig-altr-link-header-mapping">
             <table>
@@ -1040,7 +1060,7 @@ URIs for resources conforming to profile urn:example:profile:x]
                 <td><code>altp:Representation</code></td><td>the <em>link target</em> URI indicates an instance altp:Representation</td>
               </tr>
               <tr>
-                <td><code>prof:Profile</code></td><td>a <em>target attribute</em> of <code>profile</code> indicates the URI of an instance of prof:Profile, if present</td>
+                <td><code>dct:Standard</code></td><td>a <em>target attribute</em> of <code>profile</code> indicates the URI of an instance of dct:Standard, if present</td>
               </tr>
               <tr>
                 <td><code>dct:conformsTo</code></td><td>the implicit relation between the <em>link target</em> URI and the <em>target attribute</em> <code>profile</code> URI</td>
@@ -1155,7 +1175,7 @@ Link:
 # The profile URI in the "anchor" element is linked to the token "igsn-r1"
 
 # Further, the relation "type" is used to inform
-# that the anchor resource is of type "prof:Profile"
+# that the anchor resource is of type "dct:Standard"
 
 Link: &lt;http://www.w3.org/ns/dx/prof/Profile&gt;;
   rel="type";
@@ -1759,7 +1779,7 @@ Link:
 # The profile URI in the "anchor" element is linked to the token "igsn-r1"
 
 # Further, the relation "type" is used to inform
-# that the anchor resource is of type "prof:Profile"
+# that the anchor resource is of type "dct:Standard"
 
 Link: &lt;http://www.w3.org/ns/dx/prof/Profile&gt;;
   rel="type";
@@ -1937,10 +1957,11 @@ Link: &lt;http://www.w3.org/ns/dx/prof/Profile&gt;;
       <p>
         The RDF (turtle syntax) code in <a href="#profiles-in-prof">Code Listing 1</a> defines <em>Content Negotiation
         by Profile</em> as a <code><a href="http://purl.org/dc/terms/Standard">dct:Standard</a></code>, the definition
-        of which in [[?PROF]] matches the definition of <a>specification</a> in this document. The 4 profiles of it are
+        of which in [[?PROF]] matches the definition of <a>specification</a> in this document. Note that, since this
+        document is describing behaviours, this specification is a <a>functional specification</a>. The 4 profiles of it are
         then, as per regular PROF modelling, termed <code><a href="https://www.w3.org/TR/dx-prof/#Class:Profile">
-        prof:Profiles</a></code>. The 4 profiles are presented in a hierarchy with the profiles either directly
-        profiling the standard or, in the case of the <em>QSA Realization</em> profile, profiling another profile that then
+        prof:Profiles</a></code>. These 4 functional profiles are presented in a hierarchy with the profiles either directly
+        profiling the standard or, in the case of the <em>QSA Functional Profile</em>, profiling another profile that then
         profiles the standard. This is also shown graphically in <a href="#fig-profile-hierarchy"></a> below the code
         listing.
       </p>
