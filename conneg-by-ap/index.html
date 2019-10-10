@@ -10,8 +10,8 @@
   <section id="abstract">
     <h2>Abstract</h2>
     <p>
-      This document describes how Internet clients may negotiate for content provided by servers according to
-      <em>profiles</em>. This is distinct from negotiating by Media Type or Language: a <em>profile</em> may
+      This document describes how Internet clients may negotiate for content provided by servers based on the
++     <em>profile</em> to which the content conforms. This is distinct from negotiating by Media Type or Language: a <em>profile</em> may
       specify the content of information returned, which may be a subset of the information the responding server has about the requested resource, and may be structured in a specific way to meet interoperability requirements of a community of practice.
     </p>
   </section>
@@ -34,7 +34,7 @@
   <section id="introduction" class="informative">
     <h2>Introduction</h2>
     <p>
-      Content delivered by dereferencing Internet identifiers can be negotiated for in different
+      Content delivered by dereferencing Internet identifiers can be the subject of negotiation in different
       ways. When using the HTTP protocol [[RFC7230]], a client may set one or more request headers:
     </p>
     <ul>
@@ -44,36 +44,34 @@
     </ul>
     <p>
       However, clients have not had a
-      defined way to negotiate for content based on its adherence to an information model - a standard, a <a>specification</a> or
+      defined way to negotiate for content based on its adherence to an information model: a standard, a <a>specification</a> or
       a <a>profile</a>. This document describes how such functionality can be delivered.
     </p>
     <p>
       When online information about a resource adheres to one or more profiles, methods described here allow
-      clients to request lists of those profiles and request content according to one or more of them, in order of preference.
+      clients to request lists of those profiles and request content according to one or more of the profiles in order of preference.
     </p>
     <p>
       For example, a catalog may offer choices of representations of a dataset's description that conform to different information models, perhaps [[VOID]],
       [[VOCAB-DATA-CUBE]] and [[VOCAB-DCAT]]. Furthermore, the [[VOCAB-DCAT]] representation might conform to the
       [[DCAT-AP]] profile, the [[GeoDCAT-AP]] profile and perhaps also an organisation-specific profile "MyOrgDCATProfile".
-      These "narrower" profiles constrain various elements of the dataset's description above and beyond the "broader", more general, specification or profile that they profile.
-      A request for information about this dataset description's possible representations may
-      ask for the list of profiles to which conformant representations of it are available, or may ask specifically for a representation conforming to one profile, for example
-      [[GeoDCAT-AP]]. When no profile or an unsupported profile is requested, a server returns default content,
-      that is, content conforming to the default profile supported by the server.
+      These narrower profiles further constrain various elements of the dataset's description beyond the more general specification or profile of which they are a profile.
++      A request for information about possible representations of this dataset's description may
++      ask for the list of conformant profiles that are available for the dataset, or may ask specifically for a representation conforming to one specific profile, for example
++      [[GeoDCAT-AP]]. When no profile or an unsupported profile is requested, a server returns default content conforming to the default profile supported by the server.
     </p>
     <p>
       When selecting a content negotiation mechanism, an Internet client may use the HTTP protocol, but it may also use
-      other methods for providing instructions to a server. One of potentially many mechanisms is URI Query String
+      other methods for providing instructions to a server. One potential mechanism is URI Query String
       Arguments (<abbr title="Query String Arguments">QSAs</abbr>). QSAs are
       useful for humans and machines for situations where negotiation via HTTP is not practical, such
       as when manually entering requests into web browsers. This specification provides an abstract model
-      of content negotiation by profile and presents guidance on the use of two specific methods, HTTP &amp; QSA, that both conform to the abstract model.
+      of content negotiation by profile and presents guidance on the use of two specific methods that conform to the abstract model, HTTP and QSA.
     </p>
     <p>
-      The HTTP and QSA methods are formally defined in a series of <em>Functional Profiles</em> of the Abstract Model.
+       The HTTP and QSA methods are defined as <em>Functional Profiles</em> of the Abstract Model.
       While this specification only describes these two Functional Profiles, it is expected
-      that implementers will want to implement methods, and thus Functional Profiles of the Abstract Model, for other environments, some of which may
-      not yet be realized &ndash; future environments.
+      that implementers will want to implement Functional Profiles of the Abstract Model for other environments, including environments that may be realized in the future.
     </p>
     <p>
       Implementers will need to ensure that any Functional Profile
@@ -82,7 +80,7 @@
     <p>
       While this specification only describes HTTP and QSA methods for content negotiation by profile, it is expected
       that implementers will want to implement functionally equivalent methods for other environments, some of which may
-      not yet be realized; future environments.
+      be not yet realized future environments.
     </p>
     <!--
     <p>
@@ -91,20 +89,21 @@
     </p>
     -->
     <p>
-      Describing how resources' representations conform to profiles and how profiles and specifications relate to one
-      another is not part of this specification. Parts of those questions are addressed by the Profiles Vocabulary
+       Describing how resource representations conform to profiles and how profiles and specifications relate to one
++      another is not part of this specification. Some aspects of those questions are addressed by the Profiles Vocabulary
       [[?PROF]], also produced by the DXWG.
     </p>
   </section>
   <section id="conformance">
     <p>
       For the purpose of compliance, the normative sections of this document are
-      <a href="#definitions">Section 3</a>,
-      <a href="#abstractmodel">Section 6</a>,
-      <a href="#functional-profiles">Section 7</a> and
-      <a href="#testsuites">Section 8</a>.
+      <a href="#definitions"></a>,
+      <a href="#abstractmodel"></a>,
+      <a href="#functional-profiles"></a> and
+      <a href="#testsuites"></a>.
+      Appendices are non-normative.
     </p>
-    <p class="note">Specifications and Profiles to which the content of resource representations may conform embody their own notions of conformance, which are out of scope for this specification.</p>
+    <p class="note">Specifications and Profiles to which the content of resource representations may conform will embody their own definitions of conformance, which are out of scope for this specification.</p>
   </section>
   <section id="definitions">
     <h2>Definitions</h2>
@@ -143,7 +142,7 @@
         </p>
         <p>
           This Content Negotiation by Profile specification concerns negotiation for data profiles,
-		and <a href="#functional-profiles-definition">specifies functional profiles</a> for different ways of achieving this.
+		and specifies <a href="#functional-profiles-definition">functional profiles</a> for different ways of achieving this.
 		In this document, most occurrences of the term &qout;profile&quot; refer to &quot;data profile&quot;.
         </p>
       </dd>
@@ -207,9 +206,9 @@
       (classes and properties) available to use for their content's information model. When a client initiates a request
       for an Internet resource, such as an HTTP GET to retrieve a resource's representation, the client and server must have a standardized way to exchange information on how the transmitted resource
       will be structured according to DTDs, XML Schema, vocabularies or other standards, specifications or
-      <a href="#dfn-data-profile">profiles</a>. When using non-HTTP content negotiation, various methods such as URIs with Query String
-      Arguments have been implemented previously,
-      for instance the
+      <a href="#dfn-data-profile">profiles</a>. When using non-HTTP content negotiation, methods such as URIs with Query String
+      Arguments have been previously implemented,
+      such as the
       <abbr title="Open Archives Initiative - Protocol for Metadata Harvesting">OAI-PMH</abbr> [[OAI-PMH]] and
       <abbr title="Open Geospatial Consortium">OGC</abbr>'s
       <abbr title="Catalogue Service for the Web">CSW</abbr> [[CSW]] protocols.
@@ -217,13 +216,13 @@
     <p>
       This document describes an abstract, functions-based, specification for content negotiation by profile and gives both an
       HTTP functional profile and two Query String Argument-based functional profiles for the specification's implementation in different environments. The query string
-	   approaches provide both a "fall back" (second, non-HTTP implementation of the abstract specification), as required by the
+	   approaches provide both a "fall back" (a second, non-HTTP implementation of the abstract specification), as required by the
       <a href="https://www.w3.org/2017/dxwg/charter">Dataset Exchange Working Group's Charter</a> (Section 2.3) and also demonstrates functional profiles of the abstract specification that potential functional profile implementers may take as guidance for their implementations.
     </p>
     <p>
-      Other query string or REST-based functional profiles and indeed radically different environment's implementation of this abstract specification
+      Other query string or REST-based functional profiles of this abstract specification
       are considered possible but are not specified here. In general, existing APIs that support the listing of alternative
-      profiles for resource representations and retrieval of resource representations to profiles may support and demonstrate conformance to this specification too by implementing its required functionality, as the given functional profiles do.
+      profiles for resource representations and the retrieval of resource representations to profiles may also support and demonstrate conformance to this specification by implementing its required functionality, as the functional profiles in this document do.
     </p>
   </section>
   <section id="relatedwork" class="informative">
@@ -233,7 +232,7 @@
       for an <a href="https://profilenegotiation.github.io/I-D-Profile-Negotiation/I-D-Profile-Negotiation">Internet Draft
       for Indicating and Negotiating Profiles in HTTP</a> [[PROF-IETF]] is available but has not yet been submitted to the IETF. The
       current version of the IETF draft (-00) is expected to be completely re-written in parallel work with this document and should
-      not be seen as anything but work-in-progress until this paragraph is removed from this document.
+      be seen as a work-in-progress until this paragraph is removed from this document.
     </div>
     <section id="related-http">
       <h3>Existing standards for transporting profile information in HTTP headers</h3>
@@ -244,7 +243,7 @@
         A Media Type registration can also specify an optional list of Media Type parameters.
         Some Media Type registrations (e. g. <code>application/ld+json</code>)
         have specified the use of a Media Type parameter "profile"
-        that could be used to signal the profile that the body of the response conforms to.</p>
+        that could be used to signal the profile to which that the body of the response conforms.</p>
       <pre id="eg-profile-and-accept" class="example nohighlight" aria-busy="false" aria-live="polite"
            title="Using the HTTP Accept header together with a 'profile' parameter">
 GET /resource/a HTTP/1.1
@@ -309,20 +308,20 @@ Content-Type: text/turtle
 Preference-Applied: profile="urn:example:schema"
       </pre>
       <p>This approach has two disadvantages.
-      The first is, as with the <code>Link</code> header,
+      The first, as with the <code>Link</code> header, is
       that there is no possibility to work with q-values.
-      The second one is that the only way for a server to state
+      The second is that the only way for a server to state
       that it ignored the preference indicated by the client
       is to omit sending a <code>Preference-Applied</code> header field.
       For the client, however, it is not clear
       if the <code>Preference-Applied</code> header is absent
-      because the server did not honour the preference,
+      because the server did not honor the preference,
       or because the server did not understand
       the <code>Prefer</code> header.
       This could be solved by making it mandatory to send a
       <code>Link: rel=profile</code> header when answering a request
       with a <code>Prefer: profile=""</code> header in it.
-      That solution requires that a client evaluates two different headers
+      That solution requires that a client evaluate two different headers
       to find a response to its request for a specific profile,
       which would make client implementation more complicated.</p>
     </section>
@@ -361,15 +360,15 @@ Preference-Applied: profile="urn:example:schema"
       </p>
       <p>
         What these tools call a <em>view</em> is analogous to a <a href="#dfn-data-profile">profile</a>
-	      and a <em>format</em> to an HTTP Media Type.
+	      and a <em>format</em> is analogous to an HTTP Media Type.
       </p>
       <p>
-        These APIs provide for direct access to resource representations, conforming to a particular view, in a
-        particular format, or a default view/format if either is unspecified or invalid. For example, using pyLDAPI, the
+        These APIs provide for direct access to resource representations that conform to a particular view, to a
+        particular format, or to a default view or format if either is unspecified or invalid. For example, using pyLDAPI, the
         available views and formats for representations of the address <a href="http://linked.data.gov.au/dataset/gnaf/address/GAACT714845933">GAACT714845933</a>
         can by seen by dereferencing <a href="http://linked.data.gov.au/dataset/gnaf/address/GAACT714845933?_view=alternates">http://linked.data.gov.au/dataset/gnaf/address/GAACT714845933<strong>?_view=alternates</strong></a>
-        and the "ISO19160" <em>view</em> of that Address in the RDF Turtle
-        <em>format</em>, listed by the Alternates View, is available at <a href="http://linked.data.gov.au/dataset/gnaf/address/GAACT714845933?_view=ISO19160&_format=text/turtle">http://linked.data.gov.au/dataset/gnaf/address/GAACT714845933<strong>?_view=ISO19160&amp;_format=text/turtle</strong></a>.
+        and the "ISO19160" <em>view</em> of that address in the RDF Turtle
+        <em>format</em>, listed in the Alternates View, is available at <a href="http://linked.data.gov.au/dataset/gnaf/address/GAACT714845933?_view=ISO19160&_format=text/turtle">http://linked.data.gov.au/dataset/gnaf/address/GAACT714845933<strong>?_view=ISO19160&amp;_format=text/turtle</strong></a>.
       </p>
     </section>
     <section id="related-oai-pmh">
@@ -387,7 +386,7 @@ Preference-Applied: profile="urn:example:schema"
       </p>
       <p>
         OAI-PMH requires that representations of all resources in a repository are available according to the same set
-        of profiles (what it calls <em>formats</em>). It is also entirely XML-based so that profiles must
+        of profiles (what it calls <em>formats</em>). It is entirely XML-based, therefore profiles must
         all be presented in XML and the content of an XML representation of a resource is presented within an XML
         envelope that always identifies the record, the profile, the OAI-PMH method used, the request time and other
         common metadata.
@@ -398,7 +397,7 @@ Preference-Applied: profile="urn:example:schema"
       <p>
         [[CSW]] is the OGC standard used world-wide by the geospatial community to implement a machine-actionable interface
 	to catalog services, providing access to metadata about datasets, geospatial services ([[WMS]], [[WFS]], etc.),
-	as well as other types of resources. Besides supporting common functions such as free-text and faceted search, CSW supports the retrieval of metadata according to a given metadata schema and format, indicated respectively by using <code>outputSchema</code> and <code>outputFormat</code> query parameters. Commonly supported metadata schemas are [[DC11]], and [[ISO-19115]], and the default format is XML. A given CSW instance's supported metadata schemas and formats are described in the service "capabilities" &ndash; a machine-readable description of the service interface &ndash; that is returned via a <code>GetCapabilities</code> request.
+	as well as other types of resources. Besides supporting common functions such as free-text and faceted search, CSW supports the retrieval of metadata according to a given metadata schema and format, indicated respectively by using <code>outputSchema</code> and <code>outputFormat</code> query parameters. Commonly supported metadata schemas are [[DC11]], and [[ISO-19115]], and the default format is XML. A given CSW instance's supported metadata schemas and formats are described in the service "capabilities" (a machine-readable description of the service interface) that is returned via a <code>GetCapabilities</code> request.
       </p>
       <p>
         Notably, CSW theoretically supports HTTP content negotiation for the metadata format, and the specification defines a conflict resolution mechanism for requests where this information is specified both via HTTP <code>Accept</code> headers and the <code>outputFormat</code> parameter (see Section 6.2 of the <a href="http://docs.opengeospatial.org/is/12-176r7/12-176r7.html">OGC CSW 3.0 specification - HTTP Protocol Binding</a>).
@@ -413,8 +412,8 @@ Preference-Applied: profile="urn:example:schema"
     </p>
     <p>
       Implementations of this Abstract Model for different environments are called
-      <a href="#dfn-functional-profile"><em>Functional Profiles</em></a>
-      and to be a valid functional profile they MUST implement these Abstract Model functions.
+      <a href="#dfn-functional-profile"><em>Functional Profiles</em></a>.
+      To be a valid functional profile they MUST implement these Abstract Model functions.
       How they do this will be environment-specific.
     </p>
     <p>
@@ -422,7 +421,7 @@ Preference-Applied: profile="urn:example:schema"
       additions MUST NOT invalidate the functions defined here.
     </p>
     <p>
-      A data model for describing the representations of a resource that conform to different (data) profiles is given here
+      A data model for describing the representations of a resource that conform to different data profiles is given here
       and this model MUST be used by all Functional Profiles. How the data model is realized is left to implementers to
       determine. How conformance of implemented data models is demonstrated is not addressed here in detail and only this
       guidance is given: implementers SHOULD demonstrate conformance of their Alternate Representations data model
@@ -432,15 +431,15 @@ Preference-Applied: profile="urn:example:schema"
     <section id="connegbackground">
       <h3>Content Negotiation Background</h3>
       <p>
-        All content negotiation takes place between a <a>client</a> and a <a>server</a> over the Internet with the
+        All content negotiation over the Internet takes place between a <a>client</a> and a <a>server</a> with the
         former requesting a representation of a <a>resource</a> or a <a>resource</a>'s <a>metadata</a> through a
-        <a>request</a> and receiving it via a <a>response</a>. For any given pair of communicating machines,
+        <a>request</a> and receiving the requested representation via a <a>response</a>. For any given pair of communicating machines,
         the roles of <a>client</a> and <a>server</a> may be reversed as information is requested back and forth.
       </p>
       <p>
         An Internet <a>resource</a> may have many aspects over which a <a>client</a>/<a>server</a> pair of
         agents might negotiate for content. These aspects are to be treated independently so content negotiation for a
-        resource involving negotiation by profile and any other aspects will not affect each other.
+        resource involving negotiation by profile and negotiation by any other aspects will not affect each other.
       </p>
       <!--
       <p>
@@ -452,7 +451,7 @@ Preference-Applied: profile="urn:example:schema"
       <p>
         In this Abstract Model, we don't assume any specific details about <a>client</a>, <a>server</a>,
         <a>resource</a>, <em>metadata</em>, <a>request</a> or <a>response</a> other than those details already
-        provided in those terms' definitions in <a href="#definitions"></a>.
+        provided those terms in the definitions section<a href="#definitions"></a>.
       </p>
     </section>
     <section id="profileid">
@@ -465,7 +464,7 @@ Preference-Applied: profile="urn:example:schema"
       <p>
         If a URI is used for profile identification, it SHOULD be an HTTP URI
         that dereferences to a description of the profile.
-        Other kinds or URIs, e. g. URNs MAY also be used and these may not be capable of dereferencing.
+        Other kinds or URIs, e. g. URNs, MAY also be used and these may not be dereferenceable.
         If a token is used, it MUST unambiguously identify the
         <a>data profile</a> within a <a>request</a>/<a>response</a> pair of messages.
         The server MUST declare the context within which the token may be mapped to a URI.
@@ -490,8 +489,8 @@ Preference-Applied: profile="urn:example:schema"
         </li>
       </ol>
       <p>
-        A <a>server</a> adhering to this specification MUST respond to each request with the following
-        <a>response</a>s.
+        A <a>server</a> adhering to this specification MUST respond to each request with the following respective
+        <a>response</a>s:
       </p>
       <ol>
         <li>
@@ -520,17 +519,17 @@ Preference-Applied: profile="urn:example:schema"
         </p>
         <p>
           The <strong>list profiles</strong> <a>request</a> MAY result in a <a>response</a> in one of a
-          number of formats, provided that the <a>data profile</a>s representations of resources
-          conform to are unambiguously identified either by either a URI or a <a>token</a>. If the latter, it MUST be
+          number of formats, provided that the <a>data profile</a>s to which representations of resources
+          conform are unambiguously identified either by either a URI or a <a>token</a>. If the latter, it MUST be
           mappable to a URI within one particular client/server message pair.
         </p>
         <p>
-          A <a>server</a> MUST NOT list <a>data profile</a>s that <a>resource</a> representations conform to if
+          A <a>server</a> MUST NOT list <a>data profile</a>s that <a>resource</a> to which representations to if
           it is unable to deliver those representations when presented with a <strong>get resource by profile</strong>
           <a>request</a>.
         </p>
         <p>
-          <a href="#eg-list-simple"></a> shows a request/response pair of messages, conforming to the QSA Functional
+          <a href="#eg-list-simple"></a> shows a request/response pair of messages conforming to the QSA Functional
           Profile, where the request is a <em>list profiles</em> request for a particular resource.
         </p>
         <pre id="eg-list-simple"
@@ -589,7 +588,7 @@ Link:
         </p>
         <p>
           A <a>client</a> executing a <strong>get resource by profile</strong> <a>request</a> MUST
-          identify the <a>data profile</a> with either a URI or a token mapping unambiguously within a session to a URI.
+          identify the <a>data profile</a> with either a URI or with a token mapping unambiguously to a URI within the session.
         </p>
         <p>
           A <a>client</a> executing a <strong>get resource by profile</strong> MAY <a>request</a> a
@@ -600,7 +599,7 @@ Link:
           The server SHOULD attempt to reply with a profile that best matches the client request. The order of
           preference a server MUST follow to determine a best matching profile is: an exact match, followed the
           next most specific profile that the resource representation conforms to. Note that resource representations
-          might conform to more general specifications/other profiles via a hierarchy (i.e. transitively).
+          might conform to more general specifications or other profiles via a hierarchy (i.e. transitively).
         </p>
         <p>
           If a server redirects to another resource it MUST indicate the selected choice of profile from the list
@@ -608,7 +607,7 @@ Link:
           in the redirection request (303 response).
         </p>
         <div class="note" title="Redirection to another resource">
-          Since <em>get resource by profile</em> requests are for <a>representations</a> of a <a>resource</a> and resources
+          Since <em>get resource by profile</em> requests are for <a>representations</a> of a <a>resource</a>, and that resources
           for which there are profile-conformant representations may not be information resources, it is important to
           note that a server's response may take the form of a redirect to another resource. This is as per the
           <a href="https://lists.w3.org/Archives/Public/www-tag/2005Jun/0039.html">W3C's recommendations to handle the
@@ -699,9 +698,9 @@ Content-Profile: http://example.org/profile/x, \
 [content conforming to to Profile X, Y & Z]
         </pre>
         <p>
-          When a resource is returned that conforms to two or more profiles not within a profile hierarchy
+          When a resource is returned that conforms to two or more profiles that are not within a profile hierarchy
           (i.e. none of the multiple profiles the resource conforms to is a profiles of another), the server MUST
-          indicate all profiles individually within the <code>Content-Profile</code> header as such:
+          indicate all conforming profiles individually within the <code>Content-Profile</code> header as such:
         </p>
         <p>
           <code>Content-Profile: &lt;PROFILE_1>, &lt;PROFILE_2></code>
@@ -710,7 +709,7 @@ Content-Profile: http://example.org/profile/x, \
           For example, a response from a server that conforms to both [[?GeoDCAT-AP]] and also [[?STATDCAT-AP]], given
           that neither profiles the other and thus no single indication of conformance will suffice for both, (note they
           both do profile [[?DCAT-AP]], see the <a href="https://www.w3.org/TR/dx-prof/#eg-hierarchy">DCAT-AP Hierarchy
-          example in [[?PROF]]</a>), using profile URIs for [[?GeoDCAT-AP]] and [[?STATDCAT-AP]] could be:
+          example in [[?PROF]]</a>), a response using profile URIs for [[?GeoDCAT-AP]] and [[?STATDCAT-AP]] could be:
         </p>
         <p>
           <code>Content-Profile: &lt;https://joinup.ec.europa.eu/release/geodcat-ap-v10>, &lt;https://joinup.ec.europa.eu/release/statdcat-ap/101></code>
@@ -720,11 +719,11 @@ Content-Profile: http://example.org/profile/x, \
     <section id="altr">
       <h3>Alternate Representations Data Model</h3>
       <p>
-        This data model, MUST be used for describing the representations of a resource that conform to different
+        This data model MUST be used for describing the representations of a resource that conform to different
         profiles.
       </p>
       <p>
-        An graphical overview of this model is given in <a href="#fig-altr-model"></a>.
+        A graphical overview of this model is given in <a href="#fig-altr-model"></a>.
       </p>
       <figure id="fig-altr-model">
         <img src="altr.svg" alt="Alternate Profiles data model" style="width:60%" />
@@ -733,18 +732,18 @@ Content-Profile: http://example.org/profile/x, \
         </figcaption>
       </figure>
       <p>
-        Descriptions of alternate representations of resource according to different profiles MAY be presented according
+        Descriptions of alternate representations of a resource conforming to different profiles MAY be presented according
         to modelling systems implementing this model, depending
-        on what is deemed to be relevant to the application profile of this specification that they are created for. For
-        example, the HTTP Application Profile (<a href="#http"></a>) is limited to text within the constrains of the
+        on what is deemed to be relevant to the application profile for which this specification has been created. For
+        example, the HTTP Application Profile (<a href="#http"></a>) is limited to text within the constraints of the
         HTTP specification's headers structure in [[RFC7230]] and thus syntactic communication of this data model in
         that environment must be implemented according to its constraints.
       </p>
       <p>
         Tools for testing the conformance of data instances to some implementations of this data model are given in
         <a href="#testsuites"></a>. Suggestions for concrete implementations of, and extensions to, this data model for
-        use in expected situations are given in <a href="#altr-detail"></a>. Examples of suggested use as per the  are
-        also given in Functional Profiles of this specification are also given in that appendix.
+        use in expected situations are given in <a href="#altr-detail"></a>. Examples of suggested use are
+        also given in that appendix.
       </p>
     </section>
     <section id="precendence">
@@ -755,8 +754,8 @@ Content-Profile: http://example.org/profile/x, \
         The order of precedence determines which mechanism MUST be used.
       </p>
       <p>
-        The order of precedence is QSA over HTTP -
-        on the basis that the more exactly a URI points to a resource,
+        The order of precedence is QSA over HTTP
+        on the basis that the more precisely a URI points to a resource,
         the more likely it is that the agent intends to request that precise resource
         irrespective of which HTTP headers are sent with that request.
       </p>
@@ -768,37 +767,44 @@ Content-Profile: http://example.org/profile/x, \
     <section id="functional-profiles-definition">
       <h3>Functional Profiles of this specification</h3>
       <p>
-      This section describes <a>functional profiles</a> of this <a>specification</a>'s Abstract Model which are implementations of it
-      in different environments. These functional profiles are
-      formally identified in <a href="#conformance-profiles"></a> and are to be used as conformance targets for specific
-      implementations of systems within different environments wishing to conform to this specification.
+        This section illustrates a few conformant <a>functional profiles</a> of this
+        <a>specification</a>'s <a href="#abstractmodel">Abstract Model</a> for different system environments. These
+        functional profiles are formally described in <a href="#conformancetoprofiles"></a>
+        and may be used within different environments
+        wishing to conform to this specification. Implementation of the profiles
+        illustrated here is not mandatory; any profile that conforms to the
+        Abstract Model fulfills conformance to this specification.
       </p>
       <p>
-        This document provides functional profiles for two environments &ndash; HTTP &amp; human browser (Query String
-        Arguments). For the human browser environment, two functional profiles are presented to cater for different modes of use.
+        This document provides functional profiles for two environments: HTTP and human browser (Query String
+        Arguments). For the human browser environment, two functional profiles are presented to demonstrate different modes of use.
         Further functional profiles of this specification MAY be implemented either for other environments and or even for
-        constrained scenarios within these environments and implementers are encouraged to do this by further profiling this
+        constrained scenarios within these environments, and implementers are encouraged create additional profiles conforming to this
         specification.
       </p>
       <p class="note" title="Conformance to multiple functional profiles">
-      Implementers of Content Negotiation by Profile need not ensure systems conform to multiple functional profiles
-      of this specification. They need only conform to the functional profile(s) relevant to their environment. In some
-      cases, for example the Query String Argument-relevant human browser environment, there is a choice of more than
-      one functional profile. Since all functional profiles of this specification themselves must conform to this specification, by
-      design, conformance to any functional profile guarantees conformance to the specification.
-    </p>
+        The functional profiles provided here are conformant with the Abstract
+        Model. Systems may implement one or more of the profiles provided in
+        this document or may develop other functional profiles that conform to
+        the abstract model. Conformance to one of the profiles provided here
+        guarantees conformance to the abstract model, but conformance can be
+        achieved with other functional profiles. Implementers of Content
+        Negotiation by Profile need not ensure systems conform to multiple
+        functional profiles of this specification, they need only conform to the
+        functional profile(s) relevant to their environment.
+      </p>
     </section>
     <section id="conformance-profiles">
       <h3>Conformance to Functional Profiles</h3>
       <p>
-        This specification defines several <a>functional profiles</a> that may be conformed to by systems.
+        This specification defines several <a>functional profiles</a> to which systems may conform.
         These functional profiles are identified by URIs and given in the table below.
       </p>
       <p>
         If a system wishes to show conformance to this specification, conformance to at least one functional profile of
         it, such as those listed <a href="#fig-table-profiles"></a> MUST be indicated. <a href="#fig-table-profiles"></a>
-        is not an exhaustive list of functional profiles of this specification and users MAY make additional
-        functional profiles for different environments, as described in the previous section.
+        is not an exhaustive list of functional profiles of this specification and users MAY instead make other
+        functional profiles for their environments, as described in the previous section.
       </p>
       <p>
         The namespace prefix for the functional profiles used in <a href="#fig-table-profiles"></a>, the table below, is:
@@ -1042,7 +1048,7 @@ URIs for resources conforming to profile urn:example:profile:x]
                 <td><code>altp:Representation</code></td><td>the <em>link target</em> URI indicates an instance altp:Representation</td>
               </tr>
               <tr>
-                <td><code>prof:Profile</code></td><td>a <em>target attribute</em> of <code>profile</code> indicates the URI of an instance of prof:Profile, if present</td>
+                <td><code>dct:Standard</code></td><td>a <em>target attribute</em> of <code>profile</code> indicates the URI of an instance of dct:Standard, if present</td>
               </tr>
               <tr>
                 <td><code>dct:conformsTo</code></td><td>the implicit relation between the <em>link target</em> URI and the <em>target attribute</em> <code>profile</code> URI</td>
@@ -1157,7 +1163,7 @@ Link:
 # The profile URI in the "anchor" element is linked to the token "igsn-r1"
 
 # Further, the relation "type" is used to inform
-# that the anchor resource is of type "prof:Profile"
+# that the anchor resource is of type "dct:Standard"
 
 Link: &lt;http://www.w3.org/ns/dx/prof/Profile&gt;;
   rel="type";
@@ -1247,7 +1253,7 @@ Content-Profile: &lt;urn:example:profile:x>
         </p>
         <p>
           To both allow for human-actionable content negotiation by profile and also to show how mechanics similar to
-          existing systems might fulfill all aspects of this specification's Abstract Model, here we present a Query
+          existing systems might fulfill all aspects of this specification's Abstract Model, this section shows a Query
           String Argument (QSA) functional profile of the Abstract Model. This functional profile is functionally equivalent to the
           HTTP functional profile in that all required functions of the Abstract Model are supported however it is not mutually
           exclusive of the HTTP, or any other, functional profile: an implementation of this specification may
@@ -1256,7 +1262,7 @@ Content-Profile: &lt;urn:example:profile:x>
         </p>
         <p>
           Unlike the HTTP functional profile which is also the subject of an independent IETF document [[PROF-IETF]],
-          this QSA functional profile is fully specified here. Two forms of this QSA approach are presented too: the first is the
+          the QSA functional profile is fully specified here. Two forms of this QSA approach are presented: the first is the
           fixed keyword "QSA Functional Profile" and the second is the "QSA Alternate Keywords Functional Profile" according to which
           servers may implement any keywords they choose. These various functional profiles are
           all identified in <a href="#conformance-profiles"></a>.
@@ -1264,8 +1270,8 @@ Content-Profile: &lt;urn:example:profile:x>
         <div class="note">
           Conformance of a system to any one, or perhaps multiple, of these functional profiles may be demonstrated as per
           <a href="#conformancetoprofiles"></a>. Note that it is not required that a system, perhaps a server, indicate
-          conformance to one or more functional profiles of this specification since not all systems will have the ability to
-          do so themselves. Systems may also show conformance to
+          conformance to one or more of the functional profiles described in this specification since not all systems will
+          do so. Systems may also show conformance to
           functional profiles in multiple ways, such as with annotated entries in a services catalogue.
         </div>
         <section id="qsa-uri">
@@ -1761,7 +1767,7 @@ Link:
 # The profile URI in the "anchor" element is linked to the token "igsn-r1"
 
 # Further, the relation "type" is used to inform
-# that the anchor resource is of type "prof:Profile"
+# that the anchor resource is of type "dct:Standard"
 
 Link: &lt;http://www.w3.org/ns/dx/prof/Profile&gt;;
   rel="type";
