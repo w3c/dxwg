@@ -94,10 +94,10 @@ var respecConfig = {
                 "Rob Atkinson",
                 "Nicholas J. Car"
             ],
-            href: "https://www.w3.org/TR/2018/WD-dx-prof-20181218/",
-            title: "Profile Descriptions ontology",
-            date: "2018-12-18",
-            status: "W3C First Public Working Draft"
+            href: "https://www.w3.org/TR/2019/WD-dx-prof-20190402/",
+            title: "The Profiles Vocabulary",
+            date: "2019-04-02",
+            status: "W3C Second Public Working Draft"
         }
     }
 };
