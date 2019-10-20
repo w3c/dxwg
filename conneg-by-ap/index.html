@@ -746,7 +746,7 @@ Content-Profile: http://example.org/profile/x, \
         also given in that appendix.
       </p>
     </section>
-    <section id="precendence">
+    <section id="precedence">
       <h3>Order of Precedence for Implementation Profiles</h3>
       <p>
         A service MAY implement multiple <a>functional profile</a>s, including HTTP, QSA and possibly other approaches.
@@ -767,12 +767,11 @@ Content-Profile: http://example.org/profile/x, \
     <section id="functional-profiles-definition">
       <h3>Functional Profiles of this specification</h3>
       <p>
-        This section illustrates a few conformant <a>functional profiles</a> of this
-        <a>specification</a>'s <a href="#abstractmodel">Abstract Model</a> for different system environments. These
-        functional profiles are formally described in <a href="#conformancetoprofiles"></a>
-        and may be used within different environments
-        wishing to conform to this specification. Implementation of the profiles
-        illustrated here is not mandatory; any profile that conforms to the
+        This section illustrates a few <a>functional profiles</a> of this
+        <a>specification</a>'s <a href="#abstractmodel">Abstract Model</a> for different system environments. They
+        may be conformed to by systems operating within different environments
+        wishing to conform to this specification. Conforming to the profiles
+        illustrated here is not mandatory; conformance to any profile that conforms to the
         Abstract Model fulfills conformance to this specification.
       </p>
       <p>
@@ -802,7 +801,7 @@ Content-Profile: http://example.org/profile/x, \
       </p>
       <p>
         If a system wishes to show conformance to this specification, conformance to at least one functional profile of
-        it, such as those listed <a href="#fig-table-profiles"></a> MUST be indicated. <a href="#fig-table-profiles"></a>
+        it, such as those listed <a href="#fig-table-profiles"></a>, MUST be indicated. <a href="#fig-table-profiles"></a>
         is not an exhaustive list of functional profiles of this specification and users MAY instead make others
         for their environments, as described in the previous section.
       </p>
@@ -1350,10 +1349,9 @@ http://example.com/path/to/resource/a?<strong>_profile=prof-01&amp;_mediatype=te
           </p>
           <p>
             To conform to the "QSA Functional Profile", the QSA key <code>_profile</code> MUST be used to indicate a
-            profile token or URI and SHOULD use <code>_mediatype</code> to indicate a resource representation's Media
+            profile token or URI and the key <code>_mediatype</code> SHOULD be used to indicate a resource representation's Media
             Type.
           </p>
-          <div class="note">The recommendation to standardise the use of _mediatype in QSA is <strong>at risk</strong></div>
           <p>
             When conforming to the profile "QSA Alternate Keywords Functional Profile", any key values acceptable
             within the specification of [[RFC3986]] MAY be used to indicate the desired profile.
@@ -1678,13 +1676,18 @@ Accept-Profile: &lt;http://example.org/profile/x>
 # QSA Alt, not a QSA Functional Profile-conformant system
 
 # The resource representations available conform to profile-x & profile-y.
-# The profile-y-conformant representation is only available in XML
+# The profile-x-conformant representation is available in HTML & Turtle,
+# the profile-y-conformant representation is available only in XML
 
 HTTP/1.1 200 OK
 Link:
-  &lt;http://example.org/resource/a?view=profile-x>;
+  &lt;http://example.org/resource/a?view=profile-x&format=text/html>;
           rel="self";
           type="text/html";
+          profile="http://otherexample.org/profile/x",
+  &lt;http://example.org/resource/a?view=profile-x&format=text/turtle>;
+          rel="self";
+          type="text/turtle";
           profile="http://otherexample.org/profile/x",
   &lt;http://example.org/resource/a?view=profile-y&amp;format=text/xml>;
           rel="alternate";
@@ -1707,8 +1710,8 @@ Link:
           To communicate to a client what QSA key/value pair is used for <em>list profiles</em> when the "QSA Alternate
           Keywords Functional Profile" is conformed to, a server SHOULD, following the methods above for
           <em>list profiles</em> communication, indicate that a representation of the resource is available that conforms to the
-          Alternate Profiles Data Model described in <a href="#eg-qsa-keydisco-altprofiles"></a>. This is demonstrated
-          as an extension to <a href="#eg-qsa-keydiscovery"></a> in <a href="#eg-qsa-keydisco-altprofiles"></a>.
+          Alternate Profiles Data Model identified by the URI <code>http://www.w3.org/ns/dx/conneg/altr</code>. This is demonstrated
+          in <a href="#eg-qsa-keydisco-altprofiles"></a> which is an extension to <a href="#eg-qsa-keydiscovery"></a> .
         </p>
         <pre id="eg-qsa-keydisco-altprofiles" class="example nohighlight" aria-busy="false" aria-live="polite"
              title="Extension of previous example showing of Alternate Profiles Data Model-conformant responses">
@@ -1719,31 +1722,35 @@ Accept-Profile: &lt;http://example.org/profile/x>
 
 HTTP/1.1 200 OK
 Link:
-  &lt;http://example.org/resource/a?view=profile-x>;
+  &lt;http://example.org/resource/a?view=profile-x&format=text/html>;
           rel="self";
           type="text/html";
+          profile="http://otherexample.org/profile/x",
+  &lt;http://example.org/resource/a?view=profile-x&format=text/turtle>;
+          rel="self";
+          type="text/turtle";
           profile="http://otherexample.org/profile/x",
   &lt;http://example.org/resource/a?view=profile-y&amp;format=text/xml>;
           rel="alternate";
           type="text/xml";
-          profile="http://otherexample.org/profile/y",
-  &lt;http://example.org/resource/a?view=altprofiles>;
+          profile="http://otherexample.org/profile/y"
+<strong>  &lt;http://example.org/resource/a?view=altrep&format=application/ld+json>;
           rel="alternate";
           type="application/ld+json";
-          profile="http://www.w3.org/ns/dx/conneg/altprofiles"
+          profile="http://www.w3.org/ns/dx/conneg/altr"</strong>
 
 [default response content]
         </pre>
         <p>
           <a href="#eg-qsa-keydisco-altprofiles"></a> shows that for resource <code>/resource/a</code> there is a
           representation of it that conforms to the specification/profile
-          <code>http://www.w3.org/ns/dx/conneg/altprofiles</code> which is the URI identifying the Alternate Profiles
-          Data Model defined in <a href="#altr"></a>. Since the example also shows the QSA
-          <code>view=altprofiles</code> can be used to formulate a request for this representation, dereferencing
-          <code>http://example.org/resource/a?view=altprofiles</code> will generate a response that also yields the
-          content of the request in <a href="#eg-qsa-keydisco-altprofiles"></a> but, since it is conformant to the
-          Alternate Profiles Data Model, the HTTP body of that response will also list the alternate profiles for
-          <code>/resource/a</code> as opposed to the default representation of it.
+          <code>http://www.w3.org/ns/dx/conneg/altr</code> which is the URI identifying the Alternate Profiles
+          Data Model defined in <a href="#altr"></a>.
+        </p>
+        <p>The example also shows the QSA <code>view=altrep</code> can be used to formulate a request for a Alternate
+          Profiles Data Model-conformant response. Dereferencing <code>http://example.org/resource/a?view=altrep</code>
+          will therefore generate a response that also yields equivalent content to the <code>Link</code> header content
+          in <a href="#eg-qsa-keydisco-altprofiles"></a> rather than the default representation of <code>/resource/a</code>.
         </p>
       </section>
     </section>
@@ -1924,7 +1931,6 @@ Link: &lt;http://www.w3.org/ns/dx/prof/Profile&gt;;
 		  <ul>
 			  <li>Use of <a href="#http">HTTP protocol headers</a>
 				  for information about which profiles the response's message conforms to.</li>
-              <li>Recommendation to use _mediatype to define preferred encoding in QSA implementations.</li>
 		  </ul>
 	  </section>
   </section>

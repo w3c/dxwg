@@ -1,5 +1,5 @@
 var respecConfig = {
-    specStatus: "WD",
+    specStatus: "CR",
     shortName: "dx-prof-conneg",
     edDraftURI: "https://w3c.github.io/dxwg/conneg-by-ap/",
     previousPublishDate: "2019-04-30",
