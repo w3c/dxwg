@@ -547,7 +547,7 @@ GET /resource/a<strong>?_profile=all</strong> HTTP/1.1
 HTTP/1.1 200 OK
 Content-Type: application/json
 Content-Profile: &lt;http://www.w3.org/ns/dx/conneg/profile/qsa>
-# This Link header indicates representations ar available that conform to Profile X
+# This Link header indicates representations are available that conform to Profile X
 # &amp; Y and that the Profile X-conformant representations are available in HTML
 # &amp; XML Media Types.
 Link:
@@ -775,8 +775,12 @@ Content-Profile: http://example.org/profile/x, \
         Abstract Model fulfills conformance to this specification.
       </p>
       <p>
-        This specification provides functional profiles of it for two environments: HTTP and human browser (Query String
-        Arguments) as well as a single action functional profile relevant to multiple environments. For the human browser environment, two functional profiles are presented to demonstrate different modes of use.
+        This specification provides functional profiles of the abstract model for two environments: HTTP and human browser (Query String
+        Arguments) as well as a functional profile that specifies a single action - confirming which profile(s) a server response conforms to -
+        that is relevant to multiple environments, such as the HTTP and human browser environments.
+      </p>
+      <p>
+        For the human browser environment, two functional profiles are presented to demonstrate different modes of use.
         Further functional profiles of this specification MAY be implemented either for other environments and or even for
         constrained scenarios within these environments, and implementers are encouraged create additional profiles conforming to this
         specification.
@@ -787,9 +791,9 @@ Content-Profile: http://example.org/profile/x, \
         this document or may develop other functional profiles that conform to
         the abstract model. Conformance to one of the profiles provided here
         guarantees conformance to the abstract model, but conformance can be
-        achieved with other functional profiles too. Implementers of Content
+        achieved with other functional profiles also. Implementers of Content
         Negotiation by Profile need not ensure systems conform to multiple
-        functional profiles of this specification: they need only conform to the
+        functional profiles of this specification; they need only conform to the
         functional profile(s) relevant to their environment.
       </p>
       <p>
@@ -2040,30 +2044,31 @@ cnpr:rrd a prof:Profile ;
       <p>
         With the identification of functional profiles of this specification given in <a href="#functional-profiles-definition"></a> and
         their relations described using the Profiles Vocabulary [[?PROF]] in this appendix, it is possible for
-        systems to show conformance to the this specification or any of the profiles by using mechanisms recommended
-        in [[?PROF]]. PROF's recommendation is that any resource, for example <code>&lt;http://example.org/resource/a&gt;</code>,
-        wishing to claim conformance to a <a>specification</a> or a <a>functional profile</a> use the [[DCTERMS]]
-        <code><a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-conformsTo">
-          dct:conformsTo</a></code> predicate like this:
+        systems to show conformance to this specification or any functional profile of it using [[?PROF]] mechanisms.
+        This is done using the [[DCTERMS]] predicate <code><a href="http://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-conformsTo">dct:conformsTo</a></code>
+        so that, for example, a system identified with the URI <code>&lt;http://example.org/system/a&gt;</code> claiming to
+        conform to a specification or functional profile identified by URI &lt;SPEC_OR_PROFILE_URI&gt; would do so like this:
       </p>
       <p>
-        <code>&lt;http://example.com/resource/a&gt; dct:conformsTo &lt;SPEC_OR_PROFILE_URI&gt; .</code>
+        <code>&lt;http://example.com/system/a&gt; dct:conformsTo &lt;SPEC_OR_PROFILE_URI&gt; .</code>
       </p>
       <p>
         The <code>&lt;SPEC_OR_PROFILE_URI&gt;</code> may be this specification's URI, <code>https://www.w3.org/TR/dx-prof-conneg/</code>, but in the best case, would be
-        one of the profile URIs listed in <a href="#functional-profiles-definition"></a> since it is much clearer what is being
-        conformed to when functional profile URIs are cited as they are narrower in scope than the specification as a whole.
+        one of the profile URIs listed in <a href="#functional-profiles-definition"></a> or another functional profile's URI,
+        since it is much clearer what is being conformed to when functional profile URIs are cited as they are narrower
+        in scope than the specification as a whole.
       </p>
       <p>
-        A system wishing to claim conformance to multiple conformance targets - the <a>specification</a> or <a>functional profiles</a> of it - may do so with multiple uses of <code>dct:conformsTo</code>.
+        A system wishing to claim conformance to multiple conformance targets - the <a>specification</a> or
+        <a>functional profiles</a> of it - may do so with multiple uses of <code>dct:conformsTo</code>.
       </p>
       <p>
         The code in <a href="#system-conforming">Code Listing 2</a> shows an imaginary Web Service documented using
         [[?VOCAB-DCAT-2]] and borrowing parts from its examples, such as
-        <a href="https://www.w3.org/TR/vocab-dcat-2/#ex-service-eea">Example 49</a>,
-        that includes a <code>dct:conformsTo</code> predicate as [[?VOCAB-DCAT-2]], as well as [[?PROF]], suggest for
-        use. Conformance here is claimed to be to the <em>QSA Alternate Keywords Functional Profile</em> profile indicated by
-        the URI <code>http://www.w3.org/ns/dx/conneg/profile/qsa-alt</code>, as it is identified in
+        <a href="https://www.w3.org/TR/vocab-dcat-2/#ex-service-eea">Example 49</a>.
+        Included is the predicate <code>dct:conformsTo</code> used as per [[?VOCAB-DCAT-2]] &amp; [[?PROF]].
+        Conformance here is claimed to the <em>QSA Alternate Keywords Functional Profile</em> profile which is indicated by
+        the URI <code>http://www.w3.org/ns/dx/conneg/profile/qsa-alt</code>, identified as per
         <a href="#functional-profiles-definition"></a>.
       </p>
       <pre id="system-conforming"
