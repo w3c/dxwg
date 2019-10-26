@@ -40,10 +40,16 @@ var respecConfig = {
   }],
   otherLinks: [{
     key: "Contributors",
-    data: [{
+    data: [
+    {
       value: "Lars G. Svensson",
       href:  "https://orcid.org/0000-0002-8714-9718"
-    }]
+    },
+    {
+      value: "Nicholas J. Car",
+      href:  "https://orcid.org/0000-0002-8742-7730"
+    }
+    ]
   }],
   processVersion: 2019,
   edDraftURI: "https://w3c.github.io/dxwg/dcat-implementation-report/",
