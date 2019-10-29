@@ -4,7 +4,7 @@ var respecConfig = {
     specStatus: "ED",
 //    specStatus: "CR",
 //  crEnd: "2019-10-24",
-    implementationReportURI: "https://docs.google.com/spreadsheets/d/1eEVUuPFAGO2GjS5ocxylY8T1AlpqlwnOTc3er_Mhcv4/edit#gid=1108132380%22",
+    implementationReportURI: "https://w3c.github.io/dxwg/dcat-implementation-report/",
     shortName: "vocab-dcat-2",
     prevRecShortname: "vocab-dcat",
     canonicalURI: "TR",
