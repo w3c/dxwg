@@ -2386,38 +2386,48 @@ Link:
         </pre>
       </section>
     </section>
-      <section id="dcat-usage-example">
-        <h2>Describing Conneg-by-AP support by data distrubutions using DCAT</h2>
-        <p>A dataset may be accessible via a data access service, and that service may support one or more functional profiles of this specification. In this case this should be declared via reference to the relevant functional profiles using the dct:conformsTo predicate on a DataService provided by a DataDistribution, as illustrated in the code example below.
-        </p>
-        <p>Note that DCAT currently provides no canonical means to specify if the data access service allows individual data items in the dataset to be accessed by identifier, so this example relates to the dataset distribution as a whole. The use of dct:conformsTo would nevertheless apply to data access services which declare a mechanism to access individual items. This mechanism may be identified via the dcat:endpointDescription.
-        </p>
-        <div class="issue" data-number="1146"></div>
-        <pre id="dcat-example"
+    <section id="dcat-usage-example">
+      <h2>Describing Conneg-by-AP support by data distrubutions using DCAT</h2>
+      <p>
+        A dataset may be accessible via a data access service, and that service may support one or more functional profiles of this specification. In this case this should be declared via reference to the relevant functional profiles using the dct:conformsTo predicate on a DataService provided by a DataDistribution, as illustrated in the code example below.
+      </p>
+      <p>
+        Note that DCAT currently provides no canonical means to specify if the data access service allows individual data items in the dataset to be accessed by identifier, so this example relates to the dataset distribution as a whole. The use of dct:conformsTo would nevertheless apply to data access services which declare a mechanism to access individual items. This mechanism may be identified via the dcat:endpointDescription.
+      </p>
+      <div class="issue" data-number="1146"></div>
+      <pre id="dcat-example"
            class="codelisting nohighlight" aria-busy="false" aria-live="polite"
            title="Example of describing a dataset supporting Conneg-by-AP in DCAT">
-    <div class="codelisting-title">
-    <a href="#dcat-example">CODE LISTING 4</a>: Example of describing a dataset supporting Conneg-by-AP in DCAT
-    </div>
+<div class="codelisting-title">
+<a href="#dcat-example">CODE LISTING 4</a>: Example of describing a dataset supporting Conneg-by-AP in DCAT
+</div>
+@prefix ex: &lt;http://example.org#> .
+@prefix dcat: &lt;http://www.w3.org/ns/dcat#> .
+@prefix dct: &lt;http://purl.org/dc/terms/> .
+@prefix prof: &lt;http://www.w3.org/ns/dx/prof/> .
 
 :aDataset dcat:hasDistribution :aDatasetDistribution .
 
 # declare what this version data looks like
-:aDatasetDistribution a dcat:Distribution ;
-  dcterms:conformsTo eg:someDataProfile ;
-  dcat:accessService eg:connegDataAccessService 
- .
+:aDatasetDistribution
+    a dcat:Distribution ;
+    dct:conformsTo ex:someDataProfile ;
+    dcat:accessService ex:connegDataAccessService .
 
 # describe data
-eg:someDataProfile a prof:DataProfile ;
-  # other details
+ex:someDataProfile a prof:DataProfile ;
+    # other details
 .
+
 # declare how data can be accessed
-eg:connegDataAccessService a dcat:DataService ;
- dcterms:conformsTo <http://www.w3.org/ns/dx/conneg/profile/http>,<http://www.w3.org/ns/dx/conneg/profile/qsa> ;
-# declare that the dataset may be invoked by URI id using conneg-by-ap
-dcat:endPointURL :aDataset ;
-.
+ex:connegDataAccessService
+    a dcat:DataService ;
+    dct:conformsTo
+        &lt;http://www.w3.org/ns/dx/conneg/profile/http> ,
+        &lt;http://www.w3.org/ns/dx/conneg/profile/qsa> ;
+
+    # declare that the dataset may be invoked by URI id using conneg-by-ap
+    dcat:endPointURL :aDataset .
 </pre>
     </section>
   </section>
