@@ -4,89 +4,23 @@
     <meta charset='utf-8'>
     <title>DCAT Version 2 Implementation Report</title>
     <script src="https://www.w3.org/Tools/respec/respec-w3c-common" async class="remove"></script>
-    <script class="remove" src="config.js">
-    </script>
-<!--
-    <script src="data.js">
--->
-    </script>
-<!--
-    <style type="text/css">
-      .table-container {
-        overflow: auto;
-      }
-
-      .dwbp-ir-table {
-        border: 1px solid #CCC;
-        border-spacing: 0px;
-        border-collapse: collapse;;
-      }
-      .dwbp-ir-table td, .dwbp-ir-table th {
-        padding: 5px;
-        border: 1px solid #AAA;
-      }
-      .dwbp-ir-table tbody tr:nth-child(odd) {
-       background-color: #EDEDED;
-     }
-
-      .panel {
-         max-width: 800px !important;
-         margin: 0 auto;
-         margin-bottom: 20px;
-         background-color: #fff;
-         border: 1px solid transparent;
-         border-radius: 4px;
-         -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
-         box-shadow: 0 1px 1px rgba(0,0,0,.05);
-     }
-      .panel-default {
-       border-color: #ddd;
-     }
-       .panel-heading {
-       padding: 10px 15px;
-       border-bottom: 1px solid transparent;
-       border-top-left-radius: 3px;
-       border-top-right-radius: 3px;
-       color: #333;
-       background-color: #f5f5f5;
-       border-color: #ddd;
-   }
+    <script class="remove" src="config.js"></script>
+    <style>
+      table{width:100%;}
+      .nr{text-align:center;}
+      .small{font-size:.8em}
     </style>
--->
-<style>
-.nr{text-align:center;}
-.small{font-size:.8em}
-/*
-.simple tbody tr.at-risk{background-color:yellow;}
-.simple tbody tr.recommended{font-weight:bold;}
-.simple tbody tr.new{font-style:italic;}
-.warn{background-color:yellow;}
-.success{background-color:lightgreen;}
-*/
-</style>
-
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
-
   </head>
   <body class="informative">
     <section id='abstract'>
       <p>
-      This document reports on evidence and implementations of the revised edition of the Data Catalog vocabulary (DCAT) Candidate Recommendation [[VOCAB-DCAT-2]]. In particular, it demonstrates that the revisions proposed in [[VOCAB-DCAT-2]] are already in use and are also implementable.</section>
+      This document reports on evidence and implementations of the Data Catalog vocabulary version 2 (DCAT2) Candidate Recommendation [[VOCAB-DCAT-2]]. In particular, it demonstrates that the revisions proposed in [[VOCAB-DCAT-2]] are already in use and are also implementable.</section>
     <section id='sotd'>
     </section>
     <section id="introduction">
       <h2>Introduction</h2>
-<!--
-      <p class="ednote">TBD: What is DCAT; why a revision was needed; what has been revised; how implementation evidence was collected.</p>
--->
-<!--
-      <p>One of the main goals of the Data on the Web Best Practices (<a href="http://w3.org/TR/dwbp">DWBP</a>) is to facilitate interaction between publishers and consumers of data on the Web. A set of 35 Best Practices were created to cover different <a data-cite="VOCAB-DCAT-2#challenges">challenges</a> related to data publishing and consumption, such as Metadata, Data licenses, Data provenance, Data quality, Data versioning, Data identification, Data formats, Data vocabularies, Data access and APIs, Data preservation, Feedback, Data enrichment and Data republication. </p>
--->
 <p>DCAT is an RDF vocabulary, first published as a W3C Recommendation in 2014 [[VOCAB-DCAT]], designed to facilitate interoperability between data catalogs published on the Web. The <a href="https://www.w3.org/2017/dxwg/">Dataset Exchange Working Group</a> (<abbr title="Dataset Exchange Working Group">DXWG</abbr>) has developed a new version of DCAT [[VOCAB-DCAT-2]], which extends [[VOCAB-DCAT]] to support further use cases and requirements [[DCAT-UCR]]. These include the possibility of cataloging other resources in addition to datasets, such as data services, and of describing relationships between datasets as well as between datasets and other cataloged resources.</p>
 <p>To show that the revisions proposed in [[VOCAB-DCAT-2]] are implementable as well as broadly adopted, we collected evidence in the form of vocabularies, data catalogs, data services, and datasets (<a href="#evidence"></a>). The results are summarized in this report.</p>
-<!--
-      <p> Besides the results collected from the surveys, in order to strengthen the DWBP adoption evidence, we also present our evaluation of how DWBP are currently being adopted by the major data catalog solutions, including <a href="http://ckan.org/">CKAN</a>, <a href="https://socrata.com/">Socrata</a>, <a href="http://www.nucivic.com/dkan/">DKAN</a>, <a href="http://www.junar.com">JUNAR</a>, <a href="http://opendata.arcgis.com/">ArcGIS Open Data</a> and <a href="https://www.opendatasoft.com/">OPENDATASOFT</a> (<a href="#DWBP-Catalogues">Section 3</a>). Finally, we also present some examples to illustrate that each one of the DWBP is implementable (<a href="#DWBP-Examples">Section 4</a>).
--->
       <section id="methodology">
         <h3>Methodology</h3>
         <p>We followed the steps described below to collect evidence for the revisions proposed in [[VOCAB-DCAT-2]]:</p>
@@ -94,40 +28,19 @@
         <li>Identify the actual list of revisions proposed in [[VOCAB-DCAT-2]] for which implementation evidence should be collected (see <a href="#proposed-revisions"></a> for more details).</li>
         <li>Review existing vocabularies based on [[VOCAB-DCAT]], and identify if they include already the changes proposed in [[VOCAB-DCAT-2]], and/or their alignment with [[VOCAB-DCAT-2]] is planned. The rationale for including also planned implementations is that these vocabularies are not likely to adopt the revisions proposed in [[VOCAB-DCAT-2]] until it becomes a W3C Recommendation.</li>
         <li>Review existing guidelines and implementation reports of [[VOCAB-DCAT]], as well as of vocabularies based on it, to verify if the changes proposed [[VOCAB-DCAT-2]] are implemented in existing data catalogs, data services, and datasets.</li>
-<!--
-        <li>A review of the collected implementations was made in order to check which best practices should have more implementations.</li>
-        <li>A detailed review of the implementations as well as the comments received through the surveys were made in order to prepare the implementation report.</li>
--->
-        <li>The Implementation Report was developed.</li>
+        <li>Develop an Implementation Report with details of the steps above.</li>
         </ol>
 
         <p>As noted, to have a broader coverage of [[VOCAB-DCAT-2]] adoption we considered different types of evidence:</p>
         <ol>
           <li>DCAT-based vocabularies</li>
           <li>Data catalogs, data services, and datasets</li>
-<!--
-        <li><strong>Datasets, Data Portals and Vocabularies</strong>: this type of evidence shows that the proposed revisions to [[VOCAB-DCAT]] were already considered by organizations responsible for documenting and publishing data.</li>
--->
-<!--
-        <li><strong>Documents and References</strong>: this category includes Web sites, Web pages, blogs, published papers, APIs documentation, projects and wikis. This type of evidence shows the adoption of the proposed revisions to [[VOCAB-DCAT]] in more general scenarios.</li>
--->
-<!--
-        <li><strong>Guidelines</strong>: these guidelines were proposed by governmental organizations to help data publishers to make data available on the Web. Each guideline discusses and proposes practices that makes an explicit) reference to a DWBP or where the advice offered is fully consistent with the relevant proposed revision to [[VOCAB-DCAT]].</li>
--->
         </ol>
-        <p>Because of the number of DCAT-based vocabularies and data catalogs supporting [[VOCAB-DCAT]], this report includes only a representative subset, providing nonetheless enough implementation evidence of the revisions proposed in [[VOCAB-DCAT-2]].</p>
+        <p>Due to the large number of DCAT-based vocabularies and data catalogs supporting [[VOCAB-DCAT]], this report includes only a representative subset, providing nonetheless enough implementation evidence of the revisions proposed in [[VOCAB-DCAT-2]].</p>
       </section>
       <section id="exit-criteria">
         <h3>Meeting the exit criteria</h3>
-        <p>As described in the <abbr title="Dataset Exchange Working Group">DXWG</abbr> <a href="https://www.w3.org/2017/dxwg/charter">charter</a>, to move on to Proposed Recommendation, evidence will be adduced in order to demonstrate that each of the changes made to the original DCAT Recommendation [[VOCAB-DCAT]]
-<!--
-is used in multiple catalogs and related systems. As a minimum, evidence will be adduced that each term
--->
-has been published and consumed independently in catalogs and related systems at least once, although a higher number is expected for the majority of terms.
-<!--
-has two independent implementations.
--->
-</p>
+        <p>As described in the <abbr title="Dataset Exchange Working Group">DXWG</abbr> <a href="https://www.w3.org/2017/dxwg/charter">charter</a>, to advance to Proposed Recommendation, evidence will be adduced in order to demonstrate that each of the changes made to the original DCAT Recommendation [[VOCAB-DCAT]] has been published and consumed independently in catalogs and related systems at least once, although a higher number is expected for the majority of terms.</p>
 <p>Evidence of implementation was gathered from existing data catalogs, data services, and datasets, which already implement the proposed changes, as well as from existing application profiles of [[VOCAB-DCAT]].</p>
       </section>
     </section>
@@ -137,7 +50,7 @@ has two independent implementations.
       <p>The following table shows the set of changes proposed in [[VOCAB-DCAT-2]].</p>
 
 <aside class="note">
-<p>The table does not include the revisions concerning the definition of a new class <code>dcat:Resource</code> and the associated properties (see <a data-cite="VOCAB-DCAT-2#Class:Resource">&sect;&nbsp;<span class="secno">6.4 </span>Class: Cataloged Resource</a> of [[VOCAB-DCAT-2]]), as <code>dcat:Resource</code> is an abstract class that is not supposed to be used directly, as explained in <a data-cite="VOCAB-DCAT-2#dcat-scope">&sect;&nbsp;<span class="secno">5.1 </span>DCAT scope</a> of [[VOCAB-DCAT-2]].</p>
+<p>The table does not include the revisions concerning the definition of a new class <code>dcat:Resource</code> and the associated properties (see <a data-cite="VOCAB-DCAT-2#Class:Resource">&sect;&nbsp;<span class="secno">6.4 </span>Class: Cataloged Resource</a> of [[VOCAB-DCAT-2]]), as <code>dcat:Resource</code> is an abstract class that is not supposed to be used directly, as explained in <a data-cite="VOCAB-DCAT-2#dcat-scope">&sect;&nbsp;<span class="secno">5.1 </span>DCAT scope</a> of [[VOCAB-DCAT-2]]. The properties are considered when inherited by a sub-class of <code>dcat:Resource</code>.</p>
 <!--
 <p>Quoting:</p>
 <blockquote>
@@ -146,125 +59,13 @@ has two independent implementations.
 -->
 </aside>
 
-<!--
-      <dl>
-        <dt id="REV0.1"><a data-cite="VOCAB-DCAT-2#">Revision 0.1</a></dt>
-        <dd>Broadened the scope of DCAT beyond datasets.</dd>
-        <dt id="REV0.1"><a data-cite="VOCAB-DCAT-2#">Revision 0.1</a></dt>
-        <dd>Extended the use of some DCAT properties, originally bound to given classes, to other resource types.</dd>
-        <dt id="REV0.1"><a data-cite="VOCAB-DCAT-2#">Revision 0.1</a></dt>
-        <dd>Provided guidance and recommendations for the expression of the different types of rights.</dd>
-        <dt id="REV0.1"><a data-cite="VOCAB-DCAT-2#">Revision 0.1</a></dt>
-        <dd>Provided guidance and recommendations for the expression of qualified relationships between datasets and other resources.</dd>
-        <dt id="REV0.1"><a data-cite="VOCAB-DCAT-2#">Revision 0.1</a></dt>
-        <dd>Added new classes and properties (either newly defined or taken from existing vocabularies) to describe aspects not originally covered in DCAT.</dd>
-      </dl>
--->
-<!--
-      <section>
-        <h3>Redefinition of existing terms</h3>
-
-      <table class="simple">
-      <thead>
-        <th>Revision</th>
-        <th>Description</th>
-        <th>Scope</th>
-        <th>Comment</th>
-      </thead>
-      <tbody>
-        <tr id="REV0.2"><td><a data-cite="VOCAB-DCAT-2#">REV0.2</a></td><td>Removed statement making <code>dcat:Dataset</code> a subclass of <code>dctype:Dataset</code>.</td><td></td><td></td></tr>
-        <tr id="REV0.2"><td><a data-cite="VOCAB-DCAT-2#">REV0.2</a></td><td><code>dcat:Catalog</code> made a subclass of <code>dcat:Dataset</code>.</td><td></td><td></td></tr>
-        <tr id="REV0.2"><td><a data-cite="VOCAB-DCAT-2#">REV0.2</a></td><td>Removed domain restriction from <code>dcat:contactPoint</code>.</td><td></td><td></td></tr>
-        <tr id="REV0.3"><td><a data-cite="VOCAB-DCAT-2#">REV0.3</a></td><td>Removed domain restriction from <code>dcat:landingPage</code>.</td><td></td><td></td></tr>
-        <tr id="REV0.4"><td><a data-cite="VOCAB-DCAT-2#">REV0.4</a></td><td>Removed domain restriction from <code>dcat:keyword</code>.</td><td></td><td></td></tr>
-        <tr id="REV0.5"><td><a data-cite="VOCAB-DCAT-2#">REV0.5</a></td><td>Removed domain restriction from <code>dcat:theme</code>.</td><td></td><td></td></tr>
-      </tbody>
-      </table>
-
-      </section>
-
-      <section>
-        <h3>Definition of new properties and classes in the DCAT namespace</h3>
-
-      <table class="simple">
-      <thead>
-        <th>Revision</th>
-        <th>Description</th>
-        <th>Scope</th>
-        <th>Comment</th>
-      </thead>
-      <tbody>
-        <tr id="REV4"><td><a data-cite="VOCAB-DCAT-2#Class:Resource">REV4</a></td><td>Definition of new class <code>dcat:Resource</code>.</td><td></td><td></td></tr>
-        <tr id="REV30"><td><a data-cite="VOCAB-DCAT-2#Class:Data_Service">REV30</a></td><td>Definition of new class <code>dcat:DataService</code>.</td><td></td><td></td></tr>
-        <tr id="REV36"><td><a data-cite="VOCAB-DCAT-2#Class:Relationship">REV36</a></td><td>Definition of new class <code>dcat:Relationship</code>.</td><td></td><td></td></tr>
-        <tr id="REV39"><td><a data-cite="VOCAB-DCAT-2#Class:Role">REV39</a></td><td>Definition of new class <code>dcat:Role</code>.</td><td></td><td></td></tr>
-        <tr id="REV19"><td><a data-cite="VOCAB-DCAT-2#Property:dataset_spatial_resolution">REV19</a></td><td>Definition of new datatype property <code>dcat:spatialResolutionInMeters</code> (with no domain restriction).</td><td></td><td></td></tr>
-        <tr id="REV19"><td><a data-cite="VOCAB-DCAT-2#Property:dataset_temporal_resolution">REV19</a></td><td>Definition of new datatype property <code>dcat:temporalResolution</code> (with no domain restriction).</td><td></td><td></td></tr>
-        <tr id="REV19"><td><a data-cite="VOCAB-DCAT-2#Property:resource_qualifiedRelation">REV19</a></td><td>Definition of new property <code>dcat:qualifiedRelation</code> (with domain <code>dcat:Resource</code> and range <code>dcat:Relationship</code>).</td><td></td><td></td></tr>
-        <tr id="REV3"><td><a data-cite="VOCAB-DCAT-2#Property:catalog_catalog">REV3</a></td><td>Definition of new property <code>dcat:catalog</code> (with domain and range <code>dcat:Catalog</code>).</td><td></td><td></td></tr>
-        <tr id="REV2"><td><a data-cite="VOCAB-DCAT-2#Property:catalog_service">REV2</a></td><td>Definition of new property <code>dcat:service</code> (with domain <code>dcat:Catalog</code> and range <code>dcat:DataService</code>).</td><td></td><td></td></tr>
-        <tr id="REV28"><td><a data-cite="VOCAB-DCAT-2#Property:distribution_accessservice">REV28</a></td><td>Definition of new property <code>dcat:accessService</code> (with domain <code>dcat:Distribution</code> and range <code>dcat:DataService</code>).</td><td></td><td></td></tr>
-        <tr id="REV28"><td><a data-cite="VOCAB-DCAT-2#Property:distribution_compression_format">REV28</a></td><td>Definition of new property <code>dcat:compressFormat</code> (with domain <code>dcat:Distribution</code> and range <code>dct:MediaType</code>).</td><td></td><td></td></tr>
-        <tr id="REV28"><td><a data-cite="VOCAB-DCAT-2#Property:distribution_package_format">REV28</a></td><td>Definition of new property <code>dcat:packageFormat</code> (with domain <code>dcat:Distribution</code> and range <code>dct:MediaType</code>).</td><td></td><td></td></tr>
-        <tr id="REV31"><td><a data-cite="VOCAB-DCAT-2#Property:dataservice_endpointurl">REV31</a></td><td>Definition of new property <code>dcat:endpointURL</code> (with domain <code>dcat:DataService</code>).</td><td></td><td></td></tr>
-        <tr id="REV32"><td><a data-cite="VOCAB-DCAT-2#Property:dataservice_endpointdescription">REV32</a></td><td>Definition of new property <code>dcat:endpointDescription</code> (with domain <code>dcat:DataService</code>).</td><td></td><td></td></tr>
-        <tr id="REV32"><td><a data-cite="VOCAB-DCAT-2#Property:data_service_serves_dataset">REV32</a></td><td>Definition of new property <code>dcat:servesDataset</code> (with range <code>dcat:Dataset</code>).</td><td></td><td></td></tr>
-        <tr id="REV38"><td><a data-cite="VOCAB-DCAT-2#Property:relationship_hadRole">REV38</a></td><td>Definition of new property <code>dcat:hadRole</code> (with domain <code>prov:Attribution</code> or <code>dcat:Relationship</code>, and range <code>dcat:Role</code>).</td><td></td><td></td></tr>
-      </tbody>
-      </table>
-
-      </section>
-
-      <section>
-        <h3>Addition of properties and classes from other vocabularies</h3>
-
-      <table class="simple">
-      <thead>
-        <th>Revision</th>
-        <th>Description</th>
-        <th>Scope</th>
-        <th>Comment</th>
-      </thead>
-      <tbody>
-        <tr id="REV1"><td><a data-cite="VOCAB-DCAT-2#Property:catalog_hasPart">REV1</a></td><td>Addition of property <code>dct:hasPart</code> to <code>dcat:Catalog</code>.</td><td></td><td></td></tr>
-        <tr id="REV5"><td><a data-cite="VOCAB-DCAT-2#Property:resource_accessRights">REV5</a></td><td>Addition of property <code>dct:accessRights</code> to <code>dcat:Resource</code>.</td><td></td><td></td></tr>
-        <tr id="REV6"><td><a data-cite="VOCAB-DCAT-2#Property:resource_conformsto">REV6</a></td><td>Addition of property <code>dct:conformsTo</code> to <code>dcat:Resource</code>.</td><td></td><td></td></tr>
-        <tr id="REV7"><td><a data-cite="VOCAB-DCAT-2#Property:resource_contact_point">REV7</a></td><td>Addition of property <code>dcat:contactPoint</code> to <code>dcat:Resource</code>.</td><td></td><td></td></tr>
-        <tr id="REV8"><td><a data-cite="VOCAB-DCAT-2#Property:resource_creator">REV8</a></td><td>Addition of property <code>dct:creator</code> to <code>dcat:Resource</code>.</td><td></td><td></td></tr>
-        <tr id="REV9"><td><a data-cite="VOCAB-DCAT-2#Property:resource_description">REV9</a></td><td>Addition of property <code>dct:description</code> to <code>dcat:Resource</code>.</td><td></td><td></td></tr>
-        <tr id="REV10"><td><a data-cite="VOCAB-DCAT-2#Property:resource_title">REV10</a></td><td>Addition of property <code>dct:title</code> to <code>dcat:Resource</code>.</td><td></td><td></td></tr>
-        <tr id="REV11"><td><a data-cite="VOCAB-DCAT-2#Property:resource_release_date">REV11</a></td><td>Addition of property <code>dct:issued</code> to <code>dcat:Resource</code>.</td><td></td><td></td></tr>
-        <tr id="REV12"><td><a data-cite="VOCAB-DCAT-2#Property:resource_update_date">REV12</a></td><td>Addition of property <code>dct:modified</code> to <code>dcat:Resource</code>.</td><td></td><td></td></tr>
-        <tr id="REV13"><td><a data-cite="VOCAB-DCAT-2#Property:resource_language">REV13</a></td><td>Addition of property <code>dct:language</code> to <code>dcat:Resource</code>.</td><td></td><td></td></tr>
-        <tr id="REV14"><td><a data-cite="VOCAB-DCAT-2#Property:resource_publisher">REV14</a></td><td>Addition of property <code>dct:publisher</code> to <code>dcat:Resource</code>.</td><td></td><td></td></tr>
-        <tr id="REV15"><td><a data-cite="VOCAB-DCAT-2#Property:resource_identifier">REV15</a></td><td>Addition of property <code>dct:identifier</code> to <code>dcat:Resource</code>.</td><td></td><td></td></tr>
-        <tr id="REV16"><td><a data-cite="VOCAB-DCAT-2#Property:resource_theme">REV16</a></td><td>Addition of property <code>dcat:theme</code> to <code>dcat:Resource</code>.</td><td></td><td></td></tr>
-        <tr id="REV17"><td><a data-cite="VOCAB-DCAT-2#Property:resource_type">REV17</a></td><td>Addition of property <code>dct:type</code> to <code>dcat:Resource</code>.</td><td></td><td></td></tr>
-        <tr id="REV18"><td><a data-cite="VOCAB-DCAT-2#Property:resource_relation">REV18</a></td><td>Addition of property <code>dct:relation</code> to <code>dcat:Resource</code>.</td><td></td><td></td></tr>
-        <tr id="REV20"><td><a data-cite="VOCAB-DCAT-2#Property:resource_keyword">REV20</a></td><td>Addition of property <code>dcat:keyword</code> to <code>dcat:Resource</code>.</td><td></td><td></td></tr>
-        <tr id="REV21"><td><a data-cite="VOCAB-DCAT-2#Property:resource_landing_page">REV21</a></td><td>Addition of property <code>dcat:landingPage</code> to <code>dcat:Resource</code>.</td><td></td><td></td></tr>
-        <tr id="REV22"><td><a data-cite="VOCAB-DCAT-2#Property:resource_qualifiedAttribution">REV22</a></td><td>Addition of property <code>prov:qualifiedAttribution</code> to <code>dcat:Resource</code>.</td><td></td><td></td></tr>
-        <tr id="REV23"><td><a data-cite="VOCAB-DCAT-2#Property:resource_license">REV23</a></td><td>Addition of property <code>dct:license</code> to <code>dcat:Resource</code>.</td><td></td><td></td></tr>
-        <tr id="REV24"><td><a data-cite="VOCAB-DCAT-2#Property:resource_rights">REV24</a></td><td>Addition of property <code>dct:rights</code> to <code>dcat:Resource</code>.</td><td></td><td></td></tr>
-        <tr id="REV25"><td><a data-cite="VOCAB-DCAT-2#Property:resource_hasPolicy">REV25</a></td><td>Addition of property <code>odrl:hasPolicy</code> to <code>dcat:Resource</code>.</td><td></td><td></td></tr>
-        <tr id="REV26"><td><a data-cite="VOCAB-DCAT-2#Property:record_conformsto">REV26</a></td><td>Addition of property <code>dct:conformsTo</code> to <code>dcat:CatalogRecord</code>.</td><td></td><td></td></tr>
-        <tr id="REV27"><td><a data-cite="VOCAB-DCAT-2#Property:dataset_wasgeneratedby">REV27</a></td><td>Addition of property <code>dct:conformsTo</code> to <code>dcat:Dataset</code>.</td><td></td><td></td></tr>
-        <tr id="REV29"><td><a data-cite="VOCAB-DCAT-2#Property:distribution_conformsto">REV29</a></td><td>Addition of property <code>dct:conformsTo</code> to <code>dcat:Distribution</code>.</td><td></td><td></td></tr>
-        <tr id="REV33"><td><a data-cite="VOCAB-DCAT-2#Property:dataservice_license">REV33</a></td><td>Addition of property <code>dct:license</code> to <code>dcat:DataService</code>.</td><td></td><td></td></tr>
-        <tr id="REV34"><td><a data-cite="VOCAB-DCAT-2#Property:dataservice_access_rights">REV34</a></td><td>Addition of property <code>dct:accessRights</code> to <code>dcat:DataService</code>.</td><td></td><td></td></tr>
-        <tr id="REV37"><td><a data-cite="VOCAB-DCAT-2#Property:relationship_relation">REV37</a></td><td>Addition of property <code>dct:relation</code> to <code>dcat:Relationship</code>.</td><td></td><td></td></tr>
-      </tbody>
-      </table>
-    </section>
--->
-
 <div data-include="table-revisions.html"></div>
 
 </section>
 
     <section id="evidence">
       <h2>Implementation Evidence</h2>
-      <p>The table below shows the evidence collected for each one of the revisions proposed in [[VOCAB-DCAT-2]], including, for each revision, the existing implementations - flagged with "&#x2714;" -, as well as the planned implementations - flagged with "(&#x2714;)".</p>
+      <p>The table below shows the evidence collected for each one of the revisions proposed in [[VOCAB-DCAT-2]], including, for each revision, the existing implementations - flagged with "&#x2714;" -, as well as the planned implementations - flagged with "(&#x2714;)". The vocabularies and data catalogs/data services/datasets corresponding to columns in this table are listed in subsequent sections.</p>
       <p>The reported planned implementations reflect the following (not mutually exclusive) scenarios:</p>
       <ul>
         <li>The vocabulary or the metadata schema of the data catalog is being aligned with [[VOCAB-DCAT-2]] (or this alignment is planned).</li>
@@ -273,28 +74,10 @@ has two independent implementations.
 
 <div data-include="table-implementations.html"></div>
 
-<!--
-        <table id="table-bp-evidence" class="simple">
-          <thead>
-            <tr>
-              <th>Revision</th>
-              <th>Evidence</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
--->
-
       <section id="vocabularies">
         <h3>DCAT-based vocabularies</h3>
         <p>The following table shows DCAT-based vocabularies providing implementation evidence of the revisions proposed in [[VOCAB-DCAT-2]].</p>
-<!--
-        <aside class="ednote">
-        <p>Explain selection criteria.</p>
-        </aside>
--->
+
         <table id="table-vocabularies" class="simple">
           <thead>
             <tr>
@@ -352,48 +135,31 @@ has two independent implementations.
 -->
           </tbody>
         </table>
-<!--
-        <aside class="ednote">
-        <p>Evidence from [[HCLS-Dataset]] is missing.</p>
-        </aside>
--->
 
 <p>The criteria used to select the relevant vocabularies are the following ones:</p>
 
 <ol>
-<li>They are based on [[VOCAB-DCAT-2]] or they extend [[VOCAB-DCAT]] with properties and classes included in [[VOCAB-DCAT-2]].</p>
+<li>They are based on [[VOCAB-DCAT-2]] or they extend [[VOCAB-DCAT]] with properties and classes included in [[VOCAB-DCAT-2]].</li>
 <li>Preferably, they are used across multiple data catalogs and/or domains/disciplines.</li>
 </ol>
 
-<p>At the date this report was written, it was not possible to identify vocabularies based on [[VOCAB-DCAT-2]]. However, there are quite a few vocabularies extending [[VOCAB-DCAT]] - a non-exhaustive list is included in <a data-cite="VOCAB-DCAT-2#profiles">&sect;&nbsp;<span class="secno">14 </span>DCAT Profiles</a> of [[VOCAB-DCAT-2]]. Among these, we have selected the most representative ones, for geographic and domain coverage as well as tooling support, which already include at least some of the revisions proposed in [[VOCAB-DCAT-2]], and/or whose alignment with [[VOCAB-DCAT-2]] is under way or planned.</p>
+<p>At the time this report was written, it was not possible to identify vocabularies based on [[VOCAB-DCAT-2]]. However, there are quite a few vocabularies extending [[VOCAB-DCAT]] - a non-exhaustive list is included in <a data-cite="VOCAB-DCAT-2#profiles">&sect;&nbsp;<span class="secno">14 </span>DCAT Profiles</a> of [[VOCAB-DCAT-2]]. Among these, we have selected the most representative ones, for geographic and domain coverage as well as tooling support, which already include at least some of the revisions proposed in [[VOCAB-DCAT-2]], and/or whose alignment with [[VOCAB-DCAT-2]] is under way or planned.</p>
 
 <p>The vocabularies listed earlier in this section have been chosen for the following reasons:</p>
 <ul>
-<li>[[DCAT-AP]] is a profile of [[VOCAB-DCAT]] used across Europe since 2014 as a metadata interchange format, primarily for catalogs of government data, and, to some extent, for scientific data. As such, it has a broad geographic coverage, and it is supported in data catalogs (e.g., the <a href="https://www.europeandataportal.eu/">European Data Portal</a>) and catalog platforms (e.g., <a href="https://github.com/ckan/ckanext-dcat">CKAN</a>).
-<!-- Finally, at the date this report was written, work is under way to release a new version of [[DCAT-AP]], aligned with [[VOCAB-DCAT-2]].-->
-</li>
+<li>[[DCAT-AP]] is a profile of [[VOCAB-DCAT]] used across Europe since 2014 as a metadata interchange format, primarily for catalogs of government data, and, to some extent, for scientific data. As such, it has a broad geographic coverage, and it is supported in data catalogs (e.g., the <a href="https://www.europeandataportal.eu/">European Data Portal</a>) and catalog platforms (e.g., <a href="https://github.com/ckan/ckanext-dcat">CKAN</a>).</li>
 <li>[[GeoDCAT-AP]] and [[StatDCAT-AP]] are domain-specific extension of [[DCAT-AP]] for geospatial and statistical data, respectively, and they share the same geographic coverage of [[VOCAB-DCAT]].</li>
 <li>[[CiteDCAT-AP]] and [[DCAT-AP-JRC]] are extensions of [[DCAT-AP]] specifically designed for multidisciplinary research data, and they are implemented in the <a href="https://data.jrc.ec.europa.eu/">corporate catalog of the European Commission's Joint Research Centre</a>. Moreover, [[CiteDCAT-AP]] is supported in <a href="https://zenodo.org/">Zenodo</a>, the research data catalog and repository most widely used in Europe.</li>
 </ul>
 
 <p>[[DCAT-AP]] has also been used as a basis for the development of country-specific extensions (see [[DCAT-AP-EXT]]). Such extensions have not been included in this report, but they provide additional support to the implementation evidence for the revisions proposed in [[VOCAB-DCAT-2]] already included in [[DCAT-AP]].</p>
 <p>Moreover, at the date this report was written, work is under way to release a new version of [[DCAT-AP]], aligned with [[VOCAB-DCAT-2]], which will eventually be reflected in the [[DCAT-AP]] extensions.</p>
-<!--
-<p>[[DCAT-AP]] is a profile of [[VOCAB-DCAT]] used across Europe since 2014 as a metadata interchange format, primarily for catalogs of government data, and, to some extent, for scientific data. As such, it has a broad geographic coverage, and led to the creation of country-specific extension (see [[DCAT-AP-EXT]] for a comprehensive overview). Moreover, [[DCAT-AP]] is complemented by domain- and community-specific extensions for geospatial [[GeoDCAT-AP]], statistical [[StatDCAT-AP]], and research data [[CiteDCAT-AP]], [[DCAT-AP-JRC]].</p>
 
-<p>The family of metadata profiles based on [[DCAT-AP]] extend [[VOCAB-DCAT]] with additional properties and classes, which have been the basis for some of the use cases included in [[DCAT-UCR]] and taken into account in [[VOCAB-DCAT-2]].</p>
-
-<p>At the date this report was written, work is under way to release a new version of [[DCAT-AP]], aligned with [[VOCAB-DCAT-2]].</p>
--->
       </section>
       <section id="data-catalogs">
         <h3>Data catalogs, data services, and datasets</h3>
         <p>The following table shows data catalogs, data services, and datasets providing implementation evidence of the revisions proposed in [[VOCAB-DCAT-2]].</p>
-<!--
-        <aside class="ednote">
-        <p>Explain selection criteria.</p>
-        </aside>
--->
+
           <table id="table-datasetportals" class="simple">
           <thead>
             <tr>
@@ -448,7 +214,7 @@ has two independent implementations.
             <tr>
               <td id="D05">D05</td>
               <td><a href="http://linkeddata.ge.imati.cnr.it/">LusTRE</a></td>
-              <td><a href="https://github.com/riccardoAlbertoni/LUSTRE-DCAT2/blob/master/LusTRE-DCAT2.ttl"><code>LusTRE-DCAT2.ttl<code></a></td>
+              <td><a href="https://github.com/riccardoAlbertoni/LUSTRE-DCAT2/blob/master/LusTRE-DCAT2.ttl"><code>LusTRE-DCAT2.ttl</code></a></td>
               <td>Data service, Dataset</td>
               <td>[[VOCAB-DCAT-2]]</td>
               <td>Environment</td>
@@ -483,14 +249,11 @@ has two independent implementations.
             </tr>
           </tbody>
         </table>
-<!--
-        <p>* This column indicates if a catalog platform is used to provide the data. The data catalog can be based on an existing solution like <a href="http://ckan.org/">CKAN</a> or can be a proprietary one.
-        </div>
--->
+
 <p>The criteria used to select the relevant data catalogs are the following ones:</p>
 
 <ol>
-<li>They implement [[VOCAB-DCAT-2]] or one of the vocabularies listed in <a href="#vocabularies"></a>.</p>
+<li>They implement [[VOCAB-DCAT-2]] or one of the vocabularies listed in <a href="#vocabularies"></a>.</li>
 <li>Preferably, they have a broad geographic and/or community coverage.</li>
 </ol>
 
@@ -499,45 +262,12 @@ has two independent implementations.
 
 <p>As already mentioned in <a href="#vocabularies"></a>, <a href="https://ckan.org/">CKAN</a>, a popular catalog platform on which also some of the data catalogs listed earlier are based, supports [[DCAT-AP]] via <a href="https://github.com/ckan/ckanext-dcat">a specific extension</a>, and therefore it has not been included here.</p>
 <p>Finally, among other reported implementations, it is worth mentioning the <a href="https://github.com/linkedpipes/dcat-ap-viewer/commit/0f23874cf3c98d779a25304bcc4d608bc26aba19">LinkedPipes DCAT-AP Viewer</a> and the <a href="https://github.com/linkedpipes/dcat-ap-forms/commits/feature/dcat2">LinkedPipes DCAT-AP Forms</a>, where support to [[VOCAB-DCAT-2]] is being implemented at the date this report was written.</p>
-<!--
-<p>Moreover, [[DCAT-AP]] is the metadata schema used by the <a href="https://www.europeandataportal.eu/">European Data Portal</a>, which, at the date this report was written, includes nearly 1,000,000 metadata records harvested across European data catalogs.</p>
 
-<p>[[DCAT-AP]] is a profile of [[VOCAB-DCAT]] used across Europe since 2014 as a metadata interchange format, primarily for catalogs of government data, and, to some extent, for scientific data. As such, it has a broad geographic coverage, and led to the creation of country-specific extension (see [[DCAT-AP-EXT]] for a comprehensive overview). Moreover, [[DCAT-AP]] is complemented by domain- and community-specific extensions for geospatial [[GeoDCAT-AP]], statistical [[StatDCAT-AP]], and research data [[CiteDCAT-AP]], [[DCAT-AP-JRC]].</p>
-
-<p>The family of metadata profiles based on [[DCAT-AP]] extend [[VOCAB-DCAT]] with additional properties and classes, which have been the basis for some of the use cases included in [[DCAT-UCR]] and taken into account in [[VOCAB-DCAT-2]].</p>
-
-<p>At the date this report was written, work is under way to release a new version of [[DCAT-AP]], aligned with [[VOCAB-DCAT-2]].</p>
--->
       </section>
-<!--
-      <section>
-        <h3>Documents and References</h3>
-
-<p class="ednote">
-Not sure we have documents, besides vocabularies, guidelines and implementation reports, that can be used to provide evidence for the implementation of the proposed revisions to [[VOCAB-DCAT]].
-</p>
-
-        <p>The following table shows organizations and implementers that contributed with [[VOCAB-DCAT-2]] evidence in the form Documents and References.</p>
-        <div class="table-container">
-          <table id="table-references" class="simple">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Organization</th>
-              <th>Evidence</th>
-              <th>Category</th>
-            </tr>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
-        </div>
-      </section>
--->
 
       <section id="guidelines">
-        <h3>Guidelines</h3>
-        <p>The following table the guidelines which have been reviewed to get complementary evidence of the actual implementation of the revisions proposed in [[VOCAB-DCAT-2]] in the data catalogs and DCAT-based vocabularies listed in the previous sections.</p>
+        <h3>Guidelines and reports</h3>
+        <p>The following table lists guidelines and reports that demonstrate actual implementations of the revisions proposed in [[VOCAB-DCAT-2]]. These examples are drawn from the data catalogs and DCAT-based vocabularies listed in the previous sections.</p>
 
           <table id="table-guidelines" class="simple">
           <thead>
@@ -582,10 +312,10 @@ Not sure we have documents, besides vocabularies, guidelines and implementation 
 <p>Based on the collected evidence, the large majority of the revisions proposed in [[VOCAB-DCAT-2]] have at least 1 implementation, considering both the existing and the planned ones.</p>
 <p>More precisely:</p>
 <ul>
-<li>42 revisions out of 81 have at least 2 existing implementations.</li>
-<li>23 revisions out of the remaining 39 have 1 existing implementation.</li>
-<li>8 revisions out of the remaining 16 have at least 2 planned implementations.</li>
-<li>The remaining 8 revisions have 1 planned implementation.</li>
+<li>46 revisions out of 81 have at least 2 existing implementations.</li>
+<li>22 revisions out of the remaining 35 have 1 existing implementation.</li>
+<li>6 revisions out of the remaining 13 have at least 2 planned implementations.</li>
+<li>The remaining 7 revisions have 1 planned implementation.</li>
 </ul>
 <p>The corresponding statistics are summarised in <a href="#fig-implementations-statistics"></a>.</p>
 
@@ -594,18 +324,18 @@ Not sure we have documents, besides vocabularies, guidelines and implementation 
 <figcaption>Implementation statistics</figcaption>
 </figure>
 
-<p>For the 65 revisions with existing implementations, the number of evidences ranges from 1 to 8, according to the distribution illustrated in <a href="#fig-existing-implementations-distribution"></a>. Considering that these evidences have been collected over a representative subset of vocabularies, data catalogs, data services, and datasets, we can state that these revisions have already a high level of adoption. In particular, these implementations reflect revisions and extensions to [[VOCAB-DCAT]] which have been documented in the use cases included in [[DCAT-UCR]].</p>
+<p>For the 68 revisions with existing implementations, the number of evidences ranges from 1 to 8, according to the distribution illustrated in <a href="#fig-existing-implementations-distribution"></a>. Considering that these evidence has been collected over a representative subset of vocabularies, data catalogs, data services, and datasets, we can state that these revisions have already a high level of adoption. In particular, these implementations reflect revisions and extensions to [[VOCAB-DCAT]] which have been documented in the use cases included in [[DCAT-UCR]].</p>
 
 <figure id="fig-existing-implementations-distribution">
 <img src="./img/fig-existing-implementations-distribution.svg"/>
 <figcaption>Distribution of existing implementations</figcaption>
 </figure>
 
-<p>The 16 revisions with no existing implementations are listed in the following table. They all have at least one planned implementation in [[DCAT-AP]], which, at the time this report was written, was in the process of being aligned with [[VOCAB-DCAT-2]] (see the relevant issues in the [[DCAT-AP]] <a href="https://github.com/SEMICeu/DCAT-AP/issues?utf8=%E2%9C%93&amp;q=is%3Aissue+label%3A%22dcat+2%22">GitHub repository</a>). As already explained in <a href="#vocabularies"></a>, [[DCAT-AP]] has been used as a basis for country- and domain-specific extensions, which in turn may therefore be aligned as well to [[VOCAB-DCAT-2]]. For these reasons, we can state that there is enough evidence that these revisions are implementable.</p>
+<p>The 13 revisions with no existing implementations are listed in the following table. They all have at least one planned implementation in [[DCAT-AP]], which, at the time this report was written, was in the process of being aligned with [[VOCAB-DCAT-2]] (see the relevant issues in the [[DCAT-AP]] <a href="https://github.com/SEMICeu/DCAT-AP/issues?utf8=%E2%9C%93&amp;q=is%3Aissue+label%3A%22dcat+2%22">GitHub repository</a>). As already explained in <a href="#vocabularies"></a>, [[DCAT-AP]] has been used as a basis for country- and domain-specific extensions, which in turn may therefore be aligned as well to [[VOCAB-DCAT-2]]. For these reasons, we can state that there is enough evidence that these revisions are implementable.</p>
 
 <div data-include="table-revisions-with-no-existing-implementations.html"></div>
 <!--
-<p>The 16 revisions with no existing implementations have a number of planned implementations that ranges from 1 to 7, according to the distribution illustrated in <a href="#fig-planned-implementations-distribution"></a>.</p>
+<p>The revisions listed in the previous table have a number of planned implementations that ranges from 1 to 7, according to the distribution illustrated in <a href="#fig-planned-implementations-distribution"></a>.</p>
 
 <figure id="fig-planned-implementations-distribution">
 <img src="./img/fig-planned-implementations-distribution.svg"/>
@@ -613,199 +343,13 @@ Not sure we have documents, besides vocabularies, guidelines and implementation 
 </figure>
 -->
 
-<!--
-<p>The proposed revisions having at least 2 implementations, counting both the existing and the planned implementations, are listed in the following table.</p>
+</section>
 
-<div data-include="table-revisions-group-3.html"></div>
-
-<aside class="ednote">
-<p>TBD: Verify if planned implementations are in this case acceptable as implementation evidence.</p>
-</aside>
-
-<p>The proposed revisions having 1 planned implementations, but no existing implementations, are listed in the following table.</p>
-
-<div data-include="table-revisions-group-4.html"></div>
-
-<aside class="ednote">
-<p>TBD: These group include revisions that are likely to be implemented in the new version of [[DCAT-AP]], and, in such a case, they may be implemented in 1 or more [[DCAT-AP]] extension. Verify if this case can be acceptable as implementation evidence.</p>
-</aside>
--->
-<!--
-<aside class="ednote">
-<p>TBD: summarise collected evidence, in particular wrt planned implementations.</p>
-</aside>
--->
-<!--
-        <p>One of our main concerns when we started to collect evidence for each one of the DWBP was to have implementations from well-known organizations as well as high profile datasets and data portals worldwide, like <a href="http://wiki.dbpedia.org/">DBpedia</a>, <a href="https://data.gov.uk/">Data.gov.uk</a>, <a href="https://data.gov/">Data.gov</a> and <a href="http://data.worldbank.org/"> World Bank</a>. Analyzing the tables presented in the previous section, we can say that we accomplished this goal. The DWBP evidence were collected from well-known organizations and projects including the ones mentioned before as well as BBC, Twitter, Europeana, Pacific Northwest National Laboratory and OpenStreetMaps. Considering the geographical coverage, we collected implementations from several countries, including Brazil, France, Ireland, New Zealand, Spain, UK, USA and Italy. It is also important to notice that evidence in the form of guidelines concerns several governmental organizations from Europe. Other important characteristic from the DWBP implementations is their broad domain coverage, e.g. they refer to different domains, like Government, Environment and Healthcare, as described in the graphic below.</p>
-
-        <div class="col-md-12">
-          <div class="panel panel-default">
-            <div class="panel-heading">Evidence count per domain</div>
-            <div class="panel-body"> <canvas id="graficoPieDom"></canvas> </div>
-          </div>
-        </div>
-
-        <p>As we can observe in the graphic below, there is a broad adoption of DWBP related to Metadata (<a href="#BP1">BP1</a> and <a href="#BP2">BP2</a>), Data Licenses (<a href="#BP4">BP4</a>), Data Identification (<a href="#BP9">BP9</a> and <a href="#BP10">BP10</a>), Data Formats (<a href="#BP12">BP12</a> and <a href="#BP14">BP14</a>), Vocabularies (<a href="#BP15">BP15</a> and <a href="#BP16">BP16</a>), Data Access (<a href="#BP23">BP23</a>, <a href="#BP24">BP24</a>, <a href="#BP25">BP25</a> and <a href="#BP26">BP26</a>) and Feedback (<a href="#BP29">BP29</a>). On the other hand, for others, such as Preserve identifiers (<a href="#BP27">BP27</a>), Assess dataset coverage (<a href="#BP28">BP28</a>), Provide real-time access (<a href="#BP20">BP20</a>) and Provide an explanation for data that is not available (<a href="#BP22">BP22</a>), collection of evidence was more difficult, especially related to datasets and data portals. This can be justified by comments received during the evidence gathering process and also available in the <a href="http://w3c.br/visualizar-evidencias/">DWBP evidence form</a>. Bill Roberts from the SWIRRL, for example, made the following comment about one of the Data Preservation best practices: "Too difficult to test in a meaningful way. In this system, no datasets have yet been taken offline, so the archiving process has not been developed." In the same way, he made a comment about the Best Practice Provide real-time access: "The system does not currently hold dataset collected in 'real time'. Generally the data is statistical in nature and goes through a slower collection and processing cycle."</p>
-
-        <div class="container">
-
-        <div class="col-md-12">
-          <div class="panel panel-default">
-            <div class="panel-heading">Evidence count per proposed revision</div>
-            <div class="panel-body"> <canvas id="graficoBarraBP"></canvas></div>
-          </div>
-        </div>
--->
-        <!--
-
-        <div class="col-md-12">
-          <div class="panel panel-default">
-            <div class="panel-heading">Number of evidences (Datasets and Data Portals) per Best Practices</div>
-            <div class="panel-body">
-              <canvas id="graficoBarraBPDatasetsPortal"></canvas>
-            </div>
-          </div>
-        </div> -->
-<!--
-
-
-      </div>
-
--->
-
-
-      <!--<div class="col-md-12">
-        <div class="panel panel-default">
-          <div class="panel-heading">Number of evidences (Documents and References) per Best Practices</div>
-          <div class="panel-body">
-            <canvas id="graficoBarraBPDocRef"></canvas>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-12">
-        <div class="panel panel-default">
-          <div class="panel-heading">Number of evidences per DWBP challenge</div>
-          <div class="panel-body">
-            <canvas id="graficoDoughnutDesafios"></canvas>
-          </div>
-        </div>
-      </div> -->
-
-
-
-
-        <!--<p>On the other hand, it was easier to collect evidence to show the broadly adoption of the DWBP related to Metadata, Vocabularies Reuse, Data Formats, License, Data Identifiers, APIs, Feedback, and Data Enrichment, has a lot of evidences showing that these Best Practices are broadly adopted.
-
-        In the following, we list some comments received during the DWBP implementation phase:
-        <ol>
-        <li> In the case of Metadata we received a comment explaining that "A DCAT profile is provided in order to document the metadata". </li>
-        <li> About  Data Formats, was said for instance that "Currency values etc are provided together with units." and "Data is available as RDF in a number of serialisation formats." </li>
-        <li> Considering the reuse of vocabularies, we received a comment saying that "A number of standard vocabularies are re-used, notably DCAT, RDF Data Cube, DCMI Terms." </li>
-        <li> In the case of Data Identifiers was mentioned that "The dataset contents are provided as Linked Data, with (reasonably) persistent identifiers for geographical areas, time intervals and other statistical dimension values." </li>
-        <li> Regarding License was said that "The license is provided in a machine readable form via the property and in human readable form "The license is provided in a machine readable form via the property and in human readable form." </li>
-        </ol> -->
-<!--
-	</p>
--->
-    </section>
-<!--
-    <section>
-      <h2>DCAT and data catalog platforms</h2>
-
-      <p>In this section we present some more evidence that shows the support to the proposed revisions to [[VOCAB-DCAT]]. Rather than specific datasets or data catalogs, we use the following data catalog solutions as evidence: <a href="http://ckan.org/">CKAN</a>, <a href="https://socrata.com/">Socrata</a>, <a href="http://www.nucivic.com/dkan/">DKAN</a>, <a href="http://www.junar.com">JUNAR</a>, <a href="http://opendata.arcgis.com/">ArcGIS Open Data</a> and <a href="https://www.opendatasoft.com/">OPENDATASOFT</a>. For each one of the proposed revisions to [[VOCAB-DCAT]], we show the list of data catalog solutions that implement it.</p>
-
-        <table id="table-bp-datacatalog" class="simple">
-          <thead>
-            <tr>
-              <th>BP</th>
-              <th>Data Catalogs</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
-
-        <p>As we may notice, there is no evidence for some of the proposed revisions.
--->
-<!--
-        This happens because these Best Practices do not concern the solution used for making the data available on the Web, e.g. the data catalog solution, as explained below.
-
-        <ul>
-          <li> BP10, BP16, BP22, BP28: these BP apply to the data itself rather than the data catalog solution used to publish the data. </li>
-          <li> BP33, B34, BP35: these BP apply to situations of data republication, i.e. it depends from the consumer rather than the data catalog solution used to publish the data. </li>
-          <li> BP31: this BP concerns processes that can be used to enhance, refine or otherwise improve raw or previously processed data, which are not part of the basic data catalog functions.
-        </ul>
-
-        <p> Concerning BP27 none of the data catalog solutions implement it. In general, when a dataset is not available then just a 404 error message is returned. </p>
-
-        <p>Some Best Practices related to metadata are partially implemented by the data catalog solutions. Note that almost all data catalog solutions are compatible with <a href="https://www.w3.org/TR/vocab-dcat/">DCAT</a>, which means that metadata covered by <a href="https://www.w3.org/TR/vocab-dcat/">DCAT</a> may be completely or partially available both in human-readable and machine-readable formats. In general, it means that just a human-readable or a machine-readable version of the metadata is available, as detailed in the following.
-
-        <ul>
-          <li>BP3 is partially implemented by CKAN and JUNAR because they do not offer an explicit way to present human-readable structural metadata. </li>
-          <li>BP4 and BP5 are partially implemented by ARCGIS OPEN DATA and OPENDATASOFT because it does not offer a way to represent machine-readable license metadata and machine-readable provenance metadata. </li>
-          <li>BP8 is partially implemented by SOCRATA because it does not offer a way to represent machine-readable version history metadata. </li>
-          <li>BP13 is partially implemented by OPENDATASOFT because it does not offer a way to represent machine-readable language metadata. </li>
-        </ul>
--->
-<!--
-<p class="ednote">
-The following analysis of data catalog platforms may be relevant also to the revised edition of DCAT, so we can cite it.
-</p>
-
-        <p>As a general analysis with regards to the <a href="https://www.w3.org/TR/dwbp/#challenges">Data on the Web Challenges</a>, we can say that Metadata, Data Licenses and Data Formats challenges are a main concern of the data catalog solutions. The Data Access challenge has also been recognized as an important one except when it concerns real-time data. The use of Data Access APIs is a consensus. The major data catalog solutions also deal with the Data Identification challenge, however just part of the problem has been solved. The Data Vocabularies challenge has also been considered as an important one since data catalog solutions reuse existing vocabularies, e.g. <a href="https://www.w3.org/TR/vocab-dcat/">DCAT</a>, when publishing metadata about the data catalogs. Other challenges like Data Provenance, Data Versioning and Feedback have been superficially dealt with in the data catalog solutions. In general, Data Quality, Data Preservation, Data Enrichment and Data Republications are challenges still not explored by the major data catalog solutions.</p>
-    </section>
--->
-<!--<section>
-      <h2 id="DWBP-Examples">DWBP Examples</h2>
-      <p>Besides the evidence described earlier, we also worked on examples to show how to use the DWBP in more specific scenarios and also to show that the DWBP are implementable.</p>
-
-      <p><strong> Example 01: Publishing and consuming budget data about Recife.</a> </strong></p>
-
-      <ul>
-      <li>Step 1.1 Publication of the first version of the dataset: this step corresponds to the publication of a dataset about budget data from the city of Recife from 2014 to 2015. The data to be published was collected from an existing data portal and it was published according to the DWBP. In order provide a locale neutral data representation, a new attribute (currency) was included as part of the structural metadata. An email was also sent to the original data publisher informing some problems with the dataset. Due to privacy reasons, data values from one of the columns were removed, but a proper explanation was given. After analyzing the data, some null values were replaced in order to enrich the data. During this step, the following DWBP were implemented: <a href="#BP1">BP1</a>, <a href="#BP1">BP2</a>, <a href="#BP1">BP3</a>, <a href="#BP4">BP4</a>, <a href="#BP5">BP5</a>, <a href="#BP6">BP6</a>, <a href="#BP7">BP7</a>, <a href="#BP9">BP9</a>, <a href="#BP12">BP12</a>, <a href="#BP13">BP13</a>, <a href="#BP14">BP14</a>, <a href="#BP17">BP17</a>, <a href="#BP22">BP22</a>, <a href="#BP29">BP29</a>, <a href="#BP31">BP31</a>, <a href="#BP32">BP32</a>, <a href="#BP33">BP33, <a href="#BP34">BP34</a> and <a href="#BP35">BP35</a>. The Budget Dataset is available <a href="http://cin.ufpe.br/~dwbp/dataset/orcamento-2016-11-01/"> here. </a></li>
-
-      <li>Step 1.2: Publication of a new version of the dataset: a new version of the Budget Dataset is published to include budget data from 2016. Besides, subsets of the dataset were created to facilitate data access. During this step, the following DWBP were implemented: <a href="#BP8">BP8</a>, <a href="#BP11">BP11</a> and <a href="#BP18">BP18</a>. The new version of the Budget Dataset is available <a href="http://cin.ufpe.br/~dwbp/dataset/orcamento-2016-11-08/"> here</a>.</li>
-
-      <li>Step 1.3 Creation of a RDF distribution: During this step, the following DWBP were implemented: <a href="#BP10">B10</a>, <a href="#BP15">BP15</a>, <a href="#BP16">BP16 </a> and <a href="#BP28">B28 </a>.</li>
-
-      <li>Step 1.4 Creation of an API: During this step, the following DWBP were implemented: <a href="#BP19">B19</a>, <a href="#BP23">BP23</a>, <a href="#BP24">BP24</a>, <a href="#BP25">BP25</a>, <a href="#BP26">BP26</a>.</li>
-
-      <li>Step 1.5 Publishing a new version of the dataset, temporally removing the first version of the dataset and showing feedback previously collected: a new version of the Budget Dataset is published after resolving some codifications problems and the version 1.0 of the dataset is temporally unavailable. It is also possible to see some feedback previously collected from data consumers. During this step, the following DWBP were implemented: <a href="#BP27">BP27</a> and <a href="#BP30">BP30</a>.The new version of the Budget Dataset is available <a href="http://cin.ufpe.br/~dwbp/dataset/orcamento-2016-11-15/"> here.</a></li>
-
-      <li>Step 1.6 Creation of an API to provide real time data about budget data from Recife: During this step, the following DWBP was implemented: <a href="#BP20">BP20</a></p></li>
-      </ul>
-
-      <p> to include: BP21</p>
-
-    </section> -->
-
-<section>
+<section id="acknowledgements">
   <h2>Acknowledgements</h2>
-<!--
-<p class="ednote">TBD</p>
--->
-<p>The editors gratefully acknowledge the contributions made to gathering evidence for [[VOCAB-DCAT-2]] by <a href="https://www.w3.org/2000/09/dbwg/details?group=99375&amp;public=1">all members of the working group</a>.</p>
+<p>The editors gratefully acknowledge the contributions made to gathering evidence for [[VOCAB-DCAT-2]] and reviewing this report by <a href="https://www.w3.org/2000/09/dbwg/details?group=99375&amp;public=1">all members of the working group</a>, especially Annette Greiner.</p>
 <p>The editors would also like to thank evidences received from Jakub Klímek.</p>
 </section>
 
-    <script>
-    // script calls
-//    createVocabulariesTable();
-//    createDatasetPortalsTable();
-//    createBpEvidenceTable();
-//    createReferencesTable();
-//    createGuidelinesTable();
-//    createBpDataCatalogueTable();
-    </script>
-<!--
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
-    <link rel="stylesheet" href="http://mistic100.github.io/jQCloud/dist/jqcloud2/dist/jqcloud.min.css">
-    <script src="http://mistic100.github.io/jQCloud/dist/jqcloud2/dist/jqcloud.js"></script>
-    <script type="text/javascript" src="graficos.js"></script>
--->
   </body>
 </html>
