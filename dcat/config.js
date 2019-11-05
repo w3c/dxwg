@@ -9,8 +9,8 @@ var respecConfig = {
     prevRecShortname: "vocab-dcat",
     canonicalURI: "TR",
     prevRecURI:           "https://www.w3.org/TR/2014/REC-vocab-dcat-20140116/",    
-    previousPublishDate:  "2019-05-28",
-    previousMaturity:     "WD",
+    previousPublishDate:  "2019-10-03",
+    previousMaturity:     "CR",
 //    previousURI:          "https://www.w3.org/TR/2019/WD-vocab-dcat-2-20190528/",
     edDraftURI:           "https://w3c.github.io/dxwg/dcat/",
 //    issueBase:            "https://github.com/w3c/dxwg/issues/", -- Not needed when github used
