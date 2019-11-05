@@ -2387,6 +2387,56 @@ Link:
 ---------------------------------------------------------------------------------------
         </pre>
       </section>
+    </section>
+    <section id="dcat-usage-example">
+      <h2>Describing DCAT Distributions support of Content Negotiation by Profile</h2>
+      <p>
+        A DCAT [[VOCAB-DCAT-2]] <code>dcat:Dataset</code> may be accessible via a <code>dcat:DataService</code>, and that service may support one or more functional profiles of this specification. In this case, support should be declared by the service's reference to relevant functional profiles using the predicate <code>dct:conformsTo</code>, as illustrated in <a href="#dcat-example">Code Listing 5</a>.
+      </p>
+      <p>
+        Note that DCAT 2 provides no canonical means to specify if a data service allows individual data items in the dataset it provides access to, to be accessed by identifier, so this example relates to the dataset distributed as a whole. The use of <code>dct:conformsTo</code> would nevertheless apply to data services which declare a mechanism to access individual items. This mechanism may be identified via the <code>dcat:endpointDescription</code>.
+      </p>
+      <div class="issue" data-number="1146"></div>
+      <pre id="dcat-example"
+           class="codelisting nohighlight" aria-busy="false" aria-live="polite"
+           title="Example of describing a dataset supporting Conneg-by-P in DCAT">
+<div class="codelisting-title">
+<a href="#dcat-example">CODE LISTING 5</a>: Describing a DCAT Data Service supporting Content Negotiation by Profile
+</div>
+@prefix ex: &lt;http://example.org#> .
+@prefix dcat: &lt;http://www.w3.org/ns/dcat#> .
+@prefix dct: &lt;http://purl.org/dc/terms/> .
+@prefix prof: &lt;http://www.w3.org/ns/dx/prof/> .
+
+# A Dataset has a Distribution
+:aDataset dcat:distribution :aDatasetDistribution .
+
+# A data profile that the Distribution conforms to
+ex:someDataProfile
+    a prof:Profile ;
+    # profile details
+.
+
+# A Distribution that can be accessed by a DataService that support Content
+# Negotiation by Profile. The Distribution's content conforms to the Profile above
+:aDatasetDistribution
+    a dcat:Distribution ;
+    dct:conformsTo ex:someDataProfile ;
+    dcat:accessService ex:connegDataAccessService .
+
+# The Service used to access the Dataset's Distribution. The Service itself conforms
+# to two functional profiles of Content Negotiation by Profile
+ex:connegDataAccessService
+    a dcat:DataService ;
+    dct:conformsTo
+        &lt;http://www.w3.org/ns/dx/conneg/profile/http> ,
+        &lt;http://www.w3.org/ns/dx/conneg/profile/qsa> ;
+
+    # Declare that the Dataset may be invoked by URI, its id, using Content
+    # Negotiation by Profile
+    dcat:endPointURL :aDataset .
+</pre>
+    </section>
   </section>
   <script class="remove" src="config.js"></script>
   <script class="remove" src="https://www.w3.org/Tools/respec/respec-w3c-common"></script>
