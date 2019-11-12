@@ -524,9 +524,7 @@ Preference-Applied: profile="urn:example:schema"
           mappable to a URI within one particular client/server message pair.
         </p>
         <p>
-          A <a>server</a> MUST NOT list <a>data profile</a>s that <a>resource</a> to which representations to if
-          it is unable to deliver those representations when presented with a <strong>get resource by profile</strong>
-          <a>request</a>.
+          A <a>server</a> MUST NOT list <a>data profile</a>s it is unable to deliver when presented with a <strong>get resource by profile</strong> <a>request</a> specifying that <a>data profile</a>.
         </p>
         <p>
           <a href="#eg-list-simple"></a> shows a request/response pair of messages conforming to the QSA Functional
@@ -668,7 +666,7 @@ HTTP/1.1 200 OK
 [response body]
         </pre>
         <pre id="eg-narrower-profile-response" class="example nohighlight" aria-busy="false" aria-live="polite"
-             title="Get resource by profile, narrower profile response (HTTP Headers Functional Profile)">
+             title="Get resource by profile responding with a conforming, narrower, profile (HTTP Headers Functional Profile)">
 # A request for Resource A whose representation conforms
 # to Profile X is made
 
@@ -684,7 +682,7 @@ Accept-Profile: &lt;http://example.org/profile/x>
 
 # The server responds with the list of profiles that it knows
 # the resource representations conforms to ensuring that the
-# requested profile, Profile X, is lists. Here Profile Y and
+# requested profile, Profile X, is listed. Here Profile Y and
 # a further profile irrelevant for the client, Profile Z, are
 # indicated.
 
@@ -698,15 +696,11 @@ Content-Profile: http://example.org/profile/x, \
 [content conforming to to Profile X, Y & Z]
         </pre>
         <p>
-          When a resource is returned that conforms to two or more profiles that are not within a profile hierarchy
-          (i.e. none of the multiple profiles the resource conforms to is a profiles of another), the server MUST
-          indicate all conforming profiles individually within the <code>Content-Profile</code> header as such:
+          When a resource is returned that conforms to two or more profiles that are not within the same profile hierarchy
+          (i.e. the resource conforms to a set of profiles, but some of these are independent, not being specialised profiles of others in the set), the server SHOULD indicate indicate conformance to each independent profile.
         </p>
         <p>
-          <code>Content-Profile: &lt;PROFILE_1>, &lt;PROFILE_2></code>
-        </p>
-        <p>
-          For example, a response from a server that conforms to both [[?GeoDCAT-AP]] and also [[?STATDCAT-AP]], given
+          For example, using the HTTP Functional Profile,  a response from a server that conforms to both [[?GeoDCAT-AP]] and also [[?STATDCAT-AP]], given
           that neither profiles the other and thus no single indication of conformance will suffice for both, (note they
           both do profile [[?DCAT-AP]], see the <a href="https://www.w3.org/TR/dx-prof/#eg-hierarchy">DCAT-AP Hierarchy
           example in [[?DX-PROF]]</a>), a response using profile URIs for [[?GeoDCAT-AP]] and [[?STATDCAT-AP]] could be:
