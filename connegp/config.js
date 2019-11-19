@@ -5,7 +5,7 @@ var respecConfig = {
     previousPublishDate: "2019-04-30",
     previousMaturity: "PWD",
     prevRecURI: "https://www.w3.org/TR/2019/WD-dx-prof-conneg-20190430/",
-    testSuiteURI: "https://github.com/w3c/conneg-prof-testing",
+    testSuiteURI: "https://github.com/w3c/prof-conneg-testing",
     implementationReportURI: "https://w3c.github.io/dxwg/connegp-implementation-report/",
     canonicalURI: "TR",
     editors: [{
