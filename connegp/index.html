@@ -550,7 +550,7 @@ Content-Profile: &lt;http://www.w3.org/ns/dx/conneg/profile/qsa>
 # &amp; XML Media Types.
 Link:
   &lt;http://example.org/resource/a?_profile=profile-x&amp;_mediatype=text/html>;
-          rel="self"; type="text/html";
+          rel="canonical"; type="text/html";
           profile="http://otherexample.org/profile/x",
   &lt;http://example.org/resource/a?_profile=profile-x&amp;_mediatype=text/xml>;
           rel="alternate";
@@ -897,7 +897,7 @@ Content-Profile: http://example.org/profile/x, \
 	  In either case, a server implementing
           content negotiation by profile SHOULD return an HTTP <code>Link</code> header containing information about the
           default representation of that resource and information about any alternate representations of that
-          resource conforming to other profiles. The returned representation will be identified by <code>rel="self"</code>, other representations by
+          resource conforming to other profiles. The returned representation will be identified by <code>rel="canonical"</code>, other representations by
           <code>rel="alternate"</code>.
         </p>
         <p>As an example, consider the resource <code>http://example.org/resource/a</code> available
@@ -924,7 +924,7 @@ Content-Type: text/turtle
 Content-Profile: &lt;urn:example:profile:x&gt;
 Link:
   &lt;http://example.org/resource/a&gt;;
-          rel="self";
+          rel="canonical";
           type="text/turtle";
           profile="urn:example:profile:x",
   &lt;http://example.org/resource/a&gt;;
@@ -968,7 +968,7 @@ Content-Location: http://example.org/resource/a.prof1.ttl
 Content-Profile: &lt;urn:example:profile:x>
 Link:
   <strong>&lt;http://example.org/resource/a.prof1.ttl&gt;;</strong>
-          rel="self";
+          rel="canonical";
           type="text/turtle";
           profile="urn:example:profile:x",
   &lt;http://example.org/resource/a&gt;;
@@ -1019,7 +1019,7 @@ URIs for resources conforming to profile urn:example:profile:x]
           </p>
           <ul>
             <li><em>link target</em> - <code>&lt;http://example.org/resource/a.prof1.ttl&gt;</code></li>
-            <li><em>relation type</em> - <code>rel="self"</code></li>
+            <li><em>relation type</em> - <code>rel="canonical"</code></li>
             <li><em>target attributes</em> - <code>type="text/turtle"</code> &amp; <code>profile="urn:example:profile:x"</code></li>
           </ul>
           <p>
@@ -1054,7 +1054,7 @@ URIs for resources conforming to profile urn:example:profile:x]
                 <td><code>altp:hasRepresentation</code></td><td>the implicit relation between the <em>link context</em> URI and the <em>link target</em> URI where a <em>relation type</em> of <code>alternate</code> is given</td>
               </tr>
               <tr>
-                <td><code>altp:hasDefaultRepresentation</code></td><td>the implicit relation between the <em>link context</em> URI and the <em>link target</em> URI where a <em>relation type</em> of <code>self</code> is given</td>
+                <td><code>altp:hasDefaultRepresentation</code></td><td>the implicit relation between the <em>link context</em> URI and the <em>link target</em> URI where a <em>relation type</em> of <code>canonical</code> is given</td>
               </tr>
             </table>
             <figcaption>
@@ -1073,7 +1073,7 @@ URIs for resources conforming to profile urn:example:profile:x]
 # (&lt;http://example.org/resource/a&gt;; &rarr; &lt;http://example.org/resource/different&gt;;)
 Link:
   &lt;http://example.org/resource/a&gt;;
-          rel="self";
+          rel="canonical";
           type="text/turtle";
           profile="urn:example:profile:x",
   &lt;http://example.org/resource/a&gt;;
@@ -1190,7 +1190,7 @@ Content-Profile: &lt;urn:example:profile:x&gt;
 Link:
   &lt;http://www.w3.org/ns/dx/prof/Profile&gt;; rel="type"; token="dnb"; anchor=&lt;urn:example:profile:marc21-dnb&gt;,
   &lt;http://www.w3.org/ns/dx/prof/Profile&gt;; rel="type"; token="loc"; anchor=&lt;http://example.org/profiles/marc21-loc&gt;,
-  &lt;http://example.org/resource/a.profdnb.ttl&gt;; rel="self"; type="text/turtle"; profile="urn:example:profile:marc21-dnb",
+  &lt;http://example.org/resource/a.profdnb.ttl&gt;; rel="canonical"; type="text/turtle"; profile="urn:example:profile:marc21-dnb",
   &lt;http://example.org/resource/a.profloc.ttl&gt;; rel="alternate"; type="text/turtle"; profile="http://example.org/profiles/marc21-loc",
   &lt;http://example.org/resource/a.profdnb.xml&gt;; rel="alternate"; type="application/xml"; profile="urn:example:profile:marc21-dnb",
   &lt;http://example.org/resource/a.profloc.xml&gt;; rel="alternate"; type="application/xml"; profile="http://example.org/profiles/marc21-loc",
@@ -1402,7 +1402,7 @@ Content-Type: application/json
 Content-Profile: &lt;http://www.w3.org/ns/dx/conneg/profile/qsa>
 Link:
   &lt;http://example.org/resource/a?_profile=profile-x&amp;_mediatype=application/json>;
-          rel="self"; type="application/json";
+          rel="canonical"; type="application/json";
           profile="http://otherexample.org/profile/x",
   &lt;http://example.org/resource/a?_profile=profile-x&amp;_mediatype=text/xml>;
           rel="alternate";
@@ -1456,7 +1456,7 @@ Link:
 # (&lt;http://example.org/resource/a&gt;; &rarr; &lt;http://example.org/resource/different&gt;;)
 Link:
   &lt;http://example.org/resource/a&gt;;
-          rel="self";
+          rel="canonical";
           type="text/turtle";
           profile="urn:example:profile:x",
   &lt;http://example.org/resource/a&gt;;
@@ -1668,11 +1668,11 @@ Accept-Profile: &lt;http://example.org/profile/x>
 HTTP/1.1 200 OK
 Link:
   &lt;http://example.org/resource/a?view=profile-x&format=text/html>;
-          rel="self";
+          rel="canonical";
           type="text/html";
           profile="http://otherexample.org/profile/x",
   &lt;http://example.org/resource/a?view=profile-x&format=text/turtle>;
-          rel="self";
+          rel="canonical";
           type="text/turtle";
           profile="http://otherexample.org/profile/x",
   &lt;http://example.org/resource/a?view=profile-y&amp;format=text/xml>;
@@ -1682,7 +1682,7 @@ Link:
 
 # Note that here the server does not directly indicate the profile served
 # (there is no Content-Profile header present) but this can be inferred
-# by the link header with rel="self"
+# by the link header with rel="canonical"
         </pre>
         <p>
           While the Link header in <a href="#eg-qsa-keydiscovery"></a> above communicates all the information that a <em>list profiles</em> request
@@ -1709,11 +1709,11 @@ Accept-Profile: &lt;http://example.org/profile/x>
 HTTP/1.1 200 OK
 Link:
   &lt;http://example.org/resource/a?view=profile-x&format=text/html>;
-          rel="self";
+          rel="canonical";
           type="text/html";
           profile="http://otherexample.org/profile/x",
   &lt;http://example.org/resource/a?view=profile-x&format=text/turtle>;
-          rel="self";
+          rel="canonical";
           type="text/turtle";
           profile="http://otherexample.org/profile/x",
   &lt;http://example.org/resource/a?view=profile-y&amp;format=text/xml>;
@@ -2349,7 +2349,7 @@ dct:MediaType
              title="Multiple format implementation of the previous example's content">
 # The content of the previous example expressed as in an HTTP Link header
 # as per the HTTP Application Profile of this Specification with the
-# default Representation indicated by the use of rel="self". Note the
+# default Representation indicated by the use of rel="canonical". Note the
 # Representations are seen, one per Link result comma-separated, identified
 # only by the combination of the Resource URI, the URI of the Standard to
 # which they conform and the rel attribute - they do not have individual
@@ -2362,7 +2362,7 @@ Link:
           rel="alternate";
           profile="http://otherexample.org/profile/y",
   &lt;http://example.org/resource/a>;
-          rel="self";
+          rel="canonical";
           profile="http://otherexample.org/profile/z"
 
 ---
