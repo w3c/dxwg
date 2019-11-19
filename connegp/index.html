@@ -62,7 +62,7 @@
     </p>
     <p>
       When selecting a content negotiation mechanism, an Internet client may use the HTTP protocol, but it may also use
-      other methods for providing instructions to a server. One potential mechanism is URI Query String
+      other methods for providing instructions to a server. One potential mechanism is URL Query String
       Arguments (<abbr title="Query String Arguments">QSAs</abbr>). QSAs are
       useful for humans and machines for situations where negotiation via HTTP is not practical, such
       as when manually entering requests into web browsers. This specification provides an abstract model
@@ -143,7 +143,7 @@
         <p>
           This Content Negotiation by Profile specification concerns negotiation for data profiles,
 		and specifies <a href="#functional-profiles-definition">functional profiles</a> for different ways of achieving this.
-		In this document, most occurrences of the term &qout;profile&quot; refer to &quot;data profile&quot;.
+		In this document, most occurrences of the term &quot;profile&quot; refer to &quot;data profile&quot;.
         </p>
       </dd>
       <dt><dfn data-lt="data profile">data profile</dfn></dt>
@@ -215,7 +215,7 @@
     </p>
     <p>
       This document describes an abstract, functions-based, specification for content negotiation by profile and gives both an
-      HTTP functional profile and two Query String Argument-based functional profiles for the specification's implementation in different environments. The query string
+      HTTP Headers functional profile and two Query String Argument-based functional profiles for the specification's implementation in different environments. The query string
 	   approaches provide both a "fall back" (a second, non-HTTP implementation of the abstract specification), as required by the
       <a href="https://www.w3.org/2017/dxwg/charter">Dataset Exchange Working Group's Charter</a> (Section 2.3) and also demonstrates functional profiles of the abstract specification that potential functional profile implementers may take as guidance for their implementations.
     </p>
@@ -700,7 +700,7 @@ Content-Profile: http://example.org/profile/x, \
           (i.e. the resource conforms to a set of profiles, but some of these are independent, not being specialised profiles of others in the set), the server SHOULD indicate indicate conformance to each independent profile.
         </p>
         <p>
-          For example, using the HTTP Functional Profile, a response from a server that conforms to both [[?GeoDCAT-AP]] and also [[?STATDCAT-AP]], given
+          For example, using the HTTP Headers Functional Profile,  a response from a server that conforms to both [[?GeoDCAT-AP]] and also [[?STATDCAT-AP]], given
           that neither profiles the other and thus no single indication of conformance will suffice for both, (note they
           both do profile [[?DCAT-AP]], see the <a href="https://www.w3.org/TR/dx-prof/#eg-hierarchy">DCAT-AP Hierarchy
           example</a> in [[?DX-PROF]]), a response using profile URIs for [[?GeoDCAT-AP]] and [[?STATDCAT-AP]] could be:
@@ -769,10 +769,11 @@ Content-Profile: http://example.org/profile/x, \
         Abstract Model fulfills conformance to this specification.
       </p>
       <p>
-        This specification provides functional profiles of the abstract model for two environments: HTTP and human browser (Query String
+        This specification provides functional profiles of the abstract model for two environments: HTTP Header and human browser (URL Query String
         Arguments). It also provides a functional profile that has the single function to respond with which profile(s)
         a server response conforms to, and which can be used in multiple environments.
       </p>
+      <div class="issue" data-number="1022"></div>
       <p>
         For the human browser environment, two functional profiles are presented to demonstrate different modes of use.
         Further functional profiles of this specification MAY be implemented either for other environments and or even for
@@ -819,7 +820,7 @@ Content-Profile: http://example.org/profile/x, \
             <td>QSA Functional Profile</td>
             <td>For conformance with the functional profile presented in <a href="#qsa"></a>.</td>
             <td>
-              To be used if a resource conforms to the QSA Functional Profile using the Query String Arguments <code>_profile</code> and <code>_mediatype</code> as per the recommendations
+              To be used if a resource conforms to the URL QSA functional profile using the Query String Arguments <code>_profile</code> and <code>_mediatype</code> as per the recommendations
               in <a href="#qsa"></a>.
             </td>
           </tr>
@@ -828,7 +829,7 @@ Content-Profile: http://example.org/profile/x, \
             <td>QSA Alternate Keywords Functional Profile</td>
             <td>For conformance with the functional profile presented in <a href="#qsa"></a>.</td>
             <td>
-              To be used if a resource conforms to the QSA Functional Profile but uses alternate keywords for the Query String Arguments <code>_profile</code> and
+              To be used if a resource conforms to the URL QSA functional profile but uses alternate keywords for the Query String Arguments <code>_profile</code> and
               <code>_mediatype</code>, as allowed by the recommendations in <a href="#qsa"></a>.
             </td>
           </tr>
@@ -997,7 +998,7 @@ URIs for resources conforming to profile urn:example:profile:x]
           <p>
             Functional profile implementations need to ensure that they, in addition to implementing the Abstract
             Model's functions, can deliver alternate representation information as per the Alternate Representations
-            Data Model. In this HTTP functional profile, the chosen mechanics for doing this are <code>Links</code>
+            Data Model. In this HTTP Headers functional profile, the chosen mechanics for doing this are <code>Links</code>
             headers (from [[RFC8288]]), as described below.
           </p>
           <p>
@@ -1024,7 +1025,7 @@ URIs for resources conforming to profile urn:example:profile:x]
             <li><em>target attributes</em> - <code>type="text/turtle"</code> &amp; <code>profile="urn:example:profile:x"</code></li>
           </ul>
           <p>
-            Using these <code>Link</code> HTTP header parts, this HTTP Functional Profile is able to communicate
+            Using these <code>Link</code> HTTP header parts, this HTTP Headers functional profile is able to communicate
             alternate data profiles for a resource as per the <a href="#altr">Alternate Profiles Data Model</a> and
             <a href="#fig-altr-link-header-mapping"></a> below maps the header parts to the
             <a href="#altr-owl">OWL ontology</a> representation of the Data Model which is a concrete
@@ -1124,7 +1125,7 @@ Link:
             If an HTTP <a>server</a> wishes to allow a <a>client</a> to identify a <a>profile</a> via a <a>token</a>,
             in addition to the mandatory identification of <a>profile</a>s via via URI, the <a>server</a>s SHOULD
             indicate for every supported token to which profile URI it corresponds.
-            When implementing the HTTP functional profile of this specification,
+            When implementing the HTTP Headers functional profile of this specification,
             a server MUST include a <code>Link</code> header ([[RFC8288]])
             for each <code>profile URI</code>/<code>token</code> pair in its response.
             Each <code>Link</code> header MUST use the <code>Link Target</code>
@@ -1244,7 +1245,7 @@ Content-Profile: &lt;urn:example:profile:x>
       <section id="qsa-description">
         <h4>QSA Functional Profile description</h4>
         <p>
-          While the HTTP functional profile's approach to profile negotiation enables fully automated content negotiation by
+          While the HTTP Headers functional profile's approach to profile negotiation enables fully automated content negotiation by
           profile, the motivating use cases for this specification included human actionable negotiation. Also, as related
           in <a href="#relatedwork"></a>, previous and existing systems already allow for human-actionable content
           negotiation by profile by a number of means.
@@ -1253,13 +1254,13 @@ Content-Profile: &lt;urn:example:profile:x>
           To both allow for human-actionable content negotiation by profile and also to show how mechanics similar to
           existing systems might fulfill all aspects of this specification's Abstract Model, this section shows a Query
           String Argument (QSA) functional profile of the Abstract Model. This functional profile is functionally equivalent to the
-          HTTP functional profile in that all required functions of the Abstract Model are supported however it is not mutually
+          HTTP Hedaers functional profile in that all required functions of the Abstract Model are supported however it is not mutually
           exclusive of the HTTP, or any other, functional profile: an implementation of this specification may
           be conformant to multiple functional profiles of it to implement content negotiation by profile functionality
           in multiple environments or in different ways within the same environment.
         </p>
         <p>
-          Unlike the HTTP functional profile which is also the subject of an independent IETF document [[PROF-IETF]],
+          Unlike the HTTP Headers functional profile which is also the subject of an independent IETF document [[PROF-IETF]],
           the QSA functional profile is fully specified here. Two forms of this QSA approach are presented: the first is the
           fixed keyword "QSA Functional Profile" and the second is the "QSA Alternate Keywords Functional Profile" according to which
           servers may implement any keywords they choose. These various functional profiles are
@@ -1366,7 +1367,7 @@ http://example.com/path/to/resource/a?<strong>_profile=prof-01&amp;_mediatype=te
         </p>
         <p>
           The server SHOULD represent the alternate profiles information in the HTTP header of the <a>response</a>, as
-          per the HTTP functional profile (using a Link header) and it MAY also represent the information in the response body
+          per the HTTP Headers functional profile (using a Link header) and it MAY also represent the information in the response body
           in place of the default profile representation of a resource. This body content allowance is to enable humans
           to read alternate profile-conformant representation options for a resource easily in a web browser without
           having to view lower-level HTTP information.
@@ -1435,7 +1436,7 @@ Link:
           <p>
             Implementations of this specification according to the QSA Functional Profiles MUST communicate their
             alternate representations information as per the Alternate Representations Data Model. They MAY do so using
-            HTTP <code>Link</code> headers, as per the HTTP Functional Profile, or they MAY use other approaches.
+            HTTP <code>Link</code> headers, as per the HTTP Headers functional profile, or they MAY use other approaches.
           </p>
           <p>
             As noted in [[RFC8288]] (<em>Web Linking</em>)'s introduction, HTML and some other data models have
@@ -1553,7 +1554,7 @@ Link:
           </p>
           <p>
             QSA servers wishing to make tokens for profile URIs available to clients SHOULD follow the instructions
-            provided for the HTTP Functional Profile in <a href="#http-tokens"></a>.
+            provided for the HTTP Headers functional profile in <a href="#http-tokens"></a>.
           </p>
         </section>
         <section id="qsa-resource-url">
@@ -1989,10 +1990,10 @@ using the Profiles Vocabulary.
 
 cnpr:http a prof:Profile ;
     prof:isProfileOf &lt;https://www.w3.org/TR/dx-prof-conneg/> ;
-    rdfs:label "HTTP Functional Profile" ;
+    rdfs:label "HTTP Headers Functional Profile" ;
     rdfs:comment "For conformance with the functional profile of Content Negotiation by
                   Profile presented in § 7.1 Hypertext Transfer Protocol Headers."@en ;
-    skos:scopeNote "To be used if a resource conforms to the HTTP Functional Profile"@en .
+    skos:scopeNote "To be used if a resource conforms to the HTTP Headers functional profile"@en .
 
 cnpr:qsa a prof:Profile ;
     prof:isProfileOf cnpr:qsa-alt ;
