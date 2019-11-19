@@ -1,12 +1,10 @@
 var respecConfig = {
-    specStatus: "ED",
-    shortName: "dx-prof-conneg",
-    edDraftURI: "https://w3c.github.io/dxwg/connegp/",
+    specStatus: "base",
+    shortName: "dx-prof-conneg-implementation-report",
+    edDraftURI: "https://w3c.github.io/dxwg/conneg-implementation-report",
     previousPublishDate: "2019-04-30",
     previousMaturity: "PWD",
-    prevRecURI: "https://www.w3.org/TR/2019/WD-dx-prof-conneg-20190430/",
-    testSuiteURI: "https://github.com/w3c/conneg-prof-testing",
-    implementationReportURI: "https://w3c.github.io/dxwg/connegp-implementation-report/",
+    testSuiteURI: "https://github.com/w3c/prof-conneg-testing",
     canonicalURI: "TR",
     editors: [{
         name:       "Lars G. Svensson",
@@ -18,7 +16,7 @@ var respecConfig = {
       {
         name:       "Rob Atkinson",
         company:    "Metalinkage, Open Geospatial Consortium",
-        companyURL: "http://www.opengeospatial.org",
+        companyURL: "http://www.opengeospatial.org/",
         orcid:      "0000-0002-7878-2693"
       },
       {
@@ -29,22 +27,9 @@ var respecConfig = {
         orcid:      "0000-0002-8742-7730",
         w3cid:      70131
     }],
-    otherLinks: [{
-    	key: "Contributors",
-	    data: [{
-            value: "Ruben Verborgh",
-            href:  "https://ruben.verborgh.org/"
-    	}]
-    }],
     wg: "Dataset Exchange Working Group",
     wgURI: "https://www.w3.org/2017/dxwg/",
-    wgPublicList: "public-dxwg-comments",
-    wgPatentURI: "https://www.w3.org/2004/01/pp-impl/99375/status",
-    inlineCSS: "true",
-    lint: "false",
-    maxTocLevel: 3,
-    issueBase: "https://github.com/w3c/dxwg/issues/",
-    github: "https://github.com/w3c/dxwg/",
+    processVersion: 2019,
     localBiblio: {
         "ARK" : {
            editors: [
