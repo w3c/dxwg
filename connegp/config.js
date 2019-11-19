@@ -1,5 +1,5 @@
 var respecConfig = {
-    specStatus: "WD",
+    specStatus: "ED",
     shortName: "dx-prof-conneg",
     edDraftURI: "https://w3c.github.io/dxwg/conneg-by-ap/",
     previousPublishDate: "2019-04-30",
@@ -56,17 +56,6 @@ var respecConfig = {
             date: "2008-05-22",
             status: "Internet-Draft"
         },
-        "PROF-CONNEG": {
-            editors: [
-                "Lars G. Svensson",
-                "Rob Atkinson",
-                "Nicholas J. Car"
-            ],
-            href: "https://www.w3.org/TR/2018/WD-dx-prof-conneg-20181218/",
-            title: "Content Negotiation by Profile",
-            date: " 2018-12-18",
-            status: "W3C First Public Working Draft"
-        },
         "PROF-GUIDANCE": {
             editors: [
                 "Rob Atkinson",
@@ -88,16 +77,6 @@ var respecConfig = {
             title: "Indicating and Negotiating Profiles in HTTP",
             date: " 2019-07-11",
             status: "IETF Internet Draft"
-        },
-        "PROF": {
-            editors: [
-                "Rob Atkinson",
-                "Nicholas J. Car"
-            ],
-            href: "https://www.w3.org/TR/2018/WD-dx-prof-20181218/",
-            title: "Profile Descriptions ontology",
-            date: "2018-12-18",
-            status: "W3C First Public Working Draft"
         }
     }
 };

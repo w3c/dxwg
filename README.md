@@ -14,7 +14,7 @@
 - [The Profiles Vocabulary (Editors' Draft)](https://w3c.github.io/dxwg/prof/)
   - [The Profiles Vocabulary Second Public Working Draft](https://www.w3.org/TR/2019/WD-dx-prof-20190402/)
   - [The Profiles Vocabulary First Public Working Draft](https://www.w3.org/TR/2018/WD-dx-prof-20181218/)
-- [Content Negotiation by Profile (Editors' Draft)](https://w3c.github.io/dxwg/conneg-by-ap/)
+- [Content Negotiation by Profile (Editors' Draft)](https://w3c.github.io/dxwg/connegp/)
   - [Content Negotiation by Profile Second Public Working Draft](https://www.w3.org/TR/2019/WD-dx-prof-conneg-20190430/)
   - [Content Negotiation by Profile First Public Working Draft](https://www.w3.org/TR/2018/WD-dx-prof-conneg-20181218/)
 
