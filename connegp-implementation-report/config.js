@@ -4,9 +4,7 @@ var respecConfig = {
     edDraftURI: "https://w3c.github.io/dxwg/conneg-implementation-report",
     previousPublishDate: "2019-04-30",
     previousMaturity: "PWD",
-    prevRecURI: "https://www.w3.org/TR/2019/WD-dx-prof-conneg-20190430/",
-    testSuiteURI: "https://github.com/w3c/conneg-prof-testing",
-    implementationReportURI: "https://github.com/w3c/conneg-prof-testing",
+    testSuiteURI: "https://github.com/w3c/prof-conneg-testing",
     canonicalURI: "TR",
     editors: [{
         name:       "Lars G. Svensson",
