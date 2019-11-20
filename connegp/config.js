@@ -11,8 +11,7 @@ var respecConfig = {
     editors: [{
         name:       "Lars G. Svensson",
         company:    "Invited Expert and before at Deutsche Nationalbibliothek",
-        companyURL: "http://www.dnb.de/",
-	    orcid:      "0000-0002-8714-9718",
+        orcid:      "0000-0002-8714-9718",
         w3cid:      44603
       },
       {
