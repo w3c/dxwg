@@ -22,9 +22,10 @@ var respecConfig = {
   },{
     name:       "Alejandra Gonzalez-Beltran",
     orcid:      "0000-0003-3499-8262",
-    company:    "Scientific Computing Department, Science and Technology Facilities Council, UK (Previously at the University of Oxford)",
+    company:    "Scientific Computing Department, Science and Technology Facilities Council, UK",
     url: "https://www.scd.stfc.ac.uk/Pages/Alejandra-Gonzalez-Beltran.aspx",
     companyURL: "https://stfc.ukri.org/",
+    note: "Previously at the University of Oxford",
     w3cid: 61587
   },{
     name:       "Andrea Perego",
