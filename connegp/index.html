@@ -69,7 +69,7 @@
       of content negotiation by profile and presents guidance on the use of two specific methods that conform to the abstract model, HTTP and QSA.
     </p>
     <p>
-       The HTTP and QSA methods are defined as <em>Functional Profiles</em> of the Abstract Model.
+       The HTTP Header and URL QSA methods are defined as <em>Functional Profiles</em> of the Abstract Model.
       While this specification only describes these two Functional Profiles, it is expected
       that implementers will want to implement Functional Profiles of the Abstract Model for other environments, including environments that may be realized in the future.
     </p>
@@ -78,8 +78,8 @@
       they define implements the Abstract Model's functions and can deliver alternate representation information as per the Alternate Representations Data Model.
     </p>
     <p>
-      While this specification only describes HTTP and QSA methods for content negotiation by profile, it is expected
-      that implementers will want to implement functionally equivalent methods for other environments, some of which may
+      While this specification only describes HTTP methods for content negotiation by profile via the HTTP Header and URL QSA Functional Profiles, it is expected
+      that implementers will want to implement functionally equivalent profiles for other environments, some of which may
       be not yet realized future environments.
     </p>
     <!--
@@ -697,7 +697,8 @@ Content-Profile: http://example.org/profile/x, \
         </pre>
         <p>
           When a resource is returned that conforms to two or more profiles that are not within the same profile hierarchy
-          (i.e. the resource conforms to a set of profiles, but some of these are independent, not being specialised profiles of others in the set), the server SHOULD indicate indicate conformance to each independent profile.
+          (i.e. the resource conforms to a set of profiles, but some of these are independent, not being specialised
+          profiles of others in the set), the server SHOULD indicate indicate conformance to each independent profile.
         </p>
         <p>
           For example, using the HTTP Headers Functional Profile,  a response from a server that conforms to both [[?GeoDCAT-AP]] and also [[?STATDCAT-AP]], given
@@ -744,16 +745,21 @@ Content-Profile: http://example.org/profile/x, \
       <h3>Order of Precedence for Implementation Profiles</h3>
       <p>
         A service MAY implement multiple <a>functional profile</a>s, including HTTP, QSA and possibly other approaches.
-        In such cases a client MAY specify conflicting choices via different mechanisms.
-        The order of precedence determines which mechanism MUST be used.
+        In such cases a client may specify conflicting choices via different mechanisms, for example the common case of
+        client sending default headers but asking for a specific representation.
+        The order of precedence defined here determines which mechanism MUST be used.
       </p>
       <p>
-        The order of precedence is QSA over HTTP
-        on the basis that the more precisely a URI points to a resource,
+        The order of precedence is QSA over HTTP.
+        This is on the basis that the more precisely a URI points to a resource,
         the more likely it is that the agent intends to request that precise resource
         irrespective of which HTTP headers are sent with that request.
       </p>
-      <p>If other functional profiles of the abstract model are defined each MUST specify order of precedence.</p>
+      <p>
+        If other potentially conflicting functional profiles of the abstract model are defined, then order of precedence
+        will need to be established. No specific mechanism is proposed for how this may be declared.
+      </p>
+      <div class="issue" data-number="505"></div>
     </section>
   </section>
   <section id="functional-profiles">
@@ -1793,16 +1799,10 @@ Link: &lt;http://www.w3.org/ns/dx/prof/Profile&gt;;
   <section id="implementations" class="informative">
     <h2>Implementations</h2>
     <p>
-      This section includes implementations of the functional profiles given in this document and their conformance
-      test results. The tools used for conformance testing are listed in the section above.
+      Implementations of the functional profiles given in this document and their conformance
+      test results are given in the <a href="https://w3c.github.io/dxwg/conneg-implementation-report">Content Negotiation by Profile Implementation Report</a>.
+      That report also contains a description of, and gives access to the code for, conformance testing tools.
     </p>
-    <ul>
-      <li>
-        <a href="https://github.com/CSIRO-enviro-informatics/prof-conneg-conf-test-results">
-          https://github.com/CSIRO-enviro-informatics/prof-conneg-conf-test-results
-        </a>
-      </li>
-    </ul>
   </section>
   <section id="acknowledgements" class="informative">
     <h2>Acknowledgements</h2>

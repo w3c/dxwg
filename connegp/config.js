@@ -6,13 +6,12 @@ var respecConfig = {
     previousMaturity: "PWD",
     prevRecURI: "https://www.w3.org/TR/2019/WD-dx-prof-conneg-20190430/",
     testSuiteURI: "https://github.com/w3c/prof-conneg-testing",
-    implementationReportURI: "https://github.com/w3c/prof-conneg-testing",
+    implementationReportURI: "https://w3c.github.io/dxwg/connegp-implementation-report/",
     canonicalURI: "TR",
     editors: [{
         name:       "Lars G. Svensson",
         company:    "Invited Expert and before at Deutsche Nationalbibliothek",
-        companyURL: "http://www.dnb.de/",
-	    orcid:      "0000-0002-8714-9718",
+        orcid:      "0000-0002-8714-9718",
         w3cid:      44603
       },
       {
