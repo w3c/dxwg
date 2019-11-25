@@ -312,7 +312,7 @@
     <p>
       OWL [[OWL2-OVERVIEW]] is an RDF-based ontology language that provides for the description of classes, properties,
       individuals, and data values which are stored as Semantic Web documents. PROF uses many OWL properties, classes
-      and structures and is easily recognizable as a specialized OWL ontology.
+      and structures and is easily recognized as a specialized OWL ontology.
     </p>
     <p>
       Regarding profiling, none of the various OWL (or the updated OWL2) specifications directly address profiling, as
@@ -323,25 +323,21 @@
       thus providing the basic facility for ontology modularization" (<a href="https://www.w3.org/TR/owl2-syntax/#Imports">&#167; 3.4 Imports</a>).
     </p>
     <p>
-      <code>owl:imports</code> is included in OWL to facilitate the closure of ontology semantics within systems used to
-      manipulate ontology data and is a technical convenience mechanism. It does not make any strong ontological claim
-      about the relationship of the two ontologies joined by it nor does it make any conceptual claim about the
-      importing ontology's specific use of the imported ontology, only that some use/reuse is implied. It is not possbile,
-      with <code>owl:imports</code>, or any other OWL ontology property, to know that data conforming to an ontology
-      also conforms to another ontology.
+      Within OWL, the definition of <code>owl:imports</code> is not associated with any axioms that permit reasoning with
+      it and it is mostly used by ontology editing software to
+      manipulate ontology data by importing it from remote (online) locations, as a technical convenience mechanism.
+      Since an ontology that imports another includes all the axioms of the imported ontology, data which conforms to an
+      ontology <em>x</em> will necessarily conform to any ontology that <em>x</em> imports too.
     </p>
     <p>
-      It <em>is</em> possible to know, on a per-class or property basis, that data elements conform to particular
-      ontologies through inspection of those elements. Ontologies that use OWL (and RDF [[RDF11-CONCEPTS]] &amp; RDF
-      Schema [[RDF-SCHEMA]]) declare classes and properties as being of a particular defined class by using
-      <code>rdf:type</code> &ndash; <code>:myNewClassInstance rdf:type ex:SomeExistingClass</code> &ndash; which claims
-      conformance to the indicated class or property. Newly declared classes and properties may also claim conformance
+      When using OWL (and RDF [[RDF11-CONCEPTS]] &amp; RDF Schema [[RDF-SCHEMA]]) it is
+      possible to know, on a per-class or property basis, that data elements conform to particular
+      ontologies through inspection of those elements. Data that uses OWL
+      declares classes and properties as being of types &ndash; particular classes or properties &ndash; by using
+      <code>rdf:type</code> &ndash; <code>:myNewClassInstance rdf:type ex:SomeExistingClass</code> &ndash; which claims the data
+      conforms to the indicated class or property. Newly declared classes and properties in ontologies may also claim conformance
        to existing classes or properties by using <code>rdfs:subClassOf</code> or <code>rdfs:subPropertyOf</code>
       respectively.
-    </p>
-    <p>
-      These data or ontology element conformances do not indicate conformance or whole profiles to other specifications
-      or profiles or of instance data to specifications or profiles.
     </p>
   </section>
   <section id="related-dcat">
@@ -902,10 +898,10 @@ CSIRO's publications catalogue."""@en ;
         <tbody>
           <tr><td class="prop">OWL type:</td><td><a href="https://www.w3.org/TR/owl2-rdf-based-semantics/#table-axiomatic-datatypes">owl:DatatypeProperty</a></td></tr>
           <tr><td class="prop">Label:</td><td>has token</td></tr>
-          <tr><td class="prop">Definition:</td><td>The preferred identifier for the Profile, in circumstances where its URI cannot be used.</td></tr>
+          <tr><td class="prop">Definition:</td><td>A preferred alternative identifier for a Profile.</td></tr>
           <tr><td class="prop">Domain:</td><td><a href="#Class:Profile">prof:Profile</a></td></tr>
           <tr><td class="prop">Range:</td><td><a href="https://www.w3.org/TR/xmlschema-2/#token">xsd:token</a></td></tr>
-          <tr><td class="prop">Usage note:</td><td>A simple lexical form of identifier that may be accepted in some circumstances, such as API arguments or in content negotiation, to reference this profile. This is a “preferred term”, since alternative identifiers may be declared and used by any implementation</td></tr>
+          <tr><td class="prop">Usage note:</td><td>A simple lexical form of identifier that may be accepted in some circumstances, such as API arguments or in content negotiation, to reference a profile. This is a “preferred term”, since alternative identifiers may be declared and used by any implementation</td></tr>
         </tbody>
       </table>
     </section>
