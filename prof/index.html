@@ -12,8 +12,8 @@
   <p>
     The Profiles Vocabulary is an RDF vocabulary created to allows the machine-readable description of profiles of
     specifications for information resources. It can be used to describe profile hierarchies wherein profiles of
-    specifications may themselves have profiles indicated. It can also link multiple resources that make up a profile
-    - guidelines, validation tools, schemas, term lists and so on - to it and allows for those resources have formats,
+    specifications may themselves have profiles indicated. It can also link multiple profile resources that make up a profile
+    - guidelines, validation tools, schemas, term lists and so on - to it and allows for those profile resources have formats,
     roles, and digital artifacts to be described.
   </p>
   <p style="text-align: center;">
@@ -38,7 +38,7 @@
     </p>
     <ul>
       <li><strong>[PROF] this document, an RDF vocabulary that describes profiles and related resources</strong></li>
-      <li>[PROF-CONNEG] specific guidance on how to negotiate for Internet resource content using profiles</li>
+      <li>[PROF-CONNEG] specific guidance on how to negotiate for Internet data resource content using profiles</li>
       <li>[[PROF-IETF]] - <em>Indicating and Negotiating Profiles in HTTP</em>: an <a href="http://www.ietf.org">IETF</a> <a href="http://www.ietf.org/standards/ids/">Internet-Draft</a> defining HTTP Headers for HTTP content negotiation by profile</li>
       <li>The DXWG also plans to provide [[PROF-GUIDANCE]] - Profile Guidance: general recommendations and guidance on profiling.</li>
     </ul>
@@ -56,14 +56,14 @@
   <p>
     Profiles aim to increase interoperability within a community of users by introducing constraints, extensions or
     combinations on the use of more general specifications. PROF is an RDF vocabulary created
-    to describe relations between <a>specifications</a> and profiles and the resources that define and implement
+    to describe relations between <a>specifications</a> and profiles and the profile resources that define and implement
     <a>profiles</a>. A <em>specification</em> is "A basis for comparison; a reference point against which other things
     can be evaluated." (see the definition below) and a A profile, such as a <a>profile</a> or perhaps an
     <em>application profile</em>, is defined as "A [data/application] specification that constrains, extends, combines,
     or provides guidance or explanation about the usage of other [data/application] specifications". Profile resources
     may be human-readable documents (PDFs, textual documents), vocabularies, schemas or ontologies (XSD, RDF),
     constraint language resources used by specific validation tools (SHACL, ShEx, Schematron), or any other files or
-    resources that support the profile. In this specification, each resource is defined as having a role that defines
+    profile resources that support the profile. In this specification, each profile resource is defined as having a role that defines
     its function within the profile.
 	</p>
   <p>
@@ -88,12 +88,12 @@
     perhaps PDF documents, machine-readable constraint language files, code lists etc. &ndash; this vocabulary also
     provides for the description of the parts that constitute a profile or a specification. It defines a
     <a href="#Class:ResourceDescriptor"><code>prof:ResourceDescriptor</code></a> class which is used to qualify the
-    relationship between a profile and its part resources. A <code>prof:Profile</code> may have any number of
+    relationship between a profile and its part profile resources. A <code>prof:Profile</code> may have any number of
     <a href="#Property:hasResource"><code>prof:hasResource</code></a> predicates indicating <code>prof:ResourceDescriptor</code>
-    instances which then indicates the location (a URI) of the actual resource artifact with a
+    instances which then indicates the location (a URI) of the actual profile resource artifact with a
     <a href="#Property:hasArtifact"><code>prof:hasArtifact</code></a> predicate and then may describes the artifact's
     format and any specifications it conforms to with <a href="#Property:format"><code>dct:format</code></a> &amp;
-    <a href="#Property:conformsTo"><code>dct:conformsTo</code></a> predicates respectively. The role that the resource
+    <a href="#Property:conformsTo"><code>dct:conformsTo</code></a> predicates respectively. The role that the profile resource
     plays with respect to the profile may be indicating using a <a href="#Class:ResourceRole"><code>prof:ResourceRole</code></a>
     class instance linked to it with the <a href="#Property:hasRole"><code>prof:hasRole</code></a> predicate.
   </p>
@@ -162,9 +162,9 @@
         This definition includes what are sometimes called "application profiles", "metadata application profiles", or "metadata profiles". In this document, "data profile" and these other variants are all referred to as just "profiles".
       </p>
     </dd>
-    <dt><dfn>resource</dfn></dt>
+    <dt><dfn>data resource</dfn></dt>
     <dd>
-      The entity that is identified by a URI. Familiar examples include an electronic document, an image, a source of information with a consistent purpose. [[RFC3986]]
+      An entity is identified by a URI. Familiar examples include an electronic document, an image, a source of information with a consistent purpose. [[RFC3986]]
     </dd>
     <dt><dfn>metadata</dfn></dt>
     <dd>Information that is supplied about a resource. [[RFC3986]]</dd>
@@ -239,7 +239,7 @@
           guidance documents in addition to formal constraints
         </li>
         <li>
-          equivalent constraints written in different constraint languages for different forms of resource, e.g. SHACL
+          equivalent constraints written in different constraint languages for different forms of profile resource, e.g. SHACL
           for RDF and Schematron [[SCHEMATRON]] for XML.
         </li>
       </ul>
@@ -267,10 +267,10 @@
       <ul>
         <li>
           if a client requests a profile which a server cannot deliver, a server may be able to instead deliver a more
-          generic version of the requested resource, using a profile link to the thing it profiles
+          generic version of the requested data resource, using a profile link to the thing it profiles
         </li>
         <li>
-          a client may be able to generate a request that already indicates acceptable fallback options for resources
+          a client may be able to generate a request that already indicates acceptable fallback options for data resources
           when the primary requested profile is unavailable
         </li>
       </ul>
@@ -438,7 +438,7 @@
       not make any strong axiomatic claim.
     </p>
     <p>
-      VoID does not address <em>dependence</em> or <em>conformance</em> of resource on or two other resources.
+      VoID does not address <em>dependence</em> or <em>conformance</em> of data resource on or to other data resources.
     </p>
   </section>
   <section id="related-voaf">
@@ -507,7 +507,7 @@
     <p>
       Constraint Languages are frequently used in profile definitions &ndash; see <a href="#examples"></a> &ndash;
       but they may not be all that is needed for a complete definition: frequently profiles also include guidance
-      documents, examples of use and other resources too.
+      documents, examples of use and other profile resources too.
     </p>
     <p>
       PROF does include the possibility of defining profile parts via instances of the <code>prof:ResourceDescriptor</code>
@@ -588,7 +588,7 @@ CSIRO's publications catalogue."""@en ;
   # this is a profile of Dublin Core Terms, referenced by its namespace
   prof:isProfileOf &lt;http://purl.org/dc/terms/&gt; ;
 
-  # this profile has a SHACL resource that constrains it's use of Dublin Core
+  # this profile has a SHACL profile resource that constrains it's use of Dublin Core
   prof:hasResource [
     a prof:ResourceDescriptor ;
 
@@ -598,15 +598,15 @@ CSIRO's publications catalogue."""@en ;
     # it conforms to SHACL, here refered to by its namespace URI as a Profile
     dct:conformsTo &lt;https://www.w3.org/TR/shacl/&gt; ;
 
-    # this resource plays the role of "Validation"
+    # this profile resource plays the role of "Validation"
     # described in this ontology's accompanying Roles vocabulary
     prof:hasRole role:Validation ;
 
-    # this resource's actual file
+    # this profile resource's actual file
     prof:hasArtifact &lt;http://example.org/profile/x/resource/validator.ttl&gt;
   ] ;
 
-  # other resources this profile contains
+  # other profile resources this profile contains
   prof:hasResource ... ;
 
   # a short code to refer to the Profile with when a URI can't be used
@@ -614,19 +614,19 @@ CSIRO's publications catalogue."""@en ;
 .
     </pre>
     <p>
-      The following example demonstrates how resources can indicate conformance to a profile. Note that in
+      The following example demonstrates how data resources can indicate conformance to a profile. Note that in
       <a href="#eg-initial-example"></a>, there is also an example of this pattern whereby the <code>ResourceDescriptor</code>
       is indicated as conforming to the [[SHACL]] specification, which is also understood to be a profile to which
       things  may conform.
     </p>
     <pre id="eg-conformance-to-profile"
          class="example nohighlight turtle" aria-busy="false" aria-live="polite"
-         title="An example demonstrating how resources can indicate conformance to profiles.">
+         title="An example demonstrating how data resources can indicate conformance to profiles.">
 # Profile X
 <strong>&lt;http://example.org/profile/x> a prof:Profile</strong> ;
       dct:title "Profile X" .
 
-# A resource indicating conformance to Profile X.
+# A data resource indicating conformance to Profile X.
 # In this example it's a DCAT Dataset's Distribution
 &lt;http://example.org/dataset/001>
       a dcat:Dataset ;
@@ -650,13 +650,13 @@ CSIRO's publications catalogue."""@en ;
       prof:isProfileOf &lt;http://example.org/specification/y>
       dct:title "Profile X" .
 
-# A resource indicating conformance to Profile X is given
+# A data resource indicating conformance to Profile X is given
 &lt;http://example.org/resource/a>
       dct:conformsTo &lt;http://example.org/profile/x> .
 
 # Due to the property chain axiom:
 # dct:conformsTo owl:propertyChainAxiom ( prof:isProfileOf dct:conformsTo )
-# the resource above can be inferred to conform to Specification Y
+# the data resource above can be inferred to conform to Specification Y
 &lt;http://example.org/resource/a>
       <strong>dct:conformsTo &lt;http://example.org/specification/y></strong> .  # this triple is inferred
     </pre>
@@ -783,7 +783,7 @@ CSIRO's publications catalogue."""@en ;
             <td class="prop">Usage note:</td>
             <td>
               <p>
-                This is a convenience predicate that may be used to declare all specifications (including profiles) that the subject profile requires an information resource to conform to. This avoids forcing clients to traverse a profile hierarchy to find all conformance implications and available resources. If present all such relationships should be present so a client can safely avoid hierarchy traversal.
+                This is a convenience predicate that may be used to declare all specifications (including profiles) that the subject profile requires an information resource to conform to. This avoids forcing clients to traverse a profile hierarchy to find all conformance implications and available profile resources. If present all such relationships should be present so a client can safely avoid hierarchy traversal.
               </p>
               <p>
                 The use of this prof:isTransitiveProfileOf as a super-property of prof:isProfileOf allows communities of practice to exploit transitive interpretations of hierarchical network of profiles as they see fit, while not interfering with the semantics of prof:isProfileOf, which cannot enforce such transitivity. Intuitively, one can interpret prof:isProfileOf statements as explicitly asserted direct profiling links, while prof:isTransitiveProfileOf is used to reflect more-general (and possibly indirect) ancestor relationships.
@@ -930,10 +930,10 @@ CSIRO's publications catalogue."""@en ;
         <tr><th>RDF Property:</th><th><a href="#Property:hasArtifact">prof:hasArtifact</a></th></tr>
         </thead>
         <tbody>
-        <tr><td class="prop">Label:</td><td>has artifact (resource)</td></tr>
+        <tr><td class="prop">Label:</td><td>has artifact</td></tr>
         <tr><td class="prop">Definition:</td><td>The URL of a downloadable file with particulars such as its format and role indicated by a Resource Descriptor</td></tr>
         <tr><td class="prop">Domain:</td><td><a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a></td></tr>
-        <tr><td class="prop">Usage Note:</td><td>A property to link from a Resource Descriptor to an actual resource (rdfs:Resource; an individual) that implements it</td></tr>
+        <tr><td class="prop">Usage Note:</td><td>A property to link from a Resource Descriptor to an actual information resource (rdfs:Resource; an individual) that implements it</td></tr>
         </tbody>
       </table>
     </section>
@@ -953,12 +953,12 @@ CSIRO's publications catalogue."""@en ;
             <td class="prop">Usage note:</td>
             <td>
               <p>
-                This property is to be used to show conformance of a resource to a specification (<code>dct:Standard</code>)
+                This property is to be used to show conformance of a data resource to a specification (<code>dct:Standard</code>)
                 or a profile (<code>prof:Profile</code>).
               </p>
               <p>
                 The property chain axiom declared for this property means that if the thing conformed to is a profile of
-                something else (indicated by <code>prof:isProfileOf</code>), then the conforming resource will be
+                something else (indicated by <code>prof:isProfileOf</code>), then the conforming data resource will be
                 inferred to be conformant to that other thing too.
               </p>
               <p>
@@ -996,7 +996,7 @@ CSIRO's publications catalogue."""@en ;
           <tr><td class="prop">Definition:</td><td>The function of the described artifact in the expression of the Profile, such as a specification, guidance documentation, SHACL file etc.</td></tr>
           <tr><td class="prop">Domain:</td><td><a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a></td></tr>
           <tr><td class="prop">Range:</td><td><a href="https://www.w3.org/TR/skos-reference/#Concept">skos:Concept</a></td></tr>
-          <tr><td class="prop">Usage note:</td><td>A set of common roles are defined by the Profiles Vocabulary. These are not exhaustive or disjoint, and may be extended for situations where finer-grained description of purpose is necessary. A resource may perform multiple roles</td></tr>
+          <tr><td class="prop">Usage note:</td><td>A set of common roles are defined by the Profiles Vocabulary. These are not exhaustive or disjoint, and may be extended for situations where finer-grained description of purpose is necessary. A profile resource may perform multiple roles</td></tr>
         </tbody>
       </table>
     </section>
@@ -1011,7 +1011,7 @@ CSIRO's publications catalogue."""@en ;
           <tr><td class="prop">Definition:</td><td>This property indicates a Resource Descriptor described by this Profile’s base specification that is to be considered a Resource Descriptor for this Profile also</td></tr>
           <tr><td class="prop">Domain:</td><td><a href="#Class:ResourceDescriptor">prof:ResourceDescriptor</a></td></tr>
           <tr><td class="prop">Range:</td><td><a href="#Class:Profile">prof:Profile</a></td></tr>
-          <tr><td class="prop">Usage note:</td><td>This property is created for the convenience of clients. When profile describers wish to allow clients to discover all resources relevant to a Profile without having to navigating an inheritance hierarchy of prof:profileOf relations, this predicate may be used to directly associate inherited Profile Descriptors with the Profile. If this property is present, it should be used consistently and all relevant resources a client may need to utilise the profile should be present and described using this predicate</td></tr>
+          <tr><td class="prop">Usage note:</td><td>This property is created for the convenience of clients. When profile describers wish to allow clients to discover all profile resources relevant to a Profile without having to navigating an inheritance hierarchy of prof:profileOf relations, this predicate may be used to directly associate inherited Profile Descriptors with the Profile. If this property is present, it should be used consistently and all relevant profile resources a client may need to utilise the profile should be present and described using this predicate</td></tr>
         </tbody>
       </table>
       <div class="issue" data-number="842"></div>
@@ -1248,12 +1248,12 @@ ex2:Profile_Y
     <p><em>This example showcases this vocabulary's description of parts of an existing, well-known, profile.</em></p>
     <p>
       DCAT-AP is the widely used European <em>Application Profile</em> of DCAT. DCAT-AP is described in document form
-      (PDF &amp; DOCX) and a constraints resource for instance validation is available, formulated using the W3C's Shapes
+      (PDF &amp; DOCX) and a constraints profile resource for instance validation is available, formulated using the W3C's Shapes
       Constraints Language constraints language [[SHACL]]. An image of the DCAT-AP model is also provided.
     </p>
     <p>
       The figure uses elements from this vocabulary to describe part of the DCAT-AP Profile graphically - PDF &amp; RDF
-      resources only - to simplify the example.
+      profile resources only - to simplify the example.
     </p>
     <figure id="fig-eg-dcat-ap">
       <a href="examples/dcat-ap.svg">
@@ -1261,7 +1261,7 @@ ex2:Profile_Y
       </a>
       <figcaption>
         Part of the DCAT-AP Profile described using this ontology. Here two two Resource Descriptors are shown relating
-        to the Profile indicating resources with "Guidance" and "Constraints" roles.
+        to the Profile indicating profile resources with "Guidance" and "Constraints" roles.
       </figcaption>
     </figure>
     <p>
@@ -1295,7 +1295,7 @@ ex2:Profile_Y
             <a href="#Role:constraints">role:Constraints</a>
           </li>
         </ul>
-        each with a <a href="#Property:hasArtifact">prof:hasArtifact</a> value of an implementing resource object in the
+        each with a <a href="#Property:hasArtifact">prof:hasArtifact</a> value of an implementing profile resource object in the
         European Commission's <a href="https://joinup.ec.europa.eu">'joinup' data catalogue</a>
         <ul>
           <li><a href="https://joinup.ec.europa.eu/rdf_entity/http_e_f_fdata_ceuropa_ceu_fw21_f17e18570_b1d77_b4171_b9df5_bb53cb4f017d4">bb53cb4f017d4</a></li>
@@ -1532,7 +1532,7 @@ _:3
     prof:hasRole      role:Constraints ;
     prof:hasArtifact  &lt;http://test.linked.data.gov.au/test/def/CSIRO-ePub-DCAP/constraints-dcap-syntax.txt&gt; .
 
-# this resource is a PDF file in the def about how to use the CSIRO-ePub-DCAP
+# this profile resource is a PDF file in the def about how to use the CSIRO-ePub-DCAP
 _:4
     a                 prof:ResourceDescriptor ;
     rdfs:label        "Guidance document" ;
@@ -1560,7 +1560,7 @@ _:4
       mandatory for profile conformance.
     </p>
     <p>
-      The GA Profile of ISO19115 is published online as a collection of resources with an index document with the persistent URI
+      The GA Profile of ISO19115 is published online as a collection of profile resources with an index document with the persistent URI
       <a href="http://pid.geoscience.gov.au/def/schema/ga/ISO19115-1-2014">http://pid.geoscience.gov.au/def/schema/ga/ISO19115-1-2014</a>.
     </p>
     <p>
@@ -1601,7 +1601,7 @@ _:4
     a prof:Profile ;
     prof:token "iso19115-ga" ;
     rdfs:label "ISO19115-1:2014 GA Profile";
-    rdfs:comment """Provides a means to declare, and discover implementation resources to check, implementations of geographic metadata schema conforming to GA's profile."""@en;
+    rdfs:comment """Provides a means to declare, and discover implementation profile resources to check, implementations of geographic metadata schema conforming to GA's profile."""@en;
     dct:publisher &lt;http://pid.geoscience.gov.au/org/ga/geoscienceaustralia&gt; ;
     prof:profileOf :ISO19115-1-2014 ;
     prof:hasResource :web , :spec , :schema , :constraints ;
@@ -1805,7 +1805,7 @@ _:4
       properties of the two vocabularies may be sensibly used beyond the mappings presented here. In particular the fact
       that both <code>prof:Profile</code> and <code>adms:Asset</code> are non-disjoint sub classes of
       <code>dcat:Resource</code>, albeit that the latter is such via being a sub class of <code>dcat:Dataset</code>
-      which subclasses <code>dcat:Resource</code>, means that resources could easily be dually typed as being of both
+      which subclasses <code>dcat:Resource</code>, means that data resources could easily be dually typed as being of both
       <code>prof:Profile</code> and <code>adms:Asset</code>.
     </p>
     <figure id="fig-align-adms">
@@ -1895,8 +1895,8 @@ _:4
     <h3>Vocabulary of a Friend</h3>
     <p>
       Vocabulary of a Friend (VOAF) is a vocabulary specification providing elements allowing the description of
-      vocabularies (RDFS vocabularies or OWL ontologies) [[VOAF]]. Due to VOAF being defined for use with RDF resources instances
-      only, PROF has an alignment with VOAF which is instance-specific: resources described by instances of PROF's
+      vocabularies (RDFS vocabularies or OWL ontologies) [[VOAF]]. Due to VOAF being defined for use with RDF data resources instances
+      only, PROF has an alignment with VOAF which is instance-specific: data resources described by instances of PROF's
       <code>prof:ResourceDescriptor</code> class with the property <code>prof:resourceRole</code> linking to the
       Resource Role <code>role:Vocabulary</code>, or a specialized version of it, may be a <code>voaf:Vocabulary</code>.
     </p>
@@ -1967,7 +1967,7 @@ _:4
   <h2>Security and Privacy</h2>
   <p>
     The PROF vocabulary, when used with likely extensions such as [[DCTERMS]], supports the attribution of data and
-    metadata to various participants such as resource <a href="http://purl.org/dc/terms/creator">creators</a>,
+    metadata to various participants such as data resource <a href="http://purl.org/dc/terms/creator">creators</a>,
     <a href="http://purl.org/dc/terms/publisher">publishers</a> and other parties or agents via <em>qualified
     relations</em> and, as such, may define terms that may be related to personal information.  In addition, it may also
     be used with extensions that support the association of <a href="http://purl.org/dc/terms/rights">rights</a> and
