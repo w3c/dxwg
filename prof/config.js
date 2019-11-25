@@ -3,8 +3,6 @@ var respecConfig = {
     shortName: "dx-prof",
     edDraftURI: "https://w3c.github.io/dxwg/prof/",
     canonicalURI: "TR",
-    implementationReportURI: "https://github.com/CSIRO-enviro-informatics/prof-implementations",
-    testSuiteURI: "https://github.com/CSIRO-enviro-informatics/prof-implementations",
     editors: [
       {
         name: "Rob Atkinson",
@@ -19,15 +17,6 @@ var respecConfig = {
         companyURL: "https://surroundaustralia.com",
         orcid:      "0000-0002-8742-7730",
         w3cid:      70131
-    }],
-    otherLinks: [{
-      key: "Contributors",
-      data: [
-        {
-          value: "Simon Cox",
-          href: "http://people.csiro.au/Simon-Cox"
-        }
-      ]
     }],
     wg: "Dataset Exchange Working Group",
     wgURI: "https://www.w3.org/2017/dxwg/",
@@ -47,19 +36,8 @@ var respecConfig = {
         SHEX: {
             href: "https://shexspec.github.io/spec/",
             title: "Shape Expressions Language 2.next",
-            date: "2018-09-06",
+            date: "2019-08-31",
             status: "W3C Community Group Draft Report"
-        },
-        "PROF-CONNEG": {
-            editors: [
-                "Lars G. Svensson",
-                "Rob Atkinson",
-                "Nicholas J. Car"
-            ],
-            href: "https://www.w3.org/TR/2018/WD-dx-prof-conneg-20181218/",
-            title: "Content Negotiation by Profile",
-            date: " 2018-12-18",
-            status: "W3C First Public Working Draft"
         },
         "PROF-GUIDANCE": {
             editors: [
@@ -68,7 +46,7 @@ var respecConfig = {
                 "Antoine Isaac",
                 "Nicholas J. Car"
             ],
-            href: "https://www.w3.org/TR/profile-guidance/",
+            href: "https://w3c.github.io/dxwg/profiles/",
             title: "Profile Guidance",
             date: " 2018-12-31",
             status: "W3C Editor's Draft"
@@ -76,22 +54,13 @@ var respecConfig = {
         "PROF-IETF": {
             authors: [
                 "L. Svensson",
-                "R. Verborgh"
+                "R. Verborgh",
+                "H. Van de Sompel"
             ],
-            href: "https://profilenegotiation.github.io/I-D-Accept--Schema/I-D-accept-schema",
-            title: "Negotiating Profiles in HTTP",
-            date: " 2017-10-24",
-            status: "IETF Internet Draft"
-        },
-        "PROF": {
-            editors: [
-                "Rob Atkinson",
-                "Nicholas J. Car"
-            ],
-            href: "https://www.w3.org/TR/2018/WD-dx-prof-20181218/",
-            title: "Profile Descriptions ontology",
-            date: "2018-12-18",
-            status: "W3C First Public Working Draft"
+            href: "https://profilenegotiation.github.io/I-D-Profile-Negotiation/I-D-Profile-Negotiation",
+            title: "Indicating and Negotiating Profiles in HTTP",
+            date: "2019-11-20",
+            status: "IETF Internet-Draft"
         },
         SCHEMATRON: {
             href: "https://www.iso.org/standard/55982.html",
