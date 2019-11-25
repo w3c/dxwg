@@ -2,6 +2,7 @@ var respecConfig = {
     specStatus: "ED",
     shortName: "dx-prof",
     edDraftURI: "https://w3c.github.io/dxwg/prof/",
+    prevRecURI: "https://www.w3.org/TR/2019/WD-dx-prof-20190402/",
     canonicalURI: "TR",
     editors: [
       {
@@ -39,7 +40,7 @@ var respecConfig = {
             date: "2019-08-31",
             status: "W3C Community Group Draft Report"
         },
-        "PROF-GUIDANCE": {
+        "DX-PROF-GUIDANCE": {
             editors: [
                 "Rob Atkinson",
                 "Karen Coyle",
@@ -51,7 +52,7 @@ var respecConfig = {
             date: " 2018-12-31",
             status: "W3C Editor's Draft"
         },
-        "PROF-IETF": {
+        "DX-PROF-IETF": {
             authors: [
                 "L. Svensson",
                 "R. Verborgh",
