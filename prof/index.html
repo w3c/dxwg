@@ -1031,20 +1031,24 @@ CSIRO's publications catalogue."""@en ;
 @prefix prof: &lt;http://www.w3.org/ns/dx/prof/&gt; .
 @prefix role: &lt;http://www.w3.org/ns/dx/prof/role/&gt; .
 
-
+# example standard
+# with a single resource indicated for this Standard
 ex1:Standard_X
     a dct:Standard ;
     dct:title "Standard X" ;
     prof:hasResource ex1:RD_1 .
 
+# Example ResourceDescriptor for Standard X
+#   * conforms to the ShEx Expression Language
+#   * in the JSON format
+#   * used to validate instance data claiming conformance to Standard X
+#   * the actual file described is ex1:constraints.json
 ex1:RD_1
     a prof:ResourceDescriptor ;
-    dct:conformsTo &lt;http://shex.io/shex-semantics/&gt; ;  # the ShEx Expression Language
-    dct:format &lt;https://w3id.org/mediatype/application/json&gt; ;  # JSON
-    prof:hasRole role:validation ;       # this ResourceDescriptor is to be used to
-                                         # validate instance data claiming conformance
-                                         # to Standard X
-    prof:hasArtifact ex1:constraints.json . # the actual file the ResourceDescritor describes
+    dct:conformsTo &lt;http://shex.io/shex-semantics-20191008/&gt; ;
+    dct:format &lt;https://w3id.org/mediatype/application/json&gt; ;
+    prof:hasRole role:validation ;
+    prof:hasArtifact ex1:constraints.json .
 
 # then, a profile of Standard X, perhaps Profile Y, may use
 # prof:isInheritedFrom to re-use that Resource Descriptor RD_1
@@ -1053,25 +1057,31 @@ ex2:Profile_Y
     a prof:Profile ;
     dct:title "Profile Y" ;
     prof:isProfileOf ex1:Standard_X ;  # this is a profile of Standard X
-    prof:hasResource [
-        a prof:ResourceDescriptor ;  # Resource Descriptor 2 in diagram
-        prof:isInheritedFrom ex1:Standard_X ;  # this Resource Descriptor is inherited from
-                                               # Standard X
-        dct:conformsTo &lt;http://www.w3.org/ns/shacl#&gt; ;  # as above
-        dct:format &lt;https://w3id.org/mediatype/text/turtle&gt; ;  # as above
-        prof:hasRole role:partConstraints ;  # this ResourceDescriptor is now only Part Constraints
-                                             # for Profile Y as it's implementing some of its own,
-                                             # additional constraints (see next Resource Descriptor)
-        prof:hasArtifact ex1:constraints.ttl  # direct URI reference to ex1:RD_1's artifact
+    prof:hasResource
+    [
+        # Resource Descriptor 2 in diagram
+        #   * inherited from Standard X
+        #   * conforms to SHACL
+        #   * in the Turtle format
+        #   * with an example role Part Constraints - not defined. A changed role from
+        #       the Resource Descriptor's role in relation to Profile_X
+        #   * the actual file described is ex1:constraints.json
+        a prof:ResourceDescriptor ;
+        prof:isInheritedFrom ex1:Standard_X ;
+        dct:conformsTo &lt;https://www.w3.org/TR/shacl/&gt; ;
+        dct:format &lt;https://w3id.org/mediatype/text/turtle&gt; ;
+        prof:hasRole ex:partConstraints ;
+        prof:hasArtifact ex1:constraints.ttl
     ] ,
     [
-        a prof:ResourceDescriptor ;  # Resource Descriptor 2 in diagram. This is not inherited from anywhere
+        # Resource Descriptor 3 in diagram. Not inherited from anywhere
+        #   * constraints are Profile Y's on top of Standard X's
+        #   * this is indicate with example Role Extension Constraints
+        a prof:ResourceDescriptor ;
         dct:conformsTo &lt;http://www.w3.org/ns/shacl#&gt; ;
         dct:format &lt;https://w3id.org/mediatype/text/turtle&gt; ;
-        # these constraints are Profile Y's on top of Standard X's
-        prof:hasRole role:extensionConstraints ;  # Extension Constraints are those on top of
-                                                  # another base specification's
-        prof:hasArtifact ex2:extension_constraints.ttl  # a file within this Profile
+        prof:hasRole ex:extensionConstraints ;
+        prof:hasArtifact ex2:extension_constraints.ttl
     ] .
       </pre>
     </section>
