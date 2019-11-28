@@ -1,4 +1,3 @@
-@prefix : <http://www.w3.org/ns/dx/prof/profile.ttl> .
 @prefix prof: <http://www.w3.org/ns/dx/prof/> .
 @prefix roles: <http://www.w3.org/ns/dx/prof/roles/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -8,12 +7,12 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 
-<http://www.w3.org/ns/dx/prof/>
+<https://www.w3.org/TR/dx-prof/>
 	a owl:Ontology , prof:Profile ;
 	prof:hasToken "prof" ;
 	rdfs:label "The Profiles Ontology" ;
 	prof:isProfileOf owl: , dct: ;
-    prof:hasResource _:1 , _:2 , _:3 , _:4 ;
+    prof:hasResource _:1 , _:2 , _:3 , _:4 , _:5 ;
 .
 
 _:1
@@ -29,9 +28,17 @@ _:2
     dct:conformsTo owl: ;
     dct:format <https://w3id.org/mediatypes/text/turtle> ;
     prof:hasRole roles:specification ;
-    prof:hasArtifact prof: .
+    prof:hasArtifact prof:prof.ttl .
 
 _:3
+    a prof:ResourceDescriptor ;
+    rdfs:label "Ontology specification document in RDF (XML)"@en ;
+    dct:conformsTo owl: ;
+    dct:format <https://w3id.org/mediatypes/application/rdf+xml> ;
+    prof:hasRole roles:specification ;
+    prof:hasArtifact prof:prof.rdf .
+
+_:4
     a prof:ResourceDescriptor ;
     rdfs:label "Constraints in SHACL"@en ;
     dct:conformsTo <http://www.w3.org/ns/shacl#> ;
@@ -39,7 +46,7 @@ _:3
     prof:hasRole roles:constraints ;
     prof:hasArtifact prof:constraints.ttl .
 
-_:4
+_:5
     a prof:ResourceDescriptor ;
     rdfs:label "Examples of the Profiles Ontology profile in use"@en ;
     dct:conformsTo <http://www.w3.org/ns/shacl#> ;
