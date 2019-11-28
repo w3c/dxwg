@@ -4,25 +4,46 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sdo: <https://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @base <http://www.w3.org/ns/dx/prof> .
 
 <http://www.w3.org/ns/dx/prof> rdf:type owl:Ontology ;
-                                          owl:versionIRI <http://www.w3.org/ns/dx/prof/1.0> ;
-                                          rdfs:label "Profiles Vocabulary" ;
-                                          dct:contributor <http://orcid.org/0000-0002-8742-7730> ;
-                                          dc:creator "Rob Atkinson" ;
-                                          rdfs:comment """This vocabulary is for describing relationships between standards/specifications, profiles of them and supporting artifacts such as validating resources.
+                                owl:versionIRI <http://www.w3.org/ns/dx/prof/1.0> ;
+                                rdfs:label "Profiles Vocabulary" ;
+                                dct:contributor <http://orcid.org/0000-0002-8742-7730> ;
+                                dct:creator [
+                                    sdo:name "Nicholas J. Car" ;
+                                    sdo:identifier <http://orcid.org/0000-0002-8742-7730> ;
+                                    sdo:email <nicholas.car@surroundaustralia.com> ;
+                                    sdo:affiliation [
+                                        sdo:name "SURROUND Australia Pty Ltd" ;
+                                        sdo:url <https://surroundaustralia.com> ;
+                                    ] ;
+                                ] ,
+                                [
+                                    sdo:name "Rob Atkinson" ;
+                                    sdo:identifier <http://orcid.org/0000-0002-7878-2693> ;
+                                    sdo:email <rob@metalinkage.com.au> ;
+                                    sdo:affiliation [
+                                        sdo:name "Open Geospatial Consortium" ;
+                                        sdo:url <https://www.opengeospatial.org/> ;
+                                    ] ,
+                                    [
+                                        sdo:name "Metalinkage" ;
+                                    ] ;
+                                ] ;
+                              rdfs:comment """This vocabulary is for describing relationships between standards/specifications, profiles of them and supporting artifacts such as validating resources.
 
 This model starts with [http://dublincore.org/2012/06/14/dcterms#Standard](dct:Standard) entities which can either be Base Specifications (a standard not profiling any other Standard) or Profiles (Standards which do profile others). Base Specifications or Profiles can have Resource Descriptors associated with them that defines implementing rules for the it. Resource Descriptors must indicate the role they play (to guide, to validate etc.) and the formalism they adhere to (dct:format) to allow for content negotiation. A vocabulary of Resource Roles are provided alongside this vocabulary but that list is extensible."""@en ;
-                                          owl:versionInfo "1.0" ;
-                                          dc:contributor "Nicholas Car" ,
-                                                         "Simon Cox" ,
-                                                         "Alejandra Gonzalez-Beltran";
-                                          dct:modified "2018-11-15"^^xsd:date ;
-                                          dct:contributor <http://orcid.org/0000-0002-3884-3420> ;
-                                          dct:created "2018-02-16"^^xsd:date .
+                              owl:versionInfo "1.0" ;
+                              dc:contributor "Antoine Isaac" ,
+                                             "Simon Cox" ,
+                                             "Alejandra Gonzalez-Beltran" ,
+                                             "Makx Dekkers" ;
+                              dct:modified "2019-10-25"^^xsd:date ;
+                              dct:created "2018-02-16"^^xsd:date .
 
 #################################################################
 #    Annotation properties
@@ -107,8 +128,8 @@ dct:format rdf:type owl:AnnotationProperty ;
 :hasToken rdf:type owl:DatatypeProperty ;
        rdfs:domain :Profile ;
        rdfs:range xsd:token ;
-       skos:definition "A preferred alternative identifier for the Profile"@en ;
-       skos:usageNote "A simple lexical form of identifier that may be accepted in some circumstances, such as API arguments or in content negotiation, to reference a profile. This is a “preferred term”, since alternative identifiers may be declared and used by any implementation"@en ;
+       skos:definition "The preferred identifier for the Profile, for use in circumstances where its URI cannot be used"@en ;
+       skos:usageNote "A simple lexical form of identifier that may be accepted in some circumstances, such as API arguments to reference this profile. This is the “preferred term”, since alternative identifiers may be declared and used by any implementation"@en ;
        rdfs:label "has token" .
 
 
