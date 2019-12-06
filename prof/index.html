@@ -10,11 +10,11 @@
 <section id="abstract">
   <h2>Abstract</h2>
   <p>
-    The Profiles Vocabulary is an RDF vocabulary created to allows the machine-readable description of profiles of
+    The Profiles Vocabulary is an RDF vocabulary created to allow the machine-readable description of profiles of
     specifications for information resources. It can be used to describe profile hierarchies wherein profiles of
     specifications may themselves have profiles indicated. It can also link multiple profile resources that make up a profile
-    - guidelines, validation tools, schemas, term lists and so on - to it and allows for those profile resources have formats,
-    roles, and digital artifacts to be described.
+    - guidelines, validation tools, schemas, term lists and so on - to it and allows for those profile resources to be
+    described with formats, roles, and digital artifacts.
   </p>
   <p style="text-align: center;">
     The namespace for PROF terms is <code>http://www.w3.org/ns/dx/prof/</code>.<br />
@@ -48,41 +48,40 @@
   <p>
     Profiles aim to increase interoperability within a community of users by introducing constraints, extensions or
     combinations on the use of more general specifications. PROF is an RDF vocabulary created
-    to describe relations between <a>specifications</a> and profiles and the profile resources that define and implement
-    <a>profiles</a>. A <em>specification</em> is "A basis for comparison; a reference point against which other things
-    can be evaluated." (see the definition below) and a A profile, such as a <a>profile</a> or perhaps an
+    to describe relations between <a>specifications</a> and <a>profiles</a> and the profile resources that define and implement
+    profiles. A <em>specification</em> is "A basis for comparison; a reference point against which other things
+    can be evaluated." (see the definition below) and a <em>profile</em>, perhaps an
     <em>application profile</em>, is defined as "A [data/application] specification that constrains, extends, combines,
     or provides guidance or explanation about the usage of other [data/application] specifications". Profile resources
     may be human-readable documents (PDFs, textual documents), vocabularies, schemas or ontologies (XSD, RDF),
     constraint language resources used by specific validation tools (SHACL, ShEx, Schematron), or any other files or
-    profile resources that support the profile. In this specification, each profile resource is defined as having a role that defines
-    its function within the profile.
+    profile resources that support the profile. In this specification, each profile resource is able to have roles
+    assigned to it that define its functions within the profile.
 	</p>
   <p>
     This vocabulary's ontological basis for specification/profile relations is a specialization of the
     <code><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-Standard">dct:Standard</a></code>
     class which is defined here as a <code><a href="#Class:Profile">prof:Profile</a></code>. A <code>prof:Profile</code>
-    is related to either <code>dct:Standard</code> or <code>prof:Profile</code> instances by being a <em>profile of</em>
+    instance is related to either <code>dct:Standard</code> or <code>prof:Profile</code> instances by being a <em>profile of</em>
     them, formally, <a href="#Property:isProfileOf"><code>prof:isProfileOf</code></a>. Resources that conform to either a
     <code>dct:Standard</code> or a <code>prof:Profile</code> are formally described as doing so with the use of the
     <code><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#terms-conformsTo">dct:conformsTo</a></code>
     predicate.
 	</p>
   <p>
-    Data that conforms to a profile, in PROF, must conform to anything the profile is a profile of. Formally, this vocabulary
+    Data that conforms to a profile, in PROF, must conform to anything the profile is a profile of. To represent this formally, this vocabulary
     includes the property chain axiom <code>dct:conformsTo owl:propertyChainAxiom ( prof:isProfileOf dct:conformsTo )</code>.
     Individual communities may define what conformance to their profiles and the things they profile means and how to
     test for conformance if indeed they wish to.
   </p>
-  <div class="issue" data-number="1078"></div>
   <p>
     In recognition of the existence of specifications and profiles that are made up of multiple resources &ndash;
     perhaps PDF documents, machine-readable constraint language files, code lists etc. &ndash; this vocabulary also
     provides for the description of the parts that constitute a profile or a specification. It defines a
     <a href="#Class:ResourceDescriptor"><code>prof:ResourceDescriptor</code></a> class which is used to qualify the
-    relationship between a profile and its part profile resources. A <code>prof:Profile</code> may have any number of
+    relationship between a profile and profile resources. A <code>prof:Profile</code> may have any number of
     <a href="#Property:hasResource"><code>prof:hasResource</code></a> predicates indicating <code>prof:ResourceDescriptor</code>
-    instances which then indicates the location (a URI) of the actual profile resource artifact with a
+    instances which then indicate the location (a URI) of the actual profile resource artifact with a
     <a href="#Property:hasArtifact"><code>prof:hasArtifact</code></a> predicate and then may describes the artifact's
     format and any specifications it conforms to with <a href="#Property:format"><code>dct:format</code></a> &amp;
     <a href="#Property:conformsTo"><code>dct:conformsTo</code></a> predicates respectively. The role that the profile resource
@@ -92,7 +91,7 @@
   <p>
     A vocabulary of <code>prof:ResourceRole</code> instances is provided in <a href="#resource-roles-vocab"></a> but
     communities are encouraged to create additional <code>prof:ResourceRole</code> instances with definitions suited to
-    their purposes.
+    their purposes and, in the best case, to publish those additional instances for others to reuse.
   </p>
 </section>
 <section id="conformance">
@@ -105,19 +104,11 @@
     <li><a href="#specification"></a> &amp;</li>
     <li><a href="#testsuite"></a>.</li>
   </ul>
-  <section id="notationalconventions">
-    <h3>Notational Conventions</h3>
-    <p>
-      The keywords <dfn>may</dfn>, <dfn>must</dfn>, <dfn>must not</dfn>, <dfn>optional</dfn>, <dfn>shall</dfn>,
-      <dfn>shall not</dfn>, <dfn>should</dfn>, <dfn>should not</dfn>, <dfn>recommended</dfn>, <dfn>required</dfn>,
-      in this document are to be interpreted as described in [[RFC2119]].
-    </p>
-  </section>
   <section id="diagramconventions">
     <h3>Diagram Conventions</h3>
     <p>
       All diagrams in this specification, apart from <a href="#fig-skos-4.5.2"></a>, use elements defined in this key.
-      The tokens in the key are defined in <a href="#namespaces"></a>.
+      The namespace prefixes in the key are defined in <a href="#namespaces"></a>.
     </p>
     <figure id="fig-element-key">
       <a href="figures/element-key.svg">
@@ -169,12 +160,12 @@
 <section id="namespaces">
   <h2>Namespaces</h2>
   <p>
-    The namespace for PROF is <strong><code><a href="http://www.w3.org/ns/dx/prof/">http://www.w3.org/ns/dx/prof/</a></code></strong>.
-    However, it should be noted that PROF makes use of terms from other vocabularies, in particular Dublin Core [[!DCTERMS]].
-    PROF itself only defines a minimal set of classes and properties of its own.
+    The namespace for PROF is <strong><code><a href="http://www.w3.org/ns/dx/prof/">http://www.w3.org/ns/dx/prof/</a></code></strong>,
+    however, PROF makes use of terms from other vocabularies, in particular Dublin Core [[!DCTERMS]].
+    PROF itself only defines a small set of classes and properties of its own.
   </p>
   <p>
-    PROF also makes use of derivative namespaces of it's namespace for auxiliary vocabulary elements, such as instances
+    PROF also makes use of derivative namespaces of its own namespace for auxiliary vocabulary elements, such as instances
     of the <code>prof:ResourceRole</code> which are within the <code>http://www.w3.org/ns/dx/prof/role/</code> namespace.
   </p>
   <p>
@@ -203,12 +194,11 @@
 <section id="motivation" class="informative">
   <h2>Motivation</h2>
   <p>
-    Until this vocabulary's creation, there was no formal W3C method for describing the objects (Internet resources)
-    used for <a>profiles</a>.
+    Until this vocabulary's creation, there was no formal W3C method for describing <a>profile</a> objects (Internet resources).
   </p>
   <p>
-    There are a multitude of ways to describe the components needed to define a profile and support validation of data
-    to profiles, such as:
+    There are a multitude of possible ways to describe the components needed to define a profile and support validation of data
+    claiming conformance to profiles, such as:
   </p>
   <ul>
     <li>human-readable documents stating requirements (e.g. [[PDF]]) </li>
@@ -219,8 +209,8 @@
     </li>
   </ul>
   <p>
-    Describing the components within a profile via documents or constraint languages does not indicate many things
-    either important or interesting to know about a profile such as:
+    Describing the components within a profile with documents or constraint languages only does not indicate many things
+    that may be important or interesting to know about a profile such as:
   </p>
   <ul>
     <li>its dependence on standards or other profiles</li>
@@ -234,12 +224,16 @@
           equivalent constraints written in different constraint languages for different forms of profile resource, e.g. SHACL
           for RDF and Schematron [[SCHEMATRON]] for XML.
         </li>
+        <li>
+          supporting vocabularies of terms (code lists)
+        </li>
       </ul>
     </li>
   </ul>
   <p>
-    With a mechanism to relate profiles to specifications and other profiles, profile hierarchies can be established
-    which will:
+    Regarding profile/specification relations, a mechanism to relate profiles to specifications and other profiles,
+    would allow both immediate knowledge of what things a profile profiles and also allow profile hierarchies to be established
+    which could:
   </p>
   <ul>
     <li>
