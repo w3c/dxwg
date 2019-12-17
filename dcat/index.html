@@ -12,7 +12,12 @@
 <body>
 
 <!-- Disclaimer -->
-
+<aside class="note">
+    <p>DCAT 2 supersedes DCAT [[?VOCAB-DCAT-20140116]], but it does not make it obsolete. DCAT 2 maintains the DCAT namespace as its terms preserve backward compatibility with DCAT [[?VOCAB-DCAT-20140116]]. DCAT 2 relaxes constraints and adds new classes and properties, but these changes do not break the definition of previous terms.</p>
+    
+    <p>Any new implementation is expected to adopt DCAT 2, while the existing implementations do not need to upgrade to it, unless they want to use the new features. In particular, current DCAT deployments that do not overlap with the DCAT 2 new features (e.g., data services, time and space properties qualified relations, packaging) don't need to change anything to remain in conformance with DCAT 2.
+    </p>
+    </aside>
 <section  id="abstract">
     <p>DCAT is an RDF vocabulary designed to facilitate interoperability between data catalogs published on the Web.
       This document defines the schema and provides examples for its use.</p>
@@ -47,7 +52,7 @@
         This new version of the vocabulary updates and expands the original but preserves backward compatibility. A full list of the significant changes (with links to the relevent github issues) is described in <a href="#changes"></a>.
     </p>
     <p>
-        The exit criteria for CR will focus on v2 new features that replicate features that were included in application profiles of v1 as a way of remedying missing and necessary elements.  The exit criteria also include recent commitments by organisations such as EC Joinup to adopt the DCAT v2 model in their work - see  https://joinup.ec.europa.eu/solution/abr-specification-registry-registries/document/specification-registry-registries-version-meeting-september. 
+        The exit criteria for CR focussed on v2 new features that replicate features that were included in application profiles of v1 as a way of remedying missing and necessary elements.  The exit criteria also included recent commitments by organisations such as EC Joinup to adopt the DCAT v2 model in their work - see  https://joinup.ec.europa.eu/solution/abr-specification-registry-registries/document/specification-registry-registries-version-meeting-september. 
         Implementation will be evidenced by showing use of the new properties/classes (or terms with equivalent meaning) in implementations of catalogs.
     </p>
     <p>
@@ -56,10 +61,6 @@
     <h3 id="dcat_history">DCAT history</h3>
     <p>The original DCAT vocabulary was developed and <a href="http://vocab.deri.ie/dcat">hosted</a> at the Digital Enterprise Research Institute (DERI), then refined by the <a href="http://www.w3.org/egov/">eGov Interest Group</a>, and finally standardized in 2014 [[?VOCAB-DCAT-20140116]] by the <a href="http://www.w3.org/2011/gld/">Government Linked Data (GLD)</a> Working Group.</p>
     <p>This revised version of DCAT was developed by the <a href="https://www.w3.org/2017/dxwg/">Dataset Exchange Working Group</a> in response to a new se t of Use Cases and Requirements [[?DCAT-UCR]] gathered from peoples' experience with the DCAT vocabulary from the time of the original version, and new applications that were not considered in the first version. A summary of the changes from [[?VOCAB-DCAT-20140116]] is provided in <a href="#changes"></a>. </p>
-    <aside class="note">
-    <p>DCAT 2 maintains the DCAT namespace as it preserves backward compatibility with DCAT [[?VOCAB-DCAT-20140116]]. DCAT 2 relaxes constraints and adds new classes and properties, but these changes do not break existing DCAT implementations.
-    </p>
-    </aside>
 
     <h3 id="external_terms">External terms</h3>
     <p>DCAT incorporates terms from pre-existing vocabularies where stable terms with appropriate meanings could be found, such as <a href="http://xmlns.com/foaf/0.1/homepage"><code>foaf:homepage</code></a> and <a href="http://purl.org/dc/terms/title"><code>dct:title</code></a>.
@@ -68,8 +69,7 @@
       Note that conformance to DCAT (<a href="#conformance"></a>) concerns usage of only the terms in the DCAT vocabulary specification, so possible changes to other external definitions will not affect the conformance of DCAT implementations.</p>
 
     <h3 id="please_send_comments">Please send comments</h3>
-    The Working Group invites publishers to describe their catalogs and datasets with the revised version of DCAT described in this document and to report their implementations following <a href="https://github.com/w3c/dxwg/wiki/DCAT-implementation-evidence">the instruction  to reporting DCAT revised implementations</a>. The information gathered through this means will be augmented by further analysis of implementation available on the Web. The Working Group expects to adduce the combined set of evidence when requesting that the Director advance this document to Proposed Recommendation.
-
+    The Working Group invited publishers to describe their catalogs and datasets with the revised version of DCAT described in this document and to report their implementations following <a href="https://github.com/w3c/dxwg/wiki/DCAT-implementation-evidence">the instruction  to reporting DCAT revised implementations</a>. This information and subsequent analysis is published in the <a href="https://w3c.github.io/dxwg/dcat-implementation-report/">implementation report.</a>
 
 </section>
 
@@ -676,7 +676,7 @@
         </p-->
 
         <p>The (revised) DCAT vocabulary is <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/rdf/">available in RDF</a>.
-            The primary artefact <a href="https://w3c.github.io/dxwg/dcat/rdf/dcat.ttl"><code>dcat.ttl</code></a> is a serialization of the core DCAT vocabulary.
+            The primary artefact <a href="https://w3c.github.io/dxwg/dcat/rdf/dcat2.ttl"><code>dcat2.ttl</code></a> is a serialization of the core DCAT vocabulary.
             Alongside it are a set of other RDF files that provide additional information, including:</p>
         <ol>
             <li>
@@ -865,10 +865,6 @@
               </p>
             </aside>
 
-            <p class="note" title="Feature at risk">
-              This new DCAT feature is <b>at risk</b>, pending futher evidence of implementation.
-            </p>
-
             <table class="definition">
                 <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#service">dcat:service</a></th></tr></thead>
                 <tbody>
@@ -888,10 +884,6 @@
                 New property added in this revision of DCAT.
               </p>
             </aside>
-
-            <p class="note" title="Feature at risk">
-              This new DCAT feature is <b>at risk</b>, pending futher evidence of implementation.
-            </p>
 
             <table class="definition">
                 <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#catalog">dcat:catalog</a></th></tr></thead>
@@ -1285,10 +1277,6 @@
               </p>
             </aside>
 
-            <p class="note" title="Feature at risk">
-              This new DCAT feature is <b>at risk</b>, pending futher evidence of implementation.
-            </p>
-
             <table class="definition">
               <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#qualifiedRelation">dcat:qualifiedRelation</a></th></tr></thead>
               <tbody>
@@ -1386,10 +1374,6 @@
               </p>
             </aside>
         
-            <p class="note" title="Feature at risk">
-              This new DCAT feature is <b>at risk</b>, pending futher evidence of implementation.
-            </p>
-
             <table class="definition">
               <thead><tr><th>RDF Property:</th><th><a href="https://www.w3.org/TR/prov-o/#qualifiedAttribution">prov:qualifiedAttribution</a></th></tr></thead>
               <tbody>
@@ -1781,10 +1765,6 @@
               </p>
             </aside>
 
-            <p class="note" title="Feature at risk">
-              This new DCAT feature is <b>at risk</b>, pending futher evidence of implementation.
-            </p>
-
             <table class="definition">
                 <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#spatialResolutionInMeters">dcat:spatialResolutionInMeters</a></th></tr></thead>
                 <tbody>
@@ -1827,10 +1807,6 @@
               </p>
             </aside>
 
-            <p class="note" title="Feature at risk">
-              This new DCAT feature is <b>at risk</b>, pending futher evidence of implementation.
-            </p>
-
             <table class="definition">
                 <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#temporalResolution">dcat:temporalResolution</a></th></tr></thead>
                 <tbody>
@@ -1857,10 +1833,6 @@
                 Property added in this context in this revision of DCAT.
               </p>
             </aside>
-
-            <p class="note" title="Feature at risk">
-              This new DCAT feature is <b>at risk</b>, pending futher evidence of implementation.
-            </p>
 
             <table class="definition">
                 <thead><tr><th>RDF Property:</th><th><a href="https://www.w3.org/TR/prov-o/#wasGeneratedBy">prov:wasGeneratedBy</a></th></tr></thead>
@@ -2056,10 +2028,6 @@
               </p>
             </aside>
         
-            <p class="note" title="Feature at risk">
-              This new DCAT feature is <b>at risk</b>, pending futher evidence of implementation.
-            </p>
-
             <table class="definition">
                 <thead><tr><th>RDF Property:</th><th><a href="https://www.w3.org/TR/odrl-vocab/#term-hasPolicy">odrl:hasPolicy</a></th></tr></thead>
                 <tbody>
@@ -2107,10 +2075,6 @@
                 New property added in this revision of DCAT.
               </p>
             </aside>
-
-            <p class="note" title="Feature at risk">
-              This new DCAT feature is <b>at risk</b>, pending futher evidence of implementation.
-            </p>
 
             <table class="definition">
                 <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#accessService">dcat:accessService</a></th></tr></thead>
@@ -2300,10 +2264,6 @@
               </p>
             </aside>
 
-            <p class="note" title="Feature at risk">
-              This new DCAT feature is <b>at risk</b>, pending futher evidence of implementation.
-            </p>
-
             <table class="definition">
                 <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#packageFormat">dcat:packageFormat</a></th></tr></thead>
                 <tbody>
@@ -2483,10 +2443,6 @@
           </p>
         </aside>
 
-        <p class="note" title="Feature at risk">
-          This new DCAT feature is <b>at risk</b>, pending futher evidence of implementation.
-        </p>
-
         <p>The following properties are specific to this class:
           <a href="#Property:relationship_relation">relation</a>,
           <a href="#Property:relationship_hadRole">had role</a>.
@@ -2546,10 +2502,6 @@
               </p>
             </aside>
 
-            <p class="note" title="Feature at risk">
-              This new DCAT feature is <b>at risk</b>, pending futher evidence of implementation.
-            </p>
-
             <table class="definition">
               <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#hadRole">dcat:hadRole</a></th></tr></thead>
               <tbody>
@@ -2577,10 +2529,6 @@
           New class added in this revision of DCAT.
           </p>
         </aside>
-
-        <p class="note" title="Feature at risk">
-          This new DCAT feature is <b>at risk</b>, pending futher evidence of implementation.
-        </p>
 
         <table class="definition">
             <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Role">dcat:Role</a></th></tr></thead>
@@ -2654,10 +2602,6 @@
               </p>
             </aside>
 
-            <p class="note" title="Feature at risk">
-              This new DCAT feature is <b>at risk</b>, pending futher evidence of implementation.
-            </p>
-
             <table class="definition">
               <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#startDate" title="http://www.w3.org/ns/dcat#startDate">dcat:startDate</a></th></tr></thead>
               <tbody>
@@ -2677,10 +2621,6 @@
               New property added in this revision of DCAT.
               </p>
             </aside>
-
-            <p class="note" title="Feature at risk">
-              This new DCAT feature is <b>at risk</b>, pending futher evidence of implementation.
-            </p>
 
             <table class="definition">
               <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#endDate" title="http://www.w3.org/ns/dcat#endDate">dcat:endDate</a></th></tr></thead>
@@ -2826,10 +2766,6 @@
               </p>
             </aside>
 
-            <p class="note" title="Feature at risk">
-              This new DCAT feature is <b>at risk</b>, pending futher evidence of implementation.
-            </p>
-
             <table class="definition">
               <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#bbox" title="http://www.w3.org/ns/dcat#centroid">dcat:bbox</a></th></tr></thead>
               <tbody>
@@ -2855,10 +2791,6 @@
               New property added in this revision of DCAT.
               </p>
             </aside>
-
-            <p class="note" title="Feature at risk">
-              This new DCAT feature is <b>at risk</b>, pending futher evidence of implementation.
-            </p>
 
             <table class="definition">
               <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#centroid" title="http://www.w3.org/ns/dcat#centroid">dcat:centroid</a></th></tr></thead>
@@ -4796,33 +4728,6 @@ See <a href="https://github.com/w3c/dxwg/issues/172">Issue #172</a>.
 </li>
 
 </ul>
-
-    </section>
-    <section id="features-at-risk">
-      <h3>Features at risk</h3>
-      <p>The following features introduced into DCAT in this version are considered <b>AT RISK</b> pending additional evidence of implementation:</p>
-
-      <ul>
-        <li><a href="#Property:catalog_service"><code>dcat:service</code></a></li>
-        <li><a href="#Property:catalog_catalog"><code>dcat:catalog</code></a></li>
-        <li><a href="#Property:distribution_access_service"><code>dcat:accessService</code></a></li>
-        <li><a href="#Property:distribution_packaging_format"><code>dcat:packageFormat</code></a></li>
-        <li><a href="#Property:distribution_has_policy"><code>odrl:hasPolicy</code></a></li>
-        <li><a href="#Property:resource_qualified_relation"><code>dcat:qualifiedRelation</code></a></li>
-        <li><a href="#Property:resource_qualified_attribution"><code>prov:qualifiedAttribution</code></a></li>
-        <li><a href="#Property:dataset_was_generated_by"><code>	prov:wasGeneratedBy</code></a></li>
-        <li><a href="#Class:Relationship"><code>dcat:Relationship</code></a></li>
-        <li><a href="#Property:relationship_hadRole"><code>dcat:hadRole</code></a></li>
-        <li><a href="#Class:Role"><code>dcat:Role</code></a></li>
-        <li><a href="#Property:period_start_date"><code>dcat:startDate</code></a></li>
-        <li><a href="#Property:period_end_date"><code>dcat:endDate</code></a></li>
-        <li><a href="#Property:location_bbox"><code>dcat:bbox</code></a></li>
-        <li><a href="#Property:location_centroid"><code>dcat:centroid</code></a></li>
-        <li><a href="#Property:dataset_spatial_resolution"><code>dcat:spatialResolutionInMeters</code></a></li>
-        <li><a href="#Property:dataset_temporal_resolution"><code>dcat:temporalResolution</code></a></li>
-
-      </ul>
-      <p>If implementation evidence for a feature fails to show adequate adoption at this time, then the intention is to retain the feature as informative. </p>
 
     </section>
 </section>

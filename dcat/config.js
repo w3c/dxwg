@@ -9,8 +9,8 @@ var respecConfig = {
     prevRecShortname: "vocab-dcat",
     canonicalURI: "TR",
     prevRecURI:           "https://www.w3.org/TR/2014/REC-vocab-dcat-20140116/",    
-    previousPublishDate:  "2019-05-28",
-    previousMaturity:     "WD",
+    previousPublishDate:  "2019-10-03",
+    previousMaturity:     "CR",
 //    previousURI:          "https://www.w3.org/TR/2019/WD-vocab-dcat-2-20190528/",
     edDraftURI:           "https://w3c.github.io/dxwg/dcat/",
 //    issueBase:            "https://github.com/w3c/dxwg/issues/", -- Not needed when github used
@@ -40,9 +40,10 @@ var respecConfig = {
     },{
       name:       "Alejandra Gonzalez Beltran",
       orcid:      "0000-0003-3499-8262",
-      company:    "Oxford eResearch Centre, Engineering Science, University of Oxford",
-      url: "https://www.oerc.ox.ac.uk/people/alejandra",
-      companyURL: "http://www.oerc.ox.ac.uk/",
+      company:    "Scientific Computing Department, Science and Technology Facilities Council, UK",
+      url: "https://www.scd.stfc.ac.uk/Pages/Alejandra-Gonzalez-Beltran.aspx",
+      companyURL: "https://stfc.ukri.org/",
+      note: "Previously at the University of Oxford",
       w3cid: 61587
     },{
       name:       "Andrea Perego",
