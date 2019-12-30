@@ -2,23 +2,24 @@ var respecConfig = {
     specStatus: "WG-NOTE",
     shortName: "dx-prof",
     edDraftURI: "https://w3c.github.io/dxwg/prof/",
-    prevRecURI: "https://www.w3.org/TR/2019/WD-dx-prof-20190402/",
+    previousPublishDate: "2019-04-02",
+    previousMaturity: "WD",
     canonicalURI: "TR",
     editors: [
-      {
-        name: "Rob Atkinson",
-        company: "Metalinkage, Open Geospatial Consortium",
-        companyURL: "http://www.opengeospatial.org/",
-        orcid: "0000-0002-7878-2693"
-      },
-      {
-        name:       "Nicholas J. Car",
-        mailto:     "nicholas.car@surroundaustralia.com",
-        company:    "SURROUND Australia Pty Ltd and before CSIRO",
-        companyURL: "https://surroundaustralia.com",
-        orcid:      "0000-0002-8742-7730",
-        w3cid:      70131
-    }],
+        {
+            name: "Rob Atkinson",
+            company: "Metalinkage, Open Geospatial Consortium",
+            companyURL: "http://www.opengeospatial.org/",
+            orcid: "0000-0002-7878-2693"
+        },
+        {
+            name:       "Nicholas J. Car",
+            mailto:     "nicholas.car@surroundaustralia.com",
+            company:    "SURROUND Australia Pty Ltd and before CSIRO",
+            companyURL: "https://surroundaustralia.com",
+            orcid:      "0000-0002-8742-7730",
+            w3cid:      70131
+        }],
     wg: "Dataset Exchange Working Group",
     wgURI: "https://www.w3.org/2017/dxwg/",
     wgPublicList: "public-dxwg-comments",
@@ -70,25 +71,25 @@ var respecConfig = {
             status: "ISO Standard"
         },
         "MODSPEC": {
-          editors: [
-            "OGC Policy SWG"
-          ],
-          href: "http://www.opengeospatial.org/standards/modularspec" ,
-          title: "The Specification Model — A Standard for Modular specifications" ,
-          status: "OGC Policy Directive" ,
-          date: "2009-10-19"
+            editors: [
+                "OGC Policy SWG"
+            ],
+            href: "http://www.opengeospatial.org/standards/modularspec" ,
+            title: "The Specification Model — A Standard for Modular specifications" ,
+            status: "OGC Policy Directive" ,
+            date: "2009-10-19"
         },
         "CFG-MGMT": {
-          authors: [
-            "Serena Coetzee",
-            "Simon Cox",
-            "John Herring"
-          ],
-          href: "https://doi.org/10.1109/SIIT.2011.6083604" ,
-          title: "Configuration management of a system of interdependent standards" ,
-          publisher: "IEEE" ,
-          status: "7th International Conference on Standardization and Innovation in Information Technology (SIIT), Berlin, 2011, pp. 1-12" ,
-          date: "2011-11-21"
+            authors: [
+                "Serena Coetzee",
+                "Simon Cox",
+                "John Herring"
+            ],
+            href: "https://doi.org/10.1109/SIIT.2011.6083604" ,
+            title: "Configuration management of a system of interdependent standards" ,
+            publisher: "IEEE" ,
+            status: "7th International Conference on Standardization and Innovation in Information Technology (SIIT), Berlin, 2011, pp. 1-12" ,
+            date: "2011-11-21"
         }
     }
 };
