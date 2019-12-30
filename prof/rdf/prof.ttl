@@ -80,7 +80,7 @@ dct:format rdf:type owl:AnnotationProperty ;
                rdfs:domain :ResourceDescriptor ;
                rdfs:range :Profile ;
                skos:definition "A base specification, a Resource Descriptor from which is to be considered a Resource Descriptor for this Profile also"@en ;
-               skos:usageNote "This property is created for the convenience of clients. When profile describers wish to allow clients to discover all resources relevant to a Profile without having to navigating an inheritance hierarchy of prof:profileOf relations, this predicate may be used to directly associate inherited Profile Descriptors with the Profile. If this property is present, it should be used consistently and all relevant resources a client may need to utilise the profile should be present and described using this predicate"@en ;
+               skos:usageNote "This property is created for the convenience of clients. When profile describers wish to allow clients to discover all resources relevant to a Profile without having to navigating an inheritance hierarchy of :profileOf relations, this predicate may be used to directly associate inherited Profile Descriptors with the Profile. If this property is present, it should be used consistently and all relevant resources a client may need to utilise the profile should be present and described using this predicate"@en ;
                rdfs:label "is inherited from" .
 
 
@@ -89,7 +89,7 @@ dct:format rdf:type owl:AnnotationProperty ;
            rdfs:domain :Profile ;
            rdfs:range dct:Standard ;
            rdfs:subPropertyOf :isTransitiveProfileOf ;
-           skos:usageNote "A Profile may define constraints on the usage of one or more specifications. All constraints of these specifications are inherited, in the sense that an object conforming to a profile conforms to all the constraints specified the targets of prof:isProfileOf relations. This property is optional, allowing any specification to be declared at the root of a profile hierarchy using the Profile class"@en ;
+           skos:usageNote "A Profile may define constraints on the usage of one or more specifications. All constraints of these specifications are inherited, in the sense that an object conforming to a profile conforms to all the constraints specified the targets of :isProfileOf relations. This property is optional, allowing any specification to be declared at the root of a profile hierarchy using the Profile class"@en ;
            skos:definition "A specification for which this Profile defines constraints, extensions, or which it uses in combination with other specifications, or provides guidance or explanation about its usage"@en ;
            rdfs:label "is profile of" .
 
@@ -98,7 +98,7 @@ dct:format rdf:type owl:AnnotationProperty ;
 :isTransitiveProfileOf rdf:type owl:ObjectProperty ;
                      rdfs:domain :Profile ;
                      rdfs:range dct:Standard ;
-                     skos:definition "The transitive closure of the prof:isProfileOf property. Relates a profile to another specification that it is a profile of, possibly via a chain of intermediate profiles that are in prof:isProfileOf relationships"@en ;
+                     skos:definition "The transitive closure of the :isProfileOf property. Relates a profile to another specification that it is a profile of, possibly via a chain of intermediate profiles that are in :isProfileOf relationships"@en ;
                      rdfs:label "is transitive profile of" ;
                      skos:usageNote "This is a convenience property that may be used to access all specifications (including other profiles) that could provide useful information and related resources for the Profile (for example, for better identifying conformance requirements). This avoids forcing clients to traverse a profile hierarchy to find all relevant resources. If this property is used, then all such relationships should be present so a client can safely avoid hierarchy traversal"@en .
 
@@ -108,7 +108,7 @@ dct:format rdf:type owl:AnnotationProperty ;
           rdfs:range :ResourceDescriptor ;
           skos:definition "A resource which describes the nature of an artifact and the role it plays in relation to the Profile"@en ;
           rdfs:label "has resource"@en ;
-          skos:usageNote "This property is analogous to dcat:distribution however the domain is not necessarily dcat:Dataset. dcat:Dataset and prof:Profile are not disjoint, so it is up to implementations to decide if these are equivalent properties"@en .
+          skos:usageNote "This property is analogous to dcat:distribution however the domain is not necessarily dcat:Dataset. dcat:Dataset and :Profile are not disjoint, so it is up to implementations to decide if these are equivalent properties"@en .
 
 
 ###  http://www.w3.org/ns/dx/prof/hasRole
@@ -129,7 +129,7 @@ dct:format rdf:type owl:AnnotationProperty ;
        rdfs:domain :Profile ;
        rdfs:range xsd:token ;
        skos:definition "The preferred identifier for the Profile, for use in circumstances where its URI cannot be used"@en ;
-       skos:usageNote "A simple lexical form of identifier that may be accepted in some circumstances, such as API arguments to reference this profile. This is the “preferred term”, since alternative identifiers may be declared and used by any implementation"@en ;
+       skos:usageNote "A simple lexical form of identifier that may be accepted in some circumstances, such as API arguments to reference this profile. This is the 'preferred term', since alternative identifiers may be declared and used by any implementation"@en ;
        rdfs:label "has token" .
 
 
@@ -169,7 +169,13 @@ This definition includes what are often called \"application profiles\", \"metad
 
 dct:conformsTo rdfs:isDefinedBy dct: ;
                    skos:definition "An established standard to which the described resource conforms"@en ;
-                   rdfs:label "conforms to" .
+                   rdfs:label "conforms to" ;
+                   skos:scopeNote """This property is to be used to show conformance of a data resource to a specification (dct:Standard) or a profile (:Profile).
+
+The property chain axiom declared for this property means that if the thing conformed to is a profile of something else (indicated by :isProfileOf), then the conforming data resource will be inferred to be conformant to that other thing too.
+
+PROF does not specify the nature of conformance: communities using specifications and profiles are free to define appropriate conformance for their purposes.""" ;
+                   owl:propertyChainAxiom ( :isProfileOf dct:conformsTo ) .
 
 
 ###  Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi
