@@ -1,7 +1,9 @@
 var respecConfig = {
 //	preProcess: [dfn_index],
 //    subtitle: "Version 2",
-    specStatus: "ED",
+    specStatus: "REC",
+    errata: "https://w3c.github.io/dxwg/dcat/errata",
+//   specStatus: "ED",
 //    specStatus: "CR",
 //  crEnd: "2019-10-24",
     implementationReportURI: "https://w3c.github.io/dxwg/dcat-implementation-report/",
