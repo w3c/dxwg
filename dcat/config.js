@@ -19,6 +19,12 @@ var respecConfig = {
     alternateFormats: [{
       label: "Turtle",
       uri: "https://www.w3.org/ns/dcat.ttl",
+    },{
+      label: "RDF/XML",
+      uri: "https://www.w3.org/ns/dcat.rdf",
+    },{
+      label: "JSON-LD",
+      uri: "https://www.w3.org/ns/dcat.jsonld",
     }],
     editors: [{
       name:       "Riccardo Albertoni",
