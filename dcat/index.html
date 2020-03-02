@@ -12,7 +12,12 @@
 <body>
 
 <!-- Disclaimer -->
-
+<aside class="note">
+    <p>DCAT 2 supersedes DCAT [[?VOCAB-DCAT-20140116]], but it does not make it obsolete. DCAT 2 maintains the DCAT namespace as its terms preserve backward compatibility with DCAT [[?VOCAB-DCAT-20140116]]. DCAT 2 relaxes constraints and adds new classes and properties, but these changes do not break the definition of previous terms.</p>
+    
+    <p>Any new implementation is expected to adopt DCAT 2, while the existing implementations do not need to upgrade to it, unless they want to use the new features. In particular, current DCAT deployments that do not overlap with the DCAT 2 new features (e.g., data services, time and space properties qualified relations, packaging) don't need to change anything to remain in conformance with DCAT 2.
+    </p>
+    </aside>
 <section  id="abstract">
     <p>DCAT is an RDF vocabulary designed to facilitate interoperability between data catalogs published on the Web.
       This document defines the schema and provides examples for its use.</p>
@@ -47,7 +52,7 @@
         This new version of the vocabulary updates and expands the original but preserves backward compatibility. A full list of the significant changes (with links to the relevent github issues) is described in <a href="#changes"></a>.
     </p>
     <p>
-        The exit criteria for CR focussed on v2 new features that replicate features that were included in application profiles of v1 as a way of remedying missing and necessary elements.  The exit criteria also included recent commitments by organisations such as EC Joinup to adopt the DCAT v2 model in their work - see  https://joinup.ec.europa.eu/solution/abr-specification-registry-registries/document/specification-registry-registries-version-meeting-september. 
+        The exit criteria for CR focussed on v2 new features that replicate features that were included in application profiles of v1 as a way of remedying missing and necessary elements.  The exit criteria also included recent commitments by organisations such as EC Joinup to <a href='https://joinup.ec.europa.eu/solution/abr-specification-registry-registries/document/specification-registry-registries-version-meeting-september'>adopt the DCAT v2 model</a> in their work.
         Implementation will be evidenced by showing use of the new properties/classes (or terms with equivalent meaning) in implementations of catalogs.
     </p>
     <p>
@@ -55,11 +60,7 @@
     </p>
     <h3 id="dcat_history">DCAT history</h3>
     <p>The original DCAT vocabulary was developed and <a href="http://vocab.deri.ie/dcat">hosted</a> at the Digital Enterprise Research Institute (DERI), then refined by the <a href="http://www.w3.org/egov/">eGov Interest Group</a>, and finally standardized in 2014 [[?VOCAB-DCAT-20140116]] by the <a href="http://www.w3.org/2011/gld/">Government Linked Data (GLD)</a> Working Group.</p>
-    <p>This revised version of DCAT was developed by the <a href="https://www.w3.org/2017/dxwg/">Dataset Exchange Working Group</a> in response to a new se t of Use Cases and Requirements [[?DCAT-UCR]] gathered from peoples' experience with the DCAT vocabulary from the time of the original version, and new applications that were not considered in the first version. A summary of the changes from [[?VOCAB-DCAT-20140116]] is provided in <a href="#changes"></a>. </p>
-    <aside class="note">
-    <p>DCAT 2 maintains the DCAT namespace as it preserves backward compatibility with DCAT [[?VOCAB-DCAT-20140116]]. DCAT 2 relaxes constraints and adds new classes and properties, but these changes do not break existing DCAT implementations.
-    </p>
-    </aside>
+    <p>This revised version of DCAT was developed by the <a href="https://www.w3.org/2017/dxwg/">Dataset Exchange Working Group</a> in response to a new set of Use Cases and Requirements [[?DCAT-UCR]] gathered from peoples' experience with the DCAT vocabulary from the time of the original version, and new applications that were not considered in the first version. A summary of the changes from [[?VOCAB-DCAT-20140116]] is provided in <a href="#changes"></a>. </p>
 
     <h3 id="external_terms">External terms</h3>
     <p>DCAT incorporates terms from pre-existing vocabularies where stable terms with appropriate meanings could be found, such as <a href="http://xmlns.com/foaf/0.1/homepage"><code>foaf:homepage</code></a> and <a href="http://purl.org/dc/terms/title"><code>dct:title</code></a>.
@@ -68,8 +69,7 @@
       Note that conformance to DCAT (<a href="#conformance"></a>) concerns usage of only the terms in the DCAT vocabulary specification, so possible changes to other external definitions will not affect the conformance of DCAT implementations.</p>
 
     <h3 id="please_send_comments">Please send comments</h3>
-    The Working Group invites publishers to describe their catalogs and datasets with the revised version of DCAT described in this document and to report their implementations following <a href="https://github.com/w3c/dxwg/wiki/DCAT-implementation-evidence">the instruction  to reporting DCAT revised implementations</a>. The information gathered through this means will be augmented by further analysis of implementation available on the Web. The Working Group expects to adduce the combined set of evidence when requesting that the Director advance this document to Proposed Recommendation.
-
+    The Working Group invited publishers to describe their catalogs and datasets with the revised version of DCAT described in this document and to report their implementations following <a href="https://github.com/w3c/dxwg/wiki/DCAT-implementation-evidence">the instruction  to reporting DCAT revised implementations</a>. This information and subsequent analysis is published in the <a href="https://w3c.github.io/dxwg/dcat-implementation-report/">implementation report.</a>
 
 </section>
 
@@ -399,7 +399,7 @@
   dcat:contactPoint &lt;http://example.org/transparency-office/contact&gt; ;
   dct:temporal &lt;http://reference.data.gov.uk/id/quarter/2006-Q1&gt; ;
   dcat:temporalResolution "P1D"^^xsd:duration ;
-  dct:spatial &lt;http://www.geonames.org/6695072&gt; ;
+  dct:spatial &lt;http://sws.geonames.org/6695072/&gt; ;
   dcat:spatialResolutionInMeters "30.0"^^xsd:decimal ;
   dct:publisher&nbsp;:finance-ministry&nbsp;;
   dct:language &lt;http://id.loc.gov/vocabulary/iso639-1/en&gt; &nbsp;;
@@ -483,7 +483,7 @@
             It is recommended that the value of the property is taken from a well governed and broadly recognised set of resource types,
             such as the <a data-cite="?DCTERMS#section-7">DCMI Type Vocabulary</a> [[?DCTERMS]],
             the <a href="https://id.loc.gov/vocabulary/marcgt.html">MARC Genre/Terms Scheme</a>,
-            the [[?ISO-19115-1]] <a href="https://geo-ide.noaa.gov/wiki/index.php?title=ISO_19115_and_19115-2_CodeList_Dictionaries#MD_ScopeCode"><code>MD_Scope codes</code></a>,
+            the [[?ISO-19115-1]] <a href="https://standards.iso.org/iso/19115/resources/Codelists/gml/MD_ScopeCode.xml"><code>MD_Scope codes</code></a>,
             the <a href="https://schema.datacite.org/meta/kernel-4.1/include/datacite-resourceType-v4.1.xsd">DataCite resource types</a>,
             or the PARSE.Insight content-types from Re3data [[?RE3DATA-SCHEMA]].
         </p>
@@ -675,8 +675,8 @@
             The axiomatization of DCAT 2014 used global domain and range constraints for many of the properties defined in the DCAT namespace [[?VOCAB-DCAT-20140116]]. This makes quite strong ontological commitments, some of which are now being reconsidered - see individual issues noted inline below.
         </p-->
 
-        <p>The (revised) DCAT vocabulary is <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/rdf/">available in RDF</a>.
-            The primary artefact <a href="https://w3c.github.io/dxwg/dcat/rdf/dcat.ttl"><code>dcat.ttl</code></a> is a serialization of the core DCAT vocabulary.
+        <p>The (revised) DCAT vocabulary is <a href="https://www.w3.org/ns/dcat#">available in RDF</a>.
+            The primary artefact <a href="https://www.w3.org/ns/dcat2.ttl"><code>dcat2.ttl</code></a> is a serialization of the core DCAT vocabulary.
             Alongside it are a set of other RDF files that provide additional information, including:</p>
         <ol>
             <li>
@@ -686,7 +686,7 @@
                 additional axioms, which can be useful in some contexts
             </li>
             <li>
-                the files dcat2014.ttl and dcat2014.rdf that correspond to the 2014 version of DCAT [[?VOCAB-DCAT-20140116]]
+                the files <a href="https://www.w3.org/ns/dcat2014.ttl">dcat2014.ttl</a> and <a href="https://www.w3.org/ns/dcat2014.rdf">dcat2014.rdf</a> that correspond to the 2014 version of DCAT [[?VOCAB-DCAT-20140116]]
             </li>
         </ol>
 
@@ -780,7 +780,7 @@
         <table class="definition">
             <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Catalog">dcat:Catalog</a></th></tr></thead>
             <tbody>
-            <tr><td class="prop">Definition:</td><td>A curated collection of metadata about datasets and data services</td></tr>
+            <tr><td class="prop">Definition:</td><td>A curated collection of metadata about resources (e.g., datasets and data services in the context of a data catalog)</td></tr>
             <tr><td class="prop">Sub-class of:</td><td><a href="#Class:Dataset"><code>dcat:Dataset</code></a></td></tr>
             <tr><td class="prop">Usage note:</td><td>A Web-based data catalog is typically represented as a single instance of this class.</td></tr>
             <tr><td class="prop">See also:</td><td> <a href="#Class:Catalog_Record"></a>, <a href="#Class:Dataset"></a></td></tr>
@@ -1210,7 +1210,7 @@
                 <tr><td class="prop">Usage note:</td><td>The value SHOULD be taken from a well governed and broadly recognised controlled vocabulary, such as:
                     <ol>
                         <li><a data-cite="?DCTERMS#section-7">DCMI Type vocabulary</a> [[?DCTERMS]]</li>
-                        <li>[[?ISO-19115-1]] <a href="https://geo-ide.noaa.gov/wiki/index.php?title=ISO_19115_and_19115-2_CodeList_Dictionaries#MD_ScopeCode">scope codes</a></li>
+                        <li>[[?ISO-19115-1]] <a href="https://standards.iso.org/iso/19115/resources/Codelists/gml/MD_ScopeCode.xml">scope codes</a></li>
                         <li><a href="https://schema.datacite.org/meta/kernel-4.1/include/datacite-resourceType-v4.1.xsd">Datacite resource types</a> [[?DataCite]]</li>
                         <li>PARSE.Insight content-types used by <a href="https://www.re3data.org/">re3data.org</a> [[?RE3DATA-SCHEMA]] (see item 15 contentType)</li>
                         <li><a href="http://id.loc.gov/vocabulary/marcgt.html">MARC intellectual resource types</a></li>
@@ -1281,7 +1281,7 @@
               <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#qualifiedRelation">dcat:qualifiedRelation</a></th></tr></thead>
               <tbody>
               <tr><td class="prop">Definition:</td><td>Link to a description of a relationship with another resource</td></tr>
-              <tr><td class="prop">Sub-property of:</td><td><a href="https://www.w3.org/TR/prov-o/#qualifiedInfluence"><code>prov:qualifiedInfluence</code></a></td></tr>
+              <tr><td class="prop">Sub-property of:</td><td><a data-cite="PROV-O#qualifiedInfluence"><code>prov:qualifiedInfluence</code></a></td></tr>
               <tr><td class="prop">Domain:</td><td><a href="#Class:Resource"><code>dcat:Resource</code></a></td></tr>
               <tr><td class="prop">Range:</td><td><a href="#Class:Relationship"><code>dcat:Relationship</code></a></td></tr>
               <tr><td class="prop">Usage note:</td><td>Used to link to another resource where the nature of the relationship is known but does not match one of the standard [[?DCTERMS]] properties
@@ -1299,13 +1299,13 @@
               <a href="http://purl.org/dc/terms/requires"><code>dct:requires</code></a>,
               <a href="http://purl.org/dc/terms/isRequiredBy"><code>dct:isRequiredBy</code></a>)
               or [[?PROV-O]] properties
-              (<a href="https://www.w3.org/TR/prov-o/#wasDerivedFrom"><code>prov:wasDerivedFrom</code></a>,
-              <a href="https://www.w3.org/TR/prov-o/#wasInfluencedBy"><code>prov:wasInfluencedBy</code></a>,
-              <a href="https://www.w3.org/TR/prov-o/#wasQuotedFrom"><code>prov:wasQuotedFrom</code></a>,
-              <a href="https://www.w3.org/TR/prov-o/#wasRevisionOf"><code>prov:wasRevisionOf</code></a>,
-              <a href="https://www.w3.org/TR/prov-o/#hadPrimarySource"><code>prov:hadPrimarySource</code></a>,
-              <a href="https://www.w3.org/TR/prov-o/#alternateOf"><code>prov:alternateOf</code></a>,
-              <a href="https://www.w3.org/TR/prov-o/#specializationOf"><code>prov:specializationOf</code></a>).
+              (<a data-cite="PROV-O#wasDerivedFrom"><code>prov:wasDerivedFrom</code></a>,
+              <a data-cite="PROV-O#wasInfluencedBy"><code>prov:wasInfluencedBy</code></a>,
+              <a data-cite="PROV-O#wasQuotedFrom"><code>prov:wasQuotedFrom</code></a>,
+              <a data-cite="PROV-O#wasRevisionOf"><code>prov:wasRevisionOf</code></a>,
+              <a data-cite="PROV-O#hadPrimarySource"><code>prov:hadPrimarySource</code></a>,
+              <a data-cite="PROV-O#alternateOf"><code>prov:alternateOf</code></a>,
+              <a data-cite="PROV-O#specializationOf"><code>prov:specializationOf</code></a>).
               </td>
               </tr>
               </tbody>
@@ -1317,7 +1317,7 @@
 
             <aside class="note">
               <p>
-              Since this property is a sub-property of <a href="https://www.w3.org/TR/prov-o/#qualifiedInfluence"><code>prov:qualifiedInfluence</code></a>, use of this property on an individual entails that the context resource is a member of the class <a href="https://www.w3.org/TR/prov-o/#Entity"><code>prov:Entity</code></a> [[PROV-O]] .
+              Since this property is a sub-property of <a data-cite="PROV-O#qualifiedInfluence"><code>prov:qualifiedInfluence</code></a>, use of this property on an individual entails that the context resource is a member of the class <a data-cite="PROV-O#Entity"><code>prov:Entity</code></a> [[PROV-O]] .
               </p>
             </aside>
 
@@ -1375,14 +1375,14 @@
             </aside>
         
             <table class="definition">
-              <thead><tr><th>RDF Property:</th><th><a href="https://www.w3.org/TR/prov-o/#qualifiedAttribution">prov:qualifiedAttribution</a></th></tr></thead>
+              <thead><tr><th>RDF Property:</th><th><a data-cite="PROV-O#qualifiedAttribution">prov:qualifiedAttribution</a></th></tr></thead>
               <tbody>
               <tr><td class="prop">Definition:</td><td>Link to an Agent having some form of responsibility for the resource</td></tr>
-              <tr><td class="prop">Sub-property of:</td><td><a href="https://www.w3.org/TR/prov-o/#qualifiedInfluence"><code>prov:qualifiedInfluence</code></a></td></tr>
+              <tr><td class="prop">Sub-property of:</td><td><a data-cite="PROV-O#qualifiedInfluence"><code>prov:qualifiedInfluence</code></a></td></tr>
               <tr><td class="prop">Domain:</td><td><a data-cite="?PROV-O#Entity"><code>prov:Entity</code></a></td></tr>
               <tr><td class="prop">Range:</td><td><a data-cite="?PROV-O#Attribution"><code>prov:Attribution</code></a></td></tr>
               <tr><td class="prop">Usage note:</td><td>Used to link to an Agent where the nature of the relationship is known but does not match one of the standard [[?DCTERMS]] properties (<a href="http://purl.org/dc/terms/creator"><code>dct:creator</code></a>, <a href="http://purl.org/dc/terms/creator"><code>dct:publisher</code></a>).
-              Use <code>dcat:hadRole</code> on the <a href="https://www.w3.org/TR/prov-o/#Attribution"><code>prov:Attribution</code></a> to capture the responsibility of the Agent with respect to the Resource.
+              Use <code>dcat:hadRole</code> on the <a data-cite="PROV-O#Attribution"><code>prov:Attribution</code></a> to capture the responsibility of the Agent with respect to the Resource.
               See <a href="#qualified-attribution"></a> for usage examples.</td></tr>
               </tbody>
             </table>
@@ -1393,7 +1393,7 @@
 
             <aside class="note">
               <p>
-                Use of this property on an individual entails that the context resource is a member of the class <a href="https://www.w3.org/TR/prov-o/#Entity"><code>prov:Entity</code></a> [[?PROV-O]].
+                Use of this property on an individual entails that the context resource is a member of the class <a data-cite="PROV-O#Entity"><code>prov:Entity</code></a> [[?PROV-O]].
               </p>
             </aside>
 
@@ -1835,19 +1835,19 @@
             </aside>
 
             <table class="definition">
-                <thead><tr><th>RDF Property:</th><th><a href="https://www.w3.org/TR/prov-o/#wasGeneratedBy">prov:wasGeneratedBy</a></th></tr></thead>
+                <thead><tr><th>RDF Property:</th><th><a data-cite="PROV-O#wasGeneratedBy">prov:wasGeneratedBy</a></th></tr></thead>
                 <tbody>
                 <tr><td class="prop">Definition:</td><td>An activity that generated, or provides the business context for, the creation of the dataset.</td></tr>
-                <tr><td class="prop">Domain:</td><td><a href="https://www.w3.org/TR/prov-o/#Entity"><code>prov:Entity</code></a></td></tr>
-                <tr><td class="prop">Range:</td><td><a href="https://www.w3.org/TR/prov-o/#Activity"><code>prov:Activity</code></a> An activity is something that occurs over a period of time and acts upon or with entities; it may include consuming, processing, transforming, modifying, relocating, using, or generating entities.</td></tr>
+                <tr><td class="prop">Domain:</td><td><a data-cite="PROV-O#Entity"><code>prov:Entity</code></a></td></tr>
+                <tr><td class="prop">Range:</td><td><a data-cite="PROV-O#Activity"><code>prov:Activity</code></a> An activity is something that occurs over a period of time and acts upon or with entities; it may include consuming, processing, transforming, modifying, relocating, using, or generating entities.</td></tr>
                 <tr><td class="prop">Usage note:</td><td>The activity associated with generation of a dataset will typically be an initiative, project, mission, survey, on-going activity ("business as usual") etc. Multiple <code>prov:wasGeneratedBy</code> properties can be used to indicate the dataset production context at various levels of granularity. </td></tr>
-                <tr><td class="prop">Usage note:</td><td>Use <a href="https://www.w3.org/TR/prov-o/#qualifiedGeneration"><code>prov:qualifiedGeneration</code></a> to attach additional details about the relationship between the dataset and the activity, e.g. the exact time that the dataset was produced during the lifetime of a project</td></tr>
+                <tr><td class="prop">Usage note:</td><td>Use <a data-cite="PROV-O#qualifiedGeneration"><code>prov:qualifiedGeneration</code></a> to attach additional details about the relationship between the dataset and the activity, e.g. the exact time that the dataset was produced during the lifetime of a project</td></tr>
                 </tbody>
             </table>
 
             <aside class="note">
               <p>
-                Use of this property on an individual entails that the context resource is a member of the class <a href="https://www.w3.org/TR/prov-o/#Entity"><code>prov:Entity</code></a> [[PROV-O]] .
+                Use of this property on an individual entails that the context resource is a member of the class <a data-cite="PROV-O#Entity"><code>prov:Entity</code></a> [[PROV-O]] .
               </p>
             </aside>
 
@@ -2448,11 +2448,13 @@
           <a href="#Property:relationship_hadRole">had role</a>.
         </p>
 
+<p>Examples illustrating use of this class and its properties are given in <a href="#qualified-forms"></a>.</p>
+
         <table class="definition">
           <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Relationship">dcat:Relationship</a></th></tr></thead>
           <tbody>
             <tr><td class="prop">Definition:</td><td>An association class for attaching additional information to a relationship between DCAT Resources</td></tr>
-            <tr><td class="prop">Sub-class of:</td><td><a href="https://www.w3.org/TR/prov-o/#EntityInfluence"><code>prov:EntityInfluence</code></a></td></tr>
+            <tr><td class="prop">Sub-class of:</td><td><a data-cite="PROV-O#EntityInfluence"><code>prov:EntityInfluence</code></a></td></tr>
             <tr><td class="prop">Usage note:</td><td>
               Use to characterize a relationship between datasets, and potentially other resources, where the nature of the relationship is known but is not adequately characterized by the standard [[?DCTERMS]] properties
               (<a href="http://purl.org/dc/terms/hasPart"><code>dct:hasPart</code></a>,
@@ -2469,13 +2471,13 @@
               <a href="http://purl.org/dc/terms/requires"><code>dct:requires</code></a>,
               <a href="http://purl.org/dc/terms/isRequiredBy"><code>dct:isRequiredBy</code></a>)
               or [[?PROV-O]] properties
-              (<a href="https://www.w3.org/TR/prov-o/#wasDerivedFrom"><code>prov:wasDerivedFrom</code></a>,
-              <a href="https://www.w3.org/TR/prov-o/#wasInfluencedBy"><code>prov:wasInfluencedBy</code></a>,
-              <a href="https://www.w3.org/TR/prov-o/#wasQuotedFrom"><code>prov:wasQuotedFrom</code></a>,
-              <a href="https://www.w3.org/TR/prov-o/#wasRevisionOf"><code>prov:wasRevisionOf</code></a>,
-              <a href="https://www.w3.org/TR/prov-o/#hadPrimarySource"><code>prov:hadPrimarySource</code></a>,
-              <a href="https://www.w3.org/TR/prov-o/#alternateOf"><code>prov:alternateOf</code></a>,
-              <a href="https://www.w3.org/TR/prov-o/#specializationOf"><code>prov:specializationOf</code></a>)
+              (<a data-cite="PROV-O#wasDerivedFrom"><code>prov:wasDerivedFrom</code></a>,
+              <a data-cite="PROV-O#wasInfluencedBy"><code>prov:wasInfluencedBy</code></a>,
+              <a data-cite="PROV-O#wasQuotedFrom"><code>prov:wasQuotedFrom</code></a>,
+              <a data-cite="PROV-O#wasRevisionOf"><code>prov:wasRevisionOf</code></a>,
+              <a data-cite="PROV-O#hadPrimarySource"><code>prov:hadPrimarySource</code></a>,
+              <a data-cite="PROV-O#alternateOf"><code>prov:alternateOf</code></a>,
+              <a data-cite="PROV-O#specializationOf"><code>prov:specializationOf</code></a>)
             </td>
             </tr>
           </tbody>
@@ -2487,7 +2489,7 @@
                 <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/relation">dct:relation</a></th></tr></thead>
                 <tbody>
                 <tr><td class="prop">Definition:</td><td>The resource related to the source resource.</td></tr>
-                <tr><td class="prop">Usage note:</td><td>In the context of a dcat:Relationship this is expected to point to another dcat:Dataset or other cataloged resource.</td></tr>
+                <tr><td class="prop">Usage note:</td><td>In the context of a <code>dcat:Relationship</code> this is expected to point to another <code>dcat:Dataset</code> or other cataloged resource.</td></tr>
                 </tbody>
             </table>
 
@@ -2506,7 +2508,7 @@
               <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#hadRole">dcat:hadRole</a></th></tr></thead>
               <tbody>
               <tr><td class="prop">Definition:</td><td>The function of an entity or agent with respect to another entity or resource.</td></tr>
-              <tr><td class="prop">Domain:</td><td><a href="https://www.w3.org/TR/prov-o/#Attribution"><code>prov:Attribution</code></a> or <a href="#Class:Relationship"><code>dcat:Relationship</code></a></td></tr>
+              <tr><td class="prop">Domain:</td><td><a data-cite="PROV-O#Attribution"><code>prov:Attribution</code></a> or <a href="#Class:Relationship"><code>dcat:Relationship</code></a></td></tr>
               <tr><td class="prop">Range:</td><td><a href="#Class:Role"><code>dcat:Role</code></a></td></tr>
               <tr><td class="prop">Usage note:</td><td>May be used in a qualified-attribution to specify the role of an Agent with respect to an Entity. It is recommended that the value be taken from a controlled vocabulary of agent roles, such as [[?ISO-19115]] <a href="https://standards.iso.org/iso/19115/resources/Codelists/gml/CI_RoleCode.xml"><code>CI_RoleCode</code></a>.</td></tr>
               <tr><td class="prop">Usage note:</td><td>May be used in a qualified-relation to specify the role of an Entity with respect to another Entity. It is recommended that the value be taken from a controlled vocabulary of entity roles.</td></tr>
@@ -2514,7 +2516,7 @@
             </table>
 
             <p>
-              This DCAT property complements <a href="https://www.w3.org/TR/prov-o/#hadRole"><code>prov:hadRole</code></a> which provides the function of an entity or agent with respect to an activity.
+              This DCAT property complements <a data-cite="PROV-O#hadRole"><code>prov:hadRole</code></a> which provides the function of an entity or agent with respect to an activity.
             </p>
 
         </section>
@@ -2529,6 +2531,8 @@
           New class added in this revision of DCAT.
           </p>
         </aside>
+
+<p>Examples illustrating use of this class are given in <a href="#qualified-forms"></a>.</p>
 
         <table class="definition">
             <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#Role">dcat:Role</a></th></tr></thead>
@@ -2549,7 +2553,7 @@
             </tbody>
         </table>
         <p>
-          This DCAT class complements <a href="https://www.w3.org/TR/prov-o/#Role"><code>prov:Role</code></a> which provides the function of an entity or agent with respect to an activity.
+          This DCAT class complements <a data-cite="PROV-O#Role"><code>prov:Role</code></a> which provides the function of an entity or agent with respect to an activity.
         </p>
 
     </section> <!-- end class Role -->
@@ -3751,8 +3755,8 @@ ex:DS987
 </p>
 
 <aside class="note">
-<p>The domain of <a href="https://www.w3.org/TR/prov-o/#hadRole"><code>prov:hadRole</code></a> property is <a href="https://www.w3.org/TR/prov-o/#Association"><code>prov:Association</code></a>, i.e. [[!PROV-O]] roles relate to activities, not entities [[!PROV-O]].
-  Therefore, a new property <a href="#Property:relationship_hadRole"><code>dcat:hadRole</code></a> is used to attach a specific role to the association-class <a href="https://www.w3.org/TR/prov-o/#Attribution"><code>prov:Attribution</code></a>.</p>
+<p>The domain of <a data-cite="PROV-O#hadRole"><code>prov:hadRole</code></a> property is <a data-cite="PROV-O#Association"><code>prov:Association</code></a>, i.e. [[!PROV-O]] roles relate to activities, not entities [[!PROV-O]].
+  Therefore, a new property <a href="#Property:relationship_hadRole"><code>dcat:hadRole</code></a> is used to attach a specific role to the association-class <a data-cite="PROV-O#Attribution"><code>prov:Attribution</code></a>.</p>
 </aside>
 
 </section>
@@ -3853,7 +3857,7 @@ ex:Test543L
   
   <p>The editors gratefully acknowledge the contributions made to this document by <a href="https://www.w3.org/2000/09/dbwg/details?group=99375&public=1">all members of the working group</a>, especially Annette Greiner, Antoine Isaac, Armin Haller, Dan Brickley, Ine de Visser, Jaroslav Pullmann, Lars G. Svensson, Linda van den Brink, Makx Dekkers, Nicholas Car, Rob Atkinson, Tom Baker.</p>
 
-  <p>The editors would also like to thank the following for comments received: Addison Phillips, Andreas Kuckartz, Armando Stellato, Bert van Nuffelen, Chris Little, Chris Sweeney, Chris Wood, Clemens Portele, Daniel Pop, Dave Reynolds, Guillaume Duffes, Ian Davis, Jakob Voß, Jakub Klímek, James Passmore, Leigh Dodds, Luca Trani, Marco Brattinga, Matthias Palmér, Melanie Barlow, Nancy Fallgren, Nuno Freire, Øystein Åsnes, Pano Maria, Peter Parslow, Renato Iannella, Ruth Duerr, Siri Jodha S. Khalsa, Stephane Fellah, Stephen Richard, Stijn Goedertier, Tom Kralidis, Vladimir Alexiev, Wouter Beek, Yves Coene.</p>
+  <p>The editors would also like to thank the following for comments received: Addison Phillips, Andreas Kuckartz, Anna Odgaard Ingram, Armando Stellato, Bert van Nuffelen, Chris Little, Chris Sweeney, Chris Wood, Clemens Portele, Daniel Pop, Dave Reynolds, Guillaume Duffes, Ian Davis, Jakob Voß, Jakub Klímek, James Passmore, Leigh Dodds, Luca Trani, Marco Brattinga, Matthias Palmér, Melanie Barlow, Nancy Fallgren, Nuno Freire, Øystein Åsnes, Pano Maria, Peter Parslow, Renato Iannella, Ruth Duerr, Siri Jodha S. Khalsa, Stephane Fellah, Stephen Richard, Stijn Goedertier, Tom Kralidis, Vladimir Alexiev, Wouter Beek, Yves Coene.</p>
 
   <p>The editors also gratefully acknowledge the chairs of this Working Group: Karen Coyle, Caroline Burle and Peter Winstanley &mdash; and staff contacts Phil Archer and Dave Raggett.</p>
 
@@ -4294,7 +4298,7 @@ dap:P366
       </p>
       <p>
           Several properties capture provenance information, including within the citation and title, but the primary link to a formal description of the project is through <a href="#Property:dataset_was_generated_by"><code>prov:wasGeneratedBy</code></a>.
-          A terse description of the project is shown as a <a href="https://www.w3.org/TR/prov-o/#Activity"><code>prov:Activity</code></a>, though this would not necessarily be part of the same catalog.
+          A terse description of the project is shown as a <a data-cite="PROV-O#Activity"><code>prov:Activity</code></a>, though this would not necessarily be part of the same catalog.
           Note that as the project is ongoing, the activity has no end date.
       </p>
       <p>

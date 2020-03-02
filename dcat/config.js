@@ -2,28 +2,36 @@ var respecConfig = {
 //	preProcess: [dfn_index],
 //    subtitle: "Version 2",
     specStatus: "ED",
+    errata: "https://w3c.github.io/dxwg/errata/",
+//   specStatus: "ED",
 //    specStatus: "CR",
 //  crEnd: "2019-10-24",
     implementationReportURI: "https://w3c.github.io/dxwg/dcat-implementation-report/",
     shortName: "vocab-dcat-2",
     prevRecShortname: "vocab-dcat",
     canonicalURI: "TR",
-    prevRecURI:           "https://www.w3.org/TR/2014/REC-vocab-dcat-20140116/",    
-    previousPublishDate:  "2019-10-03",
-    previousMaturity:     "CR",
+    prevRecURI:           "https://www.w3.org/TR/2014/REC-vocab-dcat-20140116/",
+    previousPublishDate:  "2019-11-19",
+    previousMaturity:     "PR",
 //    previousURI:          "https://www.w3.org/TR/2019/WD-vocab-dcat-2-20190528/",
     edDraftURI:           "https://w3c.github.io/dxwg/dcat/",
 //    issueBase:            "https://github.com/w3c/dxwg/issues/", -- Not needed when github used
     alternateFormats: [{
       label: "Turtle",
-      uri: "https://w3c.github.io/dxwg/dcat/rdf/dcat.ttl",
-    }], 
+      uri: "https://www.w3.org/ns/dcat.ttl",
+    },{
+      label: "RDF/XML",
+      uri: "https://www.w3.org/ns/dcat.rdf",
+    },{
+      label: "JSON-LD",
+      uri: "https://www.w3.org/ns/dcat.jsonld",
+    }],
     editors: [{
       name:       "Riccardo Albertoni",
       orcid:  "0000-0001-5648-2713",
       company:    "CNR - Consiglio Nazionale delle Ricerche, Italy",
       url: "http://www.imati.cnr.it/joomla/index.php/people/8-curricula/178-riccardo-albertoni",
-      companyURL: "http://www.cnr.it/",
+      companyURL: "https://www.cnr.it/",
       w3cid: 72458
     },{
       name: "David Browning",
@@ -54,7 +62,7 @@ var respecConfig = {
     },{
       name: "Peter Winstanley",
       company: "Scottish Government",
-      companyURL: "http://www.gov.scot/",
+      companyURL: "https://www.gov.scot/",
       w3cid: 64374
     }],
     formerEditors: [{
@@ -131,7 +139,7 @@ var respecConfig = {
             href: "https://dcat-ap.de/def/"
         },
         "DDI" : {
-            href : "http://www.ddialliance.org/explore-documentation",
+            href : "https://www.ddialliance.org/explore-documentation",
             title : "Data Documentation Initiative",
             publisher : "DDI Alliance"
         },
@@ -267,7 +275,7 @@ var respecConfig = {
             status: "IETF Internet Draft"
         },
         "SCHEMA-ORG" : {
-            href : "http://schema.org/",
+            href : "https://schema.org/",
             title : "Schema.org"
         },
         "ShEx" : {
@@ -278,7 +286,7 @@ var respecConfig = {
 			publisher: "Shape Expressions W3C Community Group"
         },
         "VIVO-ISF" : {
-            href:"http://github.com/vivo-isf/vivo-isf",
+            href:"https://github.com/vivo-isf/vivo-isf",
             title:"VIVO-ISF Data Standard"
         },
         "ZaveriEtAl" : {
@@ -293,4 +301,3 @@ var respecConfig = {
         
     }
 };
-
