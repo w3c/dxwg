@@ -8,13 +8,16 @@ This repository contains the *Dataset Catalogue Vocabulary* (DCAT) work of the *
 
 ## DCAT Working Documents
 
-- [DXWG Use cases and requirements](https://w3c.github.io/dxwg/ucr/)
-- [DCAT Revision (Editors' Draft)](https://w3c.github.io/dxwg/dcat/)  
-  - [DCAT Revision Second Public Working Draft (SPWD)](https://www.w3.org/TR/vocab-dcat-2/)
-  - [DCAT Revision First Public Working Draft (FPWD)](https://www.w3.org/TR/2018/WD-vocab-dcat-2-20180508/)
+- [Editors' Draft](https://w3c.github.io/dxwg/dcat/)  
+  - [Proposed Recommendation (PR)](https://www.w3.org/TR/2019/PR-vocab-dcat-2-20191119/)
+  - [Candidate Recommendation (CR)](https://www.w3.org/TR/2019/CR-vocab-dcat-2-20191003/)
+  - [Third Public Working Draft (TPWD)](https://www.w3.org/TR/2019/WD-vocab-dcat-2-20190528/)
+  - [Second Public Working Draft (SPWD)](https://www.w3.org/TR/2018/WD-vocab-dcat-2-20181016/)
+  - [First Public Working Draft (FPWD)](https://www.w3.org/TR/2018/WD-vocab-dcat-2-20180508/)
 
 ## Other DXWG Documents
 
+- [DXWG Use cases and requirements](https://w3c.github.io/dxwg/ucr/)
 - [Guidance for Application Profiles](https://w3c.github.io/dxwg/profiles/)
 - [The Profiles Vocabulary (Editors' Draft)](https://w3c.github.io/dx-prof/)
 - [Content Negotiation by Profile (Editors' Draft)](https://w3c.github.io/dx-connegp/)
