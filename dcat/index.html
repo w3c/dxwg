@@ -246,8 +246,7 @@
         </li>
         <li>
           <a href="#Class:Dataset"><code>dcat:Dataset</code></a> represents a dataset.
-          A dataset is a collection of data, published or curated by a single agent.
-          Data comes in many forms including numbers, words, pixels, imagery, sound and other multi-media, and potentially other types, any of which might be collected into a dataset.
+          A dataset is a collection of data, published or curated by a single agent or identifiable community. The notion of dataset in DCAT is broad and inclusive, with the intention of accommodating resource types arising from all communities. Data comes in many forms including numbers, text, pixels, imagery, sound and other multi-media, and potentially other types, any of which might be collected into a dataset.
         </li>
         <li>
           <a href="#Class:Distribution"><code>dcat:Distribution</code></a> represents an accessible form of a dataset such as a downloadable file.
@@ -1696,6 +1695,7 @@
             <tr><td class="prop">Sub-class of:</td><td><a href="#Class:Resource"><code>dcat:Resource</code></a></td></tr>
             <tr><td class="prop">Usage note:</td><td>This class describes the conceptual dataset. One or more representations might be available, with differing schematic layouts and formats or serializations.</td></tr>
             <tr><td class="prop">Usage note:</td><td>This class describes the actual dataset as published by the dataset provider. In cases where a distinction between the actual dataset and its entry in the catalog is necessary (because metadata such as modification date might differ), the <i><a href="#Class:Catalog_Record">catalog record</a></i> class can be used for the latter.</td></tr>
+            <tr><td class="prop">Usage note:</td><td>The notion of dataset in DCAT is broad and inclusive, with the intention of accommodating resource types arising from all communities. Data comes in many forms including numbers, text, pixels, imagery, sound and other multi-media, and potentially other types, any of which might be collected into a dataset.</td></tr>
             </tbody>
         </table>
 
@@ -2750,7 +2750,7 @@
               <tbody>
               <tr><td class="prop">Definition:</td><td>Associates any resource with the corresponding geometry. [[LOCN]]</td></tr>
               <tr><td class="prop">Range:</td><td><a data-cite="RDF-SCHEMA#ch_literal"><code title="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</code></a></td></tr>
-              <tr><td class="prop">Usage note:</td><td>The range of this property is intentionally generic, with the purpose of allowing different geometry encodings. E.g., the geometry could be encoded as <abbr title="Well-known Text">WKT</abbr> (<a href="http://www.opengis.net/ont/geosparql#asWKT"><code title="http://www.opengis.net/ont/geosparql#asWKT">geosparql:asWKT</code></a> [[GeoSPARQL]]).</td></tr>
+              <tr><td class="prop">Usage note:</td><td>The range of this property is intentionally generic, with the purpose of allowing different geometry encodings. E.g., the geometry could be encoded as <abbr title="Well-known Text">WKT</abbr> (<a href="http://www.opengis.net/ont/geosparql#wktLiteral"><code title="http://www.opengis.net/ont/geosparql#wktLiteral">geosparql:wktLiteral</code></a> [[GeoSPARQL]]).</td></tr>
               </tbody>
             </table>
 
@@ -2776,7 +2776,7 @@
               <tbody>
               <tr><td class="prop">Definition:</td><td>The geographic bounding box of a resource.</td></tr>
               <tr><td class="prop">Range:</td><td><a data-cite="RDF-SCHEMA#ch_literal"><code title="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</code></a></td></tr>
-              <tr><td class="prop">Usage note:</td><td>The range of this property is intentionally generic, with the purpose of allowing different geometry encodings. E.g., the geometry could be encoded as <abbr title="Well-known Text">WKT</abbr> (<a href="http://www.opengis.net/ont/geosparql#asWKT"><code title="http://www.opengis.net/ont/geosparql#asWKT">geosparql:asWKT</code></a> [[GeoSPARQL]]).</td></tr>
+              <tr><td class="prop">Usage note:</td><td>The range of this property is intentionally generic, with the purpose of allowing different geometry encodings. E.g., the geometry could be encoded as <abbr title="Well-known Text">WKT</abbr> (<a href="http://www.opengis.net/ont/geosparql#wktLiteral"><code title="http://www.opengis.net/ont/geosparql#wktLiteral">geosparql:wktLiteral</code></a> [[GeoSPARQL]]).</td></tr>
               </tbody>
             </table>
 
@@ -2802,7 +2802,7 @@
               <tbody>
               <tr><td class="prop">Definition:</td><td>The geographic center (centroid) of a resource.</td></tr>
               <tr><td class="prop">Range:</td><td><a data-cite="RDF-SCHEMA#ch_literal"><code title="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</code></a></td></tr>
-              <tr><td class="prop">Usage note:</td><td>The range of this property is intentionally generic, with the purpose of allowing different geometry encodings. E.g., the geometry could be encoded as <abbr title="Well-known Text">WKT</abbr> (<a href="http://www.opengis.net/ont/geosparql#asWKT"><code title="http://www.opengis.net/ont/geosparql#asWKT">geosparql:asWKT</code></a> [[GeoSPARQL]]).</td></tr>
+              <tr><td class="prop">Usage note:</td><td>The range of this property is intentionally generic, with the purpose of allowing different geometry encodings. E.g., the geometry could be encoded as <abbr title="Well-known Text">WKT</abbr> (<a href="http://www.opengis.net/ont/geosparql#wktLiteral"><code title="http://www.opengis.net/ont/geosparql#wktLiteral">geosparql:wktLiteral</code></a> [[GeoSPARQL]]).</td></tr>
               </tbody>
             </table>
 
@@ -3181,7 +3181,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
       4.8843200 52.374996 , 4.884255 52.374926 ,
       4.8843289 52.374901 , 4.884451 52.375034 ,
       4.8842353 52.375108
-    ))"""^^geosparql:asWKT ;
+    ))"""^^geosparql:wktLiteral ;
   ] .
 </pre>
 <figure id="fig-spatial-coverage-geometry">
@@ -3205,7 +3205,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
       120755.411 487576.96  , 120750.935 487569.172 ,
       120755.941 487566.288 , 120764.369 487581.066 ,
       120749.725 487589.422
-    ))"""^^geosparql:asWKT ;
+    ))"""^^geosparql:wktLiteral ;
   ] .
 </pre>
 </aside>
@@ -3216,7 +3216,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
 &lt;AnneFrank_2&gt; a dcat:Dataset ;
   dct:spatial [
     a dct:Location ;
-    dcat:centroid "POINT(4.88412 52.37509)"^^geosparql:asWKT ;
+    dcat:centroid "POINT(4.88412 52.37509)"^^geosparql:wktLiteral ;
   ] .
 </pre>
 <figure id="fig-spatial-coverage-centroid">
@@ -3225,14 +3225,14 @@ ex:InternationalDOIFundation a foaf:Organization ;
 </figure>
 <div class="note">
 <p>This point location could be expressed using the [[W3C-BASIC-GEO]] vocabulary. 
-If it is required to provide the <code>w3cgeo:Point</code> formulation, then it should be in addition to, not in place of, a <code>dcat:centroid</code> containing a <abbr title="Well-known Text">WKT</abbr> literal (<a href="http://www.opengis.net/ont/geosparql#asWKT"><code title="http://www.opengis.net/ont/geosparql#asWKT">geosparql:asWKT</code></a> [[GeoSPARQL]]). 
+If it is required to provide the <code>w3cgeo:Point</code> formulation, then it should be in addition to, not in place of, a <code>dcat:centroid</code> containing a <abbr title="Well-known Text">WKT</abbr> literal (<a href="http://www.opengis.net/ont/geosparql#wktLiteral"><code title="http://www.opengis.net/ont/geosparql#wktLiteral">geosparql:wktLiteral</code></a> [[GeoSPARQL]]). 
 This ensures interoperability with other DCAT dataset descriptions. 
 For example:
 <pre class="nohighlight turtle">
   &lt;AnneFrank_3&gt; a dcat:Dataset ;
     dct:spatial [
       a dct:Location , w3cgeo:Point ;
-      dcat:centroid "POINT(4.88412 52.37509)"^^geosparql:asWKT ;
+      dcat:centroid "POINT(4.88412 52.37509)"^^geosparql:wktLiteral ;
       w3cgeo:lat  "52.37509"^^xsd:decimal ;
       w3cgeo:long "4.88412"^^xsd:decimal ;
     ] .
@@ -3257,7 +3257,7 @@ For example:
       3.053 47.975 , 7.24  47.975 ,
       7.24  53.504 , 3.053 53.504 ,
       3.053 47.975
-    ))"""^^geosparql:asWKT ;
+    ))"""^^geosparql:wktLiteral ;
   ] .
 </pre>
 <figure id="fig-spatial-coverage-bbox">
@@ -3858,7 +3858,7 @@ ex:Test543L
   
   <p>The editors gratefully acknowledge the contributions made to this document by <a href="https://www.w3.org/2000/09/dbwg/details?group=99375&public=1">all members of the working group</a>, especially Annette Greiner, Antoine Isaac, Armin Haller, Dan Brickley, Ine de Visser, Jaroslav Pullmann, Lars G. Svensson, Linda van den Brink, Makx Dekkers, Nicholas Car, Rob Atkinson, Tom Baker.</p>
 
-  <p>The editors would also like to thank the following for comments received: Addison Phillips, Andreas Kuckartz, Anna Odgaard Ingram, Armando Stellato, Bert van Nuffelen, Chris Little, Chris Sweeney, Chris Wood, Clemens Portele, Daniel Pop, Dave Reynolds, Guillaume Duffes, Ian Davis, Jakob Voß, Jakub Klímek, James Passmore, Leigh Dodds, Luca Trani, Marco Brattinga, Matthias Palmér, Melanie Barlow, Nancy Fallgren, Nuno Freire, Øystein Åsnes, Pano Maria, Peter Parslow, Renato Iannella, Ruth Duerr, Siri Jodha S. Khalsa, Stephane Fellah, Stephen Richard, Stijn Goedertier, Tom Kralidis, Vladimir Alexiev, Wouter Beek, Yves Coene.</p>
+  <p>The editors would also like to thank the following for comments received: Addison Phillips, Andreas Kuckartz, Anna Odgaard Ingram, Armando Stellato, Bert van Nuffelen, Chris Little, Chris Sweeney, Chris Wood, Clemens Portele, Daniel Pop, Dave Reynolds, Guillaume Duffes, Ian Davis, Jakob Voß, Jakub Klímek, James Passmore, Leigh Dodds, Luca Trani, Marco Brattinga, Matthew Rawlings, Matthias Palmér, Melanie Barlow, Nancy Fallgren, Nuno Freire, Øystein Åsnes, Pano Maria, Peter Parslow, Renato Iannella, Ruth Duerr, Shuji Kamitsuna, Siri Jodha S. Khalsa, Stephane Fellah, Stephen Richard, Stijn Goedertier, Tom Kralidis, Vladimir Alexiev, Wouter Beek, Yves Coene.</p>
 
   <p>The editors also gratefully acknowledge the chairs of this Working Group: Karen Coyle, Caroline Burle and Peter Winstanley &mdash; and staff contacts Phil Archer and Dave Raggett.</p>
 
