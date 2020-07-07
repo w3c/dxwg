@@ -4087,7 +4087,7 @@ ex:Test543L
           In many legacy catalogs and repositories (e.g. CKAN), ‘datasets’ are ‘just a bag of files’. There is no distinction made between distribution (representation), and other kinds of relationship (e.g. documentation, schema, supporting documents) from the dataset to each of the files.
       </p>
       <p>
-          If the nature of the relationships between a dataset and component resources in a catalog, repository, or elsewhere are not known, <code>dct:hasPart</code> can be used:
+          If the nature of the relationships between a dataset and component resources in a catalog, repository, or elsewhere are not known, <code>dct:relation</code> or its sub-property <code>dct:hasPart</code> can be used:
       </p>
 
 <aside id="ex-dataset-as-bag-of-files" class="example">
@@ -4095,21 +4095,21 @@ ex:Test543L
 :d33937
   dct:description "A set of RDF graphs representing the International [Chrono]stratigraphic Chart, ..."@en ;
   dct:identifier "https://doi.org/10.25919/5b4d2b83cbf2d"^^xsd:anyURI ;
-  dct:creator &lt;https://orcid.org/0000-0002-3884-3420&gt;;
-  dct:hasPart &lt;https://vocabs.ands.org.au/viewById/196&gt; ;
-  dct:hasPart :ChronostratChart2017-02.pdf  ;
-  dct:hasPart :ChronostratChart2017-02.jpg ;
+  dct:creator &lt;https://orcid.org/0000-0002-3884-3420&gt; ;
+  dct:relation :ChronostratChart2017-02.pdf  ;
+  dct:relation :ChronostratChart2017-02.jpg ;
+  dct:relation :d33937.owl ;
   dct:hasPart :timescale.zip ;
-  dct:hasPart :isc2017.jsonld ;
-  dct:hasPart :isc2017.nt ;
-  dct:hasPart :isc2017.rdf ;
-  dct:hasPart :isc2017.ttl ;
+  dct:hasPart :d33937-jsonld ;
+  dct:hasPart :d33937-nt ;
+  dct:hasPart :d33937-rdf ;
+  dct:hasPart :d33937-ttl ;
 .
 </pre>
 </aside>
 
       <p>
-          If it is clear that any of these related resources is a proper <i>representation</i> of the dataset, <code>dcat:distribution</code> should be used.
+          If the nature of the relationship is known, then other <a href="#Property:resource_relation">sub-properties of <code>dct:relation</code> should be used</a> to convey this. In particular, if it is clear that any of these related resources is a proper <i>representation</i> of the dataset, then <code>dcat:distribution</code> should be used.
       </p>
 
 <aside id="ex-when-using-distribution" class="example">
@@ -4118,10 +4118,10 @@ ex:Test543L
   rdf:type dcat:Dataset ;
   dct:description "A set of RDF graphs representing the International [Chrono]stratigraphic Chart, ..."@en ;
   dct:identifier "https://doi.org/10.25919/5b4d2b83cbf2d"^^xsd:anyURI ;
-  dct:hasPart &lt;https://vocabs.ands.org.au/viewById/196&gt; ;
-  dct:hasPart :ChronostratChart2017-02.pdf  ;
-  dct:hasPart :ChronostratChart2017-02.jpg ;
-  dct:hasPart :timescale.zip ;
+  dct:hasFormat :ChronostratChart2017-02.pdf  ;
+  dct:hasFormat :ChronostratChart2017-02.jpg ;
+  dct:references :d33937.owl ;
+  dcat:distribution :timescale.zip ;
   dcat:distribution :d33937-jsonld ;
   dcat:distribution :d33937-nt ;
   dcat:distribution :d33937-rdf ;
@@ -4147,11 +4147,24 @@ ex:Test543L
   dcat:byteSize "531703"^^xsd:decimal ;
   dcat:mediaType &lt;https://www.iana.org/assignments/media-types/text/turtle&gt; ;
 .
+:d33937.owl
+  a dcat:Dataset ;
+  dct:conformsTo <https://www.w3.org/TR/owl2-overview/> ;
+  dct:description "This is an RDF/OWL representation of the GeoSciML Geologic Timescale model ..."@en ;
+  dct:identifier "http://resource.geosciml.org/ontology/timescale/gts" ;
+  dct:issued "2011-01-01"^^xsd:date ;
+  dct:modified "2020-05-31"^^xsd:date ;
+  dct:title "Geologic Timescale model"@en ;
+  dct:type <http://purl.org/adms/assettype/DomainModel> ;
+  rdfs:comment "The ontology used for the data"@en ;
+  dcat:distribution <https://data.csiro.au/dataset/d33937.owl.ttl> ;
+  dcat:landingPage <https://raw.githack.com/CGI-IUGS/timescale-ont/master/html/gts.html> ;
+.
 </pre>
 </aside>
 
       <p>
-          This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://w3c.github.io/dxwg/dcat/examples/csiro-dap-examples.ttl"><code>csiro-dap-examples.ttl</code></a>.
+          This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://w3c.github.io/dxwg/dcat/examples/csiro-dap-examples.ttl"><code>csiro-dap-examples.ttl</code></a> and <a href="https://w3c.github.io/dxwg/dcat/examples/csiro-stratchart.ttl"><code>csiro-stratchart.ttl</code></a>.
       </p>
 
       <p>
