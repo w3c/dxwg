@@ -56,8 +56,7 @@ var respecConfig = {
     },{
       name:       "Andrea Perego",
       orcid:      "0000-0001-9300-2694",
-      company:    "European Commission, Joint Research Centre",
-      companyURL: "https://ec.europa.eu/jrc/",
+      company:    "Invited Expert",
       w3cid: 40317
     },{
       name: "Peter Winstanley",
