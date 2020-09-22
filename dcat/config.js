@@ -103,6 +103,11 @@ var respecConfig = {
     lint: "false",
     github: "https://github.com/w3c/dxwg/",
     localBiblio: {
+        "ADMS-SKOS":{
+          "href":"https://joinup.ec.europa.eu/svn/adms/ADMS_v1.00/ADMS_SKOS_v1.00.html",
+          "title":"Joinup. ADMS Controlled Vocabularies",
+          "publisher":"European Commission"
+        },	    
         "DATS": {
             "href": "https://datatagsuite.github.io/docs/html/",
             "title": "Data Tag Suite",
@@ -208,6 +213,16 @@ var respecConfig = {
             "title":"Named Authority List: Access rights",
             "publisher":"Publications Office of the European Union"
         },
+        "EUV-CS":{
+            "href":"https://publications.europa.eu/en/web/eu-vocabularies/at-dataset/-/resource/dataset/concept-status",
+            "title":"Named Authority List: Concept statuses",
+            "publisher":"Publications Office of the European Union"
+        },
+        "EUV-DS":{
+            "href":"https://publications.europa.eu/en/web/eu-vocabularies/at-dataset/-/resource/dataset/dataset-status",
+            "title":"Named Authority List: Dataset statuses",
+            "publisher":"Publications Office of the European Union"
+        },
         "netCDF": {
             href: "https://www.unidata.ucar.edu/software/netcdf/",
             title: "Network Common Data Form (NetCDF)",
@@ -284,6 +299,11 @@ var respecConfig = {
             status: "Draft Community Group Report",
 			publisher: "Shape Expressions W3C Community Group"
         },
+        "UKGOVLD-REG":{
+          "href":"https://github.com/UKGovLD/registry-core/wiki/Principles-and-concepts",
+          "title":"Linked Data Registry",
+          "publisher":"UK Government Linked Data Working Group"
+        },	    
         "VIVO-ISF" : {
             href:"https://github.com/vivo-isf/vivo-isf",
             title:"VIVO-ISF Data Standard"
