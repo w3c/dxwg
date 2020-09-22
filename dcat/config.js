@@ -99,9 +99,9 @@ var respecConfig = {
 /* The following fields are now deprecated, and replaced by field `group`	
     wg: "Dataset Exchange Working Group",
     wgURI: "https://www.w3.org/2017/dxwg/",
-    wgPublicList: "public-dxwg-comments",
     wgPatentURI: "https://www.w3.org/2004/01/pp-impl/99375/status",
 */    
+    wgPublicList: "public-dxwg-comments",
     inlineCSS: "true",
     lint: "false",
     github: "https://github.com/w3c/dxwg/",
