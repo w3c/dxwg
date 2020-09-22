@@ -301,7 +301,7 @@ var respecConfig = {
         },
         "UKGOVLD-REG":{
           "href":"https://github.com/UKGovLD/registry-core/wiki/Principles-and-concepts",
-          "title":"Linked Data Registry",
+          "title":"Linked Data Registry - Principles and Concepts",
           "publisher":"UK Government Linked Data Working Group"
         },	    
         "VIVO-ISF" : {
