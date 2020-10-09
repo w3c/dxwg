@@ -4,7 +4,7 @@
     <title>Data Catalog Vocabulary (DCAT) - Version 2</title>
     <meta content="text/html; charset=utf-8" http-equiv="content-type" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <script class="remove" src="https://www.w3.org/Tools/respec/respec-w3c-common"></script>
+    <script class="remove" src="https://www.w3.org/Tools/respec/respec-w3c" defer></script>
     <script class="remove" src="config.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="small.css" media="only all and (max-width: 649px)">
@@ -73,6 +73,9 @@
 
 </section>
 
+<section class="introductory" id="issue-summary">
+</section>    
+    
 <section id="introduction" class="informative">
 
     <h2>Introduction</h2>
@@ -3290,6 +3293,98 @@ See the wiki page on <a href="https://github.com/w3c/dxwg/wiki/Dataset-versionin
 </p>
 </aside>
 -->
+
+<aside class="ednote">
+<p>Preliminary draft for discussion.</p>
+<p>Relevant issues:</p>
+<div class="issue" data-number="1251"></div>    
+</aside>
+    
+<p>The following sections briefly discuss some key versioning aspects, and how they can be specified in DCAT records.</p>
+
+<aside class="ednote">
+<p>TBD: revising <a href="#qualified-relationship"></a> and <a href="#examples-dataset-provenance"></a> in order to include aspects more specific to versioning.</p>
+</aside>
+
+<section id="version-types">
+<h2>Version types</h2>
+
+<p>The creation of a version of a resource may have different motivations and purposes. For instance, the resource contains errors to be fixed, there may be new content to be added, or there may be a need to make the resource available in a different representation or language. Moreover, a new version may or may not replace the original resource.</p>
+<p>Depending on these aspects, it is possible to identify different version types, which may correspond to different relationships. By following the approach used in the library domain, version types can be classified as follows:</p>
+
+<ol>
+<li>Each version <strong>replaces</strong> / <strong>supersedes</strong> the previous one, typically via a <strong>revision</strong>. E.g., this may include situations when a resource is revised to fix errors, add new content.</li>
+<li>Each version is the <strong>successor</strong> of the previous one. In this case, a new version may or may not replace the previous one. An example is a project creating datasets providing statistics about air quality on, say, a yearly basis.</li>
+<li>Versions provided <strong>in addition to</strong> the reference resource, without replacing it. In this case, versions may result in information loss. Examples includes abridgements (e.g., a summary), adaptations, transformations (to a different representations, formats, reference systems, measurements), translations.</li> 
+</ol>
+
+<aside class="ednote">
+<p>The second type is partially related to the notion of dataset series.</p>
+<div class="issue" data-number="868"></div>
+</aside>
+    
+<p>These version types are not necessarily mutually exclusive, and they may overlap - especially, the first and the second ones. So, the relationship(s) used to link resource versions depends on which aspect is relevant for the specific use case. E.g.:</p>
+<ul>
+<li>In same cases, the only relevant information is that resource <var>A</var> is a version of (<code>dct:isVersionOf</code> / <code>dct:hasVersion</code>) resource <var>B</var>, irrespective of the version type.</li>
+<li>In other cases, it is important to explicitly state that resource <var>A</var> replaces (<code>dct:replaces</code> / <code>dct:isReplacedBy</code>) resource <var>B</var>, and that it is the result of a revision (<code>prov:wasRevisionOf</code> / <code>prov:hadRevision</code>).</li>
+<li>Other cases may require having an explicit indication about which is the previous, next, and last version of a resource (<code>adms:prev</code>, <code>adms:next</code>, <code>adms:last</code>).</li>
+</ul>
+
+<p>The third version type covers more heterogeneous cases, compared with the other version types. Depending on the application scenario, some or all of them may not be considered strictly related to versioning, but rather completely different resources, derived from other ones. E.g., the transformation of a distribution in additional formats (from CSV to XML and JSON), units of measurement, or coordinate reference systems, may be simply considered as alternative distributions associated with the same dataset. The same could be said for translations from one natural language to another one.</p>
+
+<p>These cases can be addressed by using properties as <code>dct:source</code> and <code>prov:wasDerivedFrom</code> / <code>prov:hadDerivation</code>, as illustrated in <a href="#examples-dataset-provenance"></a> and <a href="#qualified-relationship"></a>. Moreover, for translations in natural language, property <a data-cite="VOCAB-ADMS#adms-translation"><code>adms:translation</code></a> could be used.</p>
+
+</section>
+
+<section id="version-info">
+<h2>Version information</h2>
+
+<div class="issue" data-number="89"></div>
+<div class="issue" data-number="91"></div>
+<div class="issue" data-number="92"></div>
+    
+<p>Besides the relationships illustrated in the previous section, versioned resources may be associated with additional information, describing, e.g., their differences with the original resource (the version "delta"),  the version identifier, and release date.</p>
+
+<p>Two typical examples are (a) a textual description of the changes between the current and the previous version of a resource, and (b) whether the new version of the resource is backward compatible or not with the previous version (this is particularly relevant when the resource is used by given applications, so it is fundamental to know if the new version can be also used with them).</p>
+
+<div class="issue" data-number="1258"></div>    
+<!--
+<aside class="issue">
+<a href="https://www.w3.org/TR/2012/REC-owl2-syntax-20121211/#Ontology_Annotations">Section 3.5 in  OWL 2 specification</a> suggests <code>owl:backwardCompatibleWith</code> / <code>owl:incompatibleWith</code> properties on entities other than ontologies is discouraged. Should we consider any other valuable alternatives? (see <a href="https://github.com/w3c/dxwg/issues/1258">issue 1258</a>) 
+</aside>
+-->
+<p>For these purposes, it is recommended to use, respectively, property <a data-cite="VOCAB-ADMS#adms-versionnotes"><code>adms:versionNotes</code></a> (for a textual description of the changes) and properties <code>owl:backwardCompatibleWith</code> / <code>owl:incompatibleWith</code> (for specifying (in)compatibility).</p>
+
+For indicating the version release date and identifier, the use of, respectively, <code>dct:issued</code> and <code>owl:versionInfo</code> is recommended.
+</section>
+
+<section id="life-cycle">
+<h2>Resource life-cycle</h2>
+
+<div class="issue" data-number="1238"></div>
+
+<p>The life-cycle of a resource is an aspect orthogonal to versioning, and sometimes strictly related. The evolution of a resource along its life-cycle (from its conception, to its creation and publication) may result in new versions, although this is not always the case (e.g., in case an approval workflow is in place, the resource may not undergo any change if no revision is needed). Similarly, the creation of a new version may not necessarily lead to a change in status (e.g., when changes are not substantial, and/or are implemented on resources still in development). Moreover, when a resource is replaced because of a revision (correcting errors, adding new content, etc.), it may be moved to a different life-cycle status (e.g., deprecation or withdrawl).</p>
+
+<p>It is worth noting that the status of a resource with respect to its life-cycle is often an important piece of information by itself, from both the data provider's and data consumers' perspectives. For a data consumer, it is important to know if a resource is still in development or not, as well as if it is deprecated or withdrawn (and, in such cases, if there is a new version to be used). On the other hand, for a data provider, flagging a resource with its status in the life-cycle is fundamental for the correct administration of the data management workflow. E.g., a resource before being published may need to be stable, and possibly flagged as approved and/or registered. Finally, besides the actual status of a resource, another useful piece of information is <em>when</em> the resource moved to a different status (e.g., when it was created, reviewed, accepted, published).</p>
+
+<p>As for versioning, the resource life-cycle depends on community practices, data management policies, and the workflows in place. Moreover, different resource types (e.g., datasets vs catalog records) may have different life-cycle statuses.</p>
+
+<p>For the specification of life-cycle statuses, the use of property <a data-cite="VOCAB-ADMS#adms-status"><code>adms:status</code></a> is recommended, along with the appropriate [[DCTERMS]] time-related properties. However, DCAT does not prescribe the use of any specific set of life-cycle statuses, but refers to existing standards and community practices fit for the relevant application scenario.</p>
+
+<aside class="note">
+<p>Examples of life-cycle statuses include:</p>
+<ul>
+<li>Those defined in the ISO standard for item registration [[ISO-19135]] (accepted / not accepted, deprecated, experimental, reserved, retired, stable, submitted, superseded, valid / invalid).</li>
+<li>The progress codes defined in [[ISO-19115]] (accepted, completed, deprecated, final, historical archive, not accepted, obsolete, ongoing, pending, planned, proposed, required, retired, superseded, tentative, under development, valid, withdrawn).</li>
+<li>[[DCTERMS]], which supports a number of relevant time-related properties (<code>dct:created</code>, <code>dct:dateSubmitted</code>, <code>dct:dateAccepted</code>, <code>dct:dateCopyrighted</code>, <code>dct:issued</code>, <code>dct:modified</code>).</li>
+<li>The ADMS Status vocabulary [[ADMS-SKOS]], used in [[DCAT-AP]], which includes four statuses: completed, deprecated, under development, and withdrawn.</li>
+<li>The dataset statuses [[EUV-DS]] and concept statuses [[EUV-CS]] vocabularies from the EU Vocabularies registry.</li>
+</ul>
+<p>The UK Government Linked Data Registry project [[UKGOVLD-REG]] provides an example of how the life-cycle statuses defined in [[ISO-19135]] can be used in a registry, along with the criteria for status transition.</p>
+</aside>
+
+</section>
+    
 </section>
 
 <section id="data-citation" class="informative">
