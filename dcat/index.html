@@ -3431,7 +3431,7 @@ For indicating the version release date and identifier, the use of, respectively
 <p>In the following example, yearly budget data are grouped into a series. Both the series and the child datasets are typed as <code>dcat:Dataset</code>'s, and the series is soft-typed with property <code>dct:type</code>. The series and the datasets are linked by using properties <code>dct:hasPart</code> and <code>dct:isPartOf</code>.</p>
 <pre>
 ex:budget a dcat:Dataset ;
-  dct:type <http://inspire.ec.europa.eu/metadata-codelist/ResourceType/series> ;
+  dct:type &lt;http://inspire.ec.europa.eu/metadata-codelist/ResourceType/series&gt: ;
   title "Budget data"@en ;
   dct:hasPart ex:budget-2018 ,
     ex:budget-2019 , ex:budget-2020 ;
@@ -3460,7 +3460,7 @@ ex:budget-2020 a dcat:Dataset ;
 <p>The following example extends <a href="#ex-dataset-series-containment"></a> by specifying the publication date (<code>dct:issued</code>) of each child dataset, and the previous (<code>adms:prev</code>) and next release (<code>adms:next</code>).</p>
 <pre>
 ex:budget a dcat:Dataset ;
-  dct:type <http://inspire.ec.europa.eu/metadata-codelist/ResourceType/series> ;
+  dct:type &lt;http://inspire.ec.europa.eu/metadata-codelist/ResourceType/series&gt: ;
   title "Budget data"@en ;
   dct:hasPart ex:budget-2018 ,
     ex:budget-2019 , ex:budget-2020 ;
@@ -3528,10 +3528,10 @@ ex:budget-2020 a dcat:Dataset ;
 </aside>
 
 <aside class="example" id="ex-dataset-series-properties" title="">
-<p>The following example is a variant <a href="#ex-dataset-series-releases"></a>, with child datasets corresponding to yearly budget data for specific countries. The temporal resolution (<code>dcat:temporalResolution</code>), temporal coverage (<code>dcat:temporal</code>), and spatial coverage (<code>dcat:spatial</code>) of the dataset series correspond to the union of those of the child datasets. Finally, the dataset series specifies as publication date the one of the first published child dataset, whereas the date of publication of the last child dataset is specified as update date (<code>dct:modified</code>).</p>
+<p>The following example is a variant <a href="#ex-dataset-series-releases"></a>, with child datasets corresponding to yearly budget data for specific countries. The temporal resolution (<code>dcat:temporalResolution</code>), temporal coverage (<code>dcat:temporal</code>), and spatial coverage (<code>dcat:spatial</code>) of the dataset series correspond to the union of those of the child datasets. Moreover, the dataset series specifies as publication date the one of the first published child dataset, whereas the date of publication of the last child dataset is specified as update date (<code>dct:modified</code>). Finally, the update frequency (<code>dct:accrualPeriodicity</code>) of the dataset series is annual, as the child datasets are published on a yearly basis, and not updated after their publication.</p>
 <pre>
 ex:budget a dcat:Dataset ;
-  dct:type <http://inspire.ec.europa.eu/metadata-codelist/ResourceType/series> ;
+  dct:type &lt;http://inspire.ec.europa.eu/metadata-codelist/ResourceType/series&gt: ;
   title "Budget data"@en ;
   dct:hasPart ex:budget-2018-be , ex:budget-2019-be , ex:budget-2020-be ,
     ex:budget-2018-fr , ex:budget-2019-fr , ex:budget-2020-fr , 
@@ -3539,15 +3539,15 @@ ex:budget a dcat:Dataset ;
 	... ;
   dct:issued "2019-01-01"^^xsd:date ,
   dct:modified "2021-01-01"^^xsd:date ;
-  dct:accrualPeriodicity <http://purl.org/cld/freq/annual> ;
+  dct:accrualPeriodicity &lt;http://purl.org/cld/freq/annual&gt; ;
   dcat:temporalResolution "P1Y"^^xsd:duration ;
   dct:temporal [ a dct:PeriodOfTime ;
     dcat:startDate "2018-01-01"^^xsd:date ;
     dcat:endDate   "2020-12-31"^^xsd:date ;
   ] ;  
-  dct:spatial <http://publications.europa.eu/resource/dataset/country/BEL> ,
-    <http://publications.europa.eu/resource/dataset/country/FRA> ,
-    <http://publications.europa.eu/resource/dataset/country/ITA> ,
+  dct:spatial &lt;http://publications.europa.eu/resource/dataset/country/BEL&gt; ,
+    &lt;http://publications.europa.eu/resource/dataset/country/FRA&gt; ,
+    &lt;http://publications.europa.eu/resource/dataset/country/ITA&gt; ,
     ...  ;
   .
   
@@ -3556,13 +3556,13 @@ ex:budget-2018-be a dcat:Dataset ;
   dct:isPartOf ex:budget ;
   dct:issued "2019-01-01"^^xsd:date ;
   adms:next ex:budget-2019-be ;
-  dct:accrualPeriodicity <http://purl.org/cld/freq/annual> ;
+  dct:accrualPeriodicity &lt;http://purl.org/cld/freq/annual&gt; ;
   dcat:temporalResolution "P1Y"^^xsd:duration ;
   dct:temporal [ a dct:PeriodOfTime ;
     dcat:startDate "2018-01-01"^^xsd:date ;
     dcat:endDate   "2018-12-31"^^xsd:date ;
   ] ;  
-  dct:spatial <http://publications.europa.eu/resource/dataset/country/BEL> ;
+  dct:spatial &lt;http://publications.europa.eu/resource/dataset/country/BEL&gt; ;
   .
   
 ...
@@ -3572,13 +3572,13 @@ ex:budget-2018-fr a dcat:Dataset ;
   dct:isPartOf ex:budget ;
   dct:issued "2019-01-01"^^xsd:date ;
   adms:next ex:budget-2019-fr ;
-  dct:accrualPeriodicity <http://purl.org/cld/freq/annual> ;
+  dct:accrualPeriodicity &lt;http://purl.org/cld/freq/annual&gt; ;
   dcat:temporalResolution "P1Y"^^xsd:duration ;
   dct:temporal [ a dct:PeriodOfTime ;
     dcat:startDate "2018-01-01"^^xsd:date ;
     dcat:endDate   "2018-12-31"^^xsd:date ;
   ] ;  
-  dct:spatial <http://publications.europa.eu/resource/dataset/country/FRA> ;
+  dct:spatial &lt;http://publications.europa.eu/resource/dataset/country/FRA&gt; ;
   .
 
 ...
@@ -3594,7 +3594,7 @@ ex:budget-2018-it a dcat:Dataset ;
     dcat:startDate "2018-01-01"^^xsd:date ;
     dcat:endDate   "2018-12-31"^^xsd:date ;
   ] ;  
-  dct:spatial <http://publications.europa.eu/resource/dataset/country/ITA> ;
+  dct:spatial &lt;http://publications.europa.eu/resource/dataset/country/ITA&gt; ;
   .
   
 ...
