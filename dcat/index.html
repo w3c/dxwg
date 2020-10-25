@@ -3387,6 +3387,220 @@ For indicating the version release date and identifier, the use of, respectively
     
 </section>
 
+<section class="informative" id="dataset-series">
+
+<h2>Dataset series</h2>
+
+<div class="issue" data-number="868"></div>
+
+<p>With "dataset series" we refer to data, somehow interrelated, that are published separately, although they could be  merged into a single dataset. An example is budget data split by year and/or country, instead of being made available in a single dataset.</p>
+
+<p>Dataset series are defined in [[ISO-19115]] as a <q>collection of datasets [&hellip;] sharing common characteristics</q>. However, their use is not limited to geospatial data, although in other domains they can be named differently (e.g., time series, data slices) and defined more or less strictly (see, e.g., the notion of "dataset slice" in [[VOCAB-DATA-CUBE]]).</p>
+
+<p>The reasons and criteria for splitting data into series are manyfold, and they may be related to, e.g., data characteristics, publishing process, and how they are typically used. For instance, data huge in size (as geospatial ones) are more easily handled (by data providers as well as data consumers) by splitting them in smaller ones. Another example is data that are released on a yearly basis, which are typically published as separate datasets, instead of appending the new data to the first in the series.</p>
+
+<p>There are no common rules and criteria across domains to decide when dataset series should be created and how they should be organized. The situation is similar to the one concerning versioning (see <a href="#dataset-versions"></a>), and, likewise, DCAT does not adopt any specific definition of dataset series, and when and how they should be created and organized. The purpose of this section is limited to providing guidance on how dataset series can be specified in DCAT.</p>
+
+
+<section id="dataset-series-specification">
+
+<h2>How to specify dataset series</h2>
+
+<p>Existing DCAT implementations adopt two main alternative approaches to specifying dataset series:</p>
+
+<ol>
+<li>The dataset series is typed as a <code>dcat:Dataset</code>, whereas its child datasets are typed as <code>dcat:Distribution</code>'s.</li>
+<li>Both the dataset series and its child datasets are typed as a <code>dcat:Dataset</code>'s, and the two are usually linked by using the [[DCTERMS]] properties <code>dct:hasPart</code> / <code>dct:isPartOf</code>.</li>
+</ol>
+
+<p>In both cases, the dataset series is sometimes soft-typed by using the [[DCTERMS]] property <code>dct:type</code> (e.g., this is the approach used in [[GeoDCAT-AP]], and adopted in [[DCAT-AP-IT]] and [[GeoDCAT-AP-IT]]).</p>
+
+<p>Compared with the second option, the first one may have the advantage of simplifying metadata management, and avoiding the creation of datasets having an almost equivalent intensional description (i.e., datasets having the same values for almost all their metadata elements). On the other hand, this approach reduces the ability of being discovered, as distribution metadata are not rich as datasets' ones. Moreover, using distributions may result cumbersome or unfeasible when the number of child datasets is too high.</p>
+
+<p>As stated in the note to <a href="#Class:Distribution"></a>, DCAT recommends, as the default approach, typing both dataset series and child datasets as <code>dct:Dataset</code>'s, and linking them by using properties <code>dct:hasPart</code> and/or <code>dct:isPartOf</code>, and possibly soft-typing the dataset series via property <code>dct:type</code>.</p>
+
+<aside class="ednote">
+<p>The creation of a specific class for dataset series is under discussion.</p>
+</aside>
+
+<p>The approach based on the use of <code>dcat:Distribution</code> for typing child datasets is however recognized as a possible alternative, whenever it addresses more effectively the requirements of a given application scenario.</p>
+
+<p>Here and in the following sections, guidance will focus on the default approach.</p>
+
+<aside class="example" id="ex-dataset-series-containment" title=""> 
+<p>In the following example, yearly budget data are grouped into a series. Both the series and the child datasets are typed as <code>dcat:Dataset</code>'s, and the series is soft-typed with property <code>dct:type</code>. The series and the datasets are linked by using properties <code>dct:hasPart</code> and <code>dct:isPartOf</code>.</p>
+<pre>
+ex:budget a dcat:Dataset ;
+  dct:type <http://inspire.ec.europa.eu/metadata-codelist/ResourceType/series> ;
+  title "Budget data"@en ;
+  dct:hasPart ex:budget-2018 ,
+    ex:budget-2019 , ex:budget-2020 ;
+  .
+  
+ex:budget-2018 a dcat:Dataset ;
+  title "Budget data for year 2018"@en ;
+  dct:isPartOf ex:budget ;
+  .
+  
+ex:budget-2019 a dcat:Dataset ;
+  title "Budget data for year 2019"@en ;
+  dct:isPartOf ex:budget ;
+  .
+  
+ex:budget-2020 a dcat:Dataset ;
+  title "Budget data for year 2020"@en ;
+  dct:isPartOf ex:budget ;
+  .
+</pre>
+</aside>
+
+<p>It is worth noting that a dataset series may evolve over time, but acquiring new datasets. E.g., a dataset series about yearly budget data will acquire a new child dataset every year. In such cases, it might be important to link the yearly releases with relationship specifying the previous, next, and latest ones. In such scenario, DCAT recommends following the approach described in <a href="#version-types"></a>, using the [[VOCAB-ADMS]] properties <code>adms:prev</code>, <code>adms:next</code>, and <code>adms:last</code>, respectively.</p>
+
+<aside class="example" id="ex-dataset-series-releases" title="">
+<p>The following example extends <a href="#ex-dataset-series-specification"></a> by specifying the publication date (<code>dct:issued</code>) of each child dataset, and the previous (<code>adms:prev</code>) and next release (<code>adms:next</code>).</p>
+<pre>
+ex:budget a dcat:Dataset ;
+  dct:type <http://inspire.ec.europa.eu/metadata-codelist/ResourceType/series> ;
+  title "Budget data"@en ;
+  dct:hasPart ex:budget-2018 ,
+    ex:budget-2019 , ex:budget-2020 ;
+  .
+  
+ex:budget-2018 a dcat:Dataset ;
+  title "Budget data for year 2018"@en ;
+  dct:isPartOf ex:budget ;
+  dct:issued "2019-01-01"^^xsd:date ;
+  adms:next ex:budget-2019 ;
+  .
+  
+ex:budget-2019 a dcat:Dataset ;
+  title "Budget data for year 2019"@en ;
+  dct:isPartOf ex:budget ;
+  dct:issued "2020-01-01"^^xsd:date ;
+  adms:prev ex:budget-2018 ;
+  adms:next ex:budget-2020 ;
+  .
+  
+ex:budget-2020 a dcat:Dataset ;
+  title "Budget data for year 2020"@en ;
+  dct:isPartOf ex:budget ;
+  dct:issued "2021-01-01"^^xsd:date ;
+  adms:prev ex:budget-2019 ;
+  .
+</pre>
+</aside>
+
+</section>
+
+
+<section id="dataset-series-properties">
+
+<h2>Property values inheritance in dataset series</h2>
+
+<p>A dataset series can be seen as the result of subsetting (or slicing) a single dataset based on the values of one or more metadata element. E.g., a statistical dataset about employment may be split into smaller datasets about the same age-group and/or gender.</p>
+
+<p>Although any metadata element can be used for subsetting, the most frequent cases concern the spatial and temporal dimensions. Re-using the example of budget data, the dataset can be split not only by year, but also by country / region. Other examples concerns child datasets using different temporal / spatial resolution, unit of measurement, or reference system.</p>
+
+<p>Because of its role of "container", the dimensions described in child dataset metadata should be reflected in the dataset series, via upstream inheritance - i.e., properties of child datasets are inherited by their parent (the dataset series).</p>
+
+<p>Typically, this means that, for each of the relevant properties, the dataset series takes as value the union of those specified in child datasets. For instance:</p>
+
+<ul>
+<li>If the temporal coverage of child datasets is a different year, e.g., 2018, 2019, 2020, the temporal coverage of the series will be the time period between years 2018 and 2020.</li>
+</li>If child datasets have a different geographic bounding box as spatial coverage, the spatial coverage of the series will be the union of these bounding boxes (i.e., a bounding box including the ones of the child datasets).</li>
+<li>If each child dataset uses a different spatial reference system, the dataset series will have multiple spatial reference systems.</li>
+</ul>
+
+<p>Finally, some annotation properties of child datasets may need to be taken into account as well at the level of dataset series. In particular, properties concerning the creation / publication / update dates of child datasets may affect the corresponding ones in the series. For these properties, DCAT recommends the following approach:</p>
+<ul>
+<li>The creation date (<code>dct:created</code>) of the dataset series should correspond to the earliest creation date of the child datasets.</li>
+<li>The publication date (<code>dct:issued</code>) of the dataset series should correspond to the earliest publication date of the child datasets.</li>
+<li>The update date (<code>dct:modified</code>) of the dataset series should correspond to the latest publication or update date of the child datasets.</li>
+</ul>
+
+<aside class="ednote">
+<p>To be discussed if guidance is neeeded for other annotation properties.</p>
+</aside>
+
+<aside class="note">
+<p>To ensure dataset series metadata be correct and updated, mechanisms can be put in place to implement upstream inheritance automatically. However, DCAT does not recommend any specific strategy to be adopted.</p>
+</aside>
+
+<aside class="example" id="ex-dataset-series-properties" title="">
+<p>The following example is a variant <a href="#ex-dataset-series-releases"></a>, with child datasets corresponding to yearly budget data for specific countries. The temporal resolution (<code>dcat:temporalResolution</code>), temporal coverage (<code>dcat:temporal</code>), and spatial coverage (<code>dcat:spatial</code>) of the dataset series correspond to the union of those of the child datasets. Finally, the dataset series specifies as publication date the one of the first published child dataset, whereas the date of publication of the last child dataset is specified as update date (<code>dct:modified</code>).</p>
+<pre>
+ex:budget a dcat:Dataset ;
+  dct:type <http://inspire.ec.europa.eu/metadata-codelist/ResourceType/series> ;
+  title "Budget data"@en ;
+  dct:hasPart ex:budget-2018-be , ex:budget-2019-be , ex:budget-2020-be ,
+    ex:budget-2018-fr , ex:budget-2019-fr , ex:budget-2020-fr , 
+    ex:budget-2018-it , ex:budget-2019-it , ex:budget-2020-it ,
+	... ;
+  dct:issued "2019-01-01"^^xsd:date ,
+  dct:modified "2021-01-01"^^xsd:date ;
+  dcat:temporalResolution "P1Y"^^xsd:duration ;
+  dct:temporal [ a dct:PeriodOfTime ;
+    dcat:startDate "2018-01-01"^^xsd:date ;
+    dcat:endDate   "2020-12-31"^^xsd:date ;
+  ] ;  
+  dct:spatial <http://publications.europa.eu/resource/dataset/country/BEL> ,
+    <http://publications.europa.eu/resource/dataset/country/FRA> ,
+    <http://publications.europa.eu/resource/dataset/countryITA> ,
+    ...  ;
+  .
+  
+ex:budget-2018-be a dcat:Dataset ;
+  title "Belgium budget data for year 2018"@en ;
+  dct:isPartOf ex:budget ;
+  dct:issued "2019-01-01"^^xsd:date ;
+  adms:next ex:budget-2019-be ;
+  dcat:temporalResolution "P1Y"^^xsd:duration ;
+  dct:temporal [ a dct:PeriodOfTime ;
+    dcat:startDate "2018-01-01"^^xsd:date ;
+    dcat:endDate   "2018-12-31"^^xsd:date ;
+  ] ;  
+  dct:spatial <http://publications.europa.eu/resource/dataset/country/BEL> ;
+  .
+  
+...
+  
+ex:budget-2018-fr a dcat:Dataset ;
+  title "France budget data for year 2018"@en ;
+  dct:isPartOf ex:budget ;
+  dct:issued "2019-01-01"^^xsd:date ;
+  adms:next ex:budget-2019-fr ;
+  dcat:temporalResolution "P1Y"^^xsd:duration ;
+  dct:temporal [ a dct:PeriodOfTime ;
+    dcat:startDate "2018-01-01"^^xsd:date ;
+    dcat:endDate   "2018-12-31"^^xsd:date ;
+  ] ;  
+  dct:spatial <http://publications.europa.eu/resource/dataset/country/FRA> ;
+  .
+
+...
+  
+ex:budget-2018-it a dcat:Dataset ;
+  title "Italy budget data for year 2018"@en ;
+  dct:isPartOf ex:budget ;
+  dct:issued "2019-01-01"^^xsd:date ;
+  adms:next ex:budget-2019-it ;
+  dcat:temporalResolution "P1Y"^^xsd:duration ;
+  dct:temporal [ a dct:PeriodOfTime ;
+    dcat:startDate "2018-01-01"^^xsd:date ;
+    dcat:endDate   "2018-12-31"^^xsd:date ;
+  ] ;  
+  dct:spatial <http://publications.europa.eu/resource/dataset/countryITA> ;
+  .
+  
+...
+</pre>
+</aside>
+
+</section>
+
+</section>
+
+
 <section id="data-citation" class="informative">
 
     <h2>Data citation</h2>
