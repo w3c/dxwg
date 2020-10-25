@@ -3507,15 +3507,16 @@ ex:budget-2020 a dcat:Dataset ;
 
 <ul>
 <li>If the temporal coverage of child datasets is a different year, e.g., 2018, 2019, 2020, the temporal coverage of the series will be the time period between years 2018 and 2020.</li>
-</li>If child datasets have a different geographic bounding box as spatial coverage, the spatial coverage of the series will be the union of these bounding boxes (i.e., a bounding box including the ones of the child datasets).</li>
+<li>If child datasets have a different geographic bounding box as spatial coverage, the spatial coverage of the series will be the union of these bounding boxes (i.e., a bounding box including the ones of the child datasets).</li>
 <li>If each child dataset uses a different spatial reference system, the dataset series will have multiple spatial reference systems.</li>
 </ul>
 
-<p>Finally, some annotation properties of child datasets may need to be taken into account as well at the level of dataset series. In particular, properties concerning the creation / publication / update dates of child datasets may affect the corresponding ones in the series. For these properties, DCAT recommends the following approach:</p>
+<p>Finally, some annotation properties of child datasets may need to be taken into account as well at the level of dataset series. In particular, properties concerning the creation / publication / update dates of child datasets, as well as their update frequency, may affect the corresponding ones in the series. For these properties, DCAT recommends the following approach:</p>
 <ul>
 <li>The creation date (<code>dct:created</code>) of the dataset series should correspond to the earliest creation date of the child datasets.</li>
 <li>The publication date (<code>dct:issued</code>) of the dataset series should correspond to the earliest publication date of the child datasets.</li>
 <li>The update date (<code>dct:modified</code>) of the dataset series should correspond to the latest publication or update date of the child datasets.</li>
+<li>The update frequency (<code>dct:accrualPeriodicity</code>) of the dataset series should correspond to the one of the child dataset most frequently updated.</li>
 </ul>
 
 <aside class="ednote">
@@ -3538,6 +3539,7 @@ ex:budget a dcat:Dataset ;
 	... ;
   dct:issued "2019-01-01"^^xsd:date ,
   dct:modified "2021-01-01"^^xsd:date ;
+  dct:accrualPeriodicity <http://purl.org/cld/freq/annual> ;
   dcat:temporalResolution "P1Y"^^xsd:duration ;
   dct:temporal [ a dct:PeriodOfTime ;
     dcat:startDate "2018-01-01"^^xsd:date ;
@@ -3545,7 +3547,7 @@ ex:budget a dcat:Dataset ;
   ] ;  
   dct:spatial <http://publications.europa.eu/resource/dataset/country/BEL> ,
     <http://publications.europa.eu/resource/dataset/country/FRA> ,
-    <http://publications.europa.eu/resource/dataset/countryITA> ,
+    <http://publications.europa.eu/resource/dataset/country/ITA> ,
     ...  ;
   .
   
@@ -3554,6 +3556,7 @@ ex:budget-2018-be a dcat:Dataset ;
   dct:isPartOf ex:budget ;
   dct:issued "2019-01-01"^^xsd:date ;
   adms:next ex:budget-2019-be ;
+  dct:accrualPeriodicity <http://purl.org/cld/freq/annual> ;
   dcat:temporalResolution "P1Y"^^xsd:duration ;
   dct:temporal [ a dct:PeriodOfTime ;
     dcat:startDate "2018-01-01"^^xsd:date ;
@@ -3569,6 +3572,7 @@ ex:budget-2018-fr a dcat:Dataset ;
   dct:isPartOf ex:budget ;
   dct:issued "2019-01-01"^^xsd:date ;
   adms:next ex:budget-2019-fr ;
+  dct:accrualPeriodicity <http://purl.org/cld/freq/annual> ;
   dcat:temporalResolution "P1Y"^^xsd:duration ;
   dct:temporal [ a dct:PeriodOfTime ;
     dcat:startDate "2018-01-01"^^xsd:date ;
@@ -3584,12 +3588,13 @@ ex:budget-2018-it a dcat:Dataset ;
   dct:isPartOf ex:budget ;
   dct:issued "2019-01-01"^^xsd:date ;
   adms:next ex:budget-2019-it ;
+  dct:accrualPeriodicity <http://purl.org/cld/freq/annual> ;
   dcat:temporalResolution "P1Y"^^xsd:duration ;
   dct:temporal [ a dct:PeriodOfTime ;
     dcat:startDate "2018-01-01"^^xsd:date ;
     dcat:endDate   "2018-12-31"^^xsd:date ;
   ] ;  
-  dct:spatial <http://publications.europa.eu/resource/dataset/countryITA> ;
+  dct:spatial <http://publications.europa.eu/resource/dataset/country/ITA> ;
   .
   
 ...
