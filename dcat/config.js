@@ -35,8 +35,7 @@ var respecConfig = {
       w3cid: 72458
     },{
       name: "David Browning",
-      company: "Refinitiv",
-      companyURL: "https://www.refinitiv.com",
+      company: "Invited Expert",
       w3cid: 98704
     },{
       name:       "Simon Cox",
