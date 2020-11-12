@@ -12,6 +12,9 @@
 <body>
 
 <!-- Disclaimer -->
+    <aside class="ednote">
+    <p>This document presents advancements in the discussion made on DCAT 3 within DXWG group. It complements the DCAT 2 [[?VOCAB-DCAT-2-20200204]] with guidelines on Versioning and Dataset series (see sections <a href="#dataset-versions"></a> and <a href="#dataset-series"></a>). </p>
+    </aside>
 <aside class="note">
     <p>DCAT 2 supersedes DCAT [[?VOCAB-DCAT-20140116]] (hereafter named DCAT 1), but it does not make it obsolete. DCAT 2 maintains the DCAT namespace as its terms preserve backward compatibility with DCAT [[?VOCAB-DCAT-20140116]]. DCAT 2 relaxes constraints and adds new classes and properties, but these changes do not break the definition of previous terms.</p>
     
@@ -3279,29 +3282,6 @@ For example:
 <p>Versioning can be applied to any of the first class citizens DCAT resources including Catalogs, Datasets, Distributions. The notion of version is very much related to the community practices,  data management policy and the workflows in place. It is up to data providers to decide when and why a new version should be released. For this reason, DCAT refrains from providing definitions or rules about when changes in a resource should turn into a new release of it. </p>
 
 <p>Versioning may be understood as involving relationships between datasets, which is supported by the <a href="#Property:resource_qualified_relation"><code>dcat:qualifiedRelation</code></a> and described in <a href="#qualified-relationship"></a>. The class <a href="#Class:Relationship"><code>dcat:Relationship</code></a> supports providing information about the relationship, and could be extended for versioning information.</p>
-  <!--backlog p class="issue" data-number="90">
-  <p class="issue" data-number="90">
-        The need to be able to describe version relationships of datasets has been identified as a requirement to be satisfied in the revision of DCAT. Also see detailed requirements in
-        <a href="https://github.com/w3c/dxwg/issues/89">Issue #89</a>,
-        <a href="https://github.com/w3c/dxwg/issues/91">Issue #91</a>,
-        <a href="https://github.com/w3c/dxwg/issues/92">Issue #92</a>,
-        <a href="https://github.com/w3c/dxwg/issues/93">Issue #93</a>,
-    </p-->
-<!--
-<aside class="note">
-<p>
-In this section it is planned to describe some patterns for describing Dataset and/or Distribution versions.
-See the wiki page on <a href="https://github.com/w3c/dxwg/wiki/Dataset-versioning">Dataset versioning</a> for more discussion.
-</p>
-</aside>
--->
-
-<aside class="ednote">
-<p>Preliminary draft for discussion.</p>
-<p>Relevant issues:</p>
-<div class="issue" data-number="1251"></div>    
-</aside>
-    
 <p>The following sections briefly discuss some key versioning aspects, and how they can be specified in DCAT records.</p>
 
 <aside class="ednote">
@@ -3322,7 +3302,6 @@ See the wiki page on <a href="https://github.com/w3c/dxwg/wiki/Dataset-versionin
 
 <aside class="ednote">
 <p>The second type is partially related to the notion of dataset series.</p>
-<div class="issue" data-number="868"></div>
 </aside>
     
 <p>These version types are not necessarily mutually exclusive, and they may overlap - especially, the first and the second ones. So, the relationship(s) used to link resource versions depends on which aspect is relevant for the specific use case. E.g.:</p>
@@ -3341,9 +3320,7 @@ See the wiki page on <a href="https://github.com/w3c/dxwg/wiki/Dataset-versionin
 <section id="version-info">
 <h2>Version information</h2>
 
-<div class="issue" data-number="89"></div>
-<div class="issue" data-number="91"></div>
-<div class="issue" data-number="92"></div>
+<div class="issue" data-number="1271"></div>
     
 <p>Besides the relationships illustrated in the previous section, versioned resources may be associated with additional information, describing, e.g., their differences with the original resource (the version "delta"),  the version identifier, and release date.</p>
 
@@ -3362,8 +3339,6 @@ For indicating the version release date and identifier, the use of, respectively
 
 <section id="life-cycle">
 <h2>Resource life-cycle</h2>
-
-<div class="issue" data-number="1238"></div>
 
 <p>The life-cycle of a resource is an aspect orthogonal to versioning, and sometimes strictly related. The evolution of a resource along its life-cycle (from its conception, to its creation and publication) may result in new versions, although this is not always the case (e.g., in case an approval workflow is in place, the resource may not undergo any change if no revision is needed). Similarly, the creation of a new version may not necessarily lead to a change in status (e.g., when changes are not substantial, and/or are implemented on resources still in development). Moreover, when a resource is replaced because of a revision (correcting errors, adding new content, etc.), it may be moved to a different life-cycle status (e.g., deprecation or withdrawl).</p>
 
@@ -3393,12 +3368,6 @@ For indicating the version release date and identifier, the use of, respectively
 
 <h2>Dataset series</h2>
 
-<aside class="ednote">
-<p>Preliminary draft for discussion.</p>
-<p>Relevant issues:</p>
-<div class="issue" data-number="868"></div>
-</aside>
-
 <p>With "dataset series" we refer to data, somehow interrelated, that are published separately, although they could be  merged into a single dataset. An example is budget data split by year and/or country, instead of being made available in a single dataset.</p>
 
 <p>Dataset series are defined in [[ISO-19115]] as a <q>collection of datasets [&hellip;] sharing common characteristics</q>. However, their use is not limited to geospatial data, although in other domains they can be named differently (e.g., time series, data slices) and defined more or less strictly (see, e.g., the notion of "dataset slice" in [[VOCAB-DATA-CUBE]]).</p>
@@ -3427,6 +3396,7 @@ For indicating the version release date and identifier, the use of, respectively
 
 <aside class="ednote">
 <p>The creation of a specific class for dataset series is under discussion.</p>
+<div class="issue" data-number="1272"></div>
 </aside>
 
 <p>The approach based on the use of <code>dcat:Distribution</code> for typing child datasets is however recognized as a possible alternative, whenever it addresses more effectively the requirements of a given application scenario.</p>
@@ -3504,7 +3474,7 @@ ex:budget-2020 a dcat:Dataset ;
 <h2>Property values inheritance in dataset series</h2>
 
 <aside class="ednote">
-<p>The approach proposed in this section is being reviewed.</p>
+<p>The approach proposed in this section is being reviewed.  </p>
 </aside>
 
     <p>A dataset series can be seen as the result of subsetting (or slicing) a single dataset based on the values of one or more metadata element. E.g., a statistical dataset about employment may be split into smaller datasets about the same age-group and/or gender.</p>
@@ -3531,6 +3501,7 @@ ex:budget-2020 a dcat:Dataset ;
 
 <aside class="ednote">
 <p>To be discussed if guidance is neeeded for other annotation properties.</p>
+<div class="issue" data-number="1273"></div>    
 </aside>
 
 <aside class="note">
