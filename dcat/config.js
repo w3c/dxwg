@@ -59,8 +59,8 @@ var respecConfig = {
       w3cid: 40317
     },{
       name: "Peter Winstanley",
-      company: "Scottish Government",
-      companyURL: "https://www.gov.scot/",
+      company: "Invited Expert",
+//      companyURL: "https://www.gov.scot/",
       w3cid: 64374
     }],
     formerEditors: [{
