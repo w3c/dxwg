@@ -30,7 +30,7 @@ var respecConfig = {
       name:       "Riccardo Albertoni",
       orcid:  "0000-0001-5648-2713",
       company:    "CNR - Consiglio Nazionale delle Ricerche, Italy",
-      url: "http://www.imati.cnr.it/joomla/index.php/people/8-curricula/178-riccardo-albertoni",
+      url: "http://imati.cnr.it/mypage/people/AlbertoniRiccardo.htm",
       companyURL: "https://www.cnr.it/",
       w3cid: 72458
     },{
