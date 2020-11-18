@@ -6,13 +6,13 @@ var respecConfig = {
 //   specStatus: "ED",
 //    specStatus: "CR",
 //  crEnd: "2019-10-24",
-    implementationReportURI: "https://w3c.github.io/dxwg/dcat-implementation-report/",
-    shortName: "vocab-dcat-2",
-    prevRecShortname: "vocab-dcat",
+//    implementationReportURI: "https://w3c.github.io/dxwg/dcat-implementation-report/",
+    shortName: "vocab-dcat-3",
+    prevRecShortname: "vocab-dcat-2",
     canonicalURI: "TR",
-    prevRecURI:           "https://www.w3.org/TR/2014/REC-vocab-dcat-20140116/",
-    previousPublishDate:  "2019-11-19",
-    previousMaturity:     "PR",
+    prevRecURI:           "https://www.w3.org/TR/2020/REC-vocab-dcat-2-20200204/",
+    previousPublishDate:  "2020-02-04",
+    previousMaturity:     "REC",
 //    previousURI:          "https://www.w3.org/TR/2019/WD-vocab-dcat-2-20190528/",
     edDraftURI:           "https://w3c.github.io/dxwg/dcat/",
 //    issueBase:            "https://github.com/w3c/dxwg/issues/", -- Not needed when github used
@@ -59,8 +59,8 @@ var respecConfig = {
       w3cid: 40317
     },{
       name: "Peter Winstanley",
-      company: "Scottish Government",
-      companyURL: "https://www.gov.scot/",
+      company: "Invited Expert",
+//      companyURL: "https://www.gov.scot/",
       w3cid: 64374
     }],
     formerEditors: [{
