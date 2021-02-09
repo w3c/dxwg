@@ -1887,7 +1887,7 @@
             
         </aside>
         
-        <p>The following properties are specific to this class:
+        <p>The following property is specific to this class:
             <a href="#Property:datasetseries_has_part">hasPart</a>.
             
         </p>
@@ -1923,7 +1923,7 @@
         </p>
         <aside class="issue">
               <p>
-                  Does being ADMS a non-normative namespace prevent to list  <code>adms:next</code>, <code>adms:prev</code> in this section?
+                  Does being ADMS a non-normative namespace prevent to list <code>adms:next</code>, <code>adms:prev</code> in this section?
               </p>
            </aside>
     
@@ -1932,7 +1932,7 @@
             <tbody>
             <tr><td class="prop">Definition:</td><td>A collection of datasets that are published separatelly, but are sharing common characteristic and could be made available as a single dataset.</td></tr>
             <tr><td class="prop">Sub-class of:</td><td><a href="#Class:Dataset"><code>dcat:Dataset</code></a></td></tr>
-            <tr><td class="prop">Usage note:</td><td> Dataset series can be also soft-typedvia property <code>dct:type</code> as in the approach used in [[GeoDCAT-AP]], and adopted in [[DCAT-AP-IT]] and [[GeoDCAT-AP-IT]]).</td></tr>
+            <tr><td class="prop">Usage note:</td><td> Dataset series can be also soft-typed via property <code>dct:type</code> as in the approach used in [[GeoDCAT-AP]], and adopted in [[DCAT-AP-IT]] and [[GeoDCAT-AP-IT]]).</td></tr>
             </tbody>
         </table>
 
@@ -1948,7 +1948,7 @@
             <table class="definition">
                 <thead><tr><th>RDF Property:</th><th><a href="http://purl.org/dc/terms/hasPart">dct:hasPart</a></th></tr></thead>
                 <tbody>
-                <tr><td class="prop">Definition:</td><td>An child dataset that is part of the dataset series.</td></tr>
+                <tr><td class="prop">Definition:</td><td>A child dataset that is part of the dataset series.</td></tr>
 <!--                    
                 <tr><td class="prop">Domain:</td><td><a href="#Class:Catalog"><code>dcat:Catalog</code></a></td></tr>
                 <tr><td class="prop">Range:</td><td><a href="#Class:Resource"><code>dcat:Resource</code></a></td></tr>
@@ -3492,7 +3492,7 @@ For indicating the version release date and identifier, the use of, respectively
     
 <p>DCAT makes dataset series first class citizens of data catalogs by minting a new class <code>dcat:DatasetSeries</code>. <code>dcat:DatasetSeries</code> is defined as subclass of   <code>dcat:Dataset</code>.</p>
     
-<p><!--As stated in the note to <a href="#Class:Distribution"></a>,-->DCAT recommends, as the default approach, typing dataset series as <code>dcat:DatasetSeries</code> and child datasets as <code>dct:Dataset</code>'s, and linking them by using properties <code>dct:hasPart</code> and/or <code>dct:isPartOf</code>, and possibly soft-typing the dataset series via property <code>dct:type</code>.</p>
+<p><!--As stated in the note to <a href="#Class:Distribution"></a>,-->DCAT recommends, as the default approach, typing dataset series as <code>dcat:DatasetSeries</code> and child datasets as <code>dcat:Dataset</code>, and linking them by using properties <code>dct:hasPart</code> and/or <code>dct:isPartOf</code>, and possibly soft-typing the dataset series via property <code>dct:type</code>.</p>
 
 <!--aside class="ednote">
 <p>The creation of a specific class for dataset series is under discussion.</p>
@@ -3504,7 +3504,7 @@ For indicating the version release date and identifier, the use of, respectively
 <p>Here and in the following sections, guidance will focus on the default approach.</p>
 
 <aside class="example" id="ex-dataset-series-containment" title=""> 
-<p>In the following example, yearly budget data are grouped into a series. Both the series and the child datasets are typed as <code>dcat:DatasetSeries</code>, and the series is soft-typed with property <code>dct:type</code>. The series and the datasets are linked by using properties <code>dct:hasPart</code> and <code>dct:isPartOf</code>.</p>
+<p>In the following example, yearly budget data are grouped into a series. The series is typed as <code>dcat:DatasetSeries</code> and soft-typed with property <code>dct:type</code>, the child datasets are typed as <code>dcat:Dataset</code>. The series and the datasets are linked by using properties <code>dct:hasPart</code> and <code>dct:isPartOf</code>.</p>
 <pre>
 ex:budget a dcat:DatasetSeries ;
   dct:type &lt;http://inspire.ec.europa.eu/metadata-codelist/ResourceType/series&gt: ;
@@ -3604,8 +3604,8 @@ ex:budget-2020 a dcat:Dataset ;
 <aside class="example" id="ex-dataset-series-properties" title="">
 <p>The following example is a variant <a href="#ex-dataset-series-releases"></a>, with child datasets corresponding to yearly budget data for specific countries. The temporal resolution (<code>dcat:temporalResolution</code>), temporal coverage (<code>dcat:temporal</code>), and spatial coverage (<code>dcat:spatial</code>) of the dataset series correspond to the union of those of the child datasets. Moreover, the dataset series specifies as publication date the one of the first published child dataset, whereas the date of publication of the last child dataset is specified as update date (<code>dct:modified</code>). Finally, the update frequency (<code>dct:accrualPeriodicity</code>) of the dataset series is annual, as the child datasets are published on a yearly basis, and not updated after their publication.</p>
 <pre>
-ex:budget a dcat:Dataset ;
-  dct:type &lt;http://inspire.ec.europa.eu/metadata-codelist/ResourceType/series&gt: ;
+ex:budget a dcat:DatasetSeries ;
+  dct:type &lt;http://inspire.ec.europa.eu/metadata-codelist/ResourceType/series&gt; ;
   title "Budget data"@en ;
   dct:hasPart ex:budget-2018-be , ex:budget-2019-be , ex:budget-2020-be ,
     ex:budget-2018-fr , ex:budget-2019-fr , ex:budget-2020-fr , 
