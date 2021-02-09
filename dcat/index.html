@@ -3389,7 +3389,8 @@ For indicating the version release date and identifier, the use of, respectively
 <section id="dataset-series-specification">
 
 <h2>How to specify dataset series</h2>
-
+<p>DCAT makes dataset series first class citizens of data catalogs by minting a new class <code>dcat:DatasetSeries</code>. <code>dcat:DatasetSeries</code> is defined as subclass of   <code>dcat:Dataset</code>.</p>
+    
 <p>Existing DCAT implementations adopt two main alternative approaches to specifying dataset series:</p>
 
 <ol>
@@ -3398,6 +3399,7 @@ For indicating the version release date and identifier, the use of, respectively
 </ol>
 
 <p>In both cases, the dataset series is sometimes soft-typed by using the [[DCTERMS]] property <code>dct:type</code> (e.g., this is the approach used in [[GeoDCAT-AP]], and adopted in [[DCAT-AP-IT]] and [[GeoDCAT-AP-IT]]).</p>
+
 
 <p>Compared with the second option, the first one may have the advantage of simplifying metadata management, and avoiding the creation of datasets having the same values for almost all their metadata elements. On the other hand, this approach reduces the ability of being discovered, as distribution metadata are not rich as datasets' ones. Moreover, using distributions may result cumbersome or unfeasible when the number of child datasets is too high.</p>
 
@@ -3413,9 +3415,9 @@ For indicating the version release date and identifier, the use of, respectively
 <p>Here and in the following sections, guidance will focus on the default approach.</p>
 
 <aside class="example" id="ex-dataset-series-containment" title=""> 
-<p>In the following example, yearly budget data are grouped into a series. Both the series and the child datasets are typed as <code>dcat:Dataset</code>'s, and the series is soft-typed with property <code>dct:type</code>. The series and the datasets are linked by using properties <code>dct:hasPart</code> and <code>dct:isPartOf</code>.</p>
+<p>In the following example, yearly budget data are grouped into a series. Both the series and the child datasets are typed as <code>dcat:DatasetSeries</code>, and the series is soft-typed with property <code>dct:type</code>. The series and the datasets are linked by using properties <code>dct:hasPart</code> and <code>dct:isPartOf</code>.</p>
 <pre>
-ex:budget a dcat:Dataset ;
+ex:budget a dcat:DatasetSeries ;
   dct:type &lt;http://inspire.ec.europa.eu/metadata-codelist/ResourceType/series&gt: ;
   title "Budget data"@en ;
   dct:hasPart ex:budget-2018 ,
@@ -3444,7 +3446,7 @@ ex:budget-2020 a dcat:Dataset ;
 <aside class="example" id="ex-dataset-series-releases" title="">
 <p>The following example extends <a href="#ex-dataset-series-containment"></a> by specifying the publication date (<code>dct:issued</code>) of each child dataset, and the previous (<code>adms:prev</code>) and next release (<code>adms:next</code>).</p>
 <pre>
-ex:budget a dcat:Dataset ;
+ex:budget a dcat:DatasetSeries ;
   dct:type &lt;http://inspire.ec.europa.eu/metadata-codelist/ResourceType/series&gt: ;
   title "Budget data"@en ;
   dct:hasPart ex:budget-2018 ,
