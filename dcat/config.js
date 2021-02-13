@@ -319,6 +319,13 @@ var respecConfig = {
             href : "https://doi.org/10.3233/SW-150175",
             date : "2015"
         },
+        "PAV" : {
+            href:"http://purl.org/pav/",
+            title:"PAV - Provenance, Authoring and Versioning. Version 2.3.1",
+			authors:["Paolo Ciccarese","Stian Soiland-Reyes"],
+			publisher:"Mind Informatics",
+			date:"16 March 2015"
+        },
         
     }
 };

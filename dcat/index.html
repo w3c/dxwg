@@ -3278,12 +3278,167 @@ For example:
 </section>
 
 <section id="dataset-versions" class="informative">
-    <h2>Versioning</h2>
-<p>Versioning can be applied to any of the first class citizens DCAT resources including Catalogs, Datasets, Distributions. The notion of version is very much related to the community practices,  data management policy and the workflows in place. It is up to data providers to decide when and why a new version should be released. For this reason, DCAT refrains from providing definitions or rules about when changes in a resource should turn into a new release of it. </p>
+
+<h2>Versioning</h2>
+
+<div class="issue" data-number="1277"></div>    
+
+<aside class="ednote">
+<p>This is a new draft for discussion on versioning support in DCAT.</p>
+<p>Compared with the first draft in [[VOCAB-DCAT-3-20201217]], this section has been revised to focus specifically on versions derived from the revision of a resource, and by following the [[PAV]] approach for the specification of version chains and hierarchies - previous, next, current, last version.</p>
+<p>In particular, the introductory text has been revised accordingly with the new scope, the section on version types has been removed, and a new section has been added to describe how to specify relationships between versions.</p>
+<p>The other sections include only editorial changes.</p>
+</aside>
+
+<p>The notion of <em>version</em> is often used as a generic term to denote some kind of relationship between a resource and a derived one. Examples, among others, include revisions, editions, adaptations, and translations.</p>
+
+<p>This section focuses specifically on how to use DCAT to describe versions resulting from a revision - i.e., from changes occurring to a resource as part of its life-cycle.</p>
+
+<!--
+<p>Henceforth, the words <em>version</em> and <em>versioning</em> must be intended in this restrictive sense.</p>
+-->
+
+<p>For this purpose, DCAT builds upon existing vocabularies, in particular the versioning component of the [[?PAV]] ontology, and the relevant terms from [[?DCTERMS]], [[?PROV-O]], [[?OWL2-OVERVIEW]], and [[?VOCAB-ADMS]].</p>
+
+<p>It is important to note that versioning can be applied to any of the first class citizens DCAT resources including Catalogs, Catalog Records, Datasets, Distributions.</p>
+
+<aside class="note">
+<p>The notion of version is very much related to the community practices, data management policy and the workflows in place. It is up to data providers to decide when and why a new version should be released. For this reason, DCAT refrains from providing definitions or rules about when changes in a resource should turn into a new release of it, and refers for guidance to [[?DWBP]] (<a data-cite="?DWBP#dataVersioning">&sect;&nbsp;<span class="secno">8.6 </span>Data Versioning</a>).</p>
+</aside>
+
+<section id="version-relationships">
+
+<h2>Relationships between versions</h2>
+
+<p>DCAT supports three kinds of relationships between versions:</p>
+<ol>
+<li>Those indicating the version chain and hierarchy (the version history).</li>
+<li>Those indicating whether a version is replaced/superseded by another one.</li>
+<li>Those indicating whether a version is backward compatible with another one.</li>
+</ol>
+
+<section id="version-history">
+
+<h2>Version chains and hierarchies</h2>
+
+<p>In line with [[?DWBP]]'s <a data-cite="?DWBP#VersionHistory">Best Practice 8: Provide version history</a>, DCAT defines specific properties for this purpose, aligned with the corresponding [[?PAV]] ones:</p>
+
+<ul>
+<li><code>dcat:previousVersion</code> (equivalent to <a data-cite="?PAV#d4e459"><code>pav:previousVersion</code></a>)</li>
+<li><p><code>dcat:hasVersion</code> (equivalent to <a data-cite="?PAV#d4e395"><code>pav:hasVersion</code></a>), plus the following additional properties:</p>
+<ul>
+<li><code>dcat:isVersionOf</code> (inverse of <code>dcat:hasVersion</code>);</li>
+<li><code>dcat:currentVersion</code> (equivalent to <a data-cite="?PAV#d4e359"><code>pav:currentVersion</code></a>, and subproperty of <code>dcat:hasVersion</code>)</li>
+<li><code>dcat:lastVersion</code> (subproperty of <code>dcat:hasVersion</code>)</li>
+</ul>
+</li>
+</ul>
+
+<aside class="ednote">
+<p>The previous draft [[VOCAB-DCAT-3-20201217]] was making use of similar properties from [[VOCAB-ADMS]]: <code>adms:prev</code>, <code>adms:next</code>, <code>adms:last</code> for both versions and dataset series.</p>
+<p>Their definitions and use do not however fit completely with similar properties in [[PAV]]. E.g., <a data-cite="VOCAB-ADMS#adms-last"><code>adms:last</code></a> is defined as <q>A link to the current or latest version of the Asset</q>, whereas in [[PAV]] the current and latest versions of a resource may be different, and link to by using different properties.</p>
+<p>Moreover, although their definition states explicitly that they are meant to be used for "versions", they are subproperties of the corresponding terms in [[XHTML-VOCAB]], where they are used to link resources in a collection (e.g., the set of pages of a Web site). E.g., the definition of <a data-cite="XHTML-VOCAB#last"><code>xhv:last</code></a> reads as follows: <q>last refers to the last resource in a collection of resources.</q>.</p>
+<p>Based on that, in this draft, [[PAV]]-equivalent properties are used for versions, whereas the [[VOCAB-ADMS]] ones are used for dataset series (<a href="#dataset-series"></a>).</p>
+</aside>
+
+<p>Property <code>dcat:previousVersion</code> is used to build a version chain, that can be navigated backward from a given version to the first one. This reflects the most typical use case - i.e., linking different versions published as distinct resources in a catalog.</p>
+
+<p>In addition to this, property <code>dcat:hasVersion</code> can be used to specify a version hierarchy, by linking an abstract resource to its versions.</p>
+
+<p>If needed, the version hierarchy can be further described by specific properties. More precisely, property <code>dcat:isVersionOf</code> (inverse of <code>dcat:hasVersion</code>) gives the possibility of specifying a back link from a version to the abstract resource, whereas properties <code>dcat:currentVersion</code> and <code>dcat:lastVersion</code> link to, respectively, the current and last versions of the resource. Note that the current version of a resource may be different from the last version: e.g., when the last version is still in draft status, the current one may correspond to the latest stable version of the resource.</p>
+
+<aside class="note">
+<p>On how to use DCAT to specify a resource's status, see <a href="#life-cycle"></a>.</p>
+</aside>
+
+<p>The use of these properties is illustrated in <a href="#fig-version-chain-and-hierarchy"></a>. In the figure, the resource with URI <code>https://www.w3.org/TR/vocab-dcat</code> is an abstract resource, corresponding always to the latest  stable version of DCAT (as W3C Recommendation), whereas the other ones correspond to specific versions of DCAT. The current version is DCAT 2, as DCAT 3 (the last version) is still a draft.</p>
+
+<figure id="fig-version-chain-and-hierarchy">
+<a href="./images/version-chain-and-hierarchy.svg"><img src="./images/version-chain-and-hierarchy.svg"></a>
+<figcaption>Version chain and hierarchy of DCAT specifications</figcaption>
+</figure>
+
+<p>The following example reuses and revises those in <a data-cite="?DWBP#dataVersioning">&sect;&nbsp;<span class="secno">8.6 </span>Data Versioning</a> of [[DWBP]] to show the use of DCAT to specify a version chain and hierarchy on a bus stops dataset.</p>
+
+<aside class="example" id="ex-version-chain-and-hierarchy" title="Version history of a bus stop dataset">
+<pre>
+&lt;http://data.mycity.example.com/transport/dataset/bus/stops&gt; 
+  a dcat:Dataset ;
+  ...
+  dcat:hasVersion &lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-01-01&gt; ,
+    &lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-05-05&gt; ,
+    &lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-12-07&gt; ;
+  dcat:currentVersion &lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-12-07&gt; ;
+.
+
+&lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-01-01&gt;
+  a dcat:Dataset ;
+  ...
+  dcat:isVersionOf &lt;http://data.mycity.example.com/transport/dataset/bus/stops&gt; ;
+.
+
+&lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-05-05&gt;
+  a dcat:Dataset ;
+  ...
+  dcat:previousVersion &lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-01-01&gt; ;
+  dcat:isVersionOf &lt;http://data.mycity.example.com/transport/dataset/bus/stops&gt; ;
+.
+
+&lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-12-07&gt;
+  a dcat:Dataset ;
+  ...
+  dcat:previousVersion &lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-05-05&gt; ;
+  dcat:isVersionOf &lt;http://data.mycity.example.com/transport/dataset/bus/stops&gt; ;
+.
+</pre>
+</aside>
+
+</section>
+
+<section id="version-replace">
+
+<h2>Versions replaced by other ones</h2>
+
+<p>Another type of relationship concerns whether a given version replaces/supersedes another one. For this purpose, DCAT reuses the relevant [[DCTERMS]] property, namely, <code>dct:replaces</code>, plus its inverse <code>dct:isReplacedBy</code>, in case a back link needs to be provided.</p>
+
+<p>It is worth noting that these properties are not denoting by themselves a version chain - i.e., a version is not necessarily replacing its immediate predecessor. For instance, in <a href="#fig-version-replace"></a>, DCAT 2 is not replaced by its immediate successor (the First Public Working Draft of DCAT 3), since it is still a draft.</p>
+
+<figure id="fig-version-replace">
+<a href="./images/version-replace.svg"><img src="./images/version-replace.svg"></a>
+<figcaption>Specification of replaced versions, applied to DCAT</figcaption>
+</figure>
+
+</section>
+
+<section id="version-backward-compatibility">
+
+<h2>Version backward compatibility</h2>
+
+<div class="issue" data-number="1258"></div>    
+
+<p>For some types of resources documented in a catalog, the release of a new version may lead to backward compatibility issues, that should be advertised to users. This applies, in particular, to resources as code lists, thesauri, taxonomies, vocabularies, ontologies, data models and schemas.</p>
+
+<p>In DCAT this information is specified by using the relevant [[OWL2-OVERVIEW]] properties, namely, <code>owl:backwardCompatibleWith</code> and <code>owl:incompatibleWith</code>.</p>
+
+<p><a href="#fig-version-backward-compatibility"></a> shows, as an example, the use of these properties on DCAT, where DCAT 2 is backward compatible with DCAT 1.</p> 
+
+<figure id="fig-version-backward-compatibility">
+<a href="./images/version-backward-compatibility.svg"><img src="./images/version-backward-compatibility.svg"></a>
+<figcaption>Version backward compatibility, applied to DCAT</figcaption>
+</figure>
+
+</section>
+
+</section>
+
+<!--
+
+<p>Versioning can be applied to any of the first class citizens DCAT resources including Catalogs, Catalog Records, Datasets, Distributions. The notion of version is very much related to the community practices,  data management policy and the workflows in place. It is up to data providers to decide when and why a new version should be released. For this reason, DCAT refrains from providing definitions or rules about when changes in a resource should turn into a new release of it, and refer, for guidance, to [[?DWBP]] (<a data-cite="?DWBP#dataVersioning">&sect;&nbsp;<span class="secno">8.6 </span>Data Versioning</a>).</p>
 
 <p>Versioning may be understood as involving relationships between datasets, which is supported by the <a href="#Property:resource_qualified_relation"><code>dcat:qualifiedRelation</code></a> and described in <a href="#qualified-relationship"></a>. The class <a href="#Class:Relationship"><code>dcat:Relationship</code></a> supports providing information about the relationship, and could be extended for versioning information.</p>
+
 <aside class="ednote">
-    <p>Preliminary draft for discussion.</p>	   	
+    <p>Second draft for discussion.</p>	   	
 </aside>
     
 <p>The following sections briefly discuss some key versioning aspects, and how they can be specified in DCAT records.</p>
@@ -3323,27 +3478,61 @@ For example:
 
 </section>
 
+-->
+
 <section id="version-info">
 <h2>Version information</h2>
+
+<div class="issue" data-number="1280"></div>
 
 <div class="issue" data-number="1271"></div>
     
 <p>Besides the relationships illustrated in the previous section, versioned resources may be associated with additional information, describing, e.g., their differences with the original resource (the version "delta"),  the version identifier, and release date.</p>
 
+<!--
 <p>Two typical examples are (a) a textual description of the changes between the current and the previous version of a resource, and (b) whether the new version of the resource is backward compatible or not with the previous version (this is particularly relevant when the resource is used by given applications, so it is fundamental to know if the new version can be also used with them).</p>
-
-<div class="issue" data-number="1258"></div>    
+-->
 
 <!--
 <aside class="issue">
 <a href="https://www.w3.org/TR/2012/REC-owl2-syntax-20121211/#Ontology_Annotations">Section 3.5 in  OWL 2 specification</a> suggests <code>owl:backwardCompatibleWith</code> / <code>owl:incompatibleWith</code> properties on entities other than ontologies is discouraged. Should we consider any other valuable alternatives? (see <a href="https://github.com/w3c/dxwg/issues/1258">issue 1258</a>) 
 </aside>
 -->
+<!--
 <p>For these purposes, it is recommended to use, respectively, property <a data-cite="VOCAB-ADMS#adms-versionnotes"><code>adms:versionNotes</code></a> (for a textual description of the changes) and properties <code>owl:backwardCompatibleWith</code> / <code>owl:incompatibleWith</code> (for specifying (in)compatibility).</p>
+-->
 
-<div class="issue" data-number="1280"></div>
-    
+<p>For these purposes, DCAT makes use of the following properties:</p>
+
+<ul>
+<li><code>dcat:version</code></a> (equivalent to <a data-cite="?PAV#d4e395"><code>pav:version</code></a> [[?PAV]]), for the version name / identifier;</li>
+<li><code>dct:issued</code></a> [[?DCTERMS]], for the version release date;</li>
+<li><code>adms:versionNotes</code></a> [[?VOCAB-ADMS]], for a textual description of the changes.</li>
+</ul>
+
+<aside class="note">
+<p>DCAT does not prescribe how a version name / identifier should be specified, and refer for guidance to [[DWBP]]'s <a href="https://www.w3.org/TR/dwbp/#VersioningInfo">Best Practice 7: Provide a version indicator</a>.</p>
+</aside>
+
+<!--    
 For indicating the version release date and identifier, the use of, respectively, <code>dct:issued</code> and <code>owl:versionInfo</code> is recommended.
+-->
+
+<p>The following examples reuse the one in [[DWBP]]'s <a href="https://www.w3.org/TR/dwbp/#VersioningInfo">Best Practice 7: Provide a version indicator</a> to show how version information can be specified in DCAT.</p>
+
+<aside class="example" id="ex-version-info">
+<pre>
+:stops-2015-05-05
+  a dcat:Dataset ;
+  dct:title "Bus stops of MyCity" ;
+  ...
+  dct:issued "2015-05-05"^^xsd:date ;
+  ...
+  dcat:version "1.0" ;
+.
+</pre>
+</aside>
+
 </section>
 
 <section id="life-cycle">
@@ -3439,7 +3628,11 @@ ex:budget-2020 a dcat:Dataset ;
 </pre>
 </aside>
 
-<p>It is worth noting that a dataset series may evolve over time, by acquiring new datasets. E.g., a dataset series about yearly budget data will acquire a new child dataset every year. In such cases, it might be important to link the yearly releases with relationship specifying the previous, next, and latest ones. In such scenario, DCAT recommends following the approach described in <a href="#version-types"></a>, using the [[VOCAB-ADMS]] properties <code>adms:prev</code>, <code>adms:next</code>, and <code>adms:last</code>, respectively.</p>
+<p>It is worth noting that a dataset series may evolve over time, by acquiring new datasets. E.g., a dataset series about yearly budget data will acquire a new child dataset every year. In such cases, it might be important to link the yearly releases with relationship specifying the previous, next, and latest ones. In such scenario, DCAT recommends 
+<!--
+following the approach described in <a href="#version-types"></a>,
+-->
+ using the [[VOCAB-ADMS]] properties <code>adms:prev</code>, <code>adms:next</code>, and <code>adms:last</code>, respectively.</p>
 
 <aside class="example" id="ex-dataset-series-releases" title="">
 <p>The following example extends <a href="#ex-dataset-series-containment"></a> by specifying the publication date (<code>dct:issued</code>) of each child dataset, and the previous (<code>adms:prev</code>) and next release (<code>adms:next</code>).</p>
