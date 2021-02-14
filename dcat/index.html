@@ -3386,10 +3386,18 @@ For example:
 </ul>
 
 <aside class="ednote">
-<p>The previous draft [[VOCAB-DCAT-3-20201217]] was making use of similar properties from [[VOCAB-ADMS]]: <code>adms:prev</code>, <code>adms:next</code>, <code>adms:last</code> for both versions and dataset series.</p>
-<p>Their definitions and use do not however fit completely with similar properties in [[PAV]]. E.g., <a data-cite="VOCAB-ADMS#adms-last"><code>adms:last</code></a> is defined as <q>A link to the current or latest version of the Asset</q>, whereas in [[PAV]] the current and latest versions of a resource may be different, and link to by using different properties.</p>
-<p>Moreover, although their definition states explicitly that they are meant to be used for "versions", they are subproperties of the corresponding terms in [[XHTML-VOCAB]], where they are used to link resources in a collection (e.g., the set of pages of a Web site). E.g., the definition of <a data-cite="XHTML-VOCAB#last"><code>xhv:last</code></a> reads as follows: <q>last refers to the last resource in a collection of resources.</q>.</p>
-<p>Based on that, in this draft, [[PAV]]-equivalent properties are used for versions, whereas the [[VOCAB-ADMS]] ones are used for dataset series (<a href="#dataset-series"></a>).</p>
+<p>The previous draft [[VOCAB-DCAT-3-20201217]] was making use of similar properties from [[DCTERMS]] and [[VOCAB-ADMS]], namely:</p>
+<ul>
+<li><code>dct:hasVersion</code> / <code>dct:isVersionOf</code>, for version hierarchies, and</li>
+<li><code>adms:prev</code>, <code>adms:next</code>, <code>adms:last</code> for both versions chains and dataset series.</li>
+</ul>
+<p>Their definitions and use do not however fit completely with similar properties in [[PAV]]. E.g.:</p>
+<ul>
+<li><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/hasVersion"><code>dct:hasVersion</code></a> is defined as <q>A related resource that is a version, edition, or adaptation of the described resource</q>, thus using the notion of version in its wider sense, whereas [[PAV]] is specifically describing versions as the result of a revision.</li>
+<li><a data-cite="VOCAB-ADMS#adms-last"><code>adms:last</code></a> is defined as <q>A link to the current or latest version of the Asset</q>, whereas in [[PAV]] the current and latest versions of a resource may be different, and link to by using different properties.</li>
+</ul>
+<p>Moreover, although the definitions of the [[VOCAB-ADMS]] properties states explicitly that they are meant to be used for "versions", they are subproperties of the corresponding terms in [[XHTML-VOCAB]], where they are used to link resources in a collection (e.g., the set of pages of a Web site). E.g., the definition of <a data-cite="XHTML-VOCAB#last"><code>xhv:last</code></a> reads as follows: <q>last refers to the last resource in a collection of resources.</q>.</p>
+<p>Based on that, in this draft, [[PAV]]-equivalent properties are used for versions, whereas the [[VOCAB-ADMS]] ones are used for dataset series (<a href="#dataset-series"></a>). Properties <code>dct:hasVersion</code> / <code>dct:isVersionOf</code> are not used.</p>
 </aside>
 
 <p>Property <code>dcat:previousVersion</code> is used to build a version chain, that can be navigated backward from a given version to the first one. This reflects the most typical use case - i.e., linking different versions published as distinct resources in a catalog.</p>
