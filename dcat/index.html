@@ -3336,6 +3336,7 @@ For example:
 <p>This is a new draft for discussion on versioning support in DCAT.</p>
 <p>Compared with the first draft in [[VOCAB-DCAT-3-20201217]], this section has been revised to focus specifically on versions derived from the revision of a resource, and by following the [[PAV]] approach for the specification of version chains and hierarchies - previous, next, current, last version.</p>
 <p>In particular, the introductory text has been revised according to the new scope, the section on version types has been removed, and a new section has been added to describe how to specify relationships between versions, including those concerning backward compatibility, originally included in <a href="#version-info"></a>.</p>
+<p>Moreover, <a href="#versioning-complementary-approaches">a new section</a> has been added at the end to compare the DCAT versioning approach with those used in OWL and [[?DCTERMS]].</p> 
 <p>The other sections include only editorial changes.</p>
 <p><strong>NB:</strong> All the properties described in this section are yet to be added to <a href="#vocabulary-specification"></a> and to the RDF definition of DCAT.</p>
 </aside>
@@ -3352,7 +3353,7 @@ For example:
 
 <p>It is important to note that versioning can be applied to any of the first class citizens DCAT resources, including Catalogs, Catalog Records, Datasets, Distributions.</p>
 
-<p>Note also that the DCAT approach described in the following sections is meant to be complementary with those already used in specific types of resources (e.g., [[OWL2-OVERVIEW]] provides a set of versioning properties for ontologies), as well as in given domains and communities.</p> 
+<p>Note also that the DCAT approach described in the following sections is meant to be complementary with those already used in specific types of resources (e.g., [[OWL2-OVERVIEW]] provides a set of versioning properties for ontologies), as well as in given domains and communities. For a comparison between the DCAT versioning approach and those of other vocabularies, see <a href="#versioning-complementary-approaches"></a>.</p> 
 
 <aside class="note">
 <p>The notion of version is very much related to the community practices, the data management policy and the workflows in place. It is up to data providers to decide when and why a new version should be released. For this reason, DCAT refrains from providing definitions or rules about when changes in a resource should turn into a new release of it, and refers for guidance to [[?DWBP]] (<a data-cite="?DWBP#dataVersioning">&sect;&nbsp;<span class="secno">8.6 </span>Data Versioning</a>).</p>
@@ -3607,6 +3608,75 @@ For indicating the version release date and identifier, the use of, respectively
 <li>The dataset statuses [[EUV-DS]] and concept statuses [[EUV-CS]] vocabularies from the EU Vocabularies registry.</li>
 </ul>
 <p>The UK Government Linked Data Registry project [[UKGOVLD-REG]] provides an example of how the life-cycle statuses defined in [[ISO-19135]] can be used in a registry, along with the criteria for status transition.</p>
+</aside>
+
+</section>
+
+<section id="versioning-complementary-approaches">
+
+<h2>Complementary approaches to versioning</h2>
+
+<p>The DCAT versioning approach can coexist with existing versioning practices - as those used in specific communities, domains, and resource types.</p>
+
+<p>As an example, the following table shows the correspondences between the DCAT versioning properties and two of the vocabularies most frequently used to specify similar concepts, namely, OWL, for ontologies, and [[?DCTERMS]].</p>
+
+<table class="simple">
+<caption>Similar (but not equivalent) versioning properties in DCAT, OWL and [[?DCTERMS]]</caption>
+<thead>
+<tr>
+<th>DCAT</th>
+<th>OWL</th>
+<th>[[?DCTERMS]]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href=""><code>dcat:hasVersion</code></td>
+<td><a href=""><code></code></a></td>
+<td><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/hasVersion"><code>dct:hasVersion</code></a></td>
+</tr>
+<tr>
+<td><a href=""><code>dcat:isVersionOf</code></a></td>
+<td><a href=""><code></code></a></td>
+<td><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/isVersionOf"><code>dct:isVersionOf</code></a></td>
+</tr>
+<tr>
+<td><a href=""><code>dcat:currentVersion</code></a></td>
+<td><code>owl:versionIRI</code></td>
+<td><a href=""><code></code></a></td>
+</tr>
+<tr>
+<td><a href=""><code>dcat:previousVersion</code></a></td>
+<td><code>owl:priorVersion</code></td>
+<td><a href=""><code></code></a></td>
+</tr>
+<tr>
+<td><a href=""><code>dcat:version</code></a></td>
+<td><code>owl:versionInfo</code></td>
+<td><a href=""><code></code></a></td>
+</tr>
+</tbody>
+</table>
+
+<p>Note that correspondence does not imply equivalence. These properties have different scopes and semantics, and therefore they can complement but not replace each other. In particular, OWL properties are meant to be used on resources that can be typed as <code>owl:Ontology</code>'s, whereas the [[?DCTERMS]] ones use a very broad notion of <em>version</em> (including editions and adaptations). On the other hand, DCAT versioning properties are meant to be used on any resource in a catalog, and they use a very specific notion of <em>version</em>, as explained in the introduction to <a href="#dataset-versions"></a>.</p>
+
+<p>The following examples shows how DCAT and OWL can be used complementarily to versioning [[?VOCAB-DCAT-2]].</p>
+
+<aside class="example" id="versioning-with-dcat-and-owl" title="Use of DCAT and OWL for versioning DCAT 2">
+<pre>
+&lt;https://www.w3.org/TR/vocab-dcat-2&gt; a owl:Ontology , dcat:Dataset ;
+  owl:versionInfo "Version 2" ;
+  dcat:version "Version 2" ;
+  owl:versionIRI &lt;https://www.w3.org/TR/2020/REC-vocab-dcat-2-20200204/&gt; ;
+  dcat:currentVersion &lt;https://www.w3.org/TR/2020/REC-vocab-dcat-2-20200204/&gt; ;
+  owl:priorVersion &lt;https://www.w3.org/TR/vocab-dcat-1&gt; ;
+  dcat:previousVersion &lt;https://www.w3.org/TR/2019/PR-vocab-dcat-2-20191119/&gt; ;
+  dcat:hasVersion &lt;https://www.w3.org/TR/2019/CR-vocab-dcat-2-20191003/&gt; ,
+    &lt;https://www.w3.org/TR/2019/WD-vocab-dcat-2-20190528/&gt; ,
+    &lt;https://www.w3.org/TR/2018/WD-vocab-dcat-2-20181016/&gt; ,
+    &lt;https://www.w3.org/TR/2018/WD-vocab-dcat-2-20180508/&gt; ;
+. 
+</pre>
 </aside>
 
 </section>
@@ -5103,7 +5173,14 @@ ga-courts:jc-wms
 <p>The document has undergone the following changes since the DCAT 3 first public working draft of 17 December 2020 [[?VOCAB-DCAT-3-20201217]]:</p>
 
 <ul>
-<li><a href="#dataset-versions"></a> has been revised to focus specifically on versions derived from the revision of a resource, and by following the [[PAV]] approach for the specification of version chains and hierarchies - previous, next, current, last version. In particular, the introductory text has been revised according to the new scope, the section on <a href="https://www.w3.org/TR/2020/WD-vocab-dcat-3-20201217/#version-types">version types</a> (link to previous version) has been removed, and <a href="#version-relationships">a new section</a> has been added to describe how to specify relationships between versions, including those concerning backward compatibility, originally included in <a href="#version-info"></a>. The other sections include only editorial changes.</li>
+<li><p><a href="#dataset-versions"></a> has been revised to focus specifically on versions derived from the revision of a resource, and by following the [[PAV]] approach for the specification of version chains and hierarchies - previous, next, current, last version. In particular:</p>
+<ul>
+<li>The introductory text has been revised according to the new scope.</li>
+<li>The section on <a href="https://www.w3.org/TR/2020/WD-vocab-dcat-3-20201217/#version-types">version types</a> (link to previous version) has been removed, and <a href="#version-relationships">a new section</a> has been added to describe how to specify relationships between versions, including those concerning backward compatibility, originally included in <a href="#version-info"></a>.</li>
+<li><a href="#versioning-complementary-approaches">A new section</a> has been added at the end to compare the DCAT versioning approach with those used in OWL and [[?DCTERMS]].</li>
+</ul>
+<p>The other sections include only editorial changes.</p>
+</li>
 </ul>
 
 </section>
