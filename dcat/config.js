@@ -320,7 +320,8 @@ var respecConfig = {
             date : "2015"
         },
         "PAV" : {
-            href:"http://purl.org/pav/",
+			href:"https://pav-ontology.github.io/pav/",
+//            href:"http://purl.org/pav/",
             title:"PAV - Provenance, Authoring and Versioning. Version 2.3.1",
 			authors:["Paolo Ciccarese","Stian Soiland-Reyes"],
 			publisher:"Mind Informatics",
