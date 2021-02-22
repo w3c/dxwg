@@ -948,7 +948,19 @@
             <a href="#Property:resource_title">title</a>,
             <a href="#Property:resource_type">type/genre</a>,
             <a href="#Property:resource_update_date">update/modification date</a>,
-            <a href="#Property:resource_qualified_attribution">qualified attribution</a>.
+            <a href="#Property:resource_qualified_attribution">qualified attribution</a>,
+			
+            <a href="#Property:resource_has_current_version">has current version</a>,
+            <a href="#Property:resource_has_last_version">has last version</a>,
+            <a href="#Property:resource_has_version">has version</a>,
+            <a href="#Property:resource_is_replaced_by">is replaced by</a>,
+            <a href="#Property:resource_is_version_of">is version of</a>,
+            <a href="#Property:resource_previous_version">previous version</a>,
+            <a href="#Property:resource_replaces">replaces</a>,
+            <a href="#Property:resource_status">status</a>,
+            <a href="#Property:resource_version">version</a>,
+            <a href="#Property:resource_version_notes">version notes</a>.
+			
         </p>
 
         <!--backlog p class="issue" data-number="62">
@@ -1482,7 +1494,427 @@
 
         </section>
 
+<!-- Versioning properties -->
 
+<section id="Property:resource_previous_version">
+
+<h4>Property: previous version</h4>
+
+<aside class="note">
+<p>Property added in DCAT 3.</p>
+</aside>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Property:</th>
+<th><a href="http://www.w3.org/ns/dcat#previousVersion">dcat:previousVersion</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>The previous version of a resource in a lineage [[?PAV]].</td>
+</tr>
+<tr>
+<td class="prop">Equivalent property:</td>
+<td><a data-cite="?PAV#d4e459"><code title="http://purl.org/pav/previousVersion">pav:previousVersion</code></a></td>
+</tr>
+<tr>
+<td class="prop">Sub-property of:</td>
+<td><a data-cite="?PROV-O#wasRevisionOf"><code title="http://www.w3.org/ns/prov#wasRevisionOf">prov:wasRevisionOf</code></a></td>
+</tr>
+<tr>
+<td class="prop">Usage note:</td>
+<td>
+<p>This property is meant to be used to specify a version chain, consisting of snapshots of a resource.</p>
+<p>The notion of version used by this property is limited to versions resulting from revisions occurring to a resource as part of its life-cycle.</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>For guidance on the use of this property, see <a href="#version-history"></a>.</p>
+
+</section>
+
+<section id="Property:resource_has_version">
+
+<h4>Property: has version</h4>
+
+<aside class="note">
+<p>Property added in DCAT 3.</p>
+</aside>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Property:</th>
+<th><a href="http://www.w3.org/ns/dcat#hasVersion">dcat:hasVersion</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>This resource has a more specific, versioned resource [[?PAV]].</td>
+</tr>
+<tr>
+<td class="prop">Equivalent property:</td>
+<td><a data-cite="?PAV#d4e395"><code title="http://purl.org/pav/hasVersion">pav:hasVersion</code></a></td>
+</tr>
+<tr>
+<td class="prop">Sub-property of:</td>
+<td><a data-cite="?DCTERMS#http://purl.org/dc/terms/hasVersion"><code title="http://purl.org/dc/terms/hasVersion">dct:hasVersion</code></a></td>
+</tr>
+<td class="prop">Sub-property of:</td>
+<td><a data-cite="?PROV-O#generalizationOf"><code title="http://www.w3.org/ns/prov#generalizationOf">prov:generalizationOf</code></a></td>
+</tr>
+<tr>
+<td class="prop">Usage note:</td>
+<td>
+<p>This property is intended for relating a non-versioned or abstract resource to several versioned resources, e.g. snapshots [[?PAV]].</p>
+<p>The notion of version used by this property is limited to versions resulting from revisions occurring to a resource as part of its life-cycle. Therefore, its semantics is more specific than its super-property <a data-cite="?DCTERMS#http://purl.org/dc/terms/hasVersion"><code title="http://purl.org/dc/terms/hasVersion">dct:hasVersion</code></a>, which makes use of a broader notion of version, including editions and adaptations.</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>For guidance on the use of this property, see <a href="#version-history"></a>.</p>
+
+</section>
+
+<section id="Property:resource_is_version_of">
+
+<h4>Property: is version of</h4>
+
+<aside class="note">
+<p>Property added in DCAT 3.</p>
+</aside>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Property:</th>
+<th><a href="http://www.w3.org/ns/dcat#isVersionOf">dcat:isVersionOf</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>This resource is a version of a non-versioned or abstract resource.</td>
+</tr>
+<tr>
+<td class="prop">Inverse property of:</td>
+<td><a href="#Property:resource_has_version"><code title="http://www.w3.org/dcat#hasVersion">dcat:hasVersion</code></a></td>
+</tr>
+<tr>
+<td class="prop">Sub-property of:</td>
+<td><a data-cite="?DCTERMS#http://purl.org/dc/terms/isVersionOf"><code title="http://purl.org/dc/terms/isVersionOf">dct:isVersionOf</code></a></td>
+</tr>
+<td class="prop">Sub-property of:</td>
+<td><a data-cite="?PROV-O#specializationOf"><code title="http://www.w3.org/ns/prov#specializationOf">prov:specializationOf</code></a></td>
+</tr>
+<tr>
+<td class="prop">Usage note:</td>
+<td>
+<p>This property is intended for relating a versioned resource to a non-versioned or abstract resource.</p>
+<p>The notion of version used by this property is limited to versions resulting from revisions occurring to a resource as part of its life-cycle. Therefore, its semantics is more specific than its super-property <a data-cite="?DCTERMS#http://purl.org/dc/terms/isVersionOf"><code title="http://purl.org/dc/terms/isVersionOf">dct:isVersionOf</code></a>, which makes use of a broader notion of version, including editions and adaptations.</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>For guidance on the use of this property, see <a href="#version-history"></a>.</p>
+
+</section>
+
+<section id="Property:resource_has_current_version">
+
+<h4>Property: current version</h4>
+
+<aside class="note">
+<p>Property added in DCAT 3.</p>
+</aside>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Property:</th>
+<th><a href="http://www.w3.org/ns/dcat#hasCurrentVersion">dcat:hasCurrentVersion</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>This resource has a more specific, versioned resource with equivalent content [[?PAV]].</td>
+</tr>
+<tr>
+<td class="prop">Equivalent property:</td>
+<td><a data-cite="?PAV#d4e359"><code title="http://purl.org/pav/hasCurrentVersion">pav:hasCurrentVersion</code></a></td>
+</tr>
+<tr>
+<td class="prop">Sub-property of:</td>
+<td><a data-cite="?PAV#d4e395"><code title="http://purl.org/pav/hasVersion">pav:hasVersion</code></a></td>
+</tr>
+<tr>
+<td class="prop">Usage note:</td>
+<td>
+<p>This property is intended for relating a non-versioned or abstract resource to a single snapshot that can be used as a permalink to indicate the current version of the content [[?PAV]]. As such, it corresponds to the latest <em>stable</em> version of a resource. To point instead to the latest version of a resource in a version chain, irrespective of its status (stable or draft), property <a href="#Property:resource_has_last_version"><code>dcat:hasLastVersion</code></a> SHOULD be used.</p>
+<p>The notion of version used by this property is limited to versions resulting from revisions occurring to a resource as part of its life-cycle.</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>For guidance on the use of this property, see <a href="#version-history"></a>.</p>
+
+</section>
+
+<section id="Property:resource_has_last_version">
+
+<h4>Property: has last version</h4>
+
+<aside class="note">
+<p>Property added in DCAT 3.</p>
+</aside>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Property:</th>
+<th><a href="http://www.w3.org/ns/dcat#hasLastVersion">dcat:hasLastVersion</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>This resource is the most recent version of a non-versioned or abstract resource.</td>
+</tr>
+<tr>
+<td class="prop">Sub-property of:</td>
+<td><a data-cite="?PAV#d4e395"><code title="http://purl.org/pav/hasVersion">pav:hasVersion</code></a></td>
+</tr>
+<tr>
+<td class="prop">Usage note:</td>
+<td>
+<p>This property is intended for relating a non-versioned or abstract resource to the most recent versioned resource, irrespective of its status (stable vs draft) to a non-versioned or abstract resource. To point instead to the latest <em>stable</em> version of a resource, property <a href="#Property:resource_has_current_version"><code>dcat:hasCurrentVersion</code></a> SHOULD be used.</p>
+<p>The notion of version used by this property is limited to versions resulting from revisions occurring to a resource as part of its life-cycle.</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>For guidance on the use of this property, see <a href="#version-history"></a>.</p>
+
+</section>
+
+<section id="Property:resource_replaces">
+
+<h4>Property: replaces</h4>
+
+<aside class="note">
+<p>Property added in DCAT 3.</p>
+</aside>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Property:</th>
+<th><a href="http://purl.org/dc/terms/replaces">dct:replaces</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>A related resource that is supplanted, displaced, or superseded by the described resource [[?DCTERMS]].</td>
+</tr>
+<tr>
+<td class="prop">Sub-property of:</td>
+<td><a data-cite="?DCTERMS#http://purl.org/dc/terms/relation"><code title="http://purl.org/dc/terms/relation">dct:relation</code></a></td>
+</tr>
+<!--
+<tr>
+<td class="prop">Usage note:</td>
+<td>
+<p>This property is intended for relating a non-versioned or abstract resource to the most recent versioned resource, irrespective of its status (stable vs draft) to a non-versioned or abstract resource. To point instead to the latest <em>stable</em> version of a resource, property <a href="#Property:resource_has_current_version"><code>dcat:hasCurrentVersion</code></a> SHOULD be used.</p>
+<p>The notion of version used by this property is limited to versions resulting from revisions occurring to a resource as part of its life-cycle.</p>
+</td>
+</tr>
+-->
+</tbody>
+</table>
+
+<p>For guidance on the use of this property, see <a href="#version-replace"></a>.</p>
+
+</section>
+
+<section id="Property:resource_is_replaced_by">
+
+<h4>Property: is replaced by</h4>
+
+<aside class="note">
+<p>Property added in DCAT 3.</p>
+</aside>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Property:</th>
+<th><a href="http://purl.org/dc/terms/isReplacedBy">dct:isReplacedBy</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>A related resource that supplants, displaces, or supersedes the described resource [[?DCTERMS]].</td>
+</tr>
+<tr>
+<td class="prop">Inverse property of:</td>
+<td><a data-cite="?DCTERMS#http://purl.org/dc/terms/replaces"><code title="http://purl.org/dc/terms/replaces">dct:replaces</code></a></td>
+</tr>
+<tr>
+<td class="prop">Sub-property of:</td>
+<td><a data-cite="?DCTERMS#http://purl.org/dc/terms/relation"><code title="http://purl.org/dc/terms/relation">dct:relation</code></a></td>
+</tr>
+<!--
+<tr>
+<td class="prop">Usage note:</td>
+<td>
+<p>This property is intended for relating a non-versioned or abstract resource to the most recent versioned resource, irrespective of its status (stable vs draft) to a non-versioned or abstract resource. To point instead to the latest <em>stable</em> version of a resource, property <a href="#Property:resource_has_current_version"><code>dcat:hasCurrentVersion</code></a> SHOULD be used.</p>
+<p>The notion of version used by this property is limited to versions resulting from revisions occurring to a resource as part of its life-cycle.</p>
+</td>
+</tr>
+-->
+</tbody>
+</table>
+
+<p>For guidance on the use of this property, see <a href="#version-replace"></a>.</p>
+
+</section>
+
+<section id="Property:resource_version">
+
+<h4>Property: version</h4>
+
+<aside class="note">
+<p>Property added in DCAT 3.</p>
+</aside>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Property:</th>
+<th><a href="http://www.w3.org/ns/dcat#version">dcat:version</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>The version number of a resource [[?PAV]].</td>
+</tr>
+<tr>
+<td class="prop">Equivalent property:</td>
+<td><a data-cite="?PAV#d4e869"><code title="http://purl.org/pav/version">pav:version</code></a></td>
+</tr>
+<tr>
+<td class="prop">Range:</td>
+<td><a data-cite="RDF-SCHEMA#ch_literal"><code title="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</code></a></td>
+</tr>
+<!--
+<tr>
+<td class="prop">Usage note:</td>
+<td>
+<p>This property is intended for relating a non-versioned or abstract resource to the most recent versioned resource, irrespective of its status (stable vs draft) to a non-versioned or abstract resource. To point instead to the latest <em>stable</em> version of a resource, property <a href="#Property:resource_has_current_version"><code>dcat:hasCurrentVersion</code></a> SHOULD be used.</p>
+<p>The notion of version used by this property is limited to versions resulting from revisions occurring to a resource as part of its life-cycle.</p>
+</td>
+</tr>
+-->
+</tbody>
+</table>
+
+<p>For guidance on the use of this property, see <a href="#version-info"></a>.</p>
+
+</section>
+
+<section id="Property:resource_version_notes">
+
+<h4>Property: version notes</h4>
+
+<aside class="note">
+<p>Property added in DCAT 3.</p>
+</aside>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Property:</th>
+<th><a data-cite="VOCAB-ADMS#adms-versionnotes">adms:versionNotes</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>A description of changes between this version and the previous version of the resource [[?VOCAB-ADMS]].</td>
+</tr>
+<tr>
+<td class="prop">Range:</td>
+<td><a data-cite="RDF-SCHEMA#ch_literal"><code title="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</code></a></td>
+</tr>
+<!--
+<tr>
+<td class="prop">Usage note:</td>
+<td>
+<p>This property is intended for relating a non-versioned or abstract resource to the most recent versioned resource, irrespective of its status (stable vs draft) to a non-versioned or abstract resource. To point instead to the latest <em>stable</em> version of a resource, property <a href="#Property:resource_has_current_version"><code>dcat:hasCurrentVersion</code></a> SHOULD be used.</p>
+<p>The notion of version used by this property is limited to versions resulting from revisions occurring to a resource as part of its life-cycle.</p>
+</td>
+</tr>
+-->
+</tbody>
+</table>
+
+<p>For guidance on the use of this property, see <a href="#version-info"></a>.</p>
+
+</section>
+
+<section id="Property:resource_status">
+
+<h4>Property: status</h4>
+
+<aside class="note">
+<p>Property added in DCAT 3.</p>
+</aside>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Property:</th>
+<th><a data-cite="VOCAB-ADMS#adms-status">adms:status</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>The status of the resource in the context of a particular workflow process [[?VOCAB-ADMS]].</td>
+</tr>
+<tr>
+<td class="prop">Range:</td>
+<td><a data-cite="?SKOS-REFERENCE#concepts"><code title="http://www.w3.org/2004/02/skos/core#Concept">skos:Concept</code></a></td>
+</tr>
+<!--
+<tr>
+<td class="prop">Usage note:</td>
+<td>
+<p>This property is intended for relating a non-versioned or abstract resource to the most recent versioned resource, irrespective of its status (stable vs draft) to a non-versioned or abstract resource. To point instead to the latest <em>stable</em> version of a resource, property <a href="#Property:resource_has_current_version"><code>dcat:hasCurrentVersion</code></a> SHOULD be used.</p>
+<p>The notion of version used by this property is limited to versions resulting from revisions occurring to a resource as part of its life-cycle.</p>
+</td>
+</tr>
+-->
+</tbody>
+</table>
+
+<p>For guidance on the use of this property, see <a href="#life-cycle"></a>.</p>
+
+</section>
 
     </section> <!-- end class Resource -->
 
@@ -3377,12 +3809,12 @@ For example:
 <p>DCAT defines specific properties for describing version history, aligned with the corresponding [[?PAV]] ones:</p>
 
 <ul>
-<li><code>dcat:previousVersion</code> (equivalent to <a data-cite="?PAV#d4e459"><code>pav:previousVersion</code></a>)</li>
-<li><p><code>dcat:hasVersion</code> (equivalent to <a data-cite="?PAV#d4e395"><code>pav:hasVersion</code></a>), plus the following additional properties:</p>
+<li><a href="#Property:resource_previous_version"><code>dcat:previousVersion</code></a> (equivalent to <a data-cite="?PAV#d4e459"><code>pav:previousVersion</code></a>)</li>
+<li><p><a href="#Property:resource_has_version"><code>dcat:hasVersion</code></a> (equivalent to <a data-cite="?PAV#d4e395"><code>pav:hasVersion</code></a>), plus the following additional properties:</p>
 <ul>
-<li><code>dcat:isVersionOf</code> (inverse of <code>dcat:hasVersion</code>);</li>
-<li><code>dcat:currentVersion</code> (equivalent to <a data-cite="?PAV#d4e359"><code>pav:currentVersion</code></a>, and subproperty of <code>dcat:hasVersion</code>)</li>
-<li><code>dcat:lastVersion</code> (subproperty of <code>dcat:hasVersion</code>)</li>
+<li><a href="#Property:resource_is_version_of"><code>dcat:isVersionOf</code></a> (inverse of <code>dcat:hasVersion</code>);</li>
+<li><a href="#Property:resource_has_current_version"><code>dcat:hasCurrentVersion</code></a> (equivalent to <a data-cite="?PAV#d4e359"><code>pav:hasCurrentVersion</code></a>, and subproperty of <code>dcat:hasVersion</code>)</li>
+<li><a href="#Property:resource_has_last_version"><code>dcat:hasLastVersion</code></a> (subproperty of <code>dcat:hasVersion</code>)</li>
 </ul>
 </li>
 </ul>
@@ -3406,7 +3838,7 @@ For example:
 
 <p>In addition to this, property <code>dcat:hasVersion</code> can be used to specify a version hierarchy, by linking an abstract resource to its versions.</p>
 
-<p>If needed, the version hierarchy can be further described by specific properties. More precisely, property <code>dcat:isVersionOf</code> (inverse of <code>dcat:hasVersion</code>) gives the possibility of specifying a back link from a version to the abstract resource, whereas properties <code>dcat:currentVersion</code> and <code>dcat:lastVersion</code> link to, respectively, the current and last versions of the resource. Note that the current version of a resource may be different from the last version: e.g., when the last version is still in draft status, the current one may correspond to the latest stable version of the resource.</p>
+<p>If needed, the version hierarchy can be further described by specific properties. More precisely, property <code>dcat:isVersionOf</code> (inverse of <code>dcat:hasVersion</code>) gives the possibility of specifying a back link from a version to the abstract resource, whereas properties <code>dcat:hasCurrentVersion</code> and <code>dcat:hasLastVersion</code> link to, respectively, the current and last versions of the resource. Note that the current version of a resource may be different from the last version: e.g., when the last version is still in draft status, the current one may correspond to the latest stable version of the resource.</p>
 
 <aside class="note">
 <p>On how to use DCAT to specify a resource's status, see <a href="#life-cycle"></a>.</p>
@@ -3432,7 +3864,7 @@ For example:
   dcat:hasVersion &lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-01-01&gt; ,
     &lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-05-05&gt; ,
     &lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-12-07&gt; ;
-  dcat:currentVersion &lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-12-07&gt; ;
+  dcat:hasCurrentVersion &lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-12-07&gt; ;
 .
 
 &lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-01-01&gt;
@@ -3641,7 +4073,7 @@ For indicating the version release date and identifier, the use of, respectively
 <td><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/isVersionOf"><code>dct:isVersionOf</code></a></td>
 </tr>
 <tr>
-<td><a href=""><code>dcat:currentVersion</code></a></td>
+<td><a href=""><code>dcat:hasCurrentVersion</code></a></td>
 <td><code>owl:versionIRI</code></td>
 <td><a href=""><code></code></a></td>
 </tr>
@@ -3668,7 +4100,7 @@ For indicating the version release date and identifier, the use of, respectively
   owl:versionInfo "Version 2" ;
   dcat:version "Version 2" ;
   owl:versionIRI &lt;https://www.w3.org/TR/2020/REC-vocab-dcat-2-20200204/&gt; ;
-  dcat:currentVersion &lt;https://www.w3.org/TR/2020/REC-vocab-dcat-2-20200204/&gt; ;
+  dcat:hasCurrentVersion &lt;https://www.w3.org/TR/2020/REC-vocab-dcat-2-20200204/&gt; ;
   owl:priorVersion &lt;https://www.w3.org/TR/vocab-dcat-1&gt; ;
   dcat:previousVersion &lt;https://www.w3.org/TR/2019/PR-vocab-dcat-2-20191119/&gt; ;
   dcat:hasVersion &lt;https://www.w3.org/TR/2019/CR-vocab-dcat-2-20191003/&gt; ,
