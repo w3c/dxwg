@@ -3989,49 +3989,59 @@ This property is intended for relating a non-versioned or abstract resource to a
 <p>On how to use DCAT to specify a resource's status, see <a href="#life-cycle"></a>.</p>
 </aside>
 
+<!--
 <p><a href="#fig-version-chain-and-hierarchy"></a> illustrates the use of <em>all</em> these properties. In the figure, the resource with URI <code>https://www.w3.org/TR/vocab-dcat</code> is an abstract resource, corresponding always to the latest  stable version of DCAT (as W3C Recommendation), whereas the other ones correspond to specific versions of DCAT. The current version is DCAT 2, as DCAT 3 (the last version) is still a draft.</p>
 
 <figure id="fig-version-chain-and-hierarchy">
 <a href="./images/version-chain-and-hierarchy-dcat.svg"><img src="./images/version-chain-and-hierarchy-dcat.svg"></a>
 <figcaption>Version chain and hierarchy of DCAT specifications</figcaption>
 </figure>
+-->
 
 <p>Note that the only properties necessary to specify a version chain and hierarchy are, respectively, <code>dcat:previousVersion</code> and <code>dcat:hasVersion</code>. Whether to use or not the other ones depends on the requirements of the relevant use case.</p>
 
-<p>The following example reuses those in <a data-cite="?DWBP#dataVersioning">&sect;&nbsp;<span class="secno">8.6 </span>Data Versioning</a> of [[DWBP]] and revises them to show how to specify a version chain and hierarchy on a bus stops dataset, by using a subset of the properties described in this section.</p>
+<p>The following example reuses those in <a data-cite="?DWBP#dataVersioning">&sect;&nbsp;<span class="secno">8.6 </span>Data Versioning</a> of [[DWBP]] and revises them to show how to specify a version chain and hierarchy on a bus stops dataset, by using the properties described in this section.</p>
 
 <aside class="example" id="ex-version-chain-and-hierarchy" title="Version history of the MyCity bus stops dataset">
+
 <p>The MyCity bus stops dataset is updated whenever the list of bus stops changes. The different versions are preserved in order to keep an historical record of the bus stops available in given points in time. An abstract dataset is used to point to the version with the most up to date list of bus stops.</p>
+
+<p>In <a href="#fig-version-chain-and-hierarchy"></a>, the resource with URI <code>mycity-bus:stops</code> is the abstract resource, corresponding always to the latest version of the MyCity bus stops dataset, whereas the other ones correspond to specific versions of it. The current version is the one with URI <code>mycity-bus:stops-2015-12-07</code>.</p>
+
+<figure id="fig-version-chain-and-hierarchy">
+<img src="./images/version-chain-and-hierarchy.svg">
+<figcaption>Version chain and hierarchy of the MyCity bus stops dataset</figcaption>
+</figure>
+
+<p>The corresponding [[Turtle]] representation:</p>
+
 <pre>
-&lt;http://data.mycity.example.com/transport/dataset/bus/stops&gt; 
-  a dcat:Dataset ;
+mycity-bus:stops a dcat:Dataset ;
   ...
-  dcat:hasVersion &lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-01-01&gt; ,
-    &lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-05-05&gt; ,
-    &lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-12-07&gt; ;
-  dcat:hasCurrentVersion &lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-12-07&gt; ;
+  dcat:hasVersion mycity-bus:stops-2015-01-01 ,
+    mycity-bus:stops-2015-05-05 ,
+    mycity-bus:stops-2015-12-07 ;
+  dcat:hasCurrentVersion mycity-bus:stops-2015-12-07 ;
 .
 
-&lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-01-01&gt;
-  a dcat:Dataset ;
+mycity-bus:stops-2015-01-01 a dcat:Dataset ;
   ...
-  dcat:isVersionOf &lt;http://data.mycity.example.com/transport/dataset/bus/stops&gt; ;
+  dcat:isVersionOf mycity-bus:stops ;
 .
 
-&lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-05-05&gt;
-  a dcat:Dataset ;
+mycity-bus:stops-2015-05-05 a dcat:Dataset ;
   ...
-  dcat:previousVersion &lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-01-01&gt; ;
-  dcat:isVersionOf &lt;http://data.mycity.example.com/transport/dataset/bus/stops&gt; ;
+  dcat:previousVersion mycity-bus:stops-2015-01-01 ;
+  dcat:isVersionOf mycity-bus:stops ;
 .
 
-&lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-12-07&gt;
-  a dcat:Dataset ;
+mycity-bus:stops-2015-12-07 a dcat:Dataset ;
   ...
-  dcat:previousVersion &lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-05-05&gt; ;
-  dcat:isVersionOf &lt;http://data.mycity.example.com/transport/dataset/bus/stops&gt; ;
+  dcat:previousVersion mycity-bus:stops-2015-05-05 ;
+  dcat:isVersionOf mycity-bus:stops ;
 .
 </pre>
+
 </aside>
 
 </section>
@@ -4042,37 +4052,38 @@ This property is intended for relating a non-versioned or abstract resource to a
 
 <p>Another type of relationship concerns whether a given version replaces/supersedes another one. For this purpose, DCAT reuses the relevant [[DCTERMS]] property, namely, <a href="#Property:resource_replaces"><code title="http://purl.org/dc/terms/replaces">dct:replaces</code></a>, plus its inverse <a href="#Property:resource_is_replaced_by"><code title="http://purl.org/dc/terms/isReplacedBy">dct:isReplacedBy</code></a>, in case a back link needs to be provided.</p>
 
+<p>It is worth noting that these properties are not denoting by themselves a version chain - i.e., a version is not necessarily replacing its immediate predecessor.</p>
+
+<!--
 <p>It is worth noting that these properties are not denoting by themselves a version chain - i.e., a version is not necessarily replacing its immediate predecessor. For instance, in <a href="#fig-version-replace"></a>, DCAT 2 is not replaced by its immediate successor (the First Public Working Draft of DCAT 3), since it is still a draft.</p>
 
 <figure id="fig-version-replace">
 <a href="./images/version-replace-dcat.svg"><img src="./images/version-replace-dcat.svg"></a>
 <figcaption>Specification of replaced versions, applied to DCAT</figcaption>
 </figure>
+-->
 
 <p>The following example reuses the description of the MyCity bus stop dataset in <a href="#ex-version-chain-and-hierarchy"></a> to show how replaced versions can be specified in DCAT.</p>
 
 <aside class="example" id="ex-version-replace" title="Replaced versions of the MyCity bus stops dataset">
 <pre>
-&lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-01-01&gt;
-  a dcat:Dataset ;
+mycity-bus:stops-2015-01-01 a dcat:Dataset ;
   ...
-  dcat:isVersionOf &lt;http://data.mycity.example.com/transport/dataset/bus/stops&gt; ;
+  dcat:isVersionOf mycity-bus:stops ;
 .
 
-&lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-05-05&gt;
-  a dcat:Dataset ;
+mycity-bus:stops-2015-05-05 a dcat:Dataset ;
   ...
-  dcat:previousVersion &lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-01-01&gt; ;
-  dcat:isVersionOf &lt;http://data.mycity.example.com/transport/dataset/bus/stops&gt; ;
-  dct:replaces &lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-01-01&gt; ;
+  dcat:previousVersion mycity-bus:stops-2015-01-01 ;
+  dcat:isVersionOf mycity-bus:stops ;
+  dct:replaces mycity-bus:stops-2015-01-01 ;
 .
 
-&lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-12-07&gt;
-  a dcat:Dataset ;
+mycity-bus:stops-2015-12-07 a dcat:Dataset ;
   ...
-  dcat:previousVersion &lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-05-05&gt; ;
-  dcat:isVersionOf &lt;http://data.mycity.example.com/transport/dataset/bus/stops&gt; ;
-  dct:replaces &lt;http://data.mycity.example.com/transport/dataset/bus/stops-2015-05-05&gt; ;
+  dcat:previousVersion mycity-bus:stops-2015-05-05 ;
+  dcat:isVersionOf mycity-bus:stops ;
+  dct:replaces mycity-bus:stops-2015-05-05 ;
 .
 </pre>
 </aside>
@@ -4161,7 +4172,7 @@ For indicating the version release date and identifier, the use of, respectively
 
 <aside class="example" id="ex-version-info" title="First version of the MyCity bus stops dataset">
 <pre>
-:stops-2015-01-01
+mycity-bus:stops-2015-01-01
   a dcat:Dataset ;
   dct:title "Bus stops of MyCity" ;
   ...
