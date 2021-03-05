@@ -4231,56 +4231,62 @@ mycity-bus:stops-2015-01-01
 
 <p>The DCAT versioning approach can coexist with existing versioning practices - as those used in specific communities, domains, and resource types.</p>
 
-<p>As an example, the following table shows the correspondences between the DCAT versioning properties and two of the vocabularies most frequently used to specify similar concepts, namely, OWL, for ontologies, and [[?DCTERMS]].</p>
+<p>As an example, the following table shows the correspondences between the DCAT versioning properties and the vocabularies most frequently used to specify similar concepts, namely, OWL, for ontologies, [[?DCTERMS]], and [[?PROV-O]].</p>
 
-<table class="simple">
-<caption>Similar (but not equivalent) versioning properties in DCAT, OWL and [[?DCTERMS]]</caption>
+<table class="simple" id="table-complementary-versioning-approaches">
+<caption>Similar (but not equivalent) versioning properties in DCAT, OWL, [[?DCTERMS]], and [[?PROV-O]]</caption>
 <thead>
 <tr>
 <th>DCAT</th>
 <th>OWL</th>
 <th>[[?DCTERMS]]</th>
+<th>[[?PROV-O]]</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href=""><code>dcat:hasVersion</code></td>
-<td><a href=""><code></code></a></td>
+<td><a href="#Property:resource_has_version"><code>dcat:hasVersion</code></td>
+<td></td>
 <td><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/hasVersion"><code>dct:hasVersion</code></a></td>
+<td></td>
 </tr>
 <tr>
-<td><a href=""><code>dcat:isVersionOf</code></a></td>
-<td><a href=""><code></code></a></td>
+<td><a href="#Property:resource_is_version_of"><code>dcat:isVersionOf</code></a></td>
+<td></td>
 <td><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/isVersionOf"><code>dct:isVersionOf</code></a></td>
+<td></td>
 </tr>
 <tr>
-<td><a href=""><code>dcat:hasCurrentVersion</code></a></td>
+<td><a href="#Property:resource_has_current_version"><code>dcat:hasCurrentVersion</code></a></td>
 <td><code>owl:versionIRI</code></td>
-<td><a href=""><code></code></a></td>
+<td></td>
+<td></td>
 </tr>
 <tr>
-<td><a href=""><code>dcat:previousVersion</code></a></td>
+<td><a href="#Property:resource_previous_version"><code>dcat:previousVersion</code></a></td>
 <td><code>owl:priorVersion</code></td>
-<td><a href=""><code></code></a></td>
+<td></td>
+<td><a href="https://www.w3.org/TR/prov-o/#wasRevisionOf"><code>prov:wasRevisionOf</code></a></td>
 </tr>
 <tr>
-<td><a href=""><code>dcat:version</code></a></td>
+<td><a href="#Property:resource_version"><code>dcat:version</code></a></td>
 <td><code>owl:versionInfo</code></td>
-<td><a href=""><code></code></a></td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
 
-<p>Note that correspondence does not imply equivalence. These properties have different scopes and semantics, and therefore they can complement but not replace each other. In particular, OWL properties are meant to be used on resources that can be typed as <code>owl:Ontology</code>'s, whereas the [[?DCTERMS]] ones use a very broad notion of <em>version</em> (including editions and adaptations). On the other hand, DCAT versioning properties are meant to be used on any resource in a catalog, and they use a very specific notion of <em>version</em>, as explained in the introduction to <a href="#dataset-versions"></a>.</p>
+<p>Note that correspondence does not imply equivalence. These properties have different scopes and semantics, and therefore they can complement but not replace each other. In particular, OWL properties are meant to be used on resources that can be typed as <code>owl:Ontology</code>'s, whereas the [[?DCTERMS]] ones use a very broad notion of <em>version</em> (including editions and adaptations). On the other hand, DCAT versioning properties are meant to be used on any resource in a catalog, and they use a very specific notion of <em>version</em>, as explained in the introduction to <a href="#dataset-versions"></a>. Finally, the [[?PROV-O]] property <code>prov:wasRevisionOf</code>, although semantically similar to <code>dcat:previousVersion</code>, is not explicitly meant to be used to build a version chain.</p>
 
 <p>The following examples shows how DCAT and OWL can be used complementarily to versioning [[?VOCAB-DCAT-2]].</p>
 
 <aside class="example" id="versioning-with-dcat-and-owl" title="Use of DCAT and OWL for versioning DCAT 2">
 <pre>
-dcat: a owl:Ontology , dcat:Dataset ;
+&lt;http://www.w3.org/ns/dcat#&gt; a owl:Ontology , dcat:Dataset ;
   owl:versionInfo "Version 2" ;
   dcat:version "Version 2" ;
-  owl:versionIRI &lt;http://www.w3.org/ns/dcat2#/&gt; ;
+  owl:versionIRI &lt;http://www.w3.org/ns/dcat2#&gt; ;
   dcat:hasCurrentVersion &lt;http://www.w3.org/ns/dcat2#&gt; ;
   owl:priorVersion &lt;http://www.w3.org/ns/dcat2014#&gt; ;
   dcat:previousVersion &lt;http://www.w3.org/ns/dcat2014#&gt; ;
