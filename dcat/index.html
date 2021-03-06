@@ -3469,29 +3469,10 @@ For indicating the version release date and identifier, the use of, respectively
 
 <h2>How to specify dataset series</h2>
 
-<aside class="note">
-<p>Existing DCAT implementations adopt two main alternative approaches to specifying dataset series:</p>
-<ol>
-<li>The dataset series is typed as a <code>dcat:Dataset</code>, whereas its child datasets are typed as <code>dcat:Distribution</code>'s.</li>
-<li>Both the dataset series and its child datasets are typed as a <code>dcat:Dataset</code>'s, and the two are usually linked by using the [[DCTERMS]] properties <code>dct:hasPart</code> / <code>dct:isPartOf</code>.</li>
-</ol>
-<p>In both cases, the dataset series is sometimes soft-typed by using the [[DCTERMS]] property <code>dct:type</code> (e.g., this is the approach used in [[GeoDCAT-AP]], and adopted in [[DCAT-AP-IT]] and [[GeoDCAT-AP-IT]]).</p>
-<p>Compared with the second option, the first one may have the advantage of simplifying metadata management, and avoiding the creation of datasets having the same values for almost all their metadata elements. On the other hand, this approach reduces the ability of being discovered, as distribution metadata are not rich as datasets' ones. Moreover, using distributions may result cumbersome or unfeasible when the number of child datasets is too high.</p>
-
-<p>DCAT makes dataset series first class citizens of data catalogs by minting a new class <code>dcat:DatasetSeries</code>. <code>dcat:DatasetSeries</code> is defined as subclass of <code>dcat:Dataset</code>.</p>
-
-<p>DCAT recommends, as the default approach, typing dataset series as <code>dcat:DatasetSeries</code> and child datasets as <code>dcat:Dataset</code>, and linking them by using properties <code>dct:hasPart</code> and/or <code>dct:isPartOf</code>, and possibly soft-typing the dataset series via property <code>dct:type</code>.</p>
-
-<p>The approach based on the use of <code>dcat:Distribution</code> for typing child datasets is however recognized as a possible alternative, whenever it addresses more effectively the requirements of a given application scenario.</p>
-
-<p>Here and in the following sections, guidance will focus on the default approach.</p>
-
-</aside>
-
-<p>DCAT makes dataset series first class citizens of data catalogs by minting a new class <a href="#Class:Dataset_Series"><code>dcat:DatasetSeries</code></a>, defined as subclass of <a href="#Class:Dataset"><code>dcat:Dataset</code></a>. The dataset series and the child datasets are linked by using properties <a href="#Property:dataset_series_has_part"><code>dct:hasPart</code></a> and <a href="#Property:dataset_series_is_part_of"><code>dct:isPartOf</code></a>.</p>
+<p>DCAT makes dataset series first class citizens of data catalogs by minting a new class <a href="#Class:Dataset_Series"><code>dcat:DatasetSeries</code></a>, defined as subclass of <a href="#Class:Dataset"><code>dcat:Dataset</code></a>. The dataset series and the child datasets are linked by using property <a href="#Property:dataset_series_has_part"><code>dct:hasPart</code></a> and/or its inverse <a href="#Property:dataset_series_is_part_of"><code>dct:isPartOf</code></a>. Note that a dataset series can also be the child of another dataset series.</p>
 
 <aside class="example" id="ex-dataset-series-containment" title="Yearly budget datasets grouped into a series"> 
-<p>In the following example, yearly budget data are grouped into a series. The series is typed as <code>dcat:DatasetSeries</code>, the child datasets are typed as <code>dcat:Dataset</code>. The series and the datasets are linked by using properties <code>dct:hasPart</code> and <code>dct:isPartOf</code>.</p>
+<p>In the following example, yearly budget data are grouped into a series. The series is typed as <code>dcat:DatasetSeries</code>, the child datasets are typed as <code>dcat:Dataset</code>. The series and the datasets are linked by using the [[DCTERMS]] properties <code>dct:hasPart</code> and <code>dct:isPartOf</code>.</p>
 <pre>
 ex:budget a dcat:DatasetSeries ;
   title "Budget data"@en ;
@@ -3516,7 +3497,7 @@ ex:budget-2020 a dcat:Dataset ;
 </pre>
 </aside>
 
-<p>It is worth noting that a dataset series may evolve over time, by acquiring new datasets. E.g., a dataset series about yearly budget data will acquire a new child dataset every year. In such cases, it might be important to link the yearly releases with relationship specifying the previous, next, and latest ones. In such scenario, DCAT makes used of the [[VOCAB-ADMS]] properties <a href="#Property:resource_prev"><code>adms:prev</code></a>, <a href="#Property:resource_next"><code>adms:next</code></a>, and <a href="#Property:resource_last"><code>adms:last</code></a>, respectively.</p>
+<p>Dataset series may evolve over time, by acquiring new datasets. E.g., a dataset series about yearly budget data will acquire a new child dataset every year. In such cases, it might be important to link the yearly releases with relationship specifying the previous, next, and latest ones. In such scenario, DCAT makes used of the [[VOCAB-ADMS]] properties <a href="#Property:resource_prev"><code>adms:prev</code></a>, <a href="#Property:resource_next"><code>adms:next</code></a>, and <a href="#Property:resource_last"><code>adms:last</code></a>, respectively.</p>
 
 <aside class="example" id="ex-dataset-series-releases" title="Linking datasets in a series">
 <p>The following example extends <a href="#ex-dataset-series-containment"></a> by specifying the publication date (<code>dct:issued</code>) of each child dataset, and the previous (<code>adms:prev</code>) and next release (<code>adms:next</code>).</p>
@@ -3571,7 +3552,7 @@ ex:budget-2020 a dcat:Dataset ;
 
 <p>Properties about dataset series can be classified into two groups.</p>
 
-<p>The first group is about properties describing the dataset series itself. For instance, this is the case of property <code>dct:accrualPeriodicity</code>, whose value should correspond to the frequency upon which a new child dataset is added.</p>
+<p>The first group is about properties describing the dataset series itself. For instance, this is the case of property <a href="#Property:dataset_series_update_frequency"><code>dct:accrualPeriodicity</code></a>, whose value should correspond to the frequency upon which a new child dataset is added.</p>
 
 <p>The second group is about properties reflecting the dimensions described in child dataset metadata, via upstream inheritance - i.e., properties values of child datasets are inherited by their parent (the dataset series).</p>
 
@@ -3586,8 +3567,8 @@ ex:budget-2020 a dcat:Dataset ;
 <p>Finally, some annotation properties of child datasets may need to be taken into account as well at the level of dataset series. In particular, properties concerning the creation / publication / update dates of child datasets may affect the corresponding ones in the series. For these properties, DCAT recommends the following approach:</p>
 <ul>
 <li>The creation date (<code>dct:created</code>) of the dataset series should correspond to the earliest creation date of the child datasets.</li>
-<li>The publication date (<code>dct:issued</code>) of the dataset series should correspond to the earliest publication date of the child datasets.</li>
-<li>The update date (<code>dct:modified</code>) of the dataset series should correspond to the latest publication or update date of the child datasets.</li>
+<li>The publication date (<a href="#Property:dataset_series_release_date"><code>dct:issued</code></a>) of the dataset series should correspond to the earliest publication date of the child datasets.</li>
+<li>The update date (<a href="#Property:dataset_series_update_date"><code>dct:modified</code></a>) of the dataset series should correspond to the latest publication or update date of the child datasets.</li>
 </ul>
 
 <aside class="note">
@@ -3666,6 +3647,33 @@ ex:budget-2018-it a dcat:Dataset ;
 ...
 </pre>
 </aside>
+
+</section>
+
+<section id="dataset-series-before-dcat3">
+
+<h2>Dataset series in existing DCAT implementations</h2>
+
+<aside class="ednote">
+<p>To be decided whether to keep or not this section.</p>
+</aside>
+
+<p>Existing DCAT implementations adopt two main alternative approaches to specifying dataset series:</p>
+
+<ol>
+<li>The dataset series is typed as a <code>dcat:Dataset</code>, whereas its child datasets are typed as <code>dcat:Distribution</code>'s.</li>
+<li>Both the dataset series and its child datasets are typed as a <code>dcat:Dataset</code>'s, and the two are usually linked by using the [[DCTERMS]] properties <code>dct:hasPart</code> / <code>dct:isPartOf</code>.</li>
+</ol>
+
+<p>In both cases, the dataset series is sometimes soft-typed by using the [[DCTERMS]] property <code>dct:type</code> (e.g., this is the approach used in [[GeoDCAT-AP]], and adopted in [[DCAT-AP-IT]] and [[GeoDCAT-AP-IT]]).</p>
+
+<p>These options are not formally incompatible with DCAT, so they can cohexist with <code>dcat:DatasetSeries</code> during the upgrade to DCAT 3.</p>
+
+<!--
+<p>Compared with the second option, the first one may have the advantage of simplifying metadata management, and avoiding the creation of datasets having the same values for almost all their metadata elements. On the other hand, this approach reduces the ability of being discovered, as distribution metadata are not rich as datasets' ones. Moreover, using distributions may result cumbersome or unfeasible when the number of child datasets is too high.</p>
+
+<p>The approach based on the use of <code>dcat:Distribution</code> for typing child datasets is however recognized as a possible alternative, whenever it addresses more effectively the requirements of a given application scenario.</p>
+-->
 
 </section>
 
