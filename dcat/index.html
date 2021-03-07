@@ -3469,10 +3469,10 @@ For indicating the version release date and identifier, the use of, respectively
 
 <h2>How to specify dataset series</h2>
 
-<p>DCAT makes dataset series first class citizens of data catalogs by minting a new class <a href="#Class:Dataset_Series"><code>dcat:DatasetSeries</code></a>, defined as subclass of <a href="#Class:Dataset"><code>dcat:Dataset</code></a>. The dataset series and the child datasets are linked by using property <a href="#Property:dataset_series_has_part"><code>dct:hasPart</code></a> and/or its inverse <a href="#Property:dataset_series_is_part_of"><code>dct:isPartOf</code></a>. Note that a dataset series can also be the child of another dataset series.</p>
+<p>DCAT makes dataset series first class citizens of data catalogs by minting a new class <a href="#Class:Dataset_Series"><code>dcat:DatasetSeries</code></a>, defined as subclass of <a href="#Class:Dataset"><code>dcat:Dataset</code></a>. The dataset series and the child datasets are linked by using the [[DCTERMS]] property <a href="#Property:dataset_series_has_part"><code>dct:hasPart</code></a> and/or its inverse <a href="#Property:dataset_series_is_part_of"><code>dct:isPartOf</code></a>. Note that a dataset series can also be the child of another dataset series.</p>
 
 <aside class="example" id="ex-dataset-series-containment" title="Yearly budget datasets grouped into a series"> 
-<p>In the following example, yearly budget data are grouped into a series. The series is typed as <code>dcat:DatasetSeries</code>, the child datasets are typed as <code>dcat:Dataset</code>. The series and the datasets are linked by using the [[DCTERMS]] properties <code>dct:hasPart</code> and <code>dct:isPartOf</code>.</p>
+<p>In the following example, yearly budget data are grouped into a series. The series is typed as <code>dcat:DatasetSeries</code>, the child datasets are typed as <code>dcat:Dataset</code>. The series and the datasets are linked by using both <code>dct:hasPart</code> and <code>dct:isPartOf</code>.</p>
 <pre>
 ex:budget a dcat:DatasetSeries ;
   title "Budget data"@en ;
@@ -3497,7 +3497,7 @@ ex:budget-2020 a dcat:Dataset ;
 </pre>
 </aside>
 
-<p>Dataset series may evolve over time, by acquiring new datasets. E.g., a dataset series about yearly budget data will acquire a new child dataset every year. In such cases, it might be important to link the yearly releases with relationship specifying the previous, next, and latest ones. In such scenario, DCAT makes used of the [[VOCAB-ADMS]] properties <a href="#Property:resource_prev"><code>adms:prev</code></a>, <a href="#Property:resource_next"><code>adms:next</code></a>, and <a href="#Property:resource_last"><code>adms:last</code></a>, respectively.</p>
+<p>Dataset series may evolve over time, by acquiring new datasets. E.g., a dataset series about yearly budget data will acquire a new child dataset every year. In such cases, it might be important to link the yearly releases with relationships specifying the previous, next, and latest ones. In such scenario, DCAT makes use of the [[VOCAB-ADMS]] properties <a href="#Property:resource_prev"><code>adms:prev</code></a>, <a href="#Property:resource_next"><code>adms:next</code></a>, and <a href="#Property:resource_last"><code>adms:last</code></a>, respectively.</p>
 
 <aside class="example" id="ex-dataset-series-releases" title="Linking datasets in a series">
 <p>The following example extends <a href="#ex-dataset-series-containment"></a> by specifying the publication date (<code>dct:issued</code>) of each child dataset, and the previous (<code>adms:prev</code>) and next release (<code>adms:next</code>).</p>
@@ -3554,7 +3554,7 @@ ex:budget-2020 a dcat:Dataset ;
 
 <p>The first group is about properties describing the dataset series itself. For instance, this is the case of property <a href="#Property:dataset_series_update_frequency"><code>dct:accrualPeriodicity</code></a>, whose value should correspond to the frequency upon which a new child dataset is added.</p>
 
-<p>The second group is about properties reflecting the dimensions described in child dataset metadata, via upstream inheritance - i.e., properties values of child datasets are inherited by their parent (the dataset series).</p>
+<p>The second group is about properties reflecting the dimensions described in child dataset metadata, via upstream inheritance - i.e., property values of child datasets are inherited by their parent (the dataset series).</p>
 
 <p>Typically, this means that, for each of the relevant properties, the dataset series takes as value the union of those specified in child datasets. For instance:</p>
 
