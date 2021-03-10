@@ -37,6 +37,10 @@
 
 <section id="sotd">
 
+<aside class="ednote">
+<p>To be updated</p>
+</aside>
+
     <p>
         This document defines a major revision of the original DCAT vocabulary ([[?VOCAB-DCAT-20140116]]) in response to new use cases, requirements and community experience since that publication.  This revision extends the original DCAT standard in line with community practice while supporting diverse approaches to data description and dataset exchange. The main changes to the DCAT vocabulary have been: 
     </p>
@@ -138,6 +142,10 @@
 
 <h2>Motivation for change</h2>
 
+<aside class="ednote">
+<p>To be updated</p>
+</aside>
+
     <p>The original Recommendation [[?VOCAB-DCAT-20140116]] published in January 2014 provided the basic framework for describing datasets. It made an important distinction between a <i>dataset</i> as an abstract idea and a <i>distribution</i> as a manifestation of the dataset. Although DCAT has been widely adopted, it has become clear that the original specification lacked a number of essential features that were added either through the mechanism of a profile, such as the European Commission's DCAT-AP [[?DCAT-AP]], or the development of larger vocabularies that to a greater or lesser extent built upon the base standard, such as the Healthcare and Life Sciences Community Profile [[?HCLS-Dataset]], the Data Tag Suite [[?DATS]] and more. DCAT 2 has been developed to address the specific shortcomings that have come to light through the experiences of different communities, the aim being to improve interoperability between the outputs of these larger vocabularies.
     For example, in DCAT 2 we provide classes, properties and guidance to address <a href="#dereferenceable-identifiers">identifiers</a>, <a href="#quality-information">dataset quality information</a>, and <a href="#data-citation">data citation</a> issues.</p>
     <p>This revision includes re-writing of the specification throughout. Significant changes from the 2014 Recommendation are marked within the text using "Note" sections, as well as being described in <a href="#changes"></a>.</p>
@@ -156,23 +164,23 @@
           <p>Namespaces and prefixes used in normative parts of this recommendation are shown in the following table.</p>
 
           <table id="table-namespaces">
-            <thead><tr><th>Prefix</th><th>Namespace</th></tr></thead>
+            <thead><tr><th>Prefix</th><th>Namespace IRI</th><th>Source</th></tr></thead>
             <tbody>
-            <tr><td><code>dc</code></td><td><code>http://purl.org/dc/elements/1.1/</code></td></tr>
-            <tr><td><code>dcat</code></td><td><code>http://www.w3.org/ns/dcat#</code></td></tr>
-            <tr><td><code>dcterms</code></td><td><code>http://purl.org/dc/terms/</code></td></tr>
-            <tr><td><code>dctype</code></td><td><code>http://purl.org/dc/dcmitype/</code></td></tr>
-            <tr><td><code>foaf</code></td><td><code>http://xmlns.com/foaf/0.1/</code></td></tr>
-            <tr><td><code>locn</code></td><td><code>http://www.w3.org/ns/locn#</code></td></tr>
-            <tr><td><code>odrl</code></td><td><code>http://www.w3.org/ns/odrl/2/</code></td></tr>
-            <tr><td><code>owl</code></td><td><code>http://www.w3.org/2002/07/owl#</code></td></tr>
-            <tr><td><code>prov</code></td><td><code>http://www.w3.org/ns/prov#</code></td></tr>
-            <tr><td><code>rdf</code></td><td><code>http://www.w3.org/1999/02/22-rdf-syntax-ns#</code></td></tr>
-            <tr><td><code>rdfs</code></td><td><code>http://www.w3.org/2000/01/rdf-schema#</code></td></tr>
-            <tr><td><code>skos</code></td><td><code>http://www.w3.org/2004/02/skos/core#</code></td></tr>
-            <tr><td><code>time</code></td><td><code>http://www.w3.org/2006/time#</code></td></tr>
-            <tr><td><code>vcard</code></td><td><code>http://www.w3.org/2006/vcard/ns#</code></td></tr>
-            <tr><td><code>xsd</code></td><td><code>http://www.w3.org/2001/XMLSchema#</code></td></tr>
+            <tr><td><code>dc</code></td><td><code>http://purl.org/dc/elements/1.1/</code></td><td>[[DCTERMS]]</td></tr>
+            <tr><td><code>dcat</code></td><td><code>http://www.w3.org/ns/dcat#</code></td><td>[[VOCAB-DCAT]]</td></tr>
+            <tr><td><code>dcterms</code></td><td><code>http://purl.org/dc/terms/</code></td><td>[[DCTERMS]]</td></tr>
+            <tr><td><code>dctype</code></td><td><code>http://purl.org/dc/dcmitype/</code></td><td>[[DCTERMS]]</td></tr>
+            <tr><td><code>foaf</code></td><td><code>http://xmlns.com/foaf/0.1/</code></td><td>[[FOAF]]</td></tr>
+            <tr><td><code>locn</code></td><td><code>http://www.w3.org/ns/locn#</code></td><td>[[LOCN]]</td></tr>
+            <tr><td><code>odrl</code></td><td><code>http://www.w3.org/ns/odrl/2/</code></td><td>[[ODRL-VOCAB]]</td></tr>
+            <tr><td><code>owl</code></td><td><code>http://www.w3.org/2002/07/owl#</code></td><td>[[OWL2-SYNTAX]]</td></tr>
+            <tr><td><code>prov</code></td><td><code>http://www.w3.org/ns/prov#</code></td><td>[[PROV-O]]</td></tr>
+            <tr><td><code>rdf</code></td><td><code>http://www.w3.org/1999/02/22-rdf-syntax-ns#</code></td><td>[[RDF-SYNTAX-GRAMMAR]]</td></tr>
+            <tr><td><code>rdfs</code></td><td><code>http://www.w3.org/2000/01/rdf-schema#</code></td><td>[[RDF-SCHEMA]]</td></tr>
+            <tr><td><code>skos</code></td><td><code>http://www.w3.org/2004/02/skos/core#</code></td><td>[[SKOS-REFERENCE]]</td></tr>
+            <tr><td><code>time</code></td><td><code>http://www.w3.org/2006/time#</code></td><td>[[OWL-TIME]]</td></tr>
+            <tr><td><code>vcard</code></td><td><code>http://www.w3.org/2006/vcard/ns#</code></td><td>[[VCARD-RDF]]</td></tr>
+            <tr><td><code>xsd</code></td><td><code>http://www.w3.org/2001/XMLSchema#</code></td><td>[[XMLSCHEMA11-2]]</td></tr>
             </tbody>
         </table>
     
@@ -182,16 +190,17 @@
           <p>Namespaces and prefixes used in examples and guidelines  in the document and not from normative parts of the recommendation are shown in the following table.</p>
 
           <table id="table-namespaces-examples">
-            <thead><tr><th>Prefix</th><th>Namespace</th></tr></thead>
+            <thead><tr><th>Prefix</th><th>Namespace IRI</th><th>Source</th></tr></thead>
             <tbody>
-            <tr><td><code>adms</code></td><td><code>https://www.w3.org/ns/adms#</code></td></tr>
-            <tr><td><code>dqv</code></td><td><code>http://www.w3.org/ns/dqv#</code></td></tr>
-            <tr><td><code>earl</code></td><td><code>http://www.w3.org/ns/earl#</code></td></tr>
-            <tr><td><code>geosparql</code></td><td><code>http://www.opengis.net/ont/geosparql#</code></td></tr>
-            <tr><td><code>oa</code></td><td><code>http://www.w3.org/ns/oa#</code></td></tr>
-            <tr><td><code>sdmx-attribute</code></td><td><code>http://purl.org/linked-data/sdmx/2009/attribute#</code></td></tr>
-            <tr><td><code>sdo</code></td><td><code>https://schema.org/</code></td></tr>
-            <tr><td><code>w3cgeo</code></td><td><code>http://www.w3.org/2003/01/geo/wgs84_pos#</code></td></tr>
+            <tr><td><code>adms</code></td><td><code>https://www.w3.org/ns/adms#</code></td><td>[[?VOCAB-ADMS]]</td></tr>
+            <tr><td><code>dqv</code></td><td><code>http://www.w3.org/ns/dqv#</code></td><td>[[?VOCAB-DQV]]</td></tr>
+            <tr><td><code>earl</code></td><td><code>http://www.w3.org/ns/earl#</code></td><td>[[?EARL10-Schema]]</td></tr>
+            <tr><td><code>geosparql</code></td><td><code>http://www.opengis.net/ont/geosparql#</code></td><td>[[?GeoSPARQL]]</td></tr>
+            <tr><td><code>oa</code></td><td><code>http://www.w3.org/ns/oa#</code></td><td>[[?ANNOTATION-VOCAB]]</td></tr>
+            <tr><td><code>pav</code></td><td><code>http://purl.org/pav/</code></td><td>[[?PAV]]</td></tr>
+            <tr><td><code>sdmx-attribute</code></td><td><code>http://purl.org/linked-data/sdmx/2009/attribute#</code></td><td>[[?VOCAB-DATA-CUBE]]</td></tr>
+            <tr><td><code>sdo</code></td><td><code>https://schema.org/</code></td><td>[[?SCHEMA-ORG]]</td></tr>
+            <tr><td><code>w3cgeo</code></td><td><code>http://www.w3.org/2003/01/geo/wgs84_pos#</code></td><td>[[?W3C-BASIC-GEO]]</td></tr>
             </tbody>
         </table>
     
@@ -952,7 +961,21 @@
             <a href="#Property:resource_title">title</a>,
             <a href="#Property:resource_type">type/genre</a>,
             <a href="#Property:resource_update_date">update/modification date</a>,
-            <a href="#Property:resource_qualified_attribution">qualified attribution</a>.
+            <a href="#Property:resource_qualified_attribution">qualified attribution</a>,
+			
+            <a href="#Property:resource_has_current_version">has current version</a>,
+<!--			
+            <a href="#Property:resource_has_last_version">has last version</a>,
+-->			
+            <a href="#Property:resource_has_version">has version</a>,
+            <a href="#Property:resource_is_replaced_by">is replaced by</a>,
+            <a href="#Property:resource_is_version_of">is version of</a>,
+            <a href="#Property:resource_previous_version">previous version</a>,
+            <a href="#Property:resource_replaces">replaces</a>,
+            <a href="#Property:resource_status">status</a>,
+            <a href="#Property:resource_version">version</a>,
+            <a href="#Property:resource_version_notes">version notes</a>.
+			
         </p>
 
         <!--backlog p class="issue" data-number="62">
@@ -1032,7 +1055,7 @@
 
             <aside class="note">
               <p>
-                In DCAT 1 [[VOCAB-DCAT-20140116]] the domain of <code>dcat:contactPoint</code> was <code>dcat:Dataset</code>, which limited use of this property in other contexts. The domain has been relaxed in this revision. See <a href="https://github.com/w3c/dxwg/issues/95">Issue #95</a>.
+                In DCAT 1 [[VOCAB-DCAT-20140116]] the domain of <code>dcat:contactPoint</code> was <code>dcat:Dataset</code>, which limited use of this property in other contexts. The domain has been relaxed in DCAT 2. See <a href="https://github.com/w3c/dxwg/issues/95">Issue #95</a>.
               </p>
             </aside>
 
@@ -1186,7 +1209,7 @@
 
             <aside class="note">
               <p>
-                In DCAT 1 [[?VOCAB-DCAT-20140116]] the domain of <code>dcat:theme</code> was <code>dcat:Dataset</code>, which limited use of this property in other contexts. The domain has been relaxed in this revision. 
+                In DCAT 1 [[?VOCAB-DCAT-20140116]] the domain of <code>dcat:theme</code> was <code>dcat:Dataset</code>, which limited use of this property in other contexts. The domain has been relaxed in DCAT 2. 
                 See <a href="https://github.com/w3c/dxwg/issues/123">Issue #123</a>.
               </p>
             </aside>
@@ -1274,7 +1297,7 @@
 
             <p>
                 Many existing and legacy catalogs do not distinguish between dataset components, representations, documentation, schemata and other resources that are lumped together as part of a dataset.
-                <a href="http://purl.org/dc/terms/relation"><code>dcterms:relation</code></a> is a super-property of a number of more specific properties which express more precise relationships, so use of <code>dcterms:relation</code> is not inconsistent with a subsequent reclassification with more specific semantics, though the more specialized sub-properties SHOULD be used to link a dataset to component and supplementary resources if possible.
+                <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/relation"><code title="http://purl.org/dc/terms/relation">dcterms:relation</code></a> is a super-property of a number of more specific properties which express more precise relationships, so use of <code>dcterms:relation</code> is not inconsistent with a subsequent reclassification with more specific semantics, though the more specialized sub-properties SHOULD be used to link a dataset to component and supplementary resources if possible.
             </p>
 
 
@@ -1340,7 +1363,7 @@
 
             <aside class="note">
               <p>
-                In DCAT 1 [[?VOCAB-DCAT-20140116]] the domain of <code>dcat:keyword</code> was <code>dcat:Dataset</code>, which limited use of this property in other contexts. The domain has been relaxed in this revision - see <a href="https://github.com/w3c/dxwg/issues/121">Issue #121</a>.
+                In DCAT 1 [[?VOCAB-DCAT-20140116]] the domain of <code>dcat:keyword</code> was <code>dcat:Dataset</code>, which limited use of this property in other contexts. The domain has been relaxed in DCAT 2 - see <a href="https://github.com/w3c/dxwg/issues/121">Issue #121</a>.
               </p>
             </aside>
 
@@ -1359,7 +1382,7 @@
 
             <aside class="note">
               <p>
-                In DCAT 1 [[?VOCAB-DCAT-20140116]] the domain of <code>dcat:landingPage</code> was <code>dcat:Dataset</code>, which limited use of this property in other contexts. The domain has been relaxed in this revision - see <a href="https://github.com/w3c/dxwg/issues/122">Issue #122</a>.
+                In DCAT 1 [[?VOCAB-DCAT-20140116]] the domain of <code>dcat:landingPage</code> was <code>dcat:Dataset</code>, which limited use of this property in other contexts. The domain has been relaxed in DCAT 2 - see <a href="https://github.com/w3c/dxwg/issues/122">Issue #122</a>.
               </p>
             </aside>
 
@@ -1486,7 +1509,564 @@
 
         </section>
 
+<!-- Versioning properties -->
 
+<section id="Property:resource_previous_version">
+
+<h4>Property: previous version</h4>
+
+<aside class="note">
+<p>Property added in DCAT 3.</p>
+</aside>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Property:</th>
+<th><a href="http://www.w3.org/ns/dcat#previousVersion">dcat:previousVersion</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>The previous version of a resource in a lineage [[?PAV]].</td>
+</tr>
+<tr>
+<td class="prop">Equivalent property:</td>
+<td><a data-cite="?PAV#d4e459"><code title="http://purl.org/pav/previousVersion">pav:previousVersion</code></a></td>
+</tr>
+<tr>
+<td class="prop">Sub-property of:</td>
+<td><a data-cite="?PROV-O#wasRevisionOf"><code title="http://www.w3.org/ns/prov#wasRevisionOf">prov:wasRevisionOf</code></a></td>
+</tr>
+<tr>
+<td class="prop">Usage note:</td>
+<td>
+<p>This property is meant to be used to specify a version chain, consisting of snapshots of a resource.</p>
+<p>The notion of version used by this property is limited to versions resulting from revisions occurring to a resource as part of its life-cycle. One of the typical cases here is representing the history of the versions of a dataset that have been released over time.</p>
+</td>
+</tr>
+<tr>
+<td class="prop">See also:</td>
+<td>
+<a href="#Property:resource_has_current_version"></a>,
+<a href="#Property:resource_has_version"></a>,
+<a href="#Property:resource_is_replaced_by"></a>,
+<a href="#Property:resource_is_version_of"></a>,
+<a href="#Property:resource_release_date"></a>,
+<a href="#Property:resource_replaces"></a>,
+<a href="#Property:resource_status"></a>,
+<a href="#Property:resource_version"></a>,
+<a href="#Property:resource_version_notes"></a>.
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>For guidance on the use of this property, see <a href="#version-history"></a>.</p>
+
+</section>
+
+<section id="Property:resource_has_version">
+
+<h4>Property: has version</h4>
+
+<aside class="note">
+<p>Property added in DCAT 3.</p>
+</aside>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Property:</th>
+<th><a href="http://www.w3.org/ns/dcat#hasVersion">dcat:hasVersion</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>This resource has a more specific, versioned resource [[?PAV]].</td>
+</tr>
+<tr>
+<td class="prop">Equivalent property:</td>
+<td><a data-cite="?PAV#d4e395"><code title="http://purl.org/pav/hasVersion">pav:hasVersion</code></a></td>
+</tr>
+<tr>
+<td class="prop">Sub-property of:</td>
+<td><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/hasVersion"><code title="http://purl.org/dc/terms/hasVersion">dcterms:hasVersion</code></a></td>
+</tr>
+<td class="prop">Sub-property of:</td>
+<td><a data-cite="?PROV-O#generalizationOf"><code title="http://www.w3.org/ns/prov#generalizationOf">prov:generalizationOf</code></a></td>
+</tr>
+<tr>
+<td class="prop">Usage note:</td>
+<td>
+<p>This property is intended for relating a non-versioned or abstract resource to several versioned resources, e.g. snapshots [[?PAV]].</p>
+<p>The notion of version used by this property is limited to versions resulting from revisions occurring to a resource as part of its life-cycle. Therefore, its semantics is more specific than its super-property <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/hasVersion"><code title="http://purl.org/dc/terms/hasVersion">dcterms:hasVersion</code></a>, which makes use of a broader notion of version, including editions and adaptations.</p>
+</td>
+</tr>
+<tr>
+<td class="prop">See also:</td>
+<td>
+<a href="#Property:resource_has_current_version"></a>,
+<a href="#Property:resource_is_replaced_by"></a>,
+<a href="#Property:resource_is_version_of"></a>,
+<a href="#Property:resource_previous_version"></a>,
+<a href="#Property:resource_release_date"></a>,
+<a href="#Property:resource_replaces"></a>,
+<a href="#Property:resource_status"></a>,
+<a href="#Property:resource_version"></a>,
+<a href="#Property:resource_version_notes"></a>.
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>For guidance on the use of this property, see <a href="#version-history"></a>.</p>
+
+</section>
+
+<section id="Property:resource_is_version_of">
+
+<h4>Property: is version of</h4>
+
+<aside class="note">
+<p>Property added in DCAT 3.</p>
+</aside>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Property:</th>
+<th><a href="http://www.w3.org/ns/dcat#isVersionOf">dcat:isVersionOf</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>This resource is a version of a non-versioned or abstract resource.</td>
+</tr>
+<tr>
+<td class="prop">Inverse property of:</td>
+<td><a href="#Property:resource_has_version"><code title="http://www.w3.org/dcat#hasVersion">dcat:hasVersion</code></a></td>
+</tr>
+<tr>
+<td class="prop">Sub-property of:</td>
+<td><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/isVersionOf"><code title="http://purl.org/dc/terms/isVersionOf">dcterms:isVersionOf</code></a></td>
+</tr>
+<td class="prop">Sub-property of:</td>
+<td><a data-cite="?PROV-O#specializationOf"><code title="http://www.w3.org/ns/prov#specializationOf">prov:specializationOf</code></a></td>
+</tr>
+<tr>
+<td class="prop">Usage note:</td>
+<td>
+<p>This property is intended for relating a versioned resource to a non-versioned or abstract resource.</p>
+<p>The notion of version used by this property is limited to versions resulting from revisions occurring to a resource as part of its life-cycle. Therefore, its semantics is more specific than its super-property <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/isVersionOf"><code title="http://purl.org/dc/terms/isVersionOf">dcterms:isVersionOf</code></a>, which makes use of a broader notion of version, including editions and adaptations.</p>
+</td>
+</tr>
+<tr>
+<td class="prop">See also:</td>
+<td>
+<a href="#Property:resource_has_current_version"></a>,
+<a href="#Property:resource_has_version"></a>,
+<a href="#Property:resource_is_replaced_by"></a>,
+<a href="#Property:resource_previous_version"></a>,
+<a href="#Property:resource_release_date"></a>,
+<a href="#Property:resource_replaces"></a>,
+<a href="#Property:resource_status"></a>,
+<a href="#Property:resource_version"></a>,
+<a href="#Property:resource_version_notes"></a>.
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>For guidance on the use of this property, see <a href="#version-history"></a>.</p>
+
+</section>
+
+<section id="Property:resource_has_current_version">
+
+<h4>Property: current version</h4>
+
+<aside class="note">
+<p>Property added in DCAT 3.</p>
+</aside>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Property:</th>
+<th><a href="http://www.w3.org/ns/dcat#hasCurrentVersion">dcat:hasCurrentVersion</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>This resource has a more specific, versioned resource with equivalent content [[?PAV]].</td>
+</tr>
+<tr>
+<td class="prop">Equivalent property:</td>
+<td><a data-cite="?PAV#d4e359"><code title="http://purl.org/pav/hasCurrentVersion">pav:hasCurrentVersion</code></a></td>
+</tr>
+<tr>
+<td class="prop">Sub-property of:</td>
+<td><a data-cite="?PAV#d4e395"><code title="http://purl.org/pav/hasVersion">pav:hasVersion</code></a></td>
+</tr>
+<tr>
+<td class="prop">Usage note:</td>
+<td>
+<p>This property is intended for relating a non-versioned or abstract resource to a single snapshot that can be used as a permalink to indicate the current version of the content [[?PAV]].</p>
+<!--
+<p>This property is intended for relating a non-versioned or abstract resource to a single snapshot that can be used as a permalink to indicate the current version of the content [[?PAV]]. To point instead to the latest version of a resource in a version chain, property <a href="#Property:resource_has_last_version"><code>dcat:hasLastVersion</code></a> SHOULD be used.</p>
+-->
+<p>The notion of version used by this property is limited to versions resulting from revisions occurring to a resource as part of its life-cycle.</p>
+</td>
+</tr>
+<tr>
+<td class="prop">See also:</td>
+<td>
+<a href="#Property:resource_has_version"></a>,
+<a href="#Property:resource_is_replaced_by"></a>,
+<a href="#Property:resource_is_version_of"></a>,
+<a href="#Property:resource_previous_version"></a>,
+<a href="#Property:resource_release_date"></a>,
+<a href="#Property:resource_replaces"></a>,
+<a href="#Property:resource_status"></a>,
+<a href="#Property:resource_version"></a>,
+<a href="#Property:resource_version_notes"></a>.
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>For guidance on the use of this property, see <a href="#version-history"></a>.</p>
+
+</section>
+
+<!--
+<section id="Property:resource_has_last_version">
+
+<h4>Property: has last version</h4>
+
+<aside class="note">
+<p>Property added in DCAT 3.</p>
+</aside>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Property:</th>
+<th><a href="http://www.w3.org/ns/dcat#hasLastVersion">dcat:hasLastVersion</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>This resource is the most recent version of a non-versioned or abstract resource.</td>
+</tr>
+<tr>
+<td class="prop">Sub-property of:</td>
+<td><a data-cite="?PAV#d4e395"><code title="http://purl.org/pav/hasVersion">pav:hasVersion</code></a></td>
+</tr>
+<tr>
+<td class="prop">Usage note:</td>
+<td>
+<p>This property is intended for relating a non-versioned or abstract resource to the most recent versioned resource in a version chain. To point instead to the version corresponding to the non-versioned or abstract resource, property <a href="#Property:resource_has_current_version"><code>dcat:hasCurrentVersion</code></a> SHOULD be used.</p>
+<p>The notion of version used by this property is limited to versions resulting from revisions occurring to a resource as part of its life-cycle.</p>
+</td>
+</tr>
+<tr>
+<td class="prop">See also:</td>
+<td>
+<a href="#Property:resource_has_current_version"></a>,
+<a href="#Property:resource_has_version"></a>,
+<a href="#Property:resource_is_replaced_by"></a>,
+<a href="#Property:resource_is_version_of"></a>,
+<a href="#Property:resource_previous_version"></a>,
+<a href="#Property:resource_release_date"></a>,
+<a href="#Property:resource_replaces"></a>,
+<a href="#Property:resource_status"></a>,
+<a href="#Property:resource_version"></a>,
+<a href="#Property:resource_version_notes"></a>.
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>For guidance on the use of this property, see <a href="#version-history"></a>.</p>
+
+</section>
+-->
+
+<section id="Property:resource_replaces">
+
+<h4>Property: replaces</h4>
+
+<aside class="note">
+<p>Property added in DCAT 3.</p>
+</aside>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Property:</th>
+<th><a href="http://purl.org/dc/terms/replaces">dcterms:replaces</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>A related resource that is supplanted, displaced, or superseded by the described resource [[?DCTERMS]].</td>
+</tr>
+<tr>
+<td class="prop">Sub-property of:</td>
+<td><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/relation"><code title="http://purl.org/dc/terms/relation">dcterms:relation</code></a></td>
+</tr>
+<!--
+<tr>
+<td class="prop">Usage note:</td>
+<td>
+<p>This property is intended for relating a non-versioned or abstract resource to the most recent versioned resource, irrespective of its status (stable vs draft) to a non-versioned or abstract resource. To point instead to the latest <em>stable</em> version of a resource, property <a href="#Property:resource_has_current_version"><code>dcat:hasCurrentVersion</code></a> SHOULD be used.</p>
+<p>The notion of version used by this property is limited to versions resulting from revisions occurring to a resource as part of its life-cycle.</p>
+</td>
+</tr>
+-->
+<tr>
+<td class="prop">See also:</td>
+<td>
+<a href="#Property:resource_has_current_version"></a>,
+<a href="#Property:resource_has_version"></a>,
+<a href="#Property:resource_is_replaced_by"></a>,
+<a href="#Property:resource_is_version_of"></a>,
+<a href="#Property:resource_previous_version"></a>,
+<a href="#Property:resource_release_date"></a>,
+<a href="#Property:resource_status"></a>,
+<a href="#Property:resource_version"></a>,
+<a href="#Property:resource_version_notes"></a>.
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>For guidance on the use of this property, see <a href="#version-replace"></a>.</p>
+
+</section>
+
+<section id="Property:resource_is_replaced_by">
+
+<h4>Property: is replaced by</h4>
+
+<aside class="note">
+<p>Property added in DCAT 3.</p>
+</aside>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Property:</th>
+<th><a href="http://purl.org/dc/terms/isReplacedBy">dcterms:isReplacedBy</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>A related resource that supplants, displaces, or supersedes the described resource [[?DCTERMS]].</td>
+</tr>
+<tr>
+<td class="prop">Inverse property of:</td>
+<td><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/replaces"><code title="http://purl.org/dc/terms/replaces">dcterms:replaces</code></a></td>
+</tr>
+<tr>
+<td class="prop">Sub-property of:</td>
+<td><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/relation"><code title="http://purl.org/dc/terms/relation">dcterms:relation</code></a></td>
+</tr>
+<!--
+<tr>
+<td class="prop">Usage note:</td>
+<td>
+<p>This property is intended for relating a non-versioned or abstract resource to the most recent versioned resource, irrespective of its status (stable vs draft) to a non-versioned or abstract resource. To point instead to the latest <em>stable</em> version of a resource, property <a href="#Property:resource_has_current_version"><code>dcat:hasCurrentVersion</code></a> SHOULD be used.</p>
+<p>The notion of version used by this property is limited to versions resulting from revisions occurring to a resource as part of its life-cycle.</p>
+</td>
+</tr>
+-->
+<tr>
+<td class="prop">See also:</td>
+<td>
+<a href="#Property:resource_has_current_version"></a>,
+<a href="#Property:resource_has_version"></a>,
+<a href="#Property:resource_is_version_of"></a>,
+<a href="#Property:resource_previous_version"></a>,
+<a href="#Property:resource_release_date"></a>,
+<a href="#Property:resource_replaces"></a>,
+<a href="#Property:resource_status"></a>,
+<a href="#Property:resource_version"></a>,
+<a href="#Property:resource_version_notes"></a>.
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>For guidance on the use of this property, see <a href="#version-replace"></a>.</p>
+
+</section>
+
+<section id="Property:resource_version">
+
+<h4>Property: version</h4>
+
+<aside class="note">
+<p>Property added in DCAT 3.</p>
+</aside>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Property:</th>
+<th><a href="http://www.w3.org/ns/dcat#version">dcat:version</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>The version number of a resource [[?PAV]].</td>
+</tr>
+<tr>
+<td class="prop">Equivalent property:</td>
+<td><a data-cite="?PAV#d4e869"><code title="http://purl.org/pav/version">pav:version</code></a></td>
+</tr>
+<tr>
+<td class="prop">Range:</td>
+<td><a data-cite="RDF-SCHEMA#ch_literal"><code title="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</code></a></td>
+</tr>
+<tr>
+<td class="prop">Usage note:</td>
+<td>
+<p>DCAT does not prescribe how a version name / identifier should be specified, and refers for guidance to [[DWBP]]'s <a href="https://www.w3.org/TR/dwbp/#VersioningInfo">Best Practice 7: Provide a version indicator</a>.</p>
+</td>
+</tr>
+<tr>
+<td class="prop">See also:</td>
+<td>
+<a href="#Property:resource_has_current_version"></a>,
+<a href="#Property:resource_has_version"></a>,
+<a href="#Property:resource_is_replaced_by"></a>,
+<a href="#Property:resource_is_version_of"></a>,
+<a href="#Property:resource_previous_version"></a>,
+<a href="#Property:resource_release_date"></a>,
+<a href="#Property:resource_replaces"></a>,
+<a href="#Property:resource_status"></a>,
+<a href="#Property:resource_version_notes"></a>.
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>For guidance on the use of this property, see <a href="#version-info"></a>.</p>
+
+</section>
+
+<section id="Property:resource_version_notes">
+
+<h4>Property: version notes</h4>
+
+<aside class="note">
+<p>Property added in DCAT 3.</p>
+</aside>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Property:</th>
+<th><a data-cite="VOCAB-ADMS#adms-versionnotes">adms:versionNotes</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>A description of changes between this version and the previous version of the resource [[?VOCAB-ADMS]].</td>
+</tr>
+<tr>
+<td class="prop">Range:</td>
+<td><a data-cite="RDF-SCHEMA#ch_literal"><code title="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</code></a></td>
+</tr>
+<tr>
+<td class="prop">Usage note:</td>
+<td>
+<p>In case of backward compatibility issues with the previous version of the resource, a textual description of them SHOULD be specified by using this property.</p>
+</td>
+</tr>
+<tr>
+<td class="prop">See also:</td>
+<td>
+<a href="#Property:resource_has_current_version"></a>,
+<a href="#Property:resource_has_version"></a>,
+<a href="#Property:resource_is_replaced_by"></a>,
+<a href="#Property:resource_is_version_of"></a>,
+<a href="#Property:resource_previous_version"></a>,
+<a href="#Property:resource_release_date"></a>,
+<a href="#Property:resource_replaces"></a>,
+<a href="#Property:resource_status"></a>,
+<a href="#Property:resource_version"></a>.
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>For guidance on the use of this property, see <a href="#version-info"></a>.</p>
+
+</section>
+
+<section id="Property:resource_status">
+
+<h4>Property: status</h4>
+
+<aside class="note">
+<p>Property added in DCAT 3.</p>
+</aside>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Property:</th>
+<th><a data-cite="VOCAB-ADMS#adms-status">adms:status</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>The status of the resource in the context of a particular workflow process [[?VOCAB-ADMS]].</td>
+</tr>
+<tr>
+<td class="prop">Range:</td>
+<td><a data-cite="?SKOS-REFERENCE#concepts"><code title="http://www.w3.org/2004/02/skos/core#Concept">skos:Concept</code></a></td>
+</tr>
+<tr>
+<td class="prop">Usage note:</td>
+<td>
+<p>DCAT does not prescribe the use of any specific set of life-cycle statuses, but refers to existing standards and community practices fit for the relevant application scenario.</p>
+</td>
+</tr>
+<tr>
+<td class="prop">See also:</td>
+<td>
+<a href="#Property:resource_has_current_version"></a>,
+<a href="#Property:resource_has_version"></a>,
+<a href="#Property:resource_is_replaced_by"></a>,
+<a href="#Property:resource_is_version_of"></a>,
+<a href="#Property:resource_previous_version"></a>,
+<a href="#Property:resource_release_date"></a>,
+<a href="#Property:resource_replaces"></a>,
+<a href="#Property:resource_version"></a>,
+<a href="#Property:resource_version_notes"></a>.
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>For guidance on the use of this property, see <a href="#life-cycle"></a>.</p>
+
+</section>
 
     </section> <!-- end class Resource -->
 
@@ -2670,7 +3250,7 @@
         </p>
 
         <table class="definition">
-          <thead><tr><th>RDF Class:</th><th><a data-cite="DCTERMS#terms-PeriodOfTime" title="http://purl.org/dc/terms/PeriodOfTime">dcterms:PeriodOfTime</a></th></tr></thead>
+          <thead><tr><th>RDF Class:</th><th><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/PeriodOfTime" title="http://purl.org/dc/terms/PeriodOfTime">dcterms:PeriodOfTime</a></th></tr></thead>
           <tbody>
             <tr>
                <td class="prop">Definition:</td>
@@ -2808,7 +3388,7 @@
         </p>
 
         <table class="definition">
-          <thead><tr><th>RDF Class:</th><th><a data-cite="DCTERMS#terms-Location" title="http://purl.org/dc/terms/Location">dcterms:Location</a></th></tr></thead>
+          <thead><tr><th>RDF Class:</th><th><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/Location" title="http://purl.org/dc/terms/Location">dcterms:Location</a></th></tr></thead>
           <tbody>
             <tr>
         <td class="prop">Definition:</td>
@@ -2932,7 +3512,7 @@
 </aside>
 
     <p>The property <a data-cite="VOCAB-ADMS#adms-identifier"><code>adms:identifier</code></a> [[?VOCAB-ADMS]] can express other locally minted identifiers or external identifiers, like DOI, <a href="https://eur-lex.europa.eu/eli-register/about.html"><abbr title="European Legislation Identifier">ELI</abbr></a>, <a href="https://arxiv.org/">ar&Chi;iv</a> for creative works and <a href="https://orcid.org/">ORCID</a>, <a href="https://viaf.org/"><abbr title="Virtual International Authority File">VIAF</abbr></a>, <a href="http://www.isni.org/"><abbr title="International Standard Name Identifier">ISNI</abbr></a> for actors such as authors and publishers, as long as the identifiers are globally unique and stable.</p>
-    <p><a href="#ex-adms-identifier"></a> uses <a data-cite="VOCAB-ADMS#schemaAgency"><code>adms:schemaAgency</code></a> and <a data-cite="?DCTERMS#creator"><code>dcterms:creator</code></a> to represent the authority that defines the identifier scheme (e.g., the <a href="https://www.doi.org/">DOI foundation</a> in the example), <code>adms:schemaAgency</code> is used when the authority has no URI associated. The <a href="https://www.crossref.org/display-guidelines/">CrossRef</a> and <a href="https://support.datacite.org/docs/datacite-doi-display-guidelines">DataCite</a> display guidelines recommend displaying DOIs as full URL link in the form <code>https://doi.org/10.xxxx/xxxxx/</code>.
+    <p><a href="#ex-adms-identifier"></a> uses <a data-cite="VOCAB-ADMS#schemaAgency"><code>adms:schemaAgency</code></a> and <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/creator"><code>dcterms:creator</code></a> to represent the authority that defines the identifier scheme (e.g., the <a href="https://www.doi.org/">DOI foundation</a> in the example), <code>adms:schemaAgency</code> is used when the authority has no URI associated. The <a href="https://www.crossref.org/display-guidelines/">CrossRef</a> and <a href="https://support.datacite.org/docs/datacite-doi-display-guidelines">DataCite</a> display guidelines recommend displaying DOIs as full URL link in the form <code>https://doi.org/10.xxxx/xxxxx/</code>.
     </p>
 
 <aside id="ex-adms-identifier" class="example">
@@ -3056,7 +3636,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
   </p>
     <ol>
       <li>
-        <p>use <a data-cite="?DCTERMS#terms-license"><code>dcterms:license</code></a> to refer to licenses;</p>
+        <p>use <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/license"><code>dcterms:license</code></a> to refer to licenses;</p>
 
         <aside class="note">
           <p>
@@ -3065,7 +3645,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
         </aside>
       </li>
       <li>
-        <p>use <a data-cite="?DCTERMS#terms-accessRights"><code>dcterms:accessRights</code></a>  to express statements concerning only access rights (e.g., whether data can be accessed by anyone or just by authorized parties);</p>
+        <p>use <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/accessRights"><code>dcterms:accessRights</code></a>  to express statements concerning only access rights (e.g., whether data can be accessed by anyone or just by authorized parties);</p>
 
         <aside class="note">
           <p>
@@ -3074,7 +3654,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
         </aside>
       </li>
       <li>
-        <p>use <a data-cite="?DCTERMS#terms-rights"><code>dcterms:rights</code></a> for all the other types of rights statements - those which are not covered by <code>dcterms:license</code> and <code>dcterms:accessRights</code>, such as copyright statements.</p>
+        <p>use <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/rights"><code>dcterms:rights</code></a> for all the other types of rights statements - those which are not covered by <code>dcterms:license</code> and <code>dcterms:accessRights</code>, such as copyright statements.</p>
 
         <aside class="note">
           <p>
@@ -3281,7 +3861,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
 </aside>
 
 <aside class="example" id="ex-spatial-coverage-geometry-with-crs" title="Spatial coverage as a polygon, using a specific CRS">
-<p>The same dataset in <a href="#ex-spatial-coverage-geometry"></a>, but where the coordinates of the polygon are specified by using the national Dutch <abbr title="Coordinate Reference System">CRS</abbr> - <a href="http://www.epsg-registry.org/?display=entity&amp;urn=urn:ogc:def:crs:EPSG::28992">EPSG:28992</a> ("Amersfoort / RD New").</p>
+<p>The same dataset in <a href="#ex-spatial-coverage-geometry"></a>, but where the coordinates of the polygon are specified by using the national Dutch <abbr title="Coordinate Reference System">CRS</abbr> - <a href="https://epsg.org/crs_28992/Amersfoort-RD-New.html">EPSG:28992</a> ("Amersfoort / RD New").</p>
 <pre class="nohighlight turtle">
 &lt;AnneFrank_1&gt; a dcat:Dataset ;
   dcterms:spatial [
@@ -3360,12 +3940,17 @@ For example:
 </section>
 
 <section id="dataset-versions" class="informative">
-    <h2>Versioning</h2>
-<p>Versioning can be applied to any of the first class citizens DCAT resources including Catalogs, Datasets, Distributions. The notion of version is very much related to the community practices,  data management policy and the workflows in place. It is up to data providers to decide when and why a new version should be released. For this reason, DCAT refrains from providing definitions or rules about when changes in a resource should turn into a new release of it. </p>
+
+<h2>Versioning</h2>
+
+<!-- FIRST DRAFT IN DCAT3 FPWD
+
+<p>Versioning can be applied to any of the first class citizens DCAT resources including Catalogs, Catalog Records, Datasets, Distributions. The notion of version is very much related to the community practices,  data management policy and the workflows in place. It is up to data providers to decide when and why a new version should be released. For this reason, DCAT refrains from providing definitions or rules about when changes in a resource should turn into a new release of it, and refer, for guidance, to [[?DWBP]] (<a data-cite="?DWBP#dataVersioning">&sect;&nbsp;<span class="secno">8.6 </span>Data Versioning</a>).</p>
 
 <p>Versioning may be understood as involving relationships between datasets, which is supported by the <a href="#Property:resource_qualified_relation"><code>dcat:qualifiedRelation</code></a> and described in <a href="#qualified-relationship"></a>. The class <a href="#Class:Relationship"><code>dcat:Relationship</code></a> supports providing information about the relationship, and could be extended for versioning information.</p>
+
 <aside class="ednote">
-    <p>Preliminary draft for discussion.</p>	   	
+    <p>Second draft for discussion.</p>	   	
 </aside>
     
 <p>The following sections briefly discuss some key versioning aspects, and how they can be specified in DCAT records.</p>
@@ -3405,30 +3990,297 @@ For example:
 
 </section>
 
+-->
+
+<div class="issue" data-number="1277"></div>    
+
+<aside class="ednote">
+<p>This is a new draft for discussion on versioning support in DCAT.</p>
+<p>Compared with the first draft in [[VOCAB-DCAT-3-20201217]], this section has been revised to focus specifically on versions derived from the revision of a resource, and by following the [[PAV]] approach for the specification of version chains and hierarchies - previous, next, current, last version.</p>
+<p>In particular, the introductory text has been revised according to the new scope, the section on version types has been removed, and a new section has been added to describe how to specify relationships between versions, including those concerning backward compatibility, originally included in <a href="#version-info"></a>.</p>
+<p>Moreover, <a href="#versioning-complementary-approaches">a new section</a> has been added at the end to compare the DCAT versioning approach with those used in OWL and [[?DCTERMS]].</p> 
+<p>The other sections include only editorial changes.</p>
+<p><strong>NB:</strong> All the properties described in this section are yet to be added to the RDF definition of DCAT.</p>
+</aside>
+
+<p>The notion of <em>version</em> is often used as a generic term to denote some kind of relationship between a resource and a derived one. Examples, among others, include revisions, editions, adaptations, and translations.</p>
+
+<p>This section focuses specifically on how to use DCAT to describe versions resulting from a revision - i.e., from changes occurring to a resource as part of its life-cycle.</p>
+
+<!--
+<p>Henceforth, the words <em>version</em> and <em>versioning</em> must be intended in this restrictive sense.</p>
+-->
+
+<p>For this purpose, DCAT builds upon existing vocabularies, in particular the versioning component of the [[?PAV]] ontology, and the relevant terms from [[?DCTERMS]], [[?OWL2-OVERVIEW]], and [[?VOCAB-ADMS]].</p>
+
+<p>It is important to note that versioning can be applied to any of the first class citizens DCAT resources, including Catalogs, Catalog Records, Datasets, Distributions.</p>
+
+<p>Note also that the DCAT approach described in the following sections is meant to be complementary with those already used in specific types of resources (e.g., [[OWL2-OVERVIEW]] provides a set of versioning properties for ontologies), as well as in given domains and communities. For a comparison between the DCAT versioning approach and those of other vocabularies, see <a href="#versioning-complementary-approaches"></a>.</p> 
+
+<aside class="note">
+<p>The notion of version is very much related to the community practices, the data management policy and the workflows in place. It is up to data providers to decide when and why a new version should be released. For this reason, DCAT refrains from providing definitions or rules about when changes in a resource should turn into a new release of it, and refers for guidance to [[?DWBP]] (<a data-cite="?DWBP#dataVersioning">&sect;&nbsp;<span class="secno">8.6 </span>Data Versioning</a> and <a data-cite="?DWBP#DataIdentifiers">&sect;&nbsp;<span class="secno">8.7 </span>Data Identifiers</a>).</p>
+</aside>
+
+<section id="version-relationships">
+
+<h2>Relationships between versions</h2>
+
+<p>DCAT supports the following kinds of relationships between versions:</p>
+<ol>
+<li>Those indicating the version chain and hierarchy (the version history).</li>
+<li>Those indicating whether a version is replaced/superseded by another one.</li>
+<!--
+<li>Those indicating whether a version is backward compatible with another one.</li>
+-->
+</ol>
+
+<section id="version-history">
+
+<h2>Version chains and hierarchies</h2>
+
+<p>DCAT defines specific properties for describing version history, aligned with the corresponding [[?PAV]] ones:</p>
+
+<ul>
+<li><a href="#Property:resource_previous_version"><code>dcat:previousVersion</code></a> (equivalent to <a data-cite="?PAV#d4e459"><code>pav:previousVersion</code></a>)</li>
+<li><p><a href="#Property:resource_has_version"><code>dcat:hasVersion</code></a> (equivalent to <a data-cite="?PAV#d4e395"><code>pav:hasVersion</code></a>), plus the following additional properties:</p>
+<ul>
+<li><a href="#Property:resource_is_version_of"><code>dcat:isVersionOf</code></a> (inverse of <code>dcat:hasVersion</code>);</li>
+<li><a href="#Property:resource_has_current_version"><code>dcat:hasCurrentVersion</code></a> (equivalent to <a data-cite="?PAV#d4e359"><code>pav:hasCurrentVersion</code></a>, and subproperty of <code>dcat:hasVersion</code>)</li>
+<!--
+<li><a href="#Property:resource_has_last_version"><code>dcat:hasLastVersion</code></a> (subproperty of <code>dcat:hasVersion</code>)</li>
+-->
+</ul>
+</li>
+</ul>
+
+<aside class="ednote">
+<p>The previous draft [[VOCAB-DCAT-3-20201217]] was making use of similar properties from [[DCTERMS]] and [[VOCAB-ADMS]], namely:</p>
+<ul>
+<li><code>dcterms:hasVersion</code> / <code>dcterms:isVersionOf</code>, for version hierarchies, and</li>
+<li><code>adms:prev</code>, <code>adms:next</code>, <code>adms:last</code> for both versions chains and dataset series.</li>
+</ul>
+<p>Their definitions and use do not however fit completely with similar properties in [[PAV]]. E.g.:</p>
+<ul>
+<li><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/hasVersion"><code>dcterms:hasVersion</code></a> is defined as <q>A related resource that is a version, edition, or adaptation of the described resource</q>, thus using the notion of version in its wider sense, whereas [[PAV]] is specifically describing versions as the result of a revision.</li>
+<li><a data-cite="VOCAB-ADMS#adms-last"><code>adms:last</code></a> is defined as <q>A link to the current or latest version of the Asset</q>, whereas in [[PAV]] the current and latest versions of a resource may be different, and link to by using different properties.</li>
+</ul>
+<p>Moreover, although the definitions of the [[VOCAB-ADMS]] properties states explicitly that they are meant to be used for "versions", they are subproperties of the corresponding terms in [[XHTML-VOCAB]], where they are used to link resources in a collection (e.g., the set of pages of a Web site). E.g., the definition of <a data-cite="XHTML-VOCAB#last"><code>xhv:last</code></a> reads as follows: <q>last refers to the last resource in a collection of resources.</q>.</p>
+<p>Based on that, in this draft, [[PAV]]-equivalent properties are used for versions, whereas the [[VOCAB-ADMS]] ones are used for dataset series (<a href="#dataset-series"></a>). Properties <code>dcterms:hasVersion</code> / <code>dcterms:isVersionOf</code> are not used.</p>
+</aside>
+
+<p>Property <code>dcat:previousVersion</code> is used to build a version chain, that can be navigated backward from a given version to the first one. This reflects the most typical use case - i.e., linking different versions published as distinct resources in a catalog.</p>
+
+<p>In addition to this, property <code>dcat:hasVersion</code> can be used to specify a version hierarchy, by linking an abstract resource to its versions.</p>
+
+<p>If needed, the version hierarchy can be further described by specific properties. More precisely, property <code>dcat:isVersionOf</code> (inverse of <code>dcat:hasVersion</code>) gives the possibility of specifying a back link from a version to the abstract resource, whereas property <code>dcat:hasCurrentVersion</code> link an abstract resource to snapshot corresponding to the current version of the content.</p>
+
+<!--
+<p>If needed, the version hierarchy can be further described by specific properties. More precisely, property <code>dcat:isVersionOf</code> (inverse of <code>dcat:hasVersion</code>) gives the possibility of specifying a back link from a version to the abstract resource, whereas property <code>dcat:hasCurrentVersion</code> link an abstract resource to snapshot corresponding to the current version of the content. Finally, property <code>dcat:hasLastVersion</code> link the abstract resource to the latest version of the resource in the version chain. Note that the current version of a resource may be different from the last version: e.g., if the last version is still in draft status, the current one may correspond to the latest stable version of the resource.</p>
+-->
+
+<aside class="note">
+<p>On how to use DCAT to specify a resource's status, see <a href="#life-cycle"></a>.</p>
+</aside>
+
+<!--
+<p><a href="#fig-version-chain-and-hierarchy"></a> illustrates the use of <em>all</em> these properties. In the figure, the resource with URI <code>https://www.w3.org/TR/vocab-dcat</code> is an abstract resource, corresponding always to the latest  stable version of DCAT (as W3C Recommendation), whereas the other ones correspond to specific versions of DCAT. The current version is DCAT 2, as DCAT 3 (the last version) is still a draft.</p>
+
+<figure id="fig-version-chain-and-hierarchy">
+<a href="./images/version-chain-and-hierarchy-dcat.svg"><img src="./images/version-chain-and-hierarchy-dcat.svg"></a>
+<figcaption>Version chain and hierarchy of DCAT specifications</figcaption>
+</figure>
+-->
+
+<p>Note that the only properties necessary to specify a version chain and hierarchy are, respectively, <code>dcat:previousVersion</code> and <code>dcat:hasVersion</code>. Whether to use or not the other ones depends on the requirements of the relevant use case.</p>
+
+<p>The following example reuses those in <a data-cite="?DWBP#dataVersioning">&sect;&nbsp;<span class="secno">8.6 </span>Data Versioning</a> of [[DWBP]] and revises them to show how to specify a version chain and hierarchy on a bus stops dataset, by using the properties described in this section.</p>
+
+<aside class="example" id="ex-version-chain-and-hierarchy" title="Version history of the MyCity bus stops dataset">
+
+<p>The MyCity bus stops dataset is updated whenever the list of bus stops changes. The different versions are preserved in order to keep an historical record of the bus stops available in given points in time. An abstract dataset is used to point to the version with the most up to date list of bus stops.</p>
+
+<p>In <a href="#fig-version-chain-and-hierarchy"></a>, the resource with URI <code>mycity-bus:stops</code> is the abstract resource, corresponding always to the latest version of the MyCity bus stops dataset, whereas the other ones correspond to specific versions of it. The current version is the one with URI <code>mycity-bus:stops-2015-12-07</code>.</p>
+
+<figure id="fig-version-chain-and-hierarchy">
+<img src="./images/version-chain-and-hierarchy.svg">
+<figcaption>Version chain and hierarchy of the MyCity bus stops dataset</figcaption>
+</figure>
+
+<p>The corresponding [[Turtle]] representation:</p>
+
+<pre>
+mycity-bus:stops a dcat:Dataset ;
+  ...
+  dcat:hasVersion mycity-bus:stops-2015-01-01 ,
+    mycity-bus:stops-2015-05-05 ,
+    mycity-bus:stops-2015-12-07 ;
+  dcat:hasCurrentVersion mycity-bus:stops-2015-12-07 ;
+.
+
+mycity-bus:stops-2015-01-01 a dcat:Dataset ;
+  ...
+  dcat:isVersionOf mycity-bus:stops ;
+.
+
+mycity-bus:stops-2015-05-05 a dcat:Dataset ;
+  ...
+  dcat:previousVersion mycity-bus:stops-2015-01-01 ;
+  dcat:isVersionOf mycity-bus:stops ;
+.
+
+mycity-bus:stops-2015-12-07 a dcat:Dataset ;
+  ...
+  dcat:previousVersion mycity-bus:stops-2015-05-05 ;
+  dcat:isVersionOf mycity-bus:stops ;
+.
+</pre>
+
+</aside>
+
+</section>
+
+<section id="version-replace">
+
+<h2>Versions replaced by other ones</h2>
+
+<p>Another type of relationship concerns whether a given version replaces/supersedes another one. For this purpose, DCAT reuses the relevant [[DCTERMS]] property, namely, <a href="#Property:resource_replaces"><code title="http://purl.org/dc/terms/replaces">dcterms:replaces</code></a>, plus its inverse <a href="#Property:resource_is_replaced_by"><code title="http://purl.org/dc/terms/isReplacedBy">dcterms:isReplacedBy</code></a>, in case a back link needs to be provided.</p>
+
+<p>It is worth noting that these properties are not denoting by themselves a version chain - i.e., a version is not necessarily replacing its immediate predecessor.</p>
+
+<!--
+<p>It is worth noting that these properties are not denoting by themselves a version chain - i.e., a version is not necessarily replacing its immediate predecessor. For instance, in <a href="#fig-version-replace"></a>, DCAT 2 is not replaced by its immediate successor (the First Public Working Draft of DCAT 3), since it is still a draft.</p>
+
+<figure id="fig-version-replace">
+<a href="./images/version-replace-dcat.svg"><img src="./images/version-replace-dcat.svg"></a>
+<figcaption>Specification of replaced versions, applied to DCAT</figcaption>
+</figure>
+-->
+
+<p>The following example reuses the description of the MyCity bus stop dataset in <a href="#ex-version-chain-and-hierarchy"></a> to show how replaced versions can be specified in DCAT.</p>
+
+<aside class="example" id="ex-version-replace" title="Replaced versions of the MyCity bus stops dataset">
+<pre>
+mycity-bus:stops-2015-01-01 a dcat:Dataset ;
+  ...
+  dcat:isVersionOf mycity-bus:stops ;
+.
+
+mycity-bus:stops-2015-05-05 a dcat:Dataset ;
+  ...
+  dcat:previousVersion mycity-bus:stops-2015-01-01 ;
+  dcat:isVersionOf mycity-bus:stops ;
+  dcterms:replaces mycity-bus:stops-2015-01-01 ;
+.
+
+mycity-bus:stops-2015-12-07 a dcat:Dataset ;
+  ...
+  dcat:previousVersion mycity-bus:stops-2015-05-05 ;
+  dcat:isVersionOf mycity-bus:stops ;
+  dcterms:replaces mycity-bus:stops-2015-05-05 ;
+.
+</pre>
+</aside>
+
+</section>
+
+<!--
+
+<section id="version-backward-compatibility">
+
+<h2>Version backward compatibility</h2>
+
+<div class="issue" data-number="1258"></div>    
+
+<p>For some types of resources documented in a catalog, the release of a new version may lead to backward compatibility issues, that should be advertised to users. This applies, in particular, to resources as code lists, thesauri, taxonomies, vocabularies, ontologies, data models and schemas.</p>
+
+<p>In DCAT this information is specified by using the relevant [[OWL2-OVERVIEW]] properties, namely, <code>owl:backwardCompatibleWith</code> and <code>owl:incompatibleWith</code>.</p>
+
+<aside class="ednote">
+<p>Properties <code>owl:backwardCompatibleWith</code> and <code>owl:incompatibleWith</code> are yet to be added to <a href="#vocabulary-specification"></a> and to the RDF definition of DCAT.</p>
+</aside>
+
+<p><a href="#fig-version-backward-compatibility"></a> shows, as an example, the use of these properties on DCAT, where DCAT 2 is backward compatible with DCAT 1.</p> 
+
+<figure id="fig-version-backward-compatibility">
+<a href="./images/version-backward-compatibility-dcat.svg"><img src="./images/version-backward-compatibility-dcat.svg"></a>
+<figcaption>Version backward compatibility, applied to DCAT</figcaption>
+</figure>
+
+</section>
+
+-->
+
+</section>
+
 <section id="version-info">
+
+
 <h2>Version information</h2>
 
-<div class="issue" data-number="1271"></div>
+<div class="issue" data-number="1280"></div>
+
+<aside class="ednote">
+<p>This draft proposes the definition of a new property <code>dcat:version</code>, to use instead of <code>owl:versionInfo</code> of the first draft, to complement the versioning properties defined in the DCAT namespace and illustrated in <a href="#version-history"></a>.</p>
+<!--
+<p>Moreover, the specification of backward compatibility between versions has been moved to a separate section (<a href="#version-backward-compatibility"></a>).</p>
+-->
+<p>Moreover, support to the specification of backward compatibility between versions has been removed (see <a href="https://github.com/w3c/dxwg/issues/1258">Issue #1258</a>).</p>
+</aside>
     
 <p>Besides the relationships illustrated in the previous section, versioned resources may be associated with additional information, describing, e.g., their differences with the original resource (the version "delta"),  the version identifier, and release date.</p>
 
+<!--
 <p>Two typical examples are (a) a textual description of the changes between the current and the previous version of a resource, and (b) whether the new version of the resource is backward compatible or not with the previous version (this is particularly relevant when the resource is used by given applications, so it is fundamental to know if the new version can be also used with them).</p>
-
-<div class="issue" data-number="1258"></div>    
+-->
 
 <!--
 <aside class="issue">
 <a href="https://www.w3.org/TR/2012/REC-owl2-syntax-20121211/#Ontology_Annotations">Section 3.5 in  OWL 2 specification</a> suggests <code>owl:backwardCompatibleWith</code> / <code>owl:incompatibleWith</code> properties on entities other than ontologies is discouraged. Should we consider any other valuable alternatives? (see <a href="https://github.com/w3c/dxwg/issues/1258">issue 1258</a>) 
 </aside>
 -->
+<!--
 <p>For these purposes, it is recommended to use, respectively, property <a data-cite="VOCAB-ADMS#adms-versionnotes"><code>adms:versionNotes</code></a> (for a textual description of the changes) and properties <code>owl:backwardCompatibleWith</code> / <code>owl:incompatibleWith</code> (for specifying (in)compatibility).</p>
+-->
 
-<div class="issue" data-number="1280"></div>
-    
+<p>For these purposes, DCAT makes use of the following properties:</p>
+
+<ul>
+<li><a href="#Property:resource_version"><code>dcat:version</code></a> (equivalent to <a data-cite="?PAV#d4e395"><code>pav:version</code></a> [[?PAV]]), for the version name / identifier;</li>
+<li><a href="#Property:resource_release_date"><code>dcterms:issued</code></a> [[?DCTERMS]], for the version release date;</li>
+<li><p><a href="#Property:resource_version_notes"><code>adms:versionNotes</code></a> [[?VOCAB-ADMS]], for a textual description of the changes, including backward compatibility issues with the previous version of the resource.</p>
+<div class="issue" data-number="1258"></div>    
+<div class="issue" data-number="1271"></div>
+</li>
+</ul>
+
+<aside class="note">
+<p>DCAT does not prescribe how a version name / identifier should be specified, and refers for guidance to [[DWBP]]'s <a href="https://www.w3.org/TR/dwbp/#VersioningInfo">Best Practice 7: Provide a version indicator</a>.</p>
+</aside>
+
+<!--    
 For indicating the version release date and identifier, the use of, respectively, <code>dcterms:issued</code> and <code>owl:versionInfo</code> is recommended.
+-->
+
+<p>The following example reuses the one in [[DWBP]]'s <a href="https://www.w3.org/TR/dwbp/#VersioningInfo">Best Practice 7: Provide a version indicator</a> to show how version information can be specified in DCAT.</p>
+
+<aside class="example" id="ex-version-info" title="First version of the MyCity bus stops dataset">
+<pre>
+mycity-bus:stops-2015-01-01
+  a dcat:Dataset ;
+  dcterms:title "Bus stops of MyCity" ;
+  ...
+  dcterms:issued "2015-01-01"^^xsd:date ;
+  ...
+  dcat:version "1.0" ;
+  adms:versioNotes "First version of the bus stop dataset."@en ;
+.
+</pre>
+</aside>
+
 </section>
 
 <section id="life-cycle">
+
 <h2>Resource life-cycle</h2>
 
 <p>The life-cycle of a resource is an aspect orthogonal to versioning, and sometimes strictly related. The evolution of a resource along its life-cycle (from its conception, to its creation and publication) may result in new versions, although this is not always the case (e.g., in case an approval workflow is in place, the resource may not undergo any change if no revision is needed). Similarly, the creation of a new version may not necessarily lead to a change in status (e.g., when changes are not substantial, and/or are implemented on resources still in development). Moreover, when a resource is replaced because of a revision (correcting errors, adding new content, etc.), it may be moved to a different life-cycle status (e.g., deprecation or withdrawl).</p>
@@ -3437,22 +4289,97 @@ For indicating the version release date and identifier, the use of, respectively
 
 <p>As for versioning, the resource life-cycle depends on community practices, data management policies, and the workflows in place. Moreover, different resource types (e.g., datasets vs catalog records) may have different life-cycle statuses.</p>
 
-<p>For the specification of life-cycle statuses, the use of property <a data-cite="VOCAB-ADMS#adms-status"><code>adms:status</code></a> is recommended, along with the appropriate [[DCTERMS]] time-related properties. However, DCAT does not prescribe the use of any specific set of life-cycle statuses, but refers to existing standards and community practices fit for the relevant application scenario.</p>
+<p>For the specification of life-cycle statuses, DCAT makes use of property <a href="#Property:resource_status"><code>adms:status</code></a> [[?VOCAB-ADMS]], along with the appropriate [[?DCTERMS]] time-related properties (<code>dcterms:created</code>, <code>dcterms:dateSubmitted</code>, <code>dcterms:dateAccepted</code>, <code>dcterms:dateCopyrighted</code>, <a href="#Property:resource_release_date"><code>dcterms:issued</code></a>, <a href="#Property:resource_update_date"><code>dcterms:modified</code></a>, <code>dcterms:valid</code>). However, DCAT does not prescribe the use of any specific set of life-cycle statuses, but refers to existing standards and community practices fit for the relevant application scenario.</p>
 
 <aside class="note">
 <p>Examples of life-cycle statuses include:</p>
 <ul>
-<li>Those defined in the ISO standard for item registration [[ISO-19135]] (accepted / not accepted, deprecated, experimental, reserved, retired, stable, submitted, superseded, valid / invalid).</li>
-<li>The progress codes defined in [[ISO-19115]] (accepted, completed, deprecated, final, historical archive, not accepted, obsolete, ongoing, pending, planned, proposed, required, retired, superseded, tentative, under development, valid, withdrawn).</li>
-<li>[[DCTERMS]], which supports a number of relevant time-related properties (<code>dcterms:created</code>, <code>dcterms:dateSubmitted</code>, <code>dcterms:dateAccepted</code>, <code>dcterms:dateCopyrighted</code>, <code>dcterms:issued</code>, <code>dcterms:modified</code>).</li>
-<li>The ADMS Status vocabulary [[ADMS-SKOS]], used in [[DCAT-AP]], which includes four statuses: completed, deprecated, under development, and withdrawn.</li>
-<li>The dataset statuses [[EUV-DS]] and concept statuses [[EUV-CS]] vocabularies from the EU Vocabularies registry.</li>
+<li>Those defined in the ISO standard for item registration [[?ISO-19135]] (accepted / not accepted, deprecated, experimental, reserved, retired, stable, submitted, superseded, valid / invalid).</li>
+<li>The progress codes defined in [[?ISO-19115]] (accepted, completed, deprecated, final, historical archive, not accepted, obsolete, ongoing, pending, planned, proposed, required, retired, superseded, tentative, under development, valid, withdrawn).</li>
+<!--
+<li>[[?DCTERMS]], which supports a number of relevant time-related properties (<code>dcterms:created</code>, <code>dcterms:dateSubmitted</code>, <code>dcterms:dateAccepted</code>, <code>dcterms:dateCopyrighted</code>, <code>dcterms:issued</code>, <code>dcterms:modified</code>, <code>dcterms:valid</code>).</li>
+-->
+<li>The ADMS Status vocabulary [[?ADMS-SKOS]], used in [[?DCAT-AP]], which includes four statuses: completed, deprecated, under development, and withdrawn.</li>
+<li>The dataset statuses [[?EUV-DS]] and concept statuses [[?EUV-CS]] vocabularies from the EU Vocabularies registry.</li>
 </ul>
-<p>The UK Government Linked Data Registry project [[UKGOVLD-REG]] provides an example of how the life-cycle statuses defined in [[ISO-19135]] can be used in a registry, along with the criteria for status transition.</p>
+<p>The UK Government Linked Data Registry project [[?UKGOVLD-REG]] provides an example of how the life-cycle statuses defined in [[?ISO-19135]] can be used in a registry, along with the criteria for status transition.</p>
 </aside>
 
 </section>
-    
+
+<section id="versioning-complementary-approaches">
+
+<h2>Complementary approaches to versioning</h2>
+
+<p>The DCAT versioning approach can coexist with existing versioning practices - as those used in specific communities, domains, and resource types.</p>
+
+<p>As an example, the following table shows the correspondences between the DCAT versioning properties and the vocabularies most frequently used to specify similar concepts, namely, OWL, for ontologies, [[?DCTERMS]], and [[?PROV-O]].</p>
+
+<table class="simple" id="table-versioning-complementary-approaches">
+<caption>Similar (but not equivalent) versioning properties in DCAT, OWL, [[?DCTERMS]], and [[?PROV-O]]</caption>
+<thead>
+<tr>
+<th>DCAT</th>
+<th>OWL</th>
+<th>[[?DCTERMS]]</th>
+<th>[[?PROV-O]]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#Property:resource_has_version"><code>dcat:hasVersion</code></td>
+<td></td>
+<td><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/hasVersion"><code>dcterms:hasVersion</code></a></td>
+<td><a data-cite="?PROV-O#generalizationOf"><code title="http://www.w3.org/ns/prov#generalizationOf">prov:generalizationOf</code></a></td>
+</tr>
+<tr>
+<td><a href="#Property:resource_is_version_of"><code>dcat:isVersionOf</code></a></td>
+<td></td>
+<td><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/isVersionOf"><code>dcterms:isVersionOf</code></a></td>
+<td><a data-cite="?PROV-O#specializationOf"><code title="http://www.w3.org/ns/prov#specializationOf">prov:specializationOf</code></a></td>
+</tr>
+<tr>
+<td><a href="#Property:resource_has_current_version"><code>dcat:hasCurrentVersion</code></a></td>
+<td><code>owl:versionIRI</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="#Property:resource_previous_version"><code>dcat:previousVersion</code></a></td>
+<td><code>owl:priorVersion</code></td>
+<td></td>
+<td><a href="https://www.w3.org/TR/prov-o/#wasRevisionOf"><code>prov:wasRevisionOf</code></a></td>
+</tr>
+<tr>
+<td><a href="#Property:resource_version"><code>dcat:version</code></a></td>
+<td><code>owl:versionInfo</code></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<p>Note that correspondence does not imply equivalence. These properties have different scopes and semantics, and therefore they can complement but not replace each other. In particular, OWL properties are meant to be used on resources that can be typed as <code>owl:Ontology</code>'s, whereas the [[?DCTERMS]] ones use a very broad notion of <em>version</em> (including editions and adaptations). On the other hand, DCAT versioning properties are meant to be used on any resource in a catalog, and they use a very specific notion of <em>version</em>, as explained in the introduction to <a href="#dataset-versions"></a>. Finally, the [[?PROV-O]] property <code>prov:wasRevisionOf</code>, although semantically similar to <code>dcat:previousVersion</code>, is not explicitly meant to be used to build a version chain, whereas <code>prov:generalizationOf</code> and <code>prov:specializationOf</code> are semantically broader than their sub-properties <code>dcat:hasVersion</code> and <code>dcat:isVersionOf</code>, respectively.</p>
+
+<p>The following example shows how DCAT and OWL can be used complementarily to versioning [[?VOCAB-DCAT-2]].</p>
+
+<aside class="example" id="ex-versioning-with-dcat-and-owl" title="Use of DCAT and OWL for versioning DCAT 2">
+<pre>
+&lt;http://www.w3.org/ns/dcat#&gt; a owl:Ontology , dcat:Dataset ;
+  owl:versionInfo "Version 2" ;
+  dcat:version "Version 2" ;
+  owl:versionIRI &lt;http://www.w3.org/ns/dcat2#&gt; ;
+  dcat:hasCurrentVersion &lt;http://www.w3.org/ns/dcat2#&gt; ;
+  owl:priorVersion &lt;http://www.w3.org/ns/dcat2014#&gt; ;
+  dcat:previousVersion &lt;http://www.w3.org/ns/dcat2014#&gt; ;
+  dcat:hasVersion &lt;http://www.w3.org/ns/dcat2014#&gt; ,
+    &lt;http://www.w3.org/ns/dcat2#&gt; ,
+. 
+</pre>
+</aside>
+
+</section>
+
 </section>
 
 <section class="informative" id="dataset-series">
@@ -3499,6 +4426,7 @@ ex:budget-2020 a dcat:Dataset ;
   .
 </pre>
 </aside>
+
 
 <p>Dataset series may evolve over time, by acquiring new datasets. E.g., a dataset series about yearly budget data will acquire a new child dataset every year. In such cases, it might be important to link the yearly releases with relationships specifying the previous, next, and latest ones. In such scenario, DCAT makes use of the [[VOCAB-ADMS]] properties <a href="#Property:resource_prev"><code>adms:prev</code></a>, <a href="#Property:resource_next"><code>adms:next</code></a>, and <a href="#Property:resource_last"><code>adms:last</code></a>, respectively.</p>
 
@@ -3836,9 +4764,9 @@ ex:budget-2018-it a dcat:Dataset ;
 
         <section id="quality-conformance-statement">
             <h3>Conformance to a standard</h3>
-            <p>The use of <a data-cite="?DCTERMS#terms-conformsTo"><code>dcterms:conformsTo</code></a> and
-      <a data-cite="?DCTERMS#terms-Standard"><code>dcterms:Standard</code></a> is a well-known pattern
-            to represent the conformance to a standard. <a href="#ex-inspire-conformant-dataset"></a>, directly borrowed from [[?SDW-BP]] (<a data-cite="SDW-BP#ex-geodcat-ap-dataset-conformance-with-specification">Example 51</a>), declares a fictional <code>a:Dataset</code>
+            <p>The use of <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/conformsTo"><code>dcterms:conformsTo</code></a> and
+      <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/Standard"><code>dcterms:Standard</code></a> is a well-known pattern
+      to represent the conformance to a standard. <a href="#ex-inspire-conformant-dataset"></a>, directly borrowed from [[?SDW-BP]] (<a data-cite="SDW-BP#ex-geodcat-ap-dataset-conformance-with-specification">Example 51</a>), declares a fictional <code>a:Dataset</code>
       conformant to the EU INSPIRE Regulation on interoperability of spatial data sets and services (<a href="http://data.europa.eu/eli/reg/2014/1312/oj">"Commission Regulation (EU) No 1089/2010
       of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards
       interoperability of spatial data sets and services"</a>).</p>
@@ -3878,7 +4806,7 @@ ex:budget-2018-it a dcat:Dataset ;
       to express non-conformance and non-evaluation beside the full compliance. Similar controlled vocabularies can
       be defined in other contexts.</p>
       <p><a href="#ex-conformance-degree"></a> specifies some newly minted concepts representing the degree of conformance (i.e., conformant, not conformant) and  declares the
-      <a data-cite="?DCTERMS#terms-type"><code>dcterms:type</code></a> for indicating
+      <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/type"><code>dcterms:type</code></a> for indicating
       the result of conformance test. Following a pattern used in [[?GeoDCAT-AP]], the example uses a <code>prov:Entity</code> to model the  conformance test (e.g.,
       <code>a:testResult</code>), a <code>prov:Activity</code> to model the testing activity (e.g.,
       <code>a:testingActivity</code>), a <code>prov:Plan</code> derived from the Data on the Web Best Practices [[?DWBP]] (e.g., <code>a:conformanceTest</code>) to check for the whole set of best practices. A qualified PROV association binds the testing activity to the conformance test.</p>
@@ -4727,7 +5655,7 @@ dap:P366
   <section id="examples-dataset-publication">
       <h3>Link datasets and publications</h3>
 
-      <p>Often datasets are associated with publications (scholarly articles, reports, etc) and this version of DCAT relies on the property <code>dcterms:isReferencedBy</code> to provide a way to link publications about a dataset to the dataset</p>
+      <p>Often datasets are associated with publications (scholarly articles, reports, etc) and this version of DCAT relies on the property <a href="#Property:resource_is_referenced_by"><code>dcterms:isReferencedBy</code></a> to provide a way to link publications about a dataset to the dataset</p>
 
       <p>The following example shows how a dataset published in the <a href="https://datadryad.org">Dryad repository</a> is linked to a publication available in the <a href="https://doi.org/10.1038/sdata.2018.22">Nature Scientific Data journal</a>:</p>
 
@@ -4944,6 +5872,29 @@ ga-courts:jc-wms
 <section id="changes" class="appendix">
     <h2>Change history</h2>
     <p>A full change-log is available on <a href="https://github.com/w3c/dxwg/commits/gh-pages/dcat">GitHub</a></p>
+	
+	
+<section id="changes-since-20201217">
+
+<h2>Changes since the first public working draft of 17 December 2020</h2>
+
+<p>The document has undergone the following changes since the DCAT 3 first public working draft of 17 December 2020 [[?VOCAB-DCAT-3-20201217]]:</p>
+
+<ul>
+<li><p><a href="#dataset-versions"></a> has been revised to focus specifically on versions derived from the revision of a resource, and by following the [[PAV]] approach for the specification of version chains and hierarchies - previous, next, current, last version. In particular:</p>
+<ul>
+<li>The introductory text has been revised according to the new scope.</li>
+<li>The section on <a href="https://www.w3.org/TR/2020/WD-vocab-dcat-3-20201217/#version-types">version types</a> (link to previous version) has been removed, and <a href="#version-relationships">a new section</a> has been added to describe how to specify relationships between versions.</li>
+<li>Dropped support to the specification of backward (in)compatibility between versions by using properties <code>owl:backwardCompatibleWith</code> and <code>owl:incompatibleWith</code>, originally included in <a href="#version-info"></a>.</li>
+<li><a href="#versioning-complementary-approaches">A new section</a> has been added at the end to compare the DCAT versioning approach with those used in OWL and [[?DCTERMS]].</li>
+</ul>
+<p>The other sections include only editorial changes.</p>
+</li>
+<li><a href="#Class:Resource"></a> has been updated to include the definition of the properties illustrated in <a href="#dataset-versions"></a>.</li>
+</ul>
+
+</section>
+	
     <section id="changes-since-20200204">
         <h3>Changes since the W3C Recommendation of 4 February 2020</h3>
         <p>The document has undergone the following changes since the DCAT 2 W3C Recommendation of 4 February 2020 [[?VOCAB-DCAT-2-20200204]]:</p>
@@ -4957,6 +5908,11 @@ ga-courts:jc-wms
         <li> A new class <a href="#Class:Dataset_Series"><code>dcat:DatasetSeries</code></a> was added (<a href="https://github.com/w3c/dxwg/issues/#1272">Issue #1272</a>). Section <a href="#dataset-series"></a> drafts guidelines on dataset series (<a href="https://github.com/w3c/dxwg/issues/#868">Issue #868</a>) and to show related examples (<a href="https://github.com/w3c/dxwg/issues/#806">Issue #806</a>). 
         </li>    
         </ul>
+
+<aside class="ednote">
+<p>To be decided if the next entry should be kept or removed.</p>
+</aside>
+
     </section>
     <section id="changes-since-20140116">
         <h3>Changes since the W3C Recommendation of 16 January 2014</h3>
@@ -5097,7 +6053,7 @@ See <a href="https://github.com/w3c/dxwg/issues/172">Issue #52</a> and related u
 </li>
 
 <li><a href="#Property:resource_theme">Property: theme/category</a>:
-In DCAT 1 [[?VOCAB-DCAT-20140116]] the domain of <code>dcat:theme</code> was <code>dcat:Dataset</code>, which limited use of this property in other contexts. The domain has been relaxed in this revision. 
+In DCAT 1 [[?VOCAB-DCAT-20140116]] the domain of <code>dcat:theme</code> was <code>dcat:Dataset</code>, which limited use of this property in other contexts. The domain has been relaxed in DCAT 2. 
 See <a href="https://github.com/w3c/dxwg/issues/123">Issue #123</a>.
 </li>
 
@@ -5107,17 +6063,17 @@ See <a href="https://github.com/w3c/dxwg/issues/64">Issue #64</a>, with examples
 </li>
 
 <li><a href="#Property:resource_keyword">Property: keyword/tag</a>:
-In DCAT 1 [[?VOCAB-DCAT-20140116]] the domain of <code>dcat:keyword</code> was <code>dcat:Dataset</code>, which limited use of this property in other contexts. The domain has been relaxed in this revision. 
+In DCAT 1 [[?VOCAB-DCAT-20140116]] the domain of <code>dcat:keyword</code> was <code>dcat:Dataset</code>, which limited use of this property in other contexts. The domain has been relaxed in DCAT 2. 
 See <a href="https://github.com/w3c/dxwg/issues/121">Issue #121</a>.
 </li>
 
 <li><a href="#Property:resource_contact_point">Property: contact point</a>:
-In DCAT 1 [[?VOCAB-DCAT-20140116]] the domain of <code>dcat:contactPoint</code> was <code>dcat:Dataset</code>, which limited use of this property in other contexts. The domain has been relaxed in this revision. 
+In DCAT 1 [[?VOCAB-DCAT-20140116]] the domain of <code>dcat:contactPoint</code> was <code>dcat:Dataset</code>, which limited use of this property in other contexts. The domain has been relaxed in DCAT 2. 
 See <a href="https://github.com/w3c/dxwg/issues/95">Issue #95</a>.
 </li>
 
 <li><a href="#Property:resource_landing_page">Property: landing page</a>:
-In DCAT 1 [[?VOCAB-DCAT-20140116]] the domain of <code>dcat:landingPage</code> was <code>dcat:Dataset</code>, which limited use of this property in other contexts. The domain has been relaxed in this revision. 
+In DCAT 1 [[?VOCAB-DCAT-20140116]] the domain of <code>dcat:landingPage</code> was <code>dcat:Dataset</code>, which limited use of this property in other contexts. The domain has been relaxed in DCAT 2. 
 See <a href="https://github.com/w3c/dxwg/issues/122">Issue #122</a>.
 </li>
 
@@ -5127,7 +6083,7 @@ See <a href="https://github.com/w3c/dxwg/issues/233">Issue #233</a>.
 </li>
 
 <li><a href="#Property:record_conforms_to">Property: conforms to</a>:
-DCAT 1 [[?VOCAB-DCAT-20140116]] had no way of representing the conformance of a record metadata with a metadata standard. This revision has added the property <code>dcterms:conformsTo</code> for <code>dcat:CatalogRecord</code> to cover this requirement.
+DCAT 1 [[?VOCAB-DCAT-20140116]] had no way of representing the conformance of a record metadata with a metadata standard. DCAT 2 has added the property <code>dcterms:conformsTo</code> for <code>dcat:CatalogRecord</code> to cover this requirement.
 See <a href="https://github.com/w3c/dxwg/issues/502">Issue #502</a>.
 </li>
 
@@ -5136,7 +6092,7 @@ Each relevant class section was extended with properties to deal with licensing,
 </li>
 
 <li>
-A new section <a href="#license-rights"></a> was added to provide guidance and recommendations for the use of <a data-cite="?DCTERMS#terms-license"><code>dcterms:license</code></a>, <a data-cite="?DCTERMS#terms-accessRights"><code>dcterms:accessRights</code></a>, and <a data-cite="?DCTERMS#terms-rights"><code>dcterms:rights</code></a> in the context of dcat catalogs and distributions. 
+A new section <a href="#license-rights"></a> was added to provide guidance and recommendations for the use of <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/license"><code>dcterms:license</code></a>, <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/accessRights"><code>dcterms:accessRights</code></a>, and <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/rights"><code>dcterms:rights</code></a> in the context of dcat catalogs and distributions. 
 See <a href="https://github.com/w3c/dxwg/issues/114">Issue #114</a> for the background discussion.
 </li>
 
