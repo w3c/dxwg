@@ -3,7 +3,7 @@
 This repository contains the *Dataset Catalogue Vocabulary* (DCAT) work of the *Dataset Exchange Working Group* (DXWG).
 
 - [DXWG's home page](https://www.w3.org/2017/dxwg/)
-- [Charter](https://www.w3.org/2017/dxwg/charter)
+- [Charter](https://www.w3.org/2020/02/dx-wg-charter.html)
 - [Contribution Guidelines](CONTRIBUTING.md) cover the W3C legal aspects of contributing to this Github repository 
 
 ## DCAT Working Documents
