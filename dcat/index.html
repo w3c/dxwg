@@ -990,7 +990,7 @@
             <a href="#Class:Dataset"><code>dcat:Dataset</code></a>, <a href="#Class:Data_Service"><code>dcat:DataService</code></a>, <a href="#Class:Catalog"><code>dcat:Catalog</code></a> and any other member of a <a href="#Class:Catalog"><code>dcat:Catalog</code></a>.
             This class carries properties common to all cataloged resources, including datasets and data services.
 
-            It is strongly recommended to use a more specific sub-class. When describing a resource which is not a dcat:Dataset or dcat:DataService, it is recommended to create a suitable sub-class of dcat:Resource, or use dcat:Resource with the dcterms:type property to indicate the specific type.</td></tr>
+            It is strongly recommended to use a more specific sub-class. When describing a resource which is not a <a href="#Class:Dataset"><code>dcat:Dataset</code></a> or <a href="#Class:Data_Service"><code>dcat:DataService</code></a>, it is recommended to create a suitable sub-class of <a href="#Class:Resource"><code>dcat:Resource</code></a>, or use <a href="#Class:Resource"><code>dcat:Resource</code></a> with the <a href="http://purl.org/dc/terms/type"><code>dcterms:type</code></a> property to indicate the specific type.</td></tr>
             <tr><td class="prop">Usage note:</td><td><a href="#Class:Resource"><code>dcat:Resource</code></a> is an extension point that enables the definition of any kind of catalog. Additional sub-classes may be defined in a DCAT profile or other DCAT application for catalogs of other kinds of resources.</td></tr>
             <tr><td class="prop">See also:</td><td><a href="#Class:Catalog_Record"></a></td></tr>
             </tbody>
@@ -4706,6 +4706,102 @@ ex:budget-2018-it a dcat:Dataset ;
 <p>The provision of a resource CRS complies with Best Practice&nbsp;8 (<a data-cite="SDW-BP#bp-crs">State how coordinate values are encoded</a>) from [[SDW-BP]].</p>
 </aside>
 
+
+<p>In order to ensure interoperability, it is important to consistently use the URIs identifying the reference standards / specifications. In particular, DCAT recommends the following general rules:</p>
+
+<ul>
+<li>Use URIs from reference registries, when available. Examples include the <a href="https://www.w3.org/TR/">W3C TR registry</a>, the <a href="https://www.ogc.org/def-server">OGC Definitions Server</a>, the <a href="https://www.iso.org/obp/ui">ISO OBP</a>.</li>
+<li>Use the URI of the standard / specification, and not the namespace URI. E.g., to express conformance with DCAT, the URI to be used is <code>https://www.w3.org.org/TR/vocab-dcat/</code>, and not <code>http://www.w3.org/ns/dcat#</code>.</p>
+<li>Use the canonical, persistent URI. This is usually specified in the document itself. If you are in doubt, use the one included in the bibliographic citations for that standard / specification.</li>
+<li>Use the non-versioned URI. If you need to express conformance with a specific version of the standard / specification, use both the un-versioned and the versioned URI. E.g., in case you need to explictly state conformance with DCAT 2, use both <code>https://www.w3.org.org/TR/vocab-dcat/</code> and <code>https://www.w3.org.org/TR/vocab-dcat-2/</code>.</li>
+</ul>
+
+<!--
+<p><a href="#ex-standards-uris"></a> shows the URIs of some of the standards used in this document.</p>
+-->
+
+<aside class="example" id="ex-standards-uris" title="URIs for standards">
+
+<p>The following table shows the URIs of some of the standards used in the examples included in this document.</p>
+
+<table>
+<thead>
+<tr>
+<th>URI</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<!--
+<tr>
+<td><code>http://data.europa.eu/eli/reg/2014/1312/oj</code></td>
+<td>[[]]</td>
+</tr>
+<tr>
+<td><code>http://www.opengis.net/def/crs/EPSG/0/28992</code></td>
+<td>[[]]</td>
+</tr>
+<tr>
+<td><code>http://resource.geosciml.org/ontology/timescale/gts</code></td>
+<td>[[]]</td>
+</tr>
+-->
+<tr>
+<td><code>https://www.w3.org/TR/owl2-overview/</code></td>
+<td>[[OWL2-OVERVIEW]]</td>
+</tr>
+<tr>
+<td><code>https://www.w3.org/TR/rdf-schema/</code></td>
+<td>[[RDF-SCHEMA]]</td>
+</tr>
+<tr>
+<td><code>https://www.w3.org/TR/sparql11-protocol/</code></td>
+<td>[[SPARQL11-PROTOCOL]]</td>
+</tr>
+<tr>
+<td><code>http://www.opengis.net/def/serviceType/ogc/csw/</code></td>
+<td>[[CSW]]</td>
+</tr>
+<!--
+<tr>
+<td><code>https://developers.arcgis.com/rest/</code></td>
+<td>[[]]</td>
+</tr>
+-->
+<tr>
+<td><code>http://www.opengis.net/def/serviceType/ogc/wfs/</code></td>
+<td>[[WFS]]</td>
+</tr>
+<!--
+<tr>
+<td><code>http://www.opengis.net/def/serviceType/ogc/wfs/1.0.0</code></td>
+<td>[[WFS]]</td>
+</tr>
+<tr>
+<td><code>http://www.opengis.net/def/serviceType/ogc/wfs/1.1.0</code></td>
+<td>[[WFS]]</td>
+</tr>
+<tr>
+<td><code>http://www.opengis.net/def/serviceType/ogc/wfs/2.0.0</code></td>
+<td>[[WFS]]</td>
+</tr>
+-->
+<tr>
+<td><code>http://www.opengis.net/def/serviceType/ogc/wms/</code></td>
+<td>[[WMS]]</td>
+</tr>
+<!--
+<tr>
+<td><code>http://www.opengis.net/def/serviceType/ogc/wms/1.3</code></td>
+<td>[[WMS]]</td>
+</tr>
+-->
+</tbody>
+</table>
+
+</aside>
+
+
         </section>
         <section id="quality-conformance-degree">
             <h3>Degree of conformance</h3>
@@ -5446,7 +5542,7 @@ dap:d33937
     dcterms:title "RDF representation of the data"@en ;
     dcat:accessService [
       rdf:type dcat:DataService ;
-      dcterms:conformsTo &lt;https://www.w3.org/TR/sparql11-query/&gt; ;
+      dcterms:conformsTo &lt;https://www.w3.org/TR/sparql11-protocol/&gt; ;
       dcterms:title "International Chronostratigraphic Chart hosted at Research Vocabularies Australia"@en ;
       dcterms:description "Service that supports queries to obtain RDF representations of subsets of the data"@en ;
       dcat:endpointURL &lt;http://vocabs.ands.org.au/repository/api/sparql/csiro_international-chronostratigraphic-chart_2017&gt; ;
