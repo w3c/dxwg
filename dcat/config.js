@@ -327,6 +327,10 @@ var respecConfig = {
 			publisher:"Mind Informatics",
 			date:"16 March 2015"
         },
-        
+        "SPDX":{
+          "href":"http://spdx.org/rdf/terms#",
+          "title":"SPDX 2.2",
+          "publisher":"SPDX"
+        },        
     }
 };
