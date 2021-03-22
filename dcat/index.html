@@ -178,6 +178,9 @@
             <tr><td><code>rdf</code></td><td><code>http://www.w3.org/1999/02/22-rdf-syntax-ns#</code></td><td>[[RDF-SYNTAX-GRAMMAR]]</td></tr>
             <tr><td><code>rdfs</code></td><td><code>http://www.w3.org/2000/01/rdf-schema#</code></td><td>[[RDF-SCHEMA]]</td></tr>
             <tr><td><code>skos</code></td><td><code>http://www.w3.org/2004/02/skos/core#</code></td><td>[[SKOS-REFERENCE]]</td></tr>
+
+            <tr><td><code>spdx</code></td><td><code>http://spdx.org/rdf/terms#</code></td><td>[[SPDX]]</td></tr>
+
             <tr><td><code>time</code></td><td><code>http://www.w3.org/2006/time#</code></td><td>[[OWL-TIME]]</td></tr>
             <tr><td><code>vcard</code></td><td><code>http://www.w3.org/2006/vcard/ns#</code></td><td>[[VCARD-RDF]]</td></tr>
             <tr><td><code>xsd</code></td><td><code>http://www.w3.org/2001/XMLSchema#</code></td><td>[[XMLSCHEMA11-2]]</td></tr>
@@ -2977,6 +2980,48 @@
             <p>For examples on the use of this property, see <a href="#examples-compressed-and-packaged-distributions"></a>.</p>
 
         </section>
+		
+
+<section id="Property:distribution_checksum">
+
+<h4>Property: checksum</h4>
+
+<aside class="note">
+<p>Property added in DCAT 3.</p>
+</aside>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Property:</th>
+<th><a data-cite="SPDX#d4e1930" title="http://spdx.org/rdf/terms#checksum">spdx:checksum</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>The checksum property provides a mechanism that can be used to verify that the contents of a file or package have not changed [[SPDX]].</td>
+</tr>
+<tr>
+<td class="prop">Range:</td>
+<td><a href="#Class:Checksum"><code title="http://spdx.org/rdf/terms#Checksum">spdx:Checksum</code></a></td>
+</tr>
+<tr>
+<td class="prop">Usage note:</td>
+<td>
+<p>The checksum is related to the download URL.</p>
+<aside class="ednote">
+<p>This is the usage note in [[?DCAT-AP]]. To be decided if it should be adopted in DCAT.</p>
+</aside>
+</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+
+		
+		
     </section> <!-- end class Distribution -->
 
     <section id="Class:Data_Service">
@@ -3514,6 +3559,138 @@
         </section>
 
     </section>
+
+<!-- Checksum -->
+
+<section id="Class:Checksum">
+
+<h3>Class: Checksum</h3>
+
+<aside class="note">
+<p>Class added in DCAT 3.</p>
+</aside>
+
+<div class="issue" data-number="1287"></div>    
+    
+<p>The following properties are specific to this class:
+<a href="#Property:checksum_algorithm">algorithm</a>,
+<a href="#Property:checksum_checksum_value">checksum value</a>.
+</p>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Class:</th>
+<th><a data-cite="SPDX#d4e1930" title="http://spdx.org/rdf/terms#Checksum">spdx:Checksum</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>A Checksum is a value that allows to check the integrity of the contents of a file. Even small changes to the content of the file will change its checksum. This class allows the results of a variety of checksum and cryptographic message digest algorithms to be represented [[SPDX]].</td>
+</tr>
+<tr>
+<td class="prop">Usage note:</td>
+<td>The Checksum includes the algorithm (<a href="#Property:checksum_algorithm"><code>spdx:algorithm</code></a>) and value (<a href="#Property:checksum_checksum_value"><code>spdx:checksumValue</code></a>) that allows the integrity of a file to be verified to ensure no errors occurred in transmission or storage.</td>
+</tr>
+</tbody>
+</table>
+
+<section id="Property:checksum_algorithm">
+
+<h4>Property: algorithm</h4>
+
+<aside class="note">
+<p>Property added in DCAT 3.</p>
+</aside>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Property:</th>
+<th><a data-cite="SPDX#d4e52" title="http://spdx.org/rdf/terms#algorithm">spdx:algorithm</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>Identifies the algorithm used to produce the subject Checksum [[SPDX]].</td>
+</tr>
+<tr>
+<td class="prop">Domain:</td>
+<td><a href="#Class:Checksum"><code title="http://spdx.org/rdf/terms#Checksum">spdx:Checksum</code></a></td>
+</tr>
+<tr>
+<td class="prop">Range:</td>
+<td>
+<p>The set of individuals of class <a data-cite="SPDX#d4e1968"><code title="http://spdx.org/rdf/terms#ChecksumAlgorithm">spdx:ChecksumAlgorithm</code></a>.</p>
+<!--
+<aside class="ednote">
+<p>To be decided if the range should be restricted to a specific algorithm - see related discussion at <a href="https://github.com/SEMICeu/DCAT-AP/issues/158">SEMICeu/DCAT-AP/issues/158</a>.</p>
+</aside>
+-->
+</td>
+</tr>
+<tr>
+<td class="prop">Usage note:</td>
+<td>Version 2.2 of [[SPDX]] defines individuals for the following algorithms: 
+<a data-cite="SPDX#d4e3691">MD2</a>, 
+<a data-cite="SPDX#d4e3704">MD4</a>, 
+<a data-cite="SPDX#d4e3717">MD5</a>, 
+<a data-cite="SPDX#d4e3731">MD6</a>, 
+<a data-cite="SPDX#d4e3744">SHA-1</a>, 
+<a data-cite="SPDX#d4e3757">SHA-224</a>, 
+<a data-cite="SPDX#d4e3771">SHA-256</a>, 
+<a data-cite="SPDX#d4e3784">SHA-384</a>, 
+<a data-cite="SPDX#d4e3797">SHA-512</a>.
+</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+
+<section id="Property:checksum_checksum_value">
+
+<h4>Property: checksum value</h4>
+
+<aside class="note">
+<p>Property added in DCAT 3.</p>
+</aside>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Property:</th>
+<th><a data-cite="SPDX#d4e1111" title="http://spdx.org/rdf/terms#checksumValue">spdx:checksumValue</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>The checksumValue property provides a lower case hexidecimal encoded digest value produced using a specific algorithm [[SPDX]].</td>
+</tr>
+<tr>
+<td class="prop">Domain:</td>
+<td><a href="#Class:Checksum"><code title="http://spdx.org/rdf/terms#Checksum">spdx:Checksum</code></a></td>
+</tr>
+<tr>
+<td class="prop">Range:</td>
+<td><a data-cite="XMLSCHEMA11-2#hexBinary"><code title="http://www.w3.org/2001/XMLSchema#hexBinary">xsd:hexBinary</code></a></td>
+</tr>
+<!--
+<tr>
+<td class="prop">Usage note:</td>
+<td></td>
+</tr>
+-->
+</tbody>
+</table>
+
+</section>
+
+</section>
+
 
 </section>
 
@@ -4806,7 +4983,7 @@ ex:budget-2018-it a dcat:Dataset ;
             <h3>Conformance to a standard</h3>
             <p>The use of <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/conformsTo"><code>dcterms:conformsTo</code></a> and
       <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/Standard"><code>dcterms:Standard</code></a> is a well-known pattern
-      to represent the conformance to a standard. <a href="#ex-inspire-conformant-dataset"></a>, directly borrowed from [[?SDW-BP]] (<a data-cite="SDW-BP#ex-geodcat-ap-dataset-conformance-with-specification">Example 51</a>), declares a fictional <code>a:Dataset</code>
+      to represent the conformance to a standard. <a href="#ex-inspire-conformant-dataset"></a>, directly borrowed from [[?SDW-BP]] (<a data-cite="SDW-BP#ex-geodcat-ap-dataset-conformance-with-specification">Example 51</a>), declares a fictitious <code>dcat:Dataset</code>
       conformant to the EU INSPIRE Regulation on interoperability of spatial data sets and services (<a href="http://data.europa.eu/eli/reg/2014/1312/oj">"Commission Regulation (EU) No 1089/2010
       of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards
       interoperability of spatial data sets and services"</a>).</p>
@@ -6029,6 +6206,7 @@ ga-courts:jc-wms
 <li><a href="#Class:Resource"></a> has been updated to include the definition of the properties illustrated in <a href="#dataset-versions"></a>.</li>
 <li><p><a href="#dataset-series"></a> has been revised making dataset series first class citizens of data catalogs and introducing new properties for linking dataset series and datasets (see issues <a href="https://github.com/w3c/dxwg/issues/1272">1272</a> and <a href="https://github.com/w3c/dxwg/issues/1307">1307</a>). In particular, the class <code>dcat:DatasetSeries</code> has been minted (see <a href="#Class:Dataset_Series"></a>), the property <code>dcat:inSeries</code> has been added to <a href="#Class:Dataset"></a>.</p>
 </li>
+<li>Added property <a href="#Property:distribution_checksum"><code>spdx:checksum</code></a> to <code>dcat:Distribution</code>, class <a href="#Class:Checksum"><code>spdx:Checksum</code></a>, and properties <a href="#Property:checksum_algorithm"><code>spdx:algorithm</code></a> and <a href="#Property:checksum_checksum_value"><code>spdx:checksumValue</code></a> - see Issue <a href="https://github.com/w3c/dxwg/issues/1287">#1287</a>.</li>
 </ul>
 </section>
 	
