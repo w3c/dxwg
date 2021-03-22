@@ -2342,7 +2342,7 @@
                     <td><a href="http://purl.org/dc/terms/isPartOf"><code>dcterms:isPartOf</code></a></td>
 </tr>
                 <tr><td class="prop">Inverse property of:</td>
-                <td><a href="#Property:dataset_series_has_series_member"><code>dcat:hasSeriesMember</code></a></td>
+                <td><a href="#Property:dataset_series_series_member"><code>dcat:seriesMember</code></a></td>
                 </tr>
                 <tr><td class="prop">Usage note:</td><td> Normally, child datasets in dataset series are represented as <code>dcat:Dataset</code>. The use of <code>dcat:Distribution</code> for typing child datasets is however recognized as a possible alternative, whenever it addresses more effectively the requirements of a given application scenario.</td></tr>
                 <!--tr><td class="prop">See also:</td><td>Sub-properties of <code>dcterms:hasPart</code> in particular <a href="#Property:catalog_dataset"><code>dcat:dataset</code></a>, <a href="#Property:catalog_catalog"><code>dcat:catalog</code></a>, <a href="#Property:catalog_service"><code>dcat:service</code></a>. </td></tr-->
@@ -2493,7 +2493,7 @@
         </aside>
         
         <p>The following property is specific to this class:
-            <a href="http://www.w3.org/ns/dcat#DatasetSeries">dcat:hasSeriesMember</a>.
+            <a href="#Property:dataset_series_series_member">dcat:seriesMember</a>.
             
         </p>
         <p>The following properties of the super-classes <a href="#Class:Resource"><code>dcat:Resource</code></a> and <a href="#Class:Dataset"><code>dcat:Dataset</code></a>  are also available for use:
@@ -2538,8 +2538,8 @@
             </tbody>
         </table>
 
-       <section id="Property:dataset_series_has_series_member">
-            <h4>Property: has series member</h4>
+       <section id="Property:dataset_series_series_member">
+            <h4>Property:series member</h4>
 <!--			
            <div class="issue" data-number="1307"> </div>
 -->
@@ -2547,7 +2547,7 @@
                <p>Property added in DCAT 3.</p>
            </aside>
             <table class="definition">
-                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#DatasetSeries">dcat:hasSeriesMember</a></th></tr></thead>
+                <thead><tr><th>RDF Property:</th><th><a href="http://www.w3.org/ns/dcat#seriesMember">dcat:seriesMember</a></th></tr></thead>
                 <tbody>
                 <tr><td class="prop">Definition:</td><td>A child dataset that is part of the dataset series.</td></tr>
                     
@@ -4431,11 +4431,11 @@ mycity-bus:stops-2015-01-01
 
 <h2>How to specify dataset series</h2>
 
-<p>DCAT makes dataset series first class citizens of data catalogs by minting a new class <a href="#Class:Dataset_Series"><code>dcat:DatasetSeries</code></a>, defined as subclass of <a href="#Class:Dataset"><code>dcat:Dataset</code></a>. The dataset series and the child datasets are linked by using the [[DCTERMS]] property <a href="#Property:dataset_series_has_series_member"><code>dcat:hasSeriesMember</code></a> and/or its inverse <a href="#Property:dataset_in_series"><code>dcat:inSeries</code></a>. Note that a dataset series can also be the child of another dataset series.</p>
+<p>DCAT makes dataset series first class citizens of data catalogs by minting a new class <a href="#Class:Dataset_Series"><code>dcat:DatasetSeries</code></a>, defined as subclass of <a href="#Class:Dataset"><code>dcat:Dataset</code></a>. The dataset series and the child datasets are linked by using the [[DCTERMS]] property <a href="#Property:dataset_series_series_member"><code>dcat:seriesMember</code></a> and/or its inverse <a href="#Property:dataset_in_series"><code>dcat:inSeries</code></a>. Note that a dataset series can also be the child of another dataset series.</p>
   <div class="issue" data-number="1307"> </div>
   
 <aside class="example" id="ex-dataset-series-containment" title="Yearly budget datasets grouped into a series"> 
-<p>In the following example, yearly budget data are grouped into a series. The series is typed as <code>dcat:DatasetSeries</code>, the child datasets are typed as <code>dcat:Dataset</code>. The series and the datasets are linked by using both <code>dcat:hasSeriesMember</code> and <code>dcat:inSeries</code>.</p>
+<p>In the following example, yearly budget data are grouped into a series. The series is typed as <code>dcat:DatasetSeries</code>, the child datasets are typed as <code>dcat:Dataset</code>. The series and the datasets are linked by using both <code>dcat:seriesMember</code> and <code>dcat:inSeries</code>.</p>
 <pre>
 ex:EUCatalogue a dcat:Catalog ;
   dcterms:title "European Data Catalogue"@en ;
@@ -4444,7 +4444,7 @@ ex:EUCatalogue a dcat:Catalog ;
 
 ex:budget a dcat:DatasetSeries ;
   dcterms:title "Budget data"@en ;
-  dcat:hasSeriesMember ex:budget-2018 ,
+  dcat:seriesMember ex:budget-2018 ,
     ex:budget-2019 , ex:budget-2020 ;
   .
   
@@ -4474,7 +4474,7 @@ ex:budget-2020 a dcat:Dataset ;
 
 ex:budget a dcat:DatasetSeries ;
   dcterms:title "Budget data"@en ;
-  dcat:hasSeriesMember ex:budget-2018 ,
+  dcat:seriesMember ex:budget-2018 ,
     ex:budget-2019 , ex:budget-2020 ;
   .
   
@@ -4550,7 +4550,7 @@ ex:budget-2020 a dcat:Dataset ;
 <pre>
 ex:budget a dcat:DatasetSeries ;
   dcterms:title "Budget data"@en ;
-  dcat:hasSeriesMember ex:budget-2018-be , ex:budget-2019-be , ex:budget-2020-be ,
+  dcat:seriesMember ex:budget-2018-be , ex:budget-2019-be , ex:budget-2020-be ,
     ex:budget-2018-fr , ex:budget-2019-fr , ex:budget-2020-fr , 
     ex:budget-2018-it , ex:budget-2019-it , ex:budget-2020-it ,
     ... ;
@@ -4632,7 +4632,7 @@ ex:budget-2018-it a dcat:Dataset ;
 
 <ol>
 <li>The dataset series is typed as a <code>dcat:Dataset</code>, whereas its child datasets are typed as <code>dcat:Distribution</code>'s.</li>
-<li>Both the dataset series and its child datasets are typed as a <code>dcat:Dataset</code>'s, and the two are usually linked by using the [[DCTERMS]] properties <code>dcat:hasSeriesMember</code> / <code>dcat:inSeries</code>.</li>
+<li>Both the dataset series and its child datasets are typed as a <code>dcat:Dataset</code>'s, and the two are usually linked by using the [[DCTERMS]] properties <code>dcat:seriesMember</code> / <code>dcat:inSeries</code>.</li>
 </ol>
 
 <p>In both cases, the dataset series is sometimes soft-typed by using the [[DCTERMS]] property <code>dcterms:type</code> (e.g., this is the approach used in [[GeoDCAT-AP]], and adopted in [[DCAT-AP-IT]] and [[GeoDCAT-AP-IT]]).</p>
@@ -6026,7 +6026,7 @@ ga-courts:jc-wms
 <p>The other sections include only editorial changes.</p>
 </li>
 <li><a href="#Class:Resource"></a> has been updated to include the definition of the properties illustrated in <a href="#dataset-versions"></a>.</li>
-<li><p><a href="#dataset-series"></a> has been revised making dataset series first class citizens of data catalogs and introducing new properties for linking dataset series and datasets (see issues <a href="https://github.com/w3c/dxwg/issues/1272">1272</a> and <a href="https://github.com/w3c/dxwg/issues/1307">1307</a>). In particular, the class <code>dcat:DatasetSeries</code> and property <code>dcat:hasSeriesMember</code> have been minted (see <a href="#Class:Dataset_Series"></a>), the property <code>dcat:inSeries</code> has been added to <a href="#Class:Dataset"></a>.</p>
+<li><p><a href="#dataset-series"></a> has been revised making dataset series first class citizens of data catalogs and introducing new properties for linking dataset series and datasets (see issues <a href="https://github.com/w3c/dxwg/issues/1272">1272</a> and <a href="https://github.com/w3c/dxwg/issues/1307">1307</a>). In particular, the class <code>dcat:DatasetSeries</code> and property <code>dcat:seriesMember</code> have been minted (see <a href="#Class:Dataset_Series"></a>), the property <code>dcat:inSeries</code> has been added to <a href="#Class:Dataset"></a>.</p>
 </li>
 </ul>
 </section>
