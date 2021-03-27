@@ -3855,7 +3855,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
 
         <aside class="note">
           <p>
-          Access rights can also be expressed as code lists / taxonomies. Examples include the access rights code list  [[?MDR-AR]] used in [[?DCAT-AP]] and the <a href="http://purl.org/eprint/accessRights/">Eprints Access Rights Vocabulary Encoding Scheme</a>.
+          Access rights can also be expressed as code lists / taxonomies. Examples include the access rights code list  [[?EUV-AR]] used in [[?DCAT-AP]] and the <a href="http://purl.org/eprint/accessRights/">Eprints Access Rights Vocabulary Encoding Scheme</a>.
         </p>
         </aside>
       </li>
@@ -3871,7 +3871,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
     </ol>
 
 <aside class="example" id="ex-license-and-access-rights" title="License and access rights">
-<p>The following example shows a dataset publicly available (with no access restriction) and whose distribution is released by using the Creative Commons Attribution (CC-BY) 4.0 license.</p>
+<p>The following example is about a dataset publicly available (with no access restriction) and whose distribution is released by using a standard license - namely, the Creative Commons Attribution (CC-BY) 4.0 license. Access rights are specified by using the [[?EUV-AR]] code list.</p>
 <pre>
 :ds7890 a dcat:Dataset ;
 # other dataset properties...
@@ -3885,34 +3885,68 @@ ex:InternationalDOIFundation a foaf:Organization ;
 </pre>
 </aside>
 
+<aside class="example" id="ex-rights" title="Non-standard license and access conditions">
+<p>This example illustrates the use of property <code>dcterms:rights</code> for a dataset with very specific usage rules, and not using a standard licence. Here use and access conditions are specified with a textual description, by using property <code>rdfs:label</code> (following the <a href="https://www.dublincore.org/resources/userguide/publishing_metadata/">Dublin Core™ User Guide</a>).</p>
+<p>On how to express the same information in a machine-readable way, see <a href="#ex-odrl-policy"></a>.</p>
+<pre>
+:ds4242 a dcat:Dataset ;
+# other dataset properties...
+  dcat:distribution [ a dcat:Distribution ;
+# other distribution properties...
+    dcterms:rights [ a dcterms:RightsStatement ;
+      rdfs:label """
+	    The data can be read and derivatives can be created, 
+	    but no commercial use of the dataset is allowed. In 
+	    addition, it is a requirement to register before the 
+	    permissions are granted.
+	  """@en
+    ] ;
+  ] ;
+.
+</pre>
+</aside>
+
   <p>Finally, in the particular case when rights are expressed via <a data-cite="?ODRL-VOCAB#term-Policy">ODRL policies</a>, it is recommended to use the <a data-cite="?ODRL-VOCAB#term-hasPolicy"><code>odrl:hasPolicy</code></a> property as the link from the description of the cataloged resource or distribution to the ODRL policy, in addition to the corresponding [[DCTERMS]] property that matches the same ODRL policy type.</p>
   
 <aside class="note">
 <p>The Open Digital Rights Language (ODRL) [[!ODRL-VOCAB]] is a policy expression language that provides a flexible and interoperable information model, vocabulary, and encoding mechanisms for representing statements about usage (i.e. permissions, prohibitions, and obligations) of content and services.</p>
 </aside>
 
+<!--
+  <p>Recommendations on the use of these properties on the different types of resources defined in DCAT are provided in the relevant class descriptions.</p>
+-->
+
 <aside class="example" id="ex-odrl-policy" title="ODRL policy">
-<p>This example shows how to express a dataset policy expressing very specific usage rules. In this case, the dataset can be read and derivatives can be created, but no commercial use of the dataset is allowed. In addition, it is a requirement to register before the permissions are granted.</p>
+<p>This example shows how to use [[ODRL]] to specify in a machine-readable way the use and access conditions in <a href="#ex-rights"></a>.</p>
 <pre>
 :ds4242 a dcat:Dataset ;
-# other dataset properties here...
+# other dataset properties...
   dcat:distribution [ a dcat:Distribution ;
+# other distribution properties...
+    dcterms:rights [ a dcterms:RightsStatement ;
+      rdfs:label """
+	    The data can be read and derivatives can be created, 
+	    but no commercial use of the dataset is allowed. In 
+	    addition, it is a requirement to register before the 
+	    permissions are granted.
+	  """@en
+    ] ;
     odrl:hasPolicy [ a odrl:Policy ;
       odrl:permission [ a odrl:Permission ;
         odrl:action ( &lt;http://www.w3.org/ns/odrl/2/read&gt;
-                      &lt;http://www.w3.org/ns/odrl/2/derive&gt; ) ];
-      odrl:obligation   [ a odrl:Duty ;
-        odrl:action &lt;https://schema.org/RegisterAction&gt; ];
-      odrl:prohibition   [ a odrl:Prohibition ;
-        odrl:action &lt;http://creativecommons.org/ns#CommercialUse&gt; ] ;
+                      &lt;http://www.w3.org/ns/odrl/2/derive&gt; ) 
+      ];
+      odrl:obligation [ a odrl:Duty ;
+        odrl:action &lt;https://schema.org/RegisterAction&gt; 
+      ];
+      odrl:prohibition [ a odrl:Prohibition ;
+        odrl:action &lt;http://creativecommons.org/ns#CommercialUse&gt;
+      ] ;
     ] ;
   ] ;
-] ;
 .
 </pre>
 </aside>
-
-  <p>Recommendations on the use of these properties on the different types of resources defined in DCAT are provided in the relevant class descriptions.</p>
 
 </section>
 
