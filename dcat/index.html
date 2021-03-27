@@ -203,6 +203,7 @@
             <tr><td><code>pav</code></td><td><code>http://purl.org/pav/</code></td><td>[[?PAV]]</td></tr>
             <tr><td><code>sdmx-attribute</code></td><td><code>http://purl.org/linked-data/sdmx/2009/attribute#</code></td><td>[[?VOCAB-DATA-CUBE]]</td></tr>
             <tr><td><code>sdo</code></td><td><code>https://schema.org/</code></td><td>[[?SCHEMA-ORG]]</td></tr>
+            <tr><td><code>xhv</code></td><td><code>http://www.w3.org/1999/xhtml/vocab#</code></td><td>[[XHTML-VOCAB]]</td></tr>
             <tr><td><code>w3cgeo</code></td><td><code>http://www.w3.org/2003/01/geo/wgs84_pos#</code></td><td>[[?W3C-BASIC-GEO]]</td></tr>
             </tbody>
         </table>
@@ -796,7 +797,25 @@
             <a href="#Property:resource_title">title</a>,
             <a href="#Property:resource_type">type/genre</a>,
             <a href="#Property:resource_update_date">update/modification date</a>,
-            <a href="#Property:resource_qualified_attribution">qualified attribution</a>.
+            <a href="#Property:resource_qualified_attribution">qualified attribution</a>,
+
+            <a href="#Property:resource_has_current_version">has current version</a>,
+<!--			
+            <a href="#Property:resource_has_last_version">has last version</a>,
+-->			
+            <a href="#Property:resource_has_version">has version</a>,
+            <a href="#Property:resource_is_replaced_by">is replaced by</a>,
+            <a href="#Property:resource_is_version_of">is version of</a>,
+            <a href="#Property:resource_previous_version">previous version</a>,
+            <a href="#Property:resource_replaces">replaces</a>,
+            <a href="#Property:resource_status">status</a>,
+            <a href="#Property:resource_version">version</a>,
+            <a href="#Property:resource_version_notes">version notes</a>,
+
+<a href="#Property:resource_last">last</a>,
+<a href="#Property:resource_next">next</a>.
+<a href="#Property:resource_previous">previous</a>.
+
         </p>
 
         <table class="definition">
@@ -965,7 +984,7 @@
             <a href="#Property:resource_type">type/genre</a>,
             <a href="#Property:resource_update_date">update/modification date</a>,
             <a href="#Property:resource_qualified_attribution">qualified attribution</a>,
-			
+<!-- Versioning properties -->			
             <a href="#Property:resource_has_current_version">has current version</a>,
 <!--			
             <a href="#Property:resource_has_last_version">has last version</a>,
@@ -977,7 +996,11 @@
             <a href="#Property:resource_replaces">replaces</a>,
             <a href="#Property:resource_status">status</a>,
             <a href="#Property:resource_version">version</a>,
-            <a href="#Property:resource_version_notes">version notes</a>.
+            <a href="#Property:resource_version_notes">version notes</a>,
+<!-- Series properties -->			
+            <a href="#Property:resource_last">last</a>,
+            <a href="#Property:resource_next">next</a>,
+            <a href="#Property:resource_previous">previous</a>.
 			
         </p>
 
@@ -2071,6 +2094,159 @@
 
 </section>
 
+<!-- Series properties -->
+
+<section id="Property:resource_last">
+
+<h4>Property: last</h4>
+
+<aside class="note">
+<p>Property added in DCAT 3.</p>
+</aside>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Property:</th>
+<th><a href="http://www.w3.org/ns/adms#last">adms:last</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>The last resource in an ordered collection or series of resources, to which the current resource belongs.</td>
+</tr>
+<!--
+<tr>
+<td class="prop">Equivalent property:</td>
+<td><a data-cite="?XHTML-VOCAB#last"><code title="http://www.w3.org/1999/xhtml/vocab#last">xhv:last</code></a></td>
+</tr>
+-->
+<tr>
+<td class="prop">Sub-property of:</td>
+<td><a data-cite="?XHTML-VOCAB#next"><code title="http://www.w3.org/1999/xhtml/vocab#last">xhv:last</code></a></td>
+</tr>
+<tr>
+<td class="prop">Usage note:</td>
+<td>
+<p>In DCAT this property is used for resources belonging to a <a href="#Class:Dataset_Series"><code>dcat:DatasetSeries</code></a>.</p>
+</td>
+</tr>
+<tr>
+<td class="prop">See also:</td>
+<td>
+<a href="#Property:resource_next"></a>,
+<a href="#Property:resource_previous"></a>.
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>For guidance on the use of this property, see <a href="#dataset-series"></a>.</p>
+
+</section>
+
+<section id="Property:resource_next">
+
+<h4>Property: next</h4>
+
+<aside class="note">
+<p>Property added in DCAT 3.</p>
+</aside>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Property:</th>
+<th><a href="http://www.w3.org/ns/adms#next">adms:next</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>The next resource (after the current one) in an ordered collection or series of resources.</td>
+</tr>
+<!--
+<tr>
+<td class="prop">Equivalent property:</td>
+<td><a data-cite="?XHTML-VOCAB#prev"><code title="http://www.w3.org/1999/xhtml/vocab#prev">xhv:prev</code></a></td>
+</tr>
+-->
+<tr>
+<td class="prop">Sub-property of:</td>
+<td><a data-cite="?XHTML-VOCAB#next"><code title="http://www.w3.org/1999/xhtml/vocab#next">xhv:next</code></a></td>
+</tr>
+<tr>
+<td class="prop">Usage note:</td>
+<td>
+<p>In DCAT this property is used for resources belonging to a <a href="#Class:Dataset_Series"><code>dcat:DatasetSeries</code></a>.</p>
+</td>
+</tr>
+<tr>
+<td class="prop">See also:</td>
+<td>
+<a href="#Property:resource_last"></a>,
+<a href="#Property:resource_previous"></a>.
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>For guidance on the use of this property, see <a href="#dataset-series"></a>.</p>
+
+</section>
+
+<section id="Property:resource_previous">
+
+<h4>Property: previous</h4>
+
+<aside class="note">
+<p>Property added in DCAT 3.</p>
+</aside>
+
+<table class="definition">
+<thead>
+<tr>
+<th>RDF Property:</th>
+<th><a href="http://www.w3.org/ns/adms#prev">adms:prev</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="prop">Definition:</td>
+<td>The previous resource (before the current one) in an ordered collection or series of resources.</td>
+</tr>
+<!--
+<tr>
+<td class="prop">Equivalent property:</td>
+<td><a data-cite="?XHTML-VOCAB#prev"><code title="http://www.w3.org/1999/xhtml/vocab#prev">xhv:prev</code></a></td>
+</tr>
+-->
+<tr>
+<td class="prop">Sub-property of:</td>
+<td><a data-cite="?XHTML-VOCAB#prev"><code title="http://www.w3.org/1999/xhtml/vocab#prev">xhv:prev</code></a></td>
+</tr>
+<tr>
+<td class="prop">Usage note:</td>
+<td>
+<p>In DCAT this property is used for resources belonging to a <a href="#Class:Dataset_Series"><code>dcat:DatasetSeries</code></a>.</p>
+<p>It is important to note that this property is different from <a href="#Property:resource_previous_version">dcat:previousVersion</a>, as it does not denote a previous version of the same resource, but a distinct resource immediately preceding the current one in an ordered collection of resources.</p>
+</td>
+</tr>
+<tr>
+<td class="prop">See also:</td>
+<td>
+<a href="#Property:resource_last"></a>,
+<a href="#Property:resource_next"></a>.
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>For guidance on the use of this property, see <a href="#dataset-series"></a>.</p>
+
+</section>
+
     </section> <!-- end class Resource -->
 
     <section id="Class:Catalog_Record">
@@ -2254,7 +2430,24 @@
             <a href="#Property:resource_title">title</a>,
             <a href="#Property:resource_type">type/genre</a>,
             <a href="#Property:resource_update_date">update/modification date</a>,
-            <a href="#Property:resource_qualified_attribution">qualified attribution</a>.
+            <a href="#Property:resource_qualified_attribution">qualified attribution</a>,
+
+            <a href="#Property:resource_has_current_version">has current version</a>,
+<!--			
+            <a href="#Property:resource_has_last_version">has last version</a>,
+-->			
+            <a href="#Property:resource_has_version">has version</a>,
+            <a href="#Property:resource_is_replaced_by">is replaced by</a>,
+            <a href="#Property:resource_is_version_of">is version of</a>,
+            <a href="#Property:resource_previous_version">previous version</a>,
+            <a href="#Property:resource_replaces">replaces</a>,
+            <a href="#Property:resource_status">status</a>,
+            <a href="#Property:resource_version">version</a>,
+            <a href="#Property:resource_version_notes">version notes</a>,
+
+<a href="#Property:resource_last">last</a>,
+<a href="#Property:resource_next">next</a>.
+<a href="#Property:resource_previous">previous</a>.
 
         </p>
 
@@ -2527,9 +2720,31 @@
             <a href="#Property:dataset_spatial_resolution">spatial resolution</a>,
             <a href="#Property:dataset_temporal">temporal coverage</a>,
             <a href="#Property:dataset_temporal_resolution">temporal resolution</a>,
-            <a href="#Property:dataset_was_generated_by">was generated by</a>.
+            <a href="#Property:dataset_was_generated_by">was generated by</a>,
+
+            <a href="#Property:resource_has_current_version">has current version</a>,
+<!--			
+            <a href="#Property:resource_has_last_version">has last version</a>,
+-->			
+            <a href="#Property:resource_has_version">has version</a>,
+            <a href="#Property:resource_is_replaced_by">is replaced by</a>,
+            <a href="#Property:resource_is_version_of">is version of</a>,
+            <a href="#Property:resource_previous_version">previous version</a>,
+            <a href="#Property:resource_replaces">replaces</a>,
+            <a href="#Property:resource_status">status</a>,
+            <a href="#Property:resource_version">version</a>,
+            <a href="#Property:resource_version_notes">version notes</a>,
+
+<a href="#Property:resource_last">last</a>,
+<a href="#Property:resource_next">next</a>.
+<a href="#Property:resource_previous">previous</a>.
+
         </p>
         <div class="issue" title="Any other properties to mention in this class ?" data-number="1308"></div>
+
+<aside class="note">
+<p>Some of the inherited properties may have a particular semantics when used with <code>dcat:DatasetSeries</code>. For more details, see <a href="#dataset-series"></a>.</p>
+</aside>
     
         <table class="definition">
             <thead><tr><th>RDF Class:</th><th><a href="http://www.w3.org/ns/dcat#DatasetSeries">dcat:DatasetSeries</a></th></tr></thead>
@@ -3064,7 +3279,25 @@
             <a href="#Property:resource_title">title</a>,
             <a href="#Property:resource_type">type/genre</a>,
             <a href="#Property:resource_update_date">update/modification date</a>,
-            <a href="#Property:resource_qualified_attribution">qualified attribution</a>.
+            <a href="#Property:resource_qualified_attribution">qualified attribution</a>,
+
+            <a href="#Property:resource_has_current_version">has current version</a>,
+<!--			
+            <a href="#Property:resource_has_last_version">has last version</a>,
+-->			
+            <a href="#Property:resource_has_version">has version</a>,
+            <a href="#Property:resource_is_replaced_by">is replaced by</a>,
+            <a href="#Property:resource_is_version_of">is version of</a>,
+            <a href="#Property:resource_previous_version">previous version</a>,
+            <a href="#Property:resource_replaces">replaces</a>,
+            <a href="#Property:resource_status">status</a>,
+            <a href="#Property:resource_version">version</a>,
+            <a href="#Property:resource_version_notes">version notes</a>,
+
+<a href="#Property:resource_last">last</a>,
+<a href="#Property:resource_next">next</a>.
+<a href="#Property:resource_previous">previous</a>.
+
         </p>
 
 
@@ -4647,7 +4880,7 @@ ex:budget-2020 a dcat:Dataset ;
 </aside>
 
 
-<p>Dataset series may evolve over time, by acquiring new datasets. E.g., a dataset series about yearly budget data will acquire a new child dataset every year. In such cases, it might be important to link the yearly releases with relationships specifying the previous, next, and latest ones. In such scenario, DCAT makes use of the [[VOCAB-ADMS]] properties <a href="#Property:resource_prev"><code>adms:prev</code></a>, <a href="#Property:resource_next"><code>adms:next</code></a>, and <a href="#Property:resource_last"><code>adms:last</code></a>, respectively.</p>
+<p>Dataset series may evolve over time, by acquiring new datasets. E.g., a dataset series about yearly budget data will acquire a new child dataset every year. In such cases, it might be important to link the yearly releases with relationships specifying the previous, next, and latest ones. In such scenario, DCAT makes use of the [[VOCAB-ADMS]] properties <a href="#Property:resource_previous"><code>adms:prev</code></a>, <a href="#Property:resource_next"><code>adms:next</code></a>, and <a href="#Property:resource_last"><code>adms:last</code></a>, respectively.</p>
 
 <aside class="example" id="ex-dataset-series-releases" title="Linking datasets in a series">
 <p>The following example extends <a href="#ex-dataset-series-containment"></a> by specifying the publication date (<code>dcterms:issued</code>) of each child dataset, and the previous (<code>adms:prev</code>) and next release (<code>adms:next</code>).</p>
