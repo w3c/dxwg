@@ -3812,6 +3812,10 @@ ex:InternationalDOIFundation a foaf:Organization ;
 
     <h2>License and rights statements</h2>
 
+<aside class="ednote">
+<p>The following NOTE should probably be dropped from DCAT3.</p>
+</aside>
+
   <aside class="note">
     <p>
     DCAT 1 handling of license and rights do not appear to satisfy all requirements [[?VOCAB-DCAT-20140116]].
@@ -3870,37 +3874,19 @@ ex:InternationalDOIFundation a foaf:Organization ;
       </li>
     </ol>
 
-<aside class="example" id="ex-license-and-access-rights" title="License and access rights">
-<p>The following example is about a dataset publicly available (with no access restriction) and whose distribution is released by using a standard license - namely, the Creative Commons Attribution (CC-BY) 4.0 license. Access rights are specified by using the [[?EUV-AR]] code list.</p>
+<aside class="example" id="ex-license-and-access-rights" title="License, access rights, and copyright statement">
+<p>The following example is about a dataset publicly available (with no access restriction) and whose distribution is released by using a standard license - namely, the Creative Commons Attribution (CC-BY) 4.0 license. Access rights are specified by using the [[?EUV-AR]] code list. Property <code>dcterms:rights</code> is used for the copyright statement, which is specified with a textual description, by using property <code>rdfs:label</code> (following the <a href="https://www.dublincore.org/resources/userguide/publishing_metadata/">Dublin Core™ User Guide</a>).</p>
 <pre>
 :ds7890 a dcat:Dataset ;
 # other dataset properties...
   dcterms:accessRights 
     &lt;http://publications.europa.eu/resource/authority/access-right/PUBLIC&gt; ;
+  dcterms:rights [ a dcterms:RightsStatement ;
+    rdfs:label "&copy; 2021 ACME Inc."@en
+  ] ;
   dcat:distribution [ a dcat:Distribution ;
 # other distribution properties...
     dcterms:license &lt;https://creativecommons.org/licenses/by/4.0/&gt;
-  ] ;
-.
-</pre>
-</aside>
-
-<aside class="example" id="ex-rights" title="Non-standard license and access conditions">
-<p>This example illustrates the use of property <code>dcterms:rights</code> for a dataset with very specific usage rules, and not using a standard licence. Here use and access conditions are specified with a textual description, by using property <code>rdfs:label</code> (following the <a href="https://www.dublincore.org/resources/userguide/publishing_metadata/">Dublin Core™ User Guide</a>).</p>
-<p>On how to express the same information in a machine-readable way, see <a href="#ex-odrl-policy"></a>.</p>
-<pre>
-:ds4242 a dcat:Dataset ;
-# other dataset properties...
-  dcat:distribution [ a dcat:Distribution ;
-# other distribution properties...
-    dcterms:rights [ a dcterms:RightsStatement ;
-      rdfs:label """
-	    The data can be read and derivatives can be created, 
-	    but no commercial use of the dataset is allowed. In 
-	    addition, it is a requirement to register before the 
-	    permissions are granted.
-	  """@en
-    ] ;
   ] ;
 .
 </pre>
@@ -3917,7 +3903,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
 -->
 
 <aside class="example" id="ex-odrl-policy" title="ODRL policy">
-<p>This example shows how to use [[ODRL]] to specify the use and access conditions in <a href="#ex-rights"></a> in a machine-readable way.</p>
+<p>This example shows how to use [[ODRL]] for a dataset with very specific usage rules. In this case, the data can be read and derivatives can be created, but no commercial use of the dataset is allowed. In addition, it is a requirement to register before the permissions are granted.</p>
 <pre>
 :ds4242 a dcat:Dataset ;
 # other dataset properties...
