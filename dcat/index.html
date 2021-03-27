@@ -3870,10 +3870,46 @@ ex:InternationalDOIFundation a foaf:Organization ;
       </li>
     </ol>
 
+<aside class="example" id="ex-license-and-access-rights" title="License and access rights">
+<p>The following example shows a dataset publicly available (with no access restriction) and whose distribution is released by using the Creative Commons Attribution (CC-BY) 4.0 license.</p>
+<pre>
+:ds7890 a dcat:Dataset ;
+# other dataset properties...
+  dcterms:accessRights 
+    &lt;http://publications.europa.eu/resource/authority/access-right/PUBLIC&gt; ;
+  dcat:distribution [ a dcat:Distribution ;
+# other distribution properties...
+    dcterms:license &lt;https://creativecommons.org/licenses/by/4.0/&gt;
+  ] ;
+.
+</pre>
+</aside>
+
   <p>Finally, in the particular case when rights are expressed via <a data-cite="?ODRL-VOCAB#term-Policy">ODRL policies</a>, it is recommended to use the <a data-cite="?ODRL-VOCAB#term-hasPolicy"><code>odrl:hasPolicy</code></a> property as the link from the description of the cataloged resource or distribution to the ODRL policy, in addition to the corresponding [[DCTERMS]] property that matches the same ODRL policy type.</p>
   
 <aside class="note">
 <p>The Open Digital Rights Language (ODRL) [[!ODRL-VOCAB]] is a policy expression language that provides a flexible and interoperable information model, vocabulary, and encoding mechanisms for representing statements about usage (i.e. permissions, prohibitions, and obligations) of content and services.</p>
+</aside>
+
+<aside class="example" id="ex-odrl-policy" title="ODRL policy">
+<p>This example shows how to express a dataset policy expressing very specific usage rules. In this case, the dataset can be read and derivatives can be created, but no commercial use of the dataset is allowed. In addition, it is a requirement to register before the permissions are granted.</p>
+<pre>
+:ds4242 a dcat:Dataset ;
+# other dataset properties here...
+  dcat:distribution [ a dcat:Distribution ;
+    odrl:hasPolicy [ a odrl:Policy ;
+      odrl:permission [ a odrl:Permission ;
+        odrl:action ( &lt;http://www.w3.org/ns/odrl/2/read&gt;
+                      &lt;http://www.w3.org/ns/odrl/2/derive&gt; ) ];
+      odrl:obligation   [ a odrl:Duty ;
+        odrl:action &lt;https://schema.org/RegisterAction&gt; ];
+      odrl:prohibition   [ a odrl:Prohibition ;
+        odrl:action &lt;http://creativecommons.org/ns#CommercialUse&gt; ] ;
+    ] ;
+  ] ;
+] ;
+.
+</pre>
 </aside>
 
   <p>Recommendations on the use of these properties on the different types of resources defined in DCAT are provided in the relevant class descriptions.</p>
@@ -3916,7 +3952,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
 
 <aside class="example" id="ex-time-series-1" title="15-minute time-series published daily">
 <pre class="nohighlight turtle">
-&lt;ds913&gt;
+:ds913
   a dcat:Dataset ;
   dcterms:accrualPeriodicity &lt;http://purl.org/cld/freq/daily&gt; ;
   dcat:temporalResolution "PT15M"^^xsd:duration ;
@@ -3926,7 +3962,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
 
 <aside class="example" id="ex-time-series-2" title="Hourly data published immediately">
 <pre class="nohighlight turtle">
-&lt;ds782&gt;
+:ds782
   a dcat:Dataset ;
   dcterms:accrualPeriodicity &lt;http://purl.org/cld/freq/continuous&gt; ;
   dcat:temporalResolution "PT1H"^^xsd:duration ;
@@ -3936,7 +3972,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
 
 <aside class="example" id="ex-temporal-coverage-closed-interval" title="Temporal coverage as closed interval">
 <pre class="nohighlight turtle">
-&lt;ds257&gt; a dcat:Dataset ;
+:ds257 a dcat:Dataset ;
   dcterms:temporal [ a dcterms:PeriodOfTime ;
     dcat:startDate "2016-03-04"^^xsd:date ;
     dcat:endDate   "2018-08-05"^^xsd:date ;
@@ -3947,7 +3983,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
 <aside class="example" id="ex-temporal-coverage-closed-proper-interval" title="Temporal coverage as closed interval, using time:ProperInterval">
 <p>The following dataset specification is equivalent to the one in <a href="#ex-temporal-coverage-closed-interval"></a>, but it uses [[OWL-TIME]]:</p>
 <pre class="nohighlight turtle">
-&lt;ds348&gt; a dcat:Dataset ;
+:ds348 a dcat:Dataset ;
   dcterms:temporal [ a dcterms:PeriodOfTime , time:ProperInterval ;
     time:hasBeginning [ a time:Instant ;
       time:inXSDDate "2016-03-04"^^xsd:date ;
@@ -3961,7 +3997,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
 
 <aside class="example" id="ex-temporal-coverage-closed-proper-interval-gyear" title="Temporal coverage as proper interval using gYear">
 <pre class="nohighlight turtle">
-&lt;ds429&gt; a dcat:Dataset ;
+:ds429 a dcat:Dataset ;
   dcterms:temporal [ a dcterms:PeriodOfTime , time:ProperInterval ;
     time:hasBeginning [ a time:Instant ;
       time:inXSDgYear "1914"^^xsd:gYear ;
@@ -3975,7 +4011,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
 
 <aside class="example" id="ex-temporal-coverage-geologic" title="Temporal coverage for a geologic dataset">
 <pre class="nohighlight turtle">
-&lt;ds850&gt; a dcat:Dataset ;
+:ds850 a dcat:Dataset ;
   dcterms:temporal [ a dcterms:PeriodOfTime , time:ProperInterval ;
     time:hasBeginning [ a time:Instant ;
       time:inTimePosition [ a time:TimePosition ;
@@ -3995,7 +4031,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
 
 <aside class="example" id="ex-temporal-coverage-open-end-interval" title="Temporal coverage as open interval (no end date)">
 <pre class="nohighlight turtle">
-&lt;ds127&gt; a dcat:Dataset ;
+:ds127 a dcat:Dataset ;
   dcterms:temporal [ a dcterms:PeriodOfTime ;
     dcat:startDate "2016-03-04"^^xsd:date ;
   ] .
@@ -4004,7 +4040,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
 
 <aside class="example" id="ex-temporal-coverage-open-begin-interval" title="Temporal coverage as open interval (no beginning)">
 <pre class="nohighlight turtle">
-&lt;ds586&gt; a dcat:Dataset ;
+:ds586 a dcat:Dataset ;
   dcterms:temporal [ a dcterms:PeriodOfTime , time:ProperInterval ;
     time:hasEnd [ time:inXSDDate "2018-08-05"^^xsd:date ] ;
   ] .
@@ -4099,27 +4135,27 @@ ex:InternationalDOIFundation a foaf:Organization ;
 <img src="./images/ex-spatial-coverage-centroid-anne-frank-house.png"/>
 <figcaption>Map preview of a spatial coverage specified with a centroid</figcaption>
 </figure>
-<div class="note">
+<aside class="note">
 <p>This point location could be expressed using the [[W3C-BASIC-GEO]] vocabulary. 
 If it is required to provide the <code>w3cgeo:Point</code> formulation, then it should be in addition to, not in place of, a <code>dcat:centroid</code> containing a <abbr title="Well-known Text">WKT</abbr> literal (<a href="http://www.opengis.net/ont/geosparql#wktLiteral"><code title="http://www.opengis.net/ont/geosparql#wktLiteral">geosparql:wktLiteral</code></a> [[GeoSPARQL]]). 
 This ensures interoperability with other DCAT dataset descriptions. 
-For example:
+For example:</p>
 <pre class="nohighlight turtle">
-  &lt;AnneFrank_3&gt; a dcat:Dataset ;
-    dcterms:spatial [
-      a dcterms:Location , w3cgeo:Point ;
-      dcat:centroid "POINT(4.88412 52.37509)"^^geosparql:wktLiteral ;
-      w3cgeo:lat  "52.37509"^^xsd:decimal ;
-      w3cgeo:long "4.88412"^^xsd:decimal ;
-    ] .
-  </pre>
-</div>
+:AnneFrank_3 a dcat:Dataset ;
+  dcterms:spatial [
+    a dcterms:Location , w3cgeo:Point ;
+    dcat:centroid "POINT(4.88412 52.37509)"^^geosparql:wktLiteral ;
+    w3cgeo:lat  "52.37509"^^xsd:decimal ;
+    w3cgeo:long "4.88412"^^xsd:decimal ;
+  ] .
+</pre>
+</aside>
 </aside>
 
 <aside class="example" id="ex-spatial-coverage-bbox" title="Spatial coverage as bounding box">
 <p>The Dutch dataset of postal addresses, with its spatial coverage (Netherlands) specified as a bounding box.</p>
 <pre class="nohighlight turtle">
-&lt;Dutch-postal&gt; a dcat:Dataset ;
+:Dutch-postal a dcat:Dataset ;
   dcterms:title "Adressen"@nl ;
   dcterms:title "Addresses"@en ;
   dcterms:description """INSPIRE Adressen afkomstig uit de basisregistratie Adressen,
