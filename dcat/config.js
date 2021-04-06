@@ -210,7 +210,7 @@ var respecConfig = {
             date: "31 May 2012",
             href : "http://patterns.dataincubator.org/book/"
         },
-        "MDR-AR":{
+        "EUV-AR":{
             "href":"https://publications.europa.eu/en/web/eu-vocabularies/at-dataset/-/resource/dataset/access-right",
             "title":"Named Authority List: Access rights",
             "publisher":"Publications Office of the European Union"
