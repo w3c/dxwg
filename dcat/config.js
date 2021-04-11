@@ -122,8 +122,8 @@ var respecConfig = {
             title:"DBPedia ontology"
         },
         "DCAT-AP-SE": {
-            title: "DCAT-AP-SE: Swedish recommendation for DCAT-AP1.1",
-            href: "https://lankadedata.se/spec/DCAT-AP-SE",
+            title: "DCAT-AP-SE: Clarifications, translations and explanations of DCAT-AP for Sweden",
+            href: "https://docs.dataportal.se/dcat/en/",
             authors: ["Matthias Palmér"],
             etAl: false
         },
@@ -210,7 +210,7 @@ var respecConfig = {
             date: "31 May 2012",
             href : "http://patterns.dataincubator.org/book/"
         },
-        "MDR-AR":{
+        "EUV-AR":{
             "href":"https://publications.europa.eu/en/web/eu-vocabularies/at-dataset/-/resource/dataset/access-right",
             "title":"Named Authority List: Access rights",
             "publisher":"Publications Office of the European Union"
