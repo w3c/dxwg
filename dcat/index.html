@@ -476,7 +476,7 @@ table.simple {width:100%;}
   dcterms:title "CSV distribution of imaginary dataset 001"@en ;
   dcterms:title "distribución en CSV del conjunto de datos imaginario 001"@es ;
   dcat:mediaType &lt;http://www.iana.org/assignments/media-types/text/csv&gt; ;
-  dcat:byteSize "5120"^^xsd:decimal ;
+  dcat:byteSize "5120"^^xsd:nonNegativeInteger ;
   .
 </pre>
 </aside>
@@ -2942,8 +2942,9 @@ table.simple {width:100%;}
                 <tr><th>RDF Property:</th><td><a href="http://www.w3.org/ns/dcat#size"><code>dcat:byteSize</code></a></td></tr>
                 <tr><th class="prop">Definition:</th><td>The size of a distribution in bytes.</td></tr>
                 <tr><th class="prop">Domain:</th><td><a href="#Class:Distribution"><code>dcat:Distribution</code></a></td></tr>
-                <tr><th class="prop">Range:</th><td><a href="http://www.w3.org/2000/01/rdf-schema#Literal"><code>rdfs:Literal</code></a> typed as <a data-cite="XMLSCHEMA11-2#decimal"><code>xsd:decimal</code></a>.</td></tr>
-                <tr><th class="prop">Usage note:</th><td>The size in bytes can be approximated (as a decimal) when the precise size is not known.</td></tr>
+                <tr><th class="prop">Range:</th><td><a href="http://www.w3.org/2000/01/rdf-schema#Literal"><code>rdfs:Literal</code></a> typically typed as <a data-cite="XMLSCHEMA11-2#nonNegativeInteger"><code>xsd:nonNegativeInteger</code></a>.</td></tr>
+                <tr><th class="prop">Usage note:</th><td>The size in bytes can be approximated (as a non-negative integer) when the precise size is not known.</td></tr>
+                <tr><th class="prop">Usage note:</th><td>While it is recommended that the size be given as an integer, alternative literals such as '1.5 MB' are sometimes used.</td></tr>
                 </table>
         </section>
 
@@ -5743,7 +5744,7 @@ ex:Test543L
   <!-- Stijn Goedertier, -->
   <!-- Tom Kralidis, -->
   <!-- Vladimir Alexiev, -->
-  <!-- Wouter Beek, --> 
+  Wouter Beek, 
   Yves Coene.
   
   </p>
@@ -6017,22 +6018,22 @@ ex:Test543L
 .
 :d33937-jsonld  rdf:type dcat:Distribution ;
   dcat:downloadURL :isc2017.jsonld ;
-  dcat:byteSize "698039"^^xsd:decimal ;
+  dcat:byteSize "698039"^^xsd:nonNegativeInteger ;
   dcat:mediaType &lt;http://www.iana.org/assignments/media-types/application/ld+json&gt; ;
 .
 :d33937-nt  rdf:type dcat:Distribution ;
   dcat:downloadURL :isc2017.nt ;
-  dcat:byteSize "2047874"^^xsd:decimal ;
+  dcat:byteSize "2047874"^^xsd:nonNegativeInteger ;
   dcat:mediaType &lt;http://www.iana.org/assignments/media-types/application/n-triples&gt; ;
 .
 :d33937-rdf  rdf:type dcat:Distribution ;
   dcat:downloadURL :isc2017.rdf ;
-  dcat:byteSize "1600569"^^xsd:decimal ;
+  dcat:byteSize "1600569"^^xsd:nonNegativeInteger ;
   dcat:mediaType &lt;http://www.iana.org/assignments/media-types/application/rdf+xml&gt; ;
 .
 :d33937-ttl  rdf:type dcat:Distribution ;
   dcat:downloadURL :isc2017.ttl ;
-  dcat:byteSize "531703"^^xsd:decimal ;
+  dcat:byteSize "531703"^^xsd:nonNegativeInteger ;
   dcat:mediaType &lt;http://www.iana.org/assignments/media-types/text/turtle&gt; ;
 .
 :d33937.owl
@@ -6451,6 +6452,9 @@ ga-courts:jc-wms
 
 <ul>
 <li><p><a href="#basic-example"></a> has been extended to include titles, labels, and keywords in two different languages (English and Spanish) to illustrate the use of language tags.
+</ul>  
+<ul>
+  <li><p>The recommended range of property <a href="#Property:distribution_size"></a> has been changed from <a data-cite="XMLSCHEMA11-2#decimal"><code>xsd:decimal</code></a> to <a data-cite="XMLSCHEMA11-2#nonNegativeInteger"><code>xsd:nonNegativeInteger</code></a> </p></li>
 </ul>
 <ul>
 <li><p><a href="#dataset-versions"></a> has been revised to focus specifically on versions derived from the revision of a resource, and by following the [[PAV]] approach for the specification of version chains and hierarchies - previous, next, current, last version. In particular:</p>
