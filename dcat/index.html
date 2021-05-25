@@ -263,7 +263,7 @@ table.simple {width:100%;}
     <h3>DCAT scope</h3>
 
     <p>DCAT is an RDF vocabulary for representing data catalogs.
-      DCAT is based around six main classes (<a href="#UML_DCAT_All_Attr"></a>):</p>
+      DCAT is based around seven main classes (<a href="#UML_DCAT_All_Attr"></a>):</p>
     <ul>
         <li>
           <a href="#Class:Catalog"><code>dcat:Catalog</code></a> represents a catalog, which is a dataset in which each individual item is a metadata record describing some resource; the scope of <code>dcat:Catalog</code> is collections of metadata about <b>datasets</b> or <b>data services</b>.
@@ -286,12 +286,15 @@ table.simple {width:100%;}
           A data service is a collection of operations accessible through an interface (<abbr title="Application Programming Interface">API</abbr>) that provide access to one or more datasets or data processing functions.
         </li>
         <li>
+          <a href="#Class:Dataset_Series"><code>dcat:DatasetSeries</code></a> is a dataset, which represents a collection of datasets that are published separately, but share some common characteristics that groups them.
+        </li>
+        <li>
           <a href="#Class:Catalog_Record"><code>dcat:CatalogRecord</code></a> represents a metadata item in the catalog, primarily concerning the registration information, such as who added the item and when.
         </li>
     </ul>
     <aside class="ednote" title="Class Diagram need to be updated">
               <p>
-                  Add the class <code>dcat:DatasetSeries</code> and properties.
+                 Changes required for the class diagram are tracked in issue <a href="https://github.com/w3c/dxwg/issues/1320">#1320</a>. Switching the format of the diagram to SVG vector graphics is under consideration, see issue <a href="https://github.com/w3c/dxwg/issues/1294">#1294</a>.
               </p>
            </aside>
     <figure id="UML_DCAT_All_Attr">
@@ -3633,7 +3636,7 @@ The interval can also be open - i.e., it can have just a start or just an end.</
 </tr>
 <tr><th class="prop">Definition:</th><td>Associates any resource with the corresponding geometry. [[LOCN]]</td></tr>
 <tr><th class="prop">Range:</th><td><a data-cite="LOCN#locn:Geometry"><code title="https://www.w3.org/ns/locn#Geometry">locn:Geometry</code></a></td></tr>
-<tr><th class="prop">Usage note:</th><td>The range of this property (<code title="https://www.w3.org/ns/locn#Geometry">locn:Geometry</code>) allows for any type of geometry specification. E.g., the geometry could be encoded by a literal, as <abbr title="Well-known Text">WKT</abbr> (<a href="http://www.opengis.net/ont/geosparql#wktLiteral"><code title="http://www.opengis.net/ont/geosparql#wktLiteral">geosparql:wktLiteral</code></a> [[GeoSPARQL]]), or represented by a class, as <code>geosparql:Geometry</code> (or any of its subclasses) [[GeoSPARQL]].</td></tr>
+<tr><th class="prop">Usage note:</th><td>The range of this property (<code title="https://www.w3.org/ns/locn#Geometry">locn:Geometry</code>) allows for any type of geometry specification. E.g., the geometry could be encoded by a literal, as <abbr title="Well-known Text">WKT</abbr> (<a href="http://www.opengis.net/ont/geosparql#wktLiteral"><code title="http://www.opengis.net/ont/geosparql#wktLiteral">geosparql:wktLiteral</code></a> [[GeoSPARQL]]), or represented by a class, as <a href="http://www.opengis.net/ont/geosparql#Geometry"><code title="http://www.opengis.net/ont/geosparql#Geometry">geosparql:Geometry</code></a> (or any of its subclasses) [[GeoSPARQL]].</td></tr>
 </table>
 <!--
             <aside class="note">
@@ -3659,7 +3662,7 @@ The interval can also be open - i.e., it can have just a start or just an end.</
 </tr>
 <tr><th class="prop">Definition:</th><td>The geographic bounding box of a resource.</td></tr>
 <tr><th class="prop">Range:</th><td><a data-cite="RDF-SCHEMA#ch_literal"><code title="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</code></a></td></tr>
-<tr><th class="prop">Usage note:</th><td>The range of this property is intentionally generic, with the purpose of allowing different geometry encodings. E.g., the geometry could be encoded as <abbr title="Well-known Text">WKT</abbr> (<a href="http://www.opengis.net/ont/geosparql#wktLiteral"><code title="http://www.opengis.net/ont/geosparql#wktLiteral">geosparql:wktLiteral</code></a> [[GeoSPARQL]]).</td></tr>
+<tr><th class="prop">Usage note:</th><td>The range of this property (<code>rdfs:Literal</code>) is intentionally generic, with the purpose of allowing different geometry literal encodings. E.g., the geometry could be encoded as a <abbr title="Well-known Text">WKT</abbr> literal (<a href="http://www.opengis.net/ont/geosparql#wktLiteral"><code title="http://www.opengis.net/ont/geosparql#wktLiteral">geosparql:wktLiteral</code></a> [[GeoSPARQL]]).</td></tr>
 </table>
 
             <aside class="note">
@@ -3686,7 +3689,7 @@ The interval can also be open - i.e., it can have just a start or just an end.</
 </tr>
 <tr><th class="prop">Definition:</th><td>The geographic center (centroid) of a resource.</td></tr>
 <tr><th class="prop">Range:</th><td><a data-cite="RDF-SCHEMA#ch_literal"><code title="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</code></a></td></tr>
-<tr><th class="prop">Usage note:</th><td>The range of this property is intentionally generic, with the purpose of allowing different geometry encodings. E.g., the geometry could be encoded as <abbr title="Well-known Text">WKT</abbr> (<a href="http://www.opengis.net/ont/geosparql#wktLiteral"><code title="http://www.opengis.net/ont/geosparql#wktLiteral">geosparql:wktLiteral</code></a> [[GeoSPARQL]]).</td></tr>
+<tr><th class="prop">Usage note:</th><td>The range of this property (<code>rdfs:Literal</code>) is intentionally generic, with the purpose of allowing different geometry literal encodings. E.g., the geometry could be encoded as a <abbr title="Well-known Text">WKT</abbr> literal (<a href="http://www.opengis.net/ont/geosparql#wktLiteral"><code title="http://www.opengis.net/ont/geosparql#wktLiteral">geosparql:wktLiteral</code></a> [[GeoSPARQL]]).</td></tr>
 </table>
 
             <aside class="note">
@@ -6443,9 +6446,23 @@ ga-courts:jc-wms
 
 
 <section id="changes" class="appendix">
-    <h2>Change history</h2>
-    <p>A full change-log is available on <a href="https://github.com/w3c/dxwg/commits/gh-pages/dcat">GitHub</a></p>
+
+<h2>Change history</h2>
+
+<p>A full change-log is available on <a href="https://github.com/w3c/dxwg/commits/gh-pages/dcat">GitHub</a></p>
 	
+
+<section id="changes-since-20210504">
+
+<h2>Changes since the second public working draft of 4 May 2021</h2>
+
+<p>The document has undergone the following changes since the DCAT 3 second public working draft of 4 May 2021 [[?VOCAB-DCAT-3-20210504]]:</p>
+
+<ul>
+<li>The usage notes of properties <a href="#Property:location_bbox"><code title="http://www.w3.org/ns/dcat#bbox">dcat:bbox</code></a> and <a href="#Property:location_centroid"><code title="http://www.w3.org/ns/dcat#centroid">dcat:centroid</code></a> have been revised to make it clearer that they are supposed to be used only with geometry literals - see Issue <a href="https://github.com/w3c/dxwg/issues/1359">#1359</a>.</li>
+</ul>
+
+</section>
 	
 <section id="changes-since-20201217">
 
@@ -6478,6 +6495,7 @@ ga-courts:jc-wms
 </ul>
 </li>
 <li>Added property <a href="#Property:distribution_checksum"><code>spdx:checksum</code></a> to <a href="#Class:Distribution"></a>; added class <code>spdx:Checksum</code> (see <a href="#Class:Checksum"></a>), and its properties <a href="#Property:checksum_algorithm"><code>spdx:algorithm</code></a> and <a href="#Property:checksum_checksum_value"><code>spdx:checksumValue</code></a> - see Issue <a href="https://github.com/w3c/dxwg/issues/1287">#1287</a>.</li>
+<li>Revised range of property <a href="#Property:location_geometry"><code title="http://www.w3.org/ns/locn#geometry">locn:geometry</code></a>, to align it with its definition in [[LOCN]]. The usage note of this property has been also revised to make it clear that it can be used with either geometry literals or classes - see Issue <a href="https://github.com/w3c/dxwg/issues/1293">#1293</a>.</li>
 <li>Added examples to <a href="#license-rights"></a> - see Issues <a href="https://github.com/w3c/dxwg/issues/676">#676</a> and <a href="https://github.com/w3c/dxwg/issues/1333">#1333</a>.</li>
 <li>Replaced [[?DCTERMS]] namespace prefix <code>dct:</code> with <code>dcterms:</code> throughout the document - see Issue <a href="https://github.com/w3c/dxwg/issues/1314">#1314</a>.</li>
 <li>Fixed inconsistent use of "URI" and "IRI" throughout the document - see Issue <a href="https://github.com/w3c/dxwg/issues/1341">#1341</a>.</li>
