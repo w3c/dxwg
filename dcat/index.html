@@ -439,7 +439,10 @@ table.simple {width:100%;}
   dcterms:issued "2011-12-05"^^xsd:date&nbsp;;
   dcterms:modified "2011-12-15"^^xsd:date&nbsp;;
   dcat:contactPoint &lt;http://example.org/transparency-office/contact&gt; ;
-  dcterms:temporal &lt;http://reference.data.gov.uk/id/quarter/2006-Q1&gt; ;
+  dcterms:temporal [ a dcterms:PeriodOfTime ;
+    dcat:startDate "2011-07-01"^^xsd:date ; 
+    dcat:endDate   "2011-09-30"^^xsd:date ;
+  ];
   dcat:temporalResolution "P1D"^^xsd:duration ;
   dcterms:spatial &lt;http://sws.geonames.org/6695072/&gt; ;
   dcat:spatialResolutionInMeters "30.0"^^xsd:decimal ;
@@ -455,7 +458,7 @@ table.simple {width:100%;}
           Five distinct temporal descriptors are shown for this dataset.
           The dataset publication and revision dates are shown in <a href="#Property:resource_release_date"><code>dcterms:issued</code></a> and <a href="#Property:resource_update_date"><code>dcterms:modified</code></a>.
           For the frequency of update of the dataset in <a href="#Property:dataset_frequency"><code>dcterms:accrualPeriodicity</code></a>, we use an instance from the <a data-cite="VOCAB-DATA-CUBE#dsd-cog">content-oriented guidelines</a> developed as part of the W3C Data Cube Vocabulary [[?VOCAB-DATA-CUBE]] efforts.
-          The temporal coverage or extent is given in <a href="#Property:dataset_temporal"><code>dcterms:temporal</code></a> using an item from the Interval dataset (originally available from <code>http://reference.data.gov.uk/id/interval</code>) from data.gov.uk.
+            The temporal coverage or extent is given in <a href="#Property:dataset_temporal"><code>dcterms:temporal</code></a> defining a <a href="#Class:Period_of_Time"><code>dcterms:PeriodOfTime</code></a> as a closed interval indicated by <a href="#Property:period_start_date"><code>dcat:startDate</code></a> and <a href="#Property:period_end_date"><code>dcat:endDate</code></a>.
           The temporal resolution, which describes the minimum spacing of items within the dataset, is given in <a href="#Property:dataset_temporal_resolution"><code>dcat:temporalResolution</code></a> using the standard datatype <code>xsd:duration</code>.
         </p>
         <p>
@@ -538,12 +541,12 @@ table.simple {width:100%;}
 <pre class="nohighlight turtle">
 :dataset-001
   rdf:type  dcat:Dataset ;
-  dcterms:type  &lt;http://purl.org/dc/dcmitype/Text&gt; ;
+  dcterms:type  &lt;http://purl.org/dc/dcmitype/Dataset&gt; ;
   .
 
 :dataset-001
   rdf:type  dcat:Dataset ;
-  dcterms:type  &lt;http://id.loc.gov/vocabulary/marcgt/man&gt; ;
+  dcterms:type  &lt;http://id.loc.gov/vocabulary/marcgt/dtb&gt; ;
   .</pre>
 </aside>
 
@@ -555,19 +558,19 @@ table.simple {width:100%;}
 <pre class="nohighlight turtle">
 :dataset-001
   rdf:type  dcat:Dataset ;
-  dcterms:type  &lt;http://purl.org/dc/dcmitype/Text&gt; ;
-  dcterms:type  &lt;http://id.loc.gov/vocabulary/marcgt/man&gt; ;
-  dcterms:type  &lt;http://registry.it.csiro.au/def/datacite/resourceType/Text&gt; ;
-  dcterms:type  &lt;http://registry.it.csiro.au/def/re3data/contentType/doc&gt; ;
+  dcterms:type  &lt;http://purl.org/dc/dcmitype/Dataset&gt; ;
+  dcterms:type  &lt;http://id.loc.gov/vocabulary/marcgt/dtb&gt; ;
+  dcterms:type  &lt;http://registry.it.csiro.au/def/datacite/resourceType/Dataset&gt; ;
+  dcterms:type  &lt;http://registry.it.csiro.au/def/re3data/contentType/database&gt; ;
 .
 
-&lt;http://registry.it.csiro.au/def/datacite/resourceType/Text&gt;
-  rdfs:label "Text"@en ;
+&lt;http://registry.it.csiro.au/def/datacite/resourceType/Dataset&gt;
+  rdfs:label "Dataset"@en ;
   dcterms:source "DataCite resource types"@en ;
   .
 
-&lt;http://registry.it.csiro.au/def/re3data/contentType/doc&gt;
-  rdfs:label "Standard office documents"@en ;
+&lt;http://registry.it.csiro.au/def/re3data/contentType/database&gt;
+  rdfs:label "Database"@en ;
   dcterms:source "Re3data content types"@en ;
   .</pre>
 </aside>
@@ -958,7 +961,7 @@ table.simple {width:100%;}
 
             <table class="def">
                 <tr><th>RDF Property:</th><td><a href="http://www.w3.org/ns/dcat#catalog"><code>dcat:catalog</code></a></td></tr>
-                <tr><th class="prop">Definition:</th><td>A catalog whose contents are of interest in the context of this catalog.</td></tr>
+                <tr><th class="prop">Definition:</th><td>A catalog that is listed in this catalog.</td></tr>
                 <tr><th class="prop">Sub-property of:</th><td><a href="http://purl.org/dc/terms/hasPart"><code>dcterms:hasPart</code></a></td></tr>
                 <tr><th class="prop">Domain:</th><td><a href="#Class:Catalog"><code>dcat:Catalog</code></a></td></tr>
                 <tr><th class="prop">Range:</th><td><a href="#Class:Catalog"><code>dcat:Catalog</code></a></td></tr>
@@ -6462,6 +6465,7 @@ ga-courts:jc-wms
 <p>The document has undergone the following changes since the DCAT 3 second public working draft of 4 May 2021 [[?VOCAB-DCAT-3-20210504]]:</p>
 
 <ul>
+    <li><p><a href="#basic-example"></a> has been updated to tell a more coherent story (see  issue <a href="https://github.com/w3c/dxwg/issues/1155">#1155</a>) and express temporal coverage by using <a href="#Class:Period_of_Time"><code>dcterms:PeriodOfTime</code></a>, <a href="#Property:period_start_date"><code>dcat:startDate</code></a>, and <a href="#Property:period_end_date"><code>dcat:endDate</code></a>.</p></li> 
 <li>The usage notes of properties <a href="#Property:location_bbox"><code title="http://www.w3.org/ns/dcat#bbox">dcat:bbox</code></a> and <a href="#Property:location_centroid"><code title="http://www.w3.org/ns/dcat#centroid">dcat:centroid</code></a> have been revised to make it clearer that they are supposed to be used only with geometry literals - see Issue <a href="https://github.com/w3c/dxwg/issues/1359">#1359</a>.</li>
 </ul>
 
@@ -6505,6 +6509,7 @@ ga-courts:jc-wms
 <li>Removed NOTE in <a href="#ex-spatial-coverage-centroid"></a> showing an example of the use of [[?W3C-BASIC-GEO]] for the specification of point geometries - see Issue <a href="https://github.com/w3c/dxwg/issues/1347">#1347</a>.</li>
 <li>Revised textual descriptions of classes and properties to clarify that the resources in a catalog are not limited to datasets and data services - see Issue <a href="https://github.com/w3c/dxwg/issues/1349">#1349</a>.</li>
 <li>Fixed inconsistent use of property labels - see Issue <a href="https://github.com/w3c/dxwg/issues/1350">#1350</a>.</li>
+<li>Updated definition for <code>dcat:catalog</code> - see Issue <a href="https://github.com/w3c/dxwg/issues/1156">#1156</a>.</li>
 </ul>
 </section>
 	
