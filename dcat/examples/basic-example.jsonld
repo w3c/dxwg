@@ -1,5 +1,10 @@
 {
   "@graph" : [ {
+    "@id" : "_:b0",
+    "@type" : "dct:PeriodOfTime",
+    "endDate" : "2011-09-30",
+    "startDate" : "2011-07-01"
+  }, {
     "@id" : "ex:basic-example",
     "@type" : "owl:Ontology"
   }, {
@@ -7,11 +12,11 @@
     "@type" : "dcat:Catalog",
     "language" : "http://id.loc.gov/vocabulary/iso639-1/en",
     "publisher" : "ex:transparency-office",
-    "title" : {
+    "dct:title" : {
       "@language" : "en",
       "@value" : "Imaginary Catalog"
     },
-    "label" : {
+    "rdfs:label" : {
       "@language" : "en",
       "@value" : "Imaginary Catalog"
     },
@@ -27,14 +32,14 @@
     "modified" : "2011-12-15",
     "publisher" : "ex:finance-ministry",
     "spatial" : "http://sws.geonames.org/6695072/",
-    "temporal" : "http://reference.data.gov.uk/id/quarter/2006-Q1",
-    "title" : {
+    "temporal" : "_:b0",
+    "dct:title" : {
       "@language" : "en",
       "@value" : "Imaginary dataset"
     },
     "contactPoint" : "http://example.org/transparency-office/contact",
     "distribution" : "ex:dataset-001-csv",
-    "keyword" : [ {
+    "dcat:keyword" : [ {
       "@language" : "en",
       "@value" : "accountability"
     }, {
@@ -49,7 +54,7 @@
   }, {
     "@id" : "ex:dataset-001-csv",
     "@type" : "dcat:Distribution",
-    "title" : {
+    "dct:title" : {
       "@language" : "en",
       "@value" : "CSV distribution of imaginary dataset 001"
     },
@@ -59,37 +64,35 @@
   }, {
     "@id" : "ex:transparency-office",
     "@type" : "foaf:Organization",
-    "label" : {
+    "rdfs:label" : {
       "@language" : "en",
       "@value" : "Transparency Office"
     }
   } ],
   "@context" : {
+    "homepage" : {
+      "@id" : "http://xmlns.com/foaf/0.1/homepage",
+      "@type" : "@id"
+    },
     "dataset" : {
       "@id" : "http://www.w3.org/ns/dcat#dataset",
       "@type" : "@id"
     },
-    "language" : {
-      "@id" : "http://purl.org/dc/terms/language",
-      "@type" : "@id"
+    "label" : {
+      "@id" : "http://www.w3.org/2000/01/rdf-schema#label",
+      "@type" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+    },
+    "title" : {
+      "@id" : "http://purl.org/dc/terms/title",
+      "@type" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
     },
     "publisher" : {
       "@id" : "http://purl.org/dc/terms/publisher",
       "@type" : "@id"
     },
-    "homepage" : {
-      "@id" : "http://xmlns.com/foaf/0.1/homepage",
+    "language" : {
+      "@id" : "http://purl.org/dc/terms/language",
       "@type" : "@id"
-    },
-    "label" : {
-      "@id" : "http://www.w3.org/2000/01/rdf-schema#label"
-    },
-    "title" : {
-      "@id" : "http://purl.org/dc/terms/title"
-    },
-    "byteSize" : {
-      "@id" : "http://www.w3.org/ns/dcat#byteSize",
-      "@type" : "http://www.w3.org/2001/XMLSchema#decimal"
     },
     "mediaType" : {
       "@id" : "http://www.w3.org/ns/dcat#mediaType",
@@ -99,48 +102,61 @@
       "@id" : "http://www.w3.org/ns/dcat#downloadURL",
       "@type" : "@id"
     },
-    "spatial" : {
-      "@id" : "http://purl.org/dc/terms/spatial",
-      "@type" : "@id"
+    "byteSize" : {
+      "@id" : "http://www.w3.org/ns/dcat#byteSize",
+      "@type" : "http://www.w3.org/2001/XMLSchema#decimal"
     },
     "keyword" : {
-      "@id" : "http://www.w3.org/ns/dcat#keyword"
+      "@id" : "http://www.w3.org/ns/dcat#keyword",
+      "@type" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
     },
     "distribution" : {
       "@id" : "http://www.w3.org/ns/dcat#distribution",
-      "@type" : "@id"
-    },
-    "issued" : {
-      "@id" : "http://purl.org/dc/terms/issued",
-      "@type" : "http://www.w3.org/2001/XMLSchema#date"
-    },
-    "temporal" : {
-      "@id" : "http://purl.org/dc/terms/temporal",
-      "@type" : "@id"
-    },
-    "creator" : {
-      "@id" : "http://purl.org/dc/terms/creator",
       "@type" : "@id"
     },
     "temporalResolution" : {
       "@id" : "http://www.w3.org/ns/dcat#temporalResolution",
       "@type" : "http://www.w3.org/2001/XMLSchema#duration"
     },
+    "creator" : {
+      "@id" : "http://purl.org/dc/terms/creator",
+      "@type" : "@id"
+    },
     "accrualPeriodicity" : {
       "@id" : "http://purl.org/dc/terms/accrualPeriodicity",
+      "@type" : "@id"
+    },
+    "spatialResolutionInMeters" : {
+      "@id" : "http://www.w3.org/ns/dcat#spatialResolutionInMeters",
+      "@type" : "http://www.w3.org/2001/XMLSchema#decimal"
+    },
+    "spatial" : {
+      "@id" : "http://purl.org/dc/terms/spatial",
+      "@type" : "@id"
+    },
+    "temporal" : {
+      "@id" : "http://purl.org/dc/terms/temporal",
       "@type" : "@id"
     },
     "modified" : {
       "@id" : "http://purl.org/dc/terms/modified",
       "@type" : "http://www.w3.org/2001/XMLSchema#date"
     },
-    "spatialResolutionInMeters" : {
-      "@id" : "http://www.w3.org/ns/dcat#spatialResolutionInMeters",
-      "@type" : "http://www.w3.org/2001/XMLSchema#decimal"
+    "issued" : {
+      "@id" : "http://purl.org/dc/terms/issued",
+      "@type" : "http://www.w3.org/2001/XMLSchema#date"
     },
     "contactPoint" : {
       "@id" : "http://www.w3.org/ns/dcat#contactPoint",
       "@type" : "@id"
+    },
+    "endDate" : {
+      "@id" : "http://www.w3.org/ns/dcat#endDate",
+      "@type" : "http://www.w3.org/2001/XMLSchema#date"
+    },
+    "startDate" : {
+      "@id" : "http://www.w3.org/ns/dcat#startDate",
+      "@type" : "http://www.w3.org/2001/XMLSchema#date"
     },
     "adms" : "https://www.w3.org/ns/adms#",
     "owl" : "http://www.w3.org/2002/07/owl#",
