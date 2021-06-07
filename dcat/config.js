@@ -137,8 +137,8 @@ var respecConfig = {
 			publisher: "AgID & Team Digitale"
         },
         "DCAT-AP-NO": {
-            title: "Standard for beskrivelse av datasett og datakataloger (DCAT-AP-NO)",
-            href: "https://doc.difi.no/dcat-ap-no/"
+            title: "Standard for beskrivelse av datasett, datatjenester og datakataloger (DCAT-AP-NO)",
+            href: "https://data.norge.no/specification/dcat-ap-no/"
         },
         "DCAT-AP.de": {
             title: "Vokabulare und Dokumente für DCAT-AP.de",
