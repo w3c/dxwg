@@ -34,8 +34,9 @@ var respecConfig = {
       companyURL: "https://www.cnr.it/",
       w3cid: 72458
     },{
-      name: "David Browning",
-      company: "Invited Expert",
+      name: 	"David Browning",
+      company:	"Invited Expert",
+      note: 	"Previously at Refinitiv.com",
       w3cid: 98704
     },{
       name:       "Simon Cox",
