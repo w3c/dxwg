@@ -34,8 +34,9 @@ var respecConfig = {
       companyURL: "https://www.cnr.it/",
       w3cid: 72458
     },{
-      name: "David Browning",
-      company: "Invited Expert",
+      name: 	"David Browning",
+      company:	"Invited Expert",
+      note: 	"Previously at Refinitiv.com",
       w3cid: 98704
     },{
       name:       "Simon Cox",
@@ -122,8 +123,8 @@ var respecConfig = {
             title:"DBPedia ontology"
         },
         "DCAT-AP-SE": {
-            title: "DCAT-AP-SE: Swedish recommendation for DCAT-AP1.1",
-            href: "https://lankadedata.se/spec/DCAT-AP-SE",
+            title: "DCAT-AP-SE: Clarifications, translations and explanations of DCAT-AP for Sweden",
+            href: "https://docs.dataportal.se/dcat/en/",
             authors: ["Matthias Palmér"],
             etAl: false
         },
@@ -137,8 +138,8 @@ var respecConfig = {
 			publisher: "AgID & Team Digitale"
         },
         "DCAT-AP-NO": {
-            title: "Standard for beskrivelse av datasett og datakataloger (DCAT-AP-NO)",
-            href: "https://doc.difi.no/dcat-ap-no/"
+            title: "Standard for beskrivelse av datasett, datatjenester og datakataloger (DCAT-AP-NO)",
+            href: "https://data.norge.no/specification/dcat-ap-no/"
         },
         "DCAT-AP.de": {
             title: "Vokabulare und Dokumente für DCAT-AP.de",
@@ -210,7 +211,7 @@ var respecConfig = {
             date: "31 May 2012",
             href : "http://patterns.dataincubator.org/book/"
         },
-        "MDR-AR":{
+        "EUV-AR":{
             "href":"https://publications.europa.eu/en/web/eu-vocabularies/at-dataset/-/resource/dataset/access-right",
             "title":"Named Authority List: Access rights",
             "publisher":"Publications Office of the European Union"
