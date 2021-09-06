@@ -1246,9 +1246,10 @@ table.simple {width:100%;}
             <h4>Property: identifier</h4>
             <table class="def">
                 <tr><th>RDF Property:</th><td><a href="http://purl.org/dc/terms/identifier"><code>dcterms:identifier</code></a></td></tr>
-                <tr><th class="prop">Definition:</th><td>A unique identifier of the item.</td></tr>
+                <tr><th class="prop">Definition:</th><td>A unique identifier of the resource being described or cataloged.</td></tr>
                 <tr><th class="prop">Range:</th><td><a href="http://www.w3.org/2000/01/rdf-schema#Literal"><code>rdfs:Literal</code></a></td></tr>
                 <tr><th class="prop">Usage note:</th><td>The identifier might be used as part of the IRI of the item, but still having it represented explicitly is useful.</td></tr>
+                <tr><th class="prop">Usage note:</th><td>The identifier is a text string which is assigned to the resource to provide an unambiguous reference within a particular context.</td></tr>
                 </table>
         </section>
 
@@ -3829,6 +3830,108 @@ The interval can also be open - i.e., it can have just a start or just an end.</
 
 </section>
 
+<!-- Start of Draft section on inverse properties -->
+
+<section id="inverse-properties">
+
+<h2>Use of inverse properties</h2>
+
+<aside class="ednote">
+<p>This section is a draft for discussion about support for inverse properties in DCAT.</p>
+<p>Related issues:</p>
+
+<div class="issue" data-number="1336"></div>
+
+</aside>
+
+<p>The properties described in <a href="#vocabulary-specification"></a> do not intentionally include inverses, with the purpose of ensuring interoperability also in systems not making use of OWL reasoning.</p>
+
+<p>However, recognizing that inverses are needed for some use cases, DCAT supports them, but with the requirement that they MAY be used only <em>in addition to</em> those described in <a href="#vocabulary-specification"></a>, and that they MUST NOT be used to replace them.</p>
+
+<p>The following table lists the inverse properties supported in DCAT.</p>
+
+<aside class="ednote">
+<p>The list of properties in the following table is yet to be consolidated, and it includes also properties currently defined in <a href="#vocabulary-specification"></a>.</p>
+</aside>
+
+<table class="simple">
+<thead>
+<tr>
+<th>Property</th>
+<th>Inverse</th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+<td><a href="#Property:resource_previous"><code>dcat:prev</code></a></td>
+<td id="inverse-of-resource_previous"><code>dcat:next</code></td>
+</tr>
+
+<tr>
+<td><a href="#Property:resource_previous_version"><code>dcat:previousVersion</code></a></td>
+<td id="inverse-of-resource_previous_version"><code>dcat:nextVersion</code></td>
+</tr>
+<!--
+<tr>
+<td><a href="#Property:dataset_distribution"><code>dcat:distribution</code></a></td>
+<td id="inverse-of-dataset_distribution"><code>dcat:distributionOf</code></td>
+</tr>
+-->
+<tr>
+<td><a href="#Property:catalog_has_part"><code>dcterms:hasPart</code></a></td>
+<td id="inverse-of-catalog_has_part"><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/isPartOf"><code>dcterms:isPartOf</code></a></td>
+</tr>
+<tr>
+<td><a href="#Property:resource_replaces"><code>dcterms:replaces</code></a></td>
+<td id="inverse-of-resource_replaces"><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/isReplacedBy"><code>dcterms:isReplacedBy</code></a></td>
+</tr>
+<tr>
+<td><a href="#Property:resource_is_referenced_by"><code>dcterms:isReferencedBy</code></a></td>
+<td id="inverse-of-resource_is_referenced_by"><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/references"><code>dcterms:references</code></a></td>
+</tr>
+<tr>
+<td><a href="#Property:resource_is_version_of"><code>dcat:isVersionOf</code></a></td>
+<td id="inverse-of-resource_is_version_of"><code>dcat:hasVersion</code></td>
+</tr>
+<!--
+<tr>
+<td><a href="#Property:catalog_catalog"><code>dcat:resource</code></a></td>
+<td id="inverse-of-catalog_catalog"><code>dcat:inCatalog</code></td>
+</tr>
+-->
+<!--
+<tr>
+<td><a href="#Property:resource_in_series"><code>dcat:inSeries</code></a></td>
+<td id="inverse-of-resource_in_series"><code>dcat:seriesMember</code></td>
+</tr>
+-->
+<tr>
+<td><a href="#Property:record_primary_topic"><code>foaf:primaryTopic</code></a></td>
+<td id="inverse-of-record_primary_topic"><a data-cite="FOAF#term_isPrimaryTopicOf"><code>foaf:isPrimaryTopicOf</code></a></td>
+</tr>
+<!--
+<tr>
+<td><a href="#Property:catalog_catalog"><code>dcat:catalog</code></a></td>
+<td id="inverse-of-catalog_catalog"><code>dcat:inCatalog</code></td>
+</tr>
+-->
+<tr>
+<td><a href="#Property:dataset_was_generated_by"><code>prov:wasGeneratedBy</code></a></td>
+<td id="inverse-of-record_primary_topic"><a data-cite="PROV-O#generated"><code>prov:generated</code></a></td>
+</tr>
+<!--
+<tr>
+<td><a href=""><code></code></a></td>
+<td id="inverse-of-"><code></code></td>
+</tr>
+-->
+</tbody>
+</table>
+
+</section>
+
+<!-- End of Draft section on inverse properties -->
 
 <section id="dereferenceable-identifiers" class="informative">
     <h2>Dereferenceable identifiers</h2>
