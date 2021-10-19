@@ -1,5 +1,6 @@
 var respecConfig = {
   specStatus: "base",
+  publishDate: "2019-10-30",
   editors: [{
     name:       "Riccardo Albertoni",
     orcid:  "0000-0001-5648-2713",
@@ -85,7 +86,7 @@ var respecConfig = {
       "date": "2019"
     },
     "DCAT-AP-USE":{
-      "href":"https://joinup.ec.europa.eu/document/report-dcat-ap-use",
+      "href":"https://joinup.ec.europa.eu/solution/dcat-application-profile-data-portals-europe/document/report-dcat-ap-use",
       "title":"Report on DCAT-AP Use",
       "publisher":"European Commission",
       "date":"2017"
