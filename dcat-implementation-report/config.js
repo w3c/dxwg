@@ -1,5 +1,6 @@
 var respecConfig = {
   specStatus: "base",
+  publishDate: "2019-10-30",
   editors: [{
     name:       "Riccardo Albertoni",
     orcid:  "0000-0001-5648-2713",
@@ -85,10 +86,22 @@ var respecConfig = {
       "date": "2019"
     },
     "DCAT-AP-USE":{
-      "href":"https://joinup.ec.europa.eu/document/report-dcat-ap-use",
+      "href":"https://joinup.ec.europa.eu/solution/dcat-application-profile-data-portals-europe/document/report-dcat-ap-use",
       "title":"Report on DCAT-AP Use",
       "publisher":"European Commission",
       "date":"2017"
+    },
+    "DCAT-AP":{
+      "href":"https://joinup.ec.europa.eu/release/dcat-ap/121",
+      "title":"DCAT Application Profile For Data Portals In Europe. Version 1.2.1",
+      "publisher":"European Commission",
+      "date":"28 May 2019"
+    },
+    "GeoDCAT-AP":{
+      "href":"https://joinup.ec.europa.eu/release/geodcat-ap/101",
+      "title":"GeoDCAT-AP: A Geospatial Extension For The DCAT Application Profile For Data Portals In Europe. Version 1.0.1",
+      "publisher":"European Commission",
+      "date":"2 August 2016"
     }
   }
 };
