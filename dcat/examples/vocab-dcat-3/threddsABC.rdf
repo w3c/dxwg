@@ -1,0 +1,86 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:time="http://www.w3.org/2006/time#"
+    xmlns:threddsABC="https://example.org/threddsABC#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dcat="http://www.w3.org/ns/dcat#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+  <owl:Ontology rdf:about="https://example.org/threddsABC">
+    <owl:imports rdf:resource="http://xmlns.com/foaf/0.1/"/>
+    <owl:imports rdf:resource="http://www.w3.org/ns/dcat"/>
+    <owl:imports rdf:resource="http://www.w3.org/2006/time"/>
+    <owl:imports rdf:resource="http://purl.org/dc/terms/"/>
+    <rdfs:comment xml:lang="en">A sketch of how a THREDDS service and data might be described in a DCAT catalog</rdfs:comment>
+    <dcterms:creator rdf:resource="http://orcid.org/0000-0002-3884-3420"/>
+    <dcterms:created>2018-09-10T18:00:00.00+10:00</dcterms:created>
+  </owl:Ontology>
+  <dcat:Catalog rdf:about="https://example.org/threddsABC#Catalog_1">
+    <dcat:record>
+      <dcat:CatalogRecord rdf:about="https://example.org/threddsABC#CatalogRecord_DS1">
+        <foaf:primaryTopic>
+          <dcat:DataService rdf:about="https://example.org/threddsABC#DiscoveryService_1">
+            <dcat:endpointURL rdf:resource="http://organization.example.org/data/service/th1"/>
+            <dcterms:conformsTo rdf:resource="http://unidata.org/thredds/5.4"/>
+            <dc:title xml:lang="en">THREDDS 1</dc:title>
+          </dcat:DataService>
+        </foaf:primaryTopic>
+        <dcterms:issued>2018-09-11</dcterms:issued>
+      </dcat:CatalogRecord>
+    </dcat:record>
+    <dcat:record>
+      <dcat:CatalogRecord rdf:about="https://example.org/threddsABC#CatalogRecord_D1">
+        <foaf:primaryTopic>
+          <dcat:Dataset rdf:about="https://example.org/threddsABC#Dataset_1">
+            <dcat:theme rdf:resource="http://official.example.org/classification-scheme-A/class987"/>
+            <dcat:landingPage rdf:resource="http://data.example.org/dataset/page/d1"/>
+            <dcat:keyword xml:lang="en">tag3</dcat:keyword>
+            <dcat:keyword xml:lang="en">keyword1</dcat:keyword>
+            <dcat:distribution>
+              <dcat:Distribution>
+                <dcat:mediaType rdf:resource="https://www.iana.org/assignments/media-types/text/csv"/>
+                <dcat:downloadURL rdf:resource="http://data.example.org/dataset/distro/d1.csv"/>
+                <dcat:byteSize rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                >39871230887</dcat:byteSize>
+                <dcat:accessService>
+                  <dcat:DataService rdf:about="https://example.org/threddsABC#DataService_1">
+                    <dcat:endpointURL rdf:resource="http://organization.example.org/data/service/tds1"/>
+                    <dcterms:conformsTo rdf:resource="http://unidata.org/tds/5.4"/>
+                    <dc:title xml:lang="en">TDS 1</dc:title>
+                  </dcat:DataService>
+                </dcat:accessService>
+                <dcterms:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+                <dcterms:conformsTo rdf:resource="http://organization.example.org/schema/yu876"/>
+              </dcat:Distribution>
+            </dcat:distribution>
+            <dcterms:temporal>
+              <dcterms:PeriodOfTime>
+                <rdf:value>2015-01-01/2018-12-31</rdf:value>
+              </dcterms:PeriodOfTime>
+            </dcterms:temporal>
+            <dcterms:description xml:lang="en">This is a completely fake dataset #1</dcterms:description>
+            <dc:title xml:lang="en">Fake Dataset 1</dc:title>
+          </dcat:Dataset>
+        </foaf:primaryTopic>
+        <dcterms:issued>2018-09-10</dcterms:issued>
+      </dcat:CatalogRecord>
+    </dcat:record>
+    <dc:title xml:lang="en">Thredds test catalog 1</dc:title>
+    <dcat:record>
+      <dcat:CatalogRecord rdf:about="https://example.org/threddsABC#CatalogRecord_DDS1">
+        <foaf:primaryTopic rdf:resource="https://example.org/threddsABC#DataService_1"/>
+        <dcterms:issued>2018-09-10</dcterms:issued>
+      </dcat:CatalogRecord>
+    </dcat:record>
+    <dcat:service rdf:resource="https://example.org/threddsABC#DataService_1"/>
+    <dcat:distribution rdf:parseType="Resource">
+      <dcat:accessService rdf:resource="https://example.org/threddsABC#DiscoveryService_1"/>
+    </dcat:distribution>
+    <dcat:themeTaxonomy rdf:resource="http://official.example.org/classification-scheme-A/"/>
+    <dcat:service rdf:resource="https://example.org/threddsABC#DiscoveryService_1"/>
+    <dcat:dataset rdf:resource="https://example.org/threddsABC#Dataset_1"/>
+  </dcat:Catalog>
+</rdf:RDF>
