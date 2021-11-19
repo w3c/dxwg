@@ -1,0 +1,208 @@
+{
+  "@graph" : [ {
+    "@id" : "_:b0",
+    "accessService" : "threddsABC:DiscoveryService_1"
+  }, {
+    "@id" : "_:b1",
+    "@type" : "dcat:Distribution",
+    "conformsTo" : "http://organization.example.org/schema/yu876",
+    "license" : "https://creativecommons.org/licenses/by/4.0/",
+    "accessService" : "threddsABC:DataService_1",
+    "dcat:byteSize" : "39871230887",
+    "downloadURL" : "http://data.example.org/dataset/distro/d1.csv",
+    "mediaType" : "https://www.iana.org/assignments/media-types/text/csv"
+  }, {
+    "@id" : "_:b2",
+    "@type" : "dcterms:PeriodOfTime",
+    "rdf:value" : "2015-01-01/2018-12-31"
+  }, {
+    "@id" : "https://example.org/threddsABC",
+    "@type" : "owl:Ontology",
+    "dcterms:created" : "2018-09-10T18:00:00.00+10:00",
+    "creator" : "http://orcid.org/0000-0002-3884-3420",
+    "rdfs:comment" : {
+      "@language" : "en",
+      "@value" : "A sketch of how a THREDDS service and data might be described in a DCAT catalog"
+    },
+    "imports" : [ "http://xmlns.com/foaf/0.1/", "http://www.w3.org/ns/dcat", "http://www.w3.org/2006/time", "http://purl.org/dc/terms/" ]
+  }, {
+    "@id" : "threddsABC:CatalogRecord_D1",
+    "@type" : "dcat:CatalogRecord",
+    "dcterms:issued" : "2018-09-10",
+    "primaryTopic" : "threddsABC:Dataset_1"
+  }, {
+    "@id" : "threddsABC:CatalogRecord_DDS1",
+    "@type" : "dcat:CatalogRecord",
+    "dcterms:issued" : "2018-09-10",
+    "primaryTopic" : "threddsABC:DataService_1"
+  }, {
+    "@id" : "threddsABC:CatalogRecord_DS1",
+    "@type" : "dcat:CatalogRecord",
+    "dcterms:issued" : "2018-09-11",
+    "primaryTopic" : "threddsABC:DiscoveryService_1"
+  }, {
+    "@id" : "threddsABC:Catalog_1",
+    "@type" : "dcat:Catalog",
+    "dc:title" : {
+      "@language" : "en",
+      "@value" : "Thredds test catalog 1"
+    },
+    "dataset" : "threddsABC:Dataset_1",
+    "distribution" : "_:b0",
+    "record" : [ "threddsABC:CatalogRecord_DS1", "threddsABC:CatalogRecord_D1", "threddsABC:CatalogRecord_DDS1" ],
+    "service" : [ "threddsABC:DataService_1", "threddsABC:DiscoveryService_1" ],
+    "themeTaxonomy" : "http://official.example.org/classification-scheme-A/"
+  }, {
+    "@id" : "threddsABC:DataService_1",
+    "@type" : "dcat:DataService",
+    "dc:title" : {
+      "@language" : "en",
+      "@value" : "TDS 1"
+    },
+    "conformsTo" : "http://unidata.org/tds/5.4",
+    "endpointURL" : "http://organization.example.org/data/service/tds1"
+  }, {
+    "@id" : "threddsABC:Dataset_1",
+    "@type" : "dcat:Dataset",
+    "dc:title" : {
+      "@language" : "en",
+      "@value" : "Fake Dataset 1"
+    },
+    "dcterms:description" : {
+      "@language" : "en",
+      "@value" : "This is a completely fake dataset #1"
+    },
+    "temporal" : "_:b2",
+    "distribution" : "_:b1",
+    "dcat:keyword" : [ {
+      "@language" : "en",
+      "@value" : "tag3"
+    }, {
+      "@language" : "en",
+      "@value" : "keyword1"
+    } ],
+    "landingPage" : "http://data.example.org/dataset/page/d1",
+    "theme" : "http://official.example.org/classification-scheme-A/class987"
+  }, {
+    "@id" : "threddsABC:DiscoveryService_1",
+    "@type" : "dcat:DataService",
+    "dc:title" : {
+      "@language" : "en",
+      "@value" : "THREDDS 1"
+    },
+    "conformsTo" : "http://unidata.org/thredds/5.4",
+    "endpointURL" : "http://organization.example.org/data/service/th1"
+  } ],
+  "@context" : {
+    "imports" : {
+      "@id" : "http://www.w3.org/2002/07/owl#imports",
+      "@type" : "@id"
+    },
+    "comment" : {
+      "@id" : "http://www.w3.org/2000/01/rdf-schema#comment",
+      "@type" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+    },
+    "creator" : {
+      "@id" : "http://purl.org/dc/terms/creator",
+      "@type" : "@id"
+    },
+    "created" : {
+      "@id" : "http://purl.org/dc/terms/created",
+      "@type" : "http://www.w3.org/2001/XMLSchema#string"
+    },
+    "primaryTopic" : {
+      "@id" : "http://xmlns.com/foaf/0.1/primaryTopic",
+      "@type" : "@id"
+    },
+    "issued" : {
+      "@id" : "http://purl.org/dc/terms/issued",
+      "@type" : "http://www.w3.org/2001/XMLSchema#string"
+    },
+    "endpointURL" : {
+      "@id" : "http://www.w3.org/ns/dcat#endpointURL",
+      "@type" : "@id"
+    },
+    "conformsTo" : {
+      "@id" : "http://purl.org/dc/terms/conformsTo",
+      "@type" : "@id"
+    },
+    "title" : {
+      "@id" : "http://purl.org/dc/elements/1.1/title",
+      "@type" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+    },
+    "record" : {
+      "@id" : "http://www.w3.org/ns/dcat#record",
+      "@type" : "@id"
+    },
+    "distribution" : {
+      "@id" : "http://www.w3.org/ns/dcat#distribution",
+      "@type" : "@id"
+    },
+    "service" : {
+      "@id" : "http://www.w3.org/ns/dcat#service",
+      "@type" : "@id"
+    },
+    "themeTaxonomy" : {
+      "@id" : "http://www.w3.org/ns/dcat#themeTaxonomy",
+      "@type" : "@id"
+    },
+    "dataset" : {
+      "@id" : "http://www.w3.org/ns/dcat#dataset",
+      "@type" : "@id"
+    },
+    "accessService" : {
+      "@id" : "http://www.w3.org/ns/dcat#accessService",
+      "@type" : "@id"
+    },
+    "theme" : {
+      "@id" : "http://www.w3.org/ns/dcat#theme",
+      "@type" : "@id"
+    },
+    "landingPage" : {
+      "@id" : "http://www.w3.org/ns/dcat#landingPage",
+      "@type" : "@id"
+    },
+    "keyword" : {
+      "@id" : "http://www.w3.org/ns/dcat#keyword",
+      "@type" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+    },
+    "temporal" : {
+      "@id" : "http://purl.org/dc/terms/temporal",
+      "@type" : "@id"
+    },
+    "description" : {
+      "@id" : "http://purl.org/dc/terms/description",
+      "@type" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+    },
+    "mediaType" : {
+      "@id" : "http://www.w3.org/ns/dcat#mediaType",
+      "@type" : "@id"
+    },
+    "downloadURL" : {
+      "@id" : "http://www.w3.org/ns/dcat#downloadURL",
+      "@type" : "@id"
+    },
+    "byteSize" : {
+      "@id" : "http://www.w3.org/ns/dcat#byteSize",
+      "@type" : "http://www.w3.org/2001/XMLSchema#integer"
+    },
+    "license" : {
+      "@id" : "http://purl.org/dc/terms/license",
+      "@type" : "@id"
+    },
+    "value" : {
+      "@id" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#value",
+      "@type" : "http://www.w3.org/2001/XMLSchema#string"
+    },
+    "owl" : "http://www.w3.org/2002/07/owl#",
+    "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "xsd" : "http://www.w3.org/2001/XMLSchema#",
+    "dcterms" : "http://purl.org/dc/terms/",
+    "rdfs" : "http://www.w3.org/2000/01/rdf-schema#",
+    "time" : "http://www.w3.org/2006/time#",
+    "dcat" : "http://www.w3.org/ns/dcat#",
+    "threddsABC" : "https://example.org/threddsABC#",
+    "foaf" : "http://xmlns.com/foaf/0.1/",
+    "dc" : "http://purl.org/dc/elements/1.1/"
+  }
+}
