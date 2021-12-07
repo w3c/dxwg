@@ -51,16 +51,13 @@ table.simple {width:100%;}
 </aside>
 
     <p>
-        This document defines a major revision of the original DCAT vocabulary ([[?VOCAB-DCAT-20140116]]) in response to new use cases, requirements and community experience since that publication.  This revision extends the original DCAT standard in line with community practice while supporting diverse approaches to data description and dataset exchange. The main changes to the DCAT vocabulary have been: 
+        This document defines a major revision of the DCAT 2 vocabulary ([[?vocab-dcat-2]]) in response to use cases, requirements and community experience which could not considered during the previous vocabulary development.  This revision extends the original DCAT standard in line with community practice while supporting diverse approaches to data description and dataset exchange. The main changes to the DCAT vocabulary have been: 
     </p>
     <ul>
-        <li>loosening of constraints in class and property definitions to promote re-use of terms and modularity</li>
-        <li>addition of a <a href="#Class:Resource"><code>dcat:Resource</code></a> class for representing any asset than can be included in the catalog, this is
-            now the super-class of <a href="#Class:Dataset"><code>dcat:Dataset</code></a></li>
-        <li>addition of <a href="#Class:Data_Service"><code>dcat:DataService</code></a>, as a sub-class of <a href="#Class:Resource"><code>dcat:Resource</code></a>, to support catalog service end-points providing access to data assets</li>
-        <li>addition of ways to represent <a href="#examples-bag-of-files">loosely structured catalogs</a>, where there is no distinction between a dataset and its distributions</li>
-        <li>more details for the ways of representing <a href="#examples-dataset-provenance">dataset provenance</a> and <a href="#quality-information">quality</a></li>
-        <li>an <a href="#dcat-sdo">alignment</a> between the DCAT vocabulary and the schema.org vocabulary</li>
+        <li>addition of <a href="#Property:distribution_checksum"><code>spdx:checksum</code></a> property to link digest for DCAT distributions</li>
+        <li>addition of <a href="#Property:resource_version"><code>dcat:version</code></a>, <a href="#Property:resource_previous_version"><code>dcat:version</code></a>, <a href="#Property:resource_has_current_version"><code>dcat:hasCurrentVersion</code></a> properties for supporting versioning  </li>
+        <li>addition of a <a href="#Class:Dataset_Series"><code>dcat:DatasetSeries</code></a> class for representing Dataset Series</li>
+        <li>addition of guidelines for the use of inverse properties <a href="#inverse-properties"></a></li>
     </ul>
 
 
@@ -68,15 +65,16 @@ table.simple {width:100%;}
         This new version of the vocabulary updates and expands the original but preserves backward compatibility. A full list of the significant changes (with links to the relevent github issues) is described in <a href="#changes"></a>.
     </p>
     <p>
-        The exit criteria for CR focussed on v2 new features that replicate features that were included in application profiles of v1 as a way of remedying missing and necessary elements.  The exit criteria also included recent commitments by organisations such as EC Joinup to <a href='https://joinup.ec.europa.eu/solution/abr-specification-registry-registries/document/specification-registry-registries-version-meeting-september'>adopt the DCAT v2 model</a> in their work.
+        The exit criteria for CR focussed on v3 new features that replicate features that were included in application profiles of v2 as a way of remedying missing and necessary elements.  The exit criteria also included recent commitments by organisations such as EC Joinup to <a href='https://joinup.ec.europa.eu/solution/abr-specification-registry-registries/document/specification-registry-registries-version-meeting-september'>adopt the DCAT v2 model</a> in their work.
         Implementation will be evidenced by showing use of the new properties/classes (or terms with equivalent meaning) in implementations of catalogs.
     </p>
     <p>
-        <a href="https://github.com/w3c/dxwg/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Adcat+">Issues, requirements, and features</a> that have been considered and discussed by the Data eXchange Working Group but have not been addressed due to lack of maturity or consensus are collected in GitHub. Those believed to be a priority for a future release are in the milestone <a href="https://github.com/w3c/dxwg/milestone/15">DCAT Future Priority Work</a>.
+        <a href="https://github.com/w3c/dxwg/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Adcat+">Issues, requirements, and features</a> that have been considered and discussed by the Data eXchange Working Group but have not been addressed due to lack of maturity or consensus are collected in GitHub. Those believed to be a priority for a future release are in the milestone <a href="https://github.com/w3c/dxwg/milestone/31">DCAT Future Priority Work</a>.
     </p>
     <h3 id="dcat_history">DCAT history</h3>
     <p>The original DCAT vocabulary was developed and hosted at the <a href="http://www.deri.ie">Digital Enterprise Research Institute (DERI)</a>, then refined by the <a href="http://www.w3.org/egov/">eGov Interest Group</a>, and finally standardized in 2014 [[?VOCAB-DCAT-20140116]] by the <a href="http://www.w3.org/2011/gld/">Government Linked Data (GLD)</a> Working Group.</p>
-    <p>This revised version of DCAT was developed by the <a href="https://www.w3.org/2017/dxwg/">Dataset Exchange Working Group</a> in response to a new set of Use Cases and Requirements [[?DCAT-UCR]] gathered from peoples' experience with the DCAT vocabulary from the time of the original version, and new applications that were not considered in the first version. A summary of the changes from [[?VOCAB-DCAT-20140116]] is provided in <a href="#changes"></a>. </p>
+    <p>A second recommended revision of DCAT, DCAT 2 [[?VOCAB-DCAT-2]]  was developed by the <a href="https://www.w3.org/2017/dxwg/">Dataset Exchange Working Group</a> in response to a new set of Use Cases and Requirements [[?DCAT-UCR]] gathered from peoples' experience with the DCAT vocabulary from the time of the original version, and new applications that were not considered in the first version. </p>
+    <p>This version of DCAT, DCAT 3 [[?VOCAB-DCAT-3]] was developed by the <a href="https://www.w3.org/2017/dxwg/">Dataset Exchange Working Group</a>, considering some of the more pressing use cases and requests among those left unaddressed in the previous standardization round.  A summary of the changes from [[?VOCAB-DCAT-2]] is provided in <a href="#changes"></a>. </p>
 
     <h3 id="external_terms">External terms</h3>
     <p>DCAT incorporates terms from pre-existing vocabularies where stable terms with appropriate meanings could be found, such as <a href="http://xmlns.com/foaf/0.1/homepage"><code>foaf:homepage</code></a> and <a href="http://purl.org/dc/terms/title"><code>dcterms:title</code></a>.
