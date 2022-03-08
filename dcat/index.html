@@ -2558,9 +2558,12 @@ table.simple {width:100%;}
                 <!--tr><th class="prop">Inverse property of:</th>
                 <td><a href="#Property:dataset_series_series_member"><code>dcat:seriesMember</code></a></td>
                 </tr-->
-                <tr><th class="prop">Usage note:</th><td> Normally, child datasets in dataset series are represented as <code>dcat:Dataset</code>. The use of <code>dcat:Distribution</code> for typing child datasets is however recognized as a possible alternative, whenever it addresses more effectively the requirements of a given application scenario.</td></tr>
+                <!--<tr><th class="prop">Usage note:</th><td> Normally, child datasets in dataset series are represented as <code>dcat:Dataset</code>.The use of <code>dcat:Distribution</code> for typing child datasets is however recognized as a possible alternative, whenever it addresses more effectively the requirements of a given application scenario.></td></tr-->
                 <!--tr><th class="prop">See also:</th><td>Sub-properties of <code>dcterms:hasPart</code> in particular <a href="#Property:catalog_dataset"><code>dcat:dataset</code></a>, <a href="#Property:catalog_catalog"><code>dcat:catalog</code></a>, <a href="#Property:catalog_service"><code>dcat:service</code></a>. </td></tr-->
                 </table>
+
+<p>For guidance on the use of this property, see <a href="#dataset-series"></a>.</p>
+
     </section>
         <section id="Property:dataset_spatial">
             <h4>Property: spatial/geographical coverage</h4>
@@ -2776,9 +2779,13 @@ table.simple {width:100%;}
             <tr><th>RDF Class:</th><td><a href="http://www.w3.org/ns/dcat#DatasetSeries"><code>dcat:DatasetSeries</code></a></td></tr>
             <tr><th class="prop">Definition:</th><td>A collection of datasets that are published separately, but share some common characteristics that groups them. <!--, and could also be made available as a single dataset.--></td></tr>
             <tr><th class="prop">Sub-class of:</th><td><a href="#Class:Dataset"><code>dcat:Dataset</code></a></td></tr>
+            <!--tr><th class="prop">Usage note:</th><td> Child datasets in dataset series SHOULD be represented as <code>dcat:Dataset</code>.<!--The use of <code>dcat:Distribution</code> for typing child datasets is however recognized as a possible alternative, whenever it addresses more effectively the requirements of a given application scenario.></td></tr-->
             <tr><th class="prop">Usage note:</th><td> Dataset series can be also soft-typed via property <code>dcterms:type</code> as in the approach used in [[?GeoDCAT-AP]], and adopted in [[?DCAT-AP-IT]] and [[?GeoDCAT-AP-IT]]).</td></tr>
             <tr><th class="prop">Usage note:</th><td>Common scenarios for dataset series include: time series composed of periodically released subsets; map-series composed of items of the same type or theme but with differing spatial footprints.</td></tr>
+     
             </table>
+
+<p>For guidance on the use of this property, see <a href="#dataset-series"></a>.</p>
 
        <div class="issue" data-number="1335"></div>  
        <!--section id="Property:dataset_series_series_member">
@@ -5003,8 +5010,7 @@ mycity-bus:stops-2015-01-01
 
 <h2>How to specify dataset series</h2>
     <aside class="note">
-    Discussion about using distributions or datasets as members of a dataset series has taken place in issue <a href="https://github.com/w3c/dxwg/issues/868">issue 868</a> and continues in the following
-<div class="issue" data-number="1429"></div>.  Please use this issue to continue any discussion on this topic.
+    Discussion about using distributions or datasets as members of a dataset series has taken place in issues <a href="https://github.com/w3c/dxwg/issues/868">issue 868</a> and <a href="https://github.com/w3c/dxwg/issues/1429">issue 1429</a>.
 </aside>
 
 <p>DCAT makes dataset series first class citizens of data catalogs by minting a new class <a href="#Class:Dataset_Series"><code>dcat:DatasetSeries</code></a>, defined as subclass of <a href="#Class:Dataset"><code>dcat:Dataset</code></a>. 
@@ -5199,9 +5205,9 @@ ex:budget-2018-it a dcat:Dataset ;
 
 <h2>Dataset series in existing DCAT implementations</h2>
 
-<aside class="ednote">
+<!--aside class="ednote">
 <p>To be decided whether to keep or not this section.</p>
-</aside>
+</aside-->
 
 <p>Existing DCAT implementations adopt two main alternative approaches to specifying dataset series:</p>
 
@@ -5213,7 +5219,7 @@ ex:budget-2018-it a dcat:Dataset ;
 <p>In both cases, the dataset series is sometimes soft-typed by using the [[DCTERMS]] property <code>dcterms:type</code> (e.g., this is the approach used in [[?GeoDCAT-AP]], and adopted in [[?DCAT-AP-IT]] and [[?GeoDCAT-AP-IT]]).</p>
 
 <p>These options are not formally incompatible with DCAT, so they can cohexist with <code>dcat:DatasetSeries</code> during the upgrade to DCAT 3.</p>
-
+    
 <!--
 <p>Compared with the second option, the first one may have the advantage of simplifying metadata management, and avoiding the creation of datasets having the same values for almost all their metadata elements. On the other hand, this approach reduces the ability of being discovered, as distribution metadata are not rich as datasets' ones. Moreover, using distributions may result cumbersome or unfeasible when the number of child datasets is too high.</p>
 
