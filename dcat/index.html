@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script class="remove" src="https://www.w3.org/Tools/respec/respec-w3c" defer></script>
     <script class="remove" src="config.js"></script>
-<!--	 
+<!--
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="small.css" media="only all and (max-width: 649px)">
 -->
@@ -15,7 +15,7 @@ table.simple {width:100%;}
 #table-sdo-mapping th:first-child ,
 #table-sdo-mapping td:first-child {text-align:right;}
 .prop-list {columns:4;}
-</style>	
+</style>
 </head>
 <body>
 
@@ -72,8 +72,8 @@ table.simple {width:100%;}
     </p>
     <h3 id="dcat_history">DCAT history</h3>
     <p>The original DCAT vocabulary was developed and hosted at the <a href="http://www.deri.ie">Digital Enterprise Research Institute (DERI)</a>, then refined by the <a href="http://www.w3.org/egov/">eGov Interest Group</a>, and finally standardized in 2014 [[?VOCAB-DCAT-20140116]] by the <a href="http://www.w3.org/2011/gld/">Government Linked Data (GLD)</a> Working Group.</p>
-    <p>A second recommended revision of DCAT, DCAT 2 [[?VOCAB-DCAT-2]]  was developed by the <a href="https://www.w3.org/2017/dxwg/">Dataset Exchange Working Group</a> in response to a new set of Use Cases and Requirements [[?DCAT-UCR]] gathered from peoples' experience with the DCAT vocabulary from the time of the original version, and new applications that were not considered in the first version. </p>
-    <p>This version of DCAT, DCAT 3 [[?VOCAB-DCAT-3]] was developed by the <a href="https://www.w3.org/2017/dxwg/">Dataset Exchange Working Group</a>, considering some of the more pressing use cases and requests among those left unaddressed in the previous standardization round.  A summary of the changes from [[?VOCAB-DCAT-2]] is provided in <a href="#changes"></a>. </p>
+    <p>A second recommended revision of DCAT, DCAT 2 [[?VOCAB-DCAT-2]], was developed by the <a href="https://www.w3.org/2017/dxwg/">Dataset Exchange Working Group</a> in response to a new set of Use Cases and Requirements [[?DCAT-UCR]] gathered from peoples' experience with the DCAT vocabulary from the time of the original version, and new applications that were not considered in the first version. </p>
+    <p>This version of DCAT, DCAT 3, was developed by the <a href="https://www.w3.org/2017/dxwg/">Dataset Exchange Working Group</a>, considering some of the more pressing use cases and requests among those left unaddressed in the previous standardization round.  A summary of the changes from [[?VOCAB-DCAT-2]] is provided in <a href="#changes"></a>. </p>
 
     <h3 id="external_terms">External terms</h3>
     <p>DCAT incorporates terms from pre-existing vocabularies where stable terms with appropriate meanings could be found, such as <a href="http://xmlns.com/foaf/0.1/homepage"><code>foaf:homepage</code></a> and <a href="http://purl.org/dc/terms/title"><code>dcterms:title</code></a>.
@@ -789,7 +789,11 @@ table.simple {width:100%;}
         <p>The following properties are specific to this class:<p>
 		<ul class="prop-list">
             <li><a href="#Property:catalog_catalog_record">catalog record</a></li>
+<!-- DCAT 2
             <li><a href="#Property:catalog_has_part">has part</a></li>
+-->
+            <li><a href="#Property:catalog_resource">resource</a></li>
+			
             <li><a href="#Property:catalog_dataset">dataset</a></li>
             <li><a href="#Property:catalog_service">service</a></li>
             <li><a href="#Property:catalog_catalog">catalog</a></li>
@@ -895,25 +899,45 @@ table.simple {width:100%;}
 			
         </section>
 
+<!-- DCAT2
         <section id="Property:catalog_has_part">
+		
             <h4>Property: has part</h4>
-
             <aside class="note">
               <p>
                 Property added in this context in DCAT 2.
               </p>
             </aside>
+-->
+        <section id="Property:catalog_resource">
+		
+            <h4>Property: resource</h4>
+            <aside class="note">
+              <p>
+                Property added in this context in DCAT 3.
+              </p>
+            </aside>
 
 
             <table class="def">
+<!-- DCAT2			
                 <tr><th>RDF Property:</th><td><a href="http://purl.org/dc/terms/hasPart"><code>dcterms:hasPart</code></a></td></tr>
-                <tr><th class="prop">Definition:</th><td>An item that is listed in the catalog.</td></tr>
-<!--                    
+-->				
+                <tr><th>RDF Property:</th><td><a href="http://www.w3.org/ns/dcat#resource"><code>dcat:resource</code></a></td></tr>
+
+                <tr><th class="prop">Definition:</th><td>A resource that is listed in the catalog.</td></tr>
+                    
+                <tr><th class="prop">Sub-property of:</th><td><a href="http://purl.org/dc/terms/hasPart"><code>dcterms:hasPart</code></a></td></tr>
+
                 <tr><th class="prop">Domain:</th><td><a href="#Class:Catalog"><code>dcat:Catalog</code></a></td></tr>
                 <tr><th class="prop">Range:</th><td><a href="#Class:Resource"><code>dcat:Resource</code></a></td></tr>
--->
+
                 <tr><th class="prop">Usage note:</th><td>This is the most general predicate for membership of a catalog. Use of a more specific sub-property is recommended when available. </td></tr>
+<!-- DCAT2
                 <tr><th class="prop">See also:</th><td>Sub-properties of <code>dcterms:hasPart</code> in particular <a href="#Property:catalog_dataset"><code>dcat:dataset</code></a>, <a href="#Property:catalog_catalog"><code>dcat:catalog</code></a>, <a href="#Property:catalog_service"><code>dcat:service</code></a>. </td></tr>
+-->				
+                <tr><th class="prop">See also:</th><td>Sub-properties of <code>dcat:resource</code> in particular <a href="#Property:catalog_dataset"><code>dcat:dataset</code></a>, <a href="#Property:catalog_catalog"><code>dcat:catalog</code></a>, <a href="#Property:catalog_service"><code>dcat:service</code></a>. </td></tr>
+				
             </table>
 			
         </section>
@@ -923,8 +947,13 @@ table.simple {width:100%;}
 
             <table class="def">
                 <tr><th>RDF Property:</th><td><a href="http://www.w3.org/ns/dcat#dataset"><code>dcat:dataset</code></a></td></tr>
-                <tr><th class="prop">Definition:</th><td>A collection of data that is listed in the catalog.</td></tr>
+                <tr><th class="prop">Definition:</th><td>A dataset that is listed in the catalog.</td></tr>
+
+<!-- DCAT2
                 <tr><th class="prop">Sub-property of:</th><td><a href="http://purl.org/dc/terms/hasPart"><code>dcterms:hasPart</code></a></td></tr>
+-->
+                <tr><th class="prop">Sub-property of:</th><td><a href="#Property:catalog_resource"><code>dcat:resource</code></a></td></tr>
+
                 <tr><th class="prop">Domain:</th><td><a href="#Class:Catalog"><code>dcat:Catalog</code></a></td></tr>
                 <tr><th class="prop">Range:</th><td><a href="#Class:Dataset"><code>dcat:Dataset</code></a></td></tr>
             </table>
@@ -941,8 +970,13 @@ table.simple {width:100%;}
 
             <table class="def">
                 <tr><th>RDF Property:</th><td><a href="http://www.w3.org/ns/dcat#service"><code>dcat:service</code></a></td></tr>
-                <tr><th class="prop">Definition:</th><td>A site or end-point that is listed in the catalog.</td></tr>
+                <tr><th class="prop">Definition:</th><td>A service that is listed in the catalog.</td></tr>
+
+<!-- DCAT2
                 <tr><th class="prop">Sub-property of:</th><td><a href="http://purl.org/dc/terms/hasPart"><code>dcterms:hasPart</code></a></td></tr>
+-->
+                <tr><th class="prop">Sub-property of:</th><td><a href="#Property:catalog_resource"><code>dcat:resource</code></a></td></tr>
+
                 <tr><th class="prop">Domain:</th><td><a href="#Class:Catalog"><code>dcat:Catalog</code></a></td></tr>
                 <tr><th class="prop">Range:</th><td><a href="#Class:Data_Service"><code>dcat:DataService</code></a></td></tr>
             </table>
@@ -959,8 +993,13 @@ table.simple {width:100%;}
 
             <table class="def">
                 <tr><th>RDF Property:</th><td><a href="http://www.w3.org/ns/dcat#catalog"><code>dcat:catalog</code></a></td></tr>
-                <tr><th class="prop">Definition:</th><td>A catalog that is listed in this catalog.</td></tr>
+                <tr><th class="prop">Definition:</th><td>A catalog that is listed in the catalog.</td></tr>
+
+<!-- DCAT2
                 <tr><th class="prop">Sub-property of:</th><td><a href="http://purl.org/dc/terms/hasPart"><code>dcterms:hasPart</code></a></td></tr>
+-->
+                <tr><th class="prop">Sub-property of:</th><td><a href="#Property:catalog_resource"><code>dcat:resource</code></a></td></tr>
+
                 <tr><th class="prop">Domain:</th><td><a href="#Class:Catalog"><code>dcat:Catalog</code></a></td></tr>
                 <tr><th class="prop">Range:</th><td><a href="#Class:Catalog"><code>dcat:Catalog</code></a></td></tr>
             </table>
@@ -993,6 +1032,9 @@ table.simple {width:100%;}
             <li><a href="#Property:resource_contact_point">contact point</a></li>
             <li><a href="#Property:resource_creator">creator</a></li>
             <li><a href="#Property:resource_description">description</a></li>
+
+            <li><a href="#Property:resource_has_part">has part</a></li>
+
             <li><a href="#Property:resource_has_policy">has policy</a></li>
             <li><a href="#Property:resource_identifier">identifier</a></li>
             <li><a href="#Property:resource_is_referenced_by">is referenced by</a></li>
@@ -1497,6 +1539,27 @@ table.simple {width:100%;}
 
                 <tr><th class="prop">See also:</th><td><a href="#Property:resource_license"></a>, <a href="#Property:distribution_rights"></a>, <a href="#Property:resource_access_rights"></a></td></tr>
                 </table>
+        </section>
+
+
+        <section id="Property:resource_has_part">
+            <h4>Property: has part</h4>
+
+            <aside class="note">
+              <p>
+                Property added in this context in DCAT 3.
+              </p>
+            </aside>
+
+
+            <table class="def">
+                <tr><th>RDF Property:</th><td><a href="http://purl.org/dc/terms/hasPart"><code>dcterms:hasPart</code></a></td></tr>
+                <tr><th class="prop">Definition:</th><td>A related resource that is included either physically or logically in the described resource.</td></tr>
+<!--				
+                <tr><th class="prop">Usage note:</th><td></td></tr>
+-->				
+            </table>
+			
         </section>
 
         <section id="Property:resource_has_policy">
@@ -2495,9 +2558,12 @@ table.simple {width:100%;}
                 <!--tr><th class="prop">Inverse property of:</th>
                 <td><a href="#Property:dataset_series_series_member"><code>dcat:seriesMember</code></a></td>
                 </tr-->
-                <tr><th class="prop">Usage note:</th><td> Normally, child datasets in dataset series are represented as <code>dcat:Dataset</code>. The use of <code>dcat:Distribution</code> for typing child datasets is however recognized as a possible alternative, whenever it addresses more effectively the requirements of a given application scenario.</td></tr>
+                <!--<tr><th class="prop">Usage note:</th><td> Normally, child datasets in dataset series are represented as <code>dcat:Dataset</code>.The use of <code>dcat:Distribution</code> for typing child datasets is however recognized as a possible alternative, whenever it addresses more effectively the requirements of a given application scenario.></td></tr-->
                 <!--tr><th class="prop">See also:</th><td>Sub-properties of <code>dcterms:hasPart</code> in particular <a href="#Property:catalog_dataset"><code>dcat:dataset</code></a>, <a href="#Property:catalog_catalog"><code>dcat:catalog</code></a>, <a href="#Property:catalog_service"><code>dcat:service</code></a>. </td></tr-->
                 </table>
+
+<p>For guidance on the use of this property, see <a href="#dataset-series"></a>.</p>
+
     </section>
         <section id="Property:dataset_spatial">
             <h4>Property: spatial/geographical coverage</h4>
@@ -2713,9 +2779,13 @@ table.simple {width:100%;}
             <tr><th>RDF Class:</th><td><a href="http://www.w3.org/ns/dcat#DatasetSeries"><code>dcat:DatasetSeries</code></a></td></tr>
             <tr><th class="prop">Definition:</th><td>A collection of datasets that are published separately, but share some common characteristics that groups them. <!--, and could also be made available as a single dataset.--></td></tr>
             <tr><th class="prop">Sub-class of:</th><td><a href="#Class:Dataset"><code>dcat:Dataset</code></a></td></tr>
+            <!--tr><th class="prop">Usage note:</th><td> Child datasets in dataset series SHOULD be represented as <code>dcat:Dataset</code>.<!--The use of <code>dcat:Distribution</code> for typing child datasets is however recognized as a possible alternative, whenever it addresses more effectively the requirements of a given application scenario.></td></tr-->
             <tr><th class="prop">Usage note:</th><td> Dataset series can be also soft-typed via property <code>dcterms:type</code> as in the approach used in [[?GeoDCAT-AP]], and adopted in [[?DCAT-AP-IT]] and [[?GeoDCAT-AP-IT]]).</td></tr>
             <tr><th class="prop">Usage note:</th><td>Common scenarios for dataset series include: time series composed of periodically released subsets; map-series composed of items of the same type or theme but with differing spatial footprints.</td></tr>
+     
             </table>
+
+<p>For guidance on the use of this property, see <a href="#dataset-series"></a>.</p>
 
        <div class="issue" data-number="1335"></div>  
        <!--section id="Property:dataset_series_series_member">
@@ -3897,10 +3967,18 @@ The interval can also be open - i.e., it can have just a start or just an end.</
 <td id="inverse-of-dataset_distribution"><code>dcat:distributionOf</code></td>
 </tr>
 -->
+<!-- DCAT 2
 <tr>
 <td><a href="#Property:catalog_has_part"><code>dcterms:hasPart</code></a></td>
 <td id="inverse-of-catalog_has_part"><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/isPartOf"><code>dcterms:isPartOf</code></a></td>
 </tr>
+-->
+
+<tr>
+<td><a href="#Property:resource_has_part"><code>dcterms:hasPart</code></a></td>
+<td id="inverse-of-resource_has_part"><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/isPartOf"><code>dcterms:isPartOf</code></a></td>
+</tr>
+
 <tr>
 <td><a href="#Property:resource_replaces"><code>dcterms:replaces</code></a></td>
 <td id="inverse-of-resource_replaces"><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/isReplacedBy"><code>dcterms:isReplacedBy</code></a></td>
@@ -3987,8 +4065,8 @@ The interval can also be open - i.e., it can have just a start or just an end.</
 <aside id="ex-adms-identifier" class="example">
 <pre class="nohighlight turtle">
 &lt;https://dcat.example.org/id&gt; a dcat:Dataset;
-  adms:identifier  &lt;https://example.org/iddoi&gt; ;
-  dcterms:publisher &lt;https://example.org/PoelenJorritH&gt; ;
+  adms:identifier  &lt;https://dcat.example.org/iddoi&gt; ;
+  dcterms:publisher &lt;https://dcat.example.org/PoelenJorritH&gt; ;
   .
 
 &lt;https://dcat.example.org/iddoi&gt; a adms:Identifier ;
@@ -4007,7 +4085,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
 
 &lt;https://dcat.example.org/PoelenJorritH&gt; a foaf:Person;
   foaf:name "Jorrit H. Poelen" ;
-  adms:identifier &lt;https://example.org/PoelenJorritHID&gt; ;
+  adms:identifier &lt;https://dcat.example.org/PoelenJorritHID&gt; ;
   .
 
 &lt;https://dcat.example.org/PoelenJorritHID&gt; a adms:Identifier;
@@ -4017,7 +4095,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
   .</pre>
 </aside>
 
-    <p><a href="#ex-adms-identifier"></a> does not represent the authority responsible for assigning and maintaining identifiers using that scheme (e.g., <a href="https://zenodo.org/">Zenodo</a>) as naming the registrant goes against the philosophy of DOI, where the sub-spaces are abstracted from the organization that registers them, with the advantage that DOIs do not change when the organization changes or the responsibility for that sub-space is handed over to someone else. <a href="#ex-adms-identifier"></a> shows a locally minted identifier for the creator of the dataset (e.g., <code>https://example.org/PoelenJorritHID</code>) and its correspondent ORCID identifier (e.g., <code>https://orcid.org/0000-0003-3138-4118</code>). </p>
+    <p><a href="#ex-adms-identifier"></a> does not represent the authority responsible for assigning and maintaining identifiers using that scheme (e.g., <a href="https://zenodo.org/">Zenodo</a>) as naming the registrant goes against the philosophy of DOI, where the sub-spaces are abstracted from the organization that registers them, with the advantage that DOIs do not change when the organization changes or the responsibility for that sub-space is handed over to someone else. <a href="#ex-adms-identifier"></a> shows a locally minted identifier for the creator of the dataset (e.g., <code>https://dcat.example.org/PoelenJorritHID</code>) and its correspondent ORCID identifier (e.g., <code>https://orcid.org/0000-0003-3138-4118</code>). </p>
     <p>When the HTTP dereferenceable ID returns an RDF/OWL description for the dataset, the use of <code>owl:sameAs</code> might be considered. For example,</p>
 
 <aside id="ex-owl-sameas" class="example">
@@ -4932,8 +5010,7 @@ mycity-bus:stops-2015-01-01
 
 <h2>How to specify dataset series</h2>
     <aside class="note">
-    Discussion about using distributions or datasets as members of a dataset series has taken place in issue <a href="https://github.com/w3c/dxwg/issues/868">issue 868</a> and continues in the following
-<div class="issue" data-number="1429"></div>.  Please use this issue to continue any discussion on this topic.
+    Discussion about using distributions or datasets as members of a dataset series has taken place in issues <a href="https://github.com/w3c/dxwg/issues/868">issue 868</a> and <a href="https://github.com/w3c/dxwg/issues/1429">issue 1429</a>.
 </aside>
 
 <p>DCAT makes dataset series first class citizens of data catalogs by minting a new class <a href="#Class:Dataset_Series"><code>dcat:DatasetSeries</code></a>, defined as subclass of <a href="#Class:Dataset"><code>dcat:Dataset</code></a>. 
@@ -5128,9 +5205,9 @@ ex:budget-2018-it a dcat:Dataset ;
 
 <h2>Dataset series in existing DCAT implementations</h2>
 
-<aside class="ednote">
+<!--aside class="ednote">
 <p>To be decided whether to keep or not this section.</p>
-</aside>
+</aside-->
 
 <p>Existing DCAT implementations adopt two main alternative approaches to specifying dataset series:</p>
 
@@ -5142,7 +5219,7 @@ ex:budget-2018-it a dcat:Dataset ;
 <p>In both cases, the dataset series is sometimes soft-typed by using the [[DCTERMS]] property <code>dcterms:type</code> (e.g., this is the approach used in [[?GeoDCAT-AP]], and adopted in [[?DCAT-AP-IT]] and [[?GeoDCAT-AP-IT]]).</p>
 
 <p>These options are not formally incompatible with DCAT, so they can cohexist with <code>dcat:DatasetSeries</code> during the upgrade to DCAT 3.</p>
-
+    
 <!--
 <p>Compared with the second option, the first one may have the advantage of simplifying metadata management, and avoiding the creation of datasets having the same values for almost all their metadata elements. On the other hand, this approach reduces the ability of being discovered, as distribution metadata are not rich as datasets' ones. Moreover, using distributions may result cumbersome or unfeasible when the number of child datasets is too high.</p>
 
@@ -6592,6 +6669,53 @@ ga-courts:jc-wms
 <p>A full change-log is available on <a href="https://github.com/w3c/dxwg/commits/gh-pages/dcat">GitHub</a></p>
 	
 
+<section id="changes-since-20220111">
+
+<h2>Changes since the third public working draft of 11 January 2022</h2>
+
+<p>The document has undergone the following changes since the DCAT 3 third public working draft of 11 January 2022 [[?VOCAB-DCAT-3-20220111]]:</p>
+
+<ul>
+
+<li>
+<p>Defined a new property <a href="#Property:catalog_resource"><code>dcat:resource</code></a> to link a <code>dcat:Catalog</code> to a <code>dcat:Resource</code>, thus replacing property <code>dcterms:hasPart</code> that in DCAT 2 was introduced for this purpose. As a consequence, properties <a href="#Property:catalog_dataset"><code>dcat:dataset</code></a>, <a href="#Property:catalog_service"><code>dcat:service</code></a>, and <a href="#Property:catalog_catalog"><code>dcat:catalog</code></a> have been revised to be sub-properties of <code>dcat:resource</code> - see Issue <a href="https://github.com/w3c/dxwg/issues/1469">#1469</a>.</p>
+</li>
+
+<li>
+<p>Added property <a href="#Property:resource_has_part"><code>dcterms:hasPart</code></a> under <code>dcat:Resource</code> - see Issue <a href="https://github.com/w3c/dxwg/issues/1469">#1469</a>.</p>
+</li>
+
+<li>
+<p>Fixed inconsistent URIs in <a href="#ex-adms-identifier"></a> (<a href="#dereferenceable-identifiers"></a>) - see Issue <a href="https://github.com/w3c/dxwg/issues/1459">#1459</a>.</p>
+</li>
+
+
+<li>
+<p>Aligned the definitions of the properties <a href="Property:catalog_dataset"><code>dcat:dataset</code></a>, <a href="Property:catalog_service"><code>dcat:service</code></a>, <a href="Property:catalog_catalog"><code>dcat:catalog</code></a> - see Issue <a href="https://github.com/w3c/dxwg/issues/1465">#1465</a>.</p>
+</li>
+
+<li>
+<p>The definition of property <a href="Property:resource_version"><code>dcat:version</code></a> has been revised to make it explicit that version indicators can be numeric or textual - see Issue <a href="https://github.com/w3c/dxwg/issues/1442">#1442</a>.</p>
+</li>
+
+
+<li>
+<p>Revised <a href="#compressed-distribution"></a>, <a href="#packaged-distribution"></a>, and <a href="#packaged-and-compressed-distribution"></a> (<a href="#examples-compressed-and-packaged-distributions"></a>) to remove all occurrences of property <code>dcat:accessURL</code> when taking as value the same URL of <code>dcat:downloadURL</code> - see Issue <a href="https://github.com/w3c/dxwg/issues/1437">#1437</a>.</p>
+</li>
+
+<li>
+<p>Revised usage note of property <a href="#Property:distribution_packaging_format"><code>dcat:packageFormat</code></a> to include the ZIP format as one of the examples of packaging formats - see Issue <a href="https://github.com/w3c/dxwg/issues/1438">#1438</a>.</p>
+</li>
+
+<li>
+<p>Editorial fixes to <a href="#dcat-scope"></a> - see Issue <a href="https://github.com/w3c/dxwg/issues/1440">#1440</a>.</p>
+</li>
+
+</ul>
+
+</section>
+
+
 <section id="changes-since-20210504">
 
 <h2>Changes since the second public working draft of 4 May 2021</h2>
@@ -6599,7 +6723,7 @@ ga-courts:jc-wms
 <p>The document has undergone the following changes since the DCAT 3 second public working draft of 4 May 2021 [[?VOCAB-DCAT-3-20210504]]:</p>
 
 <ul>
-<li><p> New section <a href="#inverse-properties"></a> has been added, and properties <code>dcat:sVersionOf</code>, <code>dcat:next</code>, and <code>dcterms:isReplacedBy</code> have been removed from <a href="#vocabulary-specification"></a> - see Issue <a href="https://github.com/w3c/dxwg/issues/1336">#1336</a>.</p></li>
+<li><p> New section <a href="#inverse-properties"></a> has been added, and properties <code>dcat:isVersionOf</code>, <code>dcat:next</code>, and <code>dcterms:isReplacedBy</code> have been removed from <a href="#vocabulary-specification"></a> - see Issue <a href="https://github.com/w3c/dxwg/issues/1336">#1336</a>.</p></li>
 <li><p> New section <a href="#accessibility"></a> has been added - see Issue <a href="https://github.com/w3c/dxwg/issues/1358">#1358</a>.</p>
   </li>
 <li><p> Revision of UML diagrams - see Issues  <a href="https://github.com/w3c/dxwg/issues/1383">#1383</a>, <a href="https://github.com/w3c/dxwg/issues/1294">#1294</a>, <a href="https://github.com/w3c/dxwg/issues/1252">#1252</a>.</p>
@@ -6674,6 +6798,7 @@ ga-courts:jc-wms
         </li>    
         </ul>
 
+<!--
 <aside class="ednote">
 <p>To be decided if the next entry should be kept or removed.</p>
 </aside>
@@ -6746,11 +6871,11 @@ See Issue <a href="https://github.com/w3c/dxwg/issues/79">#79</a>.
 The property <code>dcat:hadRole</code> is added to support the use of <a data-cite="?PROV-O#qualifiedAttribution"><code>prov:qualifiedAttribution</code></a> to associate an agent with a resource, where the role of the agent with relation to the resource is specified, and is something other than the standard [[DCTERMS]] roles: creator, publisher or contributor. 
 See Issue <a href="https://github.com/w3c/dxwg/issues/79">#79</a>
 </li>
-<!--
+<!-
 <li>
 The section <a href="#license-rights"></a> was added to describe patterns for linking <code>dcat:Dataset</code>s and <code>dcat:Distribution</code>s to the relevant license and rights expressions.
 </li>
--->
+->
 <li>
 <a href="#Property:resource_creator">Property: resource creator</a>: 
 The property <code>dcterms:creator</code> is recommended for use in the context of a dataset or other resource to allow the entity responsible for generating the resource to be recorded. 
@@ -6795,9 +6920,9 @@ See Issue <a href="https://github.com/w3c/dxwg/issues/57">#57</a> and Issue <a h
 <a href="#Class:Resource">Class: Cataloged resource</a>: 
 In DCAT 1 [[?VOCAB-DCAT-20140116]] the scope of a <a href="#Class:Catalog"><code>dcat:Catalog</code></a> was limited to datasets. This has been generalized, and properties common to all cataloged resources are now associated with a super-class <a href="#Class:Resource"><code>dcat:Resource</code></a>.
 See Issue <a href="https://github.com/w3c/dxwg/issues/172">#172</a> and Issue <a href="https://github.com/w3c/dxwg/issues/116">#116</a>. 
-<!--
+<!-
 The wiki page on <a href="https://github.com/w3c/dxwg/wiki/Cataloguing-data-services">Cataloguing data services</a> describes some proposals related to this requirement.
--->
+->
 </li>
 
 <li>
@@ -6874,6 +6999,8 @@ See Issue <a href="https://github.com/w3c/dxwg/issues/172">#172</a>.
 </ul>
 
     </section>
+-->	
+	
 </section>
 
 </body>
