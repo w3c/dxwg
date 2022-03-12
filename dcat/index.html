@@ -5087,6 +5087,60 @@ ex:budget-2020 a dcat:Dataset ;
 </pre>
 </aside>
 
+<p>Datasets in a series can, of course, be versioned. In such a case, the dataset can be linked to its versions by using the approach illustrated in <a href="#version-history"></a>, as shown in <a href="#ex-dataset-series-and-versions"></a>.</p>
+
+<aside class="note">
+<p>This use case was contributed in Issue <a href="https://github.com/w3c/dxwg/issues/1409">#1409</a>.</p>
+</aside>
+
+<aside class="example" id="ex-dataset-series-and-versions" title="Combining dataset series and versions">
+<p>The following example extends <a href="#ex-dataset-series-releases"></a> by supposing that dataset <code>ex:budget-2019</code> has two different versions, namely, <code>ex:budget-2019-rev0</code> and <code>ex:budget-2019-rev1</code>. Dataset <code>ex:budget-2019</code> is linked to its versions by using property <a href="#Property:resource_has_version"><code>dcat:hasVersion</code></a>, and to its current version (<code>ex:budget-2019-rev1</code>) by using property <a href="#Property:resource_has_current_version"><code>dcat:hasCurrentVersion</code></a>.</p>
+<pre>
+ex:budget a dcat:DatasetSeries ;
+  dcterms:title "Budget data"@en ;
+  .
+  
+ex:budget-2018 a dcat:Dataset ;
+  dcterms:title "Budget data for year 2018"@en ;
+  dcat:inSeries ex:budget ;
+  dcterms:issued "2019-01-01"^^xsd:date ;
+  dcat:next ex:budget-2019 ;
+  .
+  
+ex:budget-2019 a dcat:Dataset ;
+  dcterms:title "Budget data for year 2019"@en ;
+  dcat:inSeries ex:budget ;
+  dcat:hasVersion ex:budget-2019-rev0 , ex:budget-2019-rev1 ;
+  dcat:hasCurrentVersion ex:budget-2019-rev1 ;
+  dcterms:issued "2020-01-01"^^xsd:date ;
+  dcat:prev ex:budget-2018 ;
+  dcat:next ex:budget-2020 ;
+  .
+
+ex:budget-2019-rev0 a dcat:Dataset ;
+  dcterms:title "Budget data for year 2019"@en ;
+  dcat:version "rev0" ;
+  dcat:isVersionOf ex:budget-2019 ;
+  dcterms:issued "2020-01-01"^^xsd:date ;
+  .
+
+ex:budget-2019-rev1 a dcat:Dataset ;
+  dcterms:title "Budget data for year 2019"@en ;
+  dcat:version "rev1" ;
+  dcat:isVersionOf ex:budget-2019 ;
+  dcat:previousVersion ex:budget-2019-rev0 ;
+  dcterms:issued "2020-05-10"^^xsd:date ;
+  .
+  
+ex:budget-2020 a dcat:Dataset ;
+  dcterms:title "Budget data for year 2020"@en ;
+  dcat:inSeries ex:budget ;
+  dcterms:issued "2021-01-01"^^xsd:date ;
+  dcat:prev ex:budget-2019 ;
+  .
+</pre>
+</aside>
+
 </section>
 
 
@@ -6676,6 +6730,10 @@ ga-courts:jc-wms
 <p>The document has undergone the following changes since the DCAT 3 third public working draft of 11 January 2022 [[?VOCAB-DCAT-3-20220111]]:</p>
 
 <ul>
+
+<li>
+<p>Added <a href="#ex-dataset-series-and-versions"></a> (<a href="#dataset-series-specification"></a>) and introductory paragraph to show how to combine dataset series and dataset versions - see Issue <a href="https://github.com/w3c/dxwg/issues/1409">#1409</a>.</p>
+</li>
 
 <li>
 <p>Defined a new property <a href="#Property:catalog_resource"><code>dcat:resource</code></a> to link a <code>dcat:Catalog</code> to a <code>dcat:Resource</code>, thus replacing property <code>dcterms:hasPart</code> that in DCAT 2 was introduced for this purpose. As a consequence, properties <a href="#Property:catalog_dataset"><code>dcat:dataset</code></a>, <a href="#Property:catalog_service"><code>dcat:service</code></a>, and <a href="#Property:catalog_catalog"><code>dcat:catalog</code></a> have been revised to be sub-properties of <code>dcat:resource</code> - see Issue <a href="https://github.com/w3c/dxwg/issues/1469">#1469</a>.</p>
