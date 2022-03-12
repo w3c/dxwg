@@ -1,0 +1,63 @@
+# baseURI: http://example.org/dcat/
+# imports: http://www.w3.org/ns/dcat
+
+@prefix ex: <http://example.org/dcat/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dctype: <http://purl.org/dc/dcmitype/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix gsp: <http://www.opengis.net/ont/geosparql#> .
+@prefix locn: <http://www.w3.org/ns/locn#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:budget a dcat:DatasetSeries ;
+  dcterms:title "Budget data"@en ;
+  .
+  
+ex:budget-2018 a dcat:Dataset ;
+  dcterms:title "Budget data for year 2018"@en ;
+  dcat:inSeries ex:budget ;
+  dcterms:issued "2019-01-01"^^xsd:date ;
+  dcat:next ex:budget-2019 ;
+  .
+  
+ex:budget-2019 a dcat:Dataset ;
+  dcterms:title "Budget data for year 2019"@en ;
+  dcat:inSeries ex:budget ;
+  dcat:hasVersion ex:budget-2019-rev0 , ex:budget-2019-rev1 ;
+  dcat:hasCurrentVersion ex:budget-2019-rev1 ;
+  dcterms:issued "2020-01-01"^^xsd:date ;
+  dcat:prev ex:budget-2018 ;
+  dcat:next ex:budget-2020 ;
+  .
+
+ex:budget-2019-rev0 a dcat:Dataset ;
+  dcterms:title "Budget data for year 2019"@en ;
+  dcat:version "rev0" ;
+  dcat:isVersionOf ex:budget-2019 ;
+  dcterms:issued "2020-01-01"^^xsd:date ;
+  .
+
+ex:budget-2019-rev1 a dcat:Dataset ;
+  dcterms:title "Budget data for year 2019"@en ;
+  dcat:version "rev1" ;
+  dcat:isVersionOf ex:budget-2019 ;
+  dcat:previousVersion ex:budget-2019-rev0 ;
+  dcterms:issued "2020-05-10"^^xsd:date ;
+  .
+  
+ex:budget-2020 a dcat:Dataset ;
+  dcterms:title "Budget data for year 2020"@en ;
+  dcat:inSeries ex:budget ;
+  dcterms:issued "2021-01-01"^^xsd:date ;
+  dcat:prev ex:budget-2019 ;
+  .
