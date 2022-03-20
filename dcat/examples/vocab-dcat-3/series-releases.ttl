@@ -1,0 +1,30 @@
+@prefix ex: <http://example.org/dcat/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:budget a dcat:DatasetSeries ;
+  dcterms:title "Budget data"@en ;
+  .
+  
+ex:budget-2018 a dcat:Dataset ;
+  dcterms:title "Budget data for year 2018"@en ;
+  dcat:inSeries ex:budget ;
+  dcterms:issued "2019-01-01"^^xsd:date ;
+  dcat:next ex:budget-2019 ;
+  .
+  
+ex:budget-2019 a dcat:Dataset ;
+  dcterms:title "Budget data for year 2019"@en ;
+  dcat:inSeries ex:budget ;
+  dcterms:issued "2020-01-01"^^xsd:date ;
+  dcat:prev ex:budget-2018 ;
+  dcat:next ex:budget-2020 ;
+  .
+  
+ex:budget-2020 a dcat:Dataset ;
+  dcterms:title "Budget data for year 2020"@en ;
+  dcat:inSeries ex:budget ;
+  dcterms:issued "2021-01-01"^^xsd:date ;
+  dcat:prev ex:budget-2019 ;
+  .
