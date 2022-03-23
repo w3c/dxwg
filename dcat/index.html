@@ -581,13 +581,14 @@ table.simple {width:100%;}
 
 <aside id="ex-catalog-record" class="example">
 <pre class="nohighlight turtle">
-:catalog  dcat:record&nbsp;:record-001&nbsp; .
+:catalog dcat:record :record-001 .
 
 :record-001
-  a dcat:CatalogRecord&nbsp;;
-  foaf:primaryTopic&nbsp;:dataset-001&nbsp; ;
-  dcterms:issued "2011-12-11"^^xsd:date&nbsp; ;
-  .</pre>
+  a dcat:CatalogRecord ;
+  foaf:primaryTopic :dataset-001 ;
+  dcterms:issued "2011-12-11"^^xsd:date ;
+  .
+</pre>
 </aside>
 
     </section>
@@ -5472,10 +5473,28 @@ ex:budget-2018-it a dcat:Dataset ;
 
 <ul>
 <li>Use IRIs from reference registries, when available. Examples include the <a href="https://www.w3.org/TR/">W3C TR registry</a>, the <a href="https://www.ogc.org/def-server">OGC Definitions Server</a>, the <a href="https://www.iso.org/obp/ui">ISO OBP</a>.</li>
-<li>Use the IRI of the standard / specification, and not the namespace IRI. E.g., to express conformance with DCAT, the IRI to be used is <code>https://www.w3.org.org/TR/vocab-dcat/</code>, and not <code>http://www.w3.org/ns/dcat#</code>.</li>
+<li>Use the IRI of the standard / specification, and not the namespace IRI. E.g., to express conformance of a <code>dcat:CatalogRecord</code> with DCAT, the IRI to be used is <code>https://www.w3.org.org/TR/vocab-dcat/</code>, and not <code>http://www.w3.org/ns/dcat#</code>.</li>
 <li>Use the canonical, persistent IRI. This is usually specified in the document itself. If you are in doubt, use the one included in the bibliographic citations for that standard / specification.</li>
-<li>Use the non-versioned IRI. If you need to express conformance with a specific version of the standard / specification, use both the un-versioned and the versioned IRI. E.g., in case you need to explictly state conformance with DCAT 2, use both <code>https://www.w3.org.org/TR/vocab-dcat/</code> and <code>https://www.w3.org.org/TR/vocab-dcat-2/</code>.</li>
+<li>Use the non-versioned IRI. If you need to express conformance with a specific version of the standard / specification, use both the un-versioned and the versioned IRI. E.g., in case you need to explictly state conformance of a <code>dcat:CatalogRecord</code> with DCAT 2, use both <code>https://www.w3.org.org/TR/vocab-dcat/</code> and <code>https://www.w3.org.org/TR/vocab-dcat-2/</code>.</li>
 </ul>
+
+<!-- @andrea-perego: added example on how to specify the metadata schema of a catalog record -->
+
+<p><a href="#ex-catalog-record-schema"></a> extends <a href="#ex-catalog-record"></a> to show how to specify that a given catalog record is conformant with DCAT, by following the above rules.</p>
+
+<aside class="example" id="ex-catalog-record-schema">
+<pre class="nohighlight turtle">
+:catalog dcat:record :record-001 .
+
+:record-001
+  a dcat:CatalogRecord ;
+  foaf:primaryTopic :dataset-001 ;
+  dcterms:issued "2011-12-11"^^xsd:date ;
+  dcterms:conformsTo &lt;https://www.w3.org.org/TR/vocab-dcat/&gt; ;
+  .
+</pre>
+</aside>
+
 
 <!--
 <p><a href="#ex-standards-uris"></a> shows the IRIs of some of the standards used in this document.</p>
