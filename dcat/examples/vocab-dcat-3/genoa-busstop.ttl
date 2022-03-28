@@ -1,7 +1,7 @@
 # baseURI: https://dcat.example.org/genoa-busstop
 # imports: http://www.w3.org/ns/dcat
 
-@prefix : <https://dcat.example.org/> .
+@prefix ex: <https://dcat.example.org/> .
 @prefix adms: <https://www.w3.org/ns/adms#> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -20,53 +20,53 @@
 @prefix w3cgeo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-:completenessWRTExpectedNumberOfEntities
+ex:completenessWRTExpectedNumberOfEntities
   a dqv:Metric ;
   skos:definition "The degree of completeness as ratio between the actual number of entities included in the dataset and the declared expected number of entities."@en ;
   dqv:expectedDataType xsd:decimal ;
   dqv:inDimension ldqd:completeness ;
 .
-:genoa-busstop
+ex:genoa-busstop
   a owl:Ontology ;
   owl:imports <http://www.w3.org/ns/dcat> ;
 .
-:genoaBusStopsDataset
+ex:genoaBusStopsDataset
   a dcat:Dataset ;
-  dqv:hasQualityAnnotation :genoaBusStopsDatasetCompletenessNote ;
-  dqv:hasQualityMeasurement :genoaBusStopsDatasetCompletenessMeasurement ;
+  dqv:hasQualityAnnotation ex:genoaBusStopsDatasetCompletenessNote ;
+  dqv:hasQualityMeasurement ex:genoaBusStopsDatasetCompletenessMeasurement ;
 .
-:genoaBusStopsDatasetCompletenessMeasurement
+ex:genoaBusStopsDatasetCompletenessMeasurement
   a dqv:QualityMeasurement ;
-  dqv:computedOn :genoaBusStopsDataset ;
-  dqv:isMeasurementOf :completenessWRTExpectedNumberOfEntities ;
+  dqv:computedOn ex:genoaBusStopsDataset ;
+  dqv:isMeasurementOf ex:completenessWRTExpectedNumberOfEntities ;
   dqv:value 0.6833333 ;
   prov:generatedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
-  prov:wasAttributedTo :myQualityChecker ;
-  prov:wasGeneratedBy :myQualityChecking ;
+  prov:wasAttributedTo ex:myQualityChecker ;
+  prov:wasGeneratedBy ex:myQualityChecking ;
 .
-:genoaBusStopsDatasetCompletenessNote
+ex:genoaBusStopsDatasetCompletenessNote
   a dqv:UserQualityFeedback ;
   dqv:inDimension ldqd:completeness ;
-  oa:hasBody :textBody ;
-  oa:hasTarget :genoaBusStopsDataset ;
+  oa:hasBody ex:textBody ;
+  oa:hasTarget ex:genoaBusStopsDataset ;
   oa:motivatedBy dqv:qualityAssessment ;
   prov:generatedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
-  prov:wasAttributedTo :consumer1 ;
+  prov:wasAttributedTo ex:consumer1 ;
 .
-:myQualityChecker
+ex:myQualityChecker
   a prov:SoftwareAgent ;
   rdfs:label "A quality assessment service"@en ;
 .
-:myQualityChecking
+ex:myQualityChecking
   a prov:Activity ;
   rdfs:label "The checking of genoaBusStopsDataset's quality"@en ;
   prov:endedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
-  prov:generated :genoaBusStopsDatasetCompletenessMeasurement ;
+  prov:generated ex:genoaBusStopsDatasetCompletenessMeasurement ;
   prov:startedAtTime "2018-05-27T00:52:02Z"^^xsd:dateTime ;
-  prov:used :genoaBusStopsDataset ;
-  prov:wasAssociatedWith :myQualityChecker ;
+  prov:used ex:genoaBusStopsDataset ;
+  prov:wasAssociatedWith ex:myQualityChecker ;
 .
-:textBody
+ex:textBody
   a oa:TextualBody ;
   dcterms:format "text/plain" ;
   dcterms:language "en" ;
