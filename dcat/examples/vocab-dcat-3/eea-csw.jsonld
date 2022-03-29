@@ -8,12 +8,12 @@
       "@value" : "<gml:Envelope srsName=\"http://www.opengis.net/def/crs/OGC/1.3/CRS84\"><gml:lowerCorner>-180 -90</gml:lowerCorner><gml:upperCorner>180 90</gml:upperCorner></gml:Envelope>"
     }
   }, {
-    "@id" : "a:CatalogA",
+    "@id" : "ex:CatalogA",
     "@type" : "dcat:Catalog",
-    "record" : "a:EEA-CSW-Endpoint-Record",
-    "service" : "a:EEA-CSW-Endpoint"
+    "record" : "ex:EEA-CSW-Endpoint-Record",
+    "service" : "ex:EEA-CSW-Endpoint"
   }, {
-    "@id" : "a:EEA",
+    "@id" : "ex:EEA",
     "@type" : "v:Organization",
     "hasEmail" : "mailto:info@eea.europa.eu",
     "hasURL" : "http://www.eea.europa.eu",
@@ -22,7 +22,7 @@
       "@value" : "European Environment Agency"
     }
   }, {
-    "@id" : "a:EEA-CSW-Endpoint",
+    "@id" : "ex:EEA-CSW-Endpoint",
     "@type" : "dcat:DataService",
     "dc:subject" : {
       "@language" : "en",
@@ -42,22 +42,22 @@
       "@language" : "en",
       "@value" : "European Environment Agency's public catalogue of spatial datasets."
     },
-    "type" : [ "http://inspire.ec.europa.eu/metadata-codelist/ResourceType/service", "http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/discovery" ],
-    "contactPoint" : "a:EEA",
+    "type" : [ "http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/discovery", "http://inspire.ec.europa.eu/metadata-codelist/ResourceType/service" ],
+    "contactPoint" : "ex:EEA",
     "endpointDescription" : "https://sdi.eea.europa.eu/catalogue/srv/eng/csw?service=CSW&request=GetCapabilities",
     "endpointURL" : "http://sdi.eea.europa.eu/catalogue/srv/eng/csw"
   }, {
-    "@id" : "a:EEA-CSW-Endpoint-Record",
+    "@id" : "ex:EEA-CSW-Endpoint-Record",
     "@type" : "dcat:CatalogRecord",
     "conformsTo" : "http://data.europa.eu/930",
     "dcterms:identifier" : "4be5cb08-e082-426a-9c57-8a53d7cd3f65",
     "language" : "http://publications.europa.eu/resource/authority/language/ENG",
     "modified" : "2012-05-21",
-    "source" : "a:EEA-CSW-Endpoint-SourceRecord",
-    "contactPoint" : "a:EEA",
-    "primaryTopic" : "a:EEA-CSW-Endpoint"
+    "source" : "ex:EEA-CSW-Endpoint-SourceRecord",
+    "contactPoint" : "ex:EEA",
+    "primaryTopic" : "ex:EEA-CSW-Endpoint"
   }, {
-    "@id" : "a:EEA-CSW-Endpoint-SourceRecord",
+    "@id" : "ex:EEA-CSW-Endpoint-SourceRecord",
     "conformsTo" : "http://www.isotc211.org/2005/gmd"
   }, {
     "@id" : "https://dcat.example.org/eea-csw",
@@ -65,6 +65,14 @@
     "imports" : [ "http://www.w3.org/2004/02/skos/core", "http://purl.org/dc/terms/" ]
   } ],
   "@context" : {
+    "conformsTo" : {
+      "@id" : "http://purl.org/dc/terms/conformsTo",
+      "@type" : "@id"
+    },
+    "geometry" : {
+      "@id" : "http://www.w3.org/ns/locn#geometry",
+      "@type" : "http://www.opengis.net/ont/geosparql#wktLiteral"
+    },
     "organization-name" : {
       "@id" : "http://www.w3.org/2006/vcard/ns#organization-name",
       "@type" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
@@ -77,76 +85,12 @@
       "@id" : "http://www.w3.org/2006/vcard/ns#hasEmail",
       "@type" : "@id"
     },
-    "imports" : {
-      "@id" : "http://www.w3.org/2002/07/owl#imports",
-      "@type" : "@id"
-    },
-    "title" : {
-      "@id" : "http://purl.org/dc/terms/title",
-      "@type" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
-    },
-    "endpointURL" : {
-      "@id" : "http://www.w3.org/ns/dcat#endpointURL",
-      "@type" : "@id"
-    },
-    "conformsTo" : {
-      "@id" : "http://purl.org/dc/terms/conformsTo",
-      "@type" : "@id"
-    },
-    "type" : {
-      "@id" : "http://purl.org/dc/terms/type",
-      "@type" : "@id"
-    },
-    "license" : {
-      "@id" : "http://purl.org/dc/terms/license",
+    "primaryTopic" : {
+      "@id" : "http://xmlns.com/foaf/0.1/primaryTopic",
       "@type" : "@id"
     },
     "contactPoint" : {
       "@id" : "http://www.w3.org/ns/dcat#contactPoint",
-      "@type" : "@id"
-    },
-    "issued" : {
-      "@id" : "http://purl.org/dc/terms/issued",
-      "@type" : "http://www.w3.org/2001/XMLSchema#date"
-    },
-    "spatial" : {
-      "@id" : "http://purl.org/dc/terms/spatial",
-      "@type" : "@id"
-    },
-    "subject" : {
-      "@id" : "http://purl.org/dc/elements/1.1/subject",
-      "@type" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
-    },
-    "identifier" : {
-      "@id" : "http://purl.org/dc/terms/identifier",
-      "@type" : "http://www.w3.org/2001/XMLSchema#string"
-    },
-    "accessRights" : {
-      "@id" : "http://purl.org/dc/terms/accessRights",
-      "@type" : "@id"
-    },
-    "description" : {
-      "@id" : "http://purl.org/dc/terms/description",
-      "@type" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
-    },
-    "endpointDescription" : {
-      "@id" : "http://www.w3.org/ns/dcat#endpointDescription",
-      "@type" : "@id"
-    },
-    "geometry" : {
-      "@id" : "http://www.w3.org/ns/locn#geometry",
-      "@type" : "http://www.opengis.net/ont/geosparql#wktLiteral"
-    },
-    "service" : {
-      "@id" : "http://www.w3.org/ns/dcat#service",
-      "@type" : "@id"
-    },
-    "record" : {
-      "@id" : "http://www.w3.org/ns/dcat#record",
-      "@type" : "@id"
-    },
-    "primaryTopic" : {
-      "@id" : "http://xmlns.com/foaf/0.1/primaryTopic",
       "@type" : "@id"
     },
     "source" : {
@@ -161,13 +105,69 @@
       "@id" : "http://purl.org/dc/terms/language",
       "@type" : "@id"
     },
+    "identifier" : {
+      "@id" : "http://purl.org/dc/terms/identifier",
+      "@type" : "http://www.w3.org/2001/XMLSchema#string"
+    },
+    "service" : {
+      "@id" : "http://www.w3.org/ns/dcat#service",
+      "@type" : "@id"
+    },
+    "record" : {
+      "@id" : "http://www.w3.org/ns/dcat#record",
+      "@type" : "@id"
+    },
+    "imports" : {
+      "@id" : "http://www.w3.org/2002/07/owl#imports",
+      "@type" : "@id"
+    },
+    "endpointDescription" : {
+      "@id" : "http://www.w3.org/ns/dcat#endpointDescription",
+      "@type" : "@id"
+    },
+    "title" : {
+      "@id" : "http://purl.org/dc/terms/title",
+      "@type" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+    },
+    "spatial" : {
+      "@id" : "http://purl.org/dc/terms/spatial",
+      "@type" : "@id"
+    },
+    "description" : {
+      "@id" : "http://purl.org/dc/terms/description",
+      "@type" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+    },
+    "endpointURL" : {
+      "@id" : "http://www.w3.org/ns/dcat#endpointURL",
+      "@type" : "@id"
+    },
+    "type" : {
+      "@id" : "http://purl.org/dc/terms/type",
+      "@type" : "@id"
+    },
+    "accessRights" : {
+      "@id" : "http://purl.org/dc/terms/accessRights",
+      "@type" : "@id"
+    },
+    "license" : {
+      "@id" : "http://purl.org/dc/terms/license",
+      "@type" : "@id"
+    },
+    "issued" : {
+      "@id" : "http://purl.org/dc/terms/issued",
+      "@type" : "http://www.w3.org/2001/XMLSchema#date"
+    },
+    "subject" : {
+      "@id" : "http://purl.org/dc/elements/1.1/subject",
+      "@type" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+    },
     "schema" : "http://schema.org/",
-    "a" : "http://dcat.example.org/eea-csw/",
     "gsp" : "http://www.opengis.net/ont/geosparql#",
     "owl" : "http://www.w3.org/2002/07/owl#",
     "xsd" : "http://www.w3.org/2001/XMLSchema#",
     "skos" : "http://www.w3.org/2004/02/skos/core#",
     "rdfs" : "http://www.w3.org/2000/01/rdf-schema#",
+    "ex" : "http://dcat.example.org/eea-csw/",
     "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "v" : "http://www.w3.org/2006/vcard/ns#",
     "dctype" : "http://purl.org/dc/dcmitype/",
