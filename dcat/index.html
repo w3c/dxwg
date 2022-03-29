@@ -392,7 +392,7 @@ table.simple {width:100%;}
 
 <aside id="ex-catalog" class="example">
 <pre class="nohighlight turtle">
-:catalog
+ex:catalog
   a dcat:Catalog&nbsp;;
   dcterms:title "Imaginary Catalog"@en&nbsp;;
   dcterms:title "Catálogo imaginario"@es&nbsp;;
@@ -401,12 +401,12 @@ table.simple {width:100%;}
   foaf:homepage &lt;http://dcat.example.org/catalog&gt;&nbsp;;
   dcterms:publisher&nbsp;ex:transparency-office&nbsp;;
   dcterms:language &lt;http://id.loc.gov/vocabulary/iso639-1/en&gt; &nbsp;;
-  dcat:dataset&nbsp;:dataset-001&nbsp; , :dataset-002 , :dataset-003 ;
+  dcat:dataset&nbsp;ex:dataset-001&nbsp; , ex:dataset-002 , ex:dataset-003 ;
   .
 </pre>
 </aside>
 
-        <p>The publisher of the catalog has the relative IRI&nbsp;<code>:transparency-office</code>. Further description of the publisher can be provided as in <a href="#ex-publisher"></a>:
+        <p>The publisher of the catalog has the relative IRI&nbsp;<code>ex:transparency-office</code>. Further description of the publisher can be provided as in <a href="#ex-publisher"></a>:
         </p>
 
 <aside id="ex-publisher" class="example">
@@ -418,7 +418,7 @@ ex:transparency-office
   .
 </pre>
 </aside>
-        <p>The catalog lists each of its datasets via the <code>dcat:dataset</code> property. In <a href="#ex-catalog"></a>, an example dataset was mentioned with the relative IRI&nbsp;<code>:dataset-001</code>. A possible description of it using DCAT is shown below:
+        <p>The catalog lists each of its datasets via the <code>dcat:dataset</code> property. In <a href="#ex-catalog"></a>, an example dataset was mentioned with the relative IRI&nbsp;<code>ex:dataset-001</code>. A possible description of it using DCAT is shown below:
         </p>
 
 <aside id="ex-dataset" class="example">
@@ -443,7 +443,7 @@ ex:dataset-001
   dcterms:publisher&nbsp;ex:finance-ministry&nbsp;;
   dcterms:language &lt;http://id.loc.gov/vocabulary/iso639-1/en&gt; &nbsp;;
   dcterms:accrualPeriodicity &lt;http://purl.org/linked-data/sdmx/2009/code#freq-W&gt; &nbsp;;
-  dcat:distribution&nbsp;:dataset-001-csv&nbsp;;
+  dcat:distribution&nbsp;ex:dataset-001-csv&nbsp;;
   .
 </pre>
 </aside>
@@ -470,7 +470,7 @@ ex:dataset-001
 
 <aside id="ex-distribution" class="example">
 <pre class="nohighlight turtle">
-:dataset-001-csv
+ex:dataset-001-csv
   a dcat:Distribution&nbsp;;
   dcat:downloadURL &lt;http://dcat.example.org/files/001.csv&gt; ;
   dcterms:title "CSV distribution of imaginary dataset 001"@en ;
@@ -600,10 +600,10 @@ ex:accountability
 
 <aside id="ex-landing-page" class="example">
 <pre class="nohighlight turtle">
-:dataset-002
+ex:dataset-002
   a dcat:Dataset ;
   dcat:landingPage &lt;http://dcat.example.org/dataset-002.html&gt; ;
-  dcat:distribution :dataset-002-csv ;
+  dcat:distribution ex:dataset-002-csv ;
   .
 :dataset-002-csv
   a dcat:Distribution ;
@@ -622,10 +622,10 @@ ex:accountability
 
 <aside id="ex-access-and-download-url" class="example">
 <pre class="nohighlight turtle">
-:dataset-003
+ex:dataset-003
   a dcat:Dataset ;
   dcat:landingPage &lt;http://dcat.example.org/dataset-003.html&gt; ;
-  dcat:distribution :dataset-003-csv ;
+  dcat:distribution ex:dataset-003-csv ;
   .
 :dataset-003-csv
   a dcat:Distribution ;
@@ -649,42 +649,42 @@ ex:accountability
 
 <aside id="ex-access-service" class="example">
 <pre class="nohighlight turtle">
-:dataset-004
+ex:dataset-004
   rdf:type dcat:Dataset ;
-  dcat:distribution :dataset-004-csv ;
-  dcat:distribution :dataset-004-png ;
+  dcat:distribution ex:dataset-004-csv ;
+  dcat:distribution ex:dataset-004-png ;
   .
 
-:dataset-004-csv
+ex:dataset-004-csv
   rdf:type dcat:Distribution ;
-  dcat:accessService :table-service-005 ;
+  dcat:accessService ex:table-service-005 ;
   dcat:accessURL &lt;http://dcat.example.org/api/table-005&gt; ;
   dcat:mediaType &lt;http://www.iana.org/assignments/media-types/text/csv&gt; ;
   .
 
-:dataset-004-png
+ex:dataset-004-png
   rdf:type dcat:Distribution ;
-  dcat:accessService :figure-service-006 ;
+  dcat:accessService ex:figure-service-006 ;
   dcat:accessURL &lt;http://dcat.example.org/api/figure-006&gt; ;
   dcat:mediaType &lt;http://www.iana.org/assignments/media-types/image/png&gt; ;
   .
 
-:figure-service-006
+ex:figure-service-006
   rdf:type dcat:DataService ;
   dcterms:conformsTo &lt;http://dcat.example.org/apidef/figure/v1.0&gt; ;
   dcterms:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view&gt; ;
   dcat:endpointDescription &lt;http://dcat.example.org/api/figure-006/params&gt; ;
   dcat:endpointURL &lt;http://dcat.example.org/api/figure-006&gt; ;
-  dcat:servesDataset :dataset-004 ;
+  dcat:servesDataset ex:dataset-004 ;
   .
 
-:table-service-005
+ex:table-service-005
   rdf:type dcat:DataService ;
   dcterms:conformsTo &lt;http://dcat.example.org/apidef/table/v2.2&gt; ;
   dcterms:type &lt;https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download&gt; ;
   dcat:endpointDescription &lt;http://dcat.example.org/api/table-005/capability&gt; ;
   dcat:endpointURL &lt;http://dcat.example.org/api/table-005&gt; ;
-  dcat:servesDataset :dataset-003, :dataset-004 ;
+  dcat:servesDataset ex:dataset-003, ex:dataset-004 ;
   .</pre>
 </aside>
 
@@ -5359,19 +5359,19 @@ ex:budget-2018-it a dcat:Dataset ;
 
 <aside class="example" id="ex-genoa-bus-stops-dataset-completeness-note">
 <pre class="nohighlight turtle">
-:genoaBusStopsDataset a dcat:Dataset ;
-  dqv:hasQualityAnnotation :genoaBusStopsDatasetCompletenessNote .
+ex:genoaBusStopsDataset a dcat:Dataset ;
+  dqv:hasQualityAnnotation ex:genoaBusStopsDatasetCompletenessNote .
 
 :genoaBusStopsDatasetCompletenessNote a dqv:UserQualityFeedback ;
-  oa:hasTarget :genoaBusStopsDataset ;
-  oa:hasBody :textBody ;
+  oa:hasTarget ex:genoaBusStopsDataset ;
+  oa:hasBody ex:textBody ;
   oa:motivatedBy dqv:qualityAssessment ;
-  prov:wasAttributedTo :consumer1 ;
+  prov:wasAttributedTo ex:consumer1 ;
   prov:generatedAtTime "2018-05-27T02:52:02Z"^^xsd:dateTime ;
   dqv:inDimension ldqd:completeness
   .
 
-:textBody a oa:TextualBody ;
+ex:textBody a oa:TextualBody ;
   rdf:value "Incomplete dataset: it contains only 20500 out of 30000 existing bus stops" ;
   dc:language "en" ;
   dc:format "text/plain"
