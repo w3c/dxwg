@@ -337,6 +337,32 @@ dcat:Dataset
   skos:scopeNote "Denne klasse repræsenterer det konkrete datasæt som det udgives af datasætleverandøren. I de tilfælde hvor det er nødvendigt at skelne mellem det konkrete datasæt og dets registrering i kataloget (fordi metadata såsom ændringsdato og vedligeholder er forskellige), så kan klassen katalogpost anvendes. "@da ;
   skos:scopeNote "Denne klasse beskriver det konceptuelle datasæt. En eller flere repræsentationer kan være tilgængelige med forskellige skematiske opsætninger, formater eller serialiseringer."@da ;
 .
+dcat:DatasetSeries
+  a rdfs:Class ;
+  a owl:Class ;  
+  rdfs:comment "A collection of datasets that are published separately, but share some common characteristics that groups them."@en ;
+  rdfs:comment "Una collezione di dataset che sono pubblicati separatamente, ma che condividono caratteristiche che li rendono parte di uno stesso gruppo."@it ;  
+  rdfs:comment "Una colección de conjuntos de datos publicados por separado, pero que comparten características comunes que los agrupan."@es ;
+  rdfs:label "Dataset series"@en ;
+  rdfs:label "Serie de conjuntos de datos"@es ;
+  rdfs:label "Serie di dataset"@it ;
+  rdfs:subClassOf dcat:Dataset ;
+  skos:editorialNote "2022-05-02 Added to ttl file with labels in English and Spanish only for now"@en ;
+  skos:changeNote "New class added in DCAT 3."@en ;
+  skos:changeNote "Nueva clase agregada en DCAT 3."@es ;
+  skos:changeNote "Nová třída přidaná ve verzi DCAT 3"@cs ;
+  skos:changeNote "Nuova classe aggiunta in DCAT 3"@it ;
+  skos:changeNote "Ny klasse tilføjet i DCAT 3"@da ;
+  skos:definition "A collection of datasets that are published separately, but share some common characteristics that groups them."@en ;
+  skos:definition "Una collezione di dataset che sono pubblicati separatamente, ma che condividono caratteristiche che li rendono parte di uno stesso gruppo."@it ;  
+  skos:definition "Una colección de conjuntos de datos publicados por separado, pero que comparten características comunes que los agrupan."@es ;
+  skos:scopeNote "Common scenarios for dataset series include: time series composed of periodically released subsets; map-series composed of items of the same type or theme but with differing spatial footprints."@en ;
+  skos:scopeNote "Algunos escenarios comunes para series de conjuntos de datos son: series temporales compuestas de subconjuntos de datos publicados periódicamente; series de mapas compuestos de elementos del mismo tipo o tema pero con distintas huellas espaciales."@es ;
+  skos:scopeNote "Scenari tipici per l'uso di serie di dataset: serie temporali costituite di dataset pubblicati regolarmente; serie di mappe costituite da elementi dello stesso tipo o tematica ma relative a differenti aree geografiche."@it ;  
+  skos:scopeNote "Dataset series can be also soft-typed via property dcterms:type as in the approach used in [GeoDCAT-AP], and adopted in [DCAT-AP-IT] and [GeoDCAT-AP-IT])."@en ;
+  skos:scopeNote "También puede asignarse un tipo a las series de datos usando la propiedad dcterms:type como se hace en [GeoDCAT-AP], y adoptado en [DCAT-AP-IT] y [GeoDCAT-AP-IT])."@es ;
+  skos:scopeNote "Le serie di dati possono anche essere denotate come tali usando la proprietà dcterms:type, secondo l'approccio usato in [GeoDCAT-AP], e adottato in [DCAT-AP-IT] e [GeoDCAT-AP-IT])."@it ;
+.
 dcat:Distribution
   a rdfs:Class ;
   a owl:Class ;
@@ -410,121 +436,6 @@ dcat:Relationship
   skos:scopeNote "Viene utilizzato per caratterizzare la relazione tra insiemi di dati, e potenzialmente altri tipi di risorse, nei casi in cui la natura della relazione è nota ma non adeguatamente caratterizzata dalle proprietà dello standard 'Dublin Core' (dcterms:hasPart, dcterms:isPartOf, dcterms:conformsTo, dcterms:isFormatOf, dcterms:hasFormat, dcterms:isVersionOf, dcterms:hasVersion, dcterms:replaces, dcterms:isReplacedBy, dcterms:references, dcterms:isReferencedBy, dcterms:require, dcterms:isRequiredBy) o dalle propietà fornite da PROV-O  (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov: hadPrimarySource, prov:alternateOf, prov:specializationOf)."@it ;
   skos:scopeNote "Anvendes til at karakterisere en relation mellem datasæt, og potentielt andre ressourcer, hvor relationen er kendt men ikke tilstrækkeligt beskrevet af de standardiserede egenskaber i Dublin Core (dcterms:hasPart, dcterms:isPartOf, dcterms:conformsTo, dcterms:isFormatOf, dcterms:hasFormat, dcterms:isVersionOf, dcterms:hasVersion, dcterms:replaces, dcterms:isReplacedBy, dcterms:references, dcterms:isReferencedBy, dcterms:requires, dcterms:isRequiredBy) eller PROV-O-egenskaber (prov:wasDerivedFrom, prov:wasInfluencedBy, prov:wasQuotedFrom, prov:wasRevisionOf, prov:hadPrimarySource, prov:alternateOf, prov:specializationOf)."@da ;
 .
-
-dcat:inSeries
-  a rdf:Property ;
-  a owl:ObjectProperty ; 
-  rdfs:subPropertyOf dcterms:isPartOf ;
-  rdfs:label "in series"@en ;
-  rdfs:label "TBD"@es ;
-  rdfs:label "in serie"@it ;
-  rdfs:comment "A dataset series of which the dataset is part."@en ;
-  rdfs:comment "TBD"@es ;
-  rdfs:comment "Una serie di dataset di cui questo dataset fa parte."@it ;
-  skos:definition "A dataset series of which the dataset is part."@en ;
-  skos:definition "TBD"@es ;
-  skos:definition "Una serie di dataset di cui questo dataset fa parte."@it ;
-  skos:changeNote "New property added in DCAT 3."@en ;
-  skos:changeNote "Nueva propiedad agregada in DCAT 3."@es ;
-  skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 3."@cs ;
-  skos:changeNote "Nuova proprietà aggiunta in DCAT 3."@it ;
-  skos:changeNote "Ny egenskab tilføjet i DCAT 3."@da ;
-.
-
-dcat:DatasetSeries
-  a rdfs:Class ;
-  a owl:Class ;  
-  rdfs:comment "A collection of datasets that are published separately, but share some common characteristics that groups them."@en ;
-  rdfs:comment "Una collezione di dataset che sono pubblicati separatamente, ma che condividono caratteristiche che li rendono parte di uno stesso gruppo."@it ;  
-  rdfs:comment "Una colección de conjuntos de datos publicados por separado, pero que comparten características comunes que los agrupan."@es ;
-  rdfs:label "Dataset series"@en ;
-  rdfs:label "Serie de conjuntos de datos"@es ;
-  rdfs:label "Serie di dataset"@it ;
-  rdfs:subClassOf dcat:Dataset ;
-  skos:editorialNote "2022-05-02 Added to ttl file with labels in English and Spanish only for now"@en ;
-  skos:changeNote "New class added in DCAT 3."@en ;
-  skos:changeNote "Nueva clase agregada en DCAT 3."@es ;
-  skos:changeNote "Nová třída přidaná ve verzi DCAT 3"@cs ;
-  skos:changeNote "Nuova classe aggiunta in DCAT 3"@it ;
-  skos:changeNote "Ny klasse tilføjet i DCAT 3"@da ;
-  skos:definition "A collection of datasets that are published separately, but share some common characteristics that groups them."@en ;
-  skos:definition "Una collezione di dataset che sono pubblicati separatamente, ma che condividono caratteristiche che li rendono parte di uno stesso gruppo."@it ;  
-  skos:definition "Una colección de conjuntos de datos publicados por separado, pero que comparten características comunes que los agrupan."@es ;
-  skos:scopeNote "Common scenarios for dataset series include: time series composed of periodically released subsets; map-series composed of items of the same type or theme but with differing spatial footprints."@en ;
-  skos:scopeNote "Algunos escenarios comunes para series de conjuntos de datos son: series temporales compuestas de subconjuntos de datos publicados periódicamente; series de mapas compuestos de elementos del mismo tipo o tema pero con distintas huellas espaciales."@es ;
-  skos:scopeNote "Scenari tipici per l'uso di serie di dataset: serie temporali costituite di dataset pubblicati regolarmente; serie di mappe costituite da elementi dello stesso tipo o tematica ma relative a differenti aree geografiche."@it ;  
-  skos:scopeNote "Dataset series can be also soft-typed via property dcterms:type as in the approach used in [GeoDCAT-AP], and adopted in [DCAT-AP-IT] and [GeoDCAT-AP-IT])."@en ;
-  skos:scopeNote "También puede asignarse un tipo a las series de datos usando la propiedad dcterms:type como se hace en [GeoDCAT-AP], y adoptado en [DCAT-AP-IT] y [GeoDCAT-AP-IT])."@es ;
-  skos:scopeNote "Le serie di dati possono anche essere denotate come tali usando la proprietà dcterms:type, secondo l'approccio usato in [GeoDCAT-AP], e adottato in [DCAT-AP-IT] e [GeoDCAT-AP-IT])."@it ;
-.
-
-dcat:first
-  a rdf:Property ;
-  a owl:ObjectProperty ; 
-  rdfs:label "first"@en ;
-  rdfs:label "primero"@es ;
-  rdfs:label "primo"@it ;
-  rdfs:comment "The first resource in an ordered collection or series of resources, to which the current resource belongs."@en ;
-  rdfs:comment "El primer recurso en una colección ordenada o serie de recursos, al que el recurso pertenece."@es ;
-  rdfs:comment "La prima risorsa in una collezione ordinata o in una serie di risorse, di cui la risorsa fa parte."@it ;  
-  skos:definition "The first resource in an ordered collection or series of resources, to which the current resource belongs."@en ;
-  skos:definition "El primer recurso en una colección ordenada o serie de recursos, al que el recurso pertenece."@es ;
-  skos:definition "La prima risorsa in una collezione ordinata o in una serie di risorse, di cui la risorsa fa parte."@it ;
-  skos:scopeNote "In DCAT this property is used for resources belonging to a dcat:DatasetSeries."@en ;
-  skos:scopeNote "En DCAT esta propiedad se usa para recursos que pertenecen a una dcat:DatasetSeries."@es ;
-  skos:scopeNote "In DCAT questa proprietà è usata per risorse che fanno parte di una dcat:DatasetSeries."@it ;
-  skos:changeNote "New property added in DCAT 3."@en ;
-  skos:changeNote "Nueva propiedad agregada in DCAT 3."@es ;
-  skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 3."@cs ;
-  skos:changeNote "Nuova proprietà aggiunta in DCAT 3."@it ;
-  skos:changeNote "Ny egenskab tilføjet i DCAT 3."@da ;
-.
-   
-dcat:last
-  a rdf:Property ;
-  a owl:ObjectProperty ; 
-  rdfs:label "last"@en ;
-  rdfs:label "último"@es ;
-  rdfs:label "ultimo"@it ;
-  rdfs:comment "The last resource in an ordered collection or series of resources, to which the current resource belongs."@en ;
-  rdfs:comment "El último recurso en una colección ordenada o serie de recursos, al que el recurso pertenece."@es ;
-  rdfs:comment "L'ultima risorsa in una collezione ordinata o in una serie di risorse, di cui la risorsa fa parte."@it ;
-  skos:definition "The last resource in an ordered collection or series of resources, to which the current resource belongs."@en ;
-  skos:definition "El último recurso en una colección ordenada o serie de recursos, al que el recurso pertenece."@es ;
-  skos:definition "L'ultima risorsa in una collezione ordinata o in una serie di risorse, di cui la risorsa fa parte."@it ;
-  skos:scopeNote "In DCAT this property is used for resources belonging to a dcat:DatasetSeries."@en ;
-  skos:scopeNote "En DCAT esta propiedad se usa para recursos que pertenecen a una dcat:DatasetSeries."@es ;
-  skos:scopeNote "In DCAT questa proprietà è usata per risorse che fanno parte di una dcat:DatasetSeries."@it ;
-  skos:changeNote "New property added in DCAT 3."@en ;
-  skos:changeNote "Nueva propiedad agregada in DCAT 3."@es ;
-  skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 3."@cs ;
-  skos:changeNote "Nuova proprietà aggiunta in DCAT 3."@it ;
-  skos:changeNote "Ny egenskab tilføjet i DCAT 3."@da ;
-.
-
-dcat:prev
-  a rdf:Property ;
-  a owl:ObjectProperty ; 
-  rdfs:label "previous"@en ;
-  rdfs:label "previo"@es ;
-  rdfs:label "precedente"@it ;
-  rdfs:comment "The previous resource (before the current one) in an ordered collection or series of resources."@en ;
-  rdfs:comment "La risorsa precedente a quella attuale in una collezione ordinata o in una serie di risorse."@it ;
-  skos:definition "The previous resource (before the current one) in an ordered collection or series of resources."@en ;
-  skos:definition "La risorsa precedente a quella attuale in una collezione ordinata o in una serie di risorse."@it ;
-
-  skos:scopeNote "In DCAT this property is used for resources belonging to a dcat:DatasetSeries."@en ;
-  skos:scopeNote "En DCAT esta propiedad se usa para recursos que pertenecen a una dcat:DatasetSeries."@es ;
-  skos:scopeNote "In DCAT questa proprietà è usata per risorse che fanno parte di una dcat:DatasetSeries."@it ;
-  skos:scopeNote "It is important to note that this property is different from dcat:previousVersion, as it does not denote a previous version of the same resource, but a distinct resource immediately preceding the current one in an ordered collection of resources."@en ;
-  skos:scopeNote "È importante notare che questa proprietà è diversa da dcat:previousVersion, dato che non indica una versione precedente della stessa risorsa, ma una risorsa distinta che precede immediatamente quella attuale in una collezione ordinata di risorse."@it ;
-  skos:changeNote "New property added in DCAT 3."@en ;
-  skos:changeNote "Nueva propiedad agregada in DCAT 3."@es ;
-  skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 3."@cs ;
-  skos:changeNote "Nuova proprietà aggiunta in DCAT 3."@it ;
-  skos:changeNote "Ny egenskab tilføjet i DCAT 3."@da ;
-.
-
 dcat:Resource
   a owl:Class ;
   a rdfs:Class ;
@@ -601,6 +512,92 @@ dcat:Role
   skos:scopeNote "Anvendes i forbindelse med kvalificerede krediteringer til at angive aktørens rolle i forhold til en entitet. Det anbefales at værdierne styres som et kontrolleret udfaldsrum med aktørroller, såsom http://registry.it.csiro.au/def/isotc211/CI_RoleCode."@da ;
   skos:scopeNote "Anvendes i forbindelse med kvalificerede relationer til at specificere en entitets rolle i forhold til en anden entitet. Det anbefales at værdierne styres med et kontrolleret udfaldsrum for for entitetsroller såsom: ISO 19115 DS_AssociationTypeCode http://registry.it.csiro.au/def/isotc211/DS_AssociationTypeCode; IANA Registry of Link Relations https://www.iana.org/assignments/link-relation;  DataCite metadata schema;  MARC relators https://id.loc.gov/vocabulary/relators."@da ;
 .
+
+dcat:inSeries
+  a rdf:Property ;
+  a owl:ObjectProperty ; 
+  rdfs:subPropertyOf dcterms:isPartOf ;
+  rdfs:label "in series"@en ;
+  rdfs:label "TBD"@es ;
+  rdfs:label "in serie"@it ;
+  rdfs:comment "A dataset series of which the dataset is part."@en ;
+  rdfs:comment "TBD"@es ;
+  rdfs:comment "Una serie di dataset di cui questo dataset fa parte."@it ;
+  skos:definition "A dataset series of which the dataset is part."@en ;
+  skos:definition "TBD"@es ;
+  skos:definition "Una serie di dataset di cui questo dataset fa parte."@it ;
+  skos:changeNote "New property added in DCAT 3."@en ;
+  skos:changeNote "Nueva propiedad agregada in DCAT 3."@es ;
+  skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 3."@cs ;
+  skos:changeNote "Nuova proprietà aggiunta in DCAT 3."@it ;
+  skos:changeNote "Ny egenskab tilføjet i DCAT 3."@da ;
+.
+dcat:first
+  a rdf:Property ;
+  a owl:ObjectProperty ; 
+  rdfs:label "first"@en ;
+  rdfs:label "primero"@es ;
+  rdfs:label "primo"@it ;
+  rdfs:comment "The first resource in an ordered collection or series of resources, to which the current resource belongs."@en ;
+  rdfs:comment "El primer recurso en una colección ordenada o serie de recursos, al que el recurso pertenece."@es ;
+  rdfs:comment "La prima risorsa in una collezione ordinata o in una serie di risorse, di cui la risorsa fa parte."@it ;  
+  skos:definition "The first resource in an ordered collection or series of resources, to which the current resource belongs."@en ;
+  skos:definition "El primer recurso en una colección ordenada o serie de recursos, al que el recurso pertenece."@es ;
+  skos:definition "La prima risorsa in una collezione ordinata o in una serie di risorse, di cui la risorsa fa parte."@it ;
+  skos:scopeNote "In DCAT this property is used for resources belonging to a dcat:DatasetSeries."@en ;
+  skos:scopeNote "En DCAT esta propiedad se usa para recursos que pertenecen a una dcat:DatasetSeries."@es ;
+  skos:scopeNote "In DCAT questa proprietà è usata per risorse che fanno parte di una dcat:DatasetSeries."@it ;
+  skos:changeNote "New property added in DCAT 3."@en ;
+  skos:changeNote "Nueva propiedad agregada in DCAT 3."@es ;
+  skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 3."@cs ;
+  skos:changeNote "Nuova proprietà aggiunta in DCAT 3."@it ;
+  skos:changeNote "Ny egenskab tilføjet i DCAT 3."@da ;
+. 
+dcat:last
+  a rdf:Property ;
+  a owl:ObjectProperty ; 
+  rdfs:label "last"@en ;
+  rdfs:label "último"@es ;
+  rdfs:label "ultimo"@it ;
+  rdfs:comment "The last resource in an ordered collection or series of resources, to which the current resource belongs."@en ;
+  rdfs:comment "El último recurso en una colección ordenada o serie de recursos, al que el recurso pertenece."@es ;
+  rdfs:comment "L'ultima risorsa in una collezione ordinata o in una serie di risorse, di cui la risorsa fa parte."@it ;
+  skos:definition "The last resource in an ordered collection or series of resources, to which the current resource belongs."@en ;
+  skos:definition "El último recurso en una colección ordenada o serie de recursos, al que el recurso pertenece."@es ;
+  skos:definition "L'ultima risorsa in una collezione ordinata o in una serie di risorse, di cui la risorsa fa parte."@it ;
+  skos:scopeNote "In DCAT this property is used for resources belonging to a dcat:DatasetSeries."@en ;
+  skos:scopeNote "En DCAT esta propiedad se usa para recursos que pertenecen a una dcat:DatasetSeries."@es ;
+  skos:scopeNote "In DCAT questa proprietà è usata per risorse che fanno parte di una dcat:DatasetSeries."@it ;
+  skos:changeNote "New property added in DCAT 3."@en ;
+  skos:changeNote "Nueva propiedad agregada in DCAT 3."@es ;
+  skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 3."@cs ;
+  skos:changeNote "Nuova proprietà aggiunta in DCAT 3."@it ;
+  skos:changeNote "Ny egenskab tilføjet i DCAT 3."@da ;
+.
+dcat:prev
+  a rdf:Property ;
+  a owl:ObjectProperty ; 
+  rdfs:label "previous"@en ;
+  rdfs:label "previo"@es ;
+  rdfs:label "precedente"@it ;
+  rdfs:comment "The previous resource (before the current one) in an ordered collection or series of resources."@en ;
+  rdfs:comment "La risorsa precedente a quella attuale in una collezione ordinata o in una serie di risorse."@it ;
+  skos:definition "The previous resource (before the current one) in an ordered collection or series of resources."@en ;
+  skos:definition "La risorsa precedente a quella attuale in una collezione ordinata o in una serie di risorse."@it ;
+
+  skos:scopeNote "In DCAT this property is used for resources belonging to a dcat:DatasetSeries."@en ;
+  skos:scopeNote "En DCAT esta propiedad se usa para recursos que pertenecen a una dcat:DatasetSeries."@es ;
+  skos:scopeNote "In DCAT questa proprietà è usata per risorse che fanno parte di una dcat:DatasetSeries."@it ;
+  skos:scopeNote "It is important to note that this property is different from dcat:previousVersion, as it does not denote a previous version of the same resource, but a distinct resource immediately preceding the current one in an ordered collection of resources."@en ;
+  skos:scopeNote "È importante notare che questa proprietà è diversa da dcat:previousVersion, dato che non indica una versione precedente della stessa risorsa, ma una risorsa distinta che precede immediatamente quella attuale in una collezione ordinata di risorse."@it ;
+  skos:changeNote "New property added in DCAT 3."@en ;
+  skos:changeNote "Nueva propiedad agregada in DCAT 3."@es ;
+  skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 3."@cs ;
+  skos:changeNote "Nuova proprietà aggiunta in DCAT 3."@it ;
+  skos:changeNote "Ny egenskab tilføjet i DCAT 3."@da ;
+.
+
+
 
 dcat:previousVersion
   a rdf:Property ;
