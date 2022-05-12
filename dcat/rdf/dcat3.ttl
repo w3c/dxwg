@@ -21,12 +21,6 @@
 
 <http://www.w3.org/ns/dcat>
   a owl:Ontology ;
-  vann:preferredNamespaceUri "http://www.w3.org/ns/dcat#" ;
-  vann:preferredNamespacePrefix "dcat" ;
-  owl:versionIRI <http://www.w3.org/ns/dcat3> ;
-  owl:backwardCompatibleWith <http://www.w3.org/ns/dcat2> ;
-  owl:backwardCompatibleWith <http://www.w3.org/ns/dcat2014> ;
-  owl:priorVersion <http://www.w3.org/ns/dcat2> ;
   dcat:version "3" ;
   dcterms:contributor [
       a foaf:Person ;
@@ -135,6 +129,14 @@
   dcterms:modified "2021-09-27"^^xsd:date ;
   dcterms:modified "2022-03-22"^^xsd:date ;
   dcterms:modified "2022-05-12"^^xsd:date ;
+  foaf:maker [
+      foaf:homepage <https://www.w3.org/2011/gld/> ;
+      foaf:name "Government Linked Data WG" ;
+    ] ;
+  foaf:maker [
+      foaf:homepage <https://www.w3.org/2017/dxwg/> ;
+      foaf:name "Dataset Exchange WG" ;
+    ] ;
   rdfs:comment "DCAT es un vocabulario RDF diseñado para facilitar la interoperabilidad entre catálogos de datos publicados en la Web. Utilizando DCAT para describir datos disponibles en catálogos se aumenta la posibilidad de que sean descubiertos y se permite que las aplicaciones consuman fácilmente los metadatos de varios catálogos."@es ;
   rdfs:comment "DCAT est un vocabulaire développé pour faciliter l'interopérabilité entre les jeux de données publiées sur le Web. En utilisant DCAT pour décrire les jeux de données dans les catalogues de données, les fournisseurs de données augmentent leur découverte et permettent que les applications facilement les métadonnées de plusieurs catalogues. Il permet en plus la publication décentralisée des catalogues et facilitent la recherche fédérée des données entre plusieurs sites. Les métadonnées DCAT aggrégées peuvent servir comme un manifeste pour faciliter la préservation digitale des ressources. DCAT est définie à l'adresse http://www.w3.org/TR/vocab-dcat/. Une quelconque version de ce document normatif et ce vocabulaire est une erreur dans ce vocabulaire."@fr ;
   rdfs:comment "DCAT is an RDF vocabulary designed to facilitate interoperability between data catalogs published on the Web. By using DCAT to describe datasets in data catalogs, publishers increase discoverability and enable applications easily to consume metadata from multiple catalogs. It further enables decentralized publishing of catalogs and facilitates federated dataset search across sites. Aggregated DCAT metadata can serve as a manifest file to facilitate digital preservation. DCAT is defined at http://www.w3.org/TR/vocab-dcat/. Any variance between that normative document and this schema is an error in this schema."@en ;
@@ -153,23 +155,21 @@
   rdfs:label "أنطولوجية فهارس قوائم البيانات"@ar ;
   rdfs:label "データ・カタログ語彙（DCAT）"@ja ;
   rdfs:label "Datakatalogvokabular"@da ;
+  owl:backwardCompatibleWith <http://www.w3.org/ns/dcat2> ;
+  owl:backwardCompatibleWith <http://www.w3.org/ns/dcat2014> ;
   owl:imports dcterms: ;
   owl:imports <http://www.w3.org/2004/02/skos/core> ;
   owl:imports <http://www.w3.org/ns/prov-o#> ;
+  owl:priorVersion <http://www.w3.org/ns/dcat2> ;
   owl:versionInfo "Esta es una copia del vocabulario DCAT 3 disponible en https://www.w3.org/ns/dcat.ttl"@es ;
   owl:versionInfo "This is an updated copy the DCAT 3 vocabulary, taken from https://www.w3.org/ns/dcat.ttl"@en ;
   owl:versionInfo "Dette er en opdateret kopi af DCAT 3 som er tilgænglig på https://www.w3.org/ns/dcat.ttl"@da ;
   owl:versionInfo "Questa è una copia aggiornata del vocabolario DCAT 3 disponibile in https://www.w3.org/ns/dcat.ttl"@en ;
   owl:versionInfo "Toto je aktualizovaná kopie slovníku DCAT 3, převzatá z https://www.w3.org/ns/dcat.ttl"@cs ;
+  owl:versionIRI <http://www.w3.org/ns/dcat3> ;
   skos:editorialNote "English language definitions updated in this revision in line with ED. Multilingual text unevenly updated."@en ;
-  foaf:maker [
-      foaf:homepage <https://www.w3.org/2011/gld/> ;
-      foaf:name "Government Linked Data WG" ;
-    ] ;
-  foaf:maker [
-      foaf:homepage <https://www.w3.org/2017/dxwg/> ;
-      foaf:name "Dataset Exchange WG" ;
-    ] ;
+  vann:preferredNamespacePrefix "dcat" ;
+  vann:preferredNamespaceUri "http://www.w3.org/ns/dcat#" ;
 .
 dcat:Catalog
   a rdfs:Class ;
@@ -274,9 +274,9 @@ dcat:DataService
   rdfs:label "Servizio di dati"@it ;
   rdfs:label "Servicio de datos"@es ;
   rdfs:label "Datatjeneste"@da ;
-  skos:altLabel "Dataservice"@da ;
   rdfs:subClassOf dctype:Service ;
   rdfs:subClassOf dcat:Resource ;
+  skos:altLabel "Dataservice"@da ;
   skos:changeNote "New class added in DCAT 2."@en ;
   skos:changeNote "Nová třída přidaná ve verzi DCAT 2."@cs ;
   skos:changeNote "Nueva clase añadida en DCAT 2."@es ;
@@ -320,8 +320,8 @@ dcat:Dataset
   rdfs:label "قائمة بيانات"@ar ;
   rdfs:label "データセット"@ja ;
   rdfs:label "Datasæt"@da ;
-  skos:altLabel "Datasamling"@da ;
   rdfs:subClassOf dcat:Resource ;
+  skos:altLabel "Datasamling"@da ;
   skos:editorialNote "2020-03-16 A new scopenote added and need to be translated"@en ;
   skos:changeNote "2018-02 - odstraněno tvrzení o podtřídě dctype:Dataset, jelikož rozsah dcat:Dataset zahrnuje několik dalších typů ze slovníku dctype."@cs ;
   skos:changeNote "2018-02 - se eliminó el axioma de subclase con dctype:Dataset porque el alcance de dcat:Dataset incluye muchos otros tipos del vocabulario dctype."@es ;
@@ -356,6 +356,7 @@ dcat:DatasetSeries
   rdfs:comment "A collection of datasets that are published separately, but share some characteristics that group them."@en ;
   rdfs:comment "Una collezione di dataset che sono pubblicati separatamente, ma che condividono caratteristiche che li rendono parte di uno stesso gruppo."@it ;  
   rdfs:comment "Una colección de conjuntos de datos publicados por separado, pero que comparten características que los agrupan."@es ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-3/> ;
   rdfs:label "Dataset series"@en ;
   rdfs:label "Serie de conjuntos de datos"@es ;
   rdfs:label "Serie di dataset"@it ;
@@ -428,6 +429,7 @@ dcat:Relationship
   rdfs:comment "Una clase de asociación para adjuntar información adicional a una relación entre recursos DCAT."@es ;
   rdfs:comment "Una classe di associazione per il collegamento di informazioni aggiuntive a una relazione tra le risorse DCAT."@it ;
   rdfs:comment "En associationsklasse til brug for tilknytning af yderligere information til en relation mellem DCAT-ressourcer."@da ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-2/> ;
   rdfs:label "Relación"@es ;
   rdfs:label "Relationship"@en ;
   rdfs:label "Relazione"@it ;
@@ -457,6 +459,7 @@ dcat:Resource
   rdfs:comment "Risorsa pubblicata o curata da un singolo agente."@it ;
   rdfs:comment "Zdroj publikovaný či řízený jediným činitelem."@cs ;
   rdfs:comment "Ressource udgivet eller udvalgt og arrangeret af en enkelt aktør."@da ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-2/> ;
   rdfs:label "Catalogued resource"@en ;
   rdfs:label "Katalogizovaný zdroj"@cs ;
   rdfs:label "Recurso catalogado"@es ;
@@ -492,6 +495,7 @@ dcat:Role
   rdfs:comment "Un rol es la función de un recurso o agente con respecto a otro recuros, en el contexto de atribución del recurso o de las relaciones entre recursos."@es ;
   rdfs:comment "Un ruolo è la funzione di una risorsa o di un agente rispetto ad un'altra risorsa, nel contesto dell'attribuzione delle risorse o delle relazioni tra risorse."@it ;
   rdfs:comment "En rolle er den funktion en ressource eller aktør har i forhold til en anden ressource, i forbindelse med ressourcekreditering eller ressourcerelationer."@da ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-2/> ;
   rdfs:label "Rol"@es ;
   rdfs:label "Role"@cs ;
   rdfs:label "Role"@en ;
@@ -534,6 +538,7 @@ dcat:accessService
   rdfs:comment "Un sitio o end-point que da acceso a la distribución de un conjunto de datos."@es ;
   rdfs:comment "Un sito o end-point che dà accesso alla distribuzione del set di dati."@it ;
   rdfs:comment "Et websted eller endpoint der giver adgang til en repræsentation af datasættet."@da ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-2/> ;
   rdfs:label "data access service"@en ;
   rdfs:label "servicio de acceso de datos"@es ;
   rdfs:label "servizio di accesso ai dati"@it ;
@@ -554,6 +559,10 @@ dcat:accessService
 dcat:accessURL
   a rdf:Property ;
   a owl:ObjectProperty ;
+  owl:propertyChainAxiom (
+      dcat:accessService
+      dcat:endpointURL
+    ) ;
   rdfs:comment "A URL of a resource that gives access to a distribution of the dataset. E.g. landing page, feed, SPARQL endpoint. Use for all cases except a simple download link, in which case downloadURL is preferred."@en ;
   rdfs:comment "Ceci peut être tout type d'URL qui donne accès à une distribution du jeu de données. Par exemple, un lien à une page HTML contenant un lien au jeu de données, un Flux RSS, un point d'accès SPARQL. Utilisez le lorsque votre catalogue ne contient pas d'information sur quoi il est ou quand ce n'est pas téléchargeable."@fr ;
   rdfs:comment "Puede ser cualquier tipo de URL que de acceso a una distribución del conjunto de datos, e.g., página de destino, descarga, URL feed, punto de acceso SPARQL. Esta propriedad se debe usar cuando su catálogo de datos no tiene información sobre donde está o cuando no se puede descargar."@es ;
@@ -574,12 +583,8 @@ dcat:accessURL
   rdfs:label "رابط وصول"@ar ;
   rdfs:label "アクセスURL"@ja ;
   rdfs:label "adgangsadresse"@da ;
-  skos:altLabel "adgangsURL"@da ;
   rdfs:range rdfs:Resource ;
-  owl:propertyChainAxiom (
-      dcat:accessService
-      dcat:endpointURL
-    ) ;
+  skos:altLabel "adgangsURL"@da ;
   skos:definition "A URL of a resource that gives access to a distribution of the dataset. E.g. landing page, feed, SPARQL endpoint. Use for all cases except a simple download link, in which case downloadURL is preferred."@en ;
   skos:definition "Ceci peut être tout type d'URL qui donne accès à une distribution du jeu de données. Par exemple, un lien à une page HTML contenant un lien au jeu de données, un Flux RSS, un point d'accès SPARQL. Utilisez le lorsque votre catalogue ne contient pas d'information sur quoi il est ou quand ce n'est pas téléchargeable."@fr ;
   skos:definition "Puede ser cualquier tipo de URL que de acceso a una distribución del conjunto de datos, e.g., página de destino, descarga, URL feed, punto de acceso SPARQL. Esta propriedad se debe usar cuando su catálogo de datos no tiene información sobre donde está o cuando no se puede descargar."@es ;
@@ -604,6 +609,12 @@ dcat:bbox
   a rdf:Property ;
   a owl:DatatypeProperty ;
   rdfs:domain dcterms:Location ;
+  rdfs:comment "El cuadro delimitador geográfico para un recurso."@es ;
+  rdfs:comment "Ohraničení geografické oblasti zdroje."@cs ;
+  rdfs:comment "The geographic bounding box of a spatial thing [SDW-BP]."@en ;
+  rdfs:comment "Il riquadro di delimitazione geografica di una risorsa."@it ;
+  rdfs:comment "Den geografiske omskrevne firkant af en ressource."@da ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-2/> ;
   rdfs:label "bounding box"@en ;
   rdfs:label "quadro di delimitazione"@it ;
   rdfs:label "cuadro delimitador"@es ;
@@ -620,12 +631,12 @@ dcat:bbox
   skos:definition "The geographic bounding box of a spatial thing [SDW-BP]."@en ;
   skos:definition "Il riquadro di delimitazione geografica di una risorsa."@it ;
   skos:definition "Den geografiske omskrevne firkant af en ressource."@da ;
+  skos:editorialNote "English language definitions and comments updated in this revision in line with ED. Multilingual text unevenly updated."@en ;
   skos:scopeNote "El rango de esta propiedad es intencionalmente genérico con el propósito de permitir distintas codificaciones geométricas. Por ejemplo, la geometría puede ser codificada como WKT (geosparql:wktLiteral [GeoSPARQL]) o [GML] (geosparql:asGML [GeoSPARQL])."@es ;
   skos:scopeNote "Obor hodnot této vlastnosti je úmyslně obecný, aby umožnil různé kódování geometrií. Geometrie by kupříkladu mohla být kódována jako WKT (geosparql:wktLiteral [GeoSPARQL]) či [GML] (geosparql:asGML [GeoSPARQL])."@cs ;
   skos:scopeNote "The range of this property (rdfs:Literal) is intentionally generic, with the purpose of allowing different geometry literal encodings. E.g., the geometry could be encoded as a WKT literal (geosparql:wktLiteral [GeoSPARQL])."@en ;
   skos:scopeNote "Il range di questa proprietà (rdfs:Literal) è volutamente generica, con lo scopo di consentire diverse codifiche geometriche letterali. Ad esempio, la geometria potrebbe essere codificata con un letterale WKT (geosparql:wktLiteral [GeoSPARQL]) o [GML] (geosparql:asGML [GeoSPARQL])."@it ;
   skos:scopeNote "Rækkevidden for denne egenskab er bevidst generisk defineret med det formål at tillade forskellige kodninger af geometrier. Geometrien kan eksempelvis repræsenteres som WKT (geosparql:asWKT [GeoSPARQL]) eller [GML] (geosparql:asGML [GeoSPARQL])."@da ;
-  skos:editorialNote "English language definitions and comments updated in this revision in line with ED. Multilingual text unevenly updated."@en ;
 .
 dcat:byteSize
   a rdf:Property ;
@@ -679,15 +690,16 @@ dcat:catalog
   rdfs:comment "Un catálogo cuyo contenido es de interés en el contexto del catálogo que está siendo descripto."@es ;
   rdfs:comment "Et katalog hvis indhold er relevant i forhold til det aktuelle katalog."@da ;
   rdfs:domain dcat:Catalog ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-2/> ;
   rdfs:label "catalog"@en ;
   rdfs:label "catalogo"@it ;
   rdfs:label "catálogo"@es ;
   rdfs:label "katalog"@cs ;
   rdfs:label "katalog"@da ;
-  skos:altLabel "har delkatalog"@da ;
-  skos:altLabel "has catalog"@en;
   rdfs:range dcat:Catalog ;
   rdfs:subPropertyOf dcat:resource ;
+  skos:altLabel "har delkatalog"@da ;
+  skos:altLabel "has catalog"@en;
   skos:changeNote "New property added in DCAT 2."@en ;
   skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 2."@cs ;
   skos:changeNote "Nueva propiedad agregada en DCAT 2."@es ;
@@ -702,14 +714,20 @@ dcat:catalog
 dcat:centroid
   a rdf:Property ;
   a owl:DatatypeProperty ;
+  rdfs:comment "El centro geográfico (centroide) de un recurso."@es ;
+  rdfs:comment "Geografický střed (centroid) zdroje."@cs ;
+  rdfs:comment "The geographic center (centroid) of a spatial thing [SDW-BP]."@en ;
+  rdfs:comment "Il centro geografico (centroide) di una risorsa."@it ;
+  rdfs:comment "Det geometrisk tyngdepunkt (centroid) for en ressource."@da ;
   rdfs:domain dcterms:Location ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-2/> ;
   rdfs:label "centroid"@cs ;
   rdfs:label "centroid"@en ;
   rdfs:label "centroide"@it ;
   rdfs:label "centroide"@es ;
   rdfs:label "geometrisk tyngdepunkt"@da ;
-  skos:altLabel "centroide"@da ;
   rdfs:range rdfs:Literal ;
+  skos:altLabel "centroide"@da ;
   skos:changeNote "New property added in DCAT 2."@en ;
   skos:changeNote "Nuova proprietà aggiunta in DCAT 2."@it ;
   skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 2."@cs ;
@@ -720,12 +738,12 @@ dcat:centroid
   skos:definition "The geographic center (centroid) of a spatial thing [SDW-BP]."@en ;
   skos:definition "Il centro geografico (centroide) di una risorsa."@it ;
   skos:definition "Det geometrisk tyngdepunkt (centroid) for en ressource."@da ;
+  skos:editorialNote "English language definitions and comments updated in this revision in line with ED. Multilingual text unevenly updated."@en ;
   skos:scopeNote "El rango de esta propiedad es intencionalmente genérico con el objetivo de permitir distintas codificaciones geométricas. Por ejemplo, la geometría puede codificarse como WKT (geosparql:wktLiteral [GeoSPARQL]) o [GML] (geosparql:asGML [GeoSPARQL])."@es ;
   skos:scopeNote "Obor hodnot této vlastnosti je úmyslně obecný, aby umožnil různé kódování geometrií. Geometrie by kupříkladu mohla být kódována jako WKT (geosparql:wktLiteral [GeoSPARQL]) či [GML] (geosparql:asGML [GeoSPARQL])."@cs ;
   skos:scopeNote "The range of this property (rdfs:Literal) is intentionally generic, with the purpose of allowing different geometry literal encodings. E.g., the geometry could be encoded as a WKT literal (geosparql:wktLiteral [GeoSPARQL])."@en ;
   skos:scopeNote "Il range di questa proprietà (rdfs:Literal) è volutamente generica, con lo scopo di consentire diverse codifiche geometriche letterali. Ad esempio, la geometria potrebbe essere codificata con un letterale WKT (geosparql:wktLiteral [GeoSPARQL]) o [GML] (geosparql:asGML [GeoSPARQL])."@it ;
   skos:scopeNote "Rækkevidden for denne egenskab er bevidst generisk definere med det formål at tillade forskellige geokodninger. Geometrien kan eksempelvis repræsenteres som WKT (geosparql:asWKT [GeoSPARQL]) eller [GML] (geosparql:asGML [GeoSPARQL])."@da ;
-  skos:editorialNote "English language definitions and comments updated in this revision in line with ED. Multilingual text unevenly updated."@en ;
 .
 dcat:compressFormat
   a rdf:Property ;
@@ -817,11 +835,11 @@ dcat:dataset
   rdfs:label "قائمة بيانات"@ar ;
   rdfs:label "データセット"@ja ;
   rdfs:label "datasæt"@da ;
+  rdfs:range dcat:Dataset ;
+  rdfs:subPropertyOf dcat:resource ;
   skos:altLabel "har datasæt"@da ;
   skos:altLabel "datasamling"@da ;
   skos:altLabel "has dataset"@en;
-  rdfs:range dcat:Dataset ;
-  rdfs:subPropertyOf dcat:resource ;
   skos:definition "A dataset that is listed in the catalog."@en ;
   skos:definition "Kolekce dat, která je katalogizována v katalogu."@cs ;
   skos:definition "Relie un catalogue à un jeu de données faisant partie de ce catalogue."@fr ;
@@ -917,14 +935,20 @@ dcat:downloadURL
 dcat:endDate
   a rdf:Property ;
   a owl:DatatypeProperty ;
+  rdfs:comment "El fin del período."@es ;
+  rdfs:comment "Konec doby trvání."@cs ;
+  rdfs:comment "The end of the period."@en ;
+  rdfs:comment "La fine del periodo."@it ;
+  rdfs:comment "Slutningen på perioden."@da ;
   rdfs:domain dcterms:PeriodOfTime ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-2/> ;
   rdfs:label "datum konce"@cs ;
   rdfs:label "end date"@en ;
   rdfs:label "data di fine"@it ;
   rdfs:label "fecha final"@es ;
   rdfs:label "slutdato"@da ;
-  skos:altLabel "sluttidspunkt"@da ;
   rdfs:range rdfs:Literal ;
+  skos:altLabel "sluttidspunkt"@da ;
   skos:changeNote "New property added in DCAT 2."@en ;
   skos:changeNote "Nuova proprietà aggiunta in DCAT 2."@it ;
   skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 2."@cs ;
@@ -950,6 +974,7 @@ dcat:endpointDescription
   rdfs:comment "Una descrizione dell'endpoint del servizio, incluse le sue operazioni, parametri, ecc."@it ;
   rdfs:comment "En beskrivelse af det pågældende tjenesteendpoint, inklusiv dets operationer, parametre etc."@da ;
   rdfs:domain dcat:DataService ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-2/> ;
   rdfs:label "descripción del end-point del servicio"@es ;
   rdfs:label "description of service end-point"@en ;
   rdfs:label "descrizione dell'endpoint del servizio"@it ;
@@ -985,6 +1010,7 @@ dcat:endpointURL
   rdfs:comment "The root location or primary endpoint of the service (a web-resolvable IRI)."@en ;
   rdfs:comment "Rodplaceringen eller det primære endpoint for en tjeneste (en web-resolverbar IRI)."@da ;
   rdfs:domain dcat:DataService ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-2/> ;
   rdfs:label "end-point del servicio"@es ;
   rdfs:label "end-point del servizio"@it ;
   rdfs:label "přístupový bod služby"@cs ;
@@ -1004,35 +1030,43 @@ dcat:endpointURL
 dcat:first
   a rdf:Property ;
   a owl:ObjectProperty ; 
-  rdfs:label "first"@en ;
-  rdfs:label "primero"@es ;
-  rdfs:label "primo"@it ;
   rdfs:comment "The first resource in an ordered collection or series of resources, to which the current resource belongs."@en ;
   rdfs:comment "El primer recurso en una colección ordenada o serie de recursos, al que el recurso pertenece."@es ;
   rdfs:comment "La prima risorsa in una collezione ordinata o in una serie di risorse, di cui la risorsa fa parte."@it ;  
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-3/> ;
+  rdfs:label "first"@en ;
+  rdfs:label "primero"@es ;
+  rdfs:label "primo"@it ;
+  rdfs:subPropertyOf xhv:first ;
+  skos:changeNote "New property added in DCAT 3."@en ;
+  skos:changeNote "Nueva propiedad agregada in DCAT 3."@es ;
+  skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 3."@cs ;
+  skos:changeNote "Nuova proprietà aggiunta in DCAT 3."@it ;
+  skos:changeNote "Ny egenskab tilføjet i DCAT 3."@da ;
   skos:definition "The first resource in an ordered collection or series of resources, to which the current resource belongs."@en ;
   skos:definition "El primer recurso en una colección ordenada o serie de recursos, al que el recurso pertenece."@es ;
   skos:definition "La prima risorsa in una collezione ordinata o in una serie di risorse, di cui la risorsa fa parte."@it ;
   skos:scopeNote "In DCAT this property is used for resources belonging to a dcat:DatasetSeries."@en ;
   skos:scopeNote "En DCAT esta propiedad se usa para recursos que pertenecen a una dcat:DatasetSeries."@es ;
   skos:scopeNote "In DCAT questa proprietà è usata per risorse che fanno parte di una dcat:DatasetSeries."@it ;
-  skos:changeNote "New property added in DCAT 3."@en ;
-  skos:changeNote "Nueva propiedad agregada in DCAT 3."@es ;
-  skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 3."@cs ;
-  skos:changeNote "Nuova proprietà aggiunta in DCAT 3."@it ;
-  skos:changeNote "Ny egenskab tilføjet i DCAT 3."@da ;
 . 
 dcat:hasCurrentVersion
   a rdf:Property ;
   a owl:ObjectProperty ; 
   owl:equivalentProperty pav:hasCurrentVersion ;
   rdfs:subPropertyOf pav:hasVersion ;
-  rdfs:label "has current version"@en ;
-  rdfs:label "tiene versión actual"@es ;
-  rdfs:label "ha versione attuale"@it ;
   rdfs:comment "This resource has a more specific, versioned resource with equivalent content [PAV]."@en ;
   rdfs:comment "Este recurso es más específico y versionado con contenido equivalente [PAV]."@es ;
   rdfs:comment "Per questa risorsa esiste una risorsa più specifica e versionata, ma con lo stesso contenuto."@it ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-3/> ;
+  rdfs:label "has current version"@en ;
+  rdfs:label "tiene versión actual"@es ;
+  rdfs:label "ha versione attuale"@it ;
+  skos:changeNote "New property added in DCAT 3."@en ;
+  skos:changeNote "Nueva propiedad agregada in DCAT 3."@es ;
+  skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 3."@cs ;
+  skos:changeNote "Nuova proprietà aggiunta in DCAT 3."@it ;
+  skos:changeNote "Ny egenskab tilføjet i DCAT 3."@da ;
   skos:definition "This resource has a more specific, versioned resource with equivalent content [PAV]."@en ;
   skos:definition "Este recurso es más específico y versionado con contenido equivalente [PAV]."@es ;
   skos:definition "Per questa risorsa esiste una risorsa più specifica e versionata, ma con lo stesso contenuto."@it ;
@@ -1042,24 +1076,25 @@ dcat:hasCurrentVersion
   skos:scopeNote "The notion of version used by this property is limited to versions resulting from revisions occurring to a resource as part of its life-cycle."@en ;
   skos:scopeNote "La noción de versión que se usa en esta propiedad está limitada a las versiones que resultan de revisiones de un recurso como parte de su ciclo de vida."@es ;
   skos:scopeNote "La nozione di versione usata da questa proprietà è limitata a versioni risultanti da revisioni a cui una risorsa è soggetta nel suo ciclo di vita."@it ;
-  skos:changeNote "New property added in DCAT 3."@en ;
-  skos:changeNote "Nueva propiedad agregada in DCAT 3."@es ;
-  skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 3."@cs ;
-  skos:changeNote "Nuova proprietà aggiunta in DCAT 3."@it ;
-  skos:changeNote "Ny egenskab tilføjet i DCAT 3."@da ;
 .
 dcat:hasVersion
   a rdf:Property ;
   a owl:ObjectProperty ; 
   owl:equivalentProperty pav:hasVersion ;
-  rdfs:subPropertyOf dcterms:hasVersion ;
-  rdfs:subPropertyOf prov:generalizationOf ;
-  rdfs:label "has version"@en ;
-  rdfs:label "tiene versión"@es ;
-  rdfs:label "ha versione"@it ;
   rdfs:comment "This resource has a more specific, versioned resource [PAV]."@en ;
   rdfs:comment "Este recurso tiene una versión específica."@es ;
   rdfs:comment "Per questa risorsa esiste una risorsa più specifica e versionata."@it ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-3/> ;
+  rdfs:label "has version"@en ;
+  rdfs:label "tiene versión"@es ;
+  rdfs:label "ha versione"@it ;
+  rdfs:subPropertyOf dcterms:hasVersion ;
+  rdfs:subPropertyOf prov:generalizationOf ;
+  skos:changeNote "New property added in DCAT 3."@en ;
+  skos:changeNote "Nueva propiedad agregada in DCAT 3."@es ;
+  skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 3."@cs ;
+  skos:changeNote "Nuova proprietà aggiunta in DCAT 3."@it ;
+  skos:changeNote "Ny egenskab tilføjet i DCAT 3."@da ;
   skos:definition "This resource has a more specific, versioned resource [PAV]."@en ;
   skos:definition "Este recurso tiene una versión específica."@es ;
   skos:definition "Per questa risorsa esiste una risorsa più specifica e versionata."@it ;
@@ -1069,11 +1104,6 @@ dcat:hasVersion
   skos:scopeNote "The notion of version used by this property is limited to versions resulting from revisions occurring to a resource as part of its life-cycle. Therefore, its semantics is more specific than its super-property dcterms:hasVersion, which makes use of a broader notion of version, including editions and adaptations."@en ;
   skos:scopeNote "La noción de versión que se usa en esta propiedad está limitada a las versiones que resultan de revisiones de un recurso como parte de su ciclo de vida. Por lo tanto, su semántica es más específica que su super-propiedad dcterns:hasVersion, la cuál hace uso de la noción más amplia de versión, incluyendo ediciones y adaptaciones."@es ;
   skos:scopeNote "La nozione di versione usata da questa proprietà è limitata a versioni risultanti da revisioni a cui una risorsa è soggetta nel suo ciclo di vita. Quindi la sua semantica è più specifica di quella della sua super-proprietà dcterms:hasVersion, che utilizza una nozione di versione più ampia, e include, ad es., edizioni e adattamenti."@it ;
-  skos:changeNote "New property added in DCAT 3."@en ;
-  skos:changeNote "Nueva propiedad agregada in DCAT 3."@es ;
-  skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 3."@cs ;
-  skos:changeNote "Nuova proprietà aggiunta in DCAT 3."@it ;
-  skos:changeNote "Ny egenskab tilføjet i DCAT 3."@da ;
 .
 dcat:hadRole
   a rdf:Property ;
@@ -1090,6 +1120,7 @@ dcat:hadRole
           dcat:Relationship
         ) ;
     ] ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-2/> ;
   rdfs:label "haRuolo"@it ;
   rdfs:label "hadRole"@en ;
   rdfs:label "sehraná role"@cs ;
@@ -1121,41 +1152,44 @@ dcat:hadRole
   skos:scopeNote "Kan vendes ved kvalificerede krediteringer til at angive en aktørs rolle i forhold en entitet. Det anbefales at værdierne styres som et kontrolleret udfaldsrum med aktørroller, såsom http://registry.it.csiro.au/def/isotc211/CI_RoleCode."@da ;
 .
 dcat:isVersionOf owl:inverseOf dcat:hasVersion ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-3/> ;
+  skos:changeNote "New property added in DCAT 3."@en ;
+  skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 3."@cs ;
+  skos:changeNote "Nueva propiedad agregada en DCAT 3."@es ;
+  skos:changeNote "Nuova proprietà aggiunta in DCAT 3."@it ;
   skos:scopeNote "This property MAY be used only in addition to its inverse, and it MUST NOT be used to replace it."@en ;
   skos:scopeNote "Esta propiedad inversa PUEDE usarse sólo en combinación con su inversa, y NO PUEDE utilizarse en su reemplazo."@es ;
   skos:scopeNote "Questa proprietà PUÒ essere usata solo insieme alla sua inversa, e NON DEVE essere usata per sostituirla."@it ;
+.
+dcat:inCatalog owl:inverseOf dcat:resource ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-3/> ;
   skos:changeNote "New property added in DCAT 3."@en ;
   skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 3."@cs ;
   skos:changeNote "Nueva propiedad agregada en DCAT 3."@es ;
   skos:changeNote "Nuova proprietà aggiunta in DCAT 3."@it ;
-.
-dcat:inCatalog owl:inverseOf dcat:resource ;
   skos:scopeNote "This property MAY be used only in addition to its inverse, and it MUST NOT be used to replace it."@en ;
   skos:scopeNote "Esta propiedad inversa PUEDE usarse sólo en combinación con su inversa, y NO PUEDE utilizarse en su reemplazo."@es ;
   skos:scopeNote "Questa proprietà PUÒ essere usata solo insieme alla sua inversa, e NON DEVE essere usata per sostituirla."@it ;  
-  skos:changeNote "New property added in DCAT 3."@en ;
-  skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 3."@cs ;
-  skos:changeNote "Nueva propiedad agregada en DCAT 3."@es ;
-  skos:changeNote "Nuova proprietà aggiunta in DCAT 3."@it ;
 .
 dcat:inSeries
   a rdf:Property ;
   a owl:ObjectProperty ; 
-  rdfs:subPropertyOf dcterms:isPartOf ;
-  rdfs:label "in series"@en ;
-  rdfs:label "en serie"@es ;
-  rdfs:label "in serie"@it ;
   rdfs:comment "A dataset series of which the dataset is part."@en ;
   rdfs:comment "Una serie de conjuntos de datos del cuál un conjunto de datos es parte."@es ;
   rdfs:comment "Una serie di dataset di cui questo dataset fa parte."@it ;
-  skos:definition "A dataset series of which the dataset is part."@en ;
-  skos:definition "Una serie de conjuntos de datos del cuál un conjunto de datos es parte."@es ;
-  skos:definition "Una serie di dataset di cui questo dataset fa parte."@it ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-3/> ;
+  rdfs:label "in series"@en ;
+  rdfs:label "en serie"@es ;
+  rdfs:label "in serie"@it ;
+  rdfs:subPropertyOf dcterms:isPartOf ;
   skos:changeNote "New property added in DCAT 3."@en ;
   skos:changeNote "Nueva propiedad agregada in DCAT 3."@es ;
   skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 3."@cs ;
   skos:changeNote "Nuova proprietà aggiunta in DCAT 3."@it ;
   skos:changeNote "Ny egenskab tilføjet i DCAT 3."@da ;
+  skos:definition "A dataset series of which the dataset is part."@en ;
+  skos:definition "Una serie de conjuntos de datos del cuál un conjunto de datos es parte."@es ;
+  skos:definition "Una serie di dataset di cui questo dataset fa parte."@it ;
 .
 dcat:keyword
   a rdf:Property ;
@@ -1235,23 +1269,25 @@ dcat:landingPage
 dcat:last
   a rdf:Property ;
   a owl:ObjectProperty ; 
-  rdfs:label "last"@en ;
-  rdfs:label "último"@es ;
-  rdfs:label "ultimo"@it ;
   rdfs:comment "The last resource in an ordered collection or series of resources, to which the current resource belongs."@en ;
   rdfs:comment "El último recurso en una colección ordenada o serie de recursos, al que el recurso pertenece."@es ;
   rdfs:comment "L'ultima risorsa in una collezione ordinata o in una serie di risorse, di cui la risorsa fa parte."@it ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-3/> ;
+  rdfs:label "last"@en ;
+  rdfs:label "último"@es ;
+  rdfs:label "ultimo"@it ;
+  rdfs:subPropertyOf xhv:last ;
+  skos:changeNote "New property added in DCAT 3."@en ;
+  skos:changeNote "Nueva propiedad agregada in DCAT 3."@es ;
+  skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 3."@cs ;
+  skos:changeNote "Nuova proprietà aggiunta in DCAT 3."@it ;
+  skos:changeNote "Ny egenskab tilføjet i DCAT 3."@da ;
   skos:definition "The last resource in an ordered collection or series of resources, to which the current resource belongs."@en ;
   skos:definition "El último recurso en una colección ordenada o serie de recursos, al que el recurso pertenece."@es ;
   skos:definition "L'ultima risorsa in una collezione ordinata o in una serie di risorse, di cui la risorsa fa parte."@it ;
   skos:scopeNote "In DCAT this property is used for resources belonging to a dcat:DatasetSeries."@en ;
   skos:scopeNote "En DCAT esta propiedad se usa para recursos que pertenecen a una dcat:DatasetSeries."@es ;
   skos:scopeNote "In DCAT questa proprietà è usata per risorse che fanno parte di una dcat:DatasetSeries."@it ;
-  skos:changeNote "New property added in DCAT 3."@en ;
-  skos:changeNote "Nueva propiedad agregada in DCAT 3."@es ;
-  skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 3."@cs ;
-  skos:changeNote "Nuova proprietà aggiunta in DCAT 3."@it ;
-  skos:changeNote "Ny egenskab tilføjet i DCAT 3."@da ;
 .
 dcat:mediaType
   a rdf:Property ;
@@ -1298,22 +1334,24 @@ dcat:mediaType
   skos:scopeNote "Denne egenskab BØR anvendes hvis distributionens medietype optræder i 'IANA media types registry' https://www.iana.org/assignments/media-types/, ellers KAN egenskaben dcterms:format anvendes med et andet udfaldsrum."@da ;
 .
 dcat:next owl:inverseOf dcat:prev ;
-  skos:scopeNote "This property MAY be used only in addition to its inverse, and it MUST NOT be used to replace it."@en ;
-  skos:scopeNote "Esta propiedad inversa PUEDE usarse sólo en combinación con su inversa, y NO PUEDE utilizarse en su reemplazo."@es ;
-  skos:scopeNote "Questa proprietà PUÒ essere usata solo insieme alla sua inversa, e NON DEVE essere usata per sostituirla."@it ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-3/> ;
   skos:changeNote "New property added in DCAT 3."@en ;
   skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 3."@cs ;
   skos:changeNote "Nueva propiedad agregada en DCAT 3."@es ;
   skos:changeNote "Nuova proprietà aggiunta in DCAT 3."@it ;
+  skos:scopeNote "This property MAY be used only in addition to its inverse, and it MUST NOT be used to replace it."@en ;
+  skos:scopeNote "Esta propiedad inversa PUEDE usarse sólo en combinación con su inversa, y NO PUEDE utilizarse en su reemplazo."@es ;
+  skos:scopeNote "Questa proprietà PUÒ essere usata solo insieme alla sua inversa, e NON DEVE essere usata per sostituirla."@it ;
 .
 dcat:nextVersion owl:inverseOf dcat:previousVersion ;
-  skos:scopeNote "This property MAY be used only in addition to its inverse, and it MUST NOT be used to replace it."@en ;
-  skos:scopeNote "Esta propiedad inversa PUEDE usarse sólo en combinación con su inversa, y NO PUEDE utilizarse en su reemplazo."@es ;
-  skos:scopeNote "Questa proprietà PUÒ essere usata solo insieme alla sua inversa, e NON DEVE essere usata per sostituirla."@it ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-3/> ;
   skos:changeNote "New property added in DCAT 3."@en ;
   skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 3."@cs ;
   skos:changeNote "Nueva propiedad agregada en DCAT 3."@es ;
   skos:changeNote "Nuova proprietà aggiunta in DCAT 3."@it ;
+  skos:scopeNote "This property MAY be used only in addition to its inverse, and it MUST NOT be used to replace it."@en ;
+  skos:scopeNote "Esta propiedad inversa PUEDE usarse sólo en combinación con su inversa, y NO PUEDE utilizarse en su reemplazo."@es ;
+  skos:scopeNote "Questa proprietà PUÒ essere usata solo insieme alla sua inversa, e NON DEVE essere usata per sostituirla."@it ;
 .
 dcat:packageFormat
   a rdf:Property ;
@@ -1350,11 +1388,18 @@ dcat:packageFormat
 dcat:prev
   a rdf:Property ;
   a owl:ObjectProperty ; 
+  rdfs:comment "The previous resource (before the current one) in an ordered collection or series of resources."@en ;
+  rdfs:comment "La risorsa precedente a quella attuale in una collezione ordinata o in una serie di risorse."@it ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-3/> ;
   rdfs:label "previous"@en ;
   rdfs:label "previo"@es ;
   rdfs:label "precedente"@it ;
-  rdfs:comment "The previous resource (before the current one) in an ordered collection or series of resources."@en ;
-  rdfs:comment "La risorsa precedente a quella attuale in una collezione ordinata o in una serie di risorse."@it ;
+  rdfs:subPropertyOf xhv:prev ;
+  skos:changeNote "New property added in DCAT 3."@en ;
+  skos:changeNote "Nueva propiedad agregada in DCAT 3."@es ;
+  skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 3."@cs ;
+  skos:changeNote "Nuova proprietà aggiunta in DCAT 3."@it ;
+  skos:changeNote "Ny egenskab tilføjet i DCAT 3."@da ;
   skos:definition "The previous resource (before the current one) in an ordered collection or series of resources."@en ;
   skos:definition "La risorsa precedente a quella attuale in una collezione ordinata o in una serie di risorse."@it ;
   skos:scopeNote "In DCAT this property is used for resources belonging to a dcat:DatasetSeries."@en ;
@@ -1362,22 +1407,18 @@ dcat:prev
   skos:scopeNote "In DCAT questa proprietà è usata per risorse che fanno parte di una dcat:DatasetSeries."@it ;
   skos:scopeNote "It is important to note that this property is different from dcat:previousVersion, as it does not denote a previous version of the same resource, but a distinct resource immediately preceding the current one in an ordered collection of resources."@en ;
   skos:scopeNote "È importante notare che questa proprietà è diversa da dcat:previousVersion, dato che non indica una versione precedente della stessa risorsa, ma una risorsa distinta che precede immediatamente quella attuale in una collezione ordinata di risorse."@it ;
-  skos:changeNote "New property added in DCAT 3."@en ;
-  skos:changeNote "Nueva propiedad agregada in DCAT 3."@es ;
-  skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 3."@cs ;
-  skos:changeNote "Nuova proprietà aggiunta in DCAT 3."@it ;
-  skos:changeNote "Ny egenskab tilføjet i DCAT 3."@da ;
 .
 dcat:previousVersion
   a rdf:Property ;
   a owl:ObjectProperty ; 
   owl:equivalentProperty pav:previousVersion ;
-  rdfs:subPropertyOf prov:wasRevisionOf ;
+  rdfs:comment "The previous version of a resource in a lineage [PAV]."@en ;
+  rdfs:comment "La versione precedente di una risorsa."@it ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-3/> ;
   rdfs:label "previous version"@en ;
   rdfs:label "versión anterior"@es ;
   rdfs:label "versione precedente"@it ;
-  rdfs:comment "The previous version of a resource in a lineage [PAV]."@en ;
-  rdfs:comment "La versione precedente di una risorsa."@it ;
+  rdfs:subPropertyOf prov:wasRevisionOf ;
   skos:definition "The previous version of a resource in a lineage [PAV]."@en ;
   skos:definition "La versione precedente di una risorsa."@it ;
   skos:scopeNote "This property is meant to be used to specify a version chain, consisting of snapshots of a resource."@en ;
@@ -1399,6 +1440,7 @@ dcat:qualifiedRelation
   rdfs:comment "Odkaz na popis vztahu s jiným zdrojem."@cs ;
   rdfs:comment "Reference til en beskrivelse af en relation til en anden ressource."@da ;
   rdfs:domain dcat:Resource ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-2/> ;
   rdfs:label "kvalifikovaný vztah"@cs ;
   rdfs:label "qualified relation"@en ;
   rdfs:label "relación calificada"@es ;
@@ -1450,8 +1492,8 @@ dcat:record
   rdfs:label "سجل"@ar ;
   rdfs:label "カタログ・レコード"@ja ;
   rdfs:label "post"@da ;
-  skos:altLabel "har post"@da ;
   rdfs:range dcat:CatalogRecord ;
+  skos:altLabel "har post"@da ;
   skos:definition "A record describing the registration of a single dataset or data service that is part of the catalog."@en ;
   skos:definition "Describe la registración de un conjunto de datos o un servicio de datos en el catálogo."@es ;
   skos:definition "Propojuje katalog a jeho záznamy."@cs ;
@@ -1468,21 +1510,27 @@ dcat:resource
   a rdf:Property ;
   a owl:ObjectProperty ;
   rdfs:comment "A resource that is listed in the catalog."@en ;
+  rdfs:comment "Una risorsa elencata nel catalogo."@it ;
   rdfs:domain dcat:Catalog ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-3/> ;
   rdfs:label "resource"@en ;
-  rdfs:range dcat:Catalog ;
-  rdfs:domain dcat:Resource ;
+  rdfs:label "risorsa"@it ;
+  rdfs:range dcat:Resource ;
   rdfs:subPropertyOf dcterms:hasPart ;
   skos:changeNote "New property added in DCAT 3."@en ;
   skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 3."@cs ;
   skos:changeNote "Nueva propiedad agregada en DCAT 3."@es ;
   skos:changeNote "Nuova proprietà aggiunta in DCAT 3."@it ;
   skos:definition "A resource that is listed in the catalog."@en ;
+  skos:definition "Una risorsa elencata nel catalogo."@it ;
   skos:editorialNote "Status: English Definition text modified by DCAT 3 revision team, translations pending."@en ;
   skos:scopeNote "This is the most general predicate for membership of a catalog. Use of a more specific sub-property is recommended when available."@en ;
-  skos:scopeNote "See also:	Sub-properties of dcat:resource in particular dcat:dataset, dcat:catalog, dcat:service."@en;
+  skos:scopeNote "Questo è il predicate più generale per indicare l'appartenenza di una risorsa a un catalogo. Si raccomanda l'uso di una proprietà più specifica, quando disponibile."@it ;
+  skos:scopeNote "See also:	Sub-properties of dcat:resource in particular dcat:dataset, dcat:catalog, dcat:service."@en ;
+  skos:scopeNote "Vd. anche: Le sottoproprietà di dcat:resource, in particolare: dcat:dataset, dcat:catalog, dcat:service."@it ;
 .
 dcat:seriesMember owl:inverseOf dcat:inSeries ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-3/> ;
   skos:scopeNote "This property MAY be used only in addition to its inverse, and it MUST NOT be used to replace it."@en ;
   skos:scopeNote "Esta propiedad inversa PUEDE usarse sólo en combinación con su inversa, y NO PUEDE utilizarse en su reemplazo."@es ;
   skos:scopeNote "Questa proprietà PUÒ essere usata solo insieme alla sua inversa, e NON DEVE essere usata per sostituirla."@it ;
@@ -1500,15 +1548,16 @@ dcat:servesDataset
   rdfs:comment "Una raccolta di dati che questo DataService può distribuire."@it ;
   rdfs:comment "En samling af data som denne datatjeneste kan distribuere."@da ;
   rdfs:domain dcat:DataService ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-2/> ;
   rdfs:label "poskytuje datovou sadu"@cs ;
   rdfs:label "provee conjunto de datos"@es ;
   rdfs:label "serve set di dati"@it ;
   rdfs:label "serves dataset"@en ;
   rdfs:label "datatjeneste for datasæt"@da ;
+  rdfs:range dcat:Dataset ;
   skos:altLabel "distribuerer"@da ;
   skos:altLabel "udstiller"@da ;
   skos:altLabel "ekspederer"@da ;
-  rdfs:range dcat:Dataset ;
   skos:changeNote "New property in DCAT 2."@en ;
   skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 2."@cs ;
   skos:changeNote "Nueva propiedad agregada en DCAT 2."@es ;
@@ -1528,15 +1577,16 @@ dcat:service
   rdfs:comment "Un sito o endpoint elencato nel catalogo."@it ;
   rdfs:comment "Et websted eller et endpoint som er opført i kataloget."@da ;
   rdfs:domain dcat:Catalog ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-2/> ;
   rdfs:label "service"@en ;
   rdfs:label "servicio"@es ;
   rdfs:label "servizio"@it ;
   rdfs:label "služba"@cs ;
   rdfs:label "datatjeneste"@da ;
-  skos:altLabel "har datatjeneste"@da ;
-  skos:altLabel "has service"@en ;
   rdfs:range dcat:DataService ;
   rdfs:subPropertyOf dcat:resource ;
+  skos:altLabel "har datatjeneste"@da ;
+  skos:altLabel "has service"@en ;
   skos:changeNote "New property added in DCAT 2."@en ;
   skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 2."@cs ;
   skos:changeNote "Nueva propiedad añadida en DCAT 2."@es ;
@@ -1557,6 +1607,7 @@ dcat:spatialResolutionInMeters
   rdfs:comment "mínima separacíon espacial disponible en un conjunto de datos, medida en metros."@es ;
   rdfs:comment "separazione spaziale minima risolvibile in un set di dati, misurata in metri."@it ;
   rdfs:comment "mindste geografiske afstand som kan erkendes i et datasæt, målt i meter."@da ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-2/> ;
   rdfs:label "prostorové rozlišení (metry)"@cs ;
   rdfs:label "resolución espacial (metros)"@es ;
   rdfs:label "risoluzione spaziale (metros)"@it ;
@@ -1593,12 +1644,13 @@ dcat:startDate
   a rdf:Property ;
   a owl:DatatypeProperty ;
   rdfs:domain dcterms:PeriodOfTime ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-2/> ;
   rdfs:label "datum začátku"@cs ;
   rdfs:label "start date"@en ;
   rdfs:label "data di inizio"@it ;
   rdfs:label "startdato"@da ;
-  skos:altLabel "starttidspunkt"@da ;
   rdfs:range rdfs:Literal ;
+  skos:altLabel "starttidspunkt"@da ;
   skos:changeNote "New property added in DCAT 2."@en ;
   skos:changeNote "Nuova proprietà aggiunta in DCAT 2."@it ;
   skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 2."@cs ;
@@ -1623,6 +1675,7 @@ dcat:temporalResolution
   rdfs:comment "periodo di tempo minimo risolvibile in un set di dati."@it ;
   rdfs:comment "período de tiempo mínimo en el conjunto de datos."@es ;
   rdfs:comment "mindste tidsperiode der kan resolveres i datasættet."@da ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-2/> ;
   rdfs:label "resolución temporal"@es ;
   rdfs:label "risoluzione temporale"@it ;
   rdfs:label "temporal resolution"@en ;
@@ -1674,8 +1727,8 @@ dcat:theme
   rdfs:label "التصنيف"@ar ;
   rdfs:label "テーマ/カテゴリー"@ja ;
   rdfs:label "emne"@da ;
-  skos:altLabel "tema"@da ;
   rdfs:subPropertyOf dcterms:subject ;
+  skos:altLabel "tema"@da ;
   skos:definition "A main category of the resource. A resource can have multiple themes."@en ;
   skos:definition "Hlavní téma zdroje. Zdroj může mít více témat."@cs ;
   skos:definition "La categoria principale della risorsa. Una risorsa può avere più temi."@it ;
@@ -1698,9 +1751,6 @@ dcat:theme
 dcat:themeTaxonomy
   a rdf:Property ;
   a owl:ObjectProperty ;
-  sdo:rangeIncludes owl:Ontology ;
-  sdo:rangeIncludes skos:Collection ;
-  sdo:rangeIncludes skos:ConceptScheme ;
   rdfs:comment "El sistema de organización del conocimiento utilizado para clasificar conjuntos de datos de catálogos."@es ;
   rdfs:comment "Il sistema di organizzazione della conoscenza (KOS) usato per classificare i dataset del catalogo."@it ;
   rdfs:comment "Le systhème d'ogranisation de connaissances utilisé pour classifier les jeux de données du catalogue."@fr ;
@@ -1721,8 +1771,11 @@ dcat:themeTaxonomy
   rdfs:label "قائمة التصنيفات"@ar ;
   rdfs:label "テーマ"@ja ;
   rdfs:label "emnetaksonomi"@da ;
-  skos:altLabel "temataksonomi"@da ;
   rdfs:range rdfs:Resource ;
+  sdo:rangeIncludes owl:Ontology ;
+  sdo:rangeIncludes skos:Collection ;
+  sdo:rangeIncludes skos:ConceptScheme ;
+  skos:altLabel "temataksonomi"@da ;
   skos:definition "El sistema de organización del conocimiento utilizado para clasificar conjuntos de datos de catálogos."@es ;
   skos:definition "Il sistema di organizzazione della conoscenza (KOS) usato per classificare i dataset del catalogo."@it ;
   skos:definition "Le systhème d'ogranisation de connaissances utilisé pour classifier les jeux de données du catalogue."@fr ;
@@ -1742,31 +1795,32 @@ dcat:version
   a rdf:Property ;
   a owl:DatatypeProperty ; 
   owl:equivalentProperty pav:version ;
-  rdfs:label "version"@en ;
-  rdfs:label "versión"@es ;
-  rdfs:label "versione"@it ;
   rdfs:comment "The version indicator (name or identifier) of a resource."@en ;
   rdfs:comment "El indicador de versión (nombre o identificador) del recurso."@es ;
   rdfs:comment "L'indicatore di versione (un nome o un identificatore) di una risorsa."@it ;
-  skos:definition "The version indicator (name or identifier) of a resource."@en ;
-  skos:definition "El indicador de versión (nombre o identificador) del recurso."@es ;
-  skos:definition "L'indicatore di versione (un nome o un identificatore) di una risorsa"@it ;
-  skos:scopeNote "DCAT does not prescribe how a version name / identifier should be specified, and refers for guidance to [DWBP]'s Best Practice 7: Provide a version indicator."@en ;
-  skos:scopeNote "DCAT "@es ;
-  skos:scopeNote "DCAT non prescrive come un nome o identificatore di versione dovrebbe essere specification, and fa riferimento alle linee guida indicate in [DWBP] Best Practice 7: Provide a version indicator."@it ;
+  rdfs:isDefinedBy <https://www.w3.org/TR/vocab-dcat-3/> ;
+  rdfs:label "version"@en ;
+  rdfs:label "versión"@es ;
+  rdfs:label "versione"@it ;
   skos:changeNote "New property added in DCAT 3."@en ;
   skos:changeNote "Nueva propiedad agregada in DCAT 3."@es ;
   skos:changeNote "Nová vlastnost přidaná ve verzi DCAT 3."@cs ;
   skos:changeNote "Nuova proprietà aggiunta in DCAT 3."@it ;
   skos:changeNote "Ny egenskab tilføjet i DCAT 3."@da ;
+  skos:definition "The version indicator (name or identifier) of a resource."@en ;
+  skos:definition "El indicador de versión (nombre o identificador) del recurso."@es ;
+  skos:definition "L'indicatore di versione (un nome o un identificatore) di una risorsa"@it ;
+  skos:scopeNote "DCAT does not prescribe how a version name / identifier should be specified, and refers for guidance to [DWBP]'s Best Practice 7: Provide a version indicator."@en ;
+  skos:scopeNote "DCAT  "@es ;
+  skos:scopeNote "DCAT non prescrive come un nome o identificatore di versione dovrebbe essere specification, and fa riferimento alle linee guida indicate in [DWBP] Best Practice 7: Provide a version indicator."@it ;
 .
 foaf:homepage
   a owl:ObjectProperty ;
-  rdfs:comment "This axiom needed so that Protege loads DCAT3 without errors."@en ;
+  rdfs:comment "This axiom needed so that Protege loads DCAT 3 without errors."@en ;
   rdfs:comment "Este axioma se necesita de manera que Protege cargue DCAT3 sin problemas."@es ;
 .
 foaf:primaryTopic
   a owl:ObjectProperty ;
-  rdfs:comment "This axiom needed so that Protege loads DCAT3 without errors."@en;
-  rdfs:comment "Este axioma se necesita de manera que Protege cargue DCAT3 sin problemas."@es ;
+  rdfs:comment "This axiom needed so that Protege loads DCAT 3 without errors."@en;
+  rdfs:comment "Este axioma se necesita de manera que Protege cargue DCAT 3 sin problemas."@es ;
 .
