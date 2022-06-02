@@ -262,7 +262,7 @@ table.simple {width:100%;}
       DCAT is based around seven main classes (<a href="#fig-dcat-all-attributes"></a>):</p>
     <ul>
         <li>
-          <a href="#Class:Catalog"><code>dcat:Catalog</code></a> represents a catalog, which is a dataset in which each individual item is a metadata record describing some resource; the scope of <code>dcat:Catalog</code> is collections of metadata about <b>datasets</b> or <b>data services</b>.
+          <a href="#Class:Catalog"><code>dcat:Catalog</code></a> represents a catalog, which is a dataset in which each individual item is a metadata record describing some resource; the scope of <code>dcat:Catalog</code> is collections of metadata about <b>datasets</b>, <b>data services</b>, or other resource types.
         </li>
         <li>
           <a href="#Class:Resource"><code>dcat:Resource</code></a> represents a dataset, a data service or any other resource that may be described by a metadata record in a catalog.
@@ -524,7 +524,7 @@ ex:accountability
             such as the <a data-cite="?DCTERMS#section-7">DCMI Type Vocabulary</a> [[?DCTERMS]],
             the <a href="https://id.loc.gov/vocabulary/marcgt.html">MARC Genre/Terms Scheme</a>,
             the [[?ISO-19115-1]] <a href="https://standards.iso.org/iso/19115/resources/Codelists/gml/MD_ScopeCode.xml"><code>MD_Scope codes</code></a>,
-            the <a href="https://schema.datacite.org/meta/kernel-4.1/include/datacite-resourceType-v4.1.xsd">DataCite resource types</a>,
+            the <a href="https://schema.datacite.org/meta/kernel-4.4/include/datacite-resourceType-v4.xsd">DataCite resource types</a> [[?DataCite]],
             or the PARSE.Insight content-types from Re3data [[?RE3DATA-SCHEMA]].
         </p>
         <p>
@@ -560,12 +560,12 @@ ex:dataset-001
 
 &lt;http://registry.it.csiro.au/def/datacite/resourceType/Dataset&gt;
   rdfs:label "Dataset"@en ;
-  dcterms:source "DataCite resource types"@en ;
+  dcterms:source [ rdfs:label "DataCite resource types"@en ] ;
   .
 
 &lt;http://registry.it.csiro.au/def/re3data/contentType/database&gt;
   rdfs:label "Database"@en ;
-  dcterms:source "Re3data content types"@en ;
+  dcterms:source [ rdfs:label "Re3data content types"@en ] ;
   .</pre>
 </aside>
 
@@ -719,17 +719,25 @@ ex:table-service-005
     <p>New RDF serializations will be made available for DCAT 3 as soon as the vocabulary is finalized.</p>
     </aside>
         <p>The (revised) DCAT vocabulary is <a href="https://www.w3.org/ns/dcat#">available in RDF</a>.
-            The primary artifact <a href="https://www.w3.org/ns/dcat2.ttl"><code>dcat2.ttl</code></a> is a serialization of the core DCAT vocabulary.
+            The primary artifact <a href="https://www.w3.org/ns/dcat.ttl"><code>dcat.ttl</code></a> is a serialization of the core DCAT vocabulary.
             Alongside it are a set of other RDF files that provide additional information, including:</p>
         <ol>
-            <li>
-                non-normative alignments to other vocabularies, provided for guidance
+<!-- EDNOTE: None of these are listed in https://www.w3.org/ns/dcat#
+	    <li>
+                Non-normative alignments to other vocabularies, provided for guidance.
             </li>
             <li>
-                additional axioms, which can be useful in some contexts
+                Additional axioms, which can be useful in some contexts.
             </li>
+-->
+<li>
+<p>The files <a href="https://www.w3.org/ns/dcat-external.ttl">dcat-external.ttl</a>, <a href="https://www.w3.org/ns/dcat-external.rdf">dcat-external.rdf</a>, and <a href="https://www.w3.org/ns/dcat-external.jsonld">dcat-external.jsonld</a> includes externally defined terms where DCAT has provided additional documentation or usage notes.</p>
+</li>
+<li>
+<p>The files <a href="https://www.w3.org/ns/dcat2.ttl">dcat2.ttl</a>, <a href="https://www.w3.org/ns/dcat2.rdf">dcat2.rdf</a>, and <a href="https://www.w3.org/ns/dcat2.jsonld">dcat2.jsonld</a> that correspond to version 2 of DCAT [[?VOCAB-DCAT-2]].</p>
+</li>
             <li>
-                the files <a href="https://www.w3.org/ns/dcat2014.ttl">dcat2014.ttl</a> and <a href="https://www.w3.org/ns/dcat2014.rdf">dcat2014.rdf</a> that correspond to the 2014 version of DCAT [[?VOCAB-DCAT-1]]
+                The files <a href="https://www.w3.org/ns/dcat2014.ttl">dcat2014.ttl</a> and <a href="https://www.w3.org/ns/dcat2014.rdf">dcat2014.rdf</a> that correspond to the 2014 version of DCAT [[?VOCAB-DCAT-1]].
             </li>
         </ol>
 
@@ -1265,6 +1273,9 @@ ex:table-service-005
                 <tr><th class="prop">Usage note:</th><td>The value(s) provided for members of a catalog (i.e., dataset or service) override the value(s) provided for the catalog if they conflict.</td></tr>
                 <tr><th class="prop">Usage note:</th><td>If representations of a dataset are available for each language separately, define an instance of <code>dcat:Distribution</code> for each language and describe the specific language of each distribution using <code>dcterms:language</code> (i.e., the dataset will have multiple <code>dcterms:language</code> values and each distribution will have just one as the value of its <code>dcterms:language</code> property).</td></tr>
                 </table>
+            <aside class="note"> 
+            Requirements for identification of natural language in linked data specifications are evolving. Many applications use <a href="https://datatracker.ietf.org/doc/html/bcp47">BCP47</a> language tags for this purpose. ISO 639 also provides additional codes in ISO 639-3 which might be required for some uses. 
+            </aside>
         </section>
 
         <section id="Property:resource_publisher">
@@ -4145,7 +4156,7 @@ ex:InternationalDOIFundation a foaf:Organization ;
   skos:notation "info:doi/10.1109/5.771073"^^xsd:anyURI .</pre>
 </aside>
 
-        <p>Otherwise, examples of common types for identifier scheme (<a href="https://arxiv.org/help/arxiv_identifier">arXiv</a>, etc.) are defined in <a href="https://schema.datacite.org/meta/kernel-4.1/include/datacite-relatedIdentifierType-v4.xsd">DataCite schema</a> and <a href="https://fairsharing.org/standards/?q=&selected_facets=type_exact:identifier%20schema">FAIRsharing Registry</a>.</p>
+        <p>Otherwise, examples of common types for identifier scheme (<a href="https://arxiv.org/help/arxiv_identifier">arXiv</a>, etc.) are defined in <a href="https://schema.datacite.org/meta/kernel-4.4/include/datacite-relatedIdentifierType-v4.xsd">DataCite schema</a> [[?DataCite]] and <a href="https://fairsharing.org/standards/?q=&selected_facets=type_exact:identifier%20schema">FAIRsharing Registry</a>.</p>
     </section>
 </section>
 
@@ -4969,17 +4980,18 @@ mycity-bus:stops-2015-01-01
 
 <p>The following example shows how DCAT and OWL can be used complementarily to versioning [[?VOCAB-DCAT-2]].</p>
 
-<aside class="example" id="ex-versioning-with-dcat-and-owl" title="Use of DCAT and OWL for versioning DCAT 2">
+<aside class="example" id="ex-versioning-with-dcat-and-owl" title="Use of DCAT and OWL for versioning DCAT 3">
 <pre>
-&lt;http://www.w3.org/ns/dcat#&gt; a owl:Ontology , dcat:Dataset ;
-  owl:versionInfo "Version 2" ;
-  dcat:version "Version 2" ;
-  owl:versionIRI &lt;http://www.w3.org/ns/dcat2#&gt; ;
-  dcat:hasCurrentVersion &lt;http://www.w3.org/ns/dcat2#&gt; ;
-  owl:priorVersion &lt;http://www.w3.org/ns/dcat2014#&gt; ;
-  dcat:previousVersion &lt;http://www.w3.org/ns/dcat2014#&gt; ;
-  dcat:hasVersion &lt;http://www.w3.org/ns/dcat2014#&gt; ,
-    &lt;http://www.w3.org/ns/dcat2#&gt; ,
+&lt;http://www.w3.org/ns/dcat&gt; a owl:Ontology , dcat:Dataset ;
+  owl:versionInfo "3" ;
+  dcat:version "3" ;
+  owl:versionIRI &lt;http://www.w3.org/ns/dcat3&gt; ;
+  dcat:hasCurrentVersion &lt;http://www.w3.org/ns/dcat3&gt; ;
+  owl:priorVersion &lt;http://www.w3.org/ns/dcat2&gt; ;
+  dcat:previousVersion &lt;http://www.w3.org/ns/dcat2&gt; ;
+  dcat:hasVersion &lt;http://www.w3.org/ns/dcat2014&gt; ,
+    &lt;http://www.w3.org/ns/dcat2&gt; ,
+    &lt;http://www.w3.org/ns/dcat3&gt; ;
 . 
 </pre>
 </aside>
@@ -5481,7 +5493,6 @@ ex:Dataset-2 a dcat:Dataset;
 <li>Use the canonical, persistent IRI. This is usually specified in the document itself. If you are in doubt, use the one included in the bibliographic citations for that standard / specification.</li>
 <li>Use the non-versioned IRI. If you need to express conformance with a specific version of the standard / specification, use both the un-versioned and the versioned IRI. E.g., in case you need to explicitly state conformance of a <code>dcat:CatalogRecord</code> with DCAT 2, use both <code>https://www.w3.org/TR/vocab-dcat/</code> and <code>https://www.w3.org/TR/vocab-dcat-2/</code>.</li>
 </ul>
-!-- @andrea-perego: added example on how to specify the metadata schema of a catalog record -->
 
 <p><a href="#ex-catalog-record-schema"></a> extends <a href="#ex-catalog-record"></a> to show how to specify that a given catalog record is conformant with DCAT, by following the above rules.</p>
 
@@ -6751,8 +6762,25 @@ ga-courts:jc-wms
 <h2>Change history</h2>
 
 <p>A full change-log is available on <a href="https://github.com/w3c/dxwg/commits/gh-pages/dcat">GitHub</a></p>
-	
 
+	
+<section id="changes-since-20220510">
+
+<h2>Changes since the fourth public working draft of 10 May 2022</h2>
+
+<p>The document has undergone the following changes since the DCAT 3 fourth public working draft of 10 May 2022 [[?VOCAB-DCAT-3-20220510]]:</p>
+
+<ul>
+<li>
+<p>Updated <a href="#ex-versioning-with-dcat-and-owl"></a> (<a href="#versioning-complementary-approaches"></a>) to illustrate how to use OWL and DCAT to version DCAT 3.</p>
+</li>
+<li>
+<p>Editorial and bug fixes throughout the document.</p>
+</li>
+</ul>
+
+</section>
+	
 <section id="changes-since-20220111">
 
 <h2>Changes since the third public working draft of 11 January 2022</h2>
@@ -6762,13 +6790,13 @@ ga-courts:jc-wms
 <ul>
 <li>
 <p>Editorial fix to the inconsistent use of "item" and "resource" throughout the document, by replacing "item" with "resource" when referring to an instance of <code>dcat:Resource</code> - see Issue <a href="https://github.com/w3c/dxwg/issues/1490">#1490</a>. This revision has affected the definitions and/or the usage notes of the following terms in section <a href="#Class:Resource"></a>:
-<a href="#Property:resource_description"></a>
-<a href="#Property:resource_title"></a>
-<a href="#Property:resource_release_date"></a>
-<a href="#Property:resource_update_date"></a>
-<a href="#Property:resource_language"></a>
-<a href="#Property:resource_publisher"></a>
-<a href="#Property:resource_identifier"></a>
+<a href="#Property:resource_description"></a>,
+<a href="#Property:resource_title"></a>,
+<a href="#Property:resource_release_date"></a>,
+<a href="#Property:resource_update_date"></a>,
+<a href="#Property:resource_language"></a>,
+<a href="#Property:resource_publisher"></a>,
+<a href="#Property:resource_identifier"></a>,
 <a href="#Property:resource_relation"></a>.
 </p>
 </li>

@@ -1,4 +1,5 @@
 var respecConfig = {
+    doJsonLd: true,
 //	preProcess: [dfn_index],
 //    subtitle: "Version 2",
     specStatus: "ED",
