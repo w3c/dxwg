@@ -5067,12 +5067,14 @@ ex:budget-2020 a dcat:Dataset ;
 <p>Dataset series may evolve over time, by acquiring new datasets. E.g., a dataset series about yearly budget data will acquire a new child dataset every year. In such cases, it might be important to link the yearly releases with relationships specifying the first, previous, next, and latest ones. In such a scenario, DCAT makes use of properties <a href="#Property:resource_first"><code>dcat:first</code></a>, <a href="#Property:resource_previous"><code>dcat:prev</code></a>, and <a href="#Property:resource_last"><code>dcat:last</code></a>, respectively. See <a href="#inverse-properties"> </a> for <code>dcat:next</code>. </p>
 
 <aside class="example" id="ex-dataset-series-releases" title="Linking datasets in a series">
-<p>The following example extends <a href="#ex-dataset-series-containment"></a> by specifying the publication date (<code>dcterms:issued</code>) of each child dataset, and the previous (<code>dcat:prev</code>) and next release (<code>dcat:next</code>).</p>
+<p>The following example extends <a href="#ex-dataset-series-containment"></a> by specifying the publication date (<code>dcterms:issued</code>) of each child dataset, and the previous (<code>dcat:prev</code>) and next (<code>dcat:next</code>) dataset in the series. Moreover, the dataset series is linked to its first (<code>dcat:first</code>) and last (<code>dcat:last</code>) child datasets.</p>
 <pre>
 
 ex:budget a dcat:DatasetSeries ;
   dcterms:title "Budget data"@en ;<!--dcat:seriesMember ex:budget-2018 ,
     ex:budget-2019 , ex:budget-2020 -->
+  dcat:first ex:budget-2018 ;
+  dcat:last ex:budget-2020 ;
   .
   
 ex:budget-2018 a dcat:Dataset ;
@@ -5110,6 +5112,8 @@ ex:budget-2020 a dcat:Dataset ;
 <pre>
 ex:budget a dcat:DatasetSeries ;
   dcterms:title "Budget data"@en ;
+  dcat:first ex:budget-2018 ;
+  dcat:last ex:budget-2020 ;
   .
   
 ex:budget-2018 a dcat:Dataset ;
@@ -6063,6 +6067,7 @@ ex:Test543L
   <!-- Stephane Fellah, -->
   Stephen Richard, 
   Stian Soiland-Reyes,
+  Stig B. Dørmænen,
   <!-- Stijn Goedertier, -->
   Susheel Varma,
   Sidney Cox,

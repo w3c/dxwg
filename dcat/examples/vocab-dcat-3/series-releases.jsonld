@@ -1,69 +1,77 @@
 {
-    "@graph": [
-      {
-        "@id": "http://dcat.example.org/budget",
-        "@type": "http://www.w3.org/ns/dcat#DatasetSeries",
-        "http://purl.org/dc/terms/title": {
-          "@language": "en",
-          "@value": "Budget data"
-        }
-      },
-      {
-        "@id": "http://dcat.example.org/budget-2020",
-        "@type": "http://www.w3.org/ns/dcat#Dataset",
-        "http://purl.org/dc/terms/issued": {
-          "@type": "http://www.w3.org/2001/XMLSchema#date",
-          "@value": "2021-01-01"
-        },
-        "http://purl.org/dc/terms/title": {
-          "@language": "en",
-          "@value": "Budget data for year 2020"
-        },
-        "http://www.w3.org/ns/dcat#inSeries": {
-          "@id": "http://dcat.example.org/budget"
-        },
-        "http://www.w3.org/ns/dcat#prev": {
-          "@id": "http://dcat.example.org/budget-2019"
-        }
-      },
-      {
-        "@id": "http://dcat.example.org/budget-2019",
-        "@type": "http://www.w3.org/ns/dcat#Dataset",
-        "http://purl.org/dc/terms/issued": {
-          "@type": "http://www.w3.org/2001/XMLSchema#date",
-          "@value": "2020-01-01"
-        },
-        "http://purl.org/dc/terms/title": {
-          "@language": "en",
-          "@value": "Budget data for year 2019"
-        },
-        "http://www.w3.org/ns/dcat#inSeries": {
-          "@id": "http://dcat.example.org/budget"
-        },
-        "http://www.w3.org/ns/dcat#next": {
-          "@id": "http://dcat.example.org/budget-2020"
-        },
-        "http://www.w3.org/ns/dcat#prev": {
-          "@id": "http://dcat.example.org/budget-2018"
-        }
-      },
-      {
-        "@id": "http://dcat.example.org/budget-2018",
-        "@type": "http://www.w3.org/ns/dcat#Dataset",
-        "http://purl.org/dc/terms/issued": {
-          "@type": "http://www.w3.org/2001/XMLSchema#date",
-          "@value": "2019-01-01"
-        },
-        "http://purl.org/dc/terms/title": {
-          "@language": "en",
-          "@value": "Budget data for year 2018"
-        },
-        "http://www.w3.org/ns/dcat#inSeries": {
-          "@id": "http://dcat.example.org/budget"
-        },
-        "http://www.w3.org/ns/dcat#next": {
-          "@id": "http://dcat.example.org/budget-2019"
-        }
-      }
-    ]
+  "@graph" : [ {
+    "@id" : "ex:budget",
+    "@type" : "dcat:DatasetSeries",
+    "dcterms:title" : {
+      "@language" : "en",
+      "@value" : "Budget data"
+    },
+    "first" : "ex:budget-2018",
+    "last" : "ex:budget-2020"
+  }, {
+    "@id" : "ex:budget-2018",
+    "@type" : "dcat:Dataset",
+    "issued" : "2019-01-01",
+    "dcterms:title" : {
+      "@language" : "en",
+      "@value" : "Budget data for year 2018"
+    },
+    "inSeries" : "ex:budget",
+    "next" : "ex:budget-2019"
+  }, {
+    "@id" : "ex:budget-2019",
+    "@type" : "dcat:Dataset",
+    "issued" : "2020-01-01",
+    "dcterms:title" : {
+      "@language" : "en",
+      "@value" : "Budget data for year 2019"
+    },
+    "inSeries" : "ex:budget",
+    "next" : "ex:budget-2020",
+    "prev" : "ex:budget-2018"
+  }, {
+    "@id" : "ex:budget-2020",
+    "@type" : "dcat:Dataset",
+    "issued" : "2021-01-01",
+    "dcterms:title" : {
+      "@language" : "en",
+      "@value" : "Budget data for year 2020"
+    },
+    "inSeries" : "ex:budget",
+    "prev" : "ex:budget-2019"
+  } ],
+  "@context" : {
+    "last" : {
+      "@id" : "http://www.w3.org/ns/dcat#last",
+      "@type" : "@id"
+    },
+    "first" : {
+      "@id" : "http://www.w3.org/ns/dcat#first",
+      "@type" : "@id"
+    },
+    "title" : {
+      "@id" : "http://purl.org/dc/terms/title",
+      "@type" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+    },
+    "next" : {
+      "@id" : "http://www.w3.org/ns/dcat#next",
+      "@type" : "@id"
+    },
+    "prev" : {
+      "@id" : "http://www.w3.org/ns/dcat#prev",
+      "@type" : "@id"
+    },
+    "issued" : {
+      "@id" : "http://purl.org/dc/terms/issued",
+      "@type" : "http://www.w3.org/2001/XMLSchema#date"
+    },
+    "inSeries" : {
+      "@id" : "http://www.w3.org/ns/dcat#inSeries",
+      "@type" : "@id"
+    },
+    "ex" : "http://dcat.example.org/",
+    "xsd" : "http://www.w3.org/2001/XMLSchema#",
+    "dcterms" : "http://purl.org/dc/terms/",
+    "dcat" : "http://www.w3.org/ns/dcat#"
   }
+}
