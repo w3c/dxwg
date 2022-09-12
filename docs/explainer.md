@@ -28,7 +28,7 @@ The prioritization was made considering the [requirements left out from the seco
 
 We organized the issues on different [GitHub Projects](https://github.com/w3c/dxwg/projects?query=is%3Aopen&type=classic), splitting the effort into Thematically-homogeneous sprints. 
 
-  Among the springs, we decide to prioritize [DCAT Sprint: Dataset Series](https://github.com/w3c/dxwg/projects/10) and [DCAT Sprint: Versioning](https://github.com/w3c/dxwg/projects/9) as
+  Among the sprints, we decide to prioritize [DCAT Sprint: Dataset Series](https://github.com/w3c/dxwg/projects/10) and [DCAT Sprint: Versioning](https://github.com/w3c/dxwg/projects/9) as
 - they counted a quite conspicuous number of open issues, 14 and 18 open issues, respectively
 - they seemed to be two core building blocks whose stabilization could simplify addressing other aspects
 - they were relevant for different communities, from governmental to open science.
