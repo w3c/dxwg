@@ -26,7 +26,7 @@ DCAT versioning supports versions resulting from a revision - i.e., from changes
 ## Prioritization of the issues /requirements to address in DCAT 3
 The prioritization was made considering the [requirements left out from the second round of standardization](https://github.com/w3c/dxwg/issues?q=label%3Adcat++closed%3A%3E2020-02-01+label%3Arequirement+) and the feedback received at the time.
 
-We organized the issues on different GitHub Projects, splitting the effort into Thematically-homogeneous sprints. https://github.com/w3c/dxwg/projects?query=is%3Aopen&type=classic
+We organized the issues on different [GitHub Projects](https://github.com/w3c/dxwg/projects?query=is%3Aopen&type=classic), splitting the effort into Thematically-homogeneous sprints. 
 
   Among the springs, we decide to prioritize [DCAT Sprint: Dataset Series](https://github.com/w3c/dxwg/projects/10) and [DCAT Sprint: Versioning](https://github.com/w3c/dxwg/projects/9) as
 - they counted a quite conspicuous number of open issues, 14 and 18 open issues, respectively
