@@ -33,7 +33,7 @@ We organized the issues on different [GitHub Projects](https://github.com/w3c/dx
 - they seemed to be two core building blocks whose stabilization could simplify addressing other aspects
 - they were relevant for different communities, from governmental to open science.
 
-Of course, we didn't work only on Dataset series and Versioning,
+In addition to Dataset series and Versioning, we also worked on other issues,
 A summary of the changes from [[VOCAB-DCAT-2](https://www.w3.org/TR/vocab-dcat-2/)] is provided in [the change history section](https://www.w3.org/TR/vocab-dcat-3/#changes) of [[VOCAB-DCAT-3](https://www.w3.org/TR/vocab-dcat-3/)].
 Overall, more than  [160 github issues](https://github.com/w3c/dxwg/issues?q=is%3Aissue+is%3Aclosed++label%3Adcat++closed%3A%3E2020-02-10) have been closed as part of the effort in DCAT3.
 
