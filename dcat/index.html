@@ -2615,13 +2615,15 @@ ex:table-service-005
             <table class="def">
                 <tr><th>RDF Property:</th><td><a href="http://www.w3.org/ns/dcat#spatialResolutionInMeters"><code>dcat:spatialResolutionInMeters</code></a></td></tr>
                 <tr><th class="prop">Definition:</th><td>Minimum spatial separation resolvable in a dataset, measured in meters.</td></tr>
-                <tr><th class="prop">Range:</th><td><a href="http://www.w3.org/2000/01/rdf-schema#Literal"><code>rdfs:Literal</code></a> typed as <a data-cite="XMLSCHEMA11-2#decimal"><code>xsd:decimal</code></a></td></tr>
+                <tr><th class="prop">Range:</th><td><a href="http://www.w3.org/2000/01/rdf-schema#Literal"><code>rdfs:Literal</code></a> typed as <a data-cite="XMLSCHEMA11-2#decimal"><code>xsd:decimal</code></a> or <a data-cite="XMLSCHEMA11-2#double"><code>xsd:double</code></a></td></tr>
                 <tr><th class="prop">Usage note:</th><td>If the dataset is an image or grid this should correspond to the spacing of items. For other kinds of spatial datasets, this property will usually indicate the smallest distance between items in the dataset.</td></tr>
                 </table>
 
-            <p>The range of this property is a decimal number representing a length in meters.
+            <p>The range of this property is a number representing a length in meters.
             This is intended to provide a summary indication of the spatial resolution of the data as a single number.
           More complex descriptions of various aspects of spatial precision, accuracy, resolution and other statistics can be provided using the Data Quality Vocabulary [[?VOCAB-DQV]]. </p>
+
+          <p class="note">This specification allows two datatypes (<a data-cite="XMLSCHEMA11-2#decimal"><code>xsd:decimal</code></a> and <a data-cite="XMLSCHEMA11-2#double"><code>xsd:double</code></a>) to avoid easy mistakes that would make metadata non-compliant. For example, [[JSON-LD]] converts numbers to <a data-cite="XMLSCHEMA11-2#double"><code>xsd:double</code></a> by default, and properly generating <a data-cite="XMLSCHEMA11-2#decimal"><code>xsd:decimal</code></a> requires the use of strings. In [[Turtle]], seemingly minor modifications can change the datatype of a value: `100.0` is an <a data-cite="XMLSCHEMA11-2#decimal"><code>xsd:decimal</code></a>, while `1e2` is an <a data-cite="XMLSCHEMA11-2#double"><code>xsd:double</code></a>.</p>
 
         </section>
 
@@ -3067,12 +3069,12 @@ ex:table-service-005
             <table class="def">
                 <tr><th>RDF Property:</th><td><a href="http://www.w3.org/ns/dcat#spatialResolutionInMeters"><code>dcat:spatialResolutionInMeters</code></a></td></tr>
                 <tr><th class="prop">Definition:</th><td>The minimum spatial separation resolvable in a dataset distribution, measured in meters.</td></tr>
-                  <tr><th class="prop">Range:</th><td><a href="https://www.w3.org/TR/xmlschema11-2/#decimal"><code>xsd:decimal</code></a></td></tr>
+                  <tr><th class="prop">Range:</th><td><a href="https://www.w3.org/TR/xmlschema11-2/#decimal"><code>xsd:decimal</code></a> or <a data-cite="XMLSCHEMA11-2#double"><code>xsd:double</code></a></td></tr>
                   <tr><th class="prop">Usage note:</th><td>If the dataset is an image or grid this should correspond to the spacing of items. For other kinds of spatial datasets, this property will usually indicate the smallest distance between items in the dataset.</td></tr>
                 <tr><th class="prop">Usage note:</th><td>Alternative spatial resolutions might be provided as different dataset distributions</td></tr>
                 </table>
 
-            <p>The range of this property is a decimal number representing a length in meters.
+            <p>The range of this property is a number representing a length in meters.
             This is intended to provide a summary indication of the spatial resolution of the data distribution as a single number.
           More complex descriptions of various aspects of spatial precision, accuracy, resolution and other statistics can be provided using the Data Quality Vocabulary [[?VOCAB-DQV]]. </p>
 
@@ -6906,6 +6908,7 @@ ga-courts:jc-wms
 </ul>  
 <ul>
   <li><p>The recommended range of property <a href="#Property:distribution_size"></a> has been changed from <a data-cite="XMLSCHEMA11-2#decimal"><code>xsd:decimal</code></a> to <a data-cite="XMLSCHEMA11-2#nonNegativeInteger"><code>xsd:nonNegativeInteger</code></a> </p></li>
+  <li><p>The recommended range of properties <a href="#Property:dataset_spatial_resolution"></a> and <a href="#Property:distribution_spatial_resolution"></a> has been extended to include <a data-cite="XMLSCHEMA11-2#double"><code>xsd:double</code></a> in addition to <a data-cite="XMLSCHEMA11-2#decimal"><code>xsd:decimal</code></a>.</p></li>
 </ul>
 <ul>
 <li><p><a href="#dataset-versions"></a> has been revised to focus specifically on versions derived from the revision of a resource, and by following the [[PAV]] approach for the specification of version chains and hierarchies - previous, next, current, last version. In particular:</p>
