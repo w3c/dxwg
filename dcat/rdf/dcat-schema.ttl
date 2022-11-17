@@ -51,8 +51,8 @@ dct:temporal
 dct:type
   skos:closeMatch schema:additionalType ;
 .
-dcat:Catalog
-  owl:equivalentClass schema:DataCatalog ;
+schema:DataCatalog
+  rdfs:subClassOf dcat:Catalog ;
 .
 dcat:DataService
   rdfs:comment "Unclear if a DataFeed is a data service, or a data collection. " ;
@@ -61,8 +61,8 @@ dcat:DataService
 dcat:Dataset
   owl:equivalentClass schema:Dataset ;
 .
-dcat:Distribution
-  owl:equivalentClass schema:DataDownload ;
+schema:DataDownload
+  rdfs:subClassOf dcat:Distribution ;
 .
 dcat:Resource
   rdfs:subClassOf schema:Thing ;
@@ -138,91 +138,4 @@ dcat:theme
 dcat:themeTaxonomy
   schema:domainIncludes dcat:Catalog , schema:DataCatalog ;
   schema:rangeIncludes skos:ConceptScheme ;
-.
-<http://www.w3.org/ns/dcat/schema>
-  rdf:type owl:Ontology ;
-  dct:contributor <https://orcid.org/0000-0003-3499-8262> ;
-  dct:created "2018-02-19"^^xsd:date ;
-  dct:creator <http://registry.it.csiro.au/sandbox/csiro/person/Simon-Cox> ;
-  dct:modified "2018-09-18"^^xsd:date ;
-  rdfs:comment "<p>Based in part on Project Open Data mappings described in <a href=\"https://project-open-data.cio.gov/metadata-resources/\">https://project-open-data.cio.gov/metadata-resources/</a></p>"^^rdf:HTML ;
-  rdfs:comment "<p>Based in part on SDWWG ISO 19115 - DCAT - Schema.org mapping described in <a href=\"https://www.w3.org/2015/spatial/wiki/ISO_19115_-_DCAT_-_Schema.org_mapping\">https://www.w3.org/2015/spatial/wiki/ISO_19115_-_DCAT_-_Schema.org_mapping</a></p>"^^rdf:HTML ;
-  rdfs:comment "NOTE: this alignment is provisional and incomplete, and is added to the repository here to (a) support further development of the DCAT-SDO alignment (b) demonstrate the strategy of modularizing alignments and dependencies into separate RDF files." ;
-  rdfs:comment "RDF graph containing alignment axioms between DCAT and schema.org" ;
-  rdfs:label "DCAT-SDO alignment" ;
-  rdfs:seeAlso <https://github.com/w3c/dxwg/issues/110> ;
-  rdfs:seeAlso <https://project-open-data.cio.gov/metadata-resources/> ;
-  rdfs:seeAlso <https://www.w3.org/2015/spatial/wiki/ISO_19115_-_DCAT_-_Schema.org_mapping> ;
-  owl:imports schema: ;
-  owl:imports <http://www.w3.org/ns/dcat> ;
-  owl:imports sosa: ;
-.
-schema:measurementTechnique
-  rdfs:subPropertyOf sosa:usedProcedure  ;
-.
-schema:usesDevice
-  rdfs:subPropertyOf ssn:implementedBy  ;
-.
-sosa:FeatureOfInterest
-  rdfs:subClassOf schema:Thing ;
-.
-sosa:ObservableProperty
-  rdfs:subClassOf schema:Property ;
-.
-sosa:Observation
-  rdfs:subClassOf schema:Action ;
-.
-sosa:Platform
-  rdfs:subClassOf schema:Thing ;
-.
-sosa:Procedure
-  rdfs:subClassOf schema:Intangible ;
-.
-sosa:Result
-  rdfs:subClassOf schema:Thing ;
-.
-sosa:Sensor
-  rdfs:subClassOf schema:Thing ;
-.
-sosa:hasFeatureOfInterest
-  rdfs:subPropertyOf schema:object ;
-.
-sosa:hasResult
-  rdfs:subPropertyOf schema:result ;
-.
-sosa:madeByActuator
-  rdfs:subPropertyOf schema:instrument ;
-.
-sosa:madeBySampler
-  rdfs:subPropertyOf schema:instrument ;
-.
-sosa:madeBySensor
-  rdfs:subPropertyOf schema:instrument ;
-.
-sosa:observedProperty
-  owl:equivalentProperty schema:variableMeasured ;
-.
-sosa:phenomenonTime
-  rdfs:subPropertyOf schema:temporalCoverage ;
-.
-sosa:resultTime
-  rdfs:subPropertyOf schema:endTime ;
-.
-sosa:usedProcedure
-  dcat:hasSubProperty schema:measurementTechnique ;
-.
-ssn:implementedBy
-  dcat:hasSubProperty schema:usesDevice ;
-.
-foaf:Organization
-  owl:equivalentClass schema:Organization ;
-.
-foaf:Person
-  owl:equivalentClass schema:Person ;
-.
-foaf:page
-  owl:equivalentProperty schema:url ;
-.
-foaf:mbox
-  owl:equivalentProperty schema:email ;
 .
