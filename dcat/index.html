@@ -171,6 +171,7 @@ table.simple {width:100%;}
           <table id="table-namespaces" class="simple">
             <thead><tr><th>Prefix</th><th>Namespace IRI</th><th>Source</th></tr></thead>
             <tbody>
+            <tr><td><code>adms</code></td><td><code>http://www.w3.org/ns/adms#</code></td><td>[[?VOCAB-ADMS]]</td></tr>
             <tr><td><code>dc</code></td><td><code>http://purl.org/dc/elements/1.1/</code></td><td>[[DCTERMS]]</td></tr>
             <tr><td><code>dcat</code></td><td><code>http://www.w3.org/ns/dcat#</code></td><td>[[VOCAB-DCAT]]</td></tr>
             <tr><td><code>dcterms</code></td><td><code>http://purl.org/dc/terms/</code></td><td>[[DCTERMS]]</td></tr>
@@ -200,7 +201,6 @@ table.simple {width:100%;}
           <table id="table-namespaces-examples" class="simple">
             <thead><tr><th>Prefix</th><th>Namespace IRI</th><th>Source</th></tr></thead>
             <tbody>
-            <tr><td><code>adms</code></td><td><code>https://www.w3.org/ns/adms#</code></td><td>[[?VOCAB-ADMS]]</td></tr>
             <tr><td><code>dqv</code></td><td><code>http://www.w3.org/ns/dqv#</code></td><td>[[?VOCAB-DQV]]</td></tr>
             <tr><td><code>earl</code></td><td><code>http://www.w3.org/ns/earl#</code></td><td>[[?EARL10-Schema]]</td></tr>
             <tr><td><code>geosparql</code></td><td><code>http://www.opengis.net/ont/geosparql#</code></td><td>[[?GeoSPARQL]]</td></tr>
@@ -4893,7 +4893,7 @@ mycity-bus:stops-2015-01-01
   dcterms:issued "2015-01-01"^^xsd:date ;
   ...
   dcat:version "1.0" ;
-  adms:versioNotes "First version of the bus stop dataset."@en ;
+  adms:versionNotes "First version of the bus stop dataset."@en ;
 .
 </pre>
 </aside>
@@ -5978,6 +5978,8 @@ ex:Test543L
       These rights and licenses could potentially include or reference sensitive information such as user and asset identifiers as <a data-cite="?ODRL-VOCAB#privacy-consideration">described</a> in [[!ODRL-VOCAB]].   Implementations that produce, maintain, publish or
       consume such vocabulary terms must take steps to ensure security and privacy considerations are addressed at the application level.
     </p>
+<p>DCAT borrows the property <a href="#Property:distribution_checksum"><code>spdx:checksum</code></a> from [[!SPDX]] to ensure the integrity and authenticity of DCAT distributions. It is worth noting that the associated checksum will not provide the expected security protections if the integrity or authenticity of the DCAT metadata is also not guaranteed. Integrity and authenticity of DCAT metadata depend on the trustworthiness of the source. DCAT providers should address integrity and authenticity at the application level. For example, they should ensure the integrity and authenticity of their API and download endpoints and make DCAT metadata files downloadable from authoritative origins. DCAT does not prescribe the manner of generating the checksum. Publishers should provide the necessary detail for the user to reliably calculate the provided hash from the files supplied. Development of a canonical method for the generation of a checksum overlaps with the scope of the <a href="https://www.w3.org/groups/wg/rch">RDF Dataset Canonicalization and Hash Working Group</a>, on which DCAT can build in the future. Moreover, the use of Verifiable Credentials [[?VC-DATA-MODEL-2.0]] can be explored when DCAT metadata is served as JSON-LD.
+    </p>
 </section>
 <section id="accessibility">
     <h2>Accessibility Considerations</h2>
@@ -6781,6 +6783,9 @@ ga-courts:jc-wms
 <p>The document has undergone the following changes since the DCAT 3 fourth public working draft of 10 May 2022 [[?VOCAB-DCAT-3-20220510]]:</p>
 
 <ul>
+    <li>
+<p>Updated section <a href="#security_and_privacy"></a> to include suggestions about integrity and authenticity  - see Issue <a href="https://github.com/w3c/dxwg/issues/1526 ">#1526</a>.</p>
+</li>    
 <li>
 <p>Updated usage note in <a href="#Property:resource_language"></a> to provide guidance on the use of <code>dcterms:language</code> in multilingual distributions - see Issue <a href="https://github.com/w3c/dxwg/issues/1532">#1532</a>.</p>
 </li>    
