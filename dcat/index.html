@@ -20,9 +20,9 @@ table.simple {width:100%;}
 <body>
 
 <!-- Disclaimer -->
-    <aside class="ednote">
+    <!--aside class="ednote">
     <p>This document presents advancements in the discussion made on DCAT 3 within DXWG group. It extends DCAT 2 [[?VOCAB-DCAT-2]] with terms and guidelines on inverse properties, versioning,  and dataset series (see sections <a href="#inverse-properties"></a>, <a href="#dataset-versions"></a> and <a href="#dataset-series"></a>), and by including terms for specifying the checksum of a distribution (see <a href="#Property:distribution_checksum"></a> and <a href="#Class:Checksum"></a>).</p>
-    </aside>
+    </aside-->
 	
 <aside class="note">
     <p>DCAT 3 supersedes DCAT 2 [[?VOCAB-DCAT-2]], but it does not make it obsolete. DCAT 3 maintains the DCAT namespace as its terms preserve backward compatibility with  DCAT 2. DCAT 3 relaxes constraints and adds new classes and properties, but these changes do not break the definition of previous terms.</p>
@@ -340,7 +340,7 @@ table.simple {width:100%;}
         The scope of DCAT 1 [[?VOCAB-DCAT-1]] was limited to catalogs of datasets.
         A number of use cases for the revision [[?DCAT-UCR]] involve <b>data services</b> as members of a catalog - see <a data-cite="DCAT-UCR#ID6">&sect;&nbsp;<span class="secno">5.16 </span>DCAT Distribution to describe Web services</a> and
         <a data-cite="DCAT-UCR#ID18">&sect;&nbsp;<span class="secno">5.18 </span>Modeling service-based data access</a>.
-        Hence, the scope of DCAT 2 includes both datasets and data services to enable these to be part of a DCAT conformant catalog.
+        Since DCAT 2 [[?VOCAB-DCAT-2]], DCAT includes both datasets and data services to enable these to be part of a DCAT conformant catalog.
         Provision for catalogs to be composed of other catalogs is also made.
         See Issue <a href="https://github.com/w3c/dxwg/issues/172">#172</a>.
       </p>
@@ -712,11 +712,11 @@ ex:table-service-005
             The use of guarded constraints (existence, cardinality, range-type) to control the use of the recommended properties in the context of a class is being considered as part of the revision of DCAT.
         </p-->
 
-        <!--NoBacklogNorCR p class="issue" data-number="110">
+        <!--NoBacklogNorCR  p class="issue" data-number="110">
             The axiomatization of DCAT 1 used global domain and range constraints for many of the properties defined in the DCAT namespace [[?VOCAB-DCAT-20140116]]. This makes quite strong ontological commitments, some of which are now being reconsidered - see individual issues noted inline below.
         </p-->
  <aside class="ednote">
-    <p>New RDF serializations will be made available for DCAT 3 as soon as the vocabulary is finalized.</p>
+    <p>New RDF serializations will be made available for DCAT 3 in the official URIs as soon as DCAT 3 becomes REC. In the meanwhile, the DCAT3 RDFs are available in the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/rdf">DXWG GitHub repository</a>: <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/rdf/dcat3.ttl">dcat3.ttl</a>, <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/rdf/dcat3.rdf">dcat3.rdf</a>, and <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/rdf/dcat3.jsonld">dcat3.jsonld</a></p>
     </aside>
         <p>The (revised) DCAT vocabulary is <a href="https://www.w3.org/ns/dcat#">available in RDF</a>.
             The primary artifact <a href="https://www.w3.org/ns/dcat.ttl"><code>dcat.ttl</code></a> is a serialization of the core DCAT vocabulary.
@@ -783,8 +783,8 @@ ex:table-service-005
         <h3>Class: Catalog</h3>
 
         <aside class="note">
-          <p>The scope of <code>dcat:Catalog</code> in DCAT 1 was catalogs of datasets [[?VOCAB-DCAT-1]]. For DCAT 2, this was generalized, and properties common to all cataloged resources were associated with a super-class <a href="#Class:Resource"><code>dcat:Resource</code></a>.</p>
-          <p>Moreover, an explicit class for <a href="#Class:Data_Service">data services</a> was added in DCAT 2, to enable these to be part of a catalog.</p>
+          <p>The scope of <code>dcat:Catalog</code> in DCAT 1 was catalogs of datasets [[?VOCAB-DCAT-1]]. Since DCAT 2 [[?VOCAB-DCAT-2]], this was generalized, and properties common to all cataloged resources were associated with a super-class <a href="#Class:Resource"><code>dcat:Resource</code></a>.</p>
+          <p>Moreover, an explicit class for <a href="#Class:Data_Service">data services</a> was added in DCAT, to enable these to be part of a catalog.</p>
           <p>Finally, <code>dcat:Catalog</code> was made a sub-class of <code>dcat:Dataset</code>, and provision for catalogs to be composed of other catalogs is also enabled.</p>
           <p>See Issue <a href="https://github.com/w3c/dxwg/issues/116">#116</a> and Issue <a href="https://github.com/w3c/dxwg/issues/172">#172</a>.</p>
         </aside>
@@ -838,7 +838,7 @@ ex:table-service-005
             <li><a href="#Property:resource_keyword">keyword/tag</a></li>
             <li><a href="#Property:resource_landing_page">landing page</a></li>
             <li><a href="#Property:resource_license">license</a></li>
-            <li><a href="#Property:resource_language">catalog language</a></li>
+            <li><a href="#Property:resource_language">language</a></li>
             <li><a href="#Property:resource_relation">relation</a></li>
             <li><a href="#Property:resource_rights">rights</a></li>
             <li><a href="#Property:resource_qualified_relation">qualified relation</a></li>
@@ -3238,9 +3238,9 @@ ex:table-service-005
 <th class="prop">Usage note:</th>
 <td>
 <p>The checksum is related to the download URL.</p>
-<aside class="ednote">
+<!--aside class="ednote">
 <p>This is the usage note in [[?DCAT-AP]]. To be decided if it should be adopted in DCAT.</p>
-</aside>
+</aside-->
 </td>
 </tr>
 </table>
@@ -3982,19 +3982,16 @@ The interval can also be open - i.e., it can have just a start or just an end.</
 <td><a href="#Property:resource_previous_version"><code>dcat:previousVersion</code></a></td>
 <td id="inverse_of_resource_previous_version"><code>dcat:nextVersion</code></td>
 </tr>
-<!--
 <tr>
 <td><a href="#Property:dataset_distribution"><code>dcat:distribution</code></a></td>
-<td id="inverse_of_dataset_distribution"><code>dcat:distributionOf</code></td>
+<td id="inverse_of_dataset_distribution"><code>dcat:isDistributionOf</code></td>
 </tr>
--->
 <!-- DCAT 2
 <tr>
 <td><a href="#Property:catalog_has_part"><code>dcterms:hasPart</code></a></td>
 <td id="inverse_of_catalog_has_part"><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/isPartOf"><code>dcterms:isPartOf</code></a></td>
 </tr>
 -->
-
 <tr>
 <td><a href="#Property:resource_has_part"><code>dcterms:hasPart</code></a></td>
 <td id="inverse_of_resource_has_part"><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/isPartOf"><code>dcterms:isPartOf</code></a></td>
@@ -4175,17 +4172,17 @@ ex:InternationalDOIFundation a foaf:Organization ;
 
     <h2>License and rights statements</h2>
 
-<aside class="ednote">
+<!--aside class="ednote">
 <p>The following NOTE should probably be dropped from DCAT3.</p>
-</aside>
+</aside-->
 
-  <aside class="note">
+  <!--aside class="note">
     <p>
     DCAT 1 handling of license and rights do not appear to satisfy all requirements [[?VOCAB-DCAT-1]].
     The recently completed W3C ODRL model [[?ODRL-MODEL]] and vocabulary [[?ODRL-VOCAB]] provide a rich language for describing many kinds of rights and obligations.
     In this section, we describe some patterns for linking DCAT Datasets and/or Distributions to suitable license and rights expressions.
   </p>
-  </aside>
+  </aside-->
 
   <p>
     Selecting the right way to express conditions for access to and re-use of resources can be complex.
@@ -4257,7 +4254,7 @@ ex:ds7890 a dcat:Dataset ;
 
   <p>Finally, in the particular case when rights are expressed via <a data-cite="ODRL-VOCAB#term-Policy">ODRL policies</a>, it is recommended to use the <a data-cite="ODRL-VOCAB#term-hasPolicy"><code>odrl:hasPolicy</code></a> property as the link from the description of the cataloged resource or distribution to the ODRL policy, in addition to the corresponding [[DCTERMS]] property that matches the same ODRL policy type.</p>
   
-<div class="issue" data-number="1342"></div>
+<!--div class="issue" data-number="1342"></div-->
   
 <aside class="note">
 <p>The Open Digital Rights Language (ODRL) is a policy expression language that provides a flexible and interoperable information model [[ODRL-MODEL]], vocabulary [[ODRL-VOCAB]], and encoding mechanisms for representing statements about usage (i.e., permissions, prohibitions, and obligations) of content and services.</p>
@@ -4616,14 +4613,14 @@ ex:Dutch-postal a dcat:Dataset ;
 
 -->   
     
-<aside class="ednote">
+<!--aside class="ednote">
 <p>This is a new draft for discussion on versioning support in DCAT.</p>
 <p>Compared with the first draft in [[VOCAB-DCAT-3-20201217]], this section has been revised to focus specifically on versions derived from the revision of a resource, and by following the [[PAV]] approach for the specification of version chains and hierarchies - previous, next, current, last version.</p>
 <p>In particular, the introductory text has been revised according to the new scope, the section on version types has been removed, and a new section has been added to describe how to specify relationships between versions, including those concerning backward compatibility, originally included in <a href="#version-info"></a>.</p>
 <p>Moreover, <a href="#versioning-complementary-approaches">a new section</a> has been added at the end to compare the DCAT versioning approach with those used in OWL and [[?DCTERMS]].</p> 
 <p>The other sections include only editorial changes.</p>
 <p><strong>NB:</strong> All the properties described in this section are yet to be added to the RDF definition of DCAT.</p>
-</aside>
+</aside-->
 
 <p>The notion of <em>version</em> is often used as a generic term to denote some kind of relationship between a resource and a derived one. Examples, among others, include revisions, editions, adaptations, and translations.</p>
 
@@ -4677,7 +4674,7 @@ ex:Dutch-postal a dcat:Dataset ;
 -->
 </ul>
 
-<aside class="ednote">
+<!--aside class="ednote">
 <p>An earlier working draft [[VOCAB-DCAT-3-20201217]] was making use of similar properties from [[DCTERMS]] and [[VOCAB-ADMS]], namely:</p>
 <ul>
 <li><code>dcterms:hasVersion</code> / <code>dcterms:isVersionOf</code>, for version hierarchies, and</li>
@@ -4690,7 +4687,7 @@ ex:Dutch-postal a dcat:Dataset ;
 </ul>
 <p>Moreover, although the definitions of the [[VOCAB-ADMS]] properties states explicitly that they are meant to be used for "versions", they are subproperties of the corresponding terms in [[XHTML-VOCAB]], where they are used to link resources in a collection (e.g., the set of pages of a Web site). E.g., the definition of <a data-cite="XHTML-VOCAB#last"><code>xhv:last</code></a> reads as follows: <q>last refers to the last resource in a collection of resources.</q>.</p>
 <p>Based on that, in subsequent drafts, [[PAV]]-equivalent properties are used for versions, whereas the [[VOCAB-ADMS]] properties, and properties <code>dcterms:hasVersion</code> / <code>dcterms:isVersionOf</code> are not used.</p>
-</aside>
+</aside-->
 
 <p>Property <code>dcat:previousVersion</code> is used to build a version chain that can be navigated backward from a given version to the first one. This reflects the most typical use case - i.e., linking different versions published as distinct resources in a catalog.</p>
 
@@ -4844,18 +4841,10 @@ mycity-bus:stops-2015-12-07 a dcat:Dataset ;
 
 
 <h2>Version information</h2>
-<aside class="ednote">
+<!--aside class="ednote">
 <p>This draft proposes the definition of a new property <code>dcat:version</code>, to use instead of <code>owl:versionInfo</code> of the first draft, to complement the versioning properties defined in the DCAT namespace and illustrated in <a href="#version-history"></a> (see Issue <a href="https://github.com/w3c/dxwg/issues/1280">#1280</a>).</p>
-<!--
-<p>Issue <a href="https://github.com/w3c/dxwg/issues/1280">#1280</a> is kept open to provide a context for the latest changes and as a placeholder for further feedback.  
-</p>   
-<div class="issue" data-number="1280"></div>
--->
-<!--
-<p>Moreover, the specification of backward compatibility between versions has been moved to a separate section (<a href="#version-backward-compatibility"></a>).</p>
--->
 <p>Moreover, support to the specification of backward compatibility between versions has been removed (see Issue <a href="https://github.com/w3c/dxwg/issues/1258">#1258</a>).</p>
-</aside>
+</aside-->
     
 <p>Besides the relationships illustrated in the previous section, versioned resources may be associated with additional information, describing, e.g., their differences with the original resource (the version "delta"),  the version identifier, and release date.</p>
 
@@ -5015,11 +5004,11 @@ mycity-bus:stops-2015-01-01
 
 <h2>Dataset series</h2>
 
-<aside class="ednote">
+<!--aside class="ednote">
 <p>This is a new draft for discussion on dataset series support in DCAT. Compared with the first draft in [[VOCAB-DCAT-3-20201217]], this section has been revised.</p>
 <p>A new class <code>dcat:DatasetSeries</code> is defined as suggested in Issue <a href="https://github.com/w3c/dxwg/issues/1272">#1272</a>. </p>
 <p>Only one property  <code>dcat:inSeries</code> linking the child datasets to dataset series is defined. The new property <code>dcat:inSeries</code> replaces the use of <code>dcterms:isPartOf</code> helping to distinguish between the composition in dataset series and  <a href="https://www.w3.org/TR/vocab-dcat-3/#examples-bag-of-files">Loosely structured catalog</a> (see Issue <a href="https://github.com/w3c/dxwg/issues/1307">#1307</a>). Finally, properties <code>adms:prev</code>, <code>adms:next</code>, and <code>adms:last</code> have been replaced by newly defined properties - <code>dcat:prev</code>, <code>dcat:next</code>, and <code>dcat:last</code> (see Issue <a href="https://github.com/w3c/dxwg/issues/1308">#1308</a>)).</p>
-</aside>
+</aside-->
 
 <p>With "dataset series" we refer to data, somehow interrelated, that are published separately. An example is budget data split by year and/or country, instead of being made available in a single dataset.</p>
 
@@ -5985,7 +5974,7 @@ ex:Test543L
       These rights and licenses could potentially include or reference sensitive information such as user and asset identifiers as <a data-cite="?ODRL-VOCAB#privacy-consideration">described</a> in [[!ODRL-VOCAB]].   Implementations that produce, maintain, publish or
       consume such vocabulary terms must take steps to ensure security and privacy considerations are addressed at the application level.
     </p>
-<p>DCAT borrows the property <a href="#Property:distribution_checksum"><code>spdx:checksum</code></a> from [[!SPDX]] to ensure the integrity and authenticity of DCAT distributions. It is worth noting that the associated checksum will not provide the expected security protections if the integrity or authenticity of the DCAT metadata is also not guaranteed. Integrity and authenticity of DCAT metadata depend on the trustworthiness of the source. DCAT providers should address integrity and authenticity at the application level. For example, they should ensure the integrity and authenticity of their API and download endpoints and make DCAT metadata files downloadable from authoritative origins. DCAT does not prescribe the manner of generating the checksum. Publishers should provide the necessary detail for the user to reliably calculate the provided hash from the files supplied. Development of a canonical method for the generation of a checksum overlaps with the scope of the <a href="https://www.w3.org/groups/wg/rch">RDF Dataset Canonicalization and Hash Working Group</a>, on which DCAT can build in the future. Moreover, the use of Verifiable Credentials [[?VC-DATA-MODEL-2.0]] can be explored when DCAT metadata is served as JSON-LD.
+<p>DCAT borrows the property <a href="#Property:distribution_checksum"><code>spdx:checksum</code></a> from [[!SPDX]] to ensure the integrity and authenticity of DCAT distributions. It is worth noting that the associated checksum will not provide the expected security protections if the integrity or authenticity of the DCAT metadata is also not guaranteed. Integrity and authenticity of DCAT metadata depend on the trustworthiness of the source. DCAT providers should address integrity and authenticity at the application level. For example, they should ensure the integrity and authenticity of their API and download endpoints and make DCAT metadata files downloadable from authoritative origins. DCAT does not prescribe the manner of generating the checksum. Publishers should provide the necessary detail for the user to reliably calculate the provided hash from the files supplied. Development of a canonical method for the generation of a checksum overlaps with the scope of the <a href="https://www.w3.org/groups/wg/rch">RDF Dataset Canonicalization and Hash Working Group</a>, on which DCAT can build in the future. Moreover, the use of Verifiable Credentials Data Integrity [[?VC-DATA-INTEGRITY]] can be explored.
     </p>
 </section>
 <section id="accessibility">
