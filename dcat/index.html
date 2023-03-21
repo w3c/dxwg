@@ -20,9 +20,9 @@ table.simple {width:100%;}
 <body>
 
 <!-- Disclaimer -->
-    <aside class="ednote">
+    <!--aside class="ednote">
     <p>This document presents advancements in the discussion made on DCAT 3 within DXWG group. It extends DCAT 2 [[?VOCAB-DCAT-2]] with terms and guidelines on inverse properties, versioning,  and dataset series (see sections <a href="#inverse-properties"></a>, <a href="#dataset-versions"></a> and <a href="#dataset-series"></a>), and by including terms for specifying the checksum of a distribution (see <a href="#Property:distribution_checksum"></a> and <a href="#Class:Checksum"></a>).</p>
-    </aside>
+    </aside-->
 	
 <aside class="note">
     <p>DCAT 3 supersedes DCAT 2 [[?VOCAB-DCAT-2]], but it does not make it obsolete. DCAT 3 maintains the DCAT namespace as its terms preserve backward compatibility with  DCAT 2. DCAT 3 relaxes constraints and adds new classes and properties, but these changes do not break the definition of previous terms.</p>
@@ -51,7 +51,7 @@ table.simple {width:100%;}
 </aside-->
 
     <p>
-        This document defines a major revision of the DCAT 2 vocabulary ([[?VOCAB-DCAT-2]]) in response to use cases, requirements and community experience which could not be considered during the previous vocabulary development. This revision extends the original DCAT standard in line with community practice while supporting diverse approaches to data description and dataset exchange. The main changes to the DCAT vocabulary have been: 
+        This document defines a major revision of the DCAT 2 vocabulary ([[?VOCAB-DCAT-2]]) in response to use cases, requirements and community experience which could not be considered during the previous vocabulary development. This revision extends the DCAT standard in line with community practice while supporting diverse approaches to data description and dataset exchange. The main changes to the DCAT vocabulary have been: 
     </p>
     <ul>
         <li>addition of <a href="#Property:distribution_checksum"><code>spdx:checksum</code></a> property and <a href="#Class:Checksum"><code>spdx:Checksum</code></a> class to provide digest for DCAT distributions</li>
@@ -82,7 +82,7 @@ table.simple {width:100%;}
       Note that conformance to DCAT (<a href="#conformance"></a>) concerns usage of only the terms in the DCAT vocabulary specification, so possible changes to other external definitions will not affect the conformance of DCAT implementations.</p>
 
     <h3 id="please_send_comments">Please send comments</h3>
-    The Working Group invited publishers to describe their catalogs and datasets with the revised version of DCAT described in this document and to report their implementations following <a href="https://github.com/w3c/dxwg/wiki/DCAT-implementation-evidence">the instruction  to reporting DCAT revised implementations</a>. This information and subsequent analysis is published in the <a href="https://w3c.github.io/dxwg/dcat-implementation-report/">implementation report.</a>
+    The Working Group invited publishers to describe their catalogs and datasets with the revised version of DCAT described in this document and to report their implementations following <a href="https://github.com/w3c/dxwg/wiki/DCAT-implementation-evidence">the instruction  to reporting DCAT revised implementations</a>. This information and subsequent analysis is published in the <a href="https://w3c.github.io/dxwg/dcat3-implementation-report/">implementation report.</a>
 
 </section>
 
@@ -340,7 +340,7 @@ table.simple {width:100%;}
         The scope of DCAT 1 [[?VOCAB-DCAT-1]] was limited to catalogs of datasets.
         A number of use cases for the revision [[?DCAT-UCR]] involve <b>data services</b> as members of a catalog - see <a data-cite="DCAT-UCR#ID6">&sect;&nbsp;<span class="secno">5.16 </span>DCAT Distribution to describe Web services</a> and
         <a data-cite="DCAT-UCR#ID18">&sect;&nbsp;<span class="secno">5.18 </span>Modeling service-based data access</a>.
-        Hence, the scope of DCAT 2 includes both datasets and data services to enable these to be part of a DCAT conformant catalog.
+        Since DCAT 2 [[?VOCAB-DCAT-2]], DCAT includes both datasets and data services to enable these to be part of a DCAT conformant catalog.
         Provision for catalogs to be composed of other catalogs is also made.
         See Issue <a href="https://github.com/w3c/dxwg/issues/172">#172</a>.
       </p>
@@ -712,11 +712,11 @@ ex:table-service-005
             The use of guarded constraints (existence, cardinality, range-type) to control the use of the recommended properties in the context of a class is being considered as part of the revision of DCAT.
         </p-->
 
-        <!--NoBacklogNorCR p class="issue" data-number="110">
+        <!--NoBacklogNorCR  p class="issue" data-number="110">
             The axiomatization of DCAT 1 used global domain and range constraints for many of the properties defined in the DCAT namespace [[?VOCAB-DCAT-20140116]]. This makes quite strong ontological commitments, some of which are now being reconsidered - see individual issues noted inline below.
         </p-->
  <aside class="ednote">
-    <p>New RDF serializations will be made available for DCAT 3 as soon as the vocabulary is finalized.</p>
+    <p>New RDF serializations will be made available for DCAT 3 in the official URIs as soon as DCAT 3 becomes REC. In the meanwhile, the DCAT 3 RDFs are available in the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/rdf">DXWG GitHub repository</a>: <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/rdf/dcat3.ttl">dcat3.ttl</a>, <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/rdf/dcat3.rdf">dcat3.rdf</a>, and <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/rdf/dcat3.jsonld">dcat3.jsonld</a></p>
     </aside>
         <p>The (revised) DCAT vocabulary is <a href="https://www.w3.org/ns/dcat#">available in RDF</a>.
             The primary artifact <a href="https://www.w3.org/ns/dcat.ttl"><code>dcat.ttl</code></a> is a serialization of the core DCAT vocabulary.
@@ -783,8 +783,8 @@ ex:table-service-005
         <h3>Class: Catalog</h3>
 
         <aside class="note">
-          <p>The scope of <code>dcat:Catalog</code> in DCAT 1 was catalogs of datasets [[?VOCAB-DCAT-1]]. For DCAT 2, this was generalized, and properties common to all cataloged resources were associated with a super-class <a href="#Class:Resource"><code>dcat:Resource</code></a>.</p>
-          <p>Moreover, an explicit class for <a href="#Class:Data_Service">data services</a> was added in DCAT 2, to enable these to be part of a catalog.</p>
+          <p>The scope of <code>dcat:Catalog</code> in DCAT 1 was catalogs of datasets [[?VOCAB-DCAT-1]]. Since DCAT 2 [[?VOCAB-DCAT-2]], this was generalized, and properties common to all cataloged resources were associated with a super-class <a href="#Class:Resource"><code>dcat:Resource</code></a>.</p>
+          <p>Moreover, an explicit class for <a href="#Class:Data_Service">data services</a> was added in DCAT, to enable these to be part of a catalog.</p>
           <p>Finally, <code>dcat:Catalog</code> was made a sub-class of <code>dcat:Dataset</code>, and provision for catalogs to be composed of other catalogs is also enabled.</p>
           <p>See Issue <a href="https://github.com/w3c/dxwg/issues/116">#116</a> and Issue <a href="https://github.com/w3c/dxwg/issues/172">#172</a>.</p>
         </aside>
@@ -838,7 +838,7 @@ ex:table-service-005
             <li><a href="#Property:resource_keyword">keyword/tag</a></li>
             <li><a href="#Property:resource_landing_page">landing page</a></li>
             <li><a href="#Property:resource_license">license</a></li>
-            <li><a href="#Property:resource_language">catalog language</a></li>
+            <li><a href="#Property:resource_language">language</a></li>
             <li><a href="#Property:resource_relation">relation</a></li>
             <li><a href="#Property:resource_rights">rights</a></li>
             <li><a href="#Property:resource_qualified_relation">qualified relation</a></li>
@@ -3233,9 +3233,9 @@ ex:table-service-005
 <th class="prop">Usage note:</th>
 <td>
 <p>The checksum is related to the download URL.</p>
-<aside class="ednote">
+<!--aside class="ednote">
 <p>This is the usage note in [[?DCAT-AP]]. To be decided if it should be adopted in DCAT.</p>
-</aside>
+</aside-->
 </td>
 </tr>
 </table>
@@ -3422,6 +3422,7 @@ ex:table-service-005
 <p><a href="http://xmlns.com/foaf/0.1/Organization"><code>foaf:Organization</code></a> (for government agencies or other entities)</p>
 </td>
 </tr>
+<tr><th class="prop">Sub-class of:</th><td><a href="http://xmlns.com/foaf/0.1/Agent"><code>foaf:Agent</code></a></td></tr>
 <tr>
 <th class="prop">Usage note:</th>
 <td>[[!FOAF]] provides several properties to describe these entities.</td>
@@ -3977,19 +3978,16 @@ The interval can also be open - i.e., it can have just a start or just an end.</
 <td><a href="#Property:resource_previous_version"><code>dcat:previousVersion</code></a></td>
 <td id="inverse_of_resource_previous_version"><code>dcat:nextVersion</code></td>
 </tr>
-<!--
 <tr>
 <td><a href="#Property:dataset_distribution"><code>dcat:distribution</code></a></td>
-<td id="inverse_of_dataset_distribution"><code>dcat:distributionOf</code></td>
+<td id="inverse_of_dataset_distribution"><code>dcat:isDistributionOf</code></td>
 </tr>
--->
 <!-- DCAT 2
 <tr>
 <td><a href="#Property:catalog_has_part"><code>dcterms:hasPart</code></a></td>
 <td id="inverse_of_catalog_has_part"><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/isPartOf"><code>dcterms:isPartOf</code></a></td>
 </tr>
 -->
-
 <tr>
 <td><a href="#Property:resource_has_part"><code>dcterms:hasPart</code></a></td>
 <td id="inverse_of_resource_has_part"><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/isPartOf"><code>dcterms:isPartOf</code></a></td>
@@ -4170,17 +4168,17 @@ ex:InternationalDOIFundation a foaf:Organization ;
 
     <h2>License and rights statements</h2>
 
-<aside class="ednote">
+<!--aside class="ednote">
 <p>The following NOTE should probably be dropped from DCAT3.</p>
-</aside>
+</aside-->
 
-  <aside class="note">
+  <!--aside class="note">
     <p>
     DCAT 1 handling of license and rights do not appear to satisfy all requirements [[?VOCAB-DCAT-1]].
     The recently completed W3C ODRL model [[?ODRL-MODEL]] and vocabulary [[?ODRL-VOCAB]] provide a rich language for describing many kinds of rights and obligations.
     In this section, we describe some patterns for linking DCAT Datasets and/or Distributions to suitable license and rights expressions.
   </p>
-  </aside>
+  </aside-->
 
   <p>
     Selecting the right way to express conditions for access to and re-use of resources can be complex.
@@ -4250,9 +4248,9 @@ ex:ds7890 a dcat:Dataset ;
 </pre>
 </aside>
 
-  <p>Finally, in the particular case when rights are expressed via <a data-cite="ODRL-VOCAB#term-Policy">ODRL policies</a>, it is recommended to use the <a data-cite="ODRL-VOCAB#term-hasPolicy"><code>odrl:hasPolicy</code></a> property as the link from the description of the cataloged resource or distribution to the ODRL policy, in addition to the corresponding [[DCTERMS]] property that matches the same ODRL policy type.</p>
+  <p>Finally, in the particular case when rights are expressed via <a data-cite="ODRL-VOCAB#term-Policy">ODRL policies</a>, it is recommended to use the <a data-cite="ODRL-VOCAB#term-hasPolicy"><code>odrl:hasPolicy</code></a> property as the link from the description of the cataloged resource or distribution to the ODRL policy.</p>
   
-<div class="issue" data-number="1342"></div>
+<!--div class="issue" data-number="1342"></div-->
   
 <aside class="note">
 <p>The Open Digital Rights Language (ODRL) is a policy expression language that provides a flexible and interoperable information model [[ODRL-MODEL]], vocabulary [[ODRL-VOCAB]], and encoding mechanisms for representing statements about usage (i.e., permissions, prohibitions, and obligations) of content and services.</p>
@@ -4611,14 +4609,14 @@ ex:Dutch-postal a dcat:Dataset ;
 
 -->   
     
-<aside class="ednote">
+<!--aside class="ednote">
 <p>This is a new draft for discussion on versioning support in DCAT.</p>
 <p>Compared with the first draft in [[VOCAB-DCAT-3-20201217]], this section has been revised to focus specifically on versions derived from the revision of a resource, and by following the [[PAV]] approach for the specification of version chains and hierarchies - previous, next, current, last version.</p>
 <p>In particular, the introductory text has been revised according to the new scope, the section on version types has been removed, and a new section has been added to describe how to specify relationships between versions, including those concerning backward compatibility, originally included in <a href="#version-info"></a>.</p>
 <p>Moreover, <a href="#versioning-complementary-approaches">a new section</a> has been added at the end to compare the DCAT versioning approach with those used in OWL and [[?DCTERMS]].</p> 
 <p>The other sections include only editorial changes.</p>
 <p><strong>NB:</strong> All the properties described in this section are yet to be added to the RDF definition of DCAT.</p>
-</aside>
+</aside-->
 
 <p>The notion of <em>version</em> is often used as a generic term to denote some kind of relationship between a resource and a derived one. Examples, among others, include revisions, editions, adaptations, and translations.</p>
 
@@ -4672,7 +4670,7 @@ ex:Dutch-postal a dcat:Dataset ;
 -->
 </ul>
 
-<aside class="ednote">
+<!--aside class="ednote">
 <p>An earlier working draft [[VOCAB-DCAT-3-20201217]] was making use of similar properties from [[DCTERMS]] and [[VOCAB-ADMS]], namely:</p>
 <ul>
 <li><code>dcterms:hasVersion</code> / <code>dcterms:isVersionOf</code>, for version hierarchies, and</li>
@@ -4685,7 +4683,7 @@ ex:Dutch-postal a dcat:Dataset ;
 </ul>
 <p>Moreover, although the definitions of the [[VOCAB-ADMS]] properties states explicitly that they are meant to be used for "versions", they are subproperties of the corresponding terms in [[XHTML-VOCAB]], where they are used to link resources in a collection (e.g., the set of pages of a Web site). E.g., the definition of <a data-cite="XHTML-VOCAB#last"><code>xhv:last</code></a> reads as follows: <q>last refers to the last resource in a collection of resources.</q>.</p>
 <p>Based on that, in subsequent drafts, [[PAV]]-equivalent properties are used for versions, whereas the [[VOCAB-ADMS]] properties, and properties <code>dcterms:hasVersion</code> / <code>dcterms:isVersionOf</code> are not used.</p>
-</aside>
+</aside-->
 
 <p>Property <code>dcat:previousVersion</code> is used to build a version chain that can be navigated backward from a given version to the first one. This reflects the most typical use case - i.e., linking different versions published as distinct resources in a catalog.</p>
 
@@ -4839,18 +4837,10 @@ mycity-bus:stops-2015-12-07 a dcat:Dataset ;
 
 
 <h2>Version information</h2>
-<aside class="ednote">
+<!--aside class="ednote">
 <p>This draft proposes the definition of a new property <code>dcat:version</code>, to use instead of <code>owl:versionInfo</code> of the first draft, to complement the versioning properties defined in the DCAT namespace and illustrated in <a href="#version-history"></a> (see Issue <a href="https://github.com/w3c/dxwg/issues/1280">#1280</a>).</p>
-<!--
-<p>Issue <a href="https://github.com/w3c/dxwg/issues/1280">#1280</a> is kept open to provide a context for the latest changes and as a placeholder for further feedback.  
-</p>   
-<div class="issue" data-number="1280"></div>
--->
-<!--
-<p>Moreover, the specification of backward compatibility between versions has been moved to a separate section (<a href="#version-backward-compatibility"></a>).</p>
--->
 <p>Moreover, support to the specification of backward compatibility between versions has been removed (see Issue <a href="https://github.com/w3c/dxwg/issues/1258">#1258</a>).</p>
-</aside>
+</aside-->
     
 <p>Besides the relationships illustrated in the previous section, versioned resources may be associated with additional information, describing, e.g., their differences with the original resource (the version "delta"),  the version identifier, and release date.</p>
 
@@ -5010,11 +5000,11 @@ mycity-bus:stops-2015-01-01
 
 <h2>Dataset series</h2>
 
-<aside class="ednote">
+<!--aside class="ednote">
 <p>This is a new draft for discussion on dataset series support in DCAT. Compared with the first draft in [[VOCAB-DCAT-3-20201217]], this section has been revised.</p>
 <p>A new class <code>dcat:DatasetSeries</code> is defined as suggested in Issue <a href="https://github.com/w3c/dxwg/issues/1272">#1272</a>. </p>
 <p>Only one property  <code>dcat:inSeries</code> linking the child datasets to dataset series is defined. The new property <code>dcat:inSeries</code> replaces the use of <code>dcterms:isPartOf</code> helping to distinguish between the composition in dataset series and  <a href="https://www.w3.org/TR/vocab-dcat-3/#examples-bag-of-files">Loosely structured catalog</a> (see Issue <a href="https://github.com/w3c/dxwg/issues/1307">#1307</a>). Finally, properties <code>adms:prev</code>, <code>adms:next</code>, and <code>adms:last</code> have been replaced by newly defined properties - <code>dcat:prev</code>, <code>dcat:next</code>, and <code>dcat:last</code> (see Issue <a href="https://github.com/w3c/dxwg/issues/1308">#1308</a>)).</p>
-</aside>
+</aside-->
 
 <p>With "dataset series" we refer to data, somehow interrelated, that are published separately. An example is budget data split by year and/or country, instead of being made available in a single dataset.</p>
 
@@ -5312,7 +5302,7 @@ ex:budget-2018-it a dcat:Dataset ;
     <h2>Data citation</h2>
 
     <p>
-        <a href="https://www.w3.org/TR/dcat-ucr/#RDSC">Dataset citation</a> is one of the requirements identified for this DCAT revision.
+        <a href="https://www.w3.org/TR/dcat-ucr/#RDSC">Dataset citation</a> is one of the requirements identified.
         Data citation is the practice of referencing data in a similar way as when providing bibliographic references, acknowledging data
         as a first class output in any investigative process. Data citation offers multiple benefits, such as supporting proper attribution
         and credit to those producing the data, facilitating data discovery, supporting tracking the impact and reuse of data, allowing for
@@ -5326,7 +5316,7 @@ ex:budget-2018-it a dcat:Dataset ;
     </p>
 
     <p>
-        In order to support data citation, this DCAT revision has added the consideration of <a href="#dereferenceable-identifiers">dereferenceable identifiers</a> and support for indicating
+        In order to support data citation, DCAT 2 added the consideration of <a href="#dereferenceable-identifiers">dereferenceable identifiers</a> and support for indicating
         <a href="#Property:resource_creator">the creators of the cataloged resources</a>. The remaining properties necessary for data citation were already available in DCAT 1 [[?VOCAB-DCAT-1]].
     </p>
 
@@ -5951,7 +5941,7 @@ ex:Test543L
     <h2>DCAT Profiles</h2>
 
     <p>
-        The DCAT-2014 vocabulary [[?VOCAB-DCAT-1]] has been extended for application in data catalogs in different domains.
+        The DCAT-2014 vocabulary [[?VOCAB-DCAT-1]] and DCAT 2 [[?VOCAB-DCAT-2]] have been extended for application in data catalogs in different domains.
         Each of these new specifications constitutes a DCAT profile, i.e., a named set of constraints based on DCAT (see <a href="#conformance"></a>). In some cases,
         a profile extends one of the DCAT profiles themselves, by adding classes and properties for metadata fields not covered in the reference DCAT profile.
     </p>
@@ -6087,7 +6077,7 @@ ex:Test543L
   
   </p>
 
-  <p>The editors also gratefully acknowledge the chairs of this Working Group: Caroline Burle and Peter Winstanley &mdash; and staff contact Philippe Le Hégaret.</p>
+  <p>The editors also gratefully acknowledge the chairs of this Working Group: Caroline Burle and Peter Winstanley &mdash; and staff contacts Philippe Le Hégaret and Pierre-Antoine Champin.</p>
 
 </section>
 
@@ -6388,7 +6378,7 @@ ex:d33937-ttl  rdf:type dcat:Distribution ;
 </aside>
 
       <p>
-          This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://w3c.github.io/dxwg/dcat/examples/vocab-dcat-3/csiro-dap-examples.ttl"><code>csiro-dap-examples.ttl</code></a> and <a href="https://w3c.github.io/dxwg/dcat/examples/vocab-dcat-3/csiro-stratchart_dcat3.ttl"><code>csiro-stratchart_dcat3.ttl</code></a>.
+          This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples/vocab-dcat-3">DXWG DCAT 3 code repository</a> at <a href="https://w3c.github.io/dxwg/dcat/examples/vocab-dcat-3/csiro-dap-examples.ttl"><code>csiro-dap-examples.ttl</code></a> and <a href="https://w3c.github.io/dxwg/dcat/examples/vocab-dcat-3/csiro-stratchart_dcat3.ttl"><code>csiro-stratchart_dcat3.ttl</code></a>.
       </p>
 
       <p>
@@ -6496,7 +6486,7 @@ dap:d33937
 </aside>
 
       <p>
-          This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://w3c.github.io/dxwg/dcat/examples/vocab-dcat-3/csiro-stratchart.ttl"><code>csiro-stratchart.ttl</code></a>.
+          This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples/vocab-dcat-3">DXWG DCAT 3 code repository</a> at <a href="https://w3c.github.io/dxwg/dcat/examples/vocab-dcat-3/csiro-stratchart.ttl"><code>csiro-stratchart.ttl</code></a>.
       </p>
 
   </section>
@@ -6532,7 +6522,7 @@ dap:P366
 </aside>
 
       <p>
-          This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://w3c.github.io/dxwg/dcat/examples/vocab-dcat-3/csiro-dap-examples.ttl"><code>csiro-dap-examples.ttl</code></a>.
+          This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples/vocab-dcat-3">DXWG DCAT 3 code repository</a> at <a href="https://w3c.github.io/dxwg/dcat/examples/vocab-dcat-3/csiro-dap-examples.ttl"><code>csiro-dap-examples.ttl</code></a>.
       </p>
       <p>
           Several properties capture provenance information, including within the citation and title, but the primary link to a formal description of the project is through <a href="#Property:dataset_was_generated_by"><code>prov:wasGeneratedBy</code></a>.
@@ -6560,7 +6550,7 @@ dap:P366
   <section id="examples-dataset-publication">
       <h3>Link datasets and publications</h3>
 
-      <p>Often datasets are associated with publications (scholarly articles, reports, etc.) and this version of DCAT relies on the property <a href="#Property:resource_is_referenced_by"><code>dcterms:isReferencedBy</code></a> to provide a way to link publications about a dataset to the dataset</p>
+      <p>Datasets are often associated with publications (scholarly articles, reports, etc.) and DCAT relies on the property <a href="#Property:resource_is_referenced_by"><code>dcterms:isReferencedBy</code></a> to provide a way to link publications about a dataset to the dataset</p>
 
       <p>The following example shows how a dataset published in the <a href="https://datadryad.org">Dryad repository</a> is linked to a publication available in the <a href="https://doi.org/10.1038/sdata.2018.22">Nature Scientific Data journal</a>:</p>
 
@@ -6578,7 +6568,7 @@ ex:globtherm
 </aside>
 
       <p>
-          This examples is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://w3c.github.io/dxwg/dcat/examples/vocab-dcat-3/dryad-globtherm-sdata.ttl"><code>dryad-globtherm-sdata.ttl</code></a>
+          This examples is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples/vocab-dcat-3">DXWG DCAT 3 code repository</a> at <a href="https://w3c.github.io/dxwg/dcat/examples/vocab-dcat-3/dryad-globtherm-sdata.ttl"><code>dryad-globtherm-sdata.ttl</code></a>
       </p>
 
   </section>
@@ -6594,7 +6584,7 @@ ex:globtherm
           This is classified as a <a href="#Class:Data_Service"><code>dcat:DataService</code></a> and has the <code>dcterms:type</code> set to &quot;<a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/discovery">discovery</a>&quot; from the INSPIRE classification of spatial data service types [[?INSPIRE-SDST]].
       </p>
       <p>
-          This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://w3c.github.io/dxwg/dcat/examples/vocab-dcat-3/eea-csw.ttl"><code>eea-csw.ttl</code></a>
+          This example is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples/vocab-dcat-3">DXWG DCAT 3 code repository</a> at <a href="https://w3c.github.io/dxwg/dcat/examples/vocab-dcat-3/eea-csw.ttl"><code>eea-csw.ttl</code></a>
       </p>
 
 <aside id="ex-service-eea" class="example">
@@ -6635,7 +6625,7 @@ ex:EEA-CSW-Endpoint
           These are classified as a <a href="#Class:Data_Service"><code>dcat:DataService</code></a> and also have the <code>dcterms:type</code> set to &quot;<a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download">download</a>&quot; and &quot;<a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view">view</a>&quot; from the INSPIRE classification of spatial data service types [[?INSPIRE-SDST]].
       </p>
       <p>
-          <a href="#ex-service-gsa"></a> is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://w3c.github.io/dxwg/dcat/examples/vocab-dcat-3/ga-courts.ttl"><code>ga-courts.ttl</code></a>
+          <a href="#ex-service-gsa"></a> is available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples/vocab-dcat-3">DXWG DCAT 3 code repository</a> at <a href="https://w3c.github.io/dxwg/dcat/examples/vocab-dcat-3/ga-courts.ttl"><code>ga-courts.ttl</code></a>
       </p>
 
 <aside id="ex-service-gsa" class="example">
@@ -6762,7 +6752,7 @@ ga-courts:jc-wms
 </aside>
 
         <p>
-            These examples are available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples">DXWG code repository</a> at <a href="https://w3c.github.io/dxwg/dcat/examples/vocab-dcat-3/compress-and-package.ttl"><code>compress-and-package.ttl</code></a>
+            These examples are available from the <a href="https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples/vocab-dcat-3">DXWG DCAT 3 code repository</a> at <a href="https://w3c.github.io/dxwg/dcat/examples/vocab-dcat-3/compress-and-package.ttl"><code>compress-and-package.ttl</code></a>
         </p>
 
   </section>
