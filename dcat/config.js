@@ -40,11 +40,11 @@ var respecConfig = {
       note: 	"Previously at Refinitiv.com",
       w3cid: 98704
     },{
-      name:       "Simon Cox",
-      orcid:      "0000-0002-3884-3420",
-      company:    "Invited Expert / CSIRO",
-      url:        "http://people.csiro.au/Simon-Cox",
-      companyURL: "https://www.csiro.au/",
+      name:     "Simon J D Cox",
+      orcid:    "0000-0002-3884-3420",
+      company:  "Invited Expert",
+      url:      "https://orcid.org/0000-0002-3884-3420",
+      note:     "Previously at CSIRO",
       w3cid: 1796
     },{
       name:       "Alejandra Gonzalez Beltran",
