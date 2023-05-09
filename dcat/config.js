@@ -30,7 +30,7 @@ var respecConfig = {
     editors: [{
       name:       "Riccardo Albertoni",
       orcid:  "0000-0001-5648-2713",
-      company:    "CNR - Consiglio Nazionale delle Ricerche, Italy",
+      company:    "Invited Expert / CNR - Consiglio Nazionale delle Ricerche, Italy",
       url: "http://imati.cnr.it/mypage/people/AlbertoniRiccardo.htm",
       companyURL: "https://www.cnr.it/",
       w3cid: 72458
@@ -40,16 +40,16 @@ var respecConfig = {
       note: 	"Previously at Refinitiv.com",
       w3cid: 98704
     },{
-      name:       "Simon Cox",
-      orcid:      "0000-0002-3884-3420",
-      company:    "CSIRO",
-      url:        "http://people.csiro.au/Simon-Cox",
-      companyURL: "https://www.csiro.au/",
+      name:     "Simon J D Cox",
+      orcid:    "0000-0002-3884-3420",
+      company:  "Invited Expert",
+      url:      "https://orcid.org/0000-0002-3884-3420",
+      note:     "Previously at CSIRO",
       w3cid: 1796
     },{
       name:       "Alejandra Gonzalez Beltran",
       orcid:      "0000-0003-3499-8262",
-      company:    "Scientific Computing Department, Science and Technology Facilities Council, UK",
+      company:    "Invited Expert / Scientific Computing Department, Science and Technology Facilities Council, UK",
       url: "https://www.scd.stfc.ac.uk/Pages/Alejandra-Gonzalez-Beltran.aspx",
       companyURL: "https://stfc.ukri.org/",
       note: "Previously at the University of Oxford",
