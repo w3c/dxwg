@@ -4,10 +4,10 @@ var respecConfig = {
 //    subtitle: "Version 2",
     specStatus: "ED",
     errata: "https://w3c.github.io/dxwg/errata/",
-//   specStatus: "ED",
+//    specStatus: "ED",
 //    specStatus: "CR",
-//  crEnd: "2019-10-24",
-//    implementationReportURI: "https://w3c.github.io/dxwg/dcat-implementation-report/",
+//    crEnd: "2023-11-28",
+//    implementationReportURI: "https://w3c.github.io/dxwg/dcat3-implementation-report/",
     shortName: "vocab-dcat-3",
     prevRecShortname: "vocab-dcat-2",
     canonicalURI: "TR",
@@ -31,7 +31,7 @@ var respecConfig = {
       name:       "Riccardo Albertoni",
       orcid:  "0000-0001-5648-2713",
       company:    "Invited Expert / CNR - Consiglio Nazionale delle Ricerche, Italy",
-      url: "http://imati.cnr.it/mypage/people/AlbertoniRiccardo.htm",
+      url: "https://imati.cnr.it/mypage.php?idk=PG-62",
       companyURL: "https://www.cnr.it/",
       w3cid: 72458
     },{
@@ -108,7 +108,7 @@ var respecConfig = {
     github: "https://github.com/w3c/dxwg/",
     localBiblio: {
         "ADMS-SKOS":{
-          "href":"https://joinup.ec.europa.eu/svn/adms/ADMS_v1.00/ADMS_SKOS_v1.00.html",
+          "href":"https://web.archive.org/web/20210521035614/https://joinup.ec.europa.eu/svn/adms/ADMS_v1.00/ADMS_SKOS_v1.00.html",
           "title":"Joinup. ADMS Controlled Vocabularies",
           "publisher":"European Commission"
         },	    
@@ -172,7 +172,7 @@ var respecConfig = {
         },
         "GeoDCAT-AP-IT": {
             title: "GeoDCAT-AP in Italy, the national guidelines published",
-            href: "https://joinup.ec.europa.eu/news/geodcat-apit"
+            href: "https://web.archive.org/web/20200506120557/https://joinup.ec.europa.eu/collection/semantic-interoperability-community-semic/news/geodcat-apit"
         },
         "HYDRA": {
             authors: [
@@ -263,7 +263,7 @@ var respecConfig = {
             publisher:"OpenSearch"
         },
         "PDO" : {
-            href:"http://vocab.deri.ie/pdo",
+            href:"https://web.archive.org/web/20100727172837/http://vocab.deri.ie/pdo",
             title:"Project Documents Ontology",
             authors: ["Pradeep Varma"],
             date: "09 July 2010"
