@@ -22,14 +22,14 @@
     </section>
     <section id="introduction">
       <h2>Introduction</h2>
-<p>DCAT is an RDF vocabulary, first published as a W3C Recommendation in 2014 [[VOCAB-DCAT]], designed to facilitate interoperability between data catalogs published on the Web. The <a href="https://www.w3.org/2017/dxwg/">Dataset Exchange Working Group</a> (<abbr title="Dataset Exchange Working Group">DXWG</abbr>) has developed a new version of DCAT [[VOCAB-DCAT-3]], which extends [[VOCAB-DCAT-2] to support further use cases and requirements [[DCAT-UCR]]. These include the possibility of providing  digest for DCAT distributions, the support for resource's versioning and data series.</p>
+<p>DCAT is an RDF vocabulary, first published as a W3C Recommendation in 2014 [[VOCAB-DCAT]], designed to facilitate interoperability between data catalogs published on the Web. The <a href="https://www.w3.org/2017/dxwg/">Dataset Exchange Working Group</a> (<abbr title="Dataset Exchange Working Group">DXWG</abbr>) has developed a new version of DCAT [[VOCAB-DCAT-3]], which extends [[VOCAB-DCAT-2]] to support further use cases and requirements [[DCAT-UCR]]. These include the possibility of providing  digest for DCAT distributions, the support for resource's versioning and data series.</p>
 <p>To show that the revisions proposed in [[VOCAB-DCAT-3]] are implementable and adopted, we collected evidence in the form of vocabularies, data catalogs, data services, and datasets (<a href="#evidence"></a>). The results are summarized in this report.</p>
       <section id="methodology">
         <h3>Methodology</h3>
         <p>We followed the steps described below to collect evidence for the revisions proposed in [[VOCAB-DCAT-3]]:</p>
         <ol>
         <li>Identify the actual list of revisions proposed in [[VOCAB-DCAT-3]] for which implementation evidence should be collected (see <a href="#proposed-revisions"></a> for more details).</li>
-        <li>Review existing vocabularies based on [VOCAB-DCAT] or [[VOCAB-DCAT-2]], and identify if they include already the changes proposed in [[VOCAB-DCAT-3]], and/or their alignment with [[VOCAB-DCAT-3]] is planned. The rationale for including also planned implementations is that these vocabularies are not likely to adopt the revisions proposed in [[VOCAB-DCAT-3]] until it becomes a W3C Recommendation.</li>
+        <li>Review existing vocabularies based on [[VOCAB-DCAT]] or [[VOCAB-DCAT-2]], and identify if they include already the changes proposed in [[VOCAB-DCAT-3]], and/or their alignment with [[VOCAB-DCAT-3]] is planned. The rationale for including also planned implementations is that these vocabularies are not likely to adopt the revisions proposed in [[VOCAB-DCAT-3]] until it becomes a W3C Recommendation.</li>
         <li>Review existing guidelines and implementation reports of [[VOCAB-DCAT-2]], as well as of vocabularies based on it, to verify if the changes proposed [[VOCAB-DCAT-3]] are implemented in existing data catalogs, data services, and datasets.</li>
         <li>Develop an Implementation Report with details of the steps above.</li>
         </ol>
@@ -48,10 +48,10 @@
       </section> 
         <section id="proposed-revisions">
       <h2>Summary of proposed revisions</h2>
-      <p>The following table shows the set of changes proposed in [[VOCAB-DCAT-2]].</p>
+      <p>The following table shows the set of changes proposed in [[VOCAB-DCAT-3]].</p>
 
 <aside class="note">
-<p>The table does not include the revisions concerning the definition of a new class <code>dcat:Resource</code> and the associated properties (see <a data-cite="VOCAB-DCAT-2#Class:Resource">&sect;&nbsp;<span class="secno">6.4 </span>Class: Cataloged Resource</a> of [[VOCAB-DCAT-2]]), as <code>dcat:Resource</code> is an abstract class that is not supposed to be used directly, as explained in <a data-cite="VOCAB-DCAT-2#dcat-scope">&sect;&nbsp;<span class="secno">5.1 </span>DCAT scope</a> of [[VOCAB-DCAT-2]]. The properties are considered when inherited by a sub-class of <code>dcat:Resource</code>.</p>
+<p> <code>dcat:Resource</code> is an abstract class that is not supposed to be used directly, as explained in <a data-cite="VOCAB-DCAT-2#dcat-scope">&sect;&nbsp;<span class="secno">5.1 </span>DCAT scope</a> of [[VOCAB-DCAT-2]]. The properties are considered when inherited by a sub-class of <code>dcat:Resource</code>.</p>
 <!--
 <p>Quoting:</p>
 <blockquote>
@@ -61,8 +61,86 @@
 </aside>
 
 <div data-include="table-revisions.html"></div>
+            
+<section id="vocabularies">
+        <h3>DCAT-based vocabularies and datasets</h3>
+        <p>The following table shows DCAT-based vocabularies providing implementation evidence of the revisions proposed in [[VOCAB-DCAT-3]].</p>
+
+        <table id="table-vocabularies" class="simple">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Application Profile/Datasets in Catalog</th>
+              <th>Creator</th>
+              <th>Country</th>
+              <th>Year</th>
+            </tr>
+          </thead>
+          <tbody>
+               <tr>
+              <td id="V02">V01</td>
+              <td>[[DCAT-AP-3]]</td>
+              <td>SEMIC action, Interoperable Europe, European Commission</td>
+              <td>Europe</td>
+              <td>2024</td>
+            </tr>
+              <tr>
+              <td id="V01">V02</td>
+              <td>[[DCAT-EP]]</td>
+              <td>European Parliament</td>
+              <td>Europe</td>
+              <td>2022</td>
+            </tr>
+           
+            <tr>
+              <td id="V03">V03</td>
+              <td>[[GeoDCAT-AP-2]]</td>
+              <td>European Commission</td>
+              <td>Europe</td>
+              <td>2020</td>
+            </tr>
+              <tr>
+              <td id="V01">V04</td>
+              <td><a href="https://data.europa.eu/data/sparq">The official portal for European data</a></td>
+              <td>European Commission</td>
+              <td>Europe</td>
+              <td>2024</td>
+            </tr>
+          </tbody>
+        </table>
+
+<p>The criteria used to select the relevant vocabularies are the following ones:</p>
+
+<ol>
+<li>They are based on [[VOCAB-DCAT-3]] or they extend [[VOCAB-DCAT]] with properties and classes included in [[VOCAB-DCAT-3]].</li>
+<li>Preferably, they are used across multiple data catalogs and/or domains/disciplines.</li>
+</ol>
+
+<!--p>At the time this report was written, it was not possible to identify vocabularies based on [[VOCAB-DCAT-2]]. However, there are quite a few vocabularies extending [[VOCAB-DCAT]] - a non-exhaustive list is included in <a data-cite="VOCAB-DCAT-2#profiles">&sect;&nbsp;<span class="secno">14 </span>DCAT Profiles</a> of [[VOCAB-DCAT-2]]. Among these, we have selected the most representative ones, for geographic and domain coverage as well as tooling support, which already include at least some of the revisions proposed in [[VOCAB-DCAT-2]], and/or whose alignment with [[VOCAB-DCAT-2]] is under way or planned.</p-->
+
+<p>The vocabularies listed earlier in this section have been chosen for the following reasons:</p>
+<ul>
+<li>[[DCAT-AP]] is a profile of [[VOCAB-DCAT]] used across Europe since 2014 as a metadata interchange format, primarily for catalogs of government data, and, to some extent, for scientific data. As such, it has a broad geographic coverage, and it is supported in data catalogs (e.g., the <a href="https://data.europa.eu">European Data Portal</a>) and catalog platforms (e.g., <a href="https://github.com/ckan/ckanext-dcat">CKAN</a>). This report considers [[DCAT-AP-3]] that is the latest  editor's draft release.</li>
+<li>[[DCAT-EP]] is an extension of the DCAT Application Profile for European data portals (DCAT-AP), designed and used for documenting datasets and data services of the European Parliament.</li>
+<li>[[GeoDCAT-AP-2]] is domain-specific extension of [[DCAT-AP]] for geospatial and statistical data, respectively, and they share the same geographic coverage of [[VOCAB-DCAT]].</li>
+</ul>  
+ <p> Furthermore, the [[DataEuropaPortal]] serves as a pivotal hub for accessing European open data across a spectrum of sources, including international, European Union, national, regional, local, and geodata portals. It amalgamates the former EU Open Data Portal and the European Data Portal into a cohesive platform.
+ Datasets available through the portal are considered as proof of implementation for a DCAT 3 features.</p>   
+<p>[[DCAT-AP]] has also been used as a basis for the development of country-specific extensions (see [[DCAT-AP-EXT]]). Such extensions have not been included in this report, but they provide additional support to the implementation evidence for the revisions proposed in [[VOCAB-DCAT-3]] already included in [[DCAT-AP-3]].</p>
+
 
 </section>
-        
+            
+<section id="evidence">
+      <h2>Implementation Evidence</h2>
+      <p>The table below shows the evidence collected for each one of the revisions proposed in [[VOCAB-DCAT-3]], including, for each revision, the existing implementations - flagged with "&#x2714;" -, as well as the planned implementations - flagged with "(&#x2714;)". The vocabularies and data catalogs/data services/datasets corresponding to columns in this table are listed in subsequent sections.</p>
+      <p>The reported planned implementations reflect the following (not mutually exclusive) scenarios:</p>
+      <ul>
+        <li>The vocabulary or the metadata schema of the data catalog is being aligned with [[VOCAB-DCAT-3]] (or this alignment is planned).</li>
+        <li>The vocabulary or data catalog supports equivalent or similar properties and classes, that may be eventually replaced by those defined in [[VOCAB-DCAT-3]].</li>
+      </ul>
+
+<div data-include="table-implementations.html"></div>
+
   </body>
 </html>

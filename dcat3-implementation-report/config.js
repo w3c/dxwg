@@ -101,7 +101,32 @@ var respecConfig = {
       "href":"https://joinup.ec.europa.eu/release/geodcat-ap/101",
       "title":"GeoDCAT-AP: A Geospatial Extension For The DCAT Application Profile For Data Portals In Europe. Version 1.0.1",
       "publisher":"European Commission",
+      "status": "Working Draft",
       "date":"2 August 2016"
+    },
+    "GeoDCAT-AP-2":{
+      "href":"https://semiceu.github.io/GeoDCAT-AP/releases/2.0.0/",
+      "title":"GeoDCAT-AP: A Geospatial Extension For The DCAT Application Profile For Data Portals In Europe. Version 2.0.0",
+      "publisher":"European Commission",
+      "date":"23 December 2020"
+    },
+    "DCAT-EP":{
+      "href":"https://europarl.github.io/dcat-ep/",
+      "title":"DCAT-EP Application Profile - Version 0.3 ",
+      "authors":["European Parliament"],
+      "publisher":"European Commission",
+      "date":"22 December 2022"
+    },
+    "DCAT-AP-3":{
+      "href":"https://semiceu.github.io/DCAT-AP/releases/3.0.0/",
+      "title":"DCAT-AP 3.0",
+      "publisher":"European Commission",
+      "date":"12 February 2024"
+    },
+    "Data Europa":{
+      "href":"https://data.europa.eu/data/sparql",
+      "title":"The official portal for European data - data.europa.eu",
+      "publisher":"European Commission"
     }
   }
 };
