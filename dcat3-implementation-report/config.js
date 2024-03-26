@@ -1,6 +1,6 @@
 var respecConfig = {
   specStatus: "base",
-  publishDate: "1900-01-01",
+  publishDate: "2024-03-26",
   editors: [{
       name:       "Riccardo Albertoni",
       orcid:  "0000-0001-5648-2713",
@@ -40,19 +40,19 @@ var respecConfig = {
       w3cid: 64374
     }]
 ,
-  otherLinks: [{
-    key: "Contributors",
-    data: [
-    {
-      value: "XXXXXX",
-      href:  "https://orcid.org/YYYY-YYYY-YYYY-YYYY"
-    },
-    {
-      value: "ZZZZZZ",
-      href:  "https://orcid.org/YYYY-YYYY-YYYY-YYYY"
-    }
-    ]
-  }],
+ // otherLinks: [{
+ //   key: "Contributors",
+ //   data: [
+ //   {
+ //     value: "XXXXXX",
+ //     href:  "https://orcid.org/YYYY-YYYY-YYYY-YYYY"
+ //   },
+ //   {
+ //     value: "ZZZZZZ",
+ //     href:  "https://orcid.org/YYYY-YYYY-YYYY-YYYY"
+ //   }
+ //   ]
+//  }],
   processVersion: 2019,
   edDraftURI: "https://w3c.github.io/dxwg/dcat-implementation-report/",
   shortName: "dcat-implementation-report",
@@ -123,7 +123,7 @@ var respecConfig = {
       "publisher":"European Commission",
       "date":"12 February 2024"
     },
-    "Data Europa":{
+    "DataEuropaPortal":{
       "href":"https://data.europa.eu/data/sparql",
       "title":"The official portal for European data - data.europa.eu",
       "publisher":"European Commission"
