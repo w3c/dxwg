@@ -2,7 +2,7 @@ var respecConfig = {
     doJsonLd: true,
 //	preProcess: [dfn_index],
 //    subtitle: "Version 2",
-  specStatus: "PR",
+  specStatus: "ED",
     errata: "https://w3c.github.io/dxwg/errata/",
 //    specStatus: "ED",
 // specStatus: "CR",
