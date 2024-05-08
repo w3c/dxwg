@@ -330,7 +330,7 @@ var respecConfig = {
 			date:"16 March 2015"
         },
         "SPDX":{
-          "href":"http://spdx.org/rdf/terms#",
+          "href":"https://spdx.org/rdf/spdx-terms-v2.2/",
           "title":"SPDX 2.2",
           "publisher":"SPDX"
         },        
