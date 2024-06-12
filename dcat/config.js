@@ -78,7 +78,7 @@ var respecConfig = {
         key: "Contributors",
         data: [{
             value: "Makx Dekkers",
-            href: "http://www.makxdekkers.com"
+            href: "https://github.com/makxdekkers"
         }]
       },
 /*                 
