@@ -2,12 +2,12 @@ var respecConfig = {
     doJsonLd: true,
 //	preProcess: [dfn_index],
 //    subtitle: "Version 2",
-    specStatus: "ED",
+  specStatus: "ED",
     errata: "https://w3c.github.io/dxwg/errata/",
 //    specStatus: "ED",
-//    specStatus: "CR",
-//    crEnd: "2023-11-28",
-//    implementationReportURI: "https://w3c.github.io/dxwg/dcat3-implementation-report/",
+// specStatus: "CR",
+    crEnd: "2024-02-15",
+    implementationReportURI: "https://w3c.github.io/dxwg/dcat3-implementation-report/",
     shortName: "vocab-dcat-3",
     prevRecShortname: "vocab-dcat-2",
     canonicalURI: "TR",
@@ -78,7 +78,7 @@ var respecConfig = {
         key: "Contributors",
         data: [{
             value: "Makx Dekkers",
-            href: "http://www.makxdekkers.com"
+            href: "https://github.com/makxdekkers"
         }]
       },
 /*                 
@@ -330,7 +330,7 @@ var respecConfig = {
 			date:"16 March 2015"
         },
         "SPDX":{
-          "href":"http://spdx.org/rdf/terms#",
+          "href":"https://spdx.org/rdf/spdx-terms-v2.2/",
           "title":"SPDX 2.2",
           "publisher":"SPDX"
         },        

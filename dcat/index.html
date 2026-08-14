@@ -64,21 +64,7 @@ table.simple {width:100%;}
         This new version of the vocabulary updates and expands the original but preserves backward compatibility. A full list of the significant changes (with links to the relevant GitHub issues) is described in <a href="#changes"></a>.
     </p>
     <p>
-        The exit criteria for <abbr title="Candidate Recommendation">CR</abbr> focused on v3 new features that replicate features that were included in application profiles of v2 as a way of remedying missing and necessary elements. <!--The exit criteria also included recent commitments by organisations such as EC Joinup to <a href='https://joinup.ec.europa.eu/solution/abr-specification-registry-registries/document/specification-registry-registries-version-meeting-september'>adopt the DCAT v2 model</a> in their work.-->
-        Implementation will be evidenced by showing use of the new properties/classes (or terms with equivalent meaning) in implementations of catalogs.
-    </p>
-    <p>
         <a href="https://github.com/w3c/dxwg/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3Adcat+">Issues, requirements, and features</a> that have been considered and discussed by the Data eXchange Working Group but have not been addressed due to lack of maturity or consensus are collected in GitHub. Those believed to be a priority for a future release are in the milestone <a href="https://github.com/w3c/dxwg/milestone/31">DCAT Future Priority Work</a>.
-    </p>
-    <p>
-    The following terms are at-risk, and may be dropped during the CR period:
-    </p>    
-  <ul>
-    <li> <a href="#Property:resource_first"></a></li>
-    <li> <a href="#Property:resource_last"></a> </li>
-  </ul>
-    <p>
-        “At-risk” is a W3C <a href="https://www.w3.org/2021/Process-20211102/#at-risk">Process term-of-art</a>, and does not necessarily imply that the feature is in danger of being dropped or delayed. It means that the WG believes the feature may have difficulty being interoperably implemented in a timely manner, and marking it as such allows the WG to drop the feature if necessary when transitioning to the Proposed Rec stage, without having to publish a new Candidate Rec without the feature first.
     </p>
     
     
@@ -1390,6 +1376,7 @@ ex:table-service-005
                     <a href="#Property:dataset_distribution"><code>dcat:distribution</code></a>,
                     <a href="http://purl.org/dc/terms/hasPart"><code>dcterms:hasPart</code></a>,
                     (and its sub-properties
+                    <a href="#Property:catalog_resource"><code>dcat:resource</code></a>,
                     <a href="#Property:catalog_catalog"><code>dcat:catalog</code></a>,
                     <a href="#Property:catalog_dataset"><code>dcat:dataset</code></a>,
                     <a href="#Property:catalog_service"><code>dcat:service</code></a>
@@ -2398,7 +2385,7 @@ ex:table-service-005
                 <tr><th>RDF Property:</th><td><a href="http://xmlns.com/foaf/0.1/primaryTopic"><code>foaf:primaryTopic</code></a></td></tr>
                 <tr><th class="prop">Definition:</th><td>The  <a href="#Class:Resource"><code>dcat:Resource</code></a> (dataset or service) described in the record.</td></tr>
                 <tr><th class="prop">Usage note:</th><td><a href="http://xmlns.com/foaf/0.1/primaryTopic"><code>foaf:primaryTopic</code></a> property is functional:
-                    each catalog record can have at most one primary topic, i.e., describes one dataset or service.</td></tr>
+                    each catalog record can have at most one primary topic, i.e., describes one cataloged resource.</td></tr>
                 </table>
         </section>
 
@@ -2754,9 +2741,12 @@ ex:table-service-005
             <li><a href="#Property:resource_conforms_to">conforms to</a></li>
             <li><a href="#Property:resource_contact_point">contact point</a></li>
             <li><a href="#Property:resource_creator">creator</a></li>
+            <li><a href="#Property:dataset_distribution">distribution</a></li>
             <li><a href="#Property:resource_description">description</a></li>
+            <li><a href="#Property:resource_has_part">has part</a></li>
             <li><a href="#Property:resource_has_policy">has policy</a></li>
             <li><a href="#Property:resource_identifier">identifier</a></li>
+            <li><a href="#Property:dataset_in_series">in series</a></li>
             <li><a href="#Property:resource_is_referenced_by">is referenced by</a></li>
             <li><a href="#Property:resource_keyword">keyword/tag</a></li>
             <li><a href="#Property:resource_landing_page">landing page</a></li>
@@ -3384,7 +3374,7 @@ ex:table-service-005
         <section id="Property:data_service_serves_dataset">
             <h4>Property: serves dataset</h4>
             <table class="def">
-                <tr><th>RDF Property:</th><td><a href="http://www.w3.org/ns/dcat#servesdataset"><code>dcat:servesDataset</code></a></td></tr>
+                <tr><th>RDF Property:</th><td><a href="http://www.w3.org/ns/dcat#servesDataset"><code>dcat:servesDataset</code></a></td></tr>
                 <tr><th class="prop">Definition:</th><td>A collection of data that this data service can distribute.</td></tr>
                 <tr><th class="prop">Range:</th><td><a href="#Class:Dataset"><code>dcat:Dataset</code></a></td></tr>
                 </table>
@@ -6139,7 +6129,7 @@ ex:Test543L
         <p>
             A <a href="https://www.w3.org/wiki/WebSchemas/Datasets">mapping between DCAT 1 and schema.org</a> was discussed on the original proposal to extend [[?SCHEMA-ORG]] for describing datasets and data catalogs.
             Partial mappings between DCAT 1 [[?VOCAB-DCAT-1]] and [[?SCHEMA-ORG]] were provided earlier by the
-            <a href="https://www.w3.org/2015/spatial/wiki/ISO_19115_-_DCAT_-_Schema.org_mapping">Spatial Data on the Web Working Group</a>, building upon previous work.
+            <a href="https://www.w3.org/2015/spatial/wiki/ISO_19115_-_DCAT_-_Schema">Spatial Data on the Web Working Group</a>, building upon previous work.
         </p>
         <p>
             A recommended mapping from the revised DCAT (this document) to [[?SCHEMA-ORG]] version 3.4 is <a href="https://w3c.github.io/dxwg/dcat/rdf/dcat-schema.ttl">available in an RDF file</a>.
@@ -6791,7 +6781,19 @@ ga-courts:jc-wms
 <p>A full change-log is available on <a href="https://github.com/w3c/dxwg/commits/gh-pages/dcat">GitHub</a></p>
 
 </section>
-	
+<section id="changes-since-20240118">	
+<h2>Changes since the Candidate Recommendation Snapshot 18 January 2024</h2>
+    <p>The document has undergone the following changes since the Candidate Recommendation Snapshot 18 January 2024 [[?VOCAB-DCAT-3-20240118]]:</p>
+
+<ul>
+    <li>
+<p>Editorial fixes as suggested in Issues <a href="https://github.com/w3c/dxwg/issues/1581">#1581</a>, <a href="https://github.com/w3c/dxwg/issues/1583">#1583</a>, <a href="https://github.com/w3c/dxwg/issues/1591">#1591</a>.</p>
+</li>
+    <li><p>Fixed the wrong link to SPDX 2.2 - see Issue <a href="https://github.com/w3c/dxwg/issues/1592">#1592</a>.</p></li>
+    <li><p>Removed the references at risk features in status section, as implementations for those features have been collected in the implementation report.</p>
+    </li>
+</ul>
+</section>   
 <section id="changes-since-20220510">
 
 <h2>Changes since the fourth public working draft of 10 May 2022</h2>
